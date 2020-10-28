@@ -166,7 +166,7 @@ public class PackageAspect {
       if (_t instanceof TDLRuntimeException) {
         final TDLRuntimeException nt = (TDLRuntimeException)_t;
         String _message = nt.getMessage();
-        String _plus = ("Stopped due to " + _message);
+        String _plus = ("Stopped due " + _message);
         InputOutput.<String>println(_plus);
       } else {
         throw Exceptions.sneakyThrow(_t);
