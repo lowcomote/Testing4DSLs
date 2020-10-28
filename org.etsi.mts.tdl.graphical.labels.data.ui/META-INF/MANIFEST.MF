@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: TDL Graphical Editor Labels UI
+Bundle-Vendor: TDL Graphical Editor
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: org.etsi.mts.tdl.graphical.labels.data.ui; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.etsi.mts.tdl.graphical.labels.data;visibility:=reexport,
+ org.eclipse.xtext.ui,
+ org.eclipse.ui.editors;bundle-version="3.5.0",
+ org.eclipse.ui.ide;bundle-version="3.5.0",
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.ui,
+ org.eclipse.xtext.builder,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtext.common.types.ui,
+ org.eclipse.xtext.ui.codetemplates.ui,
+ org.eclipse.compare,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+Import-Package: org.apache.log4j
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: org.etsi.mts.tdl.graphical.labels.ui.quickfix,
+ org.etsi.mts.tdl.graphical.labels.ui.contentassist,
+ org.etsi.mts.tdl.graphical.labels.data.ui.internal,
+ org.etsi.mts.tdl.graphical.labels.ide.contentassist.antlr.internal,
+ org.etsi.mts.tdl.graphical.labels.ide.contentassist.antlr
+Bundle-Activator: org.etsi.mts.tdl.graphical.labels.ui.internal.DataActivator

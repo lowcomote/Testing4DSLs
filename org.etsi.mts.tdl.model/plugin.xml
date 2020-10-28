@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            type="tdl"
+            class="org.etsi.mts.tdl.resources.TDLResourceFactory"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated tdl -->
+      <package
+            uri="http://www.etsi.org/spec/TDL/1.4.1"
+            class="org.etsi.mts.tdl.tdlPackage"
+            genModel="model/tdl.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated tdl -->
+      <parser
+            type="tdl"
+            class="org.etsi.mts.tdl.util.tdlResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated tdl -->
+      <package
+            uri="http://www.etsi.org/spec/TDL/1.3.1/configurations"
+            class="org.etsi.mts.tdl.extendedconfigurations.ExtendedConfigurationsPackage"
+            genModel="model/tdl.genmodel"/>
+   </extension>
+
+   <extension
+         point="org.eclipse.emf.ecore.generated_package">
+      <package
+            class="org.etsi.mts.tdl.structuredobjectives.StructuredObjectivesPackage"
+            genModel="model/tdl.genmodel"
+            uri="http://www.etsi.org/spec/TDL/1.3.1/structured">
+      </package>
+   </extension>
+
+</plugin>

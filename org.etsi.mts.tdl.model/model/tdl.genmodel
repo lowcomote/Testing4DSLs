@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.etsi.mts.tdl.model/src-gen" modelPluginID="org.etsi.mts.tdl.model"
+    redirection="" modelName="Tdl" importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0"
+    copyrightFields="false" operationReflection="true" importOrganizing="true">
+  <foreignModel>configurations.ecore</foreignModel>
+  <foreignModel>structured.ecore</foreignModel>
+  <foreignModel>tdl.ecore</foreignModel>
+  <genPackages prefix="ExtendedConfigurations" basePackage="org.etsi.mts.tdl" disposableProviderFactory="true"
+      ecorePackage="configurations.ecore#/">
+    <genClasses ecoreClass="configurations.ecore#//ExtendedTestConfiguration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference configurations.ecore#//ExtendedTestConfiguration/configurations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference configurations.ecore#//ExtendedTestConfiguration/operations"/>
+    </genClasses>
+    <genClasses ecoreClass="configurations.ecore#//TestConfigurationInstance">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference configurations.ecore#//TestConfigurationInstance/configuration"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="configurations.ecore#//TestConfigurationOperation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference configurations.ecore#//TestConfigurationOperation/component"/>
+    </genClasses>
+    <genClasses ecoreClass="configurations.ecore#//ComponentReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference configurations.ecore#//ComponentReference/component"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference configurations.ecore#//ComponentReference/configuration"/>
+    </genClasses>
+    <genClasses ecoreClass="configurations.ecore#//ComponentMerge">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference configurations.ecore#//ComponentMerge/target"/>
+    </genClasses>
+    <genClasses ecoreClass="configurations.ecore#//ComponentHide"/>
+    <genClasses ecoreClass="configurations.ecore#//ReassignRole">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configurations.ecore#//ReassignRole/role"/>
+    </genClasses>
+    <genClasses ecoreClass="configurations.ecore#//ComponentAlias"/>
+    <genClasses ecoreClass="configurations.ecore#//ExtendedGateReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference configurations.ecore#//ExtendedGateReference/configuration"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="StructuredObjectives" basePackage="org.etsi.mts.tdl" disposableProviderFactory="true"
+      ecorePackage="structured.ecore#/">
+    <genClasses ecoreClass="structured.ecore#//StructuredTestObjective">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference structured.ecore#//StructuredTestObjective/configuration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//StructuredTestObjective/initialConditions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//StructuredTestObjective/expectedBehaviour"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//StructuredTestObjective/finalConditions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//StructuredTestObjective/picsReference"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//StructuredTestObjective/variants"/>
+    </genClasses>
+    <genClasses ecoreClass="structured.ecore#//InitialConditions">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//InitialConditions/conditions"/>
+    </genClasses>
+    <genClasses ecoreClass="structured.ecore#//EventSequence">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//EventSequence/events"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="structured.ecore#//EventOccurrence">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//EventOccurrence/timeConstraint"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//EventOccurrence/timeLabel"/>
+    </genClasses>
+    <genClasses ecoreClass="structured.ecore#//ExpectedBehaviour">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//ExpectedBehaviour/whenClause"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//ExpectedBehaviour/thenClause"/>
+    </genClasses>
+    <genClasses ecoreClass="structured.ecore#//FinalConditions">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//FinalConditions/conditions"/>
+    </genClasses>
+    <genClasses ecoreClass="structured.ecore#//PICSReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference structured.ecore#//PICSReference/pics"/>
+    </genClasses>
+    <genClasses ecoreClass="structured.ecore#//PICS"/>
+    <genClasses ecoreClass="structured.ecore#//Entity"/>
+    <genClasses ecoreClass="structured.ecore#//Event"/>
+    <genClasses ecoreClass="structured.ecore#//EventOccurrenceSpecification">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//EventOccurrenceSpecification/entityReference"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//EventOccurrenceSpecification/eventReference"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//EventOccurrenceSpecification/oppositeEntityReference"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//EventOccurrenceSpecification/eventArgument"/>
+    </genClasses>
+    <genClasses ecoreClass="structured.ecore#//EntityReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference structured.ecore#//EntityReference/entity"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference structured.ecore#//EntityReference/component"/>
+    </genClasses>
+    <genClasses ecoreClass="structured.ecore#//EventReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference structured.ecore#//EventReference/event"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="structured.ecore#//Value"/>
+    <genClasses ecoreClass="structured.ecore#//EventArgument"/>
+    <genClasses ecoreClass="structured.ecore#//DataReference">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//DataReference/content"/>
+    </genClasses>
+    <genClasses ecoreClass="structured.ecore#//Content">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//Content/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//Content/content"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference structured.ecore#//Content/member"/>
+    </genClasses>
+    <genClasses ecoreClass="structured.ecore#//LiteralValue">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//LiteralValue/content"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference structured.ecore#//LiteralValue/dataType"/>
+    </genClasses>
+    <genClasses ecoreClass="structured.ecore#//ContentReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference structured.ecore#//ContentReference/content"/>
+    </genClasses>
+    <genClasses ecoreClass="structured.ecore#//LiteralValueReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference structured.ecore#//LiteralValueReference/content"/>
+    </genClasses>
+    <genClasses ecoreClass="structured.ecore#//RepeatedEventSequence">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//RepeatedEventSequence/repetitions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//RepeatedEventSequence/interval"/>
+    </genClasses>
+    <genClasses ecoreClass="structured.ecore#//EventTemplateOccurrence">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference structured.ecore#//EventTemplateOccurrence/eventTemplate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//EventTemplateOccurrence/entityBinding"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//EventTemplateOccurrence/occurrenceArgument"/>
+    </genClasses>
+    <genClasses ecoreClass="structured.ecore#//EventSpecificationTemplate">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//EventSpecificationTemplate/eventSpecification"/>
+    </genClasses>
+    <genClasses ecoreClass="structured.ecore#//EntityBinding">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//EntityBinding/templateEntity"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//EntityBinding/occurrenceEntity"/>
+    </genClasses>
+    <genClasses ecoreClass="structured.ecore#//Variants">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//Variants/variants"/>
+    </genClasses>
+    <genClasses ecoreClass="structured.ecore#//Variant">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute structured.ecore#//Variant/objectiveURI"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute structured.ecore#//Variant/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//Variant/picsReference"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//Variant/bindings"/>
+    </genClasses>
+    <genClasses ecoreClass="structured.ecore#//VariantBinding">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//VariantBinding/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference structured.ecore#//VariantBinding/boundTo"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="tdl" basePackage="org.etsi.mts" resource="XMI" disposableProviderFactory="true"
+      fileExtensions="tdl" ecorePackage="tdl.ecore#/" publicationLocation="">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tdl.ecore#//UnassignedMemberTreatment">
+      <genEnumLiterals ecoreEnumLiteral="tdl.ecore#//UnassignedMemberTreatment/AnyValue"/>
+      <genEnumLiterals ecoreEnumLiteral="tdl.ecore#//UnassignedMemberTreatment/AnyValueOrOmit"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tdl.ecore#//ComponentInstanceRole">
+      <genEnumLiterals ecoreEnumLiteral="tdl.ecore#//ComponentInstanceRole/SUT"/>
+      <genEnumLiterals ecoreEnumLiteral="tdl.ecore#//ComponentInstanceRole/Tester"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tdl.ecore#//GateTypeKind">
+      <genEnumLiterals ecoreEnumLiteral="tdl.ecore#//GateTypeKind/Message"/>
+      <genEnumLiterals ecoreEnumLiteral="tdl.ecore#//GateTypeKind/Procedure"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tdl.ecore#//TimeLabelUseKind">
+      <genEnumLiterals ecoreEnumLiteral="tdl.ecore#//TimeLabelUseKind/Last"/>
+      <genEnumLiterals ecoreEnumLiteral="tdl.ecore#//TimeLabelUseKind/Previous"/>
+      <genEnumLiterals ecoreEnumLiteral="tdl.ecore#//TimeLabelUseKind/First"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tdl.ecore#//ParameterKind">
+      <genEnumLiterals ecoreEnumLiteral="tdl.ecore#//ParameterKind/In"/>
+      <genEnumLiterals ecoreEnumLiteral="tdl.ecore#//ParameterKind/Out"/>
+      <genEnumLiterals ecoreEnumLiteral="tdl.ecore#//ParameterKind/Exception"/>
+    </genEnums>
+    <genClasses image="false" ecoreClass="tdl.ecore#//Element">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//Element/comment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//Element/annotation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tdl.ecore#//Element/name"/>
+      <genOperations ecoreOperation="tdl.ecore#//Element/container"/>
+      <genOperations ecoreOperation="tdl.ecore#//Element/getParentTestDescription"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//Comment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tdl.ecore#//Comment/body"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tdl.ecore#//Comment/commentedElement"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//Annotation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tdl.ecore#//Annotation/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//Annotation/key"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tdl.ecore#//Annotation/annotatedElement"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//AnnotationType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//AnnotationType/extension"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="tdl.ecore#//PackageableElement">
+      <genOperations ecoreOperation="tdl.ecore#//PackageableElement/conformsTo">
+        <genParameters ecoreParameter="tdl.ecore#//PackageableElement/conformsTo/e"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="tdl.ecore#//NamedElement">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tdl.ecore#//NamedElement/qualifiedName"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//Package">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//Package/packagedElement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//Package/import"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//Package/nestedPackage"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//ElementImport">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//ElementImport/importedElement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//ElementImport/importedPackage"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//TestObjective">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tdl.ecore#//TestObjective/objectiveURI"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tdl.ecore#//TestObjective/description"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="tdl.ecore#//DataInstance">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//DataInstance/dataType"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="tdl.ecore#//MappableDataElement"/>
+    <genClasses image="false" ecoreClass="tdl.ecore#//DataType"/>
+    <genClasses ecoreClass="tdl.ecore#//DataResourceMapping">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tdl.ecore#//DataResourceMapping/resourceURI"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//DataElementMapping">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//DataElementMapping/mappableDataElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tdl.ecore#//DataElementMapping/elementURI"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//DataElementMapping/dataResourceMapping"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//DataElementMapping/parameterMapping"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//ParameterMapping">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tdl.ecore#//ParameterMapping/parameterURI"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//ParameterMapping/parameter"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="tdl.ecore#//Parameter">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//Parameter/dataType"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//SimpleDataType"/>
+    <genClasses ecoreClass="tdl.ecore#//SimpleDataInstance"/>
+    <genClasses ecoreClass="tdl.ecore#//StructuredDataType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//StructuredDataType/extension"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//StructuredDataType/member"/>
+      <genOperations ecoreOperation="tdl.ecore#//StructuredDataType/allMembers"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//Member">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tdl.ecore#//Member/isOptional"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//StructuredDataInstance">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//StructuredDataInstance/memberAssignment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tdl.ecore#//StructuredDataInstance/unassignedMember"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//MemberAssignment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//MemberAssignment/member"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//MemberAssignment/memberSpec"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="tdl.ecore#//StaticDataUse"/>
+    <genClasses image="false" ecoreClass="tdl.ecore#//DataUse">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//DataUse/argument"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//DataUse/reduction"/>
+      <genOperations ecoreOperation="tdl.ecore#//DataUse/resolveDataType"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//ParameterBinding">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//ParameterBinding/dataUse"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//ParameterBinding/parameter"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//Action">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tdl.ecore#//Action/body"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//Action/formalParameter"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//FormalParameter"/>
+    <genClasses ecoreClass="tdl.ecore#//Function">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//Function/returnType"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//FormalParameterUse">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//FormalParameterUse/parameter"/>
+      <genOperations ecoreOperation="tdl.ecore#//FormalParameterUse/resolveDataType"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="tdl.ecore#//DynamicDataUse"/>
+    <genClasses ecoreClass="tdl.ecore#//Variable">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//Variable/dataType"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//FunctionCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//FunctionCall/function"/>
+      <genOperations ecoreOperation="tdl.ecore#//FunctionCall/resolveDataType"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//VariableUse">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//VariableUse/componentInstance"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//VariableUse/variable"/>
+      <genOperations ecoreOperation="tdl.ecore#//VariableUse/resolveDataType"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//ComponentInstance">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//ComponentInstance/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tdl.ecore#//ComponentInstance/role"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//ComponentType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//ComponentType/gateInstance"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//ComponentType/timer"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//ComponentType/variable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//ComponentType/extension"/>
+      <genOperations ecoreOperation="tdl.ecore#//ComponentType/allGates"/>
+      <genOperations ecoreOperation="tdl.ecore#//ComponentType/allTimers"/>
+      <genOperations ecoreOperation="tdl.ecore#//ComponentType/allVariables"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//GateInstance">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//GateInstance/type"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//GateType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//GateType/dataType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tdl.ecore#//GateType/kind"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//GateType/extension"/>
+      <genOperations ecoreOperation="tdl.ecore#//GateType/allDataTypes"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//Timer"/>
+    <genClasses ecoreClass="tdl.ecore#//OmitValue"/>
+    <genClasses image="false" ecoreClass="tdl.ecore#//SpecialValueUse">
+      <genOperations ecoreOperation="tdl.ecore#//SpecialValueUse/resolveDataType"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//AnyValue">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//AnyValue/dataType"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//AnyValueOrOmit"/>
+    <genClasses ecoreClass="tdl.ecore#//DataInstanceUse">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//DataInstanceUse/dataInstance"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tdl.ecore#//DataInstanceUse/unassignedMember"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//DataInstanceUse/dataType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//DataInstanceUse/item"/>
+      <genOperations ecoreOperation="tdl.ecore#//DataInstanceUse/resolveDataType"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//Time"/>
+    <genClasses ecoreClass="tdl.ecore#//TimeLabel"/>
+    <genClasses image="false" ecoreClass="tdl.ecore#//TimerOperation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//TimerOperation/timer"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//TimerOperation/componentInstance"/>
+      <genOperations ecoreOperation="tdl.ecore#//TimerOperation/getParticipatingComponents"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="tdl.ecore#//AtomicBehaviour">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//AtomicBehaviour/timeConstraint"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//AtomicBehaviour/timeLabel"/>
+      <genOperations ecoreOperation="tdl.ecore#//AtomicBehaviour/getParticipatingComponents"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="tdl.ecore#//Behaviour">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//Behaviour/testObjective"/>
+      <genOperations ecoreOperation="tdl.ecore#//Behaviour/isTesterInputEvent"/>
+      <genOperations ecoreOperation="tdl.ecore#//Behaviour/getParticipatingComponents"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//TimeConstraint">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//TimeConstraint/timeConstraintExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//TimerStart">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//TimerStart/period"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//TimerStop"/>
+    <genClasses ecoreClass="tdl.ecore#//TimeOut"/>
+    <genClasses image="false" ecoreClass="tdl.ecore#//TimeOperation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//TimeOperation/componentInstance"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//TimeOperation/period"/>
+      <genOperations ecoreOperation="tdl.ecore#//TimeOperation/getParticipatingComponents"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//Wait"/>
+    <genClasses ecoreClass="tdl.ecore#//Quiescence">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//Quiescence/gateReference"/>
+      <genOperations ecoreOperation="tdl.ecore#//Quiescence/getParticipatingComponents"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//GateReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//GateReference/component"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//GateReference/gate"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//TimeLabelUse">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//TimeLabelUse/timeLabel"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tdl.ecore#//TimeLabelUse/kind"/>
+      <genOperations ecoreOperation="tdl.ecore#//TimeLabelUse/resolveDataType"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//TestConfiguration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//TestConfiguration/componentInstance"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//TestConfiguration/connection"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//Connection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//Connection/endPoint"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//TestDescription">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//TestDescription/testConfiguration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//TestDescription/formalParameter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//TestDescription/behaviourDescription"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//TestDescription/testObjective"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tdl.ecore#//TestDescription/isLocallyOrdered"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//BehaviourDescription">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//BehaviourDescription/behaviour"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//Block">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//Block/behaviour"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//Block/guard"/>
+      <genOperations ecoreOperation="tdl.ecore#//Block/getParticipatingComponents"/>
+      <genOperations ecoreOperation="tdl.ecore#//Block/getParticipatingComponentsExcluding">
+        <genParameters ecoreParameter="tdl.ecore#//Block/getParticipatingComponentsExcluding/excluded"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="tdl.ecore#//CombinedBehaviour">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//CombinedBehaviour/periodic"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//CombinedBehaviour/exceptional"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//PeriodicBehaviour">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//PeriodicBehaviour/block"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//PeriodicBehaviour/period"/>
+      <genOperations ecoreOperation="tdl.ecore#//PeriodicBehaviour/getParticipatingComponents"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="tdl.ecore#//ExceptionalBehaviour">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//ExceptionalBehaviour/block"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//ExceptionalBehaviour/guardedComponent"/>
+      <genOperations ecoreOperation="tdl.ecore#//ExceptionalBehaviour/getParticipatingComponents"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//AlternativeBehaviour"/>
+    <genClasses image="false" ecoreClass="tdl.ecore#//MultipleCombinedBehaviour">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//MultipleCombinedBehaviour/block"/>
+      <genOperations ecoreOperation="tdl.ecore#//MultipleCombinedBehaviour/getParticipatingComponents"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//ParallelBehaviour"/>
+    <genClasses ecoreClass="tdl.ecore#//BoundedLoopBehaviour">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//BoundedLoopBehaviour/numIteration"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="tdl.ecore#//SingleCombinedBehaviour">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//SingleCombinedBehaviour/block"/>
+      <genOperations ecoreOperation="tdl.ecore#//SingleCombinedBehaviour/getParticipatingComponents"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//OptionalBehaviour"/>
+    <genClasses ecoreClass="tdl.ecore#//UnboundedLoopBehaviour"/>
+    <genClasses ecoreClass="tdl.ecore#//ConditionalBehaviour"/>
+    <genClasses ecoreClass="tdl.ecore#//CompoundBehaviour"/>
+    <genClasses ecoreClass="tdl.ecore#//DefaultBehaviour"/>
+    <genClasses ecoreClass="tdl.ecore#//InterruptBehaviour"/>
+    <genClasses ecoreClass="tdl.ecore#//Target">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//Target/targetGate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//Target/valueAssignment"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//VerdictAssignment">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//VerdictAssignment/verdict"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//Assertion">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//Assertion/otherwise"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//Assertion/condition"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//Stop"/>
+    <genClasses ecoreClass="tdl.ecore#//Break"/>
+    <genClasses ecoreClass="tdl.ecore#//Assignment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//Assignment/variable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//Assignment/expression"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="tdl.ecore#//ActionBehaviour">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//ActionBehaviour/componentInstance"/>
+      <genOperations ecoreOperation="tdl.ecore#//ActionBehaviour/getParticipatingComponents"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//InlineAction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tdl.ecore#//InlineAction/body"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//ActionReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//ActionReference/action"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//ActionReference/actualParameter"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//TestDescriptionReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//TestDescriptionReference/testDescription"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//TestDescriptionReference/componentInstanceBinding"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//TestDescriptionReference/actualParameter"/>
+      <genOperations ecoreOperation="tdl.ecore#//TestDescriptionReference/getParticipatingComponents"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//ComponentInstanceBinding">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//ComponentInstanceBinding/formalComponent"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//ComponentInstanceBinding/actualComponent"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//Interaction">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//Interaction/sourceGate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//Interaction/target"/>
+      <genOperations ecoreOperation="tdl.ecore#//Interaction/getParticipatingComponents"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//Message">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tdl.ecore#//Message/isTrigger"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//Message/argument"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//PredefinedFunction">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//PredefinedFunction/returnType"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//MemberReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//MemberReference/member"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//MemberReference/collectionIndex"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//PredefinedFunctionCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//PredefinedFunctionCall/function"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//PredefinedFunctionCall/actualParameters"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//LocalExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//LocalExpression/expression"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//LocalExpression/scope"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//ValueAssignment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//ValueAssignment/variable"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//ValueAssignment/parameter"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//ProcedureCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//ProcedureCall/signature"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//ProcedureCall/argument"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//ProcedureCall/replyTo"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//ProcedureSignature">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//ProcedureSignature/parameter"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//ProcedureParameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tdl.ecore#//ProcedureParameter/kind"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//CollectionDataType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//CollectionDataType/itemType"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//CollectionDataInstance">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tdl.ecore#//CollectionDataInstance/item"/>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//Extension">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//Extension/extending.1"/>
+      <genOperations ecoreOperation="tdl.ecore#//Extension/transitiveExtending"/>
+      <genOperations ecoreOperation="tdl.ecore#//Extension/extending">
+        <genParameters ecoreParameter="tdl.ecore#//Extension/extending/e"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="tdl.ecore#//LiteralValueUse">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tdl.ecore#//LiteralValueUse/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tdl.ecore#//LiteralValueUse/dataType"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

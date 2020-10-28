@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="tdl" nsURI="http://www.etsi.org/spec/TDL/1.4.1" nsPrefix="tdl">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Element" abstract="true">
+    <eOperations name="container" eType="#//Element">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;if (not self.oclContainer().oclIsUndefined()) then&#xA;&#x9;&#x9;&#x9;&#x9;self.oclContainer().oclAsType(Element)&#xA;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;&#x9;null&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getParentTestDescription" eType="#//TestDescription">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#x9;&#xA;&#x9;&#x9;&#x9;if (not self.container().oclIsUndefined()) then&#xA;&#x9;&#x9;&#x9;&#x9;if (self.container().oclIsKindOf(TestDescription)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;self.container().oclAsType(TestDescription)&#xA;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;self.container().getParentTestDescription()&#xA;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;&#x9;null&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comment" upperBound="-1"
+        eType="#//Comment" containment="true" eOpposite="#//Comment/commentedElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotation" upperBound="-1"
+        eType="#//Annotation" containment="true" eOpposite="#//Annotation/annotatedElement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Comment" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="body" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commentedElement" lowerBound="1"
+        eType="#//Element" eOpposite="#//Element/comment"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Annotation" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" lowerBound="1" eType="#//AnnotationType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotatedElement" lowerBound="1"
+        eType="#//Element" eOpposite="#//Element/annotation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnnotationType" eSuperTypes="#//PackageableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extension" eType="#//Extension"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PackageableElement" abstract="true"
+      eSuperTypes="#//NamedElement">
+    <eOperations name="conformsTo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;if (self.oclIsKindOf(AnnotationType)) then&#xA;&#x9;&#x9;&#x9;&#x9;self.oclAsType(AnnotationType).extension.extending(e)&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;if (self.oclIsKindOf(ComponentType)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;self.oclAsType(AnnotationType).extension.extending(e)&#xA;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if (self.oclIsKindOf(GateType)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.oclAsType(GateType).extension.extending(e)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if (self.oclIsKindOf(GateType)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.oclAsType(StructuredDataType).extension.extending(e)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;false&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+      <eParameters name="e" eType="#//PackageableElement"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"
+        volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="derivation" value="&#xA;            if (self.name.oclIsUndefined()) then&#xA;                ''&#xA;            else&#xA;                if (not self.oclContainer().oclIsUndefined()) then&#xA;                    if (self.oclContainer().oclIsKindOf(NamedElement)) then&#xA;                        self.oclContainer().oclAsType(NamedElement).qualifiedName + '::' + self.name&#xA;                    else&#xA;                        self.oclContainer().oclAsType(ocl::OclElement)->closure(oclContainer())&#xA;                        ->select(c | c.oclIsKindOf(NamedElement))&#xA;                        ->asOrderedSet()&#xA;                        ->first().oclAsType(NamedElement).qualifiedName + '::' + self.name&#xA;                    endif&#xA;                else&#xA;                    self.name&#xA;                endif&#xA;            endif"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packagedElement" ordered="false"
+        upperBound="-1" eType="#//PackageableElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="import" ordered="false"
+        upperBound="-1" eType="#//ElementImport" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nestedPackage" ordered="false"
+        upperBound="-1" eType="#//Package" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementImport" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importedElement" ordered="false"
+        upperBound="-1" eType="#//PackageableElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importedPackage" lowerBound="1"
+        eType="#//Package"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TestObjective" eSuperTypes="#//PackageableElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="objectiveURI" ordered="false"
+        unique="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataInstance" abstract="true" eSuperTypes="#//MappableDataElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataType" lowerBound="1"
+        eType="#//DataType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MappableDataElement" abstract="true"
+      eSuperTypes="#//PackageableElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataType" abstract="true" eSuperTypes="#//MappableDataElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataResourceMapping" eSuperTypes="#//PackageableElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataElementMapping" eSuperTypes="#//PackageableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mappableDataElement" lowerBound="1"
+        eType="#//MappableDataElement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="elementURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataResourceMapping" lowerBound="1"
+        eType="#//DataResourceMapping"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterMapping" ordered="false"
+        upperBound="-1" eType="#//ParameterMapping" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterMapping" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameterURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" lowerBound="1"
+        eType="#//Parameter"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter" abstract="true" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataType" lowerBound="1"
+        eType="#//DataType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleDataType" eSuperTypes="#//DataType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleDataInstance" eSuperTypes="#//DataInstance"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StructuredDataType" eSuperTypes="#//DataType">
+    <eOperations name="allMembers" upperBound="-1" eType="#//Member">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;if (not self.extension.oclIsUndefined()) then&#xA;                self.extension.extending.oclAsType(StructuredDataType).allMembers()->union(self.member)->asOrderedSet()&#xA;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;&#x9;self.member&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extension" eType="#//Extension"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="member" upperBound="-1"
+        eType="#//Member" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Member" eSuperTypes="#//Parameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOptional" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StructuredDataInstance" eSuperTypes="#//DataInstance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="memberAssignment" upperBound="-1"
+        eType="#//MemberAssignment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unassignedMember" eType="#//UnassignedMemberTreatment"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MemberAssignment" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="member" lowerBound="1"
+        eType="#//Member"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="memberSpec" lowerBound="1"
+        eType="#//StaticDataUse" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StaticDataUse" abstract="true" eSuperTypes="#//DataUse"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataUse" abstract="true" eSuperTypes="#//Element">
+    <eOperations name="resolveDataType" eType="#//DataType">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="null"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="argument" upperBound="-1"
+        eType="#//ParameterBinding" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reduction" upperBound="-1"
+        eType="#//MemberReference" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterBinding" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataUse" lowerBound="1"
+        eType="#//DataUse" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" lowerBound="1"
+        eType="#//Parameter"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="UnassignedMemberTreatment">
+    <eLiterals name="AnyValue"/>
+    <eLiterals name="AnyValueOrOmit" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action" eSuperTypes="#//MappableDataElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="body" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="formalParameter" upperBound="-1"
+        eType="#//FormalParameter" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormalParameter" eSuperTypes="#//Parameter"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Function" eSuperTypes="#//Action">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" lowerBound="1"
+        eType="#//DataType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormalParameterUse" eSuperTypes="#//DynamicDataUse">
+    <eOperations name="resolveDataType" eType="#//DataType">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="self.parameter.dataType"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" lowerBound="1"
+        eType="#//FormalParameter"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DynamicDataUse" abstract="true" eSuperTypes="#//DataUse"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataType" lowerBound="1"
+        eType="#//DataType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionCall" eSuperTypes="#//DynamicDataUse">
+    <eOperations name="resolveDataType" eType="#//DataType">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="self.function.returnType"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="function" lowerBound="1"
+        eType="#//Function"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableUse" eSuperTypes="#//DynamicDataUse">
+    <eOperations name="resolveDataType" eType="#//DataType">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="self.variable.dataType"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentInstance" lowerBound="1"
+        eType="#//ComponentInstance"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
+        eType="#//Variable"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComponentInstance" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//ComponentType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="role" lowerBound="1" eType="#//ComponentInstanceRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComponentType" eSuperTypes="#//PackageableElement">
+    <eOperations name="allGates" upperBound="-1" eType="#//GateInstance">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;if (not self.extension.oclIsUndefined()) then&#xA;                self.extension.extending.oclAsType(ComponentType).allGates()->union(self.gateInstance)->asOrderedSet()&#xA;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;&#x9;self.gateInstance&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="allTimers" upperBound="-1" eType="#//Timer">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;if (not self.extension.oclIsUndefined()) then&#xA;                self.extension.extending.oclAsType(ComponentType).allTimers()->union(self.timer)->asOrderedSet()&#xA;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;&#x9;self.timer&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="allVariables" upperBound="-1" eType="#//Variable">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;if (not self.extension.oclIsUndefined()) then&#xA;                self.extension.extending.oclAsType(ComponentType).allVariables()->union(self.variable)->asOrderedSet()&#xA;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;&#x9;self.variable&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="gateInstance" lowerBound="1"
+        upperBound="-1" eType="#//GateInstance" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="timer" upperBound="-1"
+        eType="#//Timer" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" upperBound="-1"
+        eType="#//Variable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extension" eType="#//Extension"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GateInstance" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//GateType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GateType" eSuperTypes="#//PackageableElement">
+    <eOperations name="allDataTypes" upperBound="-1" eType="#//DataType">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;if (not self.extension.oclIsUndefined()) then&#xA;                self.extension.extending.oclAsType(GateType).allDataTypes()->union(self.dataType)->asOrderedSet()&#xA;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;&#x9;self.dataType&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataType" lowerBound="1"
+        upperBound="-1" eType="#//DataType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" lowerBound="1" eType="#//GateTypeKind"
+        defaultValueLiteral="Message"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extension" eType="#//Extension"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Timer" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="ComponentInstanceRole">
+    <eLiterals name="SUT"/>
+    <eLiterals name="Tester" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OmitValue" eSuperTypes="#//SpecialValueUse"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SpecialValueUse" abstract="true" eSuperTypes="#//StaticDataUse">
+    <eOperations name="resolveDataType" eType="#//DataType">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if (self.container().oclIsTypeOf(MemberAssignment)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.container().oclAsType(MemberAssignment).member.dataType&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if (self.container().oclIsTypeOf(ParameterBinding)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.container().oclAsType(ParameterBinding).parameter.dataType&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if (self.container().oclIsTypeOf(Interaction) and &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.oclIsTypeOf(AnyValue)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.oclAsType(AnyValue).dataType&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;null&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnyValue" eSuperTypes="#//SpecialValueUse">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataType" eType="#//DataType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnyValueOrOmit" eSuperTypes="#//SpecialValueUse"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataInstanceUse" eSuperTypes="#//StaticDataUse">
+    <eOperations name="resolveDataType" eType="#//DataType">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;&#x9;if (not self.dataInstance.oclIsUndefined()) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;self.dataInstance.dataType&#xA;&#x9;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if (not self.dataType.oclIsUndefined()) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.dataType&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if (self.container().oclIsTypeOf(MemberAssignment)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.container().oclAsType(MemberAssignment).member.dataType&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if (self.container().oclIsTypeOf(ParameterBinding)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.container().oclAsType(ParameterBinding).parameter.dataType&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;null&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataInstance" eType="#//DataInstance"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unassignedMember" eType="#//UnassignedMemberTreatment"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataType" eType="#//DataType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="item" upperBound="-1" eType="#//StaticDataUse"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Time" eSuperTypes="#//SimpleDataType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TimeLabel" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TimerOperation" abstract="true" eSuperTypes="#//AtomicBehaviour">
+    <eOperations name="getParticipatingComponents" upperBound="-1" eType="#//ComponentInstance">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if self.getParentTestDescription()->exists(td | td.isLocallyOrdered) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;OrderedSet { self.componentInstance }&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.getParentTestDescription().testConfiguration.componentInstance->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="timer" lowerBound="1" eType="#//Timer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentInstance" lowerBound="1"
+        eType="#//ComponentInstance"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicBehaviour" abstract="true" eSuperTypes="#//Behaviour">
+    <eOperations name="getParticipatingComponents" upperBound="-1" eType="#//ComponentInstance">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if self.getParentTestDescription()->exists(td | td.isLocallyOrdered) and self.container().oclIsKindOf(Block) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.container().oclAsType(Block).getParticipatingComponentsExcluding(self)->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.getParentTestDescription().testConfiguration.componentInstance->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="timeConstraint" ordered="false"
+        upperBound="-1" eType="#//TimeConstraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="timeLabel" eType="#//TimeLabel"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Behaviour" abstract="true" eSuperTypes="#//Element">
+    <eOperations name="isTesterInputEvent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;&#x9;if (self.oclIsKindOf(TimeOut) or &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;self.oclIsKindOf(Quiescence) or&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;(self.oclIsKindOf(Interaction) and&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.oclAsType(Interaction).sourceGate.component.role = ComponentInstanceRole::SUT and&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;self.oclAsType(Interaction).target->exists(t | t.targetGate.component.role = ComponentInstanceRole::Tester)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;)&#xA;&#x9;&#x9;&#x9;&#x9;) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;true&#xA;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;false&#xA;&#x9;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getParticipatingComponents" upperBound="-1" eType="#//ComponentInstance">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if self.getParentTestDescription()->exists(td | td.isLocallyOrdered) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;OrderedSet{}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.getParentTestDescription().testConfiguration.componentInstance->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="testObjective" ordered="false"
+        upperBound="-1" eType="#//TestObjective"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TimeConstraint" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="timeConstraintExpression"
+        lowerBound="1" eType="#//DataUse" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TimerStart" eSuperTypes="#//TimerOperation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="period" lowerBound="1"
+        eType="#//DataUse" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TimerStop" eSuperTypes="#//TimerOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TimeOut" eSuperTypes="#//TimerOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TimeOperation" abstract="true" eSuperTypes="#//AtomicBehaviour">
+    <eOperations name="getParticipatingComponents" upperBound="-1" eType="#//ComponentInstance">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if self.getParentTestDescription()->exists(td | td.isLocallyOrdered) and self.container().oclIsKindOf(Block) then (&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if not self.componentInstance.oclIsUndefined() then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;OrderedSet { self.componentInstance }&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.container().oclAsType(Block).getParticipatingComponentsExcluding(self)->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; ) else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.getParentTestDescription().testConfiguration.componentInstance->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentInstance" eType="#//ComponentInstance"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="period" lowerBound="1"
+        eType="#//DataUse" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Wait" eSuperTypes="#//TimeOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Quiescence" eSuperTypes="#//TimeOperation">
+    <eOperations name="getParticipatingComponents" upperBound="-1" eType="#//ComponentInstance">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if self.getParentTestDescription()->exists(td | td.isLocallyOrdered) and self.container().oclIsKindOf(Block) then (&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if not self.componentInstance.oclIsUndefined() or not self.gateReference.oclIsUndefined() then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.componentInstance->including(self.gateReference.component)->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.container().oclAsType(Block).getParticipatingComponentsExcluding(self)->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; ) else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.getParentTestDescription().testConfiguration.componentInstance->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="gateReference" eType="#//GateReference"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GateReference" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="component" lowerBound="1"
+        eType="#//ComponentInstance"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="gate" lowerBound="1" eType="#//GateInstance"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TimeLabelUse" eSuperTypes="#//DynamicDataUse">
+    <eOperations name="resolveDataType" eType="#//DataType">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="Time.allInstances()->asOrderedSet()->first()"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="timeLabel" lowerBound="1"
+        eType="#//TimeLabel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" lowerBound="1" eType="#//TimeLabelUseKind"
+        defaultValueLiteral="Last"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TestConfiguration" eSuperTypes="#//PackageableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentInstance" ordered="false"
+        lowerBound="2" upperBound="-1" eType="#//ComponentInstance" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connection" ordered="false"
+        lowerBound="1" upperBound="-1" eType="#//Connection" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Connection" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="endPoint" ordered="false"
+        lowerBound="2" upperBound="2" eType="#//GateReference" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TestDescription" eSuperTypes="#//PackageableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="testConfiguration" lowerBound="1"
+        eType="#//TestConfiguration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="formalParameter" upperBound="-1"
+        eType="#//FormalParameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="behaviourDescription" eType="#//BehaviourDescription"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="testObjective" ordered="false"
+        upperBound="-1" eType="#//TestObjective"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLocallyOrdered" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BehaviourDescription" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="behaviour" lowerBound="1"
+        eType="#//Behaviour" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="#//Element">
+    <eOperations name="getParticipatingComponents" upperBound="-1" eType="#//ComponentInstance">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if self.getParentTestDescription()->exists(td | td.isLocallyOrdered) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.behaviour.getParticipatingComponents()->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.getParentTestDescription().testConfiguration.componentInstance->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getParticipatingComponentsExcluding" upperBound="-1" eType="#//ComponentInstance">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if self.getParentTestDescription()->exists(td | td.isLocallyOrdered) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.behaviour->excluding(excluded).getParticipatingComponents()->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.getParentTestDescription().testConfiguration.componentInstance->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+      <eParameters name="excluded" eType="#//Behaviour"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="behaviour" lowerBound="1"
+        upperBound="-1" eType="#//Behaviour" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="guard" upperBound="-1"
+        eType="#//LocalExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CombinedBehaviour" abstract="true" eSuperTypes="#//Behaviour">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="periodic" upperBound="-1"
+        eType="#//PeriodicBehaviour" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exceptional" upperBound="-1"
+        eType="#//ExceptionalBehaviour" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PeriodicBehaviour" eSuperTypes="#//Behaviour">
+    <eOperations name="getParticipatingComponents" upperBound="-1" eType="#//ComponentInstance">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if self.getParentTestDescription()->exists(td | td.isLocallyOrdered) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.block.getParticipatingComponents()->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.getParentTestDescription().testConfiguration.componentInstance->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="block" lowerBound="1" eType="#//Block"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="period" lowerBound="1"
+        upperBound="-1" eType="#//LocalExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExceptionalBehaviour" abstract="true"
+      eSuperTypes="#//Behaviour">
+    <eOperations name="getParticipatingComponents" upperBound="-1" eType="#//ComponentInstance">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if self.getParentTestDescription()->exists(td | td.isLocallyOrdered) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.block.getParticipatingComponents()->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.getParentTestDescription().testConfiguration.componentInstance->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="block" lowerBound="1" eType="#//Block"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="guardedComponent" eType="#//ComponentInstance"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AlternativeBehaviour" eSuperTypes="#//MultipleCombinedBehaviour"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MultipleCombinedBehaviour" abstract="true"
+      eSuperTypes="#//CombinedBehaviour">
+    <eOperations name="getParticipatingComponents" upperBound="-1" eType="#//ComponentInstance">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if self.getParentTestDescription()->exists(td | td.isLocallyOrdered) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.periodic.getParticipatingComponents()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;->union(self.exceptional.getParticipatingComponents())&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;->union(self.block.getParticipatingComponents())->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.getParentTestDescription().testConfiguration.componentInstance->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="block" lowerBound="1" upperBound="-1"
+        eType="#//Block" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParallelBehaviour" eSuperTypes="#//MultipleCombinedBehaviour"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BoundedLoopBehaviour" eSuperTypes="#//SingleCombinedBehaviour">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="numIteration" lowerBound="1"
+        upperBound="-1" eType="#//LocalExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SingleCombinedBehaviour" abstract="true"
+      eSuperTypes="#//CombinedBehaviour">
+    <eOperations name="getParticipatingComponents" upperBound="-1" eType="#//ComponentInstance">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if self.getParentTestDescription()->exists(td | td.isLocallyOrdered) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.periodic.getParticipatingComponents()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;->union(self.exceptional.getParticipatingComponents())&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;->union(self.block.getParticipatingComponents())->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.getParentTestDescription().testConfiguration.componentInstance->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="block" lowerBound="1" eType="#//Block"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OptionalBehaviour" eSuperTypes="#//SingleCombinedBehaviour"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UnboundedLoopBehaviour" eSuperTypes="#//SingleCombinedBehaviour"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConditionalBehaviour" eSuperTypes="#//MultipleCombinedBehaviour"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CompoundBehaviour" eSuperTypes="#//SingleCombinedBehaviour"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DefaultBehaviour" eSuperTypes="#//ExceptionalBehaviour"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InterruptBehaviour" eSuperTypes="#//ExceptionalBehaviour"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Target" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetGate" lowerBound="1"
+        eType="#//GateReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueAssignment" upperBound="-1"
+        eType="#//ValueAssignment" containment="true">
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VerdictAssignment" eSuperTypes="#//AtomicBehaviour">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="verdict" lowerBound="1"
+        eType="#//DataUse" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Assertion" eSuperTypes="#//ActionBehaviour">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="otherwise" eType="#//DataUse"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
+        eType="#//DataUse" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Stop" eSuperTypes="#//AtomicBehaviour"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Break" eSuperTypes="#//AtomicBehaviour"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//ActionBehaviour">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
+        eType="#//VariableUse" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
+        eType="#//DataUse" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActionBehaviour" abstract="true" eSuperTypes="#//AtomicBehaviour">
+    <eOperations name="getParticipatingComponents" upperBound="-1" eType="#//ComponentInstance">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if self.getParentTestDescription()->exists(td | td.isLocallyOrdered) and self.container().oclIsKindOf(Block) then (&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if not self.componentInstance.oclIsUndefined() then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;OrderedSet { self.componentInstance }&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.container().oclAsType(Block).getParticipatingComponentsExcluding(self)->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; ) else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.getParentTestDescription().testConfiguration.componentInstance->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentInstance" eType="#//ComponentInstance"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InlineAction" eSuperTypes="#//ActionBehaviour">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="body" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActionReference" eSuperTypes="#//ActionBehaviour">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" lowerBound="1"
+        eType="#//Action"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actualParameter" upperBound="-1"
+        eType="#//ParameterBinding" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TestDescriptionReference" eSuperTypes="#//AtomicBehaviour">
+    <eOperations name="getParticipatingComponents" upperBound="-1" eType="#//ComponentInstance">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if self.getParentTestDescription()->exists(td | td.isLocallyOrdered) and not self.componentInstanceBinding->isEmpty() then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.componentInstanceBinding.actualComponent->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.getParentTestDescription().testConfiguration.componentInstance->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="testDescription" lowerBound="1"
+        eType="#//TestDescription"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentInstanceBinding"
+        ordered="false" upperBound="-1" eType="#//ComponentInstanceBinding" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actualParameter" upperBound="-1"
+        eType="#//ParameterBinding" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComponentInstanceBinding" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="formalComponent" lowerBound="1"
+        eType="#//ComponentInstance"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actualComponent" lowerBound="1"
+        eType="#//ComponentInstance"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Interaction" eSuperTypes="#//AtomicBehaviour">
+    <eOperations name="getParticipatingComponents" upperBound="-1" eType="#//ComponentInstance">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if self.getParentTestDescription()->exists(td | td.isLocallyOrdered) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.target&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;->collect(targetGate.component)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;->including(sourceGate.component)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.getParentTestDescription().testConfiguration.componentInstance->asOrderedSet()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceGate" lowerBound="1"
+        eType="#//GateReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" ordered="false"
+        lowerBound="1" upperBound="-1" eType="#//Target" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Message" eSuperTypes="#//Interaction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTrigger" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="argument" lowerBound="1"
+        eType="#//DataUse" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PredefinedFunction" eSuperTypes="#//PackageableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="#//DataType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MemberReference" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="member" eType="#//Member"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionIndex" eType="#//DataUse"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PredefinedFunctionCall" eSuperTypes="#//DynamicDataUse">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="function" lowerBound="1"
+        eType="#//PredefinedFunction"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actualParameters" upperBound="-1"
+        eType="#//DataUse" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LocalExpression" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
+        eType="#//DataUse" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scope" eType="#//ComponentInstance"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GateTypeKind">
+    <eLiterals name="Message"/>
+    <eLiterals name="Procedure" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TimeLabelUseKind">
+    <eLiterals name="Last"/>
+    <eLiterals name="Previous" value="1"/>
+    <eLiterals name="First" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueAssignment" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
+        eType="#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="#//Parameter"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ProcedureCall" eSuperTypes="#//Interaction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="signature" lowerBound="1"
+        eType="#//ProcedureSignature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="argument" lowerBound="1"
+        upperBound="-1" eType="#//ParameterBinding" containment="true">
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="replyTo" eType="#//ProcedureCall"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ProcedureSignature" eSuperTypes="#//DataType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" lowerBound="1"
+        upperBound="-1" eType="#//ProcedureParameter" containment="true">
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ProcedureParameter" eSuperTypes="#//Parameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" lowerBound="1" eType="#//ParameterKind"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ParameterKind">
+    <eLiterals name="In"/>
+    <eLiterals name="Out" value="1"/>
+    <eLiterals name="Exception" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionDataType" eSuperTypes="#//DataType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="itemType" lowerBound="1"
+        eType="#//DataType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionDataInstance" eSuperTypes="#//DataInstance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="item" upperBound="-1" eType="#//StaticDataUse"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Extension" eSuperTypes="#//Element">
+    <eOperations name="transitiveExtending" eType="#//Extension">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;&#x9;if (self.extending.oclIsKindOf(AnnotationType)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;self.extending.oclAsType(AnnotationType).extension&#xA;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if (self.extending.oclIsKindOf(ComponentType)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.extending.oclAsType(AnnotationType).extension&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if (self.extending.oclIsKindOf(GateType)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.extending.oclAsType(GateType).extension&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if (self.extending.oclIsKindOf(GateType)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.extending.oclAsType(StructuredDataType).extension&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;null&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="extending" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;&#x9;if (self.extending = e) then&#xA;&#x9;&#x9;&#x9;&#x9;    true&#xA;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if (self->closure(transitiveExtending())->includes(e)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;true&#xA;&#x9;            &#x9;else&#xA;&#x9;            &#x9;&#x9;false&#xA;&#x9;            &#x9;endif &#xA;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+      <eParameters name="e" eType="#//PackageableElement"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extending" lowerBound="1"
+        eType="#//PackageableElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LiteralValueUse" eSuperTypes="#//StaticDataUse">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataType" eType="#//DataType"/>
+  </eClassifiers>
+</ecore:EPackage>
