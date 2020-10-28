@@ -44,7 +44,7 @@ class PackageAspect {
     			_self.enabledTestCase.executeTestCase()
     		}    		
 		} catch (TDLRuntimeException nt){
-			println("Stopped due "+nt.message)
+			println("Stopped due"+nt.message)
 		}
 	}
 }
@@ -52,6 +52,9 @@ class PackageAspect {
 class TestDescriptionAspect{
 	@Step
 	def void executeTestCase(){
+		
+	}
+	def void newMed(){
 		
 	}
 }

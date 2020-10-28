@@ -29,6 +29,17 @@ public class TestDescriptionAspect {
     };
   }
   
+  public static void newMed(final TestDescription _self) {
+    final org.imt.k3tdl.k3dsa.TestDescriptionAspectTestDescriptionAspectProperties _self_ = org.imt.k3tdl.k3dsa.TestDescriptionAspectTestDescriptionAspectContext.getSelf(_self);
+    // #DispatchPointCut_before# void newMed()
+    if (_self instanceof org.etsi.mts.tdl.TestDescription){
+    	org.imt.k3tdl.k3dsa.TestDescriptionAspect._privk3_newMed(_self_, (org.etsi.mts.tdl.TestDescription)_self);
+    };
+  }
+  
   protected static void _privk3_executeTestCase(final TestDescriptionAspectTestDescriptionAspectProperties _self_, final TestDescription _self) {
+  }
+  
+  protected static void _privk3_newMed(final TestDescriptionAspectTestDescriptionAspectProperties _self_, final TestDescription _self) {
   }
 }
