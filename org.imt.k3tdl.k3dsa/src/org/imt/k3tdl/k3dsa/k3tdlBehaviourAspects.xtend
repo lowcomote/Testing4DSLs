@@ -1,6 +1,7 @@
 package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
+
 import fr.inria.diverse.k3.al.annotationprocessor.Step
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 
@@ -40,12 +41,28 @@ import org.etsi.mts.tdl.ParallelBehaviour
 import org.etsi.mts.tdl.DefaultBehaviour
 import org.etsi.mts.tdl.InterruptBehaviour
 import org.etsi.mts.tdl.Block
+import org.etsi.mts.tdl.BehaviourDescription
+import static extension org.imt.k3tdl.k3dsa.BehaviourAspect.*
+import static extension org.imt.k3tdl.k3dsa.BlockAspect.*
+import static extension org.imt.k3tdl.k3dsa.GateInstanceAspect.*
+import org.etsi.mts.tdl.GateInstance
+import org.etsi.mts.tdl.Target
+
+@Aspect (className = BehaviourDescription)
+class BehaviourDescriptionAspect{
+	@Step
+	def void callBehavior(){
+		println("Calling target Behavior: " + _self.behaviour.name)
+		_self.behaviour.performBehavior()
+	}
+}
 @Aspect (className = Behaviour)
 class BehaviourAspect{
 	public Behaviour enabledBehaviour;
 	@Step
 	def void performBehavior(){
 		println("Performing target Behavior: " + _self.name)
+		_self.enabledBehaviour = _self
 	}
 }
 @Aspect (className = AtomicBehaviour)
@@ -70,10 +87,7 @@ class PeriodicBehaviourAspect extends BehaviourAspect{
 	@OverrideAspectMethod
 	def void performBehavior(){
 		println("Performing Periodic Behavior: " + _self.name)
-		for (Behaviour b :_self.block.behaviour){
-			_self.enabledBehaviour = b
-			b.performBehavior()
-		}
+		_self.block.traverseBlock()
 	}
 }
 @Aspect (className = ExceptionalBehaviour)
@@ -82,10 +96,7 @@ class ExceptionalBehaviourAspect extends BehaviourAspect{
 	@OverrideAspectMethod
 	def void performBehavior(){
 		println("Performing Exceptional Behavior: " + _self.name)
-		for (Behaviour b :_self.block.behaviour){
-			_self.enabledBehaviour = b
-			b.performBehavior()
-		}
+		_self.block.traverseBlock()
 	}
 }
 @Aspect (className = ActionBehaviour)
@@ -197,7 +208,16 @@ class MessageAspect extends InteractoinAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Message Behavior: " + _self.name)
+		println("Performing Message Behavior: " + _self.name);
+		for (Target t: _self.target){
+			//the argument has to be sent to the SUT
+			if (t.targetGate.component.role == 0){
+				t.targetGate.gate.sut_receive(_self.argument)
+			}else{
+				t.targetGate.gate.tester_receive(_self.argument)
+			}
+		}
+			
 	}
 }
 @Aspect (className = TimerStart)
@@ -246,10 +266,7 @@ class SingleCombinedBehaviourAspect extends CombinedBehaviourAspect{
 	@OverrideAspectMethod
 	def void performBehavior(){
 		println("Performing Single Combined Behavior: " + _self.name)
-		for (Behaviour b :_self.block.behaviour){
-			_self.enabledBehaviour = b
-			b.performBehavior()
-		}
+		_self.block.traverseBlock()
 	}
 }
 @Aspect (className = MultipleCombinedBehaviour)
@@ -340,9 +357,12 @@ class InterruptBehaviourAspect extends ExceptionalBehaviourAspect{
 }
 @Aspect (className = Block)
 class BlockAspect{
-	public boolean blockStatus
+	public String blockStatus
 	@Step
 	def void traverseBlock(){
-		
+		_self.blockStatus = "Activated"
+		for (Behaviour b:_self.behaviour){
+			b.performBehavior()
+		}
 	}
 }

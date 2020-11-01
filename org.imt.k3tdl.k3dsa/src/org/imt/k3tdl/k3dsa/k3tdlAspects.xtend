@@ -9,18 +9,16 @@ import org.etsi.mts.tdl.Package
 import org.etsi.mts.tdl.TestDescription
 import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
 import static extension org.imt.k3tdl.k3dsa.BehaviourDescriptionAspect.*
-import static extension org.imt.k3tdl.k3dsa.BehaviourAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
 import java.util.List
 import java.util.ArrayList
-import org.etsi.mts.tdl.BehaviourDescription
-
+import org.etsi.mts.tdl.TestConfiguration
 
 @Aspect(className = Package)
 class PackageAspect {
 	
 	public List<TestDescription> testcases = new ArrayList<TestDescription>;
-	public TestDescription enabledTestCase
+	public TestDescription enabledTestCase;
 	public String verdictValue
 	
 	@Step
@@ -51,16 +49,16 @@ class TestDescriptionAspect{
 	@Step
 	def void executeTestCase(){
 		println("Start test case execution: " + _self.name)
-		_self.testConfiguration.activateConfiguration
+		_self.testConfiguration.activateConfiguration()
 		_self.behaviourDescription.callBehavior()
 	}
 }
-@Aspect (className = BehaviourDescription)
-class BehaviourDescriptionAspect{
+@Aspect (className = TestConfiguration)
+class TestConfigurationAspect{
+	public TestConfiguration enabledConfiguration
 	@Step
-	def void callBehavior(){
-		println("Calling target Behavior: " + _self.behaviour.name)
-		_self.behaviour.performBehavior()
+	def void activateConfiguration(){
+		_self.enabledConfiguration = _self
 	}
 }
 class TDLRuntimeException extends Exception {
