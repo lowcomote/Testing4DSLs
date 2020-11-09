@@ -1,0 +1,3 @@
+org/etsi/mts/tdl/ui/*
+!org/etsi/mts/tdl/ui/labeling/
+!.gitignore
