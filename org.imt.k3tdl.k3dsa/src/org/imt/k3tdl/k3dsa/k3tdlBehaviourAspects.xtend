@@ -210,7 +210,7 @@ class MessageAspect extends InteractoinAspect{
 	def void performBehavior(){
 		println("Performing Message Behavior: " + _self.name);
 		for (Target t: _self.target){
-			//the argument has to be sent to the SUT
+			//the argument has to be sent to the MUT
 			if (t.targetGate.component.role == 0){
 				t.targetGate.gate.sut_receive(_self.argument)
 			}else{
