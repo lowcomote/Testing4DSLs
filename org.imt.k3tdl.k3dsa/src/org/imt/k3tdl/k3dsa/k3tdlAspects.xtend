@@ -63,7 +63,6 @@ class TestDescriptionAspect{
 @Aspect (className = TestConfiguration)
 class TestConfigurationAspect{
 	public String MUTPath
-	public String DSLPath
 	public GateReference gateRef;
 	@Step
 	def void activateConfiguration(){
@@ -71,14 +70,12 @@ class TestConfigurationAspect{
 		for (Annotation a:_self.componentInstance.filter[ci | ci.role == 0].get(0).annotation){
 			if (a.key.name == 'MUTPath'){
 				_self.MUTPath = a.value
-			}else if(a.key.name == 'DSLPath'){
-				_self.DSLPath = a.value
 			}
 		}
 		for (Connection c:_self.connection){
 			if (c.endPoint.filter[e | e.gate.name.contains('MUT')].size > 0){
 				_self.gateRef = c.endPoint.filter[e | e.gate.name.contains('MUT')].get(0)
-				_self.gateRef.gate.configureLauncher(_self.MUTPath, _self.DSLPath);
+				_self.gateRef.gate.configureLauncher(_self.MUTPath);
 			}
 		}
 	}

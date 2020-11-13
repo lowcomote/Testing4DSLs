@@ -29,17 +29,14 @@ class GateTypeAspect{
 class GateInstanceAspect{
 	public List<DataUse> testerIncomingData = new ArrayList<DataUse>
 	public List<DataUse> sutIncomingData = new ArrayList<DataUse>
-	public String MUTPath = ""
-	public String DSLPath = ""
-	CustomLauncher launcher = new CustomLauncher();
+	CustomLauncher launcher;
 	//set the launcher attributes based on the gate type 
-	def void configureLauncher(String MUTPath, String DSLPath){
-		_self.MUTPath = MUTPath;
-		_self.DSLPath = DSLPath;
+	def void configureLauncher(String MUTPath){
+		_self.launcher = new CustomLauncher(MUTPath);
 		if (_self.name.equals('genericMUTGate')){
 			//call the launcher to configure the GEMOC ALE engine
 			try{
-				_self.launcher.setALEConfiguration(_self.MUTPath, _self.DSLPath);
+				_self.launcher.setALEConfiguration();
 			}catch(CoreException ce){
 				System.out.println(ce.message);
 			}catch(EngineContextException ece){
@@ -47,10 +44,10 @@ class GateInstanceAspect{
 			}
 		}else if (_self.name.equals('dslSpecificMUTGate')){
 			//call the launcher to configure the event manager
-			_self.launcher.setEventManagerConfiguration(_self.MUTPath, _self.DSLPath);
+			_self.launcher.setEventManagerConfiguration();
 		}else if (_self.name.equals('oclMUTGate')){
 			//call the launcher to configure the OCL Interpreter
-			_self.launcher.setOCLInterpreterConfiguration(_self.MUTPath, _self.DSLPath);
+			_self.launcher.setOCLInterpreterConfiguration();
 		}
 	}
 	@Step
@@ -98,7 +95,7 @@ class GateReferenceAspect{
 }
 @Aspect (className = Connection)
 class ConnectionAspect{
-	def void setMUTpath(GateInstance gate, String MUTPath, String DSLPath){
-		gate.configureLauncher(MUTPath, DSLPath);
+	def void setMUTpath(GateInstance gate, String MUTPath){
+		gate.configureLauncher(MUTPath);
 	}
 }

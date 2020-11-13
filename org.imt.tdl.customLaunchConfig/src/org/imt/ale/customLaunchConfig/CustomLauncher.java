@@ -19,8 +19,9 @@ import org.eclipse.gemoc.dsl.debug.ide.launch.AbstractDSLLaunchConfigurationDele
 import org.eclipse.gemoc.dsl.debug.ide.sirius.ui.launch.AbstractDSLLaunchConfigurationDelegateSiriusUI;
 
 public class CustomLauncher{
-	public SequentialRunConfiguration runConfiguration;
-	public ExecutionMode executionMode;
+	private SequentialRunConfiguration runConfiguration;
+	private ExecutionMode executionMode;
+	
 	private String _modelLocationText;
 	private String _siriusRepresentationLocationText;
 	private String _delayText;
@@ -30,12 +31,25 @@ public class CustomLauncher{
 	private String _animationFirstBreak;
 	private String _modelInitializationMethodText;
 	private String _modelInitializationArgumentsText;
-	public static String GENERIC_COMMAND = "Generic";
-	public static String DSL_SPECIFIC_COMMAND = "DSL-Specific";
-	public static String OCL_COMMAND = "OCL";
 	
+	public final static  String GENERIC_COMMAND = "Generic";
+	public final static String DSL_SPECIFIC_COMMAND = "DSL-Specific";
+	public final static String OCL_COMMAND = "OCL";
+	
+	public CustomLauncher(String MUTAddress){
+		//TODO: The attributes have to be set in an automatic manner (for now, I simply set them)
+		this._modelLocationText = MUTAddress;
+		this._siriusRepresentationLocationText = MUTAddress.split("/")[0] + "representations.aird";
+		this._delayText = "0";
+		this._languageCombo = "org.imt.bpmn.BPMN";
+		this._entryPointModelElementText = "/";
+		this._entryPointMethodText = "bpmn::Microflow::main";
+		this._animationFirstBreak = "true";
+		this._modelInitializationMethodText = "bpmn::Microflow::initializeModel";
+		this._modelInitializationArgumentsText = "";
+	}
 	//definition of a new configuration of ALE Engine for running a specific model
-	public void setALEConfiguration(String MUTAddress, String DSLAddress) throws CoreException, EngineContextException {
+	public void setALEConfiguration() throws CoreException, EngineContextException {
 		// Create a new Launch Configuration
 		ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
 		ILaunchConfigurationType type = manager.getLaunchConfigurationType("org.eclipse.gemoc.ale.interpreted.engine.ui.launcher");
@@ -46,15 +60,15 @@ public class CustomLauncher{
 				this._modelLocationText);
 		configuration.setAttribute(AbstractDSLLaunchConfigurationDelegateSiriusUI.SIRIUS_RESOURCE_URI,
 				this._siriusRepresentationLocationText);
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_DELAY, Integer.parseInt(_delayText));
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_SELECTED_LANGUAGE, _languageCombo);
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_MODEL_ENTRY_POINT, _entryPointModelElementText);
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_METHOD_ENTRY_POINT, _entryPointMethodText);
+		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_DELAY, Integer.parseInt(this._delayText));
+		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_SELECTED_LANGUAGE, this._languageCombo);
+		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_MODEL_ENTRY_POINT, this._entryPointModelElementText);
+		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_METHOD_ENTRY_POINT, this._entryPointMethodText);
 		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_METHOD,
-				_modelInitializationMethodText);
+				this._modelInitializationMethodText);
 		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_ARGUMENTS,
-				_modelInitializationArgumentsText);
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_BREAK_START, _animationFirstBreak);
+				this._modelInitializationArgumentsText);
+		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_BREAK_START, this._animationFirstBreak);
 		// DebugModelID for sequential engine
 		configuration.setAttribute(SequentialRunConfiguration.DEBUG_MODEL_ID, Activator.DEBUG_MODEL_ID);
 
@@ -65,9 +79,10 @@ public class CustomLauncher{
 		//setting the executionMode
 	}
 	//definition of a new configuration of Event Manager for interacting with a specific model
-	public void setEventManagerConfiguration(String DSLAddress, String MUTAddress) {}
+	public void setEventManagerConfiguration() {}
 	//definition of a new configuration of OCL Engine for querying on a specific model
-	public void setOCLInterpreterConfiguration(String DSLAddress, String MUTAddress) {}
+	public void setOCLInterpreterConfiguration() {}
+	
 	public void executeCommand(String commandType) {
 		if (commandType.equals(GENERIC_COMMAND)) {
 			try {
