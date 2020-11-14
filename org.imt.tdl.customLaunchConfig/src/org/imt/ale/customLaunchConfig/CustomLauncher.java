@@ -28,11 +28,11 @@ public class CustomLauncher{
 	private String _languageCombo;
 	private String _entryPointModelElementText;
 	private String _entryPointMethodText;
-	private String _animationFirstBreak;
+	private Boolean _animationFirstBreak;
 	private String _modelInitializationMethodText;
 	private String _modelInitializationArgumentsText;
 	
-	public final static  String GENERIC_COMMAND = "Generic";
+	public final static String GENERIC_COMMAND = "Generic";
 	public final static String DSL_SPECIFIC_COMMAND = "DSL-Specific";
 	public final static String OCL_COMMAND = "OCL";
 	
@@ -44,11 +44,13 @@ public class CustomLauncher{
 		this._languageCombo = "org.imt.bpmn.BPMN";
 		this._entryPointModelElementText = "/";
 		this._entryPointMethodText = "bpmn::Microflow::main";
-		this._animationFirstBreak = "true";
+		this._animationFirstBreak = true;
 		this._modelInitializationMethodText = "bpmn::Microflow::initializeModel";
 		this._modelInitializationArgumentsText = "";
+		this.executionMode = ExecutionMode.Run;
 	}
 	//definition of a new configuration of ALE Engine for running a specific model
+	
 	public void setALEConfiguration() throws CoreException, EngineContextException {
 		// Create a new Launch Configuration
 		ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
@@ -84,6 +86,7 @@ public class CustomLauncher{
 	public void setOCLInterpreterConfiguration() {}
 	
 	public void executeCommand(String commandType) {
+		System.out.println("Start executing the command of type " + commandType);
 		if (commandType.equals(GENERIC_COMMAND)) {
 			try {
 				createExecutionEngine(this.runConfiguration, this.executionMode);
@@ -100,7 +103,7 @@ public class CustomLauncher{
 	}
 	protected AleEngine createExecutionEngine(SequentialRunConfiguration runConfiguration, ExecutionMode executionMode)
 			throws CoreException, EngineContextException {
-		
+		System.out.println("Start creating Ale Engine");
 		AleEngine engine = new AleEngine();
 		
 		GenericModelExecutionContext<SequentialRunConfiguration> executioncontext = new GenericModelExecutionContext<SequentialRunConfiguration>(runConfiguration, executionMode);

@@ -2,15 +2,16 @@ package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 
+
 import fr.inria.diverse.k3.al.annotationprocessor.InitializeModel
 import fr.inria.diverse.k3.al.annotationprocessor.Main
 import fr.inria.diverse.k3.al.annotationprocessor.Step
-import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 import org.etsi.mts.tdl.Package
 import org.etsi.mts.tdl.TestDescription
 import org.etsi.mts.tdl.TestConfiguration
 import org.etsi.mts.tdl.Annotation
 import org.etsi.mts.tdl.Connection
+import org.etsi.mts.tdl.ComponentInstanceRole
 import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
 import static extension org.imt.k3tdl.k3dsa.BehaviourDescriptionAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
@@ -18,6 +19,8 @@ import static extension org.imt.k3tdl.k3dsa.GateInstanceAspect.*
 import java.util.List
 import java.util.ArrayList
 import org.etsi.mts.tdl.GateReference
+import org.eclipse.emf.common.util.EList
+import org.etsi.mts.tdl.ComponentInstance
 
 @Aspect(className = Package)
 class PackageAspect {
@@ -29,7 +32,7 @@ class PackageAspect {
 	
 	@Step
 	@InitializeModel
-	def void initializeModel(){
+	def void initializeModel(EList<String> args){
 		for (Object o : _self.packagedElement.filter[p | p instanceof TestDescription]){
 			_self.testcases.add(o as TestDescription)
 		}
@@ -64,10 +67,12 @@ class TestDescriptionAspect{
 class TestConfigurationAspect{
 	public String MUTPath
 	public GateReference gateRef;
+	public List<ComponentInstance> instances = new ArrayList<ComponentInstance>();
 	@Step
 	def void activateConfiguration(){
+		println("Start test configuration activation")
 		//finding the address of MUT and DSL from the annotations set to the SUT component (the component with role==0)
-		for (Annotation a:_self.componentInstance.filter[ci | ci.role == 0].get(0).annotation){
+		for (Annotation a:_self.componentInstance.filter[ci | ci.role.toString == "SUT"].get(0).annotation){
 			if (a.key.name == 'MUTPath'){
 				_self.MUTPath = a.value
 			}
@@ -78,6 +83,7 @@ class TestConfigurationAspect{
 				_self.gateRef.gate.configureLauncher(_self.MUTPath);
 			}
 		}
+		println("Test configuration activated")
 	}
 }
 class TDLRuntimeException extends Exception {
