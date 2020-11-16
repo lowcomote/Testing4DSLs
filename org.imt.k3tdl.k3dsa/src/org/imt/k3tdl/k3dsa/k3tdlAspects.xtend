@@ -74,7 +74,7 @@ class TestConfigurationAspect{
 		//finding the address of MUT and DSL from the annotations set to the SUT component (the component with role==0)
 		for (Annotation a:_self.componentInstance.filter[ci | ci.role.toString == "SUT"].get(0).annotation){
 			if (a.key.name == 'MUTPath'){
-				_self.MUTPath = a.value
+				_self.MUTPath = a.value.substring(1, a.value.length-2)
 			}
 		}
 		for (Connection c:_self.connection){

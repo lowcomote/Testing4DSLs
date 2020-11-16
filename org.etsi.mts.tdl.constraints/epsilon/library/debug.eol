@@ -1,0 +1,366 @@
+//Debugging operations
+operation Any prefix() : String {
+	return self.type().name+":  "+self.qualifiedName() + " ";
+}
+
+operation Any debugAnnotations() : Boolean {
+	self.println();
+	("  Annotations: "+self.annotation).println();
+	("  Comments:    "+self.comment).println();
+	return true;
+}
+
+operation Any debugTimeConstraintVariables() : Boolean {
+    var expressionConstraint = 
+ 			(not self.timeConstraintExpression.oclIsKindOf(VariableUse)
+    	 	  or (self.oclContainer().oclIsKindOf(Interaction)
+    	 	  	and	(self.oclContainer().sourceGate.component = self.timeConstraintExpression.componentInstance 
+    	 	   	  or self.oclContainer().target->forAll(t | 
+    	 	   			t.targetGate.component = self.timeConstraintExpression.componentInstance)))
+    	 	  or (self.oclContainer().oclIsKindOf(ActionBehaviour)
+    	 	  	and not self.oclContainer().componentInstance.oclIsUndefined()
+    	 	  	and self.oclContainer().componentInstance = self.timeConstraintExpression.componentInstance));
+    
+    
+    var argumentConstraint = 
+    		 self.timeConstraintExpression.argument->forAll(a | 
+    		 		not a.dataUse.oclIsKindOf(VariableUse) 
+		    	 	 or (self.oclContainer().oclIsKindOf(Interaction)
+		    	 	 	and (self.oclContainer().sourceGate.component = a.dataUse.componentInstance 
+		    	 	      or self.oclContainer().target->forAll(t | 
+    	 	   					t.targetGate.component = a.dataUse.componentInstance)))
+		    	 	 or (self.oclContainer().oclIsKindOf(ActionBehaviour)
+		    	 	   and not self.oclContainer().componentInstance.oclIsUndefined()
+		    	 	   and self.oclContainer().componentInstance = self.timeConstraintExpression.componentInstance));
+
+	var nestedArgumentConstraint = 
+			 self.timeConstraintExpression.argument->closure(a | a.dataUse.argument)->forAll(a | 
+    	  	 		not a.dataUse.oclIsKindOf(VariableUse)
+    	  	 		 or (self.oclContainer().oclIsKindOf(Interaction)
+    	  	 		 	and (self.oclContainer().sourceGate.component = a.dataUse.componentInstance 
+		    	 	      or self.oclContainer().target->forAll(t | 
+		    	 	   			t.targetGate.component = a.dataUse.componentInstance)))
+		    	 	 or (self.oclContainer().oclIsKindOf(ActionBehaviour)
+		    	 	   and not self.oclContainer().componentInstance.oclIsUndefined()
+		    	 	   and self.oclContainer().componentInstance = self.timeConstraintExpression.componentInstance));
+
+	("TC: EC: " + expressionConstraint).println();
+	("TC: AC: " + argumentConstraint).println();
+	("TC: NC: " + nestedArgumentConstraint).println();
+	for (a in self.timeConstraintExpression.argument) {
+		if (a.dataUse.oclIsKindOf(VariableUse)) {
+			if (self.oclContainer().oclIsKindOf(Interaction)) {
+				if (self.oclContainer().sourceGate.component = a.dataUse.componentInstance) {
+					("TC: Argument -> Variable -> Interaction -> Source").println();
+				} else if (self.oclContainer().target->forAll(t | 
+    	 	   			t.targetGate.component = a.dataUse.componentInstance)) {
+    	 	   		("TC: Argument -> Variable -> Interaction -> Targets").println();
+    	 	   	} else {
+    	 	   		("TC: Argument -> Variable -> Interaction -> None -> FAIL!").println();
+    	 	   	}
+			}
+		}
+	}
+
+	
+
+ 	var constraint = 
+ 			(not self.timeConstraintExpression.oclIsKindOf(VariableUse)
+    	 	  or (self.oclContainer().oclIsKindOf(Interaction)
+    	 	  	and	(self.oclContainer().sourceGate.component = self.timeConstraintExpression.componentInstance 
+    	 	   	  or self.oclContainer().target->forAll(t | 
+    	 	   			t.targetGate.component = self.timeConstraintExpression.componentInstance)))
+    	 	  or (self.oclContainer().oclIsKindOf(ActionBehaviour)
+    	 	  	and not self.oclContainer().componentInstance.oclIsUndefined()
+    	 	  	and self.oclContainer().componentInstance = self.timeConstraintExpression.componentInstance))
+			 
+    		 and self.timeConstraintExpression.argument->forAll(a | 
+    		 		not a.dataUse.oclIsKindOf(VariableUse) 
+		    	 	 or (self.oclContainer().oclIsKindOf(Interaction)
+		    	 	 	and (self.oclContainer().sourceGate.component = a.dataUse.componentInstance 
+		    	 	      or self.oclContainer().target->forAll(t | 
+    	 	   					t.targetGate.component = a.dataUse.componentInstance)))
+		    	 	 or (self.oclContainer().oclIsKindOf(ActionBehaviour)
+		    	 	   and not self.oclContainer().componentInstance.oclIsUndefined()
+		    	 	   and self.oclContainer().componentInstance = self.timeConstraintExpression.componentInstance))
+    		 	 
+			 and self.timeConstraintExpression.argument->closure(a | a.dataUse.argument)->forAll(a | 
+    	  	 		not a.dataUse.oclIsKindOf(VariableUse)
+    	  	 		 or (self.oclContainer().oclIsKindOf(Interaction)
+    	  	 		 	and (self.oclContainer().sourceGate.component = a.dataUse.componentInstance 
+		    	 	      or self.oclContainer().target->forAll(t | 
+		    	 	   			t.targetGate.component = a.dataUse.componentInstance)))
+		    	 	 or (self.oclContainer().oclIsKindOf(ActionBehaviour)
+		    	 	   and not self.oclContainer().componentInstance.oclIsUndefined()
+		    	 	   and self.oclContainer().componentInstance = self.timeConstraintExpression.componentInstance))
+	;
+   	return constraint;
+}
+
+
+
+operation Any debugInteractionVariableUse() : Boolean {
+	var constraint = 
+				(not self.argument.oclIsKindOf(VariableUse)
+    	 	  or (self.sourceGate.component = self.argument.componentInstance 
+    	 	   or self.target->forAll(t | 
+    	 	   		t.targetGate.component = self.argument.componentInstance)))
+			 
+    		 and self.argument.argument->forAll(a | 
+    		 		not a.dataUse.oclIsKindOf(VariableUse) 
+    		 	 or (self.sourceGate.component = a.dataUse.componentInstance 
+    	 	      or self.target->forAll(t | 
+    	 	   			t.targetGate.component = a.dataUse.componentInstance)))
+    		 	 
+    	  	 and self.argument.argument->closure(a | a.dataUse.argument)->forAll(a | 
+    	  	 		not a.dataUse.oclIsKindOf(VariableUse)
+    		 	 or (self.sourceGate.component = a.dataUse.componentInstance 
+    	 	      or self.target->forAll(t | 
+    	 	   			t.targetGate.component = a.dataUse.componentInstance)))
+    	 		;
+	
+ 	return constraint;
+}
+
+operation Any debugInteractionVariable() : Boolean {
+	for (t in self.target) {
+		if (t.variable.isDefined()) {
+			t.variable.dataType.qualifiedName().println();	
+		}
+	} 
+ 	return true;
+}
+
+operation Any debugInteractionGates() : Boolean {
+	var connected = self.target.forAll(t | 
+        			self.getTestDescription().testConfiguration.connection->exists(c |
+        				(c.endPoint->at(0).gate = self.sourceGate.gate
+        			 and c.endPoint->at(0).component = self.sourceGate.component 
+        			 and c.endPoint->at(1).gate = t.targetGate.gate
+        			 and c.endPoint->at(1).component = t.targetGate.component)
+        			    
+        			 or (c.endPoint->at(1).gate = self.sourceGate.gate 
+        			 and c.endPoint->at(1).component = self.sourceGate.component 
+        			 and c.endPoint->at(0).gate = t.targetGate.gate
+        			 and c.endPoint->at(0).component = t.targetGate.component)));
+
+ 	for (t in self.target) {
+ 	    ("  Looking for:" +self.sourceGate.qualifiedName() + " <---> " + t.targetGate.qualifiedName()+"...").println();			 
+ 	
+ 		for (c in (self.getTestDescription().testConfiguration.connection->select(c | 
+        				(c.endPoint->at(0) = self.sourceGate and c.endPoint->at(1) = t.targetGate)   
+        			 or (c.endPoint->at(1) = self.sourceGate and c.endPoint->at(0) = t.targetGate)))) {
+        	("    "+c.qualifiedName()).println();			 
+		}
+ 	}
+ 	("  ->"+connected).println();
+ 	return true;
+}
+
+
+operation Any debugCyclicImports() : Boolean {
+	for (x in self.`import`->asOrderedSet()->closure(i|i.importedPackage.`import`)) {
+		if (x.importedPackage = self) {
+			(self.qualifiedName()+" :: "+x+" : " +x.importedPackage.qualifiedName()).println();
+		}
+	}
+	//return self.`import`->asOrderedSet()->closure(i|i.importedPackage.`import`)->forAll(i | i.importedPackage <> self);
+	return true;
+}
+
+operation Any debugMemberSpec() : Boolean {
+	"  EE".println();
+	("  "+self.eContainer.name + ":: " +self.member.eContainer.name+" : "+self.member.name).print();	
+	("  ->"+(self.memberSpec.argument->forAll(a|a.dataUse.oclIsKindOf(StaticDataUse)) and 
+		self.memberSpec.argument->closure(a|a.dataUse.argument)->forAll(a|a.dataUse.oclIsKindOf(StaticDataUse)))).println();
+	for (x in self.memberSpec.argument) {
+		("  A::::>"+x.parameter.name+" => "+x.dataUse).println();
+	}
+	
+	for (x in self.memberSpec.argument->closure(a|a.dataUse.argument)) {
+		("  C::::>"+x.parameter.name+" =>"+x.dataUse).println();
+	}
+	return true;
+}
+
+operation Any debugQualifiedNames() : Boolean {
+	(":::::: QN :::::: " + self.qualifiedName()).println();
+	return true;
+}
+
+operation Any debugReductionMembers() : Boolean {
+	(self.getNamedParent().qualifiedName() + " ->> " +self.targetElement()).println();
+	//self.targetElement().qualifiedName().println();
+	for (m in self.reduction) {
+		("  "+self.reduction->indexOf(m) + " : " +self.qualifiedName()+m.name).print();
+		(" : ").print();
+		if (self.reduction->indexOf(m) = 0) {
+			(self.getDataType().isKindOf(StructuredDataType) and self.getDataType().member->contains(m)).println();
+		} else {
+			(self.reduction->at(self.reduction->indexOf(m)-1).dataType.isKindOf(StructuredDataType) 
+			and self.reduction->at(self.reduction->indexOf(m)-1).dataType.member->contains(m)).println();
+		}
+	}
+	//return
+	("    => " +( 
+	not self.getDataType().isKindOf(StructuredDataType)
+	 or self.reduction.isEmpty()
+	 or self.getDataType().member->contains(self.reduction->first())
+	and self.reduction->select(m|
+			self.reduction->indexOf(m) > 0)->forAll(m|
+				self.reduction->at(self.reduction->indexOf(m)-1).dataType.isKindOf(StructuredDataType) 
+			and self.reduction->at(self.reduction->indexOf(m)-1).dataType.member->contains(m)
+		)
+	)).println();
+	
+	return true;
+}
+
+operation Any debugFirstBlock() : Boolean {
+	self.block->forAll(b|b.behaviour.oclIsKindOf(CombinedBehaviour));
+//	for (x in self.block->closure(i|i.behaviour.oclIsKindOf(CombinedBehaviour) and i.behaviour.first().block)) {
+	//	(x).println();
+	//}
+	return true;
+}
+
+operation Any validateBindings() : Boolean {
+    //for (c in TDL!Connection.allInstances()) {
+        //c.~notMatched = false;
+    //}
+    //("Test Description:    " + self.getTestDescription().qualifiedName()).println();
+    //("  Context TC:        " + self.getTestDescription().testConfiguration.qualifiedName()).println(); 
+    //("    TD Reference     " + self.testDescription.qualifiedName()).println();
+    //("      Referenced TC: " + self.testDescription.testConfiguration.qualifiedName()).println();
+    
+    //constraint:
+	var	sameConfigurationNoBindings = 
+	    	self.getTestDescription().testConfiguration = self.testDescription.testConfiguration 
+    	and self.componentInstanceBinding.isEmpty();
+    
+    if (sameConfigurationNoBindings) {
+	    return true;
+    }
+    
+    (self.testDescription.name + " referenced in " + self.getTestDescription().name).println();
+	
+    for (c in self.testDescription.testConfiguration.connection) {
+        ("  Required connection: "+c.endPoint.get(0).qualifiedName()+" --- "+c.endPoint.get(1).qualifiedName()).println();
+        
+	        //actual constraint
+	        //note slight redundacy due to reflectivity (a--b == b--a)
+	        //which can be expressed also more succinctly
+	        //constraint
+            var matchedConnection = 
+	        		//bindings for formal components exist
+	        		self.testDescription.testConfiguration.connection.forAll(c | 
+				        	self.componentInstanceBinding->exists(i | 
+				        		i.formalComponent = c.endPoint.get(0).component) 
+			    		and self.componentInstanceBinding->exists(i |
+			    				i.formalComponent = c.endPoint.get(1).component))
+    				and 
+            		//provided -> select matched -> check matched
+            		self.getTestDescription().testConfiguration.connection->select(p | 
+	        				(p.endPoint.get(0).component = self.componentInstanceBinding->select(i | 
+	        					i.formalComponent = c.endPoint.get(0).component).first().actualComponent 
+	        		 	 and p.endPoint.get(1).component = self.componentInstanceBinding->select(i | 
+	        					i.formalComponent = c.endPoint.get(1).component).first().actualComponent)
+	             		 or (p.endPoint.get(1).component = self.componentInstanceBinding->select(i | 
+	        					i.formalComponent = c.endPoint.get(0).component).first().actualComponent 
+	             		 and p.endPoint.get(0).component = self.componentInstanceBinding->select(i | 
+	        					i.formalComponent = c.endPoint.get(1).component).first().actualComponent))->exists(m | 
+            					(m.endPoint.get(0).gate.type = c.endPoint.get(0).gate.type 
+                 			 and m.endPoint.get(1).gate.type = c.endPoint.get(1).gate.type)
+                 			 or (m.endPoint.get(0).gate.type = c.endPoint.get(1).gate.type 
+                 			 and m.endPoint.get(1).gate.type = c.endPoint.get(0).gate.type));
+			if (not matchedConnection) {	            
+	            ("      -> ERROR: No matching connections found for bound components! Binding not posible!").errln();            
+	        }
+        
+	}
+
+    return true;
+}
+
+
+operation Any debugBindings() : Boolean {
+    //for (c in TDL!Connection.allInstances()) {
+        //c.~notMatched = false;
+    //}
+    //("Test Description:    " + self.getTestDescription().qualifiedName()).println();
+    //("  Context TC:        " + self.getTestDescription().testConfiguration.qualifiedName()).println(); 
+    //("    TD Reference     " + self.testDescription.qualifiedName()).println();
+    //("      Referenced TC: " + self.testDescription.testConfiguration.qualifiedName()).println();
+    
+    //constraint:
+	var	sameConfigurationNoBindings = 
+	    	self.getTestDescription().testConfiguration = self.testDescription.testConfiguration 
+    	and self.componentInstanceBinding.isEmpty();
+    
+    if (sameConfigurationNoBindings) {
+	    return true;
+    }
+    
+    (self.testDescription.name + " referenced in " + self.getTestDescription().name).println();
+	
+    for (c in self.testDescription.testConfiguration.connection) {
+        ("  Required connection: "+c.endPoint.get(0).qualifiedName()+" --- "+c.endPoint.get(1).qualifiedName()).println();
+        var formalE1 = c.endPoint.get(0).component;
+        var formalE2 = c.endPoint.get(1).component;
+        
+        //constraint
+        var bindingsForFormalComponentsExist =
+        		self.testDescription.testConfiguration.connection.forAll(c | 
+		        	self.componentInstanceBinding.exists(i|i.formalComponent = c.endPoint.get(0).component) 
+		    	and self.componentInstanceBinding.exists(i|i.formalComponent = c.endPoint.get(1).component)
+        );
+        
+        if (bindingsForFormalComponentsExist) {
+	        var actualE1 = self.componentInstanceBinding.select(i|i.formalComponent = formalE1).first().actualComponent; 
+	        var actualE2 = self.componentInstanceBinding.select(i|i.formalComponent = formalE2).first().actualComponent;
+	        ("    Relevant Bindings:").println();
+	        ("      "+formalE1.qualifiedName()+" --> "+actualE1.qualifiedName()).println();
+	        ("      "+formalE2.qualifiedName()+" --> "+actualE2.qualifiedName()).println();
+	        
+	        var providedConnections = self.getTestDescription().testConfiguration.connection;
+	        for (p in providedConnections) {
+	            ("    Provided connections: "+p.endPoint.get(0).qualifiedName()+" <---> "+p.endPoint.get(1).qualifiedName()).println();
+	        }
+	        //actual constraint
+	        //note slight redundacy due to reflectivity (a--b == b--a)
+	        //which can be expressed also more succinctly
+	        //constraint
+	        var matchedConnections = 
+	        	providedConnections.select(p | 
+	        		(p.endPoint.get(0).component = actualE1 and p.endPoint.get(1).component = actualE2)
+	             or (p.endPoint.get(1).component = actualE1 and p.endPoint.get(0).component = actualE2));
+	        if (matchedConnections.size()=0) {
+	            ("      -> ERROR: No matching connections found for bound components! Binding not posible!").errln();            
+	            
+	        } else {
+	            ("      -> "+matchedConnections.size() + " matching connections found for bound components").println();            
+	            for (m in matchedConnections) {
+	                if ((m.endPoint.get(0).gate.type = c.endPoint.get(0).gate.type 
+	                    and  
+	                    m.endPoint.get(1).gate.type = c.endPoint.get(1).gate.type)
+	                    or 
+	                    (m.endPoint.get(0).gate.type = c.endPoint.get(1).gate.type 
+	                    and  
+	                    m.endPoint.get(1).gate.type = c.endPoint.get(0).gate.type)) {
+	                    
+	                } else {
+	                    ("      -> ERROR: Correspoonding gate types <"+m.endPoint.get(0).gate.type.name+","+m.endPoint.get(1).gate.type.name+"> for gates <"+m.endPoint.get(0).name+","+m.endPoint.get(1).name+"> are not the same as the required gate types <"+c.endPoint.get(0).gate.type.name+","+c.endPoint.get(1).gate.type.name+">! Binding not posible!").errln();            
+	                
+	                }
+	            }
+	        }
+        } else {
+            ("      -> ERROR: There are no bindings corresponding to the components for the required connection! Binding not posible!").errln();            
+        }
+        
+	}
+
+    return true;
+}
+
+
