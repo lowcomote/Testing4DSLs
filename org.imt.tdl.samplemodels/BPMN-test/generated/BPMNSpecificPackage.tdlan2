@@ -1,0 +1,50 @@
+Package BPMNSpecificPackage{
+	Import all from commonPackage;
+	//data type definition
+	//driven from metamodel
+	//the types that are required for the definition of modelState
+	Type Microflow;
+	Type MicroflowElement;
+	Type BasicVariable (
+		value of type String
+	);
+	Type Variable(
+		attributes of type BasicVariable
+	);
+	//definition of model state based on operational semantics
+	Type modelState (
+		currentNode of type MicroflowElement,
+		ownerMicroflow of type Microflow,
+		valuedVariables of type Variable,
+		innerState of type modelState
+	);
+	//definition of new events required for testing
+	Type setState(
+		state of type modelState
+	);
+	
+	//Test configuration
+	Gate Type genericGate accepts runModel, setState, getState;//a gate for exchanging of generic types
+	Gate Type oclGate accepts OCL;//a gate for querying the MUT using OCL 
+	
+	Component Type TestSystem having{
+		gate genericTestGate of type genericGate;
+		gate oclTestGate of type oclGate;
+	}
+	Component Type MUT having{
+		gate genericMUTGate of type genericGate;
+		gate oclMUTGate of type oclGate;
+	}
+	
+	Test Configuration genericConfiguration{
+		create Tester tester of type TestSystem;
+		create SUT promoteBPMN of type MUT with {MUTPath : "model/promoteBPMN.xmi";};
+		connect tester.genericTestGate to promoteBPMN.genericMUTGate;
+	}
+	Test Configuration oclConfiguration{
+		create Tester tester of type TestSystem;
+		create SUT promoteBPMN of type MUT with {MUTPath : "model/promoteBPMN.xmi";};
+		connect tester.genericTestGate to promoteBPMN.genericMUTGate;
+		connect tester.oclTestGate to promoteBPMN.oclMUTGate;
+	}
+}

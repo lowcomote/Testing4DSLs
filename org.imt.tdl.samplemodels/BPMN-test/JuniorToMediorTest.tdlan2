@@ -1,0 +1,35 @@
+Package testPromoteBPMN{
+	Import all from commonPackage;
+	Import all from BPMNSpecificPackage;
+	
+	//test data definition
+	Microflow juniorToMedior;
+	BasicVariable givenName (value = "John");
+	BasicVariable givenLevel (value = "Junior");
+	Variable givenEmployee (attributes = {givenName, givenLevel});
+	modelState givenState (ownerMicroflow = juniorToMedior, valuedVariables = givenEmployee);
+	
+	BasicVariable expectedName (value = ?);
+	BasicVariable expectedLevel (value = ?);
+	Variable expectedEmployee (attributes = {expectedName, expectedLevel});
+	modelState expectedState (valuedVariables = expectedEmployee);
+	
+	//instantiation of the types to be used in the test description
+	setState setModelState (state = ?);
+	
+	//Testing using generic commands
+	Test Description promoteBPMNtest uses configuration genericConfiguration{
+		tester.genericTestGate sends setModelState(state = givenState) to promoteBPMN.genericMUTGate with {GIVEN;};
+		tester.genericTestGate sends runMUT to promoteBPMN.genericMUTGate with {WHEN;};
+		tester.genericTestGate sends getModelState to promoteBPMN.genericMUTGate with {WHEN;};
+		alternatively{
+			promoteBPMN.genericMUTGate sends expectedState (valuedVariables = expectedEmployee 
+															(attributes = {expectedName (value = "John"),
+																			expectedLevel (value = "Medior")})
+														) to tester.genericTestGate;
+			set verdict to PASS;
+		} or{
+			set verdict to FAIL;
+		} with {THEN;}
+	}
+}

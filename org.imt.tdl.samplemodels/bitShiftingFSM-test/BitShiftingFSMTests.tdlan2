@@ -1,0 +1,52 @@
+Package testBitShifting{
+	Import all from commonPackage;
+	Import all from FSMSpecificPackage;
+	
+	//test data definition
+	State S0;
+	State S1;
+	State S2; 
+	modelState givenState (currentState = S0, 
+							unprocessedString = "000101010", 
+							consumedString = "", 
+							producedString = "");
+	modelState expectedState (currentState = ?, 
+								unprocessedString = ?, 
+								consumedString = ?, 
+								producedString = ?);
+	
+	//instantiation of the types to be used in the test description					
+	setState setModelState (state = ?);
+	fire fire_S0S2 (transition = ?);
+	
+	//Testing using generic commands
+	Test Description bitShiftingGenericTest uses configuration genericConfiguration{
+		tester.genericTestGate sends setModelState(state = givenState) to bitshiftingFSM.genericMUTGate with {GIVEN;} ;
+		tester.genericTestGate sends runMUT to bitshiftingFSM.genericMUTGate with {WHEN;};
+		tester.genericTestGate sends getModelState to bitshiftingFSM.genericMUTGate with {WHEN;};
+		alternatively{
+			bitshiftingFSM.genericMUTGate sends expectedState(currentState = S2, 
+														unprocessedString = "", 
+														consumedString = "000101010", 
+														producedString = "000010101") to tester.genericTestGate;
+			set verdict to PASS;
+		} or{
+			set verdict to FAIL;
+		} with {THEN;}
+	}
+	//Testing using FSM-Specific commands
+	Test Description bitShiftingDslSpecificTest uses configuration dslSpecificConfiguration{
+		tester.genericTestGate sends setModelState(state = givenState) to bitshiftingFSM.genericMUTGate with {GIVEN;};
+		tester.dslSpecificTestGate sends fire_S0S2 to bitshiftingFSM.dslSpecificMUTGate with {WHEN;};
+		tester.genericTestGate sends getModelState to bitshiftingFSM.genericMUTGate with {WHEN;};
+		alternatively{
+			bitshiftingFSM.dslSpecificMUTGate sends expectedState(currentState = S0, 
+														unprocessedString = "00101010", 
+														consumedString = "0", 
+														producedString = "0") to tester.dslSpecificTestGate;
+			set verdict to PASS;
+		} or{
+			set verdict to FAIL;
+		} with {THEN;}
+	}
+}

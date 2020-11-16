@@ -1,0 +1,46 @@
+Package arduinoTests{
+	Import all from commonPackage;
+	Import all from ArduinoSpecificPackage;
+	//test data definition
+	Button my_button (id = "my_button", level = '0');
+	Led RED_LED (id = "RED_LED", level = '0');
+	modelState givenState (buttons = my_button, leds = RED_LED);
+	
+	//Expected model state
+	Button expectedButton (id = "my_button", level = ?);
+	Led expectedLed (id = "RED_LED", level = ?);
+	modelState expectedState (buttons = expectedButton, leds = expectedLed);
+	 
+	//instantiation of the types to be used in the test description
+	Button_pressed button_pressed(button = ?);
+	Button_released button_released(button = ?);
+	Led_level_changed led_level_changed(led = ?);
+	setState setModelState (state = ?);
+	
+	//testing using generic commands
+	Test Description arduinoGenericTest uses configuration genericConfiguration{
+		tester.genericTestGate sends setModelState(state = givenState) to arduino.genericMUTGate with {GIVEN;};
+		tester.genericTestGate sends runMUT to arduino.genericMUTGate with {WHEN;};
+		tester.genericTestGate sends getModelState to arduino.genericMUTGate with {WHEN;};
+		alternatively{
+			arduino.genericMUTGate sends expectedState (buttons = expectedButton (id = "my_button", level = '0'), 
+														leds = expectedLed (id = "RED_LED", level = '0'))  to tester.genericTestGate;
+			set verdict to PASS;
+		} or {
+			arduino.genericMUTGate sends expectedState (buttons = expectedButton (id = "my_button", level = '0'), 
+														leds = expectedLed (id = "RED_LED", level = '1'))  to tester.genericTestGate;
+			set verdict to FAIL;
+		} with {THEN;}
+	}
+	//Testing using Arduino-specific commands
+	Test Description arduinoDslSpecificTest uses configuration dslSpecificConfiguration{
+		tester.genericTestGate sends setModelState(state = givenState) to arduino.genericMUTGate with {GIVEN;};
+		tester.dslSpecificTestGate sends button_pressed (button = my_button) to arduino.dslSpecificMUTGate with {WHEN;};
+		arduino.dslSpecificMUTGate sends led_level_changed (led = RED_LED (id = "RED_LED", level = '1'))to tester.dslSpecificTestGate;
+		arduino.dslSpecificMUTGate sends led_level_changed (led = RED_LED (id = "RED_LED", level = '0'))to tester.dslSpecificTestGate;
+		arduino.dslSpecificMUTGate sends led_level_changed (led = RED_LED (id = "RED_LED", level = '1'))to tester.dslSpecificTestGate;
+		arduino.dslSpecificMUTGate sends led_level_changed (led = RED_LED (id = "RED_LED", level = '0'))to tester.dslSpecificTestGate;
+		tester.dslSpecificTestGate sends button_released (button = my_button) to arduino.dslSpecificMUTGate with {WHEN;};
+		arduino.dslSpecificMUTGate sends led_level_changed (led = RED_LED (id = "RED_LED", level = '0'))to tester.dslSpecificTestGate;
+	}
+}

@@ -1,0 +1,26 @@
+Package commonPackage{
+	//Primitive data types
+	Type String;
+	Type Integer;
+	//OCL type
+	Type OCL(
+		query of type String
+	);
+	//test verdict definition
+	Type Verdict;
+	Verdict PASS;
+	Verdict FAIL;
+	
+	//general event to execute a Model Under Test (MUT)
+	Type runModel;
+	runModel runMUT;
+	
+	//general event for getting a model state
+	Type getState;
+	getState getModelState; 
+	
+	Annotation GIVEN;
+	Annotation WHEN;
+	Annotation THEN;
+	Annotation MUTPath; // an annotation to set the address of MUT
+}
