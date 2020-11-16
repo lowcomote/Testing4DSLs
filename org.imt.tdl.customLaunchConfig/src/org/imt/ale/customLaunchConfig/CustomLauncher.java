@@ -39,7 +39,7 @@ public class CustomLauncher{
 	public CustomLauncher(String MUTAddress){
 		//TODO: The attributes have to be set in an automatic manner (for now, I simply set them)
 		this._modelLocationText = MUTAddress;
-		this._siriusRepresentationLocationText = MUTAddress.split("/")[0] + "representations.aird";
+		this._siriusRepresentationLocationText = MUTAddress.split("/")[0] + "/representations.aird";
 		this._delayText = "0";
 		this._languageCombo = "org.imt.bpmn.BPMN";
 		this._entryPointModelElementText = "/";
