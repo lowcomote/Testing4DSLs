@@ -22,15 +22,15 @@ public class CustomLauncher{
 	private SequentialRunConfiguration runConfiguration;
 	private ExecutionMode executionMode;
 	
-	private String _modelLocationText;
-	private String _siriusRepresentationLocationText;
-	private String _delayText;
-	private String _languageCombo;
-	private String _entryPointModelElementText;
-	private String _entryPointMethodText;
+	private String _modelLocation;
+	private String _siriusRepresentationLocation;
+	private String _delay;
+	private String _language;
+	private String _entryPointModelElement;
+	private String _entryPointMethod;
 	private Boolean _animationFirstBreak;
-	private String _modelInitializationMethodText;
-	private String _modelInitializationArgumentsText;
+	private String _modelInitializationMethod;
+	private String _modelInitializationArguments;
 	
 	public final static String GENERIC_COMMAND = "Generic";
 	public final static String DSL_SPECIFIC_COMMAND = "DSL-Specific";
@@ -38,15 +38,15 @@ public class CustomLauncher{
 	
 	public CustomLauncher(String MUTAddress){
 		//TODO: The attributes have to be set in an automatic manner (for now, I simply set them)
-		this._modelLocationText = MUTAddress;
-		this._siriusRepresentationLocationText = MUTAddress.split("/")[0] + "/representations.aird";
-		this._delayText = "0";
-		this._languageCombo = "org.imt.bpmn.BPMN";
-		this._entryPointModelElementText = "/";
-		this._entryPointMethodText = "bpmn::Microflow::main";
+		this._modelLocation = MUTAddress;
+		this._siriusRepresentationLocation = MUTAddress.split("/")[0] + "/representations.aird";
+		this._delay = "0";
+		this._language = "org.imt.bpmn.BPMN";
+		this._entryPointModelElement = "/";
+		this._entryPointMethod = "bpmn::Microflow::main";
 		this._animationFirstBreak = true;
-		this._modelInitializationMethodText = "bpmn::Microflow::initializeModel";
-		this._modelInitializationArgumentsText = "";
+		this._modelInitializationMethod = "bpmn::Microflow::initializeModel";
+		this._modelInitializationArguments = "";
 		this.executionMode = ExecutionMode.Run;
 	}
 	//definition of a new configuration of ALE Engine for running a specific model
@@ -59,17 +59,17 @@ public class CustomLauncher{
 
 		// Set its attributes
 		configuration.setAttribute(AbstractDSLLaunchConfigurationDelegate.RESOURCE_URI,
-				this._modelLocationText);
+				this._modelLocation);
 		configuration.setAttribute(AbstractDSLLaunchConfigurationDelegateSiriusUI.SIRIUS_RESOURCE_URI,
-				this._siriusRepresentationLocationText);
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_DELAY, Integer.parseInt(this._delayText));
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_SELECTED_LANGUAGE, this._languageCombo);
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_MODEL_ENTRY_POINT, this._entryPointModelElementText);
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_METHOD_ENTRY_POINT, this._entryPointMethodText);
+				this._siriusRepresentationLocation);
+		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_DELAY, Integer.parseInt(this._delay));
+		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_SELECTED_LANGUAGE, this._language);
+		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_MODEL_ENTRY_POINT, this._entryPointModelElement);
+		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_METHOD_ENTRY_POINT, this._entryPointMethod);
 		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_METHOD,
-				this._modelInitializationMethodText);
+				this._modelInitializationMethod);
 		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_ARGUMENTS,
-				this._modelInitializationArgumentsText);
+				this._modelInitializationArguments);
 		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_BREAK_START, this._animationFirstBreak);
 		// DebugModelID for sequential engine
 		configuration.setAttribute(SequentialRunConfiguration.DEBUG_MODEL_ID, Activator.DEBUG_MODEL_ID);
