@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ASCII"?>
+<tdl:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tdl="http://www.etsi.org/spec/TDL/1.4.1">
+  <packagedElement xsi:type="tdl:SimpleDataType"/>
+  <packagedElement xsi:type="tdl:SimpleDataType"/>
+  <packagedElement xsi:type="tdl:SimpleDataType"/>
+  <packagedElement xsi:type="tdl:SimpleDataType"/>
+  <packagedElement xsi:type="tdl:SimpleDataInstance" dataType="//@packagedElement.5"/>
+  <packagedElement xsi:type="tdl:SimpleDataType"/>
+  <packagedElement xsi:type="tdl:SimpleDataInstance"/>
+  <packagedElement xsi:type="tdl:SimpleDataType"/>
+  <packagedElement xsi:type="tdl:SimpleDataInstance" dataType="//@packagedElement.7"/>
+  <packagedElement xsi:type="tdl:SimpleDataInstance" dataType="//@packagedElement.7"/>
+  <packagedElement xsi:type="tdl:AnnotationType"/>
+  <packagedElement xsi:type="tdl:AnnotationType"/>
+  <packagedElement xsi:type="tdl:AnnotationType"/>
+  <packagedElement xsi:type="tdl:AnnotationType"/>
+</tdl:Package>
