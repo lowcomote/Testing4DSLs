@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ASCII"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <tdl:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tdl="http://www.etsi.org/spec/TDL/1.4.1" name="commonPackage">
   <packagedElement xsi:type="tdl:SimpleDataType" name="String"/>
   <packagedElement xsi:type="tdl:SimpleDataType" name="Integer"/>

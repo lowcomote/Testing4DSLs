@@ -2,18 +2,19 @@ package org.imt.tdl.defaultPackage.generator;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.gemoc.dsl.Dsl;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.SimpleDataInstance;
 import org.etsi.mts.tdl.tdlFactory;
+import org.etsi.mts.tdl.util.tdlResourceFactoryImpl;
 import org.etsi.mts.tdl.SimpleDataType;
 import org.etsi.mts.tdl.StructuredDataType;
 import org.etsi.mts.tdl.AnnotationType;
@@ -109,23 +110,22 @@ public class TdlPackageGenerator {
 		this.commonPackage.getPackagedElement().add(MUTPath);
 	}
 	public void savePackageIntoFile(String dslName) {
-		// Register the XMI resource factory for the .tdlan2 extension
+		String extension = "tdl";
 		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
         Map<String, Object> m = reg.getExtensionToFactoryMap();
-        m.put("tdl", new XMIResourceFactoryImpl());
-        
-        // Obtain a new resource set
-        ResourceSet resSet = new ResourceSetImpl();
-
+        tdlResourceFactoryImpl factory = new tdlResourceFactoryImpl();
+        m.put(extension, factory);
+       
         // create a resource
-        Resource commonPackageResource = resSet.createResource(URI.createURI("commonPackage.tdl"));
+        Resource commonPackageResource = factory.createResource(URI.createURI("commonPackage.tdl"));
         //Resource dslSpecificPackageResource = resSet.createResource(URI.createURI(dslName + "SpecificPackage.tdlan2"));
         // Get the first model element and cast it to the right type
         commonPackageResource.getContents().add(this.commonPackage);
-        //dslSpecificPackageResource.getContents().add(this.dslSpecificPackage);
+        Map options = new HashMap<>();
+	    options.put(XMIResourceImpl.OPTION_ENCODING, "UTF-8");
         //save the content.
         try {
-            commonPackageResource.save(Collections.EMPTY_MAP);
+            commonPackageResource.save(options);
            // dslSpecificPackageResource.save(Collections.EMPTY_MAP);
         } catch (IOException e) {
             e.printStackTrace();
