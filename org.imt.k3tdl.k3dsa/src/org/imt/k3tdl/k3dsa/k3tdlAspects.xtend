@@ -67,7 +67,6 @@ class TestDescriptionAspect{
 class TestConfigurationAspect{
 	public String MUTPath
 	public GateReference gateRef;
-	public List<ComponentInstance> instances = new ArrayList<ComponentInstance>();
 	@Step
 	def void activateConfiguration(){
 		println("Start test configuration activation")

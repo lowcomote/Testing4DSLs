@@ -1,11 +1,23 @@
 package org.imt.ale.customLaunchConfig;
 
 import org.eclipse.debug.core.DebugPlugin;
+import org.eclipse.debug.core.ILaunch;
+import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.debug.core.ILaunchDelegate;
 import org.eclipse.debug.core.ILaunchManager;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.eclipse.gemoc.ale.interpreted.engine.AleEngine;
 import org.eclipse.gemoc.executionframework.engine.commons.sequential.SequentialRunConfiguration;
@@ -36,21 +48,25 @@ public class CustomLauncher{
 	public final static String DSL_SPECIFIC_COMMAND = "DSL-Specific";
 	public final static String OCL_COMMAND = "OCL";
 	
-	public CustomLauncher(String MUTAddress){
+	public CustomLauncher(String MUTPath){
 		//TODO: The attributes have to be set in an automatic manner (for now, I simply set them)
-		this._modelLocation = MUTAddress;
-		this._siriusRepresentationLocation = MUTAddress.split("/")[0] + "/representations.aird";
+		this._modelLocation = MUTPath;
+		this._siriusRepresentationLocation = MUTPath.split("/")[0] + "/representations.aird";
 		this._delay = "0";
 		this._language = "org.imt.bpmn.BPMN";
+		//this._language = "org.eclipse.gemoc.sample.ale.fsm.FSM";
 		this._entryPointModelElement = "/";
 		this._entryPointMethod = "bpmn::Microflow::main";
+		//this._entryPointMethod = "fsm::StateMachine::main";
 		this._animationFirstBreak = true;
 		this._modelInitializationMethod = "bpmn::Microflow::initializeModel";
+		//this._modelInitializationMethod = "fsm::StateMachine::initializeModel";
 		this._modelInitializationArguments = "";
+		//this._modelInitializationArguments = "000101010";
 		this.executionMode = ExecutionMode.Run;
 	}
-	//definition of a new configuration of ALE Engine for running a specific model
 	
+	//definition of a new configuration of ALE Engine for running a specific model
 	public void setALEConfiguration() throws CoreException, EngineContextException {
 		// Create a new Launch Configuration
 		ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
