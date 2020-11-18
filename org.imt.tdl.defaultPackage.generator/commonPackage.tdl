@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ASCII"?>
+<tdl:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tdl="http://www.etsi.org/spec/TDL/1.4.1" name="commonPackage">
+  <packagedElement xsi:type="tdl:SimpleDataType" name="String"/>
+  <packagedElement xsi:type="tdl:SimpleDataType" name="Integer"/>
+  <packagedElement xsi:type="tdl:SimpleDataType" name="Boolean"/>
+  <packagedElement xsi:type="tdl:SimpleDataType" name="runModel"/>
+  <packagedElement xsi:type="tdl:SimpleDataInstance" name="runMUT" dataType="//@packagedElement.5"/>
+  <packagedElement xsi:type="tdl:SimpleDataType" name="getState"/>
+  <packagedElement xsi:type="tdl:SimpleDataInstance" name="getModelState"/>
+  <packagedElement xsi:type="tdl:SimpleDataType" name="Verdict"/>
+  <packagedElement xsi:type="tdl:SimpleDataInstance" name="PASS" dataType="//@packagedElement.7"/>
+  <packagedElement xsi:type="tdl:SimpleDataInstance" name="FAIL" dataType="//@packagedElement.7"/>
+  <packagedElement xsi:type="tdl:SimpleDataInstance" name="INCONCLUSINVE" dataType="//@packagedElement.7"/>
+  <packagedElement xsi:type="tdl:AnnotationType" name="GIVEN"/>
+  <packagedElement xsi:type="tdl:AnnotationType" name="WHEN"/>
+  <packagedElement xsi:type="tdl:AnnotationType" name="THEN"/>
+  <packagedElement xsi:type="tdl:AnnotationType" name="MUTPath"/>
+</tdl:Package>
