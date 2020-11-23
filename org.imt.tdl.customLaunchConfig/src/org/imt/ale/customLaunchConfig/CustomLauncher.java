@@ -126,13 +126,13 @@ public class CustomLauncher{
 		executioncontext.initializeResourceModel(); // load model
 		engine.initialize(executioncontext);
 		
-		
 		// declare this engine as available for ale: queries in the odesign
 		ALESiriusInterpreter.getDefault().addAleEngine(engine);
 		// create and add addon to unregister when the engine will be disposed
 		IEngineAddon aleRTDInterpreter = new ALESiriusInterpreterProviderAddon();
 		Activator.getDefault().getMessaggingSystem().debug("Enabled implicit addon: "+ aleRTDInterpreter.getAddonID(), Activator.PLUGIN_ID);
 		engine.getExecutionContext().getExecutionPlatform().addEngineAddon(aleRTDInterpreter);
+		System.out.println("The model under test executed successfully");
 		return engine;
 	}
 	//TODO: Creating Event Manager
