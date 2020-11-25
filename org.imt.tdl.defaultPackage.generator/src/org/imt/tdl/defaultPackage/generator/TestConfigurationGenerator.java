@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.etsi.mts.tdl.Annotation;
 import org.etsi.mts.tdl.ComponentInstance;
@@ -19,9 +20,12 @@ import org.etsi.mts.tdl.GateReference;
 import org.etsi.mts.tdl.GateType;
 import org.etsi.mts.tdl.GateTypeKind;
 import org.etsi.mts.tdl.Package;
+import org.etsi.mts.tdl.TDLan2StandaloneSetup;
 import org.etsi.mts.tdl.TestConfiguration;
 import org.etsi.mts.tdl.tdlFactory;
 import org.etsi.mts.tdl.util.tdlResourceFactoryImpl;
+
+import com.google.inject.Injector;
 
 public class TestConfigurationGenerator {
 	private tdlFactory factory;
@@ -215,23 +219,14 @@ public class TestConfigurationGenerator {
 	}
 	
 	public void saveTestConfigurationPackageIntoFile() {
-		String extension = "tdl";
-		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
-        Map<String, Object> m = reg.getExtensionToFactoryMap();
-        tdlResourceFactoryImpl factory = new tdlResourceFactoryImpl();
-        m.put(extension, factory);
-       
-        // create a resource
-        Resource testConfigurationPackageResource = factory.createResource(URI.createURI(this.testConfigurationPackage.getName() + ".tdlan2"));
-        // Get the first model element and cast it to the right type
-        testConfigurationPackageResource.getContents().add(this.testConfigurationPackage);
-        Map options = new HashMap<>();
-	    options.put(XMIResourceImpl.OPTION_ENCODING, "UTF-8");
-        //save the content.
-        try {
-            testConfigurationPackageResource.save(options);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+		Injector injector = new TDLan2StandaloneSetup().createInjectorAndDoEMFRegistration();
+		ResourceSet rs = injector.getInstance(ResourceSet.class);
+		Resource r = rs.createResource(URI.createURI(this.testConfigurationPackage.getName()+ ".tdlan2"));
+		r.getContents().add(this.testConfigurationPackage);
+		try {
+			r.save(null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

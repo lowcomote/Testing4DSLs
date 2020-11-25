@@ -2,6 +2,7 @@ package org.imt.tdl.defaultPackage.generator;
 
 import java.io.IOException;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,15 +10,16 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.etsi.mts.tdl.Package;
-import org.etsi.mts.tdl.PackageableElement;
 import org.etsi.mts.tdl.SimpleDataInstance;
 import org.etsi.mts.tdl.tdlFactory;
-import org.etsi.mts.tdl.util.tdlResourceFactoryImpl;
+
+import com.google.inject.Injector;
 
 import org.etsi.mts.tdl.SimpleDataType;
 import org.etsi.mts.tdl.StructuredDataType;
+import org.etsi.mts.tdl.TDLan2StandaloneSetup;
 import org.etsi.mts.tdl.AnnotationType;
 import org.etsi.mts.tdl.DataInstance;
 import org.etsi.mts.tdl.DataType;
@@ -107,7 +109,7 @@ public class CommonPackageGenerator {
 		getState.setName("getState");
 		SimpleDataInstance getModelState = factory.createSimpleDataInstance();
 		getModelState.setName("getModelState");
-		runMUT.setDataType(getState);
+		getModelState.setDataType(getState);
 		this.commonPackage.getPackagedElement().add(getState);
 		this.commonPackage.getPackagedElement().add(getModelState);
 		
@@ -152,23 +154,14 @@ public class CommonPackageGenerator {
 		return this.annotations;
 	}
 	public void saveCommonPackageIntoFile() {
-		String extension = "tdl";
-		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
-        Map<String, Object> m = reg.getExtensionToFactoryMap();
-        tdlResourceFactoryImpl factory = new tdlResourceFactoryImpl();
-        m.put(extension, factory);
-       
-        // create a resource
-        Resource commonPackageResource = factory.createResource(URI.createURI(this.commonPackage.getName() + ".tdlan2"));
-        // Get the first model element and cast it to the right type
-        commonPackageResource.getContents().add(this.commonPackage);
-        Map options = new HashMap<>();
-	    options.put(XMIResourceImpl.OPTION_ENCODING, "UTF-8");
-        //save the content.
-        try {
-            commonPackageResource.save(options);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+		Injector injector = new TDLan2StandaloneSetup().createInjectorAndDoEMFRegistration();
+		ResourceSet rs = injector.getInstance(ResourceSet.class);
+		Resource r = rs.createResource(URI.createURI(this.commonPackage.getName()+ ".tdlan2"));
+		r.getContents().add(this.commonPackage);
+		try {
+			r.save(null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

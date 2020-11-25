@@ -18,7 +18,7 @@
   <packagedElement xsi:type="tdl:TestConfiguration" name="genericConfiguration">
     <componentInstance name="tester" type="//@packagedElement.2" role="Tester"/>
     <componentInstance name="bpmn" type="//@packagedElement.3">
-      <annotation value="TODO: Put the address of Model-Under test here">
+      <annotation value="TODO: Put the address of Model-Under Test here">
         <key href="commonPackage.tdlan2#//@packagedElement.15"/>
       </annotation>
     </componentInstance>
@@ -30,7 +30,7 @@
   <packagedElement xsi:type="tdl:TestConfiguration" name="oclConfiguration">
     <componentInstance name="tester" type="//@packagedElement.2" role="Tester"/>
     <componentInstance name="bpmn" type="//@packagedElement.3">
-      <annotation value="TODO: Put the address of Model-Under test here">
+      <annotation value="TODO: Put the address of Model-Under Test here">
         <key href="commonPackage.tdlan2#//@packagedElement.15"/>
       </annotation>
     </componentInstance>

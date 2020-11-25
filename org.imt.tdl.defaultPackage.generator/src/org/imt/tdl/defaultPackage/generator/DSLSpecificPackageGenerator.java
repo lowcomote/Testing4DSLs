@@ -10,6 +10,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.gemoc.dsl.Dsl;
@@ -17,8 +18,11 @@ import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterf
 import org.etsi.mts.tdl.DataType;
 import org.etsi.mts.tdl.ElementImport;
 import org.etsi.mts.tdl.Package;
+import org.etsi.mts.tdl.TDLan2StandaloneSetup;
 import org.etsi.mts.tdl.tdlFactory;
 import org.etsi.mts.tdl.util.tdlResourceFactoryImpl;
+
+import com.google.inject.Injector;
 
 public class DSLSpecificPackageGenerator {
 	private tdlFactory factory;
@@ -110,23 +114,14 @@ public class DSLSpecificPackageGenerator {
         return interfaceRootElement;
 	}
 	public void saveDSLSpecificPackageIntoFile(String dslName) {
-		String extension = "tdl";
-		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
-        Map<String, Object> m = reg.getExtensionToFactoryMap();
-        tdlResourceFactoryImpl factory = new tdlResourceFactoryImpl();
-        m.put(extension, factory);
-       
-        // create a resource
-        Resource dslSpecificPackageResource = factory.createResource(URI.createURI(this.dslSpecificPackage.getName() + ".tdlan2"));
-        // Get the first model element and cast it to the right type
-        dslSpecificPackageResource.getContents().add(this.dslSpecificPackage);
-        Map options = new HashMap<>();
-	    options.put(XMIResourceImpl.OPTION_ENCODING, "UTF-8");
-        //save the content.
-        try {
-            dslSpecificPackageResource.save(options);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Injector injector = new TDLan2StandaloneSetup().createInjectorAndDoEMFRegistration();
+		ResourceSet rs = injector.getInstance(ResourceSet.class);
+		Resource r = rs.createResource(URI.createURI(this.dslSpecificPackage.getName()+ ".tdlan2"));
+		r.getContents().add(this.dslSpecificPackage);
+		try {
+			r.save(null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
