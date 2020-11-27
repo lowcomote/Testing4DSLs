@@ -5,11 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.etsi.mts.tdl.Annotation;
 import org.etsi.mts.tdl.ComponentInstance;
 import org.etsi.mts.tdl.ComponentInstanceRole;
@@ -21,10 +19,8 @@ import org.etsi.mts.tdl.GateReference;
 import org.etsi.mts.tdl.GateType;
 import org.etsi.mts.tdl.GateTypeKind;
 import org.etsi.mts.tdl.Package;
-import org.etsi.mts.tdl.TDLan2StandaloneSetup;
 import org.etsi.mts.tdl.TestConfiguration;
 import org.etsi.mts.tdl.tdlFactory;
-import org.etsi.mts.tdl.util.tdlResourceFactoryImpl;
 
 import com.google.inject.Injector;
 
@@ -40,11 +36,11 @@ public class TestConfigurationGenerator {
 	private Map<String, GateInstance> gateInstances = new HashMap<String, GateInstance>();
 	private Map<String, TestConfiguration> configurations = new HashMap<String, TestConfiguration>();
 	
-	public TestConfigurationGenerator(IFile dslFile) {
+	public TestConfigurationGenerator(String dslFilePath) {
 		this.factory = tdlFactory.eINSTANCE;
-		this.dslSpecificPackageGenerator = new DSLSpecificPackageGenerator(dslFile);
+		this.dslSpecificPackageGenerator = new DSLSpecificPackageGenerator(dslFilePath);
 		this.commonPackageGenerator = this.dslSpecificPackageGenerator.getCommonPackageGenerator();
-		this.dslName = dslSpecificPackageGenerator.getDslName(dslFile);
+		this.dslName = dslSpecificPackageGenerator.getDslName(dslFilePath);
 		generateTestConfigurationPackage();
 	}
 	public void generateTestConfigurationPackage() {

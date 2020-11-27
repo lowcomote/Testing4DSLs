@@ -2,8 +2,6 @@ package org.imt.tdl.defaultPackage.generator;
 
 import java.io.IOException;
 
-
-import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -21,9 +19,9 @@ public class TestDesignPackageGenerator {
 	private DSLSpecificPackageGenerator dslSpecificPackageGenerator;
 	private TestConfigurationGenerator testConfigurationPackageGenerator;
 	
-	public TestDesignPackageGenerator(IFile dslFile) {
+	public TestDesignPackageGenerator(String dslFilePath) {
 		this.factory = tdlFactory.eINSTANCE;
-		this.testConfigurationPackageGenerator = new TestConfigurationGenerator(dslFile);
+		this.testConfigurationPackageGenerator = new TestConfigurationGenerator(dslFilePath);
 		this.dslSpecificPackageGenerator = this.testConfigurationPackageGenerator.getDSLSpecificPackageGenerator();
 		this.commonPackageGenerator = this.dslSpecificPackageGenerator.getCommonPackageGenerator();
 		generateTestDesignPackage();

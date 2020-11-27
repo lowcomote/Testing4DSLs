@@ -1,19 +1,20 @@
 package org.imt.tdl.defaultPackage.generator;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
+import org.eclipse.gemoc.ale.interpreted.engine.AleEngine;
 import org.eclipse.gemoc.dsl.Dsl;
+import org.eclipse.emf.ecoretools.ale.implementation.ModelUnit;
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.BehavioralInterface;
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.Event;
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.EventType;
@@ -24,17 +25,14 @@ import org.etsi.mts.tdl.ElementImport;
 import org.etsi.mts.tdl.Member;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.StructuredDataType;
-import org.etsi.mts.tdl.TDLan2StandaloneSetup;
 import org.etsi.mts.tdl.tdlFactory;
-import org.etsi.mts.tdl.util.tdlResourceFactoryImpl;
 
 import com.google.inject.Injector;
 
 public class DSLSpecificPackageGenerator {
 	private String dslName;
-	private IFile dslFile;
 	private EPackage metamodelRootElement;
-	private EPackage aleSemanticRootElement;
+	private ModelUnit aleSemanticRootElement;
 	private BehavioralInterface interfaceRootElement;
 	
 	private tdlFactory factory;
@@ -46,13 +44,17 @@ public class DSLSpecificPackageGenerator {
 	private List<DataType> dslInterfaceTypes = new ArrayList<DataType>();
 	private DataType TypeForGeneralEvents;
 	
-	public DSLSpecificPackageGenerator(IFile dslFile) {
+	public DSLSpecificPackageGenerator(String dslFilePath) {
 		this.factory = tdlFactory.eINSTANCE;
 		this.commonPackageGenerator = new CommonPackageGenerator();
-		this.dslName = getDslName(dslFile);
-		this.metamodelRootElement = getMetamodelRootElement(dslFile);
-		this.aleSemanticRootElement = getAleSemanticsRootElement(dslFile);
-		this.interfaceRootElement = getBehavioralInterfaceRootElement(dslFile);
+		this.dslName = getDslName(dslFilePath);
+		System.out.println(this.dslName);
+		this.metamodelRootElement = getMetamodelRootElement(dslFilePath);
+		System.out.println(this.metamodelRootElement.getName());
+		this.aleSemanticRootElement = getAleSemanticsRootElement(dslFilePath);
+		System.out.println(this.aleSemanticRootElement.getName());
+		this.interfaceRootElement = getBehavioralInterfaceRootElement(dslFilePath);
+		System.out.println(this.interfaceRootElement.getName());
 		generateDSLSpecificPackage();
 	}
 	
@@ -136,32 +138,30 @@ public class DSLSpecificPackageGenerator {
 		return this.TypeForGeneralEvents;
 	}
 	
-	protected String getDslName(IFile dslFile) {
-		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFile.getFullPath().toOSString()), true);
+	protected String getDslName(String dslFilePath) {
+		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
 		String dslFullName = dsl.getEntry("name").getValue();
-		String[] nameParts = dslFullName.split(".");
-		return nameParts[nameParts.length-1];
+		return dslFullName;
 	}
-	protected static EPackage getMetamodelRootElement(IFile dslFile) {
-		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFile.getFullPath().toOSString()), true);
+	protected static EPackage getMetamodelRootElement(String dslFilePath) {
+		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
 		String metamodelPath = dsl.getEntry("ecore").getValue();
 		Resource metamodelRes = (new ResourceSetImpl()).getResource(URI.createURI(metamodelPath), true);
 		EPackage metamodelRootElement = (EPackage) metamodelRes.getContents().get(0);
 		return metamodelRootElement;
 	}
-	//TODO: has to be changed
-	protected static EPackage getAleSemanticsRootElement(IFile dslFile) {
-		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFile.getFullPath().toOSString()), true);
+	protected static ModelUnit getAleSemanticsRootElement(String dslFilePath) {
+		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
 		String interpreterPath = dsl.getEntry("ale").getValue();
 		Resource interpreterRes = (new ResourceSetImpl()).getResource(URI.createURI(interpreterPath), true);
-		EPackage interpreterRootClass = (EPackage) interpreterRes.getContents().get(0);
+		ModelUnit interpreterRootClass = (ModelUnit) interpreterRes.getContents().get(0);
 		return interpreterRootClass;
 	}
-	private BehavioralInterface getBehavioralInterfaceRootElement(IFile dslFile) {
-		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFile.getFullPath().toOSString()), true);
+	private BehavioralInterface getBehavioralInterfaceRootElement(String dslFilePath) {
+		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
 		String interfacePath = dsl.getEntry("behavioralInterface").getValue();
 		Resource interfaceRes = (new ResourceSetImpl()).getResource(URI.createURI(interfacePath), true);

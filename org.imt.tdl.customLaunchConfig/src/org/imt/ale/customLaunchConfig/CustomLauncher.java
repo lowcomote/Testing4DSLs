@@ -1,23 +1,14 @@
 package org.imt.ale.customLaunchConfig;
 
 import org.eclipse.debug.core.DebugPlugin;
-import org.eclipse.debug.core.ILaunch;
-import org.eclipse.debug.core.ILaunchConfiguration;
+
+
 import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
-import org.eclipse.debug.core.ILaunchDelegate;
 import org.eclipse.debug.core.ILaunchManager;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.eclipse.gemoc.ale.interpreted.engine.AleEngine;
 import org.eclipse.gemoc.executionframework.engine.commons.sequential.SequentialRunConfiguration;
@@ -99,7 +90,11 @@ public class CustomLauncher{
 	//definition of a new configuration of Event Manager for interacting with a specific model
 	public void setEventManagerConfiguration() {}
 	//definition of a new configuration of OCL Engine for querying on a specific model
-	public void setOCLInterpreterConfiguration() {}
+	public void setOCLInterpreterConfiguration() {
+		OCL.newInstance(new ResourceSetImpl());
+		org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup.doSetup();
+		org.eclipse.ocl.pivot.model.OCLstdlib.install();
+	}
 	
 	public void executeCommand(String commandType) {
 		System.out.println("Start executing the command of type " + commandType);
@@ -136,5 +131,7 @@ public class CustomLauncher{
 		return engine;
 	}
 	//TODO: Creating Event Manager
-	//TODO: Creating OCL Engine
+	public void parseOCL(String query) {
+		//OCL.parse(query);
+	}
 }
