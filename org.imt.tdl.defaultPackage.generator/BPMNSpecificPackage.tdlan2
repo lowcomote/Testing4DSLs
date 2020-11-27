@@ -1,0 +1,3 @@
+Package BPMNSpecificPackage {
+	Import all from commonPackage ;
+}

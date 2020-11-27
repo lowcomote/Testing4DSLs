@@ -1,18 +1,16 @@
 package org.imt.tdl.defaultPackage.generator;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
+
+import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.etsi.mts.tdl.ElementImport;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TDLan2StandaloneSetup;
 import org.etsi.mts.tdl.tdlFactory;
-import org.etsi.mts.tdl.util.tdlResourceFactoryImpl;
 
 import com.google.inject.Injector;
 
@@ -23,13 +21,13 @@ public class TestDesignPackageGenerator {
 	private DSLSpecificPackageGenerator dslSpecificPackageGenerator;
 	private TestConfigurationGenerator testConfigurationPackageGenerator;
 	
-	public TestDesignPackageGenerator(String dslName) {
+	public TestDesignPackageGenerator(IFile dslFile) {
 		this.factory = tdlFactory.eINSTANCE;
-		this.testConfigurationPackageGenerator = new TestConfigurationGenerator(dslName);
+		this.testConfigurationPackageGenerator = new TestConfigurationGenerator(dslFile);
 		this.dslSpecificPackageGenerator = this.testConfigurationPackageGenerator.getDSLSpecificPackageGenerator();
 		this.commonPackageGenerator = this.dslSpecificPackageGenerator.getCommonPackageGenerator();
 		generateTestDesignPackage();
-		saveTestDesignPackageIntoFile();
+		savePackage();
 	}
 	public void generateTestDesignPackage() {
 		this.testDesignPackage = factory.createPackage();
@@ -47,9 +45,11 @@ public class TestDesignPackageGenerator {
 		this.testDesignPackage.getImport().add(dslSpecificPackageImport);
 		this.testDesignPackage.getImport().add(testConfigurationImport);
 	}
-	public void saveTestDesignPackageIntoFile() {
+
+	public void savePackage() {
 		Injector injector = new TDLan2StandaloneSetup().createInjectorAndDoEMFRegistration();
 		ResourceSet rs = injector.getInstance(ResourceSet.class);
+		this.testConfigurationPackageGenerator.savePackage(injector, rs);
 		Resource r = rs.createResource(URI.createURI(this.testDesignPackage.getName()+ ".tdlan2"));
 		r.getContents().add(this.testDesignPackage);
 		try {
@@ -57,5 +57,7 @@ public class TestDesignPackageGenerator {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		r.unload();
+		rs = null;
 	}
 }

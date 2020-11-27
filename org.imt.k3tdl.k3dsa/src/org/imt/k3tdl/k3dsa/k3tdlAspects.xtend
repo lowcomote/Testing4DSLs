@@ -3,6 +3,8 @@ package org.imt.k3tdl.k3dsa
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 
 
+
+
 import fr.inria.diverse.k3.al.annotationprocessor.InitializeModel
 import fr.inria.diverse.k3.al.annotationprocessor.Main
 import fr.inria.diverse.k3.al.annotationprocessor.Step
@@ -11,7 +13,6 @@ import org.etsi.mts.tdl.TestDescription
 import org.etsi.mts.tdl.TestConfiguration
 import org.etsi.mts.tdl.Annotation
 import org.etsi.mts.tdl.Connection
-import org.etsi.mts.tdl.ComponentInstanceRole
 import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
 import static extension org.imt.k3tdl.k3dsa.BehaviourDescriptionAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
@@ -20,7 +21,6 @@ import java.util.List
 import java.util.ArrayList
 import org.etsi.mts.tdl.GateReference
 import org.eclipse.emf.common.util.EList
-import org.etsi.mts.tdl.ComponentInstance
 
 @Aspect(className = Package)
 class PackageAspect {

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -28,6 +29,7 @@ import org.etsi.mts.tdl.util.tdlResourceFactoryImpl;
 import com.google.inject.Injector;
 
 public class TestConfigurationGenerator {
+	private String dslName;
 	private tdlFactory factory;
 	private Package testConfigurationPackage;
 	private CommonPackageGenerator commonPackageGenerator;
@@ -38,20 +40,20 @@ public class TestConfigurationGenerator {
 	private Map<String, GateInstance> gateInstances = new HashMap<String, GateInstance>();
 	private Map<String, TestConfiguration> configurations = new HashMap<String, TestConfiguration>();
 	
-	public TestConfigurationGenerator(String dslName) {
+	public TestConfigurationGenerator(IFile dslFile) {
 		this.factory = tdlFactory.eINSTANCE;
-		this.dslSpecificPackageGenerator = new DSLSpecificPackageGenerator(dslName);
+		this.dslSpecificPackageGenerator = new DSLSpecificPackageGenerator(dslFile);
 		this.commonPackageGenerator = this.dslSpecificPackageGenerator.getCommonPackageGenerator();
-		generateTestConfigurationPackage(dslName);
-		saveTestConfigurationPackageIntoFile();
+		this.dslName = dslSpecificPackageGenerator.getDslName(dslFile);
+		generateTestConfigurationPackage();
 	}
-	public void generateTestConfigurationPackage(String dslName) {
+	public void generateTestConfigurationPackage() {
 		this.testConfigurationPackage = factory.createPackage();
 		this.testConfigurationPackage.setName("testConfiguration");
 		generateImports();
 		generateGateTypes();
 		generateComponentTypes();
-		generateConfigurations(dslName);
+		generateConfigurations(this.dslName);
 	}
 	private void generateImports() {
 		ElementImport commonPackageImport = factory.createElementImport();
@@ -217,10 +219,8 @@ public class TestConfigurationGenerator {
 	public Map<String, TestConfiguration> getTestConfigurations(){
 		return this.configurations;
 	}
-	
-	public void saveTestConfigurationPackageIntoFile() {
-		Injector injector = new TDLan2StandaloneSetup().createInjectorAndDoEMFRegistration();
-		ResourceSet rs = injector.getInstance(ResourceSet.class);
+	public void savePackage(Injector injector, ResourceSet rs) {
+		this.dslSpecificPackageGenerator.savePackage(injector, rs);
 		Resource r = rs.createResource(URI.createURI(this.testConfigurationPackage.getName()+ ".tdlan2"));
 		r.getContents().add(this.testConfigurationPackage);
 		try {
@@ -228,5 +228,7 @@ public class TestConfigurationGenerator {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		r.unload();
+		rs = null;
 	}
 }

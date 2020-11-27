@@ -3,6 +3,7 @@ package org.imt.tdl.defaultPackage.generator;
 import java.io.IOException;
 
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +20,6 @@ import com.google.inject.Injector;
 
 import org.etsi.mts.tdl.SimpleDataType;
 import org.etsi.mts.tdl.StructuredDataType;
-import org.etsi.mts.tdl.TDLan2StandaloneSetup;
 import org.etsi.mts.tdl.AnnotationType;
 import org.etsi.mts.tdl.DataInstance;
 import org.etsi.mts.tdl.DataType;
@@ -37,7 +37,6 @@ public class CommonPackageGenerator {
 	public CommonPackageGenerator() {
 		this.factory = tdlFactory.eINSTANCE;
 		generateCommonPackage();
-		saveCommonPackageIntoFile();
 	}
 	public void generateCommonPackage(){
 		this.commonPackage = factory.createPackage();
@@ -117,22 +116,9 @@ public class CommonPackageGenerator {
 		this.TypesForGeneralEvents.add(getState);
 	}
 	private void generateAnnotations() {
-		AnnotationType GIVEN = factory.createAnnotationType();
-		GIVEN.setName("GIVEN");
-		AnnotationType WHEN = factory.createAnnotationType();
-		WHEN.setName("WHEN");
-		AnnotationType THEN = factory.createAnnotationType();
-		THEN.setName("THEN");
 		AnnotationType MUTPath = factory.createAnnotationType();
 		MUTPath.setName("MUTPath");
-		this.commonPackage.getPackagedElement().add(GIVEN);
-		this.commonPackage.getPackagedElement().add(WHEN);
-		this.commonPackage.getPackagedElement().add(THEN);
 		this.commonPackage.getPackagedElement().add(MUTPath);
-		
-		this.annotations.put(GIVEN.getName(), GIVEN);
-		this.annotations.put(WHEN.getName(), WHEN);
-		this.annotations.put(THEN.getName(), THEN);
 		this.annotations.put(MUTPath.getName(), MUTPath);
 	}
 	public Package getCommonPackage() {
@@ -153,9 +139,8 @@ public class CommonPackageGenerator {
 	public Map<String, AnnotationType> getAnnotations() {
 		return this.annotations;
 	}
-	public void saveCommonPackageIntoFile() {
-		Injector injector = new TDLan2StandaloneSetup().createInjectorAndDoEMFRegistration();
-		ResourceSet rs = injector.getInstance(ResourceSet.class);
+	
+	public void savePackage(Injector injector, ResourceSet rs) {
 		Resource r = rs.createResource(URI.createURI(this.commonPackage.getName()+ ".tdlan2"));
 		r.getContents().add(this.commonPackage);
 		try {
@@ -163,5 +148,7 @@ public class CommonPackageGenerator {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		r.unload();
+		rs = null;
 	}
 }
