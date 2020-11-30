@@ -84,7 +84,7 @@ public class TDLCodeGenerator {
 		//this.aleSemanticRootElement = getAleSemanticsRootElement(dslFilePath);
 		//System.out.println(this.aleSemanticRootElement.getName());
 		this.interfaceRootElement = getBehavioralInterfaceRootElement(dslFilePath);
-		generateDSLSpecificPackage();
+		generateDSLSpecificPackage(dslFilePath);
 		System.out.println("dsl-specific package generated successfully");
 		
 		System.out.println("Start test configuration package generation");
@@ -186,11 +186,11 @@ public class TDLCodeGenerator {
 	}
 	
 	//DSL-Specific package generation	
-	private void generateDSLSpecificPackage(){
+	private void generateDSLSpecificPackage(String dslFilePath){
 		this.dslSpecificPackage = factory.createPackage();
 		this.dslSpecificPackage.setName(this.dslName + "-SpecificPackage");
 		generateDSLSpecificImports();
-		generateDSLSpecificTypes();
+		generateDSLSpecificTypes(dslFilePath);
 		generateTypeForModelState();
 		if (this.interfaceRootElement != null) {
 			generateTypeForDSLInterfaces();
@@ -202,8 +202,8 @@ public class TDLCodeGenerator {
 		commonPackageImport.setImportedPackage(this.commonPackage);
 		this.dslSpecificPackage.getImport().add(commonPackageImport);
 	}
-	private void generateDSLSpecificTypes() {
-		//TODO: Which entities of metamodel have to be transformed to TDL types?
+	private void generateDSLSpecificTypes(String dslFilePath) {
+		
 	}
 	private void generateTypeForDSLInterfaces() {
 		AnnotationType acceptedEvent = factory.createAnnotationType();
