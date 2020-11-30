@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:tdl="http://www.etsi.org/spec/TDL/1.4.1">
+  <tdl:StructuredDataType name="NamedElement"/>
+  <tdl:StructuredDataType name="Project">
+    <member name="board" dataType="/2"/>
+    <member name="sketch" dataType="/8"/>
+  </tdl:StructuredDataType>
+  <tdl:StructuredDataType name="Board">
+    <member name="modules" dataType="/3"/>
+  </tdl:StructuredDataType>
+  <tdl:StructuredDataType name="Module"/>
+  <tdl:StructuredDataType name="OutputModule"/>
+  <tdl:StructuredDataType name="Led"/>
+  <tdl:StructuredDataType name="InputModule"/>
+  <tdl:StructuredDataType name="PushButton"/>
+  <tdl:StructuredDataType name="Sketch">
+    <member name="name"/>
+    <member name="block" dataType="/9"/>
+  </tdl:StructuredDataType>
+  <tdl:StructuredDataType name="Block">
+    <member name="instructions" dataType="/10"/>
+  </tdl:StructuredDataType>
+  <tdl:StructuredDataType name="Instruction"/>
+  <tdl:StructuredDataType name="Control"/>
+  <tdl:StructuredDataType name="If">
+    <member name="condition" dataType="/18"/>
+    <member name="elseBlock" dataType="/9"/>
+  </tdl:StructuredDataType>
+  <tdl:StructuredDataType name="While">
+    <member name="block" dataType="/9"/>
+    <member name="condition" dataType="/18"/>
+  </tdl:StructuredDataType>
+  <tdl:StructuredDataType name="ModuleSet"/>
+  <tdl:StructuredDataType name="SetLed">
+    <member name="value" dataType="/18"/>
+    <member name="led" dataType="/5"/>
+  </tdl:StructuredDataType>
+  <tdl:StructuredDataType name="Delay">
+    <member name="value"/>
+  </tdl:StructuredDataType>
+  <tdl:StructuredDataType name="WaitFor">
+    <member name="module" dataType="/3"/>
+    <member name="value" dataType="/19"/>
+  </tdl:StructuredDataType>
+  <tdl:StructuredDataType name="Expression"/>
+  <tdl:StructuredDataType name="Constant">
+    <member name="value"/>
+  </tdl:StructuredDataType>
+  <tdl:StructuredDataType name="UnaryExpression">
+    <member name="operator" dataType="/23"/>
+    <member name="operand" dataType="/18"/>
+  </tdl:StructuredDataType>
+  <tdl:StructuredDataType name="BinaryExpression">
+    <member name="operator" dataType="/24"/>
+    <member name="left" dataType="/18"/>
+    <member name="right" dataType="/18"/>
+  </tdl:StructuredDataType>
+  <tdl:StructuredDataType name="ModuleGet">
+    <member name="module" dataType="/3"/>
+  </tdl:StructuredDataType>
+  <tdl:SimpleDataType name="UnaryOperatorKind"/>
+  <tdl:SimpleDataType name="BinaryOperatorKind"/>
+  <tdl:SimpleDataInstance name="minus" dataType="/23"/>
+  <tdl:SimpleDataInstance name="neg" dataType="/23"/>
+  <tdl:SimpleDataInstance name="sub" dataType="/24"/>
+  <tdl:SimpleDataInstance name="add" dataType="/24"/>
+  <tdl:SimpleDataInstance name="mul" dataType="/24"/>
+  <tdl:SimpleDataInstance name="div" dataType="/24"/>
+  <tdl:SimpleDataInstance name="min" dataType="/24"/>
+  <tdl:SimpleDataInstance name="max" dataType="/24"/>
+  <tdl:SimpleDataInstance name="mod" dataType="/24"/>
+  <tdl:SimpleDataInstance name="lt" dataType="/24"/>
+  <tdl:SimpleDataInstance name="le" dataType="/24"/>
+  <tdl:SimpleDataInstance name="eq" dataType="/24"/>
+  <tdl:SimpleDataInstance name="ge" dataType="/24"/>
+  <tdl:SimpleDataInstance name="gt" dataType="/24"/>
+  <tdl:SimpleDataInstance name="neq" dataType="/24"/>
+</xmi:XMI>

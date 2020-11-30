@@ -1,0 +1,35 @@
+-- @path TDL=/org.etsi.mts.tdl.model/model/tdl.ecore
+-- @nsURI Ecore=http://www.eclipse.org/emf/2002/Ecore
+
+module ecore2tdl;
+create OUT : TDL from IN : Ecore;
+
+rule class2structuredType{
+	from class: Ecore!EClass
+	to type: TDL!StructuredDataType (
+		name <- class.name,
+		member <- class.eAllStructuralFeatures)
+}
+rule dataType2simpleType{
+	from dataType: Ecore!EDataType
+	to type : TDL!SimpleDataType(
+		name <- dataType.name)
+}
+rule attribute2member{
+	from attr: Ecore!EAttribute
+	to member: TDL!Member(
+		name <- attr.name,
+		dataType <- attr.eType)
+}
+rule reference2member{
+	from ref: Ecore!EReference
+	to member: TDL!Member(
+		name <- ref.name,
+		dataType <- ref.eType)
+}
+rule enumLiteral2simpleDataInstance{
+	from enumLiteral: Ecore!EEnumLiteral
+	to dataInstance: TDL!SimpleDataInstance(
+		name <- enumLiteral.name,
+		dataType <- enumLiteral.eEnum)
+}
