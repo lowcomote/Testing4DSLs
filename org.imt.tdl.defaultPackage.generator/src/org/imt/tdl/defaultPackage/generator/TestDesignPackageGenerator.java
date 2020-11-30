@@ -20,14 +20,18 @@ public class TestDesignPackageGenerator {
 	private TestConfigurationGenerator testConfigurationPackageGenerator;
 	
 	public TestDesignPackageGenerator(String dslFilePath) {
+		System.out.println("Start test design package generation");
 		this.factory = tdlFactory.eINSTANCE;
 		this.testConfigurationPackageGenerator = new TestConfigurationGenerator(dslFilePath);
 		this.dslSpecificPackageGenerator = this.testConfigurationPackageGenerator.getDSLSpecificPackageGenerator();
 		this.commonPackageGenerator = this.dslSpecificPackageGenerator.getCommonPackageGenerator();
 		generateTestDesignPackage();
+		System.out.println("test design package generated successfully");
+		System.out.println("start saving packages");
 		savePackage();
+		System.out.println("all packages are saved successfully");
 	}
-	public void generateTestDesignPackage() {
+	private void generateTestDesignPackage() {
 		this.testDesignPackage = factory.createPackage();
 		this.testDesignPackage.setName("testDesignPackage-template");
 		generateImports();

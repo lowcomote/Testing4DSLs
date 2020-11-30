@@ -35,10 +35,12 @@ public class CommonPackageGenerator {
 	private Map<String, AnnotationType> annotations = new HashMap<String, AnnotationType>();
 
 	public CommonPackageGenerator() {
+		System.out.println("Start common package generation");
 		this.factory = tdlFactory.eINSTANCE;
 		generateCommonPackage();
+		System.out.println("common package generated successfully");
 	}
-	public void generateCommonPackage(){
+	private void generateCommonPackage(){
 		this.commonPackage = factory.createPackage();
 		this.commonPackage.setName("commonPackage");
 		generatePrimitiveDataTypes();

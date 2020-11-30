@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.gemoc.ale.interpreted.engine.AleEngine;
+import org.eclipse.emf.ecoretools.ale.*;
 import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.emf.ecoretools.ale.implementation.ModelUnit;
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.BehavioralInterface;
@@ -42,25 +42,24 @@ public class DSLSpecificPackageGenerator {
 	private Map<String, DataType> dslSpecificTypes = new HashMap<String, DataType>();
 	private DataType modelState;
 	private List<DataType> dslInterfaceTypes = new ArrayList<DataType>();
-	private DataType TypeForGeneralEvents;
+	private List<DataType> TypesForGeneralEvents = new ArrayList<DataType>();
 	
 	public DSLSpecificPackageGenerator(String dslFilePath) {
+		System.out.println("Start dsl-specific package generation");
 		this.factory = tdlFactory.eINSTANCE;
 		this.commonPackageGenerator = new CommonPackageGenerator();
 		this.dslName = getDslName(dslFilePath);
-		System.out.println(this.dslName);
 		this.metamodelRootElement = getMetamodelRootElement(dslFilePath);
-		System.out.println(this.metamodelRootElement.getName());
-		this.aleSemanticRootElement = getAleSemanticsRootElement(dslFilePath);
-		System.out.println(this.aleSemanticRootElement.getName());
+		//this.aleSemanticRootElement = getAleSemanticsRootElement(dslFilePath);
+		//System.out.println(this.aleSemanticRootElement.getName());
 		this.interfaceRootElement = getBehavioralInterfaceRootElement(dslFilePath);
-		System.out.println(this.interfaceRootElement.getName());
 		generateDSLSpecificPackage();
+		System.out.println("dsl-specific package generated successfully");
 	}
 	
-	public void generateDSLSpecificPackage(){
+	private void generateDSLSpecificPackage(){
 		this.dslSpecificPackage = factory.createPackage();
-		this.dslSpecificPackage.setName(this.dslName + "SpecificPackage");
+		this.dslSpecificPackage.setName(this.dslName + "-SpecificPackage");
 		generateImports();
 		generateDSLSpecificTypes();
 		generateTypeForModelState();
@@ -100,6 +99,8 @@ public class DSLSpecificPackageGenerator {
 			for (int j=0; j<event.getParams().size();j++) {
 				//the parameters are the metamodel elements that have to be transformed to TDL types
 			}
+			this.dslSpecificPackage.getPackagedElement().add(typeForEvent);
+			this.dslInterfaceTypes.add(typeForEvent);
 		}
 	}
 	private void generateTypeForModelState() {
@@ -117,7 +118,7 @@ public class DSLSpecificPackageGenerator {
 		state.setDataType(this.modelState);
 		setState.getMember().add(state);
 		this.dslSpecificPackage.getPackagedElement().add(setState);
-		this.TypeForGeneralEvents = setState;
+		this.TypesForGeneralEvents.add(setState);
 	}
 	public CommonPackageGenerator getCommonPackageGenerator() {
 		return this.commonPackageGenerator;
@@ -134,15 +135,15 @@ public class DSLSpecificPackageGenerator {
 	public List<DataType> getTypesOfDslInterfaces(){
 		return this.dslInterfaceTypes;
 	}
-	public DataType getTypeOfGeneralEvents() {
-		return this.TypeForGeneralEvents;
+	public List<DataType> getTypesOfGeneralEvents() {
+		return this.TypesForGeneralEvents;
 	}
 	
 	protected String getDslName(String dslFilePath) {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
-		String dslFullName = dsl.getEntry("name").getValue();
-		return dslFullName;
+		String[] dslFullName = dsl.getEntry("name").getValue().split("\\.");
+		return dslFullName[dslFullName.length-1];
 	}
 	protected static EPackage getMetamodelRootElement(String dslFilePath) {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
@@ -152,6 +153,7 @@ public class DSLSpecificPackageGenerator {
 		EPackage metamodelRootElement = (EPackage) metamodelRes.getContents().get(0);
 		return metamodelRootElement;
 	}
+	//TODO: ModelUnit is defined in ale metamodel but Unit is used in ale files??
 	protected static ModelUnit getAleSemanticsRootElement(String dslFilePath) {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
