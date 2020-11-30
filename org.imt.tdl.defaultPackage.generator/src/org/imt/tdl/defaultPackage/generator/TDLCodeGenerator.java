@@ -96,7 +96,7 @@ public class TDLCodeGenerator {
 		System.out.println("test design package generated successfully");
 		
 		System.out.println("start saving packages");
-		savePackage();
+		savePackages();
 		System.out.println("all packages are saved successfully");
 	}
 	
@@ -183,17 +183,6 @@ public class TDLCodeGenerator {
 		MUTPath.setName("MUTPath");
 		this.commonPackage.getPackagedElement().add(MUTPath);
 		this.annotations.put(MUTPath.getName(), MUTPath);
-	}
-	public void saveCommonPackage(Injector injector, ResourceSet rs) {
-		Resource r = rs.createResource(URI.createURI(this.commonPackage.getName()+ ".tdlan2"));
-		r.getContents().add(this.commonPackage);
-		try {
-			r.save(null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		r.unload();
-		rs = null;
 	}
 	
 	//DSL-Specific package generation	
@@ -291,17 +280,6 @@ public class TDLCodeGenerator {
 		Resource interfaceRes = (new ResourceSetImpl()).getResource(URI.createURI(interfacePath), true);
 		BehavioralInterface interfaceRootElement = (BehavioralInterface) interfaceRes.getContents().get(0);
 		return interfaceRootElement;
-	}
-	public void saveDslSpecificPackage(Injector injector, ResourceSet rs) {
-		Resource r = rs.createResource(URI.createURI(this.dslSpecificPackage.getName()+ ".tdlan2"));
-		r.getContents().add(this.dslSpecificPackage);
-		try {
-			r.save(null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		r.unload();
-		rs = null;
 	}
 	
 	//test configuration generation
@@ -462,17 +440,7 @@ public class TDLCodeGenerator {
 		gateConnection.getEndPoint().add(referenceToMUTGate);
 		configuration.getConnection().add(gateConnection);
 	}
-	public void saveTestConfigurationPackage(Injector injector, ResourceSet rs) {
-		Resource r = rs.createResource(URI.createURI(this.testConfigurationPackage.getName()+ ".tdlan2"));
-		r.getContents().add(this.testConfigurationPackage);
-		try {
-			r.save(null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		r.unload();
-		rs = null;
-	}
+
 	//Test design package generation
 	private void generateTestDesignPackage() {
 		this.testDesignPackage = factory.createPackage();
@@ -491,7 +459,7 @@ public class TDLCodeGenerator {
 		this.testDesignPackage.getImport().add(testConfigurationImport);
 	}
 
-	public void savePackage() {
+	public void savePackages() {
 		Injector injector = new TDLan2StandaloneSetup().createInjectorAndDoEMFRegistration();
 		ResourceSet rs = injector.getInstance(ResourceSet.class);
 		//this.saveCommonPackage(injector, rs);
