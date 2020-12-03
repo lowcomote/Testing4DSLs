@@ -32,6 +32,7 @@ public class TestConfigurationGenerator {
 	private Package testConfigurationPackage;
 	private CommonPackageGenerator commonPackageGenerator;
 	private DSLSpecificPackageGenerator dslSpecificPackageGenerator;
+	private DSLSpecificTypesGenerator dslSpecificTypesGenerator;
 	
 	private Map<String, GateType> gateTypes = new HashMap<String, GateType>();
 	private Map<String, ComponentType> componentTypes = new HashMap<String, ComponentType>();
@@ -41,7 +42,8 @@ public class TestConfigurationGenerator {
 	public TestConfigurationGenerator(String dslFilePath) throws IOException {
 		System.out.println("Start test configuration package generation");
 		this.factory = tdlFactory.eINSTANCE;
-		this.dslSpecificPackageGenerator = new DSLSpecificPackageGenerator(dslFilePath);
+		this.dslSpecificTypesGenerator = new DSLSpecificTypesGenerator(dslFilePath);
+		this.dslSpecificPackageGenerator = this.dslSpecificTypesGenerator.getDSLSpecificPackageGenerator();
 		this.commonPackageGenerator = this.dslSpecificPackageGenerator.getCommonPackageGenerator();
 		this.dslName = this.dslSpecificPackageGenerator.getDslName(dslFilePath);
 		generateTestConfigurationPackage();
@@ -176,7 +178,7 @@ public class TestConfigurationGenerator {
 		Annotation mutPathAnnotation = factory.createAnnotation();
 		mutPathAnnotation.setAnnotatedElement(mutInstance);
 		mutPathAnnotation.setKey(this.commonPackageGenerator.getAnnotations().get("MUTPath"));
-		mutPathAnnotation.setValue("TODO: Put the address of Model-Under Test here");
+		mutPathAnnotation.setValue("\'TODO: Put the address of Model-Under Test here\'");
 		mutInstance.getAnnotation().add(mutPathAnnotation);
 		configuration.getComponentInstance().add(mutInstance);
 	}
@@ -206,8 +208,8 @@ public class TestConfigurationGenerator {
 		configuration.getConnection().add(gateConnection);
 	}
 	
-	public DSLSpecificPackageGenerator getDSLSpecificPackageGenerator() {
-		return this.dslSpecificPackageGenerator;
+	public DSLSpecificTypesGenerator getDSLSpecificTypesGenerator() {
+		return this.dslSpecificTypesGenerator;
 	}
 	public Package getTestConfigurationPackage() {
 		return this.testConfigurationPackage;
@@ -220,17 +222,5 @@ public class TestConfigurationGenerator {
 	}
 	public Map<String, TestConfiguration> getTestConfigurations(){
 		return this.configurations;
-	}
-	public void savePackage(Injector injector, ResourceSet rs) {
-		this.dslSpecificPackageGenerator.savePackage(injector, rs);
-		Resource r = rs.createResource(URI.createURI(this.testConfigurationPackage.getName()+ ".tdlan2"));
-		r.getContents().add(this.testConfigurationPackage);
-		try {
-			r.save(null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		r.unload();
-		rs = null;
 	}
 }

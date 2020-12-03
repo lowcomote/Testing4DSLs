@@ -141,16 +141,4 @@ public class CommonPackageGenerator {
 	public Map<String, AnnotationType> getAnnotations() {
 		return this.annotations;
 	}
-	
-	public void savePackage(Injector injector, ResourceSet rs) {
-		Resource r = rs.createResource(URI.createURI(this.commonPackage.getName()+ ".tdlan2"));
-		r.getContents().add(this.commonPackage);
-		try {
-			r.save(null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		r.unload();
-		rs = null;
-	}
 }

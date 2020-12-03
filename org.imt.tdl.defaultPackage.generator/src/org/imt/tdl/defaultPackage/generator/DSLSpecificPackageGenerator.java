@@ -40,18 +40,19 @@ public class DSLSpecificPackageGenerator {
 	private BehavioralInterface interfaceRootElement;
 	
 	private tdlFactory factory;
-	private Package dslSpecificPackage;
+	private Package dslSpecificEventsPackage;
+	private Package dslSpecificTypesPackage;
 	private CommonPackageGenerator commonPackageGenerator;
 	
-	private Map<String, DataType> dslSpecificTypes = new HashMap<String, DataType>();
 	private DataType modelState;
+	private Map<String, DataType> dslSpecificTypes = new HashMap<String, DataType>();
 	private List<DataType> dslInterfaceTypes = new ArrayList<DataType>();
 	private List<DataType> TypesForGeneralEvents = new ArrayList<DataType>();
 	
 	public DSLSpecificPackageGenerator(String dslFilePath) throws IOException {
 		System.out.println("Start dsl-specific package generation");
 		this.factory = tdlFactory.eINSTANCE;
-		this.commonPackageGenerator = new CommonPackageGenerator();
+		this.commonPackageGenerator = new CommonPackageGenerator(); 
 		this.dslName = getDslName(dslFilePath);
 		this.metamodelRootElement = getMetamodelRootElement(dslFilePath);
 		//this.aleSemanticRootElement = getAleSemanticsRootElement(dslFilePath);
@@ -62,10 +63,9 @@ public class DSLSpecificPackageGenerator {
 	}
 	
 	private void generateDSLSpecificPackage(String dslFilePath) throws IOException{
-		this.dslSpecificPackage = factory.createPackage();
-		this.dslSpecificPackage.setName(this.dslName + "-SpecificPackage");
+		this.dslSpecificEventsPackage = factory.createPackage();
+		this.dslSpecificEventsPackage.setName(this.dslName + "_SpecificPackage");
 		generateImports();
-		generateDSLSpecificTypes(dslFilePath);
 		generateTypeForModelState();
 		if (this.interfaceRootElement != null) {
 			generateTypeForDSLInterfaces();
@@ -75,34 +75,19 @@ public class DSLSpecificPackageGenerator {
 	private void generateImports() {
 		ElementImport commonPackageImport = factory.createElementImport();
 		commonPackageImport.setImportedPackage(this.commonPackageGenerator.getCommonPackage());
-		this.dslSpecificPackage.getImport().add(commonPackageImport);
-	}
-	private void generateDSLSpecificTypes(String dslFilePath) throws IOException {
-		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
-		Dsl dsl = (Dsl)dslRes.getContents().get(0);
-		String metamodelPath = dsl.getEntry("ecore").getValue();
-		String IN_model_path = metamodelPath;
-		String OUT_model_path = "platform:/resource/org.gemoc.arduino.ale.model/model/dslSpecificTypes.tdlan2";
-		try {
-			Ecore2tdl runner = new Ecore2tdl();
-			runner.loadModels(IN_model_path);
-			runner.doEcore2tdl(new NullProgressMonitor());
-			runner.saveModels(OUT_model_path);
-		} catch (ATLCoreException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ATLExecutionException e) {
-			e.printStackTrace();
-		}
+		this.dslSpecificEventsPackage.getImport().add(commonPackageImport);
+		
+		ElementImport dslSpecificTypesPackageImport = factory.createElementImport();
+		dslSpecificTypesPackageImport.setImportedPackage(this.dslSpecificTypesPackage);
+		this.dslSpecificEventsPackage.getImport().add(dslSpecificTypesPackageImport);
 	}
 	private void generateTypeForDSLInterfaces() {
 		AnnotationType acceptedEvent = factory.createAnnotationType();
 		acceptedEvent.setName("AcceptedEvent");
 		AnnotationType exposedEvent = factory.createAnnotationType();
 		exposedEvent.setName("ExposedEvent");
-		this.dslSpecificPackage.getPackagedElement().add(acceptedEvent);
-		this.dslSpecificPackage.getPackagedElement().add(exposedEvent);
+		this.dslSpecificEventsPackage.getPackagedElement().add(acceptedEvent);
+		this.dslSpecificEventsPackage.getPackagedElement().add(exposedEvent);
 		
 		for (int i=0; i<this.interfaceRootElement.getEvents().size();i++) {
 			Event event = this.interfaceRootElement.getEvents().get(i);
@@ -117,9 +102,15 @@ public class DSLSpecificPackageGenerator {
 			annotation.setAnnotatedElement(typeForEvent);
 			typeForEvent.getAnnotation().add(annotation);
 			for (int j=0; j<event.getParams().size();j++) {
-				//the parameters are the metamodel elements that have to be transformed to TDL types
+				String paramName = event.getParams().get(j).getName();
+				if (this.dslSpecificTypes.get(paramName) != null) {
+					Member member = factory.createMember();
+					member.setName(paramName);
+					member.setDataType(this.dslSpecificTypes.get(paramName));
+					typeForEvent.getMember().add(member);
+				}		
 			}
-			this.dslSpecificPackage.getPackagedElement().add(typeForEvent);
+			this.dslSpecificEventsPackage.getPackagedElement().add(typeForEvent);
 			this.dslInterfaceTypes.add(typeForEvent);
 		}
 	}
@@ -127,7 +118,7 @@ public class DSLSpecificPackageGenerator {
 		StructuredDataType modelState = factory.createStructuredDataType();
 		modelState.setName("modelState");
 		//TODO: Define the members based on the model state
-		this.dslSpecificPackage.getPackagedElement().add(modelState);
+		this.dslSpecificEventsPackage.getPackagedElement().add(modelState);
 		this.modelState = modelState;
 	}
 	private void generateTypeForSetState() {
@@ -137,17 +128,11 @@ public class DSLSpecificPackageGenerator {
 		state.setName("state");
 		state.setDataType(this.modelState);
 		setState.getMember().add(state);
-		this.dslSpecificPackage.getPackagedElement().add(setState);
+		this.dslSpecificEventsPackage.getPackagedElement().add(setState);
 		this.TypesForGeneralEvents.add(setState);
 	}
-	public CommonPackageGenerator getCommonPackageGenerator() {
-		return this.commonPackageGenerator;
-	}
 	public Package getDSLSpecificPackage() {
-		return this.dslSpecificPackage;
-	}
-	public Map<String, DataType> getDslSpecificTypes(){
-		return this.dslSpecificTypes;
+		return this.dslSpecificEventsPackage;
 	}
 	public DataType getTypeOfModelState() {
 		return this.modelState;
@@ -158,7 +143,15 @@ public class DSLSpecificPackageGenerator {
 	public List<DataType> getTypesOfGeneralEvents() {
 		return this.TypesForGeneralEvents;
 	}
-	
+	public CommonPackageGenerator getCommonPackageGenerator() {
+		return this.commonPackageGenerator;
+	}
+	public void setDslSpecificTypes(Map<String, DataType> dslSpecificTypes) {
+		this.dslSpecificTypes = dslSpecificTypes;
+	}
+	public void setDSLSpecificTypePackage (Package typesPackage) {
+		this.dslSpecificTypesPackage = typesPackage;
+	}
 	protected String getDslName(String dslFilePath) {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
@@ -189,17 +182,5 @@ public class DSLSpecificPackageGenerator {
 		Resource interfaceRes = (new ResourceSetImpl()).getResource(URI.createURI(interfacePath), true);
 		BehavioralInterface interfaceRootElement = (BehavioralInterface) interfaceRes.getContents().get(0);
 		return interfaceRootElement;
-	}
-	public void savePackage(Injector injector, ResourceSet rs) {
-		this.commonPackageGenerator.savePackage(injector, rs);
-		Resource r = rs.createResource(URI.createURI(this.dslSpecificPackage.getName()+ ".tdlan2"));
-		r.getContents().add(this.dslSpecificPackage);
-		try {
-			r.save(null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		r.unload();
-		rs = null;
 	}
 }

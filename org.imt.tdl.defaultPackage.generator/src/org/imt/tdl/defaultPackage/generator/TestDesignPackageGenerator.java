@@ -17,23 +17,22 @@ public class TestDesignPackageGenerator {
 	private Package testDesignPackage;
 	private CommonPackageGenerator commonPackageGenerator;
 	private DSLSpecificPackageGenerator dslSpecificPackageGenerator;
+	private DSLSpecificTypesGenerator dslSpecificTypesGenerator;
 	private TestConfigurationGenerator testConfigurationPackageGenerator;
 	
 	public TestDesignPackageGenerator(String dslFilePath) throws IOException {
 		System.out.println("Start test design package generation");
 		this.factory = tdlFactory.eINSTANCE;
 		this.testConfigurationPackageGenerator = new TestConfigurationGenerator(dslFilePath);
-		this.dslSpecificPackageGenerator = this.testConfigurationPackageGenerator.getDSLSpecificPackageGenerator();
+		this.dslSpecificTypesGenerator = this.testConfigurationPackageGenerator.getDSLSpecificTypesGenerator();
+		this.dslSpecificPackageGenerator = this.dslSpecificTypesGenerator.getDSLSpecificPackageGenerator();
 		this.commonPackageGenerator = this.dslSpecificPackageGenerator.getCommonPackageGenerator();
 		generateTestDesignPackage();
 		System.out.println("test design package generated successfully");
-		System.out.println("start saving packages");
-		savePackage();
-		System.out.println("all packages are saved successfully");
 	}
 	private void generateTestDesignPackage() {
 		this.testDesignPackage = factory.createPackage();
-		this.testDesignPackage.setName("testDesignPackage-template");
+		this.testDesignPackage.setName("testDesignPackage_template");
 		generateImports();
 	}
 	private void generateImports() {
@@ -47,19 +46,11 @@ public class TestDesignPackageGenerator {
 		this.testDesignPackage.getImport().add(dslSpecificPackageImport);
 		this.testDesignPackage.getImport().add(testConfigurationImport);
 	}
-
-	public void savePackage() {
-		Injector injector = new TDLan2StandaloneSetup().createInjectorAndDoEMFRegistration();
-		ResourceSet rs = injector.getInstance(ResourceSet.class);
-		this.testConfigurationPackageGenerator.savePackage(injector, rs);
-		Resource r = rs.createResource(URI.createURI(this.testDesignPackage.getName()+ ".tdlan2"));
-		r.getContents().add(this.testDesignPackage);
-		try {
-			r.save(null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		r.unload();
-		rs = null;
+	
+	public Package getTestDesignPackage() {
+		return this.testDesignPackage;
+	}
+	public TestConfigurationGenerator getTestConfigurationGenerator() {
+		return this.testConfigurationPackageGenerator;
 	}
 }
