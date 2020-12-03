@@ -1,15 +1,14 @@
 package org.imt.tdl.defaultPackage.generator;
 
 import java.io.IOException;
+
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.eclipse.core.resources.IFile;
-
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.Path;
+import org.imt.atl.ecore2tdl.files.Ecore2tdl;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -20,6 +19,8 @@ import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.BehavioralInterface;
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.Event;
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.EventType;
+import org.eclipse.m2m.atl.common.ATLExecutionException;
+import org.eclipse.m2m.atl.core.ATLCoreException;
 import org.etsi.mts.tdl.Annotation;
 import org.etsi.mts.tdl.AnnotationType;
 import org.etsi.mts.tdl.ComponentInstance;
@@ -70,7 +71,7 @@ public class TDLCodeGenerator {
 	
 	private Package testDesignPackage;
 	
-	public TDLCodeGenerator(String dslFilePath) {
+	public TDLCodeGenerator(String dslFilePath) throws IOException {
 		System.out.println("Start TDL Code generation");
 		this.factory = tdlFactory.eINSTANCE;
 		
@@ -186,7 +187,7 @@ public class TDLCodeGenerator {
 	}
 	
 	//DSL-Specific package generation	
-	private void generateDSLSpecificPackage(String dslFilePath){
+	private void generateDSLSpecificPackage(String dslFilePath) throws IOException{
 		this.dslSpecificPackage = factory.createPackage();
 		this.dslSpecificPackage.setName(this.dslName + "-SpecificPackage");
 		generateDSLSpecificImports();
@@ -202,8 +203,24 @@ public class TDLCodeGenerator {
 		commonPackageImport.setImportedPackage(this.commonPackage);
 		this.dslSpecificPackage.getImport().add(commonPackageImport);
 	}
-	private void generateDSLSpecificTypes(String dslFilePath) {
-		
+	private void generateDSLSpecificTypes(String dslFilePath) throws IOException {
+		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
+		Dsl dsl = (Dsl)dslRes.getContents().get(0);
+		String metamodelPath = dsl.getEntry("ecore").getValue();
+		String IN_model_path = metamodelPath;
+		String OUT_model_path = "platform:/resource/org.gemoc.arduino.ale.model/model/dslSpecificTypes.tdlan2";
+		try {
+			Ecore2tdl runner = new Ecore2tdl();
+			runner.loadModels(IN_model_path);
+			runner.doEcore2tdl(new NullProgressMonitor());
+			runner.saveModels(OUT_model_path);
+		} catch (ATLCoreException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ATLExecutionException e) {
+			e.printStackTrace();
+		}
 	}
 	private void generateTypeForDSLInterfaces() {
 		AnnotationType acceptedEvent = factory.createAnnotationType();
@@ -462,9 +479,6 @@ public class TDLCodeGenerator {
 	public void savePackages() {
 		Injector injector = new TDLan2StandaloneSetup().createInjectorAndDoEMFRegistration();
 		ResourceSet rs = injector.getInstance(ResourceSet.class);
-		//this.saveCommonPackage(injector, rs);
-		//this.saveDslSpecificPackage(injector, rs);
-		//this.saveTestConfigurationPackage(injector, rs);
 		Resource commonPackageRes = rs.createResource(URI.createURI(this.commonPackage.getName()+ ".tdlan2"));
 		Resource dslSpecificPackageRes = rs.createResource(URI.createURI(this.dslSpecificPackage.getName()+ ".tdlan2"));
 		Resource configurationRes = rs.createResource(URI.createURI(this.testConfigurationPackage.getName()+ ".tdlan2"));

@@ -38,7 +38,7 @@ public class TestConfigurationGenerator {
 	private Map<String, GateInstance> gateInstances = new HashMap<String, GateInstance>();
 	private Map<String, TestConfiguration> configurations = new HashMap<String, TestConfiguration>();
 	
-	public TestConfigurationGenerator(String dslFilePath) {
+	public TestConfigurationGenerator(String dslFilePath) throws IOException {
 		System.out.println("Start test configuration package generation");
 		this.factory = tdlFactory.eINSTANCE;
 		this.dslSpecificPackageGenerator = new DSLSpecificPackageGenerator(dslFilePath);

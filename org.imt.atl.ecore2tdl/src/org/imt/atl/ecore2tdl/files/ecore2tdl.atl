@@ -1,0 +1,56 @@
+-- @atlcompiler emftvm
+-- @nsURI Ecore=http://www.eclipse.org/emf/2002/Ecore
+-- @path TDL=/org.etsi.mts.tdl.model/model/tdl.ecore
+
+module ecore2tdl;
+create OUT : TDL from IN : Ecore;
+
+helper def: enums: Set (Ecore!EEnum)= Ecore!EEnum->allInstances()->asSet();
+helper def: enumLiterals: Set (Ecore!EEnumLiteral) = 
+	thisModule.enums->iterate (e; literals: Set (Ecore!EEnumLiteral) = Set{} | literals->including(e.eLiterals));
+helper def: metamodelClasses : Set (Ecore!EClass) = Ecore!EClass->allInstances()->asSet();
+helper def: genericTypes : Set (Ecore!EGenericType) = Ecore!EGenericType->allInstances();
+
+rule ecorePackage2tdlPackage{
+	from package: Ecore!EPackage
+	to tdlPackage: TDL!Package(
+		name <- package.name.concat('SpecificTypes'),
+		packagedElement <- package.eClassifiers.union(thisModule.enums).union(thisModule.enumLiterals).union(thisModule.genericTypes))
+}
+rule class2simpleType{
+	from class: Ecore!EClass (class.eAllStructuralFeatures.isEmpty())
+	to type: TDL!SimpleDataType(
+		name <- class.name)
+}
+rule class2structuredType{
+	from class: Ecore!EClass (class.eAllStructuralFeatures.notEmpty())
+	to type: TDL!StructuredDataType(
+		name <- class.name,
+		member <- class.eAllStructuralFeatures -> collect(feature | thisModule.feature2member(feature)))
+}
+rule enum2simpleType{
+	from enum: Ecore!EEnum
+	to type : TDL!SimpleDataType(
+		name <- enum.name) 
+}
+rule genericType2simpleType{
+	from genericType: Ecore!EGenericType (thisModule.metamodelClasses->excludes(genericType.eClassifier)
+											and thisModule.enums->excludes(genericType.eClassifier))
+	to type : TDL!SimpleDataType(
+		name <- genericType.eClassifier.name)
+}
+lazy rule feature2member{
+	from feature: Ecore!EStructuralFeature
+	to member: TDL!Member(
+		name <- feature.name,
+		dataType <- if (feature.oclIsKindOf(Ecore!EAttribute))
+					then feature.eGenericType
+					else feature.eType
+					endif)
+}
+rule enumLiteral2simpleDataInstance{
+	from enumLiteral: Ecore!EEnumLiteral
+	to dataInstance: TDL!SimpleDataInstance(
+		name <- enumLiteral.name,
+		dataType <- enumLiteral.eEnum)
+}

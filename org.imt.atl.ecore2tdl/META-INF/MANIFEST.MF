@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ATL org.imt.atl.ecore2tdl Transformation Runtime Plug-in
+Bundle-SymbolicName: org.imt.atl.ecore2tdl
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.imt.atl.ecore2tdl.Activator
+Bundle-Vendor: Eclipse Modeling Project
+Require-Bundle: org.eclipse.core.runtime, 
+ org.eclipse.emf.ecore,
+ org.eclipse.m2m.atl.engine.emfvm
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Eclipse-LazyStart: true
+Export-Package: org.imt.atl.ecore2tdl.files

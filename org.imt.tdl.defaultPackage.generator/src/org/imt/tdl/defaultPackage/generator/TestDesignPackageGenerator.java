@@ -19,7 +19,7 @@ public class TestDesignPackageGenerator {
 	private DSLSpecificPackageGenerator dslSpecificPackageGenerator;
 	private TestConfigurationGenerator testConfigurationPackageGenerator;
 	
-	public TestDesignPackageGenerator(String dslFilePath) {
+	public TestDesignPackageGenerator(String dslFilePath) throws IOException {
 		System.out.println("Start test design package generation");
 		this.factory = tdlFactory.eINSTANCE;
 		this.testConfigurationPackageGenerator = new TestConfigurationGenerator(dslFilePath);

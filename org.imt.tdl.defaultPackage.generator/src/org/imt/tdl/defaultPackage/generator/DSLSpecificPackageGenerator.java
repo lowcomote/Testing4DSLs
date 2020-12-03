@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -18,6 +19,8 @@ import org.eclipse.emf.ecoretools.ale.implementation.ModelUnit;
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.BehavioralInterface;
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.Event;
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.EventType;
+import org.eclipse.m2m.atl.common.ATLExecutionException;
+import org.eclipse.m2m.atl.core.ATLCoreException;
 import org.etsi.mts.tdl.Annotation;
 import org.etsi.mts.tdl.AnnotationType;
 import org.etsi.mts.tdl.DataType;
@@ -26,6 +29,7 @@ import org.etsi.mts.tdl.Member;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.StructuredDataType;
 import org.etsi.mts.tdl.tdlFactory;
+import org.imt.atl.ecore2tdl.files.Ecore2tdl;
 
 import com.google.inject.Injector;
 
@@ -44,7 +48,7 @@ public class DSLSpecificPackageGenerator {
 	private List<DataType> dslInterfaceTypes = new ArrayList<DataType>();
 	private List<DataType> TypesForGeneralEvents = new ArrayList<DataType>();
 	
-	public DSLSpecificPackageGenerator(String dslFilePath) {
+	public DSLSpecificPackageGenerator(String dslFilePath) throws IOException {
 		System.out.println("Start dsl-specific package generation");
 		this.factory = tdlFactory.eINSTANCE;
 		this.commonPackageGenerator = new CommonPackageGenerator();
@@ -53,15 +57,15 @@ public class DSLSpecificPackageGenerator {
 		//this.aleSemanticRootElement = getAleSemanticsRootElement(dslFilePath);
 		//System.out.println(this.aleSemanticRootElement.getName());
 		this.interfaceRootElement = getBehavioralInterfaceRootElement(dslFilePath);
-		generateDSLSpecificPackage();
+		generateDSLSpecificPackage(dslFilePath);
 		System.out.println("dsl-specific package generated successfully");
 	}
 	
-	private void generateDSLSpecificPackage(){
+	private void generateDSLSpecificPackage(String dslFilePath) throws IOException{
 		this.dslSpecificPackage = factory.createPackage();
 		this.dslSpecificPackage.setName(this.dslName + "-SpecificPackage");
 		generateImports();
-		generateDSLSpecificTypes();
+		generateDSLSpecificTypes(dslFilePath);
 		generateTypeForModelState();
 		if (this.interfaceRootElement != null) {
 			generateTypeForDSLInterfaces();
@@ -73,8 +77,24 @@ public class DSLSpecificPackageGenerator {
 		commonPackageImport.setImportedPackage(this.commonPackageGenerator.getCommonPackage());
 		this.dslSpecificPackage.getImport().add(commonPackageImport);
 	}
-	private void generateDSLSpecificTypes() {
-		//TODO: Which entities of metamodel have to be transformed to TDL types?
+	private void generateDSLSpecificTypes(String dslFilePath) throws IOException {
+		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
+		Dsl dsl = (Dsl)dslRes.getContents().get(0);
+		String metamodelPath = dsl.getEntry("ecore").getValue();
+		String IN_model_path = metamodelPath;
+		String OUT_model_path = "platform:/resource/org.gemoc.arduino.ale.model/model/dslSpecificTypes.tdlan2";
+		try {
+			Ecore2tdl runner = new Ecore2tdl();
+			runner.loadModels(IN_model_path);
+			runner.doEcore2tdl(new NullProgressMonitor());
+			runner.saveModels(OUT_model_path);
+		} catch (ATLCoreException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ATLExecutionException e) {
+			e.printStackTrace();
+		}
 	}
 	private void generateTypeForDSLInterfaces() {
 		AnnotationType acceptedEvent = factory.createAnnotationType();
