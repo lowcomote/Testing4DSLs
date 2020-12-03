@@ -6,17 +6,11 @@ module ecore2tdl;
 create OUT : TDL from IN : Ecore;
 
 helper def: enums: Set (Ecore!EEnum)= Ecore!EEnum->allInstances()->asSet();
-helper def: enumLiterals: Set (Ecore!EEnumLiteral) = 
-	thisModule.enums->iterate (e; literals: Set (Ecore!EEnumLiteral) = Set{} | literals->including(e.eLiterals));
-helper def: metamodelClasses : Set (Ecore!EClass) = Ecore!EClass->allInstances()->asSet();
-helper def: genericTypes : Set (Ecore!EGenericType) = Ecore!EGenericType->allInstances();
+helper def: enumLiterals: Set (Ecore!EEnumLiteral) = thisModule.enums->collect(e | e.eLiterals);
+helper context Ecore!EPackage def: basicDataTypes: Set(Ecore!EDataType) = Ecore!EAttribute->allInstances()->
+	select (attr | not attr.eGenericType.eClassifier.oclIsTypeOf(Ecore!EEnum))->asSet()->
+	collect(attr | attr.eGenericType.eClassifier)->asSet();
 
-rule ecorePackage2tdlPackage{
-	from package: Ecore!EPackage
-	to tdlPackage: TDL!Package(
-		name <- package.name.concat('SpecificTypes'),
-		packagedElement <- package.eClassifiers.union(thisModule.enums).union(thisModule.enumLiterals).union(thisModule.genericTypes))
-}
 rule class2simpleType{
 	from class: Ecore!EClass (class.eAllStructuralFeatures.isEmpty())
 	to type: TDL!SimpleDataType(
@@ -33,18 +27,17 @@ rule enum2simpleType{
 	to type : TDL!SimpleDataType(
 		name <- enum.name) 
 }
-rule genericType2simpleType{
-	from genericType: Ecore!EGenericType (thisModule.metamodelClasses->excludes(genericType.eClassifier)
-											and thisModule.enums->excludes(genericType.eClassifier))
+unique lazy rule dataType2simpleType{
+	from dataType: Ecore!EDataType
 	to type : TDL!SimpleDataType(
-		name <- genericType.eClassifier.name)
+		name <- dataType.name)
 }
 lazy rule feature2member{
 	from feature: Ecore!EStructuralFeature
 	to member: TDL!Member(
 		name <- feature.name,
-		dataType <- if (feature.oclIsKindOf(Ecore!EAttribute))
-					then feature.eGenericType
+		dataType <- if (feature.oclIsKindOf(Ecore!EAttribute) and thisModule.enums->excludes(feature.eType))
+					then  thisModule.dataType2simpleType(feature.eType)
 					else feature.eType
 					endif)
 }
@@ -53,4 +46,11 @@ rule enumLiteral2simpleDataInstance{
 	to dataInstance: TDL!SimpleDataInstance(
 		name <- enumLiteral.name,
 		dataType <- enumLiteral.eEnum)
+}
+rule ecorePackage2tdlPackage{
+	from package: Ecore!EPackage
+	to dslTypesPackage: TDL!Package(
+		name <- package.name.concat('SpecificTypes'),
+		packagedElement <- package.eClassifiers.union(thisModule.enums).union(thisModule.enumLiterals).
+			union(package.basicDataTypes->collect(t | thisModule.dataType2simpleType(t))))
 }

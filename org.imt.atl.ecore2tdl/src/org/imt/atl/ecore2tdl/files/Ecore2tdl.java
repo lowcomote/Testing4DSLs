@@ -108,13 +108,14 @@ public class Ecore2tdl {
 	 * @throws ATLCoreException
 	 *             if a problem occurs while loading models
 	 *
-	 * @generated
+	 * @generated NOT
 	 */
 	public void loadModels(String inModelPath) throws ATLCoreException {
 		ModelFactory factory = new EMFModelFactory();
 		IInjector injector = new EMFInjector();
 	 	IReferenceModel tdlMetamodel = factory.newReferenceModel();
-		injector.inject(tdlMetamodel, getMetamodelUri("TDL"));
+		//injector.inject(tdlMetamodel, getMetamodelUri("TDL"));
+	 	injector.inject(tdlMetamodel, "http://www.etsi.org/spec/TDL/1.4.1");
 	 	IReferenceModel ecoreMetamodel = factory.newReferenceModel();
 		injector.inject(ecoreMetamodel, getMetamodelUri("Ecore"));
 		this.inModel = factory.newModel(ecoreMetamodel);
