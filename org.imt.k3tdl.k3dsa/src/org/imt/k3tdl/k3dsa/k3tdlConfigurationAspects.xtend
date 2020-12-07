@@ -71,13 +71,16 @@ class GateInstanceAspect{
 			//if the message is an OCL query
 			else if ((argument as DataInstanceUse).dataInstance.dataType.name == 'OCL'){
 				println("Sending the argument to the OCL engine")
-				//TODO: extracting the query from the argument and sending to the OCL interpreter
+				//extracting the query from the argument and sending for execution
 				var query = argument.argument.get(0).dataUse as LiteralValueUse;
+				println("the ocl query: " + query);
 				var queryResult = _self.launcher.executeOCLCommand(query.value);
+				System.out.println("Result set size : " + (queryResult as List).size);
 			}//otherwise the message is an event conforming to the behavioral interface of the DSL
 			else{
 				println("Sending the argument to the Event Manager")
 				//TODO: Sending the related argument
+				//TD
 				_self.launcher.executeDSLSpecificCommand("");
 			}
 			println("Sending the argument done!")

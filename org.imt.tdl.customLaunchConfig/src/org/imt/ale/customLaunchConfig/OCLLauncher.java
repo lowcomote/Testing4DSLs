@@ -1,6 +1,7 @@
 package org.imt.ale.customLaunchConfig;
 
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;

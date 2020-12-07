@@ -36,11 +36,16 @@ public class CustomLauncher{
 		this.aleEngine = this.aleEngineLauncher.createExecutionEngine();
 		this.MUTResource = this.aleEngine.getExecutionContext().getResourceModel();
 	}
-	public Object executeOCLCommand (String query) throws ParserException{
+	public Object executeOCLCommand (String query){
 		System.out.println("Start executing ocl command");
-		return this.oclLauncher.runQuery(this.MUTResource, query);
+		try {
+			return this.oclLauncher.runQuery(this.MUTResource, query);
+		}catch (ParserException e) {
+            e.printStackTrace();
+		}
+		return null;
 	}
-	public void executeDSLSpecificCommand(String command) {
+	public void executeDSLSpecificCommand(String eventOccurance) {
 		System.out.println("Start executing dsl-specific command");
 		//TODO: Calling the event manager
 	}
