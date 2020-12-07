@@ -7,9 +7,8 @@ create OUT : TDL from IN : Ecore;
 
 helper def: enums: Set (Ecore!EEnum)= Ecore!EEnum->allInstances()->asSet();
 helper def: enumLiterals: Set (Ecore!EEnumLiteral) = thisModule.enums->collect(e | e.eLiterals);
-helper context Ecore!EPackage def: basicDataTypes: Set(Ecore!EDataType) = Ecore!EAttribute->allInstances()->
-	select (attr | not attr.eGenericType.eClassifier.oclIsTypeOf(Ecore!EEnum))->asSet()->
-	collect(attr | attr.eGenericType.eClassifier)->asSet();
+helper context Ecore!EPackage def: basicDataTypes: Set(Ecore!EDataType) = Ecore!EDataType->allInstances()->
+	select(type | not type.oclIsKindOf(Ecore!EEnum))->asSet();
 
 rule class2simpleType{
 	from class: Ecore!EClass (class.eAllStructuralFeatures.isEmpty())
