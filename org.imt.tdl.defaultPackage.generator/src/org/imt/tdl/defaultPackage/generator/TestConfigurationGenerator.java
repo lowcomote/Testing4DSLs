@@ -32,7 +32,7 @@ public class TestConfigurationGenerator {
 	private Package testConfigurationPackage;
 	private CommonPackageGenerator commonPackageGenerator;
 	private DSLSpecificPackageGenerator dslSpecificPackageGenerator;
-	private DSLSpecificTypesGenerator dslSpecificTypesGenerator;
+	private RequiredTypesGenerator requiredTypesGenerator;
 	
 	private Map<String, GateType> gateTypes = new HashMap<String, GateType>();
 	private Map<String, ComponentType> componentTypes = new HashMap<String, ComponentType>();
@@ -42,12 +42,14 @@ public class TestConfigurationGenerator {
 	public TestConfigurationGenerator(String dslFilePath) throws IOException {
 		System.out.println("Start test configuration package generation");
 		this.factory = tdlFactory.eINSTANCE;
-		this.dslSpecificTypesGenerator = new DSLSpecificTypesGenerator(dslFilePath);
-		this.dslSpecificPackageGenerator = this.dslSpecificTypesGenerator.getDSLSpecificPackageGenerator();
-		this.commonPackageGenerator = this.dslSpecificPackageGenerator.getCommonPackageGenerator();
+		
+		this.requiredTypesGenerator = new RequiredTypesGenerator(dslFilePath);
+		System.out.println("Required types package generated successfully");
+		
+		this.dslSpecificPackageGenerator = this.requiredTypesGenerator.getDSLSpecificPackageGenerator();
+		this.commonPackageGenerator = this.requiredTypesGenerator.getCommonPackageGenerator();
 		this.dslName = this.dslSpecificPackageGenerator.getDslName(dslFilePath);
 		generateTestConfigurationPackage();
-		System.out.println("test configuration package generated successfully");
 	}
 	private void generateTestConfigurationPackage() {
 		this.testConfigurationPackage = factory.createPackage();
@@ -208,8 +210,8 @@ public class TestConfigurationGenerator {
 		configuration.getConnection().add(gateConnection);
 	}
 	
-	public DSLSpecificTypesGenerator getDSLSpecificTypesGenerator() {
-		return this.dslSpecificTypesGenerator;
+	public RequiredTypesGenerator getRequiredTypesGenerator() {
+		return this.requiredTypesGenerator;
 	}
 	public Package getTestConfigurationPackage() {
 		return this.testConfigurationPackage;

@@ -17,6 +17,7 @@ import static extension org.imt.k3tdl.k3dsa.GateInstanceAspect.*
 import org.eclipse.core.runtime.CoreException
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException
 import org.etsi.mts.tdl.DataInstanceUse
+import org.etsi.mts.tdl.LiteralValueUse
 
 @Aspect (className = GateType)
 class GateTypeAspect{
@@ -31,28 +32,19 @@ class GateInstanceAspect{
 	public List<DataUse> sutIncomingData = new ArrayList<DataUse>
 	CustomLauncher launcher;
 	@Step
-	//set the launcher attributes based on the gate type 
+	//setting up the related launcher based on the gate type 
 	def void configureLauncher(String MUTPath){
 		println("Start configuring the MUT launcher")
-		_self.launcher = new CustomLauncher(MUTPath);
+		_self.launcher = new CustomLauncher();
 		if (_self.name.equals('genericMUTGate')){
-			//call the launcher to configure the GEMOC ALE engine
-			try{
-				println("Start configuring ALE Engine launcher")
-				_self.launcher.setALEConfiguration();
-			}catch(CoreException ce){
-				System.out.println(ce.message);
-			}catch(EngineContextException ece){
-				System.out.println(ece.message);
-			}
+			println("Start configuring ALE Engine launcher")
+			_self.launcher.setUp(CustomLauncher.GENERIC, MUTPath);
 		}else if (_self.name.equals('dslSpecificMUTGate')){
-			//call the launcher to configure the event manager
 			println("Start configuring the Event manager launcher")
-			_self.launcher.setEventManagerConfiguration();
+			_self.launcher.setUp(CustomLauncher.DSL_SPECIFIC, MUTPath);
 		}else if (_self.name.equals('oclMUTGate')){
-			//call the launcher to configure the OCL Interpreter
 			println("Start configuring the OCL Interpreter launcher")
-			_self.launcher.setOCLInterpreterConfiguration();
+			_self.launcher.setUp(CustomLauncher.OCL, MUTPath);
 		}
 		println("Configuration of the MUT launcher finished successfully")
 	}
@@ -70,7 +62,7 @@ class GateInstanceAspect{
 			println("Start sending the argument to the corresponding ENGINE")
 			if ((argument as DataInstanceUse).dataInstance.name == 'runMUT'){
 				println("Sending the argument to the ALE engine")
-				_self.launcher.executeCommand(CustomLauncher.GENERIC_COMMAND);
+				_self.launcher.executeGenericCommand();
 			}else if ((argument as DataInstanceUse).dataInstance.name == 'setModelState'){
 				//TODO: Set the model state
 			}else if ((argument as DataInstanceUse).dataInstance.name == 'getModelState'){
@@ -79,11 +71,14 @@ class GateInstanceAspect{
 			//if the message is an OCL query
 			else if ((argument as DataInstanceUse).dataInstance.dataType.name == 'OCL'){
 				println("Sending the argument to the OCL engine")
-				_self.launcher.executeCommand(CustomLauncher.OCL_COMMAND);
+				//TODO: extracting the query from the argument and sending to the OCL interpreter
+				var query = argument.argument.get(0).dataUse as LiteralValueUse;
+				var queryResult = _self.launcher.executeOCLCommand(query.value);
 			}//otherwise the message is an event conforming to the behavioral interface of the DSL
 			else{
 				println("Sending the argument to the Event Manager")
-				_self.launcher.executeCommand(CustomLauncher.DSL_SPECIFIC_COMMAND);
+				//TODO: Sending the related argument
+				_self.launcher.executeDSLSpecificCommand("");
 			}
 			println("Sending the argument done!")
 		}

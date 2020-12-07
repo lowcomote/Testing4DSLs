@@ -23,12 +23,15 @@ import org.etsi.mts.tdl.StructuredDataType;
 import org.etsi.mts.tdl.AnnotationType;
 import org.etsi.mts.tdl.DataInstance;
 import org.etsi.mts.tdl.DataType;
+import org.etsi.mts.tdl.ElementImport;
 import org.etsi.mts.tdl.Member;
 
 public class CommonPackageGenerator {
 	private tdlFactory factory;
 	private Package commonPackage;
-	private Map<String , DataType> commonTypes = new HashMap<String , DataType>();
+	private Package requiredTypesPackage;
+	private Map<String, DataType> requiredTypes = new HashMap<String, DataType>();
+	
 	private DataType oclType;
 	private List<DataInstance> verdictInstances = new ArrayList<DataInstance>();
 	private List<DataType> TypesForGeneralEvents = new ArrayList<DataType>();
@@ -37,39 +40,27 @@ public class CommonPackageGenerator {
 	public CommonPackageGenerator() {
 		System.out.println("Start common package generation");
 		this.factory = tdlFactory.eINSTANCE;
-		generateCommonPackage();
-		System.out.println("common package generated successfully");
 	}
-	private void generateCommonPackage(){
+	public void generateCommonPackage(){
 		this.commonPackage = factory.createPackage();
 		this.commonPackage.setName("commonPackage");
-		generatePrimitiveDataTypes();
+		generateImports();
 		generateTypeForOCL();
 		generateVerdicts();
 		generateTypeForGeneralEvents();
 		generateAnnotations();
 	}
-	private void generatePrimitiveDataTypes() {
-		SimpleDataType String = factory.createSimpleDataType();
-		String.setName("String");
-		SimpleDataType Integer = factory.createSimpleDataType();
-		Integer.setName("Integer");
-		SimpleDataType Boolean = factory.createSimpleDataType();
-		Boolean.setName("Boolean");
-		this.commonPackage.getPackagedElement().add(String);
-		this.commonPackage.getPackagedElement().add(Integer);
-		this.commonPackage.getPackagedElement().add(Boolean);
-		
-		this.commonTypes.put(String.getName(), String);
-		this.commonTypes.put(Integer.getName(), Integer);
-		this.commonTypes.put(Boolean.getName(), Boolean);
+	private void generateImports() {
+		ElementImport dslSpecificTypesPackageImport = factory.createElementImport();
+		dslSpecificTypesPackageImport.setImportedPackage(this.requiredTypesPackage);
+		this.commonPackage.getImport().add(dslSpecificTypesPackageImport);
 	}
 	private void generateTypeForOCL() {
 		StructuredDataType OCL = factory.createStructuredDataType();
 		OCL.setName("OCL");
 		Member query = factory.createMember();
 		query.setName("query");
-		DataType queryType = this.commonTypes.get("String");
+		DataType queryType = this.requiredTypes.get("EString".toLowerCase());
 		query.setDataType(queryType);
 		OCL.getMember().add(query);
 		this.commonPackage.getPackagedElement().add(OCL);
@@ -126,9 +117,6 @@ public class CommonPackageGenerator {
 	public Package getCommonPackage() {
 		return this.commonPackage;
 	}
-	public Map<String, DataType> getPrimitiveDataTypes() {
-		return this.commonTypes;
-	}
 	public DataType getOCLType() {
 		return this.oclType;
 	}
@@ -140,5 +128,11 @@ public class CommonPackageGenerator {
 	}
 	public Map<String, AnnotationType> getAnnotations() {
 		return this.annotations;
+	}
+	public void setRequiredTypes(Map<String, DataType> requiredTypes) {
+		this.requiredTypes = requiredTypes;
+	}
+	public void setRequiredTypesPackage (Package typesPackage) {
+		this.requiredTypesPackage = typesPackage;
 	}
 }
