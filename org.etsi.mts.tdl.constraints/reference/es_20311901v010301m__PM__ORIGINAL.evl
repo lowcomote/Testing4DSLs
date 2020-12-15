@@ -1,0 +1,877 @@
+//Main Replacement Patterns
+//^  (.+)\n    inv (\w+)\:(.+)\n
+//    constraint \2 {\n        check: \3\n        message: "\1"\n    }\n
+//guard -> ^guard
+//function -> ^function
+//^context -> 1context
+//^(\w|\') -> //\1
+//some more
+
+context Foundation {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context NamedElement {
+//Constraints
+//Mandatory name
+    constraint MandatoryName {
+        check:  not self.name.oclIsUndefined() and self.name.size() > 0
+        message: "A 'NamedElement' shall have the 'name' property set and the 'name' shall be not an empty String."
+    }
+//Distinguishable qualified names
+    constraint DistinguishableName {
+        check:  NamedElement.allInstances()->forAll(e1,e2 |     e1 <> e2 implies e1.qualifiedName <> e2.qualifiedName)
+        message: "All qualified names of instances of the same meta-class shall be distinguishable within a TDL model."
+    }
+//NOTE:	It is up to the concrete syntax definition and tooling to resolve any name clashes between instances of the same meta-class in the qualified name.
+}
+
+context PackageableElement {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context Package {
+//Constraints
+//No cyclic imports
+    constraint CyclicImports {
+        check:  self.^import->asOrderedSet()->closure(^import.importedPackage)->forAll(i | i <> self)
+        message: "A 'Package' shall not import itself directly or indirectly."
+    }
+
+}
+
+context ElementImport {
+//Constraints
+//Consistency of imported elements
+    constraint ConsistentImports {
+        check:  self.importedElement->forAll(e | self.importedPackage.packagedElement->contains(e))
+        message: "All imported 'PackageableElement's referenced by an 'ElementImport' shall be directly owned by the imported 'Package'."
+    }
+
+//Figure 5.2: Miscellaneous elements
+
+}
+
+context Comment {
+//Constraints
+//No nested comments
+    constraint CommentNestedComments {
+        check:  self.comment->isEmpty()
+        message: "A 'Comment' shall not contain 'Comment's."
+    }
+//No annotations to comments
+    constraint CommentNestedAnnotations {
+        check:  self.annotation->isEmpty()
+        message: "A 'Comment' shall not contain 'Annotation's."
+    }
+
+}
+
+context DataElementMapping {
+//Constraints
+//No nested annotations
+    constraint AnnotationNestedComments {
+        check:  self.annotation->isEmpty()
+        message: "An 'Annotation' shall not contain 'Annotation's."
+    }
+//No comments to annotations
+    constraint AnnotationNestedComments {
+        check:  self.comment->isEmpty()
+        message: "An 'Annotation' shall not contain 'Comment's."
+    }
+
+}
+
+context AnnotationType {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context TestObjective {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context Data {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context MappableDataElement {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context DataElementMapping {
+//Constraints
+//Restricted use of parameter mapping
+    constraint ParameterMappingType {
+        check:  self.parameterMapping.size() = 0 or  (self.mappableDataElement.isTypeOf(StructuredDataType) or   self.mappableDataElement.isTypeOf(Action) or  self.mappableDataElement.isTypeOf(Function))
+        message: "A set of 'ParameterMapping's shall only be provided if 'mappableDataElement' refers to a 'StructuredDataType', an 'Action' or a 'Function' definition."
+    }
+
+}
+
+context ParameterMapping {
+//Constraints
+//There are no constraints specified.
+
+//Figure 6.2: Basic data concepts and simple data
+
+}
+
+context DataType {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context DataInstance {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context SimpleDataType {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context SimpleDataInstance {
+//Constraints
+//SimpleDataInstance shall refer to SimpleDataType
+    constraint SimpleDataInstanceType {
+        check:  self.dataType.oclIsTypeOf(SimpleDataType)
+        message: "The inherited reference 'dataType' from 'DataInstance' shall refer to instances of 'SimpleDataType' solely."
+    }
+
+//Figure 6.3: Structured data type and instance
+
+}
+
+context StructuredDataType {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context Member {
+//Constraints
+//Different member names in a structured data type
+    constraint DistinguishableMemberName {
+        check:  self.oclContainer().member->forAll(e1,e2 |     e1 <> e2 implies e1.name <> e2.name)
+        message: "All 'Member' names of a 'StructuredDataType' shall be distinguishable."
+    }
+
+}
+
+context StructuredDataInstance {
+//Constraints
+//StructuredDataInstance shall refer to StructuredDataType
+    constraint StructuredDataInstanceType {
+        check:  self.dataType.oclIsTypeOf(StructuredDataType)
+        message: "The inherited reference 'dataType' from 'DataInstance' shall refer to instances of 'StructuredDataType' solely."
+    }
+
+}
+
+context MemberAssignment {
+//Constraints
+//'Member' of the 'StructuredDataType'
+    constraint ExistingMemberOfDataType {
+        check:  self.oclContainer().dataType.member->contains(self.member)
+        message: "The referenced 'Member' shall be contained in the 'StructuredDataType' that the 'StructuredDataInstance', which contains this 'MemberAssignment', refers to."
+    }
+//Type of a 'memberSpec' and 'Member' shall coincide 
+    constraint MatchingMemberDataType {
+        check:  self.memberSpec.getDataType() = self.member.dataType
+        message: "The 'DataType' of the 'StaticDataUse' of 'memberSpec' shall coincide with the 'DataType' of the 'Member' of the 'MemberAssignment'."
+    }
+//Restricted use of 'OmitValue' for optional 'Member's only
+    constraint OmitValueUse {
+        check:  self.memberSpec.oclIsTypeOf(OmitValue) implies self.member.isOptional = true
+        message: "A non-optional 'Member' shall have a 'StaticDataUse' specification assigned to it that is different from 'OmitValue'."
+    }
+
+//Figure 6.4: Action, function, parameter and variable
+
+}
+
+context Parameter {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context FormalParameter {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context Variable {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context Action {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context Function {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context DataUse {
+//Constraints
+//TODO:
+//No mixed use of 'Member' and 'FormalParameter' in 'argument' set
+//  All 'ParameterBinding's that are referenced in the 'argument' set shall refer only to one kind of 'Member' or 'FormalParameter'.
+//Occurrence of 'argument' and 'reduction'
+    constraint FunctionCallUse {
+        check:  self.argument.isEmpty() or self.reduction.isEmpty() or self.oclIsTypeOf(FunctionCall)
+        message: "Both, 'argument' and 'reduction', may be provided only in case of a 'FunctionCall'."
+    }
+//TODO:
+//Structured data types in 'reduction' set
+//  A 'Member' at index i of a 'reduction' shall be contained in the 'StructuredDataType' of the 'Member' at index(i - 1) of that 'reduction'.
+
+}
+
+context ParameterBinding {
+//Constraints
+//Matching data type
+    constraint ParameterBindingTypes {
+        check:  self.dataUse.getDataType() = self.parameter.dataType
+        message: "The provided 'DataUse' shall match the 'DataType' of the referenced 'Parameter'."
+    }
+//Use of a 'StructuredDataInstance' with non-optional 'Member's
+    constraint OmitValueParameter {
+        check:  self.parameter.oclIsTypeOf(Member) and self.parameter.oclAsType(Member).isOptional = false implies not self.dataUse.oclIsTypeOf(OmitValue)
+        message: "A non-optional 'Member' of a 'StructuredDataType' shall have a 'DataUse' specification assigned to it that is different from 'OmitValue'."
+    }
+
+}
+
+context StaticDataUse {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context DataInstanceUse {
+//Constraints
+//Either argument list or reduction list provided
+    constraint DataInstanceUseArgumentReduction {
+        check:  self.argument->isEmpty() or self.reduction->isEmpty()
+        message: "Either one of the 'argument' list or 'reduction' list or none of them shall be provided."
+    }
+//Static data use in structured data
+    constraint StructuredDataInstanceUse {
+        check:  self.dataInstance. oclIsTypeOf(StructuredDataInstance) implies    self.argument->forAll(a | a.dataUse.oclIsTypeOf(StaticDataUse))
+        message: "If the 'DataInstance' refers to a 'StructuredDataInstance', all of its 'ParameterBinding's shall refer to 'StaticDataUse'."
+    }
+
+}
+
+context SpecialValueUse {
+//Constraints
+//Empty 'argument' and 'reduction' sets
+    constraint SpecialValueUseArgumentReduction {
+        check:  self.argument->isEmpty() and self.reduction->isEmpty()
+        message: "The 'argument' and 'reduction' sets shall be empty."
+    }
+
+}
+
+context AnyValue {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context AnyValueOrOmit {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context OmitValue {
+//Constraints
+//There are no constraints specified.
+
+//Figure 6.6: Dynamic data use
+
+}
+
+context DynamicDataUse {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context FunctionCall {
+//Constraints
+//Matching parameters
+    constraint FunctionCallParameters {
+        check:  self.^function.formalParameter->size() = self.argument->size() and  self.argument->forAll(ap | ap.getDataType() =     self.^function.formalParameter.at(self.argument.indexOf(ap)).dataType)
+        message: "The arguments specified by the 'ParameterBinding' shall match (in terms of number and data type) the list of 'FormalParameter's of the invoked 'Function'."
+    }
+
+}
+
+context FormalParameterUse {
+//Constraints
+//Either argument list or reduction list provided
+    constraint FormalParameterUseArgumentReduction {
+        check:  (self.argument->isEmpty() and self.reduction->isEmpty())     or (self.argument->isEmpty() or self.reduction->isEmpty())
+        message: "Either one of the 'argument' list or 'reduction' list or none of them shall be provided."
+    }
+
+}
+
+context VariableUse {
+//Constraints
+//Either argument list or reduction list provided
+    constraint VariableUseArgumentReduction {
+        check:  (self.argument->isEmpty() and self.reduction->isEmpty())     or (self.argument->isEmpty() or self.reduction->isEmpty())
+        message: "Either one of the 'argument' list or 'reduction' list or none of them shall be provided."
+    }
+//Local variables of tester components only
+    constraint VariableUseComponentRole {
+        check:  self.componentInstance.type.variable->contains(self.variable)     and self.componentInstance.role = Tester
+        message: "All variables used in a 'DataUse' specification via a 'VariableUse' shall be local to the same 'componentInstance' and the 'componentInstance' shall be in the role 'Tester'."
+    }
+
+}
+
+context Time {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context TimeLabel {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context TimeLabelUse {
+//Constraints
+//Empty argument and reduction lists
+    constraint TimeLabelUseArgumentReduction {
+        check:  self.argument->isEmpty() and self.reduction->isEmpty()
+        message: "The 'argument' and 'reduction' lists shall be empty."
+    }
+
+}
+
+context TimeConstraint {
+//Constraints
+//Time constraint expression of type Boolean
+    constraint TimeConstraintType {
+        check:  self.timeConstraintExpression.getDataType().name = 'Boolean'
+        message: "The expression given in the 'DataUse' specification shall evaluate to predefined type 'Boolean'."
+    }
+
+//TODO:
+//Use of local variables only
+//  The expression given in the 'DataUse' specification shall contain only 'Variable's that are local to the 'AtomicBehaviour' that contains this time constraint. That is, all 'Variable's shall be referenced in the 'ComponentInstance' that executes the 'AtomicBehaviour'.
+
+}
+
+context TimeOperation {
+//Constraints
+//Time operations on tester components only
+    constraint TimeOperationComponentRole {
+        check:  self.componentInstance.role = Tester
+        message: "A 'TimeOperation' shall be performed only on a 'ComponentInstance' in the role 'Tester'."
+    }
+//'Time' data type for period expression
+    constraint TimePeriodType {
+        check:  self.period.getDataType().name = 'Time'
+        message: "The 'DataUse' expression assigned to the 'period' shall evaluate to a data instance of the 'Time' data type."
+    }
+
+}
+
+context Wait {
+//Constraints
+//Tester component for 'Wait' shall be known
+    constraint WaitTarget {
+        check:  (not self.componentInstance.oclIsUndefined()) and self.componentInstance.role = Tester
+        message: "The relation to a 'ComponentInstance' of a 'Wait' shall be set and refer to a 'Tester' component instance."
+    }
+
+}
+
+context Quiescence {
+//Constraints
+//Exclusive use of gate reference or component instance
+    constraint QuiescenceTarget {
+        check:  self.gateReference.oclIsUndefined() or self.componentInstance.oclIsUndefined()
+        message: "If a 'GateReference' is provided, a 'ComponentInstance' shall be not provided and vice versa."
+    }
+
+//Figure 7.3: Timer and timer operations
+
+}
+
+context Timer {
+//Constraints
+//Initial state of a timerWhen a timer is defined, it is operationally in the state idle.
+
+}
+
+context TimerOperation {
+//Constraints
+//Timer operations on tester components only
+    constraint TimerOperationComponentRole {
+        check:  self.componentInstance.role = Tester
+        message: "A 'TimerOperation' shall be performed only on a 'ComponentInstance' in the role 'Tester'."
+    }
+
+}
+
+context TimerStart {
+//Constraints
+//'Time' data type for period expression
+    constraint TimerPeriodType {
+        check:  self.period.getDataType().name = 'Time'
+        message: "The 'DataUse' expression assigned to the 'period' shall evaluate to a data instance of the 'Time' data type."
+    }
+
+}
+
+context TimerStop {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context TimeOut {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context TestConfiguration {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context GateInstance {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context ComponentType {
+//Constraints
+//There are no constraints specified.
+
+//Figure 8.2: Test configuration
+
+}
+
+context ComponentInstance {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context ComponentInstanceRole {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context GateReference {
+//Constraints
+//Gate instance of the referred component instance
+    constraint GateInstanceReference {
+        check:  self.component.type.gateInstance->contains(self.gate)
+        message: "The referred 'GateInstance' shall be contained in the 'ComponentType' of the referred 'ComponentInstance'."
+    }
+
+}
+
+context Connection {
+//Constraints
+//Self-loop connections are not permitted
+    constraint NoSelfLoop {
+        check:  self.endPoint->forAll(e1, e2 | not (e1.gate = e2.gate and e1.component = e2.component))
+        message: "The 'endPoint's of a 'Connection' shall not be the same. Two endpoints are the same if both, the referred 'ComponentInstance's and the referred 'GateInstance's, are identical."
+    }
+//Consistent type of a connection
+    constraint ConsistentConnectionType {
+        check:  self.endPoint->forAll(e1, e2 | e1.gate.type = e2.gate.type)
+        message: "The 'GateInstance's of the two 'endPoint's of a 'Connection' shall refer to the same 'GateType'."
+    }
+
+}
+
+context TestConfiguration {
+//Constraints
+//'TestConfiguration' and components roles
+    constraint ComponentRoles {
+        check:  self.componentInstance->exists(c | c.role = Tester) and     self.componentInstance->exists(c | c.role = SUT)
+        message: "A 'TestConfiguration' shall contain at least one 'Tester' and one 'SUT' 'ComponentInstance'."
+    }
+//Minimal 'TestConfiguration'
+    constraint MinimalTestConfiguration {
+        check:  self.connection->exists(c |     (c.endPoint->at(0).componentInstance.role = Tester and c.endPoint->at(1).componentInstance.role = SUT)    or     (c.endPoint->at(0).componentInstance.role = SUT and c.endPoint->at(1).componentInstance.role = Tester))
+        message: "Each 'TestConfiguration' shall specify at least one 'Connection' that connects a 'GateInstance' of a 'ComponentInstance' in the role 'Tester' with a 'GateInstance' of a 'ComponentInstance' in the role 'SUT'."
+    }
+//At most one connection between any two 'GateInstance'/'ComponentInstance' pairs
+    constraint UniqueConnections {
+        check:  self.connection->forAll (c1, c2 |     not (        (c1.endPoint->at(0).componentInstance = c2.endPoint->at(0).componentInstance            and c1.endPoint->at(0).gateInstance = c2.endPoint->at(0).gateInstance)        and        (c1.endPoint->at(1).componentInstance = c2.endPoint->at(1).componentInstance            and c1.endPoint->at(1).gateInstance = c2.endPoint->at(1).gateInstance)    )    and not (        (c1.endPoint->at(0).componentInstance = c2.endPoint->at(1).componentInstance            and c1.endPoint->at(0).gateInstance = c2.endPoint->at(1).gateInstance)        and        (c1.endPoint->at(1).componentInstance = c2.endPoint->at(0).componentInstance            and c1.endPoint->at(1).gateInstance = c2.endPoint->at(0).gateInstance)    ))
+        message: "Given the set of 'Connection's contained in a 'TestConfiguration'. There shall be no two 'Connection's containing 'GateReference's that in turn refer to identical pairs of 'GateInstance'/'ComponentInstance'."
+    }
+
+}
+
+context TestBehaviour {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context BehaviourDescription {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context Behaviour{
+//Constraints
+//There are no constraints specified.
+
+}
+
+context Block {
+//Constraints
+//Guard shall evaluate to Boolean
+    constraint GuardType {
+        check:  self.^guard.oclIsUndefined() or self.^guard.getDataType().name = 'Boolean'
+        message: "The type of 'guard' shall be 'Boolean'."
+    }
+
+}
+
+context CombinedBehaviour {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context SingleCombinedBehaviour {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context CompoundBehaviour {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context BoundedLoopBehaviour {
+//Constraints
+//No guard constraint
+    constraint BoundedGuard {
+        check: self.block.^guard.oclIsUndefined()
+        message: "The 'Block' of a 'BoundedLoopBehaviour' shall not have a 'guard'."
+    }
+//TODO:
+//Iteration number shall be countable and positive
+//  The expression assigned to the 'numIteration' property shall evaluate to a countable 'SimpleDataInstance' of an arbitrary user-defined data type, e.g. a positive Integer value.
+
+}
+
+context UnboundedLoopBehaviour {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context MultipleCombinedBehaviour {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context AlternativeBehaviour {
+//Constraints
+//Number of 'Block's
+    constraint AlternativeBlockCount {
+        check:  self.block->size() > 1
+        message: "An 'AlternativeBehaviour' shall contain at least two 'Block's. "
+    }
+//TODO:
+//First behaviour of 'Block's
+//  Each block of an 'AlternativeBehaviour' shall start with a tester-input event. 
+
+}
+
+context ConditionalBehaviour {
+//Constraints
+//Guard for 'ConditionalBehaviour' with single block
+    constraint ConditionalFirstGuard {
+        check:  not self.block->first().^guard.oclIsUndefined()
+        message: "If there is only one 'Block' specified, it shall have a 'guard'."
+    }
+//Possible else block for 'ConditionalBehaviour' with multiple blocks
+    constraint ConditionalLastGuard {
+        check:  self.block->forAll(b | b = self.block.last() or not b.^guard.oclIsUndefined())
+        message: "All 'Block's specified, except the last one, shall have a 'guard'."
+    }
+//TODO:
+//First 'AtomicBehaviour' allowed
+//  The first 'AtomicBehaviour' of any 'Block' of a 'ConditionalBehaviour' shall not be a tester-input event.
+
+}
+
+context ParallelBehaviour {
+//Constraints
+//Number of blocks in 'ParallelBehaviour'
+    constraint ParallelBlockCount {
+        check:  self.block->size() > 1
+        message: "There shall be at least two 'Block's specified."
+    }
+
+//Figure 9.3: Exceptional and periodic behaviour
+
+}
+
+context ExceptionalBehaviour {
+//Constraints
+//No guard
+    constraint ExceptionalGuard {
+        check:  self.block.^guard.oclIsUndefined()
+        message: "The 'Block' shall have no guard."
+    }
+//TODO:
+//First 'AtomicBehaviour' in block allowed
+//  Each block of an 'ExceptionalBehaviour' shall start with a tester-input event.
+//Guarded component shall be a 'Tester' component
+    constraint ExceptionalGuardedComponent {
+        check:  self.guardedComponent.role = Tester
+        message: "The 'guardedComponent' shall refer to a 'ComponentInstance' with the role of 'Tester'."
+    }
+
+}
+
+context DefaultBehaviour {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context InterruptBehaviour {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context PeriodicBehaviour {
+//Constraints
+//TODO:
+//First 'AtomicBehaviour' allowed
+//  The first 'AtomicBehaviour' of any 'Block' of a 'PeriodicBehaviour' shall not be a tester-input event.
+//'Time' data type for period expression
+    constraint PeriodType {
+        check:  self.period.getDataType().name = 'Time'
+        message: "The 'DataUse' expression assigned to the 'period' shall evaluate to a data instance of the 'Time' data type."
+    }
+
+}
+
+context Behaviour {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context Break {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context Stop {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context VerdictAssignment {
+//Constraints
+//Verdict of type 'Verdict'
+    constraint VerdictType {
+        check:  self.verdict.getDataType().name = 'Verdict'
+        message: "The 'verdict' shall evaluate to a, possibly predefined, instance of a 'SimpleDataInstance' of data type 'Verdict'."
+    }
+
+}
+
+context Assertion {
+//Constraints
+//Boolean condition
+    constraint AssertionOtherwise {
+        check:  self.condition.getDataType().name = 'Boolean'
+        message: "The 'condition' shall evaluate to predefined 'DataType' 'Boolean'."
+    }
+//Otherwise of type 'Verdict'
+    constraint AssertionOtherwise {
+        check:  self.otherwise.getDataType().name = 'Verdict'
+        message: "The 'otherwise' shall evaluate to a, possibly predefined, instance of a 'SimpleDataInstance' of data type 'Verdict'."
+    }
+
+//Figure 9.5: Interaction behaviour
+
+}
+
+context Interaction {
+//Constraints
+//Gate references of an interaction shall be different
+    constraint DistinctInteractionGates {
+        check:  not self.target->exists(t | t.targetGate = self.sourceGate)
+        message: "All 'GateReference's that act as source or target(s) of an 'Interaction' shall be different from each other."
+    }
+//Gate references of an interaction shall be connected
+    constraint ConnectedInteractionGates {
+        check:  self.target.forAll(t | Connection.allInstances()->exists(c |   (c.endPoint.at(0) = sourceGate and c.endPoint.at(1) = t.targetGate)   or   (c.endPoint.at(1) = sourceGate and c.endPoint.at(0) = t.targetGate)))
+        message: "The 'GateReference's that act as source or target(s) of an 'Interaction' shall be interconnected by a 'Connection'."
+    }
+//Type of interaction argument
+    constraint InteractionArgumentAndGateType {
+        check:  self.sourceGate.dataType = self.argument.getDataType() and  self.target.forAll(t | t.targetGate.dataType = self.argument.getDataType()) 
+        message: "The 'DataUse' specification referred to in the 'argument' shall match one of the 'DataType's referenced in the 'GateType' definition of the 'GateInstance's referred to by the source and target 'GateReference's of the 'Interaction'."
+    }
+//TODO:
+//Use of variables in the 'argument' specification
+//  The use of 'Variable's in the 'DataUse' specification shall be restricted to 'Variable's of 'ComponentInstance's that participate in this 'Interaction' via the provided 'GateReference's.
+//Matching data type for 'argument' and 'variable'
+    constraint InteractionArgumentAndVariableType {
+        check:  self.target.forAll(t |   t.variable.oclIsUndefined or t.variable.type = self.argument.getDataType()) 
+        message: "The 'DataUse' specification of the 'argument' and the referenced 'Variable' of any 'Target' shall refer to the same 'DataType'."
+    }
+
+}
+
+context Target {
+//Constraints
+//Variable and target gate of the same component instance
+    constraint TargetComponent {
+        check:  self.targetGate.component.type.variable->contains(self.variable)
+        message: "The referenced 'Variable' shall exist in the same 'ComponentType' as the 'GateInstance' that is referred to by the 'GateReference' of the 'targetGate'."
+    }
+//Variable of a tester component only
+    constraint TargetVariableComponentRole {
+        check:  self.variable.oclIsUndefined() or   self.targetGate.component.role = Tester
+        message: "If a 'Variable' is specified, the 'ComponentInstance' referenced by 'targetGate' shall be in the role 'Tester'."
+    }
+
+
+}
+
+context TestDescriptionReference {
+//Constraints
+//Number of actual parameters
+    constraint ParameterCount {
+        check:  self.actualParameter.size() = self.testDescription.formalParameter.size()
+        message: "The number of actual parameters in the 'TestDescriptionReference' shall be equal to the number of formal parameters of the referenced 'TestDescription'."
+    }
+//TODO:
+//No use of variables in actual parameters
+//  The 'DataUse' expressions used to describe actual parameters shall not contain variables directly or indirectly.
+//Matching parameters
+    constraint TestDescriptionParameters {
+        check:  self.actualParameter.forAll(ap | ap.getDataType() =   self.testDescription.formalParameter.at(self.actualParameter.indexOf(ap)).dataType)
+        message: "The actual parameter AP[i] of index i in the ordered list of 'actualParameter's shall match 'DataType' of the 'FormalParameter' FP[i] of index i in the ordered list of formal parameters of the referenced 'TestDescription'."
+    }
+//TODO:
+//Restriction to 1:1 component instance bindings
+//  If component instance bindings are provided, the component instances referred to in the bindings shall occur at most once for the given test description reference.
+/*Compatible test configurations 
+  The test configuration TConf2 of the referenced (invoked) test description shall be compatible with the test configuration TConf1 of the referencing (invoking) test description under the provision of a list of bindings between component instances in TConf1 and TConf2. Compatibility is then defined in the following terms:
+  All component instances in TConf2 can be mapped to component instances of TConf1.A component instance B of test configuration TConf2 can be mapped to a component instance A of test configuration TConf1if and only if:
+  a)	there is a binding pair (A, B) provided;
+  b)	A and B refer to the same component type; and
+  c)	A and B have the same component instance role {SUT, Tester} assigned.
+  All connections between component instances in TConf2 exist also between the mapped component instances in TConf1 and the type of a connection in TConf2 equals the type of the related connection in TConf1.Two connections of the two test configurations are equal if and only if the same gate instances are used in the definition of the gate references of the connections.
+  NOTE 1:	The compatibility between test configurations is defined asymmetrically. That is, if TConf2 is compatible with TConf1, it does not imply that TConf1is compatible with TConf2. If TConf2 is compatible with TConf1, it is said that TConf2 is a sub-configuration of TConf1 under a given binding.
+  NOTE 2:	If two test configurations are equal, then they are also compatible.
+*/
+}
+
+context ComponentInstanceBinding {
+//Constraints
+//Matching component types
+    constraint BindingComponentTypes {
+        check:  self.formalComponent.type = self.actualComponent.type
+        message: "Both, the formal and the actual component instances, shall refer to the same 'ComponentType'."
+    }
+//Matching component instance roles
+    constraint BindingComponentRoles {
+        check:  self.formalComponent.role = self.actualComponent.role
+        message: "Both, the formal and the actual component instances, shall have the same 'ComponentInstanceRole' assigned to."
+    }
+}
+
+context ActionBehaviour {
+//Constraints
+    constraint ActionBehaviourComponentRole {
+        check:  self.componentInstance.oclIsUndefined() or   self.componentInstance.role = Tester
+        message: "'ActionBehaviour' on 'Tester' components onlyThe 'ComponentInstance' that an 'ActionBehaviour' refers to shall be of role 'Tester'."
+    }
+
+}
+
+context ActionReference {
+//Constraints
+//Matching parameters
+    constraint ActionParameters {
+        check:  self.actualParameter.forAll(ap | ap.getDataType() =   action.formalParameter.at(self.actualParameter.indexOf(ap)).dataType) 
+        message: "The actual parameter AP[i] of index i in the ordered set of 'actualParameter's shall match the 'DataType' of the 'FormalParameter' FP[i] of index i in the ordered set of formal parameters of the referenced 'Action'."
+    }
+
+}
+
+context InlineAction {
+//Constraints
+//There are no constraints specified.
+
+}
+
+context Assignment {
+//Constraints
+//Known component instance
+    constraint AssignmentComponent {
+        check:  not self.componentInstance.oclIsUndefined()
+        message: "The property 'componentInstance' shall be set to identify the 'Variable' in this 'Assignment'."
+    }
+//Matching data type
+    constraint AssignmentDataType {
+        check:  self.expression.getDataType() = self.variable.dataType
+        message: "The provided 'DataUse' expression shall match the 'DataType' of the referenced 'Variable'."
+    }
+}
