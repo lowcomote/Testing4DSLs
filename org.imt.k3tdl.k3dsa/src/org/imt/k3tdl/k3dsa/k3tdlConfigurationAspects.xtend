@@ -1,6 +1,7 @@
 package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
+
 import fr.inria.diverse.k3.al.annotationprocessor.Step
 
 import org.etsi.mts.tdl.ComponentType
@@ -13,9 +14,7 @@ import org.etsi.mts.tdl.DataUse
 import java.util.List
 import java.util.ArrayList
 import org.imt.ale.customLaunchConfig.CustomLauncher
-import static extension org.imt.k3tdl.k3dsa.GateInstanceAspect.*
-import org.eclipse.core.runtime.CoreException
-import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException
+import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
 import org.etsi.mts.tdl.DataInstanceUse
 import org.etsi.mts.tdl.LiteralValueUse
 
@@ -30,23 +29,22 @@ class GateTypeAspect{
 class GateInstanceAspect{
 	public List<DataUse> testerIncomingData = new ArrayList<DataUse>
 	public List<DataUse> sutIncomingData = new ArrayList<DataUse>
-	CustomLauncher launcher;
+	private CustomLauncher gateLauncher;
 	@Step
 	//setting up the related launcher based on the gate type 
-	def void configureLauncher(String MUTPath){
-		println("Start configuring the MUT launcher")
-		_self.launcher = new CustomLauncher();
+	def void configureLauncher(String MUTPath, CustomLauncher launcher){
+		_self.gateLauncher = launcher;
 		if (_self.name.equals('genericMUTGate')){
 			println("Start configuring ALE Engine launcher")
-			_self.launcher.setUp(CustomLauncher.GENERIC, MUTPath);
+			_self.gateLauncher.setUp(CustomLauncher.GENERIC, MUTPath);
 		}else if (_self.name.equals('dslSpecificMUTGate')){
 			println("Start configuring the Event manager launcher")
-			_self.launcher.setUp(CustomLauncher.DSL_SPECIFIC, MUTPath);
+			_self.gateLauncher.setUp(CustomLauncher.DSL_SPECIFIC, MUTPath);
 		}else if (_self.name.equals('oclMUTGate')){
 			println("Start configuring the OCL Interpreter launcher")
-			_self.launcher.setUp(CustomLauncher.OCL, MUTPath);
+			_self.gateLauncher.setUp(CustomLauncher.OCL, MUTPath);
 		}
-		println("Configuration of the MUT launcher finished successfully")
+		println("Configuration finished successfully")
 	}
 	
 	@Step
@@ -62,7 +60,7 @@ class GateInstanceAspect{
 			println("Start sending the argument to the corresponding ENGINE")
 			if ((argument as DataInstanceUse).dataInstance.name == 'runMUT'){
 				println("Sending the argument to the ALE engine")
-				_self.launcher.executeGenericCommand();
+				_self.gateLauncher.executeGenericCommand();
 			}else if ((argument as DataInstanceUse).dataInstance.name == 'setModelState'){
 				//TODO: Set the model state
 			}else if ((argument as DataInstanceUse).dataInstance.name == 'getModelState'){
@@ -74,14 +72,13 @@ class GateInstanceAspect{
 				//extracting the query from the argument and sending for execution
 				var query = argument.argument.get(0).dataUse as LiteralValueUse;
 				println("the ocl query: " + query);
-				var queryResult = _self.launcher.executeOCLCommand(query.value);
+				var queryResult = _self.gateLauncher.executeOCLCommand(query.value);
 				System.out.println("Result set size : " + (queryResult as List).size);
 			}//otherwise the message is an event conforming to the behavioral interface of the DSL
 			else{
 				println("Sending the argument to the Event Manager")
 				//TODO: Sending the related argument
-				//TD
-				_self.launcher.executeDSLSpecificCommand("");
+				_self.gateLauncher.executeDSLSpecificCommand("");
 			}
 			println("Sending the argument done!")
 		}

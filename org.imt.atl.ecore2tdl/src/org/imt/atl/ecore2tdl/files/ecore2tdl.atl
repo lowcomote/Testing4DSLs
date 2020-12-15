@@ -5,6 +5,9 @@
 module ecore2tdl;
 create OUT : TDL from IN : Ecore;
 
+helper def: tokenNames: Sequence(String) = Sequence {
+	'Package', '{', '}', 'with', 'perform', 'action', '(', ',', ')', 'on', 'test', 'objectives', ':', ';', 'name', 'time', 'label', 'constraints', 'Action', 'alternatively', 'or', 'Annotation', '*', '?', '=', 'assert', 'otherwise', 'set', 'verdict', 'to', '->', '[', ']', 'times', 'repeat', 'break', 'Note', 'create', 'of', 'type', 'bind', 'Component', 'Type', 'having', 'if', 'else', 'connect', 'as', 'Map', 'in', '.', 'new', 'containing', 'Use', 'Signature', 'Collection', 'default', '+', '-', '/', 'mod', '>', '<', '>=', '<=', '==', '!=', 'and', 'xor', 'not', 'size', 'Import', 'all', 'from', 'Function', 'returns', 'instance', 'returned', 'Predefined', 'gate', 'Gate', 'accepts', 'sends', 'triggers', 'calls', 'responds', 'response', 'interrupt', 'optional', 'mapped', 'omit', 'argument', 'optionally', 'run', 'parallel', 'parameter', 'every', 'component', 'is', 'quiet', 'for', 'terminate', 'where', 'it', 'assigned', 'Test', 'Configuration', 'Description', 'Implementation', 'uses', 'configuration', 'execute', 'bindings', 'Objective', 'description', 'Time', 'out', 'timer', 'start', 'stop', 'variable', 'waits', 'extends', 'SUT', 'Tester', 'Message', 'Procedure', 'In', 'Out', 'Exception', 'last', 'previous', 'first'
+}; 
 helper def: enums: Set (Ecore!EEnum)= Ecore!EEnum->allInstances()->asSet();
 helper def: enumLiterals: Set (Ecore!EEnumLiteral) = thisModule.enums->collect(e | e.eLiterals);
 helper context Ecore!EPackage def: basicDataTypes: Set(Ecore!EDataType) = Ecore!EDataType->allInstances()->
@@ -13,28 +16,43 @@ helper context Ecore!EPackage def: basicDataTypes: Set(Ecore!EDataType) = Ecore!
 rule class2simpleType{
 	from class: Ecore!EClass (class.eAllStructuralFeatures.isEmpty())
 	to type: TDL!SimpleDataType(
-		name <- class.name)
+		name <- if (thisModule.tokenNames.includes(class.name))
+				then '_' + class.name
+				else class.name
+				endif)
 }
 rule class2structuredType{
 	from class: Ecore!EClass (class.eAllStructuralFeatures.notEmpty())
 	to type: TDL!StructuredDataType(
-		name <- class.name,
+		name <- if (thisModule.tokenNames.includes(class.name))
+				then '_' + class.name
+				else class.name
+				endif,
 		member <- class.eAllStructuralFeatures -> collect(feature | thisModule.feature2member(feature)))
 }
 rule enum2simpleType{
 	from enum: Ecore!EEnum
 	to type : TDL!SimpleDataType(
-		name <- enum.name) 
+		name <- if (thisModule.tokenNames.includes(enum.name))
+				then '_' + enum.name
+				else enum.name
+				endif) 
 }
 unique lazy rule dataType2simpleType{
 	from dataType: Ecore!EDataType
 	to type : TDL!SimpleDataType(
-		name <- dataType.name)
+		name <- if (thisModule.tokenNames.includes(dataType.name))
+				then '_' + dataType.name
+				else dataType.name
+				endif)
 }
 lazy rule feature2member{
 	from feature: Ecore!EStructuralFeature
 	to member: TDL!Member(
-		name <- feature.name,
+		name <- if (thisModule.tokenNames.includes(feature.name))
+				then '_' + feature.name
+				else feature.name
+				endif,
 		dataType <- if (feature.oclIsKindOf(Ecore!EAttribute) and thisModule.enums->excludes(feature.eType))
 					then  thisModule.dataType2simpleType(feature.eType)
 					else feature.eType
@@ -43,10 +61,13 @@ lazy rule feature2member{
 rule enumLiteral2simpleDataInstance{
 	from enumLiteral: Ecore!EEnumLiteral
 	to dataInstance: TDL!SimpleDataInstance(
-		name <- enumLiteral.name,
+		name <- if (thisModule.tokenNames.includes(enumLiteral.name))
+				then '_' + enumLiteral.name
+				else enumLiteral.name
+				endif,
 		dataType <- enumLiteral.eEnum)
 }
-rule ecorePackage2tdlPackage{
+rule tdlPackage{
 	from package: Ecore!EPackage
 	to dslTypesPackage: TDL!Package(
 		name <- package.name.concat('SpecificTypes'),

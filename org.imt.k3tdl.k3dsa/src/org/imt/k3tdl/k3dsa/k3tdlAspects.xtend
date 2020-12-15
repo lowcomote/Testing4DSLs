@@ -21,6 +21,7 @@ import java.util.List
 import java.util.ArrayList
 import org.etsi.mts.tdl.GateReference
 import org.eclipse.emf.common.util.EList
+import org.imt.ale.customLaunchConfig.CustomLauncher
 
 @Aspect(className = Package)
 class PackageAspect {
@@ -67,6 +68,7 @@ class TestDescriptionAspect{
 class TestConfigurationAspect{
 	public String MUTPath
 	public GateReference gateRef;
+	private CustomLauncher launcher = new CustomLauncher();
 	@Step
 	def void activateConfiguration(){
 		println("Start test configuration activation")
@@ -79,7 +81,7 @@ class TestConfigurationAspect{
 		for (Connection c:_self.connection){
 			if (c.endPoint.filter[e | e.gate.name.contains('MUT')].size > 0){
 				_self.gateRef = c.endPoint.filter[e | e.gate.name.contains('MUT')].get(0)
-				_self.gateRef.gate.configureLauncher(_self.MUTPath);
+				_self.gateRef.gate.configureLauncher(_self.MUTPath, _self.launcher);
 			}
 		}
 		println("Test configuration activated")

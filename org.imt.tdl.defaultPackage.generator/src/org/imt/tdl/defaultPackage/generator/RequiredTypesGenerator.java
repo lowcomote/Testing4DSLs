@@ -25,15 +25,13 @@ public class RequiredTypesGenerator {
 	
 	private Package requiredTypesPackage;
 	private Map<String, DataType> requiredTypes = new HashMap<String, DataType>();
-	private String requiredTypesPackagePath = "platform:/resource/org.gemoc.arduino.ale.model/model/requiredTypes.tdlan2";
-
+	
 	private DSLSpecificPackageGenerator dslSpecificPackageGenerator;
 	private CommonPackageGenerator commonPackageGenerator;
 	
-	public RequiredTypesGenerator (String dslFilePath) throws IOException{
-		System.out.println("Start required types package generation");
-		generateRequiredTypes(dslFilePath);
-		loadRequiredTyeps();
+	public RequiredTypesGenerator (String dslFilePath, String tdlProjectPath) throws IOException{
+		generateRequiredTypes(dslFilePath, tdlProjectPath);
+		loadRequiredTyeps(tdlProjectPath);
 		
 		this.commonPackageGenerator = new CommonPackageGenerator();
 		this.commonPackageGenerator.setRequiredTypesPackage(this.requiredTypesPackage);
@@ -48,16 +46,17 @@ public class RequiredTypesGenerator {
 		System.out.println("dsl-specific package generated successfully");
 	}
 	//TODO: generating types for the required elements not all of them
-	private void generateRequiredTypes(String dslFilePath) throws IOException {
+	private void generateRequiredTypes(String dslFilePath, String tdlProjectPath) throws IOException {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
 		String metamodelPath = dsl.getEntry("ecore").getValue();
 		String IN_model_path = metamodelPath;
-		String OUT_model_path = this.requiredTypesPackagePath;
+		String OUT_model_path = tdlProjectPath;
 		try {
 			Ecore2tdl runner = new Ecore2tdl();
 			runner.loadModels(IN_model_path);
 			runner.doEcore2tdl(new NullProgressMonitor());
+			//TODO: Change saveModels in order to return a resource of the generated output and not to save it
 			runner.saveModels(OUT_model_path);
 		} catch (ATLCoreException e) {
 			e.printStackTrace();
@@ -67,8 +66,8 @@ public class RequiredTypesGenerator {
 			e.printStackTrace();
 		}
 	}
-	private void loadRequiredTyeps() throws IOException {
-		Resource dslTypesRes = (new ResourceSetImpl()).getResource(URI.createURI(this.requiredTypesPackagePath), true);
+	private void loadRequiredTyeps(String tdlProjectPath) throws IOException {
+		Resource dslTypesRes = (new ResourceSetImpl()).getResource(URI.createURI(tdlProjectPath), true);
 		this.requiredTypesPackage = (Package) dslTypesRes.getContents().get(0);
 		for (int i=0; i<this.requiredTypesPackage.getPackagedElement().size();i++) {
 			PackageableElement p = this.requiredTypesPackage.getPackagedElement().get(i);

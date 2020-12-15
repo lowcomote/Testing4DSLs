@@ -46,16 +46,19 @@ import org.etsi.mts.tdl.tdlFactory;
 import com.google.inject.Injector;
 
 public class TDLCodeGenerator {
+	public static final String[] tokenNames = new String[] {
+	        "Package", "{", "}", "with", "perform", "action", "(", ",", ")", "on", "test", "objectives", ":", ";", "name", "time", "label", "constraints", "Action", "alternatively", "or", "Annotation", "*", "?", "=", "assert", "otherwise", "set", "verdict", "to", "->", "[", "]", "times", "repeat", "break", "Note", "create", "of", "type", "bind", "Component", "Type", "having", "if", "else", "connect", "as", "Map", "in", ".", "new", "containing", "Use", "Signature", "Collection", "default", "+", "-", "/", "mod", ">", "<", ">=", "<=", "==", "!=", "and", "xor", "not", "size", "Import", "all", "from", "Function", "returns", "instance", "returned", "Predefined", "gate", "Gate", "accepts", "sends", "triggers", "calls", "responds", "response", "interrupt", "optional", "mapped", "omit", "argument", "optionally", "run", "parallel", "parameter", "every", "component", "is", "quiet", "for", "terminate", "where", "it", "assigned", "Test", "Configuration", "Description", "Implementation", "uses", "configuration", "execute", "bindings", "Objective", "description", "Time", "out", "timer", "start", "stop", "variable", "waits", "extends", "SUT", "Tester", "Message", "Procedure", "In", "Out", "Exception", "last", "previous", "first"
+	    };
 	private CommonPackageGenerator commonPackageGenerator;
 	private DSLSpecificPackageGenerator dslSpecificPackageGenerator;
 	private RequiredTypesGenerator requiredTypesGenerator; 
 	private TestConfigurationGenerator testConfigurationPackageGenerator;
 	private TestDesignPackageGenerator testDesignPackageGenerator;
 	
-	public TDLCodeGenerator(String dslFilePath) throws IOException {
+	public TDLCodeGenerator(String dslFilePath, String tdlProjectPath) throws IOException {
 		System.out.println("Start TDL Code generation");
 		
-		this.testDesignPackageGenerator = new TestDesignPackageGenerator(dslFilePath);
+		this.testDesignPackageGenerator = new TestDesignPackageGenerator(dslFilePath,tdlProjectPath);
 		System.out.println("test design package generated successfully");
 		
 		this.testConfigurationPackageGenerator = this.testDesignPackageGenerator.getTestConfigurationGenerator();
@@ -64,19 +67,19 @@ public class TDLCodeGenerator {
 		this.commonPackageGenerator = this.requiredTypesGenerator.getCommonPackageGenerator();
 		
 		System.out.println("start saving packages");
-		savePackages();
+		savePackages(tdlProjectPath);
 		System.out.println("all packages are saved successfully");
 	}
 
-	public void savePackages() throws IOException {
+	public void savePackages(String tdlProjectPath) throws IOException {
 		Injector injector = new TDLan2StandaloneSetup().createInjectorAndDoEMFRegistration();
 		ResourceSet rs = injector.getInstance(ResourceSet.class);
 		
-		Resource commonPackageRes = rs.createResource(URI.createURI(this.commonPackageGenerator.getCommonPackage().getName()+ ".tdlan2"));
-		Resource dslSpecificPackageRes = rs.createResource(URI.createURI(this.dslSpecificPackageGenerator.getDSLSpecificPackage().getName()+ ".tdlan2"));
-		Resource requiredTypesRes = rs.createResource(URI.createURI(this.requiredTypesGenerator.getRequiredTypesPackage().getName()+ ".tdlan2"));
-		Resource configurationRes = rs.createResource(URI.createURI(this.testConfigurationPackageGenerator.getTestConfigurationPackage().getName()+ ".tdlan2"));
-		Resource testDesignPackageRes = rs.createResource(URI.createURI(this.testDesignPackageGenerator.getTestDesignPackage().getName()+ ".tdlan2"));
+		Resource commonPackageRes = rs.createResource(URI.createURI(tdlProjectPath + "/generated/" + this.commonPackageGenerator.getCommonPackage().getName()+ ".tdlan2"));
+		Resource dslSpecificPackageRes = rs.createResource(URI.createURI(tdlProjectPath + "/generated/" + this.dslSpecificPackageGenerator.getDSLSpecificPackage().getName()+ ".tdlan2"));
+		Resource requiredTypesRes = rs.createResource(URI.createURI(tdlProjectPath + "/generated/" + this.requiredTypesGenerator.getRequiredTypesPackage().getName()+ ".tdlan2"));
+		Resource configurationRes = rs.createResource(URI.createURI(tdlProjectPath + "/generated/" + this.testConfigurationPackageGenerator.getTestConfigurationPackage().getName()+ ".tdlan2"));
+		Resource testDesignPackageRes = rs.createResource(URI.createURI(tdlProjectPath + "/generated/" + this.testDesignPackageGenerator.getTestDesignPackage().getName()+ ".tdlan2"));
 		
 		commonPackageRes.getContents().add(this.commonPackageGenerator.getCommonPackage());
 		dslSpecificPackageRes.getContents().add(this.dslSpecificPackageGenerator.getDSLSpecificPackage());

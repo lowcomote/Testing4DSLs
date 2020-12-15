@@ -3,40 +3,43 @@ package org.imt.tdl.defaultPackage.generator;
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecoretools.ale.*;
+import org.eclipse.emf.ecoretools.ale.Attribute;
+import org.eclipse.emf.ecoretools.ale.BoolType;
+import org.eclipse.emf.ecoretools.ale.IntType;
+import org.eclipse.emf.ecoretools.ale.RealType;
+import org.eclipse.emf.ecoretools.ale.SeqType;
+import org.eclipse.emf.ecoretools.ale.SetType;
+import org.eclipse.emf.ecoretools.ale.Unit;
+import org.eclipse.emf.ecoretools.ale.rType;
+import org.eclipse.emf.ecoretools.ale.typeLiteral;
+import org.eclipse.emf.ecoretools.ale.StringType;
 import org.eclipse.gemoc.dsl.Dsl;
-import org.eclipse.emf.ecoretools.ale.implementation.ModelUnit;
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.BehavioralInterface;
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.Event;
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.EventType;
-import org.eclipse.m2m.atl.common.ATLExecutionException;
-import org.eclipse.m2m.atl.core.ATLCoreException;
 import org.etsi.mts.tdl.Annotation;
 import org.etsi.mts.tdl.AnnotationType;
 import org.etsi.mts.tdl.DataType;
 import org.etsi.mts.tdl.ElementImport;
 import org.etsi.mts.tdl.Member;
 import org.etsi.mts.tdl.Package;
+import org.etsi.mts.tdl.SimpleDataType;
 import org.etsi.mts.tdl.StructuredDataType;
 import org.etsi.mts.tdl.tdlFactory;
-import org.imt.atl.ecore2tdl.files.Ecore2tdl;
-
-import com.google.inject.Injector;
 
 public class DSLSpecificPackageGenerator {
 	private String dslName;
 	private EPackage metamodelRootElement;
-	private ModelUnit aleSemanticRootElement;
+	private Unit aleSemanticRootElement;
 	private BehavioralInterface interfaceRootElement;
 	
 	private tdlFactory factory;
@@ -49,12 +52,10 @@ public class DSLSpecificPackageGenerator {
 	private List<DataType> TypesForGeneralEvents = new ArrayList<DataType>();
 	
 	public DSLSpecificPackageGenerator(String dslFilePath) throws IOException {
-		System.out.println("Start dsl-specific package generation");
 		this.factory = tdlFactory.eINSTANCE; 
-		this.dslName = getDslName(dslFilePath);
+		this.dslName = validName(getDslName(dslFilePath));
 		this.metamodelRootElement = getMetamodelRootElement(dslFilePath);
-		//this.aleSemanticRootElement = getAleSemanticsRootElement(dslFilePath);
-		//System.out.println(this.aleSemanticRootElement.getName());
+		this.aleSemanticRootElement = getAleSemanticsRootElement(dslFilePath);
 		this.interfaceRootElement = getBehavioralInterfaceRootElement(dslFilePath);
 	}
 	
@@ -84,7 +85,7 @@ public class DSLSpecificPackageGenerator {
 		for (int i=0; i<this.interfaceRootElement.getEvents().size();i++) {
 			Event event = this.interfaceRootElement.getEvents().get(i);
 			StructuredDataType typeForEvent = factory.createStructuredDataType();
-			typeForEvent.setName(event.getName());
+			typeForEvent.setName(validName(event.getName()));
 			Annotation annotation = factory.createAnnotation();
 			if (event.getType() == EventType.ACCEPTED) {
 				annotation.setKey(acceptedEvent);
@@ -94,7 +95,7 @@ public class DSLSpecificPackageGenerator {
 			annotation.setAnnotatedElement(typeForEvent);
 			typeForEvent.getAnnotation().add(annotation);
 			for (int j=0; j<event.getParams().size();j++) {
-				String paramName = event.getParams().get(j).getName();
+				String paramName = validName(event.getParams().get(j).getName());
 				String paramType = event.getParams().get(j).getType().toLowerCase();
 				if (this.requiredTypes.get(paramType) != null) {
 					Member member = factory.createMember();
@@ -110,7 +111,32 @@ public class DSLSpecificPackageGenerator {
 	private void generateTypeForModelState() {
 		StructuredDataType modelState = factory.createStructuredDataType();
 		modelState.setName("ModelState");
-		//TODO: Define the members based on the model state
+		//generate members for modelState based on the attributes of the extended classes in ale file
+		for (int i=0; i< this.aleSemanticRootElement.getXtendedClasses().size(); i++) {
+			List<Attribute> attributes = this.aleSemanticRootElement.getXtendedClasses().get(i).getAttributes();
+			for (int j=0; j< attributes.size(); j++) {
+				String memberName = validName(attributes.get(j).getName());
+				rType memberAleType = attributes.get(j).getType();
+				DataType memberTDLType = null;
+				if (memberAleType instanceof typeLiteral) {
+					memberTDLType = aleTypeLiteral2tdlType((typeLiteral) memberAleType);
+				} else {
+					if (this.requiredTypes.get(validName(memberAleType.getName().toLowerCase())) != null) {
+						memberTDLType = this.requiredTypes.get(validName(memberAleType.getName().toLowerCase()));
+					}else {
+						SimpleDataType newType = factory.createSimpleDataType();
+						newType.setName(validName(memberAleType.getName()));
+						this.requiredTypes.put(newType.getName().toLowerCase(), newType);
+						this.dslSpecificEventsPackage.getPackagedElement().add(newType);
+						memberTDLType = newType;
+					}
+				}
+				Member member = factory.createMember();
+				member.setName(memberName);
+				member.setDataType(memberTDLType);
+				modelState.getMember().add(member);
+			}
+		}
 		this.dslSpecificEventsPackage.getPackagedElement().add(modelState);
 		this.modelState = modelState;
 	}
@@ -142,6 +168,27 @@ public class DSLSpecificPackageGenerator {
 	public void setRequiredTypesPackage (Package typesPackage) {
 		this.requiredTypesPackage = typesPackage;
 	}
+	private String validName (String name) {
+		if (Arrays.stream(TDLCodeGenerator.tokenNames).anyMatch(name::equals)) {
+			return "_"+name;
+		}
+		return name;
+	}
+	private DataType aleTypeLiteral2tdlType (typeLiteral typeLiteral) {
+		if (typeLiteral instanceof StringType) {
+			return this.requiredTypes.get("EString".toLowerCase());
+		} else if (typeLiteral instanceof IntType) {
+			return this.requiredTypes.get("EInt".toLowerCase());
+		} else if (typeLiteral instanceof RealType) {
+			return this.requiredTypes.get("EDouble".toLowerCase());
+		} else if (typeLiteral instanceof BoolType) {
+			return this.requiredTypes.get("EBoolean".toLowerCase());
+		} else if (typeLiteral instanceof SeqType || typeLiteral instanceof SetType) {
+			SeqType seqType = (SeqType) typeLiteral;
+			return aleTypeLiteral2tdlType(seqType.getType());
+		}
+		return null;
+	}
 	protected String getDslName(String dslFilePath) {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
@@ -157,12 +204,12 @@ public class DSLSpecificPackageGenerator {
 		return metamodelRootElement;
 	}
 	//TODO: ModelUnit is defined in ale metamodel but Unit is used in ale files??
-	protected static ModelUnit getAleSemanticsRootElement(String dslFilePath) {
+	protected static Unit getAleSemanticsRootElement(String dslFilePath) {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
 		String interpreterPath = dsl.getEntry("ale").getValue();
 		Resource interpreterRes = (new ResourceSetImpl()).getResource(URI.createURI(interpreterPath), true);
-		ModelUnit interpreterRootClass = (ModelUnit) interpreterRes.getContents().get(0);
+		Unit interpreterRootClass = (Unit) interpreterRes.getContents().get(0);
 		return interpreterRootClass;
 	}
 	private BehavioralInterface getBehavioralInterfaceRootElement(String dslFilePath) {

@@ -26,10 +26,9 @@ public class TestDesignPackageGenerator {
 	private RequiredTypesGenerator requiredTypesGenerator;
 	private TestConfigurationGenerator testConfigurationPackageGenerator;
 	
-	public TestDesignPackageGenerator(String dslFilePath) throws IOException {
-		System.out.println("Start test design package generation");
+	public TestDesignPackageGenerator(String dslFilePath, String tdlProjectPath) throws IOException {
 		this.factory = tdlFactory.eINSTANCE;
-		this.testConfigurationPackageGenerator = new TestConfigurationGenerator(dslFilePath);
+		this.testConfigurationPackageGenerator = new TestConfigurationGenerator(dslFilePath, tdlProjectPath);
 		System.out.println("test configuration package generated successfully");
 		
 		this.requiredTypesGenerator = this.testConfigurationPackageGenerator.getRequiredTypesGenerator();
@@ -70,19 +69,26 @@ public class TestDesignPackageGenerator {
 			this.testDesignPackage.getPackagedElement().add(oclQuery);
 		}
 		if (this.dslSpecificPackageGenerator.getTypeOfModelState()!=null) {
-			DataType modelStateType = this.dslSpecificPackageGenerator.getTypeOfModelState();
-			StructuredDataInstance givenState = factory.createStructuredDataInstance();
-			givenState.setName("givenState");
-			givenState.setDataType(modelStateType);
-			givenState.setUnassignedMember(UnassignedMemberTreatment.ANY_VALUE);
-			this.testDesignPackage.getPackagedElement().add(givenState);
-			
-			StructuredDataInstance expectedState = factory.createStructuredDataInstance();
-			expectedState.setName("expectedState");
-			expectedState.setDataType(modelStateType);
-			expectedState.setUnassignedMember(UnassignedMemberTreatment.ANY_VALUE);
-			this.testDesignPackage.getPackagedElement().add(expectedState);
+			generateInstanceForModelState("givenState");
+			generateInstanceForModelState("expectedState");
 		}
+	}
+	private void generateInstanceForModelState (String instanceName) {
+		StructuredDataType modelStateType = (StructuredDataType) this.dslSpecificPackageGenerator.getTypeOfModelState();
+		
+		StructuredDataInstance modelStateInstance = factory.createStructuredDataInstance();
+		modelStateInstance.setName(instanceName);
+		modelStateInstance.setDataType(modelStateType);
+		modelStateInstance.setUnassignedMember(UnassignedMemberTreatment.ANY_VALUE);
+		for (int i=0; i < modelStateType.getMember().size(); i++) {
+			MemberAssignment memberAssignment = factory.createMemberAssignment();
+			memberAssignment.setMember(modelStateType.getMember().get(i));
+			AnyValue anyValue = factory.createAnyValue();
+			anyValue.setName("?");
+			memberAssignment.setMemberSpec(anyValue);
+			modelStateInstance.getMemberAssignment().add(memberAssignment);
+		}
+		this.testDesignPackage.getPackagedElement().add(modelStateInstance);
 	}
 	public Package getTestDesignPackage() {
 		return this.testDesignPackage;
