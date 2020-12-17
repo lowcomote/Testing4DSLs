@@ -63,50 +63,18 @@ public class DSLSpecificPackageGenerator {
 		this.dslSpecificEventsPackage = factory.createPackage();
 		this.dslSpecificEventsPackage.setName(this.dslName + "_SpecificPackage");
 		generateImports();
-		generateTypeForModelState();
+		if (this.metamodelRootElement != null && this.aleSemanticRootElement != null) {
+			generateTypeForModelState();
+			generateTypeForSetState();
+		}
 		if (this.interfaceRootElement != null) {
 			generateTypeForDSLInterfaces();
 		}
-		generateTypeForSetState();
 	}
 	private void generateImports() {		
 		ElementImport requiredTypesPackageImport = factory.createElementImport();
 		requiredTypesPackageImport.setImportedPackage(this.requiredTypesPackage);
 		this.dslSpecificEventsPackage.getImport().add(requiredTypesPackageImport);
-	}
-	private void generateTypeForDSLInterfaces() {
-		AnnotationType acceptedEvent = factory.createAnnotationType();
-		acceptedEvent.setName("AcceptedEvent");
-		AnnotationType exposedEvent = factory.createAnnotationType();
-		exposedEvent.setName("ExposedEvent");
-		this.dslSpecificEventsPackage.getPackagedElement().add(acceptedEvent);
-		this.dslSpecificEventsPackage.getPackagedElement().add(exposedEvent);
-		
-		for (int i=0; i<this.interfaceRootElement.getEvents().size();i++) {
-			Event event = this.interfaceRootElement.getEvents().get(i);
-			StructuredDataType typeForEvent = factory.createStructuredDataType();
-			typeForEvent.setName(validName(event.getName()));
-			Annotation annotation = factory.createAnnotation();
-			if (event.getType() == EventType.ACCEPTED) {
-				annotation.setKey(acceptedEvent);
-			}else if (event.getType() ==  EventType.EXPOSED) {
-				annotation.setKey(exposedEvent);
-			}
-			annotation.setAnnotatedElement(typeForEvent);
-			typeForEvent.getAnnotation().add(annotation);
-			for (int j=0; j<event.getParams().size();j++) {
-				String paramName = validName(event.getParams().get(j).getName());
-				String paramType = event.getParams().get(j).getType().toLowerCase();
-				if (this.requiredTypes.get(paramType) != null) {
-					Member member = factory.createMember();
-					member.setName(paramName);
-					member.setDataType(this.requiredTypes.get(paramType));
-					typeForEvent.getMember().add(member);
-				}		
-			}
-			this.dslSpecificEventsPackage.getPackagedElement().add(typeForEvent);
-			this.dslInterfaceTypes.add(typeForEvent);
-		}
 	}
 	private void generateTypeForModelState() {
 		StructuredDataType modelState = factory.createStructuredDataType();
@@ -150,6 +118,40 @@ public class DSLSpecificPackageGenerator {
 		this.dslSpecificEventsPackage.getPackagedElement().add(setState);
 		this.TypesForGeneralEvents.add(setState);
 	}
+	private void generateTypeForDSLInterfaces() {
+		AnnotationType acceptedEvent = factory.createAnnotationType();
+		acceptedEvent.setName("AcceptedEvent");
+		AnnotationType exposedEvent = factory.createAnnotationType();
+		exposedEvent.setName("ExposedEvent");
+		this.dslSpecificEventsPackage.getPackagedElement().add(acceptedEvent);
+		this.dslSpecificEventsPackage.getPackagedElement().add(exposedEvent);
+		
+		for (int i=0; i<this.interfaceRootElement.getEvents().size();i++) {
+			Event event = this.interfaceRootElement.getEvents().get(i);
+			StructuredDataType typeForEvent = factory.createStructuredDataType();
+			typeForEvent.setName(validName(event.getName()));
+			Annotation annotation = factory.createAnnotation();
+			if (event.getType() == EventType.ACCEPTED) {
+				annotation.setKey(acceptedEvent);
+			}else if (event.getType() ==  EventType.EXPOSED) {
+				annotation.setKey(exposedEvent);
+			}
+			annotation.setAnnotatedElement(typeForEvent);
+			typeForEvent.getAnnotation().add(annotation);
+			for (int j=0; j<event.getParams().size();j++) {
+				String paramName = validName(event.getParams().get(j).getName());
+				String paramType = event.getParams().get(j).getType().toLowerCase();
+				if (this.requiredTypes.get(paramType) != null) {
+					Member member = factory.createMember();
+					member.setName(paramName);
+					member.setDataType(this.requiredTypes.get(paramType));
+					typeForEvent.getMember().add(member);
+				}		
+			}
+			this.dslSpecificEventsPackage.getPackagedElement().add(typeForEvent);
+			this.dslInterfaceTypes.add(typeForEvent);
+		}
+	}
 	public Package getDSLSpecificPackage() {
 		return this.dslSpecificEventsPackage;
 	}
@@ -168,12 +170,14 @@ public class DSLSpecificPackageGenerator {
 	public void setRequiredTypesPackage (Package typesPackage) {
 		this.requiredTypesPackage = typesPackage;
 	}
+	//if a name is a keyword in tdl language, put '_' before it
 	private String validName (String name) {
 		if (Arrays.stream(TDLCodeGenerator.tokenNames).anyMatch(name::equals)) {
 			return "_"+name;
 		}
 		return name;
 	}
+	//mapping from ALE basic data types to the ecore basic data types which are transformed to TDL types
 	private DataType aleTypeLiteral2tdlType (typeLiteral typeLiteral) {
 		if (typeLiteral instanceof StringType) {
 			return this.requiredTypes.get("EString".toLowerCase());
@@ -198,26 +202,35 @@ public class DSLSpecificPackageGenerator {
 	protected static EPackage getMetamodelRootElement(String dslFilePath) {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
-		String metamodelPath = dsl.getEntry("ecore").getValue();
-		Resource metamodelRes = (new ResourceSetImpl()).getResource(URI.createURI(metamodelPath), true);
-		EPackage metamodelRootElement = (EPackage) metamodelRes.getContents().get(0);
-		return metamodelRootElement;
+		if (dsl.getEntry("ecore") != null) {
+			String metamodelPath = dsl.getEntry("ecore").getValue().replaceFirst("resource", "plugin");
+			Resource metamodelRes = (new ResourceSetImpl()).getResource(URI.createURI(metamodelPath), true);
+			EPackage metamodelRootElement = (EPackage) metamodelRes.getContents().get(0);
+			return metamodelRootElement;
+		}
+		return null;
 	}
 	//TODO: ModelUnit is defined in ale metamodel but Unit is used in ale files??
 	protected static Unit getAleSemanticsRootElement(String dslFilePath) {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
-		String interpreterPath = dsl.getEntry("ale").getValue();
-		Resource interpreterRes = (new ResourceSetImpl()).getResource(URI.createURI(interpreterPath), true);
-		Unit interpreterRootClass = (Unit) interpreterRes.getContents().get(0);
-		return interpreterRootClass;
+		if (dsl.getEntry("ale") != null) {
+			String interpreterPath = dsl.getEntry("ale").getValue().replaceFirst("resource", "plugin");
+			Resource interpreterRes = (new ResourceSetImpl()).getResource(URI.createURI(interpreterPath), true);
+			Unit interpreterRootClass = (Unit) interpreterRes.getContents().get(0);
+			return interpreterRootClass;
+		}
+		return null;
 	}
-	private BehavioralInterface getBehavioralInterfaceRootElement(String dslFilePath) {
+	protected static BehavioralInterface getBehavioralInterfaceRootElement(String dslFilePath) {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
-		String interfacePath = dsl.getEntry("behavioralInterface").getValue();
-		Resource interfaceRes = (new ResourceSetImpl()).getResource(URI.createURI(interfacePath), true);
-		BehavioralInterface interfaceRootElement = (BehavioralInterface) interfaceRes.getContents().get(0);
-		return interfaceRootElement;
+		if (dsl.getEntry("behavioralInterface") != null) {
+			String interfacePath = dsl.getEntry("behavioralInterface").getValue().replaceFirst("resource", "plugin");
+			Resource interfaceRes = (new ResourceSetImpl()).getResource(URI.createURI(interfacePath), true);
+			BehavioralInterface interfaceRootElement = (BehavioralInterface) interfaceRes.getContents().get(0);
+			return interfaceRootElement;
+		}
+		return null;
 	}
 }

@@ -26,9 +26,9 @@ public class TestDesignPackageGenerator {
 	private RequiredTypesGenerator requiredTypesGenerator;
 	private TestConfigurationGenerator testConfigurationPackageGenerator;
 	
-	public TestDesignPackageGenerator(String dslFilePath, String tdlProjectPath) throws IOException {
+	public TestDesignPackageGenerator(String dslFilePath) throws IOException {
 		this.factory = tdlFactory.eINSTANCE;
-		this.testConfigurationPackageGenerator = new TestConfigurationGenerator(dslFilePath, tdlProjectPath);
+		this.testConfigurationPackageGenerator = new TestConfigurationGenerator(dslFilePath);
 		System.out.println("test configuration package generated successfully");
 		
 		this.requiredTypesGenerator = this.testConfigurationPackageGenerator.getRequiredTypesGenerator();

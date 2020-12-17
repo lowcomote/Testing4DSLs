@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.m2m.atl.common.ATLExecutionException;
 import org.eclipse.m2m.atl.core.ATLCoreException;
+import org.eclipse.m2m.atl.core.emf.EMFModel;
 import org.eclipse.xtext.GrammarUtil;
 import org.etsi.mts.tdl.parser.antlr.*;
 import org.etsi.mts.tdl.DataType;
@@ -29,9 +30,8 @@ public class RequiredTypesGenerator {
 	private DSLSpecificPackageGenerator dslSpecificPackageGenerator;
 	private CommonPackageGenerator commonPackageGenerator;
 	
-	public RequiredTypesGenerator (String dslFilePath, String tdlProjectPath) throws IOException{
-		generateRequiredTypes(dslFilePath, tdlProjectPath);
-		loadRequiredTyeps(tdlProjectPath);
+	public RequiredTypesGenerator (String dslFilePath) throws IOException{
+		generateRequiredTypes(dslFilePath);
 		
 		this.commonPackageGenerator = new CommonPackageGenerator();
 		this.commonPackageGenerator.setRequiredTypesPackage(this.requiredTypesPackage);
@@ -46,34 +46,30 @@ public class RequiredTypesGenerator {
 		System.out.println("dsl-specific package generated successfully");
 	}
 	//TODO: generating types for the required elements not all of them
-	private void generateRequiredTypes(String dslFilePath, String tdlProjectPath) throws IOException {
+	private void generateRequiredTypes(String dslFilePath) throws IOException {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
-		String metamodelPath = dsl.getEntry("ecore").getValue();
+		String metamodelPath = dsl.getEntry("ecore").getValue().replaceFirst("resource", "plugin");
 		String IN_model_path = metamodelPath;
-		String OUT_model_path = tdlProjectPath;
 		try {
 			Ecore2tdl runner = new Ecore2tdl();
 			runner.loadModels(IN_model_path);
 			runner.doEcore2tdl(new NullProgressMonitor());
-			//TODO: Change saveModels in order to return a resource of the generated output and not to save it
-			runner.saveModels(OUT_model_path);
+			EMFModel outModel = (EMFModel) runner.getOutModel();
+			Resource dslTypesRes = outModel.getResource();
+			this.requiredTypesPackage = (Package) dslTypesRes.getContents().get(0);
+			for (int i=0; i<this.requiredTypesPackage.getPackagedElement().size();i++) {
+				PackageableElement p = this.requiredTypesPackage.getPackagedElement().get(i);
+				if (p instanceof DataType) {
+					this.requiredTypes.put(p.getName().toLowerCase(), (DataType) p);
+				}
+			}
 		} catch (ATLCoreException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ATLExecutionException e) {
 			e.printStackTrace();
-		}
-	}
-	private void loadRequiredTyeps(String tdlProjectPath) throws IOException {
-		Resource dslTypesRes = (new ResourceSetImpl()).getResource(URI.createURI(tdlProjectPath), true);
-		this.requiredTypesPackage = (Package) dslTypesRes.getContents().get(0);
-		for (int i=0; i<this.requiredTypesPackage.getPackagedElement().size();i++) {
-			PackageableElement p = this.requiredTypesPackage.getPackagedElement().get(i);
-			if (p instanceof DataType) {
-				this.requiredTypes.put(p.getName().toLowerCase(), (DataType) p);
-			}
 		}
 	}
 	public CommonPackageGenerator getCommonPackageGenerator() {

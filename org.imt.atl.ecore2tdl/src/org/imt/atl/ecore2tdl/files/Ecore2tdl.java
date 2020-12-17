@@ -137,7 +137,9 @@ public class Ecore2tdl {
 		IExtractor extractor = new EMFExtractor();
 		extractor.extract(outModel, outModelPath);
 	}
-
+	public IModel getOutModel() {
+		return this.outModel;
+	}
 	/**
 	 * Transform the models.
 	 * 

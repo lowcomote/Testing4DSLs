@@ -85,17 +85,20 @@ public class DSLSelectionWizardPage extends WizardPage{
 		createTextLabelLayout(parent, "Languages");
 		_languageCombo = new Combo(parent, SWT.NONE);
 		_languageCombo.setLayoutData(createStandardLayout());
-
-		Set<String> languagesNames = (Set<String>) getAllLanguages().keySet();
+		
+		final HashMap<String, String> languagesPaths = getAllLanguages();
+		Set<String> languagesNames = (Set<String>) languagesPaths.keySet();
 		String[] empty = {};
 		_languageCombo.setItems(languagesNames.toArray(empty));
 		_languageCombo.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				selectedDSLPath = getAllLanguages().get(_languageCombo.getText());
+				selectedDSLPath = languagesPaths.get(_languageCombo.getText());
+				if (!selectedDSLPath.contains("platform:/plugin")) {
+					selectedDSLPath = "platform:/plugin" + languagesPaths.get(_languageCombo.getText());
+				}
 			}
 		});
-		
 		createTextLabelLayout(parent, "");
 
 		return parent;

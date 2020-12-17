@@ -58,7 +58,7 @@ public class TDLCodeGenerator {
 	public TDLCodeGenerator(String dslFilePath, String tdlProjectPath) throws IOException {
 		System.out.println("Start TDL Code generation");
 		
-		this.testDesignPackageGenerator = new TestDesignPackageGenerator(dslFilePath,tdlProjectPath);
+		this.testDesignPackageGenerator = new TestDesignPackageGenerator(dslFilePath);
 		System.out.println("test design package generated successfully");
 		
 		this.testConfigurationPackageGenerator = this.testDesignPackageGenerator.getTestConfigurationGenerator();
@@ -79,7 +79,7 @@ public class TDLCodeGenerator {
 		Resource dslSpecificPackageRes = rs.createResource(URI.createURI(tdlProjectPath + "/generated/" + this.dslSpecificPackageGenerator.getDSLSpecificPackage().getName()+ ".tdlan2"));
 		Resource requiredTypesRes = rs.createResource(URI.createURI(tdlProjectPath + "/generated/" + this.requiredTypesGenerator.getRequiredTypesPackage().getName()+ ".tdlan2"));
 		Resource configurationRes = rs.createResource(URI.createURI(tdlProjectPath + "/generated/" + this.testConfigurationPackageGenerator.getTestConfigurationPackage().getName()+ ".tdlan2"));
-		Resource testDesignPackageRes = rs.createResource(URI.createURI(tdlProjectPath + "/generated/" + this.testDesignPackageGenerator.getTestDesignPackage().getName()+ ".tdlan2"));
+		Resource testDesignPackageRes = rs.createResource(URI.createURI(tdlProjectPath + "/" + this.testDesignPackageGenerator.getTestDesignPackage().getName()+ ".tdlan2"));
 		
 		commonPackageRes.getContents().add(this.commonPackageGenerator.getCommonPackage());
 		dslSpecificPackageRes.getContents().add(this.dslSpecificPackageGenerator.getDSLSpecificPackage());

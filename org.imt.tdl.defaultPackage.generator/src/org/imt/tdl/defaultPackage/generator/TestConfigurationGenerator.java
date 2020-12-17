@@ -39,10 +39,10 @@ public class TestConfigurationGenerator {
 	private Map<String, GateInstance> gateInstances = new HashMap<String, GateInstance>();
 	private Map<String, TestConfiguration> configurations = new HashMap<String, TestConfiguration>();
 	
-	public TestConfigurationGenerator(String dslFilePath, String tdlProjectPath) throws IOException {
+	public TestConfigurationGenerator(String dslFilePath) throws IOException {
 		this.factory = tdlFactory.eINSTANCE;
 		
-		this.requiredTypesGenerator = new RequiredTypesGenerator(dslFilePath, tdlProjectPath);
+		this.requiredTypesGenerator = new RequiredTypesGenerator(dslFilePath);
 		System.out.println("Required types package generated successfully");
 		
 		this.dslSpecificPackageGenerator = this.requiredTypesGenerator.getDSLSpecificPackageGenerator();
