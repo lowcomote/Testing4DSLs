@@ -36,34 +36,34 @@ import org.etsi.mts.tdl.SimpleDataType;
 import org.etsi.mts.tdl.StructuredDataType;
 import org.etsi.mts.tdl.tdlFactory;
 
-public class DSLSpecificPackageGenerator {
+public class DSLSpecificEventsGenerator {
 	private String dslName;
 	private EPackage metamodelRootElement;
-	private Unit aleSemanticRootElement;
+	//private Unit aleSemanticRootElement;
 	private BehavioralInterface interfaceRootElement;
 	
 	private tdlFactory factory;
 	private Package dslSpecificEventsPackage;
-	private Package requiredTypesPackage;
-	private Map<String, DataType> requiredTypes = new HashMap<String, DataType>();
+	private Package dslSpecificTypesPackage;
+	private Map<String, DataType> dslSpecificTypes = new HashMap<String, DataType>();
 	
 	private DataType modelState;
 	private List<DataType> dslInterfaceTypes = new ArrayList<DataType>();
 	private List<DataType> TypesForGeneralEvents = new ArrayList<DataType>();
 	
-	public DSLSpecificPackageGenerator(String dslFilePath) throws IOException {
+	public DSLSpecificEventsGenerator(String dslFilePath) throws IOException {
 		this.factory = tdlFactory.eINSTANCE; 
 		this.dslName = validName(getDslName(dslFilePath));
 		this.metamodelRootElement = getMetamodelRootElement(dslFilePath);
-		this.aleSemanticRootElement = getAleSemanticsRootElement(dslFilePath);
+		//this.aleSemanticRootElement = getAleSemanticsRootElement(dslFilePath);
 		this.interfaceRootElement = getBehavioralInterfaceRootElement(dslFilePath);
 	}
 	
-	public void generateDSLSpecificPackage(String dslFilePath) throws IOException{
+	public void generateDSLSpecificEventsPackage(String dslFilePath) throws IOException{
 		this.dslSpecificEventsPackage = factory.createPackage();
-		this.dslSpecificEventsPackage.setName(this.dslName + "_SpecificPackage");
+		this.dslSpecificEventsPackage.setName(this.dslName + "SpecificEvents");
 		generateImports();
-		if (this.metamodelRootElement != null && this.aleSemanticRootElement != null) {
+		if (this.metamodelRootElement != null) {
 			generateTypeForModelState();
 			generateTypeForSetState();
 		}
@@ -72,11 +72,12 @@ public class DSLSpecificPackageGenerator {
 		}
 	}
 	private void generateImports() {		
-		ElementImport requiredTypesPackageImport = factory.createElementImport();
-		requiredTypesPackageImport.setImportedPackage(this.requiredTypesPackage);
-		this.dslSpecificEventsPackage.getImport().add(requiredTypesPackageImport);
+		ElementImport PackageImport = factory.createElementImport();
+		PackageImport.setImportedPackage(this.dslSpecificTypesPackage);
+		this.dslSpecificEventsPackage.getImport().add(PackageImport);
 	}
-	private void generateTypeForModelState() {
+	//derive the model state based on the attributes defined in the ALE file 
+	/*private void generateTypeForModelState() {
 		StructuredDataType modelState = factory.createStructuredDataType();
 		modelState.setName("ModelState");
 		//generate members for modelState based on the attributes of the extended classes in ale file
@@ -89,12 +90,12 @@ public class DSLSpecificPackageGenerator {
 				if (memberAleType instanceof typeLiteral) {
 					memberTDLType = aleTypeLiteral2tdlType((typeLiteral) memberAleType);
 				} else {
-					if (this.requiredTypes.get(validName(memberAleType.getName().toLowerCase())) != null) {
-						memberTDLType = this.requiredTypes.get(validName(memberAleType.getName().toLowerCase()));
+					if (this.dslSpecificTypes.get(validName(memberAleType.getName().toLowerCase())) != null) {
+						memberTDLType = this.dslSpecificTypes.get(validName(memberAleType.getName().toLowerCase()));
 					}else {
 						SimpleDataType newType = factory.createSimpleDataType();
 						newType.setName(validName(memberAleType.getName()));
-						this.requiredTypes.put(newType.getName().toLowerCase(), newType);
+						this.dslSpecificTypes.put(newType.getName().toLowerCase(), newType);
 						this.dslSpecificEventsPackage.getPackagedElement().add(newType);
 						memberTDLType = newType;
 					}
@@ -104,6 +105,18 @@ public class DSLSpecificPackageGenerator {
 				member.setDataType(memberTDLType);
 				modelState.getMember().add(member);
 			}
+		}
+		this.dslSpecificEventsPackage.getPackagedElement().add(modelState);
+		this.modelState = modelState;
+	}
+	*/
+	//derive the model state based on the elements of the metamodel that are annotated as 'dynamic'
+	private void generateTypeForModelState() {
+		StructuredDataType modelState = factory.createStructuredDataType();
+		modelState.setName("ModelState");
+		//generate members for modelState based on the elements with 'dynamic' annotation in dslSpecificTypes tdl package
+		for (int i=0; i< this.metamodelRootElement.getEClassifiers().size(); i++) {
+			//TODO:Recognize the model state
 		}
 		this.dslSpecificEventsPackage.getPackagedElement().add(modelState);
 		this.modelState = modelState;
@@ -141,10 +154,10 @@ public class DSLSpecificPackageGenerator {
 			for (int j=0; j<event.getParams().size();j++) {
 				String paramName = validName(event.getParams().get(j).getName());
 				String paramType = event.getParams().get(j).getType().toLowerCase();
-				if (this.requiredTypes.get(paramType) != null) {
+				if (this.dslSpecificTypes.get(paramType) != null) {
 					Member member = factory.createMember();
 					member.setName(paramName);
-					member.setDataType(this.requiredTypes.get(paramType));
+					member.setDataType(this.dslSpecificTypes.get(paramType));
 					typeForEvent.getMember().add(member);
 				}		
 			}
@@ -152,7 +165,7 @@ public class DSLSpecificPackageGenerator {
 			this.dslInterfaceTypes.add(typeForEvent);
 		}
 	}
-	public Package getDSLSpecificPackage() {
+	public Package getDslSpecificEventsPackage() {
 		return this.dslSpecificEventsPackage;
 	}
 	public DataType getTypeOfModelState() {
@@ -164,11 +177,11 @@ public class DSLSpecificPackageGenerator {
 	public List<DataType> getTypesOfGeneralEvents() {
 		return this.TypesForGeneralEvents;
 	}
-	public void setRequiredTypes(Map<String, DataType> requiredTypes) {
-		this.requiredTypes = requiredTypes;
+	public void setDslSpecificTypes(Map<String, DataType> dslSpecificTypes) {
+		this.dslSpecificTypes = dslSpecificTypes;
 	}
-	public void setRequiredTypesPackage (Package typesPackage) {
-		this.requiredTypesPackage = typesPackage;
+	public void setDslSpecificTypesPackage (Package typesPackage) {
+		this.dslSpecificTypesPackage = typesPackage;
 	}
 	//if a name is a keyword in tdl language, put '_' before it
 	private String validName (String name) {
@@ -180,13 +193,13 @@ public class DSLSpecificPackageGenerator {
 	//mapping from ALE basic data types to the ecore basic data types which are transformed to TDL types
 	private DataType aleTypeLiteral2tdlType (typeLiteral typeLiteral) {
 		if (typeLiteral instanceof StringType) {
-			return this.requiredTypes.get("EString".toLowerCase());
+			return this.dslSpecificTypes.get("EString".toLowerCase());
 		} else if (typeLiteral instanceof IntType) {
-			return this.requiredTypes.get("EInt".toLowerCase());
+			return this.dslSpecificTypes.get("EInt".toLowerCase());
 		} else if (typeLiteral instanceof RealType) {
-			return this.requiredTypes.get("EDouble".toLowerCase());
+			return this.dslSpecificTypes.get("EDouble".toLowerCase());
 		} else if (typeLiteral instanceof BoolType) {
-			return this.requiredTypes.get("EBoolean".toLowerCase());
+			return this.dslSpecificTypes.get("EBoolean".toLowerCase());
 		} else if (typeLiteral instanceof SeqType || typeLiteral instanceof SetType) {
 			SeqType seqType = (SeqType) typeLiteral;
 			return aleTypeLiteral2tdlType(seqType.getType());

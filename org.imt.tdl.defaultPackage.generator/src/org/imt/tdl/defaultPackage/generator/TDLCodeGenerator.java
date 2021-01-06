@@ -50,8 +50,8 @@ public class TDLCodeGenerator {
 	        "Package", "{", "}", "with", "perform", "action", "(", ",", ")", "on", "test", "objectives", ":", ";", "name", "time", "label", "constraints", "Action", "alternatively", "or", "Annotation", "*", "?", "=", "assert", "otherwise", "set", "verdict", "to", "->", "[", "]", "times", "repeat", "break", "Note", "create", "of", "type", "bind", "Component", "Type", "having", "if", "else", "connect", "as", "Map", "in", ".", "new", "containing", "Use", "Signature", "Collection", "default", "+", "-", "/", "mod", ">", "<", ">=", "<=", "==", "!=", "and", "xor", "not", "size", "Import", "all", "from", "Function", "returns", "instance", "returned", "Predefined", "gate", "Gate", "accepts", "sends", "triggers", "calls", "responds", "response", "interrupt", "optional", "mapped", "omit", "argument", "optionally", "run", "parallel", "parameter", "every", "component", "is", "quiet", "for", "terminate", "where", "it", "assigned", "Test", "Configuration", "Description", "Implementation", "uses", "configuration", "execute", "bindings", "Objective", "description", "Time", "out", "timer", "start", "stop", "variable", "waits", "extends", "SUT", "Tester", "Message", "Procedure", "In", "Out", "Exception", "last", "previous", "first"
 	    };
 	private CommonPackageGenerator commonPackageGenerator;
-	private DSLSpecificPackageGenerator dslSpecificPackageGenerator;
-	private RequiredTypesGenerator requiredTypesGenerator; 
+	private DSLSpecificEventsGenerator dslSpecificEventsGenerator;
+	private DSLSpecificTypesGenerator dslSpecificTypesGenerator; 
 	private TestConfigurationGenerator testConfigurationPackageGenerator;
 	private TestDesignPackageGenerator testDesignPackageGenerator;
 	
@@ -62,9 +62,9 @@ public class TDLCodeGenerator {
 		System.out.println("test design package generated successfully");
 		
 		this.testConfigurationPackageGenerator = this.testDesignPackageGenerator.getTestConfigurationGenerator();
-		this.requiredTypesGenerator = this.testConfigurationPackageGenerator.getRequiredTypesGenerator();
-		this.dslSpecificPackageGenerator = this.requiredTypesGenerator.getDSLSpecificPackageGenerator();
-		this.commonPackageGenerator = this.requiredTypesGenerator.getCommonPackageGenerator();
+		this.dslSpecificTypesGenerator = this.testConfigurationPackageGenerator.getDslSpecificTypesGenerator();
+		this.dslSpecificEventsGenerator = this.dslSpecificTypesGenerator.getDslSpecificEventsGenerator();
+		this.commonPackageGenerator = this.dslSpecificTypesGenerator.getCommonPackageGenerator();
 		
 		System.out.println("start saving packages");
 		savePackages(tdlProjectPath);
@@ -76,14 +76,14 @@ public class TDLCodeGenerator {
 		ResourceSet rs = injector.getInstance(ResourceSet.class);
 		
 		Resource commonPackageRes = rs.createResource(URI.createURI(tdlProjectPath + "/generated/" + this.commonPackageGenerator.getCommonPackage().getName()+ ".tdlan2"));
-		Resource dslSpecificPackageRes = rs.createResource(URI.createURI(tdlProjectPath + "/generated/" + this.dslSpecificPackageGenerator.getDSLSpecificPackage().getName()+ ".tdlan2"));
-		Resource requiredTypesRes = rs.createResource(URI.createURI(tdlProjectPath + "/generated/" + this.requiredTypesGenerator.getRequiredTypesPackage().getName()+ ".tdlan2"));
+		Resource dslSpecificPackageRes = rs.createResource(URI.createURI(tdlProjectPath + "/generated/" + this.dslSpecificEventsGenerator.getDslSpecificEventsPackage().getName()+ ".tdlan2"));
+		Resource requiredTypesRes = rs.createResource(URI.createURI(tdlProjectPath + "/generated/" + this.dslSpecificTypesGenerator.getDslSpecificTypesPackage().getName()+ ".tdlan2"));
 		Resource configurationRes = rs.createResource(URI.createURI(tdlProjectPath + "/generated/" + this.testConfigurationPackageGenerator.getTestConfigurationPackage().getName()+ ".tdlan2"));
 		Resource testDesignPackageRes = rs.createResource(URI.createURI(tdlProjectPath + "/" + this.testDesignPackageGenerator.getTestDesignPackage().getName()+ ".tdlan2"));
 		
 		commonPackageRes.getContents().add(this.commonPackageGenerator.getCommonPackage());
-		dslSpecificPackageRes.getContents().add(this.dslSpecificPackageGenerator.getDSLSpecificPackage());
-		requiredTypesRes.getContents().add(this.requiredTypesGenerator.getRequiredTypesPackage());
+		dslSpecificPackageRes.getContents().add(this.dslSpecificEventsGenerator.getDslSpecificEventsPackage());
+		requiredTypesRes.getContents().add(this.dslSpecificTypesGenerator.getDslSpecificTypesPackage());
 		configurationRes.getContents().add(this.testConfigurationPackageGenerator.getTestConfigurationPackage());
 		testDesignPackageRes.getContents().add(this.testDesignPackageGenerator.getTestDesignPackage());
 		

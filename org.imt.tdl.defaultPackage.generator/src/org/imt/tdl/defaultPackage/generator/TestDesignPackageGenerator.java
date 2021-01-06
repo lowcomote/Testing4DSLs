@@ -22,8 +22,8 @@ public class TestDesignPackageGenerator {
 	private tdlFactory factory;
 	private Package testDesignPackage;
 	private CommonPackageGenerator commonPackageGenerator;
-	private DSLSpecificPackageGenerator dslSpecificPackageGenerator;
-	private RequiredTypesGenerator requiredTypesGenerator;
+	private DSLSpecificEventsGenerator dslSpecificEventsGenerator;
+	private DSLSpecificTypesGenerator dslSpecificTyepsGenerator;
 	private TestConfigurationGenerator testConfigurationPackageGenerator;
 	
 	public TestDesignPackageGenerator(String dslFilePath) throws IOException {
@@ -31,9 +31,9 @@ public class TestDesignPackageGenerator {
 		this.testConfigurationPackageGenerator = new TestConfigurationGenerator(dslFilePath);
 		System.out.println("test configuration package generated successfully");
 		
-		this.requiredTypesGenerator = this.testConfigurationPackageGenerator.getRequiredTypesGenerator();
-		this.dslSpecificPackageGenerator = this.requiredTypesGenerator.getDSLSpecificPackageGenerator();
-		this.commonPackageGenerator = this.requiredTypesGenerator.getCommonPackageGenerator();
+		this.dslSpecificTyepsGenerator = this.testConfigurationPackageGenerator.getDslSpecificTypesGenerator();
+		this.dslSpecificEventsGenerator = this.dslSpecificTyepsGenerator.getDslSpecificEventsGenerator();
+		this.commonPackageGenerator = this.dslSpecificTyepsGenerator.getCommonPackageGenerator();
 		generateTestDesignPackage();
 	}
 	private void generateTestDesignPackage() {
@@ -45,12 +45,12 @@ public class TestDesignPackageGenerator {
 	private void generateImports() {
 		ElementImport commonPackageImport = factory.createElementImport();
 		commonPackageImport.setImportedPackage(this.commonPackageGenerator.getCommonPackage());
-		ElementImport dslSpecificPackageImport = factory.createElementImport();
-		dslSpecificPackageImport.setImportedPackage(this.dslSpecificPackageGenerator.getDSLSpecificPackage());
+		ElementImport dslSpecificEventsPackageImport = factory.createElementImport();
+		dslSpecificEventsPackageImport.setImportedPackage(this.dslSpecificEventsGenerator.getDslSpecificEventsPackage());
 		ElementImport testConfigurationImport = factory.createElementImport();
 		testConfigurationImport.setImportedPackage(this.testConfigurationPackageGenerator.getTestConfigurationPackage());
 		this.testDesignPackage.getImport().add(commonPackageImport);
-		this.testDesignPackage.getImport().add(dslSpecificPackageImport);
+		this.testDesignPackage.getImport().add(dslSpecificEventsPackageImport);
 		this.testDesignPackage.getImport().add(testConfigurationImport);
 	}
 	private void generateDataInstances() {
@@ -68,13 +68,13 @@ public class TestDesignPackageGenerator {
 			oclQuery.getMemberAssignment().add(query);
 			this.testDesignPackage.getPackagedElement().add(oclQuery);
 		}
-		if (this.dslSpecificPackageGenerator.getTypeOfModelState()!=null) {
+		if (this.dslSpecificEventsGenerator.getTypeOfModelState()!=null) {
 			generateInstanceForModelState("givenState");
 			generateInstanceForModelState("expectedState");
 		}
 	}
 	private void generateInstanceForModelState (String instanceName) {
-		StructuredDataType modelStateType = (StructuredDataType) this.dslSpecificPackageGenerator.getTypeOfModelState();
+		StructuredDataType modelStateType = (StructuredDataType) this.dslSpecificEventsGenerator.getTypeOfModelState();
 		
 		StructuredDataInstance modelStateInstance = factory.createStructuredDataInstance();
 		modelStateInstance.setName(instanceName);

@@ -31,8 +31,8 @@ public class TestConfigurationGenerator {
 	private tdlFactory factory;
 	private Package testConfigurationPackage;
 	private CommonPackageGenerator commonPackageGenerator;
-	private DSLSpecificPackageGenerator dslSpecificPackageGenerator;
-	private RequiredTypesGenerator requiredTypesGenerator;
+	private DSLSpecificEventsGenerator dslSpecificEventsGenerator;
+	private DSLSpecificTypesGenerator dslSpecificTypesGenerator;
 	
 	private Map<String, GateType> gateTypes = new HashMap<String, GateType>();
 	private Map<String, ComponentType> componentTypes = new HashMap<String, ComponentType>();
@@ -42,12 +42,12 @@ public class TestConfigurationGenerator {
 	public TestConfigurationGenerator(String dslFilePath) throws IOException {
 		this.factory = tdlFactory.eINSTANCE;
 		
-		this.requiredTypesGenerator = new RequiredTypesGenerator(dslFilePath);
-		System.out.println("Required types package generated successfully");
+		this.dslSpecificTypesGenerator = new DSLSpecificTypesGenerator(dslFilePath);
+		System.out.println("required types package generated successfully");
 		
-		this.dslSpecificPackageGenerator = this.requiredTypesGenerator.getDSLSpecificPackageGenerator();
-		this.commonPackageGenerator = this.requiredTypesGenerator.getCommonPackageGenerator();
-		this.dslName = this.dslSpecificPackageGenerator.getDslName(dslFilePath);
+		this.dslSpecificEventsGenerator = this.dslSpecificTypesGenerator.getDslSpecificEventsGenerator();
+		this.commonPackageGenerator = this.dslSpecificTypesGenerator.getCommonPackageGenerator();
+		this.dslName = this.dslSpecificEventsGenerator.getDslName(dslFilePath);
 		generateTestConfigurationPackage();
 	}
 	private void generateTestConfigurationPackage() {
@@ -62,7 +62,7 @@ public class TestConfigurationGenerator {
 		ElementImport commonPackageImport = factory.createElementImport();
 		commonPackageImport.setImportedPackage(this.commonPackageGenerator.getCommonPackage());
 		ElementImport dslSpecificPackageImport = factory.createElementImport();
-		dslSpecificPackageImport.setImportedPackage(this.dslSpecificPackageGenerator.getDSLSpecificPackage());
+		dslSpecificPackageImport.setImportedPackage(this.dslSpecificEventsGenerator.getDslSpecificEventsPackage());
 		this.testConfigurationPackage.getImport().add(commonPackageImport);
 		this.testConfigurationPackage.getImport().add(dslSpecificPackageImport);
 	}
@@ -72,16 +72,16 @@ public class TestConfigurationGenerator {
 		genericGate.setKind(GateTypeKind.MESSAGE);
 		List<DataType> genericGateDataTypes = new ArrayList<DataType>();
 		genericGateDataTypes.addAll(this.commonPackageGenerator.getTypesOfGeneralEvents());
-		genericGateDataTypes.addAll(this.dslSpecificPackageGenerator.getTypesOfGeneralEvents());
+		genericGateDataTypes.addAll(this.dslSpecificEventsGenerator.getTypesOfGeneralEvents());
 		genericGate.getDataType().addAll(genericGateDataTypes);
 		this.testConfigurationPackage.getPackagedElement().add(genericGate);
 		this.gateTypes.put(genericGate.getName(), genericGate);
 		
-		if (this.dslSpecificPackageGenerator.getTypesOfDslInterfaces().size()>0) {
+		if (this.dslSpecificEventsGenerator.getTypesOfDslInterfaces().size()>0) {
 			GateType dslSpecificGate = factory.createGateType();
 			dslSpecificGate.setName("dslSpecificGate");
 			dslSpecificGate.setKind(GateTypeKind.MESSAGE);
-			dslSpecificGate.getDataType().addAll(this.dslSpecificPackageGenerator.getTypesOfDslInterfaces());
+			dslSpecificGate.getDataType().addAll(this.dslSpecificEventsGenerator.getTypesOfDslInterfaces());
 			this.testConfigurationPackage.getPackagedElement().add(dslSpecificGate);
 			this.gateTypes.put(dslSpecificGate.getName(), dslSpecificGate);
 		}
@@ -209,8 +209,8 @@ public class TestConfigurationGenerator {
 		configuration.getConnection().add(gateConnection);
 	}
 	
-	public RequiredTypesGenerator getRequiredTypesGenerator() {
-		return this.requiredTypesGenerator;
+	public DSLSpecificTypesGenerator getDslSpecificTypesGenerator() {
+		return this.dslSpecificTypesGenerator;
 	}
 	public Package getTestConfigurationPackage() {
 		return this.testConfigurationPackage;

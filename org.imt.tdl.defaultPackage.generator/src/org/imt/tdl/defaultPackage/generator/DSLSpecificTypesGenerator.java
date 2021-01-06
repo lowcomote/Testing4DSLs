@@ -22,31 +22,31 @@ import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.PackageableElement;
 import org.imt.atl.ecore2tdl.files.Ecore2tdl;
 
-public class RequiredTypesGenerator {
+public class DSLSpecificTypesGenerator {
 	
-	private Package requiredTypesPackage;
-	private Map<String, DataType> requiredTypes = new HashMap<String, DataType>();
+	private Package dslSpecificTypesPackage;
+	private Map<String, DataType> dslSpecificTypes = new HashMap<String, DataType>();
 	
-	private DSLSpecificPackageGenerator dslSpecificPackageGenerator;
+	private DSLSpecificEventsGenerator dslSpecificEventsGenerator;
 	private CommonPackageGenerator commonPackageGenerator;
 	
-	public RequiredTypesGenerator (String dslFilePath) throws IOException{
-		generateRequiredTypes(dslFilePath);
+	public DSLSpecificTypesGenerator (String dslFilePath) throws IOException{
+		generateDslSpecificTypes(dslFilePath);
 		
 		this.commonPackageGenerator = new CommonPackageGenerator();
-		this.commonPackageGenerator.setRequiredTypesPackage(this.requiredTypesPackage);
-		this.commonPackageGenerator.setRequiredTypes(this.requiredTypes);
+		this.commonPackageGenerator.setDslSpecificTypesPackage(this.dslSpecificTypesPackage);
+		this.commonPackageGenerator.setDslSpecificTypes(this.dslSpecificTypes);
 		this.commonPackageGenerator.generateCommonPackage();
 		System.out.println("common package generated successfully");
 		
-		this.dslSpecificPackageGenerator = new DSLSpecificPackageGenerator(dslFilePath);
-		this.dslSpecificPackageGenerator.setRequiredTypesPackage(this.requiredTypesPackage);
-		this.dslSpecificPackageGenerator.setRequiredTypes(this.requiredTypes);
-		this.dslSpecificPackageGenerator.generateDSLSpecificPackage(dslFilePath);
-		System.out.println("dsl-specific package generated successfully");
+		this.dslSpecificEventsGenerator = new DSLSpecificEventsGenerator(dslFilePath);
+		this.dslSpecificEventsGenerator.setDslSpecificTypesPackage(this.dslSpecificTypesPackage);
+		this.dslSpecificEventsGenerator.setDslSpecificTypes(this.dslSpecificTypes);
+		this.dslSpecificEventsGenerator.generateDSLSpecificEventsPackage(dslFilePath);
+		System.out.println("dsl-specific events package generated successfully");
 	}
 	//TODO: generating types for the required elements not all of them
-	private void generateRequiredTypes(String dslFilePath) throws IOException {
+	private void generateDslSpecificTypes(String dslFilePath) throws IOException {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
 		String metamodelPath = dsl.getEntry("ecore").getValue().replaceFirst("resource", "plugin");
@@ -57,11 +57,11 @@ public class RequiredTypesGenerator {
 			runner.doEcore2tdl(new NullProgressMonitor());
 			EMFModel outModel = (EMFModel) runner.getOutModel();
 			Resource dslTypesRes = outModel.getResource();
-			this.requiredTypesPackage = (Package) dslTypesRes.getContents().get(0);
-			for (int i=0; i<this.requiredTypesPackage.getPackagedElement().size();i++) {
-				PackageableElement p = this.requiredTypesPackage.getPackagedElement().get(i);
+			this.dslSpecificTypesPackage = (Package) dslTypesRes.getContents().get(0);
+			for (int i=0; i<this.dslSpecificTypesPackage.getPackagedElement().size();i++) {
+				PackageableElement p = this.dslSpecificTypesPackage.getPackagedElement().get(i);
 				if (p instanceof DataType) {
-					this.requiredTypes.put(p.getName().toLowerCase(), (DataType) p);
+					this.dslSpecificTypes.put(p.getName().toLowerCase(), (DataType) p);
 				}
 			}
 		} catch (ATLCoreException e) {
@@ -75,10 +75,10 @@ public class RequiredTypesGenerator {
 	public CommonPackageGenerator getCommonPackageGenerator() {
 		return this.commonPackageGenerator;
 	}
-	public DSLSpecificPackageGenerator getDSLSpecificPackageGenerator() {
-		return this.dslSpecificPackageGenerator;
+	public DSLSpecificEventsGenerator getDslSpecificEventsGenerator() {
+		return this.dslSpecificEventsGenerator;
 	}
-	public Package getRequiredTypesPackage() {
-		return this.requiredTypesPackage;
+	public Package getDslSpecificTypesPackage() {
+		return this.dslSpecificTypesPackage;
 	}
 }

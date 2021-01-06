@@ -29,8 +29,8 @@ import org.etsi.mts.tdl.Member;
 public class CommonPackageGenerator {
 	private tdlFactory factory;
 	private Package commonPackage;
-	private Package requiredTypesPackage;
-	private Map<String, DataType> requiredTypes = new HashMap<String, DataType>();
+	private Package dslSpecificTypesPackage;
+	private Map<String, DataType> dslSpecificTypes = new HashMap<String, DataType>();
 	
 	private DataType oclType;
 	private List<DataInstance> verdictInstances = new ArrayList<DataInstance>();
@@ -42,7 +42,7 @@ public class CommonPackageGenerator {
 	}
 	public void generateCommonPackage(){
 		this.commonPackage = factory.createPackage();
-		this.commonPackage.setName("commonPackage");
+		this.commonPackage.setName("common");
 		generateImports();
 		generateTypeForOCL();
 		generateVerdicts();
@@ -51,7 +51,7 @@ public class CommonPackageGenerator {
 	}
 	private void generateImports() {
 		ElementImport dslSpecificTypesPackageImport = factory.createElementImport();
-		dslSpecificTypesPackageImport.setImportedPackage(this.requiredTypesPackage);
+		dslSpecificTypesPackageImport.setImportedPackage(this.dslSpecificTypesPackage);
 		this.commonPackage.getImport().add(dslSpecificTypesPackageImport);
 	}
 	private void generateTypeForOCL() {
@@ -59,7 +59,7 @@ public class CommonPackageGenerator {
 		OCL.setName("OCL");
 		Member query = factory.createMember();
 		query.setName("query");
-		DataType queryType = this.requiredTypes.get("EString".toLowerCase());
+		DataType queryType = this.dslSpecificTypes.get("EString".toLowerCase());
 		query.setDataType(queryType);
 		OCL.getMember().add(query);
 		this.commonPackage.getPackagedElement().add(OCL);
@@ -128,10 +128,10 @@ public class CommonPackageGenerator {
 	public Map<String, AnnotationType> getAnnotations() {
 		return this.annotations;
 	}
-	public void setRequiredTypes(Map<String, DataType> requiredTypes) {
-		this.requiredTypes = requiredTypes;
+	public void setDslSpecificTypes(Map<String, DataType> dslSpecificTypes) {
+		this.dslSpecificTypes = dslSpecificTypes;
 	}
-	public void setRequiredTypesPackage (Package typesPackage) {
-		this.requiredTypesPackage = typesPackage;
+	public void setDslSpecificTypesPackage (Package typesPackage) {
+		this.dslSpecificTypesPackage = typesPackage;
 	}
 }
