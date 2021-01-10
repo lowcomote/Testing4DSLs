@@ -45,9 +45,10 @@ public class DSLSpecificEventsGenerator {
 	private tdlFactory factory;
 	private Package dslSpecificEventsPackage;
 	private Package dslSpecificTypesPackage;
-	private Map<String, DataType> dslSpecificTypes = new HashMap<String, DataType>();
 	
 	private DataType modelState;
+	private Map<String, DataType> dslSpecificTypes = new HashMap<String, DataType>();
+	private List<DataType> dynamicTypes = new ArrayList<>();
 	private List<DataType> dslInterfaceTypes = new ArrayList<DataType>();
 	private List<DataType> TypesForGeneralEvents = new ArrayList<DataType>();
 	
@@ -115,8 +116,11 @@ public class DSLSpecificEventsGenerator {
 		StructuredDataType modelState = factory.createStructuredDataType();
 		modelState.setName("ModelState");
 		//generate members for modelState based on the elements with 'dynamic' annotation in dslSpecificTypes tdl package
-		for (int i=0; i< this.metamodelRootElement.getEClassifiers().size(); i++) {
-			//TODO:Recognize the model state
+		for (int i=0; i< this.dynamicTypes.size(); i++) {
+			Member member = factory.createMember();
+			member.setName(this.dynamicTypes.get(i).getName().toLowerCase());
+			member.setDataType(this.dynamicTypes.get(i));
+			modelState.getMember().add(member);
 		}
 		this.dslSpecificEventsPackage.getPackagedElement().add(modelState);
 		this.modelState = modelState;
@@ -177,11 +181,14 @@ public class DSLSpecificEventsGenerator {
 	public List<DataType> getTypesOfGeneralEvents() {
 		return this.TypesForGeneralEvents;
 	}
+	public void setDslSpecificTypesPackage (Package typesPackage) {
+		this.dslSpecificTypesPackage = typesPackage;
+	}
 	public void setDslSpecificTypes(Map<String, DataType> dslSpecificTypes) {
 		this.dslSpecificTypes = dslSpecificTypes;
 	}
-	public void setDslSpecificTypesPackage (Package typesPackage) {
-		this.dslSpecificTypesPackage = typesPackage;
+	public void setDynamicTypes(List<DataType> dynamicTypes) {
+		this.dynamicTypes = dynamicTypes;
 	}
 	//if a name is a keyword in tdl language, put '_' before it
 	private String validName (String name) {

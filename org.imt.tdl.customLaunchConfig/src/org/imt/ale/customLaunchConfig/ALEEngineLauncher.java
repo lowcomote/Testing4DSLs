@@ -35,7 +35,7 @@ public class ALEEngineLauncher {
 	public void setUp(String MUTPath) throws CoreException, EngineContextException {
 		//TODO: The attributes have to be set in an automatic manner (for now, I simply set them)
 		this._modelLocation = MUTPath;
-		this._siriusRepresentationLocation = MUTPath.split("/")[0] + "/representations.aird";
+		this._siriusRepresentationLocation = MUTPath.split("/")[1] + "/representations.aird";
 		this._delay = "0";
 		this._language = "org.imt.bpmn.BPMN";
 		//this._language = "org.eclipse.gemoc.sample.ale.fsm.FSM";

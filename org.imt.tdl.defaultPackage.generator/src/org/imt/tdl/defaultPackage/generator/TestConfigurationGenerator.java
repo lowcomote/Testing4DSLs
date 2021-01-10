@@ -43,7 +43,7 @@ public class TestConfigurationGenerator {
 		this.factory = tdlFactory.eINSTANCE;
 		
 		this.dslSpecificTypesGenerator = new DSLSpecificTypesGenerator(dslFilePath);
-		System.out.println("required types package generated successfully");
+		System.out.println("dsl-specific types package generated successfully");
 		
 		this.dslSpecificEventsGenerator = this.dslSpecificTypesGenerator.getDslSpecificEventsGenerator();
 		this.commonPackageGenerator = this.dslSpecificTypesGenerator.getCommonPackageGenerator();

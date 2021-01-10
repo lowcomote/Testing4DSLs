@@ -1,6 +1,8 @@
 package org.imt.ale.customLaunchConfig;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.eclipse.ocl.ParserException;
@@ -8,6 +10,7 @@ import org.eclipse.gemoc.ale.interpreted.engine.AleEngine;
 
 public class CustomLauncher{
 	
+	private String MUTPath;
 	private Resource MUTResource;
 	private ALEEngineLauncher aleEngineLauncher;
 	private AleEngine aleEngine;
@@ -17,12 +20,16 @@ public class CustomLauncher{
 	public final static String GENERIC = "Generic";
 	public final static String DSL_SPECIFIC = "DSL-Specific";
 	public final static String OCL = "OCL";
-
-	public void setUp(String configurationType, String MUTPath) throws CoreException, EngineContextException {
+	
+	public void setMUTPath (String MUTPath) {
+		this.MUTPath = MUTPath;
+	}
+	public void setUp(String configurationType) throws CoreException, EngineContextException {
+		this.MUTResource = (new ResourceSetImpl()).getResource(URI.createURI(this.MUTPath), true);
 		System.out.println("Start configuring the "+ configurationType + " engine");
 		if (configurationType.equals(GENERIC)) {
 			this.aleEngineLauncher = new ALEEngineLauncher();
-			this.aleEngineLauncher.setUp(MUTPath);
+			this.aleEngineLauncher.setUp(this.MUTPath);
 		}else if(configurationType.equals(DSL_SPECIFIC)) {
 			this.eventManagerLauncher = new EventManagerLauncher();
 			this.eventManagerLauncher.setUp();
@@ -39,7 +46,8 @@ public class CustomLauncher{
 	public Object executeOCLCommand (String query){
 		System.out.println("Start executing ocl command");
 		try {
-			return this.oclLauncher.runQuery(this.MUTResource, query);
+			//send the query without quotation marks
+			return this.oclLauncher.runQuery(this.MUTResource, query.substring(1, query.length()-1));
 		}catch (ParserException e) {
             e.printStackTrace();
 		}

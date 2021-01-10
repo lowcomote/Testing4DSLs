@@ -1,11 +1,10 @@
 package org.imt.tdl.defaultPackage.generator;
 
 import java.io.IOException;
-
-
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -15,17 +14,18 @@ import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.m2m.atl.common.ATLExecutionException;
 import org.eclipse.m2m.atl.core.ATLCoreException;
 import org.eclipse.m2m.atl.core.emf.EMFModel;
-import org.eclipse.xtext.GrammarUtil;
-import org.etsi.mts.tdl.parser.antlr.*;
 import org.etsi.mts.tdl.DataType;
+import org.etsi.mts.tdl.Member;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.PackageableElement;
+import org.etsi.mts.tdl.StructuredDataType;
 import org.imt.atl.ecore2tdl.files.Ecore2tdl;
 
 public class DSLSpecificTypesGenerator {
 	
 	private Package dslSpecificTypesPackage;
 	private Map<String, DataType> dslSpecificTypes = new HashMap<String, DataType>();
+	private List<DataType> dynamicTypes = new ArrayList<>();
 	
 	private DSLSpecificEventsGenerator dslSpecificEventsGenerator;
 	private CommonPackageGenerator commonPackageGenerator;
@@ -42,6 +42,7 @@ public class DSLSpecificTypesGenerator {
 		this.dslSpecificEventsGenerator = new DSLSpecificEventsGenerator(dslFilePath);
 		this.dslSpecificEventsGenerator.setDslSpecificTypesPackage(this.dslSpecificTypesPackage);
 		this.dslSpecificEventsGenerator.setDslSpecificTypes(this.dslSpecificTypes);
+		this.dslSpecificEventsGenerator.setDynamicTypes(this.dynamicTypes);
 		this.dslSpecificEventsGenerator.generateDSLSpecificEventsPackage(dslFilePath);
 		System.out.println("dsl-specific events package generated successfully");
 	}
@@ -62,6 +63,24 @@ public class DSLSpecificTypesGenerator {
 				PackageableElement p = this.dslSpecificTypesPackage.getPackagedElement().get(i);
 				if (p instanceof DataType) {
 					this.dslSpecificTypes.put(p.getName().toLowerCase(), (DataType) p);
+					//recognizing dynamic data types for being used as model state
+					if (p instanceof StructuredDataType) {
+						StructuredDataType type = (StructuredDataType) p;
+						Boolean isDynamic = false;
+						for (int j=0; j < type.getMember().size(); j++) {
+							Member m = type.getMember().get(j);
+							for (int k=0; k < m.getAnnotation().size(); k++) {
+								if (m.getAnnotation().get(k).getKey().getName().toString().contains("dynamic")) {
+									this.dynamicTypes.add(type);
+									isDynamic = true;
+									break;
+								}
+							}
+							if (isDynamic) {
+								break;
+							}
+						}
+					}
 				}
 			}
 		} catch (ATLCoreException e) {

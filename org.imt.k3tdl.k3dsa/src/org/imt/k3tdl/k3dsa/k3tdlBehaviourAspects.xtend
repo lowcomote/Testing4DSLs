@@ -2,6 +2,7 @@ package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 
+
 import fr.inria.diverse.k3.al.annotationprocessor.Step
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 
@@ -45,7 +46,7 @@ import org.etsi.mts.tdl.BehaviourDescription
 import static extension org.imt.k3tdl.k3dsa.BehaviourAspect.*
 import static extension org.imt.k3tdl.k3dsa.BlockAspect.*
 import static extension org.imt.k3tdl.k3dsa.GateInstanceAspect.*
-import org.etsi.mts.tdl.GateInstance
+import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
 import org.etsi.mts.tdl.Target
 
 @Aspect (className = BehaviourDescription)
@@ -209,6 +210,7 @@ class MessageAspect extends InteractoinAspect{
 	def void performBehavior(){
 		println("Performing Message Behavior");
 		for (Target t: _self.target){
+			t.targetGate.gate.configureLauncher(_self.parentTestDescription.launcher)
 			//the argument has to be sent to the MUT
 			if (t.targetGate.component.role.toString == "SUT"){
 				t.targetGate.gate.sut_receive(_self.argument)
