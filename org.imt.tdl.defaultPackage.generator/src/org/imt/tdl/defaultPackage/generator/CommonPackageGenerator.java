@@ -112,6 +112,11 @@ public class CommonPackageGenerator {
 		MUTPath.setName("MUTPath");
 		this.commonPackage.getPackagedElement().add(MUTPath);
 		this.annotations.put(MUTPath.getName(), MUTPath);
+		
+		AnnotationType DSLPath = factory.createAnnotationType();
+		DSLPath.setName("DSLPath");
+		this.commonPackage.getPackagedElement().add(DSLPath);
+		this.annotations.put(DSLPath.getName(), DSLPath);
 	}
 	public Package getCommonPackage() {
 		return this.commonPackage;

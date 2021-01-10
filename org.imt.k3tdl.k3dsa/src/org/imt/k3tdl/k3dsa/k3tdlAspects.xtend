@@ -55,20 +55,25 @@ class TestDescriptionAspect{
 	@Step
 	def void executeTestCase(){
 		println("Start test case execution: " + _self.name)
-		val mutPath = _self.testConfiguration.activateConfiguration()
-		_self.launcher.MUTPath = mutPath.toString
+		_self.testConfiguration.activateConfiguration()
+		_self.launcher.MUTPath = _self.testConfiguration.MUTPath
+		_self.launcher.DSLPath = _self.testConfiguration.DSLPath
 		_self.behaviourDescription.callBehavior()
 	}
 }
 @Aspect (className = TestConfiguration)
 class TestConfigurationAspect{
+	public String MUTPath;
+	public String DSLPath;
 	@Step
-	def String activateConfiguration(){
+	def void activateConfiguration(){
 		println("Test configuration activation")
 		//finding the address of MUT From the annotations of the SUT component (the component with role==0)
 		for (Annotation a:_self.componentInstance.filter[ci | ci.role.toString == "SUT"].get(0).annotation){
 			if (a.key.name == 'MUTPath'){
-				return a.value.substring(1, a.value.length-1)
+				_self.MUTPath = a.value.substring(1, a.value.length-1)
+			}else if (a.key.name == 'DSLPath'){
+				_self.DSLPath = a.value.substring(1, a.value.length-1)
 			}
 		}
 	}

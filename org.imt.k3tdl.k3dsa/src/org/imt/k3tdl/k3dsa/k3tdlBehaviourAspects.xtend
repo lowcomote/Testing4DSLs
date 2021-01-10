@@ -213,9 +213,10 @@ class MessageAspect extends InteractoinAspect{
 			t.targetGate.gate.configureLauncher(_self.parentTestDescription.launcher)
 			//the argument has to be sent to the MUT
 			if (t.targetGate.component.role.toString == "SUT"){
-				t.targetGate.gate.sut_receive(_self.argument)
+				t.targetGate.gate.sendArgument2sut(_self.argument)
 			}else{
-				t.targetGate.gate.tester_receive(_self.argument)
+				//when the tester component receive an argument, it is actually an assertion that have to be checked
+				_self.sourceGate.gate.assertArgument(_self.argument)
 			}
 		}	
 	}

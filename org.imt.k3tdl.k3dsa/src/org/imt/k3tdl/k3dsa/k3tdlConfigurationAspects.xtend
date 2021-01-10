@@ -28,11 +28,8 @@ class GateTypeAspect{
 }
 @Aspect (className = GateInstance)
 class GateInstanceAspect{
-	public List<DataUse> testerIncomingData = new ArrayList<DataUse>
-	public List<DataUse> sutIncomingData = new ArrayList<DataUse>
-	
-	public Object sutResponse = new Object
-	
+	public String actualOutput = null
+	private String expectedOutput= null
 	private CustomLauncher gateLauncher;
 	@Step
 	//setting up the related launcher based on the gate type 
@@ -49,14 +46,22 @@ class GateInstanceAspect{
 	}
 	
 	@Step
-	def void tester_receive(DataUse argument){
-		println("The tester component received data")
-		_self.testerIncomingData.add(argument)
+	def void assertArgument(DataUse argument){
+		_self.expectedOutput = (argument as LiteralValueUse).value
+		_self.expectedOutput = _self.expectedOutput.substring(1, _self.expectedOutput.length-1)//remove the quotation marks
+		println("Start assertion:")
+		//TODO: Have to be completed to support different kind of arguments (not just a string)
+		if (_self.actualOutput != null && _self.actualOutput.toString.equals(_self.expectedOutput.toString)){
+			println("Test case PASSED")
+		}else if(_self.actualOutput == null){
+			println("Test case FIALED: No response received from MUT")
+		}else{
+			println("Test case FAILED: The expected response is not received from MUT")
+		}
 	}
 	@Step
-	def void sut_receive(DataUse argument){
+	def void sendArgument2sut(DataUse argument){
 		println("The MUT component received data")
-		_self.sutIncomingData.add(argument)
 		if (argument instanceof DataInstanceUse){
 			if ((argument as DataInstanceUse).dataInstance.name == 'runMUT'){
 				println("Sending the argument to the ALE engine")
@@ -72,8 +77,8 @@ class GateInstanceAspect{
 				//extracting the query from the argument and sending for execution
 				var query = argument.argument.get(0).dataUse as LiteralValueUse;
 				println("the ocl query: " + query.value);
-				_self.sutResponse = _self.gateLauncher.executeOCLCommand(query.value);
-				println("Result: " + _self.sutResponse.toString);
+				_self.actualOutput = _self.gateLauncher.executeOCLCommand(query.value).toString;
+				println("the ocl query validation result: " + _self.actualOutput);
 			}//otherwise the message is an event conforming to the behavioral interface of the DSL
 			else{
 				println("Sending the argument to the Event Manager")

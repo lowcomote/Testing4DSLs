@@ -2,6 +2,7 @@ package org.imt.tdl.defaultPackage.generator;
 
 import java.io.IOException;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -12,14 +13,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecoretools.ale.Attribute;
 import org.eclipse.emf.ecoretools.ale.BoolType;
 import org.eclipse.emf.ecoretools.ale.IntType;
 import org.eclipse.emf.ecoretools.ale.RealType;
 import org.eclipse.emf.ecoretools.ale.SeqType;
 import org.eclipse.emf.ecoretools.ale.SetType;
 import org.eclipse.emf.ecoretools.ale.Unit;
-import org.eclipse.emf.ecoretools.ale.rType;
 import org.eclipse.emf.ecoretools.ale.typeLiteral;
 import org.eclipse.emf.ecoretools.ale.StringType;
 import org.eclipse.gemoc.dsl.Dsl;
@@ -32,7 +31,6 @@ import org.etsi.mts.tdl.DataType;
 import org.etsi.mts.tdl.ElementImport;
 import org.etsi.mts.tdl.Member;
 import org.etsi.mts.tdl.Package;
-import org.etsi.mts.tdl.SimpleDataType;
 import org.etsi.mts.tdl.StructuredDataType;
 import org.etsi.mts.tdl.tdlFactory;
 
