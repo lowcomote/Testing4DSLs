@@ -28,9 +28,11 @@ class GateTypeAspect{
 }
 @Aspect (className = GateInstance)
 class GateInstanceAspect{
-	public String actualOutput = null
+	private String actualOutput = null
 	private String expectedOutput= null
-	private CustomLauncher gateLauncher;
+	private CustomLauncher gateLauncher
+	
+	private LinkedHashSet oclResult = new LinkedHashSet
 	@Step
 	//setting up the related launcher based on the gate type 
 	def void configureLauncher(CustomLauncher launcher){
@@ -74,7 +76,7 @@ class GateInstanceAspect{
 			//if the message is an OCL query
 			else if ((argument as DataInstanceUse).dataInstance.dataType.name == 'OCL'){
 				println("Sending the argument to the OCL engine")
-				//extracting the query from the argument and sending for execution
+				//extracting the query from the argument and sending for validation
 				var query = argument.argument.get(0).dataUse as LiteralValueUse;
 				println("the ocl query: " + query.value);
 				_self.actualOutput = _self.gateLauncher.executeOCLCommand(query.value).toString;

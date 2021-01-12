@@ -14,6 +14,7 @@ public class CustomLauncher{
 	private String MUTPath;
 	private Resource MUTResource;
 	
+	private JavaEngineLauncher javaEngineLauncher;
 	private ALEEngineLauncher aleEngineLauncher;
 	private AleEngine aleEngine;
 	private OCLLauncher oclLauncher;
@@ -34,7 +35,7 @@ public class CustomLauncher{
 			this.eventManagerLauncher.setUp();
 		}else if (configurationType.equals(OCL)) {
 			this.oclLauncher = new OCLLauncher();
-			this.oclLauncher.setUp(this.DSLPath);
+			this.oclLauncher.setUp();
 		}
 	}
 	public void executeGenericCommand() throws CoreException, EngineContextException {
