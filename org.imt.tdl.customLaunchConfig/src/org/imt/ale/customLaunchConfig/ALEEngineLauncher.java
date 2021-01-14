@@ -1,13 +1,18 @@
 package org.imt.ale.customLaunchConfig;
 
 import org.eclipse.core.runtime.CoreException;
+
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.ILaunchManager;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gemoc.ale.interpreted.engine.AleEngine;
 import org.eclipse.gemoc.ale.interpreted.engine.sirius.ALESiriusInterpreter;
 import org.eclipse.gemoc.ale.interpreted.engine.sirius.ALESiriusInterpreterProviderAddon;
+import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.dsl.debug.ide.launch.AbstractDSLLaunchConfigurationDelegate;
 import org.eclipse.gemoc.dsl.debug.ide.sirius.ui.launch.AbstractDSLLaunchConfigurationDelegateSiriusUI;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
@@ -32,26 +37,25 @@ public class ALEEngineLauncher {
 	private String _modelInitializationMethod;
 	private String _modelInitializationArguments;
 
-	public void setUp(String MUTPath) throws CoreException, EngineContextException {
+	public void setUp(String MUTPath, String DSLPath) throws CoreException, EngineContextException {
 		//TODO: The attributes have to be set in an automatic manner (for now, I simply set them)
 		this._modelLocation = MUTPath;
 		this._siriusRepresentationLocation = MUTPath.split("/")[1] + "/representations.aird";
 		this._delay = "0";
-		this._language = "org.imt.bpmn.BPMN";
-		//this._language = "org.eclipse.gemoc.sample.ale.fsm.FSM";
+		this._language = this.getDslName(DSLPath);
 		this._entryPointModelElement = "/";
-		this._entryPointMethod = "bpmn::Microflow::main";
-		//this._entryPointMethod = "fsm::StateMachine::main";
+		//this._entryPointMethod = "bpmn::Microflow::main";
+		this._entryPointMethod = "fsm::StateMachine::main";
 		this._animationFirstBreak = true;
-		this._modelInitializationMethod = "bpmn::Microflow::initializeModel";
-		//this._modelInitializationMethod = "fsm::StateMachine::initializeModel";
-		this._modelInitializationArguments = "";
-		//this._modelInitializationArguments = "000101010";
+		//this._modelInitializationMethod = "bpmn::Microflow::initializeModel";
+		this._modelInitializationMethod = "fsm::StateMachine::initializeModel";
+		//this._modelInitializationArguments = "";
+		this._modelInitializationArguments = "000101010";
 		this.executionMode = ExecutionMode.Run;
 		this.setALEConfiguration();
 	}
 	//definition of a new configuration of ALE Engine for running a specific model
-	public void setALEConfiguration() throws CoreException, EngineContextException {
+	private void setALEConfiguration() throws CoreException, EngineContextException {
 		// Create a new Launch Configuration
 		ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
 		ILaunchConfigurationType type = manager.getLaunchConfigurationType("org.eclipse.gemoc.ale.interpreted.engine.ui.launcher");
@@ -98,5 +102,10 @@ public class ALEEngineLauncher {
 		engine.getExecutionContext().getExecutionPlatform().addEngineAddon(aleRTDInterpreter);
 		System.out.println("The model under test executed successfully");
 		return engine;
+	}
+	private String getDslName(String dslFilePath) {
+		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
+		Dsl dsl = (Dsl)dslRes.getContents().get(0);
+		return dsl.getEntry("name").getValue().toString();
 	}
 }

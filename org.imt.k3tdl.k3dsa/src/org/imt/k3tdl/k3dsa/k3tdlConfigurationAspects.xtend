@@ -66,7 +66,7 @@ class GateInstanceAspect{
 		println("The MUT component received data")
 		if (argument instanceof DataInstanceUse){
 			if ((argument as DataInstanceUse).dataInstance.name == 'runMUT'){
-				println("Sending the argument to the ALE engine")
+				println("Sending the argument to the Model Execution Engine")
 				_self.gateLauncher.executeGenericCommand();
 			}else if ((argument as DataInstanceUse).dataInstance.name == 'setModelState'){
 				//TODO: Set the model state

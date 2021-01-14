@@ -181,13 +181,12 @@ public class TestConfigurationGenerator {
 		mutPathAnnotation.setKey(this.commonPackageGenerator.getAnnotations().get("MUTPath"));
 		mutPathAnnotation.setValue("\'TODO: Put the address of Model-Under Test here\'");
 		mutInstance.getAnnotation().add(mutPathAnnotation);
-		if (configuration.getName().contains("ocl")) {
-			Annotation dslPathAnnotation = factory.createAnnotation();
-			dslPathAnnotation.setAnnotatedElement(mutInstance);
-			dslPathAnnotation.setKey(this.commonPackageGenerator.getAnnotations().get("DSLPath"));
-			dslPathAnnotation.setValue("\'platform:/plugin/...TODO: complete the address of .dsl file...\'");
-			mutInstance.getAnnotation().add(dslPathAnnotation);
-		}
+		Annotation dslPathAnnotation = factory.createAnnotation();
+		dslPathAnnotation.setAnnotatedElement(mutInstance);
+		dslPathAnnotation.setKey(this.commonPackageGenerator.getAnnotations().get("DSLPath"));
+		dslPathAnnotation.setValue("\'platform:/plugin/...TODO: complete the address of .dsl file...\'");
+		mutInstance.getAnnotation().add(dslPathAnnotation);
+
 		configuration.getComponentInstance().add(mutInstance);
 	}
 	private void generateConnection(TestConfiguration configuration, String configurationType) {

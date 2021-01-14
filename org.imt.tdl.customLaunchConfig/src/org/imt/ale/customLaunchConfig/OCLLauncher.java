@@ -31,12 +31,7 @@ public class OCLLauncher {
     public Object runQuery(Resource MUTResource, String query) throws ParserException {
     	//The root element of the dsl is the context for ocl
     	this.oclHelper.setContext(MUTResource.getContents().get(0).eClass());
-        try {
-            this.expression = this.oclHelper.createQuery(query);
-        } catch (ParserException e) {
-            e.printStackTrace();
-            throw e;
-        }
+        this.expression = this.oclHelper.createQuery(query);
         this.queryEval = this.ocl.createQuery(this.expression);
         //the ocl query will be evaluated on the root element of MUT (e.g, Microflow element in BPMN Example)
         Object res = this.queryEval.evaluate(MUTResource.getContents().get(0));

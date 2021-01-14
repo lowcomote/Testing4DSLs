@@ -5,19 +5,21 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.ILaunchManager;
-import org.eclipse.gemoc.ale.interpreted.engine.AleEngine;
-import org.eclipse.gemoc.ale.interpreted.engine.sirius.ALESiriusInterpreter;
-import org.eclipse.gemoc.ale.interpreted.engine.sirius.ALESiriusInterpreterProviderAddon;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.gemoc.execution.sequential.javaengine.PlainK3ExecutionEngine;
+import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.dsl.debug.ide.launch.AbstractDSLLaunchConfigurationDelegate;
 import org.eclipse.gemoc.dsl.debug.ide.sirius.ui.launch.AbstractDSLLaunchConfigurationDelegateSiriusUI;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.eclipse.gemoc.executionframework.engine.commons.GenericModelExecutionContext;
+import org.eclipse.gemoc.executionframework.engine.commons.sequential.ISequentialRunConfiguration;
 import org.eclipse.gemoc.executionframework.engine.commons.sequential.SequentialRunConfiguration;
 import org.eclipse.gemoc.executionframework.engine.ui.Activator;
 import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
-import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
 
-public class JavaEngineLauncher {
+public class JavaEngineLauncher{
 	
 	private SequentialRunConfiguration runConfiguration;
 	private ExecutionMode executionMode;
@@ -32,21 +34,17 @@ public class JavaEngineLauncher {
 	private String _modelInitializationMethod;
 	private String _modelInitializationArguments;
 
-	public void setUp(String MUTPath) throws CoreException, EngineContextException {
+	public void setUp(String MUTPath, String DSLPath) throws CoreException, EngineContextException {
 		//TODO: The attributes have to be set in an automatic manner (for now, I simply set them)
 		this._modelLocation = MUTPath;
 		this._siriusRepresentationLocation = MUTPath.split("/")[1] + "/representations.aird";
 		this._delay = "0";
-		this._language = "org.imt.bpmn.BPMN";
-		//this._language = "org.eclipse.gemoc.sample.ale.fsm.FSM";
+		this._language = this.getDslName(DSLPath);
 		this._entryPointModelElement = "/";
-		this._entryPointMethod = "bpmn::Microflow::main";
-		//this._entryPointMethod = "fsm::StateMachine::main";
+		this._entryPointMethod = "public static void org.eclipse.gemoc.example.k3fsm.k3dsa.FSMAspect.main(org.eclipse.gemoc.example.k3fsm.FSM)";
 		this._animationFirstBreak = true;
-		this._modelInitializationMethod = "bpmn::Microflow::initializeModel";
-		//this._modelInitializationMethod = "fsm::StateMachine::initializeModel";
-		this._modelInitializationArguments = "";
-		//this._modelInitializationArguments = "000101010";
+		this._modelInitializationMethod = "org.eclipse.gemoc.example.k3fsm.k3dsa.FSMAspect.initializeModel";
+		this._modelInitializationArguments = "000101010";
 		this.executionMode = ExecutionMode.Run;
 		this.setJavaConfiguration();
 	}
@@ -54,7 +52,7 @@ public class JavaEngineLauncher {
 	public void setJavaConfiguration() throws CoreException, EngineContextException {
 		// Create a new Launch Configuration
 		ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
-		ILaunchConfigurationType type = manager.getLaunchConfigurationType("org.eclipse.gemoc.ale.interpreted.engine.ui.launcher");
+		ILaunchConfigurationType type = manager.getLaunchConfigurationType("org.eclipse.gemoc.execution.sequential.javaengine.ui.launcher");
 		ILaunchConfigurationWorkingCopy configuration = type.newInstance(null, "Run MUT");
 
 		// Set its attributes
@@ -80,23 +78,21 @@ public class JavaEngineLauncher {
 		this.runConfiguration = new SequentialRunConfiguration(configuration);
 		//setting the executionMode
 	}
-	protected AleEngine createExecutionEngine()
-			throws CoreException, EngineContextException {
-		System.out.println("Start creating Ale Engine");
-		AleEngine engine = new AleEngine();
-		
-		GenericModelExecutionContext<SequentialRunConfiguration> executioncontext = 
-				new GenericModelExecutionContext<SequentialRunConfiguration>(this.runConfiguration, this.executionMode);
-		executioncontext.initializeResourceModel(); // load model
-		engine.initialize(executioncontext);
-		
-		// declare this engine as available for ale: queries in the odesign
-		ALESiriusInterpreter.getDefault().addAleEngine(engine);
-		// create and add addon to unregister when the engine will be disposed
-		IEngineAddon aleRTDInterpreter = new ALESiriusInterpreterProviderAddon();
-		Activator.getDefault().getMessaggingSystem().debug("Enabled implicit addon: "+ aleRTDInterpreter.getAddonID(), Activator.PLUGIN_ID);
-		engine.getExecutionContext().getExecutionPlatform().addEngineAddon(aleRTDInterpreter);
+
+	protected PlainK3ExecutionEngine createExecutionEngine() throws CoreException, EngineContextException {
+		// create and initialize engine
+		PlainK3ExecutionEngine executionEngine = new PlainK3ExecutionEngine();
+		GenericModelExecutionContext<ISequentialRunConfiguration> executioncontext = new GenericModelExecutionContext<ISequentialRunConfiguration>(
+				this.runConfiguration, this.executionMode);
+		//executioncontext.getExecutionPlatform().getModelLoader().setProgressMonitor(this.launchProgressMonitor);
+		executioncontext.initializeResourceModel();
+		executionEngine.initialize(executioncontext);
 		System.out.println("The model under test executed successfully");
-		return engine;
+		return executionEngine;
+	}
+	private String getDslName(String dslFilePath) {
+		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
+		Dsl dsl = (Dsl)dslRes.getContents().get(0);
+		return dsl.getEntry("name").getValue().toString();
 	}
 }
