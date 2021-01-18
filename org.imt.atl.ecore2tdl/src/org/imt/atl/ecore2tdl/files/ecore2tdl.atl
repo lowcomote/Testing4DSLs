@@ -24,6 +24,9 @@ rule class2simpleType{
 				then '_' + class.name
 				else class.name
 				endif)
+	do{
+		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
+	}
 }
 rule class2structuredType{
 	from class: Ecore!EClass (class.eAllStructuralFeatures.notEmpty())
@@ -37,6 +40,9 @@ rule class2structuredType{
 					then thisModule.dynamicFeature2annotatedMember(feature)
 					else thisModule.staticFeature2member(feature)
 					endif))
+	do{
+		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
+	}
 }
 lazy rule staticFeature2member{
 	from feature: Ecore!EStructuralFeature (feature.eAnnotations.isEmpty() or 
@@ -85,6 +91,9 @@ rule enum2simpleType{
 				then '_' + enum.name
 				else enum.name
 				endif) 
+	do{
+		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
+	}
 }
 rule enumLiteral2simpleDataInstance{
 	from enumLiteral: Ecore!EEnumLiteral
@@ -94,6 +103,9 @@ rule enumLiteral2simpleDataInstance{
 				else enumLiteral.name
 				endif,
 		dataType <- enumLiteral.eEnum)
+	do{
+		thisModule.tokenNames <- thisModule.tokenNames.append(dataInstance.name.toString());
+	}
 }
 unique lazy rule dataType2simpleType{
 	from dataType: Ecore!EDataType
@@ -102,6 +114,9 @@ unique lazy rule dataType2simpleType{
 				then '_' + dataType.name
 				else dataType.name
 				endif)
+	do{
+		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
+	}
 }
 rule tdlPackage{
 	from package: Ecore!EPackage
