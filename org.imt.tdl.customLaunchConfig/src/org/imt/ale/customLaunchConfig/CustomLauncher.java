@@ -30,22 +30,33 @@ public class CustomLauncher{
 
 	public void setUp(String configurationType) throws CoreException, EngineContextException {
 		this.MUTResource = (new ResourceSetImpl()).getResource(URI.createURI(this.MUTPath), true);
-		System.out.println("Start configuring the "+ configurationType + " engine");
 		if (configurationType.equals(GENERIC)) {
 			String engineType = this.getEngineType();
 			if (engineType=="ale") {
-				this.aleEngineLauncher = new ALEEngineLauncher();
-				this.aleEngineLauncher.setUp(this.MUTPath, this.DSLPath);
+				if (this.aleEngineLauncher == null) {
+					System.out.println("Gemoc ALE engine setup");
+					this.aleEngineLauncher = new ALEEngineLauncher();
+					this.aleEngineLauncher.setUp(this.MUTPath, this.DSLPath);
+				}
 			}else if(engineType=="k3") {
-				this.javaEngineLauncher = new JavaEngineLauncher();
-				this.javaEngineLauncher.setUp(this.MUTPath, this.DSLPath);
+				if (this.javaEngineLauncher == null) {
+					System.out.println("Gemoc java engine setup");
+					this.javaEngineLauncher = new JavaEngineLauncher();
+					this.javaEngineLauncher.setUp(this.MUTPath, this.DSLPath);
+				}
 			}
 		}else if(configurationType.equals(DSL_SPECIFIC)) {
-			this.eventManagerLauncher = new EventManagerLauncher();
-			this.eventManagerLauncher.setUp();
+			if (this.eventManagerLauncher == null) {
+				System.out.println("Event manager setup");
+				this.eventManagerLauncher = new EventManagerLauncher();
+				this.eventManagerLauncher.setUp();
+			}
 		}else if (configurationType.equals(OCL)) {
-			this.oclLauncher = new OCLLauncher();
-			this.oclLauncher.setUp();
+			if (this.oclLauncher == null) {
+				System.out.println("OCL engine setup");
+				this.oclLauncher = new OCLLauncher();
+				this.oclLauncher.setUp();
+			}
 		}
 	}
 	public void executeGenericCommand() throws CoreException, EngineContextException {
@@ -58,7 +69,6 @@ public class CustomLauncher{
 			this.javaEngine = this.javaEngineLauncher.createExecutionEngine();
 			this.MUTResource = this.javaEngine.getExecutionContext().getResourceModel();
 		}
-		
 	}
 	public Object executeOCLCommand (String query){
 		System.out.println("Start executing ocl command");
