@@ -67,7 +67,6 @@ class TestConfigurationAspect{
 	public String DSLPath;
 	@Step
 	def void activateConfiguration(){
-		println("Test configuration activation")
 		//finding the address of MUT From the annotations of the SUT component (the component with role==0)
 		for (Annotation a:_self.componentInstance.filter[ci | ci.role.toString == "SUT"].get(0).annotation){
 			if (a.key.name == 'MUTPath'){

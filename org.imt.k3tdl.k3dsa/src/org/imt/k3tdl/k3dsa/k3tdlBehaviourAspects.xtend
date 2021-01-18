@@ -53,7 +53,6 @@ import org.etsi.mts.tdl.Target
 class BehaviourDescriptionAspect{
 	@Step
 	def void callBehavior(){
-		println("Calling target Behavior")
 		_self.behaviour.performBehavior()
 	}
 }
@@ -62,7 +61,6 @@ class BehaviourAspect{
 	public Behaviour enabledBehaviour;
 	@Step
 	def void performBehavior(){
-		println("Performing target Behavior")
 		_self.enabledBehaviour = _self
 	}
 }
