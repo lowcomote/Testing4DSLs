@@ -1,22 +1,13 @@
 package org.imt.tdl.defaultPackage.generator;
 
-import java.io.IOException;
-
-
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.SimpleDataInstance;
 import org.etsi.mts.tdl.tdlFactory;
-
-import com.google.inject.Injector;
 
 import org.etsi.mts.tdl.SimpleDataType;
 import org.etsi.mts.tdl.StructuredDataType;
