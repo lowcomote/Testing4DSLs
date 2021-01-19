@@ -27,11 +27,16 @@ import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterf
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.EventType;
 import org.etsi.mts.tdl.Annotation;
 import org.etsi.mts.tdl.AnnotationType;
+import org.etsi.mts.tdl.AnyValue;
 import org.etsi.mts.tdl.DataType;
 import org.etsi.mts.tdl.ElementImport;
 import org.etsi.mts.tdl.Member;
+import org.etsi.mts.tdl.MemberAssignment;
 import org.etsi.mts.tdl.Package;
+import org.etsi.mts.tdl.SimpleDataInstance;
+import org.etsi.mts.tdl.StructuredDataInstance;
 import org.etsi.mts.tdl.StructuredDataType;
+import org.etsi.mts.tdl.UnassignedMemberTreatment;
 import org.etsi.mts.tdl.tdlFactory;
 
 public class DSLSpecificEventsGenerator {
@@ -132,6 +137,18 @@ public class DSLSpecificEventsGenerator {
 		setState.getMember().add(state);
 		this.dslSpecificEventsPackage.getPackagedElement().add(setState);
 		this.TypesForGeneralEvents.add(setState);
+		
+		StructuredDataInstance setModelState = factory.createStructuredDataInstance();
+		setModelState.setName("setModelState");
+		setModelState.setDataType(setState);
+		setModelState.setUnassignedMember(UnassignedMemberTreatment.ANY_VALUE);
+		MemberAssignment newState = factory.createMemberAssignment();
+		newState.setMember(setState.getMember().get(0));
+		AnyValue anyValue = factory.createAnyValue();
+		anyValue.setName("?");
+		newState.setMemberSpec(anyValue);
+		setModelState.getMemberAssignment().add(newState);
+		this.dslSpecificEventsPackage.getPackagedElement().add(setModelState);
 	}
 	private void generateTypeForDSLInterfaces() {
 		AnnotationType acceptedEvent = factory.createAnnotationType();

@@ -43,6 +43,7 @@ class PackageAspect {
     			_self.enabledTestCase = tc;
     			_self.enabledConfiguration = tc.testConfiguration;
     			_self.enabledTestCase.executeTestCase()
+    			println()
     		}    		
 		} catch (TDLRuntimeException nt){
 			println("Stopped due "+nt.message)	
