@@ -15,7 +15,7 @@ import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
 import java.util.List
 import java.util.ArrayList
 import org.eclipse.emf.common.util.EList
-import org.imt.ale.customLaunchConfig.CustomLauncher
+import org.imt.launchConfiguration.impl.LauncherFactory
 
 @Aspect(className = Package)
 class PackageAspect {
@@ -52,7 +52,7 @@ class PackageAspect {
 }
 @Aspect (className = TestDescription)
 class TestDescriptionAspect{
-	public CustomLauncher launcher = new CustomLauncher();
+	public LauncherFactory launcher = new LauncherFactory();
 	@Step
 	def void executeTestCase(){
 		println("Start test case execution: " + _self.name)

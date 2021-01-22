@@ -1,4 +1,4 @@
-package org.imt.ale.customLaunchConfig;
+package org.imt.launchConfiguration.impl;
 
 import org.eclipse.core.runtime.CoreException;
 
@@ -21,9 +21,10 @@ import org.eclipse.gemoc.executionframework.engine.commons.sequential.Sequential
 import org.eclipse.gemoc.executionframework.engine.ui.Activator;
 import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
 import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
+import org.imt.launchConfiguration.ILauncher;
 
-public class ALEEngineLauncher {
-	
+public class ALEEngineLauncher extends AbstractLauncher{
+
 	private SequentialRunConfiguration runConfiguration;
 	private ExecutionMode executionMode;
 	
@@ -36,8 +37,9 @@ public class ALEEngineLauncher {
 	private Boolean _animationFirstBreak;
 	private String _modelInitializationMethod;
 	private String _modelInitializationArguments;
-
-	public void setUp(String MUTPath, String DSLPath) throws CoreException, EngineContextException {
+	
+	@Override
+	public void setUp(String MUTPath, String DSLPath){
 		//TODO: The attributes have to be set in an automatic manner (for now, I simply set them)
 		this._modelLocation = MUTPath;
 		this._siriusRepresentationLocation = MUTPath.split("/")[1] + "/representations.aird";
@@ -55,42 +57,49 @@ public class ALEEngineLauncher {
 		this.setALEConfiguration();
 	}
 	//definition of a new configuration of ALE Engine for running a specific model
-	private void setALEConfiguration() throws CoreException, EngineContextException {
+	private void setALEConfiguration(){
 		// Create a new Launch Configuration
 		ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
 		ILaunchConfigurationType type = manager.getLaunchConfigurationType("org.eclipse.gemoc.ale.interpreted.engine.ui.launcher");
-		ILaunchConfigurationWorkingCopy configuration = type.newInstance(null, "Run MUT");
-
+		ILaunchConfigurationWorkingCopy configuration = null;
+		try {
+			configuration = type.newInstance(null, "Run MUT");
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
 		// Set its attributes
-		configuration.setAttribute(AbstractDSLLaunchConfigurationDelegate.RESOURCE_URI,
-				this._modelLocation);
-		configuration.setAttribute(AbstractDSLLaunchConfigurationDelegateSiriusUI.SIRIUS_RESOURCE_URI,
-				this._siriusRepresentationLocation);
+		configuration.setAttribute(AbstractDSLLaunchConfigurationDelegate.RESOURCE_URI, this._modelLocation);
+		configuration.setAttribute(AbstractDSLLaunchConfigurationDelegateSiriusUI.SIRIUS_RESOURCE_URI, this._siriusRepresentationLocation);
 		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_DELAY, Integer.parseInt(this._delay));
 		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_SELECTED_LANGUAGE, this._language);
 		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_MODEL_ENTRY_POINT, this._entryPointModelElement);
 		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_METHOD_ENTRY_POINT, this._entryPointMethod);
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_METHOD,
-				this._modelInitializationMethod);
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_ARGUMENTS,
-				this._modelInitializationArguments);
+		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_METHOD, this._modelInitializationMethod);
+		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_ARGUMENTS, this._modelInitializationArguments);
 		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_BREAK_START, this._animationFirstBreak);
-		// DebugModelID for sequential engine
-		configuration.setAttribute(SequentialRunConfiguration.DEBUG_MODEL_ID, Activator.DEBUG_MODEL_ID);
-
-		// Launch the configuration
-		//configuration.launch(ILaunchManager.RUN_MODE, new NullProgressMonitor());
-			
-		this.runConfiguration = new SequentialRunConfiguration(configuration);
-		//setting the executionMode
+		configuration.setAttribute(SequentialRunConfiguration.DEBUG_MODEL_ID, Activator.DEBUG_MODEL_ID);	
+		try {
+			this.runConfiguration = new SequentialRunConfiguration(configuration);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
 	}
-	protected AleEngine createExecutionEngine()
-			throws CoreException, EngineContextException {
+	@Override
+	public void executeModel() {
+		AleEngine aleEngine = createExecutionEngine();
+		aleEngine.start();
+		this.setModelResource(aleEngine.getExecutionContext().getResourceModel());
+	}
+	private AleEngine createExecutionEngine(){
 		System.out.println("Start creating Ale Engine");
 		AleEngine engine = new AleEngine();
 		
-		GenericModelExecutionContext<SequentialRunConfiguration> executioncontext = 
-				new GenericModelExecutionContext<SequentialRunConfiguration>(this.runConfiguration, this.executionMode);
+		GenericModelExecutionContext<SequentialRunConfiguration> executioncontext = null;
+		try {
+			executioncontext = new GenericModelExecutionContext<SequentialRunConfiguration>(this.runConfiguration, this.executionMode);
+		} catch (EngineContextException e) {
+			e.printStackTrace();
+		}
 		executioncontext.initializeResourceModel(); // load model
 		engine.initialize(executioncontext);
 		
@@ -100,7 +109,6 @@ public class ALEEngineLauncher {
 		IEngineAddon aleRTDInterpreter = new ALESiriusInterpreterProviderAddon();
 		Activator.getDefault().getMessaggingSystem().debug("Enabled implicit addon: "+ aleRTDInterpreter.getAddonID(), Activator.PLUGIN_ID);
 		engine.getExecutionContext().getExecutionPlatform().addEngineAddon(aleRTDInterpreter);
-		System.out.println("The model under test executed successfully");
 		return engine;
 	}
 	private String getDslName(String dslFilePath) {

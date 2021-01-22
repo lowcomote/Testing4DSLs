@@ -1,4 +1,4 @@
-package org.imt.ale.customLaunchConfig;
+package org.imt.launchConfiguration.impl;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
@@ -7,20 +7,18 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.eclipse.ocl.ParserException;
+import org.imt.launchConfiguration.ILauncher;
 import org.eclipse.gemoc.ale.interpreted.engine.AleEngine;
 import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.execution.sequential.javaengine.PlainK3ExecutionEngine;
 
-public class CustomLauncher{
+public class LauncherFactory{
 	
+	private Resource MUTResource;
 	private String DSLPath;
 	private String MUTPath;
-	private Resource MUTResource;
 	
-	private JavaEngineLauncher javaEngineLauncher;
-	private PlainK3ExecutionEngine javaEngine;
-	private ALEEngineLauncher aleEngineLauncher;
-	private AleEngine aleEngine;
+	private ILauncher engineLauncher;
 	private OCLLauncher oclLauncher;
 	private EventManagerLauncher eventManagerLauncher;
 	
@@ -29,22 +27,20 @@ public class CustomLauncher{
 	public final static String OCL = "OCL";
 
 	public void setUp(String configurationType) throws CoreException, EngineContextException {
-		this.MUTResource = (new ResourceSetImpl()).getResource(URI.createURI(this.MUTPath), true);
 		if (configurationType.equals(GENERIC)) {
 			String engineType = this.getEngineType();
 			if (engineType=="ale") {
-				if (this.aleEngineLauncher == null) {
+				if (this.engineLauncher == null) {
 					System.out.println("Gemoc ALE engine setup");
-					this.aleEngineLauncher = new ALEEngineLauncher();
-					this.aleEngineLauncher.setUp(this.MUTPath, this.DSLPath);
+					this.engineLauncher = new ALEEngineLauncher();	
 				}
 			}else if(engineType=="k3") {
-				if (this.javaEngineLauncher == null) {
+				if (this.engineLauncher == null) {
 					System.out.println("Gemoc java engine setup");
-					this.javaEngineLauncher = new JavaEngineLauncher();
-					this.javaEngineLauncher.setUp(this.MUTPath, this.DSLPath);
+					this.engineLauncher = new JavaEngineLauncher();
 				}
 			}
+			this.engineLauncher.setUp(this.MUTPath, this.DSLPath);
 		}else if(configurationType.equals(DSL_SPECIFIC)) {
 			if (this.eventManagerLauncher == null) {
 				System.out.println("Event manager setup");
@@ -61,14 +57,9 @@ public class CustomLauncher{
 	}
 	public void executeGenericCommand() throws CoreException, EngineContextException {
 		System.out.println("Start executing generic command");
-		String engineType = this.getEngineType();
-		if (engineType=="ale") {
-			this.aleEngine = this.aleEngineLauncher.createExecutionEngine();
-			this.MUTResource = this.aleEngine.getExecutionContext().getResourceModel();
-		}else if(engineType=="k3") {
-			this.javaEngine = this.javaEngineLauncher.createExecutionEngine();
-			this.MUTResource = this.javaEngine.getExecutionContext().getResourceModel();
-		}
+		this.engineLauncher.executeModel();
+		this.MUTResource = this.engineLauncher.getModelResource();
+		System.out.println("The model under test executed successfully");
 	}
 	public Object executeOCLCommand (String query){
 		System.out.println("Start executing ocl command");

@@ -1,8 +1,7 @@
-package org.imt.ale.customLaunchConfig;
+package org.imt.launchConfiguration.impl;
 
 import java.util.ArrayList;
-
-
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 
@@ -49,19 +48,32 @@ public class OCLLauncher {
 		this.queryEval = this.ocl.createQuery(this.expression);
 		// the ocl query will be evaluated on the root element of MUT
 		Object res = this.queryEval.evaluate(MUTResource.getContents().get(0));
-		//TODO: The type of res can be different based on the query
-		LinkedHashSet<?> queryResult =  (LinkedHashSet<?>) res;
 		ArrayList<String> labeledResult = new ArrayList<>();
-		//Registry labelGeneratorRegistry = ILabelGenerator.Registry.INSTANCE;
-		Iterator it = queryResult.iterator();
-		while (it.hasNext()) {
-			EObject object = (EObject) it.next();
-			labeledResult.add(queryResultLabelProvider(object));
-			/*@NonNull
-			DefaultLabelGeneratorBuilder labelBuilder = new DefaultLabelGeneratorBuilder(labelGeneratorRegistry, object,null);
-			labelBuilder.setOption(labelBuilder.SHOW_QUALIFIER, "::");
-			labelBuilder.buildLabelFor(object);
-			labeledResult.add(labelBuilder.toString());*/
+		if (res instanceof Collection<?>) {
+			if (res instanceof LinkedHashSet<?>) {
+				LinkedHashSet<?> queryResult =  (LinkedHashSet<?>) res;
+				Iterator it = queryResult.iterator();
+				while (it.hasNext()) {
+					EObject object = (EObject) it.next();
+					labeledResult.add(queryResultLabelProvider(object));
+				}
+			}else if (res instanceof ArrayList<?>) {
+				ArrayList<?> queryResult =  (ArrayList<?>) res;
+				for (int i = 0; i < queryResult.size(); i++) {
+					if (queryResult.get(i)== null) {
+						labeledResult.add("null");
+					}else {
+						labeledResult.add("'" + queryResult.get(i).toString() + "'");
+					}
+				}
+			}
+		}else {
+			if (res instanceof EObject) {
+				EObject object = (EObject) res;
+				labeledResult.add(queryResultLabelProvider(object));
+			}else {
+				labeledResult.add("'" + res.toString() + "'");
+			}
 		}
 		return labeledResult;
 	}

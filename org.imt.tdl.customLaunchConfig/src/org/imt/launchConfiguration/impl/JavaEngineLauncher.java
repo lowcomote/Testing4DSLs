@@ -1,6 +1,7 @@
-package org.imt.ale.customLaunchConfig;
+package org.imt.launchConfiguration.impl;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
@@ -9,6 +10,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gemoc.execution.sequential.javaengine.PlainK3ExecutionEngine;
+import org.eclipse.gemoc.ale.interpreted.engine.AleEngine;
 import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.dsl.debug.ide.launch.AbstractDSLLaunchConfigurationDelegate;
 import org.eclipse.gemoc.dsl.debug.ide.sirius.ui.launch.AbstractDSLLaunchConfigurationDelegateSiriusUI;
@@ -19,7 +21,7 @@ import org.eclipse.gemoc.executionframework.engine.commons.sequential.Sequential
 import org.eclipse.gemoc.executionframework.engine.ui.Activator;
 import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
 
-public class JavaEngineLauncher{
+public class JavaEngineLauncher extends AbstractLauncher{
 	
 	private SequentialRunConfiguration runConfiguration;
 	private ExecutionMode executionMode;
@@ -33,8 +35,8 @@ public class JavaEngineLauncher{
 	private Boolean _animationFirstBreak;
 	private String _modelInitializationMethod;
 	private String _modelInitializationArguments;
-
-	public void setUp(String MUTPath, String DSLPath) throws CoreException, EngineContextException {
+	@Override
+	public void setUp(String MUTPath, String DSLPath){
 		//TODO: The attributes have to be set in an automatic manner (for now, I simply set them)
 		this._modelLocation = MUTPath;
 		this._siriusRepresentationLocation = MUTPath.split("/")[1] + "/representations.aird";
@@ -49,45 +51,55 @@ public class JavaEngineLauncher{
 		this.setJavaConfiguration();
 	}
 	//definition of a new configuration of Gemoc java Engine for running a specific model
-	public void setJavaConfiguration() throws CoreException, EngineContextException {
+	public void setJavaConfiguration(){
 		// Create a new Launch Configuration
 		ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
 		ILaunchConfigurationType type = manager.getLaunchConfigurationType("org.eclipse.gemoc.execution.sequential.javaengine.ui.launcher");
-		ILaunchConfigurationWorkingCopy configuration = type.newInstance(null, "Run MUT");
-
+		ILaunchConfigurationWorkingCopy configuration = null;
+		try {
+			configuration = type.newInstance(null, "Run MUT");
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
 		// Set its attributes
-		configuration.setAttribute(AbstractDSLLaunchConfigurationDelegate.RESOURCE_URI,
-				this._modelLocation);
-		configuration.setAttribute(AbstractDSLLaunchConfigurationDelegateSiriusUI.SIRIUS_RESOURCE_URI,
-				this._siriusRepresentationLocation);
+		configuration.setAttribute(AbstractDSLLaunchConfigurationDelegate.RESOURCE_URI, this._modelLocation);
+		configuration.setAttribute(AbstractDSLLaunchConfigurationDelegateSiriusUI.SIRIUS_RESOURCE_URI, this._siriusRepresentationLocation);
 		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_DELAY, Integer.parseInt(this._delay));
 		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_SELECTED_LANGUAGE, this._language);
 		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_MODEL_ENTRY_POINT, this._entryPointModelElement);
 		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_METHOD_ENTRY_POINT, this._entryPointMethod);
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_METHOD,
-				this._modelInitializationMethod);
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_ARGUMENTS,
-				this._modelInitializationArguments);
+		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_METHOD, this._modelInitializationMethod);
+		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_ARGUMENTS, this._modelInitializationArguments);
 		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_BREAK_START, this._animationFirstBreak);
 		// DebugModelID for sequential engine
 		configuration.setAttribute(SequentialRunConfiguration.DEBUG_MODEL_ID, Activator.DEBUG_MODEL_ID);
-
-		// Launch the configuration
-		//configuration.launch(ILaunchManager.RUN_MODE, new NullProgressMonitor());
-			
-		this.runConfiguration = new SequentialRunConfiguration(configuration);
-		//setting the executionMode
+		try {
+			this.runConfiguration = new SequentialRunConfiguration(configuration);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
 	}
-
-	protected PlainK3ExecutionEngine createExecutionEngine() throws CoreException, EngineContextException {
+	@Override
+	public void executeModel() {
+		PlainK3ExecutionEngine javaEngine = createExecutionEngine();
+		javaEngine.start();
+		this.setModelResource(javaEngine.getExecutionContext().getResourceModel());
+	}
+	private PlainK3ExecutionEngine createExecutionEngine(){
 		// create and initialize engine
 		PlainK3ExecutionEngine executionEngine = new PlainK3ExecutionEngine();
-		GenericModelExecutionContext<ISequentialRunConfiguration> executioncontext = new GenericModelExecutionContext<ISequentialRunConfiguration>(
-				this.runConfiguration, this.executionMode);
+		GenericModelExecutionContext<ISequentialRunConfiguration> executioncontext = null;
+		try {
+			executioncontext = new GenericModelExecutionContext<ISequentialRunConfiguration>(
+					this.runConfiguration, this.executionMode);
+		} catch (EngineContextException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//executioncontext.getExecutionPlatform().getModelLoader().setProgressMonitor(this.launchProgressMonitor);
+		executioncontext.getExecutionPlatform().getModelLoader().setProgressMonitor(new NullProgressMonitor());
 		executioncontext.initializeResourceModel();
 		executionEngine.initialize(executioncontext);
-		System.out.println("The model under test executed successfully");
 		return executionEngine;
 	}
 	private String getDslName(String dslFilePath) {
