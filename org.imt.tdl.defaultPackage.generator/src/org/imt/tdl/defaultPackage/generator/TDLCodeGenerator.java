@@ -79,25 +79,29 @@ public class TDLCodeGenerator {
 		Resource dslSpecificPackageRes = rs.createResource(URI.createURI(tdlProjectPath + "/generated/" + this.dslSpecificEventsGenerator.getDslSpecificEventsPackage().getName()+ ".tdlan2"));
 		Resource requiredTypesRes = rs.createResource(URI.createURI(tdlProjectPath + "/generated/" + this.dslSpecificTypesGenerator.getDslSpecificTypesPackage().getName()+ ".tdlan2"));
 		Resource configurationRes = rs.createResource(URI.createURI(tdlProjectPath + "/generated/" + this.testConfigurationPackageGenerator.getTestConfigurationPackage().getName()+ ".tdlan2"));
-		Resource testDesignPackageRes = rs.createResource(URI.createURI(tdlProjectPath + "/" + this.testDesignPackageGenerator.getTestDesignPackage().getName()+ ".tdlan2"));
+		Resource genericTestCasesPackageRes = rs.createResource(URI.createURI(tdlProjectPath + "/" + this.testDesignPackageGenerator.getGenericTestCasesPackage().getName()+ ".tdlan2"));
+		Resource oclTestCasesPackageRes = rs.createResource(URI.createURI(tdlProjectPath + "/" + this.testDesignPackageGenerator.getOCLTestCasesPackage().getName()+ ".tdlan2"));
 		
 		commonPackageRes.getContents().add(this.commonPackageGenerator.getCommonPackage());
 		dslSpecificPackageRes.getContents().add(this.dslSpecificEventsGenerator.getDslSpecificEventsPackage());
 		requiredTypesRes.getContents().add(this.dslSpecificTypesGenerator.getDslSpecificTypesPackage());
 		configurationRes.getContents().add(this.testConfigurationPackageGenerator.getTestConfigurationPackage());
-		testDesignPackageRes.getContents().add(this.testDesignPackageGenerator.getTestDesignPackage());
+		genericTestCasesPackageRes.getContents().add(this.testDesignPackageGenerator.getGenericTestCasesPackage());
+		oclTestCasesPackageRes.getContents().add(this.testDesignPackageGenerator.getOCLTestCasesPackage());
 		
 		commonPackageRes.save(null);
 		dslSpecificPackageRes.save(null);
 		requiredTypesRes.save(null);
 		configurationRes.save(null);
-		testDesignPackageRes.save(null);
+		genericTestCasesPackageRes.save(null);
+		oclTestCasesPackageRes.save(null);
 		
 		commonPackageRes.unload();
 		dslSpecificPackageRes.unload();
 		requiredTypesRes.unload();
 		configurationRes.unload();
-		testDesignPackageRes.unload();
+		genericTestCasesPackageRes.unload();
+		oclTestCasesPackageRes.unload();
 		rs = null;
 	}
 }

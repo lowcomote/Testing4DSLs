@@ -14,9 +14,9 @@ import org.eclipse.gemoc.execution.sequential.javaengine.PlainK3ExecutionEngine;
 
 public class LauncherFactory{
 	
-	private Resource MUTResource;
 	private String DSLPath;
 	private String MUTPath;
+	private Resource MUTResource;
 	
 	private ILauncher engineLauncher;
 	private OCLLauncher oclLauncher;
@@ -27,15 +27,17 @@ public class LauncherFactory{
 	public final static String OCL = "OCL";
 
 	public void setUp(String configurationType) throws CoreException, EngineContextException {
+		//set the model resource in its initial state
+		this.MUTResource = (new ResourceSetImpl()).getResource(URI.createURI(this.MUTPath), true);
 		if (configurationType.equals(GENERIC)) {
 			String engineType = this.getEngineType();
 			if (engineType=="ale") {
-				if (this.engineLauncher == null) {
+				if (this.engineLauncher == null || (this.engineLauncher instanceof JavaEngineLauncher)) {
 					System.out.println("Gemoc ALE engine setup");
 					this.engineLauncher = new ALEEngineLauncher();	
 				}
 			}else if(engineType=="k3") {
-				if (this.engineLauncher == null) {
+				if (this.engineLauncher == null || (this.engineLauncher instanceof ALEEngineLauncher)) {
 					System.out.println("Gemoc java engine setup");
 					this.engineLauncher = new JavaEngineLauncher();
 				}
@@ -57,6 +59,7 @@ public class LauncherFactory{
 	}
 	public void executeGenericCommand() throws CoreException, EngineContextException {
 		System.out.println("Start executing generic command");
+		//TODO: the execution thread has to wait for model execution to be finished
 		this.engineLauncher.executeModel();
 		this.MUTResource = this.engineLauncher.getModelResource();
 		System.out.println("The model under test executed successfully");

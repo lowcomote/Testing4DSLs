@@ -3,6 +3,7 @@ package org.imt.tdl.defaultPackage.generator;
 import java.io.IOException;
 
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -28,12 +29,12 @@ import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterf
 import org.etsi.mts.tdl.Annotation;
 import org.etsi.mts.tdl.AnnotationType;
 import org.etsi.mts.tdl.AnyValue;
+import org.etsi.mts.tdl.AnyValueOrOmit;
 import org.etsi.mts.tdl.DataType;
 import org.etsi.mts.tdl.ElementImport;
 import org.etsi.mts.tdl.Member;
 import org.etsi.mts.tdl.MemberAssignment;
 import org.etsi.mts.tdl.Package;
-import org.etsi.mts.tdl.SimpleDataInstance;
 import org.etsi.mts.tdl.StructuredDataInstance;
 import org.etsi.mts.tdl.StructuredDataType;
 import org.etsi.mts.tdl.UnassignedMemberTreatment;
@@ -69,7 +70,7 @@ public class DSLSpecificEventsGenerator {
 		generateImports();
 		if (this.metamodelRootElement != null) {
 			generateTypeForModelState();
-			generateTypeForSetState();
+			//generateTypeForSetState();
 		}
 		if (this.interfaceRootElement != null) {
 			generateTypeForDSLInterfaces();
@@ -80,75 +81,22 @@ public class DSLSpecificEventsGenerator {
 		PackageImport.setImportedPackage(this.dslSpecificTypesPackage);
 		this.dslSpecificEventsPackage.getImport().add(PackageImport);
 	}
-	//derive the model state based on the attributes defined in the ALE file 
-	/*private void generateTypeForModelState() {
-		StructuredDataType modelState = factory.createStructuredDataType();
-		modelState.setName("ModelState");
-		//generate members for modelState based on the attributes of the extended classes in ale file
-		for (int i=0; i< this.aleSemanticRootElement.getXtendedClasses().size(); i++) {
-			List<Attribute> attributes = this.aleSemanticRootElement.getXtendedClasses().get(i).getAttributes();
-			for (int j=0; j< attributes.size(); j++) {
-				String memberName = validName(attributes.get(j).getName());
-				rType memberAleType = attributes.get(j).getType();
-				DataType memberTDLType = null;
-				if (memberAleType instanceof typeLiteral) {
-					memberTDLType = aleTypeLiteral2tdlType((typeLiteral) memberAleType);
-				} else {
-					if (this.dslSpecificTypes.get(validName(memberAleType.getName().toLowerCase())) != null) {
-						memberTDLType = this.dslSpecificTypes.get(validName(memberAleType.getName().toLowerCase()));
-					}else {
-						SimpleDataType newType = factory.createSimpleDataType();
-						newType.setName(validName(memberAleType.getName()));
-						this.dslSpecificTypes.put(newType.getName().toLowerCase(), newType);
-						this.dslSpecificEventsPackage.getPackagedElement().add(newType);
-						memberTDLType = newType;
-					}
-				}
-				Member member = factory.createMember();
-				member.setName(memberName);
-				member.setDataType(memberTDLType);
-				modelState.getMember().add(member);
-			}
-		}
-		this.dslSpecificEventsPackage.getPackagedElement().add(modelState);
-		this.modelState = modelState;
-	}
-	*/
+	
 	//derive the model state based on the elements of the metamodel that are annotated as 'dynamic'
 	private void generateTypeForModelState() {
-		StructuredDataType modelState = factory.createStructuredDataType();
-		modelState.setName("ModelState");
-		//generate members for modelState based on the elements with 'dynamic' annotation in dslSpecificTypes tdl package
+		StructuredDataType modelStateType = factory.createStructuredDataType();
+		modelStateType.setName("ModelState");
+		
+		//generate members for modelState 
+		//based on the elements with 'dynamic' annotation in dslSpecificTypes tdl package
 		for (int i=0; i< this.dynamicTypes.size(); i++) {
 			Member member = factory.createMember();
-			member.setName(this.dynamicTypes.get(i).getName().toLowerCase());
+			member.setName(this.dynamicTypes.get(i).getName().toLowerCase()+"State");
 			member.setDataType(this.dynamicTypes.get(i));
-			modelState.getMember().add(member);
+			modelStateType.getMember().add(member);
 		}
-		this.dslSpecificEventsPackage.getPackagedElement().add(modelState);
-		this.modelState = modelState;
-	}
-	private void generateTypeForSetState() {
-		StructuredDataType setState = factory.createStructuredDataType();
-		setState.setName("setState");
-		Member state = factory.createMember();
-		state.setName("state");
-		state.setDataType(this.modelState);
-		setState.getMember().add(state);
-		this.dslSpecificEventsPackage.getPackagedElement().add(setState);
-		this.TypesForGeneralEvents.add(setState);
-		
-		StructuredDataInstance setModelState = factory.createStructuredDataInstance();
-		setModelState.setName("setModelState");
-		setModelState.setDataType(setState);
-		setModelState.setUnassignedMember(UnassignedMemberTreatment.ANY_VALUE);
-		MemberAssignment newState = factory.createMemberAssignment();
-		newState.setMember(setState.getMember().get(0));
-		AnyValue anyValue = factory.createAnyValue();
-		anyValue.setName("?");
-		newState.setMemberSpec(anyValue);
-		setModelState.getMemberAssignment().add(newState);
-		this.dslSpecificEventsPackage.getPackagedElement().add(setModelState);
+		this.dslSpecificEventsPackage.getPackagedElement().add(modelStateType);
+		this.modelState = modelStateType;
 	}
 	private void generateTypeForDSLInterfaces() {
 		AnnotationType acceptedEvent = factory.createAnnotationType();
@@ -245,7 +193,7 @@ public class DSLSpecificEventsGenerator {
 		}
 		return null;
 	}
-	//TODO: ModelUnit is defined in ale metamodel but Unit is used in ale files??
+
 	protected static Unit getAleSemanticsRootElement(String dslFilePath) {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);

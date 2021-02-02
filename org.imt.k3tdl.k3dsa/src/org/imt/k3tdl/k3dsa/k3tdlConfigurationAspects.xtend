@@ -15,6 +15,7 @@ import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
 import org.etsi.mts.tdl.DataInstanceUse
 import org.etsi.mts.tdl.LiteralValueUse
 import org.imt.launchConfiguration.impl.LauncherFactory
+import org.etsi.mts.tdl.ParameterBinding
 
 @Aspect(className=GateType)
 class GateTypeAspect {
@@ -41,17 +42,20 @@ class GateInstanceAspect {
 
 	@Step
 	def void assertArgument(DataUse argument) {
-		_self.expectedOutput = (argument as LiteralValueUse).value
-		_self.expectedOutput = _self.expectedOutput.substring(1, _self.expectedOutput.length - 1) // remove the quotation marks
-		print("Start assertion:")
-		// TODO: Have to be completed to support different kind of arguments (not just a string)
-		if (_self.receivedOutput != null && _self.receivedOutput.toString.equals(_self.expectedOutput.toString)) {
-			println("Test case PASSED")
-		} else if (_self.receivedOutput == null) {
-			println("Test case FIALED: No response received from MUT")
-		} else {
-			println("Test case FAILED: The expected response is not received from MUT")
+		if (argument instanceof LiteralValueUse){
+			_self.expectedOutput = (argument as LiteralValueUse).value
+			_self.expectedOutput = _self.expectedOutput.substring(1, _self.expectedOutput.length - 1) // remove the quotation marks
+			print("Start assertion:")
+			// TODO: Have to be completed to support different kind of arguments (not just a string)
+			if (_self.receivedOutput != null && _self.receivedOutput.toString.equals(_self.expectedOutput.toString)) {
+				println("Test case PASSED")
+			} else if (_self.receivedOutput == null) {
+				println("Test case FIALED: No response received from MUT")
+			} else {
+				println("Test case FAILED: The expected response is not received from MUT")
+			}
 		}
+		// TODO: Have to be completed to support different kind of arguments (not just LiteralValueUse)
 		println("Expected output: " + _self.expectedOutput);
 		println("Received output: " + _self.receivedOutput);
 		println();
@@ -64,8 +68,8 @@ class GateInstanceAspect {
 			if ((argument as DataInstanceUse).dataInstance.name == 'runMUT') {
 				println("Sending the data to the Model Execution Engine")
 				_self.gateLauncher.executeGenericCommand();
-			} else if ((argument as DataInstanceUse).dataInstance.name == 'setModelState') {
-				// TODO: Set the model state
+			} else if ((argument as DataInstanceUse).dataInstance.name == 'newState') {
+				_self.setModelState(argument as DataInstanceUse);
 			} else if ((argument as DataInstanceUse).dataInstance.name == 'getModelState') {
 				// TODO: Get the model state
 			} // if the message is an OCL query
@@ -81,6 +85,17 @@ class GateInstanceAspect {
 				_self.gateLauncher.executeDSLSpecificCommand("");
 			}
 			println("Sending the data done!")
+		}
+	}
+	def void setModelState(DataInstanceUse newState){
+		for (ParameterBinding paramBinding: newState.argument){
+			var ecoreTypeName = "";
+			if (paramBinding.parameter.dataType.name.startsWith('_')){
+				ecoreTypeName = paramBinding.parameter.dataType.name.substring(1)
+			}else{
+				ecoreTypeName = paramBinding.parameter.dataType.name
+			}
+			//TODO: finding an element in the MUT that its type name is equals to ecoreTypeName
 		}
 	}
 }
