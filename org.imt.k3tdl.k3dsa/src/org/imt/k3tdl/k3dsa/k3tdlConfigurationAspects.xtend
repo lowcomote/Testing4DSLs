@@ -69,6 +69,7 @@ class GateInstanceAspect {
 				println("Sending the data to the Model Execution Engine")
 				_self.gateLauncher.executeGenericCommand();
 			} else if ((argument as DataInstanceUse).dataInstance.name == 'newState') {
+				//the tester sends a new model state to the MUT
 				_self.setModelState(argument as DataInstanceUse);
 			} else if ((argument as DataInstanceUse).dataInstance.name == 'getModelState') {
 				// TODO: Get the model state
@@ -89,6 +90,7 @@ class GateInstanceAspect {
 	}
 	def void setModelState(DataInstanceUse newState){
 		for (ParameterBinding paramBinding: newState.argument){
+			//The data type of the parameters of the newState are data types defined in the ecore file of the DSL
 			var ecoreTypeName = "";
 			if (paramBinding.parameter.dataType.name.startsWith('_')){
 				ecoreTypeName = paramBinding.parameter.dataType.name.substring(1)
