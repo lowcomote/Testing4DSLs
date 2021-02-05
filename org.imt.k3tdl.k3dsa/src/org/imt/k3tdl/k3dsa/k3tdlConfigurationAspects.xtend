@@ -20,6 +20,7 @@ import org.etsi.mts.tdl.ParameterBinding
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.emf.ecore.resource.Resource
+import org.etsi.mts.tdl.DataType
 
 @Aspect(className=GateType)
 class GateTypeAspect {
@@ -118,6 +119,9 @@ class GateInstanceAspect {
 			}
 			println("Sending the data done!")
 		}
+	}
+	def boolean isEcoreType(DataType dataType){
+		return true;
 	}
 	def void setModelState(DataInstanceUse newState){
 		//get the current MUTResource
