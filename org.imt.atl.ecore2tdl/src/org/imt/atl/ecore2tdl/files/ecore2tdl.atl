@@ -29,13 +29,13 @@ rule class2simpleType{
 	}
 }
 rule class2structuredType{
-	from class: Ecore!EClass (class.eAllStructuralFeatures.notEmpty())
+	from class: Ecore!EClass (class.eAllStructuralFeatures.notEmpty() and class.eSuperTypes.isEmpty())
 	to type: TDL!StructuredDataType(
 		name <- if (thisModule.tokenNames.includes(class.name))
 				then '_' + class.name
 				else class.name
 				endif,
-		member <- class.eAllStructuralFeatures-> collect(feature | 
+		member <- class.eStructuralFeatures-> collect(feature | 
 				if (feature.eAnnotations.notEmpty() and feature.isDynamicFeature)
 					then thisModule.dynamicFeature2annotatedMember(feature)
 					else thisModule.staticFeature2member(feature)
@@ -43,6 +43,29 @@ rule class2structuredType{
 	do{
 		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
 	}
+}
+rule inheritedClass2structuredType{
+	from class: Ecore!EClass (class.eAllStructuralFeatures.notEmpty() and class.eSuperTypes.notEmpty())
+	to type: TDL!StructuredDataType(
+		name <- if (thisModule.tokenNames.includes(class.name))
+				then '_' + class.name
+				else class.name
+				endif,
+		member <- class.eStructuralFeatures-> collect(feature | 
+				if (feature.eAnnotations.notEmpty() and feature.isDynamicFeature)
+					then thisModule.dynamicFeature2annotatedMember(feature)
+					else thisModule.staticFeature2member(feature)
+					endif),
+		extension <- thisModule.superClass2extension(class))
+	do{
+		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
+	}
+}
+unique lazy rule superClass2extension{
+	from class: Ecore!EClass (class.eSuperTypes.notEmpty())
+	to parent : TDL!Extension(
+		extending <- class.eSuperTypes->last()
+	)
 }
 lazy rule staticFeature2member{
 	from feature: Ecore!EStructuralFeature (feature.eAnnotations.isEmpty() or 
