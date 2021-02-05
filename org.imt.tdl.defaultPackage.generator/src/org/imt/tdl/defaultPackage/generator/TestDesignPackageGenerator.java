@@ -65,28 +65,38 @@ public class TestDesignPackageGenerator {
 		List<DataType> dynamicTypes = this.dslSpecificTyepsGenerator.getDynamicTypes();
 		for (int i=0; i< dynamicTypes.size(); i++) {
 			//generate instances for each dynamic type
-			StructuredDataInstance dynamicTypeInstance = factory.createStructuredDataInstance();
+			
 			DataType dynamicType = dynamicTypes.get(i);
-			dynamicTypeInstance.setName(dynamicType.getName().toLowerCase()+"NewState");
-			dynamicTypeInstance.setDataType(dynamicType);
-			dynamicTypeInstance.setUnassignedMember(UnassignedMemberTreatment.ANY_VALUE);
-			if (dynamicType instanceof StructuredDataType) {
-				StructuredDataType type = (StructuredDataType) dynamicType;
-				for (int j=0; j < type.getMember().size(); j++) {
-					Member m = type.getMember().get(j);
-					for (int k=0; k < m.getAnnotation().size(); k++) {
-						if (m.getAnnotation().get(k).getKey().getName().toString().contains("dynamic")) {
-							MemberAssignment memberAssign = factory.createMemberAssignment();
-							memberAssign.setMember(m);
-							AnyValueOrOmit anyValueOrOmit = factory.createAnyValueOrOmit();
-							memberAssign.setMemberSpec(anyValueOrOmit);
-							dynamicTypeInstance.getMemberAssignment().add(memberAssign);
+			if (!isAbstractType(dynamicType)) {
+				StructuredDataInstance dynamicTypeInstance = factory.createStructuredDataInstance();
+				dynamicTypeInstance.setName(dynamicType.getName().toLowerCase()+"NewState");
+				dynamicTypeInstance.setDataType(dynamicType);
+				if (dynamicType instanceof StructuredDataType) {
+					StructuredDataType type = (StructuredDataType) dynamicType;
+					for (int j=0; j < type.allMembers().size(); j++) {
+						Member m = type.allMembers().get(j);
+						for (int k=0; k < m.getAnnotation().size(); k++) {
+							if (m.getAnnotation().get(k).getKey().getName().toString().contains("dynamic")) {
+								MemberAssignment memberAssign = factory.createMemberAssignment();
+								memberAssign.setMember(m);
+								AnyValueOrOmit anyValueOrOmit = factory.createAnyValueOrOmit();
+								memberAssign.setMemberSpec(anyValueOrOmit);
+								dynamicTypeInstance.getMemberAssignment().add(memberAssign);
+							}
 						}
 					}
 				}
+				this.genericTestCasesPackage.getPackagedElement().add(dynamicTypeInstance);
 			}
-			this.genericTestCasesPackage.getPackagedElement().add(dynamicTypeInstance);
 		}
+	}
+	private boolean isAbstractType(DataType type) {
+		for (int i=0; i<type.getAnnotation().size(); i++) {
+			if (type.getAnnotation().get(i).getKey().toString().contains("abstract")){
+				return true;
+			}
+		}
+		return false;
 	}
 	private void generateOCLDataInstances() {
 		if (this.commonPackageGenerator.getOCLType()!=null) {

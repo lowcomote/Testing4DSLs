@@ -25,7 +25,9 @@ Require-Bundle: org.etsi.mts.tdl.model;bundle-version="1.4.0",
  org.eclipse.m2m.atl.emftvm;bundle-version="4.2.2",
  org.eclipse.m2m.atl.common,
  org.imt.atl.ecore2tdl;bundle-version="1.0.0",
- org.eclipse.emf.ecoretools.ale.xtext;bundle-version="1.2.0"
+ org.eclipse.emf.ecoretools.ale.xtext;bundle-version="1.2.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common
 Import-Package: javax.inject;version="1.0.0",
  org.eclipse.emf.mwe.internal.core.ast.util,
  org.eclipse.xtext.resource,

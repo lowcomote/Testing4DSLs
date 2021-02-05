@@ -1,6 +1,7 @@
 package org.imt.tdl.defaultPackage.generator;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,11 +15,13 @@ import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.m2m.atl.common.ATLExecutionException;
 import org.eclipse.m2m.atl.core.ATLCoreException;
 import org.eclipse.m2m.atl.core.emf.EMFModel;
+import org.etsi.mts.tdl.Annotation;
 import org.etsi.mts.tdl.DataType;
 import org.etsi.mts.tdl.Member;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.PackageableElement;
 import org.etsi.mts.tdl.StructuredDataType;
+import org.imt.atl.ecore2tdl.emftvm.Ecore2tdl_EMFTVM;
 import org.imt.atl.ecore2tdl.files.Ecore2tdl;
 
 public class DSLSpecificTypesGenerator {
@@ -53,8 +56,10 @@ public class DSLSpecificTypesGenerator {
 		String IN_model_path = metamodelPath;
 		try {
 			Ecore2tdl runner = new Ecore2tdl();
+			//Ecore2tdl_EMFTVM runner = new Ecore2tdl_EMFTVM();
 			runner.loadModels(IN_model_path);
 			runner.doEcore2tdl(new NullProgressMonitor());
+			//runner.doEcore2tdl();
 			EMFModel outModel = (EMFModel) runner.getOutModel();
 			Resource dslTypesRes = outModel.getResource();
 			this.dslSpecificTypesPackage = (Package) dslTypesRes.getContents().get(0);
@@ -65,18 +70,12 @@ public class DSLSpecificTypesGenerator {
 					//recognizing dynamic data types for being used as model state
 					if (p instanceof StructuredDataType) {
 						StructuredDataType type = (StructuredDataType) p;
-						Boolean isDynamic = false;
-						for (int j=0; j < type.getMember().size(); j++) {
-							Member m = type.getMember().get(j);
-							for (int k=0; k < m.getAnnotation().size(); k++) {
-								if (m.getAnnotation().get(k).getKey().getName().toString().contains("dynamic")) {
-									this.dynamicTypes.add(type);
-									isDynamic = true;
-									break;
-								}
-							}
-							if (isDynamic) {
-								break;
+						if (isDynamic(type)) {
+							this.dynamicTypes.add(type);
+						}else if (type.getExtension() != null) {
+							DataType superClass = (DataType) type.getExtension().getExtending();
+							if (isDynamic(superClass) || this.dynamicTypes.contains(superClass)) {
+								this.dynamicTypes.add(type);
 							}
 						}
 					}
@@ -84,11 +83,23 @@ public class DSLSpecificTypesGenerator {
 			}
 		} catch (ATLCoreException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
 		} catch (ATLExecutionException e) {
 			e.printStackTrace();
 		}
+	}
+	private boolean isDynamic(DataType dataType) {
+		if (dataType instanceof StructuredDataType) {
+			StructuredDataType type = (StructuredDataType) dataType;
+			for (int j=0; j < type.getMember().size(); j++) {
+				Member m = type.getMember().get(j);
+				for (int k=0; k < m.getAnnotation().size(); k++) {
+					if (m.getAnnotation().get(k).getKey().getName().toString().contains("dynamic")) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 	public CommonPackageGenerator getCommonPackageGenerator() {
 		return this.commonPackageGenerator;
