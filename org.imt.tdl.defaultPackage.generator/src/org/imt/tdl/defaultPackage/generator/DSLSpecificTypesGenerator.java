@@ -42,7 +42,6 @@ public class DSLSpecificTypesGenerator {
 		this.dslSpecificEventsGenerator = new DSLSpecificEventsGenerator(dslFilePath);
 		this.dslSpecificEventsGenerator.setDslSpecificTypesPackage(this.dslSpecificTypesPackage);
 		this.dslSpecificEventsGenerator.setDslSpecificTypes(this.dslSpecificTypes);
-		this.dslSpecificEventsGenerator.setDynamicTypes(this.dynamicTypes);
 		this.dslSpecificEventsGenerator.generateDSLSpecificEventsPackage(dslFilePath);
 		System.out.println("dsl-specific events package generated successfully");
 	}
@@ -99,5 +98,8 @@ public class DSLSpecificTypesGenerator {
 	}
 	public Package getDslSpecificTypesPackage() {
 		return this.dslSpecificTypesPackage;
+	}
+	public List<DataType> getDynamicTypes(){
+		return this.dynamicTypes;
 	}
 }

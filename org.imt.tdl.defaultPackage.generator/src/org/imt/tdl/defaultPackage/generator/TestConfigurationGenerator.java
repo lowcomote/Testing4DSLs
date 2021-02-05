@@ -70,13 +70,9 @@ public class TestConfigurationGenerator {
 		GateType genericGate = factory.createGateType();
 		genericGate.setName("genericGate");
 		genericGate.setKind(GateTypeKind.MESSAGE);
-		List<DataType> genericGateDataTypes = new ArrayList<DataType>();
-		genericGateDataTypes.addAll(this.commonPackageGenerator.getTypesOfGeneralEvents());
-		genericGateDataTypes.addAll(this.dslSpecificEventsGenerator.getTypesOfGeneralEvents());
-		genericGate.getDataType().addAll(genericGateDataTypes);
+		genericGate.getDataType().add(this.commonPackageGenerator.getGenericCommand());
 		this.testConfigurationPackage.getPackagedElement().add(genericGate);
 		this.gateTypes.put(genericGate.getName(), genericGate);
-		
 		if (this.dslSpecificEventsGenerator.getTypesOfDslInterfaces().size()>0) {
 			GateType dslSpecificGate = factory.createGateType();
 			dslSpecificGate.setName("dslSpecificGate");

@@ -37,6 +37,7 @@ public class JavaEngineLauncher extends AbstractLauncher{
 	private String _modelInitializationArguments;
 	@Override
 	public void setUp(String MUTPath, String DSLPath){
+		super.setUp(MUTPath, DSLPath);
 		//TODO: The attributes have to be set in an automatic manner (for now, I simply set them)
 		this._modelLocation = MUTPath;
 		this._siriusRepresentationLocation = MUTPath.split("/")[1] + "/representations.aird";
@@ -46,12 +47,13 @@ public class JavaEngineLauncher extends AbstractLauncher{
 		this._entryPointMethod = "public static void org.eclipse.gemoc.example.k3fsm.k3dsa.FSMAspect.main(org.eclipse.gemoc.example.k3fsm.FSM)";
 		this._animationFirstBreak = true;
 		this._modelInitializationMethod = "org.eclipse.gemoc.example.k3fsm.k3dsa.FSMAspect.initializeModel";
+		//this._modelInitializationArguments = "";
 		this._modelInitializationArguments = "000101010";
 		this.executionMode = ExecutionMode.Run;
-		this.setJavaConfiguration();
+		this.configureEngine();
 	}
 	//definition of a new configuration of Gemoc java Engine for running a specific model
-	public void setJavaConfiguration(){
+	private void configureEngine(){
 		// Create a new Launch Configuration
 		ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
 		ILaunchConfigurationType type = manager.getLaunchConfigurationType("org.eclipse.gemoc.execution.sequential.javaengine.ui.launcher");

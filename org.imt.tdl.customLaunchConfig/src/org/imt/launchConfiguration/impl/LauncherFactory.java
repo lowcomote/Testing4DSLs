@@ -16,7 +16,6 @@ public class LauncherFactory{
 	
 	private String DSLPath;
 	private String MUTPath;
-	private Resource MUTResource;
 	
 	private ILauncher engineLauncher;
 	private OCLLauncher oclLauncher;
@@ -27,20 +26,14 @@ public class LauncherFactory{
 	public final static String OCL = "OCL";
 
 	public void setUp(String configurationType) throws CoreException, EngineContextException {
-		//set the model resource in its initial state
-		this.MUTResource = (new ResourceSetImpl()).getResource(URI.createURI(this.MUTPath), true);
 		if (configurationType.equals(GENERIC)) {
 			String engineType = this.getEngineType();
 			if (engineType=="ale") {
-				if (this.engineLauncher == null || (this.engineLauncher instanceof JavaEngineLauncher)) {
-					System.out.println("Gemoc ALE engine setup");
-					this.engineLauncher = new ALEEngineLauncher();	
-				}
+				System.out.println("Gemoc ALE engine setup");
+				this.engineLauncher = new ALEEngineLauncher();	
 			}else if(engineType=="k3") {
-				if (this.engineLauncher == null || (this.engineLauncher instanceof ALEEngineLauncher)) {
-					System.out.println("Gemoc java engine setup");
-					this.engineLauncher = new JavaEngineLauncher();
-				}
+				System.out.println("Gemoc java engine setup");
+				this.engineLauncher = new JavaEngineLauncher();
 			}
 			this.engineLauncher.setUp(this.MUTPath, this.DSLPath);
 		}else if(configurationType.equals(DSL_SPECIFIC)) {
@@ -61,18 +54,16 @@ public class LauncherFactory{
 		System.out.println("Start executing generic command");
 		//TODO: the execution thread has to wait for model execution to be finished
 		this.engineLauncher.executeModel();
-		this.MUTResource = this.engineLauncher.getModelResource();
 		System.out.println("The model under test executed successfully");
 	}
-	public Object executeOCLCommand (String query){
+	public void executeOCLCommand (String query){
 		System.out.println("Start executing ocl command");
 		try {
 			//send the query without quotation marks
-			return this.oclLauncher.runQuery(this.MUTResource, query.substring(1, query.length()-1));
+			this.oclLauncher.runQuery(this.engineLauncher.getModelResource(), query.substring(1, query.length()-1));
 		}catch (ParserException e) {
             e.printStackTrace();
 		}
-		return null;
 	}
 	public void executeDSLSpecificCommand(String eventOccurance) {
 		System.out.println("Start executing dsl-specific command");
@@ -96,5 +87,14 @@ public class LauncherFactory{
 	}
 	public void setMUTPath (String MUTPath) {
 		this.MUTPath = MUTPath;
+	}
+	public void setMUTResource(Resource MUTResource) {
+		this.engineLauncher.setModelResource(MUTResource);
+	}
+	public Resource getMUTResource() {
+		return this.engineLauncher.getModelResource();
+	}
+	public OCLLauncher getOCLLauncher() {
+		return this.oclLauncher;
 	}
 }

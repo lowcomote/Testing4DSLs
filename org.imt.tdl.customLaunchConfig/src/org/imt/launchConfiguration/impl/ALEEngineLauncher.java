@@ -40,6 +40,7 @@ public class ALEEngineLauncher extends AbstractLauncher{
 	
 	@Override
 	public void setUp(String MUTPath, String DSLPath){
+		super.setUp(MUTPath, DSLPath);
 		//TODO: The attributes have to be set in an automatic manner (for now, I simply set them)
 		this._modelLocation = MUTPath;
 		this._siriusRepresentationLocation = MUTPath.split("/")[1] + "/representations.aird";
@@ -54,10 +55,10 @@ public class ALEEngineLauncher extends AbstractLauncher{
 		//this._modelInitializationArguments = "";
 		this._modelInitializationArguments = "000101010";
 		this.executionMode = ExecutionMode.Run;
-		this.setALEConfiguration();
+		this.configureEngine();
 	}
 	//definition of a new configuration of ALE Engine for running a specific model
-	private void setALEConfiguration(){
+	private void configureEngine(){
 		// Create a new Launch Configuration
 		ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
 		ILaunchConfigurationType type = manager.getLaunchConfigurationType("org.eclipse.gemoc.ale.interpreted.engine.ui.launcher");

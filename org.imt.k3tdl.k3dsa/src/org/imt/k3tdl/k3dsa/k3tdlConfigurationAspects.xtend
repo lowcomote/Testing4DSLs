@@ -2,6 +2,7 @@ package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 
+
 import fr.inria.diverse.k3.al.annotationprocessor.Step
 
 import org.etsi.mts.tdl.ComponentType
@@ -11,11 +12,14 @@ import org.etsi.mts.tdl.GateInstance
 import org.etsi.mts.tdl.ComponentInstance
 import org.etsi.mts.tdl.Connection
 import org.etsi.mts.tdl.DataUse
-import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
+import static extension org.imt.k3tdl.k3dsa.DataInstanceUseAspect.*
 import org.etsi.mts.tdl.DataInstanceUse
 import org.etsi.mts.tdl.LiteralValueUse
 import org.imt.launchConfiguration.impl.LauncherFactory
 import org.etsi.mts.tdl.ParameterBinding
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.eclipse.emf.ecore.resource.Resource
 
 @Aspect(className=GateType)
 class GateTypeAspect {
@@ -23,10 +27,16 @@ class GateTypeAspect {
 
 @Aspect(className=GateInstance)
 class GateInstanceAspect {
-	private String receivedOutput = null
-	private String expectedOutput = null
+	private String initialMUT_Path = ""
+	
+	private Object receivedOutput = null
+	private Object expectedOutput = null
+	
 	private LauncherFactory gateLauncher
-
+	
+	def void setInitialMUTPath (String path){
+		_self.initialMUT_Path = path
+	}
 	@Step
 	// setting up the related launcher based on the gate type 
 	def void configureLauncher(LauncherFactory launcher) {
@@ -42,11 +52,22 @@ class GateInstanceAspect {
 
 	@Step
 	def void assertArgument(DataUse argument) {
+		//when asserting ocl query validation result:
+		//if the expected result is String, use the labeled result of validation 
+		//else use the object retrieved by ocl interpreter
+		if (_self.name.equals('oclMUTGate')){
+			if (argument instanceof LiteralValueUse){
+				_self.receivedOutput = _self.gateLauncher.OCLLauncher.resultAsString
+			}else{
+				_self.receivedOutput = _self.gateLauncher.OCLLauncher.resultAsObject
+			}
+		}
+		//if the argument is a string
 		if (argument instanceof LiteralValueUse){
-			_self.expectedOutput = (argument as LiteralValueUse).value
-			_self.expectedOutput = _self.expectedOutput.substring(1, _self.expectedOutput.length - 1) // remove the quotation marks
+			var expected = (argument as LiteralValueUse).value
+			expected = expected.substring(1, expected.length - 1) // remove the quotation marks
+			_self.expectedOutput = expected;
 			print("Start assertion:")
-			// TODO: Have to be completed to support different kind of arguments (not just a string)
 			if (_self.receivedOutput != null && _self.receivedOutput.toString.equals(_self.expectedOutput.toString)) {
 				println("Test case PASSED")
 			} else if (_self.receivedOutput == null) {
@@ -54,9 +75,13 @@ class GateInstanceAspect {
 			} else {
 				println("Test case FAILED: The expected response is not received from MUT")
 			}
+		}else if (argument instanceof DataInstanceUse){
+			_self.expectedOutput = (argument as DataInstanceUse).transformToEMFObject();
+			if (_self.receivedOutput instanceof DataInstanceUse){
+				_self.receivedOutput = (_self.receivedOutput as DataInstanceUse).transformToEMFObject();
+			}
+			//TODO: compare expectedOutput with receivedOutput
 		}
-		// TODO: Have to be completed to support different kind of arguments (not just LiteralValueUse)
-		println("Expected output: " + _self.expectedOutput);
 		println("Received output: " + _self.receivedOutput);
 		println();
 	}
@@ -65,20 +90,26 @@ class GateInstanceAspect {
 	def void sendArgument2sut(DataUse argument) {
 		println("The MUT component received data")
 		if (argument instanceof DataInstanceUse) {
-			if ((argument as DataInstanceUse).dataInstance.name == 'runMUT') {
-				println("Sending the data to the Model Execution Engine")
+			if ((argument as DataInstanceUse).dataInstance.name == 'runModel') {
+				println("Request for running MUT")
 				_self.gateLauncher.executeGenericCommand();
-			} else if ((argument as DataInstanceUse).dataInstance.name == 'newState') {
-				//the tester sends a new model state to the MUT
+			} else if ((argument as DataInstanceUse).dataInstance.name == 'resetModel') {
+				println("Request for resetting the model to its initial state")
+				_self.gateLauncher.MUTResource = 
+					(new ResourceSetImpl()).getResource(URI.createURI(_self.initialMUT_Path), true);
+			}else if ((argument as DataInstanceUse).dataInstance.name == 'getModelState') {
+				println("Request for getting the MUT")
+				_self.receivedOutput = _self.gateLauncher.MUTResource
+			}else if ((argument as DataInstanceUse).dataInstance.name == 'newState') {
+				println("Request for setting MUT in a new State")
 				_self.setModelState(argument as DataInstanceUse);
-			} else if ((argument as DataInstanceUse).dataInstance.name == 'getModelState') {
-				// TODO: Get the model state
-			} // if the message is an OCL query
+			}// if the message is an OCL query
 			else if ((argument as DataInstanceUse).dataInstance.dataType.name == 'OCL') {
 				println("Sending the data to the OCL engine")
 				// extracting the query from the argument and sending for validation
 				var query = argument.argument.get(0).dataUse as LiteralValueUse;
-				_self.receivedOutput = _self.gateLauncher.executeOCLCommand(query.value).toString;
+				_self.gateLauncher.executeOCLCommand(query.value);
+				
 			} // otherwise the message is an event conforming to the behavioral interface of the DSL
 			else {
 				println("Sending the data to the Event Manager")
@@ -89,16 +120,11 @@ class GateInstanceAspect {
 		}
 	}
 	def void setModelState(DataInstanceUse newState){
-		for (ParameterBinding paramBinding: newState.argument){
-			//The data type of the parameters of the newState are data types defined in the ecore file of the DSL
-			var ecoreTypeName = "";
-			if (paramBinding.parameter.dataType.name.startsWith('_')){
-				ecoreTypeName = paramBinding.parameter.dataType.name.substring(1)
-			}else{
-				ecoreTypeName = paramBinding.parameter.dataType.name
-			}
-			//TODO: finding an element in the MUT that its type name is equals to ecoreTypeName
-		}
+		//get the current MUTResource
+		var newMUTResource = _self.gateLauncher.MUTResource;
+		var EMFObjectForNewState = newState.transformToEMFObject()
+		//TODO: change the required variables of MUTResource
+		_self.gateLauncher.MUTResource = newMUTResource;
 	}
 }
 

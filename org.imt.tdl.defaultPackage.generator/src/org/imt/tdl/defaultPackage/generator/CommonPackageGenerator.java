@@ -25,7 +25,7 @@ public class CommonPackageGenerator {
 	
 	private DataType oclType;
 	private List<DataInstance> verdictInstances = new ArrayList<DataInstance>();
-	private List<DataType> TypesForGeneralEvents = new ArrayList<DataType>();
+	private DataType genericCommand;
 	private Map<String, AnnotationType> annotations = new HashMap<String, AnnotationType>();
 
 	public CommonPackageGenerator() {
@@ -79,24 +79,24 @@ public class CommonPackageGenerator {
 		this.verdictInstances.add(INCONCLUSINVE);
 	}
 	private void generateTypeForGeneralEvents() {
-		SimpleDataType runModel = factory.createSimpleDataType();
+		SimpleDataType genericCommand = factory.createSimpleDataType();
+		genericCommand.setName("genericCommand");
+		SimpleDataInstance runModel = factory.createSimpleDataInstance();
 		runModel.setName("runModel");
-		SimpleDataInstance runMUT = factory.createSimpleDataInstance();
-		runMUT.setName("runMUT");
-		runMUT.setDataType(runModel);
-		this.commonPackage.getPackagedElement().add(runModel);
-		this.commonPackage.getPackagedElement().add(runMUT);
-		
-		SimpleDataType getState = factory.createSimpleDataType();
-		getState.setName("getState");
+		runModel.setDataType(genericCommand);
+		SimpleDataInstance resetModel = factory.createSimpleDataInstance();
+		resetModel.setName("resetModel");
+		resetModel.setDataType(genericCommand);
 		SimpleDataInstance getModelState = factory.createSimpleDataInstance();
 		getModelState.setName("getModelState");
-		getModelState.setDataType(getState);
-		this.commonPackage.getPackagedElement().add(getState);
+		getModelState.setDataType(genericCommand);
+
+		this.commonPackage.getPackagedElement().add(genericCommand);
+		this.commonPackage.getPackagedElement().add(runModel);
+		this.commonPackage.getPackagedElement().add(resetModel);
 		this.commonPackage.getPackagedElement().add(getModelState);
 		
-		this.TypesForGeneralEvents.add(runModel);
-		this.TypesForGeneralEvents.add(getState);
+		this.genericCommand = genericCommand;
 	}
 	private void generateAnnotations() {
 		AnnotationType MUTPath = factory.createAnnotationType();
@@ -118,8 +118,8 @@ public class CommonPackageGenerator {
 	public List<DataInstance> getVerdictInstances() {
 		return this.verdictInstances;
 	}
-	public List<DataType> getTypesOfGeneralEvents() {
-		return this.TypesForGeneralEvents;
+	public DataType getGenericCommand() {
+		return this.genericCommand;
 	}
 	public Map<String, AnnotationType> getAnnotations() {
 		return this.annotations;

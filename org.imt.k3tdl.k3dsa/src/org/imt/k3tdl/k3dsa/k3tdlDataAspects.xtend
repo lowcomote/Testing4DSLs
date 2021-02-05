@@ -214,8 +214,8 @@ class StaticDataUseAspect extends DataUseAspect{
 }
 @Aspect (className = DataInstanceUse)
 class DataInstanceUseAspect extends StaticDataUseAspect{
-	def void mapDataResource(){
-		
+	def Object transformToEMFObject(){
+		//TODO: transform a dataInstanceUse to and EMF object to be able to compare it with the real MUT
 	}
 }
 @Aspect (className = SpecialValueUse)

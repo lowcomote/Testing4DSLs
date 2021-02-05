@@ -50,11 +50,8 @@ public class DSLSpecificEventsGenerator {
 	private Package dslSpecificEventsPackage;
 	private Package dslSpecificTypesPackage;
 	
-	private DataType modelState;
 	private Map<String, DataType> dslSpecificTypes = new HashMap<String, DataType>();
-	private List<DataType> dynamicTypes = new ArrayList<>();
 	private List<DataType> dslInterfaceTypes = new ArrayList<DataType>();
-	private List<DataType> TypesForGeneralEvents = new ArrayList<DataType>();
 	
 	public DSLSpecificEventsGenerator(String dslFilePath) throws IOException {
 		this.factory = tdlFactory.eINSTANCE; 
@@ -68,10 +65,6 @@ public class DSLSpecificEventsGenerator {
 		this.dslSpecificEventsPackage = factory.createPackage();
 		this.dslSpecificEventsPackage.setName(this.dslName + "SpecificEvents");
 		generateImports();
-		if (this.metamodelRootElement != null) {
-			generateTypeForModelState();
-			//generateTypeForSetState();
-		}
 		if (this.interfaceRootElement != null) {
 			generateTypeForDSLInterfaces();
 		}
@@ -81,23 +74,7 @@ public class DSLSpecificEventsGenerator {
 		PackageImport.setImportedPackage(this.dslSpecificTypesPackage);
 		this.dslSpecificEventsPackage.getImport().add(PackageImport);
 	}
-	
-	//derive the model state based on the elements of the metamodel that are annotated as 'dynamic'
-	private void generateTypeForModelState() {
-		StructuredDataType modelStateType = factory.createStructuredDataType();
-		modelStateType.setName("ModelState");
-		
-		//generate members for modelState 
-		//based on the elements with 'dynamic' annotation in dslSpecificTypes tdl package
-		for (int i=0; i< this.dynamicTypes.size(); i++) {
-			Member member = factory.createMember();
-			member.setName(this.dynamicTypes.get(i).getName().toLowerCase()+"State");
-			member.setDataType(this.dynamicTypes.get(i));
-			modelStateType.getMember().add(member);
-		}
-		this.dslSpecificEventsPackage.getPackagedElement().add(modelStateType);
-		this.modelState = modelStateType;
-	}
+
 	private void generateTypeForDSLInterfaces() {
 		AnnotationType acceptedEvent = factory.createAnnotationType();
 		acceptedEvent.setName("AcceptedEvent");
@@ -135,23 +112,14 @@ public class DSLSpecificEventsGenerator {
 	public Package getDslSpecificEventsPackage() {
 		return this.dslSpecificEventsPackage;
 	}
-	public DataType getTypeOfModelState() {
-		return this.modelState;
-	}
 	public List<DataType> getTypesOfDslInterfaces(){
 		return this.dslInterfaceTypes;
-	}
-	public List<DataType> getTypesOfGeneralEvents() {
-		return this.TypesForGeneralEvents;
 	}
 	public void setDslSpecificTypesPackage (Package typesPackage) {
 		this.dslSpecificTypesPackage = typesPackage;
 	}
 	public void setDslSpecificTypes(Map<String, DataType> dslSpecificTypes) {
 		this.dslSpecificTypes = dslSpecificTypes;
-	}
-	public void setDynamicTypes(List<DataType> dynamicTypes) {
-		this.dynamicTypes = dynamicTypes;
 	}
 	//if a name is a keyword in tdl language, put '_' before it
 	private String validName (String name) {

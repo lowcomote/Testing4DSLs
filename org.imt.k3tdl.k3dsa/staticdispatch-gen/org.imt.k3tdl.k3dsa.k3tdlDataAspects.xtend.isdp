@@ -8,11 +8,6 @@
 			org.imt.k3tdl.k3dsa.VariableUseAspect.mapDataResource((org.etsi.mts.tdl.VariableUse)_self);
 		} else
 		// EndInjectInto org.imt.k3tdl.k3dsa.DataUseAspect#void mapDataResource() from org.imt.k3tdl.k3dsa.VariableUseAspect
-	// BeginInjectInto org.imt.k3tdl.k3dsa.StaticDataUseAspect#void mapDataResource() from org.imt.k3tdl.k3dsa.DataInstanceUseAspect
-		if (_self instanceof org.etsi.mts.tdl.DataInstanceUse){
-			org.imt.k3tdl.k3dsa.DataInstanceUseAspect.mapDataResource((org.etsi.mts.tdl.DataInstanceUse)_self);
-		} else
-		// EndInjectInto org.imt.k3tdl.k3dsa.StaticDataUseAspect#void mapDataResource() from org.imt.k3tdl.k3dsa.DataInstanceUseAspect
 	// BeginInjectInto org.imt.k3tdl.k3dsa.DynamicDataUseAspect#void mapDataResource() from org.imt.k3tdl.k3dsa.FunctionCallAspect
 		if (_self instanceof org.etsi.mts.tdl.FunctionCall){
 			org.imt.k3tdl.k3dsa.FunctionCallAspect.mapDataResource((org.etsi.mts.tdl.FunctionCall)_self);
@@ -178,11 +173,6 @@
 			org.imt.k3tdl.k3dsa.ProcedureParameterAspect.mapDataResource((org.etsi.mts.tdl.ProcedureParameter)_self);
 		} else
 		// EndInjectInto org.imt.k3tdl.k3dsa.ParameterAspect#void mapDataResource() from org.imt.k3tdl.k3dsa.ProcedureParameterAspect
-	// BeginInjectInto org.imt.k3tdl.k3dsa.DataUseAspect#void mapDataResource() from org.imt.k3tdl.k3dsa.DataInstanceUseAspect
-		if (_self instanceof org.etsi.mts.tdl.DataInstanceUse){
-			org.imt.k3tdl.k3dsa.DataInstanceUseAspect.mapDataResource((org.etsi.mts.tdl.DataInstanceUse)_self);
-		} else
-		// EndInjectInto org.imt.k3tdl.k3dsa.DataUseAspect#void mapDataResource() from org.imt.k3tdl.k3dsa.DataInstanceUseAspect
 	// BeginInjectInto org.imt.k3tdl.k3dsa.DataInstanceAspect#void mapDataResource() from org.imt.k3tdl.k3dsa.CollectionDataInstanceAspect
 		if (_self instanceof org.etsi.mts.tdl.CollectionDataInstance){
 			org.imt.k3tdl.k3dsa.CollectionDataInstanceAspect.mapDataResource((org.etsi.mts.tdl.CollectionDataInstance)_self);

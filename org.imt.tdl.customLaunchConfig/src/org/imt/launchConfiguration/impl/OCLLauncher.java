@@ -35,49 +35,49 @@ public class OCLLauncher {
 
 	protected OCLExpression<EClassifier> expression = null;
 	protected Query<EClassifier, EClass, EObject> queryEval = null;
+	
+	private Object resultAsObject = null;
+	private ArrayList<String> resultAsString = new ArrayList<>();
 
 	public void setUp() {
 		this.ocl = OCL.newInstance(EcoreEnvironmentFactory.INSTANCE);
 		this.oclHelper = ocl.createOCLHelper();
 	}
 
-	public ArrayList<String> runQuery(Resource MUTResource, String query) throws ParserException {
+	public void runQuery(Resource MUTResource, String query) throws ParserException {
 		// The root element of the dsl is the context for ocl
 		this.oclHelper.setContext(MUTResource.getContents().get(0).eClass());
 		this.expression = this.oclHelper.createQuery(query);
 		this.queryEval = this.ocl.createQuery(this.expression);
 		// the ocl query will be evaluated on the root element of MUT
-		Object res = this.queryEval.evaluate(MUTResource.getContents().get(0));
-		ArrayList<String> labeledResult = new ArrayList<>();
-		if (res instanceof Collection<?>) {
-			if (res instanceof LinkedHashSet<?>) {
-				LinkedHashSet<?> queryResult =  (LinkedHashSet<?>) res;
+		this.resultAsObject = this.queryEval.evaluate(MUTResource.getContents().get(0));
+		if (this.resultAsObject instanceof Collection<?>) {
+			if (this.resultAsObject instanceof LinkedHashSet<?>) {
+				LinkedHashSet<?> queryResult =  (LinkedHashSet<?>) this.resultAsObject;
 				Iterator it = queryResult.iterator();
 				while (it.hasNext()) {
 					EObject object = (EObject) it.next();
-					labeledResult.add(queryResultLabelProvider(object));
+					this.resultAsString.add(queryResultLabelProvider(object));
 				}
-			}else if (res instanceof ArrayList<?>) {
-				ArrayList<?> queryResult =  (ArrayList<?>) res;
+			}else if (this.resultAsObject instanceof ArrayList<?>) {
+				ArrayList<?> queryResult =  (ArrayList<?>) this.resultAsObject;
 				for (int i = 0; i < queryResult.size(); i++) {
 					if (queryResult.get(i)== null) {
-						labeledResult.add("null");
+						this.resultAsString.add("null");
 					}else {
-						labeledResult.add("'" + queryResult.get(i).toString() + "'");
+						this.resultAsString.add("'" + queryResult.get(i).toString() + "'");
 					}
 				}
 			}
 		}else {
-			if (res instanceof EObject) {
-				EObject object = (EObject) res;
-				labeledResult.add(queryResultLabelProvider(object));
+			if (this.resultAsObject instanceof EObject) {
+				EObject object = (EObject) this.resultAsObject;
+				this.resultAsString.add(queryResultLabelProvider(object));
 			}else {
-				labeledResult.add("'" + res.toString() + "'");
+				this.resultAsString.add("'" + this.resultAsObject.toString() + "'");
 			}
 		}
-		return labeledResult;
 	}
-
 	public String queryResultLabelProvider(EObject object) {
 		final Class<?> IItemLabelProviderClass = IItemLabelProvider.class;
 		final Class<?> ITreeItemContentProviderClass = ITreeItemContentProvider.class;
@@ -100,6 +100,12 @@ public class OCLLauncher {
         String containerLabel = itemLabelProvider.getText(container);
         
 		return (containerLabel + "::" + objectLabel);
+	}
+	public ArrayList<String> getResultAsString(){
+		return this.resultAsString;
+	}
+	public Object getResultAsObject() {
+		return this.resultAsObject;
 	}
 	public void tearDown() throws Exception {
 		this.oclHelper = null;

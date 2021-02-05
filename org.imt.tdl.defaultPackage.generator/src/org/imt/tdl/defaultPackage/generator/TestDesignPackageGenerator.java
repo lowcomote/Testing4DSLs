@@ -1,10 +1,8 @@
 package org.imt.tdl.defaultPackage.generator;
 
 import java.io.IOException;
+import java.util.List;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.etsi.mts.tdl.AnyValue;
 import org.etsi.mts.tdl.AnyValueOrOmit;
 import org.etsi.mts.tdl.DataType;
@@ -14,11 +12,8 @@ import org.etsi.mts.tdl.MemberAssignment;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.StructuredDataInstance;
 import org.etsi.mts.tdl.StructuredDataType;
-import org.etsi.mts.tdl.TDLan2StandaloneSetup;
 import org.etsi.mts.tdl.UnassignedMemberTreatment;
 import org.etsi.mts.tdl.tdlFactory;
-
-import com.google.inject.Injector;
 
 public class TestDesignPackageGenerator {
 	private tdlFactory factory;
@@ -67,47 +62,30 @@ public class TestDesignPackageGenerator {
 		testCasesPackage.getImport().add(testConfigurationImport);
 	}
 	private void generateGenericDataInstances() {
-		if (this.dslSpecificEventsGenerator.getTypeOfModelState()!=null) {
-			StructuredDataType modelStateType = (StructuredDataType) this.dslSpecificEventsGenerator.getTypeOfModelState();
-			
-			StructuredDataInstance modelStateInstance = factory.createStructuredDataInstance();
-			modelStateInstance.setName("newState");
-			modelStateInstance.setDataType(modelStateType);
-			modelStateInstance.setUnassignedMember(UnassignedMemberTreatment.ANY_VALUE);
-			for (int i=0; i< modelStateType.getMember().size(); i++) {
-				//generate memberAssignments for newState of type modelState
-				MemberAssignment modelStateMemberAssign = factory.createMemberAssignment();
-				modelStateMemberAssign.setMember(modelStateType.getMember().get(i));
-				AnyValue anyValue = factory.createAnyValue();
-				anyValue.setName("?");
-				modelStateMemberAssign.setMemberSpec(anyValue);
-				modelStateInstance.getMemberAssignment().add(modelStateMemberAssign);
-				
-				//generate instances for each dynamic type
-				StructuredDataInstance dynamicTypeInstance = factory.createStructuredDataInstance();
-				DataType dynamicType = modelStateType.getMember().get(i).getDataType();
-				dynamicTypeInstance.setName(dynamicType.getName().toLowerCase()+"NewState");
-				dynamicTypeInstance.setDataType(dynamicType);
-				dynamicTypeInstance.setUnassignedMember(UnassignedMemberTreatment.ANY_VALUE);
-				if (dynamicType instanceof StructuredDataType) {
-					StructuredDataType type = (StructuredDataType) dynamicType;
-					for (int j=0; j < type.getMember().size(); j++) {
-						Member m = type.getMember().get(j);
-						for (int k=0; k < m.getAnnotation().size(); k++) {
-							if (m.getAnnotation().get(k).getKey().getName().toString().contains("dynamic")) {
-								MemberAssignment memberAssign = factory.createMemberAssignment();
-								memberAssign.setMember(m);
-								AnyValueOrOmit anyValueOrOmit = factory.createAnyValueOrOmit();
-								anyValue.setName("*");
-								memberAssign.setMemberSpec(anyValueOrOmit);
-								dynamicTypeInstance.getMemberAssignment().add(memberAssign);
-							}
+		List<DataType> dynamicTypes = this.dslSpecificTyepsGenerator.getDynamicTypes();
+		for (int i=0; i< dynamicTypes.size(); i++) {
+			//generate instances for each dynamic type
+			StructuredDataInstance dynamicTypeInstance = factory.createStructuredDataInstance();
+			DataType dynamicType = dynamicTypes.get(i);
+			dynamicTypeInstance.setName(dynamicType.getName().toLowerCase()+"NewState");
+			dynamicTypeInstance.setDataType(dynamicType);
+			dynamicTypeInstance.setUnassignedMember(UnassignedMemberTreatment.ANY_VALUE);
+			if (dynamicType instanceof StructuredDataType) {
+				StructuredDataType type = (StructuredDataType) dynamicType;
+				for (int j=0; j < type.getMember().size(); j++) {
+					Member m = type.getMember().get(j);
+					for (int k=0; k < m.getAnnotation().size(); k++) {
+						if (m.getAnnotation().get(k).getKey().getName().toString().contains("dynamic")) {
+							MemberAssignment memberAssign = factory.createMemberAssignment();
+							memberAssign.setMember(m);
+							AnyValueOrOmit anyValueOrOmit = factory.createAnyValueOrOmit();
+							memberAssign.setMemberSpec(anyValueOrOmit);
+							dynamicTypeInstance.getMemberAssignment().add(memberAssign);
 						}
 					}
 				}
-				this.genericTestCasesPackage.getPackagedElement().add(dynamicTypeInstance);
 			}
-			this.genericTestCasesPackage.getPackagedElement().add(modelStateInstance);
+			this.genericTestCasesPackage.getPackagedElement().add(dynamicTypeInstance);
 		}
 	}
 	private void generateOCLDataInstances() {

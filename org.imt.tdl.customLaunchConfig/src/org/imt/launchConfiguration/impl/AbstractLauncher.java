@@ -1,10 +1,16 @@
 package org.imt.launchConfiguration.impl;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.imt.launchConfiguration.ILauncher;
 
 public abstract class AbstractLauncher implements ILauncher{
 	private Resource MUTResource = null;
+	@Override
+	public void setUp(String MUTPath, String DSLPath) {
+		this.MUTResource = (new ResourceSetImpl()).getResource(URI.createURI(MUTPath), true);
+	}
 	@Override
 	public void setModelResource(Resource resource) {
 		this.MUTResource = resource;
