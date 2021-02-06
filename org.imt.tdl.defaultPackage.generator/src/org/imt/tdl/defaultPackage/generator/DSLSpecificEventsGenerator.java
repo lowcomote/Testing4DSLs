@@ -4,6 +4,7 @@ import java.io.IOException;
 
 
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -28,16 +29,11 @@ import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterf
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.EventType;
 import org.etsi.mts.tdl.Annotation;
 import org.etsi.mts.tdl.AnnotationType;
-import org.etsi.mts.tdl.AnyValue;
-import org.etsi.mts.tdl.AnyValueOrOmit;
 import org.etsi.mts.tdl.DataType;
 import org.etsi.mts.tdl.ElementImport;
 import org.etsi.mts.tdl.Member;
-import org.etsi.mts.tdl.MemberAssignment;
 import org.etsi.mts.tdl.Package;
-import org.etsi.mts.tdl.StructuredDataInstance;
 import org.etsi.mts.tdl.StructuredDataType;
-import org.etsi.mts.tdl.UnassignedMemberTreatment;
 import org.etsi.mts.tdl.tdlFactory;
 
 public class DSLSpecificEventsGenerator {
