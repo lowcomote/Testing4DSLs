@@ -1,32 +1,21 @@
 package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
-
-
 import fr.inria.diverse.k3.al.annotationprocessor.Step
-
-import org.etsi.mts.tdl.ComponentType
-import org.etsi.mts.tdl.GateType
-import org.etsi.mts.tdl.GateReference
-import org.etsi.mts.tdl.GateInstance
-import org.etsi.mts.tdl.ComponentInstance
-import org.etsi.mts.tdl.Connection
-import org.etsi.mts.tdl.DataUse
-import static extension org.imt.k3tdl.k3dsa.DataInstanceUseAspect.*
-import org.etsi.mts.tdl.DataInstanceUse
-import org.etsi.mts.tdl.LiteralValueUse
-import org.imt.launchConfiguration.impl.LauncherFactory
 import org.eclipse.emf.common.util.URI
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
-import org.etsi.mts.tdl.DataType
-import org.eclipse.emf.ecore.EPackage
-import org.eclipse.gemoc.dsl.Dsl
-import org.eclipse.emf.ecore.EClass
-import org.eclipse.emf.ecore.EClassifier
-import org.etsi.mts.tdl.StaticDataUse
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
-import java.util.ArrayList
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.etsi.mts.tdl.DataInstanceUse
+import org.etsi.mts.tdl.DataUse
+import org.etsi.mts.tdl.GateInstance
+import org.etsi.mts.tdl.GateType
+import org.etsi.mts.tdl.LiteralValueUse
+import org.etsi.mts.tdl.StaticDataUse
+import org.imt.launchConfiguration.impl.LauncherFactory
+
+import static extension org.imt.k3tdl.k3dsa.DataInstanceUseAspect.*
+import static extension org.imt.k3tdl.k3dsa.DataTypeAspect.*
 
 @Aspect(className=GateType)
 class GateTypeAspect {
@@ -85,13 +74,15 @@ class GateInstanceAspect {
 			if (arg.item != null){
 				for (i : 0 ..<arg.item.size){//there is a list of objects in the expected output
 					if (_self.receivedOutput instanceof Resource){//the MUTResource is the received output
-						val EObject matchedObject = (arg.item.get(i) as DataInstanceUse).getMatchedMUTElement(_self.receivedOutput as Resource)		
+						val EObject matchedObject = (arg.item.get(i) as DataInstanceUse).
+							getMatchedMUTElement(_self.receivedOutput as Resource)		
 						if (matchedObject == null){
 							notMatchedElements.add(arg.item.get(i))
 							assertionFailed = true
 						}
 					}else if (_self.name.equals('oclMUTGate')){//the MUT objects are the received output
-						val EObject matchedObject = (arg.item.get(i) as DataInstanceUse).getMatchedMUTElement(_self.gateLauncher.MUTResource)		
+						val EObject matchedObject = (arg.item.get(i) as DataInstanceUse).
+							getMatchedMUTElement(_self.gateLauncher.MUTResource)		
 						if (matchedObject == null){
 							notMatchedElements.add(arg.item.get(i))
 							assertionFailed = true
@@ -106,7 +97,8 @@ class GateInstanceAspect {
 						notMatchedElements.add(arg)
 						assertionFailed = true
 					}else if (_self.name.equals('oclMUTGate')){//the MUT objects are the received output
-						val EObject matchedObject = (arg as DataInstanceUse).getMatchedMUTElement(_self.gateLauncher.MUTResource)		
+						val EObject matchedObject = (arg as DataInstanceUse).
+							getMatchedMUTElement(_self.gateLauncher.MUTResource)		
 						if (matchedObject == null){
 							notMatchedElements.add(arg)
 							assertionFailed = true
@@ -139,7 +131,7 @@ class GateInstanceAspect {
 		println("The MUT component received data")
 		if (argument instanceof DataInstanceUse) {
 			var arg = (argument as DataInstanceUse)
-			if (arg.item != null || _self.isEcoreType(arg.dataInstance.dataType)){
+			if (arg.item != null || arg.dataInstance.dataType.isConcreteEcoreType(_self.DSLPath)){
 				println("Request for setting MUT in a new State")
 				_self.setModelState(arg);
 			}else if (arg.dataInstance.name == 'runModel') {
@@ -166,25 +158,6 @@ class GateInstanceAspect {
 			println("Sending the data done!")
 		}
 	}
-	def boolean isEcoreType(DataType dataType) {
-		var tdlTypeName = dataType.name
-		if (dataType.name.startsWith("_")){
-			tdlTypeName = dataType.name.substring(1)
-		}
-		var dslRes = (new ResourceSetImpl()).getResource(URI.createURI(_self.DSLPath), true);
-		var dsl = dslRes.getContents().get(0) as Dsl;
-		if (dsl.getEntry("ecore") != null) {
-			var metamodelPath = dsl.getEntry("ecore").getValue().replaceFirst("resource", "plugin");
-			var metamodelRes = (new ResourceSetImpl()).getResource(URI.createURI(metamodelPath), true);
-			var metamodelRootElement = metamodelRes.getContents().get(0) as EPackage;
-			for (EClassifier classifier: metamodelRootElement.EClassifiers){
-				if (classifier.name.equals(tdlTypeName)){
-					return true;
-				}
-			}
-		}
-		return false;
-	}
 	def void setModelState(DataInstanceUse arg){
 		//get the current MUTResource
 		var newMUTResource = _self.gateLauncher.MUTResource;
@@ -197,20 +170,4 @@ class GateInstanceAspect {
 		}
 		_self.gateLauncher.MUTResource = newMUTResource;
 	}
-}
-
-@Aspect(className=ComponentType)
-class ComponentTypeAspect {
-}
-
-@Aspect(className=ComponentInstance)
-class ComponentInstanceAspect {
-}
-
-@Aspect(className=GateReference)
-class GateReferenceAspect {
-}
-
-@Aspect(className=Connection)
-class ConnectionAspect {
 }

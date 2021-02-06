@@ -1,45 +1,27 @@
 package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
-import fr.inria.diverse.k3.al.annotationprocessor.Step
-import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
-import org.etsi.mts.tdl.DataResourceMapping
-import org.etsi.mts.tdl.SimpleDataInstance
-import org.etsi.mts.tdl.SimpleDataType
-import org.etsi.mts.tdl.PredefinedFunction
-import org.etsi.mts.tdl.UnassignedMemberTreatment
-import org.etsi.mts.tdl.Function
-import org.etsi.mts.tdl.Action
-import org.etsi.mts.tdl.Variable
-import org.etsi.mts.tdl.FormalParameter
-import org.etsi.mts.tdl.Parameter
-import org.etsi.mts.tdl.MappableDataElement
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.EClassifier
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EPackage
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.eclipse.gemoc.dsl.Dsl
 import org.etsi.mts.tdl.DataElementMapping
-import org.etsi.mts.tdl.ParameterMapping
-import org.etsi.mts.tdl.DataType
-import org.etsi.mts.tdl.DataInstance
-import org.etsi.mts.tdl.Member
-import org.etsi.mts.tdl.StructuredDataInstance
-import org.etsi.mts.tdl.MemberAssignment
-import org.etsi.mts.tdl.CollectionDataType
-import org.etsi.mts.tdl.CollectionDataInstance
-import org.etsi.mts.tdl.ProcedureSignature
-import org.etsi.mts.tdl.ProcedureParameter
-import org.etsi.mts.tdl.StructuredDataType
-import org.etsi.mts.tdl.OmitValue
-import org.etsi.mts.tdl.PredefinedFunctionCall
-import org.etsi.mts.tdl.VariableUse
-import org.etsi.mts.tdl.FormalParameterUse
-import org.etsi.mts.tdl.DynamicDataUse
-import org.etsi.mts.tdl.AnyValueOrOmit
-import org.etsi.mts.tdl.AnyValue
-import org.etsi.mts.tdl.SpecialValueUse
 import org.etsi.mts.tdl.DataInstanceUse
-import org.etsi.mts.tdl.StaticDataUse
-import org.etsi.mts.tdl.MemberReference
-import org.etsi.mts.tdl.ParameterBinding
+import org.etsi.mts.tdl.DataResourceMapping
+import org.etsi.mts.tdl.DataType
 import org.etsi.mts.tdl.DataUse
-import org.etsi.mts.tdl.FunctionCall
+import org.etsi.mts.tdl.MappableDataElement
+import org.etsi.mts.tdl.MemberReference
+import org.etsi.mts.tdl.Message
+import org.etsi.mts.tdl.ParameterBinding
+import org.etsi.mts.tdl.ParameterMapping
+import org.etsi.mts.tdl.StaticDataUse
+
+import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
+import static extension org.imt.k3tdl.k3dsa.DataTypeAspect.*
 
 @Aspect (className = DataResourceMapping)
 class DataResourceMappingAspect{
@@ -67,127 +49,27 @@ class ParameterMappingAspect{
 }
 @Aspect (className = DataType)
 class DataTypeAspect extends MappableDataElementAspect{
-	@OverrideAspectMethod
-	def void mapDataResource(){
-		
+	def boolean isConcreteEcoreType(String DSLPath) {
+		var tdlTypeName = _self.name
+		if (_self.name.startsWith("_")){
+			tdlTypeName = _self.name.substring(1)
+		}
+		var dslRes = (new ResourceSetImpl()).getResource(URI.createURI(DSLPath), true);
+		var dsl = dslRes.getContents().get(0) as Dsl;
+		if (dsl.getEntry("ecore") != null) {
+			var metamodelPath = dsl.getEntry("ecore").getValue().replaceFirst("resource", "plugin");
+			var metamodelRes = (new ResourceSetImpl()).getResource(URI.createURI(metamodelPath), true);
+			var metamodelRootElement = metamodelRes.getContents().get(0) as EPackage;
+			for (EClassifier classifier: metamodelRootElement.EClassifiers){
+				if (classifier.name.equals(tdlTypeName) && !classifier.eClass.abstract){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }
-@Aspect (className = DataInstance)
-class DataInstanceAspect extends MappableDataElementAspect{
-	@OverrideAspectMethod
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = SimpleDataType)
-class SimpleDataTypeAspect extends DataTypeAspect{
-	@OverrideAspectMethod
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = SimpleDataInstance)
-class SimpleDataInstanceAspect extends DataInstanceAspect{
-	@OverrideAspectMethod
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = StructuredDataType)
-class StructuredDataTypeAspect extends DataTypeAspect{
-	@OverrideAspectMethod
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = Member)
-class MemberAspect extends ParameterAspect{
-	@OverrideAspectMethod
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = StructuredDataInstance)
-class StructuredDataInstanceAspect extends DataInstanceAspect{
-	@OverrideAspectMethod
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = MemberAssignment)
-class MemberAssignmentAspect{
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = CollectionDataType)
-class CollectionDataTypeAspect extends DataTypeAspect{
-	@OverrideAspectMethod
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = CollectionDataInstance)
-class CollectionDataInstanceAspect extends DataInstanceAspect{
-	@OverrideAspectMethod
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = ProcedureSignature)
-class ProcedureSignatureAspect extends DataTypeAspect{
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = ProcedureParameter)
-class ProcedureParameterAspect extends ParameterAspect{
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = Parameter)
-class ParameterAspect{
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = FormalParameter)
-class FormalParameterAspect extends ParameterAspect{
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = Variable)
-class VariableAspect{
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = Action)
-class ActionAspect extends MappableDataElementAspect{
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = Function)
-class FunctionAspect extends ActionAspect{
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = UnassignedMemberTreatment)
-class UnassignedMemberTreatmentAspect{
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = PredefinedFunction)
-class PredefinedFunctionAspect{
-	def void mapDataResource(){
-		
-	}
-}
+
 @Aspect (className = DataUse)
 class DataUseAspect{
 	def void mapDataResource(){
@@ -214,60 +96,21 @@ class StaticDataUseAspect extends DataUseAspect{
 }
 @Aspect (className = DataInstanceUse)
 class DataInstanceUseAspect extends StaticDataUseAspect{
-	def Object transformToEMFObject(){
-		//TODO: transform a dataInstanceUse to and EMF object to be able to compare it with the real MUT
+	
+	def EObject getMatchedMUTElement(Resource MUTResource){
+		val String DSLPath = (_self.eContainer as Message).parentTestDescription.testConfiguration.DSLPath
+		if (!_self.dataInstance.dataType.isConcreteEcoreType(DSLPath)){
+			return null;
+		}
+		//TODO: the parameter with exactEquivalent annotation should be equal to the real element
+		//TODO: the parameter with partialEquivalent annotation would be contained in the real element
+		//TODO: check if the dataInstanceUse is present in MUT
+		//find all the parameters
+		return null;
 	}
-}
-@Aspect (className = SpecialValueUse)
-class SpecialValueUseAspect extends StaticDataUseAspect{
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = AnyValue)
-class AnyValueAspect extends SpecialValueUseAspect{
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = AnyValueOrOmit)
-class AnyValueOrOmitAspect extends SpecialValueUseAspect{
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = OmitValue)
-class OmitValueAspect extends SpecialValueUseAspect{
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = DynamicDataUse)
-class DynamicDataUseAspect extends DataUseAspect{
-	def void mapDataResource(){
-	}
-}
-@Aspect (className = FunctionCall)
-class FunctionCallAspect extends DynamicDataUseAspect{
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = FormalParameterUse)
-class FormalParameterUseAspect extends DynamicDataUseAspect{
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = VariableUse)
-class VariableUseAspect extends DynamicDataUseAspect{
-	def void mapDataResource(){
-		
-	}
-}
-@Aspect (className = PredefinedFunctionCall)
-class PredefinedFunctionCallAspect extends DynamicDataUseAspect{
-	def void mapDataResource(){
-		
+	def void setMatchedMUTElement(Resource MUTResource){
+		//TODO: check if the dataInstanceUse is present in MUT
+		//find static parameters
+		//set dynamic parameters
 	}
 }
