@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EClass;
@@ -36,7 +37,7 @@ public class OCLLauncher {
 	protected OCLExpression<EClassifier> expression = null;
 	protected Query<EClassifier, EClass, EObject> queryEval = null;
 	
-	private Object resultAsObject = null;
+	private Object[] resultAsObject = null;
 	private ArrayList<String> resultAsString = new ArrayList<>();
 
 	public void setUp() {
@@ -50,17 +51,19 @@ public class OCLLauncher {
 		this.expression = this.oclHelper.createQuery(query);
 		this.queryEval = this.ocl.createQuery(this.expression);
 		// the ocl query will be evaluated on the root element of MUT
-		this.resultAsObject = this.queryEval.evaluate(MUTResource.getContents().get(0));
-		if (this.resultAsObject instanceof Collection<?>) {
-			if (this.resultAsObject instanceof LinkedHashSet<?>) {
-				LinkedHashSet<?> queryResult =  (LinkedHashSet<?>) this.resultAsObject;
+		Object res = this.queryEval.evaluate(MUTResource.getContents().get(0));
+		if (res instanceof Collection<?>) {
+			if (res instanceof LinkedHashSet<?>) {
+				LinkedHashSet<?> queryResult =  (LinkedHashSet<?>) res;
+				this.resultAsObject = queryResult.toArray();
 				Iterator it = queryResult.iterator();
 				while (it.hasNext()) {
 					EObject object = (EObject) it.next();
 					this.resultAsString.add(queryResultLabelProvider(object));
 				}
-			}else if (this.resultAsObject instanceof ArrayList<?>) {
-				ArrayList<?> queryResult =  (ArrayList<?>) this.resultAsObject;
+			}else if (res instanceof ArrayList<?>) {
+				ArrayList<?> queryResult =  (ArrayList<?>) res;
+				this.resultAsObject = queryResult.toArray();
 				for (int i = 0; i < queryResult.size(); i++) {
 					if (queryResult.get(i)== null) {
 						this.resultAsString.add("null");
@@ -70,10 +73,12 @@ public class OCLLauncher {
 				}
 			}
 		}else {
-			if (this.resultAsObject instanceof EObject) {
-				EObject object = (EObject) this.resultAsObject;
+			if (res instanceof EObject) {
+				EObject object = (EObject) res;
+				this.resultAsObject[0] = object;
 				this.resultAsString.add(queryResultLabelProvider(object));
 			}else {
+				this.resultAsObject[0] = this.resultAsObject.toString();
 				this.resultAsString.add("'" + this.resultAsObject.toString() + "'");
 			}
 		}
@@ -104,7 +109,7 @@ public class OCLLauncher {
 	public ArrayList<String> getResultAsString(){
 		return this.resultAsString;
 	}
-	public Object getResultAsObject() {
+	public Object[] getResultAsObject() {
 		return this.resultAsObject;
 	}
 	public void tearDown() throws Exception {

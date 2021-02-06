@@ -4,6 +4,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+
+import java.util.ArrayList;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.eclipse.ocl.ParserException;
@@ -94,7 +97,10 @@ public class LauncherFactory{
 	public Resource getMUTResource() {
 		return this.engineLauncher.getModelResource();
 	}
-	public OCLLauncher getOCLLauncher() {
-		return this.oclLauncher;
+	public Object[] getOCLResultAsObject() {
+		return this.oclLauncher.getResultAsObject();
+	}
+	public ArrayList<String> getOCLResultAsString(){
+		return this.oclLauncher.getResultAsString();
 	}
 }
