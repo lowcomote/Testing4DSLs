@@ -3,6 +3,7 @@ package org.imt.tdl.defaultPackage.generator;
 import java.io.IOException;
 import java.util.List;
 
+import org.etsi.mts.tdl.AnnotationType;
 import org.etsi.mts.tdl.AnyValue;
 import org.etsi.mts.tdl.AnyValueOrOmit;
 import org.etsi.mts.tdl.DataType;
@@ -40,6 +41,7 @@ public class TestDesignPackageGenerator {
 		this.genericTestCasesPackage.setName("genericTestCases");
 		generateImports(this.genericTestCasesPackage);
 		generateGenericDataInstances();
+		generateAnnotations();
 	}
 	private void generateOclTestCasesPackage() {
 		this.oclTestCasesPackage = factory.createPackage();
@@ -97,6 +99,15 @@ public class TestDesignPackageGenerator {
 			}
 		}
 		return false;
+	}
+	private void generateAnnotations() {
+		AnnotationType ExactEquivalent = factory.createAnnotationType();
+		ExactEquivalent.setName("ExactEquivalent");
+		this.genericTestCasesPackage.getPackagedElement().add(ExactEquivalent);
+		
+		AnnotationType PartialEquivalent = factory.createAnnotationType();
+		PartialEquivalent.setName("PartialEquivalent");
+		this.genericTestCasesPackage.getPackagedElement().add(PartialEquivalent);
 	}
 	private void generateOCLDataInstances() {
 		if (this.commonPackageGenerator.getOCLType()!=null) {
