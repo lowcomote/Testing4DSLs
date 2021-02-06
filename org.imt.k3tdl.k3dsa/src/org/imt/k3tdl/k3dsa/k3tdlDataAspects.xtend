@@ -50,10 +50,6 @@ class ParameterMappingAspect{
 @Aspect (className = DataType)
 class DataTypeAspect extends MappableDataElementAspect{
 	def boolean isConcreteEcoreType(String DSLPath) {
-		var tdlTypeName = _self.name
-		if (_self.name.startsWith("_")){
-			tdlTypeName = _self.name.substring(1)
-		}
 		var dslRes = (new ResourceSetImpl()).getResource(URI.createURI(DSLPath), true);
 		var dsl = dslRes.getContents().get(0) as Dsl;
 		if (dsl.getEntry("ecore") != null) {
@@ -61,12 +57,19 @@ class DataTypeAspect extends MappableDataElementAspect{
 			var metamodelRes = (new ResourceSetImpl()).getResource(URI.createURI(metamodelPath), true);
 			var metamodelRootElement = metamodelRes.getContents().get(0) as EPackage;
 			for (EClassifier classifier: metamodelRootElement.EClassifiers){
-				if (classifier.name.equals(tdlTypeName) && !classifier.eClass.abstract){
+				if (classifier.name.equals(_self.qualifiedName) && !classifier.eClass.abstract){
 					return true;
 				}
 			}
 		}
 		return false;
+	}
+	def String qualifiedName(){
+		var tdlName = _self.name
+		if (_self.name.startsWith("_")){
+			return tdlName.substring(1)
+		}
+		return tdlName
 	}
 }
 
@@ -99,8 +102,21 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 	
 	def EObject getMatchedMUTElement(Resource MUTResource){
 		val String DSLPath = (_self.eContainer as Message).parentTestDescription.testConfiguration.DSLPath
+		//if data type is abstract return null
 		if (!_self.dataInstance.dataType.isConcreteEcoreType(DSLPath)){
 			return null;
+		}
+		val dataTypeName = _self.dataInstance.dataType.qualifiedName
+		var rootElement = MUTResource.getContents().get(0);
+		if (!rootElement.eClass.name.equals(dataTypeName)){
+			for (EObject object: rootElement.eContents){				
+				if (object.eClass.name.equals(dataTypeName)){
+					rootElement = object
+				}
+			}
+		}
+		for (j : 0 ..<_self.argument.size){
+					
 		}
 		//TODO: the parameter with exactEquivalent annotation should be equal to the real element
 		//TODO: the parameter with partialEquivalent annotation would be contained in the real element
