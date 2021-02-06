@@ -211,7 +211,8 @@ class MessageAspect extends InteractoinAspect{
 	def void performBehavior(){
 		println("Performing Message Behavior");
 		for (Target t: _self.target){
-			t.targetGate.gate.setInitialMUTPath(_self.parentTestDescription.testConfiguration.MUTPath)
+			t.targetGate.gate.DSLPath = _self.parentTestDescription.testConfiguration.DSLPath
+			t.targetGate.gate.MUTPath = _self.parentTestDescription.testConfiguration.MUTPath
 			t.targetGate.gate.configureLauncher(_self.parentTestDescription.launcher)
 			//the argument has to be sent to the MUT
 			if (t.targetGate.component.role.toString == "SUT"){
