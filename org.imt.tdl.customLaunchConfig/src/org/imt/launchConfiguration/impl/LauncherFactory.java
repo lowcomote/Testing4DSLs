@@ -46,7 +46,9 @@ public class LauncherFactory{
 				this.eventManagerLauncher.setUp();
 			}
 		}else if (configurationType.equals(OCL)) {
-			if (this.oclLauncher == null) {
+			if (this.engineLauncher==null) {
+				System.out.println("There is no model under execution. You have to run the model first.");
+			}else if (this.oclLauncher == null) {
 				System.out.println("OCL engine setup");
 				this.oclLauncher = new OCLLauncher();
 				this.oclLauncher.setUp();

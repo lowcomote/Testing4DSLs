@@ -131,10 +131,7 @@ class GateInstanceAspect {
 		println("The MUT component received data")
 		if (argument instanceof DataInstanceUse) {
 			var arg = (argument as DataInstanceUse)
-			if (arg.item != null || arg.dataInstance.dataType.isConcreteEcoreType(_self.DSLPath)){
-				println("Request for setting MUT in a new State")
-				_self.setModelState(arg);
-			}else if (arg.dataInstance.name == 'runModel') {
+			if (arg.dataInstance.name == 'runModel') {
 				println("Request for running MUT")
 				_self.gateLauncher.executeGenericCommand();
 			}else if (arg.dataInstance.name == 'resetModel') {
@@ -144,6 +141,9 @@ class GateInstanceAspect {
 			}else if (arg.dataInstance.name == 'getModelState') {
 				println("Request for getting the MUT")
 				_self.receivedOutput = _self.gateLauncher.MUTResource
+			}else if (arg.dataInstance.dataType.isConcreteEcoreType(_self.DSLPath)){
+				println("Request for setting MUT in a new State")
+				_self.setModelState(arg);
 			}else if (arg.dataInstance.dataType.name == 'OCL') {
 				println("Sending the data to the OCL engine")
 				// extracting the query from the argument and sending for validation
