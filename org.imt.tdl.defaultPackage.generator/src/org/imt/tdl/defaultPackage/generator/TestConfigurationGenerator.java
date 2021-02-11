@@ -10,6 +10,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.etsi.mts.tdl.Annotation;
+import org.etsi.mts.tdl.AnnotationType;
 import org.etsi.mts.tdl.ComponentInstance;
 import org.etsi.mts.tdl.ComponentInstanceRole;
 import org.etsi.mts.tdl.ComponentType;
@@ -37,6 +38,7 @@ public class TestConfigurationGenerator {
 	private Map<String, GateType> gateTypes = new HashMap<String, GateType>();
 	private Map<String, ComponentType> componentTypes = new HashMap<String, ComponentType>();
 	private Map<String, GateInstance> gateInstances = new HashMap<String, GateInstance>();
+	private Map<String, AnnotationType> annotations = new HashMap<String, AnnotationType>();
 	private Map<String, TestConfiguration> configurations = new HashMap<String, TestConfiguration>();
 	
 	public TestConfigurationGenerator(String dslFilePath) throws IOException {
@@ -56,6 +58,7 @@ public class TestConfigurationGenerator {
 		generateImports();
 		generateGateTypes();
 		generateComponentTypes();
+		generateAnnotations();
 		generateConfigurations();
 	}
 	private void generateImports() {
@@ -127,6 +130,17 @@ public class TestConfigurationGenerator {
 		component.getGateInstance().add(oclGate);
 		this.gateInstances.put(oclGate.getName(), oclGate);
 	}
+	private void generateAnnotations() {
+		AnnotationType MUTPath = factory.createAnnotationType();
+		MUTPath.setName("MUTPath");
+		this.testConfigurationPackage.getPackagedElement().add(MUTPath);
+		this.annotations.put(MUTPath.getName(), MUTPath);
+		
+		AnnotationType DSLPath = factory.createAnnotationType();
+		DSLPath.setName("DSLPath");
+		this.testConfigurationPackage.getPackagedElement().add(DSLPath);
+		this.annotations.put(DSLPath.getName(), DSLPath);
+	}
 	private void generateConfigurations() {
 		//generate one generic test configuration
 		TestConfiguration genericConfiguration = factory.createTestConfiguration();
@@ -174,12 +188,12 @@ public class TestConfigurationGenerator {
 		mutInstance.setType(this.componentTypes.get("MUT"));
 		Annotation mutPathAnnotation = factory.createAnnotation();
 		mutPathAnnotation.setAnnotatedElement(mutInstance);
-		mutPathAnnotation.setKey(this.commonPackageGenerator.getAnnotations().get("MUTPath"));
+		mutPathAnnotation.setKey(this.annotations.get("MUTPath"));
 		mutPathAnnotation.setValue("\'TODO: Put the address of Model-Under Test here\'");
 		mutInstance.getAnnotation().add(mutPathAnnotation);
 		Annotation dslPathAnnotation = factory.createAnnotation();
 		dslPathAnnotation.setAnnotatedElement(mutInstance);
-		dslPathAnnotation.setKey(this.commonPackageGenerator.getAnnotations().get("DSLPath"));
+		dslPathAnnotation.setKey(this.annotations.get("DSLPath"));
 		dslPathAnnotation.setValue("\'platform:/plugin/...TODO: complete the address of .dsl file...\'");
 		mutInstance.getAnnotation().add(dslPathAnnotation);
 

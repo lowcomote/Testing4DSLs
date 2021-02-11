@@ -26,7 +26,6 @@ public class CommonPackageGenerator {
 	private DataType oclType;
 	private List<DataInstance> verdictInstances = new ArrayList<DataInstance>();
 	private DataType genericCommand;
-	private Map<String, AnnotationType> annotations = new HashMap<String, AnnotationType>();
 
 	public CommonPackageGenerator() {
 		this.factory = tdlFactory.eINSTANCE;
@@ -38,7 +37,6 @@ public class CommonPackageGenerator {
 		generateTypeForOCL();
 		generateVerdicts();
 		generateTypeForGeneralEvents();
-		generateAnnotations();
 	}
 	private void generateImports() {
 		ElementImport dslSpecificTypesPackageImport = factory.createElementImport();
@@ -98,17 +96,6 @@ public class CommonPackageGenerator {
 		
 		this.genericCommand = genericCommand;
 	}
-	private void generateAnnotations() {
-		AnnotationType MUTPath = factory.createAnnotationType();
-		MUTPath.setName("MUTPath");
-		this.commonPackage.getPackagedElement().add(MUTPath);
-		this.annotations.put(MUTPath.getName(), MUTPath);
-		
-		AnnotationType DSLPath = factory.createAnnotationType();
-		DSLPath.setName("DSLPath");
-		this.commonPackage.getPackagedElement().add(DSLPath);
-		this.annotations.put(DSLPath.getName(), DSLPath);
-	}
 	public Package getCommonPackage() {
 		return this.commonPackage;
 	}
@@ -120,9 +107,6 @@ public class CommonPackageGenerator {
 	}
 	public DataType getGenericCommand() {
 		return this.genericCommand;
-	}
-	public Map<String, AnnotationType> getAnnotations() {
-		return this.annotations;
 	}
 	public void setDslSpecificTypes(Map<String, DataType> dslSpecificTypes) {
 		this.dslSpecificTypes = dslSpecificTypes;
