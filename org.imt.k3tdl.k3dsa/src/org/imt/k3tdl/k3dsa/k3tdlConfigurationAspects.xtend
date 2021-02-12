@@ -12,7 +12,7 @@ import org.etsi.mts.tdl.GateInstance
 import org.etsi.mts.tdl.GateType
 import org.etsi.mts.tdl.LiteralValueUse
 import org.etsi.mts.tdl.StaticDataUse
-import org.imt.launchConfiguration.impl.LauncherFactory
+import org.imt.launchConfiguration.impl.EngineFactory
 
 import static extension org.imt.k3tdl.k3dsa.DataInstanceUseAspect.*
 import static extension org.imt.k3tdl.k3dsa.DataTypeAspect.*
@@ -29,18 +29,18 @@ class GateInstanceAspect {
 	private Object receivedOutput = null
 	private Object expectedOutput = null
 	
-	private LauncherFactory gateLauncher
+	private EngineFactory gateLauncher
 
 	@Step
 	// setting up the related launcher based on the gate type 
-	def void configureLauncher(LauncherFactory launcher) {
+	def void configureLauncher(EngineFactory launcher) {
 		_self.gateLauncher = launcher;
 		if (_self.name.equals('genericMUTGate')) {
-			_self.gateLauncher.setUp(LauncherFactory.GENERIC);
+			_self.gateLauncher.setUp(EngineFactory.GENERIC);
 		} else if (_self.name.equals('dslSpecificMUTGate')) {
-			_self.gateLauncher.setUp(LauncherFactory.DSL_SPECIFIC);
+			_self.gateLauncher.setUp(EngineFactory.DSL_SPECIFIC);
 		} else if (_self.name.equals('oclMUTGate')) {
-			_self.gateLauncher.setUp(LauncherFactory.OCL);
+			_self.gateLauncher.setUp(EngineFactory.OCL);
 		}
 	}
 

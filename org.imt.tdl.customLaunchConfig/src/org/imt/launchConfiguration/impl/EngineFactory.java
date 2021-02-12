@@ -15,21 +15,21 @@ import org.eclipse.gemoc.ale.interpreted.engine.AleEngine;
 import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.execution.sequential.javaengine.PlainK3ExecutionEngine;
 
-public class LauncherFactory{
+public class EngineFactory{
 	
 	private String DSLPath;
 	private String MUTPath;
 	
 	private ILauncher engineLauncher;
-	private OCLLauncher oclLauncher;
+	private OCLBenchmark oclLauncher;
 	private EventManagerLauncher eventManagerLauncher;
 	
 	public final static String GENERIC = "Generic";
 	public final static String DSL_SPECIFIC = "DSL-Specific";
 	public final static String OCL = "OCL";
 
-	public void setUp(String configurationType) throws CoreException, EngineContextException {
-		if (configurationType.equals(GENERIC)) {
+	public void setUp(String commandType) throws CoreException, EngineContextException {
+		if (commandType.equals(GENERIC)) {
 			String engineType = this.getEngineType();
 			if (engineType=="ale") {
 				System.out.println("Gemoc ALE engine setup");
@@ -39,18 +39,18 @@ public class LauncherFactory{
 				this.engineLauncher = new JavaEngineLauncher();
 			}
 			this.engineLauncher.setUp(this.MUTPath, this.DSLPath);
-		}else if(configurationType.equals(DSL_SPECIFIC)) {
+		}else if(commandType.equals(DSL_SPECIFIC)) {
 			if (this.eventManagerLauncher == null) {
 				System.out.println("Event manager setup");
 				this.eventManagerLauncher = new EventManagerLauncher();
 				this.eventManagerLauncher.setUp();
 			}
-		}else if (configurationType.equals(OCL)) {
+		}else if (commandType.equals(OCL)) {
 			if (this.engineLauncher==null) {
 				System.out.println("There is no model under execution. You have to run the model first.");
 			}else if (this.oclLauncher == null) {
 				System.out.println("OCL engine setup");
-				this.oclLauncher = new OCLLauncher();
+				this.oclLauncher = new OCLBenchmark();
 				this.oclLauncher.setUp();
 			}
 		}
