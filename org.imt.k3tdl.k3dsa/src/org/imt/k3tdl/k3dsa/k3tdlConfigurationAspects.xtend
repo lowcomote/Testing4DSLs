@@ -68,44 +68,33 @@ class GateInstanceAspect {
 		//if the argument is an element/a list of elements
 		else if (argument instanceof DataInstanceUse){
 			val arg = argument as DataInstanceUse
+			var Object MUTResource = null;
+			if (_self.receivedOutput instanceof Resource){
+				MUTResource = _self.receivedOutput//the MUTResource is the received output
+			}else if (_self.name.equals('oclMUTGate')){
+				MUTResource = _self.gateLauncher.MUTResource//the MUT objects are the received output
+			}
 			var boolean assertionFailed = false
 			var EObject[] matchedMUTElements = null
 			var StaticDataUse[] notMatchedElements = null
-			if (arg.item != null){
-				for (i : 0 ..<arg.item.size){//there is a list of objects in the expected output
-					if (_self.receivedOutput instanceof Resource){//the MUTResource is the received output
-						val EObject matchedObject = (arg.item.get(i) as DataInstanceUse).
-							getMatchedMUTElement(_self.receivedOutput as Resource)		
-						if (matchedObject == null){
-							notMatchedElements.add(arg.item.get(i))
-							assertionFailed = true
-						}
-					}else if (_self.name.equals('oclMUTGate')){//the MUT objects are the received output
-						val EObject matchedObject = (arg.item.get(i) as DataInstanceUse).
-							getMatchedMUTElement(_self.gateLauncher.MUTResource)		
-						if (matchedObject == null){
-							notMatchedElements.add(arg.item.get(i))
-							assertionFailed = true
-						}else{
-							matchedMUTElements.add(matchedObject)
-						}
+			if (arg.item != null){//there is a list of objects in the expected output
+				for (i : 0 ..<arg.item.size){
+					val EObject matchedObject = (arg.item.get(i) as DataInstanceUse).
+						getMatchedMUTElement(MUTResource as Resource)		
+					if (matchedObject == null){
+						notMatchedElements.add(arg.item.get(i))
+						assertionFailed = true
+					}else{
+						matchedMUTElements.add(matchedObject)
 					}
 				}
 			}else{//there is only one object in the expected output
-				if (_self.receivedOutput instanceof Resource){//the MUTResource is the received output
-					if ((arg as DataInstanceUse).getMatchedMUTElement(_self.receivedOutput as Resource) == null){
-						notMatchedElements.add(arg)
-						assertionFailed = true
-					}else if (_self.name.equals('oclMUTGate')){//the MUT objects are the received output
-						val EObject matchedObject = (arg as DataInstanceUse).
-							getMatchedMUTElement(_self.gateLauncher.MUTResource)		
-						if (matchedObject == null){
-							notMatchedElements.add(arg)
-							assertionFailed = true
-						}else{
-							matchedMUTElements.add(matchedObject)
-						}	
-					}
+				val EObject matchedObject = (arg as DataInstanceUse).getMatchedMUTElement(MUTResource as Resource)
+				if (matchedObject == null){
+					notMatchedElements.add(arg)
+					assertionFailed = true
+				}else{
+					matchedMUTElements.add(matchedObject)	
 				}
 			}
 			if (assertionFailed){
