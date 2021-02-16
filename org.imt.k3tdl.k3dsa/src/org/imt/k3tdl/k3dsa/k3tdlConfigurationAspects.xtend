@@ -1,6 +1,7 @@
 package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
+
 import fr.inria.diverse.k3.al.annotationprocessor.Step
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
@@ -14,6 +15,7 @@ import org.etsi.mts.tdl.LiteralValueUse
 import org.etsi.mts.tdl.StaticDataUse
 import org.imt.launchConfiguration.impl.EngineFactory
 
+import static extension org.imt.k3tdl.k3dsa.DataInstanceAspect.*
 import static extension org.imt.k3tdl.k3dsa.DataInstanceUseAspect.*
 import static extension org.imt.k3tdl.k3dsa.DataTypeAspect.*
 
@@ -77,7 +79,7 @@ class GateInstanceAspect {
 			var boolean assertionFailed = false
 			var EObject[] matchedMUTElements = null
 			var StaticDataUse[] notMatchedElements = null
-			if (arg.item != null){//there is a list of objects in the expected output
+			if (arg.item != null && arg.item.size > 0){//there is a list of objects in the expected output
 				for (i : 0 ..<arg.item.size){
 					val EObject matchedObject = (arg.item.get(i) as DataInstanceUse).
 						getMatchedMUTElement(MUTResource as Resource)		
@@ -89,7 +91,8 @@ class GateInstanceAspect {
 					}
 				}
 			}else{//there is only one object in the expected output
-				val EObject matchedObject = (arg as DataInstanceUse).getMatchedMUTElement(MUTResource as Resource)
+				val EObject matchedObject = (arg as DataInstanceUse).
+					getMatchedMUTElement(MUTResource as Resource)
 				if (matchedObject == null){
 					notMatchedElements.add(arg)
 					assertionFailed = true
@@ -149,8 +152,9 @@ class GateInstanceAspect {
 	}
 	def void setModelState(DataInstanceUse arg){
 		//get the current MUTResource
+		//TODO: Get the in-memory MUTResource
 		var newMUTResource = _self.gateLauncher.MUTResource;
-		if (arg.item != null){
+		if (arg.item != null && arg.item.size > 0){
 			for (i : 0 ..<arg.item.size){
 				(arg.item.get(i) as DataInstanceUse).setMatchedMUTElement(newMUTResource)
 			}

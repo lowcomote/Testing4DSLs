@@ -1,5 +1,10 @@
-	// BeginInjectInto org.imt.k3tdl.k3dsa.DataUseAspect#void mapDataResource() from org.imt.k3tdl.k3dsa.StaticDataUseAspect
-		if (_self instanceof org.etsi.mts.tdl.StaticDataUse){
-			org.imt.k3tdl.k3dsa.StaticDataUseAspect.mapDataResource((org.etsi.mts.tdl.StaticDataUse)_self);
+	// BeginInjectInto org.imt.k3tdl.k3dsa.DataInstanceAspect#EObject getMatchedMUTElement(EObject) from org.imt.k3tdl.k3dsa.StructuredDataInstanceAspect
+		if (_self instanceof org.etsi.mts.tdl.StructuredDataInstance){
+			result = org.imt.k3tdl.k3dsa.StructuredDataInstanceAspect.getMatchedMUTElement((org.etsi.mts.tdl.StructuredDataInstance)_self,rootElement);
 		} else
-		// EndInjectInto org.imt.k3tdl.k3dsa.DataUseAspect#void mapDataResource() from org.imt.k3tdl.k3dsa.StaticDataUseAspect
+		// EndInjectInto org.imt.k3tdl.k3dsa.DataInstanceAspect#EObject getMatchedMUTElement(EObject) from org.imt.k3tdl.k3dsa.StructuredDataInstanceAspect
+	// BeginInjectInto org.imt.k3tdl.k3dsa.DataInstanceAspect#EObject getMatchedMUTElement(EObject) from org.imt.k3tdl.k3dsa.SimpleDataInstanceAspect
+		if (_self instanceof org.etsi.mts.tdl.SimpleDataInstance){
+			result = org.imt.k3tdl.k3dsa.SimpleDataInstanceAspect.getMatchedMUTElement((org.etsi.mts.tdl.SimpleDataInstance)_self,rootElement);
+		} else
+		// EndInjectInto org.imt.k3tdl.k3dsa.DataInstanceAspect#EObject getMatchedMUTElement(EObject) from org.imt.k3tdl.k3dsa.SimpleDataInstanceAspect
