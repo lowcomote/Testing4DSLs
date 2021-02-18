@@ -16,9 +16,9 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.part.FileEditorInput;
+import org.imt.tdl.codeGenerator.TDLCodeGenerator;
 import org.imt.tdl.codeGenerator.ui.DSLSelectionWizard;
 import org.imt.tdl.codeGenerator.ui.DSLSelectionWizardPage;
-import org.imt.tdl.defaultPackage.generator.TDLCodeGenerator;
 
 public class CodeGenerationHandler extends AbstractHandler {
 	

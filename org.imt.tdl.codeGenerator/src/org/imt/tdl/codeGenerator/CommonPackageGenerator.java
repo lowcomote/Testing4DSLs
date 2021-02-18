@@ -1,4 +1,4 @@
-package org.imt.tdl.defaultPackage.generator;
+package org.imt.tdl.codeGenerator;
 
 import java.util.ArrayList;
 import java.util.HashMap;

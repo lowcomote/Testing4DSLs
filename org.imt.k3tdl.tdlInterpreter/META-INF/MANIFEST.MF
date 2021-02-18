@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.imt.k3tdl.k3dsa
-Bundle-SymbolicName: org.imt.k3tdl.k3dsa; singleton:=true
+Bundle-SymbolicName: org.imt.k3tdl.tdlInterpreter;singleton:=true
 Bundle-Version: 1.0.0
 Require-Bundle: fr.inria.diverse.k3.al.annotationprocessor.plugin;bundle-version="3.0.0";visibility:=reexport,
  org.eclipse.xtend.lib;bundle-version="2.6.0";visibility:=private,

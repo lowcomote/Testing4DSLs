@@ -111,6 +111,7 @@ class DataInstanceUseAspect{
 		}
 		//find matched elements based on the parameter bindings of dataInstanceUse
 		for (i : 0 ..<_self.argument.size){
+			val parameterBinding = _self.argument.get(i);
 			if (!_self.argument.get(i).parameter.parameterMatched(rootElement)){
 				return null;
 			}

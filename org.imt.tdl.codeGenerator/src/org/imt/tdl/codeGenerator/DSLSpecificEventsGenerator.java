@@ -1,4 +1,4 @@
-package org.imt.tdl.defaultPackage.generator;
+package org.imt.tdl.codeGenerator;
 
 import java.io.IOException;
 
