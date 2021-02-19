@@ -94,7 +94,6 @@ public class ALEEngineLauncher extends AbstractLauncher{
 		this.setModelResource(aleEngine.getExecutionContext().getResourceModel());
 	}
 	private AleEngine createExecutionEngine(){
-		System.out.println("Start creating Ale Engine");
 		AleEngine engine = new AleEngine();
 		GenericModelExecutionContext<SequentialRunConfiguration> executioncontext = null;
 		try {

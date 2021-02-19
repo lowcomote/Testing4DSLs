@@ -73,7 +73,6 @@ class AtomicBehaviourAspect extends BehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Atomic Behavior")
 	}
 }
 @Aspect (className = CombinedBehaviour)
@@ -81,7 +80,6 @@ class CombinedBehaviourAspect extends BehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Combined Behavior")
 	}
 }
 @Aspect (className = PeriodicBehaviour)
@@ -89,7 +87,6 @@ class PeriodicBehaviourAspect extends BehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Periodic Behavior")
 		_self.block.traverseBlock()
 	}
 }
@@ -98,7 +95,6 @@ class ExceptionalBehaviourAspect extends BehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Exceptional Behavior")
 	}
 }
 @Aspect (className = ActionBehaviour)
@@ -106,7 +102,6 @@ class ActionBehaviourAspect extends AtomicBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Action Behavior")
 	}
 }
 @Aspect (className = VerdictAssignment)
@@ -114,7 +109,6 @@ class VerdictAssignmentAspect extends AtomicBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Verdict Assignment Behavior")
 	}
 }
 @Aspect (className = Stop)
@@ -122,7 +116,6 @@ class StopAspect extends AtomicBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Stop Behavior")
 	}
 }
 @Aspect (className = Break)
@@ -130,7 +123,6 @@ class BreakAspect extends AtomicBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Break Behavior")
 	}
 }
 @Aspect (className = TestDescriptionReference)
@@ -138,7 +130,6 @@ class TestDescriptionReferenceAspect extends AtomicBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Test Description Reference Behavior")
 	}
 }
 @Aspect (className = Interaction)
@@ -146,7 +137,6 @@ class InteractoinAspect extends AtomicBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Interaction Behavior")
 	}
 }
 @Aspect (className = TimerOperation)
@@ -154,7 +144,6 @@ class TimerOperationAspect extends AtomicBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Timer Operation Behavior")
 	}
 }
 @Aspect (className = TimeOperation)
@@ -162,7 +151,6 @@ class TimeOperationAspect extends AtomicBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Time Operation Behavior")
 	}
 }
 @Aspect (className = Assertion)
@@ -170,7 +158,6 @@ class AssertionAspect extends ActionBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Assertion Behavior")
 	}
 }
 @Aspect (className = Assignment)
@@ -178,7 +165,6 @@ class AssignmentAspect extends ActionBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Assignment Behavior")
 	}
 }
 @Aspect (className = InlineAction)
@@ -186,7 +172,6 @@ class InlineActionAspect extends ActionBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Inline Action Behavior")
 	}
 }
 @Aspect (className = ActionReference)
@@ -194,7 +179,6 @@ class ActionReferenceAspect extends ActionBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Action Reference Behavior")
 	}
 }
 @Aspect (className = ProcedureCall)
@@ -202,7 +186,6 @@ class ProcedureCallAspect extends InteractoinAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Procedure Call Behavior")
 	}
 }
 @Aspect (className = Message)
@@ -210,15 +193,15 @@ class MessageAspect extends InteractoinAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Message Behavior");
 		for (Target t: _self.target){
 			t.targetGate.gate.DSLPath = _self.parentTestDescription.testConfiguration.DSLPath
 			t.targetGate.gate.MUTPath = _self.parentTestDescription.testConfiguration.MUTPath
-			t.targetGate.gate.configureLauncher(_self.parentTestDescription.launcher)
 			if (_self.sourceGate.component.role.toString == "SUT"){
 				//when the SUT component sends an argument, it is actually an assertion that have to be checked
+				_self.sourceGate.gate.setLauncher(_self.parentTestDescription.launcher)
 				_self.sourceGate.gate.assertArgument(_self.argument)
 			}else{//the argument has to be sent to the MUT
+				t.targetGate.gate.setLauncher(_self.parentTestDescription.launcher)
 				t.targetGate.gate.sendArgument2sut(_self.argument)
 			}
 		}	
@@ -229,7 +212,6 @@ class TimerStartAspect extends TimerOperationAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Timer Start Behavior")
 	}
 }
 @Aspect (className = TimerStop)
@@ -237,7 +219,6 @@ class TimerStopAspect extends TimerOperationAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Timer Stop Behavior")
 	}
 }
 @Aspect (className = TimeOut)
@@ -245,7 +226,6 @@ class TimeOutAspect extends TimerOperationAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Time Out Behavior")
 	}
 }
 @Aspect (className = Wait)
@@ -253,7 +233,6 @@ class WaitAspect extends TimeOperationAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Wait Behavior")
 	}
 }
 @Aspect (className = Quiescence)
@@ -261,7 +240,6 @@ class QuiescenceAspect extends TimeOperationAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Quiescence Behavior")
 	}
 }
 @Aspect (className = SingleCombinedBehaviour)
@@ -269,7 +247,6 @@ class SingleCombinedBehaviourAspect extends CombinedBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Single Combined Behavior")
 		_self.block.traverseBlock()
 	}
 }
@@ -278,7 +255,6 @@ class MultipleCombinedBehaviourAspect extends CombinedBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Multiple Combined Behavior")
 	}
 }
 @Aspect (className = BoundedLoopBehaviour)
@@ -286,7 +262,6 @@ class BoundedLoopBehaviourAspect extends SingleCombinedBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Bounded Loop Behavior")
 		_self.block.traverseBlock()
 	}
 }
@@ -295,7 +270,6 @@ class UnBoundedLoopBehaviourAspect extends SingleCombinedBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Bounded Loop Behavior")
 		_self.block.traverseBlock()
 	}
 }
@@ -304,7 +278,6 @@ class CompoundBehaviourAspect extends SingleCombinedBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Compound Behavior")
 		_self.block.traverseBlock()
 	}
 }
@@ -313,7 +286,6 @@ class OptionalBehaviourAspect extends SingleCombinedBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Optional Behavior")
 		_self.block.traverseBlock()
 	}
 }
@@ -322,7 +294,6 @@ class ConditionalBehaviourAspect extends MultipleCombinedBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Conditional Behavior")
 	}
 }
 @Aspect (className = AlternativeBehaviour)
@@ -330,7 +301,6 @@ class AlternativeBehaviourAspect extends MultipleCombinedBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Alternative Behavior")
 		for (Block innerBlock : _self.block){
 			for (Behaviour b :innerBlock.behaviour){
 				_self.enabledBehaviour = b
@@ -344,7 +314,6 @@ class ParallelBehaviourAspect extends MultipleCombinedBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Parallel Behavior")
 	}
 }
 @Aspect (className = DefaultBehaviour)
@@ -352,7 +321,6 @@ class DefaultBehaviourAspect extends ExceptionalBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Default Behavior")
 		_self.block.traverseBlock()
 	}
 }
@@ -361,7 +329,6 @@ class InterruptBehaviourAspect extends ExceptionalBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def void performBehavior(){
-		println("Performing Interrupt Behavior")
 		_self.block.traverseBlock()
 	}
 }

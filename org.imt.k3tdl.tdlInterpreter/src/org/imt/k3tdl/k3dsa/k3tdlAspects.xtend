@@ -56,9 +56,7 @@ class TestDescriptionAspect{
 	@Step
 	def void executeTestCase(){
 		println("Start test case execution: " + _self.name)
-		_self.testConfiguration.activateConfiguration()
-		_self.launcher.MUTPath = _self.testConfiguration.MUTPath
-		_self.launcher.DSLPath = _self.testConfiguration.DSLPath
+		_self.testConfiguration.activateConfiguration(_self.launcher)
 		_self.behaviourDescription.callBehavior()
 	}
 }
@@ -67,14 +65,25 @@ class TestConfigurationAspect{
 	public String MUTPath;
 	public String DSLPath;
 	@Step
-	def void activateConfiguration(){
+	def void activateConfiguration(EngineFactory launcher){
 		//finding the address of MUT From the annotations of the SUT component (the component with role==0)
 		for (Annotation a:_self.componentInstance.filter[ci | ci.role.toString == "SUT"].get(0).annotation){
 			if (a.key.name == 'MUTPath'){
 				_self.MUTPath = a.value.substring(1, a.value.length-1)
+				launcher.MUTPath = _self.MUTPath
 			}else if (a.key.name == 'DSLPath'){
 				_self.DSLPath = a.value.substring(1, a.value.length-1)
+				launcher.DSLPath = _self.DSLPath
 			}
+		}
+		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.contains('generic')]]) {
+			launcher.setUp(EngineFactory.GENERIC);
+		}
+		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.contains('dslSpecific')]]) {
+			launcher.setUp(EngineFactory.DSL_SPECIFIC);
+		}
+		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.contains('ocl')]]){
+			launcher.setUp(EngineFactory.OCL);
 		}
 	}
 }

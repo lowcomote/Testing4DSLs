@@ -1,7 +1,7 @@
 package org.imt.launchConfiguration.impl;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
@@ -11,7 +11,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.eclipse.ocl.ParserException;
 import org.imt.launchConfiguration.ILauncher;
-import org.eclipse.gemoc.ale.interpreted.engine.AleEngine;
 import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.execution.sequential.javaengine.PlainK3ExecutionEngine;
 
@@ -32,10 +31,10 @@ public class EngineFactory{
 		if (commandType.equals(GENERIC)) {
 			String engineType = this.getEngineType();
 			if (engineType=="ale") {
-				System.out.println("Gemoc ALE engine setup");
+				//System.out.println("Gemoc ALE engine setup");
 				this.engineLauncher = new ALEEngineLauncher();	
 			}else if(engineType=="k3") {
-				System.out.println("Gemoc java engine setup");
+				//System.out.println("Gemoc java engine setup");
 				this.engineLauncher = new JavaEngineLauncher();
 			}
 			this.engineLauncher.setUp(this.MUTPath, this.DSLPath);
@@ -49,20 +48,21 @@ public class EngineFactory{
 			if (this.engineLauncher==null) {
 				System.out.println("There is no model under execution. You have to run the model first.");
 			}else if (this.oclLauncher == null) {
-				System.out.println("OCL engine setup");
+				//System.out.println("OCL engine setup");
 				this.oclLauncher = new OCLInterpreter();
 				this.oclLauncher.setUp();
 			}
 		}
 	}
 	public void executeGenericCommand() throws CoreException, EngineContextException {
-		System.out.println("Start executing generic command");
+		//System.out.println("Start executing generic command");
 		//TODO: the execution thread has to wait for model execution to be finished
+		this.engineLauncher.setUp(this.MUTPath, this.DSLPath);
 		this.engineLauncher.executeModel();
-		System.out.println("The model under test executed successfully");
+		//System.out.println("The model under test executed successfully");
 	}
 	public void executeOCLCommand (String query){
-		System.out.println("Start executing ocl command");
+		//System.out.println("Start executing ocl command");
 		try {
 			//send the query without quotation marks
 			this.oclLauncher.runQuery(this.engineLauncher.getModelResource(), query.substring(1, query.length()-1));
@@ -99,7 +99,7 @@ public class EngineFactory{
 	public Resource getMUTResource() {
 		return this.engineLauncher.getModelResource();
 	}
-	public Object[] getOCLResultAsObject() {
+	public ArrayList<EObject> getOCLResultAsObject() {
 		return this.oclLauncher.getResultAsObject();
 	}
 	public ArrayList<String> getOCLResultAsString(){

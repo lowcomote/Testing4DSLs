@@ -2,6 +2,7 @@ package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 
+
 import fr.inria.diverse.k3.al.annotationprocessor.Step
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
@@ -18,6 +19,7 @@ import org.imt.launchConfiguration.impl.EngineFactory
 import static extension org.imt.k3tdl.k3dsa.DataInstanceAspect.*
 import static extension org.imt.k3tdl.k3dsa.DataInstanceUseAspect.*
 import static extension org.imt.k3tdl.k3dsa.DataTypeAspect.*
+import java.util.ArrayList
 
 @Aspect(className=GateType)
 class GateTypeAspect {
@@ -34,16 +36,8 @@ class GateInstanceAspect {
 	private EngineFactory gateLauncher
 
 	@Step
-	// setting up the related launcher based on the gate type 
-	def void configureLauncher(EngineFactory launcher) {
+	def void setLauncher(EngineFactory launcher) {
 		_self.gateLauncher = launcher;
-		if (_self.name.equals('genericMUTGate')) {
-			_self.gateLauncher.setUp(EngineFactory.GENERIC);
-		} else if (_self.name.equals('dslSpecificMUTGate')) {
-			_self.gateLauncher.setUp(EngineFactory.DSL_SPECIFIC);
-		} else if (_self.name.equals('oclMUTGate')) {
-			_self.gateLauncher.setUp(EngineFactory.OCL);
-		}
 	}
 
 	@Step
@@ -70,15 +64,15 @@ class GateInstanceAspect {
 		//if the argument is an element/a list of elements
 		else if (argument instanceof DataInstanceUse){
 			val arg = argument as DataInstanceUse
-			var Object MUTResource = null;
+			var Resource MUTResource = null;
 			if (_self.receivedOutput instanceof Resource){
-				MUTResource = _self.receivedOutput//the MUTResource is the received output
+				MUTResource = _self.receivedOutput as Resource//the MUTResource is the received output
 			}else if (_self.name.equals('oclMUTGate')){
 				MUTResource = _self.gateLauncher.MUTResource//the MUT objects are the received output
 			}
 			var boolean assertionFailed = false
-			var EObject[] matchedMUTElements = null
-			var StaticDataUse[] notMatchedElements = null
+			var ArrayList<EObject> matchedMUTElements = new ArrayList<EObject>();
+			var ArrayList<EObject> notMatchedElements = new ArrayList<EObject>();
 			if (arg.item != null && arg.item.size > 0){//there is a list of objects in the expected output
 				for (i : 0 ..<arg.item.size){
 					val EObject matchedObject = (arg.item.get(i) as DataInstanceUse).
@@ -101,66 +95,68 @@ class GateInstanceAspect {
 				}
 			}
 			if (assertionFailed){
-				println("Test case FAILED: The expected response is not received from MUT")
-				println("The following elements are not matched: " + notMatchedElements.toString)
+				println("Assertion FAILED: The expected response is not received from MUT")
+				println("The following elements are not matched: " + (notMatchedElements.get(0) as DataInstanceUse).dataInstance.name)
 			}else if(_self.name.equals('oclMUTGate')){
 				val Object[] receivedObjects = _self.gateLauncher.OCLResultAsObject
 				if (receivedObjects.elementsEqual(matchedMUTElements)){
-					println("Test case PASSED")
+					println("Assertion PASSED")
 				}else{
-					println("Test case FAILED: The expected response is not received from MUT")
+					println("Assertion FAILED: The expected response is not received from MUT")
 					println("Received result: " + _self.gateLauncher.OCLResultAsString)
 				}
 			}else{
-				println("Test case PASSED")
+				println("Assertion PASSED")
 			}
 		}
-		println();
 	}
 
 	@Step
 	def void sendArgument2sut(DataUse argument) {
-		println("The MUT component received data")
 		if (argument instanceof DataInstanceUse) {
 			var arg = (argument as DataInstanceUse)
 			if (arg.dataInstance.name == 'runModel') {
-				println("Request for running MUT")
+				println("--Start MUT Execution:")
 				_self.gateLauncher.executeGenericCommand();
+				println("--MUT executed successfully")
 			}else if (arg.dataInstance.name == 'resetModel') {
-				println("Request for resetting the model to its initial state")
 				_self.gateLauncher.MUTResource = 
 					(new ResourceSetImpl()).getResource(URI.createURI(_self.MUTPath), true);
 			}else if (arg.dataInstance.name == 'getModelState') {
-				println("Request for getting the MUT")
 				_self.receivedOutput = _self.gateLauncher.MUTResource
 			}else if (arg.dataInstance.dataType.isConcreteEcoreType(_self.DSLPath)){
-				println("Request for setting MUT in a new State")
 				_self.setModelState(arg);
 			}else if (arg.dataInstance.dataType.name == 'OCL') {
-				println("Sending the data to the OCL engine")
 				// extracting the query from the argument and sending for validation
 				var query = argument.argument.get(0).dataUse as LiteralValueUse;
 				_self.gateLauncher.executeOCLCommand(query.value);				
 			} // otherwise the message is an event conforming to the behavioral interface of the DSL
 			else {
-				println("Sending the data to the Event Manager")
 				// TODO: Sending the related argument
 				_self.gateLauncher.executeDSLSpecificCommand("");
 			}
-			println("Sending the data done!")
 		}
 	}
-	def void setModelState(DataInstanceUse arg){
+	def boolean setModelState(DataInstanceUse arg){
 		//get the current MUTResource
 		//TODO: Get the in-memory MUTResource
-		var newMUTResource = _self.gateLauncher.MUTResource;
+		var MUTResource = _self.gateLauncher.MUTResource;
+		var boolean status = false;
 		if (arg.item != null && arg.item.size > 0){
 			for (i : 0 ..<arg.item.size){
-				(arg.item.get(i) as DataInstanceUse).setMatchedMUTElement(newMUTResource)
+				status = (arg.item.get(i) as DataInstanceUse).setMatchedMUTElement(MUTResource)
+				if (!status){
+					println("the specified model state doesn't match the model under test")
+					return false;
+				}
 			}
 		}else{
-			arg.setMatchedMUTElement(newMUTResource);
+			status = arg.setMatchedMUTElement(MUTResource);
+			if (!status){
+				println("the specified model state doesn't match the model under test")
+				return false;
+			}
 		}
-		_self.gateLauncher.MUTResource = newMUTResource;
+		return status;
 	}
 }

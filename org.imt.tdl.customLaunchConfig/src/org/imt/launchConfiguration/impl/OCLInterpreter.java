@@ -37,7 +37,7 @@ public class OCLInterpreter {
 	protected OCLExpression<EClassifier> expression = null;
 	protected Query<EClassifier, EClass, EObject> queryEval = null;
 	
-	private Object[] resultAsObject = null;
+	private ArrayList<EObject> resultAsObject = new ArrayList<>();
 	private ArrayList<String> resultAsString = new ArrayList<>();
 
 	public void setUp() {
@@ -55,19 +55,20 @@ public class OCLInterpreter {
 		if (res instanceof Collection<?>) {
 			if (res instanceof LinkedHashSet<?>) {
 				LinkedHashSet<?> queryResult =  (LinkedHashSet<?>) res;
-				this.resultAsObject = queryResult.toArray();
 				Iterator it = queryResult.iterator();
 				while (it.hasNext()) {
 					EObject object = (EObject) it.next();
+					this.resultAsObject.add(object);
 					this.resultAsString.add(queryResultLabelProvider(object));
 				}
 			}else if (res instanceof ArrayList<?>) {
 				ArrayList<?> queryResult =  (ArrayList<?>) res;
-				this.resultAsObject = queryResult.toArray();
 				for (int i = 0; i < queryResult.size(); i++) {
 					if (queryResult.get(i)== null) {
+						this.resultAsObject.add(null);
 						this.resultAsString.add("null");
 					}else {
+						this.resultAsObject.add((EObject) queryResult.get(i));
 						this.resultAsString.add("'" + queryResult.get(i).toString() + "'");
 					}
 				}
@@ -75,11 +76,11 @@ public class OCLInterpreter {
 		}else {
 			if (res instanceof EObject) {
 				EObject object = (EObject) res;
-				this.resultAsObject[0] = object;
+				this.resultAsObject.add(object);
 				this.resultAsString.add(queryResultLabelProvider(object));
 			}else {
-				this.resultAsObject[0] = this.resultAsObject.toString();
-				this.resultAsString.add("'" + this.resultAsObject.toString() + "'");
+				this.resultAsObject.add((EObject) res);
+				this.resultAsString.add("'" + res.toString() + "'");
 			}
 		}
 	}
@@ -109,7 +110,7 @@ public class OCLInterpreter {
 	public ArrayList<String> getResultAsString(){
 		return this.resultAsString;
 	}
-	public Object[] getResultAsObject() {
+	public ArrayList<EObject> getResultAsObject() {
 		return this.resultAsObject;
 	}
 	public void tearDown() throws Exception {
