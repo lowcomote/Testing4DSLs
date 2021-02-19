@@ -29,7 +29,7 @@ import org.eclipse.ocl.pivot.labels.DefaultLabelGeneratorBuilder;
 import org.eclipse.ocl.pivot.labels.ILabelGenerator;
 import org.eclipse.ocl.pivot.labels.ILabelGenerator.Registry;
 
-public class OCLBenchmark {
+public class OCLInterpreter {
 
 	protected OCL ocl = null;
 	protected OCLHelper oclHelper = null;

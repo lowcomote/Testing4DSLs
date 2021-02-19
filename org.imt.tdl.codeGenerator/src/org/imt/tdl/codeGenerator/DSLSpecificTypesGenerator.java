@@ -90,6 +90,11 @@ public class DSLSpecificTypesGenerator {
 	private boolean isDynamic(DataType dataType) {
 		if (dataType instanceof StructuredDataType) {
 			StructuredDataType type = (StructuredDataType) dataType;
+			for (int j=0; j < type.getAnnotation().size(); j++){
+				if (type.getAnnotation().get(j).getKey().getName().toString().contains("dynamic")) {
+					return true;
+				}
+			}
 			for (int j=0; j < type.getMember().size(); j++) {
 				Member m = type.getMember().get(j);
 				for (int k=0; k < m.getAnnotation().size(); k++) {

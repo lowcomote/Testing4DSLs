@@ -82,7 +82,7 @@ class GateInstanceAspect {
 			if (arg.item != null && arg.item.size > 0){//there is a list of objects in the expected output
 				for (i : 0 ..<arg.item.size){
 					val EObject matchedObject = (arg.item.get(i) as DataInstanceUse).
-						getMatchedMUTElement(MUTResource as Resource)		
+						getMatchedMUTElement(MUTResource as Resource, true)		
 					if (matchedObject == null){
 						notMatchedElements.add(arg.item.get(i))
 						assertionFailed = true
@@ -92,7 +92,7 @@ class GateInstanceAspect {
 				}
 			}else{//there is only one object in the expected output
 				val EObject matchedObject = (arg as DataInstanceUse).
-					getMatchedMUTElement(MUTResource as Resource)
+					getMatchedMUTElement(MUTResource as Resource, true)
 				if (matchedObject == null){
 					notMatchedElements.add(arg)
 					assertionFailed = true

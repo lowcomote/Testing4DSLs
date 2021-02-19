@@ -21,7 +21,7 @@ public class EngineFactory{
 	private String MUTPath;
 	
 	private ILauncher engineLauncher;
-	private OCLBenchmark oclLauncher;
+	private OCLInterpreter oclLauncher;
 	private EventManagerLauncher eventManagerLauncher;
 	
 	public final static String GENERIC = "Generic";
@@ -50,7 +50,7 @@ public class EngineFactory{
 				System.out.println("There is no model under execution. You have to run the model first.");
 			}else if (this.oclLauncher == null) {
 				System.out.println("OCL engine setup");
-				this.oclLauncher = new OCLBenchmark();
+				this.oclLauncher = new OCLInterpreter();
 				this.oclLauncher.setUp();
 			}
 		}

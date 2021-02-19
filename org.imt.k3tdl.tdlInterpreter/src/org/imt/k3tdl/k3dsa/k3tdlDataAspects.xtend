@@ -1,6 +1,7 @@
 package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
+import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EClassifier
 import org.eclipse.emf.ecore.EObject
@@ -11,23 +12,47 @@ import org.eclipse.gemoc.dsl.Dsl
 import org.etsi.mts.tdl.DataInstance
 import org.etsi.mts.tdl.DataInstanceUse
 import org.etsi.mts.tdl.DataType
-import org.etsi.mts.tdl.DataUse
-import org.etsi.mts.tdl.MemberReference
+import org.etsi.mts.tdl.LiteralValueUse
+import org.etsi.mts.tdl.Member
+import org.etsi.mts.tdl.MemberAssignment
 import org.etsi.mts.tdl.Message
 import org.etsi.mts.tdl.ParameterBinding
-import org.etsi.mts.tdl.StaticDataUse
 import org.etsi.mts.tdl.SimpleDataInstance
 import org.etsi.mts.tdl.StructuredDataInstance
-import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
-import org.etsi.mts.tdl.Parameter
+import org.etsi.mts.tdl.StructuredDataType
 
-import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
 import static extension org.imt.k3tdl.k3dsa.DataTypeAspect.*
+import static extension org.imt.k3tdl.k3dsa.MemberAssignmentAspect.*
+import static extension org.imt.k3tdl.k3dsa.ParameterBindingAspect.*
 import static extension org.imt.k3tdl.k3dsa.StructuredDataInstanceAspect.*
-import static extension org.imt.k3tdl.k3dsa.ParameterAspect.*
+import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
+import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl
+import com.sun.jdi.Value
+import com.sun.jdi.PrimitiveType
+import java.util.Properties
+import org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl.Describer
 
 @Aspect (className = DataType)
 class DataTypeAspect{
+	def boolean isDynamicType() {
+		if (_self instanceof StructuredDataType){
+			val StructuredDataType type = _self as StructuredDataType
+			for (i : 0 ..<type.annotation.size){
+				if (type.annotation.get(i).key.name.toString.contains("dynamic")) {
+					return true;
+				}
+			}
+			for (i : 0 ..<type.member.size){
+				val Member m = type.member.get(i)
+				for (j : 0 ..<m.annotation.size){
+					if (m.annotation.get(j).key.name.toString.contains("dynamic")) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
 	def boolean isConcreteEcoreType(String DSLPath) {
 		var dslRes = (new ResourceSetImpl()).getResource(URI.createURI(DSLPath), true);
 		var dsl = dslRes.getContents().get(0) as Dsl;
@@ -53,14 +78,14 @@ class DataTypeAspect{
 }
 @Aspect (className = DataInstance)
 class DataInstanceAspect{
-	def EObject getMatchedMUTElement(EObject rootElement){
+	def EObject getMatchedMUTElement(EObject rootElement, boolean isAssertion){
 		
 	}
 }
 @Aspect (className = SimpleDataInstance)
 class SimpleDataInstanceAspect extends DataInstanceAspect{
 	@OverrideAspectMethod
-	def EObject getMatchedMUTElement(EObject rootElement){
+	def EObject getMatchedMUTElement(EObject rootElement, boolean isAssertion){
 		println("The " + _self.name + " element cannot be found since it has no identifier")
 		println("Please specify the values of its static features")
 		return null;
@@ -69,11 +94,19 @@ class SimpleDataInstanceAspect extends DataInstanceAspect{
 @Aspect (className = StructuredDataInstance)
 class StructuredDataInstanceAspect extends DataInstanceAspect{
 	@OverrideAspectMethod
-	def EObject getMatchedMUTElement(EObject rootElement){
+	def EObject getMatchedMUTElement(EObject rootElement, boolean isAssertion){
 		//find matched elements based on the memberAssignments of dataInstance
 		for (i : 0 ..<_self.memberAssignment.size){
-			if (!_self.memberAssignment.get(i).member.parameterMatched(rootElement)){
-				return null;
+			if (isAssertion){//all the arguments (static and dynamic) have to be matched
+				if (_self.memberAssignment.get(i).getMatchedMember(rootElement)==null){
+					return null;
+				}
+			}else{//only static arguments have to be matched
+				if (!_self.memberAssignment.get(i).member.dataType.isDynamicType()){
+					if (_self.memberAssignment.get(i).getMatchedMember(rootElement)==null){
+						return null;
+					}
+				}
 			}
 		}
 		//all the members are matched with the attributes of the rootElement
@@ -82,7 +115,7 @@ class StructuredDataInstanceAspect extends DataInstanceAspect{
 }
 @Aspect (className = DataInstanceUse)
 class DataInstanceUseAspect{
-	def EObject getMatchedMUTElement(Resource MUTResource){
+	def EObject getMatchedMUTElement(Resource MUTResource, boolean isAssertion){
 		var EObject rootElement = null
 		val String DSLPath = (_self.eContainer as Message).parentTestDescription.testConfiguration.DSLPath
 		//if data type is abstract return null
@@ -104,7 +137,7 @@ class DataInstanceUseAspect{
 			//some attributes are set as member assignments for dataInstance
 			//so find the matched element based on the dataInstance
 			val dataIns = _self.dataInstance as StructuredDataInstance
-			rootElement = dataIns.getMatchedMUTElement(rootElement)
+			rootElement = dataIns.getMatchedMUTElement(rootElement, isAssertion)
 			if (rootElement == null){
 				return null;
 			}
@@ -112,24 +145,84 @@ class DataInstanceUseAspect{
 		//find matched elements based on the parameter bindings of dataInstanceUse
 		for (i : 0 ..<_self.argument.size){
 			val parameterBinding = _self.argument.get(i);
-			if (!_self.argument.get(i).parameter.parameterMatched(rootElement)){
-				return null;
-			}
+			if (isAssertion){//all the arguments (static and dynamic) have to be matched
+				if (parameterBinding.getMatchedParameter(rootElement)==null){
+					return null;
+				}
+			}else{//only static arguments have to be matched
+				if (!parameterBinding.parameter.dataType.isDynamicType()){
+					if (parameterBinding.getMatchedParameter(rootElement)==null){
+						return null;
+					}
+				}
+			}			
 		}
 		//all the parameters are matched with the attributes of the rootElement
 		return rootElement;
 	}
-	def void setMatchedMUTElement(Resource MUTResource){
-		//TODO: check if the dataInstanceUse is present in MUT
-		//find static parameters
-		//set dynamic parameters
+	def boolean setMatchedMUTElement(Resource MUTResource){
+		//the second parameter is isAssertion that has to be set as false
+		//so only static elements will be matched to then set the values of its dynamic features
+		var EObject matchedObject = _self.getMatchedMUTElement(MUTResource, false)
+		if (matchedObject == null){
+			println("There is no matched object in the model under test")
+			return false;
+		}
+		if (_self.dataInstance instanceof StructuredDataInstance){
+			//some attributes are set as member assignments for dataInstance
+			//so find the matched element based on the dataInstance
+			val dataIns = _self.dataInstance as StructuredDataInstance
+			for (i : 0 ..<dataIns.memberAssignment.size){
+				var memberAssig = dataIns.memberAssignment.get(i)
+				if (memberAssig.member.dataType.isDynamicType){
+					var EObject matchedMember = memberAssig.getMatchedMember(matchedObject)
+					if (matchedMember == null){
+						return false;
+					}
+					if (memberAssig.memberSpec instanceof LiteralValueUse){
+						var memberValue = (memberAssig.memberSpec as LiteralValueUse).value;
+						(matchedMember as Properties).setProperty(memberAssig.member.name, memberValue)
+						//TODO: Setting the value in the MUT
+					}
+				}
+			}
+		}
+		//find matched elements based on the parameter bindings of dataInstanceUse
+		for (i : 0 ..<_self.argument.size){
+			var parameterBinding = _self.argument.get(i);
+			if (parameterBinding.parameter.dataType.isDynamicType){
+				var EObject matchedParameter = parameterBinding.getMatchedParameter(matchedObject)
+				if (matchedParameter == null){
+					return false;
+				}
+				if (parameterBinding.dataUse instanceof LiteralValueUse){
+					var parameterValue = (parameterBinding.dataUse as LiteralValueUse).value;
+					(matchedParameter as Properties).setProperty(parameterBinding.parameter.name, parameterValue)
+					//TODO: setting the values
+				}
+			}			
+		}
 	}
 }
-@Aspect (className = Parameter)
-class ParameterAspect{
-	def boolean parameterMatched(EObject rootElement){
+@Aspect (className = MemberAssignment)
+class MemberAssignmentAspect{
+	def EObject getMatchedMember(EObject rootElement){
+		for (i : 0 ..< rootElement.eContents.size){
+			//if (rootElement.eContents.get(i))
+		}
+		val propertyValue = (rootElement as Properties).getProperty(_self.member.name)
+		//if (propertyValue != null && propertyValue )
+		//comparing the values
 		//TODO: the parameter with exactEquivalent annotation should be equal to the real element
 		//TODO: the parameter with partialEquivalent annotation would be contained in the real element
-		return false;
+		return null;
+	} 
+}
+@Aspect (className = ParameterBinding)
+class ParameterBindingAspect{
+	def EObject getMatchedParameter(EObject rootElement){
+		//TODO: the parameter with exactEquivalent annotation should be equal to the real element
+		//TODO: the parameter with partialEquivalent annotation would be contained in the real element
+		return null;
 	} 
 }
