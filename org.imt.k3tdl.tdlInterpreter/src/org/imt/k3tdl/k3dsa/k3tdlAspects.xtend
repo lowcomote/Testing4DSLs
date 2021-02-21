@@ -2,6 +2,7 @@ package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 
+
 import fr.inria.diverse.k3.al.annotationprocessor.InitializeModel
 import fr.inria.diverse.k3.al.annotationprocessor.Main
 import fr.inria.diverse.k3.al.annotationprocessor.Step
@@ -15,7 +16,7 @@ import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
 import java.util.List
 import java.util.ArrayList
 import org.eclipse.emf.common.util.EList
-import org.imt.launchConfiguration.impl.EngineFactory
+import org.imt.tdl.configuration.impl.EngineFactory
 
 @Aspect(className = Package)
 class PackageAspect {

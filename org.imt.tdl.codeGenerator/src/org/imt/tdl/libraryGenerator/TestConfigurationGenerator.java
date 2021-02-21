@@ -1,4 +1,4 @@
-package org.imt.tdl.codeGenerator;
+package org.imt.tdl.libraryGenerator;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package org.imt.launchConfiguration.impl;
+package org.imt.tdl.configuration.impl;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.eclipse.ocl.ParserException;
-import org.imt.launchConfiguration.ILauncher;
+import org.imt.tdl.configuration.IExecutionEngine;
 import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.execution.sequential.javaengine.PlainK3ExecutionEngine;
 
@@ -19,7 +19,7 @@ public class EngineFactory{
 	private String DSLPath;
 	private String MUTPath;
 	
-	private ILauncher engineLauncher;
+	private IExecutionEngine engineLauncher;
 	private OCLInterpreter oclLauncher;
 	private EventManagerLauncher eventManagerLauncher;
 	

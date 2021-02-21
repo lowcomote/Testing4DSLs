@@ -1,4 +1,4 @@
-package org.imt.launchConfiguration.impl;
+package org.imt.tdl.configuration.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;

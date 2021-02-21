@@ -1,11 +1,11 @@
-package org.imt.launchConfiguration.impl;
+package org.imt.tdl.configuration.impl;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.imt.launchConfiguration.ILauncher;
+import org.imt.tdl.configuration.IExecutionEngine;
 
-public abstract class AbstractLauncher implements ILauncher{
+public abstract class AbstractEngine implements IExecutionEngine{
 	private Resource MUTResource = null;
 	@Override
 	public void setUp(String MUTPath, String DSLPath) {

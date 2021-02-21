@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Generator
-Bundle-SymbolicName: org.imt.tdl.codeGenerator
+Bundle-SymbolicName: org.imt.tdl.libraryGenerator
 Bundle-Version: 1.0.0.qualifier
 Export-Package: .,
- org.imt.tdl.codeGenerator
+ org.imt.tdl.libraryGenerator
 Require-Bundle: org.etsi.mts.tdl.model;bundle-version="1.4.0",
  org.eclipse.core.runtime;bundle-version="3.17.100",
  org.eclipse.emf.ecoretools;bundle-version="3.3.2",

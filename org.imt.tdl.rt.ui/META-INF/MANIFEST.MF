@@ -17,7 +17,7 @@ Require-Bundle: org.eclipse.ui,
  org.etsi.mts.tdl.model,
  org.etsi.mts.tdl.TDLan2,
  org.eclipse.gemoc.xdsmlframework.api,
- org.imt.tdl.codeGenerator
+ org.imt.tdl.libraryGenerator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.emf.common.util
