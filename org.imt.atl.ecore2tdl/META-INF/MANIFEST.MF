@@ -12,5 +12,4 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true
-Export-Package: org.imt.atl.ecore2tdl.files,
- org.imt.atl.ecore2tdl.emftvm
+Export-Package: org.imt.atl.ecore2tdl.files

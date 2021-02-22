@@ -2,6 +2,7 @@ package org.imt.tdl.libraryGenerator;
 
 import java.io.IOException;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +22,6 @@ import org.etsi.mts.tdl.Member;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.PackageableElement;
 import org.etsi.mts.tdl.StructuredDataType;
-import org.imt.atl.ecore2tdl.emftvm.Ecore2tdl_EMFTVM;
 import org.imt.atl.ecore2tdl.files.Ecore2tdl;
 
 public class DSLSpecificTypesGenerator {
@@ -56,10 +56,8 @@ public class DSLSpecificTypesGenerator {
 		String IN_model_path = metamodelPath;
 		try {
 			Ecore2tdl runner = new Ecore2tdl();
-			//Ecore2tdl_EMFTVM runner = new Ecore2tdl_EMFTVM();
 			runner.loadModels(IN_model_path);
 			runner.doEcore2tdl(new NullProgressMonitor());
-			//runner.doEcore2tdl();
 			EMFModel outModel = (EMFModel) runner.getOutModel();
 			Resource dslTypesRes = outModel.getResource();
 			this.dslSpecificTypesPackage = (Package) dslTypesRes.getContents().get(0);
