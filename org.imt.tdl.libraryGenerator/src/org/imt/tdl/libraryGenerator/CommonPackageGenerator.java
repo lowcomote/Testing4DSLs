@@ -10,12 +10,16 @@ import org.etsi.mts.tdl.SimpleDataInstance;
 import org.etsi.mts.tdl.tdlFactory;
 
 import org.etsi.mts.tdl.SimpleDataType;
+import org.etsi.mts.tdl.StructuredDataInstance;
 import org.etsi.mts.tdl.StructuredDataType;
+import org.etsi.mts.tdl.UnassignedMemberTreatment;
 import org.etsi.mts.tdl.AnnotationType;
+import org.etsi.mts.tdl.AnyValue;
 import org.etsi.mts.tdl.DataInstance;
 import org.etsi.mts.tdl.DataType;
 import org.etsi.mts.tdl.ElementImport;
 import org.etsi.mts.tdl.Member;
+import org.etsi.mts.tdl.MemberAssignment;
 
 public class CommonPackageGenerator {
 	private tdlFactory factory;
@@ -52,8 +56,19 @@ public class CommonPackageGenerator {
 		query.setDataType(queryType);
 		OCL.getMember().add(query);
 		this.commonPackage.getPackagedElement().add(OCL);
-		
 		this.oclType = OCL;
+		
+		StructuredDataInstance oclQuery = factory.createStructuredDataInstance();
+		oclQuery.setName("oclQuery");
+		oclQuery.setDataType(OCL);
+		oclQuery.setUnassignedMember(UnassignedMemberTreatment.ANY_VALUE);
+		MemberAssignment queryAssign = factory.createMemberAssignment();
+		queryAssign.setMember(query);
+		AnyValue anyValue = factory.createAnyValue();
+		anyValue.setName("?");
+		queryAssign.setMemberSpec(anyValue);
+		oclQuery.getMemberAssignment().add(queryAssign);
+		this.commonPackage.getPackagedElement().add(oclQuery);
 	}
 	private void generateVerdicts() {
 		SimpleDataType Verdict = factory.createSimpleDataType();
@@ -101,9 +116,6 @@ public class CommonPackageGenerator {
 	}
 	public DataType getOCLType() {
 		return this.oclType;
-	}
-	public List<DataInstance> getVerdictInstances() {
-		return this.verdictInstances;
 	}
 	public DataType getGenericCommand() {
 		return this.genericCommand;

@@ -47,7 +47,6 @@ public class TestDesignPackageGenerator {
 		this.oclTestCasesPackage = factory.createPackage();
 		this.oclTestCasesPackage.setName("oclTestCases");
 		generateImports(this.oclTestCasesPackage);
-		generateOCLDataInstances();
 	}
 	private void generateImports(Package testCasesPackage) {
 		ElementImport commonPackageImport = factory.createElementImport();
@@ -108,22 +107,6 @@ public class TestDesignPackageGenerator {
 		AnnotationType PartialEquivalent = factory.createAnnotationType();
 		PartialEquivalent.setName("PartialEquivalent");
 		this.genericTestCasesPackage.getPackagedElement().add(PartialEquivalent);
-	}
-	private void generateOCLDataInstances() {
-		if (this.commonPackageGenerator.getOCLType()!=null) {
-			StructuredDataInstance oclQuery = factory.createStructuredDataInstance();
-			oclQuery.setName("oclQuery");
-			StructuredDataType OCL = (StructuredDataType) this.commonPackageGenerator.getOCLType();
-			oclQuery.setDataType(OCL);
-			oclQuery.setUnassignedMember(UnassignedMemberTreatment.ANY_VALUE);
-			MemberAssignment query = factory.createMemberAssignment();
-			query.setMember(OCL.getMember().get(0));
-			AnyValue anyValue = factory.createAnyValue();
-			anyValue.setName("?");
-			query.setMemberSpec(anyValue);
-			oclQuery.getMemberAssignment().add(query);
-			this.oclTestCasesPackage.getPackagedElement().add(oclQuery);
-		}
 	}
 	public Package getGenericTestCasesPackage() {
 		return this.genericTestCasesPackage;

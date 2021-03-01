@@ -1,0 +1,32 @@
+Package testConfiguration {
+	Import all from common ;
+	Gate Type genericGate accepts genericCommand ;
+	Gate Type oclGate accepts OCL ;
+	Component Type TestSystem having {
+		gate genericTestGate of type genericGate ;
+		gate oclTestGate of type oclGate ;
+	}
+	Component Type MUT having {
+		gate genericMUTGate of type genericGate ;
+		gate oclMUTGate of type oclGate ;
+	}
+	Annotation MUTPath ;
+	Annotation DSLPath ;
+	Test Configuration genericConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT fsm of type MUT with { 
+			MUTPath : '/FSM.ALE.BitShifting/BitShifting.fsm' ; 
+			DSLPath : 'platform:/plugin/org.eclipse.gemoc.sample.ale.fsm.model/model/fsm.dsl' ;
+		} ;
+		connect tester.genericTestGate to fsm.genericMUTGate ;
+	}
+	Test Configuration oclConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT fsm of type MUT with { 
+			MUTPath : '/FSM.ALE.BitShifting/BitShifting.fsm' ; 
+			DSLPath : 'platform:/plugin/org.eclipse.gemoc.sample.ale.fsm.model/model/fsm.dsl' ;
+		} ;
+		connect tester.genericTestGate to fsm.genericMUTGate ;
+		connect tester.oclTestGate to fsm.oclMUTGate ;
+	}
+}

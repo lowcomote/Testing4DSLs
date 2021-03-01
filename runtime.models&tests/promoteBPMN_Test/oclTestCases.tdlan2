@@ -1,0 +1,17 @@
+Package testDesignPackage_template {
+	Import all from common ;
+	Import all from testConfiguration ;
+	OCL oclQuery ( query = ? ) ;
+	
+	Test Description promoteEmployeeOCLTest uses configuration oclConfiguration{
+		tester.genericTestGate sends runModel to bpmn.genericMUTGate;
+		tester.oclTestGate sends oclQuery (query = "self.ownedElements->select(o|o.oclIsKindOf(ForkDecision))") to bpmn.oclMUTGate;
+		bpmn.oclMUTGate sends "[Microflow promote employee level::Fork Decision is employee level junior?]" to tester.oclTestGate; 
+		
+		tester.oclTestGate sends oclQuery (query = "self.ownedElements->select(o|o.oclIsKindOf(Event))") to bpmn.oclMUTGate;
+		bpmn.oclMUTGate sends "[Microflow promote employee level::Start Event, Microflow promote employee level::End Event]" to tester.oclTestGate;
+
+		tester.oclTestGate sends oclQuery (query = "self.ownedElements->collect(o|o.label)") to bpmn.oclMUTGate;
+		bpmn.oclMUTGate sends "[null, 'create variable for expected Employee level', 'is employee level junior?', 'promote employee level to Medior', 'show error message', null, null]" to tester.oclTestGate;
+	}
+}

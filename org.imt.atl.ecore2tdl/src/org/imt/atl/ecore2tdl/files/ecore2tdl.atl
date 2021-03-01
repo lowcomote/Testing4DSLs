@@ -1,4 +1,4 @@
--- @atlcompiler emftvm
+
 -- @nsURI Ecore=http://www.eclipse.org/emf/2002/Ecore
 -- @path TDL=/org.etsi.mts.tdl.model/model/tdl.ecore
 

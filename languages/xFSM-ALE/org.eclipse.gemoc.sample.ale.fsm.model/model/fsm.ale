@@ -1,0 +1,78 @@
+behavior fsm;
+
+open class StateMachine {
+	String input;
+	//the model state is defined in the ecore file with 'dynamic' annotation
+	
+	//State currentState;
+	//String unprocessedString;
+	//String consumedString;
+	//String producedString ;
+	
+	@main
+	def void main() {
+		self.setInitialValues();
+		while ( self.unprocessedString.size() > 0) {
+			self.currentState.step(self.unprocessedString);
+		} 
+		('current state: '+self.currentState.name).log();
+		('unprocessed string: '+self.unprocessedString).log();
+		('processed string: '+self.consumedString).log();
+		('produced string: '+self.producedString).log();
+		
+	}
+	
+	@init
+	def void initializeModel(String input) {
+		self.input := input;
+	}
+	@step
+	def void setInitialValues(){
+		if (self.currentState = null){
+			self.currentState := self.initialState;
+		}
+		if (self.unprocessedString = null or self.unprocessedString = ''){			
+	 		self.unprocessedString := self.input;
+		}
+		if (self.consumedString = null){
+			self.consumedString := '';
+		}
+		if (self.producedString = null){
+			self.producedString := '';
+		}
+	}
+}
+
+open class fsm.State {
+	
+	@step
+	def void step(String inputString) {
+		//('input string: '+ inputString).log();
+		// Get the valid transitions
+		Sequence(fsm::Transition) validTransitions := 
+			self.outgoingTransitions
+			->select(t | inputString.startsWith(t.input))
+			->asSequence();
+
+		// Fire transition
+		validTransitions->at(1).fire();
+	}
+}
+
+open class Transition {
+	
+	@step
+	def void fire() {
+		//('Firing ' + self.name + ' and entering ' + self.target.name).log();
+		StateMachine fsm := self.source.owningFSM;
+		fsm.currentState := self.target;
+		fsm.producedString := fsm.producedString + self.output;
+		fsm.consumedString := fsm.consumedString + self.input;
+		if(self.input.size()+1 <= fsm.unprocessedString.size()) {
+			fsm.unprocessedString := fsm.unprocessedString.substring(self.input.size()+1);
+		}
+		else {
+			fsm.unprocessedString := '';
+		}
+	}
+}

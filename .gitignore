@@ -2,3 +2,6 @@ bin
 src-gen
 xtend-gen
 metadata
+edit
+editor
+tests

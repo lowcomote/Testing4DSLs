@@ -1,0 +1,70 @@
+	// BeginInjectInto org.gemoc.arduino.sequential.k3dsa.InstructionAspect#void execute() from org.gemoc.arduino.sequential.k3dsa.SetLedAspect
+		if (_self instanceof org.gemoc.sequential.model.arduino.SetLed){
+			org.gemoc.arduino.sequential.k3dsa.SetLedAspect.execute((org.gemoc.sequential.model.arduino.SetLed)_self);
+		} else
+		// EndInjectInto org.gemoc.arduino.sequential.k3dsa.InstructionAspect#void execute() from org.gemoc.arduino.sequential.k3dsa.SetLedAspect
+	// BeginInjectInto org.gemoc.arduino.sequential.k3dsa.InstructionAspect#void execute() from org.gemoc.arduino.sequential.k3dsa.IfAspect
+		if (_self instanceof org.gemoc.sequential.model.arduino.If){
+			org.gemoc.arduino.sequential.k3dsa.IfAspect.execute((org.gemoc.sequential.model.arduino.If)_self);
+		} else
+		// EndInjectInto org.gemoc.arduino.sequential.k3dsa.InstructionAspect#void execute() from org.gemoc.arduino.sequential.k3dsa.IfAspect
+	// BeginInjectInto org.gemoc.arduino.sequential.k3dsa.ExpressionAspect#Integer evaluate() from org.gemoc.arduino.sequential.k3dsa.UnaryExpressionAspect
+		if (_self instanceof org.gemoc.sequential.model.arduino.UnaryExpression){
+			result = org.gemoc.arduino.sequential.k3dsa.UnaryExpressionAspect.evaluate((org.gemoc.sequential.model.arduino.UnaryExpression)_self);
+		} else
+		// EndInjectInto org.gemoc.arduino.sequential.k3dsa.ExpressionAspect#Integer evaluate() from org.gemoc.arduino.sequential.k3dsa.UnaryExpressionAspect
+	// BeginInjectInto org.gemoc.arduino.sequential.k3dsa.ControlAspect#void execute() from org.gemoc.arduino.sequential.k3dsa.IfAspect
+		if (_self instanceof org.gemoc.sequential.model.arduino.If){
+			org.gemoc.arduino.sequential.k3dsa.IfAspect.execute((org.gemoc.sequential.model.arduino.If)_self);
+		} else
+		// EndInjectInto org.gemoc.arduino.sequential.k3dsa.ControlAspect#void execute() from org.gemoc.arduino.sequential.k3dsa.IfAspect
+	// BeginInjectInto org.gemoc.arduino.sequential.k3dsa.ControlAspect#void execute() from org.gemoc.arduino.sequential.k3dsa.WhileAspect
+		if (_self instanceof org.gemoc.sequential.model.arduino.While){
+			org.gemoc.arduino.sequential.k3dsa.WhileAspect.execute((org.gemoc.sequential.model.arduino.While)_self);
+		} else
+		// EndInjectInto org.gemoc.arduino.sequential.k3dsa.ControlAspect#void execute() from org.gemoc.arduino.sequential.k3dsa.WhileAspect
+	// BeginInjectInto org.gemoc.arduino.sequential.k3dsa.ExpressionAspect#Integer evaluate() from org.gemoc.arduino.sequential.k3dsa.BinaryExpressionAspect
+		if (_self instanceof org.gemoc.sequential.model.arduino.BinaryExpression){
+			result = org.gemoc.arduino.sequential.k3dsa.BinaryExpressionAspect.evaluate((org.gemoc.sequential.model.arduino.BinaryExpression)_self);
+		} else
+		// EndInjectInto org.gemoc.arduino.sequential.k3dsa.ExpressionAspect#Integer evaluate() from org.gemoc.arduino.sequential.k3dsa.BinaryExpressionAspect
+	// BeginInjectInto org.gemoc.arduino.sequential.k3dsa.ExpressionAspect#Integer evaluate() from org.gemoc.arduino.sequential.k3dsa.ModuleGetAspect
+		if (_self instanceof org.gemoc.sequential.model.arduino.ModuleGet){
+			result = org.gemoc.arduino.sequential.k3dsa.ModuleGetAspect.evaluate((org.gemoc.sequential.model.arduino.ModuleGet)_self);
+		} else
+		// EndInjectInto org.gemoc.arduino.sequential.k3dsa.ExpressionAspect#Integer evaluate() from org.gemoc.arduino.sequential.k3dsa.ModuleGetAspect
+	// BeginInjectInto org.gemoc.arduino.sequential.k3dsa.InstructionAspect#void execute() from org.gemoc.arduino.sequential.k3dsa.DelayAspect
+		if (_self instanceof org.gemoc.sequential.model.arduino.Delay){
+			org.gemoc.arduino.sequential.k3dsa.DelayAspect.execute((org.gemoc.sequential.model.arduino.Delay)_self);
+		} else
+		// EndInjectInto org.gemoc.arduino.sequential.k3dsa.InstructionAspect#void execute() from org.gemoc.arduino.sequential.k3dsa.DelayAspect
+	// BeginInjectInto org.gemoc.arduino.sequential.k3dsa.ModuleSetAspect#void execute() from org.gemoc.arduino.sequential.k3dsa.SetLedAspect
+		if (_self instanceof org.gemoc.sequential.model.arduino.SetLed){
+			org.gemoc.arduino.sequential.k3dsa.SetLedAspect.execute((org.gemoc.sequential.model.arduino.SetLed)_self);
+		} else
+		// EndInjectInto org.gemoc.arduino.sequential.k3dsa.ModuleSetAspect#void execute() from org.gemoc.arduino.sequential.k3dsa.SetLedAspect
+	// BeginInjectInto org.gemoc.arduino.sequential.k3dsa.InstructionAspect#void execute() from org.gemoc.arduino.sequential.k3dsa.ModuleSetAspect
+		if (_self instanceof org.gemoc.sequential.model.arduino.ModuleSet){
+			org.gemoc.arduino.sequential.k3dsa.ModuleSetAspect.execute((org.gemoc.sequential.model.arduino.ModuleSet)_self);
+		} else
+		// EndInjectInto org.gemoc.arduino.sequential.k3dsa.InstructionAspect#void execute() from org.gemoc.arduino.sequential.k3dsa.ModuleSetAspect
+	// BeginInjectInto org.gemoc.arduino.sequential.k3dsa.InstructionAspect#void execute() from org.gemoc.arduino.sequential.k3dsa.ControlAspect
+		if (_self instanceof org.gemoc.sequential.model.arduino.Control){
+			org.gemoc.arduino.sequential.k3dsa.ControlAspect.execute((org.gemoc.sequential.model.arduino.Control)_self);
+		} else
+		// EndInjectInto org.gemoc.arduino.sequential.k3dsa.InstructionAspect#void execute() from org.gemoc.arduino.sequential.k3dsa.ControlAspect
+	// BeginInjectInto org.gemoc.arduino.sequential.k3dsa.InstructionAspect#void execute() from org.gemoc.arduino.sequential.k3dsa.WaitForAspect
+		if (_self instanceof org.gemoc.sequential.model.arduino.WaitFor){
+			org.gemoc.arduino.sequential.k3dsa.WaitForAspect.execute((org.gemoc.sequential.model.arduino.WaitFor)_self);
+		} else
+		// EndInjectInto org.gemoc.arduino.sequential.k3dsa.InstructionAspect#void execute() from org.gemoc.arduino.sequential.k3dsa.WaitForAspect
+	// BeginInjectInto org.gemoc.arduino.sequential.k3dsa.InstructionAspect#void execute() from org.gemoc.arduino.sequential.k3dsa.WhileAspect
+		if (_self instanceof org.gemoc.sequential.model.arduino.While){
+			org.gemoc.arduino.sequential.k3dsa.WhileAspect.execute((org.gemoc.sequential.model.arduino.While)_self);
+		} else
+		// EndInjectInto org.gemoc.arduino.sequential.k3dsa.InstructionAspect#void execute() from org.gemoc.arduino.sequential.k3dsa.WhileAspect
+	// BeginInjectInto org.gemoc.arduino.sequential.k3dsa.ExpressionAspect#Integer evaluate() from org.gemoc.arduino.sequential.k3dsa.ConstantAspect
+		if (_self instanceof org.gemoc.sequential.model.arduino.Constant){
+			result = org.gemoc.arduino.sequential.k3dsa.ConstantAspect.evaluate((org.gemoc.sequential.model.arduino.Constant)_self);
+		} else
+		// EndInjectInto org.gemoc.arduino.sequential.k3dsa.ExpressionAspect#Integer evaluate() from org.gemoc.arduino.sequential.k3dsa.ConstantAspect

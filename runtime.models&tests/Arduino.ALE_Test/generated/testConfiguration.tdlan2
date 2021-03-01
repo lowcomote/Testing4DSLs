@@ -1,0 +1,32 @@
+Package testConfiguration {
+	Import all from common ;
+	Gate Type genericGate accepts genericCommand ;
+	Gate Type oclGate accepts OCL ;
+	Component Type TestSystem having {
+		gate genericTestGate of type genericGate ;
+		gate oclTestGate of type oclGate ;
+	}
+	Component Type MUT having {
+		gate genericMUTGate of type genericGate ;
+		gate oclMUTGate of type oclGate ;
+	}
+	Annotation MUTPath ;
+	Annotation DSLPath ;
+	Test Configuration genericConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT arduino of type MUT with { 
+			MUTPath : '/Arduino.ALE.blinking/blinking.arduino' ; 
+			DSLPath : 'platform:/plugin/org.imt.arduino.ale.model/model/arduino.dsl' ;
+		} ;
+		connect tester.genericTestGate to arduino.genericMUTGate ;
+	}
+	Test Configuration oclConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT arduino of type MUT with { 
+			MUTPath : '/Arduino.ALE.blinking/blinking.arduino' ; 
+			DSLPath : 'platform:/plugin/org.imt.arduino.ale.model/model/arduino.dsl' ;
+		} ;
+		connect tester.genericTestGate to arduino.genericMUTGate ;
+		connect tester.oclTestGate to arduino.oclMUTGate ;
+	}
+}

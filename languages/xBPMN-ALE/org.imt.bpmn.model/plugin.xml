@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<!--
+-->
+<plugin>
+  <extension point="org.eclipse.gemoc.gemoc_language_workbench.xdsml">
+    <XDSML_Definition name="org.imt.bpmn.BPMN" xdsmlFilePath="/org.imt.bpmn.model/model/BPMN.dsl" modelLoader_class="org.eclipse.gemoc.executionframework.extensions.sirius.modelloader.DefaultModelLoader" />
+  </extension>
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <!-- @generated BPMN -->
+    <package uri="www.MendixBPMN.com" class="org.imt.bpmn.bpmnPackage" genModel="model/BPMN.genmodel" />
+  </extension>
+</plugin>

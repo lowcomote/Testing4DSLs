@@ -1,0 +1,32 @@
+Package testDesignPackage_template {
+	Import all from common ;
+	Import all from k3fsmSpecificTypes;
+	Import all from testConfiguration ;	
+
+	State S0 (
+		_name = "S0"
+	);
+	State S1 (
+		_name = "S1"
+	);
+	State S2 (
+		_name = "S2"
+	);
+	
+	Test Description bitShiftingOclTest1 uses configuration oclConfiguration{
+		tester.genericTestGate sends runModel to k3fsm.genericMUTGate;
+		tester.oclTestGate sends oclQuery (query = "self.ownedStates") to k3fsm.oclMUTGate;
+		k3fsm.oclMUTGate sends "[FSM BitShifting::State S0, FSM BitShifting::State S1, FSM BitShifting::State S2]" to tester.oclTestGate;
+	}
+	//By having MUT in TDL format, the oracle can be defined in a more readable way
+	Test Description bitShiftingOclTest2 uses configuration oclConfiguration{
+		tester.genericTestGate sends runModel to k3fsm.genericMUTGate;
+		tester.oclTestGate sends oclQuery (query = "self.ownedStates") to k3fsm.oclMUTGate;
+		k3fsm.oclMUTGate sends {S0, S1, S2} to tester.oclTestGate;
+	}
+	Test Description bitShiftingOclTest3 uses configuration oclConfiguration{
+		tester.genericTestGate sends runModel to k3fsm.genericMUTGate;
+		tester.oclTestGate sends oclQuery (query = "self.producedString") to k3fsm.oclMUTGate;
+		k3fsm.oclMUTGate sends "['000010101']" to tester.oclTestGate;
+	}
+}

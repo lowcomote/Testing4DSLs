@@ -1,0 +1,8 @@
+Package genericTestCases {
+	Import all from common ;
+	Import all from bpmnSpecificTypes ;
+	Import all from testConfiguration ;
+	Microflow microflowNewState ( parameters = * , currentNode = * , valuedVariables = * ) ;
+	Annotation ExactEquivalent ;
+	Annotation PartialEquivalent ;
+}
