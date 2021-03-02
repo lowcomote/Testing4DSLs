@@ -68,7 +68,8 @@ class GateInstanceAspect {
 			var Resource MUTResource = null;
 			if (_self.receivedOutput instanceof Resource){
 				MUTResource = _self.receivedOutput as Resource//the MUTResource is the received output
-			}else if (_self.name.equals('oclMUTGate')){
+			}
+			if (_self.name.equals('oclMUTGate')){
 				MUTResource = _self.gateLauncher.MUTResource//the MUT objects are the received output
 			}
 			var boolean assertionFailed = false

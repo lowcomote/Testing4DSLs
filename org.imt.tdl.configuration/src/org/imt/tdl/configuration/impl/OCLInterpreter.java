@@ -37,8 +37,8 @@ public class OCLInterpreter {
 	protected OCLExpression<EClassifier> expression = null;
 	protected Query<EClassifier, EClass, EObject> queryEval = null;
 	
-	private ArrayList<EObject> resultAsObject = new ArrayList<>();
-	private ArrayList<String> resultAsString = new ArrayList<>();
+	private ArrayList<EObject> resultAsObject;
+	private ArrayList<String> resultAsString;
 
 	public void setUp() {
 		this.ocl = OCL.newInstance(EcoreEnvironmentFactory.INSTANCE);
@@ -52,6 +52,8 @@ public class OCLInterpreter {
 		this.queryEval = this.ocl.createQuery(this.expression);
 		// the ocl query will be evaluated on the root element of MUT
 		Object res = this.queryEval.evaluate(MUTResource.getContents().get(0));
+		resultAsObject = new ArrayList<>();
+		resultAsString = new ArrayList<>();
 		if (res instanceof Collection<?>) {
 			if (res instanceof LinkedHashSet<?>) {
 				LinkedHashSet<?> queryResult =  (LinkedHashSet<?>) res;

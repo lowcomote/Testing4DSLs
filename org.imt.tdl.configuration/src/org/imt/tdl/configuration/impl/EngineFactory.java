@@ -31,10 +31,10 @@ public class EngineFactory{
 		if (commandType.equals(GENERIC)) {
 			String engineType = this.getEngineType();
 			if (engineType=="ale") {
-				//System.out.println("Gemoc ALE engine setup");
+				System.out.println("Gemoc ALE engine setup");
 				this.engineLauncher = new ALEEngineLauncher();	
 			}else if(engineType=="k3") {
-				//System.out.println("Gemoc java engine setup");
+				System.out.println("Gemoc java engine setup");
 				this.engineLauncher = new JavaEngineLauncher();
 			}
 			this.engineLauncher.setUp(this.MUTPath, this.DSLPath);
@@ -48,7 +48,7 @@ public class EngineFactory{
 			if (this.engineLauncher==null) {
 				System.out.println("There is no model under execution. You have to run the model first.");
 			}else if (this.oclLauncher == null) {
-				//System.out.println("OCL engine setup");
+				System.out.println("OCL engine setup");
 				this.oclLauncher = new OCLInterpreter();
 				this.oclLauncher.setUp();
 			}

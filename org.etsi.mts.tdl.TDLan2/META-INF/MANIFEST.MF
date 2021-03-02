@@ -13,7 +13,7 @@ Require-Bundle: org.etsi.mts.tdl.common,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.xtext.util,
  org.eclipse.xtend.lib,
- org.etsi.mts.tdl.model;bundle-version="1.4.0"
+ org.etsi.mts.tdl.model
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.etsi.mts.tdl,
  org.etsi.mts.tdl.formatting2,
