@@ -15,6 +15,6 @@ Package genericTestCases {
 			(currentState = S , 
 			unprocessedString = "", 
 			consumedString = "000101010", 
-			producedString = "10101") to tester.genericTestGate;
+			producedString = "000010101") to tester.genericTestGate;
 	}
 }

@@ -13,4 +13,5 @@
   <semanticResources>generic2.tdlan2</semanticResources>
   <semanticResources>MUT/generic2.tdlan2</semanticResources>
   <semanticResources>actionSample.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210301_184928/oclTestCases.tdlan2</semanticResources>
 </viewpoint:DAnalysis>
