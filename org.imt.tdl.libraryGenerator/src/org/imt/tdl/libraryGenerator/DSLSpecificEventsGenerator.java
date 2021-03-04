@@ -29,11 +29,15 @@ import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterf
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.EventType;
 import org.etsi.mts.tdl.Annotation;
 import org.etsi.mts.tdl.AnnotationType;
+import org.etsi.mts.tdl.AnyValue;
 import org.etsi.mts.tdl.DataType;
 import org.etsi.mts.tdl.ElementImport;
 import org.etsi.mts.tdl.Member;
+import org.etsi.mts.tdl.MemberAssignment;
 import org.etsi.mts.tdl.Package;
+import org.etsi.mts.tdl.StructuredDataInstance;
 import org.etsi.mts.tdl.StructuredDataType;
+import org.etsi.mts.tdl.UnassignedMemberTreatment;
 import org.etsi.mts.tdl.tdlFactory;
 
 public class DSLSpecificEventsGenerator {
@@ -59,7 +63,7 @@ public class DSLSpecificEventsGenerator {
 	
 	public void generateDSLSpecificEventsPackage(String dslFilePath) throws IOException{
 		this.dslSpecificEventsPackage = factory.createPackage();
-		this.dslSpecificEventsPackage.setName(this.dslName + "SpecificEvents");
+		this.dslSpecificEventsPackage.setName(this.dslName.toLowerCase() + "SpecificEvents");
 		generateImports();
 		if (this.interfaceRootElement != null) {
 			generateTypeForDSLInterfaces();
@@ -91,6 +95,12 @@ public class DSLSpecificEventsGenerator {
 			}
 			annotation.setAnnotatedElement(typeForEvent);
 			typeForEvent.getAnnotation().add(annotation);
+			//generating an instance of the event type to be able to use it when writing test cases
+			StructuredDataInstance eventInstance = factory.createStructuredDataInstance();
+			eventInstance.setName(typeForEvent.getName().toLowerCase());
+			eventInstance.setDataType(typeForEvent);
+			eventInstance.setUnassignedMember(UnassignedMemberTreatment.ANY_VALUE);
+			
 			for (int j=0; j<event.getParams().size();j++) {
 				String paramName = validName(event.getParams().get(j).getName());
 				String paramType = event.getParams().get(j).getType().toLowerCase();
@@ -99,10 +109,18 @@ public class DSLSpecificEventsGenerator {
 					member.setName(paramName);
 					member.setDataType(this.dslSpecificTypes.get(paramType));
 					typeForEvent.getMember().add(member);
+					
+					MemberAssignment memberAssign = factory.createMemberAssignment();
+					memberAssign.setMember(member);
+					AnyValue anyValue = factory.createAnyValue();
+					anyValue.setName("?");
+					memberAssign.setMemberSpec(anyValue);
+					eventInstance.getMemberAssignment().add(memberAssign);
 				}		
 			}
 			this.dslSpecificEventsPackage.getPackagedElement().add(typeForEvent);
-			this.dslInterfaceTypes.add(typeForEvent);
+			this.dslSpecificEventsPackage.getPackagedElement().add(eventInstance);
+			this.dslInterfaceTypes.add(typeForEvent);	
 		}
 	}
 	public Package getDslSpecificEventsPackage() {
