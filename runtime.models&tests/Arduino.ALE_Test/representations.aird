@@ -5,4 +5,6 @@
   <semanticResources>generated/testConfiguration.tdlan2</semanticResources>
   <semanticResources>oclTestCases.tdlan2</semanticResources>
   <semanticResources>genericTestCases.tdlan2</semanticResources>
+  <semanticResources>generated/arduinoSpecificEvents.tdlan2</semanticResources>
+  <semanticResources>dslSpecificTestCases.tdlan2</semanticResources>
 </viewpoint:DAnalysis>

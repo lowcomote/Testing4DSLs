@@ -14,15 +14,11 @@ Package oclTestCases {
 	);
 	
 	Test Description bitShiftingOclTest uses configuration oclConfiguration{
+		tester.genericTestGate sends runModel to fsm.genericMUTGate;
 		tester.oclTestGate sends oclQuery (query = "self.ownedStates") to fsm.oclMUTGate;
 		fsm.oclMUTGate sends {S0, S1} to tester.oclTestGate;
 		
 		tester.oclTestGate sends oclQuery (query = "self.ownedStates") to fsm.oclMUTGate;
 		fsm.oclMUTGate sends {S0, S1, S2} to tester.oclTestGate;
-		//tester.oclTestGate sends oclQuery (query = "self.ownedTransitions->select(t|t.input = '0' and t.output = '1')") to fsm.oclMUTGate;
-		//fsm.oclMUTGate sends "State Machine BitShifting::Transition S1_to_S2" to tester.oclTestGate;
-		
-		//tester.oclTestGate sends oclQuery (query = "self.ownedStates") to fsm.oclMUTGate;
-		//fsm.oclMUTGate sends "[State Machine BitShifting::State S0, State Machine BitShifting::State S1, State Machine BitShifting::State S2]" to tester.oclTestGate;
 	}
 }

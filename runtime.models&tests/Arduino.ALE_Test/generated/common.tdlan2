@@ -10,5 +10,4 @@ Package common {
 	genericCommand runModel ;
 	genericCommand resetModel ;
 	genericCommand getModelState ;
-
 }

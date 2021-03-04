@@ -1,0 +1,21 @@
+Package arduinoSpecificEvents {
+	Import all from arduinoSpecificTypes ;
+	Annotation AcceptedEvent ;
+	Annotation ExposedEvent ;
+	Type _run ( sketch of type Sketch ) with {
+		AcceptedEvent ;
+	} ;
+	_run _run ( sketch = ? ) ;
+	Type button_pressed ( button of type PushButton ) with {
+		AcceptedEvent ;
+	} ;
+	button_pressed button_pressed ( button = ? ) ;
+	Type button_released ( button of type PushButton ) with {
+		AcceptedEvent ;
+	} ;
+	button_released button_released ( button = ? ) ;
+	Type led_level_changed ( led of type Led ) with {
+		ExposedEvent ;
+	} ;
+	led_level_changed led_level_changed ( led = ? ) ;
+}

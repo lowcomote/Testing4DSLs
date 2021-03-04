@@ -3,11 +3,10 @@ Package arduinoGenericTestCases {
 	Import all from arduinoSpecificTypes ;
 	Import all from testConfiguration ;
 	
-	Module moduleNewState ( level = * ) ;
-	OutputModule outputmoduleNewState (level = * ) ;
 	Led ledNewState ( level = * ) ;
-	InputModule inputmoduleNewState ( level = * ) ;
 	PushButton pushbuttonNewState ( level = * ) ;
+	Annotation ExactEquivalent ;
+	Annotation PartialEquivalent ;
 	
 	Test Description arduinoGenericTest uses configuration genericConfiguration{
 		tester.genericTestGate sends {pushbuttonNewState (_name = "my_button", level = "1"), 

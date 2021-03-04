@@ -1,0 +1,22 @@
+Package arduinoTestCases {
+	Import all from common ;
+	Import all from arduinoSpecificTypes ;
+	Import all from arduinoSpecificEvents ;
+	Import all from testConfiguration ;
+	
+	Led RED_LED ( _name = "RED_LED" ) ;
+	PushButton my_button ( _name = "my_button" ) ;
+	
+	
+	
+	Test Description arduinoGenericTest uses configuration dslSpecificConfiguration{
+		tester.genericTestGate sends button_pressed(button = my_button) to arduino.genericMUTGate;
+		arduino.dslSpecificMUTGate sends led_level_changed (led = RED_LED (level = '1'))to tester.dslSpecificTestGate;
+		arduino.dslSpecificMUTGate sends led_level_changed (led = RED_LED (level = '0'))to tester.dslSpecificTestGate;
+		arduino.dslSpecificMUTGate sends led_level_changed (led = RED_LED (level = '1'))to tester.dslSpecificTestGate;
+		arduino.dslSpecificMUTGate sends led_level_changed (led = RED_LED (level = '0'))to tester.dslSpecificTestGate;
+		tester.dslSpecificTestGate sends button_released (button = my_button) to arduino.dslSpecificMUTGate;
+		arduino.dslSpecificMUTGate sends led_level_changed (led = RED_LED (level = '0'))to tester.dslSpecificTestGate;
+	}
+}
+

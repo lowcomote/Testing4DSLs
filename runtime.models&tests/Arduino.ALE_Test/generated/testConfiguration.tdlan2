@@ -1,13 +1,17 @@
 Package testConfiguration {
 	Import all from common ;
+	Import all from arduinoSpecificEvents;
 	Gate Type genericGate accepts genericCommand ;
+	Gate Type dslSpecificGate accepts _run , button_pressed , button_released , led_level_changed ;
 	Gate Type oclGate accepts OCL ;
 	Component Type TestSystem having {
 		gate genericTestGate of type genericGate ;
+		gate dslSpecificTestGate of type dslSpecificGate ;
 		gate oclTestGate of type oclGate ;
 	}
 	Component Type MUT having {
 		gate genericMUTGate of type genericGate ;
+		gate dslSpecificMUTGate of type dslSpecificGate ;
 		gate oclMUTGate of type oclGate ;
 	}
 	Annotation MUTPath ;
@@ -19,6 +23,15 @@ Package testConfiguration {
 			DSLPath : 'platform:/plugin/org.imt.arduino.ale.model/model/arduino.dsl' ;
 		} ;
 		connect tester.genericTestGate to arduino.genericMUTGate ;
+	}
+	Test Configuration dslSpecificConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT arduino of type MUT with {
+			MUTPath : '/Arduino.ALE.blinking/blinking.arduino' ; 
+			DSLPath : 'platform:/plugin/org.imt.arduino.ale.model/model/arduino.dsl' ;
+		};
+		connect tester.genericTestGate to arduino.genericMUTGate ;
+		connect tester.dslSpecificTestGate to arduino.dslSpecificMUTGate ;
 	}
 	Test Configuration oclConfiguration {
 		create Tester tester of type TestSystem ;
