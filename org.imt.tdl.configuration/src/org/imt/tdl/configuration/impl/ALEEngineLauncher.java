@@ -90,6 +90,9 @@ public class ALEEngineLauncher extends AbstractEngine{
 	@Override
 	public void executeModel() {
 		AleEngine aleEngine = createExecutionEngine();
+		//add a custom addon to set the model resource as the model to be executed
+		aleEngine.getExecutionContext().getExecutionPlatform().addEngineAddon(
+				new SetMUTResoureAddon(this.getModelResource()));
 		aleEngine.startSynchronous();
 		this.setModelResource(aleEngine.getExecutionContext().getResourceModel());
 	}

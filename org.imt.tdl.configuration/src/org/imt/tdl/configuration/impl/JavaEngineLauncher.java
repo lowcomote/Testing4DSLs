@@ -86,6 +86,9 @@ public class JavaEngineLauncher extends AbstractEngine{
 	@Override
 	public void executeModel() {
 		PlainK3ExecutionEngine javaEngine = createExecutionEngine();
+		//add a custom addon to set the model resource as the model to be executed
+		javaEngine.getExecutionContext().getExecutionPlatform().addEngineAddon(
+			new SetMUTResoureAddon(this.getModelResource()));
 		javaEngine.startSynchronous();
 		this.setModelResource(javaEngine.getExecutionContext().getResourceModel());
 	}
