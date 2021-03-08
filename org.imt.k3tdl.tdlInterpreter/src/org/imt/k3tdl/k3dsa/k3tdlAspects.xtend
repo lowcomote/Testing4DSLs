@@ -17,6 +17,8 @@ import java.util.List
 import java.util.ArrayList
 import org.eclipse.emf.common.util.EList
 import org.imt.tdl.configuration.impl.EngineFactory
+import java.util.HashMap
+import org.etsi.mts.tdl.Message
 
 @Aspect(className = Package)
 class PackageAspect {
@@ -24,7 +26,6 @@ class PackageAspect {
 	public List<TestDescription> testcases = new ArrayList<TestDescription>
 	public TestDescription enabledTestCase
 	public TestConfiguration enabledConfiguration
-	public String verdictValue
 	
 	@Step
 	@InitializeModel
@@ -53,7 +54,8 @@ class PackageAspect {
 }
 @Aspect (className = TestDescription)
 class TestDescriptionAspect{
-	public EngineFactory launcher = new EngineFactory();
+	public EngineFactory launcher = new EngineFactory()
+	public HashMap<Message, String> verdict = new HashMap<Message, String>()
 	@Step
 	def void executeTestCase(){
 		println("Start test case execution: " + _self.name)
@@ -64,7 +66,7 @@ class TestDescriptionAspect{
 	@Step
 	def void executeTestCase(String MUTPath){
 		_self.launcher.MUTPath = MUTPath
-		_self.testConfiguration.activateConfiguration(_self.launcher, true)
+		_self.testConfiguration.activateConfiguration(_self.launcher, MUTPath)
 		_self.behaviourDescription.callBehavior()
 	}
 }
@@ -87,8 +89,8 @@ class TestConfigurationAspect{
 		_self.setUpLauncher(launcher)
 	}
 	@Step
-	def void activateConfiguration(EngineFactory launcher, boolean manual){
-		//finding the address of MUT From the annotations of the SUT component (the component with role==0)
+	def void activateConfiguration(EngineFactory launcher, String MUTPath){
+		_self.MUTPath = MUTPath
 		for (Annotation a:_self.componentInstance.filter[ci | ci.role.toString == "SUT"].get(0).annotation){
 			if (a.key.name == 'DSLPath'){
 				_self.DSLPath = a.value.substring(1, a.value.length-1)
