@@ -867,22 +867,18 @@
         </toolSections>
         <decorationDescriptionsSet>
           <decorationDescriptions xsi:type="description_2:MappingBasedDecoration" name="Enabled breakpoint" position="WEST" preconditionExpression="service:self.hasEnabledBreakpoint" imageExpression="/org.eclipse.gemoc.executionframework.extensions.sirius/icons/breakpoint_enabled.gif" mappings="//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='assignment']/@subNodeMappings[name='assignment.assignment'] //@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='combinedBehaviour']/@subContainerMappings[name='boundedLoopBehaviour']/@subNodeMappings[name='boundedLoop.iteration'] //@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='combinedBehaviour']/@subContainerMappings[name='periodicBehaviour']/@subNodeMappings[name='periodicBehaviour.iteration'] //@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']"/>
-          <decorationDescriptions xsi:type="description_2:MappingBasedDecoration" name="Disabled breakpoint" position="NORTH" preconditionExpression="service:self.hasDisabledBreakpoint" imageExpression="/org.eclipse.gemoc.executionframework.extensions.sirius/icons/breakpoint_disabled.gif" mappings="//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='combinedBehaviour']/@subContainerMappings[name='boundedLoopBehaviour']/@subNodeMappings[name='boundedLoop.iteration'] //@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='combinedBehaviour']/@subContainerMappings[name='periodicBehaviour']/@subNodeMappings[name='periodicBehaviour.iteration'] //@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']"/>
+          <decorationDescriptions xsi:type="description_2:MappingBasedDecoration" name="Disabled breakpoint" position="WEST" preconditionExpression="service:self.hasDisabledBreakpoint" imageExpression="/org.eclipse.gemoc.executionframework.extensions.sirius/icons/breakpoint_disabled.gif" mappings="//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='combinedBehaviour']/@subContainerMappings[name='boundedLoopBehaviour']/@subNodeMappings[name='boundedLoop.iteration'] //@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='combinedBehaviour']/@subContainerMappings[name='periodicBehaviour']/@subNodeMappings[name='periodicBehaviour.iteration'] //@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']"/>
         </decorationDescriptionsSet>
         <customization>
           <vsmElementCustomizations xsi:type="description:VSMElementCustomization" predicateExpression="service:self.isCurrentInstruction">
-            <featureCustomizations xsi:type="description:EReferenceCustomization" referenceName="arrowColor"/>
+            <featureCustomizations xsi:type="description:EReferenceCustomization" applyOnAll="true" referenceName="messageArrowColor"/>
           </vsmElementCustomizations>
         </customization>
       </additionalLayers>
       <additionalLayers name="Animation" activeByDefault="true">
-        <decorationDescriptionsSet>
-          <decorationDescriptions xsi:type="description_2:MappingBasedDecoration" name="current message" position="NORTH_EAST" imageExpression="/org.etsi.mts.tdl.graphical.viewpoint/icons/cursor-3-24.png" mappings="//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']"/>
-        </decorationDescriptionsSet>
         <customization>
           <vsmElementCustomizations xsi:type="description:VSMElementCustomization" predicateExpression="service:self.hasBeenActivated">
-            <featureCustomizations xsi:type="description:EReferenceCustomization"/>
-            <featureCustomizations xsi:type="description:EReferenceCustomization"/>
+            <featureCustomizations xsi:type="description:EReferenceCustomization" appliedOn="//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']/@style //@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']/@conditionnalStyles.1/@style //@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']/@conditionnalStyles.0/@style //@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']/@conditionnalStyles.2/@style" referenceName="messageArrowColor"/>
           </vsmElementCustomizations>
         </customization>
       </additionalLayers>
@@ -2036,6 +2032,8 @@
     <ownedJavaExtensions qualifiedClassName="org.etsi.mts.tdl.graphical.extensions.BehaviourProvider"/>
     <ownedJavaExtensions qualifiedClassName="org.etsi.mts.tdl.graphical.extensions.ModelHelper"/>
     <ownedJavaExtensions qualifiedClassName="org.etsi.mts.tdl.graphical.extensions.BehaviourModifications"/>
+    <ownedJavaExtensions qualifiedClassName="org.imt.tdl.design.services.TDLAnimatorServices"/>
+    <ownedJavaExtensions qualifiedClassName="org.imt.tdl.design.services.TDLDebugServices"/>
   </ownedViewpoints>
   <userColorsPalettes name="TDL Behavior Palette">
     <entries xsi:type="description:UserFixedColor" red="255" green="255" blue="0" name="current instruction"/>
