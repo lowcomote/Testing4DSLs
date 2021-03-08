@@ -33,6 +33,8 @@ import static extension org.imt.k3tdl.k3dsa.MemberAssignmentAspect.*
 import static extension org.imt.k3tdl.k3dsa.ParameterBindingAspect.*
 import static extension org.imt.k3tdl.k3dsa.StaticDataUseAspect.*
 import static extension org.imt.k3tdl.k3dsa.StructuredDataInstanceAspect.*
+import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.BehavioralInterface
+import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.Event
 
 @Aspect (className = DataType)
 class DataTypeAspect{
@@ -65,6 +67,17 @@ class DataTypeAspect{
 			var metamodelRes = (new ResourceSetImpl()).getResource(URI.createURI(metamodelPath), true);
 			var metamodelRootElement = metamodelRes.getContents().get(0) as EPackage;
 			return metamodelRootElement.EClassifiers.exists[c | c.name.equals(_self.getValidName) && !c.eClass.abstract]
+		}
+		return false;
+	}
+	def boolean isEvent(String DSLPath) {
+		var dslRes = (new ResourceSetImpl()).getResource(URI.createURI(DSLPath), true);
+		var dsl = dslRes.getContents().get(0) as Dsl;
+		if (dsl.getEntry("behavioralInterface") != null) {
+			var interfacePath = dsl.getEntry("behavioralInterface").getValue().replaceFirst("resource", "plugin");
+			var interfaceRes = (new ResourceSetImpl()).getResource(URI.createURI(interfacePath), true);
+			var BehavioralInterface interfaceRootElement= interfaceRes.getContents().get(0) as BehavioralInterface;
+			return interfaceRootElement.events.exists[e | e.name.equals(_self.getValidName)]
 		}
 		return false;
 	}
