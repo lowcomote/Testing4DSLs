@@ -90,7 +90,7 @@ public class ALEEngineLauncher extends AbstractEngine{
 	@Override
 	public void executeModel() {
 		AleEngine aleEngine = createExecutionEngine();
-		aleEngine.start();
+		aleEngine.startSynchronous();
 		this.setModelResource(aleEngine.getExecutionContext().getResourceModel());
 	}
 	private AleEngine createExecutionEngine(){

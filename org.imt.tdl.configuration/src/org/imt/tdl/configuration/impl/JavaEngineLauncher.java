@@ -86,7 +86,7 @@ public class JavaEngineLauncher extends AbstractEngine{
 	@Override
 	public void executeModel() {
 		PlainK3ExecutionEngine javaEngine = createExecutionEngine();
-		javaEngine.start();
+		javaEngine.startSynchronous();
 		this.setModelResource(javaEngine.getExecutionContext().getResourceModel());
 	}
 	private PlainK3ExecutionEngine createExecutionEngine(){
