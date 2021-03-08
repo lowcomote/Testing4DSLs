@@ -60,6 +60,13 @@ class TestDescriptionAspect{
 		_self.testConfiguration.activateConfiguration(_self.launcher)
 		_self.behaviourDescription.callBehavior()
 	}
+	//this method is called from TDL runner
+	@Step
+	def void executeTestCase(String MUTPath){
+		_self.launcher.MUTPath = MUTPath
+		_self.testConfiguration.activateConfiguration(_self.launcher, true)
+		_self.behaviourDescription.callBehavior()
+	}
 }
 @Aspect (className = TestConfiguration)
 class TestConfigurationAspect{
@@ -77,6 +84,20 @@ class TestConfigurationAspect{
 				launcher.DSLPath = _self.DSLPath
 			}
 		}
+		_self.setUpLauncher(launcher)
+	}
+	@Step
+	def void activateConfiguration(EngineFactory launcher, boolean manual){
+		//finding the address of MUT From the annotations of the SUT component (the component with role==0)
+		for (Annotation a:_self.componentInstance.filter[ci | ci.role.toString == "SUT"].get(0).annotation){
+			if (a.key.name == 'DSLPath'){
+				_self.DSLPath = a.value.substring(1, a.value.length-1)
+				launcher.DSLPath = _self.DSLPath
+			}
+		}
+		_self.setUpLauncher(launcher)
+	}
+	def void setUpLauncher (EngineFactory launcher){
 		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.contains('generic')]]) {
 			launcher.setUp(EngineFactory.GENERIC);
 		}
