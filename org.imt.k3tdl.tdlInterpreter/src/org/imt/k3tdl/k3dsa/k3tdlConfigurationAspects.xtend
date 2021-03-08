@@ -126,14 +126,14 @@ class GateInstanceAspect {
 					(new ResourceSetImpl()).getResource(URI.createURI(_self.MUTPath), true);
 			}else if (arg.dataInstance.name == 'getModelState') {
 				_self.receivedOutput = _self.gateLauncher.MUTResource
-			}else if (arg.dataInstance.dataType.isConcreteEcoreType(_self.DSLPath)){
+			}else if (arg.dataInstance.dataType.isConcreteEcoreType(_self.DSLPath)){//request for setting the model state
 				_self.setModelState(arg);
 			}else if (arg.dataInstance.dataType.name == 'OCL') {
 				// extracting the query from the argument and sending for validation
 				var query = argument.argument.get(0).dataUse as LiteralValueUse;
 				_self.gateLauncher.executeOCLCommand(query.value);				
 			} // otherwise the message is an event conforming to the behavioral interface of the DSL
-			else {
+			else if (arg.dataInstance.dataType.isEvent(_self.DSLPath)){
 				// TODO: Sending the related argument
 				_self.gateLauncher.executeDSLSpecificCommand("");
 			}
