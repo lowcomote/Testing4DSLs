@@ -1,6 +1,7 @@
 package org.imt.tdl.configuration.impl;
 
 import org.eclipse.core.runtime.CoreException;
+
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchConfigurationType;
@@ -10,7 +11,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gemoc.execution.sequential.javaengine.PlainK3ExecutionEngine;
-import org.eclipse.gemoc.ale.interpreted.engine.AleEngine;
 import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.dsl.debug.ide.launch.AbstractDSLLaunchConfigurationDelegate;
 import org.eclipse.gemoc.dsl.debug.ide.sirius.ui.launch.AbstractDSLLaunchConfigurationDelegateSiriusUI;
