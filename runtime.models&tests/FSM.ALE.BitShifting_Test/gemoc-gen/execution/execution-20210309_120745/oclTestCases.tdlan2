@@ -19,6 +19,6 @@ Package oclTestCases {
 		fsm.oclMUTGate sends {S0, S1} to tester.oclTestGate;
 		
 		tester.oclTestGate sends oclQuery (query = "self.currentState") to fsm.oclMUTGate;
-		fsm.oclMUTGate sends S2 to tester.oclTestGate;
+		fsm.oclMUTGate sends "[State Machine BitShifting::State S2]" to tester.oclTestGate;
 	}
 }

@@ -56,8 +56,6 @@ public class EngineFactory{
 	}
 	public void executeGenericCommand() throws CoreException, EngineContextException {
 		//System.out.println("Start executing generic command");
-		//TODO: the execution thread has to wait for model execution to be finished
-		this.engineLauncher.setUp(this.MUTPath, this.DSLPath);
 		this.engineLauncher.executeModel();
 		//System.out.println("The model under test executed successfully");
 	}

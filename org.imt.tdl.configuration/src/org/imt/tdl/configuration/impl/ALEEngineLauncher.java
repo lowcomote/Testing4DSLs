@@ -90,21 +90,21 @@ public class ALEEngineLauncher extends AbstractEngine{
 	@Override
 	public void executeModel() {
 		AleEngine aleEngine = createExecutionEngine();
-		//add a custom addon to set the model resource as the model to be executed
-		aleEngine.getExecutionContext().getExecutionPlatform().addEngineAddon(
-				new SetMUTResoureAddon(this.getModelResource()));
 		aleEngine.startSynchronous();
 		this.setModelResource(aleEngine.getExecutionContext().getResourceModel());
 	}
 	private AleEngine createExecutionEngine(){
 		AleEngine engine = new AleEngine();
-		GenericModelExecutionContext<SequentialRunConfiguration> executioncontext = null;
+		CustomModelExecutionContext executioncontext = null;
 		try {
-			executioncontext = new GenericModelExecutionContext<SequentialRunConfiguration>(this.runConfiguration, this.executionMode);
+			executioncontext = new CustomModelExecutionContext(this.runConfiguration, this.executionMode);
 		} catch (EngineContextException e) {
 			e.printStackTrace();
 		}
-		executioncontext.initializeResourceModel(); // load model
+		if (!executioncontext.modelInitialized()) {
+			executioncontext.initializeResourceModel();
+		}
+		//executioncontext.setResourceModel(this.getModelResource());
 		engine.initialize(executioncontext);
 		
 		// declare this engine as available for ale: queries in the odesign
