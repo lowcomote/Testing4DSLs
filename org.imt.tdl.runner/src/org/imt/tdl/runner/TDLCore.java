@@ -15,13 +15,12 @@ import org.imt.k3tdl.k3dsa.TestDescriptionAspect;
 public class TDLCore {
 	private Result result = new Result();
 	
-	public Result run(String testSuitePath, String MUTPath) {
-		Resource testSuiteRes = (new ResourceSetImpl()).getResource(URI.createURI(testSuitePath), true);
-		Package testPackage = (Package) testSuiteRes.getContents().get(0);
+	public Result run(Package testPackage, String MUTPath) {
 		for (int i=0; i<testPackage.getPackagedElement().size(); i++) {
 			Object o = testPackage.getPackagedElement().get(i);
 			if (o instanceof TestDescription) {
 				TestDescription testCase = (TestDescription) o;
+				result.addTest(testCase);
 				TestDescriptionAspect testCaseRunner = new TestDescriptionAspect();
 				testCaseRunner.executeTestCase(testCase, MUTPath);
 				result.addNumExecutedTests();

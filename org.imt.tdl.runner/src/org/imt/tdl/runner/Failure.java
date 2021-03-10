@@ -8,6 +8,7 @@ import org.etsi.mts.tdl.TestDescription;
 public class Failure {
 	private String testHeader;
 	private String message;
+	private String failedTestName;
 	
 	public void setMessage(List<Message> failedAssertions) {
 		for (int i=0; i<failedAssertions.size(); i++) {
@@ -20,10 +21,14 @@ public class Failure {
 		return this.message;
 	}
 	public void setTestHeader(TestDescription testCase) {
+		this.failedTestName= testCase.getName();
 		this.testHeader = "Failed test case: " + testCase.getName();
 	}
 	public String getTestHeader() {
 		//a user-understandable label for the test
 		return this.testHeader;
+	}
+	public String getFailedTestName() {
+		return this.failedTestName;
 	}
 }
