@@ -53,15 +53,23 @@ class GateInstanceAspect {
 			if (_self.name.equals('oclMUTGate')){
 				_self.receivedOutput = _self.gateLauncher.OCLResultAsString
 			}
-			print("Start assertion:")
-			if (_self.receivedOutput != null && _self.receivedOutput.toString.equals(_self.expectedOutput.toString)) {
-				println("Test case PASSED")
-				return "PASS"
+			if (_self.receivedOutput != null) {
+				if (_self.gateLauncher.OCLResultAsString.size==1){
+					val String result = _self.gateLauncher.OCLResultAsString.get(0)
+					_self.receivedOutput = result.subSequence(1, result.length-1)
+				}
+				if (_self.receivedOutput.toString.equals(_self.expectedOutput.toString)){
+					println("Assertion PASSED")
+					return "PASS"
+				}else{
+					println("Assertion FIALED: The expected response is not received from MUT")
+					return "FAIL"
+				}
 			} else if (_self.receivedOutput == null) {
-				println("Test case FIALED: No response received from MUT")
+				println("Assertion FIALED: No response received from MUT")
 				return "FAIL"
 			} else {
-				println("Test case FAILED: The expected response is not received from MUT")
+				println("Assertion FAILED: The expected response is not received from MUT")
 				return "FAIL"
 			}
 		}

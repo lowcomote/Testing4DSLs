@@ -55,9 +55,7 @@ public class EngineFactory{
 		}
 	}
 	public void executeGenericCommand() throws CoreException, EngineContextException {
-		//System.out.println("Start executing generic command");
 		this.engineLauncher.executeModel();
-		//System.out.println("The model under test executed successfully");
 	}
 	public void executeOCLCommand (String query){
 		//System.out.println("Start executing ocl command");

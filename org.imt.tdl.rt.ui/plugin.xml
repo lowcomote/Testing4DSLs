@@ -14,7 +14,7 @@
             id="org.etsi.mts.tdl.tools.rt.ui.commands.translateCommand">
       </command>
       <command
-            name="Generate TDL model"
+            name="Generate TDL Library"
             categoryId="org.etsi.mts.tdl.tools.rt.ui.commands.category"
             id="org.etsi.mts.tdl.tools.rt.ui.commands.codeGeneratorCommand">
       </command>
@@ -74,7 +74,7 @@
             <command
                   commandId="org.etsi.mts.tdl.tools.rt.ui.commands.codeGeneratorCommand"
                   icon="icons/tdl.png"
-                  tooltip="Generate TDL Model"
+                  tooltip="Generate TDL Library"
                   id="org.etsi.mts.tdl.tools.rt.ui.menus.codeGeneratorCommand">
             </command>
          </toolbar>

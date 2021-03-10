@@ -104,7 +104,7 @@ public class ALEEngineLauncher extends AbstractEngine{
 		if (!executioncontext.modelInitialized()) {
 			executioncontext.initializeResourceModel();
 		}
-		//executioncontext.setResourceModel(this.getModelResource());
+		executioncontext.setResourceModel(this.getModelResource());
 		engine.initialize(executioncontext);
 		
 		// declare this engine as available for ale: queries in the odesign

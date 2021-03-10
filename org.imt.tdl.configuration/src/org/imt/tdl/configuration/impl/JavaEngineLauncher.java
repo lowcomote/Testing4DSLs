@@ -92,17 +92,18 @@ public class JavaEngineLauncher extends AbstractEngine{
 	private PlainK3ExecutionEngine createExecutionEngine(){
 		// create and initialize engine
 		PlainK3ExecutionEngine executionEngine = new PlainK3ExecutionEngine();
-		GenericModelExecutionContext<ISequentialRunConfiguration> executioncontext = null;
+		CustomModelExecutionContext executioncontext = null;
 		try {
-			executioncontext = new GenericModelExecutionContext<ISequentialRunConfiguration>(
-					this.runConfiguration, this.executionMode);
+			executioncontext = new CustomModelExecutionContext(this.runConfiguration, this.executionMode);
 		} catch (EngineContextException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//executioncontext.getExecutionPlatform().getModelLoader().setProgressMonitor(this.launchProgressMonitor);
 		executioncontext.getExecutionPlatform().getModelLoader().setProgressMonitor(new NullProgressMonitor());
-		executioncontext.initializeResourceModel();
+		if (!executioncontext.modelInitialized()) {
+			executioncontext.initializeResourceModel();
+		}
+		executioncontext.setResourceModel(this.getModelResource());
 		executionEngine.initialize(executioncontext);
 		return executionEngine;
 	}

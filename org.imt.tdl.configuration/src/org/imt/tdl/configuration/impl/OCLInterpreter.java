@@ -81,7 +81,7 @@ public class OCLInterpreter {
 				this.resultAsObject.add(object);
 				this.resultAsString.add(queryResultLabelProvider(object));
 			}else {
-				this.resultAsObject.add((EObject) res);
+				this.resultAsObject.add(null);
 				this.resultAsString.add("'" + res.toString() + "'");
 			}
 		}
