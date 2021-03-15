@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+	<feature id="org.etsi.mts.tdl.TDLan2.feature" version="0.0.0">
+		<category name="main"/>
+	</feature>
+	<feature id="org.etsi.mts.tdl.TDLan2.feature.source" version="0.0.0">
+		<category name="main.source"/>
+	</feature>
+	<category-def name="main" label="TDLan2"/>
+	<category-def name="main.source" label="TDLan2 (Sources)"/>
+</site>

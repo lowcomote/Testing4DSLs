@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.etsi.mts.tdl.TPLan2
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: org.etsi.mts.tdl.TPLan2; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.etsi.mts.tdl.model,
+ org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.util,
+ org.eclipse.xtend.lib,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ org.etsi.mts.tdl.common
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: org.etsi.mts.tdl.scoping,
+ org.etsi.mts.tdl,
+ org.etsi.mts.tdl.validation,
+ org.etsi.mts.tdl.generator,
+ org.etsi.mts.tdl.services,
+ org.etsi.mts.tdl.serializer,
+ org.etsi.mts.tdl.formatting2,
+ org.etsi.mts.tdl.parser.antlr.internal,
+ org.etsi.mts.tdl.parser.antlr
+Import-Package: org.apache.log4j

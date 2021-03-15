@@ -2,11 +2,11 @@
 grammar org.etsi.mts.tdl.graphical.labels.Data with org.eclipse.xtext.common.Terminals
 
 //import "http://www.eclipse.org/uml2/4.0.0/Types" 
-import "http://www.etsi.org/spec/TDL/1.4.1"
+//import "http://www.etsi.org/spec/TDL/1.4.1"
 //import "http://www.eclipse.org/uml2/5.0.0/Types" as types 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 //import "http://www.etsi.org/spec/TDL/STABLE" as tdl
-
+import "platform:/resource/org.etsi.mts.tdl.model/model/tdl.ecore"
 
 TDLSpec returns Package:
 	{Package}

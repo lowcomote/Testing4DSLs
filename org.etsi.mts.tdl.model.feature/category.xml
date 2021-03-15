@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.etsi.mts.tdl.TDLan2.feature_1.0.0.qualifier.jar" id="org.etsi.mts.tdl.TDLan2.feature" version="1.0.0.qualifier">
+      <category name="org.etsi.mts.tdl"/>
+   </feature>
+   <feature url="features/org.etsi.mts.tdl.model.feature_1.4.0.qualifier.jar" id="org.etsi.mts.tdl.model.feature" version="1.4.0.qualifier">
+      <category name="org.etsi.mts.tdl"/>
+   </feature>
+   <feature url="features/org.etsi.mts.tdl.graphical.editor.feature_0.9.0.qualifier.jar" id="org.etsi.mts.tdl.graphical.editor.feature" version="0.9.0.qualifier">
+      <category name="org.etsi.mts.tdl"/>
+   </feature>
+   <feature url="features/org.etsi.mts.tdl.util.feature_1.0.0.qualifier.jar" id="org.etsi.mts.tdl.util.feature" version="1.0.0.qualifier">
+      <category name="org.etsi.mts.tdl"/>
+   </feature>
+   <feature url="features/org.etsi.mts.tdl.TPLan2.feature_1.0.0.qualifier.jar" id="org.etsi.mts.tdl.TPLan2.feature" version="1.0.0.qualifier">
+      <category name="org.etsi.mts.tdl"/>
+   </feature>
+   <feature url="features/org.etsi.mts.tdl.tools.to.docx.feature_1.0.0.qualifier.jar" id="org.etsi.mts.tdl.tools.to.docx.feature" version="1.0.0.qualifier">
+      <category name="org.etsi.mts.tdl"/>
+   </feature>
+   <feature url="features/org.etsi.mts.tdl.ttcn3.feature_1.0.0.qualifier.jar" id="org.etsi.mts.tdl.ttcn3.feature" version="1.0.0.qualifier">
+      <category name="org.etsi.mts.tdl"/>
+   </feature>
+   <feature url="features/org.etsi.mts.tdl.constraints.feature_1.0.0.qualifier.jar" id="org.etsi.mts.tdl.constraints.feature" version="1.0.0.qualifier">
+      <category name="org.etsi.mts.tdl"/>
+   </feature>
+   <category-def name="org.etsi.mts.tdl" label="TDL"/>
+</site>

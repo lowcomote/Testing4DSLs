@@ -2,7 +2,8 @@
 grammar org.etsi.mts.tdl.TDLan2 with org.eclipse.xtext.common.Terminals
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
-import "http://www.etsi.org/spec/TDL/1.4.1" as tdl 
+//import "http://www.etsi.org/spec/TDL/1.4.1" as tdl 
+import "platform:/resource/org.etsi.mts.tdl.model/model/tdl.ecore" as tdl
 
 Package returns tdl::Package:
 	{tdl::Package}
