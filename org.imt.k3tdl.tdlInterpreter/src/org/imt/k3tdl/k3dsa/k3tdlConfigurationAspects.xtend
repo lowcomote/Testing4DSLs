@@ -147,8 +147,8 @@ class GateInstanceAspect {
 				// extracting the query from the argument and sending for validation
 				var query = argument.argument.get(0).dataUse as LiteralValueUse;
 				_self.gateLauncher.executeOCLCommand(query.value);				
-			} // otherwise the message is an event conforming to the behavioral interface of the DSL
-			else if (arg.dataInstance.dataType.isEvent(_self.DSLPath)){
+			}else if (arg.dataInstance.dataType.isEvent(_self.DSLPath)){
+				//the message is an event conforming to the behavioral interface of the DSL
 				// TODO: Sending the related argument
 				_self.gateLauncher.executeDSLSpecificCommand("");
 			}
