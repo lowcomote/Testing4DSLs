@@ -17,21 +17,22 @@ public class TDLCore {
 			Object o = testPackage.getPackagedElement().get(i);
 			if (o instanceof TestDescription) {
 				TestDescription testCase = (TestDescription) o;
-				result.addTest(testCase);
 				TestDescriptionAspect testCaseRunner = new TestDescriptionAspect();
 				testCaseRunner.executeTestCase(testCase, MUTPath);
 				result.addNumExecutedTests();
-				HashMap<Message, String> verdict = testCaseRunner.verdict(testCase);//result of the test case assertions
-				if (verdict.values().contains("FAIL")) {
+				HashMap<Message, Boolean> verdict = testCaseRunner.verdict(testCase);//result of the test case assertions
+				if (verdict.values().contains(false)) {
+					result.addTest(testCase.getName(), false);
 					result.addNumFailedTests();
 					List<Message> failedAssertions = new ArrayList<>();
-					for (HashMap.Entry<Message, String> set : verdict.entrySet()) {
-					    if (set.getValue().toString().equals("FAIL")) {
+					for (HashMap.Entry<Message, Boolean> set : verdict.entrySet()) {
+					    if (set.getValue().toString().equals(false)) {
 					    	failedAssertions.add(set.getKey());
 					    }
 					}
 					result.addFailure(testCase, failedAssertions);
-				}	
+				}
+				result.addTest(testCase.getName(), true);
 			}
 		}
 		return result;

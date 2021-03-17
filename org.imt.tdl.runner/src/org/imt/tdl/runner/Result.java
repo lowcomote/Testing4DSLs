@@ -1,6 +1,8 @@
 package org.imt.tdl.runner;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.etsi.mts.tdl.Message;
 import org.etsi.mts.tdl.TestDescription;
@@ -8,13 +10,13 @@ import org.etsi.mts.tdl.TestDescription;
 public class Result {
 	private int numExecutedTests = 0;
 	private int numFailedTests = 0;
-	private List<TestDescription> tests;
+	private Map<String, Boolean> tests;
 	private List<Failure> failures;
 	
-	public void addTest(TestDescription testCase) {
-		tests.add(testCase);
+	public void addTest(String testCase, boolean verdict) {
+		this.tests.put(testCase, verdict);
 	}
-	public List<TestDescription> getTests(){
+	public Map<String, Boolean> getTests(){
 		return this.tests;
 	}
 	public void addFailure(TestDescription testCase, List<Message> failedAssertions) {

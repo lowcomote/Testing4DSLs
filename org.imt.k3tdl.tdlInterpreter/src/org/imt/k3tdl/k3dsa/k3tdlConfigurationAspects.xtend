@@ -40,7 +40,7 @@ class GateInstanceAspect {
 		_self.gateLauncher = launcher;
 	}
 
-	def String assertArgument(DataUse argument) {
+	def boolean assertArgument(DataUse argument) {
 		//if the argument is a string
 		if (argument instanceof LiteralValueUse){			
 			var expected = (argument as LiteralValueUse).value
@@ -58,17 +58,17 @@ class GateInstanceAspect {
 				}
 				if (_self.receivedOutput.toString.equals(_self.expectedOutput.toString)){
 					println("Assertion PASSED")
-					return "PASS"
+					return true
 				}else{
 					println("Assertion FIALED: The expected response is not received from MUT")
-					return "FAIL"
+					return false
 				}
 			} else if (_self.receivedOutput == null) {
 				println("Assertion FIALED: No response received from MUT")
-				return "FAIL"
+				return false
 			} else {
 				println("Assertion FAILED: The expected response is not received from MUT")
-				return "FAIL"
+				return false
 			}
 		}
 		//if the argument is an element/a list of elements
@@ -108,20 +108,20 @@ class GateInstanceAspect {
 			if (assertionFailed){
 				println("Assertion FAILED: The expected response is not received from MUT")
 				println("The following elements are not matched: " + (notMatchedElements.get(0) as DataInstanceUse).dataInstance.name)
-				return "FAIL"
+				return false
 			}else if(_self.name.equals('oclMUTGate')){
 				val Object[] receivedObjects = _self.gateLauncher.OCLResultAsObject
 				if (receivedObjects.elementsEqual(matchedMUTElements)){
 					println("Assertion PASSED")
-					return "PASS"
+					return true
 				}else{
 					println("Assertion FAILED: The expected response is not received from MUT")
 					println("Received result: " + _self.gateLauncher.OCLResultAsString)
-					return "FAIL"
+					return false
 				}
 			}else{
 				println("Assertion PASSED")
-				return "PASS"
+				return true
 			}
 		}
 	}

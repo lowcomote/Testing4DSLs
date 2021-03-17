@@ -55,13 +55,13 @@ class PackageAspect {
 @Aspect (className = TestDescription)
 class TestDescriptionAspect{
 	public EngineFactory launcher = new EngineFactory()
-	public HashMap<Message, String> verdict = new HashMap<Message, String>()
+	public HashMap<Message, Boolean> verdict = new HashMap<Message, Boolean>()
 	@Step
 	def void executeTestCase(){
 		println("Start test case execution: " + _self.name)
 		_self.testConfiguration.activateConfiguration(_self.launcher)
 		_self.behaviourDescription.callBehavior()
-		if (_self.verdict.values().contains("FAIL")) {
+		if (_self.verdict.values().contains(false)) {
 			println("Test case FAILED")
 		}else{
 			println("Test case PASSED")
