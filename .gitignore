@@ -1,6 +1,7 @@
 bin
 src-gen
 xtend-gen
+gemoc-gen
 metadata
 edit
 editor

@@ -1,5 +1,9 @@
 package org.imt.tdl.configuration.impl;
 
+import java.lang.reflect.Method;
+import java.util.Iterator;
+import java.util.Set;
+
 import org.eclipse.core.runtime.CoreException;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -14,12 +18,15 @@ import org.eclipse.gemoc.execution.sequential.javaengine.PlainK3ExecutionEngine;
 import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.dsl.debug.ide.launch.AbstractDSLLaunchConfigurationDelegate;
 import org.eclipse.gemoc.dsl.debug.ide.sirius.ui.launch.AbstractDSLLaunchConfigurationDelegateSiriusUI;
+import org.eclipse.gemoc.executionframework.engine.commons.DslHelper;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.eclipse.gemoc.executionframework.engine.commons.GenericModelExecutionContext;
+import org.eclipse.gemoc.executionframework.engine.commons.K3DslHelper;
 import org.eclipse.gemoc.executionframework.engine.commons.sequential.ISequentialRunConfiguration;
 import org.eclipse.gemoc.executionframework.engine.commons.sequential.SequentialRunConfiguration;
 import org.eclipse.gemoc.executionframework.engine.ui.Activator;
 import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
+import org.osgi.framework.Bundle;
 
 public class JavaEngineLauncher extends AbstractEngine{
 	
@@ -40,17 +47,15 @@ public class JavaEngineLauncher extends AbstractEngine{
 		if (this.getModelResource()==null) {
 			super.setUp(MUTPath, DSLPath);
 		}
-		//TODO: The attributes have to be set in an automatic manner (for now, I simply set them)
 		this._modelLocation = this.getModelResource().getURI().toString();
 		this._siriusRepresentationLocation = this.getModelResource().getURI().toString().split("/")[1] + "/representations.aird";
 		this._delay = "0";
 		this._language = this.getDslName(DSLPath);
 		this._entryPointModelElement = "/";
-		this._entryPointMethod = "public static void org.eclipse.gemoc.example.k3fsm.k3dsa.FSMAspect.main(org.eclipse.gemoc.example.k3fsm.FSM)";
+		this._entryPointMethod = getModelEntryPointMethodName();
 		this._animationFirstBreak = true;
-		this._modelInitializationMethod = "org.eclipse.gemoc.example.k3fsm.k3dsa.FSMAspect.initializeModel";
-		//this._modelInitializationArguments = "";
-		this._modelInitializationArguments = "000101010";
+		this._modelInitializationMethod = getModelInitializationMethodName();
+		this._modelInitializationArguments = "";
 		this.executionMode = ExecutionMode.Run;
 		this.configureEngine();
 	}
@@ -111,5 +116,47 @@ public class JavaEngineLauncher extends AbstractEngine{
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
 		return dsl.getEntry("name").getValue().toString();
+	}
+	protected String getModelEntryPointMethodName(){
+		Set<Class<?>> candidateAspects = K3DslHelper.getAspects(this._language);
+		Iterator it = candidateAspects.iterator();
+		while (it.hasNext()) {
+			Class c = (Class) it.next();
+			for(Method m : c.getMethods()){
+				// TODO find a better search mechanism (check signature, inheritance, aspects, etc)
+				if(m.isAnnotationPresent(fr.inria.diverse.k3.al.annotationprocessor.Main.class)){
+					return m.toString();
+				}
+			}
+		}
+		return "";
+	}
+	protected String getModelInitializationMethodName(){
+		String entryPointClassName = null;
+		final String prefix = "public static void ";
+		int startName = prefix.length();
+		int endName = this._entryPointMethod.lastIndexOf("(");
+		if(endName == -1) return "";
+		String entryMethod = this._entryPointMethod.substring(startName, endName);
+		int lastDot = entryMethod.lastIndexOf(".");
+		if(lastDot != -1){
+			entryPointClassName = entryMethod.substring(0, lastDot);
+		}
+		
+		Bundle bundle = DslHelper.getDslBundle(this._language);
+		
+		if(entryPointClassName != null && bundle != null){
+			try {
+				Class<?> entryPointClass = bundle.loadClass(entryPointClassName);
+				for(Method m : entryPointClass.getMethods()){
+					// TODO find a better search mechanism (check signature, inheritance, aspects, etc)
+					if(m.isAnnotationPresent(fr.inria.diverse.k3.al.annotationprocessor.InitializeModel.class)){
+						return entryPointClassName+"."+m.getName();
+					}
+				}
+			} catch (ClassNotFoundException e) {}
+		}
+			
+		return "";
 	}
 }

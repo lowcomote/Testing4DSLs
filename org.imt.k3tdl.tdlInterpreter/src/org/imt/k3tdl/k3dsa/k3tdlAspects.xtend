@@ -61,6 +61,11 @@ class TestDescriptionAspect{
 		println("Start test case execution: " + _self.name)
 		_self.testConfiguration.activateConfiguration(_self.launcher)
 		_self.behaviourDescription.callBehavior()
+		if (_self.verdict.values().contains("FAIL")) {
+			println("Test case FAILED")
+		}else{
+			println("Test case PASSED")
+		}
 	}
 	//this method is called from TDL runner
 	@Step

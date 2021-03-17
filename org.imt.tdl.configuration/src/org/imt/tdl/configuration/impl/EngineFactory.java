@@ -21,7 +21,7 @@ public class EngineFactory{
 	
 	private IExecutionEngine engineLauncher;
 	private OCLInterpreter oclLauncher;
-	private EventManagerLauncher eventManagerLauncher;
+	private EventManager eventManager;
 	
 	public final static String GENERIC = "Generic";
 	public final static String DSL_SPECIFIC = "DSL-Specific";
@@ -39,10 +39,10 @@ public class EngineFactory{
 			}
 			this.engineLauncher.setUp(this.MUTPath, this.DSLPath);
 		}else if(commandType.equals(DSL_SPECIFIC)) {
-			if (this.eventManagerLauncher == null) {
+			if (this.eventManager == null) {
 				System.out.println("Event manager setup");
-				this.eventManagerLauncher = new EventManagerLauncher();
-				this.eventManagerLauncher.setUp();
+				this.eventManager = new EventManager();
+				this.eventManager.setUp();
 			}
 		}else if (commandType.equals(OCL)) {
 			if (this.engineLauncher==null) {

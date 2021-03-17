@@ -36,12 +36,10 @@ class GateInstanceAspect {
 	
 	private EngineFactory gateLauncher
 
-	@Step
 	def void setLauncher(EngineFactory launcher) {
 		_self.gateLauncher = launcher;
 	}
 
-	@Step
 	def String assertArgument(DataUse argument) {
 		//if the argument is a string
 		if (argument instanceof LiteralValueUse){			
@@ -89,7 +87,7 @@ class GateInstanceAspect {
 			if (arg.item != null && arg.item.size > 0){//there is a list of objects in the expected output
 				for (i : 0 ..<arg.item.size){
 					val EObject matchedObject = (arg.item.get(i) as DataInstanceUse).
-						getMatchedMUTElement(MUTResource as Resource, true)		
+						getMatchedMUTElement(MUTResource as Resource, true, _self.DSLPath)		
 					if (matchedObject == null){
 						notMatchedElements.add(arg.item.get(i))
 						assertionFailed = true
@@ -99,7 +97,7 @@ class GateInstanceAspect {
 				}
 			}else{//there is only one object in the expected output
 				val EObject matchedObject = (arg as DataInstanceUse).
-					getMatchedMUTElement(MUTResource as Resource, true)
+					getMatchedMUTElement(MUTResource as Resource, true, _self.DSLPath)
 				if (matchedObject == null){
 					notMatchedElements.add(arg)
 					assertionFailed = true
@@ -161,14 +159,14 @@ class GateInstanceAspect {
 		var boolean status = false;
 		if (arg.item != null && arg.item.size > 0){
 			for (i : 0 ..<arg.item.size){
-				status = (arg.item.get(i) as DataInstanceUse).setMatchedMUTElement(MUTResource)
+				status = (arg.item.get(i) as DataInstanceUse).setMatchedMUTElement(MUTResource, _self.DSLPath)
 				if (!status){
 					println("the specified model state doesn't match the model under test")
 					return false;
 				}
 			}
 		}else{
-			status = arg.setMatchedMUTElement(MUTResource);
+			status = arg.setMatchedMUTElement(MUTResource, _self.DSLPath);
 			if (!status){
 				println("the specified model state doesn't match the model under test")
 				return false;
