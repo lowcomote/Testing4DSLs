@@ -1,6 +1,7 @@
 package org.gemoc.arduino.sequential.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
+
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 import fr.inria.diverse.k3.al.annotationprocessor.Step
 import org.gemoc.sequential.model.arduino.BinaryExpression
@@ -134,6 +135,7 @@ class IfAspect extends ControlAspect {
 
 @Aspect(className=While)
 class WhileAspect extends ControlAspect {
+	@Step
 	@OverrideAspectMethod
 	def void execute() {
 		println("execute while instruction");
