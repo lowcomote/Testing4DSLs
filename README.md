@@ -19,10 +19,13 @@ XTDL is a generic approach that provides testing facilities for executable DSLs.
 - *org.imt.tdl.configuration*: The automatic test configuration to execute test cases on the model under test. It is integrated to the model execution engines and also uses [Eclipse OCL API](https://download.eclipse.org/ocl/javadoc/6.4.0/) to evaluate OCL queries on the models.
 - *org.imt.tdl.libraryGenerator*: By having a DSL as input, it generates a TDL library specific to it.
 - *org.imt.tdl.rt.ui*: Providing GUI icons for TDL library generator
+- *org.imt.tdl.runner*: A java-based runner for the TDL test cases
 - *org.imt.tdl.xdsml*: The definition of the executable TDL language
 - *runtime.models&tests*: A set of models conforming to the provided languages along with their TDL test cases.
 
 ## Using the XTDL
+**Requirements**: installing Gemoc studio V3.2.0 from this [udpate site](http://download.eclipse.org/gemoc/updates/releases/3.2.0)
+
 To use XTDL for a given DSL, the following steps have to be followed.
 1. Import the intended input DSL into the plugins workspace. For example, any of the DSLs in the *languages* folder can be used.
 2. Run as `Eclipse Application`
