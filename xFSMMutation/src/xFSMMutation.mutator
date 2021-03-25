@@ -1,7 +1,7 @@
 generate 2 mutants
 in "data/out/"
 from "data/model/"
-metamodel "C:/labtop/GEMOC/workspaces/xTDL/xFSMMutation/data/model/fsm.ecore"
+metamodel "C:/labtop/Github/xTDL/xFSMMutation/data/model/fsm.ecore"
 
 with blocks {
 	dt {
