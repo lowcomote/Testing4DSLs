@@ -126,6 +126,8 @@ public class ALEEngineLauncher extends AbstractEngine{
 		IEngineAddon aleRTDInterpreter = new ALESiriusInterpreterProviderAddon();
 		Activator.getDefault().getMessaggingSystem().debug("Enabled implicit addon: "+ aleRTDInterpreter.getAddonID(), Activator.PLUGIN_ID);
 		engine.getExecutionContext().getExecutionPlatform().addEngineAddon(aleRTDInterpreter);
+		//add testEngineAddon to use it for running dsl-specific commands
+		engine.getExecutionContext().getExecutionPlatform().addEngineAddon(this.testEngineAddon);
 		return engine;
 	}
 	private String getDslName(String dslFilePath) {

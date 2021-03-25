@@ -9,11 +9,14 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gemoc.executionframework.engine.commons.DslHelper;
 import org.eclipse.gemoc.executionframework.engine.commons.K3DslHelper;
+import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
 import org.imt.tdl.configuration.IExecutionEngine;
 import org.osgi.framework.Bundle;
 
 public abstract class AbstractEngine implements IExecutionEngine{
 	private Resource MUTResource = null;
+	public IEngineAddon testEngineAddon = new TestEngineAddon();
+	
 	@Override
 	public void setUp(String MUTPath, String DSLPath) {
 		this.MUTResource = (new ResourceSetImpl()).getResource(URI.createURI(MUTPath), true);

@@ -96,7 +96,7 @@ public class JavaEngineLauncher extends AbstractEngine{
 	}
 	private PlainK3ExecutionEngine createExecutionEngine(){
 		// create and initialize engine
-		PlainK3ExecutionEngine executionEngine = new PlainK3ExecutionEngine();
+		PlainK3ExecutionEngine engine = new PlainK3ExecutionEngine();
 		CustomModelExecutionContext executioncontext = null;
 		try {
 			executioncontext = new CustomModelExecutionContext(this.runConfiguration, this.executionMode);
@@ -109,8 +109,10 @@ public class JavaEngineLauncher extends AbstractEngine{
 			executioncontext.initializeResourceModel();
 		}
 		executioncontext.setResourceModel(this.getModelResource());
-		executionEngine.initialize(executioncontext);
-		return executionEngine;
+		engine.initialize(executioncontext);
+		//add testEngineAddon to use it for running dsl-specific commands
+		engine.getExecutionContext().getExecutionPlatform().addEngineAddon(this.testEngineAddon);
+		return engine;
 	}
 	private String getDslName(String dslFilePath) {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);

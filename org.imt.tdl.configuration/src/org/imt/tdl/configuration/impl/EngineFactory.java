@@ -6,6 +6,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
@@ -31,16 +32,13 @@ public class EngineFactory{
 		if (commandType.equals(GENERIC)) {
 			String engineType = this.getEngineType();
 			if (engineType=="ale") {
-				System.out.println("Gemoc ALE engine setup");
 				this.engineLauncher = new ALEEngineLauncher();	
 			}else if(engineType=="k3") {
-				System.out.println("Gemoc java engine setup");
 				this.engineLauncher = new JavaEngineLauncher();
 			}
 			this.engineLauncher.setUp(this.MUTPath, this.DSLPath);
 		}else if(commandType.equals(DSL_SPECIFIC)) {
 			if (this.eventManager == null) {
-				System.out.println("Event manager setup");
 				this.eventManager = new EventManager();
 				this.eventManager.setUp();
 			}
@@ -48,7 +46,6 @@ public class EngineFactory{
 			if (this.engineLauncher==null) {
 				System.out.println("There is no model under execution. You have to run the model first.");
 			}else if (this.oclLauncher == null) {
-				System.out.println("OCL engine setup");
 				this.oclLauncher = new OCLInterpreter();
 				this.oclLauncher.setUp();
 			}
@@ -66,8 +63,7 @@ public class EngineFactory{
             e.printStackTrace();
 		}
 	}
-	public void executeDSLSpecificCommand(String eventOccurance) {
-		System.out.println("Start executing dsl-specific command");
+	public void executeDSLSpecificCommand(String eventName, Map<String, Object> parameters) {
 		//TODO: Calling the event manager
 	}
 	private String getEngineType() {
