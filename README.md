@@ -24,7 +24,8 @@ XTDL is a generic approach that provides testing facilities for executable DSLs.
 - *runtime.models&tests*: A set of models conforming to the provided languages along with their TDL test cases.
 
 ## Using the XTDL
-**Requirements**: installing Gemoc studio V3.2.0 [udpate site](http://download.eclipse.org/gemoc/updates/releases/3.2.0)
+**Requirements**: installing Gemoc studio V3.2.0 from this [udpate site](http://download.eclipse.org/gemoc/updates/releases/3.2.0)
+
 To use XTDL for a given DSL, the following steps have to be followed.
 1. Import the intended input DSL into the plugins workspace. For example, any of the DSLs in the *languages* folder can be used.
 2. Run as `Eclipse Application`
