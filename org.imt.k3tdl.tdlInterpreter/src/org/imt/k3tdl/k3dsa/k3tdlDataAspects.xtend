@@ -69,14 +69,25 @@ class DataTypeAspect{
 		}
 		return false;
 	}
-	def boolean isEvent(String DSLPath) {
+	def boolean isAcceptedEvent(String DSLPath) {
 		var dslRes = (new ResourceSetImpl()).getResource(URI.createURI(DSLPath), true);
 		var dsl = dslRes.getContents().get(0) as Dsl;
 		if (dsl.getEntry("behavioralInterface") != null) {
 			var interfacePath = dsl.getEntry("behavioralInterface").getValue().replaceFirst("resource", "plugin");
 			var interfaceRes = (new ResourceSetImpl()).getResource(URI.createURI(interfacePath), true);
 			var BehavioralInterface interfaceRootElement= interfaceRes.getContents().get(0) as BehavioralInterface;
-			return interfaceRootElement.events.exists[e | e.name.equals(_self.getValidName)]
+			return interfaceRootElement.events.exists[e | e.name.equals(_self.getValidName) && e.type.getName() != "EXPOSED"]
+		}
+		return false;
+	}
+	def boolean isExposedEvent(String DSLPath) {
+		var dslRes = (new ResourceSetImpl()).getResource(URI.createURI(DSLPath), true);
+		var dsl = dslRes.getContents().get(0) as Dsl;
+		if (dsl.getEntry("behavioralInterface") != null) {
+			var interfacePath = dsl.getEntry("behavioralInterface").getValue().replaceFirst("resource", "plugin");
+			var interfaceRes = (new ResourceSetImpl()).getResource(URI.createURI(interfacePath), true);
+			var BehavioralInterface interfaceRootElement= interfaceRes.getContents().get(0) as BehavioralInterface;
+			return interfaceRootElement.events.exists[e | e.name.equals(_self.getValidName) && e.type.getName() != "ACCEPTED"]
 		}
 		return false;
 	}

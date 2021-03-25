@@ -96,6 +96,7 @@ class TestConfigurationAspect{
 	@Step
 	def void activateConfiguration(EngineFactory launcher, String MUTPath){
 		_self.MUTPath = MUTPath
+		launcher.MUTPath = _self.MUTPath
 		for (Annotation a:_self.componentInstance.filter[ci | ci.role.toString == "SUT"].get(0).annotation){
 			if (a.key.name == 'DSLPath'){
 				_self.DSLPath = a.value.substring(1, a.value.length-1)

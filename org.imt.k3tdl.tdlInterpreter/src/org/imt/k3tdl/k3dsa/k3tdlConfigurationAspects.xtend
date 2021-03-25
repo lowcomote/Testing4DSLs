@@ -21,6 +21,8 @@ import static extension org.imt.k3tdl.k3dsa.DataInstanceAspect.*
 import static extension org.imt.k3tdl.k3dsa.DataInstanceUseAspect.*
 import static extension org.imt.k3tdl.k3dsa.DataTypeAspect.*
 import java.util.ArrayList
+import java.util.Map
+import java.util.HashMap
 
 @Aspect(className=GateType)
 class GateTypeAspect {
@@ -39,7 +41,7 @@ class GateInstanceAspect {
 	def void setLauncher(EngineFactory launcher) {
 		_self.gateLauncher = launcher;
 	}
-
+	@Step
 	def boolean assertArgument(DataUse argument) {
 		//if the argument is a string
 		if (argument instanceof LiteralValueUse){			
@@ -80,6 +82,9 @@ class GateInstanceAspect {
 			}
 			if (_self.name.equals('oclMUTGate')){
 				MUTResource = _self.gateLauncher.MUTResource//the MUT objects are the received output
+			}
+			else if (arg.dataInstance.dataType.isExposedEvent(_self.DSLPath)){//an execution rule is the received output 
+				//TODO: what should be set here??
 			}
 			var boolean assertionFailed = false
 			var ArrayList<EObject> matchedMUTElements = new ArrayList<EObject>();
@@ -145,16 +150,15 @@ class GateInstanceAspect {
 				// extracting the query from the argument and sending for validation
 				var query = argument.argument.get(0).dataUse as LiteralValueUse;
 				_self.gateLauncher.executeOCLCommand(query.value);				
-			}else if (arg.dataInstance.dataType.isEvent(_self.DSLPath)){
+			}else if (arg.dataInstance.dataType.isAcceptedEvent(_self.DSLPath)){
 				//the message is an event conforming to the behavioral interface of the DSL
-				// TODO: Sending the related argument
-				_self.gateLauncher.executeDSLSpecificCommand("");
+				_self.gateLauncher.executeDSLSpecificCommand(arg.dataInstance.name, _self.getEventParameters(arg));
 			}
 		}
 	}
+	@Step
 	def boolean setModelState(DataInstanceUse arg){
 		//get the current MUTResource
-		//TODO: Get the in-memory MUTResource
 		var MUTResource = _self.gateLauncher.MUTResource;
 		var boolean status = false;
 		if (arg.item != null && arg.item.size > 0){
@@ -169,9 +173,23 @@ class GateInstanceAspect {
 			status = arg.setMatchedMUTElement(MUTResource, _self.DSLPath);
 			if (!status){
 				println("the specified model state doesn't match the model under test")
-				return false;
+				return false
 			}
 		}
 		return status;
+	}
+	//retrieve a map of the parameter name and its corresponding model element
+	def Map<String, Object> getEventParameters(DataInstanceUse event){
+		var Map<String, Object> parameters = new HashMap;
+		for (i : 0 ..<event.argument.size){//the parameterBindings of the event
+			val DataUse parameter = event.argument.get(i).dataUse
+			if (parameter instanceof DataInstanceUse){
+				val DataInstanceUse param = parameter
+				//put the name of the parameter along with its matched object in the MUTResource
+				 parameters.put(param.dataInstance.name, 
+				 	param.getMatchedMUTElement(_self.gateLauncher.MUTResource, true, _self.DSLPath))
+			}			
+		}
+		return parameters
 	}
 }
