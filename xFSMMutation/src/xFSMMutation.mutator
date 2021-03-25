@@ -1,0 +1,33 @@
+generate 2 mutants
+in "data/out/"
+from "data/model/"
+metamodel "C:/labtop/GEMOC/workspaces/xTDL/xFSMMutation/data/model/fsm.ecore"
+
+with blocks {
+	dt {
+		remove one Transition
+	}
+	mis {
+		sm = select one StateMachine
+		cis = select one State in sm->initialState 
+		nis = select one State where {self <> cis}
+		modify sm with {initialState = nis}
+	}
+	mtio {
+		modify one Transition with {swap(input, output)}
+	}
+	mti {
+		t = select one Transition
+		modify one Transition where {self <> t and ^source = t->^source} with {swap(input, t.input)}
+	}
+	cnt {
+		s1 = select one State
+		s2 = select one State where {self <> s1}
+		create Transition with {name = random-string(1, 4), ^source = s1, ^target = s2, input = random-string(1, 4), output = random-string(1, 4)}
+	}
+	cet {
+		t = select one Transition
+		create Transition with {name = random-string(1,4), ^source = t->^source, ^target = one State where {self <> t->^target}, 
+				swap(input, t.input), swap(output, t.output)}
+	}
+}

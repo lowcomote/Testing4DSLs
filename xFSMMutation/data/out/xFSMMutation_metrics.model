@@ -1,0 +1,782 @@
+<?xml version="1.0" encoding="ASCII"?>
+<mutatormetrics:MutatorMetrics xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mutatormetrics="http://mutatormetrics/1.0">
+  <trees xsi:type="mutatormetrics:Folder" name="bitshifting" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting">
+    <mutants name="cet" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\cet">
+      <mutants xsi:type="mutatormetrics:Mutant" name="Output0.model" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\cet\Output0.model">
+        <classes name="StateMachine" modified="1">
+          <attributes name="name"/>
+          <attributes name="unprocessedString"/>
+          <attributes name="consumedString"/>
+          <attributes name="producedString"/>
+          <references name="ownedStates"/>
+          <references name="initialState"/>
+          <references name="ownedTransitions" modified="1"/>
+          <references name="currentState"/>
+        </classes>
+        <classes name="State">
+          <attributes name="name"/>
+          <references name="owningFSM"/>
+          <references name="outgoingTransitions"/>
+          <references name="incomingTransitions"/>
+        </classes>
+        <classes name="Transition" created="3" ccreated="1">
+          <attributes name="name" created="1"/>
+          <attributes name="input"/>
+          <attributes name="output"/>
+          <references name="source" created="1"/>
+          <references name="target" created="1"/>
+        </classes>
+        <classes name="NamedElement">
+          <attributes name="name"/>
+        </classes>
+      </mutants>
+      <mutants xsi:type="mutatormetrics:Mutant" name="Output1.model" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\cet\Output1.model">
+        <classes name="StateMachine" modified="1">
+          <attributes name="name"/>
+          <attributes name="unprocessedString"/>
+          <attributes name="consumedString"/>
+          <attributes name="producedString"/>
+          <references name="ownedStates"/>
+          <references name="initialState"/>
+          <references name="ownedTransitions" modified="1"/>
+          <references name="currentState"/>
+        </classes>
+        <classes name="State">
+          <attributes name="name"/>
+          <references name="owningFSM"/>
+          <references name="outgoingTransitions"/>
+          <references name="incomingTransitions"/>
+        </classes>
+        <classes name="Transition" created="3" ccreated="1">
+          <attributes name="name" created="1"/>
+          <attributes name="input"/>
+          <attributes name="output"/>
+          <references name="source" created="1"/>
+          <references name="target" created="1"/>
+        </classes>
+        <classes name="NamedElement">
+          <attributes name="name"/>
+        </classes>
+      </mutants>
+      <classes name="StateMachine" modified="2">
+        <attributes name="name"/>
+        <attributes name="unprocessedString"/>
+        <attributes name="consumedString"/>
+        <attributes name="producedString"/>
+        <references name="ownedStates"/>
+        <references name="initialState"/>
+        <references name="ownedTransitions" modified="2"/>
+        <references name="currentState"/>
+      </classes>
+      <classes name="State">
+        <attributes name="name"/>
+        <references name="owningFSM"/>
+        <references name="outgoingTransitions"/>
+        <references name="incomingTransitions"/>
+      </classes>
+      <classes name="Transition" created="6" ccreated="2">
+        <attributes name="name" created="2"/>
+        <attributes name="input"/>
+        <attributes name="output"/>
+        <references name="source" created="2"/>
+        <references name="target" created="2"/>
+      </classes>
+      <classes name="NamedElement">
+        <attributes name="name"/>
+      </classes>
+    </mutants>
+    <mutants name="cnt" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\cnt">
+      <mutants xsi:type="mutatormetrics:Mutant" name="Output0.model" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\cnt\Output0.model">
+        <classes name="StateMachine" modified="1">
+          <attributes name="name"/>
+          <attributes name="unprocessedString"/>
+          <attributes name="consumedString"/>
+          <attributes name="producedString"/>
+          <references name="ownedStates"/>
+          <references name="initialState"/>
+          <references name="ownedTransitions" modified="1"/>
+          <references name="currentState"/>
+        </classes>
+        <classes name="State">
+          <attributes name="name"/>
+          <references name="owningFSM"/>
+          <references name="outgoingTransitions"/>
+          <references name="incomingTransitions"/>
+        </classes>
+        <classes name="Transition" created="3" ccreated="1">
+          <attributes name="name" created="1"/>
+          <attributes name="input"/>
+          <attributes name="output"/>
+          <references name="source" created="1"/>
+          <references name="target" created="1"/>
+        </classes>
+        <classes name="NamedElement">
+          <attributes name="name"/>
+        </classes>
+      </mutants>
+      <classes name="StateMachine" modified="1">
+        <attributes name="name"/>
+        <attributes name="unprocessedString"/>
+        <attributes name="consumedString"/>
+        <attributes name="producedString"/>
+        <references name="ownedStates"/>
+        <references name="initialState"/>
+        <references name="ownedTransitions" modified="1"/>
+        <references name="currentState"/>
+      </classes>
+      <classes name="State">
+        <attributes name="name"/>
+        <references name="owningFSM"/>
+        <references name="outgoingTransitions"/>
+        <references name="incomingTransitions"/>
+      </classes>
+      <classes name="Transition" created="3" ccreated="1">
+        <attributes name="name" created="1"/>
+        <attributes name="input"/>
+        <attributes name="output"/>
+        <references name="source" created="1"/>
+        <references name="target" created="1"/>
+      </classes>
+      <classes name="NamedElement">
+        <attributes name="name"/>
+      </classes>
+    </mutants>
+    <mutants name="cst" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\cst">
+      <mutants xsi:type="mutatormetrics:Mutant" name="Output0.model" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\cst\Output0.model">
+        <classes name="StateMachine">
+          <attributes name="name"/>
+          <attributes name="unprocessedString"/>
+          <attributes name="consumedString"/>
+          <attributes name="producedString"/>
+          <references name="ownedStates"/>
+          <references name="initialState"/>
+          <references name="ownedTransitions"/>
+          <references name="currentState"/>
+        </classes>
+        <classes name="State">
+          <attributes name="name"/>
+          <references name="owningFSM"/>
+          <references name="outgoingTransitions"/>
+          <references name="incomingTransitions"/>
+        </classes>
+        <classes name="Transition">
+          <attributes name="name"/>
+          <attributes name="input"/>
+          <attributes name="output"/>
+          <references name="source"/>
+          <references name="target"/>
+        </classes>
+        <classes name="NamedElement">
+          <attributes name="name"/>
+        </classes>
+      </mutants>
+      <mutants xsi:type="mutatormetrics:Mutant" name="Output1.model" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\cst\Output1.model">
+        <classes name="StateMachine">
+          <attributes name="name"/>
+          <attributes name="unprocessedString"/>
+          <attributes name="consumedString"/>
+          <attributes name="producedString"/>
+          <references name="ownedStates"/>
+          <references name="initialState"/>
+          <references name="ownedTransitions"/>
+          <references name="currentState"/>
+        </classes>
+        <classes name="State">
+          <attributes name="name"/>
+          <references name="owningFSM"/>
+          <references name="outgoingTransitions"/>
+          <references name="incomingTransitions"/>
+        </classes>
+        <classes name="Transition">
+          <attributes name="name"/>
+          <attributes name="input"/>
+          <attributes name="output"/>
+          <references name="source"/>
+          <references name="target"/>
+        </classes>
+        <classes name="NamedElement">
+          <attributes name="name"/>
+        </classes>
+      </mutants>
+      <classes name="StateMachine">
+        <attributes name="name"/>
+        <attributes name="unprocessedString"/>
+        <attributes name="consumedString"/>
+        <attributes name="producedString"/>
+        <references name="ownedStates"/>
+        <references name="initialState"/>
+        <references name="ownedTransitions"/>
+        <references name="currentState"/>
+      </classes>
+      <classes name="State">
+        <attributes name="name"/>
+        <references name="owningFSM"/>
+        <references name="outgoingTransitions"/>
+        <references name="incomingTransitions"/>
+      </classes>
+      <classes name="Transition">
+        <attributes name="name"/>
+        <attributes name="input"/>
+        <attributes name="output"/>
+        <references name="source"/>
+        <references name="target"/>
+      </classes>
+      <classes name="NamedElement">
+        <attributes name="name"/>
+      </classes>
+    </mutants>
+    <mutants name="dst" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\dst">
+      <mutants xsi:type="mutatormetrics:Mutant" name="Output0.model" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\dst\Output0.model">
+        <classes name="StateMachine" modified="1">
+          <attributes name="name"/>
+          <attributes name="unprocessedString"/>
+          <attributes name="consumedString"/>
+          <attributes name="producedString"/>
+          <references name="ownedStates" modified="1"/>
+          <references name="initialState"/>
+          <references name="ownedTransitions"/>
+          <references name="currentState"/>
+        </classes>
+        <classes name="State" removed="2" cremoved="1">
+          <attributes name="name" removed="1"/>
+          <references name="owningFSM" removed="1"/>
+          <references name="outgoingTransitions"/>
+          <references name="incomingTransitions"/>
+        </classes>
+        <classes name="Transition">
+          <attributes name="name"/>
+          <attributes name="input"/>
+          <attributes name="output"/>
+          <references name="source"/>
+          <references name="target"/>
+        </classes>
+        <classes name="NamedElement">
+          <attributes name="name"/>
+        </classes>
+      </mutants>
+      <mutants xsi:type="mutatormetrics:Mutant" name="Output1.model" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\dst\Output1.model">
+        <classes name="StateMachine" modified="1">
+          <attributes name="name"/>
+          <attributes name="unprocessedString"/>
+          <attributes name="consumedString"/>
+          <attributes name="producedString"/>
+          <references name="ownedStates" modified="1"/>
+          <references name="initialState"/>
+          <references name="ownedTransitions"/>
+          <references name="currentState"/>
+        </classes>
+        <classes name="State" removed="2" cremoved="1">
+          <attributes name="name" removed="1"/>
+          <references name="owningFSM" removed="1"/>
+          <references name="outgoingTransitions"/>
+          <references name="incomingTransitions"/>
+        </classes>
+        <classes name="Transition">
+          <attributes name="name"/>
+          <attributes name="input"/>
+          <attributes name="output"/>
+          <references name="source"/>
+          <references name="target"/>
+        </classes>
+        <classes name="NamedElement">
+          <attributes name="name"/>
+        </classes>
+      </mutants>
+      <classes name="StateMachine" modified="2">
+        <attributes name="name"/>
+        <attributes name="unprocessedString"/>
+        <attributes name="consumedString"/>
+        <attributes name="producedString"/>
+        <references name="ownedStates" modified="2"/>
+        <references name="initialState"/>
+        <references name="ownedTransitions"/>
+        <references name="currentState"/>
+      </classes>
+      <classes name="State" removed="4" cremoved="2">
+        <attributes name="name" removed="2"/>
+        <references name="owningFSM" removed="2"/>
+        <references name="outgoingTransitions"/>
+        <references name="incomingTransitions"/>
+      </classes>
+      <classes name="Transition">
+        <attributes name="name"/>
+        <attributes name="input"/>
+        <attributes name="output"/>
+        <references name="source"/>
+        <references name="target"/>
+      </classes>
+      <classes name="NamedElement">
+        <attributes name="name"/>
+      </classes>
+    </mutants>
+    <mutants name="dt" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\dt">
+      <mutants xsi:type="mutatormetrics:Mutant" name="Output0.model" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\dt\Output0.model">
+        <classes name="StateMachine" modified="1">
+          <attributes name="name"/>
+          <attributes name="unprocessedString"/>
+          <attributes name="consumedString"/>
+          <attributes name="producedString"/>
+          <references name="ownedStates"/>
+          <references name="initialState"/>
+          <references name="ownedTransitions" modified="1"/>
+          <references name="currentState"/>
+        </classes>
+        <classes name="State">
+          <attributes name="name"/>
+          <references name="owningFSM"/>
+          <references name="outgoingTransitions"/>
+          <references name="incomingTransitions"/>
+        </classes>
+        <classes name="Transition" removed="3" cremoved="1">
+          <attributes name="name" removed="1"/>
+          <attributes name="input"/>
+          <attributes name="output"/>
+          <references name="source" removed="1"/>
+          <references name="target" removed="1"/>
+        </classes>
+        <classes name="NamedElement">
+          <attributes name="name"/>
+        </classes>
+      </mutants>
+      <mutants xsi:type="mutatormetrics:Mutant" name="Output1.model" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\dt\Output1.model">
+        <classes name="StateMachine" modified="1">
+          <attributes name="name"/>
+          <attributes name="unprocessedString"/>
+          <attributes name="consumedString"/>
+          <attributes name="producedString"/>
+          <references name="ownedStates"/>
+          <references name="initialState"/>
+          <references name="ownedTransitions" modified="1"/>
+          <references name="currentState"/>
+        </classes>
+        <classes name="State">
+          <attributes name="name"/>
+          <references name="owningFSM"/>
+          <references name="outgoingTransitions"/>
+          <references name="incomingTransitions"/>
+        </classes>
+        <classes name="Transition" removed="3" cremoved="1">
+          <attributes name="name" removed="1"/>
+          <attributes name="input"/>
+          <attributes name="output"/>
+          <references name="source" removed="1"/>
+          <references name="target" removed="1"/>
+        </classes>
+        <classes name="NamedElement">
+          <attributes name="name"/>
+        </classes>
+      </mutants>
+      <classes name="StateMachine" modified="2">
+        <attributes name="name"/>
+        <attributes name="unprocessedString"/>
+        <attributes name="consumedString"/>
+        <attributes name="producedString"/>
+        <references name="ownedStates"/>
+        <references name="initialState"/>
+        <references name="ownedTransitions" modified="2"/>
+        <references name="currentState"/>
+      </classes>
+      <classes name="State">
+        <attributes name="name"/>
+        <references name="owningFSM"/>
+        <references name="outgoingTransitions"/>
+        <references name="incomingTransitions"/>
+      </classes>
+      <classes name="Transition" removed="6" cremoved="2">
+        <attributes name="name" removed="2"/>
+        <attributes name="input"/>
+        <attributes name="output"/>
+        <references name="source" removed="2"/>
+        <references name="target" removed="2"/>
+      </classes>
+      <classes name="NamedElement">
+        <attributes name="name"/>
+      </classes>
+    </mutants>
+    <mutants name="mis" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\mis">
+      <mutants xsi:type="mutatormetrics:Mutant" name="Output0.model" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\mis\Output0.model">
+        <classes name="StateMachine" modified="1" cmodified="1">
+          <attributes name="name"/>
+          <attributes name="unprocessedString"/>
+          <attributes name="consumedString"/>
+          <attributes name="producedString"/>
+          <references name="ownedStates"/>
+          <references name="initialState" modified="1"/>
+          <references name="ownedTransitions"/>
+          <references name="currentState"/>
+        </classes>
+        <classes name="State">
+          <attributes name="name"/>
+          <references name="owningFSM"/>
+          <references name="outgoingTransitions"/>
+          <references name="incomingTransitions"/>
+        </classes>
+        <classes name="Transition">
+          <attributes name="name"/>
+          <attributes name="input"/>
+          <attributes name="output"/>
+          <references name="source"/>
+          <references name="target"/>
+        </classes>
+        <classes name="NamedElement">
+          <attributes name="name"/>
+        </classes>
+      </mutants>
+      <mutants xsi:type="mutatormetrics:Mutant" name="Output1.model" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\mis\Output1.model">
+        <classes name="StateMachine" modified="1" cmodified="1">
+          <attributes name="name"/>
+          <attributes name="unprocessedString"/>
+          <attributes name="consumedString"/>
+          <attributes name="producedString"/>
+          <references name="ownedStates"/>
+          <references name="initialState" modified="1"/>
+          <references name="ownedTransitions"/>
+          <references name="currentState"/>
+        </classes>
+        <classes name="State">
+          <attributes name="name"/>
+          <references name="owningFSM"/>
+          <references name="outgoingTransitions"/>
+          <references name="incomingTransitions"/>
+        </classes>
+        <classes name="Transition">
+          <attributes name="name"/>
+          <attributes name="input"/>
+          <attributes name="output"/>
+          <references name="source"/>
+          <references name="target"/>
+        </classes>
+        <classes name="NamedElement">
+          <attributes name="name"/>
+        </classes>
+      </mutants>
+      <classes name="StateMachine" modified="2" cmodified="2">
+        <attributes name="name"/>
+        <attributes name="unprocessedString"/>
+        <attributes name="consumedString"/>
+        <attributes name="producedString"/>
+        <references name="ownedStates"/>
+        <references name="initialState" modified="2"/>
+        <references name="ownedTransitions"/>
+        <references name="currentState"/>
+      </classes>
+      <classes name="State">
+        <attributes name="name"/>
+        <references name="owningFSM"/>
+        <references name="outgoingTransitions"/>
+        <references name="incomingTransitions"/>
+      </classes>
+      <classes name="Transition">
+        <attributes name="name"/>
+        <attributes name="input"/>
+        <attributes name="output"/>
+        <references name="source"/>
+        <references name="target"/>
+      </classes>
+      <classes name="NamedElement">
+        <attributes name="name"/>
+      </classes>
+    </mutants>
+    <mutants name="mti" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\mti">
+      <mutants xsi:type="mutatormetrics:Mutant" name="Output0.model" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\mti\Output0.model">
+        <classes name="StateMachine">
+          <attributes name="name"/>
+          <attributes name="unprocessedString"/>
+          <attributes name="consumedString"/>
+          <attributes name="producedString"/>
+          <references name="ownedStates"/>
+          <references name="initialState"/>
+          <references name="ownedTransitions"/>
+          <references name="currentState"/>
+        </classes>
+        <classes name="State">
+          <attributes name="name"/>
+          <references name="owningFSM"/>
+          <references name="outgoingTransitions"/>
+          <references name="incomingTransitions"/>
+        </classes>
+        <classes name="Transition" modified="1" cmodified="1">
+          <attributes name="name"/>
+          <attributes name="input" modified="1"/>
+          <attributes name="output"/>
+          <references name="source"/>
+          <references name="target"/>
+        </classes>
+        <classes name="NamedElement">
+          <attributes name="name"/>
+        </classes>
+      </mutants>
+      <mutants xsi:type="mutatormetrics:Mutant" name="Output1.model" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\mti\Output1.model">
+        <classes name="StateMachine">
+          <attributes name="name"/>
+          <attributes name="unprocessedString"/>
+          <attributes name="consumedString"/>
+          <attributes name="producedString"/>
+          <references name="ownedStates"/>
+          <references name="initialState"/>
+          <references name="ownedTransitions"/>
+          <references name="currentState"/>
+        </classes>
+        <classes name="State">
+          <attributes name="name"/>
+          <references name="owningFSM"/>
+          <references name="outgoingTransitions"/>
+          <references name="incomingTransitions"/>
+        </classes>
+        <classes name="Transition" modified="1" cmodified="1">
+          <attributes name="name"/>
+          <attributes name="input" modified="1"/>
+          <attributes name="output"/>
+          <references name="source"/>
+          <references name="target"/>
+        </classes>
+        <classes name="NamedElement">
+          <attributes name="name"/>
+        </classes>
+      </mutants>
+      <classes name="StateMachine">
+        <attributes name="name"/>
+        <attributes name="unprocessedString"/>
+        <attributes name="consumedString"/>
+        <attributes name="producedString"/>
+        <references name="ownedStates"/>
+        <references name="initialState"/>
+        <references name="ownedTransitions"/>
+        <references name="currentState"/>
+      </classes>
+      <classes name="State">
+        <attributes name="name"/>
+        <references name="owningFSM"/>
+        <references name="outgoingTransitions"/>
+        <references name="incomingTransitions"/>
+      </classes>
+      <classes name="Transition" modified="2" cmodified="2">
+        <attributes name="name"/>
+        <attributes name="input" modified="2"/>
+        <attributes name="output"/>
+        <references name="source"/>
+        <references name="target"/>
+      </classes>
+      <classes name="NamedElement">
+        <attributes name="name"/>
+      </classes>
+    </mutants>
+    <mutants name="mtio" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\mtio">
+      <mutants xsi:type="mutatormetrics:Mutant" name="Output0.model" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\mtio\Output0.model">
+        <classes name="StateMachine">
+          <attributes name="name"/>
+          <attributes name="unprocessedString"/>
+          <attributes name="consumedString"/>
+          <attributes name="producedString"/>
+          <references name="ownedStates"/>
+          <references name="initialState"/>
+          <references name="ownedTransitions"/>
+          <references name="currentState"/>
+        </classes>
+        <classes name="State">
+          <attributes name="name"/>
+          <references name="owningFSM"/>
+          <references name="outgoingTransitions"/>
+          <references name="incomingTransitions"/>
+        </classes>
+        <classes name="Transition" modified="2" cmodified="1">
+          <attributes name="name"/>
+          <attributes name="input" modified="1"/>
+          <attributes name="output" modified="1"/>
+          <references name="source"/>
+          <references name="target"/>
+        </classes>
+        <classes name="NamedElement">
+          <attributes name="name"/>
+        </classes>
+      </mutants>
+      <mutants xsi:type="mutatormetrics:Mutant" name="Output1.model" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\mtio\Output1.model">
+        <classes name="StateMachine">
+          <attributes name="name"/>
+          <attributes name="unprocessedString"/>
+          <attributes name="consumedString"/>
+          <attributes name="producedString"/>
+          <references name="ownedStates"/>
+          <references name="initialState"/>
+          <references name="ownedTransitions"/>
+          <references name="currentState"/>
+        </classes>
+        <classes name="State">
+          <attributes name="name"/>
+          <references name="owningFSM"/>
+          <references name="outgoingTransitions"/>
+          <references name="incomingTransitions"/>
+        </classes>
+        <classes name="Transition" modified="2" cmodified="1">
+          <attributes name="name"/>
+          <attributes name="input" modified="1"/>
+          <attributes name="output" modified="1"/>
+          <references name="source"/>
+          <references name="target"/>
+        </classes>
+        <classes name="NamedElement">
+          <attributes name="name"/>
+        </classes>
+      </mutants>
+      <classes name="StateMachine">
+        <attributes name="name"/>
+        <attributes name="unprocessedString"/>
+        <attributes name="consumedString"/>
+        <attributes name="producedString"/>
+        <references name="ownedStates"/>
+        <references name="initialState"/>
+        <references name="ownedTransitions"/>
+        <references name="currentState"/>
+      </classes>
+      <classes name="State">
+        <attributes name="name"/>
+        <references name="owningFSM"/>
+        <references name="outgoingTransitions"/>
+        <references name="incomingTransitions"/>
+      </classes>
+      <classes name="Transition" modified="4" cmodified="2">
+        <attributes name="name"/>
+        <attributes name="input" modified="2"/>
+        <attributes name="output" modified="2"/>
+        <references name="source"/>
+        <references name="target"/>
+      </classes>
+      <classes name="NamedElement">
+        <attributes name="name"/>
+      </classes>
+    </mutants>
+    <mutants name="mts" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\mts">
+      <mutants xsi:type="mutatormetrics:Mutant" name="Output0.model" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\mts\Output0.model">
+        <classes name="StateMachine">
+          <attributes name="name"/>
+          <attributes name="unprocessedString"/>
+          <attributes name="consumedString"/>
+          <attributes name="producedString"/>
+          <references name="ownedStates"/>
+          <references name="initialState"/>
+          <references name="ownedTransitions"/>
+          <references name="currentState"/>
+        </classes>
+        <classes name="State">
+          <attributes name="name"/>
+          <references name="owningFSM"/>
+          <references name="outgoingTransitions"/>
+          <references name="incomingTransitions"/>
+        </classes>
+        <classes name="Transition" modified="1" cmodified="1">
+          <attributes name="name"/>
+          <attributes name="input"/>
+          <attributes name="output"/>
+          <references name="source"/>
+          <references name="target" modified="1"/>
+        </classes>
+        <classes name="NamedElement">
+          <attributes name="name"/>
+        </classes>
+      </mutants>
+      <mutants xsi:type="mutatormetrics:Mutant" name="Output1.model" path="C:\eclipse\workspace\xFSMMutation\data\out\bitshifting\mts\Output1.model">
+        <classes name="StateMachine" modified="1">
+          <attributes name="name"/>
+          <attributes name="unprocessedString"/>
+          <attributes name="consumedString"/>
+          <attributes name="producedString"/>
+          <references name="ownedStates" modified="1"/>
+          <references name="initialState"/>
+          <references name="ownedTransitions"/>
+          <references name="currentState"/>
+        </classes>
+        <classes name="State" created="2" ccreated="1">
+          <attributes name="name" created="1"/>
+          <references name="owningFSM" created="1"/>
+          <references name="outgoingTransitions"/>
+          <references name="incomingTransitions"/>
+        </classes>
+        <classes name="Transition" modified="1" cmodified="1">
+          <attributes name="name"/>
+          <attributes name="input"/>
+          <attributes name="output"/>
+          <references name="source"/>
+          <references name="target" modified="1"/>
+        </classes>
+        <classes name="NamedElement">
+          <attributes name="name"/>
+        </classes>
+      </mutants>
+      <classes name="StateMachine" modified="1">
+        <attributes name="name"/>
+        <attributes name="unprocessedString"/>
+        <attributes name="consumedString"/>
+        <attributes name="producedString"/>
+        <references name="ownedStates" modified="1"/>
+        <references name="initialState"/>
+        <references name="ownedTransitions"/>
+        <references name="currentState"/>
+      </classes>
+      <classes name="State" created="2" ccreated="1">
+        <attributes name="name" created="1"/>
+        <references name="owningFSM" created="1"/>
+        <references name="outgoingTransitions"/>
+        <references name="incomingTransitions"/>
+      </classes>
+      <classes name="Transition" modified="2" cmodified="2">
+        <attributes name="name"/>
+        <attributes name="input"/>
+        <attributes name="output"/>
+        <references name="source"/>
+        <references name="target" modified="2"/>
+      </classes>
+      <classes name="NamedElement">
+        <attributes name="name"/>
+      </classes>
+    </mutants>
+    <classes name="StateMachine" modified="10" cmodified="2">
+      <attributes name="name"/>
+      <attributes name="unprocessedString"/>
+      <attributes name="consumedString"/>
+      <attributes name="producedString"/>
+      <references name="ownedStates" modified="3"/>
+      <references name="initialState" modified="2"/>
+      <references name="ownedTransitions" modified="5"/>
+      <references name="currentState"/>
+    </classes>
+    <classes name="State" created="2" removed="4" ccreated="1" cremoved="2">
+      <attributes name="name" created="1" removed="2"/>
+      <references name="owningFSM" created="1" removed="2"/>
+      <references name="outgoingTransitions"/>
+      <references name="incomingTransitions"/>
+    </classes>
+    <classes name="Transition" created="9" modified="8" removed="6" ccreated="3" cmodified="6" cremoved="2">
+      <attributes name="name" created="3" removed="2"/>
+      <attributes name="input" modified="4"/>
+      <attributes name="output" modified="2"/>
+      <references name="source" created="3" removed="2"/>
+      <references name="target" created="3" modified="2" removed="2"/>
+    </classes>
+  </trees>
+  <classes xsi:type="mutatormetrics:Class" name="StateMachine" modified="10" cmodified="2">
+    <attributes name="name"/>
+    <attributes name="unprocessedString"/>
+    <attributes name="consumedString"/>
+    <attributes name="producedString"/>
+    <references name="ownedStates" modified="3"/>
+    <references name="initialState" modified="2"/>
+    <references name="ownedTransitions" modified="5"/>
+    <references name="currentState"/>
+  </classes>
+  <classes xsi:type="mutatormetrics:Class" name="State" created="2" removed="4" ccreated="1" cremoved="2">
+    <attributes name="name" created="1" removed="2"/>
+    <references name="owningFSM" created="1" removed="2"/>
+    <references name="outgoingTransitions"/>
+    <references name="incomingTransitions"/>
+  </classes>
+  <classes xsi:type="mutatormetrics:Class" name="Transition" created="9" modified="8" removed="6" ccreated="3" cmodified="6" cremoved="2">
+    <attributes name="name" created="3" removed="2"/>
+    <attributes name="input" modified="4"/>
+    <attributes name="output" modified="2"/>
+    <references name="source" created="3" removed="2"/>
+    <references name="target" created="3" modified="2" removed="2"/>
+  </classes>
+  <classes xsi:type="mutatormetrics:Class" name="NamedElement">
+    <attributes name="name"/>
+  </classes>
+</mutatormetrics:MutatorMetrics>
