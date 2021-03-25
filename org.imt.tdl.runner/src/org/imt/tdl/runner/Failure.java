@@ -31,4 +31,18 @@ public class Failure {
 	public String getFailedTestName() {
 		return this.failedTestName;
 	}
+	@Override
+    public boolean equals(Object o) {
+		if (o == this) {
+			return true;
+		}
+		if (!(o instanceof Failure)) {
+			return false;
+		}
+		Failure f = (Failure) o;
+		if (this.testHeader == f.testHeader && this.message == f.message && this.failedTestName == f.failedTestName) {
+			return true;
+		}
+		return false;
+	}
 }

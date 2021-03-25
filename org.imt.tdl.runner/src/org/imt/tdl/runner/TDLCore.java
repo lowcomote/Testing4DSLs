@@ -1,6 +1,9 @@
 package org.imt.tdl.runner;
 
 import java.util.ArrayList;
+
+
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,15 +13,19 @@ import org.etsi.mts.tdl.TestDescription;
 import org.imt.k3tdl.k3dsa.TestDescriptionAspect;
 
 public class TDLCore {
-	private Result result = new Result();
 	
-	public Result run(Package testPackage, String MUTPath) {
+
+	public Result run(Package testPackage, String artifactPath) {
+		Result result = new Result();
+		artifactPath = artifactPath.replace("\\", "/");
+		System.out.println("Model under test: " + artifactPath);
 		for (int i=0; i<testPackage.getPackagedElement().size(); i++) {
 			Object o = testPackage.getPackagedElement().get(i);
 			if (o instanceof TestDescription) {
 				TestDescription testCase = (TestDescription) o;
 				TestDescriptionAspect testCaseRunner = new TestDescriptionAspect();
-				testCaseRunner.executeTestCase(testCase, MUTPath);
+				System.out.println("Test case: " + testCase.getName());
+				testCaseRunner.executeTestCase(testCase, artifactPath);
 				result.addNumExecutedTests();
 				HashMap<Message, Boolean> verdict = testCaseRunner.verdict(testCase);//result of the test case assertions
 				if (verdict.values().contains(false)) {
@@ -37,4 +44,5 @@ public class TDLCore {
 		}
 		return result;
 	}
+
 }
