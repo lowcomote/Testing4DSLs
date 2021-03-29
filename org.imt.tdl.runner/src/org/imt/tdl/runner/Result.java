@@ -58,7 +58,7 @@ public class Result {
 			return false;
 		}
 		Result r = (Result) o;
-		if (this.numExecutedTests == r.numExecutedTests && this.numFailedTests == this.numFailedTests &&
+		if (this.numExecutedTests == r.numExecutedTests && this.numFailedTests == r.numFailedTests &&
 				this.tests.equals(r.tests) && this.failures.equals(r.failures)) {
 			return true;
 		}

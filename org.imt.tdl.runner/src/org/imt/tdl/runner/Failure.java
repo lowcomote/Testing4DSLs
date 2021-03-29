@@ -40,7 +40,7 @@ public class Failure {
 			return false;
 		}
 		Failure f = (Failure) o;
-		if (this.testHeader == f.testHeader && this.message == f.message && this.failedTestName == f.failedTestName) {
+		if (this.testHeader.equals(f.testHeader) && this.message.equals(f.message) && this.failedTestName.equals(f.failedTestName)) {
 			return true;
 		}
 		return false;

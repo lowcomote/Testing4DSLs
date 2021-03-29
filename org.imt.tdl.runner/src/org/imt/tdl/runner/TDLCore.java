@@ -33,13 +33,14 @@ public class TDLCore {
 					result.addNumFailedTests();
 					List<Message> failedAssertions = new ArrayList<>();
 					for (HashMap.Entry<Message, Boolean> set : verdict.entrySet()) {
-					    if (set.getValue().toString().equals(false)) {
+					    if (set.getValue().toString().equals("false")) {
 					    	failedAssertions.add(set.getKey());
 					    }
 					}
 					result.addFailure(testCase, failedAssertions);
+				}else {
+					result.addTest(testCase.getName(), true);
 				}
-				result.addTest(testCase.getName(), true);
 			}
 		}
 		return result;
