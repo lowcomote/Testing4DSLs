@@ -5,4 +5,5 @@
   <semanticResources>generated/common.tdlan2</semanticResources>
   <semanticResources>genericTestCases.tdlan2</semanticResources>
   <semanticResources>oclTestCases.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210331_123315/genericTestCases.tdlan2</semanticResources>
 </viewpoint:DAnalysis>
