@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.etsi.mts.tdl.Message;
 import org.etsi.mts.tdl.TestDescription;
+import org.imt.tdl.testResult.TDLMessageResult;
 
 public class Result {
 	private int numExecutedTests = 0;
@@ -20,10 +21,9 @@ public class Result {
 	public Map<String, Boolean> getTests(){
 		return this.tests;
 	}
-	public void addFailure(TestDescription testCase, List<Message> failedAssertions) {
+	public void addFailure(TestDescription testCase) {
 		Failure failure = new Failure();
 		failure.setTestHeader(testCase);
-		failure.setMessage(failedAssertions);
 		this.failures.add(failure);
 	}
 	public List<Failure> getFailures(){

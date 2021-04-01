@@ -11,6 +11,8 @@ import org.etsi.mts.tdl.Message;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
 import org.imt.k3tdl.k3dsa.TestDescriptionAspect;
+import org.imt.tdl.testResult.TDLMessageResult;
+import org.imt.tdl.testResult.TDLTestCaseResult;
 
 public class TDLCore {
 	
@@ -27,17 +29,11 @@ public class TDLCore {
 				System.out.println("Test case: " + testCase.getName());
 				testCaseRunner.executeTestCase(testCase, artifactPath);
 				result.addNumExecutedTests();
-				HashMap<Message, Boolean> verdict = testCaseRunner.verdict(testCase);//result of the test case assertions
-				if (verdict.values().contains(false)) {
+				TDLTestCaseResult verdict = testCaseRunner.testCaseResult(testCase);
+				if (verdict.getValue() == "FAIL") {
 					result.addTest(testCase.getName(), false);
 					result.addNumFailedTests();
-					List<Message> failedAssertions = new ArrayList<>();
-					for (HashMap.Entry<Message, Boolean> set : verdict.entrySet()) {
-					    if (set.getValue().toString().equals("false")) {
-					    	failedAssertions.add(set.getKey());
-					    }
-					}
-					result.addFailure(testCase, failedAssertions);
+					result.addFailure(testCase);
 				}else {
 					result.addTest(testCase.getName(), true);
 				}
