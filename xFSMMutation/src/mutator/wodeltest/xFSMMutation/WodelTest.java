@@ -11,30 +11,27 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-
-import manager.IOUtils;
-import manager.IWodelTest;
-import manager.ModelManager;
-import manager.WodelTestResult;
-import manager.WodelTestGlobalResult;
-import manager.WodelTestGlobalResult.Status;
-import manager.WodelTestInfo;
-import manager.WodelTestResultClass;
-import manager.WodelTestUtils;
-
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.core.JavaCore;
-
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
 import org.imt.tdl.runner.Failure;
 import org.imt.tdl.runner.Result;
 import org.imt.tdl.runner.TDLCore;
 
+import manager.IOUtils;
+import manager.IWodelTest;
+import manager.ModelManager;
+import manager.WodelTestGlobalResult;
+import manager.WodelTestGlobalResult.Status;
+import manager.WodelTestInfo;
+import manager.WodelTestResult;
+import manager.WodelTestResultClass;
+
 public class WodelTest implements IWodelTest {
 	
+	String workspacePath;
 	List<String> seedModels = new ArrayList<>();
 	Map<String, Result> seedModelsTestResult = new HashMap<>();
 	
@@ -55,8 +52,11 @@ public class WodelTest implements IWodelTest {
 	private void artifactPathsHelper(String projectName, File file, List<String> artifactPaths) {
 		if (file.isFile() && file.getName().endsWith(".model")) {
 			String filePath = file.getPath();
+			if (this.workspacePath == null) {
+				this.workspacePath = filePath.substring(0, filePath.lastIndexOf(projectName)-1);
+			}		
 			//get the relative path of the file
-			filePath = filePath.replace(filePath.substring(0, filePath.lastIndexOf(projectName)), "\\");
+			filePath = filePath.replace(this.workspacePath, "");
 			//get the name of the seed model
 			String seedName = filePath.substring(filePath.indexOf("\\model\\") + "\\model\\".length(), filePath.length());
 			if (file.getName().equals(seedName)) {//file is the seed model
@@ -110,14 +110,14 @@ public class WodelTest implements IWodelTest {
 			WodelTestInfo info = new WodelTestInfo(testPackage.getName(), value, MUTName, message);
 			testsInfo.add(info);
 		}
-		
-		WodelTestResult wtr = new WodelTestResult(testPackage.getName(), artifactPath, mutantResult.getTests(), testsInfo);
+		String artifactAbsolutePath = (this.workspacePath + artifactPath).replaceAll("\\\\", "/");
+		WodelTestResult wtr = new WodelTestResult(testPackage.getName(), artifactAbsolutePath, mutantResult.getTests(), testsInfo);
 		globalResult.incNumTestsExecuted(mutantResult.getRunCount());
 		globalResult.incNumTestsFailed(mutantResult.getFailureCount());
 		globalResult.incNumTestsError(wtr.getErrorCount());
-		WodelTestResultClass resultClass = WodelTestResultClass.getWodelTestResultClassByName(results, artifactPath);
+		WodelTestResultClass resultClass = WodelTestResultClass.getWodelTestResultClassByName(results, artifactAbsolutePath);
 		if (resultClass == null) {
-			resultClass = new WodelTestResultClass(artifactPath);
+			resultClass = new WodelTestResultClass(artifactAbsolutePath);
 			results.add(resultClass);
 		}
 		resultClass.addResult(wtr);
