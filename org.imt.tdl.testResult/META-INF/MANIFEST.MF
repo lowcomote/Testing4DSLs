@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: TestResult
+Bundle-SymbolicName: org.imt.tdl.testResult
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: org.imt.tdl.testResult
+Export-Package: org.imt.tdl.testResult
+Require-Bundle: org.etsi.mts.tdl.model;bundle-version="1.4.0"
