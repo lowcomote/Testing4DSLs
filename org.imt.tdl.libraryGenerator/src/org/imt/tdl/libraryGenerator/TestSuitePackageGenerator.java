@@ -16,16 +16,15 @@ import org.etsi.mts.tdl.StructuredDataType;
 import org.etsi.mts.tdl.UnassignedMemberTreatment;
 import org.etsi.mts.tdl.tdlFactory;
 
-public class TestDesignPackageGenerator {
+public class TestSuitePackageGenerator {
 	private tdlFactory factory;
-	private Package genericTestCasesPackage;
-	private Package oclTestCasesPackage;
+	private Package testSuitePackage;
 	private CommonPackageGenerator commonPackageGenerator;
 	private DSLSpecificEventsGenerator dslSpecificEventsGenerator;
 	private DSLSpecificTypesGenerator dslSpecificTyepsGenerator;
 	private TestConfigurationGenerator testConfigurationPackageGenerator;
 	
-	public TestDesignPackageGenerator(String dslFilePath) throws IOException {
+	public TestSuitePackageGenerator(String dslFilePath) throws IOException {
 		this.factory = tdlFactory.eINSTANCE;
 		this.testConfigurationPackageGenerator = new TestConfigurationGenerator(dslFilePath);
 		System.out.println("test configuration package generated successfully");
@@ -33,34 +32,29 @@ public class TestDesignPackageGenerator {
 		this.dslSpecificTyepsGenerator = this.testConfigurationPackageGenerator.getDslSpecificTypesGenerator();
 		this.dslSpecificEventsGenerator = this.dslSpecificTyepsGenerator.getDslSpecificEventsGenerator();
 		this.commonPackageGenerator = this.dslSpecificTyepsGenerator.getCommonPackageGenerator();
-		generateGenericTestCasesPackage();
-		generateOclTestCasesPackage();
+		generateTestSuitePackage();
 	}
-	private void generateGenericTestCasesPackage() {
-		this.genericTestCasesPackage = factory.createPackage();
-		this.genericTestCasesPackage.setName("genericTestCases");
-		generateImports(this.genericTestCasesPackage);
+	private void generateTestSuitePackage() {
+		this.testSuitePackage = factory.createPackage();
+		this.testSuitePackage.setName("testSuite");
+		generateImports(this.testSuitePackage);
 		generateGenericDataInstances();
 		generateAnnotations();
 	}
-	private void generateOclTestCasesPackage() {
-		this.oclTestCasesPackage = factory.createPackage();
-		this.oclTestCasesPackage.setName("oclTestCases");
-		generateImports(this.oclTestCasesPackage);
-	}
-	private void generateImports(Package testCasesPackage) {
+
+	private void generateImports(Package testSuitePackage) {
 		ElementImport commonPackageImport = factory.createElementImport();
 		commonPackageImport.setImportedPackage(this.commonPackageGenerator.getCommonPackage());
-		ElementImport dslSpecificEventsPackageImport = factory.createElementImport();
-		dslSpecificEventsPackageImport.setImportedPackage(this.dslSpecificEventsGenerator.getDslSpecificEventsPackage());
 		ElementImport dslSpecificTypesPackageImport = factory.createElementImport();
 		dslSpecificTypesPackageImport.setImportedPackage(this.dslSpecificTyepsGenerator.getDslSpecificTypesPackage());
+		ElementImport dslSpecificEventsPackageImport = factory.createElementImport();
+		dslSpecificEventsPackageImport.setImportedPackage(this.dslSpecificEventsGenerator.getDslSpecificEventsPackage());
 		ElementImport testConfigurationImport = factory.createElementImport();
 		testConfigurationImport.setImportedPackage(this.testConfigurationPackageGenerator.getTestConfigurationPackage());
-		testCasesPackage.getImport().add(commonPackageImport);
-		testCasesPackage.getImport().add(dslSpecificEventsPackageImport);
-		testCasesPackage.getImport().add(dslSpecificTypesPackageImport);
-		testCasesPackage.getImport().add(testConfigurationImport);
+		testSuitePackage.getImport().add(commonPackageImport);
+		testSuitePackage.getImport().add(dslSpecificTypesPackageImport);
+		testSuitePackage.getImport().add(dslSpecificEventsPackageImport);
+		testSuitePackage.getImport().add(testConfigurationImport);
 	}
 	private void generateGenericDataInstances() {
 		List<DataType> dynamicTypes = this.dslSpecificTyepsGenerator.getDynamicTypes();
@@ -87,7 +81,7 @@ public class TestDesignPackageGenerator {
 						}
 					}
 				}
-				this.genericTestCasesPackage.getPackagedElement().add(dynamicTypeInstance);
+				this.testSuitePackage.getPackagedElement().add(dynamicTypeInstance);
 			}
 		}
 	}
@@ -102,17 +96,14 @@ public class TestDesignPackageGenerator {
 	private void generateAnnotations() {
 		AnnotationType ExactEquivalent = factory.createAnnotationType();
 		ExactEquivalent.setName("ExactEquivalent");
-		this.genericTestCasesPackage.getPackagedElement().add(ExactEquivalent);
+		this.testSuitePackage.getPackagedElement().add(ExactEquivalent);
 		
 		AnnotationType PartialEquivalent = factory.createAnnotationType();
 		PartialEquivalent.setName("PartialEquivalent");
-		this.genericTestCasesPackage.getPackagedElement().add(PartialEquivalent);
+		this.testSuitePackage.getPackagedElement().add(PartialEquivalent);
 	}
-	public Package getGenericTestCasesPackage() {
-		return this.genericTestCasesPackage;
-	}
-	public Package getOCLTestCasesPackage() {
-		return this.oclTestCasesPackage;
+	public Package getTestSuitePackage() {
+		return this.testSuitePackage;
 	}
 	public TestConfigurationGenerator getTestConfigurationGenerator() {
 		return this.testConfigurationPackageGenerator;
