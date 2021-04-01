@@ -52,7 +52,7 @@ public class TDLTestResultsView extends ViewPart{
 
 	private static final Color GREEN = new Color(Display.getCurrent(), 102, 255, 102);
 	
-	private static final Color BLUE = new Color(Display.getCurrent(), 102, 102, 255);
+	private static final Color YELLOW = new Color(Display.getCurrent(), 255, 255, 102);
 
 	
 	private static int filterIndex = -1;
@@ -116,12 +116,12 @@ public class TDLTestResultsView extends ViewPart{
 		TreeColumn column2 = new TreeColumn(addressTree, SWT.LEFT);
 		column2.setAlignment(SWT.LEFT);
 		column2.setText("Result");
-		column2.setWidth(150);
+		column2.setWidth(130);
 		
 		TreeColumn column3 = new TreeColumn(addressTree, SWT.LEFT);
-		column2.setAlignment(SWT.LEFT);
-		column2.setText("Description");
-		column2.setWidth(400);
+		column3.setAlignment(SWT.LEFT);
+		column3.setText("Description");
+		column3.setWidth(500);
 
 		m_treeViewer.setContentProvider(new TDLTestResultContentProvider());
 		m_treeViewer.setLabelProvider(new TableLabelProvider());
@@ -158,7 +158,7 @@ public class TDLTestResultsView extends ViewPart{
 				}
 				if (element instanceof TDLTestCaseResult) {
 					TDLTestCaseResult result = (TDLTestCaseResult) element;
-					return result.getValue().equals("PASS") && result.getNumOfFailures() == 0;
+					return result.getValue().equals("PASS");
 				}
 				if (element instanceof TDLMessageResult) {
 					TDLMessageResult result = (TDLMessageResult) element;
@@ -171,7 +171,7 @@ public class TDLTestResultsView extends ViewPart{
 				}
 				if (element instanceof TDLTestCaseResult) {
 					TDLTestCaseResult result = (TDLTestCaseResult) element;
-					return !result.getValue().equals("FAIL") && result.getNumOfFailures() > 0;
+					return result.getValue().equals("FAIL");
 				}
 				if (element instanceof TDLMessageResult) {
 					TDLMessageResult result = (TDLMessageResult) element;
@@ -297,7 +297,7 @@ public class TDLTestResultsView extends ViewPart{
 					return GREEN;
 				}
 				else if(result.getValue().equals("INCONCLUSIVE")) {
-					return BLUE;
+					return YELLOW;
 				}
 				else return RED;
 			}
