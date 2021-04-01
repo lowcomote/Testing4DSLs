@@ -99,7 +99,7 @@ public class TDLTestResultsView extends ViewPart{
 		TreeColumn column1 = new TreeColumn(addressTree, SWT.LEFT);
 		column1.setAlignment(SWT.LEFT);
 		column1.setText("Test case");
-		column1.setWidth(250);
+		column1.setWidth(200);
 		
 		TreeColumn column2 = new TreeColumn(addressTree, SWT.LEFT);
 		column2.setAlignment(SWT.LEFT);
@@ -109,7 +109,7 @@ public class TDLTestResultsView extends ViewPart{
 		TreeColumn column3 = new TreeColumn(addressTree, SWT.LEFT);
 		column3.setAlignment(SWT.LEFT);
 		column3.setText("Description");
-		column3.setWidth(500);
+		column3.setWidth(600);
 		
 		m_treeViewer.setContentProvider(new TDLTestResultContentProvider());
 		m_treeViewer.setLabelProvider(new TableLabelProvider());
@@ -326,7 +326,7 @@ private class DataFilter extends ViewerFilter {
 				}
 				if (element instanceof TDLMessageResult) {
 					TDLMessageResult result = (TDLMessageResult) element;
-					return result.getValue() && result.getFailure() == false; 
+					return result.getValue(); 
 				}
 			}
 			if (filterIndex == 2) {
@@ -339,7 +339,7 @@ private class DataFilter extends ViewerFilter {
 				}
 				if (element instanceof TDLMessageResult) {
 					TDLMessageResult result = (TDLMessageResult) element;
-					return !result.getValue() && result.getFailure() == true; 
+					return !result.getValue(); 
 				}
 			}
 			if (filterIndex == 3) {
