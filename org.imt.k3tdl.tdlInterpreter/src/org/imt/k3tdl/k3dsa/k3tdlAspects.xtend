@@ -2,27 +2,31 @@ package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 
-
 import fr.inria.diverse.k3.al.annotationprocessor.InitializeModel
 import fr.inria.diverse.k3.al.annotationprocessor.Main
 import fr.inria.diverse.k3.al.annotationprocessor.Step
-import org.etsi.mts.tdl.Package
-import org.etsi.mts.tdl.TestDescription
-import org.etsi.mts.tdl.TestConfiguration
+import java.util.ArrayList
+import java.util.List
+import org.eclipse.emf.common.util.EList
 import org.etsi.mts.tdl.Annotation
-import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
+import org.etsi.mts.tdl.Package
+import org.etsi.mts.tdl.TestConfiguration
+import org.etsi.mts.tdl.TestDescription
+import org.imt.tdl.configuration.impl.EngineFactory
+import org.imt.tdl.testResult.TDLTestCaseResult
+import org.imt.tdl.testResult.TDLTestPackageResult
+import org.imt.tdl.testResult.ui.TDLTestResultsView
+
 import static extension org.imt.k3tdl.k3dsa.BehaviourDescriptionAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
-import java.util.List
-import java.util.ArrayList
-import org.eclipse.emf.common.util.EList
-import org.imt.tdl.configuration.impl.EngineFactory
-import java.util.HashMap
-import org.etsi.mts.tdl.Message
+import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
+import static extension org.imt.k3tdl.k3dsa.PackageAspect.*
+import org.imt.tdl.testResult.TestResultUtil
 
 @Aspect(className = Package)
 class PackageAspect {
 	
+	public TDLTestPackageResult testPackageResults = new TDLTestPackageResult
 	public List<TestDescription> testcases = new ArrayList<TestDescription>
 	public TestDescription enabledTestCase
 	public TestConfiguration enabledConfiguration
@@ -41,12 +45,16 @@ class PackageAspect {
 	@Main
 	def void main(){
 		try {
+			_self.testPackageResults.testPackageName = _self.name
     		for (TestDescription tc:_self.testcases) {
     			_self.enabledTestCase = tc;
     			_self.enabledConfiguration = tc.testConfiguration;
-    			_self.enabledTestCase.executeTestCase()
+    			val TDLTestCaseResult result = _self.enabledTestCase.executeTestCase()
+    			_self.testPackageResults.addResult(result)
     			println()
-    		}    		
+    		}
+    		TestResultUtil.instance.testPackageResult = _self.testPackageResults
+    		//var TDLTestResultsView view = new TDLTestResultsView(_self.testPackageResults);   		
 		} catch (TDLRuntimeException nt){
 			println("Stopped due "+nt.message)	
 		}
@@ -55,24 +63,27 @@ class PackageAspect {
 @Aspect (className = TestDescription)
 class TestDescriptionAspect{
 	public EngineFactory launcher = new EngineFactory()
-	public HashMap<Message, Boolean> verdict = new HashMap<Message, Boolean>()
+	public TDLTestCaseResult testCaseResult = new TDLTestCaseResult
 	@Step
-	def void executeTestCase(){
+	def TDLTestCaseResult executeTestCase(){
 		println("Start test case execution: " + _self.name)
+		_self.testCaseResult.testCaseName = _self.name
 		_self.testConfiguration.activateConfiguration(_self.launcher)
 		_self.behaviourDescription.callBehavior()
-		if (_self.verdict.values().contains(false)) {
+		if (_self.testCaseResult.numOfFailures > 0) {
 			println("Test case FAILED")
 		}else{
 			println("Test case PASSED")
 		}
+		return _self.testCaseResult
 	}
 	//this method is called from TDL runner
 	@Step
-	def void executeTestCase(String MUTPath){
+	def TDLTestCaseResult executeTestCase(String MUTPath){
 		_self.launcher.MUTPath = MUTPath
 		_self.testConfiguration.activateConfiguration(_self.launcher, MUTPath)
 		_self.behaviourDescription.callBehavior()
+		return _self.testCaseResult
 	}
 }
 @Aspect (className = TestConfiguration)
