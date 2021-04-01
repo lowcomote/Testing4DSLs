@@ -1,15 +1,7 @@
 package org.imt.tdl.testResult.ui;
 
-import java.io.File;
-import java.util.HashMap;
 import java.util.List;
 
-import org.eclipse.core.filesystem.EFS;
-import org.eclipse.core.filesystem.IFileStore;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ITableColorProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
@@ -31,12 +23,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.ViewPart;
-import org.etsi.mts.tdl.TestDescription;
 import org.imt.tdl.testResult.TDLMessageResult;
 import org.imt.tdl.testResult.TDLTestCaseResult;
 import org.imt.tdl.testResult.TDLTestPackageResult;
@@ -106,8 +93,9 @@ public class TDLTestResultsView extends ViewPart{
 	    Tree addressTree = new Tree(data, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		addressTree.setHeaderVisible(true);
 		addressTree.setLinesVisible(true);
-	
+		
 		m_treeViewer = new TreeViewer(addressTree);
+
 		TreeColumn column1 = new TreeColumn(addressTree, SWT.LEFT);
 		column1.setAlignment(SWT.LEFT);
 		column1.setText("Test case");
@@ -122,80 +110,12 @@ public class TDLTestResultsView extends ViewPart{
 		column3.setAlignment(SWT.LEFT);
 		column3.setText("Description");
 		column3.setWidth(500);
-
+		
 		m_treeViewer.setContentProvider(new TDLTestResultContentProvider());
 		m_treeViewer.setLabelProvider(new TableLabelProvider());
 		m_treeViewer.setInput(TestResultUtil.getInstance().getTestPackageResult());
 		m_treeViewer.addFilter(new DataFilter());
 		m_treeViewer.collapseAll();
-	}
-	private static void openFileInEditor(String path) {
-		File fileToOpen = new File(path);
-		 
-		if (fileToOpen.exists() && fileToOpen.isFile()) {
-		    IFileStore fileStore = EFS.getLocalFileSystem().getStore(fileToOpen.toURI());
-		    IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getPages()[0];
-		 
-		    try {
-		        IDE.openEditorOnFileStore( page, fileStore );
-		    } catch ( PartInitException e ) {
-		        //Put your exception handler here if you wish to
-		    }
-		} else {
-		    //Do something if the file does not exist
-		}
-	}
-	private class DataFilter extends ViewerFilter {
-		
-		@Override
-		public boolean select(Viewer viewer, Object parentElement, Object element) {
-			if (filterIndex == -1 || filterIndex == 0) {
-				return true;
-			}
-			if (filterIndex == 1) {
-				if (element instanceof TDLTestPackageResult) {
-					return true;
-				}
-				if (element instanceof TDLTestCaseResult) {
-					TDLTestCaseResult result = (TDLTestCaseResult) element;
-					return result.getValue().equals("PASS");
-				}
-				if (element instanceof TDLMessageResult) {
-					TDLMessageResult result = (TDLMessageResult) element;
-					return result.getValue() && result.getFailure() == false; 
-				}
-			}
-			if (filterIndex == 2) {
-				if (element instanceof TDLTestPackageResult) {
-					return true;
-				}
-				if (element instanceof TDLTestCaseResult) {
-					TDLTestCaseResult result = (TDLTestCaseResult) element;
-					return result.getValue().equals("FAIL");
-				}
-				if (element instanceof TDLMessageResult) {
-					TDLMessageResult result = (TDLMessageResult) element;
-					return !result.getValue() && result.getFailure() == true; 
-				}
-			}
-			if (filterIndex == 3) {
-				if (element instanceof TDLTestPackageResult) {
-					return true;
-				}
-				if (element instanceof TDLTestCaseResult) {
-					TDLTestCaseResult result = (TDLTestCaseResult) element;
-					return result.getValue().equals("INCONCLUSIVE");
-				}
-				if (element instanceof TDLMessageResult) {
-					if (parentElement instanceof TDLTestCaseResult) {
-						TDLTestCaseResult result = (TDLTestCaseResult) parentElement;
-						return result.getValue().equals("INCONCLUSIVE");
-					}
-					return false;
-				}
-			}
-			return false;
-		}
 	}
 	
 	private class TDLTestResultContentProvider implements ITreeContentProvider {
@@ -250,9 +170,8 @@ public class TDLTestResultsView extends ViewPart{
 			return false;
 		}
 	}
-	
-	class TableLabelProvider implements ITableLabelProvider, ITableColorProvider {
 
+	class TableLabelProvider implements ITableLabelProvider, ITableColorProvider {
 		@Override
 		public void addListener(ILabelProviderListener listener) {
 			// TODO Auto-generated method stub
@@ -323,15 +242,14 @@ public class TDLTestResultsView extends ViewPart{
 			// TODO Auto-generated method stub
 			return null;
 		}
-
 		@Override
 		public String getColumnText(Object element, int columnIndex) {
-			String text = null;
+			String columnText = "";
 			if (element instanceof String) {
 				String result = (String) element;
 				switch (columnIndex) {
 				case 0:
-					text = result;
+					columnText = result;
 					break;
 				}
 			}
@@ -339,19 +257,19 @@ public class TDLTestResultsView extends ViewPart{
 				TDLTestPackageResult result = (TDLTestPackageResult) element;
 				switch(columnIndex) {
 				case 0:
-					text = result.getTestPackageName();
+					columnText = result.getTestPackageName();
 					break;
 				case 1:
 					if (result.getNumOfFailedTestCases() == 0) {
-						text = "PASS";
+						columnText = "PASS";
 					}else if (result.getNumOfInconclusiveTestCases() > 0) {
-						text = "INCONCLUSIVE";
+						columnText = "INCONCLUSIVE";
 					}else {
-						text = "FAIL";
+						columnText = "FAIL";
 					}
 					break;
 				case 2:
-					text = "";
+					columnText = "";
 					break;
 				}
 			}
@@ -359,13 +277,13 @@ public class TDLTestResultsView extends ViewPart{
 				TDLTestCaseResult result = (TDLTestCaseResult) element;
 				switch (columnIndex) {
 				case 0:
-					text = result.getTestCaseName();
+					columnText = result.getTestCaseName();
 					break;
 				case 1:
-					text = result.getValue();
+					columnText = result.getValue();
 					break;
 				case 2:
-					text = "";
+					columnText = "";
 					break;
 				}
 			}
@@ -373,24 +291,76 @@ public class TDLTestResultsView extends ViewPart{
 				TDLMessageResult result = (TDLMessageResult) element;
 				switch (columnIndex) {
 				case 0:
-					text = result.getTdlMessageName();
+					columnText = result.getTdlMessageName();
 					break;
 				case 1:
 					if (result.getFailure() == false) {
-						text = "PASS";
+						columnText = "PASS";
 					}else {
-						text = "FAIL";
+						columnText = "FAIL";
 					}
 					break;
 				case 2:
-					text = result.getMessage();
+					columnText = result.getMessage();
 					break;
 				}
 			}
-			return text;
+			return columnText; 
+		}
+
+	}
+private class DataFilter extends ViewerFilter {
+		
+		@Override
+		public boolean select(Viewer viewer, Object parentElement, Object element) {
+			if (filterIndex == -1 || filterIndex == 0) {
+				return true;
+			}
+			if (filterIndex == 1) {
+				if (element instanceof TDLTestPackageResult) {
+					return true;
+				}
+				if (element instanceof TDLTestCaseResult) {
+					TDLTestCaseResult result = (TDLTestCaseResult) element;
+					return result.getValue().equals("PASS");
+				}
+				if (element instanceof TDLMessageResult) {
+					TDLMessageResult result = (TDLMessageResult) element;
+					return result.getValue() && result.getFailure() == false; 
+				}
+			}
+			if (filterIndex == 2) {
+				if (element instanceof TDLTestPackageResult) {
+					return true;
+				}
+				if (element instanceof TDLTestCaseResult) {
+					TDLTestCaseResult result = (TDLTestCaseResult) element;
+					return result.getValue().equals("FAIL");
+				}
+				if (element instanceof TDLMessageResult) {
+					TDLMessageResult result = (TDLMessageResult) element;
+					return !result.getValue() && result.getFailure() == true; 
+				}
+			}
+			if (filterIndex == 3) {
+				if (element instanceof TDLTestPackageResult) {
+					return true;
+				}
+				if (element instanceof TDLTestCaseResult) {
+					TDLTestCaseResult result = (TDLTestCaseResult) element;
+					return result.getValue().equals("INCONCLUSIVE");
+				}
+				if (element instanceof TDLMessageResult) {
+					if (parentElement instanceof TDLTestCaseResult) {
+						TDLTestCaseResult result = (TDLTestCaseResult) parentElement;
+						return result.getValue().equals("INCONCLUSIVE");
+					}
+					return false;
+				}
+			}
+			return false;
 		}
 	}
-
 	@Override
 	public void setFocus() {
 		// TODO Auto-generated method stub
