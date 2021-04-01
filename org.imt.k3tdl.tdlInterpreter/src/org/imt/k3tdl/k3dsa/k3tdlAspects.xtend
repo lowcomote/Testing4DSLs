@@ -53,8 +53,7 @@ class PackageAspect {
     			_self.testPackageResults.addResult(result)
     			println()
     		}
-    		TestResultUtil.instance.testPackageResult = _self.testPackageResults
-    		//var TDLTestResultsView view = new TDLTestResultsView(_self.testPackageResults);   		
+    		TestResultUtil.instance.testPackageResult = _self.testPackageResults  		
 		} catch (TDLRuntimeException nt){
 			println("Stopped due "+nt.message)	
 		}
