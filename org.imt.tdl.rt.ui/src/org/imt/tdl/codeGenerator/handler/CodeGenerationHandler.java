@@ -22,7 +22,6 @@ import org.imt.tdl.libraryGenerator.TDLCodeGenerator;
 
 public class CodeGenerationHandler extends AbstractHandler {
 	
-	private IWorkbenchWindow window;
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {

@@ -80,4 +80,19 @@
          </toolbar>
       </menuContribution>
    </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            category="tdl.views"
+            class="org.imt.tdl.testResult.ui.TDLTestResultsView"
+            icon="icons/tdl.png"
+            id="test.views.TDLTestResultsTestViewPart"
+            name="TDL Test Results"
+            restorable="true">
+      </view>
+      <category
+            id="tdl.views"
+            name="TDL">
+      </category>
+   </extension>
 </plugin>
