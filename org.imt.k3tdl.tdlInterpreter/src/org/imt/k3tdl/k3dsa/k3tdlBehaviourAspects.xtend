@@ -218,13 +218,11 @@ class MessageAspect extends InteractoinAspect{
 				//when the SUT component sends an argument, it is actually an assertion that have to be checked
 				_self.sourceGate.gate.setLauncher(_self.parentTestDescription.launcher)
 				var String info = _self.sourceGate.gate.assertArgument(_self.argument)
-				info = info.substring(info.indexOf(":") + 1, info.length)
 				_self.addMessageResult(info)
 				return true //continue test case execution
 			}else{//the argument has to be sent to the MUT
 				t.targetGate.gate.setLauncher(_self.parentTestDescription.launcher)
-				var String info = t.targetGate.gate.sendArgument2sut(_self.argument)
-				info = info.substring(info.indexOf(":") + 1, info.length)
+				var String info = t.targetGate.gate.sendArgument2sut(_self.argument)			
 				_self.addMessageResult(info)
 				var boolean result = true
 				if (info.contains("FAIL")){
@@ -241,7 +239,8 @@ class MessageAspect extends InteractoinAspect{
 			result = false
 			_self.parentTestDescription.testCaseResult.value = "FAIL"
 		}
-		_self.parentTestDescription.testCaseResult.addTdlMessage(_self.name, result, !result, info, null)
+		val message = info.substring(info.indexOf(":") + 2, info.length)
+		_self.parentTestDescription.testCaseResult.addTdlMessage(_self.name, result, !result, message, null)
 	}
 }
 @Aspect (className = TimerStart)

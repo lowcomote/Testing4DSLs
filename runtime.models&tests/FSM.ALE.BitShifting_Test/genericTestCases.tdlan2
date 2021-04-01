@@ -21,7 +21,7 @@ Package genericTestCases {
 		tester.genericTestGate sends getModelState to fsm.genericMUTGate;
 		//Assertion 
 		fsm.genericMUTGate sends stateMachineNewState 
-			(currentState = S2 , 
+			(currentState = S1 , 
 			unprocessedString = "", 
 			consumedString = "000101010", 
 			producedString = "000010101") to tester.genericTestGate;
