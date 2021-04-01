@@ -89,21 +89,25 @@ public class JavaEngineLauncher extends AbstractEngine{
 		}
 	}
 	@Override
-	public void executeModel() {
-		PlainK3ExecutionEngine javaEngine = createExecutionEngine();
+	public String executeModel() {
+		PlainK3ExecutionEngine javaEngine = null;
+		try{
+			javaEngine = createExecutionEngine();
+		}catch (EngineContextException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "FAIL: Cannot execute the model under test";
+		}
 		javaEngine.startSynchronous();
 		this.setModelResource(javaEngine.getExecutionContext().getResourceModel());
+		return "PASS: The model under test executed successfully";
 	}
-	private PlainK3ExecutionEngine createExecutionEngine(){
+	private PlainK3ExecutionEngine createExecutionEngine() throws EngineContextException{
 		// create and initialize engine
 		PlainK3ExecutionEngine engine = new PlainK3ExecutionEngine();
 		CustomModelExecutionContext executioncontext = null;
-		try {
-			executioncontext = new CustomModelExecutionContext(this.runConfiguration, this.executionMode);
-		} catch (EngineContextException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		executioncontext = new CustomModelExecutionContext(this.runConfiguration, this.executionMode);
+		
 		executioncontext.getExecutionPlatform().getModelLoader().setProgressMonitor(new NullProgressMonitor());
 		if (!executioncontext.modelInitialized()) {
 			executioncontext.initializeResourceModel();

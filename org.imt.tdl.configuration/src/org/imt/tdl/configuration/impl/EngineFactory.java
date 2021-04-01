@@ -51,20 +51,16 @@ public class EngineFactory{
 			}
 		}
 	}
-	public void executeGenericCommand() throws CoreException, EngineContextException {
-		this.engineLauncher.executeModel();
+	public String executeGenericCommand() throws CoreException, EngineContextException {
+		return this.engineLauncher.executeModel();
 	}
-	public void executeOCLCommand (String query){
-		//System.out.println("Start executing ocl command");
-		try {
-			//send the query without quotation marks
-			this.oclLauncher.runQuery(this.engineLauncher.getModelResource(), query.substring(1, query.length()-1));
-		}catch (ParserException e) {
-            e.printStackTrace();
-		}
+	public String executeOCLCommand (String query){
+		//send the query without quotation marks
+		return this.oclLauncher.runQuery(this.engineLauncher.getModelResource(), query.substring(1, query.length()-1));
 	}
-	public void executeDSLSpecificCommand(String eventName, Map<String, Object> parameters) {
+	public String executeDSLSpecificCommand(String eventName, Map<String, Object> parameters) {
 		//TODO: Calling the event manager
+		return null;
 	}
 	private String getEngineType() {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(this.DSLPath), true);

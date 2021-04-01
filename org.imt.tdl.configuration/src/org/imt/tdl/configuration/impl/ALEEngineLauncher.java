@@ -30,6 +30,7 @@ import org.eclipse.gemoc.ale.interpreted.engine.sirius.ALESiriusInterpreterProvi
 import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.dsl.debug.ide.launch.AbstractDSLLaunchConfigurationDelegate;
 import org.eclipse.gemoc.dsl.debug.ide.sirius.ui.launch.AbstractDSLLaunchConfigurationDelegateSiriusUI;
+import org.eclipse.gemoc.execution.sequential.javaengine.PlainK3ExecutionEngine;
 import org.eclipse.gemoc.executionframework.engine.commons.DslHelper;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.eclipse.gemoc.executionframework.engine.commons.GenericModelExecutionContext;
@@ -101,19 +102,23 @@ public class ALEEngineLauncher extends AbstractEngine{
 		}
 	}
 	@Override
-	public void executeModel() {
-		AleEngine aleEngine = createExecutionEngine();
+	public String executeModel() {
+		AleEngine aleEngine = null;
+		try{
+			aleEngine = createExecutionEngine();
+		}catch (EngineContextException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "FAIL: Cannot execute the model under test";
+		}
 		aleEngine.startSynchronous();
 		this.setModelResource(aleEngine.getExecutionContext().getResourceModel());
+		return "PASS: The model under test executed successfully";
 	}
-	private AleEngine createExecutionEngine(){
+	private AleEngine createExecutionEngine() throws EngineContextException{
 		AleEngine engine = new AleEngine();
 		CustomModelExecutionContext executioncontext = null;
-		try {
-			executioncontext = new CustomModelExecutionContext(this.runConfiguration, this.executionMode);
-		} catch (EngineContextException e) {
-			e.printStackTrace();
-		}
+		executioncontext = new CustomModelExecutionContext(this.runConfiguration, this.executionMode);
 		if (!executioncontext.modelInitialized()) {
 			executioncontext.initializeResourceModel();
 		}

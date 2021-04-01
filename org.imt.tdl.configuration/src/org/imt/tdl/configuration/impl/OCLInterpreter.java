@@ -45,10 +45,16 @@ public class OCLInterpreter {
 		this.oclHelper = ocl.createOCLHelper();
 	}
 
-	public void runQuery(Resource MUTResource, String query) throws ParserException {
+	public String runQuery(Resource MUTResource, String query) {
 		// The root element of the dsl is the context for ocl
 		this.oclHelper.setContext(MUTResource.getContents().get(0).eClass());
-		this.expression = this.oclHelper.createQuery(query);
+		try {
+			this.expression = this.oclHelper.createQuery(query);
+		} catch (ParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "FAIL: Cannot create the ocl query";
+		}
 		this.queryEval = this.ocl.createQuery(this.expression);
 		// the ocl query will be evaluated on the root element of MUT
 		Object res = this.queryEval.evaluate(MUTResource.getContents().get(0));
@@ -85,6 +91,7 @@ public class OCLInterpreter {
 				this.resultAsString.add("'" + res.toString() + "'");
 			}
 		}
+		return "PASS: The ocl query evaluated successfully";
 	}
 	public String queryResultLabelProvider(EObject object) {
 		final Class<?> IItemLabelProviderClass = IItemLabelProvider.class;
