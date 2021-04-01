@@ -286,24 +286,22 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 				matchedObjects.add(matchedObject)
 			}
 			if ((featureValue as EList).equals(matchedObjects)){
-				return "PASS: The expected data is equal to the MUT data"
+				return "PASS: The expected data is equal to the current data"
 			}
 			val expectedData = TestResultUtil.instance.getDataAsString(featureValue as EList)
 			val mutData = TestResultUtil.instance.getDataAsString(matchedObjects)
-			return "FAIL: The expected value for the " + _self.dataInstance.name + " property is: " + expectedData + 
-				", but its current value is: " + mutData;
+			return "FAIL: The expected data is: " + expectedData + ", but the current data is: " + mutData;
 		}else{//there is just one data instance
 			val matchedObject = _self.getMatchedMUTElement(MUTResource , true, DSLPath)
 			if (matchedObject == null){
 				println("There is no " + _self.dataInstance.name + " property in the MUT")
 				return "FAIL: There is no MUT element matched with " + _self.dataInstance.name
 			}else if (matchedObject.equals(featureValue)){
-				return "PASS: The expected data is equal to the MUT data"
+				return "PASS: The expected data is equal to the current data"
 			}
 			val expectedData = "[" + TestResultUtil.instance.eObjectLabelProvider(featureValue as EObject) + "]"
 			val mutData = "[" + TestResultUtil.instance.eObjectLabelProvider(matchedObject as EObject) + "]"
-			return "FAIL: The expected value for the " + _self.dataInstance.name + " property is: " + expectedData + 
-				", but its current value is: " + mutData;
+			return "FAIL: The expected data is: " + expectedData + ", but the current data is: " + mutData;
 		}
 	}
 	
@@ -453,9 +451,9 @@ class LiteralValueUseAspect extends StaticDataUseAspect{
 		var String parameterValue = _self.value
 		parameterValue = parameterValue.substring(1, parameterValue.length-1)//remove quotation marks
 		if (featureValue.toString.equals(parameterValue)){
-			return "PASS: The expected data is equal to the MUT data"
+			return "PASS: The expected data is equal to the current data"
 		}
-		return "FAIL: The expected data is: " + parameterValue + ", but the MUT data is: " + featureValue
+		return "FAIL: The expected data is: " + parameterValue + ", but the current data is: " + featureValue
 	}
 	@OverrideAspectMethod
 	def String updateData(EObject object, EStructuralFeature matchedFeature){
