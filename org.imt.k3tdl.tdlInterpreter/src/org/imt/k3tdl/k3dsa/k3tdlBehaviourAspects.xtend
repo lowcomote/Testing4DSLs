@@ -57,256 +57,302 @@ import org.etsi.mts.tdl.Target
 @Aspect (className = BehaviourDescription)
 class BehaviourDescriptionAspect{
 	@Step
-	def void callBehavior(){
-		_self.behaviour.performBehavior()
+	def boolean callBehavior(){
+		return _self.behaviour.performBehavior()
 	}
 }
 @Aspect (className = Behaviour)
 class BehaviourAspect{
 	public Behaviour enabledBehaviour;
 	@Step
-	def void performBehavior(){
+	def boolean performBehavior(){
 		_self.enabledBehaviour = _self
+		return false
 	}
 }
 @Aspect (className = AtomicBehaviour)
 class AtomicBehaviourAspect extends BehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = CombinedBehaviour)
 class CombinedBehaviourAspect extends BehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = PeriodicBehaviour)
 class PeriodicBehaviourAspect extends BehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
-		_self.block.traverseBlock()
+	def boolean performBehavior(){
+		return _self.block.traverseBlock()
 	}
 }
 @Aspect (className = ExceptionalBehaviour)
 class ExceptionalBehaviourAspect extends BehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = ActionBehaviour)
 class ActionBehaviourAspect extends AtomicBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = VerdictAssignment)
 class VerdictAssignmentAspect extends AtomicBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = Stop)
 class StopAspect extends AtomicBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = Break)
 class BreakAspect extends AtomicBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = TestDescriptionReference)
 class TestDescriptionReferenceAspect extends AtomicBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = Interaction)
 class InteractoinAspect extends AtomicBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = TimerOperation)
 class TimerOperationAspect extends AtomicBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = TimeOperation)
 class TimeOperationAspect extends AtomicBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = Assertion)
 class AssertionAspect extends ActionBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = Assignment)
 class AssignmentAspect extends ActionBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = InlineAction)
 class InlineActionAspect extends ActionBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = ActionReference)
 class ActionReferenceAspect extends ActionBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = ProcedureCall)
 class ProcedureCallAspect extends InteractoinAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = Message)
 class MessageAspect extends InteractoinAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
 		for (Target t: _self.target){
 			t.targetGate.gate.DSLPath = _self.parentTestDescription.testConfiguration.DSLPath
 			t.targetGate.gate.MUTPath = _self.parentTestDescription.testConfiguration.MUTPath
 			if (_self.sourceGate.component.role.toString == "SUT"){
 				//when the SUT component sends an argument, it is actually an assertion that have to be checked
 				_self.sourceGate.gate.setLauncher(_self.parentTestDescription.launcher)
-				val result = _self.sourceGate.gate.assertArgument(_self.argument)
-				_self.parentTestDescription.verdict.put(_self, result)
+				var String info = _self.sourceGate.gate.assertArgument(_self.argument)
+				info = info.substring(info.indexOf(":") + 1, info.length)
+				_self.addMessageResult(info)
+				return true //continue test case execution
 			}else{//the argument has to be sent to the MUT
 				t.targetGate.gate.setLauncher(_self.parentTestDescription.launcher)
-				t.targetGate.gate.sendArgument2sut(_self.argument)
+				var String info = t.targetGate.gate.sendArgument2sut(_self.argument)
+				info = info.substring(info.indexOf(":") + 1, info.length)
+				_self.addMessageResult(info)
+				var boolean result = true
+				if (info.contains("FAIL")){
+					result = false
+					_self.parentTestDescription.testCaseResult.value = "INCONCLUSIVE"//the test case should be interrupted
+				}
+				return result //if the result is false, the test case execution should be interrupted
 			}
 		}	
+	}
+	def void addMessageResult(String info){
+		var boolean result = true
+		if (info.contains("FAIL")){
+			result = false
+			_self.parentTestDescription.testCaseResult.value = "FAIL"
+		}
+		_self.parentTestDescription.testCaseResult.addTdlMessage(_self.name, result, !result, info, null)
 	}
 }
 @Aspect (className = TimerStart)
 class TimerStartAspect extends TimerOperationAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = TimerStop)
 class TimerStopAspect extends TimerOperationAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = TimeOut)
 class TimeOutAspect extends TimerOperationAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = Wait)
 class WaitAspect extends TimeOperationAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = Quiescence)
 class QuiescenceAspect extends TimeOperationAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = SingleCombinedBehaviour)
 class SingleCombinedBehaviourAspect extends CombinedBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
-		_self.block.traverseBlock()
+	def boolean performBehavior(){
+		return _self.block.traverseBlock()
 	}
 }
 @Aspect (className = MultipleCombinedBehaviour)
 class MultipleCombinedBehaviourAspect extends CombinedBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = BoundedLoopBehaviour)
 class BoundedLoopBehaviourAspect extends SingleCombinedBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
-		_self.block.traverseBlock()
+	def boolean performBehavior(){
+		return _self.block.traverseBlock()
 	}
 }
 @Aspect (className = UnboundedLoopBehaviour)
 class UnBoundedLoopBehaviourAspect extends SingleCombinedBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
-		_self.block.traverseBlock()
+	def boolean performBehavior(){
+		return _self.block.traverseBlock()
 	}
 }
 @Aspect (className = CompoundBehaviour)
 class CompoundBehaviourAspect extends SingleCombinedBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
-		_self.block.traverseBlock()
+	def boolean performBehavior(){
+		return _self.block.traverseBlock()
 	}
 }
 @Aspect (className = OptionalBehaviour)
 class OptionalBehaviourAspect extends SingleCombinedBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
-		_self.block.traverseBlock()
+	def boolean performBehavior(){
+		return _self.block.traverseBlock()
 	}
 }
 @Aspect (className = ConditionalBehaviour)
 class ConditionalBehaviourAspect extends MultipleCombinedBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = AlternativeBehaviour)
 class AlternativeBehaviourAspect extends MultipleCombinedBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		var result = true
 		for (Block innerBlock : _self.block){
 			for (Behaviour b :innerBlock.behaviour){
 				_self.enabledBehaviour = b
-				b.performBehavior()
+				result = b.performBehavior()
+				if (!result){
+					return result
+				}
 			}
 		}
 	}
@@ -315,33 +361,36 @@ class AlternativeBehaviourAspect extends MultipleCombinedBehaviourAspect{
 class ParallelBehaviourAspect extends MultipleCombinedBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
+	def boolean performBehavior(){
+		return false
 	}
 }
 @Aspect (className = DefaultBehaviour)
 class DefaultBehaviourAspect extends ExceptionalBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
-		_self.block.traverseBlock()
+	def boolean performBehavior(){
+		return _self.block.traverseBlock()
 	}
 }
 @Aspect (className = InterruptBehaviour)
 class InterruptBehaviourAspect extends ExceptionalBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
-	def void performBehavior(){
-		_self.block.traverseBlock()
+	def boolean performBehavior(){
+		return _self.block.traverseBlock()
 	}
 }
 @Aspect (className = Block)
 class BlockAspect{
-	public String blockStatus
 	@Step
-	def void traverseBlock(){
-		_self.blockStatus = "Activated"
+	def boolean traverseBlock(){
+		var result = true
 		for (Behaviour b:_self.behaviour){
-			b.performBehavior()
+			result = b.performBehavior()
+			if (!result){
+				return result
+			}
 		}
 	}
 }

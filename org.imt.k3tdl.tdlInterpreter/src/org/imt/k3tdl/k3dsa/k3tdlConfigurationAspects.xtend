@@ -42,7 +42,7 @@ class GateInstanceAspect {
 		_self.gateLauncher = launcher;
 	}
 	@Step
-	def boolean assertArgument(DataUse argument) {
+	def String assertArgument(DataUse argument) {
 		//if the argument is a string
 		if (argument instanceof LiteralValueUse){			
 			var expected = (argument as LiteralValueUse).value
@@ -60,17 +60,20 @@ class GateInstanceAspect {
 				}
 				if (_self.receivedOutput.toString.equals(_self.expectedOutput.toString)){
 					println("Assertion PASSED")
-					return true
+					return "PASS: The expected data is equal to the MUT data"
 				}else{
 					println("Assertion FIALED: The expected response is not received from MUT")
-					return false
+					return "FAIL: The expected data is: " + _self.expectedOutput.toString + 
+						", but the MUT data is: " + _self.receivedOutput.toString;
 				}
 			} else if (_self.receivedOutput == null) {
 				println("Assertion FIALED: No response received from MUT")
-				return false
+				return "FAIL: The expected data is: " + _self.expectedOutput.toString + 
+						", but the MUT data is: " + _self.receivedOutput.toString;
 			} else {
 				println("Assertion FAILED: The expected response is not received from MUT")
-				return false
+				return "FAIL: The expected data is: " + _self.expectedOutput.toString + 
+						", but the MUT data is: " + _self.receivedOutput.toString;
 			}
 		}
 		//if the argument is an element/a list of elements
@@ -86,97 +89,89 @@ class GateInstanceAspect {
 			else if (arg.dataInstance.dataType.isExposedEvent(_self.DSLPath)){//an execution rule is the received output 
 				//TODO: what should be set here??
 			}
-			var boolean assertionFailed = false
+			var String status = null
 			var ArrayList<EObject> matchedMUTElements = new ArrayList<EObject>();
-			var ArrayList<EObject> notMatchedElements = new ArrayList<EObject>();
 			if (arg.item != null && arg.item.size > 0){//there is a list of objects in the expected output
 				for (i : 0 ..<arg.item.size){
-					val EObject matchedObject = (arg.item.get(i) as DataInstanceUse).
-						getMatchedMUTElement(MUTResource as Resource, true, _self.DSLPath)		
+					val DataInstanceUse data = (arg.item.get(i) as DataInstanceUse)
+					val EObject matchedObject = data.getMatchedMUTElement(MUTResource as Resource, true, _self.DSLPath)		
 					if (matchedObject == null){
-						notMatchedElements.add(arg.item.get(i))
-						assertionFailed = true
+						return data.dataInstance.info //the info must contains FAIL information			
 					}else{
 						matchedMUTElements.add(matchedObject)
-					}
+						status = data.dataInstance.info
+					}	
 				}
 			}else{//there is only one object in the expected output
-				val EObject matchedObject = (arg as DataInstanceUse).
-					getMatchedMUTElement(MUTResource as Resource, true, _self.DSLPath)
+				val DataInstanceUse data = (arg as DataInstanceUse)
+				val EObject matchedObject = data.getMatchedMUTElement(MUTResource as Resource, true, _self.DSLPath)
 				if (matchedObject == null){
-					notMatchedElements.add(arg)
-					assertionFailed = true
+					return data.dataInstance.info //the info must contains FAIL information
 				}else{
-					matchedMUTElements.add(matchedObject)	
+					matchedMUTElements.add(matchedObject)
+					status = data.dataInstance.info	
 				}
 			}
-			if (assertionFailed){
-				println("Assertion FAILED: The expected response is not received from MUT")
-				println("The following elements are not matched: " + (notMatchedElements.get(0) as DataInstanceUse).dataInstance.name)
-				return false
-			}else if(_self.name.equals('oclMUTGate')){
+			if(_self.name.equals('oclMUTGate')){
 				val Object[] receivedObjects = _self.gateLauncher.OCLResultAsObject
 				if (receivedObjects.elementsEqual(matchedMUTElements)){
 					println("Assertion PASSED")
-					return true
+					return "PASS: The expected data is equal to the MUT data"
 				}else{
 					println("Assertion FAILED: The expected response is not received from MUT")
-					println("Received result: " + _self.gateLauncher.OCLResultAsString)
-					return false
+					return "FAIL: The expected data is: " + matchedMUTElements.toString + 
+						", but the MUT data is: " + _self.gateLauncher.OCLResultAsString;
 				}
 			}else{
-				println("Assertion PASSED")
-				return true
+				return status
 			}
 		}
 	}
 
 	@Step
-	def void sendArgument2sut(DataUse argument) {
+	def String sendArgument2sut(DataUse argument) {
 		if (argument instanceof DataInstanceUse) {
 			var arg = (argument as DataInstanceUse)
 			if (arg.dataInstance.name == 'runModel') {
 				println("--Start MUT Execution:")
-				_self.gateLauncher.executeGenericCommand();
-				println("--MUT executed successfully")
+				return _self.gateLauncher.executeGenericCommand()
 			}else if (arg.dataInstance.name == 'resetModel') {
 				_self.gateLauncher.MUTResource = 
-					(new ResourceSetImpl()).getResource(URI.createURI(_self.MUTPath), true);
+					(new ResourceSetImpl()).getResource(URI.createURI(_self.MUTPath), true)
+				return "PASS: The MUT is reset to its initial state"
 			}else if (arg.dataInstance.name == 'getModelState') {
 				_self.receivedOutput = _self.gateLauncher.MUTResource
+				return "PASS: The current state of the MUT is retrieved"
 			}else if (arg.dataInstance.dataType.isConcreteEcoreType(_self.DSLPath)){//request for setting the model state
-				_self.setModelState(arg);
+				return _self.setModelState(arg);
 			}else if (arg.dataInstance.dataType.name == 'OCL') {
 				// extracting the query from the argument and sending for validation
-				var query = argument.argument.get(0).dataUse as LiteralValueUse;
-				_self.gateLauncher.executeOCLCommand(query.value);				
+				var query = argument.argument.get(0).dataUse as LiteralValueUse
+				return _self.gateLauncher.executeOCLCommand(query.value)				
 			}else if (arg.dataInstance.dataType.isAcceptedEvent(_self.DSLPath)){
 				//the message is an event conforming to the behavioral interface of the DSL
-				_self.gateLauncher.executeDSLSpecificCommand(arg.dataInstance.name, _self.getEventParameters(arg));
+				return _self.gateLauncher.executeDSLSpecificCommand(arg.dataInstance.name, _self.getEventParameters(arg))
 			}
+			return "FAIL: Cannot send data to the MUT"
 		}
+		return "FAIL: Cannot send data to the MUT"
 	}
 	@Step
-	def boolean setModelState(DataInstanceUse arg){
+	def String setModelState(DataInstanceUse arg){
 		//get the current MUTResource
 		var MUTResource = _self.gateLauncher.MUTResource;
-		var boolean status = false;
+		var String status = null
 		if (arg.item != null && arg.item.size > 0){
 			for (i : 0 ..<arg.item.size){
 				status = (arg.item.get(i) as DataInstanceUse).setMatchedMUTElement(MUTResource, _self.DSLPath)
-				if (!status){
-					println("the specified model state doesn't match the model under test")
-					return false;
+				if (status.contains("FAIL")){
+					return status
 				}
 			}
 		}else{
 			status = arg.setMatchedMUTElement(MUTResource, _self.DSLPath);
-			if (!status){
-				println("the specified model state doesn't match the model under test")
-				return false
-			}
 		}
-		return status;
+		return status
 	}
 	//retrieve a map of the parameter name and its corresponding model element
 	def Map<String, Object> getEventParameters(DataInstanceUse event){
