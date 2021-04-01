@@ -14,26 +14,25 @@ Package genericTestCases {
 		_name = "S2"
 	);
 	
-	Test Description bitShiftingGenericTest uses configuration genericConfiguration{
+	Test Description bitShiftingTest1 uses configuration genericConfiguration{
 		tester.genericTestGate sends stateMachineNewState
 			(unprocessedString = "000101010") to fsm.genericMUTGate;
 		tester.genericTestGate sends runModel to fsm.genericMUTGate;
 		tester.genericTestGate sends getModelState to fsm.genericMUTGate;
-		//Assertion 
 		fsm.genericMUTGate sends stateMachineNewState 
 			(currentState = S1 , 
 			unprocessedString = "", 
 			consumedString = "000101010", 
 			producedString = "000010101") to tester.genericTestGate;
 	}
-	Test Description bitShiftingOclTest uses configuration oclConfiguration{
+	Test Description bitShiftingTest2 uses configuration oclConfiguration{
 		tester.genericTestGate sends runModel to fsm.genericMUTGate;
 		tester.oclTestGate sends oclQuery (query = "self.currentState") to fsm.oclMUTGate;
-		//Assertion
 		fsm.oclMUTGate sends {S0, S1} to tester.oclTestGate;
-		
-		tester.oclTestGate sends oclQuery (query = "self.currentState") to fsm.oclMUTGate;
-		//Assertion
+	}
+	Test Description bitShiftingTest3 uses configuration oclConfiguration{
+		tester.genericTestGate sends runModel to fsm.genericMUTGate;
+		tester.oclTestGate sends oclQuery (query = "self.currentSta") to fsm.oclMUTGate;
 		fsm.oclMUTGate sends S0 to tester.oclTestGate;
 	}
 }
