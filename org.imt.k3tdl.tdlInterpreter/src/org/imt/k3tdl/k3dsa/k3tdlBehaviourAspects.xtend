@@ -239,7 +239,10 @@ class MessageAspect extends InteractoinAspect{
 			result = false
 			_self.parentTestDescription.testCaseResult.value = "FAIL"
 		}
-		val message = info.substring(info.indexOf(":") + 2, info.length)
+		var message = info
+		if (info.contains(":")){
+			message = info.substring(info.indexOf(":") + 2, info.length)
+		}
 		_self.parentTestDescription.testCaseResult.addTdlMessage(_self.name, result, !result, message, null)
 	}
 }

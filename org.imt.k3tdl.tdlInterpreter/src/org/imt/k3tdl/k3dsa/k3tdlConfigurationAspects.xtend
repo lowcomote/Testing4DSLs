@@ -23,6 +23,7 @@ import static extension org.imt.k3tdl.k3dsa.DataTypeAspect.*
 import java.util.ArrayList
 import java.util.Map
 import java.util.HashMap
+import org.imt.tdl.testResult.TestResultUtil
 
 @Aspect(className=GateType)
 class GateTypeAspect {
@@ -119,7 +120,8 @@ class GateInstanceAspect {
 					return "PASS: The expected data is equal to the MUT data"
 				}else{
 					println("Assertion FAILED: The expected response is not received from MUT")
-					return "FAIL: The expected data is: " + matchedMUTElements.toString + 
+					var expectedData = TestResultUtil.instance.getDataAsString(matchedMUTElements)
+					return "FAIL: The expected data is: " + expectedData + 
 						", but the MUT data is: " + _self.gateLauncher.OCLResultAsString;
 				}
 			}else{

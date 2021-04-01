@@ -36,6 +36,8 @@ import static extension org.imt.k3tdl.k3dsa.MemberAssignmentAspect.*
 import static extension org.imt.k3tdl.k3dsa.ParameterBindingAspect.*
 import static extension org.imt.k3tdl.k3dsa.StaticDataUseAspect.*
 import static extension org.imt.k3tdl.k3dsa.StructuredDataInstanceAspect.*
+import org.imt.tdl.testResult.TestResultUtil
+import java.util.List
 
 @Aspect (className = DataType)
 class DataTypeAspect{
@@ -286,8 +288,10 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 			if ((featureValue as EList).equals(matchedObjects)){
 				return "PASS: The expected data is equal to the MUT data"
 			}
-			return "FAIL: The expected data is: " + (featureValue as EList).toString + 
-				" , but the MUT data is: " + matchedObjects.toString;
+			val expectedData = TestResultUtil.instance.getDataAsString(featureValue as EList)
+			val mutData = TestResultUtil.instance.getDataAsString(matchedObjects)
+			return "FAIL: The expected value for the " + _self.dataInstance.name + " property is: " + expectedData + 
+				", but its current value is: " + mutData;
 		}else{//there is just one data instance
 			val matchedObject = _self.getMatchedMUTElement(MUTResource , true, DSLPath)
 			if (matchedObject == null){
@@ -296,10 +300,13 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 			}else if (matchedObject.equals(featureValue)){
 				return "PASS: The expected data is equal to the MUT data"
 			}
-			return "FAIL: The expected data is: " + featureValue.toString + 
-				" , but the MUT data is: " + matchedObject.toString;
+			val expectedData = "[" + TestResultUtil.instance.eObjectLabelProvider(featureValue as EObject) + "]"
+			val mutData = "[" + TestResultUtil.instance.eObjectLabelProvider(matchedObject as EObject) + "]"
+			return "FAIL: The expected value for the " + _self.dataInstance.name + " property is: " + expectedData + 
+				", but its current value is: " + mutData;
 		}
 	}
+	
 	@OverrideAspectMethod
 	@Step
 	def String updateData(Resource MUTResource, EObject object, EStructuralFeature matchedFeature, String DSLPath){
