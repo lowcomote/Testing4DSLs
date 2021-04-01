@@ -111,12 +111,12 @@ public class TDLTestResultsView extends ViewPart{
 		TreeColumn column1 = new TreeColumn(addressTree, SWT.LEFT);
 		column1.setAlignment(SWT.LEFT);
 		column1.setText("Test case");
-		column1.setWidth(400);
+		column1.setWidth(250);
 		
 		TreeColumn column2 = new TreeColumn(addressTree, SWT.LEFT);
 		column2.setAlignment(SWT.LEFT);
 		column2.setText("Result");
-		column2.setWidth(400);
+		column2.setWidth(150);
 		
 		TreeColumn column3 = new TreeColumn(addressTree, SWT.LEFT);
 		column2.setAlignment(SWT.LEFT);
@@ -184,9 +184,13 @@ public class TDLTestResultsView extends ViewPart{
 				}
 				if (element instanceof TDLTestCaseResult) {
 					TDLTestCaseResult result = (TDLTestCaseResult) element;
-					return !result.getValue().equals("INCONCLUSIVE");
+					return result.getValue().equals("INCONCLUSIVE");
 				}
 				if (element instanceof TDLMessageResult) {
+					if (parentElement instanceof TDLTestCaseResult) {
+						TDLTestCaseResult result = (TDLTestCaseResult) parentElement;
+						return result.getValue().equals("INCONCLUSIVE");
+					}
 					return false;
 				}
 			}
@@ -346,6 +350,9 @@ public class TDLTestResultsView extends ViewPart{
 						text = "FAIL";
 					}
 					break;
+				case 2:
+					text = "";
+					break;
 				}
 			}
 			if (element instanceof TDLTestCaseResult) {
@@ -356,6 +363,9 @@ public class TDLTestResultsView extends ViewPart{
 					break;
 				case 1:
 					text = result.getValue();
+					break;
+				case 2:
+					text = "";
 					break;
 				}
 			}
@@ -379,16 +389,6 @@ public class TDLTestResultsView extends ViewPart{
 			}
 			return text;
 		}
-	}
-	public String getWorkspaceAbsolutePath() {
-		IPath path = Platform.getLocation().makeAbsolute();
-		URI uri = URI.createFileURI(path.toString());
-		String ret = uri.toString();
-		ret = ret.replaceFirst("file:/", "/");
-		if (ret.indexOf(":") != -1) {
-			ret = ret.replaceFirst("/", "");
-		}
-		return ret;
 	}
 
 	@Override
