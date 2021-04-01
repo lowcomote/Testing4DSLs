@@ -6,4 +6,6 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: org.imt.tdl.testResult
 Export-Package: org.imt.tdl.testResult
-Require-Bundle: org.etsi.mts.tdl.model;bundle-version="1.4.0"
+Require-Bundle: org.etsi.mts.tdl.model;bundle-version="1.4.0",
+ org.eclipse.emf.edit,
+ org.eclipse.emf.ecore.edit
