@@ -61,20 +61,20 @@ class GateInstanceAspect {
 				}
 				if (_self.receivedOutput.toString.equals(_self.expectedOutput.toString)){
 					println("Assertion PASSED")
-					return "PASS: The expected data is equal to the MUT data"
+					return "PASS: The expected data is equal to the current data"
 				}else{
 					println("Assertion FIALED: The expected response is not received from MUT")
 					return "FAIL: The expected data is: " + _self.expectedOutput.toString + 
-						", but the MUT data is: " + _self.receivedOutput.toString;
+						", but the current data is: " + _self.receivedOutput.toString;
 				}
 			} else if (_self.receivedOutput == null) {
 				println("Assertion FIALED: No response received from MUT")
 				return "FAIL: The expected data is: " + _self.expectedOutput.toString + 
-						", but the MUT data is: " + _self.receivedOutput.toString;
+						", but the current data is: " + _self.receivedOutput.toString;
 			} else {
 				println("Assertion FAILED: The expected response is not received from MUT")
 				return "FAIL: The expected data is: " + _self.expectedOutput.toString + 
-						", but the MUT data is: " + _self.receivedOutput.toString;
+						", but the current data is: " + _self.receivedOutput.toString;
 			}
 		}
 		//if the argument is an element/a list of elements
@@ -117,12 +117,12 @@ class GateInstanceAspect {
 				val Object[] receivedObjects = _self.gateLauncher.OCLResultAsObject
 				if (receivedObjects.elementsEqual(matchedMUTElements)){
 					println("Assertion PASSED")
-					return "PASS: The expected data is equal to the MUT data"
+					return "PASS: The expected data is equal to the current data"
 				}else{
 					println("Assertion FAILED: The expected response is not received from MUT")
 					var expectedData = TestResultUtil.instance.getDataAsString(matchedMUTElements)
 					return "FAIL: The expected data is: " + expectedData + 
-						", but the MUT data is: " + _self.gateLauncher.OCLResultAsString;
+						", but the current data is: " + _self.gateLauncher.OCLResultAsString;
 				}
 			}else{
 				return status
