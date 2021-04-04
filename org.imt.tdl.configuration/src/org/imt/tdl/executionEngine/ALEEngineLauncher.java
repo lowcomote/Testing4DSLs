@@ -1,4 +1,4 @@
-package org.imt.tdl.configuration.impl;
+package org.imt.tdl.executionEngine;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -39,7 +39,6 @@ import org.eclipse.gemoc.executionframework.engine.commons.sequential.Sequential
 import org.eclipse.gemoc.executionframework.engine.ui.Activator;
 import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
 import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
-import org.imt.tdl.configuration.IExecutionEngine;
 
 public class ALEEngineLauncher extends AbstractEngine{
 

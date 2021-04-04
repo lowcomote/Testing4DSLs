@@ -1,4 +1,4 @@
-package org.imt.tdl.configuration;
+package org.imt.tdl.executionEngine;
 
 import org.eclipse.emf.ecore.resource.Resource;
 

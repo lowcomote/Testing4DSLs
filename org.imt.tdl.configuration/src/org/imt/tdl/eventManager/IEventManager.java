@@ -1,0 +1,31 @@
+package org.imt.tdl.eventManager;
+
+import java.util.Set;
+
+import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.Event;
+import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.BehavioralInterface;
+import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrence;
+import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
+
+public interface IEventManager extends IEngineAddon {
+	
+	IRelationshipManager getRelationshipManager();
+
+	void processEventOccurrence(EventOccurrence event);
+
+	void processCallRequests();
+
+	void waitForCallRequests();
+
+	//void addListener(IEventManagerListener listener);
+
+	//void removeListener(IEventManagerListener listener);
+
+	Set<BehavioralInterface> getBehavioralInterfaces();
+	
+	Set<Event> getEvents();
+	
+	void emitEventOccurrence(EventOccurrence eventOccurrence);
+	
+	void processCallRequest(ICallRequest callRequest);
+}

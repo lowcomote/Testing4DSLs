@@ -2,6 +2,7 @@ package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 
+
 import fr.inria.diverse.k3.al.annotationprocessor.InitializeModel
 import fr.inria.diverse.k3.al.annotationprocessor.Main
 import fr.inria.diverse.k3.al.annotationprocessor.Step
@@ -12,7 +13,7 @@ import org.etsi.mts.tdl.Annotation
 import org.etsi.mts.tdl.Package
 import org.etsi.mts.tdl.TestConfiguration
 import org.etsi.mts.tdl.TestDescription
-import org.imt.tdl.configuration.impl.EngineFactory
+import org.imt.tdl.executionEngine.EngineFactory
 import org.imt.tdl.testResult.TDLTestCaseResult
 import org.imt.tdl.testResult.TDLTestPackageResult
 import org.imt.tdl.testResult.ui.TDLTestResultsView

@@ -1,4 +1,4 @@
-package org.imt.tdl.configuration.impl;
+package org.imt.tdl.executionEngine;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -11,7 +11,8 @@ import java.util.Map;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.eclipse.ocl.ParserException;
-import org.imt.tdl.configuration.IExecutionEngine;
+import org.imt.tdl.eventManager.GenericEventManager;
+import org.imt.tdl.oclInterpreter.OCLInterpreter;
 import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.execution.sequential.javaengine.PlainK3ExecutionEngine;
 
@@ -22,7 +23,7 @@ public class EngineFactory{
 	
 	private IExecutionEngine engineLauncher;
 	private OCLInterpreter oclLauncher;
-	private EventManager eventManager;
+	private GenericEventManager eventManager;
 	
 	public final static String GENERIC = "Generic";
 	public final static String DSL_SPECIFIC = "DSL-Specific";
@@ -39,7 +40,7 @@ public class EngineFactory{
 			this.engineLauncher.setUp(this.MUTPath, this.DSLPath);
 		}else if(commandType.equals(DSL_SPECIFIC)) {
 			if (this.eventManager == null) {
-				this.eventManager = new EventManager();
+				//this.eventManager = new GenericEventManager();
 				this.eventManager.setUp();
 			}
 		}else if (commandType.equals(OCL)) {

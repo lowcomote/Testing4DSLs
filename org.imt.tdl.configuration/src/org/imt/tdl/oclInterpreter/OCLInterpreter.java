@@ -1,4 +1,4 @@
-package org.imt.tdl.configuration.impl;
+package org.imt.tdl.oclInterpreter;
 
 import java.util.ArrayList;
 import java.util.Collection;

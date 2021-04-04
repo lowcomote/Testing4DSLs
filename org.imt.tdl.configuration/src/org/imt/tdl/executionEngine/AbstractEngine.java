@@ -1,4 +1,4 @@
-package org.imt.tdl.configuration.impl;
+package org.imt.tdl.executionEngine;
 
 import java.lang.reflect.Method;
 import java.util.Iterator;
@@ -10,7 +10,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gemoc.executionframework.engine.commons.DslHelper;
 import org.eclipse.gemoc.executionframework.engine.commons.K3DslHelper;
 import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
-import org.imt.tdl.configuration.IExecutionEngine;
 import org.osgi.framework.Bundle;
 
 public abstract class AbstractEngine implements IExecutionEngine{
