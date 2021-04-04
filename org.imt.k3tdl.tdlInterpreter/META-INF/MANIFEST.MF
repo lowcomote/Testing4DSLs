@@ -18,9 +18,7 @@ Require-Bundle: fr.inria.diverse.k3.al.annotationprocessor.plugin;bundle-version
  org.eclipse.gemoc.executionframework.behavioralinterface;bundle-version="1.0.0",
  org.imt.tdl.testResult;bundle-version="1.0.0",
  org.imt.tdl.rt.ui;bundle-version="1.0.0",
- org.imt.tdl.eventManager,
- org.imt.tdl.executionEngine,
- org.imt.tdl.oclInterpreter
+ org.imt.tdl.configuration;bundle-version="1.0.0"
 Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.imt.k3tdl.k3dsa

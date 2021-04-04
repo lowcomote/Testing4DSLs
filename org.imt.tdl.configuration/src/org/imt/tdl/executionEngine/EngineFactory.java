@@ -1,20 +1,17 @@
 package org.imt.tdl.executionEngine;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-
 import java.util.ArrayList;
 import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
-import org.eclipse.ocl.ParserException;
-import org.imt.tdl.eventManager.GenericEventManager;
-import org.imt.tdl.oclInterpreter.OCLInterpreter;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gemoc.dsl.Dsl;
-import org.eclipse.gemoc.execution.sequential.javaengine.PlainK3ExecutionEngine;
+import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
+import org.eclipse.gemoc.executionframework.event.manager.GenericEventManager;
+import org.imt.tdl.oclInterpreter.OCLInterpreter;
 
 public class EngineFactory{
 	
@@ -41,7 +38,6 @@ public class EngineFactory{
 		}else if(commandType.equals(DSL_SPECIFIC)) {
 			if (this.eventManager == null) {
 				//this.eventManager = new GenericEventManager();
-				this.eventManager.setUp();
 			}
 		}else if (commandType.equals(OCL)) {
 			if (this.engineLauncher==null) {

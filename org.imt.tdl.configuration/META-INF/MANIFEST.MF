@@ -3,8 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: CustomLaunchConfig
 Bundle-SymbolicName: org.imt.tdl.configuration
 Bundle-Version: 1.0.0.qualifier
-Export-Package: org.imt.tdl.eventManager,
- org.imt.tdl.executionEngine,
+Export-Package: org.imt.tdl.executionEngine,
  org.imt.tdl.oclInterpreter
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.17.100",
  org.eclipse.core.resources;bundle-version="3.13.700",
@@ -32,5 +31,6 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.17.100",
  org.eclipse.emf.transaction;bundle-version="1.9.1",
  org.eclipse.emf.ecoretools.ale.xtext;bundle-version="1.2.0",
  org.eclipse.gemoc.executionframework.behavioralinterface;bundle-version="1.0.0",
- org.eclipse.gemoc.executionframework.event.model;bundle-version="4.0.0"
+ org.eclipse.gemoc.executionframework.event.model;bundle-version="4.0.0",
+ org.eclipse.gemoc.executionframework.event.manager;bundle-version="4.0.0"
 Import-Package: org.eclipse.emf.ecore.provider

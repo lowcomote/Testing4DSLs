@@ -1,8 +1,6 @@
 package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
-
-
 import fr.inria.diverse.k3.al.annotationprocessor.InitializeModel
 import fr.inria.diverse.k3.al.annotationprocessor.Main
 import fr.inria.diverse.k3.al.annotationprocessor.Step
@@ -16,13 +14,11 @@ import org.etsi.mts.tdl.TestDescription
 import org.imt.tdl.executionEngine.EngineFactory
 import org.imt.tdl.testResult.TDLTestCaseResult
 import org.imt.tdl.testResult.TDLTestPackageResult
-import org.imt.tdl.testResult.ui.TDLTestResultsView
+import org.imt.tdl.testResult.TestResultUtil
 
 import static extension org.imt.k3tdl.k3dsa.BehaviourDescriptionAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
-import static extension org.imt.k3tdl.k3dsa.PackageAspect.*
-import org.imt.tdl.testResult.TestResultUtil
 
 @Aspect(className = Package)
 class PackageAspect {
