@@ -2,6 +2,7 @@ package org.imt.tdl.executionEngine;
 
 import java.util.Arrays;
 
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +32,6 @@ import org.eclipse.gemoc.ale.interpreted.engine.sirius.ALESiriusInterpreterProvi
 import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.dsl.debug.ide.launch.AbstractDSLLaunchConfigurationDelegate;
 import org.eclipse.gemoc.dsl.debug.ide.sirius.ui.launch.AbstractDSLLaunchConfigurationDelegateSiriusUI;
-import org.eclipse.gemoc.execution.sequential.javaengine.PlainK3ExecutionEngine;
 import org.eclipse.gemoc.executionframework.engine.commons.DslHelper;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.eclipse.gemoc.executionframework.engine.commons.GenericModelExecutionContext;
@@ -131,8 +131,6 @@ public class ALEEngineLauncher extends AbstractEngine{
 		IEngineAddon aleRTDInterpreter = new ALESiriusInterpreterProviderAddon();
 		Activator.getDefault().getMessaggingSystem().debug("Enabled implicit addon: "+ aleRTDInterpreter.getAddonID(), Activator.PLUGIN_ID);
 		engine.getExecutionContext().getExecutionPlatform().addEngineAddon(aleRTDInterpreter);
-		//add testEngineAddon to use it for running dsl-specific commands
-		engine.getExecutionContext().getExecutionPlatform().addEngineAddon(this.testEngineAddon);
 		return engine;
 	}
 	private String getDslName(String dslFilePath) {

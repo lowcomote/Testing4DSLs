@@ -1,6 +1,7 @@
 package org.imt.tdl.executionEngine;
 
 import java.lang.reflect.Method;
+
 import java.util.Iterator;
 import java.util.Set;
 
@@ -14,10 +15,10 @@ import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.gemoc.execution.sequential.javaengine.PlainK3ExecutionEngine;
 import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.dsl.debug.ide.launch.AbstractDSLLaunchConfigurationDelegate;
 import org.eclipse.gemoc.dsl.debug.ide.sirius.ui.launch.AbstractDSLLaunchConfigurationDelegateSiriusUI;
+import org.eclipse.gemoc.execution.sequential.javaengine.PlainK3ExecutionEngine;
 import org.eclipse.gemoc.executionframework.engine.commons.DslHelper;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.eclipse.gemoc.executionframework.engine.commons.GenericModelExecutionContext;
@@ -102,7 +103,7 @@ public class JavaEngineLauncher extends AbstractEngine{
 		this.setModelResource(javaEngine.getExecutionContext().getResourceModel());
 		return "PASS: The model under test executed successfully";
 	}
-	private PlainK3ExecutionEngine createExecutionEngine() throws EngineContextException{
+	public PlainK3ExecutionEngine createExecutionEngine() throws EngineContextException{
 		// create and initialize engine
 		PlainK3ExecutionEngine engine = new PlainK3ExecutionEngine();
 		CustomModelExecutionContext executioncontext = null;
@@ -114,11 +115,9 @@ public class JavaEngineLauncher extends AbstractEngine{
 		}
 		executioncontext.setResourceModel(this.getModelResource());
 		engine.initialize(executioncontext);
-		//add testEngineAddon to use it for running dsl-specific commands
-		engine.getExecutionContext().getExecutionPlatform().addEngineAddon(this.testEngineAddon);
 		return engine;
 	}
-	private String getDslName(String dslFilePath) {
+	public String getDslName(String dslFilePath) {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
 		return dsl.getEntry("name").getValue().toString();
