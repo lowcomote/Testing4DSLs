@@ -88,7 +88,7 @@ class GateInstanceAspect {
 			if (_self.name.equals('oclMUTGate')){
 				MUTResource = _self.gateLauncher.MUTResource//the MUT objects are the received output
 			}
-			if (arg.dataInstance.dataType.isExposedEvent(_self.DSLPath)){//an execution rule is the received output 
+			else if (arg.dataInstance.dataType.isExposedEvent(_self.DSLPath)){//an execution rule is the received output 
 				//TODO: what should be set here??
 			}
 			var String status = null
