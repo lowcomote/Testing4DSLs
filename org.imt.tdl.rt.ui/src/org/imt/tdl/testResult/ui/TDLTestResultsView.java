@@ -14,15 +14,23 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
+import org.eclipse.swt.widgets.TreeItem;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 import org.imt.tdl.testResult.TDLMessageResult;
 import org.imt.tdl.testResult.TDLTestCaseResult;
@@ -90,10 +98,29 @@ public class TDLTestResultsView extends ViewPart{
 		gd.horizontalAlignment = SWT.FILL;
 	    data.setLayoutData(gd);
 
-	    Tree addressTree = new Tree(data, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
+	    final Tree addressTree = new Tree(data, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		addressTree.setHeaderVisible(true);
 		addressTree.setLinesVisible(true);
-		
+		addressTree.addListener(SWT.MouseDoubleClick, new Listener() {
+			@Override
+			public void handleEvent(Event event) {
+				Point point = new Point(event.x, event.y);
+				TreeItem item = addressTree.getItem(point);
+				if (item.getData() instanceof TDLMessageResult) {
+					TDLMessageResult verdict = (TDLMessageResult) item.getData();
+					final String description = verdict.getMessage();
+            		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+						public void run() {
+							Shell shell = PlatformUI.getWorkbench().getDisplay().getShells()[0];
+							MessageBox messageBox = new MessageBox(shell);
+							messageBox.setText("Description");
+							messageBox.setMessage(description);
+							messageBox.open();
+						}
+					});
+				}
+			}
+		});
 		m_treeViewer = new TreeViewer(addressTree);
 
 		TreeColumn column1 = new TreeColumn(addressTree, SWT.LEFT);
