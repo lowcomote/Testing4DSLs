@@ -80,7 +80,8 @@ public class K3EventManagerLauncher {
 		GenericEventManager eventManager = new GenericEventManager(
 				languageName, MUTResource, implementationRelationships, subtypingRelationships);
 		engine.getExecutionContext().getExecutionPlatform().addEngineAddon(eventManager);
-		
+		//if accepted event -> eventManager.processEventOccurance (e)
+		//if exposed event -> get an event from eventoccurances that is equal to e
 		LinkedTransferQueue<EventOccurrence> eventOccurrences = new LinkedTransferQueue<>();
 	}
 
