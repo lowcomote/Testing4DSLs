@@ -8,7 +8,7 @@
  * Contributors:
  *     Inria - initial API and implementation
  *******************************************************************************/
-package org.imt.tdl.graphical.services;
+package org.etsi.mts.tdl.graphical.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class TdlDebugServices extends AbstractGemocDebuggerServices {
 		//		- the second String is the id of the Layer
 		final List<StringCouple> res = new ArrayList<StringCouple>();
 	
-		res.add(new StringCouple("TDL", "Debug"));
+		res.add(new StringCouple("TestDescriptionDiagram", "Debug"));
 
 		return res;
 	}

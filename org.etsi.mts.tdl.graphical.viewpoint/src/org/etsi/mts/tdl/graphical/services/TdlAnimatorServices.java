@@ -8,7 +8,7 @@
  * Contributors:
  *     Inria - initial API and implementation
  *******************************************************************************/
-package org.imt.tdl.graphical.services;
+package org.etsi.mts.tdl.graphical.services;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ public class TdlAnimatorServices extends AbstractGemocAnimatorServices {
 	@Override
 	protected List<StringCouple> getRepresentationRefreshList() {  // <1>
 		final List<StringCouple> res = new ArrayList<StringCouple>();
-		res.add(new StringCouple("TDL", "Animation"));
+		res.add(new StringCouple("TestDescriptionDiagram", "Animation"));
 		return res;
 	}
 }
