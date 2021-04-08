@@ -4,15 +4,9 @@ Package genericTestCases {
 	Import all from testConfiguration ;
 	
 	StateMachine stateMachineNewState(_name = "BitShifting");
-	State S0 (
-		_name = "S0"
-	);
-	State S1 (
-		_name = "S1"
-	);
-	State S2 (
-		_name = "S2"
-	);
+	State S0 (_name = "S0");
+	State S1 (_name = "S1");
+	State S2 (_name = "S2");
 	
 	Test Description bitShiftingTest1 uses configuration genericConfiguration{
 		tester.genericTestGate sends stateMachineNewState

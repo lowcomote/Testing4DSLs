@@ -8,15 +8,15 @@
     <semanticResources>testSuite.tdlan2</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_UwFsEJfhEeuYVbGdAv-h4w">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_Vxe3oJfhEeuYVbGdAv-h4w" name="test1" repPath="#_Vwwe4JfhEeuYVbGdAv-h4w" changeId="6bce62d6-1aaa-40e1-8170-a163881fae7a">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_Vxe3oJfhEeuYVbGdAv-h4w" name="test1" repPath="#_Vwwe4JfhEeuYVbGdAv-h4w" changeId="356c41a5-f9b9-4a5c-862d-0d6fa043d3a4">
         <description xmi:type="description_1:SequenceDiagramDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']"/>
         <target xmi:type="tdl:TestDescription" href="testSuite.tdlan2#//@packagedElement.4"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_1puPZJhAEeuH7PwMquoySg" name="test2" repPath="#_1poIwJhAEeuH7PwMquoySg" changeId="e61c1b0b-5a3f-40df-a7b9-096c520b5174">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_1puPZJhAEeuH7PwMquoySg" name="test2" repPath="#_1poIwJhAEeuH7PwMquoySg" changeId="deec3e18-eb17-4c2e-b177-120d2462f613">
         <description xmi:type="description_1:SequenceDiagramDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']"/>
         <target xmi:type="tdl:TestDescription" href="testSuite.tdlan2#//@packagedElement.5"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_60cAxJhAEeuH7PwMquoySg" name="test3" repPath="#_60aLkJhAEeuH7PwMquoySg" changeId="6464373c-0468-487a-91cd-eb053ca159ea">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_60cAxJhAEeuH7PwMquoySg" name="test3" repPath="#_60aLkJhAEeuH7PwMquoySg" changeId="4e24eb3e-39c4-4a1c-99a1-7bbf5f558103">
         <description xmi:type="description_1:SequenceDiagramDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']"/>
         <target xmi:type="tdl:TestDescription" href="testSuite.tdlan2#//@packagedElement.6"/>
       </ownedRepresentationDescriptors>
@@ -72,10 +72,10 @@
                 <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WCquR5fhEeuYVbGdAv-h4w"/>
               </children>
               <styles xmi:type="notation:ShapeStyle" xmi:id="_WCquQZfhEeuYVbGdAv-h4w" fontName="Segoe UI" fontHeight="8"/>
-              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WCquQpfhEeuYVbGdAv-h4w" x="-43" y="140" width="10" height="10"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WCquQpfhEeuYVbGdAv-h4w" x="-43" y="183" width="10" height="10"/>
             </children>
             <styles xmi:type="notation:ShapeStyle" xmi:id="_WChkUZfhEeuYVbGdAv-h4w" fontName="Segoe UI" fontHeight="8"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WChkUpfhEeuYVbGdAv-h4w" y="42" width="10" height="140"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WChkUpfhEeuYVbGdAv-h4w" y="42" width="10" height="183"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_WCqHMJfhEeuYVbGdAv-h4w" type="3003" element="_V7ERcJfhEeuYVbGdAv-h4w">
             <styles xmi:type="notation:ShapeStyle" xmi:id="_WCqHMZfhEeuYVbGdAv-h4w" fontName="Segoe UI"/>
@@ -105,10 +105,10 @@
                 <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WCtKgpfhEeuYVbGdAv-h4w"/>
               </children>
               <styles xmi:type="notation:ShapeStyle" xmi:id="_WCsjd5fhEeuYVbGdAv-h4w" fontName="Segoe UI" fontHeight="8"/>
-              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WCsjeJfhEeuYVbGdAv-h4w" x="-43" y="140" width="10" height="10"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WCsjeJfhEeuYVbGdAv-h4w" x="-43" y="183" width="10" height="10"/>
             </children>
             <styles xmi:type="notation:ShapeStyle" xmi:id="_WCr8YZfhEeuYVbGdAv-h4w" fontName="Segoe UI" fontHeight="8"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WCr8YpfhEeuYVbGdAv-h4w" y="42" width="10" height="140"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WCr8YpfhEeuYVbGdAv-h4w" y="42" width="10" height="183"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_WCsjcJfhEeuYVbGdAv-h4w" type="3003" element="_V7JJ8JfhEeuYVbGdAv-h4w">
             <styles xmi:type="notation:ShapeStyle" xmi:id="_WCsjcZfhEeuYVbGdAv-h4w" fontName="Segoe UI"/>
@@ -120,7 +120,7 @@
         <styles xmi:type="notation:DiagramStyle" xmi:id="_Vx1c8pfhEeuYVbGdAv-h4w"/>
         <edges xmi:type="notation:Edge" xmi:id="_WC8bEJfhEeuYVbGdAv-h4w" type="4001" element="_V8vscJfhEeuYVbGdAv-h4w" source="_WChkUJfhEeuYVbGdAv-h4w" target="_WCr8YJfhEeuYVbGdAv-h4w">
           <children xmi:type="notation:Node" xmi:id="_WC8bFJfhEeuYVbGdAv-h4w" type="6001">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WC8bFZfhEeuYVbGdAv-h4w" y="-10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WC8bFZfhEeuYVbGdAv-h4w" x="5" y="-6"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_WC9pMJfhEeuYVbGdAv-h4w" type="6002">
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WC9pMZfhEeuYVbGdAv-h4w" y="10"/>
@@ -130,7 +130,7 @@
           </children>
           <styles xmi:type="notation:ConnectorStyle" xmi:id="_WC8bEZfhEeuYVbGdAv-h4w"/>
           <styles xmi:type="notation:FontStyle" xmi:id="_WC8bEpfhEeuYVbGdAv-h4w" fontName="Segoe UI" fontHeight="8"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WC8bE5fhEeuYVbGdAv-h4w" points="[0, -40, 0, -40]$[0, -40, 0, -40]"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WC8bE5fhEeuYVbGdAv-h4w" points="[0, -62, 0, -62]$[0, -62, 0, -62]"/>
           <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WDGzIJfhEeuYVbGdAv-h4w" id="(0.5,0.5)"/>
           <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WDGzIZfhEeuYVbGdAv-h4w" id="(0.5,0.5)"/>
         </edges>
@@ -146,13 +146,13 @@
           </children>
           <styles xmi:type="notation:ConnectorStyle" xmi:id="_WDGzI5fhEeuYVbGdAv-h4w"/>
           <styles xmi:type="notation:FontStyle" xmi:id="_WDGzJJfhEeuYVbGdAv-h4w" fontName="Segoe UI" fontHeight="8"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WDGzJZfhEeuYVbGdAv-h4w" points="[0, -20, 0, -20]$[0, -20, 0, -20]"/>
-          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WDGzLJfhEeuYVbGdAv-h4w" id="(0.5,0.5)"/>
-          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WDGzLZfhEeuYVbGdAv-h4w" id="(0.5,0.5)"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WDGzJZfhEeuYVbGdAv-h4w" points="[0, 81, 0, 81]$[0, 81, 0, 81]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_nP0ZgJhfEeuqkIw0ePjWPQ" id="(0.5, 0.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_nP0ZgZhfEeuqkIw0ePjWPQ" id="(0.5, 0.0)"/>
         </edges>
         <edges xmi:type="notation:Edge" xmi:id="_WDGzLpfhEeuYVbGdAv-h4w" type="4001" element="_WAnf0JfhEeuYVbGdAv-h4w" source="_WChkUJfhEeuYVbGdAv-h4w" target="_WCr8YJfhEeuYVbGdAv-h4w">
           <children xmi:type="notation:Node" xmi:id="_WDJPYJfhEeuYVbGdAv-h4w" type="6001">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WDJPYZfhEeuYVbGdAv-h4w" y="-10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WDJPYZfhEeuYVbGdAv-h4w" x="-2" y="-15"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_WDJ2cJfhEeuYVbGdAv-h4w" type="6002">
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WDJ2cZfhEeuYVbGdAv-h4w" y="10"/>
@@ -162,13 +162,13 @@
           </children>
           <styles xmi:type="notation:ConnectorStyle" xmi:id="_WDGzL5fhEeuYVbGdAv-h4w"/>
           <styles xmi:type="notation:FontStyle" xmi:id="_WDGzMJfhEeuYVbGdAv-h4w" fontName="Segoe UI" fontHeight="8"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WDGzMZfhEeuYVbGdAv-h4w" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
-          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WDJ2dJfhEeuYVbGdAv-h4w" id="(0.5,0.5)"/>
-          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WDJ2dZfhEeuYVbGdAv-h4w" id="(0.5,0.5)"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WDGzMZfhEeuYVbGdAv-h4w" points="[0, 112, 0, 112]$[0, 112, 0, 112]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_lJgNQJhfEeuqkIw0ePjWPQ" id="(0.5, 0.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_lJgNQZhfEeuqkIw0ePjWPQ" id="(0.5, 0.0)"/>
         </edges>
         <edges xmi:type="notation:Edge" xmi:id="_WDJ2dpfhEeuYVbGdAv-h4w" type="4001" element="_WBJrUJfhEeuYVbGdAv-h4w" source="_WCr8YJfhEeuYVbGdAv-h4w" target="_WChkUJfhEeuYVbGdAv-h4w">
           <children xmi:type="notation:Node" xmi:id="_WDKdgJfhEeuYVbGdAv-h4w" type="6001">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WDKdgZfhEeuYVbGdAv-h4w" x="1" y="23"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WDKdgZfhEeuYVbGdAv-h4w" x="-4" y="19"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_WDKdgpfhEeuYVbGdAv-h4w" type="6002">
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WDKdg5fhEeuYVbGdAv-h4w" y="10"/>
@@ -178,40 +178,15 @@
           </children>
           <styles xmi:type="notation:ConnectorStyle" xmi:id="_WDJ2d5fhEeuYVbGdAv-h4w"/>
           <styles xmi:type="notation:FontStyle" xmi:id="_WDJ2eJfhEeuYVbGdAv-h4w" fontName="Segoe UI" fontHeight="8"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WDJ2eZfhEeuYVbGdAv-h4w" points="[0, 20, 0, 20]$[0, 20, 0, 20]"/>
-          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WDKdhpfhEeuYVbGdAv-h4w" id="(0.5,0.5)"/>
-          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WDKdh5fhEeuYVbGdAv-h4w" id="(0.5,0.5)"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WDJ2eZfhEeuYVbGdAv-h4w" points="[0, 133, 0, 133]$[0, 133, 0, 133]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_kWD-IJhfEeuqkIw0ePjWPQ" id="(0.5, 0.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_kWD-IZhfEeuqkIw0ePjWPQ" id="(0.5, 0.0)"/>
         </edges>
       </data>
     </ownedAnnotationEntries>
     <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_WB-KsJfhEeuYVbGdAv-h4w" source="DANNOTATION_CUSTOMIZATION_KEY">
       <data xmi:type="diagram:ComputedStyleDescriptionRegistry" uid="_WB-KsZfhEeuYVbGdAv-h4w"/>
     </ownedAnnotationEntries>
-    <ownedDiagramElements xmi:type="diagram:DNode" uid="_V5XBQJfhEeuYVbGdAv-h4w" name="genericTestGate : genericGate" width="10" height="5" resizeKind="NSEW">
-      <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.0"/>
-      <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.0"/>
-      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_WXfuw5fhEeuYVbGdAv-h4w" x="180" y="50" height="50" width="100"/>
-      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_V7UJEJfhEeuYVbGdAv-h4w" outgoingEdges="_V8vscJfhEeuYVbGdAv-h4w _V_-moJfhEeuYVbGdAv-h4w _WAnf0JfhEeuYVbGdAv-h4w" incomingEdges="_WBJrUJfhEeuYVbGdAv-h4w" width="1" height="10" resizeKind="NSEW">
-        <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.0"/>
-        <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.0"/>
-        <ownedBorderedNodes xmi:type="diagram:DNode" uid="_V7VXMJfhEeuYVbGdAv-h4w" width="1" height="1" resizeKind="NSEW">
-          <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.0"/>
-          <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.0"/>
-          <ownedStyle xmi:type="diagram:Square" uid="_V7V-QJfhEeuYVbGdAv-h4w" showIcon="false" labelPosition="node" width="1" height="1" color="0,0,0">
-            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']/@style"/>
-          </ownedStyle>
-          <actualMapping xmi:type="description_1:EndOfLifeMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']"/>
-        </ownedBorderedNodes>
-        <ownedStyle xmi:type="diagram:Square" uid="_V7UJEZfhEeuYVbGdAv-h4w" showIcon="false" labelPosition="node" width="1" height="10" color="255,255,255">
-          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@style"/>
-        </ownedStyle>
-        <actualMapping xmi:type="description_1:ExecutionMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']"/>
-      </ownedBorderedNodes>
-      <ownedStyle xmi:type="diagram:Square" uid="_V7ERcJfhEeuYVbGdAv-h4w" showIcon="false" borderSize="1" borderSizeComputationExpression="1" labelPosition="node" width="10" height="5" color="255,255,255">
-        <description xmi:type="style:SquareDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@style"/>
-      </ownedStyle>
-      <actualMapping xmi:type="description_1:InstanceRoleMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']"/>
-    </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNode" uid="_V7Ii4JfhEeuYVbGdAv-h4w" name="genericMUTGate : genericGate" width="10" height="5" resizeKind="NSEW">
       <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.1"/>
       <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.1"/>
@@ -233,6 +208,31 @@
         <actualMapping xmi:type="description_1:ExecutionMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']"/>
       </ownedBorderedNodes>
       <ownedStyle xmi:type="diagram:Square" uid="_V7JJ8JfhEeuYVbGdAv-h4w" showIcon="false" borderSize="1" borderSizeComputationExpression="1" labelPosition="node" width="10" height="5" color="255,255,255">
+        <description xmi:type="style:SquareDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:InstanceRoleMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_V5XBQJfhEeuYVbGdAv-h4w" name="genericTestGate : genericGate" width="10" height="5" resizeKind="NSEW">
+      <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.0"/>
+      <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.0"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_WXfuw5fhEeuYVbGdAv-h4w" x="180" y="50" height="50" width="100"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_V7UJEJfhEeuYVbGdAv-h4w" outgoingEdges="_V8vscJfhEeuYVbGdAv-h4w _V_-moJfhEeuYVbGdAv-h4w _WAnf0JfhEeuYVbGdAv-h4w" incomingEdges="_WBJrUJfhEeuYVbGdAv-h4w" width="1" height="10" resizeKind="NSEW">
+        <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.0"/>
+        <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.0"/>
+        <ownedBorderedNodes xmi:type="diagram:DNode" uid="_V7VXMJfhEeuYVbGdAv-h4w" width="1" height="1" resizeKind="NSEW">
+          <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.0"/>
+          <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.0"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_V7V-QJfhEeuYVbGdAv-h4w" showIcon="false" labelPosition="node" width="1" height="1" color="0,0,0">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:EndOfLifeMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']"/>
+        </ownedBorderedNodes>
+        <ownedStyle xmi:type="diagram:Square" uid="_V7UJEZfhEeuYVbGdAv-h4w" showIcon="false" labelPosition="node" width="1" height="10" color="255,255,255">
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ExecutionMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']"/>
+      </ownedBorderedNodes>
+      <ownedStyle xmi:type="diagram:Square" uid="_V7ERcJfhEeuYVbGdAv-h4w" showIcon="false" borderSize="1" borderSizeComputationExpression="1" labelPosition="node" width="10" height="5" color="255,255,255">
         <description xmi:type="style:SquareDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:InstanceRoleMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']"/>
@@ -285,7 +285,7 @@
     <ownedDiagramElements xmi:type="diagram:DEdge" uid="_V_-moJfhEeuYVbGdAv-h4w" name=" runModel" sourceNode="_V7UJEJfhEeuYVbGdAv-h4w" targetNode="_V7WlUJfhEeuYVbGdAv-h4w">
       <target xmi:type="tdl:Target" href="testSuite.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.1/@target.0"/>
       <semanticElements xmi:type="tdl:Message" href="testSuite.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
-      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_WXfuwJfhEeuYVbGdAv-h4w" y="150" height="0"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_WXfuwJfhEeuYVbGdAv-h4w" y="181" height="0"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" uid="_V__0wJfhEeuYVbGdAv-h4w" size="2" strokeColor="0,0,0">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']/@style"/>
         <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_V__0wpfhEeuYVbGdAv-h4w" showIcon="false"/>
@@ -296,7 +296,7 @@
     <ownedDiagramElements xmi:type="diagram:DEdge" uid="_WAnf0JfhEeuYVbGdAv-h4w" name=" getModelState" sourceNode="_V7UJEJfhEeuYVbGdAv-h4w" targetNode="_V7WlUJfhEeuYVbGdAv-h4w">
       <target xmi:type="tdl:Target" href="testSuite.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.2/@target.0"/>
       <semanticElements xmi:type="tdl:Message" href="testSuite.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
-      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_WXfuwZfhEeuYVbGdAv-h4w" y="170" height="0"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_WXfuwZfhEeuYVbGdAv-h4w" y="212" height="0"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" uid="_WAot8JfhEeuYVbGdAv-h4w" size="2" strokeColor="0,0,0">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']/@style"/>
         <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_WAot8pfhEeuYVbGdAv-h4w" showIcon="false"/>
@@ -307,7 +307,7 @@
     <ownedDiagramElements xmi:type="diagram:DEdge" uid="_WBJrUJfhEeuYVbGdAv-h4w" name=" stateMachineNewState &#xD;&#xA;&#x9;&#x9;&#x9;( currentState := S2 , unprocessedString := &quot;&quot; , consumedString := &quot;000101010&quot; , producedString := &quot;000010101&quot; )" sourceNode="_V7WlUJfhEeuYVbGdAv-h4w" targetNode="_V7UJEJfhEeuYVbGdAv-h4w">
       <target xmi:type="tdl:Target" href="testSuite.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.3/@target.0"/>
       <semanticElements xmi:type="tdl:Message" href="testSuite.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
-      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_WXfuwpfhEeuYVbGdAv-h4w" y="190" height="0"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_WXfuwpfhEeuYVbGdAv-h4w" y="233" height="0"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" uid="_WBK5cJfhEeuYVbGdAv-h4w" size="2" strokeColor="0,0,0">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']/@style"/>
         <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_WBK5cpfhEeuYVbGdAv-h4w" showIcon="false"/>
@@ -560,31 +560,6 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:InstanceRoleMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DNode" uid="_1qC_gZhAEeuH7PwMquoySg" name="oclMUTGate : oclGate" width="10" height="5" resizeKind="NSEW">
-      <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
-      <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
-      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_1x3exJhAEeuH7PwMquoySg" x="180" y="50" height="50" width="100"/>
-      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_1qFbwZhAEeuH7PwMquoySg" outgoingEdges="_1rgYEJhAEeuH7PwMquoySg" incomingEdges="_1rABwJhAEeuH7PwMquoySg" width="1" height="10" resizeKind="NSEW">
-        <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
-        <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
-        <ownedBorderedNodes xmi:type="diagram:DNode" uid="_1qGC0JhAEeuH7PwMquoySg" width="1" height="1" resizeKind="NSEW">
-          <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
-          <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
-          <ownedStyle xmi:type="diagram:Square" uid="_1qGC0ZhAEeuH7PwMquoySg" showIcon="false" labelPosition="node" width="1" height="1" color="0,0,0">
-            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']/@style"/>
-          </ownedStyle>
-          <actualMapping xmi:type="description_1:EndOfLifeMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']"/>
-        </ownedBorderedNodes>
-        <ownedStyle xmi:type="diagram:Square" uid="_1qFbwphAEeuH7PwMquoySg" showIcon="false" labelPosition="node" width="1" height="10" color="255,255,255">
-          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@style"/>
-        </ownedStyle>
-        <actualMapping xmi:type="description_1:ExecutionMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']"/>
-      </ownedBorderedNodes>
-      <ownedStyle xmi:type="diagram:Square" uid="_1qDmkJhAEeuH7PwMquoySg" showIcon="false" borderSize="1" borderSizeComputationExpression="1" labelPosition="node" width="10" height="5" color="255,255,255">
-        <description xmi:type="style:SquareDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@style"/>
-      </ownedStyle>
-      <actualMapping xmi:type="description_1:InstanceRoleMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']"/>
-    </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNode" uid="_1qDmkphAEeuH7PwMquoySg" name="genericTestGate : genericGate" width="10" height="5" resizeKind="NSEW">
       <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.0"/>
       <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.0"/>
@@ -631,6 +606,31 @@
         <actualMapping xmi:type="description_1:ExecutionMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']"/>
       </ownedBorderedNodes>
       <ownedStyle xmi:type="diagram:Square" uid="_1qENophAEeuH7PwMquoySg" showIcon="false" borderSize="1" borderSizeComputationExpression="1" labelPosition="node" width="10" height="5" color="255,255,255">
+        <description xmi:type="style:SquareDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:InstanceRoleMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_1qC_gZhAEeuH7PwMquoySg" name="oclMUTGate : oclGate" width="10" height="5" resizeKind="NSEW">
+      <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+      <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_1x3exJhAEeuH7PwMquoySg" x="180" y="50" height="50" width="100"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_1qFbwZhAEeuH7PwMquoySg" outgoingEdges="_1rgYEJhAEeuH7PwMquoySg" incomingEdges="_1rABwJhAEeuH7PwMquoySg" width="1" height="10" resizeKind="NSEW">
+        <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+        <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+        <ownedBorderedNodes xmi:type="diagram:DNode" uid="_1qGC0JhAEeuH7PwMquoySg" width="1" height="1" resizeKind="NSEW">
+          <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+          <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_1qGC0ZhAEeuH7PwMquoySg" showIcon="false" labelPosition="node" width="1" height="1" color="0,0,0">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:EndOfLifeMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']"/>
+        </ownedBorderedNodes>
+        <ownedStyle xmi:type="diagram:Square" uid="_1qFbwphAEeuH7PwMquoySg" showIcon="false" labelPosition="node" width="1" height="10" color="255,255,255">
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ExecutionMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']"/>
+      </ownedBorderedNodes>
+      <ownedStyle xmi:type="diagram:Square" uid="_1qDmkJhAEeuH7PwMquoySg" showIcon="false" borderSize="1" borderSizeComputationExpression="1" labelPosition="node" width="10" height="5" color="255,255,255">
         <description xmi:type="style:SquareDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:InstanceRoleMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']"/>
@@ -947,31 +947,6 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:InstanceRoleMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DNode" uid="_61gXwphAEeuH7PwMquoySg" name="oclMUTGate : oclGate" width="10" height="5" resizeKind="NSEW">
-      <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
-      <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
-      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_6-Ym85hAEeuH7PwMquoySg" x="180" y="50" height="50" width="100"/>
-      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_61nFcJhAEeuH7PwMquoySg" outgoingEdges="_63qT4JhAEeuH7PwMquoySg" incomingEdges="_63UVoJhAEeuH7PwMquoySg" width="1" height="10" resizeKind="NSEW">
-        <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
-        <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
-        <ownedBorderedNodes xmi:type="diagram:DNode" uid="_61nFc5hAEeuH7PwMquoySg" width="1" height="1" resizeKind="NSEW">
-          <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
-          <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
-          <ownedStyle xmi:type="diagram:Square" uid="_61nFdJhAEeuH7PwMquoySg" showIcon="false" labelPosition="node" width="1" height="1" color="0,0,0">
-            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']/@style"/>
-          </ownedStyle>
-          <actualMapping xmi:type="description_1:EndOfLifeMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']"/>
-        </ownedBorderedNodes>
-        <ownedStyle xmi:type="diagram:Square" uid="_61nFcZhAEeuH7PwMquoySg" showIcon="false" labelPosition="node" width="1" height="10" color="255,255,255">
-          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@style"/>
-        </ownedStyle>
-        <actualMapping xmi:type="description_1:ExecutionMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']"/>
-      </ownedBorderedNodes>
-      <ownedStyle xmi:type="diagram:Square" uid="_61g-0JhAEeuH7PwMquoySg" showIcon="false" borderSize="1" borderSizeComputationExpression="1" labelPosition="node" width="10" height="5" color="255,255,255">
-        <description xmi:type="style:SquareDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@style"/>
-      </ownedStyle>
-      <actualMapping xmi:type="description_1:InstanceRoleMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']"/>
-    </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNode" uid="_61g-0phAEeuH7PwMquoySg" name="genericTestGate : genericGate" width="10" height="5" resizeKind="NSEW">
       <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.0"/>
       <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.0"/>
@@ -1018,6 +993,31 @@
         <actualMapping xmi:type="description_1:ExecutionMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']"/>
       </ownedBorderedNodes>
       <ownedStyle xmi:type="diagram:Square" uid="_61iM8JhAEeuH7PwMquoySg" showIcon="false" borderSize="1" borderSizeComputationExpression="1" labelPosition="node" width="10" height="5" color="255,255,255">
+        <description xmi:type="style:SquareDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:InstanceRoleMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_61gXwphAEeuH7PwMquoySg" name="oclMUTGate : oclGate" width="10" height="5" resizeKind="NSEW">
+      <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+      <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_6-Ym85hAEeuH7PwMquoySg" x="180" y="50" height="50" width="100"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_61nFcJhAEeuH7PwMquoySg" outgoingEdges="_63qT4JhAEeuH7PwMquoySg" incomingEdges="_63UVoJhAEeuH7PwMquoySg" width="1" height="10" resizeKind="NSEW">
+        <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+        <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+        <ownedBorderedNodes xmi:type="diagram:DNode" uid="_61nFc5hAEeuH7PwMquoySg" width="1" height="1" resizeKind="NSEW">
+          <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+          <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_61nFdJhAEeuH7PwMquoySg" showIcon="false" labelPosition="node" width="1" height="1" color="0,0,0">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:EndOfLifeMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']"/>
+        </ownedBorderedNodes>
+        <ownedStyle xmi:type="diagram:Square" uid="_61nFcZhAEeuH7PwMquoySg" showIcon="false" labelPosition="node" width="1" height="10" color="255,255,255">
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ExecutionMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']"/>
+      </ownedBorderedNodes>
+      <ownedStyle xmi:type="diagram:Square" uid="_61g-0JhAEeuH7PwMquoySg" showIcon="false" borderSize="1" borderSizeComputationExpression="1" labelPosition="node" width="10" height="5" color="255,255,255">
         <description xmi:type="style:SquareDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:InstanceRoleMapping" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']"/>
