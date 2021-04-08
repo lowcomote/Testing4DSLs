@@ -33,8 +33,10 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.sirius.properties.ext.widgets.reference,
  org.eclipse.sirius.properties.ext.widgets.reference.edit,
  org.eclipse.sirius.ui.properties.ext.widgets.reference,
- org.eclipse.gemoc.executionframework.extensions.sirius;bundle-version="0.0.0";visibility:="reexport",
- org.eclipse.gemoc.execution.sequential.javaengine.ui;bundle-version=0.0.0;visibility:=reexport
+ org.eclipse.gemoc.executionframework.extensions.sirius;bundle-version="0.0.0";visibility:=reexport,
+ org.eclipse.gemoc.execution.sequential.javaengine.ui;bundle-version="0.0.0";visibility:=reexport,
+ org.imt.k3tdl.tdlInterpreter,
+ org.imt.tdl.testResult
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: org.etsi.mts.tdl

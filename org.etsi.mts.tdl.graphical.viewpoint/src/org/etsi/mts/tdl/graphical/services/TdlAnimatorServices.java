@@ -11,13 +11,17 @@
 package org.etsi.mts.tdl.graphical.services;
 
 import java.util.ArrayList;
-
 import java.util.List;
+import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gemoc.executionframework.extensions.sirius.services.AbstractGemocAnimatorServices;
+import org.etsi.mts.tdl.Message;
+import org.imt.k3tdl.k3dsa.MessageAspectMessageAspectContext;
+import org.imt.tdl.testResult.TDLMessageResult;
 
-// tag::FsmAnimatorServicesClass[]
 public class TdlAnimatorServices extends AbstractGemocAnimatorServices {
 	@Override
 	protected List<StringCouple> getRepresentationRefreshList() {  // <1>
@@ -25,5 +29,20 @@ public class TdlAnimatorServices extends AbstractGemocAnimatorServices {
 		res.add(new StringCouple("TestDescriptionDiagram", "Animation"));
 		return res;
 	}
+	public boolean isPassedMessage(EObject o){    
+		if(o.eContainer() instanceof Message){
+			Message message = (Message) o.eContainer();
+			return MessageAspectMessageAspectContext.INSTANCE.getSelf(message).messageVerdict.getValue();
+		} else {
+			return false;
+		}
+	}
+	public boolean isFailedMessage(EObject o){     
+		if(o.eContainer() instanceof Message){
+			Message message = (Message) o.eContainer();
+			return !MessageAspectMessageAspectContext.INSTANCE.getSelf(message).messageVerdict.getValue();
+		} else {
+			return false;
+		}
+	}
 }
-// end::FsmAnimatorServicesClass[]
