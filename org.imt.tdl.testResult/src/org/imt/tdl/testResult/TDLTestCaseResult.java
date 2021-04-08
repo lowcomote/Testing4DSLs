@@ -70,18 +70,10 @@ public class TDLTestCaseResult {
 		return failures;
 	}
 
-	public void addTdlMessage(String tdlMessageName, boolean value, boolean error, String message, HashMap<DataUse, DataUse> oracle) {
-		TDLMessageResult testInfo = new TDLMessageResult();
-		if (tdlMessageName == null) {
-			this.messageNumber++;
-			tdlMessageName = "Message#" + this.messageNumber;
-		}
-		testInfo.setTdlMessageName(tdlMessageName);
-		testInfo.setValue(value);
-		testInfo.setMessage(message);
-		testInfo.setOracle(oracle);
-		testInfo.setFailure(error);
-		this.tdlMessages.add(testInfo);
+	public void addTdlMessage(TDLMessageResult messageVerdict) {
+		this.messageNumber++;
+		messageVerdict.setTdlMessageName("Message#" + this.messageNumber);
+		this.tdlMessages.add(messageVerdict);
 	}
 	
 }

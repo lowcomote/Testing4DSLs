@@ -47,6 +47,7 @@ import static extension org.imt.k3tdl.k3dsa.GateInstanceAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
 import org.etsi.mts.tdl.Target
+import org.imt.tdl.testResult.TDLMessageResult
 
 @Aspect (className = BehaviourDescription)
 class BehaviourDescriptionAspect{
@@ -202,6 +203,7 @@ class ProcedureCallAspect extends InteractoinAspect{
 }
 @Aspect (className = Message)
 class MessageAspect extends InteractoinAspect{
+	private TDLMessageResult messageVerdict;
 	@Step
 	@OverrideAspectMethod
 	def boolean performBehavior(){
@@ -211,15 +213,15 @@ class MessageAspect extends InteractoinAspect{
 			if (_self.sourceGate.component.role.toString == "SUT"){
 				//when the SUT component sends an argument, it is actually an assertion that have to be checked
 				_self.sourceGate.gate.setLauncher(_self.parentTestDescription.launcher)
-				var String info = _self.sourceGate.gate.assertArgument(_self.argument)
-				_self.addMessageResult(info)
+				var String verdict = _self.sourceGate.gate.assertArgument(_self.argument)
+				_self.addMessageResult(verdict)
 				return true //continue test case execution
 			}else{//the argument has to be sent to the MUT
 				t.targetGate.gate.setLauncher(_self.parentTestDescription.launcher)
-				var String info = t.targetGate.gate.sendArgument2sut(_self.argument)			
-				_self.addMessageResult(info)
+				var String verdict = t.targetGate.gate.sendArgument2sut(_self.argument)			
+				_self.addMessageResult(verdict)
 				var boolean result = true
-				if (info.contains("FAIL")){
+				if (verdict.contains("FAIL")){
 					result = false
 					_self.parentTestDescription.testCaseResult.value = "INCONCLUSIVE"//the test case should be interrupted
 				}
@@ -237,7 +239,8 @@ class MessageAspect extends InteractoinAspect{
 		if (info.contains(":")){
 			message = info.substring(info.indexOf(":") + 2, info.length)
 		}
-		_self.parentTestDescription.testCaseResult.addTdlMessage(_self.name, result, !result, message, null)
+		_self.messageVerdict = new TDLMessageResult(_self.name, result, message, null,!result);
+		_self.parentTestDescription.testCaseResult.addTdlMessage(_self.messageVerdict)
 	}
 }
 @Aspect (className = TimerStart)

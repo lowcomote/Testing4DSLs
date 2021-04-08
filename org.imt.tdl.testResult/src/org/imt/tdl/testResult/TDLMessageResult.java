@@ -16,6 +16,13 @@ public class TDLMessageResult {
 	
 	private boolean failure;
 	
+	public TDLMessageResult(String tdlMessageName, boolean value, String message, HashMap<DataUse, DataUse> oracle, boolean error) {
+		this.tdlMessageName = tdlMessageName;
+		this.value = value;
+		this.message = message;
+		this.oracle = oracle;
+		this.failure = error;
+	}
 	public String getTdlMessageName() {
 		if (this.tdlMessageName == null) {
 			return "NULL";
