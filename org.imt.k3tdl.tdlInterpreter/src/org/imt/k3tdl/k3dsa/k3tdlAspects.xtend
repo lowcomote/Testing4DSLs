@@ -46,8 +46,8 @@ class PackageAspect {
     		for (TestDescription tc:_self.testcases) {
     			_self.enabledTestCase = tc;
     			_self.enabledConfiguration = tc.testConfiguration;
-    			val TDLTestCaseResult result = _self.enabledTestCase.executeTestCase()
-    			_self.testPackageResults.addResult(result)
+    			val TDLTestCaseResult verdict = _self.enabledTestCase.executeTestCase()
+    			_self.testPackageResults.addResult(verdict)
     			println()
     		}
     		TestResultUtil.instance.testPackageResult = _self.testPackageResults  		

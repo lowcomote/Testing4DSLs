@@ -80,7 +80,7 @@ class DataTypeAspect{
 			var interfacePath = dsl.getEntry("behavioralInterface").getValue().replaceFirst("resource", "plugin");
 			var interfaceRes = (new ResourceSetImpl()).getResource(URI.createURI(interfacePath), true);
 			var BehavioralInterface interfaceRootElement= interfaceRes.getContents().get(0) as BehavioralInterface;
-			return interfaceRootElement.events.exists[e | e.name.equals(_self.getValidName) && e.type.getName() != "EXPOSED"]
+			return interfaceRootElement.events.exists[e | e.name.equals(_self.getValidName) && e.type.getName().equals("ACCEPTED") ]
 		}
 		return false;
 	}
@@ -91,7 +91,7 @@ class DataTypeAspect{
 			var interfacePath = dsl.getEntry("behavioralInterface").getValue().replaceFirst("resource", "plugin");
 			var interfaceRes = (new ResourceSetImpl()).getResource(URI.createURI(interfacePath), true);
 			var BehavioralInterface interfaceRootElement= interfaceRes.getContents().get(0) as BehavioralInterface;
-			return interfaceRootElement.events.exists[e | e.name.equals(_self.getValidName) && e.type.getName() != "ACCEPTED"]
+			return interfaceRootElement.events.exists[e | e.name.equals(_self.getValidName) && e.type.getName().equals("EXPOSED")]
 		}
 		return false;
 	}
@@ -151,6 +151,7 @@ class StructuredDataInstanceAspect extends DataInstanceAspect{
 		}
 		return null
 	}
+	@Step
 	def String setMatchedMUTElement(EObject matchedObject, Resource MUTResource, String DSLPath){
 		var String status = ""
 		for (i : 0 ..<_self.memberAssignment.size){
@@ -455,6 +456,7 @@ class LiteralValueUseAspect extends StaticDataUseAspect{
 		}
 		return "FAIL: The expected data is: " + parameterValue + ", but the current data is: " + featureValue
 	}
+	@Step
 	@OverrideAspectMethod
 	def String updateData(EObject object, EStructuralFeature matchedFeature){
 		var String parameterValue = _self.value
