@@ -10,6 +10,7 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
@@ -27,6 +28,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.swt.widgets.TreeItem;
@@ -88,20 +90,21 @@ public class TDLTestResultsView extends ViewPart{
 			}
 		});
 		
-		Group data = new Group(contents, SWT.FILL);
+		Group testVerdict = new Group(contents, SWT.FILL);
 		FillLayout fill = new FillLayout(SWT.VERTICAL);
-		data.setLayout(fill);
+		testVerdict.setLayout(fill);
 		layout.numColumns = 1;
 		layout.verticalSpacing = 9;
-	    data.setText("Results");
+		testVerdict.setText("Results");
 		gd = new GridData(GridData.FILL_HORIZONTAL | GridData.FILL_VERTICAL);
 		gd.horizontalAlignment = SWT.FILL;
-	    data.setLayoutData(gd);
-
-	    final Tree addressTree = new Tree(data, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
+		testVerdict.setLayoutData(gd);
+		
+	    final Tree addressTree = new Tree(testVerdict, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		addressTree.setHeaderVisible(true);
 		addressTree.setLinesVisible(true);
-		addressTree.addListener(SWT.MouseDoubleClick, new Listener() {
+		final StyledText detailTextBox = new StyledText(testVerdict, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
+		addressTree.addListener(SWT.MouseDown, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
 				Point point = new Point(event.x, event.y);
@@ -111,11 +114,12 @@ public class TDLTestResultsView extends ViewPart{
 					final String description = verdict.getMessage();
             		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
 						public void run() {
-							Shell shell = PlatformUI.getWorkbench().getDisplay().getShells()[0];
-							MessageBox messageBox = new MessageBox(shell);
-							messageBox.setText("Description");
-							messageBox.setMessage(description);
-							messageBox.open();
+							detailTextBox.setText(description);
+							//Shell shell = PlatformUI.getWorkbench().getDisplay().getShells()[0];
+							//MessageBox messageBox = new MessageBox(shell);
+							//messageBox.setText("Description");
+							//messageBox.setMessage(description);
+							//messageBox.open();
 						}
 					});
 				}
