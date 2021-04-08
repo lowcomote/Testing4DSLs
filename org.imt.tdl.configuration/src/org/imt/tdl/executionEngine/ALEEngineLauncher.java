@@ -1,16 +1,12 @@
 package org.imt.tdl.executionEngine;
 
 import java.util.Arrays;
-
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.CoreException;
-
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
@@ -34,8 +30,6 @@ import org.eclipse.gemoc.dsl.debug.ide.launch.AbstractDSLLaunchConfigurationDele
 import org.eclipse.gemoc.dsl.debug.ide.sirius.ui.launch.AbstractDSLLaunchConfigurationDelegateSiriusUI;
 import org.eclipse.gemoc.executionframework.engine.commons.DslHelper;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
-import org.eclipse.gemoc.executionframework.engine.commons.GenericModelExecutionContext;
-import org.eclipse.gemoc.executionframework.engine.commons.K3DslHelper;
 import org.eclipse.gemoc.executionframework.engine.commons.sequential.SequentialRunConfiguration;
 import org.eclipse.gemoc.executionframework.engine.ui.Activator;
 import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
@@ -70,7 +64,7 @@ public class ALEEngineLauncher extends AbstractEngine{
 		this._animationFirstBreak = true;
 		this._modelInitializationMethod = getModelInitializationMethodName();
 		this._modelInitializationArguments = "";
-		this.executionMode = ExecutionMode.Run;
+		this.executionMode = ExecutionMode.Animation;
 		this.configureEngine();
 	}
 	//definition of a new configuration of ALE Engine for running a specific model
