@@ -50,7 +50,7 @@ import org.etsi.mts.tdl.Target
 
 @Aspect (className = BehaviourDescription)
 class BehaviourDescriptionAspect{
-	@Step
+
 	def boolean callBehavior(){
 		return _self.behaviour.performBehavior()
 	}
@@ -58,7 +58,7 @@ class BehaviourDescriptionAspect{
 @Aspect (className = Behaviour)
 class BehaviourAspect{
 	public Behaviour enabledBehaviour;
-	@Step
+
 	def boolean performBehavior(){
 		_self.enabledBehaviour = _self
 		return false
@@ -66,7 +66,7 @@ class BehaviourAspect{
 }
 @Aspect (className = AtomicBehaviour)
 class AtomicBehaviourAspect extends BehaviourAspect{
-	@Step
+
 	@OverrideAspectMethod
 	def boolean performBehavior(){
 		return false
@@ -74,7 +74,7 @@ class AtomicBehaviourAspect extends BehaviourAspect{
 }
 @Aspect (className = CombinedBehaviour)
 class CombinedBehaviourAspect extends BehaviourAspect{
-	@Step
+
 	@OverrideAspectMethod
 	def boolean performBehavior(){
 		return false
@@ -82,7 +82,7 @@ class CombinedBehaviourAspect extends BehaviourAspect{
 }
 @Aspect (className = PeriodicBehaviour)
 class PeriodicBehaviourAspect extends BehaviourAspect{
-	@Step
+
 	@OverrideAspectMethod
 	def boolean performBehavior(){
 		return _self.block.traverseBlock()
@@ -90,7 +90,7 @@ class PeriodicBehaviourAspect extends BehaviourAspect{
 }
 @Aspect (className = ExceptionalBehaviour)
 class ExceptionalBehaviourAspect extends BehaviourAspect{
-	@Step
+
 	@OverrideAspectMethod
 	def boolean performBehavior(){
 		return false
@@ -98,7 +98,7 @@ class ExceptionalBehaviourAspect extends BehaviourAspect{
 }
 @Aspect (className = ActionBehaviour)
 class ActionBehaviourAspect extends AtomicBehaviourAspect{
-	@Step
+
 	@OverrideAspectMethod
 	def boolean performBehavior(){
 		return false
@@ -146,7 +146,7 @@ class InteractoinAspect extends AtomicBehaviourAspect{
 }
 @Aspect (className = TimerOperation)
 class TimerOperationAspect extends AtomicBehaviourAspect{
-	@Step
+
 	@OverrideAspectMethod
 	def boolean performBehavior(){
 		return false
@@ -154,7 +154,7 @@ class TimerOperationAspect extends AtomicBehaviourAspect{
 }
 @Aspect (className = TimeOperation)
 class TimeOperationAspect extends AtomicBehaviourAspect{
-	@Step
+
 	@OverrideAspectMethod
 	def boolean performBehavior(){
 		return false
@@ -282,7 +282,7 @@ class QuiescenceAspect extends TimeOperationAspect{
 }
 @Aspect (className = SingleCombinedBehaviour)
 class SingleCombinedBehaviourAspect extends CombinedBehaviourAspect{
-	@Step
+
 	@OverrideAspectMethod
 	def boolean performBehavior(){
 		return _self.block.traverseBlock()
@@ -290,7 +290,7 @@ class SingleCombinedBehaviourAspect extends CombinedBehaviourAspect{
 }
 @Aspect (className = MultipleCombinedBehaviour)
 class MultipleCombinedBehaviourAspect extends CombinedBehaviourAspect{
-	@Step
+
 	@OverrideAspectMethod
 	def boolean performBehavior(){
 		return false
@@ -298,7 +298,7 @@ class MultipleCombinedBehaviourAspect extends CombinedBehaviourAspect{
 }
 @Aspect (className = BoundedLoopBehaviour)
 class BoundedLoopBehaviourAspect extends SingleCombinedBehaviourAspect{
-	@Step
+
 	@OverrideAspectMethod
 	def boolean performBehavior(){
 		return _self.block.traverseBlock()
@@ -306,7 +306,7 @@ class BoundedLoopBehaviourAspect extends SingleCombinedBehaviourAspect{
 }
 @Aspect (className = UnboundedLoopBehaviour)
 class UnBoundedLoopBehaviourAspect extends SingleCombinedBehaviourAspect{
-	@Step
+
 	@OverrideAspectMethod
 	def boolean performBehavior(){
 		return _self.block.traverseBlock()
@@ -314,7 +314,7 @@ class UnBoundedLoopBehaviourAspect extends SingleCombinedBehaviourAspect{
 }
 @Aspect (className = CompoundBehaviour)
 class CompoundBehaviourAspect extends SingleCombinedBehaviourAspect{
-	@Step
+
 	@OverrideAspectMethod
 	def boolean performBehavior(){
 		return _self.block.traverseBlock()
@@ -322,7 +322,7 @@ class CompoundBehaviourAspect extends SingleCombinedBehaviourAspect{
 }
 @Aspect (className = OptionalBehaviour)
 class OptionalBehaviourAspect extends SingleCombinedBehaviourAspect{
-	@Step
+
 	@OverrideAspectMethod
 	def boolean performBehavior(){
 		return _self.block.traverseBlock()
@@ -330,7 +330,7 @@ class OptionalBehaviourAspect extends SingleCombinedBehaviourAspect{
 }
 @Aspect (className = ConditionalBehaviour)
 class ConditionalBehaviourAspect extends MultipleCombinedBehaviourAspect{
-	@Step
+
 	@OverrideAspectMethod
 	def boolean performBehavior(){
 		return false
@@ -338,7 +338,7 @@ class ConditionalBehaviourAspect extends MultipleCombinedBehaviourAspect{
 }
 @Aspect (className = AlternativeBehaviour)
 class AlternativeBehaviourAspect extends MultipleCombinedBehaviourAspect{
-	@Step
+
 	@OverrideAspectMethod
 	def boolean performBehavior(){
 		var result = true
@@ -355,7 +355,7 @@ class AlternativeBehaviourAspect extends MultipleCombinedBehaviourAspect{
 }
 @Aspect (className = ParallelBehaviour)
 class ParallelBehaviourAspect extends MultipleCombinedBehaviourAspect{
-	@Step
+
 	@OverrideAspectMethod
 	def boolean performBehavior(){
 		return false
@@ -363,7 +363,7 @@ class ParallelBehaviourAspect extends MultipleCombinedBehaviourAspect{
 }
 @Aspect (className = DefaultBehaviour)
 class DefaultBehaviourAspect extends ExceptionalBehaviourAspect{
-	@Step
+
 	@OverrideAspectMethod
 	def boolean performBehavior(){
 		return _self.block.traverseBlock()
@@ -371,7 +371,7 @@ class DefaultBehaviourAspect extends ExceptionalBehaviourAspect{
 }
 @Aspect (className = InterruptBehaviour)
 class InterruptBehaviourAspect extends ExceptionalBehaviourAspect{
-	@Step
+
 	@OverrideAspectMethod
 	def boolean performBehavior(){
 		return _self.block.traverseBlock()
@@ -379,7 +379,7 @@ class InterruptBehaviourAspect extends ExceptionalBehaviourAspect{
 }
 @Aspect (className = Block)
 class BlockAspect{
-	@Step
+
 	def boolean traverseBlock(){
 		var result = true
 		for (Behaviour b:_self.behaviour){

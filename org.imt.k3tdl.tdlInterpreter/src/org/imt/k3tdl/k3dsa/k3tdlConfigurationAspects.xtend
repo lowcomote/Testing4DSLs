@@ -43,7 +43,7 @@ class GateInstanceAspect {
 	def void setLauncher(EngineFactory launcher) {
 		_self.gateLauncher = launcher;
 	}
-	@Step
+
 	def String assertArgument(DataUse argument) {
 		//if the argument is a string
 		if (argument instanceof LiteralValueUse){			
@@ -131,7 +131,7 @@ class GateInstanceAspect {
 		}
 	}
 
-	@Step
+
 	def String sendArgument2sut(DataUse argument) {
 		if (argument instanceof DataInstanceUse) {
 			var arg = (argument as DataInstanceUse)
@@ -159,7 +159,7 @@ class GateInstanceAspect {
 		}
 		return "FAIL: Cannot send data to the MUT"
 	}
-	@Step
+
 	def String setModelState(DataInstanceUse arg){
 		//get the current MUTResource
 		var MUTResource = _self.gateLauncher.MUTResource;

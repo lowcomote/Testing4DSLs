@@ -1,9 +1,7 @@
 package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
-
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
-import fr.inria.diverse.k3.al.annotationprocessor.Step
 import java.util.ArrayList
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.common.util.URI
@@ -27,6 +25,7 @@ import org.etsi.mts.tdl.SpecialValueUse
 import org.etsi.mts.tdl.StaticDataUse
 import org.etsi.mts.tdl.StructuredDataInstance
 import org.etsi.mts.tdl.StructuredDataType
+import org.imt.tdl.testResult.TestResultUtil
 
 import static extension org.imt.k3tdl.k3dsa.DataInstanceAspect.*
 import static extension org.imt.k3tdl.k3dsa.DataTypeAspect.*
@@ -36,8 +35,6 @@ import static extension org.imt.k3tdl.k3dsa.MemberAssignmentAspect.*
 import static extension org.imt.k3tdl.k3dsa.ParameterBindingAspect.*
 import static extension org.imt.k3tdl.k3dsa.StaticDataUseAspect.*
 import static extension org.imt.k3tdl.k3dsa.StructuredDataInstanceAspect.*
-import org.imt.tdl.testResult.TestResultUtil
-import java.util.List
 
 @Aspect (className = DataType)
 class DataTypeAspect{
@@ -151,7 +148,7 @@ class StructuredDataInstanceAspect extends DataInstanceAspect{
 		}
 		return null
 	}
-	@Step
+
 	def String setMatchedMUTElement(EObject matchedObject, Resource MUTResource, String DSLPath){
 		var String status = ""
 		for (i : 0 ..<_self.memberAssignment.size){
@@ -241,7 +238,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 		}
 		return "PASS";
 	}
-	@Step
+
 	def String setMatchedMUTElement(Resource MUTResource, String DSLPath){
 		//the second parameter is isAssertion that has to be set as false
 		//so only static elements will be matched to then set the values of its dynamic features
@@ -307,7 +304,6 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 	}
 	
 	@OverrideAspectMethod
-	@Step
 	def String updateData(Resource MUTResource, EObject object, EStructuralFeature matchedFeature, String DSLPath){
 		val ArrayList<EObject> matchedObjects = new ArrayList
 		if (_self.item != null && _self.item.size > 0){//there are several intances of data
@@ -456,7 +452,7 @@ class LiteralValueUseAspect extends StaticDataUseAspect{
 		}
 		return "FAIL: The expected data is: " + parameterValue + ", but the current data is: " + featureValue
 	}
-	@Step
+
 	@OverrideAspectMethod
 	def String updateData(EObject object, EStructuralFeature matchedFeature){
 		var String parameterValue = _self.value
