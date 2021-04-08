@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/sequence/description/2.0.0" xmlns:description_2="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:sequence="http://www.eclipse.org/sirius/diagram/sequence/2.0.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tdl="http://www.etsi.org/spec/TDL/1.4.1" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/sequence/description/2.0.0 http://www.eclipse.org/sirius/diagram/sequence/2.0.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
-  <viewpoint:DAnalysis uid="_c7yWkIBFEeu_s-mKWHZ_zg" selectedViews="_UwFsEJfhEeuYVbGdAv-h4w" version="14.3.1.202003261200">
+  <viewpoint:DAnalysis uid="_c7yWkIBFEeu_s-mKWHZ_zg" selectedViews="_AzzLQJh6EeucZZaWUXkwwA" version="14.3.1.202003261200">
     <semanticResources>generated/fsmSpecificTypes.tdlan2</semanticResources>
     <semanticResources>generated/testConfiguration.tdlan2</semanticResources>
     <semanticResources>generated/common.tdlan2</semanticResources>
@@ -18,6 +18,21 @@
       </ownedRepresentationDescriptors>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_60cAxJhAEeuH7PwMquoySg" name="test3" repPath="#_60aLkJhAEeuH7PwMquoySg" changeId="4e24eb3e-39c4-4a1c-99a1-7bbf5f558103">
         <description xmi:type="description_1:SequenceDiagramDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']"/>
+        <target xmi:type="tdl:TestDescription" href="testSuite.tdlan2#//@packagedElement.6"/>
+      </ownedRepresentationDescriptors>
+    </ownedViews>
+    <ownedViews xmi:type="viewpoint:DView" uid="_AzzLQJh6EeucZZaWUXkwwA">
+      <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']"/>
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_BSSeEJh6EeucZZaWUXkwwA" name="test1" repPath="#_BRvEcJh6EeucZZaWUXkwwA" changeId="bcd45255-d923-470f-98a3-3d6fffcf5571">
+        <description xmi:type="description_1:SequenceDiagramDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']"/>
+        <target xmi:type="tdl:TestDescription" href="testSuite.tdlan2#//@packagedElement.4"/>
+      </ownedRepresentationDescriptors>
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_JCaygJh6EeucZZaWUXkwwA" name="test2" repPath="#_JCXvMJh6EeucZZaWUXkwwA" changeId="36deab30-d2db-4383-9d32-611ac7dc1da9">
+        <description xmi:type="description_1:SequenceDiagramDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']"/>
+        <target xmi:type="tdl:TestDescription" href="testSuite.tdlan2#//@packagedElement.5"/>
+      </ownedRepresentationDescriptors>
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_LEUY1Jh6EeucZZaWUXkwwA" name="test3" repPath="#_LETKsJh6EeucZZaWUXkwwA" changeId="329e8406-e5eb-4964-a6cd-2581d3f03a14">
+        <description xmi:type="description_1:SequenceDiagramDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']"/>
         <target xmi:type="tdl:TestDescription" href="testSuite.tdlan2#//@packagedElement.6"/>
       </ownedRepresentationDescriptors>
     </ownedViews>
@@ -1092,6 +1107,1081 @@
     <description xmi:type="description_1:SequenceDiagramDescription" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']"/>
     <filterVariableHistory xmi:type="diagram:FilterVariableHistory" uid="_60aLkZhAEeuH7PwMquoySg"/>
     <activatedLayers xmi:type="description_2:Layer" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/TDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer"/>
+    <target xmi:type="tdl:TestDescription" href="testSuite.tdlan2#//@packagedElement.6"/>
+  </sequence:SequenceDDiagram>
+  <sequence:SequenceDDiagram uid="_BRvEcJh6EeucZZaWUXkwwA" headerHeight="3">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_BSpqcJh6EeucZZaWUXkwwA" source="GMF_DIAGRAMS">
+      <data xmi:type="notation:Diagram" xmi:id="_BSpqcZh6EeucZZaWUXkwwA" type="Sirius" element="_BRvEcJh6EeucZZaWUXkwwA" measurementUnit="Pixel">
+        <children xmi:type="notation:Node" xmi:id="_Bhn6k5h6EeucZZaWUXkwwA" type="2003" element="_BbGb0Jh6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_Bhn6lph6EeucZZaWUXkwwA" type="5007"/>
+          <children xmi:type="notation:Node" xmi:id="_Bhn6l5h6EeucZZaWUXkwwA" type="7004">
+            <children xmi:type="notation:Node" xmi:id="_BhySoJh6EeucZZaWUXkwwA" type="3010" element="_BbUeQJh6EeucZZaWUXkwwA">
+              <styles xmi:type="notation:FontStyle" xmi:id="_BhySoZh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_BhySoph6EeucZZaWUXkwwA"/>
+            </children>
+            <styles xmi:type="notation:SortingStyle" xmi:id="_Bhn6mJh6EeucZZaWUXkwwA"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_Bhn6mZh6EeucZZaWUXkwwA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_Bhn6lJh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8" bold="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Bhn6lZh6EeucZZaWUXkwwA" x="40" y="10"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_BhnTgJh6EeucZZaWUXkwwA" type="2003" element="_Ba-gAJh6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_BhnTg5h6EeucZZaWUXkwwA" type="5007"/>
+          <children xmi:type="notation:Node" xmi:id="_Bhn6kJh6EeucZZaWUXkwwA" type="7004">
+            <children xmi:type="notation:Node" xmi:id="_BhxrkJh6EeucZZaWUXkwwA" type="3010" element="_BbNJgJh6EeucZZaWUXkwwA">
+              <styles xmi:type="notation:FontStyle" xmi:id="_BhxrkZh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_Bhxrkph6EeucZZaWUXkwwA"/>
+            </children>
+            <styles xmi:type="notation:SortingStyle" xmi:id="_Bhn6kZh6EeucZZaWUXkwwA"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_Bhn6kph6EeucZZaWUXkwwA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_BhnTgZh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8" bold="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BhnTgph6EeucZZaWUXkwwA" x="170" y="10"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_BhbGQJh6EeucZZaWUXkwwA" type="2001" element="_BYz80Jh6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_Bhf-wJh6EeucZZaWUXkwwA" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_Bhf-wZh6EeucZZaWUXkwwA" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_BhohoJh6EeucZZaWUXkwwA" type="3001" element="_BaOSEJh6EeucZZaWUXkwwA">
+            <children xmi:type="notation:Node" xmi:id="_BhpIsph6EeucZZaWUXkwwA" type="5001">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_BhpIs5h6EeucZZaWUXkwwA" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_BhvPUJh6EeucZZaWUXkwwA" type="3003" element="_BaOSEZh6EeucZZaWUXkwwA">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_BhvPUZh6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BhvPUph6EeucZZaWUXkwwA"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_BhvPU5h6EeucZZaWUXkwwA" type="3001" element="_BaO5IZh6EeucZZaWUXkwwA">
+              <children xmi:type="notation:Node" xmi:id="_BhvPVph6EeucZZaWUXkwwA" type="5001">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_BhvPV5h6EeucZZaWUXkwwA" y="5"/>
+              </children>
+              <children xmi:type="notation:Node" xmi:id="_Bhv2YJh6EeucZZaWUXkwwA" type="3003" element="_BaO5Iph6EeucZZaWUXkwwA">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_Bhv2YZh6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Bhv2Yph6EeucZZaWUXkwwA"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_BhvPVJh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BhvPVZh6EeucZZaWUXkwwA" x="-43" y="220" width="10" height="10"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_BhpIsJh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BhpIsZh6EeucZZaWUXkwwA" y="42" width="10" height="220"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_BhuoQJh6EeucZZaWUXkwwA" type="3003" element="_BaD6AJh6EeucZZaWUXkwwA">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_BhuoQZh6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BhuoQph6EeucZZaWUXkwwA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_BhbGQZh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BhbGQph6EeucZZaWUXkwwA" x="50" y="50" width="100" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_BhmFYJh6EeucZZaWUXkwwA" type="2001" element="_BaHkYJh6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_BhmFY5h6EeucZZaWUXkwwA" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_BhmFZJh6EeucZZaWUXkwwA" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_Bhv2Y5h6EeucZZaWUXkwwA" type="3001" element="_BaPgMZh6EeucZZaWUXkwwA">
+            <children xmi:type="notation:Node" xmi:id="_Bhv2Zph6EeucZZaWUXkwwA" type="5001">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_Bhv2Z5h6EeucZZaWUXkwwA" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_Bhwdc5h6EeucZZaWUXkwwA" type="3003" element="_BaPgMph6EeucZZaWUXkwwA">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_BhwddJh6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BhwddZh6EeucZZaWUXkwwA"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_Bhwddph6EeucZZaWUXkwwA" type="3001" element="_BaQHQZh6EeucZZaWUXkwwA">
+              <children xmi:type="notation:Node" xmi:id="_BhwdeZh6EeucZZaWUXkwwA" type="5001">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_Bhwdeph6EeucZZaWUXkwwA" y="5"/>
+              </children>
+              <children xmi:type="notation:Node" xmi:id="_BhxEgJh6EeucZZaWUXkwwA" type="3003" element="_BaQHQph6EeucZZaWUXkwwA">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_BhxEgZh6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BhxEgph6EeucZZaWUXkwwA"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_Bhwdd5h6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BhwdeJh6EeucZZaWUXkwwA" x="-43" y="220" width="10" height="10"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_Bhv2ZJh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Bhv2ZZh6EeucZZaWUXkwwA" y="42" width="10" height="220"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_BhwdcJh6EeucZZaWUXkwwA" type="3003" element="_BaILcJh6EeucZZaWUXkwwA">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_BhwdcZh6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Bhwdcph6EeucZZaWUXkwwA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_BhmFYZh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BhmFYph6EeucZZaWUXkwwA" x="180" y="50" width="100" height="50"/>
+        </children>
+        <styles xmi:type="notation:DiagramStyle" xmi:id="_BSpqcph6EeucZZaWUXkwwA"/>
+        <edges xmi:type="notation:Edge" xmi:id="_Bh8qsJh6EeucZZaWUXkwwA" type="4001" element="_Bb67MJh6EeucZZaWUXkwwA" source="_Bhv2Y5h6EeucZZaWUXkwwA" target="_BhohoJh6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_Bh9RwJh6EeucZZaWUXkwwA" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Bh9RwZh6EeucZZaWUXkwwA" x="-2" y="-2"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_Bh940Jh6EeucZZaWUXkwwA" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Bh940Zh6EeucZZaWUXkwwA" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_Bh940ph6EeucZZaWUXkwwA" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Bh9405h6EeucZZaWUXkwwA" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_Bh8qsZh6EeucZZaWUXkwwA"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_Bh8qsph6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Bh8qs5h6EeucZZaWUXkwwA" points="[0, 50, 0, 50]$[0, 50, 0, 50]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_GUB5oJh6EeucZZaWUXkwwA" id="(0.5, 0.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_GUB5oZh6EeucZZaWUXkwwA" id="(0.5, 0.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_BiFNkph6EeucZZaWUXkwwA" type="4001" element="_Bfa7IJh6EeucZZaWUXkwwA" source="_Bhv2Y5h6EeucZZaWUXkwwA" target="_BhohoJh6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_BiF0oJh6EeucZZaWUXkwwA" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BiF0oZh6EeucZZaWUXkwwA" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_BiF0oph6EeucZZaWUXkwwA" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BiF0o5h6EeucZZaWUXkwwA" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_BiF0pJh6EeucZZaWUXkwwA" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BiF0pZh6EeucZZaWUXkwwA" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_BiFNk5h6EeucZZaWUXkwwA"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_BiFNlJh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_BiFNlZh6EeucZZaWUXkwwA" points="[0, 90, 0, 90]$[0, 90, 0, 90]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_FeL2wJh6EeucZZaWUXkwwA" id="(0.5, 0.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_FeL2wZh6EeucZZaWUXkwwA" id="(0.5, 0.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_BiF0qJh6EeucZZaWUXkwwA" type="4001" element="_Bf_i4Jh6EeucZZaWUXkwwA" source="_Bhv2Y5h6EeucZZaWUXkwwA" target="_BhohoJh6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_BiGbsJh6EeucZZaWUXkwwA" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BiGbsZh6EeucZZaWUXkwwA" x="1" y="-17"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_BiGbsph6EeucZZaWUXkwwA" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BiGbs5h6EeucZZaWUXkwwA" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_BiGbtJh6EeucZZaWUXkwwA" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BiGbtZh6EeucZZaWUXkwwA" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_BiF0qZh6EeucZZaWUXkwwA"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_BiF0qph6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_BiF0q5h6EeucZZaWUXkwwA" points="[0, 120, 0, 120]$[0, 120, 0, 120]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_EzZ0YJh6EeucZZaWUXkwwA" id="(0.5, 0.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_EzZ0YZh6EeucZZaWUXkwwA" id="(0.5, 0.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_BiHCwZh6EeucZZaWUXkwwA" type="4001" element="_BghHUJh6EeucZZaWUXkwwA" source="_BhohoJh6EeucZZaWUXkwwA" target="_Bhv2Y5h6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_BiHCxZh6EeucZZaWUXkwwA" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BiHCxph6EeucZZaWUXkwwA" x="3" y="-22"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_BiHCx5h6EeucZZaWUXkwwA" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BiHCyJh6EeucZZaWUXkwwA" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_BiHCyZh6EeucZZaWUXkwwA" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BiHCyph6EeucZZaWUXkwwA" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_BiHCwph6EeucZZaWUXkwwA"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_BiHCw5h6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_BiHCxJh6EeucZZaWUXkwwA" points="[0, 170, 0, 170]$[0, 170, 0, 170]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_DIsmEJh6EeucZZaWUXkwwA" id="(0.5, 0.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_DIsmEZh6EeucZZaWUXkwwA" id="(0.5, 0.0)"/>
+        </edges>
+      </data>
+    </ownedAnnotationEntries>
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_BhL1sJh6EeucZZaWUXkwwA" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" uid="_BhMcwJh6EeucZZaWUXkwwA"/>
+    </ownedAnnotationEntries>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_BYz80Jh6EeucZZaWUXkwwA" name="genericMUTGate : genericGate" width="10" height="5" resizeKind="NSEW">
+      <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.1"/>
+      <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.1"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_B0XQZJh6EeucZZaWUXkwwA" x="50" y="50" height="50" width="100"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_BaOSEJh6EeucZZaWUXkwwA" outgoingEdges="_BghHUJh6EeucZZaWUXkwwA" incomingEdges="_Bb67MJh6EeucZZaWUXkwwA _Bfa7IJh6EeucZZaWUXkwwA _Bf_i4Jh6EeucZZaWUXkwwA" width="1" height="10" resizeKind="NSEW">
+        <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.1"/>
+        <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.1"/>
+        <ownedBorderedNodes xmi:type="diagram:DNode" uid="_BaO5IZh6EeucZZaWUXkwwA" width="1" height="1" resizeKind="NSEW">
+          <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.1"/>
+          <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.1"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_BaO5Iph6EeucZZaWUXkwwA" showIcon="false" labelPosition="node" width="1" height="1" color="0,0,0">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:EndOfLifeMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']"/>
+        </ownedBorderedNodes>
+        <ownedStyle xmi:type="diagram:Square" uid="_BaOSEZh6EeucZZaWUXkwwA" showIcon="false" labelPosition="node" width="1" height="10" color="255,255,255">
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ExecutionMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']"/>
+      </ownedBorderedNodes>
+      <ownedStyle xmi:type="diagram:Square" uid="_BaD6AJh6EeucZZaWUXkwwA" showIcon="false" borderSize="1" borderSizeComputationExpression="1" labelPosition="node" width="10" height="5" color="255,255,255">
+        <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:InstanceRoleMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_BaHkYJh6EeucZZaWUXkwwA" name="genericTestGate : genericGate" width="10" height="5" resizeKind="NSEW">
+      <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.0"/>
+      <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.0"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_B0XQZZh6EeucZZaWUXkwwA" x="180" y="50" height="50" width="100"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_BaPgMZh6EeucZZaWUXkwwA" outgoingEdges="_Bb67MJh6EeucZZaWUXkwwA _Bfa7IJh6EeucZZaWUXkwwA _Bf_i4Jh6EeucZZaWUXkwwA" incomingEdges="_BghHUJh6EeucZZaWUXkwwA" width="1" height="10" resizeKind="NSEW">
+        <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.0"/>
+        <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.0"/>
+        <ownedBorderedNodes xmi:type="diagram:DNode" uid="_BaQHQZh6EeucZZaWUXkwwA" width="1" height="1" resizeKind="NSEW">
+          <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.0"/>
+          <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@connection.0/@endPoint.0"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_BaQHQph6EeucZZaWUXkwwA" showIcon="false" labelPosition="node" width="1" height="1" color="0,0,0">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:EndOfLifeMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']"/>
+        </ownedBorderedNodes>
+        <ownedStyle xmi:type="diagram:Square" uid="_BaPgMph6EeucZZaWUXkwwA" showIcon="false" labelPosition="node" width="1" height="10" color="255,255,255">
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ExecutionMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']"/>
+      </ownedBorderedNodes>
+      <ownedStyle xmi:type="diagram:Square" uid="_BaILcJh6EeucZZaWUXkwwA" showIcon="false" borderSize="1" borderSizeComputationExpression="1" labelPosition="node" width="10" height="5" color="255,255,255">
+        <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:InstanceRoleMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_Ba-gAJh6EeucZZaWUXkwwA" name="Tester">
+      <target xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@componentInstance.0"/>
+      <semanticElements xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@componentInstance.0"/>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_BbF0wJh6EeucZZaWUXkwwA" showIcon="false" borderSize="1" borderSizeComputationExpression="1" foregroundColor="255,255,255">
+        <labelFormat>bold</labelFormat>
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_2:ContainerMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']"/>
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_BbNJgJh6EeucZZaWUXkwwA" name="tester : TestSystem">
+        <target xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@componentInstance.0"/>
+        <semanticElements xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@componentInstance.0"/>
+        <ownedStyle xmi:type="diagram:Square" uid="_BbT3MJh6EeucZZaWUXkwwA" showIcon="false" borderSize="-1" borderSizeComputationExpression="-1" labelPosition="node" color="255,255,255">
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']/@subNodeMappings[name='componentInstance.name']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_2:NodeMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']/@subNodeMappings[name='componentInstance.name']"/>
+      </ownedElements>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_BbGb0Jh6EeucZZaWUXkwwA" name="SUT">
+      <target xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@componentInstance.1"/>
+      <semanticElements xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@componentInstance.1"/>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_BbGb0Zh6EeucZZaWUXkwwA" showIcon="false" borderSize="1" borderSizeComputationExpression="1" foregroundColor="255,255,255">
+        <labelFormat>bold</labelFormat>
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_2:ContainerMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']"/>
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_BbUeQJh6EeucZZaWUXkwwA" name="fsm : MUT">
+        <target xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@componentInstance.1"/>
+        <semanticElements xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.6/@componentInstance.1"/>
+        <ownedStyle xmi:type="diagram:Square" uid="_BbUeQZh6EeucZZaWUXkwwA" showIcon="false" borderSize="-1" borderSizeComputationExpression="-1" labelPosition="node" color="255,255,255">
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']/@subNodeMappings[name='componentInstance.name']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_2:NodeMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']/@subNodeMappings[name='componentInstance.name']"/>
+      </ownedElements>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_Bb67MJh6EeucZZaWUXkwwA" name=" stateMachineNewState&#xD;&#xA;&#x9;&#x9;&#x9;( unprocessedString := &quot;000101010&quot; )" sourceNode="_BaPgMZh6EeucZZaWUXkwwA" targetNode="_BaOSEJh6EeucZZaWUXkwwA">
+      <target xmi:type="tdl:Target" href="testSuite.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.0/@target.0"/>
+      <semanticElements xmi:type="tdl:Message" href="testSuite.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_B0XQYJh6EeucZZaWUXkwwA" y="150" height="0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_BcvakJh6EeucZZaWUXkwwA" size="2" strokeColor="0,0,0">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_Bcvakph6EeucZZaWUXkwwA" showIcon="false"/>
+        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_BcvakZh6EeucZZaWUXkwwA" showIcon="false"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:BasicMessageMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_Bfa7IJh6EeucZZaWUXkwwA" name=" runModel" sourceNode="_BaPgMZh6EeucZZaWUXkwwA" targetNode="_BaOSEJh6EeucZZaWUXkwwA">
+      <target xmi:type="tdl:Target" href="testSuite.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.1/@target.0"/>
+      <semanticElements xmi:type="tdl:Message" href="testSuite.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_B0XQYZh6EeucZZaWUXkwwA" y="190" height="0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_BfcwUJh6EeucZZaWUXkwwA" size="2" strokeColor="0,0,0">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_BfcwUph6EeucZZaWUXkwwA" showIcon="false"/>
+        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_BfcwUZh6EeucZZaWUXkwwA" showIcon="false"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:BasicMessageMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_Bf_i4Jh6EeucZZaWUXkwwA" name=" getModelState" sourceNode="_BaPgMZh6EeucZZaWUXkwwA" targetNode="_BaOSEJh6EeucZZaWUXkwwA">
+      <target xmi:type="tdl:Target" href="testSuite.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.2/@target.0"/>
+      <semanticElements xmi:type="tdl:Message" href="testSuite.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_B0XQYph6EeucZZaWUXkwwA" y="220" height="0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_BgBYEJh6EeucZZaWUXkwwA" size="2" strokeColor="0,0,0">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_BgBYEph6EeucZZaWUXkwwA" showIcon="false"/>
+        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_BgBYEZh6EeucZZaWUXkwwA" showIcon="false"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:BasicMessageMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_BghHUJh6EeucZZaWUXkwwA" name=" stateMachineNewState &#xD;&#xA;&#x9;&#x9;&#x9;( currentState := S2 , unprocessedString := &quot;&quot; , consumedString := &quot;000101010&quot; , producedString := &quot;000010101&quot; )" sourceNode="_BaOSEJh6EeucZZaWUXkwwA" targetNode="_BaPgMZh6EeucZZaWUXkwwA">
+      <target xmi:type="tdl:Target" href="testSuite.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.3/@target.0"/>
+      <semanticElements xmi:type="tdl:Message" href="testSuite.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_B0XQY5h6EeucZZaWUXkwwA" y="270" height="0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_BgiVcJh6EeucZZaWUXkwwA" size="2" strokeColor="0,0,0">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_BgiVcph6EeucZZaWUXkwwA" showIcon="false"/>
+        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_BgiVcZh6EeucZZaWUXkwwA" showIcon="false"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:BasicMessageMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']"/>
+    </ownedDiagramElements>
+    <description xmi:type="description_1:SequenceDiagramDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" uid="_BR41cJh6EeucZZaWUXkwwA"/>
+    <activatedLayers xmi:type="description_2:Layer" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer"/>
+    <activatedLayers xmi:type="description_2:AdditionalLayer" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@additionalLayers[name='Animation']"/>
+    <target xmi:type="tdl:TestDescription" href="testSuite.tdlan2#//@packagedElement.4"/>
+  </sequence:SequenceDDiagram>
+  <sequence:SequenceDDiagram uid="_JCXvMJh6EeucZZaWUXkwwA" headerHeight="3">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_JCaygZh6EeucZZaWUXkwwA" source="GMF_DIAGRAMS">
+      <data xmi:type="notation:Diagram" xmi:id="_JCaygph6EeucZZaWUXkwwA" type="Sirius" element="_JCXvMJh6EeucZZaWUXkwwA" measurementUnit="Pixel">
+        <children xmi:type="notation:Node" xmi:id="_JGL4NJh6EeucZZaWUXkwwA" type="2003" element="_JDtL8ph6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_JGL4N5h6EeucZZaWUXkwwA" type="5007"/>
+          <children xmi:type="notation:Node" xmi:id="_JGL4OJh6EeucZZaWUXkwwA" type="7004">
+            <children xmi:type="notation:Node" xmi:id="_JGQwsJh6EeucZZaWUXkwwA" type="3010" element="_JD288Jh6EeucZZaWUXkwwA">
+              <styles xmi:type="notation:FontStyle" xmi:id="_JGQwsZh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_JGQwsph6EeucZZaWUXkwwA"/>
+            </children>
+            <styles xmi:type="notation:SortingStyle" xmi:id="_JGL4OZh6EeucZZaWUXkwwA"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_JGL4Oph6EeucZZaWUXkwwA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_JGL4NZh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8" bold="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGL4Nph6EeucZZaWUXkwwA" x="40" y="10"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_JGLRJ5h6EeucZZaWUXkwwA" type="2003" element="_JDmeQJh6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_JGL4MJh6EeucZZaWUXkwwA" type="5007"/>
+          <children xmi:type="notation:Node" xmi:id="_JGL4MZh6EeucZZaWUXkwwA" type="7004">
+            <children xmi:type="notation:Node" xmi:id="_JGQJqJh6EeucZZaWUXkwwA" type="3010" element="_JDxdYJh6EeucZZaWUXkwwA">
+              <styles xmi:type="notation:FontStyle" xmi:id="_JGQJqZh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_JGQJqph6EeucZZaWUXkwwA"/>
+            </children>
+            <styles xmi:type="notation:SortingStyle" xmi:id="_JGL4Mph6EeucZZaWUXkwwA"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_JGL4M5h6EeucZZaWUXkwwA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_JGLRKJh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8" bold="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGLRKZh6EeucZZaWUXkwwA" x="300" y="10"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_JGKDAJh6EeucZZaWUXkwwA" type="2001" element="_JDQgAJh6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_JGKqEJh6EeucZZaWUXkwwA" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_JGKqEZh6EeucZZaWUXkwwA" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_JGL4O5h6EeucZZaWUXkwwA" type="3001" element="_JDfJgJh6EeucZZaWUXkwwA">
+            <children xmi:type="notation:Node" xmi:id="_JGL4Pph6EeucZZaWUXkwwA" type="5001">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_JGL4P5h6EeucZZaWUXkwwA" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_JGMfQ5h6EeucZZaWUXkwwA" type="3003" element="_JDfJgZh6EeucZZaWUXkwwA">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_JGMfRJh6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGMfRZh6EeucZZaWUXkwwA"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_JGMfRph6EeucZZaWUXkwwA" type="3001" element="_JDgXoJh6EeucZZaWUXkwwA">
+              <children xmi:type="notation:Node" xmi:id="_JGMfSZh6EeucZZaWUXkwwA" type="5001">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_JGMfSph6EeucZZaWUXkwwA" y="5"/>
+              </children>
+              <children xmi:type="notation:Node" xmi:id="_JGNGUJh6EeucZZaWUXkwwA" type="3003" element="_JDgXoZh6EeucZZaWUXkwwA">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_JGNGUZh6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGNGUph6EeucZZaWUXkwwA"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_JGMfR5h6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGMfSJh6EeucZZaWUXkwwA" x="-43" y="120" width="10" height="10"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_JGL4PJh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGL4PZh6EeucZZaWUXkwwA" y="42" width="10" height="120"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_JGMfQJh6EeucZZaWUXkwwA" type="3003" element="_JDWmoJh6EeucZZaWUXkwwA">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_JGMfQZh6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGMfQph6EeucZZaWUXkwwA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_JGKDAZh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGKDAph6EeucZZaWUXkwwA" x="310" y="50" width="100" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_JGKqEph6EeucZZaWUXkwwA" type="2001" element="_JDXNsZh6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_JGKqFZh6EeucZZaWUXkwwA" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_JGKqFph6EeucZZaWUXkwwA" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_JGNGU5h6EeucZZaWUXkwwA" type="3001" element="_JDg-sJh6EeucZZaWUXkwwA">
+            <children xmi:type="notation:Node" xmi:id="_JGNGVph6EeucZZaWUXkwwA" type="5001">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_JGNGV5h6EeucZZaWUXkwwA" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_JGNGW5h6EeucZZaWUXkwwA" type="3003" element="_JDg-sZh6EeucZZaWUXkwwA">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_JGNGXJh6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGNGXZh6EeucZZaWUXkwwA"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_JGNtYJh6EeucZZaWUXkwwA" type="3001" element="_JDg-s5h6EeucZZaWUXkwwA">
+              <children xmi:type="notation:Node" xmi:id="_JGNtY5h6EeucZZaWUXkwwA" type="5001">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_JGNtZJh6EeucZZaWUXkwwA" y="5"/>
+              </children>
+              <children xmi:type="notation:Node" xmi:id="_JGNtZZh6EeucZZaWUXkwwA" type="3003" element="_JDhlwJh6EeucZZaWUXkwwA">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_JGNtZph6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGNtZ5h6EeucZZaWUXkwwA"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_JGNtYZh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGNtYph6EeucZZaWUXkwwA" x="-43" y="120" width="10" height="10"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_JGNGVJh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGNGVZh6EeucZZaWUXkwwA" y="42" width="10" height="120"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_JGNGWJh6EeucZZaWUXkwwA" type="3003" element="_JDX0wJh6EeucZZaWUXkwwA">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_JGNGWZh6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGNGWph6EeucZZaWUXkwwA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_JGKqE5h6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGKqFJh6EeucZZaWUXkwwA" x="440" y="50" width="100" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_JGKqF5h6EeucZZaWUXkwwA" type="2001" element="_JDYb0Zh6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_JGLRIJh6EeucZZaWUXkwwA" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_JGLRIZh6EeucZZaWUXkwwA" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_JGNtaJh6EeucZZaWUXkwwA" type="3001" element="_JDhlwph6EeucZZaWUXkwwA">
+            <children xmi:type="notation:Node" xmi:id="_JGNta5h6EeucZZaWUXkwwA" type="5001">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_JGNtbJh6EeucZZaWUXkwwA" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_JGOUcJh6EeucZZaWUXkwwA" type="3003" element="_JDhlw5h6EeucZZaWUXkwwA">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_JGOUcZh6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGOUcph6EeucZZaWUXkwwA"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_JGOUc5h6EeucZZaWUXkwwA" type="3001" element="_JDiM0Zh6EeucZZaWUXkwwA">
+              <children xmi:type="notation:Node" xmi:id="_JGO7gJh6EeucZZaWUXkwwA" type="5001">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_JGO7gZh6EeucZZaWUXkwwA" y="5"/>
+              </children>
+              <children xmi:type="notation:Node" xmi:id="_JGO7gph6EeucZZaWUXkwwA" type="3003" element="_JDiM0ph6EeucZZaWUXkwwA">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_JGO7g5h6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGO7hJh6EeucZZaWUXkwwA"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_JGOUdJh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGOUdZh6EeucZZaWUXkwwA" x="-43" y="120" width="10" height="10"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_JGNtaZh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGNtaph6EeucZZaWUXkwwA" y="42" width="10" height="120"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_JGNtbZh6EeucZZaWUXkwwA" type="3003" element="_JDZC4Jh6EeucZZaWUXkwwA">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_JGNtbph6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGNtb5h6EeucZZaWUXkwwA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_JGKqGJh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGKqGZh6EeucZZaWUXkwwA" x="50" y="50" width="100" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_JGLRIph6EeucZZaWUXkwwA" type="2001" element="_JDZC4ph6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_JGLRJZh6EeucZZaWUXkwwA" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_JGLRJph6EeucZZaWUXkwwA" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_JGPikJh6EeucZZaWUXkwwA" type="3001" element="_JDiz4Zh6EeucZZaWUXkwwA">
+            <children xmi:type="notation:Node" xmi:id="_JGPik5h6EeucZZaWUXkwwA" type="5001">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_JGPilJh6EeucZZaWUXkwwA" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_JGPimJh6EeucZZaWUXkwwA" type="3003" element="_JDiz4ph6EeucZZaWUXkwwA">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_JGPimZh6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGPimph6EeucZZaWUXkwwA"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_JGQJoJh6EeucZZaWUXkwwA" type="3001" element="_JDiz5Jh6EeucZZaWUXkwwA">
+              <children xmi:type="notation:Node" xmi:id="_JGQJo5h6EeucZZaWUXkwwA" type="5001">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_JGQJpJh6EeucZZaWUXkwwA" y="5"/>
+              </children>
+              <children xmi:type="notation:Node" xmi:id="_JGQJpZh6EeucZZaWUXkwwA" type="3003" element="_JDja8Jh6EeucZZaWUXkwwA">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_JGQJpph6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGQJp5h6EeucZZaWUXkwwA"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_JGQJoZh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGQJoph6EeucZZaWUXkwwA" x="-43" y="120" width="10" height="10"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_JGPikZh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGPikph6EeucZZaWUXkwwA" y="42" width="10" height="120"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_JGPilZh6EeucZZaWUXkwwA" type="3003" element="_JDZp8Jh6EeucZZaWUXkwwA">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_JGPilph6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGPil5h6EeucZZaWUXkwwA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_JGLRI5h6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGLRJJh6EeucZZaWUXkwwA" x="180" y="50" width="100" height="50"/>
+        </children>
+        <styles xmi:type="notation:DiagramStyle" xmi:id="_JCayg5h6EeucZZaWUXkwwA"/>
+        <edges xmi:type="notation:Edge" xmi:id="_JGQws5h6EeucZZaWUXkwwA" type="4001" element="_JEGNgJh6EeucZZaWUXkwwA" source="_JGL4O5h6EeucZZaWUXkwwA" target="_JGNtaJh6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_JGQwt5h6EeucZZaWUXkwwA" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGQwuJh6EeucZZaWUXkwwA" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_JGQwuZh6EeucZZaWUXkwwA" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGQwuph6EeucZZaWUXkwwA" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_JGQwu5h6EeucZZaWUXkwwA" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGQwvJh6EeucZZaWUXkwwA" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_JGQwtJh6EeucZZaWUXkwwA"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_JGQwtZh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_JGQwtph6EeucZZaWUXkwwA" points="[0, -30, 0, -30]$[0, -30, 0, -30]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_JGRXwJh6EeucZZaWUXkwwA" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_JGRXwZh6EeucZZaWUXkwwA" id="(0.5,0.5)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_JGRXwph6EeucZZaWUXkwwA" type="4001" element="_JFDPwJh6EeucZZaWUXkwwA" source="_JGNGU5h6EeucZZaWUXkwwA" target="_JGPikJh6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_JGRXxph6EeucZZaWUXkwwA" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGRXx5h6EeucZZaWUXkwwA" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_JGRXyJh6EeucZZaWUXkwwA" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGRXyZh6EeucZZaWUXkwwA" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_JGRXyph6EeucZZaWUXkwwA" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGRXy5h6EeucZZaWUXkwwA" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_JGRXw5h6EeucZZaWUXkwwA"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_JGRXxJh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_JGRXxZh6EeucZZaWUXkwwA" points="[0, -10, 0, -10]$[0, -10, 0, -10]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_JGRXzJh6EeucZZaWUXkwwA" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_JGRXzZh6EeucZZaWUXkwwA" id="(0.5,0.5)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_JGRXzph6EeucZZaWUXkwwA" type="4001" element="_JFfUoJh6EeucZZaWUXkwwA" source="_JGPikJh6EeucZZaWUXkwwA" target="_JGNGU5h6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_JGRX0ph6EeucZZaWUXkwwA" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGRX05h6EeucZZaWUXkwwA" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_JGRX1Jh6EeucZZaWUXkwwA" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGRX1Zh6EeucZZaWUXkwwA" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_JGRX1ph6EeucZZaWUXkwwA" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGRX15h6EeucZZaWUXkwwA" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_JGRXz5h6EeucZZaWUXkwwA"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_JGRX0Jh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_JGRX0Zh6EeucZZaWUXkwwA" points="[0, 10, 0, 10]$[0, 10, 0, 10]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_JGRX2Jh6EeucZZaWUXkwwA" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_JGRX2Zh6EeucZZaWUXkwwA" id="(0.5,0.5)"/>
+        </edges>
+      </data>
+    </ownedAnnotationEntries>
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_JGI04Jh6EeucZZaWUXkwwA" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" uid="_JGI04Zh6EeucZZaWUXkwwA"/>
+    </ownedAnnotationEntries>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_JDQgAJh6EeucZZaWUXkwwA" name="genericTestGate : genericGate" width="10" height="5" resizeKind="NSEW">
+      <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.0"/>
+      <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.0"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_JK71U5h6EeucZZaWUXkwwA" x="310" y="50" height="50" width="100"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_JDfJgJh6EeucZZaWUXkwwA" outgoingEdges="_JEGNgJh6EeucZZaWUXkwwA" width="1" height="10" resizeKind="NSEW">
+        <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.0"/>
+        <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.0"/>
+        <ownedBorderedNodes xmi:type="diagram:DNode" uid="_JDgXoJh6EeucZZaWUXkwwA" width="1" height="1" resizeKind="NSEW">
+          <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.0"/>
+          <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.0"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_JDgXoZh6EeucZZaWUXkwwA" showIcon="false" labelPosition="node" width="1" height="1" color="0,0,0">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:EndOfLifeMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']"/>
+        </ownedBorderedNodes>
+        <ownedStyle xmi:type="diagram:Square" uid="_JDfJgZh6EeucZZaWUXkwwA" showIcon="false" labelPosition="node" width="1" height="10" color="255,255,255">
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ExecutionMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']"/>
+      </ownedBorderedNodes>
+      <ownedStyle xmi:type="diagram:Square" uid="_JDWmoJh6EeucZZaWUXkwwA" showIcon="false" borderSize="1" borderSizeComputationExpression="1" labelPosition="node" width="10" height="5" color="255,255,255">
+        <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:InstanceRoleMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_JDXNsZh6EeucZZaWUXkwwA" name="oclTestGate : oclGate" width="10" height="5" resizeKind="NSEW">
+      <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.0"/>
+      <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.0"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_JK71VJh6EeucZZaWUXkwwA" x="440" y="50" height="50" width="100"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_JDg-sJh6EeucZZaWUXkwwA" outgoingEdges="_JFDPwJh6EeucZZaWUXkwwA" incomingEdges="_JFfUoJh6EeucZZaWUXkwwA" width="1" height="10" resizeKind="NSEW">
+        <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.0"/>
+        <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.0"/>
+        <ownedBorderedNodes xmi:type="diagram:DNode" uid="_JDg-s5h6EeucZZaWUXkwwA" width="1" height="1" resizeKind="NSEW">
+          <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.0"/>
+          <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.0"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_JDhlwJh6EeucZZaWUXkwwA" showIcon="false" labelPosition="node" width="1" height="1" color="0,0,0">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:EndOfLifeMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']"/>
+        </ownedBorderedNodes>
+        <ownedStyle xmi:type="diagram:Square" uid="_JDg-sZh6EeucZZaWUXkwwA" showIcon="false" labelPosition="node" width="1" height="10" color="255,255,255">
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ExecutionMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']"/>
+      </ownedBorderedNodes>
+      <ownedStyle xmi:type="diagram:Square" uid="_JDX0wJh6EeucZZaWUXkwwA" showIcon="false" borderSize="1" borderSizeComputationExpression="1" labelPosition="node" width="10" height="5" color="255,255,255">
+        <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:InstanceRoleMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_JDYb0Zh6EeucZZaWUXkwwA" name="genericMUTGate : genericGate" width="10" height="5" resizeKind="NSEW">
+      <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.1"/>
+      <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.1"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_JK71VZh6EeucZZaWUXkwwA" x="50" y="50" height="50" width="100"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_JDhlwph6EeucZZaWUXkwwA" incomingEdges="_JEGNgJh6EeucZZaWUXkwwA" width="1" height="10" resizeKind="NSEW">
+        <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.1"/>
+        <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.1"/>
+        <ownedBorderedNodes xmi:type="diagram:DNode" uid="_JDiM0Zh6EeucZZaWUXkwwA" width="1" height="1" resizeKind="NSEW">
+          <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.1"/>
+          <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.1"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_JDiM0ph6EeucZZaWUXkwwA" showIcon="false" labelPosition="node" width="1" height="1" color="0,0,0">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:EndOfLifeMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']"/>
+        </ownedBorderedNodes>
+        <ownedStyle xmi:type="diagram:Square" uid="_JDhlw5h6EeucZZaWUXkwwA" showIcon="false" labelPosition="node" width="1" height="10" color="255,255,255">
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ExecutionMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']"/>
+      </ownedBorderedNodes>
+      <ownedStyle xmi:type="diagram:Square" uid="_JDZC4Jh6EeucZZaWUXkwwA" showIcon="false" borderSize="1" borderSizeComputationExpression="1" labelPosition="node" width="10" height="5" color="255,255,255">
+        <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:InstanceRoleMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_JDZC4ph6EeucZZaWUXkwwA" name="oclMUTGate : oclGate" width="10" height="5" resizeKind="NSEW">
+      <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+      <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_JK71Vph6EeucZZaWUXkwwA" x="180" y="50" height="50" width="100"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_JDiz4Zh6EeucZZaWUXkwwA" outgoingEdges="_JFfUoJh6EeucZZaWUXkwwA" incomingEdges="_JFDPwJh6EeucZZaWUXkwwA" width="1" height="10" resizeKind="NSEW">
+        <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+        <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+        <ownedBorderedNodes xmi:type="diagram:DNode" uid="_JDiz5Jh6EeucZZaWUXkwwA" width="1" height="1" resizeKind="NSEW">
+          <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+          <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_JDja8Jh6EeucZZaWUXkwwA" showIcon="false" labelPosition="node" width="1" height="1" color="0,0,0">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:EndOfLifeMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']"/>
+        </ownedBorderedNodes>
+        <ownedStyle xmi:type="diagram:Square" uid="_JDiz4ph6EeucZZaWUXkwwA" showIcon="false" labelPosition="node" width="1" height="10" color="255,255,255">
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ExecutionMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']"/>
+      </ownedBorderedNodes>
+      <ownedStyle xmi:type="diagram:Square" uid="_JDZp8Jh6EeucZZaWUXkwwA" showIcon="false" borderSize="1" borderSizeComputationExpression="1" labelPosition="node" width="10" height="5" color="255,255,255">
+        <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:InstanceRoleMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_JDmeQJh6EeucZZaWUXkwwA" name="Tester">
+      <target xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@componentInstance.0"/>
+      <semanticElements xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@componentInstance.0"/>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_JDtL8Jh6EeucZZaWUXkwwA" showIcon="false" borderSize="1" borderSizeComputationExpression="1" foregroundColor="255,255,255">
+        <labelFormat>bold</labelFormat>
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_2:ContainerMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']"/>
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_JDxdYJh6EeucZZaWUXkwwA" name="tester : TestSystem">
+        <target xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@componentInstance.0"/>
+        <semanticElements xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@componentInstance.0"/>
+        <ownedStyle xmi:type="diagram:Square" uid="_JD2V4Jh6EeucZZaWUXkwwA" showIcon="false" borderSize="-1" borderSizeComputationExpression="-1" labelPosition="node" color="255,255,255">
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']/@subNodeMappings[name='componentInstance.name']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_2:NodeMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']/@subNodeMappings[name='componentInstance.name']"/>
+      </ownedElements>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_JDtL8ph6EeucZZaWUXkwwA" name="SUT">
+      <target xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@componentInstance.1"/>
+      <semanticElements xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@componentInstance.1"/>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_JDtL85h6EeucZZaWUXkwwA" showIcon="false" borderSize="1" borderSizeComputationExpression="1" foregroundColor="255,255,255">
+        <labelFormat>bold</labelFormat>
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_2:ContainerMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']"/>
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_JD288Jh6EeucZZaWUXkwwA" name="fsm : MUT">
+        <target xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@componentInstance.1"/>
+        <semanticElements xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@componentInstance.1"/>
+        <ownedStyle xmi:type="diagram:Square" uid="_JD3kAJh6EeucZZaWUXkwwA" showIcon="false" borderSize="-1" borderSizeComputationExpression="-1" labelPosition="node" color="255,255,255">
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']/@subNodeMappings[name='componentInstance.name']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_2:NodeMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']/@subNodeMappings[name='componentInstance.name']"/>
+      </ownedElements>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_JEGNgJh6EeucZZaWUXkwwA" name=" runModel" sourceNode="_JDfJgJh6EeucZZaWUXkwwA" targetNode="_JDhlwph6EeucZZaWUXkwwA">
+      <target xmi:type="tdl:Target" href="testSuite.tdlan2#//@packagedElement.5/@behaviourDescription/@behaviour/@block/@behaviour.0/@target.0"/>
+      <semanticElements xmi:type="tdl:Message" href="testSuite.tdlan2#//@packagedElement.5/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_JK71UJh6EeucZZaWUXkwwA" y="130" height="0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_JEcLwJh6EeucZZaWUXkwwA" size="2" strokeColor="0,0,0">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_JEcLwph6EeucZZaWUXkwwA" showIcon="false"/>
+        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_JEcLwZh6EeucZZaWUXkwwA" showIcon="false"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:BasicMessageMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_JFDPwJh6EeucZZaWUXkwwA" name=" oclQuery ( query := &quot;self.currentState&quot; )" sourceNode="_JDg-sJh6EeucZZaWUXkwwA" targetNode="_JDiz4Zh6EeucZZaWUXkwwA">
+      <target xmi:type="tdl:Target" href="testSuite.tdlan2#//@packagedElement.5/@behaviourDescription/@behaviour/@block/@behaviour.1/@target.0"/>
+      <semanticElements xmi:type="tdl:Message" href="testSuite.tdlan2#//@packagedElement.5/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_JK71UZh6EeucZZaWUXkwwA" y="150" height="0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_JFFE8Jh6EeucZZaWUXkwwA" size="2" strokeColor="0,0,0">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_JFFE8ph6EeucZZaWUXkwwA" showIcon="false"/>
+        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_JFFE8Zh6EeucZZaWUXkwwA" showIcon="false"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:BasicMessageMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_JFfUoJh6EeucZZaWUXkwwA" name="{ S0 , S1 }" sourceNode="_JDiz4Zh6EeucZZaWUXkwwA" targetNode="_JDg-sJh6EeucZZaWUXkwwA">
+      <target xmi:type="tdl:Target" href="testSuite.tdlan2#//@packagedElement.5/@behaviourDescription/@behaviour/@block/@behaviour.2/@target.0"/>
+      <semanticElements xmi:type="tdl:Message" href="testSuite.tdlan2#//@packagedElement.5/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_JK71Uph6EeucZZaWUXkwwA" y="170" height="0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_JFf7sJh6EeucZZaWUXkwwA" size="2" strokeColor="0,0,0">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_JFf7sph6EeucZZaWUXkwwA" showIcon="false"/>
+        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_JFf7sZh6EeucZZaWUXkwwA" showIcon="false"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:BasicMessageMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']"/>
+    </ownedDiagramElements>
+    <description xmi:type="description_1:SequenceDiagramDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" uid="_JCXvMZh6EeucZZaWUXkwwA"/>
+    <activatedLayers xmi:type="description_2:Layer" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer"/>
+    <activatedLayers xmi:type="description_2:AdditionalLayer" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@additionalLayers[name='Animation']"/>
+    <target xmi:type="tdl:TestDescription" href="testSuite.tdlan2#//@packagedElement.5"/>
+  </sequence:SequenceDDiagram>
+  <sequence:SequenceDDiagram uid="_LETKsJh6EeucZZaWUXkwwA" headerHeight="3">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_LEUY1Zh6EeucZZaWUXkwwA" source="GMF_DIAGRAMS">
+      <data xmi:type="notation:Diagram" xmi:id="_LEUY1ph6EeucZZaWUXkwwA" type="Sirius" element="_LETKsJh6EeucZZaWUXkwwA" measurementUnit="Pixel">
+        <children xmi:type="notation:Node" xmi:id="_LGZccJh6EeucZZaWUXkwwA" type="2003" element="_LEn60Jh6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_LGZcc5h6EeucZZaWUXkwwA" type="5007"/>
+          <children xmi:type="notation:Node" xmi:id="_LGZcdJh6EeucZZaWUXkwwA" type="7004">
+            <children xmi:type="notation:Node" xmi:id="_LGgKIJh6EeucZZaWUXkwwA" type="3010" element="_LEoh4Jh6EeucZZaWUXkwwA">
+              <styles xmi:type="notation:FontStyle" xmi:id="_LGgKIZh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_LGgKIph6EeucZZaWUXkwwA"/>
+            </children>
+            <styles xmi:type="notation:SortingStyle" xmi:id="_LGZcdZh6EeucZZaWUXkwwA"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_LGZcdph6EeucZZaWUXkwwA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_LGZccZh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8" bold="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGZccph6EeucZZaWUXkwwA" x="40" y="10"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_LGY1bJh6EeucZZaWUXkwwA" type="2003" element="_LEnTwJh6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_LGY1b5h6EeucZZaWUXkwwA" type="5007"/>
+          <children xmi:type="notation:Node" xmi:id="_LGY1cJh6EeucZZaWUXkwwA" type="7004">
+            <children xmi:type="notation:Node" xmi:id="_LGfjFZh6EeucZZaWUXkwwA" type="3010" element="_LEn605h6EeucZZaWUXkwwA">
+              <styles xmi:type="notation:FontStyle" xmi:id="_LGfjFph6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_LGfjF5h6EeucZZaWUXkwwA"/>
+            </children>
+            <styles xmi:type="notation:SortingStyle" xmi:id="_LGY1cZh6EeucZZaWUXkwwA"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_LGY1cph6EeucZZaWUXkwwA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_LGY1bZh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8" bold="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGY1bph6EeucZZaWUXkwwA" x="300" y="10"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_LGYOUJh6EeucZZaWUXkwwA" type="2001" element="_LEZ4YJh6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_LGYOU5h6EeucZZaWUXkwwA" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_LGYOVJh6EeucZZaWUXkwwA" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_LGZcd5h6EeucZZaWUXkwwA" type="3001" element="_LEdiwZh6EeucZZaWUXkwwA">
+            <children xmi:type="notation:Node" xmi:id="_LGZceph6EeucZZaWUXkwwA" type="5001">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_LGZce5h6EeucZZaWUXkwwA" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_LGZcf5h6EeucZZaWUXkwwA" type="3003" element="_LEdiwph6EeucZZaWUXkwwA">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_LGZcgJh6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGZcgZh6EeucZZaWUXkwwA"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_LGaDgJh6EeucZZaWUXkwwA" type="3001" element="_LEeJ0Zh6EeucZZaWUXkwwA">
+              <children xmi:type="notation:Node" xmi:id="_LGaDg5h6EeucZZaWUXkwwA" type="5001">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_LGaDhJh6EeucZZaWUXkwwA" y="5"/>
+              </children>
+              <children xmi:type="notation:Node" xmi:id="_LGaqkJh6EeucZZaWUXkwwA" type="3003" element="_LEeJ0ph6EeucZZaWUXkwwA">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_LGaqkZh6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGaqkph6EeucZZaWUXkwwA"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_LGaDgZh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGaDgph6EeucZZaWUXkwwA" x="-43" y="120" width="10" height="10"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_LGZceJh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGZceZh6EeucZZaWUXkwwA" y="42" width="10" height="120"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_LGZcfJh6EeucZZaWUXkwwA" type="3003" element="_LEafcJh6EeucZZaWUXkwwA">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_LGZcfZh6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGZcfph6EeucZZaWUXkwwA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_LGYOUZh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGYOUph6EeucZZaWUXkwwA" x="310" y="50" width="100" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_LGYOVZh6EeucZZaWUXkwwA" type="2001" element="_LEbtkJh6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_LGY1YJh6EeucZZaWUXkwwA" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_LGY1YZh6EeucZZaWUXkwwA" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_LGaqk5h6EeucZZaWUXkwwA" type="3001" element="_LEew4Zh6EeucZZaWUXkwwA">
+            <children xmi:type="notation:Node" xmi:id="_LGaqlph6EeucZZaWUXkwwA" type="5001">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_LGaql5h6EeucZZaWUXkwwA" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_LGbRoJh6EeucZZaWUXkwwA" type="3003" element="_LEew4ph6EeucZZaWUXkwwA">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_LGbRoZh6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGbRoph6EeucZZaWUXkwwA"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_LGb4sJh6EeucZZaWUXkwwA" type="3001" element="_LEfX8Jh6EeucZZaWUXkwwA">
+              <children xmi:type="notation:Node" xmi:id="_LGb4s5h6EeucZZaWUXkwwA" type="5001">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_LGb4tJh6EeucZZaWUXkwwA" y="5"/>
+              </children>
+              <children xmi:type="notation:Node" xmi:id="_LGcfwJh6EeucZZaWUXkwwA" type="3003" element="_LEfX8Zh6EeucZZaWUXkwwA">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_LGcfwZh6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGcfwph6EeucZZaWUXkwwA"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_LGb4sZh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGb4sph6EeucZZaWUXkwwA" x="-43" y="120" width="10" height="10"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_LGaqlJh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGaqlZh6EeucZZaWUXkwwA" y="42" width="10" height="120"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_LGaqmJh6EeucZZaWUXkwwA" type="3003" element="_LEcUoJh6EeucZZaWUXkwwA">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_LGaqmZh6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGaqmph6EeucZZaWUXkwwA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_LGYOVph6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGYOV5h6EeucZZaWUXkwwA" x="440" y="50" width="100" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_LGY1Yph6EeucZZaWUXkwwA" type="2001" element="_LEcUoph6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_LGY1ZZh6EeucZZaWUXkwwA" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_LGY1Zph6EeucZZaWUXkwwA" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_LGcfw5h6EeucZZaWUXkwwA" type="3001" element="_LEf_AJh6EeucZZaWUXkwwA">
+            <children xmi:type="notation:Node" xmi:id="_LGdG0Jh6EeucZZaWUXkwwA" type="5001">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_LGdG0Zh6EeucZZaWUXkwwA" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_LGdG1Zh6EeucZZaWUXkwwA" type="3003" element="_LEf_AZh6EeucZZaWUXkwwA">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_LGdG1ph6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGdG15h6EeucZZaWUXkwwA"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_LGdt4Jh6EeucZZaWUXkwwA" type="3001" element="_LEf_A5h6EeucZZaWUXkwwA">
+              <children xmi:type="notation:Node" xmi:id="_LGdt45h6EeucZZaWUXkwwA" type="5001">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_LGdt5Jh6EeucZZaWUXkwwA" y="5"/>
+              </children>
+              <children xmi:type="notation:Node" xmi:id="_LGdt5Zh6EeucZZaWUXkwwA" type="3003" element="_LEgmEJh6EeucZZaWUXkwwA">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_LGdt5ph6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGdt55h6EeucZZaWUXkwwA"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_LGdt4Zh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGdt4ph6EeucZZaWUXkwwA" x="-43" y="120" width="10" height="10"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_LGcfxJh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGcfxZh6EeucZZaWUXkwwA" y="42" width="10" height="120"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_LGdG0ph6EeucZZaWUXkwwA" type="3003" element="_LEc7sJh6EeucZZaWUXkwwA">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_LGdG05h6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGdG1Jh6EeucZZaWUXkwwA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_LGY1Y5h6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGY1ZJh6EeucZZaWUXkwwA" x="50" y="50" width="100" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_LGY1Z5h6EeucZZaWUXkwwA" type="2001" element="_LEc7sph6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_LGY1aph6EeucZZaWUXkwwA" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_LGY1a5h6EeucZZaWUXkwwA" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_LGeU8Jh6EeucZZaWUXkwwA" type="3001" element="_LEgmEph6EeucZZaWUXkwwA">
+            <children xmi:type="notation:Node" xmi:id="_LGeU85h6EeucZZaWUXkwwA" type="5001">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_LGeU9Jh6EeucZZaWUXkwwA" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_LGe8AJh6EeucZZaWUXkwwA" type="3003" element="_LEgmE5h6EeucZZaWUXkwwA">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_LGe8AZh6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGe8Aph6EeucZZaWUXkwwA"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_LGe8A5h6EeucZZaWUXkwwA" type="3001" element="_LEhNIZh6EeucZZaWUXkwwA">
+              <children xmi:type="notation:Node" xmi:id="_LGfjEJh6EeucZZaWUXkwwA" type="5001">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_LGfjEZh6EeucZZaWUXkwwA" y="5"/>
+              </children>
+              <children xmi:type="notation:Node" xmi:id="_LGfjEph6EeucZZaWUXkwwA" type="3003" element="_LEhNIph6EeucZZaWUXkwwA">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_LGfjE5h6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGfjFJh6EeucZZaWUXkwwA"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_LGe8BJh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGe8BZh6EeucZZaWUXkwwA" x="-43" y="120" width="10" height="10"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_LGeU8Zh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGeU8ph6EeucZZaWUXkwwA" y="42" width="10" height="120"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_LGeU9Zh6EeucZZaWUXkwwA" type="3003" element="_LEc7s5h6EeucZZaWUXkwwA">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_LGeU9ph6EeucZZaWUXkwwA" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGeU95h6EeucZZaWUXkwwA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_LGY1aJh6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGY1aZh6EeucZZaWUXkwwA" x="180" y="50" width="100" height="50"/>
+        </children>
+        <styles xmi:type="notation:DiagramStyle" xmi:id="_LEUY15h6EeucZZaWUXkwwA"/>
+        <edges xmi:type="notation:Edge" xmi:id="_LGgxMJh6EeucZZaWUXkwwA" type="4001" element="_LEsMQJh6EeucZZaWUXkwwA" source="_LGZcd5h6EeucZZaWUXkwwA" target="_LGcfw5h6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_LGgxNJh6EeucZZaWUXkwwA" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGgxNZh6EeucZZaWUXkwwA" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_LGgxNph6EeucZZaWUXkwwA" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGgxN5h6EeucZZaWUXkwwA" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_LGgxOJh6EeucZZaWUXkwwA" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGgxOZh6EeucZZaWUXkwwA" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_LGgxMZh6EeucZZaWUXkwwA"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_LGgxMph6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_LGgxM5h6EeucZZaWUXkwwA" points="[0, -30, 0, -30]$[0, -30, 0, -30]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_LGgxOph6EeucZZaWUXkwwA" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_LGgxO5h6EeucZZaWUXkwwA" id="(0.5,0.5)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_LGgxPJh6EeucZZaWUXkwwA" type="4001" element="_LFT3UJh6EeucZZaWUXkwwA" source="_LGaqk5h6EeucZZaWUXkwwA" target="_LGeU8Jh6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_LGhYQJh6EeucZZaWUXkwwA" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGhYQZh6EeucZZaWUXkwwA" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_LGhYQph6EeucZZaWUXkwwA" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGhYQ5h6EeucZZaWUXkwwA" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_LGhYRJh6EeucZZaWUXkwwA" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGhYRZh6EeucZZaWUXkwwA" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_LGgxPZh6EeucZZaWUXkwwA"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_LGgxPph6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_LGgxP5h6EeucZZaWUXkwwA" points="[0, -10, 0, -10]$[0, -10, 0, -10]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_LGhYRph6EeucZZaWUXkwwA" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_LGhYR5h6EeucZZaWUXkwwA" id="(0.5,0.5)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_LGhYSJh6EeucZZaWUXkwwA" type="4001" element="_LF8JcJh6EeucZZaWUXkwwA" source="_LGeU8Jh6EeucZZaWUXkwwA" target="_LGaqk5h6EeucZZaWUXkwwA">
+          <children xmi:type="notation:Node" xmi:id="_LGhYTJh6EeucZZaWUXkwwA" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGhYTZh6EeucZZaWUXkwwA" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_LGhYTph6EeucZZaWUXkwwA" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGhYT5h6EeucZZaWUXkwwA" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_LGhYUJh6EeucZZaWUXkwwA" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LGhYUZh6EeucZZaWUXkwwA" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_LGhYSZh6EeucZZaWUXkwwA"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_LGhYSph6EeucZZaWUXkwwA" fontName="Segoe UI" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_LGhYS5h6EeucZZaWUXkwwA" points="[0, 10, 0, 10]$[0, 10, 0, 10]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_LGhYUph6EeucZZaWUXkwwA" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_LGhYU5h6EeucZZaWUXkwwA" id="(0.5,0.5)"/>
+        </edges>
+      </data>
+    </ownedAnnotationEntries>
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_LGWZIJh6EeucZZaWUXkwwA" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" uid="_LGWZIZh6EeucZZaWUXkwwA"/>
+    </ownedAnnotationEntries>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_LEZ4YJh6EeucZZaWUXkwwA" name="genericTestGate : genericGate" width="10" height="5" resizeKind="NSEW">
+      <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.0"/>
+      <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.0"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_LLvPcJh6EeucZZaWUXkwwA" x="310" y="50" height="50" width="100"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_LEdiwZh6EeucZZaWUXkwwA" outgoingEdges="_LEsMQJh6EeucZZaWUXkwwA" width="1" height="10" resizeKind="NSEW">
+        <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.0"/>
+        <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.0"/>
+        <ownedBorderedNodes xmi:type="diagram:DNode" uid="_LEeJ0Zh6EeucZZaWUXkwwA" width="1" height="1" resizeKind="NSEW">
+          <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.0"/>
+          <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.0"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_LEeJ0ph6EeucZZaWUXkwwA" showIcon="false" labelPosition="node" width="1" height="1" color="0,0,0">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:EndOfLifeMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']"/>
+        </ownedBorderedNodes>
+        <ownedStyle xmi:type="diagram:Square" uid="_LEdiwph6EeucZZaWUXkwwA" showIcon="false" labelPosition="node" width="1" height="10" color="255,255,255">
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ExecutionMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']"/>
+      </ownedBorderedNodes>
+      <ownedStyle xmi:type="diagram:Square" uid="_LEafcJh6EeucZZaWUXkwwA" showIcon="false" borderSize="1" borderSizeComputationExpression="1" labelPosition="node" width="10" height="5" color="255,255,255">
+        <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:InstanceRoleMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_LEbtkJh6EeucZZaWUXkwwA" name="oclTestGate : oclGate" width="10" height="5" resizeKind="NSEW">
+      <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.0"/>
+      <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.0"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_LLvPcZh6EeucZZaWUXkwwA" x="440" y="50" height="50" width="100"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_LEew4Zh6EeucZZaWUXkwwA" outgoingEdges="_LFT3UJh6EeucZZaWUXkwwA" incomingEdges="_LF8JcJh6EeucZZaWUXkwwA" width="1" height="10" resizeKind="NSEW">
+        <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.0"/>
+        <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.0"/>
+        <ownedBorderedNodes xmi:type="diagram:DNode" uid="_LEfX8Jh6EeucZZaWUXkwwA" width="1" height="1" resizeKind="NSEW">
+          <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.0"/>
+          <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.0"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_LEfX8Zh6EeucZZaWUXkwwA" showIcon="false" labelPosition="node" width="1" height="1" color="0,0,0">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:EndOfLifeMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']"/>
+        </ownedBorderedNodes>
+        <ownedStyle xmi:type="diagram:Square" uid="_LEew4ph6EeucZZaWUXkwwA" showIcon="false" labelPosition="node" width="1" height="10" color="255,255,255">
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ExecutionMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']"/>
+      </ownedBorderedNodes>
+      <ownedStyle xmi:type="diagram:Square" uid="_LEcUoJh6EeucZZaWUXkwwA" showIcon="false" borderSize="1" borderSizeComputationExpression="1" labelPosition="node" width="10" height="5" color="255,255,255">
+        <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:InstanceRoleMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_LEcUoph6EeucZZaWUXkwwA" name="genericMUTGate : genericGate" width="10" height="5" resizeKind="NSEW">
+      <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.1"/>
+      <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.1"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_LLvPcph6EeucZZaWUXkwwA" x="50" y="50" height="50" width="100"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_LEf_AJh6EeucZZaWUXkwwA" incomingEdges="_LEsMQJh6EeucZZaWUXkwwA" width="1" height="10" resizeKind="NSEW">
+        <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.1"/>
+        <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.1"/>
+        <ownedBorderedNodes xmi:type="diagram:DNode" uid="_LEf_A5h6EeucZZaWUXkwwA" width="1" height="1" resizeKind="NSEW">
+          <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.1"/>
+          <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.0/@endPoint.1"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_LEgmEJh6EeucZZaWUXkwwA" showIcon="false" labelPosition="node" width="1" height="1" color="0,0,0">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:EndOfLifeMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']"/>
+        </ownedBorderedNodes>
+        <ownedStyle xmi:type="diagram:Square" uid="_LEf_AZh6EeucZZaWUXkwwA" showIcon="false" labelPosition="node" width="1" height="10" color="255,255,255">
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ExecutionMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']"/>
+      </ownedBorderedNodes>
+      <ownedStyle xmi:type="diagram:Square" uid="_LEc7sJh6EeucZZaWUXkwwA" showIcon="false" borderSize="1" borderSizeComputationExpression="1" labelPosition="node" width="10" height="5" color="255,255,255">
+        <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:InstanceRoleMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_LEc7sph6EeucZZaWUXkwwA" name="oclMUTGate : oclGate" width="10" height="5" resizeKind="NSEW">
+      <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+      <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_LLvPc5h6EeucZZaWUXkwwA" x="180" y="50" height="50" width="100"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_LEgmEph6EeucZZaWUXkwwA" outgoingEdges="_LF8JcJh6EeucZZaWUXkwwA" incomingEdges="_LFT3UJh6EeucZZaWUXkwwA" width="1" height="10" resizeKind="NSEW">
+        <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+        <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+        <ownedBorderedNodes xmi:type="diagram:DNode" uid="_LEhNIZh6EeucZZaWUXkwwA" width="1" height="1" resizeKind="NSEW">
+          <target xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+          <semanticElements xmi:type="tdl:GateReference" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@connection.1/@endPoint.1"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_LEhNIph6EeucZZaWUXkwwA" showIcon="false" labelPosition="node" width="1" height="1" color="0,0,0">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:EndOfLifeMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@borderedNodeMappings[name='lifelineEnd']"/>
+        </ownedBorderedNodes>
+        <ownedStyle xmi:type="diagram:Square" uid="_LEgmE5h6EeucZZaWUXkwwA" showIcon="false" labelPosition="node" width="1" height="10" color="255,255,255">
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ExecutionMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@borderedNodeMappings[name='lifelineExecution']"/>
+      </ownedBorderedNodes>
+      <ownedStyle xmi:type="diagram:Square" uid="_LEc7s5h6EeucZZaWUXkwwA" showIcon="false" borderSize="1" borderSizeComputationExpression="1" labelPosition="node" width="10" height="5" color="255,255,255">
+        <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:InstanceRoleMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@nodeMappings[name='gateReference']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_LEnTwJh6EeucZZaWUXkwwA" name="Tester">
+      <target xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@componentInstance.0"/>
+      <semanticElements xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@componentInstance.0"/>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_LEnTwZh6EeucZZaWUXkwwA" showIcon="false" borderSize="1" borderSizeComputationExpression="1" foregroundColor="255,255,255">
+        <labelFormat>bold</labelFormat>
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_2:ContainerMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']"/>
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_LEn605h6EeucZZaWUXkwwA" name="tester : TestSystem">
+        <target xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@componentInstance.0"/>
+        <semanticElements xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@componentInstance.0"/>
+        <ownedStyle xmi:type="diagram:Square" uid="_LEn61Jh6EeucZZaWUXkwwA" showIcon="false" borderSize="-1" borderSizeComputationExpression="-1" labelPosition="node" color="255,255,255">
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']/@subNodeMappings[name='componentInstance.name']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_2:NodeMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']/@subNodeMappings[name='componentInstance.name']"/>
+      </ownedElements>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_LEn60Jh6EeucZZaWUXkwwA" name="SUT">
+      <target xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@componentInstance.1"/>
+      <semanticElements xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@componentInstance.1"/>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_LEn60Zh6EeucZZaWUXkwwA" showIcon="false" borderSize="1" borderSizeComputationExpression="1" foregroundColor="255,255,255">
+        <labelFormat>bold</labelFormat>
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_2:ContainerMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']"/>
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_LEoh4Jh6EeucZZaWUXkwwA" name="fsm : MUT">
+        <target xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@componentInstance.1"/>
+        <semanticElements xmi:type="tdl:ComponentInstance" href="generated/testConfiguration.tdlan2#//@packagedElement.7/@componentInstance.1"/>
+        <ownedStyle xmi:type="diagram:Square" uid="_LEoh4Zh6EeucZZaWUXkwwA" showIcon="false" borderSize="-1" borderSizeComputationExpression="-1" labelPosition="node" color="255,255,255">
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']/@subNodeMappings[name='componentInstance.name']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_2:NodeMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@containerMappings[name='componentInstance']/@subNodeMappings[name='componentInstance.name']"/>
+      </ownedElements>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_LEsMQJh6EeucZZaWUXkwwA" name=" runModel" sourceNode="_LEdiwZh6EeucZZaWUXkwwA" targetNode="_LEf_AJh6EeucZZaWUXkwwA">
+      <target xmi:type="tdl:Target" href="testSuite.tdlan2#//@packagedElement.6/@behaviourDescription/@behaviour/@block/@behaviour.0/@target.0"/>
+      <semanticElements xmi:type="tdl:Message" href="testSuite.tdlan2#//@packagedElement.6/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_LLuoYJh6EeucZZaWUXkwwA" y="130" height="0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_LEuogJh6EeucZZaWUXkwwA" size="2" strokeColor="0,0,0">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_LEuogph6EeucZZaWUXkwwA" showIcon="false"/>
+        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_LEuogZh6EeucZZaWUXkwwA" showIcon="false"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:BasicMessageMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_LFT3UJh6EeucZZaWUXkwwA" name=" oclQuery ( query := &quot;self.currentSta&quot; )" sourceNode="_LEew4Zh6EeucZZaWUXkwwA" targetNode="_LEgmEph6EeucZZaWUXkwwA">
+      <target xmi:type="tdl:Target" href="testSuite.tdlan2#//@packagedElement.6/@behaviourDescription/@behaviour/@block/@behaviour.1/@target.0"/>
+      <semanticElements xmi:type="tdl:Message" href="testSuite.tdlan2#//@packagedElement.6/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_LLuoYZh6EeucZZaWUXkwwA" y="150" height="0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_LFVsgJh6EeucZZaWUXkwwA" size="2" strokeColor="0,0,0">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_LFVsgph6EeucZZaWUXkwwA" showIcon="false"/>
+        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_LFVsgZh6EeucZZaWUXkwwA" showIcon="false"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:BasicMessageMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_LF8JcJh6EeucZZaWUXkwwA" name=" S0" sourceNode="_LEgmEph6EeucZZaWUXkwwA" targetNode="_LEew4Zh6EeucZZaWUXkwwA">
+      <target xmi:type="tdl:Target" href="testSuite.tdlan2#//@packagedElement.6/@behaviourDescription/@behaviour/@block/@behaviour.2/@target.0"/>
+      <semanticElements xmi:type="tdl:Message" href="testSuite.tdlan2#//@packagedElement.6/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+      <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_LLuoYph6EeucZZaWUXkwwA" y="170" height="0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_LF8wgJh6EeucZZaWUXkwwA" size="2" strokeColor="0,0,0">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_LF8wgph6EeucZZaWUXkwwA" showIcon="false"/>
+        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_LF8wgZh6EeucZZaWUXkwwA" showIcon="false"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:BasicMessageMapping" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer/@edgeMappings[name='interaction']"/>
+    </ownedDiagramElements>
+    <description xmi:type="description_1:SequenceDiagramDescription" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" uid="_LETKsZh6EeucZZaWUXkwwA"/>
+    <activatedLayers xmi:type="description_2:Layer" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@defaultLayer"/>
+    <activatedLayers xmi:type="description_2:AdditionalLayer" href="platform:/plugin/org.imt.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='TestDescriptionDiagram']/@additionalLayers[name='Animation']"/>
     <target xmi:type="tdl:TestDescription" href="testSuite.tdlan2#//@packagedElement.6"/>
   </sequence:SequenceDDiagram>
 </xmi:XMI>

@@ -7,6 +7,7 @@
     <semanticResources>gemoc-gen/execution/execution-20210331_124804/BitShifting.fsm</semanticResources>
     <semanticResources>gemoc-gen/execution/execution-20210331_125620/BitShifting.fsm</semanticResources>
     <semanticResources>gemoc-gen/execution/execution-20210401_113325/BitShifting.fsm</semanticResources>
+    <semanticResources>gemoc-gen/execution/execution-20210408_163909/BitShifting.fsm</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_vzpv0E_yEeuAm-7iXNijaw">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.gemoc.sample.ale.fsm.design/description/fsm.odesign#//@ownedViewpoints[name='ALE_FSM_ViewPoint']"/>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_v0gEYU_yEeuAm-7iXNijaw" name="representations" repPath="#_vzzg0E_yEeuAm-7iXNijaw" changeId="4f8f325d-c6d5-4b36-9457-dc2c444be38a">
