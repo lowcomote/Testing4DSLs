@@ -12,7 +12,11 @@ package org.etsi.mts.tdl.graphical.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gemoc.executionframework.extensions.sirius.services.AbstractGemocDebuggerServices;
 
 public class TdlDebugServices extends AbstractGemocDebuggerServices {
@@ -43,6 +47,9 @@ public class TdlDebugServices extends AbstractGemocDebuggerServices {
 		// debug model id and update the manifest dependencies accordingly.
 		// for example, org.eclipse.gemoc.execution.concurrent.ccsljavaengine.ui.Activator.DEBUG_MODEL_ID for the concurrent engine.
 		return org.eclipse.gemoc.execution.sequential.javaengine.ui.Activator.DEBUG_MODEL_ID;
-	}	
-
+	}
+	@Override
+	public boolean isCurrentInstruction(EObject instruction) {
+		return super.isCurrentInstruction(instruction.eContainer());
+	}
 }
