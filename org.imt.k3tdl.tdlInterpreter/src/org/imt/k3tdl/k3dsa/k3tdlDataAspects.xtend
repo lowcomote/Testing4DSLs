@@ -106,6 +106,13 @@ class DataInstanceAspect{
 	def EObject getMatchedMUTElement(ArrayList<EObject> rootElement, Resource MUTResource, boolean isAssertion, String DSLPath){
 		
 	}
+	def String getValidName(){
+		var tdlName = _self.name
+		if (_self.name.startsWith("_")){
+			return tdlName.substring(1)
+		}
+		return tdlName
+	}
 }
 @Aspect (className = SimpleDataInstance)
 class SimpleDataInstanceAspect extends DataInstanceAspect{
@@ -126,15 +133,15 @@ class StructuredDataInstanceAspect extends DataInstanceAspect{
 			matchedElement = rootElement.get(i)
 			var boolean elementFound = true;
 			for (j : 0 ..<_self.memberAssignment.size){
+				val memberAssign = _self.memberAssignment.get(j)
 				if (isAssertion){//all the arguments (static and dynamic) have to be matched
-					_self.info = _self.memberAssignment.get(j).isMatchedMember(matchedElement, MUTResource, DSLPath)
+					_self.info = memberAssign.isMatchedMember(matchedElement, MUTResource, DSLPath)
 					if(_self.info.contains("FAIL")){
 						elementFound = false
 					}
 				}else{//only static arguments have to be matched
-					if (!_self.memberAssignment.get(j).member.dataType.isDynamicType
-						&& !_self.memberAssignment.get(j).member.isDynamicMember){
-						_self.info = _self.memberAssignment.get(j).isMatchedMember(matchedElement, MUTResource, DSLPath)
+					if (!memberAssign.member.dataType.isDynamicType && !memberAssign.member.isDynamicMember){
+						_self.info = memberAssign.isMatchedMember(matchedElement, MUTResource, DSLPath)
 						if(_self.info.contains("FAIL")){
 							elementFound = false
 						}

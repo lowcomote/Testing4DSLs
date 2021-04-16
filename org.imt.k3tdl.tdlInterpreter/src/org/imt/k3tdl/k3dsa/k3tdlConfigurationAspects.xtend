@@ -153,7 +153,7 @@ class GateInstanceAspect {
 				return _self.gateLauncher.executeOCLCommand(query.value)				
 			}else if (arg.dataInstance.dataType.isAcceptedEvent(_self.DSLPath)){
 				//the message is an event conforming to the behavioral interface of the DSL
-				return _self.gateLauncher.executeDSLSpecificCommand(arg.dataInstance.name, _self.getEventParameters(arg))
+				return _self.gateLauncher.executeDSLSpecificCommand(arg.dataInstance.validName, _self.getEventParameters(arg))
 			}
 			return "FAIL: Cannot send data to the MUT"
 		}
@@ -180,12 +180,12 @@ class GateInstanceAspect {
 	def Map<String, Object> getEventParameters(DataInstanceUse event){
 		var Map<String, Object> parameters = new HashMap;
 		for (i : 0 ..<event.argument.size){//the parameterBindings of the event
-			val DataUse parameter = event.argument.get(i).dataUse
-			if (parameter instanceof DataInstanceUse){
-				val DataInstanceUse param = parameter
+			val argName = event.argument.get(i).parameter.name
+			val DataUse argValue = event.argument.get(i).dataUse
+			if (argValue instanceof DataInstanceUse){
 				//put the name of the parameter along with its matched object in the MUTResource
-				 parameters.put(param.dataInstance.name, 
-				 	param.getMatchedMUTElement(_self.gateLauncher.MUTResource, true, _self.DSLPath))
+				val value = (argValue as DataInstanceUse).getMatchedMUTElement(_self.gateLauncher.MUTResource, true, _self.DSLPath)
+				parameters.put(argName, value)
 			}			
 		}
 		return parameters
