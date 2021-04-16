@@ -18,9 +18,9 @@ helper context Ecore!EStructuralFeature def: isDynamicFeature: Boolean =
 	if (self.eAnnotations->select(a | a.source = 'dynamic')->notEmpty()) then true else false endif;
 helper def: abstractAnnotationType: TDL!AnnotationType = OclUndefined;
 
-rule concreteClass2simpleType{
+rule simpleConcreteClass2Type{
 	from class: Ecore!EClass (class.eAllStructuralFeatures.isEmpty() and not class.abstract)
-	to type: TDL!SimpleDataType(
+	to type: TDL!StructuredDataType(
 		name <- if (thisModule.tokenNames.includes(class.name))
 				then '_' + class.name
 				else class.name
@@ -29,9 +29,9 @@ rule concreteClass2simpleType{
 		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
 	}
 }
-rule abstractClass2simpleType{
+rule simpleAbstractClass2Type{
 	from class: Ecore!EClass (class.eAllStructuralFeatures.isEmpty() and class.abstract)
-	to type: TDL!SimpleDataType(
+	to type: TDL!StructuredDataType(
 		name <- if (thisModule.tokenNames.includes(class.name))
 				then '_' + class.name
 				else class.name
@@ -47,7 +47,7 @@ rule abstractClass2simpleType{
 		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
 	}
 }
-rule concreteClass2structuredType{
+rule featuredConcreteClass2Type{
 	from class: Ecore!EClass (class.eAllStructuralFeatures.notEmpty() 
 								and class.eSuperTypes.isEmpty()
 								and not class.abstract)
@@ -65,7 +65,7 @@ rule concreteClass2structuredType{
 		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
 	}
 }
-rule abstractClass2structuredType{
+rule featuredAbstractClass2Type{
 	from class: Ecore!EClass (class.eAllStructuralFeatures.notEmpty() 
 								and class.eSuperTypes.isEmpty()
 								and class.abstract)
@@ -90,7 +90,7 @@ rule abstractClass2structuredType{
 		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
 	}
 }
-rule concreteInheritedClass2structuredType{
+rule concreteInheritedClass2Type{
 	from class: Ecore!EClass (class.eAllStructuralFeatures.notEmpty() 
 								and class.eSuperTypes.notEmpty()
 								and not class.abstract)
@@ -109,7 +109,7 @@ rule concreteInheritedClass2structuredType{
 		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
 	}
 }
-rule abstractInheritedClass2structuredType{
+rule abstractInheritedClass2Type{
 	from class: Ecore!EClass (class.eAllStructuralFeatures.notEmpty() 
 								and class.eSuperTypes.notEmpty()
 								and class.abstract)
