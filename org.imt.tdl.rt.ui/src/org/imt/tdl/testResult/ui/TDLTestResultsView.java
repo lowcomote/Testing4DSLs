@@ -103,7 +103,7 @@ public class TDLTestResultsView extends ViewPart{
 	    final Tree addressTree = new Tree(testVerdict, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		addressTree.setHeaderVisible(true);
 		addressTree.setLinesVisible(true);
-		final StyledText detailTextBox = new StyledText(testVerdict, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
+		final StyledText detailTextBox = new StyledText(testVerdict, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION| SWT.WRAP);
 		addressTree.addListener(SWT.MouseDown, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
@@ -115,11 +115,6 @@ public class TDLTestResultsView extends ViewPart{
             		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
 						public void run() {
 							detailTextBox.setText(description);
-							//Shell shell = PlatformUI.getWorkbench().getDisplay().getShells()[0];
-							//MessageBox messageBox = new MessageBox(shell);
-							//messageBox.setText("Description");
-							//messageBox.setMessage(description);
-							//messageBox.open();
 						}
 					});
 				}
