@@ -89,14 +89,16 @@ public class DSLSpecificTypesGenerator {
 		if (dataType instanceof StructuredDataType) {
 			StructuredDataType type = (StructuredDataType) dataType;
 			for (int j=0; j < type.getAnnotation().size(); j++){
-				if (type.getAnnotation().get(j).getKey().getName().toString().contains("dynamic")) {
+				String annotation = type.getAnnotation().get(j).getKey().getName().toString();
+				if (annotation.contains("dynamic")||annotation.contains("aspect")) {
 					return true;
 				}
 			}
 			for (int j=0; j < type.getMember().size(); j++) {
 				Member m = type.getMember().get(j);
 				for (int k=0; k < m.getAnnotation().size(); k++) {
-					if (m.getAnnotation().get(k).getKey().getName().toString().contains("dynamic")) {
+					String annotation = m.getAnnotation().get(k).getKey().getName().toString();
+					if (annotation.contains("dynamic")||annotation.contains("aspect")) {
 						return true;
 					}
 				}

@@ -156,8 +156,6 @@ public class TestConfigurationGenerator {
 			TestConfiguration dslSpecificConfiguration = factory.createTestConfiguration();
 			dslSpecificConfiguration.setName("dslSpecificConfiguration");
 			generateComponentInstances(dslSpecificConfiguration);
-			//two connections are required, one for generic communication, another for dsl-specific commands
-			generateConnection(dslSpecificConfiguration, "generic");
 			generateConnection(dslSpecificConfiguration, "dslSpecific");
 			this.testConfigurationPackage.getPackagedElement().add(dslSpecificConfiguration);
 			this.configurations.put(dslSpecificConfiguration.getName(), dslSpecificConfiguration);

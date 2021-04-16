@@ -38,7 +38,7 @@ public class TestSuitePackageGenerator {
 		this.testSuitePackage = factory.createPackage();
 		this.testSuitePackage.setName("testSuite");
 		generateImports(this.testSuitePackage);
-		generateGenericDataInstances();
+		//generateGenericDataInstances();
 		generateAnnotations();
 	}
 

@@ -108,6 +108,9 @@ public class DSLSpecificEventsGenerator {
 			for (int j=0; j<event.getParams().size();j++) {
 				String paramName = validName(event.getParams().get(j).getName());
 				String paramType = event.getParams().get(j).getType().toLowerCase();
+				if (paramType.contains(".")) {
+					paramType = paramType.substring(paramType.lastIndexOf(".") + 1, paramType.length());
+				}
 				if (this.dslSpecificTypes.get(paramType) != null) {
 					Member member = factory.createMember();
 					member.setName(paramName);
