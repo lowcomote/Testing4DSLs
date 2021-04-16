@@ -56,7 +56,8 @@ public class EngineFactory{
 		return this.oclLauncher.runQuery(this.engineLauncher.getModelResource(), query.substring(1, query.length()-1));
 	}
 	public String executeDSLSpecificCommand(String eventName, Map<String, Object> parameters) {
-		//TODO: Calling the event manager
+		//an accepted event have to be sent to the MUT
+		//TODO: creating an eventOccurance based on the parameters and Calling the event manager
 		return null;
 	}
 	private String getEngineType() {
@@ -82,6 +83,9 @@ public class EngineFactory{
 		this.engineLauncher.setModelResource(MUTResource);
 	}
 	public Resource getMUTResource() {
+		if (this.engineLauncher == null) {
+			return (new ResourceSetImpl()).getResource(URI.createURI(MUTPath), true);
+		}
 		return this.engineLauncher.getModelResource();
 	}
 	public ArrayList<EObject> getOCLResultAsObject() {
