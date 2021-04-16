@@ -64,7 +64,7 @@ public class ALEEngineLauncher extends AbstractEngine{
 		this._animationFirstBreak = true;
 		this._modelInitializationMethod = getModelInitializationMethodName();
 		this._modelInitializationArguments = "";
-		this.executionMode = ExecutionMode.Animation;
+		this.executionMode = ExecutionMode.Run;
 		this.configureEngine();
 	}
 	//definition of a new configuration of ALE Engine for running a specific model
