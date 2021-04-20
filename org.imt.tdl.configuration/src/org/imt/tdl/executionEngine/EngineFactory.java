@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.eclipse.gemoc.executionframework.event.manager.GenericEventManager;
+import org.imt.tdl.eventManager.K3EventManagerLauncher;
 import org.imt.tdl.oclInterpreter.OCLInterpreter;
 
 public class EngineFactory{
@@ -20,7 +21,7 @@ public class EngineFactory{
 	
 	private IExecutionEngine engineLauncher;
 	private OCLInterpreter oclLauncher;
-	private GenericEventManager eventManager;
+	private K3EventManagerLauncher eventManager;
 	
 	public final static String GENERIC = "Generic";
 	public final static String DSL_SPECIFIC = "DSL-Specific";
@@ -36,11 +37,10 @@ public class EngineFactory{
 			}
 			this.engineLauncher.setUp(this.MUTPath, this.DSLPath);
 		}else if(commandType.equals(DSL_SPECIFIC)) {
-			if (this.eventManager == null) {
-				//this.eventManager = new GenericEventManager();
-			}
+			this.eventManager = new K3EventManagerLauncher();
+			this.eventManager.setup(this.MUTPath, this.DSLPath);
 		}else if (commandType.equals(OCL)) {
-			if (this.engineLauncher==null) {
+			if (this.engineLauncher == null) {
 				System.out.println("There is no model under execution. You have to run the model first.");
 			}else if (this.oclLauncher == null) {
 				this.oclLauncher = new OCLInterpreter();
@@ -55,10 +55,16 @@ public class EngineFactory{
 		//send the query without quotation marks
 		return this.oclLauncher.runQuery(this.engineLauncher.getModelResource(), query.substring(1, query.length()-1));
 	}
-	public String executeDSLSpecificCommand(String eventName, Map<String, Object> parameters) {
-		//an accepted event have to be sent to the MUT
-		//TODO: creating an eventOccurance based on the parameters and Calling the event manager
-		return null;
+	public String executeDSLSpecificCommand(String eventType, String eventName, Map<String, Object> parameters) {
+		switch (eventType) {
+		case "ACCEPTED":
+			return this.eventManager.processAcceptedEvent(eventName, parameters);
+		case "EXPOSED":
+			return this.eventManager.getExposedEvent(eventName, parameters);
+		default:
+			break;
+		}
+		return "FAIL";
 	}
 	private String getEngineType() {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(this.DSLPath), true);
