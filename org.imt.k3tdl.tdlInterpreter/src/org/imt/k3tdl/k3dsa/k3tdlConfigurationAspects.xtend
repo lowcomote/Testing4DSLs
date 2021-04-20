@@ -61,19 +61,15 @@ class GateInstanceAspect {
 					_self.receivedOutput = result.subSequence(1, result.length-1)
 				}
 				if (_self.receivedOutput.toString.equals(_self.expectedOutput.toString)){
-					println("Assertion PASSED")
 					return "PASS: The expected data is equal to the current data"
 				}else{
-					println("Assertion FIALED: The expected response is not received from MUT")
 					return "FAIL: The expected data is: " + _self.expectedOutput.toString + 
 						", but the current data is: " + _self.receivedOutput.toString;
 				}
 			} else if (_self.receivedOutput == null) {
-				println("Assertion FIALED: No response received from MUT")
 				return "FAIL: The expected data is: " + _self.expectedOutput.toString + 
 						", but the current data is: " + _self.receivedOutput.toString;
 			} else {
-				println("Assertion FAILED: The expected response is not received from MUT")
 				return "FAIL: The expected data is: " + _self.expectedOutput.toString + 
 						", but the current data is: " + _self.receivedOutput.toString;
 			}
@@ -82,15 +78,16 @@ class GateInstanceAspect {
 		else if (argument instanceof DataInstanceUse){
 			val arg = argument as DataInstanceUse
 			var Resource MUTResource = null;
+			if (arg.dataInstance.dataType.isExposedEvent(_self.DSLPath)){
+				//the message is an event conforming to the behavioral interface of the DSL
+				return _self.gateLauncher.executeDSLSpecificCommand("EXPOSED",arg.dataInstance.validName, _self.getEventParameters(arg))
+			}
 			if (_self.receivedOutput instanceof Resource){
 				MUTResource = _self.receivedOutput as Resource//the MUTResource is the received output
 			}
 			if (_self.name.equals('oclMUTGate')){
 				MUTResource = _self.gateLauncher.MUTResource//the MUT objects are the received output
-			}
-			else if (arg.dataInstance.dataType.isExposedEvent(_self.DSLPath)){//an execution rule is the received output 
-				//TODO: what should be set here??
-			}
+			}		
 			var String status = null
 			var ArrayList<EObject> matchedMUTElements = new ArrayList<EObject>();
 			if (arg.item != null && arg.item.size > 0){//there is a list of objects in the expected output
@@ -117,10 +114,8 @@ class GateInstanceAspect {
 			if(_self.name.equals('oclMUTGate')){
 				val Object[] receivedObjects = _self.gateLauncher.OCLResultAsObject
 				if (receivedObjects.elementsEqual(matchedMUTElements)){
-					println("Assertion PASSED")
 					return "PASS: The expected data is equal to the current data"
 				}else{
-					println("Assertion FAILED: The expected response is not received from MUT")
 					var expectedData = TestResultUtil.instance.getDataAsString(matchedMUTElements)
 					return "FAIL: The expected data is: " + expectedData + 
 						", but the current data is: " + _self.gateLauncher.OCLResultAsString;
@@ -153,7 +148,7 @@ class GateInstanceAspect {
 				return _self.gateLauncher.executeOCLCommand(query.value)				
 			}else if (arg.dataInstance.dataType.isAcceptedEvent(_self.DSLPath)){
 				//the message is an event conforming to the behavioral interface of the DSL
-				return _self.gateLauncher.executeDSLSpecificCommand(arg.dataInstance.validName, _self.getEventParameters(arg))
+				return _self.gateLauncher.executeDSLSpecificCommand("ACCEPTED",arg.dataInstance.validName, _self.getEventParameters(arg))
 			}
 			return "FAIL: Cannot send data to the MUT"
 		}
