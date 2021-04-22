@@ -157,6 +157,9 @@ public class K3EventManagerLauncher {
 	}
 	public String getExposedEvent(String eventName, Map<String, Object> parameters) {
 		EventOccurrence eventOccurrence = createEventOccurance(eventName, parameters);
+		if (eventOccurrence == null) {
+			return "FAIL: The expected event is not received from MUT";
+		}
 		try {
 			EventOccurrence occ = eventOccurrences.poll(10000, TimeUnit.MILLISECONDS);
 			while (occ != null && !occ.getEvent().getName().equals(eventOccurrence.getEvent().getName())) {
@@ -199,6 +202,9 @@ public class K3EventManagerLauncher {
 			}
 			EventOccurrenceArgument argument = EventFactory.eINSTANCE.createEventOccurrenceArgument();
 			argument.setParameter(parameter);
+			if (parameters.get(paramName) == null) {
+				return null;
+			}
 			argument.setValue((Value) EventManagerUtils.convertObjectToValue(parameters.get(paramName)));
 			eventOccurance.getArgs().add(argument);
 		}
