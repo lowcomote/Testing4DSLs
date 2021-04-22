@@ -151,7 +151,7 @@ class StructuredDataInstanceAspect extends DataInstanceAspect{
 				_self.matchedElements.add(rootElement.get(i))
 			}			
 		}
-		if (_self.matchedElements == null){
+		if (_self.matchedElements.empty){
 			return null
 		}
 		return _self.matchedElements.get(0)
