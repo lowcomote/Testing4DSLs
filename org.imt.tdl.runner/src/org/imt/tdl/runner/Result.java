@@ -5,9 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.etsi.mts.tdl.Message;
 import org.etsi.mts.tdl.TestDescription;
-import org.imt.tdl.testResult.TDLMessageResult;
 
 public class Result {
 	private int numExecutedTests = 0;
