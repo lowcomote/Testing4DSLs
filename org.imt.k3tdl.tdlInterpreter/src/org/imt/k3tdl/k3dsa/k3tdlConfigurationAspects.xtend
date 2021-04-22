@@ -78,16 +78,16 @@ class GateInstanceAspect {
 		else if (argument instanceof DataInstanceUse){
 			val arg = argument as DataInstanceUse
 			var Resource MUTResource = null;
-			if (arg.dataInstance.dataType.isExposedEvent(_self.DSLPath)){
-				//the message is an event conforming to the behavioral interface of the DSL
-				return _self.gateLauncher.executeDSLSpecificCommand("EXPOSED",arg.dataInstance.validName, _self.getEventParameters(arg))
-			}
 			if (_self.receivedOutput instanceof Resource){
 				MUTResource = _self.receivedOutput as Resource//the MUTResource is the received output
 			}
 			if (_self.name.equals('oclMUTGate')){
 				MUTResource = _self.gateLauncher.MUTResource//the MUT objects are the received output
-			}		
+			}
+			else if (arg.dataInstance.dataType.isExposedEvent(_self.DSLPath)){
+				//the message is an event conforming to the behavioral interface of the DSL
+				return _self.gateLauncher.executeDSLSpecificCommand("EXPOSED",arg.dataInstance.validName, _self.getEventParameters(arg))
+			}	
 			var String status = null
 			var ArrayList<EObject> matchedMUTElements = new ArrayList<EObject>();
 			if (arg.item != null && arg.item.size > 0){//there is a list of objects in the expected output
