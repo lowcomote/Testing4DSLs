@@ -71,6 +71,7 @@ class TestDescriptionAspect{
 		}else{
 			println("Test case PASSED")
 		}
+		_self.testConfiguration.stopModelExecutionEngine(_self.launcher)
 		return _self.testCaseResult
 	}
 	//this method is called from TDL runner
@@ -79,6 +80,7 @@ class TestDescriptionAspect{
 		_self.launcher.MUTPath = MUTPath
 		_self.testConfiguration.activateConfiguration(_self.launcher, MUTPath)
 		_self.behaviourDescription.callBehavior()
+		_self.testConfiguration.stopModelExecutionEngine(_self.launcher)
 		return _self.testCaseResult
 	}
 }
@@ -121,6 +123,11 @@ class TestConfigurationAspect{
 		}
 		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.contains('ocl')]]){
 			launcher.setUp(EngineFactory.OCL);
+		}
+	}
+	def void stopModelExecutionEngine(EngineFactory launcher){
+		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.contains('dslSpecific')]]) {
+			launcher.executeDSLSpecificCommand("STOP", null, null);
 		}
 	}
 }
