@@ -92,16 +92,16 @@ public class WodelTest implements IWodelTest {
 		if (!this.seedModelsTestResult.containsKey(seedModel_testcase)) {//if the tests are not executed on the seed model
 			this.seedModelsTestResult.put(seedModel_testcase, tdlCore.run(testPackage, seedModelPath));
 		}
-		Result seedResult = this.seedModelsTestResult.get(seedModel_testcase);
-		Result mutantResult = tdlCore.run(testPackage, artifactPath);
+		Result seedTestVerdict = this.seedModelsTestResult.get(seedModel_testcase);
+		Result mutantTestVerdict = tdlCore.run(testPackage, artifactPath);
 		
 		boolean value = true;
-		if (seedResult.equals(mutantResult)) {
+		if (seedTestVerdict.equals(mutantTestVerdict)) {
 			value = false;//when the tests has passed on the mutated model, the mutant is live otherwise is killed
 		}
 		String message = value ? DIFFERENT : EQUALS;//EQUALS if the value is false and so the mutant is live
 		String MUTName = artifactPath.substring(artifactPath.lastIndexOf('\\'), artifactPath.length());
-		List<Failure> mutantFailures = mutantResult.getFailures();
+		List<Failure> mutantFailures = mutantTestVerdict.getFailures();
 		for (Failure failure : mutantFailures) {
 			WodelTestInfo info = new WodelTestInfo(failure.getFailedTestName(), value, MUTName, message);
 			testsInfo.add(info);
@@ -111,9 +111,9 @@ public class WodelTest implements IWodelTest {
 			testsInfo.add(info);
 		}
 		String artifactAbsolutePath = (this.workspacePath + artifactPath).replaceAll("\\\\", "/");
-		WodelTestResult wtr = new WodelTestResult(testPackage.getName(), artifactAbsolutePath, mutantResult.getTests(), testsInfo);
-		globalResult.incNumTestsExecuted(mutantResult.getRunCount());
-		globalResult.incNumTestsFailed(mutantResult.getFailureCount());
+		WodelTestResult wtr = new WodelTestResult(testPackage.getName(), artifactAbsolutePath, mutantTestVerdict.getTests(), testsInfo);
+		globalResult.incNumTestsExecuted(mutantTestVerdict.getRunCount());
+		globalResult.incNumTestsFailed(mutantTestVerdict.getFailureCount());
 		globalResult.incNumTestsError(wtr.getErrorCount());
 		WodelTestResultClass resultClass = WodelTestResultClass.getWodelTestResultClassByName(results, artifactAbsolutePath);
 		if (resultClass == null) {
