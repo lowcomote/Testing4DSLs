@@ -125,35 +125,36 @@ class SimpleDataInstanceAspect extends DataInstanceAspect{
 }
 @Aspect (className = StructuredDataInstance)
 class StructuredDataInstanceAspect extends DataInstanceAspect{
+	public ArrayList<EObject> matchedElements = new ArrayList
 	@OverrideAspectMethod
 	def EObject getMatchedMUTElement(ArrayList<EObject> rootElement, Resource MUTResource, boolean isAssertion, String DSLPath){
-		var EObject matchedElement = null
 		//find matched elements based on the memberAssignments of dataInstance
-		for (i:0 ..<rootElement.size){
-			matchedElement = rootElement.get(i)
-			var boolean elementFound = true;
-			for (j : 0 ..<_self.memberAssignment.size){
+		for (i:0 ..<rootElement.size){	
+			var boolean memberFound = true		
+			for (j : 0 ..<_self.memberAssignment.size){	
 				val memberAssign = _self.memberAssignment.get(j)
 				if (isAssertion){//all the arguments (static and dynamic) have to be matched
-					_self.info = memberAssign.isMatchedMember(matchedElement, MUTResource, DSLPath)
+					_self.info = memberAssign.isMatchedMember(rootElement.get(i), MUTResource, DSLPath)
 					if(_self.info.contains("FAIL")){
-						elementFound = false
+						memberFound = false
 					}
 				}else{//only static arguments have to be matched
 					if (!memberAssign.member.dataType.isDynamicType && !memberAssign.member.isDynamicMember){
-						_self.info = memberAssign.isMatchedMember(matchedElement, MUTResource, DSLPath)
+						_self.info = memberAssign.isMatchedMember(rootElement.get(i), MUTResource, DSLPath)
 						if(_self.info.contains("FAIL")){
-							elementFound = false
+							memberFound = false
 						}
 					}
 				}
 			}
-			//all the members are matched with the attributes of the rootElement.get(i)
-			if(elementFound){
-				return matchedElement
-			}
+			if (memberFound){
+				_self.matchedElements.add(rootElement.get(i))
+			}			
 		}
-		return null
+		if (_self.matchedElements == null){
+			return null
+		}
+		return _self.matchedElements.get(0)
 	}
 
 	def String setMatchedMUTElement(EObject matchedObject, Resource MUTResource, String DSLPath){
@@ -186,11 +187,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 		if (!rootElement.get(0).eClass.name.equals(dataTypeName)){
 			var container = rootElement.get(0)
 			rootElement.remove(0)
-			for (EObject object: container.eContents){				
-				if (object.eClass.name.equals(dataTypeName)){
-					rootElement.add(object)
-				}
-			}
+			rootElement.addAll(container.eAllContents.filter[object | object.eClass.name.equals(dataTypeName)].toList)
 		}
 		var EObject matchedElement = null
 		if (_self.dataInstance instanceof StructuredDataInstance){
@@ -202,23 +199,17 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 				if (matchedElement == null){
 					_self.dataInstance.info = "FAIL: There is no MUT element matched with " + dataIns.name
 					return null
-				}else{
-					_self.dataInstance.info = _self.isMatchedParametrizedElement(matchedElement, MUTResource, isAssertion, DSLPath)
-					if (_self.dataInstance.info.contains("PASS")){
-						return matchedElement
-					}
-					return null
 				}
 			}	
+			rootElement = dataIns.matchedElements
 		}
-		//when the program reach to this line, it means all the values are assigned as parameter bindings (so no member assignment)
+		//when the program reach to this line, it means the values assigned as parameter bindings has to be checked
 		//therefore, all the elements identified as root must be checked to find the matched element
 		//find matched elements based on the parameter bindings of dataInstanceUse
 		for (i:0 ..<rootElement.size){
-			matchedElement = rootElement.get(i)
-			_self.dataInstance.info = _self.isMatchedParametrizedElement(matchedElement, MUTResource, isAssertion, DSLPath)
+			_self.dataInstance.info = _self.isMatchedParametrizedElement(rootElement.get(i), MUTResource, isAssertion, DSLPath)
 			if (_self.dataInstance.info.contains("PASS")){
-				return matchedElement
+				return rootElement.get(i)
 			}
 		}
 		return null
