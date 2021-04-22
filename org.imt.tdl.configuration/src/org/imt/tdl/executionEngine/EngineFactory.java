@@ -61,6 +61,8 @@ public class EngineFactory{
 			return this.eventManager.processAcceptedEvent(eventName, parameters);
 		case "EXPOSED":
 			return this.eventManager.getExposedEvent(eventName, parameters);
+		case "STOP":
+			this.eventManager.sendStopEvent();
 		default:
 			break;
 		}
