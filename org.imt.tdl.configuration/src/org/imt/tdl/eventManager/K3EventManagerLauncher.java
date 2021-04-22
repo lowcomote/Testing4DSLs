@@ -52,6 +52,8 @@ import org.eclipse.gemoc.executionframework.event.manager.IEventManagerListener;
 import org.eclipse.gemoc.executionframework.event.model.event.EventFactory;
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrence;
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrenceArgument;
+import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrenceType;
+import org.eclipse.gemoc.executionframework.event.model.event.StopEventOccurrence;
 import org.eclipse.gemoc.executionframework.value.model.value.SingleReferenceValue;
 import org.eclipse.gemoc.executionframework.value.model.value.Value;
 import org.eclipse.gemoc.executionframework.value.model.value.ValueFactory;
@@ -100,6 +102,7 @@ public class K3EventManagerLauncher {
 		//final Set<String> subtypeRelIds = configuration.getAttribute("SUBTYPE_REL_IDS", Collections.emptySet());
 		this.DSLPath = DSLPath;
 		final String languageName = this.getDslName(DSLPath);
+		//final String implemRelId = "org.imt.arduino.relationships.implementation_relationship";
 		final String implemRelId = "org.imt.pssm.relationships.implementation_relationship";
 		final String subtypeRelId = "org.imt.pssm.relationships.subtyping_relationship";
 		final Set<String> implRelIds = new HashSet<>();
@@ -172,6 +175,11 @@ public class K3EventManagerLauncher {
 			e.printStackTrace();
 		}
 		return "FAIL: The expected event is not received from MUT";
+	}
+	public void sendStopEvent() {
+		StopEventOccurrence stopEvent = EventFactory.eINSTANCE.createStopEventOccurrence();
+		stopEvent.setType(EventOccurrenceType.ACCEPTED);
+		eventManager.processEventOccurrence(stopEvent);
 	}
 	public EventOccurrence createEventOccurance(String eventName, Map<String, Object> parameters) {
 		BehavioralInterface bInterface = this.getBehavioralInterfaceRootElement(this.DSLPath);
