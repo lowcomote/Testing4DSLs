@@ -1,0 +1,70 @@
+	// BeginInjectInto org.imt.arduino.interpreter.InstructionAspect#void execute() from org.imt.arduino.interpreter.WhileAspect
+		if (_self instanceof org.imt.arduino.While){
+			org.imt.arduino.interpreter.WhileAspect.execute((org.imt.arduino.While)_self);
+		} else
+		// EndInjectInto org.imt.arduino.interpreter.InstructionAspect#void execute() from org.imt.arduino.interpreter.WhileAspect
+	// BeginInjectInto org.imt.arduino.interpreter.ExpressionAspect#Integer evaluate() from org.imt.arduino.interpreter.BinaryExpressionAspect
+		if (_self instanceof org.imt.arduino.BinaryExpression){
+			result = org.imt.arduino.interpreter.BinaryExpressionAspect.evaluate((org.imt.arduino.BinaryExpression)_self);
+		} else
+		// EndInjectInto org.imt.arduino.interpreter.ExpressionAspect#Integer evaluate() from org.imt.arduino.interpreter.BinaryExpressionAspect
+	// BeginInjectInto org.imt.arduino.interpreter.ExpressionAspect#Integer evaluate() from org.imt.arduino.interpreter.ConstantAspect
+		if (_self instanceof org.imt.arduino.Constant){
+			result = org.imt.arduino.interpreter.ConstantAspect.evaluate((org.imt.arduino.Constant)_self);
+		} else
+		// EndInjectInto org.imt.arduino.interpreter.ExpressionAspect#Integer evaluate() from org.imt.arduino.interpreter.ConstantAspect
+	// BeginInjectInto org.imt.arduino.interpreter.InstructionAspect#void execute() from org.imt.arduino.interpreter.DelayAspect
+		if (_self instanceof org.imt.arduino.Delay){
+			org.imt.arduino.interpreter.DelayAspect.execute((org.imt.arduino.Delay)_self);
+		} else
+		// EndInjectInto org.imt.arduino.interpreter.InstructionAspect#void execute() from org.imt.arduino.interpreter.DelayAspect
+	// BeginInjectInto org.imt.arduino.interpreter.InstructionAspect#void execute() from org.imt.arduino.interpreter.ControlAspect
+		if (_self instanceof org.imt.arduino.Control){
+			org.imt.arduino.interpreter.ControlAspect.execute((org.imt.arduino.Control)_self);
+		} else
+		// EndInjectInto org.imt.arduino.interpreter.InstructionAspect#void execute() from org.imt.arduino.interpreter.ControlAspect
+	// BeginInjectInto org.imt.arduino.interpreter.InstructionAspect#void execute() from org.imt.arduino.interpreter.WaitForAspect
+		if (_self instanceof org.imt.arduino.WaitFor){
+			org.imt.arduino.interpreter.WaitForAspect.execute((org.imt.arduino.WaitFor)_self);
+		} else
+		// EndInjectInto org.imt.arduino.interpreter.InstructionAspect#void execute() from org.imt.arduino.interpreter.WaitForAspect
+	// BeginInjectInto org.imt.arduino.interpreter.ControlAspect#void execute() from org.imt.arduino.interpreter.WhileAspect
+		if (_self instanceof org.imt.arduino.While){
+			org.imt.arduino.interpreter.WhileAspect.execute((org.imt.arduino.While)_self);
+		} else
+		// EndInjectInto org.imt.arduino.interpreter.ControlAspect#void execute() from org.imt.arduino.interpreter.WhileAspect
+	// BeginInjectInto org.imt.arduino.interpreter.ControlAspect#void execute() from org.imt.arduino.interpreter.IfAspect
+		if (_self instanceof org.imt.arduino.If){
+			org.imt.arduino.interpreter.IfAspect.execute((org.imt.arduino.If)_self);
+		} else
+		// EndInjectInto org.imt.arduino.interpreter.ControlAspect#void execute() from org.imt.arduino.interpreter.IfAspect
+	// BeginInjectInto org.imt.arduino.interpreter.ExpressionAspect#Integer evaluate() from org.imt.arduino.interpreter.UnaryExpressionAspect
+		if (_self instanceof org.imt.arduino.UnaryExpression){
+			result = org.imt.arduino.interpreter.UnaryExpressionAspect.evaluate((org.imt.arduino.UnaryExpression)_self);
+		} else
+		// EndInjectInto org.imt.arduino.interpreter.ExpressionAspect#Integer evaluate() from org.imt.arduino.interpreter.UnaryExpressionAspect
+	// BeginInjectInto org.imt.arduino.interpreter.ExpressionAspect#Integer evaluate() from org.imt.arduino.interpreter.ModuleGetAspect
+		if (_self instanceof org.imt.arduino.ModuleGet){
+			result = org.imt.arduino.interpreter.ModuleGetAspect.evaluate((org.imt.arduino.ModuleGet)_self);
+		} else
+		// EndInjectInto org.imt.arduino.interpreter.ExpressionAspect#Integer evaluate() from org.imt.arduino.interpreter.ModuleGetAspect
+	// BeginInjectInto org.imt.arduino.interpreter.InstructionAspect#void execute() from org.imt.arduino.interpreter.SetLedAspect
+		if (_self instanceof org.imt.arduino.SetLed){
+			org.imt.arduino.interpreter.SetLedAspect.execute((org.imt.arduino.SetLed)_self);
+		} else
+		// EndInjectInto org.imt.arduino.interpreter.InstructionAspect#void execute() from org.imt.arduino.interpreter.SetLedAspect
+	// BeginInjectInto org.imt.arduino.interpreter.InstructionAspect#void execute() from org.imt.arduino.interpreter.ModuleSetAspect
+		if (_self instanceof org.imt.arduino.ModuleSet){
+			org.imt.arduino.interpreter.ModuleSetAspect.execute((org.imt.arduino.ModuleSet)_self);
+		} else
+		// EndInjectInto org.imt.arduino.interpreter.InstructionAspect#void execute() from org.imt.arduino.interpreter.ModuleSetAspect
+	// BeginInjectInto org.imt.arduino.interpreter.InstructionAspect#void execute() from org.imt.arduino.interpreter.IfAspect
+		if (_self instanceof org.imt.arduino.If){
+			org.imt.arduino.interpreter.IfAspect.execute((org.imt.arduino.If)_self);
+		} else
+		// EndInjectInto org.imt.arduino.interpreter.InstructionAspect#void execute() from org.imt.arduino.interpreter.IfAspect
+	// BeginInjectInto org.imt.arduino.interpreter.ModuleSetAspect#void execute() from org.imt.arduino.interpreter.SetLedAspect
+		if (_self instanceof org.imt.arduino.SetLed){
+			org.imt.arduino.interpreter.SetLedAspect.execute((org.imt.arduino.SetLed)_self);
+		} else
+		// EndInjectInto org.imt.arduino.interpreter.ModuleSetAspect#void execute() from org.imt.arduino.interpreter.SetLedAspect
