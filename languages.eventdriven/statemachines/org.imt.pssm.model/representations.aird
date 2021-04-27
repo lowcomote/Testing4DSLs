@@ -5,7 +5,7 @@
     <semanticResources>model/statemachines.genmodel</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_YGr34KN7EeuZVPWFFLIPVQ">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_Y2-FUaN7EeuZVPWFFLIPVQ" name="statemachines class diagram" repPath="#_Y2hZYKN7EeuZVPWFFLIPVQ" changeId="1b50c585-89b2-47b1-9be2-4e2cb19bea1c">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_Y2-FUaN7EeuZVPWFFLIPVQ" name="statemachines class diagram" repPath="#_Y2hZYKN7EeuZVPWFFLIPVQ" changeId="c0a4697e-6788-4e3e-8054-4edb5ad09382">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="model/statemachines.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -1194,22 +1194,6 @@
             <labelColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
           </endLabelStyleDescription>
         </computedStyleDescriptions>
-        <computedStyleDescriptions xmi:type="style:FlatContainerStyleDescription" xmi:id="_IUgGtqN9EeuZVPWFFLIPVQ" arcWidth="8" arcHeight="8" borderSizeComputationExpression="1" tooltipExpression="service:renderTooltip" roundedCorner="true" widthComputationExpression="12" heightComputationExpression="10" backgroundStyle="Liquid">
-          <borderColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='red']"/>
-          <labelColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='red']"/>
-          <backgroundColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
-          <foregroundColor xmi:type="description:UserFixedColor" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='EClass']"/>
-        </computedStyleDescriptions>
-        <computedStyleDescriptions xmi:type="style:EdgeStyleDescription" xmi:id="_IUp3pqN9EeuZVPWFFLIPVQ" targetArrow="InputClosedArrow" routingStyle="tree">
-          <strokeColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
-          <beginLabelStyleDescription xmi:type="style:BeginLabelStyleDescription" xmi:id="_IUp3p6N9EeuZVPWFFLIPVQ" showIcon="false" labelExpression="service:superTypesLabel">
-            <labelFormat>italic</labelFormat>
-            <labelColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-          </beginLabelStyleDescription>
-          <centerLabelStyleDescription xmi:type="style:CenterLabelStyleDescription" xmi:id="_IUp3qKN9EeuZVPWFFLIPVQ" showIcon="false">
-            <labelColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='red']"/>
-          </centerLabelStyleDescription>
-        </computedStyleDescriptions>
         <computedStyleDescriptions xmi:type="style:EdgeStyleDescription" xmi:id="_IUp346N9EeuZVPWFFLIPVQ" sourceArrow="InputArrow" routingStyle="manhattan">
           <strokeColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
           <beginLabelStyleDescription xmi:type="style:BeginLabelStyleDescription" xmi:id="_IUp35KN9EeuZVPWFFLIPVQ" showIcon="false" labelExpression="service:renderEOpposite">
@@ -1560,14 +1544,16 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_VY5mgKN8EeuZVPWFFLIPVQ" name="CallEventType" visible="false" tooltipText="&#xA;ERROR : The name '' is not well formed" outgoingEdges="_VZNIj6N8EeuZVPWFFLIPVQ" width="12" height="10">
+    <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_VY5mgKN8EeuZVPWFFLIPVQ" name="CallEventType" visible="false" tooltipText="" outgoingEdges="_VZNIj6N8EeuZVPWFFLIPVQ" width="12" height="10">
       <target xmi:type="ecore:EClass" href="model/statemachines.ecore#//CallEventType"/>
       <semanticElements xmi:type="ecore:EClass" href="model/statemachines.ecore#//CallEventType"/>
       <graphicalFilters xmi:type="diagram:HideFilter" uid="_Z-8kkKN8EeuZVPWFFLIPVQ"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_IUgGuKN9EeuZVPWFFLIPVQ" labelColor="239,41,41" description="_IUgGtqN9EeuZVPWFFLIPVQ" borderSize="1" borderSizeComputationExpression="1" borderColor="239,41,41" backgroundStyle="Liquid" foregroundColor="255,252,216"/>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_zrBOAqaZEeuBMtuKfh28vQ" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
+      </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_VY5mg6N8EeuZVPWFFLIPVQ" name="SignalEventType" tooltipText="" outgoingEdges="_VZDX6KN8EeuZVPWFFLIPVQ _VZNIlqN8EeuZVPWFFLIPVQ" width="12" height="10">
@@ -1598,11 +1584,12 @@
     <ownedDiagramElements xmi:type="diagram:DEdge" uid="_VZNIj6N8EeuZVPWFFLIPVQ" visible="false" sourceNode="_VY5mgKN8EeuZVPWFFLIPVQ" targetNode="_SWx5UKN8EeuZVPWFFLIPVQ">
       <target xmi:type="ecore:EClass" href="model/statemachines.ecore#//CallEventType"/>
       <semanticElements xmi:type="ecore:EClass" href="model/statemachines.ecore#//CallEventType"/>
-      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_IUp3qaN9EeuZVPWFFLIPVQ" description="_IUp3pqN9EeuZVPWFFLIPVQ" targetArrow="InputClosedArrow" routingStyle="tree">
-        <beginLabelStyle xmi:type="diagram:BeginLabelStyle" uid="_IUp3qqN9EeuZVPWFFLIPVQ" showIcon="false">
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_zrzRIKaZEeuBMtuKfh28vQ" targetArrow="InputClosedArrow" routingStyle="tree">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']/@style"/>
+        <beginLabelStyle xmi:type="diagram:BeginLabelStyle" uid="_zrzRIaaZEeuBMtuKfh28vQ" showIcon="false">
           <labelFormat>italic</labelFormat>
         </beginLabelStyle>
-        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_IUp3q6N9EeuZVPWFFLIPVQ" showIcon="false" labelColor="239,41,41"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_zrzRIqaZEeuBMtuKfh28vQ" showIcon="false"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']"/>
     </ownedDiagramElements>
