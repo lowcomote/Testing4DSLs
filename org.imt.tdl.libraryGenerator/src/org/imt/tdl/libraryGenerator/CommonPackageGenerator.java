@@ -29,7 +29,7 @@ public class CommonPackageGenerator {
 	
 	private DataType oclType;
 	private List<DataInstance> verdictInstances = new ArrayList<DataInstance>();
-	private DataType genericCommand;
+	private DataType modelExecutionCommand;
 
 	public CommonPackageGenerator() {
 		this.factory = tdlFactory.eINSTANCE;
@@ -92,24 +92,24 @@ public class CommonPackageGenerator {
 		this.verdictInstances.add(INCONCLUSINVE);
 	}
 	private void generateTypeForGeneralEvents() {
-		SimpleDataType genericCommand = factory.createSimpleDataType();
-		genericCommand.setName("genericCommand");
+		SimpleDataType modelExecutionCommand = factory.createSimpleDataType();
+		modelExecutionCommand.setName("modelExecutionCommand");
 		SimpleDataInstance runModel = factory.createSimpleDataInstance();
 		runModel.setName("runModel");
-		runModel.setDataType(genericCommand);
+		runModel.setDataType(modelExecutionCommand);
 		SimpleDataInstance resetModel = factory.createSimpleDataInstance();
 		resetModel.setName("resetModel");
-		resetModel.setDataType(genericCommand);
+		resetModel.setDataType(modelExecutionCommand);
 		SimpleDataInstance getModelState = factory.createSimpleDataInstance();
 		getModelState.setName("getModelState");
-		getModelState.setDataType(genericCommand);
+		getModelState.setDataType(modelExecutionCommand);
 
-		this.commonPackage.getPackagedElement().add(genericCommand);
+		this.commonPackage.getPackagedElement().add(modelExecutionCommand);
 		this.commonPackage.getPackagedElement().add(runModel);
 		this.commonPackage.getPackagedElement().add(resetModel);
 		this.commonPackage.getPackagedElement().add(getModelState);
 		
-		this.genericCommand = genericCommand;
+		this.modelExecutionCommand = modelExecutionCommand;
 	}
 	public Package getCommonPackage() {
 		return this.commonPackage;
@@ -117,8 +117,8 @@ public class CommonPackageGenerator {
 	public DataType getOCLType() {
 		return this.oclType;
 	}
-	public DataType getGenericCommand() {
-		return this.genericCommand;
+	public DataType getModelExecutionCommand() {
+		return this.modelExecutionCommand;
 	}
 	public void setDslSpecificTypes(Map<String, DataType> dslSpecificTypes) {
 		this.dslSpecificTypes = dslSpecificTypes;
