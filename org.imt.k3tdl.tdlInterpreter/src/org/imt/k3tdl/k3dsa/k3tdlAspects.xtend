@@ -19,6 +19,11 @@ import org.imt.tdl.testResult.TestResultUtil
 import static extension org.imt.k3tdl.k3dsa.BehaviourDescriptionAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
+import org.eclipse.core.runtime.Platform
+import java.util.Arrays
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.core.runtime.IConfigurationElement
 
 @Aspect(className = Package)
 class PackageAspect {
@@ -95,8 +100,9 @@ class TestConfigurationAspect{
 			if (a.key.name == 'MUTPath'){
 				_self.MUTPath = a.value.substring(1, a.value.length-1)
 				launcher.MUTPath = _self.MUTPath
-			}else if (a.key.name == 'DSLPath'){
-				_self.DSLPath = a.value.substring(1, a.value.length-1)
+			}else if (a.key.name == 'DSLName'){
+				val DSLName = a.value.substring(1, a.value.length-1)
+				_self.DSLPath = _self.getDSLPath(DSLName)
 				launcher.DSLPath = _self.DSLPath
 			}
 		}
@@ -107,12 +113,31 @@ class TestConfigurationAspect{
 		_self.MUTPath = MUTPath
 		launcher.MUTPath = _self.MUTPath
 		for (Annotation a:_self.componentInstance.filter[ci | ci.role.toString == "SUT"].get(0).annotation){
-			if (a.key.name == 'DSLPath'){
-				_self.DSLPath = a.value.substring(1, a.value.length-1)
+			if (a.key.name == 'DSLName'){
+				val DSLName = a.value.substring(1, a.value.length-1)
+				_self.DSLPath = _self.getDSLPath(DSLName)
 				launcher.DSLPath = _self.DSLPath
 			}
 		}
 		_self.setUpLauncher(launcher)
+	}
+	
+	def String getDSLPath (String DSLName){
+		val ResourceSet resSet = new ResourceSetImpl()
+		val IConfigurationElement language = Arrays
+				.asList(Platform.getExtensionRegistry()
+						.getConfigurationElementsFor("org.eclipse.gemoc.gemoc_language_workbench.xdsml"))
+				.stream().filter(l | l.getAttribute("xdsmlFilePath").endsWith(".dsl")
+						&& l.getAttribute("name").equals(DSLName))
+				.findFirst().orElse(null);
+		
+		if (language != null) {
+			var xdsmlFilePath = language.getAttribute("xdsmlFilePath");
+			if (!xdsmlFilePath.startsWith("platform:/plugin")) {
+				xdsmlFilePath = "platform:/plugin" + xdsmlFilePath;
+			}
+			return xdsmlFilePath
+		}
 	}
 	def void setUpLauncher (EngineFactory launcher){
 		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.contains('generic')]]) {
