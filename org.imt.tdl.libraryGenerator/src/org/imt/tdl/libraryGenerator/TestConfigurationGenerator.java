@@ -73,7 +73,7 @@ public class TestConfigurationGenerator {
 		GateType genericGate = factory.createGateType();
 		genericGate.setName("genericGate");
 		genericGate.setKind(GateTypeKind.MESSAGE);
-		genericGate.getDataType().add(this.commonPackageGenerator.getGenericCommand());
+		genericGate.getDataType().add(this.commonPackageGenerator.getModelExecutionCommand());
 		this.testConfigurationPackage.getPackagedElement().add(genericGate);
 		this.gateTypes.put(genericGate.getName(), genericGate);
 		if (this.dslSpecificEventsGenerator.getTypesOfDslInterfaces().size()>0) {
@@ -136,10 +136,10 @@ public class TestConfigurationGenerator {
 		this.testConfigurationPackage.getPackagedElement().add(MUTPath);
 		this.annotations.put(MUTPath.getName(), MUTPath);
 		
-		AnnotationType DSLPath = factory.createAnnotationType();
-		DSLPath.setName("DSLPath");
-		this.testConfigurationPackage.getPackagedElement().add(DSLPath);
-		this.annotations.put(DSLPath.getName(), DSLPath);
+		AnnotationType DSLName = factory.createAnnotationType();
+		DSLName.setName("DSLName");
+		this.testConfigurationPackage.getPackagedElement().add(DSLName);
+		this.annotations.put(DSLName.getName(), DSLName);
 	}
 	private void generateConfigurations() {
 		//generate one generic test configuration
@@ -187,13 +187,13 @@ public class TestConfigurationGenerator {
 		Annotation mutPathAnnotation = factory.createAnnotation();
 		mutPathAnnotation.setAnnotatedElement(mutInstance);
 		mutPathAnnotation.setKey(this.annotations.get("MUTPath"));
-		mutPathAnnotation.setValue("\'TODO: Put the address of Model-Under Test here\'");
+		mutPathAnnotation.setValue("\'TODO: Put the address of the Model-Under Test here\'");
 		mutInstance.getAnnotation().add(mutPathAnnotation);
-		Annotation dslPathAnnotation = factory.createAnnotation();
-		dslPathAnnotation.setAnnotatedElement(mutInstance);
-		dslPathAnnotation.setKey(this.annotations.get("DSLPath"));
-		dslPathAnnotation.setValue("\'platform:/plugin/...TODO: complete the address of .dsl file...\'");
-		mutInstance.getAnnotation().add(dslPathAnnotation);
+		Annotation DSLNameAnnotation = factory.createAnnotation();
+		DSLNameAnnotation.setAnnotatedElement(mutInstance);
+		DSLNameAnnotation.setKey(this.annotations.get("DSLName"));
+		DSLNameAnnotation.setValue("\'TODO: Put the name of the DSL\'");
+		mutInstance.getAnnotation().add(DSLNameAnnotation);
 
 		configuration.getComponentInstance().add(mutInstance);
 	}
