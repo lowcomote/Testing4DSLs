@@ -1,6 +1,7 @@
 package org.imt.tdl.executionEngine;
 
 import java.util.ArrayList;
+
 import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
@@ -10,8 +11,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
-import org.eclipse.gemoc.executionframework.event.manager.GenericEventManager;
-import org.imt.tdl.eventManager.K3EventManagerLauncher;
 import org.imt.tdl.oclInterpreter.OCLInterpreter;
 
 public class EngineFactory{
@@ -21,7 +20,6 @@ public class EngineFactory{
 	
 	private IExecutionEngine engineLauncher;
 	private OCLInterpreter oclLauncher;
-	private K3EventManagerLauncher eventManager;
 	
 	public final static String GENERIC = "Generic";
 	public final static String DSL_SPECIFIC = "DSL-Specific";
@@ -36,9 +34,6 @@ public class EngineFactory{
 				this.engineLauncher = new JavaEngineLauncher();
 			}
 			this.engineLauncher.setUp(this.MUTPath, this.DSLPath);
-		}else if(commandType.equals(DSL_SPECIFIC)) {
-			this.eventManager = new K3EventManagerLauncher();
-			this.eventManager.setup(this.MUTPath, this.DSLPath);
 		}else if (commandType.equals(OCL)) {
 			if (this.engineLauncher == null) {
 				System.out.println("There is no model under execution. You have to run the model first.");
@@ -54,19 +49,6 @@ public class EngineFactory{
 	public String executeOCLCommand (String query){
 		//send the query without quotation marks
 		return this.oclLauncher.runQuery(this.engineLauncher.getModelResource(), query.substring(1, query.length()-1));
-	}
-	public String executeDSLSpecificCommand(String eventType, String eventName, Map<String, Object> parameters) {
-		switch (eventType) {
-		case "ACCEPTED":
-			return this.eventManager.processAcceptedEvent(eventName, parameters);
-		case "EXPOSED":
-			return this.eventManager.getExposedEvent(eventName, parameters);
-		case "STOP":
-			this.eventManager.sendStopEvent();
-		default:
-			break;
-		}
-		return "FAIL";
 	}
 	private String getEngineType() {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(this.DSLPath), true);
