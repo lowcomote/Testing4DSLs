@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="ASCII"?>
+<testsuite:TestSuiteReport xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:testsuite="http://http://www.eclipse.org/gemoc/event/testsuite">
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.0"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.1"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.2"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.3"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.4"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.5"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.6"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.7"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.8"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.9"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.10"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.11"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.12"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.13"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.14"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.15"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.16"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.17"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.18"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.19"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.20"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.21"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.22"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.23"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.24"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.25"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.26"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.27"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.28"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.29"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.30"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.31"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.32"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.33"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.34"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.35"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.36"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.37"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.38"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.39"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.40"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.41"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.42"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.43"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.44"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.45"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.46"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.47"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.48"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.49"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.50"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.51"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.52"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.53"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.54"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.55"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.56"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.57"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.58"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.59"/>
+  </testCaseReports>
+  <testCaseReports xsi:type="testsuite:TestCaseSuccess">
+    <testCase href="StateMachineTestSuite.xmi#//@testCases.60"/>
+  </testCaseReports>
+</testsuite:TestSuiteReport>

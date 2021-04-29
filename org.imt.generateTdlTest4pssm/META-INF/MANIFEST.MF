@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ETest2tdlTest
+Bundle-SymbolicName: org.imt.generateTdlTest4pssm
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: org.imt.eTest2tdlTest
+Export-Package: org.imt.generateTdlTest4pssm
+Require-Bundle: org.eclipse.emf.common;bundle-version="2.22.0",
+ org.eclipse.gemoc.executionframework.event.model;bundle-version="4.0.0",
+ org.eclipse.emf.ecore.xmi;bundle-version="2.16.0",
+ org.etsi.mts.tdl.model;bundle-version="1.4.0",
+ org.imt.pssm.model;bundle-version="1.0.0"
