@@ -52,9 +52,7 @@ public class ALEEngineLauncher extends AbstractEngine{
 	
 	@Override
 	public void setUp(String MUTPath, String DSLPath){
-		if (this.getModelResource()==null) {
-			super.setUp(MUTPath, DSLPath);
-		}
+		super.setUp(MUTPath, DSLPath);
 		this._modelLocation = this.getModelResource().getURI().toString();
 		this._siriusRepresentationLocation = this.getModelResource().getURI().toString().split("/")[1] + "/representations.aird";
 		this._delay = "0";
@@ -107,6 +105,7 @@ public class ALEEngineLauncher extends AbstractEngine{
 		}
 		aleEngine.startSynchronous();
 		this.setModelResource(aleEngine.getExecutionContext().getResourceModel());
+		aleEngine.dispose();
 		return "PASS: The model under test executed successfully";
 	}
 	private AleEngine createExecutionEngine() throws EngineContextException{

@@ -45,9 +45,7 @@ public class JavaEngineLauncher extends AbstractEngine{
 	private String _modelInitializationArguments;
 	@Override
 	public void setUp(String MUTPath, String DSLPath){
-		if (this.getModelResource()==null) {
-			super.setUp(MUTPath, DSLPath);
-		}
+		super.setUp(MUTPath, DSLPath);
 		this._modelLocation = this.getModelResource().getURI().toString();
 		this._siriusRepresentationLocation = this.getModelResource().getURI().toString().split("/")[1] + "/representations.aird";
 		this._delay = "0";
@@ -101,6 +99,7 @@ public class JavaEngineLauncher extends AbstractEngine{
 		}
 		javaEngine.startSynchronous();
 		this.setModelResource(javaEngine.getExecutionContext().getResourceModel());
+		javaEngine.dispose();
 		return "PASS: The model under test executed successfully";
 	}
 	public PlainK3ExecutionEngine createExecutionEngine() throws EngineContextException{
