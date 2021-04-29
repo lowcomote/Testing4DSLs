@@ -1,4 +1,0 @@
-name = org.imt.arduino.Arduino
-ecore = platform:/resource/org.imt.arduino.model/model/arduino.ecore
-k3 = org.imt.arduino.interpreter.BinaryExpressionAspect,org.imt.arduino.interpreter.BlockAspect,org.imt.arduino.interpreter.ConstantAspect,org.imt.arduino.interpreter.ControlAspect,org.imt.arduino.interpreter.DelayAspect,org.imt.arduino.interpreter.ExpressionAspect,org.imt.arduino.interpreter.IfAspect,org.imt.arduino.interpreter.InstructionAspect,org.imt.arduino.interpreter.ModuleAspect,org.imt.arduino.interpreter.ModuleGetAspect,org.imt.arduino.interpreter.ModuleSetAspect,org.imt.arduino.interpreter.PushButtonAspect,org.imt.arduino.interpreter.SetLedAspect,org.imt.arduino.interpreter.SketchAspect,org.imt.arduino.interpreter.UnaryExpressionAspect,org.imt.arduino.interpreter.WaitForAspect,org.imt.arduino.interpreter.WhileAspect
-behavioralInterface = platform:/resource/org.imt.arduino.relationships/Arduino.bi
