@@ -129,6 +129,7 @@ class StructuredDataInstanceAspect extends DataInstanceAspect{
 	@OverrideAspectMethod
 	def EObject getMatchedMUTElement(ArrayList<EObject> rootElement, Resource MUTResource, boolean isAssertion, String DSLPath){
 		//find matched elements based on the memberAssignments of dataInstance
+		_self.matchedElements.clear
 		for (i:0 ..<rootElement.size){	
 			var boolean memberFound = true		
 			for (j : 0 ..<_self.memberAssignment.size){	

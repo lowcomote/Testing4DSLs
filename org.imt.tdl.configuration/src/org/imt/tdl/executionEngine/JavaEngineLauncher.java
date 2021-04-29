@@ -101,6 +101,7 @@ public class JavaEngineLauncher extends AbstractEngine{
 		}
 		javaEngine.startSynchronous();
 		this.setModelResource(javaEngine.getExecutionContext().getResourceModel());
+		javaEngine.dispose();
 		return "PASS: The model under test executed successfully";
 	}
 	public PlainK3ExecutionEngine createExecutionEngine() throws EngineContextException{
