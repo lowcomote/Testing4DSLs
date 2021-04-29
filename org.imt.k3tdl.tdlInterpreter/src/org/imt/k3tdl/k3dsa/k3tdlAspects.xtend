@@ -5,8 +5,13 @@ import fr.inria.diverse.k3.al.annotationprocessor.InitializeModel
 import fr.inria.diverse.k3.al.annotationprocessor.Main
 import fr.inria.diverse.k3.al.annotationprocessor.Step
 import java.util.ArrayList
+import java.util.Arrays
 import java.util.List
+import org.eclipse.core.runtime.IConfigurationElement
+import org.eclipse.core.runtime.Platform
 import org.eclipse.emf.common.util.EList
+import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.etsi.mts.tdl.Annotation
 import org.etsi.mts.tdl.Package
 import org.etsi.mts.tdl.TestConfiguration
@@ -19,11 +24,6 @@ import org.imt.tdl.testResult.TestResultUtil
 import static extension org.imt.k3tdl.k3dsa.BehaviourDescriptionAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
-import org.eclipse.core.runtime.Platform
-import java.util.Arrays
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
-import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.core.runtime.IConfigurationElement
 
 @Aspect(className = Package)
 class PackageAspect {
@@ -76,7 +76,6 @@ class TestDescriptionAspect{
 		}else{
 			println("Test case PASSED")
 		}
-		_self.testConfiguration.stopModelExecutionEngine(_self.launcher)
 		return _self.testCaseResult
 	}
 	//this method is called from TDL runner
@@ -85,7 +84,6 @@ class TestDescriptionAspect{
 		_self.launcher.MUTPath = MUTPath
 		_self.testConfiguration.activateConfiguration(_self.launcher, MUTPath)
 		_self.behaviourDescription.callBehavior()
-		_self.testConfiguration.stopModelExecutionEngine(_self.launcher)
 		return _self.testCaseResult
 	}
 }
@@ -149,11 +147,6 @@ class TestConfigurationAspect{
 		}
 		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.contains('ocl')]]){
 			launcher.setUp(EngineFactory.OCL);
-		}
-	}
-	def void stopModelExecutionEngine(EngineFactory launcher){
-		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.contains('dslSpecific')]]) {
-			launcher.executeDSLSpecificCommand("STOP", null, null);
 		}
 	}
 }

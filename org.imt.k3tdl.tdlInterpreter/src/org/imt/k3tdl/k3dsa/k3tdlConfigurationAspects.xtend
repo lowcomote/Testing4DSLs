@@ -83,10 +83,6 @@ class GateInstanceAspect {
 			}
 			if (_self.name.equals('oclMUTGate')){
 				MUTResource = _self.gateLauncher.MUTResource//the MUT objects are the received output
-			}
-			else if (arg.dataInstance.dataType.isExposedEvent(_self.DSLPath)){
-				//the message is an event conforming to the behavioral interface of the DSL
-				return _self.gateLauncher.executeDSLSpecificCommand("EXPOSED",arg.dataInstance.validName, _self.getEventParameters(arg))
 			}	
 			var String status = null
 			var ArrayList<EObject> matchedMUTElements = new ArrayList<EObject>();
@@ -146,9 +142,6 @@ class GateInstanceAspect {
 				// extracting the query from the argument and sending for validation
 				var query = argument.argument.get(0).dataUse as LiteralValueUse
 				return _self.gateLauncher.executeOCLCommand(query.value)				
-			}else if (arg.dataInstance.dataType.isAcceptedEvent(_self.DSLPath)){
-				//the message is an event conforming to the behavioral interface of the DSL
-				return _self.gateLauncher.executeDSLSpecificCommand("ACCEPTED",arg.dataInstance.validName, _self.getEventParameters(arg))
 			}
 			return "FAIL: Cannot send data to the MUT"
 		}
