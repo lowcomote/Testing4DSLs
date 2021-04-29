@@ -142,9 +142,6 @@ class TestConfigurationAspect{
 		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.contains('generic')]]) {
 			launcher.setUp(EngineFactory.GENERIC);
 		}
-		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.contains('dslSpecific')]]) {
-			launcher.setUp(EngineFactory.DSL_SPECIFIC);
-		}
 		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.contains('ocl')]]){
 			launcher.setUp(EngineFactory.OCL);
 		}
