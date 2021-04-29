@@ -96,11 +96,12 @@ class TestConfigurationAspect{
 
 	def void activateConfiguration(EngineFactory launcher){
 		//finding the address of MUT From the annotations of the SUT component (the component with role==0)
-		for (Annotation a:_self.componentInstance.filter[ci | ci.role.toString == "SUT"].get(0).annotation){
-			if (a.key.name == 'MUTPath'){
+		val sutComponent = _self.componentInstance.filter[ci | ci.role.toString.equals("SUT")].get(0)
+		for (Annotation a:sutComponent.annotation){
+			if (a.key.name.equals('MUTPath')){
 				_self.MUTPath = a.value.substring(1, a.value.length-1)
 				launcher.MUTPath = _self.MUTPath
-			}else if (a.key.name == 'DSLName'){
+			}else if (a.key.name.equals('DSLName')){
 				val DSLName = a.value.substring(1, a.value.length-1)
 				_self.DSLPath = _self.getDSLPath(DSLName)
 				launcher.DSLPath = _self.DSLPath
