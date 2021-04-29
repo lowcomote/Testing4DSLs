@@ -12,6 +12,7 @@ package org.imt.tdl.launcher.ui;
 
 import java.util.ArrayList;
 
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -29,7 +30,7 @@ import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gemoc.commons.eclipse.ui.dialogs.SelectAnyIFileDialog;
-import org.eclipse.gemoc.execution.sequential.javaengine.EventBasedRunConfiguration;
+import org.eclipse.gemoc.execution.eventBasedEngine.EventBasedRunConfiguration;
 import org.eclipse.gemoc.execution.sequential.javaengine.PlainK3ExecutionEngine;
 import org.eclipse.gemoc.execution.sequential.javaengine.ui.Activator;
 import org.eclipse.gemoc.execution.sequential.javaengine.ui.launcher.LauncherMessages;
