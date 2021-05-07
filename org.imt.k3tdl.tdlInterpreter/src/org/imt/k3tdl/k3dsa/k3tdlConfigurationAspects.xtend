@@ -52,7 +52,7 @@ class GateInstanceAspect {
 			_self.expectedOutput = expected;
 			//when asserting ocl query validation result:
 			//if the expected result is String, use the labeled result of validation 
-			if (_self.name.equals('oclMUTGate')){
+			if (_self.name.equals('oclGate')){
 				_self.receivedOutput = _self.gateLauncher.OCLResultAsString
 			}
 			if (_self.receivedOutput != null) {
@@ -81,7 +81,7 @@ class GateInstanceAspect {
 			if (_self.receivedOutput instanceof Resource){
 				MUTResource = _self.receivedOutput as Resource//the MUTResource is the received output
 			}
-			if (_self.name.equals('oclMUTGate')){
+			if (_self.name.equals('oclGate')){
 				MUTResource = _self.gateLauncher.MUTResource//the MUT objects are the received output
 			}	
 			var String status = null
@@ -107,7 +107,7 @@ class GateInstanceAspect {
 					status = data.dataInstance.info	
 				}
 			}
-			if(_self.name.equals('oclMUTGate')){
+			if(_self.name.equals('oclGate')){
 				val Object[] receivedObjects = _self.gateLauncher.OCLResultAsObject
 				if (receivedObjects.elementsEqual(matchedMUTElements)){
 					return "PASS: The expected data is equal to the current data"

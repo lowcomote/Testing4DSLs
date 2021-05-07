@@ -37,7 +37,6 @@ public class TestConfigurationGenerator {
 	
 	private Map<String, GateType> gateTypes = new HashMap<String, GateType>();
 	private Map<String, ComponentType> componentTypes = new HashMap<String, ComponentType>();
-	private Map<String, GateInstance> gateInstances = new HashMap<String, GateInstance>();
 	private Map<String, AnnotationType> annotations = new HashMap<String, AnnotationType>();
 	private Map<String, TestConfiguration> configurations = new HashMap<String, TestConfiguration>();
 	
@@ -70,27 +69,27 @@ public class TestConfigurationGenerator {
 		this.testConfigurationPackage.getImport().add(dslSpecificPackageImport);
 	}
 	private void generateGateTypes() {
-		GateType genericGate = factory.createGateType();
-		genericGate.setName("genericGate");
-		genericGate.setKind(GateTypeKind.MESSAGE);
-		genericGate.getDataType().add(this.commonPackageGenerator.getModelExecutionCommand());
-		this.testConfigurationPackage.getPackagedElement().add(genericGate);
-		this.gateTypes.put(genericGate.getName(), genericGate);
+		GateType genericGateType = factory.createGateType();
+		genericGateType.setName("genericGateType");
+		genericGateType.setKind(GateTypeKind.MESSAGE);
+		genericGateType.getDataType().add(this.commonPackageGenerator.getModelExecutionCommand());
+		this.testConfigurationPackage.getPackagedElement().add(genericGateType);
+		this.gateTypes.put(genericGateType.getName(), genericGateType);
 		if (this.dslSpecificEventsGenerator.getTypesOfDslInterfaces().size()>0) {
-			GateType dslSpecificGate = factory.createGateType();
-			dslSpecificGate.setName("dslSpecificGate");
-			dslSpecificGate.setKind(GateTypeKind.MESSAGE);
-			dslSpecificGate.getDataType().addAll(this.dslSpecificEventsGenerator.getTypesOfDslInterfaces());
-			this.testConfigurationPackage.getPackagedElement().add(dslSpecificGate);
-			this.gateTypes.put(dslSpecificGate.getName(), dslSpecificGate);
+			GateType dslSpecificGateType = factory.createGateType();
+			dslSpecificGateType.setName("dslSpecificGateType");
+			dslSpecificGateType.setKind(GateTypeKind.MESSAGE);
+			dslSpecificGateType.getDataType().addAll(this.dslSpecificEventsGenerator.getTypesOfDslInterfaces());
+			this.testConfigurationPackage.getPackagedElement().add(dslSpecificGateType);
+			this.gateTypes.put(dslSpecificGateType.getName(), dslSpecificGateType);
 		}
 	
-		GateType oclGate = factory.createGateType();
-		oclGate.setName("oclGate");
-		oclGate.setKind(GateTypeKind.MESSAGE);
-		oclGate.getDataType().add(this.commonPackageGenerator.getOCLType());
-		this.testConfigurationPackage.getPackagedElement().add(oclGate);
-		this.gateTypes.put(oclGate.getName(), oclGate);
+		GateType oclGateType = factory.createGateType();
+		oclGateType.setName("oclGateType");
+		oclGateType.setKind(GateTypeKind.MESSAGE);
+		oclGateType.getDataType().add(this.commonPackageGenerator.getOCLType());
+		this.testConfigurationPackage.getPackagedElement().add(oclGateType);
+		this.gateTypes.put(oclGateType.getName(), oclGateType);
 	}
 	private void generateComponentTypes() {
 		ComponentType testSystem = factory.createComponentType();
@@ -106,29 +105,22 @@ public class TestConfigurationGenerator {
 		this.componentTypes.put(MUT.getName(), MUT);
 	}
 	private void generateGateInstances(ComponentType component) {
-		String gateName = "MUTGate";
-		if (component.getName().contains("Test")) {
-			gateName = "TestGate";
-		}
 		GateInstance genericGate = factory.createGateInstance();
-		genericGate.setName("generic" + gateName);
-		genericGate.setType(this.gateTypes.get("genericGate"));
+		genericGate.setName("genericGate");
+		genericGate.setType(this.gateTypes.get("genericGateType"));
 		component.getGateInstance().add(genericGate);
-		this.gateInstances.put(genericGate.getName(), genericGate);
 
-		if (this.gateTypes.get("dslSpecificGate") != null) {
+		if (this.gateTypes.get("dslSpecificGateType") != null) {
 			GateInstance dslSpecificGate = factory.createGateInstance();
-			dslSpecificGate.setName("dslSpecific"+ gateName);
-			dslSpecificGate.setType(this.gateTypes.get("dslSpecificGate"));
+			dslSpecificGate.setName("dslSpecificGate");
+			dslSpecificGate.setType(this.gateTypes.get("dslSpecificGateType"));
 			component.getGateInstance().add(dslSpecificGate);
-			this.gateInstances.put(dslSpecificGate.getName(), dslSpecificGate);
 		}
 		
 		GateInstance oclGate = factory.createGateInstance();
-		oclGate.setName("ocl"+ gateName);
-		oclGate.setType(this.gateTypes.get("oclGate"));
+		oclGate.setName("oclGate");
+		oclGate.setType(this.gateTypes.get("oclGateType"));
 		component.getGateInstance().add(oclGate);
-		this.gateInstances.put(oclGate.getName(), oclGate);
 	}
 	private void generateAnnotations() {
 		AnnotationType MUTPath = factory.createAnnotationType();
@@ -152,7 +144,7 @@ public class TestConfigurationGenerator {
 		
 		//if the dsl has an interface and specific gate types are generated for it,
 		//a new test configuration has to be defined
-		if (this.gateTypes.get("dslSpecificGate") != null) {
+		if (this.gateTypes.get("dslSpecificGateType") != null) {
 			TestConfiguration dslSpecificConfiguration = factory.createTestConfiguration();
 			dslSpecificConfiguration.setName("dslSpecificConfiguration");
 			generateComponentInstances(dslSpecificConfiguration);
@@ -213,11 +205,21 @@ public class TestConfigurationGenerator {
 		Connection gateConnection = factory.createConnection();
 		GateReference referenceToTestGate = factory.createGateReference();
 		referenceToTestGate.setComponent(testerComponent);
-		referenceToTestGate.setGate(this.gateInstances.get(configurationType + "TestGate"));
+		GateInstance gate = null;
+		for (int i=0; i<testerComponent.getType().getGateInstance().size();i++) {
+			gate = testerComponent.getType().getGateInstance().get(i);
+			if (gate.getName().equals(configurationType + "Gate")) {
+				referenceToTestGate.setGate (gate);
+			}
+		}
 		GateReference referenceToMUTGate = factory.createGateReference();
 		referenceToMUTGate.setComponent(MUTComponent);
-		referenceToMUTGate.setGate(this.gateInstances.get(configurationType + "MUTGate"));
-		
+		for (int i=0; i<MUTComponent.getType().getGateInstance().size();i++) {
+			gate = MUTComponent.getType().getGateInstance().get(i);
+			if (gate.getName().equals(configurationType + "Gate")) {
+				referenceToMUTGate.setGate (gate);
+			}
+		}		
 		gateConnection.getEndPoint().add(referenceToTestGate);
 		gateConnection.getEndPoint().add(referenceToMUTGate);
 		configuration.getConnection().add(gateConnection);
