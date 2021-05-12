@@ -57,7 +57,17 @@ class StateAspect {
 	@Step												// <3>
 	def void step(String inputString) {
 		// Get the valid transitions	
-		val validTransitions =  _self.outgoingTransitions.filter[t | inputString.startsWith(t.input)]
+		var validTransitions =  _self.outgoingTransitions.filter[t | 
+			if (t.input != null){
+				inputString.startsWith(t.input)
+			}else{
+				false
+			}
+		]
+		if(validTransitions.empty) {
+			//throw new FSMRuntimeException("No Transition")
+			validTransitions =  _self.outgoingTransitions.filter[t | t.input == null]
+		}
 		if(validTransitions.empty) {
 			throw new FSMRuntimeException("No Transition")
 		}
@@ -78,17 +88,21 @@ class TransitionAspect {
 		println("Firing " + _self.name + " and entering " + _self.target.name)
 		val fsm = _self.source.owningFSM
 		fsm.currentState = _self.target
-		if (fsm.producedString != null){
-			fsm.producedString = fsm.producedString + _self.output
-		}else{
-			fsm.producedString = _self.output
+		if (_self.output != null){
+			if (fsm.producedString != null){
+				fsm.producedString = fsm.producedString + _self.output
+			}else{
+				fsm.producedString = _self.output
+			}
 		}
-		if (fsm.consumedString != null){
-			fsm.consumedString = fsm.consumedString + _self.input
-		}else{
-			fsm.consumedString = _self.input
+		if (_self.input != null){
+			if (fsm.consumedString != null){
+				fsm.consumedString = fsm.consumedString + _self.input
+			}else{
+				fsm.consumedString = _self.input
+			}
+			fsm.unprocessedString = fsm.unprocessedString.substring(_self.input.length)
 		}
-		fsm.unprocessedString = fsm.unprocessedString.substring(_self.input.length)
 	}
 }
 
