@@ -10,7 +10,7 @@ FSM returns FSM:
 	name=EString
 	'{'
 		('unprocessedString' unprocessedString=EString)?
-		('consummedString' consummedString=EString)?
+		('consummedString' consumedString=EString)?
 		('producedString' producedString=EString)?
 		'initialState' initialState=[State|EString]
 		('finalState' finalState=[State|EString])?
