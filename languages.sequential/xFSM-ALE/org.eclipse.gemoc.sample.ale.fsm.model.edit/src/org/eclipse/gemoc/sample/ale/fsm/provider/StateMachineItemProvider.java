@@ -51,7 +51,7 @@ public class StateMachineItemProvider extends NamedElementItemProvider {
 			addInitialStatePropertyDescriptor(object);
 			addCurrentStatePropertyDescriptor(object);
 			addUnprocessedStringPropertyDescriptor(object);
-			addConsummedStringPropertyDescriptor(object);
+			addConsumedStringPropertyDescriptor(object);
 			addProducedStringPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -124,18 +124,18 @@ public class StateMachineItemProvider extends NamedElementItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Consummed String feature.
+	 * This adds a property descriptor for the Consumed String feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addConsummedStringPropertyDescriptor(Object object) {
+	protected void addConsumedStringPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_StateMachine_consummedString_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_StateMachine_consummedString_feature", "_UI_StateMachine_type"),
+				 getString("_UI_StateMachine_consumedString_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_StateMachine_consumedString_feature", "_UI_StateMachine_type"),
 				 FsmPackage.Literals.STATE_MACHINE__CONSUMED_STRING,
 				 true,
 				 false,
