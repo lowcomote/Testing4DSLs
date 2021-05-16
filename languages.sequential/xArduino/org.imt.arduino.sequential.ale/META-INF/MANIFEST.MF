@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Ale
+Bundle-SymbolicName: org.imt.arduino.sequential.ale;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: org.imt.arduino.sequential.ale
+Require-Bundle: org.eclipse.gemoc.xdsmlframework.api;bundle-version="4.0.0";visibility:="reexport",
+ org.eclipse.emf.ecore.xmi;bundle-version="2.8.0";visibility:="reexport",
+ org.eclipse.gemoc.executionframework.engine;bundle-version="4.0.0";visibility:="reexport",
+ org.eclipse.gemoc.executionframework.extensions.sirius;bundle-version=0.0.0;visibility:=reexport
