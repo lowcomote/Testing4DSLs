@@ -9,24 +9,28 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.gemoc.sequential.model.arduino.Led;
+import org.gemoc.sequential.model.arduino.ArduinoPackage;
+import org.gemoc.sequential.model.arduino.LED;
 
 /**
- * This is the item provider adapter for a {@link org.gemoc.sequential.model.arduino.Led} object.
+ * This is the item provider adapter for a {@link org.gemoc.sequential.model.arduino.LED} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class LedItemProvider extends OutputModuleItemProvider {
+public class LEDItemProvider extends ArduinoDigitalModuleItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LedItemProvider(AdapterFactory adapterFactory) {
+	public LEDItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -41,19 +45,42 @@ public class LedItemProvider extends OutputModuleItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addColorPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This returns Led.gif.
+	 * This adds a property descriptor for the Color feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addColorPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_LED_color_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_LED_color_feature", "_UI_LED_type"),
+				 ArduinoPackage.Literals.LED__COLOR,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This returns LED.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Led"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/LED"));
 	}
 
 	/**
@@ -64,10 +91,10 @@ public class LedItemProvider extends OutputModuleItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Led)object).getName();
+		String label = ((LED)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_Led_type") :
-			getString("_UI_Led_type") + " " + label;
+			getString("_UI_LED_type") :
+			getString("_UI_LED_type") + " " + label;
 	}
 
 
@@ -81,6 +108,12 @@ public class LedItemProvider extends OutputModuleItemProvider {
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(LED.class)) {
+			case ArduinoPackage.LED__COLOR:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 

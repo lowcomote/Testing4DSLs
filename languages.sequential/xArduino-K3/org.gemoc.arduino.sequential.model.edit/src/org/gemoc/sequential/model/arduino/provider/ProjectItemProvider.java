@@ -9,9 +9,17 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
+import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.IItemPropertySource;
+import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
+import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.gemoc.sequential.model.arduino.ArduinoFactory;
@@ -24,7 +32,14 @@ import org.gemoc.sequential.model.arduino.Project;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ProjectItemProvider extends NamedElementItemProvider {
+public class ProjectItemProvider 
+	extends ItemProviderAdapter
+	implements
+		IEditingDomainItemProvider,
+		IStructuredItemContentProvider,
+		ITreeItemContentProvider,
+		IItemLabelProvider,
+		IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -62,8 +77,8 @@ public class ProjectItemProvider extends NamedElementItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ArduinoPackage.Literals.PROJECT__BOARD);
-			childrenFeatures.add(ArduinoPackage.Literals.PROJECT__SKETCH);
+			childrenFeatures.add(ArduinoPackage.Literals.PROJECT__BOARDS);
+			childrenFeatures.add(ArduinoPackage.Literals.PROJECT__SKETCHES);
 		}
 		return childrenFeatures;
 	}
@@ -100,10 +115,7 @@ public class ProjectItemProvider extends NamedElementItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Project)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Project_type") :
-			getString("_UI_Project_type") + " " + label;
+		return getString("_UI_Project_type");
 	}
 
 
@@ -119,8 +131,8 @@ public class ProjectItemProvider extends NamedElementItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Project.class)) {
-			case ArduinoPackage.PROJECT__BOARD:
-			case ArduinoPackage.PROJECT__SKETCH:
+			case ArduinoPackage.PROJECT__BOARDS:
+			case ArduinoPackage.PROJECT__SKETCHES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -140,13 +152,24 @@ public class ProjectItemProvider extends NamedElementItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ArduinoPackage.Literals.PROJECT__BOARD,
-				 ArduinoFactory.eINSTANCE.createBoard()));
+				(ArduinoPackage.Literals.PROJECT__BOARDS,
+				 ArduinoFactory.eINSTANCE.createArduinoBoard()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ArduinoPackage.Literals.PROJECT__SKETCH,
+				(ArduinoPackage.Literals.PROJECT__SKETCHES,
 				 ArduinoFactory.eINSTANCE.createSketch()));
+	}
+
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+		return ArduinoEditPlugin.INSTANCE;
 	}
 
 }

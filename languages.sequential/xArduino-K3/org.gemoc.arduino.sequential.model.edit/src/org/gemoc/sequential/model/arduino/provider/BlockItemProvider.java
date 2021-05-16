@@ -151,7 +151,17 @@ public class BlockItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ArduinoPackage.Literals.BLOCK__INSTRUCTIONS,
-				 ArduinoFactory.eINSTANCE.createIf()));
+				 ArduinoFactory.eINSTANCE.createModuleAssignment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArduinoPackage.Literals.BLOCK__INSTRUCTIONS,
+				 ArduinoFactory.eINSTANCE.createDelay()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArduinoPackage.Literals.BLOCK__INSTRUCTIONS,
+				 ArduinoFactory.eINSTANCE.createRepeat()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -161,12 +171,17 @@ public class BlockItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ArduinoPackage.Literals.BLOCK__INSTRUCTIONS,
-				 ArduinoFactory.eINSTANCE.createSetLed()));
+				 ArduinoFactory.eINSTANCE.createVariableAssignment()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ArduinoPackage.Literals.BLOCK__INSTRUCTIONS,
-				 ArduinoFactory.eINSTANCE.createDelay()));
+				 ArduinoFactory.eINSTANCE.createIf()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArduinoPackage.Literals.BLOCK__INSTRUCTIONS,
+				 ArduinoFactory.eINSTANCE.createVariableDeclaration()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -16,6 +16,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.gemoc.sequential.model.arduino.ArduinoPackage;
 import org.gemoc.sequential.model.arduino.Delay;
+import org.gemoc.sequential.model.arduino.Time;
 
 /**
  * This is the item provider adapter for a {@link org.gemoc.sequential.model.arduino.Delay} object.
@@ -23,7 +24,7 @@ import org.gemoc.sequential.model.arduino.Delay;
  * <!-- end-user-doc -->
  * @generated
  */
-public class DelayItemProvider extends InstructionItemProvider {
+public class DelayItemProvider extends UtilitiesItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -45,9 +46,32 @@ public class DelayItemProvider extends InstructionItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addUnitPropertyDescriptor(object);
 			addValuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Unit feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addUnitPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Delay_unit_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Delay_unit_feature", "_UI_Delay_type"),
+				 ArduinoPackage.Literals.DELAY__UNIT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -91,8 +115,11 @@ public class DelayItemProvider extends InstructionItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		Delay delay = (Delay)object;
-		return getString("_UI_Delay_type") + " " + delay.getValue();
+		Time labelValue = ((Delay)object).getUnit();
+		String label = labelValue == null ? null : labelValue.toString();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Delay_type") :
+			getString("_UI_Delay_type") + " " + label;
 	}
 
 
@@ -108,6 +135,7 @@ public class DelayItemProvider extends InstructionItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Delay.class)) {
+			case ArduinoPackage.DELAY__UNIT:
 			case ArduinoPackage.DELAY__VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

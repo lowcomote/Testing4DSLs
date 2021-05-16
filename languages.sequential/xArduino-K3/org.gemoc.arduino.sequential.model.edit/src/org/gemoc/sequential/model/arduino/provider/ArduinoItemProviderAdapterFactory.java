@@ -72,6 +72,75 @@ public class ArduinoItemProviderAdapterFactory extends ArduinoAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.DigitalPin} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DigitalPinItemProvider digitalPinItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.DigitalPin}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDigitalPinAdapter() {
+		if (digitalPinItemProvider == null) {
+			digitalPinItemProvider = new DigitalPinItemProvider(this);
+		}
+
+		return digitalPinItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.AnalogPin} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AnalogPinItemProvider analogPinItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.AnalogPin}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createAnalogPinAdapter() {
+		if (analogPinItemProvider == null) {
+			analogPinItemProvider = new AnalogPinItemProvider(this);
+		}
+
+		return analogPinItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.Sketch} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SketchItemProvider sketchItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.Sketch}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSketchAdapter() {
+		if (sketchItemProvider == null) {
+			sketchItemProvider = new SketchItemProvider(this);
+		}
+
+		return sketchItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.Project} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -95,46 +164,437 @@ public class ArduinoItemProviderAdapterFactory extends ArduinoAdapterFactory imp
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.Board} instances.
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.ModuleAssignment} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BoardItemProvider boardItemProvider;
+	protected ModuleAssignmentItemProvider moduleAssignmentItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.Board}.
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.ModuleAssignment}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createBoardAdapter() {
-		if (boardItemProvider == null) {
-			boardItemProvider = new BoardItemProvider(this);
+	public Adapter createModuleAssignmentAdapter() {
+		if (moduleAssignmentItemProvider == null) {
+			moduleAssignmentItemProvider = new ModuleAssignmentItemProvider(this);
 		}
 
-		return boardItemProvider;
+		return moduleAssignmentItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.Led} instances.
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.Delay} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected LedItemProvider ledItemProvider;
+	protected DelayItemProvider delayItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.Led}.
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.Delay}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createLedAdapter() {
+	public Adapter createDelayAdapter() {
+		if (delayItemProvider == null) {
+			delayItemProvider = new DelayItemProvider(this);
+		}
+
+		return delayItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.Repeat} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RepeatItemProvider repeatItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.Repeat}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRepeatAdapter() {
+		if (repeatItemProvider == null) {
+			repeatItemProvider = new RepeatItemProvider(this);
+		}
+
+		return repeatItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.While} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected WhileItemProvider whileItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.While}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createWhileAdapter() {
+		if (whileItemProvider == null) {
+			whileItemProvider = new WhileItemProvider(this);
+		}
+
+		return whileItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.VariableAssignment} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected VariableAssignmentItemProvider variableAssignmentItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.VariableAssignment}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createVariableAssignmentAdapter() {
+		if (variableAssignmentItemProvider == null) {
+			variableAssignmentItemProvider = new VariableAssignmentItemProvider(this);
+		}
+
+		return variableAssignmentItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.BinaryIntegerExpression} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BinaryIntegerExpressionItemProvider binaryIntegerExpressionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.BinaryIntegerExpression}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBinaryIntegerExpressionAdapter() {
+		if (binaryIntegerExpressionItemProvider == null) {
+			binaryIntegerExpressionItemProvider = new BinaryIntegerExpressionItemProvider(this);
+		}
+
+		return binaryIntegerExpressionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.BinaryBooleanExpression} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BinaryBooleanExpressionItemProvider binaryBooleanExpressionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.BinaryBooleanExpression}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBinaryBooleanExpressionAdapter() {
+		if (binaryBooleanExpressionItemProvider == null) {
+			binaryBooleanExpressionItemProvider = new BinaryBooleanExpressionItemProvider(this);
+		}
+
+		return binaryBooleanExpressionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.If} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected IfItemProvider ifItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.If}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createIfAdapter() {
+		if (ifItemProvider == null) {
+			ifItemProvider = new IfItemProvider(this);
+		}
+
+		return ifItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.IntegerConstant} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected IntegerConstantItemProvider integerConstantItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.IntegerConstant}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createIntegerConstantAdapter() {
+		if (integerConstantItemProvider == null) {
+			integerConstantItemProvider = new IntegerConstantItemProvider(this);
+		}
+
+		return integerConstantItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.BooleanConstant} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BooleanConstantItemProvider booleanConstantItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.BooleanConstant}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBooleanConstantAdapter() {
+		if (booleanConstantItemProvider == null) {
+			booleanConstantItemProvider = new BooleanConstantItemProvider(this);
+		}
+
+		return booleanConstantItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.IntegerVariable} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected IntegerVariableItemProvider integerVariableItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.IntegerVariable}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createIntegerVariableAdapter() {
+		if (integerVariableItemProvider == null) {
+			integerVariableItemProvider = new IntegerVariableItemProvider(this);
+		}
+
+		return integerVariableItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.BooleanVariable} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BooleanVariableItemProvider booleanVariableItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.BooleanVariable}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBooleanVariableAdapter() {
+		if (booleanVariableItemProvider == null) {
+			booleanVariableItemProvider = new BooleanVariableItemProvider(this);
+		}
+
+		return booleanVariableItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.BooleanModuleGet} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BooleanModuleGetItemProvider booleanModuleGetItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.BooleanModuleGet}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBooleanModuleGetAdapter() {
+		if (booleanModuleGetItemProvider == null) {
+			booleanModuleGetItemProvider = new BooleanModuleGetItemProvider(this);
+		}
+
+		return booleanModuleGetItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.IntegerModuleGet} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected IntegerModuleGetItemProvider integerModuleGetItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.IntegerModuleGet}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createIntegerModuleGetAdapter() {
+		if (integerModuleGetItemProvider == null) {
+			integerModuleGetItemProvider = new IntegerModuleGetItemProvider(this);
+		}
+
+		return integerModuleGetItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.UnaryBooleanExpression} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UnaryBooleanExpressionItemProvider unaryBooleanExpressionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.UnaryBooleanExpression}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUnaryBooleanExpressionAdapter() {
+		if (unaryBooleanExpressionItemProvider == null) {
+			unaryBooleanExpressionItemProvider = new UnaryBooleanExpressionItemProvider(this);
+		}
+
+		return unaryBooleanExpressionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.UnaryIntegerExpression} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UnaryIntegerExpressionItemProvider unaryIntegerExpressionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.UnaryIntegerExpression}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUnaryIntegerExpressionAdapter() {
+		if (unaryIntegerExpressionItemProvider == null) {
+			unaryIntegerExpressionItemProvider = new UnaryIntegerExpressionItemProvider(this);
+		}
+
+		return unaryIntegerExpressionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.VariableDeclaration} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected VariableDeclarationItemProvider variableDeclarationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.VariableDeclaration}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createVariableDeclarationAdapter() {
+		if (variableDeclarationItemProvider == null) {
+			variableDeclarationItemProvider = new VariableDeclarationItemProvider(this);
+		}
+
+		return variableDeclarationItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.IntegerVariableRef} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected IntegerVariableRefItemProvider integerVariableRefItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.IntegerVariableRef}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createIntegerVariableRefAdapter() {
+		if (integerVariableRefItemProvider == null) {
+			integerVariableRefItemProvider = new IntegerVariableRefItemProvider(this);
+		}
+
+		return integerVariableRefItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.LED} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected LEDItemProvider ledItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.LED}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createLEDAdapter() {
 		if (ledItemProvider == null) {
-			ledItemProvider = new LedItemProvider(this);
+			ledItemProvider = new LEDItemProvider(this);
 		}
 
 		return ledItemProvider;
@@ -164,141 +624,187 @@ public class ArduinoItemProviderAdapterFactory extends ArduinoAdapterFactory imp
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.Sketch} instances.
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.Buzzer} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SketchItemProvider sketchItemProvider;
+	protected BuzzerItemProvider buzzerItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.Sketch}.
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.Buzzer}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createSketchAdapter() {
-		if (sketchItemProvider == null) {
-			sketchItemProvider = new SketchItemProvider(this);
+	public Adapter createBuzzerAdapter() {
+		if (buzzerItemProvider == null) {
+			buzzerItemProvider = new BuzzerItemProvider(this);
 		}
 
-		return sketchItemProvider;
+		return buzzerItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.Block} instances.
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.RotationSensor} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BlockItemProvider blockItemProvider;
+	protected RotationSensorItemProvider rotationSensorItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.Block}.
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.RotationSensor}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createBlockAdapter() {
-		if (blockItemProvider == null) {
-			blockItemProvider = new BlockItemProvider(this);
+	public Adapter createRotationSensorAdapter() {
+		if (rotationSensorItemProvider == null) {
+			rotationSensorItemProvider = new RotationSensorItemProvider(this);
 		}
 
-		return blockItemProvider;
+		return rotationSensorItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.If} instances.
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.MicroServo} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected IfItemProvider ifItemProvider;
+	protected MicroServoItemProvider microServoItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.If}.
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.MicroServo}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createIfAdapter() {
-		if (ifItemProvider == null) {
-			ifItemProvider = new IfItemProvider(this);
+	public Adapter createMicroServoAdapter() {
+		if (microServoItemProvider == null) {
+			microServoItemProvider = new MicroServoItemProvider(this);
 		}
 
-		return ifItemProvider;
+		return microServoItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.While} instances.
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.InfraRedSensor} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected WhileItemProvider whileItemProvider;
+	protected InfraRedSensorItemProvider infraRedSensorItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.While}.
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.InfraRedSensor}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createWhileAdapter() {
-		if (whileItemProvider == null) {
-			whileItemProvider = new WhileItemProvider(this);
+	public Adapter createInfraRedSensorAdapter() {
+		if (infraRedSensorItemProvider == null) {
+			infraRedSensorItemProvider = new InfraRedSensorItemProvider(this);
 		}
 
-		return whileItemProvider;
+		return infraRedSensorItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.SetLed} instances.
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.AmbientLightSensor} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SetLedItemProvider setLedItemProvider;
+	protected AmbientLightSensorItemProvider ambientLightSensorItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.SetLed}.
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.AmbientLightSensor}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createSetLedAdapter() {
-		if (setLedItemProvider == null) {
-			setLedItemProvider = new SetLedItemProvider(this);
+	public Adapter createAmbientLightSensorAdapter() {
+		if (ambientLightSensorItemProvider == null) {
+			ambientLightSensorItemProvider = new AmbientLightSensorItemProvider(this);
 		}
 
-		return setLedItemProvider;
+		return ambientLightSensorItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.Delay} instances.
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.SoundSensor} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected DelayItemProvider delayItemProvider;
+	protected SoundSensorItemProvider soundSensorItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.Delay}.
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.SoundSensor}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createDelayAdapter() {
-		if (delayItemProvider == null) {
-			delayItemProvider = new DelayItemProvider(this);
+	public Adapter createSoundSensorAdapter() {
+		if (soundSensorItemProvider == null) {
+			soundSensorItemProvider = new SoundSensorItemProvider(this);
 		}
 
-		return delayItemProvider;
+		return soundSensorItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.Fan} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected FanItemProvider fanItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.Fan}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createFanAdapter() {
+		if (fanItemProvider == null) {
+			fanItemProvider = new FanItemProvider(this);
+		}
+
+		return fanItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.MusicPlayer} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MusicPlayerItemProvider musicPlayerItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.MusicPlayer}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createMusicPlayerAdapter() {
+		if (musicPlayerItemProvider == null) {
+			musicPlayerItemProvider = new MusicPlayerItemProvider(this);
+		}
+
+		return musicPlayerItemProvider;
 	}
 
 	/**
@@ -325,95 +831,95 @@ public class ArduinoItemProviderAdapterFactory extends ArduinoAdapterFactory imp
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.Constant} instances.
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.Block} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ConstantItemProvider constantItemProvider;
+	protected BlockItemProvider blockItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.Constant}.
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.Block}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createConstantAdapter() {
-		if (constantItemProvider == null) {
-			constantItemProvider = new ConstantItemProvider(this);
+	public Adapter createBlockAdapter() {
+		if (blockItemProvider == null) {
+			blockItemProvider = new BlockItemProvider(this);
 		}
 
-		return constantItemProvider;
+		return blockItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.UnaryExpression} instances.
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.ArduinoBoard} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected UnaryExpressionItemProvider unaryExpressionItemProvider;
+	protected ArduinoBoardItemProvider arduinoBoardItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.UnaryExpression}.
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.ArduinoBoard}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createUnaryExpressionAdapter() {
-		if (unaryExpressionItemProvider == null) {
-			unaryExpressionItemProvider = new UnaryExpressionItemProvider(this);
+	public Adapter createArduinoBoardAdapter() {
+		if (arduinoBoardItemProvider == null) {
+			arduinoBoardItemProvider = new ArduinoBoardItemProvider(this);
 		}
 
-		return unaryExpressionItemProvider;
+		return arduinoBoardItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.BinaryExpression} instances.
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.BooleanVariableRef} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BinaryExpressionItemProvider binaryExpressionItemProvider;
+	protected BooleanVariableRefItemProvider booleanVariableRefItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.BinaryExpression}.
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.BooleanVariableRef}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createBinaryExpressionAdapter() {
-		if (binaryExpressionItemProvider == null) {
-			binaryExpressionItemProvider = new BinaryExpressionItemProvider(this);
+	public Adapter createBooleanVariableRefAdapter() {
+		if (booleanVariableRefItemProvider == null) {
+			booleanVariableRefItemProvider = new BooleanVariableRefItemProvider(this);
 		}
 
-		return binaryExpressionItemProvider;
+		return booleanVariableRefItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.ModuleGet} instances.
+	 * This keeps track of the one adapter used for all {@link org.gemoc.sequential.model.arduino.BluetoothTransceiver} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ModuleGetItemProvider moduleGetItemProvider;
+	protected BluetoothTransceiverItemProvider bluetoothTransceiverItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.ModuleGet}.
+	 * This creates an adapter for a {@link org.gemoc.sequential.model.arduino.BluetoothTransceiver}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createModuleGetAdapter() {
-		if (moduleGetItemProvider == null) {
-			moduleGetItemProvider = new ModuleGetItemProvider(this);
+	public Adapter createBluetoothTransceiverAdapter() {
+		if (bluetoothTransceiverItemProvider == null) {
+			bluetoothTransceiverItemProvider = new BluetoothTransceiverItemProvider(this);
 		}
 
-		return moduleGetItemProvider;
+		return bluetoothTransceiverItemProvider;
 	}
 
 	/**
@@ -422,7 +928,6 @@ public class ArduinoItemProviderAdapterFactory extends ArduinoAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public ComposeableAdapterFactory getRootAdapterFactory() {
 		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
 	}
@@ -433,7 +938,6 @@ public class ArduinoItemProviderAdapterFactory extends ArduinoAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
@@ -482,7 +986,6 @@ public class ArduinoItemProviderAdapterFactory extends ArduinoAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void addListener(INotifyChangedListener notifyChangedListener) {
 		changeNotifier.addListener(notifyChangedListener);
 	}
@@ -493,7 +996,6 @@ public class ArduinoItemProviderAdapterFactory extends ArduinoAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void removeListener(INotifyChangedListener notifyChangedListener) {
 		changeNotifier.removeListener(notifyChangedListener);
 	}
@@ -504,7 +1006,6 @@ public class ArduinoItemProviderAdapterFactory extends ArduinoAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void fireNotifyChanged(Notification notification) {
 		changeNotifier.fireNotifyChanged(notification);
 
@@ -519,23 +1020,44 @@ public class ArduinoItemProviderAdapterFactory extends ArduinoAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void dispose() {
+		if (digitalPinItemProvider != null) digitalPinItemProvider.dispose();
+		if (analogPinItemProvider != null) analogPinItemProvider.dispose();
+		if (sketchItemProvider != null) sketchItemProvider.dispose();
 		if (projectItemProvider != null) projectItemProvider.dispose();
-		if (boardItemProvider != null) boardItemProvider.dispose();
+		if (moduleAssignmentItemProvider != null) moduleAssignmentItemProvider.dispose();
+		if (delayItemProvider != null) delayItemProvider.dispose();
+		if (repeatItemProvider != null) repeatItemProvider.dispose();
+		if (whileItemProvider != null) whileItemProvider.dispose();
+		if (variableAssignmentItemProvider != null) variableAssignmentItemProvider.dispose();
+		if (binaryIntegerExpressionItemProvider != null) binaryIntegerExpressionItemProvider.dispose();
+		if (binaryBooleanExpressionItemProvider != null) binaryBooleanExpressionItemProvider.dispose();
+		if (ifItemProvider != null) ifItemProvider.dispose();
+		if (integerConstantItemProvider != null) integerConstantItemProvider.dispose();
+		if (booleanConstantItemProvider != null) booleanConstantItemProvider.dispose();
+		if (integerVariableItemProvider != null) integerVariableItemProvider.dispose();
+		if (booleanVariableItemProvider != null) booleanVariableItemProvider.dispose();
+		if (booleanModuleGetItemProvider != null) booleanModuleGetItemProvider.dispose();
+		if (integerModuleGetItemProvider != null) integerModuleGetItemProvider.dispose();
+		if (unaryBooleanExpressionItemProvider != null) unaryBooleanExpressionItemProvider.dispose();
+		if (unaryIntegerExpressionItemProvider != null) unaryIntegerExpressionItemProvider.dispose();
+		if (variableDeclarationItemProvider != null) variableDeclarationItemProvider.dispose();
+		if (integerVariableRefItemProvider != null) integerVariableRefItemProvider.dispose();
 		if (ledItemProvider != null) ledItemProvider.dispose();
 		if (pushButtonItemProvider != null) pushButtonItemProvider.dispose();
-		if (sketchItemProvider != null) sketchItemProvider.dispose();
-		if (blockItemProvider != null) blockItemProvider.dispose();
-		if (ifItemProvider != null) ifItemProvider.dispose();
-		if (whileItemProvider != null) whileItemProvider.dispose();
-		if (setLedItemProvider != null) setLedItemProvider.dispose();
-		if (delayItemProvider != null) delayItemProvider.dispose();
+		if (buzzerItemProvider != null) buzzerItemProvider.dispose();
+		if (rotationSensorItemProvider != null) rotationSensorItemProvider.dispose();
+		if (microServoItemProvider != null) microServoItemProvider.dispose();
+		if (infraRedSensorItemProvider != null) infraRedSensorItemProvider.dispose();
+		if (ambientLightSensorItemProvider != null) ambientLightSensorItemProvider.dispose();
+		if (soundSensorItemProvider != null) soundSensorItemProvider.dispose();
+		if (fanItemProvider != null) fanItemProvider.dispose();
+		if (musicPlayerItemProvider != null) musicPlayerItemProvider.dispose();
 		if (waitForItemProvider != null) waitForItemProvider.dispose();
-		if (constantItemProvider != null) constantItemProvider.dispose();
-		if (unaryExpressionItemProvider != null) unaryExpressionItemProvider.dispose();
-		if (binaryExpressionItemProvider != null) binaryExpressionItemProvider.dispose();
-		if (moduleGetItemProvider != null) moduleGetItemProvider.dispose();
+		if (blockItemProvider != null) blockItemProvider.dispose();
+		if (arduinoBoardItemProvider != null) arduinoBoardItemProvider.dispose();
+		if (booleanVariableRefItemProvider != null) booleanVariableRefItemProvider.dispose();
+		if (bluetoothTransceiverItemProvider != null) bluetoothTransceiverItemProvider.dispose();
 	}
 
 }

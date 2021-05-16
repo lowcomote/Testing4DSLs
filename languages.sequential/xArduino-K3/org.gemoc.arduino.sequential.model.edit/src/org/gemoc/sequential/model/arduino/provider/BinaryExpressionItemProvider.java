@@ -11,15 +11,12 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.gemoc.sequential.model.arduino.ArduinoFactory;
 import org.gemoc.sequential.model.arduino.ArduinoPackage;
 import org.gemoc.sequential.model.arduino.BinaryExpression;
-import org.gemoc.sequential.model.arduino.BinaryOperatorKind;
 
 /**
  * This is the item provider adapter for a {@link org.gemoc.sequential.model.arduino.BinaryExpression} object.
@@ -49,31 +46,8 @@ public class BinaryExpressionItemProvider extends ExpressionItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addOperatorPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Operator feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addOperatorPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_BinaryExpression_operator_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_BinaryExpression_operator_feature", "_UI_BinaryExpression_type"),
-				 ArduinoPackage.Literals.BINARY_EXPRESSION__OPERATOR,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -115,11 +89,7 @@ public class BinaryExpressionItemProvider extends ExpressionItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		BinaryOperatorKind labelValue = ((BinaryExpression)object).getOperator();
-		String label = labelValue == null ? null : labelValue.toString();
-		return label == null || label.length() == 0 ?
-			getString("_UI_BinaryExpression_type") :
-			getString("_UI_BinaryExpression_type") + " " + label;
+		return getString("_UI_BinaryExpression_type");
 	}
 
 
@@ -135,9 +105,6 @@ public class BinaryExpressionItemProvider extends ExpressionItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(BinaryExpression.class)) {
-			case ArduinoPackage.BINARY_EXPRESSION__OPERATOR:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
 			case ArduinoPackage.BINARY_EXPRESSION__LEFT:
 			case ArduinoPackage.BINARY_EXPRESSION__RIGHT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
@@ -160,42 +127,102 @@ public class BinaryExpressionItemProvider extends ExpressionItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(ArduinoPackage.Literals.BINARY_EXPRESSION__LEFT,
-				 ArduinoFactory.eINSTANCE.createConstant()));
+				 ArduinoFactory.eINSTANCE.createBinaryIntegerExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ArduinoPackage.Literals.BINARY_EXPRESSION__LEFT,
-				 ArduinoFactory.eINSTANCE.createUnaryExpression()));
+				 ArduinoFactory.eINSTANCE.createBinaryBooleanExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ArduinoPackage.Literals.BINARY_EXPRESSION__LEFT,
-				 ArduinoFactory.eINSTANCE.createBinaryExpression()));
+				 ArduinoFactory.eINSTANCE.createIntegerConstant()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ArduinoPackage.Literals.BINARY_EXPRESSION__LEFT,
-				 ArduinoFactory.eINSTANCE.createModuleGet()));
+				 ArduinoFactory.eINSTANCE.createBooleanConstant()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArduinoPackage.Literals.BINARY_EXPRESSION__LEFT,
+				 ArduinoFactory.eINSTANCE.createBooleanModuleGet()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArduinoPackage.Literals.BINARY_EXPRESSION__LEFT,
+				 ArduinoFactory.eINSTANCE.createIntegerModuleGet()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArduinoPackage.Literals.BINARY_EXPRESSION__LEFT,
+				 ArduinoFactory.eINSTANCE.createUnaryBooleanExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArduinoPackage.Literals.BINARY_EXPRESSION__LEFT,
+				 ArduinoFactory.eINSTANCE.createUnaryIntegerExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArduinoPackage.Literals.BINARY_EXPRESSION__LEFT,
+				 ArduinoFactory.eINSTANCE.createIntegerVariableRef()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArduinoPackage.Literals.BINARY_EXPRESSION__LEFT,
+				 ArduinoFactory.eINSTANCE.createBooleanVariableRef()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ArduinoPackage.Literals.BINARY_EXPRESSION__RIGHT,
-				 ArduinoFactory.eINSTANCE.createConstant()));
+				 ArduinoFactory.eINSTANCE.createBinaryIntegerExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ArduinoPackage.Literals.BINARY_EXPRESSION__RIGHT,
-				 ArduinoFactory.eINSTANCE.createUnaryExpression()));
+				 ArduinoFactory.eINSTANCE.createBinaryBooleanExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ArduinoPackage.Literals.BINARY_EXPRESSION__RIGHT,
-				 ArduinoFactory.eINSTANCE.createBinaryExpression()));
+				 ArduinoFactory.eINSTANCE.createIntegerConstant()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ArduinoPackage.Literals.BINARY_EXPRESSION__RIGHT,
-				 ArduinoFactory.eINSTANCE.createModuleGet()));
+				 ArduinoFactory.eINSTANCE.createBooleanConstant()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArduinoPackage.Literals.BINARY_EXPRESSION__RIGHT,
+				 ArduinoFactory.eINSTANCE.createBooleanModuleGet()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArduinoPackage.Literals.BINARY_EXPRESSION__RIGHT,
+				 ArduinoFactory.eINSTANCE.createIntegerModuleGet()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArduinoPackage.Literals.BINARY_EXPRESSION__RIGHT,
+				 ArduinoFactory.eINSTANCE.createUnaryBooleanExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArduinoPackage.Literals.BINARY_EXPRESSION__RIGHT,
+				 ArduinoFactory.eINSTANCE.createUnaryIntegerExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArduinoPackage.Literals.BINARY_EXPRESSION__RIGHT,
+				 ArduinoFactory.eINSTANCE.createIntegerVariableRef()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArduinoPackage.Literals.BINARY_EXPRESSION__RIGHT,
+				 ArduinoFactory.eINSTANCE.createBooleanVariableRef()));
 	}
 
 	/**

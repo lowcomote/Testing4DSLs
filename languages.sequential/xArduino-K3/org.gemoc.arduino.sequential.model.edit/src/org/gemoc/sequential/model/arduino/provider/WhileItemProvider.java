@@ -136,22 +136,27 @@ public class WhileItemProvider extends ControlItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(ArduinoPackage.Literals.WHILE__CONDITION,
-				 ArduinoFactory.eINSTANCE.createConstant()));
+				 ArduinoFactory.eINSTANCE.createBinaryBooleanExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ArduinoPackage.Literals.WHILE__CONDITION,
-				 ArduinoFactory.eINSTANCE.createUnaryExpression()));
+				 ArduinoFactory.eINSTANCE.createBooleanConstant()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ArduinoPackage.Literals.WHILE__CONDITION,
-				 ArduinoFactory.eINSTANCE.createBinaryExpression()));
+				 ArduinoFactory.eINSTANCE.createBooleanModuleGet()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ArduinoPackage.Literals.WHILE__CONDITION,
-				 ArduinoFactory.eINSTANCE.createModuleGet()));
+				 ArduinoFactory.eINSTANCE.createUnaryBooleanExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArduinoPackage.Literals.WHILE__CONDITION,
+				 ArduinoFactory.eINSTANCE.createBooleanVariableRef()));
 	}
 
 }

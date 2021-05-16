@@ -11,15 +11,12 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.gemoc.sequential.model.arduino.ArduinoFactory;
 import org.gemoc.sequential.model.arduino.ArduinoPackage;
 import org.gemoc.sequential.model.arduino.UnaryExpression;
-import org.gemoc.sequential.model.arduino.UnaryOperatorKind;
 
 /**
  * This is the item provider adapter for a {@link org.gemoc.sequential.model.arduino.UnaryExpression} object.
@@ -49,31 +46,8 @@ public class UnaryExpressionItemProvider extends ExpressionItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addOperatorPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Operator feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addOperatorPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_UnaryExpression_operator_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_UnaryExpression_operator_feature", "_UI_UnaryExpression_type"),
-				 ArduinoPackage.Literals.UNARY_EXPRESSION__OPERATOR,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -114,11 +88,7 @@ public class UnaryExpressionItemProvider extends ExpressionItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		UnaryOperatorKind labelValue = ((UnaryExpression)object).getOperator();
-		String label = labelValue == null ? null : labelValue.toString();
-		return label == null || label.length() == 0 ?
-			getString("_UI_UnaryExpression_type") :
-			getString("_UI_UnaryExpression_type") + " " + label;
+		return getString("_UI_UnaryExpression_type");
 	}
 
 
@@ -134,9 +104,6 @@ public class UnaryExpressionItemProvider extends ExpressionItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(UnaryExpression.class)) {
-			case ArduinoPackage.UNARY_EXPRESSION__OPERATOR:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
 			case ArduinoPackage.UNARY_EXPRESSION__OPERAND:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -158,22 +125,52 @@ public class UnaryExpressionItemProvider extends ExpressionItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(ArduinoPackage.Literals.UNARY_EXPRESSION__OPERAND,
-				 ArduinoFactory.eINSTANCE.createConstant()));
+				 ArduinoFactory.eINSTANCE.createBinaryIntegerExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ArduinoPackage.Literals.UNARY_EXPRESSION__OPERAND,
-				 ArduinoFactory.eINSTANCE.createUnaryExpression()));
+				 ArduinoFactory.eINSTANCE.createBinaryBooleanExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ArduinoPackage.Literals.UNARY_EXPRESSION__OPERAND,
-				 ArduinoFactory.eINSTANCE.createBinaryExpression()));
+				 ArduinoFactory.eINSTANCE.createIntegerConstant()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(ArduinoPackage.Literals.UNARY_EXPRESSION__OPERAND,
-				 ArduinoFactory.eINSTANCE.createModuleGet()));
+				 ArduinoFactory.eINSTANCE.createBooleanConstant()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArduinoPackage.Literals.UNARY_EXPRESSION__OPERAND,
+				 ArduinoFactory.eINSTANCE.createBooleanModuleGet()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArduinoPackage.Literals.UNARY_EXPRESSION__OPERAND,
+				 ArduinoFactory.eINSTANCE.createIntegerModuleGet()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArduinoPackage.Literals.UNARY_EXPRESSION__OPERAND,
+				 ArduinoFactory.eINSTANCE.createUnaryBooleanExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArduinoPackage.Literals.UNARY_EXPRESSION__OPERAND,
+				 ArduinoFactory.eINSTANCE.createUnaryIntegerExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArduinoPackage.Literals.UNARY_EXPRESSION__OPERAND,
+				 ArduinoFactory.eINSTANCE.createIntegerVariableRef()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ArduinoPackage.Literals.UNARY_EXPRESSION__OPERAND,
+				 ArduinoFactory.eINSTANCE.createBooleanVariableRef()));
 	}
 
 }

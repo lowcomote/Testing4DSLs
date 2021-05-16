@@ -19,7 +19,7 @@ import org.gemoc.sequential.model.arduino.PushButton;
  * <!-- end-user-doc -->
  * @generated
  */
-public class PushButtonItemProvider extends InputModuleItemProvider {
+public class PushButtonItemProvider extends ArduinoDigitalModuleItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

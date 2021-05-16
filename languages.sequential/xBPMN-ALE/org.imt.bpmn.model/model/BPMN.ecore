@@ -90,22 +90,34 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="referencedEntity" lowerBound="1"
         eType="#//Entity"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BasicVariable" eSuperTypes="#//Variable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="valueObject" eType="#//Value"
+  <eClassifiers xsi:type="ecore:EClass" name="BasicVariable" eSuperTypes="#//Variable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerVariable" eSuperTypes="#//BasicVariable">
+    <eAnnotations source="dynamic"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueObject" eType="#//IntegerValue"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IntegerVariable" eSuperTypes="#//BasicVariable"/>
-  <eClassifiers xsi:type="ecore:EClass" name="BooleanVariable" eSuperTypes="#//BasicVariable"/>
-  <eClassifiers xsi:type="ecore:EClass" name="StringVariable" eSuperTypes="#//BasicVariable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanVariable" eSuperTypes="#//BasicVariable">
+    <eAnnotations source="dynamic"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueObject" eType="#//BooleanValue"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringVariable" eSuperTypes="#//BasicVariable">
+    <eAnnotations source="dynamic"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueObject" eType="#//StringValue"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerValue" eSuperTypes="#//Value">
+    <eAnnotations source="dynamic"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanValue" eSuperTypes="#//Value">
+    <eAnnotations source="dynamic"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StringValue" eSuperTypes="#//Value">
+    <eAnnotations source="dynamic"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Decision" abstract="true" eSuperTypes="#//MicroflowElement"/>
