@@ -39,7 +39,7 @@ public class TestSuitePackageGenerator {
 		this.testSuitePackage.setName("testSuite");
 		generateImports(this.testSuitePackage);
 		//generateGenericDataInstances();
-		generateAnnotations();
+		//generateAnnotations();
 	}
 
 	private void generateImports(Package testSuitePackage) {

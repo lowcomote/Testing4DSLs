@@ -32,9 +32,6 @@ class FSMAspect {
 		if (_self.producedString == null){
 			_self.producedString = "";
 		}
-		if(_self.unprocessedString.isEmpty) {
-			println("nothing to process, did you forgot to pass parameters to the launch configuration ?")
-		}
 	}
 	@Step	
 	@Main												// <2>

@@ -54,7 +54,7 @@ public class ALEEngineLauncher extends AbstractEngine{
 	public void setUp(String MUTPath, String DSLPath){
 		super.setUp(MUTPath, DSLPath);
 		this._modelLocation = this.getModelResource().getURI().toString();
-		this._siriusRepresentationLocation = this.getModelResource().getURI().toString().split("/")[1] + "/representations.aird";
+		//this._siriusRepresentationLocation = this.getModelResource().getURI().toString().split("/")[1] + "/representations.aird";
 		this._delay = "0";
 		this._language = this.getDslName(DSLPath);
 		this._entryPointModelElement = "/";
