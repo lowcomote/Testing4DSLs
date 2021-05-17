@@ -52,7 +52,7 @@ public class JavaEngineLauncher extends AbstractEngine{
 		this._language = this.getDslName(DSLPath);
 		this._entryPointModelElement = "/";
 		this._entryPointMethod = getModelEntryPointMethodName();
-		this._animationFirstBreak = true;
+		this._animationFirstBreak = false;
 		this._modelInitializationMethod = getModelInitializationMethodName();
 		this._modelInitializationArguments = "";
 		this.executionMode = ExecutionMode.Run;
