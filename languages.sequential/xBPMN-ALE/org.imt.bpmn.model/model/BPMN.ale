@@ -111,12 +111,15 @@ open class CreateObject{
 open class ChangeObject{
 	@step
 	def void step(){
-		//Entity objectToBeChanged := self.ownerMicroflow.valuedVariables 
-		//	-> select (e | e = self.entity)-> first();
-		//objectToBeChanged := self.entity;
-		('Entity ' + self.entity.name + ' is updated.').log();
-		for (flow in self.outgoingFlows){
-			flow.fire();
+		BasicVariable variable := self.entity.attributes->select(a | a = self.variableToBeChanged);
+		if (variable = null){
+			('There is no ' + self.variableToBeChanged + ' property in the ' + self.entity + ' entity').log();
+		}else{
+			variable.valueObject := self.newValue;
+			('Entity ' + self.entity.name + ' is updated.').log();
+			for (flow in self.outgoingFlows){
+				flow.fire();
+			}
 		}
 	}
 }

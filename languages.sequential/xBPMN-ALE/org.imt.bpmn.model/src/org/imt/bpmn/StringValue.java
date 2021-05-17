@@ -16,7 +16,7 @@ package org.imt.bpmn;
  * </ul>
  *
  * @see org.imt.bpmn.bpmnPackage#getStringValue()
- * @model
+ * @model annotation="dynamic"
  * @generated
  */
 public interface StringValue extends Value {

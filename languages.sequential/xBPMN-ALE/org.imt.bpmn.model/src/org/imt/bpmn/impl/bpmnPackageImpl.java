@@ -628,6 +628,24 @@ public class bpmnPackageImpl extends EPackageImpl implements bpmnPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getChangeObject_NewValue() {
+		return (EReference)changeObjectEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getChangeObject_VariableToBeChanged() {
+		return (EReference)changeObjectEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRetrieveObject() {
 		return retrieveObjectEClass;
 	}
@@ -871,8 +889,8 @@ public class bpmnPackageImpl extends EPackageImpl implements bpmnPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBasicVariable_ValueObject() {
-		return (EReference)basicVariableEClass.getEStructuralFeatures().get(0);
+	public EClass getIntegerVariable() {
+		return integerVariableEClass;
 	}
 
 	/**
@@ -880,8 +898,8 @@ public class bpmnPackageImpl extends EPackageImpl implements bpmnPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getIntegerVariable() {
-		return integerVariableEClass;
+	public EReference getIntegerVariable_ValueObject() {
+		return (EReference)integerVariableEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -898,8 +916,26 @@ public class bpmnPackageImpl extends EPackageImpl implements bpmnPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getBooleanVariable_ValueObject() {
+		return (EReference)booleanVariableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getStringVariable() {
 		return stringVariableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStringVariable_ValueObject() {
+		return (EReference)stringVariableEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1247,6 +1283,8 @@ public class bpmnPackageImpl extends EPackageImpl implements bpmnPackage {
 		deleteObjectEClass = createEClass(DELETE_OBJECT);
 
 		changeObjectEClass = createEClass(CHANGE_OBJECT);
+		createEReference(changeObjectEClass, CHANGE_OBJECT__NEW_VALUE);
+		createEReference(changeObjectEClass, CHANGE_OBJECT__VARIABLE_TO_BE_CHANGED);
 
 		retrieveObjectEClass = createEClass(RETRIEVE_OBJECT);
 		createEAttribute(retrieveObjectEClass, RETRIEVE_OBJECT__CONSTRAINT);
@@ -1289,13 +1327,15 @@ public class bpmnPackageImpl extends EPackageImpl implements bpmnPackage {
 		createEReference(referenceEClass, REFERENCE__REFERENCED_ENTITY);
 
 		basicVariableEClass = createEClass(BASIC_VARIABLE);
-		createEReference(basicVariableEClass, BASIC_VARIABLE__VALUE_OBJECT);
 
 		integerVariableEClass = createEClass(INTEGER_VARIABLE);
+		createEReference(integerVariableEClass, INTEGER_VARIABLE__VALUE_OBJECT);
 
 		booleanVariableEClass = createEClass(BOOLEAN_VARIABLE);
+		createEReference(booleanVariableEClass, BOOLEAN_VARIABLE__VALUE_OBJECT);
 
 		stringVariableEClass = createEClass(STRING_VARIABLE);
+		createEReference(stringVariableEClass, STRING_VARIABLE__VALUE_OBJECT);
 
 		valueEClass = createEClass(VALUE);
 
@@ -1436,6 +1476,8 @@ public class bpmnPackageImpl extends EPackageImpl implements bpmnPackage {
 		initEClass(deleteObjectEClass, DeleteObject.class, "DeleteObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(changeObjectEClass, ChangeObject.class, "ChangeObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getChangeObject_NewValue(), this.getValue(), null, "newValue", null, 1, 1, ChangeObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getChangeObject_VariableToBeChanged(), this.getBasicVariable(), null, "variableToBeChanged", null, 1, 1, ChangeObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(retrieveObjectEClass, RetrieveObject.class, "RetrieveObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRetrieveObject_Constraint(), ecorePackage.getEString(), "constraint", null, 0, 1, RetrieveObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1478,13 +1520,15 @@ public class bpmnPackageImpl extends EPackageImpl implements bpmnPackage {
 		initEReference(getReference_ReferencedEntity(), this.getEntity(), null, "referencedEntity", null, 1, 1, Reference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(basicVariableEClass, BasicVariable.class, "BasicVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBasicVariable_ValueObject(), this.getValue(), null, "valueObject", null, 0, 1, BasicVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(integerVariableEClass, IntegerVariable.class, "IntegerVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getIntegerVariable_ValueObject(), this.getIntegerValue(), null, "valueObject", null, 0, 1, IntegerVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(booleanVariableEClass, BooleanVariable.class, "BooleanVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBooleanVariable_ValueObject(), this.getBooleanValue(), null, "valueObject", null, 0, 1, BooleanVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stringVariableEClass, StringVariable.class, "StringVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getStringVariable_ValueObject(), this.getStringValue(), null, "valueObject", null, 0, 1, StringVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(valueEClass, Value.class, "Value", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1573,6 +1617,51 @@ public class bpmnPackageImpl extends EPackageImpl implements bpmnPackage {
 		   });
 		addAnnotation
 		  (getMicroflow_ValuedVariables(),
+		   source,
+		   new String[] {
+		   });
+		addAnnotation
+		  (variableEClass,
+		   source,
+		   new String[] {
+		   });
+		addAnnotation
+		  (basicVariableEClass,
+		   source,
+		   new String[] {
+		   });
+		addAnnotation
+		  (integerVariableEClass,
+		   source,
+		   new String[] {
+		   });
+		addAnnotation
+		  (booleanVariableEClass,
+		   source,
+		   new String[] {
+		   });
+		addAnnotation
+		  (stringVariableEClass,
+		   source,
+		   new String[] {
+		   });
+		addAnnotation
+		  (valueEClass,
+		   source,
+		   new String[] {
+		   });
+		addAnnotation
+		  (integerValueEClass,
+		   source,
+		   new String[] {
+		   });
+		addAnnotation
+		  (booleanValueEClass,
+		   source,
+		   new String[] {
+		   });
+		addAnnotation
+		  (stringValueEClass,
 		   source,
 		   new String[] {
 		   });

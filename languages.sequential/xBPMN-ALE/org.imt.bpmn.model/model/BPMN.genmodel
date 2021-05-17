@@ -53,7 +53,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BPMN.ecore#//CreateObject/newEntity"/>
     </genClasses>
     <genClasses ecoreClass="BPMN.ecore#//DeleteObject"/>
-    <genClasses ecoreClass="BPMN.ecore#//ChangeObject"/>
+    <genClasses ecoreClass="BPMN.ecore#//ChangeObject">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//ChangeObject/newValue"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//ChangeObject/variableToBeChanged"/>
+    </genClasses>
     <genClasses ecoreClass="BPMN.ecore#//RetrieveObject">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BPMN.ecore#//RetrieveObject/constraint"/>
     </genClasses>
@@ -89,12 +92,16 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BPMN.ecore#//Reference/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//Reference/referencedEntity"/>
     </genClasses>
-    <genClasses ecoreClass="BPMN.ecore#//BasicVariable">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BPMN.ecore#//BasicVariable/valueObject"/>
+    <genClasses ecoreClass="BPMN.ecore#//BasicVariable"/>
+    <genClasses ecoreClass="BPMN.ecore#//IntegerVariable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BPMN.ecore#//IntegerVariable/valueObject"/>
     </genClasses>
-    <genClasses ecoreClass="BPMN.ecore#//IntegerVariable"/>
-    <genClasses ecoreClass="BPMN.ecore#//BooleanVariable"/>
-    <genClasses ecoreClass="BPMN.ecore#//StringVariable"/>
+    <genClasses ecoreClass="BPMN.ecore#//BooleanVariable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BPMN.ecore#//BooleanVariable/valueObject"/>
+    </genClasses>
+    <genClasses ecoreClass="BPMN.ecore#//StringVariable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BPMN.ecore#//StringVariable/valueObject"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="BPMN.ecore#//Value"/>
     <genClasses ecoreClass="BPMN.ecore#//IntegerValue">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BPMN.ecore#//IntegerValue/value"/>

@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see org.imt.bpmn.bpmnPackage#getVariable()
  * @model abstract="true"
+ *        annotation="dynamic"
  * @generated
  */
 public interface Variable extends EObject {

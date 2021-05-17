@@ -44,7 +44,12 @@
         eType="#//Entity" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DeleteObject" eSuperTypes="#//ObjectActivity"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ChangeObject" eSuperTypes="#//ObjectActivity"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ChangeObject" eSuperTypes="#//ObjectActivity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="newValue" lowerBound="1"
+        eType="#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableToBeChanged" lowerBound="1"
+        eType="#//BasicVariable"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RetrieveObject" eSuperTypes="#//ObjectActivity">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="constraint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -90,7 +95,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="referencedEntity" lowerBound="1"
         eType="#//Entity"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BasicVariable" eSuperTypes="#//Variable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BasicVariable" eSuperTypes="#//Variable">
+    <eAnnotations source="dynamic"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerVariable" eSuperTypes="#//BasicVariable">
     <eAnnotations source="dynamic"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="valueObject" eType="#//IntegerValue"
@@ -106,7 +113,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="valueObject" eType="#//StringValue"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true">
+    <eAnnotations source="dynamic"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerValue" eSuperTypes="#//Value">
     <eAnnotations source="dynamic"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>

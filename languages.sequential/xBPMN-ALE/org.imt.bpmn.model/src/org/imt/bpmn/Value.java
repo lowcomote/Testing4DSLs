@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see org.imt.bpmn.bpmnPackage#getValue()
  * @model abstract="true"
+ *        annotation="dynamic"
  * @generated
  */
 public interface Value extends EObject {

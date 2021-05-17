@@ -9,9 +9,11 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 import org.imt.bpmn.ChangeObject;
+import org.imt.bpmn.bpmnPackage;
 
 /**
  * This is the item provider adapter for a {@link org.imt.bpmn.ChangeObject} object.
@@ -41,8 +43,54 @@ public class ChangeObjectItemProvider extends ObjectActivityItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addNewValuePropertyDescriptor(object);
+			addVariableToBeChangedPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the New Value feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNewValuePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ChangeObject_newValue_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ChangeObject_newValue_feature", "_UI_ChangeObject_type"),
+				 bpmnPackage.Literals.CHANGE_OBJECT__NEW_VALUE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Variable To Be Changed feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addVariableToBeChangedPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ChangeObject_variableToBeChanged_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ChangeObject_variableToBeChanged_feature", "_UI_ChangeObject_type"),
+				 bpmnPackage.Literals.CHANGE_OBJECT__VARIABLE_TO_BE_CHANGED,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**

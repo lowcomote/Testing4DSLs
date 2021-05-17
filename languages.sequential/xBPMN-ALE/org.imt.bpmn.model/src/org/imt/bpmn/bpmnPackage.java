@@ -597,13 +597,31 @@ public interface bpmnPackage extends EPackage {
 	int CHANGE_OBJECT__ENTITY = OBJECT_ACTIVITY__ENTITY;
 
 	/**
+	 * The feature id for the '<em><b>New Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHANGE_OBJECT__NEW_VALUE = OBJECT_ACTIVITY_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Variable To Be Changed</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHANGE_OBJECT__VARIABLE_TO_BE_CHANGED = OBJECT_ACTIVITY_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Change Object</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CHANGE_OBJECT_FEATURE_COUNT = OBJECT_ACTIVITY_FEATURE_COUNT + 0;
+	int CHANGE_OBJECT_FEATURE_COUNT = OBJECT_ACTIVITY_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Change Object</em>' class.
@@ -1548,22 +1566,13 @@ public interface bpmnPackage extends EPackage {
 	int BASIC_VARIABLE__NAME = VARIABLE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Value Object</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BASIC_VARIABLE__VALUE_OBJECT = VARIABLE_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>Basic Variable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BASIC_VARIABLE_FEATURE_COUNT = VARIABLE_FEATURE_COUNT + 1;
+	int BASIC_VARIABLE_FEATURE_COUNT = VARIABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Basic Variable</em>' class.
@@ -1600,7 +1609,7 @@ public interface bpmnPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_VARIABLE__VALUE_OBJECT = BASIC_VARIABLE__VALUE_OBJECT;
+	int INTEGER_VARIABLE__VALUE_OBJECT = BASIC_VARIABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Integer Variable</em>' class.
@@ -1609,7 +1618,7 @@ public interface bpmnPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_VARIABLE_FEATURE_COUNT = BASIC_VARIABLE_FEATURE_COUNT + 0;
+	int INTEGER_VARIABLE_FEATURE_COUNT = BASIC_VARIABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Integer Variable</em>' class.
@@ -1646,7 +1655,7 @@ public interface bpmnPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BOOLEAN_VARIABLE__VALUE_OBJECT = BASIC_VARIABLE__VALUE_OBJECT;
+	int BOOLEAN_VARIABLE__VALUE_OBJECT = BASIC_VARIABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Boolean Variable</em>' class.
@@ -1655,7 +1664,7 @@ public interface bpmnPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BOOLEAN_VARIABLE_FEATURE_COUNT = BASIC_VARIABLE_FEATURE_COUNT + 0;
+	int BOOLEAN_VARIABLE_FEATURE_COUNT = BASIC_VARIABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Boolean Variable</em>' class.
@@ -1692,7 +1701,7 @@ public interface bpmnPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRING_VARIABLE__VALUE_OBJECT = BASIC_VARIABLE__VALUE_OBJECT;
+	int STRING_VARIABLE__VALUE_OBJECT = BASIC_VARIABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>String Variable</em>' class.
@@ -1701,7 +1710,7 @@ public interface bpmnPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRING_VARIABLE_FEATURE_COUNT = BASIC_VARIABLE_FEATURE_COUNT + 0;
+	int STRING_VARIABLE_FEATURE_COUNT = BASIC_VARIABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>String Variable</em>' class.
@@ -2595,6 +2604,28 @@ public interface bpmnPackage extends EPackage {
 	EClass getChangeObject();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.imt.bpmn.ChangeObject#getNewValue <em>New Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>New Value</em>'.
+	 * @see org.imt.bpmn.ChangeObject#getNewValue()
+	 * @see #getChangeObject()
+	 * @generated
+	 */
+	EReference getChangeObject_NewValue();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.imt.bpmn.ChangeObject#getVariableToBeChanged <em>Variable To Be Changed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Variable To Be Changed</em>'.
+	 * @see org.imt.bpmn.ChangeObject#getVariableToBeChanged()
+	 * @see #getChangeObject()
+	 * @generated
+	 */
+	EReference getChangeObject_VariableToBeChanged();
+
+	/**
 	 * Returns the meta object for class '{@link org.imt.bpmn.RetrieveObject <em>Retrieve Object</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2877,17 +2908,6 @@ public interface bpmnPackage extends EPackage {
 	EClass getBasicVariable();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.imt.bpmn.BasicVariable#getValueObject <em>Value Object</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Value Object</em>'.
-	 * @see org.imt.bpmn.BasicVariable#getValueObject()
-	 * @see #getBasicVariable()
-	 * @generated
-	 */
-	EReference getBasicVariable_ValueObject();
-
-	/**
 	 * Returns the meta object for class '{@link org.imt.bpmn.IntegerVariable <em>Integer Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2896,6 +2916,17 @@ public interface bpmnPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getIntegerVariable();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.imt.bpmn.IntegerVariable#getValueObject <em>Value Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Value Object</em>'.
+	 * @see org.imt.bpmn.IntegerVariable#getValueObject()
+	 * @see #getIntegerVariable()
+	 * @generated
+	 */
+	EReference getIntegerVariable_ValueObject();
 
 	/**
 	 * Returns the meta object for class '{@link org.imt.bpmn.BooleanVariable <em>Boolean Variable</em>}'.
@@ -2908,6 +2939,17 @@ public interface bpmnPackage extends EPackage {
 	EClass getBooleanVariable();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.imt.bpmn.BooleanVariable#getValueObject <em>Value Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Value Object</em>'.
+	 * @see org.imt.bpmn.BooleanVariable#getValueObject()
+	 * @see #getBooleanVariable()
+	 * @generated
+	 */
+	EReference getBooleanVariable_ValueObject();
+
+	/**
 	 * Returns the meta object for class '{@link org.imt.bpmn.StringVariable <em>String Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2916,6 +2958,17 @@ public interface bpmnPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getStringVariable();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.imt.bpmn.StringVariable#getValueObject <em>Value Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Value Object</em>'.
+	 * @see org.imt.bpmn.StringVariable#getValueObject()
+	 * @see #getStringVariable()
+	 * @generated
+	 */
+	EReference getStringVariable_ValueObject();
 
 	/**
 	 * Returns the meta object for class '{@link org.imt.bpmn.Value <em>Value</em>}'.
@@ -3468,6 +3521,22 @@ public interface bpmnPackage extends EPackage {
 		EClass CHANGE_OBJECT = eINSTANCE.getChangeObject();
 
 		/**
+		 * The meta object literal for the '<em><b>New Value</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CHANGE_OBJECT__NEW_VALUE = eINSTANCE.getChangeObject_NewValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Variable To Be Changed</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CHANGE_OBJECT__VARIABLE_TO_BE_CHANGED = eINSTANCE.getChangeObject_VariableToBeChanged();
+
+		/**
 		 * The meta object literal for the '{@link org.imt.bpmn.impl.RetrieveObjectImpl <em>Retrieve Object</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3714,14 +3783,6 @@ public interface bpmnPackage extends EPackage {
 		EClass BASIC_VARIABLE = eINSTANCE.getBasicVariable();
 
 		/**
-		 * The meta object literal for the '<em><b>Value Object</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BASIC_VARIABLE__VALUE_OBJECT = eINSTANCE.getBasicVariable_ValueObject();
-
-		/**
 		 * The meta object literal for the '{@link org.imt.bpmn.impl.IntegerVariableImpl <em>Integer Variable</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3730,6 +3791,14 @@ public interface bpmnPackage extends EPackage {
 		 * @generated
 		 */
 		EClass INTEGER_VARIABLE = eINSTANCE.getIntegerVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Value Object</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INTEGER_VARIABLE__VALUE_OBJECT = eINSTANCE.getIntegerVariable_ValueObject();
 
 		/**
 		 * The meta object literal for the '{@link org.imt.bpmn.impl.BooleanVariableImpl <em>Boolean Variable</em>}' class.
@@ -3742,6 +3811,14 @@ public interface bpmnPackage extends EPackage {
 		EClass BOOLEAN_VARIABLE = eINSTANCE.getBooleanVariable();
 
 		/**
+		 * The meta object literal for the '<em><b>Value Object</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BOOLEAN_VARIABLE__VALUE_OBJECT = eINSTANCE.getBooleanVariable_ValueObject();
+
+		/**
 		 * The meta object literal for the '{@link org.imt.bpmn.impl.StringVariableImpl <em>String Variable</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3750,6 +3827,14 @@ public interface bpmnPackage extends EPackage {
 		 * @generated
 		 */
 		EClass STRING_VARIABLE = eINSTANCE.getStringVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Value Object</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STRING_VARIABLE__VALUE_OBJECT = eINSTANCE.getStringVariable_ValueObject();
 
 		/**
 		 * The meta object literal for the '{@link org.imt.bpmn.impl.ValueImpl <em>Value</em>}' class.

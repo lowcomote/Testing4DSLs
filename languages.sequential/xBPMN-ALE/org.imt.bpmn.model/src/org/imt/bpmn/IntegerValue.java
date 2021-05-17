@@ -16,7 +16,7 @@ package org.imt.bpmn;
  * </ul>
  *
  * @see org.imt.bpmn.bpmnPackage#getIntegerValue()
- * @model
+ * @model annotation="dynamic"
  * @generated
  */
 public interface IntegerValue extends Value {
