@@ -1,0 +1,13 @@
+Package common {
+	Import all from arduinoSpecificTypes ;
+	Type OCL ( query of type EString ) ;
+	OCL oclQuery ( query = ? ) ;
+	Type Verdict ;
+	Verdict PASS ;
+	Verdict FAIL ;
+	Verdict INCONCLUSINVE ;
+	Type modelExecutionCommand ;
+	modelExecutionCommand runModel ;
+	modelExecutionCommand resetModel ;
+	modelExecutionCommand getModelState ;
+}

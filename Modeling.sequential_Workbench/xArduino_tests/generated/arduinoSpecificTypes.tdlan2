@@ -1,0 +1,204 @@
+Package arduinoSpecificTypes {
+	Type Board extends NamedElement ( 
+		project of type Project
+	) with {abstract ;} ;
+	Type Module extends NamedElement ( ) with {abstract ;} ;
+	Type DigitalPin extends Pin ( 
+		module of type ArduinoDigitalModule
+	) ;
+	Type Pin extends NamedElement ( 
+		level of type EInt
+	) with {abstract ;} ;
+	Type AnalogPin extends Pin ( 
+		module of type ArduinoAnalogModule
+	) ;
+	Type Sketch extends NamedElement ( 
+		project of type Project , 
+		block of type Block , 
+		board of type Board
+	) ;
+	Type Project ( 
+		boards of type Board , 
+		sketches of type Sketch
+	) ;
+	Type Instruction ( ) with {abstract ;} ;
+	Type ModuleAssignment extends Assignment ( ) ;
+	Type ModuleInstruction extends Instruction ( 
+		module of type Module
+	) with {abstract ;} ;
+	Type Control extends Instruction ( 
+		block of type Block
+	) with {abstract ;} ;
+	Type Utilities ( ) with {abstract ;} ;
+	Type Delay extends Utilities ( 
+		unit of type _Time , 
+		value of type EInt
+	) ;
+	Type _Time ;
+	Type NamedElement ( 
+		_name of type EString
+	) with {abstract ;} ;
+	Type Repeat extends Control ( 
+		iteration of type EInt
+	) ;
+	Type ModuleGet extends Expression ( 
+		module of type Module
+	) with {abstract ;} ;
+	Type While extends Control ( 
+		condition of type BooleanExpression
+	) ;
+	Type BinaryExpression extends Expression ( 
+		left of type Expression , 
+		right of type Expression
+	) with {abstract ;} ;
+	Type BinaryIntegerOperatorKind ;
+	Type Variable extends NamedElement ( ) with {abstract ;} ;
+	Type VariableAssignment extends Assignment (
+		_variable of type Variable
+	) ;
+	Type BinaryIntegerExpression extends IntegerExpression ( 
+		operator of type BinaryIntegerOperatorKind
+	) ;
+	Type BinaryBooleanExpression extends BooleanExpression ( 
+		operator of type BinaryBooleanOperatorKind
+	) ;
+	Type Expression ( ) with {abstract ;} ;
+	Type Constant ( ) with {abstract ;} ;
+	Type If extends Control ( 
+		condition of type BooleanExpression , 
+		elseBlock of type Block
+	) ;
+	Type IntegerConstant extends IntegerExpression ( 
+		value of type EInt
+	) ;
+	Type BooleanConstant extends BooleanExpression ( 
+		value of type EBoolean
+	) ;
+	Type BooleanExpression ( ) with {abstract ;} ;
+	Type IntegerExpression ( ) with {abstract ;} ;
+	Type Assignment extends Instruction ( 
+		operand of type Expression
+	) with {abstract ;} ;
+	Type IntegerVariable extends Variable ( 
+		initialValue of type EInt
+	) ;
+	Type BooleanVariable extends Variable ( 
+		initialValue of type EBoolean
+	) ;
+	Type BooleanModuleGet extends BooleanExpression ( ) ;
+	Type IntegerModuleGet extends IntegerExpression ( ) ;
+	Type BinaryBooleanOperatorKind ;
+	Type UnaryIntegerOperatorKind ;
+	Type UnaryBooleanOperatorKind ;
+	Type UnaryExpression extends Expression ( 
+		operand of type Expression
+	) with {abstract ;} ;
+	Type UnaryBooleanExpression extends BooleanExpression ( 
+		operator of type UnaryBooleanOperatorKind
+	) ;
+	Type UnaryIntegerExpression extends IntegerExpression ( 
+		operator of type UnaryIntegerOperatorKind
+	) ;
+	Type VariableDeclaration extends Instruction ( 
+		_variable of type Variable
+	) ;
+	Type VariableRef ( ) with {abstract ;} ;
+	Type IntegerVariableRef extends IntegerExpression ( 
+		_variable of type IntegerVariable
+	) ;
+	Type LED extends ArduinoDigitalModule ( 
+		color of type Color
+	) ;
+	Type PushButton extends ArduinoDigitalModule ( ) ;
+	Type Buzzer extends ArduinoDigitalModule ( ) ;
+	Type RotationSensor extends ArduinoAnalogModule ( ) ;
+	Type MicroServo extends ArduinoDigitalModule ( ) ;
+	Type InfraRedSensor extends ArduinoDigitalModule ( ) ;
+	Type AmbientLightSensor extends ArduinoAnalogModule ( ) ;
+	Type SoundSensor extends ArduinoAnalogModule ( ) ;
+	Type Fan extends ArduinoDigitalModule ( ) ;
+	Type MusicPlayer extends ArduinoAnalogModule ( ) ;
+	Type ArduinoModule extends Module ( ) with {abstract ;} ;
+	Type WaitFor extends Utilities ( 
+		pin of type Pin , 
+		mode of type ChangeType
+	) ;
+	Type Block ( 
+		instructions of type Instruction
+	) ;
+	Type ArduinoBoard extends Board ( 
+		digitalPins of type DigitalPin , 
+		analogPins of type AnalogPin
+	) ;
+	Type ArduinoDigitalModule extends ArduinoModule ( ) with {abstract ;} ;
+	Type ArduinoAnalogModule extends ArduinoModule ( ) with {abstract ;} ;
+	Type BooleanVariableRef extends BooleanExpression ( 
+		_variable of type BooleanVariable
+	) ;
+	Type Color ;
+	Type ArduinoCommunicationModule extends ArduinoDigitalModule ( ) with {abstract ;} ;
+	Type BluetoothTransceiver extends ArduinoAnalogModule ( 
+		connectedTransceiver of type BluetoothTransceiver
+	) ;
+	Type ChangeType ;
+	ChangeType RISING ;
+	ChangeType FALLING ;
+	ChangeType CHANGE ;
+	BinaryBooleanOperatorKind inf ;
+	BinaryBooleanOperatorKind sup ;
+	BinaryBooleanOperatorKind infOrEqual ;
+	BinaryBooleanOperatorKind supOrEqual ;
+	BinaryBooleanOperatorKind equal ;
+	BinaryBooleanOperatorKind _and ;
+	BinaryBooleanOperatorKind _or ;
+	BinaryBooleanOperatorKind Different ;
+	BinaryIntegerOperatorKind minus ;
+	BinaryIntegerOperatorKind plus ;
+	BinaryIntegerOperatorKind mul ;
+	BinaryIntegerOperatorKind div ;
+	BinaryIntegerOperatorKind min ;
+	BinaryIntegerOperatorKind max ;
+	BinaryIntegerOperatorKind pourcent ;
+	UnaryBooleanOperatorKind _not ;
+	UnaryIntegerOperatorKind _minus ;
+	UnaryIntegerOperatorKind squareRoot ;
+	_Time MilliSecond ;
+	_Time MicroSecond ;
+	Color blue ;
+	Color red ;
+	Color white ;
+	Annotation abstract ;
+	Type EDate ;
+	Type EShort ;
+	Type EChar ;
+	Type EResource ;
+	Type EJavaObject ;
+	Type EByteObject ;
+	Type EResourceSet ;
+	Type EBigDecimal ;
+	Type EFloat ;
+	Type EByteArray ;
+	Type EInt ;
+	Type EString ;
+	Type EFeatureMapEntry ;
+	Type EMap ;
+	Type EByte ;
+	Type EJavaClass ;
+	Type EBigInteger ;
+	Type EEnumerator ;
+	Type EBooleanObject ;
+	Type ECharacterObject ;
+	Type EIntegerObject ;
+	Type ELong ;
+	Type EDoubleObject ;
+	Type EFeatureMap ;
+	Type EEList ;
+	Type ETreeIterator ;
+	Type EFloatObject ;
+	Type EDiagnosticChain ;
+	Type EShortObject ;
+	Type EBoolean ;
+	Type ELongObject ;
+	Type EDouble ;
+	Type EInvocationTargetException ;
+}

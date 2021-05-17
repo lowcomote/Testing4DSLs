@@ -1,0 +1,5 @@
+Package testSuite {
+	Import all from common ;
+	Import all from k3fsmSpecificTypes ;
+	Import all from testConfiguration ;
+}

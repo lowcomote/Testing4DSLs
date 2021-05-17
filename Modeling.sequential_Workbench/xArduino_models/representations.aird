@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" uid="_V7lgULM0EeuVeNLTgvSEpA" version="14.3.1.202003261200">
+  <semanticResources>gemoc-gen/execution/execution-20210516_203314/activeWaitIRBlueLEd.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210516_203440/activeWaitIRBlueLEd.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210516_203526/activeWaitIRBlueLEd.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210516_203618/activeWaitIRBlueLEd.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210516_203651/blink.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210516_204421/activeWaitIRBlueLEd.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210516_204445/photoresistor.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210516_204457/servo9g.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210516_204508/servoIrbutton.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210516_204527/waitForIRBlueLed.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210516_221638/waitForIRBlueLed.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210516_221651/activeWaitIRBlueLEd.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210516_221702/blink.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210516_221709/photoresistor.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210516_221717/servo9g.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210516_221725/servoIrbutton.arduino</semanticResources>
+</viewpoint:DAnalysis>

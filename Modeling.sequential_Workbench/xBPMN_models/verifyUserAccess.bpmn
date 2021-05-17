@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:Microflow xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="www.MendixBPMN.com" name="verify user access BPMN">
+  <ownedElements xsi:type="bpmn:StartEvent">
+    <outgoingFlows target="create a system user"/>
+  </ownedElements>
+  <ownedElements xsi:type="bpmn:CreateObject" incomingFlows="//@ownedElements.0/@outgoingFlows.0" label="create a system user" entity="//@ownedElements.1/@newEntity">
+    <outgoingFlows target="create a variable for expected access level"/>
+    <newEntity name="SystemUser">
+      <attributes xsi:type="bpmn:StringVariable" name="name">
+        <valueObject xsi:type="bpmn:StringValue" value="John"/>
+      </attributes>
+      <attributes xsi:type="bpmn:StringVariable" name="accessLevel">
+        <valueObject xsi:type="bpmn:StringValue" value="admin"/>
+      </attributes>
+    </newEntity>
+  </ownedElements>
+  <ownedElements xsi:type="bpmn:CreateVariable" incomingFlows="//@ownedElements.1/@outgoingFlows.0" label="create a variable for expected access level">
+    <outgoingFlows target="has user the access right?"/>
+    <newVariable xsi:type="bpmn:StringVariable" name="expectedAccessLevel">
+      <valueObject xsi:type="bpmn:StringValue" value="user"/>
+    </newVariable>
+  </ownedElements>
+  <ownedElements xsi:type="bpmn:ForkDecision" incomingFlows="//@ownedElements.2/@outgoingFlows.0" label="has user the access right?">
+    <outgoingFlows constraint="true" target="correct Access"/>
+    <outgoingFlows constraint="false" target="incorrect access"/>
+    <expression xsi:type="bpmn:StringComparisonExpression" operand1="//@ownedElements.1/@newEntity/@attributes.1" operand2="//@ownedElements.2/@newVariable"/>
+  </ownedElements>
+  <ownedElements xsi:type="bpmn:ShowMessage" incomingFlows="//@ownedElements.3/@outgoingFlows.0" label="correct Access" message="you have the access right">
+    <outgoingFlows target="1"/>
+  </ownedElements>
+  <ownedElements xsi:type="bpmn:ShowMessage" incomingFlows="//@ownedElements.3/@outgoingFlows.1" label="incorrect access" message="you don't have the access right">
+    <outgoingFlows target="2"/>
+  </ownedElements>
+  <ownedElements xsi:type="bpmn:EndEvent" incomingFlows="//@ownedElements.4/@outgoingFlows.0" label="1"/>
+  <ownedElements xsi:type="bpmn:EndEvent" incomingFlows="//@ownedElements.5/@outgoingFlows.0" label="2"/>
+</bpmn:Microflow>
