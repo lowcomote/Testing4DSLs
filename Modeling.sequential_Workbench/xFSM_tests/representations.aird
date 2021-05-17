@@ -10,5 +10,9 @@
   <semanticResources>TrafficLight_Test.tdlan2</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210517_155038/BitShifting_Test.tdlan2</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210517_155313/BitShifting_Test.tdlan2</semanticResources>
-  <semanticResources>gemoc-gen/execution/execution-20210517_163006/BitShifting_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210517_174854/BitShifting_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210517_211918/BitShifting_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210517_214101/BitShifting_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210517_214345/BitShifting_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210517_214440/BitShifting_Test.tdlan2</semanticResources>
 </viewpoint:DAnalysis>

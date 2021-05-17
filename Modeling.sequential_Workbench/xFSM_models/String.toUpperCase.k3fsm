@@ -1,5 +1,5 @@
 FSM toLowerCase {
- unprocessedString "My name is FaeZEH" initialState S0
+initialState S0
  ownedStates {
  	State S0 {
  		outgoingTransitions {

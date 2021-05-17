@@ -1,5 +1,5 @@
 FSM TrafficLight {
- unprocessedString ttbttbttbttbtt initialState Green
+ unprocessedString btt initialState Green
  ownedStates {
  	State Green {
  		outgoingTransitions {

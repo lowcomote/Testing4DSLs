@@ -32,7 +32,7 @@ Package testConfiguration {
 	Test Configuration bitShiftingConfiguration {
 		create Tester tester of type TestSystem ;
 		create SUT k3fsm of type MUT with { 
-			MUTPath : '/xFSM_models/BitShifting.k3fsm' ; 
+			MUTPath : '/xFSM_models/BitShifting.model' ; 
 			DSLName : 'org.eclipse.gemoc.example.k3fsm.K3fsm' ;
 		} ;
 		connect tester.genericGate to k3fsm.genericGate ;

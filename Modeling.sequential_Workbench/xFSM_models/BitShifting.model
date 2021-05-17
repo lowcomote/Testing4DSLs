@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ASCII"?>
+<k3fsm:FSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:k3fsm="http://www.eclipse.org/gemoc/example/k3fsm" xmi:id="_T9_MQLdHEeu6t6QH8617XA" name="BitShifting" initialState="_V8UhMLdHEeu6t6QH8617XA">
+  <ownedStates xmi:id="_V8UhMLdHEeu6t6QH8617XA" name="S0">
+    <outgoingTransitions xmi:id="_Zz2zcLdHEeu6t6QH8617XA" input="1" target="_W6GYELdHEeu6t6QH8617XA" name="S0_to_S1" output="0"/>
+    <outgoingTransitions xmi:id="_iQHOELdHEeu6t6QH8617XA" input="0" target="_XofvILdHEeu6t6QH8617XA" name="S0_to_S2" output="0"/>
+  </ownedStates>
+  <ownedStates xmi:id="_W6GYELdHEeu6t6QH8617XA" name="S1" incomingTransitions="_Zz2zcLdHEeu6t6QH8617XA _kvmIQLdHEeu6t6QH8617XA _rlQYgLdHEeu6t6QH8617XA">
+    <outgoingTransitions xmi:id="_kvmIQLdHEeu6t6QH8617XA" input="1" target="_W6GYELdHEeu6t6QH8617XA" name="S1_to_S1" output="1"/>
+    <outgoingTransitions xmi:id="_mz_B4LdHEeu6t6QH8617XA" input="0" target="_XofvILdHEeu6t6QH8617XA" name="S1_to_S2" output="1"/>
+  </ownedStates>
+  <ownedStates xmi:id="_XofvILdHEeu6t6QH8617XA" name="S2" incomingTransitions="_iQHOELdHEeu6t6QH8617XA _mz_B4LdHEeu6t6QH8617XA _pV-dgLdHEeu6t6QH8617XA">
+    <outgoingTransitions xmi:id="_pV-dgLdHEeu6t6QH8617XA" input="0" target="_XofvILdHEeu6t6QH8617XA" name="S2_to_S2" output="0"/>
+    <outgoingTransitions xmi:id="_rlQYgLdHEeu6t6QH8617XA" input="1" target="_W6GYELdHEeu6t6QH8617XA" name="S2_to_S1" output="0"/>
+  </ownedStates>
+</k3fsm:FSM>
