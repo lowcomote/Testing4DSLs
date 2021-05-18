@@ -35,6 +35,10 @@ import static extension org.imt.k3tdl.k3dsa.MemberAssignmentAspect.*
 import static extension org.imt.k3tdl.k3dsa.ParameterBindingAspect.*
 import static extension org.imt.k3tdl.k3dsa.StaticDataUseAspect.*
 import static extension org.imt.k3tdl.k3dsa.StructuredDataInstanceAspect.*
+import org.eclipse.emf.transaction.TransactionalEditingDomain
+import org.eclipse.emf.transaction.util.TransactionUtil
+import org.eclipse.emf.transaction.RecordingCommand
+import org.eclipse.gemoc.executionframework.engine.core.CommandExecution
 
 @Aspect (className = DataType)
 class DataTypeAspect{
@@ -282,32 +286,45 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 	
 	@OverrideAspectMethod
 	def String updateData(Resource MUTResource, EObject object, EStructuralFeature matchedFeature, String DSLPath){
-		val ArrayList<EObject> matchedObjects = new ArrayList
 		if (_self.item != null && _self.item.size > 0){//there are several intances of data
-			for (i : 0 ..<_self.item.size){
-				val matchedObject = (_self.item.get(i) as DataInstanceUse).getMatchedMUTElement(MUTResource , true, DSLPath)			
-				val propertyName = (_self.item.get(i) as DataInstanceUse).dataInstance.name
-				if (matchedObject == null){
-					println("There is no " + propertyName + " property in the MUT")
-					return "FAIL: There is no MUT element matched with " + propertyName
-				}
-				matchedObjects.add(matchedObject)
-			}
+			val TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(object);
 			try{
-				object.eSet(matchedFeature, matchedObjects)
-			}catch(IllegalArgumentException e){
-				println("New value cannot be set for the " + matchedFeature.name + " property of the MUT")
-				return "FAIL: New value cannot be set for the " + matchedFeature.name + " property of the MUT"
+				domain.getCommandStack().execute(new RecordingCommand(domain) {
+			        override protected doExecute() {
+			        	val ArrayList<EObject> matchedObjects = new ArrayList
+						for (i : 0 ..<_self.item.size){
+							val matchedObject = (_self.item.get(i) as DataInstanceUse).getMatchedMUTElement(MUTResource , true, DSLPath)			
+							val propertyName = (_self.item.get(i) as DataInstanceUse).dataInstance.name
+							if (matchedObject == null){
+								println("There is no " + propertyName + " property in the MUT")
+							}else{
+								matchedObjects.add(matchedObject)
+							}							
+						}
+						if (matchedObjects.size == _self.item.size){
+							object.eSet(matchedFeature, matchedObjects)
+						}		        											
+			        }
+		   		});
+	   		}catch(IllegalArgumentException e){
+				println("FAIL: The new value cannot be set for the " + matchedFeature.name + " property of the MUT")
+				return "FAIL: The new value cannot be set for the " + matchedFeature.name + " property of the MUT"
 			}
 		}else{//there is just one data instance
 			val matchedObject = _self.getMatchedMUTElement(MUTResource, true, DSLPath)
 			if (matchedObject == null){
 				println("There is no " + _self.dataInstance.name + " property in the MUT")
-					return "FAIL: There is no MUT element matched with " + _self.dataInstance.name
+				return "FAIL: There is no MUT element matched with " + _self.dataInstance.name
 			}
+			val TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(object);
 			try{
-				object.eSet(matchedFeature, matchedObject)
-			}catch(IllegalArgumentException e){
+				domain.getCommandStack().execute(new RecordingCommand(domain) {
+			        override protected doExecute() {
+			        	val matchedObject = _self.getMatchedMUTElement(MUTResource, true, DSLPath)
+			        	object.eSet(matchedFeature, matchedObject)										
+			        }
+		   		});
+	   		}catch(IllegalArgumentException e){
 				println("New value cannot be set for the " + matchedFeature.name + " property of the MUT")
 				return "FAIL: New value cannot be set for the " + matchedFeature.name + " property of the MUT"
 			}
@@ -432,14 +449,20 @@ class LiteralValueUseAspect extends StaticDataUseAspect{
 
 	@OverrideAspectMethod
 	def String updateData(EObject object, EStructuralFeature matchedFeature){
-		var String parameterValue = _self.value
-		parameterValue = parameterValue.substring(1, parameterValue.length-1)//remove quotation marks
+		val TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(object);
 		try{
-			object.eSet(matchedFeature, parameterValue)
+			domain.getCommandStack().execute(new RecordingCommand(domain) {
+	        override protected doExecute() {
+	        	var String parameterValue = _self.value
+				parameterValue = parameterValue.substring(1, parameterValue.length-1)//remove quotation marks
+	            object.eSet(matchedFeature, parameterValue);										
+	        }
+   			});
 		}catch(IllegalArgumentException e){
 			println("FAIL: The new value cannot be set for the " + matchedFeature.name + " property of the MUT")
 			return "FAIL: The new value cannot be set for the " + matchedFeature.name + " property of the MUT"
 		}
+		
 		return "PASS: New value is set for the " + matchedFeature.name + " property of the MUT"
 	}
 }
