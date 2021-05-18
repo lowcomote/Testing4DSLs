@@ -30,63 +30,7 @@ import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
 import org.osgi.framework.Bundle;
 
 public class JavaEngineLauncher extends AbstractEngine{
-	
-	private SequentialRunConfiguration runConfiguration;
-	private ExecutionMode executionMode;
-	
-	private String _modelLocation;
-	private String _siriusRepresentationLocation;
-	private String _delay;
-	private String _language;
-	private String _entryPointModelElement;
-	private String _entryPointMethod;
-	private Boolean _animationFirstBreak;
-	private String _modelInitializationMethod;
-	private String _modelInitializationArguments;
-	@Override
-	public void setUp(String MUTPath, String DSLPath){
-		super.setUp(MUTPath, DSLPath);
-		this._modelLocation = this.getModelResource().getURI().toString();
-		//this._siriusRepresentationLocation = this.getModelResource().getURI().toString().split("/")[1] + "/representations.aird";
-		this._delay = "0";
-		this._language = this.getDslName(DSLPath);
-		this._entryPointModelElement = "/";
-		this._entryPointMethod = getModelEntryPointMethodName();
-		this._animationFirstBreak = false;
-		this._modelInitializationMethod = getModelInitializationMethodName();
-		this._modelInitializationArguments = "";
-		this.executionMode = ExecutionMode.Run;
-		this.configureEngine();
-	}
-	//definition of a new configuration of Gemoc java Engine for running a specific model
-	private void configureEngine(){
-		// Create a new Launch Configuration
-		ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
-		ILaunchConfigurationType type = manager.getLaunchConfigurationType("org.eclipse.gemoc.execution.sequential.javaengine.ui.launcher");
-		ILaunchConfigurationWorkingCopy configuration = null;
-		try {
-			configuration = type.newInstance(null, "Run MUT");
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
-		// Set its attributes
-		configuration.setAttribute(AbstractDSLLaunchConfigurationDelegate.RESOURCE_URI, this._modelLocation);
-		configuration.setAttribute(AbstractDSLLaunchConfigurationDelegateSiriusUI.SIRIUS_RESOURCE_URI, this._siriusRepresentationLocation);
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_DELAY, Integer.parseInt(this._delay));
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_SELECTED_LANGUAGE, this._language);
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_MODEL_ENTRY_POINT, this._entryPointModelElement);
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_METHOD_ENTRY_POINT, this._entryPointMethod);
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_METHOD, this._modelInitializationMethod);
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_ARGUMENTS, this._modelInitializationArguments);
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_BREAK_START, this._animationFirstBreak);
-		// DebugModelID for sequential engine
-		configuration.setAttribute(SequentialRunConfiguration.DEBUG_MODEL_ID, Activator.DEBUG_MODEL_ID);
-		try {
-			this.runConfiguration = new SequentialRunConfiguration(configuration);
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
-	}
+
 	@Override
 	public String executeModel() {
 		PlainK3ExecutionEngine javaEngine = null;
@@ -105,22 +49,13 @@ public class JavaEngineLauncher extends AbstractEngine{
 	public PlainK3ExecutionEngine createExecutionEngine() throws EngineContextException{
 		// create and initialize engine
 		PlainK3ExecutionEngine engine = new PlainK3ExecutionEngine();
-		CustomModelExecutionContext executioncontext = null;
-		executioncontext = new CustomModelExecutionContext(this.runConfiguration, this.executionMode);
-		
-		executioncontext.getExecutionPlatform().getModelLoader().setProgressMonitor(new NullProgressMonitor());
-		if (!executioncontext.modelInitialized()) {
-			executioncontext.initializeResourceModel();
-		}
-		executioncontext.setResourceModel(this.getModelResource());
-		engine.initialize(executioncontext);
+		//if the resource is updated (e.g., the value of its dynamic features are set by the test case)
+		//then the execution context should be updated
+		this.executioncontext.setResourceModel(this.getModelResource());
+		engine.initialize(this.executioncontext);
 		return engine;
 	}
-	public String getDslName(String dslFilePath) {
-		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
-		Dsl dsl = (Dsl)dslRes.getContents().get(0);
-		return dsl.getEntry("name").getValue().toString();
-	}
+	@Override
 	protected String getModelEntryPointMethodName(){
 		Set<Class<?>> candidateAspects = K3DslHelper.getAspects(this._language);
 		Iterator it = candidateAspects.iterator();
@@ -135,6 +70,7 @@ public class JavaEngineLauncher extends AbstractEngine{
 		}
 		return "";
 	}
+	@Override
 	protected String getModelInitializationMethodName(){
 		String entryPointClassName = null;
 		final String prefix = "public static void ";

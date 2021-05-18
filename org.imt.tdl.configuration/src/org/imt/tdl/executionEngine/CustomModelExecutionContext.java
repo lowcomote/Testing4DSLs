@@ -2,6 +2,7 @@ package org.imt.tdl.executionEngine;
 
 import org.eclipse.emf.ecore.EObject;
 
+
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.RecordingCommand;
@@ -21,15 +22,7 @@ public class CustomModelExecutionContext extends GenericModelExecutionContext{
 		// TODO Auto-generated constructor stub
 	}
 	public void setResourceModel(Resource modifiedResource) {
-		Resource model = this._resourceModel;
-		TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(model);
-	    domain.getCommandStack().execute(new RecordingCommand(domain) {
-	        @Override
-	        protected void doExecute() {
-	        	model.getContents().clear();
-	    		model.getContents().addAll(modifiedResource.getContents());
-	        }
-	    });	
+		this._resourceModel = modifiedResource;
 	}
 	public boolean modelInitialized() {
 		if (this._resourceModel==null) {
