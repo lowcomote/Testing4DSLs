@@ -4,23 +4,29 @@ Package testSuite {
 	Import all from testConfiguration ;
 	
 	FSM FSMNewState(_name = "TrafficLight");
-	State S0 (_name = "S0");
 	
 	Test Description test1 uses configuration trafficLightConfiguration{
-		tester.genericGate sends FSMNewState 
-			(unprocessedString = "tbtt") to k3fsm.genericGate;
+		tester.genericGate sends FSMNewState (unprocessedString = "tbt") to k3fsm.genericGate;
 		tester.genericGate sends runModel to k3fsm.genericGate;
 		tester.genericGate sends getModelState to k3fsm.genericGate;
-		k3fsm.genericGate sends FSMNewState 
-			(producedString = "GreenYellowRedGreen") to tester.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = "GreenYellowRed") to tester.genericGate;
 	}
-
 	Test Description test2 uses configuration trafficLightConfiguration{
-		tester.genericGate sends FSMNewState 
-			(unprocessedString = "btb") to k3fsm.genericGate;
+		tester.genericGate sends FSMNewState (unprocessedString = "btt") to k3fsm.genericGate;
 		tester.genericGate sends runModel to k3fsm.genericGate;
-		tester.oclGate sends oclQuery (query = "self.producedString") 
-			to k3fsm.oclGate;
+		tester.oclGate sends oclQuery (query = "self.producedString") to k3fsm.oclGate;
 		k3fsm.oclGate sends "YellowRedGreen" to tester.oclGate;
+	}
+	Test Description test3 uses configuration trafficLightConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "bbb") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.oclGate sends oclQuery (query = "self.producedString") to k3fsm.oclGate;
+		k3fsm.oclGate sends "Yellow" to tester.oclGate;
+	}
+	Test Description test4 uses configuration trafficLightConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "ttt") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.oclGate sends oclQuery (query = "self.producedString") to k3fsm.oclGate;
+		k3fsm.oclGate sends "GreenGreenGreen" to tester.oclGate;
 	}
 }
