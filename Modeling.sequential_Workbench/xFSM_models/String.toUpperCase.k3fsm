@@ -1,4 +1,4 @@
-FSM toLowerCase {
+FSM toUpperCase {
 initialState S0
  ownedStates {
  	State S0 {
