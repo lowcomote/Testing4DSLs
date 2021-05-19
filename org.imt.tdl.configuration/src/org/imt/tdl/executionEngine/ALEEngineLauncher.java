@@ -36,20 +36,38 @@ import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
 import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
 
 public class ALEEngineLauncher extends AbstractEngine{
-
+	private AleEngine aleEngine = null;
 	@Override
-	public String executeModel() {
-		AleEngine aleEngine = null;
+	public String executeModelSynchronous() {
 		try{
-			aleEngine = createExecutionEngine();
+			this.aleEngine = createExecutionEngine();
 		}catch (EngineContextException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "FAIL: Cannot execute the model under test";
 		}
-		aleEngine.startSynchronous();
-		this.setModelResource(aleEngine.getExecutionContext().getResourceModel());
-		aleEngine.dispose();
+		this.aleEngine.startSynchronous();
+		this.setModelResource(this.aleEngine.getExecutionContext().getResourceModel());
+		this.aleEngine.dispose();
+		return "PASS: The model under test executed successfully";
+	}
+	@Override
+	public String executeModelAsynchronous() {
+		try{
+			this.aleEngine = createExecutionEngine();
+		}catch (EngineContextException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "FAIL: Cannot execute the model under test";
+		}
+		this.aleEngine.start();
+		return "The engine is running";
+	}
+	@Override
+	public String stopAsynchronousExecution() {
+		this.aleEngine.stop();
+		this.setModelResource(this.aleEngine.getExecutionContext().getResourceModel());
+		this.aleEngine.dispose();
 		return "PASS: The model under test executed successfully";
 	}
 	private AleEngine createExecutionEngine() throws EngineContextException{

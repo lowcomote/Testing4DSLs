@@ -43,8 +43,14 @@ public class EngineFactory{
 			}
 		}
 	}
-	public String executeGenericCommand() throws CoreException, EngineContextException {
-		return this.engineLauncher.executeModel();
+	public String executeModel(Boolean sync) throws CoreException, EngineContextException {
+		if (sync) {
+			return this.engineLauncher.executeModelSynchronous();
+		}
+		return this.engineLauncher.executeModelAsynchronous();
+	}
+	public String stopAsyncExecution() {
+		return this.engineLauncher.stopAsynchronousExecution();
 	}
 	public String executeOCLCommand (String query){
 		//send the query without quotation marks

@@ -30,20 +30,38 @@ import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
 import org.osgi.framework.Bundle;
 
 public class JavaEngineLauncher extends AbstractEngine{
-
+	private PlainK3ExecutionEngine javaEngine = null;
 	@Override
-	public String executeModel() {
-		PlainK3ExecutionEngine javaEngine = null;
+	public String executeModelSynchronous() {
 		try{
-			javaEngine = createExecutionEngine();
+			this.javaEngine = createExecutionEngine();
 		}catch (EngineContextException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "FAIL: Cannot execute the model under test";
 		}
-		javaEngine.startSynchronous();
-		this.setModelResource(javaEngine.getExecutionContext().getResourceModel());
-		javaEngine.dispose();
+		this.javaEngine.startSynchronous();
+		this.setModelResource(this.javaEngine.getExecutionContext().getResourceModel());
+		this.javaEngine.dispose();
+		return "PASS: The model under test executed successfully";
+	}
+	@Override
+	public String executeModelAsynchronous() {	
+		try{
+			this.javaEngine = createExecutionEngine();
+		}catch (EngineContextException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "FAIL: Cannot execute the model under test";
+		}
+		javaEngine.start();
+		return "The engine is running";
+	}
+	@Override
+	public String stopAsynchronousExecution() {
+		this.javaEngine.stop();
+		this.setModelResource(this.javaEngine.getExecutionContext().getResourceModel());
+		this.javaEngine.dispose();
 		return "PASS: The model under test executed successfully";
 	}
 	public PlainK3ExecutionEngine createExecutionEngine() throws EngineContextException{

@@ -97,6 +97,12 @@ public class CommonPackageGenerator {
 		SimpleDataInstance runModel = factory.createSimpleDataInstance();
 		runModel.setName("runModel");
 		runModel.setDataType(modelExecutionCommand);
+		SimpleDataInstance runModelAsynchronous = factory.createSimpleDataInstance();
+		runModelAsynchronous.setName("runModelAsynchronous");
+		runModelAsynchronous.setDataType(modelExecutionCommand);
+		SimpleDataInstance stopModelExecution = factory.createSimpleDataInstance();
+		stopModelExecution.setName("stopModelExecution");
+		stopModelExecution.setDataType(modelExecutionCommand);
 		SimpleDataInstance resetModel = factory.createSimpleDataInstance();
 		resetModel.setName("resetModel");
 		resetModel.setDataType(modelExecutionCommand);
@@ -106,6 +112,8 @@ public class CommonPackageGenerator {
 
 		this.commonPackage.getPackagedElement().add(modelExecutionCommand);
 		this.commonPackage.getPackagedElement().add(runModel);
+		this.commonPackage.getPackagedElement().add(runModelAsynchronous);
+		this.commonPackage.getPackagedElement().add(stopModelExecution);
 		this.commonPackage.getPackagedElement().add(resetModel);
 		this.commonPackage.getPackagedElement().add(getModelState);
 		
