@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
@@ -35,9 +34,9 @@ import org.imt.bpmn.bpmnPackage;
  * <ul>
  *   <li>{@link org.imt.bpmn.impl.MicroflowImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.imt.bpmn.impl.MicroflowImpl#getOwnedElements <em>Owned Elements</em>}</li>
- *   <li>{@link org.imt.bpmn.impl.MicroflowImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.imt.bpmn.impl.MicroflowImpl#getCurrentNode <em>Current Node</em>}</li>
  *   <li>{@link org.imt.bpmn.impl.MicroflowImpl#getValuedVariables <em>Valued Variables</em>}</li>
+ *   <li>{@link org.imt.bpmn.impl.MicroflowImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
  *
  * @generated
@@ -74,16 +73,6 @@ public class MicroflowImpl extends MinimalEObjectImpl.Container implements Micro
 	protected EList<MicroflowElement> ownedElements;
 
 	/**
-	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getParameters()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Variable> parameters;
-
-	/**
 	 * The cached value of the '{@link #getCurrentNode() <em>Current Node</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -102,6 +91,16 @@ public class MicroflowImpl extends MinimalEObjectImpl.Container implements Micro
 	 * @ordered
 	 */
 	protected EList<Variable> valuedVariables;
+
+	/**
+	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Variable> parameters;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -260,13 +259,13 @@ public class MicroflowImpl extends MinimalEObjectImpl.Container implements Micro
 				return getName();
 			case bpmnPackage.MICROFLOW__OWNED_ELEMENTS:
 				return getOwnedElements();
-			case bpmnPackage.MICROFLOW__PARAMETERS:
-				return getParameters();
 			case bpmnPackage.MICROFLOW__CURRENT_NODE:
 				if (resolve) return getCurrentNode();
 				return basicGetCurrentNode();
 			case bpmnPackage.MICROFLOW__VALUED_VARIABLES:
 				return getValuedVariables();
+			case bpmnPackage.MICROFLOW__PARAMETERS:
+				return getParameters();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -287,16 +286,16 @@ public class MicroflowImpl extends MinimalEObjectImpl.Container implements Micro
 				getOwnedElements().clear();
 				getOwnedElements().addAll((Collection<? extends MicroflowElement>)newValue);
 				return;
-			case bpmnPackage.MICROFLOW__PARAMETERS:
-				getParameters().clear();
-				getParameters().addAll((Collection<? extends Variable>)newValue);
-				return;
 			case bpmnPackage.MICROFLOW__CURRENT_NODE:
 				setCurrentNode((MicroflowElement)newValue);
 				return;
 			case bpmnPackage.MICROFLOW__VALUED_VARIABLES:
 				getValuedVariables().clear();
 				getValuedVariables().addAll((Collection<? extends Variable>)newValue);
+				return;
+			case bpmnPackage.MICROFLOW__PARAMETERS:
+				getParameters().clear();
+				getParameters().addAll((Collection<? extends Variable>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -316,14 +315,14 @@ public class MicroflowImpl extends MinimalEObjectImpl.Container implements Micro
 			case bpmnPackage.MICROFLOW__OWNED_ELEMENTS:
 				getOwnedElements().clear();
 				return;
-			case bpmnPackage.MICROFLOW__PARAMETERS:
-				getParameters().clear();
-				return;
 			case bpmnPackage.MICROFLOW__CURRENT_NODE:
 				setCurrentNode((MicroflowElement)null);
 				return;
 			case bpmnPackage.MICROFLOW__VALUED_VARIABLES:
 				getValuedVariables().clear();
+				return;
+			case bpmnPackage.MICROFLOW__PARAMETERS:
+				getParameters().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -341,12 +340,12 @@ public class MicroflowImpl extends MinimalEObjectImpl.Container implements Micro
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case bpmnPackage.MICROFLOW__OWNED_ELEMENTS:
 				return ownedElements != null && !ownedElements.isEmpty();
-			case bpmnPackage.MICROFLOW__PARAMETERS:
-				return parameters != null && !parameters.isEmpty();
 			case bpmnPackage.MICROFLOW__CURRENT_NODE:
 				return currentNode != null;
 			case bpmnPackage.MICROFLOW__VALUED_VARIABLES:
 				return valuedVariables != null && !valuedVariables.isEmpty();
+			case bpmnPackage.MICROFLOW__PARAMETERS:
+				return parameters != null && !parameters.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

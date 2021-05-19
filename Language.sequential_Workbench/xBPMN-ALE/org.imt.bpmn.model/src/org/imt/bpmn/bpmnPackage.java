@@ -86,22 +86,13 @@ public interface bpmnPackage extends EPackage {
 	int MICROFLOW__OWNED_ELEMENTS = 1;
 
 	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MICROFLOW__PARAMETERS = 2;
-
-	/**
 	 * The feature id for the '<em><b>Current Node</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MICROFLOW__CURRENT_NODE = 3;
+	int MICROFLOW__CURRENT_NODE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Valued Variables</b></em>' reference list.
@@ -110,7 +101,16 @@ public interface bpmnPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MICROFLOW__VALUED_VARIABLES = 4;
+	int MICROFLOW__VALUED_VARIABLES = 3;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MICROFLOW__PARAMETERS = 4;
 
 	/**
 	 * The number of structural features of the '<em>Microflow</em>' class.

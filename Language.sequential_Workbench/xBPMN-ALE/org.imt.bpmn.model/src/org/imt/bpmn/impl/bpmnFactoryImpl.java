@@ -70,6 +70,7 @@ public class bpmnFactoryImpl extends EFactoryImpl implements bpmnFactory {
 			case bpmnPackage.SHOW_MESSAGE: return createShowMessage();
 			case bpmnPackage.START_EVENT: return createStartEvent();
 			case bpmnPackage.END_EVENT: return createEndEvent();
+			case bpmnPackage.VARIABLE: return createVariable();
 			case bpmnPackage.ENTITY: return createEntity();
 			case bpmnPackage.REFERENCE: return createReference();
 			case bpmnPackage.BASIC_VARIABLE: return createBasicVariable();
@@ -260,6 +261,16 @@ public class bpmnFactoryImpl extends EFactoryImpl implements bpmnFactory {
 	public EndEvent createEndEvent() {
 		EndEventImpl endEvent = new EndEventImpl();
 		return endEvent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Variable createVariable() {
+		VariableImpl variable = new VariableImpl();
+		return variable;
 	}
 
 	/**

@@ -64,9 +64,9 @@ public class MicroflowItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
-			addParametersPropertyDescriptor(object);
 			addCurrentNodePropertyDescriptor(object);
 			addValuedVariablesPropertyDescriptor(object);
+			addParametersPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}

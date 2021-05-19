@@ -30,9 +30,9 @@
     <genClasses ecoreClass="BPMN.ecore#//Microflow">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BPMN.ecore#//Microflow/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BPMN.ecore#//Microflow/ownedElements"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//Microflow/parameters"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//Microflow/currentNode"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//Microflow/valuedVariables"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//Microflow/parameters"/>
     </genClasses>
     <genClasses ecoreClass="BPMN.ecore#//MicroflowElement">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//MicroflowElement/incomingFlows"/>

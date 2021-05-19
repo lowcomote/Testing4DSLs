@@ -29,6 +29,7 @@ public interface StringVariable extends BasicVariable {
 	 * @see #setValueObject(StringValue)
 	 * @see org.imt.bpmn.bpmnPackage#getStringVariable_ValueObject()
 	 * @model containment="true"
+	 *        annotation="dynamic"
 	 * @generated
 	 */
 	StringValue getValueObject();

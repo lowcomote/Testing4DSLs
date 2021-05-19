@@ -30,6 +30,7 @@ public interface Entity extends Variable {
 	 * @return the value of the '<em>Attributes</em>' containment reference list.
 	 * @see org.imt.bpmn.bpmnPackage#getEntity_Attributes()
 	 * @model containment="true"
+	 *        annotation="dynamic"
 	 * @generated
 	 */
 	EList<BasicVariable> getAttributes();
@@ -42,6 +43,7 @@ public interface Entity extends Variable {
 	 * @return the value of the '<em>References</em>' containment reference list.
 	 * @see org.imt.bpmn.bpmnPackage#getEntity_References()
 	 * @model containment="true"
+	 *        annotation="dynamic"
 	 * @generated
 	 */
 	EList<Reference> getReferences();

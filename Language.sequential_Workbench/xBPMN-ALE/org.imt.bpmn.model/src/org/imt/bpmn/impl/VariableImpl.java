@@ -3,12 +3,9 @@
 package org.imt.bpmn.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.imt.bpmn.Variable;
 import org.imt.bpmn.bpmnPackage;
 
@@ -25,7 +22,7 @@ import org.imt.bpmn.bpmnPackage;
  *
  * @generated
  */
-public abstract class VariableImpl extends MinimalEObjectImpl.Container implements Variable {
+public class VariableImpl extends MinimalEObjectImpl.Container implements Variable {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->

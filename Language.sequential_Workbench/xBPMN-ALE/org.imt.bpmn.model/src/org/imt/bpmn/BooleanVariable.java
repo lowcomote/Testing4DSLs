@@ -29,6 +29,7 @@ public interface BooleanVariable extends BasicVariable {
 	 * @see #setValueObject(BooleanValue)
 	 * @see org.imt.bpmn.bpmnPackage#getBooleanVariable_ValueObject()
 	 * @model containment="true"
+	 *        annotation="dynamic"
 	 * @generated
 	 */
 	BooleanValue getValueObject();

@@ -17,9 +17,9 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.imt.bpmn.Microflow#getName <em>Name</em>}</li>
  *   <li>{@link org.imt.bpmn.Microflow#getOwnedElements <em>Owned Elements</em>}</li>
- *   <li>{@link org.imt.bpmn.Microflow#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.imt.bpmn.Microflow#getCurrentNode <em>Current Node</em>}</li>
  *   <li>{@link org.imt.bpmn.Microflow#getValuedVariables <em>Valued Variables</em>}</li>
+ *   <li>{@link org.imt.bpmn.Microflow#getParameters <em>Parameters</em>}</li>
  * </ul>
  *
  * @see org.imt.bpmn.bpmnPackage#getMicroflow()

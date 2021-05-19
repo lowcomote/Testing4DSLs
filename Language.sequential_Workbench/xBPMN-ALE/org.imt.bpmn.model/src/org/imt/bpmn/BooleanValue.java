@@ -29,6 +29,7 @@ public interface BooleanValue extends Value {
 	 * @see #setValue(boolean)
 	 * @see org.imt.bpmn.bpmnPackage#getBooleanValue_Value()
 	 * @model default="false" required="true"
+	 *        annotation="dynamic"
 	 * @generated
 	 */
 	boolean isValue();

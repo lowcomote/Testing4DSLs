@@ -28,6 +28,7 @@ public interface StringValue extends Value {
 	 * @see #setValue(String)
 	 * @see org.imt.bpmn.bpmnPackage#getStringValue_Value()
 	 * @model required="true"
+	 *        annotation="dynamic"
 	 * @generated
 	 */
 	String getValue();

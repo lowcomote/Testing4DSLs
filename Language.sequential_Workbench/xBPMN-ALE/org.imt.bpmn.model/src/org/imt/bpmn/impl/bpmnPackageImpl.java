@@ -458,7 +458,7 @@ public class bpmnPackageImpl extends EPackageImpl implements bpmnPackage {
 	 * @generated
 	 */
 	public EReference getMicroflow_Parameters() {
-		return (EReference)microflowEClass.getEStructuralFeatures().get(2);
+		return (EReference)microflowEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -467,7 +467,7 @@ public class bpmnPackageImpl extends EPackageImpl implements bpmnPackage {
 	 * @generated
 	 */
 	public EReference getMicroflow_CurrentNode() {
-		return (EReference)microflowEClass.getEStructuralFeatures().get(3);
+		return (EReference)microflowEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -476,7 +476,7 @@ public class bpmnPackageImpl extends EPackageImpl implements bpmnPackage {
 	 * @generated
 	 */
 	public EReference getMicroflow_ValuedVariables() {
-		return (EReference)microflowEClass.getEStructuralFeatures().get(4);
+		return (EReference)microflowEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1257,9 +1257,9 @@ public class bpmnPackageImpl extends EPackageImpl implements bpmnPackage {
 		microflowEClass = createEClass(MICROFLOW);
 		createEAttribute(microflowEClass, MICROFLOW__NAME);
 		createEReference(microflowEClass, MICROFLOW__OWNED_ELEMENTS);
-		createEReference(microflowEClass, MICROFLOW__PARAMETERS);
 		createEReference(microflowEClass, MICROFLOW__CURRENT_NODE);
 		createEReference(microflowEClass, MICROFLOW__VALUED_VARIABLES);
+		createEReference(microflowEClass, MICROFLOW__PARAMETERS);
 
 		microflowElementEClass = createEClass(MICROFLOW_ELEMENT);
 		createEReference(microflowElementEClass, MICROFLOW_ELEMENT__INCOMING_FLOWS);
@@ -1450,9 +1450,9 @@ public class bpmnPackageImpl extends EPackageImpl implements bpmnPackage {
 		initEClass(microflowEClass, Microflow.class, "Microflow", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMicroflow_Name(), ecorePackage.getEString(), "name", null, 1, 1, Microflow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMicroflow_OwnedElements(), this.getMicroflowElement(), this.getMicroflowElement_OwnerMicroflow(), "ownedElements", null, 0, -1, Microflow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMicroflow_Parameters(), this.getVariable(), null, "parameters", null, 0, -1, Microflow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMicroflow_CurrentNode(), this.getMicroflowElement(), null, "currentNode", null, 0, 1, Microflow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMicroflow_ValuedVariables(), this.getVariable(), null, "valuedVariables", null, 0, -1, Microflow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMicroflow_Parameters(), this.getVariable(), null, "parameters", null, 0, -1, Microflow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(microflowElementEClass, MicroflowElement.class, "MicroflowElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMicroflowElement_IncomingFlows(), this.getSequenceFlow(), this.getSequenceFlow_Target(), "incomingFlows", null, 0, -1, MicroflowElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1508,7 +1508,7 @@ public class bpmnPackageImpl extends EPackageImpl implements bpmnPackage {
 		initEClass(endEventEClass, EndEvent.class, "EndEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEndEvent_ReturnVariable(), this.getVariable(), null, "returnVariable", null, 0, 1, EndEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(variableEClass, Variable.class, "Variable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(variableEClass, Variable.class, "Variable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getVariable_Name(), ecorePackage.getEString(), "name", null, 1, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1606,11 +1606,6 @@ public class bpmnPackageImpl extends EPackageImpl implements bpmnPackage {
 	protected void createDynamicAnnotations() {
 		String source = "dynamic";
 		addAnnotation
-		  (getMicroflow_Parameters(),
-		   source,
-		   new String[] {
-		   });
-		addAnnotation
 		  (getMicroflow_CurrentNode(),
 		   source,
 		   new String[] {
@@ -1621,7 +1616,22 @@ public class bpmnPackageImpl extends EPackageImpl implements bpmnPackage {
 		   new String[] {
 		   });
 		addAnnotation
+		  (getMicroflow_Parameters(),
+		   source,
+		   new String[] {
+		   });
+		addAnnotation
 		  (variableEClass,
+		   source,
+		   new String[] {
+		   });
+		addAnnotation
+		  (getEntity_Attributes(),
+		   source,
+		   new String[] {
+		   });
+		addAnnotation
+		  (getEntity_References(),
 		   source,
 		   new String[] {
 		   });
@@ -1636,12 +1646,27 @@ public class bpmnPackageImpl extends EPackageImpl implements bpmnPackage {
 		   new String[] {
 		   });
 		addAnnotation
+		  (getIntegerVariable_ValueObject(),
+		   source,
+		   new String[] {
+		   });
+		addAnnotation
 		  (booleanVariableEClass,
 		   source,
 		   new String[] {
 		   });
 		addAnnotation
+		  (getBooleanVariable_ValueObject(),
+		   source,
+		   new String[] {
+		   });
+		addAnnotation
 		  (stringVariableEClass,
+		   source,
+		   new String[] {
+		   });
+		addAnnotation
+		  (getStringVariable_ValueObject(),
 		   source,
 		   new String[] {
 		   });
@@ -1656,12 +1681,27 @@ public class bpmnPackageImpl extends EPackageImpl implements bpmnPackage {
 		   new String[] {
 		   });
 		addAnnotation
+		  (getIntegerValue_Value(),
+		   source,
+		   new String[] {
+		   });
+		addAnnotation
 		  (booleanValueEClass,
 		   source,
 		   new String[] {
 		   });
 		addAnnotation
+		  (getBooleanValue_Value(),
+		   source,
+		   new String[] {
+		   });
+		addAnnotation
 		  (stringValueEClass,
+		   source,
+		   new String[] {
+		   });
+		addAnnotation
+		  (getStringValue_Value(),
 		   source,
 		   new String[] {
 		   });

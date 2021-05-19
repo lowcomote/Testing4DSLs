@@ -28,6 +28,7 @@ public interface IntegerValue extends Value {
 	 * @see #setValue(int)
 	 * @see org.imt.bpmn.bpmnPackage#getIntegerValue_Value()
 	 * @model required="true"
+	 *        annotation="dynamic"
 	 * @generated
 	 */
 	int getValue();

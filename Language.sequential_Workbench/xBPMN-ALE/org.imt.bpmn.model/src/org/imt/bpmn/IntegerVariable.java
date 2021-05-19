@@ -29,6 +29,7 @@ public interface IntegerVariable extends BasicVariable {
 	 * @see #setValueObject(IntegerValue)
 	 * @see org.imt.bpmn.bpmnPackage#getIntegerVariable_ValueObject()
 	 * @model containment="true"
+	 *        annotation="dynamic"
 	 * @generated
 	 */
 	IntegerValue getValueObject();

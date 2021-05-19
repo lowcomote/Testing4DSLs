@@ -371,6 +371,29 @@ public class bpmnItemProviderAdapterFactory extends bpmnAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.imt.bpmn.Variable} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected VariableItemProvider variableItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.imt.bpmn.Variable}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createVariableAdapter() {
+		if (variableItemProvider == null) {
+			variableItemProvider = new VariableItemProvider(this);
+		}
+
+		return variableItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.imt.bpmn.Entity} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -827,6 +850,7 @@ public class bpmnItemProviderAdapterFactory extends bpmnAdapterFactory implement
 		if (showMessageItemProvider != null) showMessageItemProvider.dispose();
 		if (startEventItemProvider != null) startEventItemProvider.dispose();
 		if (endEventItemProvider != null) endEventItemProvider.dispose();
+		if (variableItemProvider != null) variableItemProvider.dispose();
 		if (entityItemProvider != null) entityItemProvider.dispose();
 		if (referenceItemProvider != null) referenceItemProvider.dispose();
 		if (basicVariableItemProvider != null) basicVariableItemProvider.dispose();

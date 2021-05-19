@@ -2,12 +2,6 @@ behavior fsm;
 
 open class StateMachine {
 	String input;
-	//the model state is defined in the ecore file with 'dynamic' annotation
-	
-	//State currentState;
-	//String unprocessedString;
-	//String consumedString;
-	//String producedString ;
 	
 	@main
 	def void main() {

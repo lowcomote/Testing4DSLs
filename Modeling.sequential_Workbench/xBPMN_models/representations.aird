@@ -3,4 +3,8 @@
   <semanticResources>promoteEmployee.bpmn</semanticResources>
   <semanticResources>verifyUserAccess.bpmn</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210517_150816/promoteEmployee.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210519_163009/promoteEmployee.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210519_172714/promoteEmployee.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210519_174235/promoteEmployee.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210519_174245/verifyUserAccess.bpmn</semanticResources>
 </viewpoint:DAnalysis>
