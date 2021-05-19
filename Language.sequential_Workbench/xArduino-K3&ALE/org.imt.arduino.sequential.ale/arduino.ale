@@ -1,20 +1,6 @@
 behavior arduino;
-open class Project{	
-	@main
-	def void main() {
-		'main'.log();
-		self.sketch.block.execute();
-	}
-	
-	@init
-	def void initializeModel(String input) {
-	}
-}
-open class Module{
-	//the model state is defined in the ecore file with 'dynamic' annotation
-	//Integer level;
-	def Project getProject() {
-		'get the project of the module'.log();
+open class Instruction{
+	def Project getProject(Module module) {
 		Project project := null;
 		EObject current := self.eContainer();
 		while (current != null) {
@@ -26,262 +12,229 @@ open class Module{
 		}
 		result := project;
 	}
-}
-open class PushButton extends ModuleAspect {
-	
-	@step
-	def void press() {
-		'press button'.log();
-		self.level := 1;
-		for (wait in self.getProject().sketch.eAllContents() ->filter(arduino::WaitFor)){
-			if (wait.module = self){
-				wait.setActiavted();
+	def Pin getPin (Module module){
+		Pin pin := null;
+		Project project := self.getProject(module);
+		for (board in project.boards){
+			if (board != null and board.oclIsTypeOf(arduino::ArduinoBoard)){
+				ArduinoBoard arduinoBoard := board.oclAsType(arduino::ArduinoBoard);
+				for (analogPin in arduinoBoard.analogPins){
+					if (analogPin.module = module){
+						result := analogPin;
+					}
+				}
+				for (digitalPin in arduinoBoard.digitalPins){
+					if (digitalPin.module = module){
+						result := digitalPin;
+					}
+				}
 			}
 		}
+		result := pin;
 	}
-	
-	@step
-	def void release() {
-		'release button'.log();
-		self.level := 0;
+	def void execute(){
+		
+	}
+	def void finalize(){
+		
 	}
 }
+open class Project{
+	def void execute(){
+		while(true){
+			self.sketches -> forAll(s|s.block.execute());
+		}
+	}
+	@main
+	def void main() {
+		'main'.log();
+		self.execute();
+	}
+	@step
+	def void setup(){
+		for (o in self.eAllContents){
+			if (o.oclIsTypeOf(arduino::IntegerVariable)) {
+				o.value := o.initialValue;
+			} else if (o.oclIsTypeOf(arduino::BooleanVariable)) {
+				o.value := o.initialValue;
+			} 
+		}
+	}
+	@init
+	def void initializeModel(String input) {
+		self.setup();
+	}
+}
+open class VariableAssignment extends Instruction{
+	@step
+	override void execute() {
+		variable := self.variable;	
+		value := self.operand.evaluate();
 
-open class Sketch {
-	def void execute() {
-		'execute sketch'.log();
-		while(true) {
-			self.block.execute();
+		if (variable.oclIsTypeOf(arduino::IntegerVariable)){
+			variable.initialValue := value;
+			variable.value := value;
+		}
+		if (variable.oclIsTypeOf(arduino::BooleanVariable)){
+			variable.value := value;
 		}
 	}
 }
-
-open class Block {
-	def void execute() {
-		'execute block'.log();
+open class Block{
+	def void execute(){
 		for (i in self.instructions){
 			i.execute();
 		}
 	}
 }
-
-open class Instruction {
-	def void execute() {
-		'execute instruction'.log();
-	}
-	
-	def void finalize() {
+open class ModuleInstruction extends Instruction{
+	override void execute(){
+		
 	}
 }
-
-open class Control extends Instruction {
+open class ModuleAssignment extends ModuleInstruction{
 	@step
-	@OverrideAspectMethod
-	def void execute() {
-		'execute control instruction'.log();
-	}
-}
-
-open class If extends Control {
-	@step
-	@OverrideAspectMethod
-	def void execute() {
-		'execute if instruction'.log();
-		int res:=0;
-		if (self.condition.oclIsTypeOf(arduino::UnaryExpression)){
-			res := self.condition.oclAsType(arduino::UnaryExpression).evaluate();
-		}else if (self.condition.oclIsTypeOf(arduino::BinaryExpression)){
-			res := self.condition.oclAsType(arduino::BinaryExpression).evaluate();
-		}else if (self.condition.oclIsTypeOf(arduino::ModuleGet)){
-			res := self.condition.oclAsType(arduino::ModuleGet).evaluate();
-		}else if (self.condition.oclIsTypeOf(arduino::Constant)){
-			res := self.condition.oclAsType(arduino::Constant).evaluate();
+	override void execute(){
+		pin = self.getPint(self.module);
+		('Changing the level of the pin ' + pin.name + ':').log();
+		('The current level is: ' + pin.level).log();
+		if (self.operand.oclIsTypeOf(arduino::IntegerExpression)){
+			pin.level := self.operand.evaluate();
 		}
-		if (res != 0) {
+		if (self.operand.oclIsTypeOf(arduino::BooleanExpression)){
+			res := self.operand.evaluate();
+			if (res){
+				//TODO: CHECK
+				pin.level := HIGH;
+			}else{
+				pin.level := LOW;
+			}
+		}
+		('The new level is: ' + pin.level).log();
+		if (self.module.oclIsTypeOf(arduino::BluetoothTransceiver)){
+			transceiver := self.module.oclAsType(arduino::BluetoothTransceiver);
+			transceiver.dataToSend += pin.level;
+			transceiver.push();
+			
+		}
+	}
+}
+open class BluetoothTransceiver{
+	Sequence(Integer) dataToSend;
+	Sequence(Integer) dataReceived;
+	@step
+	def void push(){
+		for (t in self.connectedTransceiver){
+			for (s in self.dataToSend){
+				t.dataReceived += s;
+			}
+		}
+		dataToSend := null;
+	}
+}
+open class VariableDeclaration extends Instruction{
+	@step
+	override void execute(){
+		if (self.variable.oclIsTypeOf(arduino::IntegerVariable)){
+			self.variable.oclAsType(arduino::IntegerVariable).value := 
+				self.variable.oclAsType(arduino::IntegerVariable).initialValue;
+		}else if (self.variable.oclIsTypeOf(arduino::BooleanVariable)){
+			self.variable.oclAsType(arduino::BooleanVariable).value := 
+				self.variable.oclAsType(arduino::BooleanVariable).initialValue;
+		}
+	}
+}
+open class Control extends Instruction{
+	override void execute(){
+		
+	}
+	def Boolean evaluate() {
+	}
+}
+open class If extends Control{
+	override Boolean evaluate(){
+		if (self.condition.oclIsTypeOf(arduino::BooleanExpression)){
+			result := self.condition.evaluate;
+		}
+		result := false;
+	} 
+	@step
+	override void execute(){
+		if (self.evaluate()) {
 			self.block.execute();
-		} else if (self.elseBlock != null) {
-			self.elseBlock.execute();
+		} else {
+			if (self.elseBlock != null) {
+				self.elseBlock.execute();
+			}
 		}
 	}
 }
-
-open class While extends Control {
-	@step
-	@OverrideAspectMethod
-	def void execute() {
-		'execute while instruction'.log();
-		while (self.condition.evaluate() != 0) {
+open class Repeat extends Control{
+	Integer i := 0;
+	override Boolean evaluate(){
+		Boolean resCond := false;
+		if (self.i < self.iteration){
+			resCond := true;
+		}
+		self.i += 1;
+		result := resCond;
+	}
+	def void finalize(){
+		self.i := 0;
+	}
+	override void execute(){
+		while (self.evaluate()){
+			self.block.execute();
+		}
+		self.finlize();
+	}
+}
+open class While extends Control{
+	override Boolean evaluate(){
+		result := self.condition.evaluate();
+	}
+	override void execute(){
+		while(self.evaluate()){
 			self.block.execute();
 		}
 	}
 }
-
-open class ModuleSet extends Instruction {
-	@step
-	@OverrideAspectMethod
-	def void execute() {
-		'execute moduleSet instruction'.log();
+open class Utilities extends Instruction{
+	override void execute(){
+		
 	}
 }
-
-open class SetLed extends ModuleSet {
-	@step
-	@OverrideAspectMethod
-	def void execute() {
-		'execute setLed instruction'.log();
-		self.led.level := self.value.evaluate();
-		if (self.led.level = 1){
-			'led is turned on'.log();
-		}else{
-			'led is turned off'.log();
-		}
-	}
-} 
-
-open class Delay extends Instruction{
-	@step
-	@OverrideAspectMethod
-	def void execute() {
-		'execute delay instruction'.log();
-		//Thread.sleep(self.value);
-		'delaying'.log();
-	}
-}
-
-open class WaitFor extends Instruction {
+open class WaitFor extends Utilities{
 	Boolean waiting := false;
 	Boolean moduleActivated := false;
-	
+	int value := 0;
 	@step
-	@OverrideAspectMethod
-	def void execute() {
-		'execute waitFor instruction'.log();
-		if (self.value != null and self.isValidated()) {
-			self.moduleActivated := false;
-			self.waiting := false;
-		}else{
-			self.waiting := true;
-			while (not(self.moduleActivated and self.isValidated())) {
-				self.moduleActivated := false;
-				self.loop();
-			}
+	override void execute(){
+		self.value := _self.pin.level;		
+		self.waiting := true;
+		while (not self.isValidated()) {
+			self.moduleActivated := false;			
+			self.loop();			
+		}
+		if (self.isValidated()) {
 			self.moduleActivated := false;
 			self.waiting := false;
 		}
+		self.moduleActivated := false;
+		self.waiting := false;
 	}
-	
-	 def Boolean isValidated() {
-	 	if (self.value = null or self.module.level = self.value.value){
-	 		result := true;
-	 	}else{
-	 		result := false;
-	 	}
-	}
-	
-	@step
-	def void loop() {
-		//Thread.sleep(100);
-		'waiting'.log();
-	}
-	
-	def void setActivated() {
-		if (self.waiting) {
-			self.moduleActivated := true;
+	def Boolean isValidate(){
+		if (self.mode = arduino::ChangeType::CHANGE) {
+			result := (self.value != _self.pin.level);
+		} else if (self.mode = arduino::ChangeType::RISING) {
+			result := (self.value < self.pin.level);
+		} else if (self.mode = arduino::ChangeType::FALLING) {
+			result := (self.value > self.pin.level);
+		} else {			
+			result := false;
 		}
 	}
-}
-
-open class UnaryExpression{
-	@step
-	def int evaluate() {
-		'evaluate Unary Expression'.log();
-		int res := 0;
-		Operand operand := self.operand.evaluate();
-		if (self.operator = arduino::UnaryOperatorKind::minus) {
-			res -= operand;
-		}else if (self.operator = arduino::UnaryOperatorKind::neg) {
-			if (operand = 0) {
-				res := 1;
-			}else{
-				res := 0;
-			}
-		}
-		result := res;
-	}
-}
-
-open class BinaryExpression{
-	@step
-	def int evaluate() {
-		'evaluate Binary Expression'.log();
-		int res := 0;
-		Operand iLeft := self.left.evaluate();
-		Operand iRight := self.right.evaluate();
-		if (self.operator = arduino::BinaryOperatorKind::div) {
-			res := iLeft / iRight;
-		} else if (self.operator = arduino::BinaryOperatorKind::max) {
-			res := Math.max(iLeft, iRight);
-		} else if (self.operator = arduino::BinaryOperatorKind::min) {
-			res := Math.min(iLeft, iRight);
-		} else if (self.operator = arduino::BinaryOperatorKind::sub) {
-			res := iLeft - iRight;
-		} else if (self.operator = arduino::BinaryOperatorKind::mul) {
-			res := iLeft * iRight;
-		} else if (self.operator = arduino::BinaryOperatorKind::add) {
-			res := iLeft + iRight;
-		} else if (self.operator = arduino::BinaryOperatorKind::lt) {
-			if (iLeft < iRight){
-				res := 1;
-			} else {
-				res := 0;
-			}
-		} else if (self.operator = arduino::BinaryOperatorKind::le) {
-			if (iLeft <= iRight){
-				res := 1;
-			} else {
-				res := 0;
-			}
-		} else if (self.operator = arduino::BinaryOperatorKind::eq) {
-			if (iLeft = iRight){
-				res := 1;
-			} else {
-				res := 0;
-			}
-		} else if (self.operator = arduino::BinaryOperatorKind::ge) {
-			if (iLeft >= iRight){
-				res := 1;
-			} else {
-				res := 0;
-			}
-		} else if (self.operator = arduino::BinaryOperatorKind::gt) {
-			if (iLeft > iRight){
-				res := 1;
-			} else {
-				res := 0;
-			}
-		} else if (self.operator = arduino::BinaryOperatorKind::neq) {
-			if (iLeft != iRight){
-				res := 1;
-			} else {
-				res := 0;
-			}
-		}
-		result := res;
-	}
-}
-
-open class Constant{
-	@step
-	def int evaluate() {
-		'evaluate constant expression'.log();
-		result := self.value;
-	}
-}
-
-open class ModuleGet{
-	@step
-	def int evaluate() {
-		'evaluate moduleGet Expression'.log();
-		result := self.module.level;
+	def void loop(){
+		Thread.sleep(10);
 	}
 }
