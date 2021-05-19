@@ -73,10 +73,19 @@ open class ForkDecision{
 	@step
 	def void step(){
 		('Start making decision').log();
-		BooleanValue gatewayValue := bpmn::BooleanValue.create();
-		gatewayValue.value := self.expression.calculateExpression();
+		Boolean gatewayValue := false;
+		if (self.expression.oclIsTypeOf(bpmn::BooleanBinaryExpression)){
+			gatewayValue := self.expression.oclAsType(bpmn::BooleanBinaryExpression).calculateExpression();
+		}else if (self.expression.oclIsTypeOf(bpmn::BooleanUnaryExpression)){
+			gatewayValue := self.expression.oclAsType(bpmn::BooleanUnaryExpression).calculateExpression();
+		}else if (self.expression.oclIsTypeOf(bpmn::IntegerComparisonExpression)){
+			gatewayValue := self.expression.oclAsType(bpmn::IntegerComparisonExpression).calculateExpression();
+		}else if (self.expression.oclIsTypeOf(bpmn::StringComparisonExpression)){
+			gatewayValue := self.expression.oclAsType(bpmn::StringComparisonExpression).calculateExpression();
+		}
+		
 		SequenceFlow validFlow := bpmn::SequenceFlow.create();
-		if (gatewayValue.value = true){
+		if (gatewayValue = true){
 			validFlow := self.outgoingFlows
 				-> select (f | f.constraint = 'true')
 				-> first();
@@ -115,7 +124,19 @@ open class ChangeObject{
 		if (variable = null){
 			('There is no ' + self.variableToBeChanged + ' property in the ' + self.entity + ' entity').log();
 		}else{
-			variable.valueObject := self.newValue;
+			if (variable.oclIsTypeOf(bpmn::IntegerVariable) and
+			self.newValue.oclIsTypeOf(bpmn::IntegerValue)){
+			variable.oclAsType(bpmn::IntegerVariable).valueObject := 
+				self.newValue.oclAsType(bpmn::IntegerValue);
+			}else if (variable.oclIsTypeOf(bpmn::BooleanVariable) and
+				self.newValue.oclIsTypeOf(bpmn::BooleanValue)){
+				variable.oclAsType(bpmn::BooleanVariable).valueObject := 
+					self.newValue.oclAsType(bpmn::BooleanValue);
+			}else if (variable.oclIsTypeOf(bpmn::StringVariable) and
+				self.newValue.oclIsTypeOf(bpmn::StringValue)){
+				variable.oclAsType(bpmn::StringVariable).valueObject := 
+					self.newValue.oclAsType(bpmn::StringValue);
+			}
 			('Entity ' + self.entity.name + ' is updated.').log();
 			for (flow in self.outgoingFlows){
 				flow.fire();
@@ -161,7 +182,19 @@ open class CreateVariable{
 open class ChangeVariable{
 	@step
 	def void step(){
-		self.targetVariable.valueObject := self.newValue;
+		if (self.targetVariable.oclIsTypeOf(bpmn::IntegerVariable) and
+			self.newValue.oclIsTypeOf(bpmn::IntegerValue)){
+			self.targetVariable.oclAsType(bpmn::IntegerVariable).valueObject := 
+				self.newValue.oclAsType(bpmn::IntegerValue);
+		}else if (self.targetVariable.oclIsTypeOf(bpmn::BooleanVariable) and
+			self.newValue.oclIsTypeOf(bpmn::BooleanValue)){
+			self.targetVariable.oclAsType(bpmn::BooleanVariable).valueObject := 
+				self.newValue.oclAsType(bpmn::BooleanValue);
+		}else if (self.targetVariable.oclIsTypeOf(bpmn::StringVariable) and
+			self.newValue.oclIsTypeOf(bpmn::StringValue)){
+			self.targetVariable.oclAsType(bpmn::StringVariable).valueObject := 
+				self.newValue.oclAsType(bpmn::StringValue);
+		}
 		('Variable ' + self.targetVariable.name + ' is updated.').log();
 		for (flow in self.outgoingFlows){
 			flow.fire();
