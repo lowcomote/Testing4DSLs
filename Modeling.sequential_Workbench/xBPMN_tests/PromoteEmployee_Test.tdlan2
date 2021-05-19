@@ -6,6 +6,7 @@ Package testSuite {
 	Entity employeeNewState(_name = "Employee", attributes = employeeLevel);
 	StringVariable employeeLevel (_name = "level", valueObject = newLevel);
 	StringValue newLevel (value = ?);
+	
 	Test Description test1 uses configuration promoteEmployeeConfiguration{
 		tester.genericGate sends employeeNewState (
 			attributes = employeeLevel (valueObject = newLevel (value = "")))
