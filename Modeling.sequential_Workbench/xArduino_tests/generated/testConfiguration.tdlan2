@@ -14,19 +14,74 @@ Package testConfiguration {
 	Annotation DSLName ;
 	Test Configuration genericConfiguration {
 		create Tester tester of type TestSystem ;
-		create SUT k3 of type MUT with { 
+		create SUT arduino of type MUT with { 
 			MUTPath : 'TODO: Put the address of the Model-Under Test here' ; 
 			DSLName : 'TODO: Put the name of the DSL' ;
 		} ;
-		connect tester.genericGate to k3.genericGate ;
+		connect tester.genericGate to arduino.genericGate ;
 	}
 	Test Configuration oclConfiguration {
 		create Tester tester of type TestSystem ;
-		create SUT k3 of type MUT with { 
+		create SUT arduino of type MUT with { 
 			MUTPath : 'TODO: Put the address of the Model-Under Test here' ; 
 			DSLName : 'TODO: Put the name of the DSL' ;
 		} ;
-		connect tester.genericGate to k3.genericGate ;
-		connect tester.oclGate to k3.oclGate ;
+		connect tester.genericGate to arduino.genericGate ;
+		connect tester.oclGate to arduino.oclGate ;
+	}
+	//manually defined: one test configuration per xArduino model
+	Test Configuration activeWaitConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT arduino of type MUT with { 
+			MUTPath : '/xArduino_models/activeWaitIRBlueLed.arduino' ; 
+			DSLName : 'org.gemoc.arduino.k3' ;
+		} ;
+		connect tester.genericGate to arduino.genericGate ;
+		connect tester.oclGate to arduino.oclGate ;
+	}
+	Test Configuration turnOnLedConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT arduino of type MUT with { 
+			MUTPath : '/xArduino_models/turnOnLed.arduino' ; 
+			DSLName : 'org.gemoc.arduino.k3' ;
+		} ;
+		connect tester.genericGate to arduino.genericGate ;
+		connect tester.oclGate to arduino.oclGate ;
+	}
+		Test Configuration photoresistorConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT arduino of type MUT with { 
+			MUTPath : '/xArduino_models/photoresistor.arduino' ; 
+			DSLName : 'org.gemoc.arduino.k3' ;
+		} ;
+		connect tester.genericGate to arduino.genericGate ;
+		connect tester.oclGate to arduino.oclGate ;
+	}
+	Test Configuration servo9gConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT arduino of type MUT with { 
+			MUTPath : '/xArduino_models/servo9g.arduino' ; 
+			DSLName : 'org.gemoc.arduino.k3' ;
+		} ;
+		connect tester.genericGate to arduino.genericGate ;
+		connect tester.oclGate to arduino.oclGate ;
+	}
+	Test Configuration servoIrbuttonConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT arduino of type MUT with { 
+			MUTPath : '/xArduino_models/servoIrbutton.arduino' ; 
+			DSLName : 'org.gemoc.arduino.k3' ;
+		} ;
+		connect tester.genericGate to arduino.genericGate ;
+		connect tester.oclGate to arduino.oclGate ;
+	}
+	Test Configuration waitForConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT arduino of type MUT with { 
+			MUTPath : '/xArduino_models/waitForIRBlueLed.arduino' ; 
+			DSLName : 'org.gemoc.arduino.k3' ;
+		} ;
+		connect tester.genericGate to arduino.genericGate ;
+		connect tester.oclGate to arduino.oclGate ;
 	}
 }

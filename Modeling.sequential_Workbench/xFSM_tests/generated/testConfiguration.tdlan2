@@ -29,6 +29,7 @@ Package testConfiguration {
 		connect tester.genericGate to k3fsm.genericGate ;
 		connect tester.oclGate to k3fsm.oclGate ;
 	}
+	//manually defined: one test configuration per xFSM model
 	Test Configuration bitShiftingConfiguration {
 		create Tester tester of type TestSystem ;
 		create SUT k3fsm of type MUT with { 

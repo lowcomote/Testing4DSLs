@@ -1,0 +1,9 @@
+Package testSuite {
+	Import all from common ;
+	Import all from arduinoSpecificTypes ;
+	Import all from testConfiguration ;
+	
+	Test Description test1 uses configuration activeWaitConfiguration{
+		tester.genericGate sends runModel to arduino.genericGate;
+	}
+}

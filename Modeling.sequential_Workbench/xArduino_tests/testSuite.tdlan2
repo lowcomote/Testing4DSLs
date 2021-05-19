@@ -1,5 +1,0 @@
-Package testSuite {
-	Import all from common ;
-	Import all from arduinoSpecificTypes ;
-	Import all from testConfiguration ;
-}

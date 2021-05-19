@@ -16,4 +16,26 @@
   <semanticResources>gemoc-gen/execution/execution-20210516_221709/photoresistor.arduino</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210516_221717/servo9g.arduino</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210516_221725/servoIrbutton.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210518_213952/blink.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210518_214046/blink.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210518_214113/blink.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210518_214259/activeWaitIRBlueLEd.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210518_214335/activeWaitIRBlueLEd.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210518_214431/activeWaitIRBlueLEd.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210518_214456/activeWaitIRBlueLEd.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210518_220136/photoresistor.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210518_220259/photoresistor.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210518_220936/blink.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210518_221346/servo9g.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210518_222152/servoIrbutton.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210518_222210/servoIrbutton.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210518_222638/waitForIRBlueLed.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210518_222700/waitForIRBlueLed.arduino</semanticResources>
+  <semanticResources>activeWaitIRBlueLed.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210519_105855/blink.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210519_110716/blink.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210519_111003/blink.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210519_111026/blink.arduino</semanticResources>
+  <semanticResources>turnOnLed.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210519_111427/turnOnLed.arduino</semanticResources>
 </viewpoint:DAnalysis>
