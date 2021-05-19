@@ -120,7 +120,7 @@ open class CreateObject{
 open class ChangeObject{
 	@step
 	def void step(){
-		BasicVariable variable := self.entity.attributes->select(a | a = self.variableToBeChanged);
+		BasicVariable variable := self.entity.attributes->select(a | a = self.variableToBeChanged)->first();
 		if (variable = null){
 			('There is no ' + self.variableToBeChanged + ' property in the ' + self.entity + ' entity').log();
 		}else{
