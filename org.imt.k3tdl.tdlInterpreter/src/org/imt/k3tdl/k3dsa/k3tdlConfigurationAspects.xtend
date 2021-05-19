@@ -127,8 +127,14 @@ class GateInstanceAspect {
 		if (argument instanceof DataInstanceUse) {
 			var arg = (argument as DataInstanceUse)
 			if (arg.dataInstance.name == 'runModel') {
-				println("--Start MUT Execution:")
-				return _self.gateLauncher.executeGenericCommand()
+				println("--Start MUT Execution synchronous:")
+				return _self.gateLauncher.executeModel(true)
+			}else if (arg.dataInstance.name == 'runModelAsynchronous') {
+				println("--Start MUT Execution Asynchronous:")
+				return _self.gateLauncher.executeModel(false)
+			}else if (arg.dataInstance.name == 'stopModelExecution') {
+				println("--Stop Asynchronous MUT Execution")
+				return _self.gateLauncher.stopAsyncExecution
 			}else if (arg.dataInstance.name == 'resetModel') {
 				_self.gateLauncher.MUTResource = 
 					(new ResourceSetImpl()).getResource(URI.createURI(_self.MUTPath), true)
