@@ -7,4 +7,10 @@
   <semanticResources>gemoc-gen/execution/execution-20210519_172714/promoteEmployee.bpmn</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210519_174235/promoteEmployee.bpmn</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210519_174245/verifyUserAccess.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210519_232816/verifyUserAccess.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210519_232841/verifyUserAccess.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210519_232905/verifyUserAccess.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210519_234515/verifyUserAccess.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210519_234633/verifyUserAccess.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210519_234646/verifyUserAccess.bpmn</semanticResources>
 </viewpoint:DAnalysis>
