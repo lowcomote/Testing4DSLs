@@ -2,9 +2,9 @@ Package bpmnSpecificTypes {
 	Type Microflow ( 
 		_name of type EString , 
 		ownedElements of type MicroflowElement , 
-		parameters of type Variable with { dynamic ;} , 
-		currentNode of type MicroflowElement with { dynamic ; } , 
-		valuedVariables of type Variable with { dynamic ; } ) ;
+		currentNode of type MicroflowElement with { dynamic ;} , 
+		valuedVariables of type Variable with { dynamic ; } , 
+		parameters of type Variable ) ;
 	Type MicroflowElement ( 
 		incomingFlows of type SequenceFlow , 
 		outgoingFlows of type SequenceFlow , 
@@ -17,7 +17,7 @@ Package bpmnSpecificTypes {
 		target of type MicroflowElement
 	) ;
 	Type Activity extends MicroflowElement ( ) with {abstract ;} ;
-	Type ObjectActivity extends Activity (
+	Type ObjectActivity extends Activity ( 
 		entity of type Entity
 	) with {abstract ;} ;
 	Type CreateObject extends ObjectActivity ( 
@@ -31,7 +31,7 @@ Package bpmnSpecificTypes {
 	Type RetrieveObject extends ObjectActivity ( 
 		constraint of type EString
 	) ;
-	Type ActionCallActivity extends Activity ( ) with {abstract ;} ;
+	Type ActionCallActivity extends Activity ( ) with { abstract ;} ;
 	Type MicroflowCall extends ActionCallActivity ( 
 		target of type Microflow
 	) ;
@@ -52,10 +52,12 @@ Package bpmnSpecificTypes {
 	Type EndEvent extends Event ( 
 		returnVariable of type Variable
 	) ;
-	Type Variable ( _name of type EString ) with {abstract ;} ;
+	Type Variable ( 
+		_name of type EString
+	) ;
 	Type Entity extends Variable ( 
-		attributes of type BasicVariable , 
-		references of type Reference
+		attributes of type BasicVariable with { dynamic ;} , 
+		references of type Reference with { dynamic ; } 
 	) ;
 	Type Reference ( 
 		_name of type EString , 
@@ -63,23 +65,23 @@ Package bpmnSpecificTypes {
 	) ;
 	Type BasicVariable extends Variable ( ) ;
 	Type IntegerVariable extends BasicVariable ( 
-		valueObject of type IntegerValue
+		valueObject of type IntegerValue with { dynamic ;} 
 	) ;
 	Type BooleanVariable extends BasicVariable ( 
-		valueObject of type BooleanValue
+		valueObject of type BooleanValue with { dynamic ;} 
 	) ;
 	Type StringVariable extends BasicVariable ( 
-		valueObject of type StringValue
+		valueObject of type StringValue with { dynamic ;} 
 	) ;
 	Type Value ( ) with {abstract ;} ;
 	Type IntegerValue extends Value ( 
-		value of type EInt
+		value of type EInt with { dynamic ;}
 	) ;
 	Type BooleanValue extends Value ( 
-		value of type EBoolean
+		value of type EBoolean with { dynamic ;} 
 	) ;
 	Type StringValue extends Value ( 
-		value of type EString
+		value of type EString with { dynamic ;} 
 	) ;
 	Type Decision extends MicroflowElement ( ) with {abstract ;} ;
 	Type ForkDecision extends Decision ( 
@@ -112,47 +114,47 @@ Package bpmnSpecificTypes {
 	Type IntegerComparisonOperator ;
 	Type StringComparisonOperator ;
 	StringComparisonOperator _EQUALS ;
+	BooleanBinaryOperator AND ;
+	BooleanBinaryOperator OR ;
+	BooleanUnaryOperator NOT ;
 	IntegerComparisonOperator SMALLER ;
 	IntegerComparisonOperator SMALLER_EQUALS ;
 	IntegerComparisonOperator EQUALS ;
 	IntegerComparisonOperator GREATER_EQUALS ;
 	IntegerComparisonOperator GREATER ;
-	BooleanUnaryOperator NOT ;
-	BooleanBinaryOperator AND ;
-	BooleanBinaryOperator OR ;
 	Annotation dynamic ;
 	Annotation abstract ;
-	Type EBigDecimal ;
-	Type EInvocationTargetException ;
-	Type EString ;
-	Type EBigInteger ;
-	Type EEList ;
-	Type EBoolean ;
-	Type ELongObject ;
-	Type EResourceSet ;
-	Type EByteArray ;
-	Type EInt ;
-	Type EJavaClass ;
-	Type EByteObject ;
-	Type EResource ;
-	Type ELong ;
-	Type ECharacterObject ;
-	Type EFeatureMap ;
-	Type EFloat ;
-	Type EShort ;
 	Type EDiagnosticChain ;
-	Type EEnumerator ;
-	Type EDouble ;
-	Type EFloatObject ;
-	Type EIntegerObject ;
-	Type EMap ;
 	Type EChar ;
-	Type EBooleanObject ;
-	Type EFeatureMapEntry ;
-	Type EByte ;
-	Type EDoubleObject ;
-	Type EDate ;
-	Type EShortObject ;
-	Type ETreeIterator ;
+	Type EEList ;
 	Type EJavaObject ;
+	Type EByteObject ;
+	Type EInt ;
+	Type EInvocationTargetException ;
+	Type EByte ;
+	Type EFloat ;
+	Type ELong ;
+	Type EShortObject ;
+	Type EEnumerator ;
+	Type EJavaClass ;
+	Type EShort ;
+	Type EFeatureMap ;
+	Type EDoubleObject ;
+	Type EFeatureMapEntry ;
+	Type ETreeIterator ;
+	Type EIntegerObject ;
+	Type EResourceSet ;
+	Type EBoolean ;
+	Type ECharacterObject ;
+	Type EBigInteger ;
+	Type ELongObject ;
+	Type EByteArray ;
+	Type EBigDecimal ;
+	Type EDouble ;
+	Type EMap ;
+	Type EDate ;
+	Type EString ;
+	Type EFloatObject ;
+	Type EBooleanObject ;
+	Type EResource ;
 }
