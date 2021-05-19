@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
@@ -159,18 +160,6 @@ public class MicroflowImpl extends MinimalEObjectImpl.Container implements Micro
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Variable> getParameters() {
-		if (parameters == null) {
-			parameters = new EObjectContainmentEList<Variable>(Variable.class, this, bpmnPackage.MICROFLOW__PARAMETERS);
-		}
-		return parameters;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public MicroflowElement getCurrentNode() {
 		if (currentNode != null && currentNode.eIsProxy()) {
 			InternalEObject oldCurrentNode = (InternalEObject)currentNode;
@@ -214,6 +203,18 @@ public class MicroflowImpl extends MinimalEObjectImpl.Container implements Micro
 			valuedVariables = new EObjectResolvingEList<Variable>(Variable.class, this, bpmnPackage.MICROFLOW__VALUED_VARIABLES);
 		}
 		return valuedVariables;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Variable> getParameters() {
+		if (parameters == null) {
+			parameters = new EObjectContainmentEList<Variable>(Variable.class, this, bpmnPackage.MICROFLOW__PARAMETERS);
+		}
+		return parameters;
 	}
 
 	/**

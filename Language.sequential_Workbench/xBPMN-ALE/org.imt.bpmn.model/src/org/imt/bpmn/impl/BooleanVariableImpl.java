@@ -4,10 +4,12 @@ package org.imt.bpmn.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.imt.bpmn.BooleanValue;
 import org.imt.bpmn.BooleanVariable;
 import org.imt.bpmn.bpmnPackage;

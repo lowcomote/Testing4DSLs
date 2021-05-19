@@ -64,19 +64,6 @@ public interface Microflow extends EObject {
 	EList<MicroflowElement> getOwnedElements();
 
 	/**
-	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
-	 * The list contents are of type {@link org.imt.bpmn.Variable}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parameters</em>' containment reference list.
-	 * @see org.imt.bpmn.bpmnPackage#getMicroflow_Parameters()
-	 * @model containment="true"
-	 *        annotation="dynamic"
-	 * @generated
-	 */
-	EList<Variable> getParameters();
-
-	/**
 	 * Returns the value of the '<em><b>Current Node</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -109,5 +96,17 @@ public interface Microflow extends EObject {
 	 * @generated
 	 */
 	EList<Variable> getValuedVariables();
+
+	/**
+	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
+	 * The list contents are of type {@link org.imt.bpmn.Variable}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Parameters</em>' containment reference list.
+	 * @see org.imt.bpmn.bpmnPackage#getMicroflow_Parameters()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Variable> getParameters();
 
 } // Microflow

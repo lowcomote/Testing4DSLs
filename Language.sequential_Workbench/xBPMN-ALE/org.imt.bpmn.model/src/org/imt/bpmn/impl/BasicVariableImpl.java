@@ -3,6 +3,7 @@
 package org.imt.bpmn.impl;
 
 import org.eclipse.emf.ecore.EClass;
+
 import org.imt.bpmn.BasicVariable;
 import org.imt.bpmn.bpmnPackage;
 

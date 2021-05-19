@@ -21,7 +21,6 @@ package org.imt.bpmn;
  * @generated
  */
 public interface ChangeObject extends ObjectActivity {
-
 	/**
 	 * Returns the value of the '<em><b>New Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -65,4 +64,5 @@ public interface ChangeObject extends ObjectActivity {
 	 * @generated
 	 */
 	void setVariableToBeChanged(BasicVariable value);
+
 } // ChangeObject

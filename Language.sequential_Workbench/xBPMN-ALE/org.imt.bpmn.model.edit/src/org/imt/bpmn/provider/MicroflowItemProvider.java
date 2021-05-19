@@ -66,7 +66,6 @@ public class MicroflowItemProvider
 			addNamePropertyDescriptor(object);
 			addCurrentNodePropertyDescriptor(object);
 			addValuedVariablesPropertyDescriptor(object);
-			addParametersPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -89,28 +88,6 @@ public class MicroflowItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Parameters feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addParametersPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Microflow_parameters_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Microflow_parameters_feature", "_UI_Microflow_type"),
-				 bpmnPackage.Literals.MICROFLOW__PARAMETERS,
-				 true,
-				 false,
-				 true,
-				 null,
 				 null,
 				 null));
 	}
@@ -172,6 +149,7 @@ public class MicroflowItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(bpmnPackage.Literals.MICROFLOW__OWNED_ELEMENTS);
+			childrenFeatures.add(bpmnPackage.Literals.MICROFLOW__PARAMETERS);
 		}
 		return childrenFeatures;
 	}
@@ -231,6 +209,7 @@ public class MicroflowItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case bpmnPackage.MICROFLOW__OWNED_ELEMENTS:
+			case bpmnPackage.MICROFLOW__PARAMETERS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -312,6 +291,36 @@ public class MicroflowItemProvider
 			(createChildParameter
 				(bpmnPackage.Literals.MICROFLOW__OWNED_ELEMENTS,
 				 bpmnFactory.eINSTANCE.createMergeDecision()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(bpmnPackage.Literals.MICROFLOW__PARAMETERS,
+				 bpmnFactory.eINSTANCE.createVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(bpmnPackage.Literals.MICROFLOW__PARAMETERS,
+				 bpmnFactory.eINSTANCE.createEntity()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(bpmnPackage.Literals.MICROFLOW__PARAMETERS,
+				 bpmnFactory.eINSTANCE.createBasicVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(bpmnPackage.Literals.MICROFLOW__PARAMETERS,
+				 bpmnFactory.eINSTANCE.createIntegerVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(bpmnPackage.Literals.MICROFLOW__PARAMETERS,
+				 bpmnFactory.eINSTANCE.createBooleanVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(bpmnPackage.Literals.MICROFLOW__PARAMETERS,
+				 bpmnFactory.eINSTANCE.createStringVariable()));
 	}
 
 	/**

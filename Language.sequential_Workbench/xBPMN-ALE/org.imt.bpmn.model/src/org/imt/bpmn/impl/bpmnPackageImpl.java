@@ -457,15 +457,6 @@ public class bpmnPackageImpl extends EPackageImpl implements bpmnPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMicroflow_Parameters() {
-		return (EReference)microflowEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getMicroflow_CurrentNode() {
 		return (EReference)microflowEClass.getEStructuralFeatures().get(2);
 	}
@@ -477,6 +468,15 @@ public class bpmnPackageImpl extends EPackageImpl implements bpmnPackage {
 	 */
 	public EReference getMicroflow_ValuedVariables() {
 		return (EReference)microflowEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMicroflow_Parameters() {
+		return (EReference)microflowEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1612,11 +1612,6 @@ public class bpmnPackageImpl extends EPackageImpl implements bpmnPackage {
 		   });
 		addAnnotation
 		  (getMicroflow_ValuedVariables(),
-		   source,
-		   new String[] {
-		   });
-		addAnnotation
-		  (getMicroflow_Parameters(),
 		   source,
 		   new String[] {
 		   });

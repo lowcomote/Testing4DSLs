@@ -20,7 +20,6 @@ package org.imt.bpmn;
  * @generated
  */
 public interface StringVariable extends BasicVariable {
-
 	/**
 	 * Returns the value of the '<em><b>Value Object</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -43,4 +42,5 @@ public interface StringVariable extends BasicVariable {
 	 * @generated
 	 */
 	void setValueObject(StringValue value);
+
 } // StringVariable

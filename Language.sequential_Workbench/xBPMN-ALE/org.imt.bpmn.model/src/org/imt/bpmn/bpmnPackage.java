@@ -2402,17 +2402,6 @@ public interface bpmnPackage extends EPackage {
 	EReference getMicroflow_OwnedElements();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.imt.bpmn.Microflow#getParameters <em>Parameters</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
-	 * @see org.imt.bpmn.Microflow#getParameters()
-	 * @see #getMicroflow()
-	 * @generated
-	 */
-	EReference getMicroflow_Parameters();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.imt.bpmn.Microflow#getCurrentNode <em>Current Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2433,6 +2422,17 @@ public interface bpmnPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMicroflow_ValuedVariables();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.imt.bpmn.Microflow#getParameters <em>Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
+	 * @see org.imt.bpmn.Microflow#getParameters()
+	 * @see #getMicroflow()
+	 * @generated
+	 */
+	EReference getMicroflow_Parameters();
 
 	/**
 	 * Returns the meta object for class '{@link org.imt.bpmn.MicroflowElement <em>Microflow Element</em>}'.
@@ -3355,14 +3355,6 @@ public interface bpmnPackage extends EPackage {
 		EReference MICROFLOW__OWNED_ELEMENTS = eINSTANCE.getMicroflow_OwnedElements();
 
 		/**
-		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MICROFLOW__PARAMETERS = eINSTANCE.getMicroflow_Parameters();
-
-		/**
 		 * The meta object literal for the '<em><b>Current Node</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3377,6 +3369,14 @@ public interface bpmnPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MICROFLOW__VALUED_VARIABLES = eINSTANCE.getMicroflow_ValuedVariables();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MICROFLOW__PARAMETERS = eINSTANCE.getMicroflow_Parameters();
 
 		/**
 		 * The meta object literal for the '{@link org.imt.bpmn.impl.MicroflowElementImpl <em>Microflow Element</em>}' class.

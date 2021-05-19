@@ -3,10 +3,12 @@
 package org.imt.bpmn.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.imt.bpmn.BasicVariable;
 import org.imt.bpmn.ChangeObject;
 import org.imt.bpmn.Value;
@@ -36,6 +38,7 @@ public class ChangeObjectImpl extends ObjectActivityImpl implements ChangeObject
 	 * @ordered
 	 */
 	protected Value newValue;
+
 	/**
 	 * The cached value of the '{@link #getVariableToBeChanged() <em>Variable To Be Changed</em>}' reference.
 	 * <!-- begin-user-doc -->

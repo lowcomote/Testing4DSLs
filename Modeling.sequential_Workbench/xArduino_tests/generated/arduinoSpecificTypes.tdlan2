@@ -7,7 +7,7 @@ Package arduinoSpecificTypes {
 		module of type ArduinoDigitalModule
 	) ;
 	Type Pin extends NamedElement ( 
-		level of type EInt
+		level of type EInt with { dynamic ;}
 	) with {abstract ;} ;
 	Type AnalogPin extends Pin ( 
 		module of type ArduinoAnalogModule
@@ -168,6 +168,7 @@ Package arduinoSpecificTypes {
 	Color red ;
 	Color white ;
 	Annotation abstract ;
+	Annotation dynamic ;
 	Type EDate ;
 	Type EShort ;
 	Type EChar ;

@@ -13,9 +13,7 @@
       <eAnnotations source="dynamic"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
-        eType="#//Variable" containment="true">
-      <eAnnotations source="dynamic"/>
-    </eStructuralFeatures>
+        eType="#//Variable" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MicroflowElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="incomingFlows" upperBound="-1"

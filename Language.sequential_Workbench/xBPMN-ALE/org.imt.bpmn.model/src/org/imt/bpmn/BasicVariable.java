@@ -14,5 +14,4 @@ package org.imt.bpmn;
  * @generated
  */
 public interface BasicVariable extends Variable {
-
 } // BasicVariable
