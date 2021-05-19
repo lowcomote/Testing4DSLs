@@ -4,5 +4,7 @@
   <semanticResources>generated/bpmnSpecificTypes.tdlan2</semanticResources>
   <semanticResources>generated/testConfiguration.tdlan2</semanticResources>
   <semanticResources>PromoteEmployee_Test.tdlan2</semanticResources>
-  <semanticResources>gemoc-gen/execution/execution-20210519_225551/PromoteEmployee_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210519_225850/PromoteEmployee_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210519_230811/PromoteEmployee_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210519_230914/PromoteEmployee_Test.tdlan2</semanticResources>
 </viewpoint:DAnalysis>

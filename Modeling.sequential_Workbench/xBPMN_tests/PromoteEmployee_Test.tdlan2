@@ -3,7 +3,47 @@ Package testSuite {
 	Import all from bpmnSpecificTypes ;
 	Import all from testConfiguration ;
 	
+	Entity employeeNewState(_name = "Employee", attributes = employeeLevel);
+	StringVariable employeeLevel (_name = "level", valueObject = newLevel);
+	StringValue newLevel (value = ?);
 	Test Description test1 uses configuration promoteEmployeeConfiguration{
+		tester.genericGate sends employeeNewState (
+			attributes = employeeLevel (valueObject = newLevel (value = "")))
+			to bpmn.genericGate;
 		tester.genericGate sends runModel to bpmn.genericGate;
+		tester.genericGate sends getModelState to bpmn.genericGate;
+		bpmn.genericGate sends employeeNewState (
+			attributes = employeeLevel (valueObject = newLevel (value = "Junior")))
+			to tester.genericGate;
+	}
+	Test Description test2 uses configuration promoteEmployeeConfiguration{
+		tester.genericGate sends employeeNewState (
+			attributes = employeeLevel (valueObject = newLevel (value = "Junior")))
+			to bpmn.genericGate;
+		tester.genericGate sends runModel to bpmn.genericGate;
+		tester.genericGate sends getModelState to bpmn.genericGate;
+		bpmn.genericGate sends employeeNewState (
+			attributes = employeeLevel (valueObject = newLevel (value = "Medior")))
+			to tester.genericGate;
+	}
+	Test Description test3 uses configuration promoteEmployeeConfiguration{
+		tester.genericGate sends employeeNewState (
+			attributes = employeeLevel (valueObject = newLevel (value = "Medior")))
+			to bpmn.genericGate;
+		tester.genericGate sends runModel to bpmn.genericGate;
+		tester.genericGate sends getModelState to bpmn.genericGate;
+		bpmn.genericGate sends employeeNewState (
+			attributes = employeeLevel (valueObject = newLevel (value = "Senior")))
+			to tester.genericGate;
+	}
+	Test Description test4 uses configuration promoteEmployeeConfiguration{
+		tester.genericGate sends employeeNewState (
+			attributes = employeeLevel (valueObject = newLevel (value = "Senior")))
+			to bpmn.genericGate;
+		tester.genericGate sends runModel to bpmn.genericGate;
+		tester.genericGate sends getModelState to bpmn.genericGate;
+		bpmn.genericGate sends employeeNewState (
+			attributes = employeeLevel (valueObject = newLevel (value = "Senior")))
+			to tester.genericGate;
 	}
 }
