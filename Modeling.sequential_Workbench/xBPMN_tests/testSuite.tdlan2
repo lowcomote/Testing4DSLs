@@ -1,5 +1,0 @@
-Package testSuite {
-	Import all from common ;
-	Import all from bpmnSpecificTypes ;
-	Import all from testConfiguration ;
-}

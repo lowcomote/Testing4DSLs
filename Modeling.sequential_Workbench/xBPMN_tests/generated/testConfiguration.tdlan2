@@ -14,12 +14,36 @@ Package testConfiguration {
 	Annotation DSLName ;
 	Test Configuration genericConfiguration {
 		create Tester tester of type TestSystem ;
-		create SUT bpmn of type MUT with { MUTPath : 'TODO: Put the address of the Model-Under Test here' ; DSLName : 'TODO: Put the name of the DSL' ; } ;
+		create SUT bpmn of type MUT with { 
+			MUTPath : 'TODO: Put the address of the Model-Under Test here' ; 
+			DSLName : 'TODO: Put the name of the DSL' ;
+		} ;
 		connect tester.genericGate to bpmn.genericGate ;
 	}
 	Test Configuration oclConfiguration {
 		create Tester tester of type TestSystem ;
-		create SUT bpmn of type MUT with { MUTPath : 'TODO: Put the address of the Model-Under Test here' ; DSLName : 'TODO: Put the name of the DSL' ; } ;
+		create SUT bpmn of type MUT with { 
+			MUTPath : 'TODO: Put the address of the Model-Under Test here' ; 
+			DSLName : 'TODO: Put the name of the DSL' ;
+		} ;
+		connect tester.genericGate to bpmn.genericGate ;
+		connect tester.oclGate to bpmn.oclGate ;
+	}
+	Test Configuration promoteEmployeeConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT bpmn of type MUT with { 
+			MUTPath : '/xBPMN_models/promoteEmployee.bpmn' ; 
+			DSLName : 'org.imt.bpmn.BPMN' ;
+		} ;
+		connect tester.genericGate to bpmn.genericGate ;
+		connect tester.oclGate to bpmn.oclGate ;
+	}
+	Test Configuration verifyUserAccessConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT bpmn of type MUT with { 
+			MUTPath : '/xBPMN_models/verifyUserAccess.bpmn' ; 
+			DSLName : 'org.imt.bpmn.BPMN' ;
+		} ;
 		connect tester.genericGate to bpmn.genericGate ;
 		connect tester.oclGate to bpmn.oclGate ;
 	}

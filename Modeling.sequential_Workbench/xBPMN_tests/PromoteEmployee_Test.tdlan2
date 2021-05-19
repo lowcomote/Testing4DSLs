@@ -1,0 +1,9 @@
+Package testSuite {
+	Import all from common ;
+	Import all from bpmnSpecificTypes ;
+	Import all from testConfiguration ;
+	
+	Test Description test1 uses configuration promoteEmployeeConfiguration{
+		tester.genericGate sends runModel to bpmn.genericGate;
+	}
+}
