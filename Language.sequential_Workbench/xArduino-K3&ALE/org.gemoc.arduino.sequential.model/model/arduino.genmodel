@@ -26,8 +26,8 @@
       <genEnumLiterals ecoreEnumLiteral="arduino.ecore#//BinaryBooleanOperatorKind/infOrEqual"/>
       <genEnumLiterals ecoreEnumLiteral="arduino.ecore#//BinaryBooleanOperatorKind/supOrEqual"/>
       <genEnumLiterals ecoreEnumLiteral="arduino.ecore#//BinaryBooleanOperatorKind/equal"/>
-      <genEnumLiterals ecoreEnumLiteral="arduino.ecore#//BinaryBooleanOperatorKind/and"/>
-      <genEnumLiterals ecoreEnumLiteral="arduino.ecore#//BinaryBooleanOperatorKind/or"/>
+      <genEnumLiterals ecoreEnumLiteral="arduino.ecore#//BinaryBooleanOperatorKind/AND"/>
+      <genEnumLiterals ecoreEnumLiteral="arduino.ecore#//BinaryBooleanOperatorKind/OR"/>
       <genEnumLiterals ecoreEnumLiteral="arduino.ecore#//BinaryBooleanOperatorKind/Different"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="arduino.ecore#//UnaryIntegerOperatorKind">
@@ -35,7 +35,7 @@
       <genEnumLiterals ecoreEnumLiteral="arduino.ecore#//UnaryIntegerOperatorKind/squareRoot"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="arduino.ecore#//UnaryBooleanOperatorKind">
-      <genEnumLiterals ecoreEnumLiteral="arduino.ecore#//UnaryBooleanOperatorKind/not"/>
+      <genEnumLiterals ecoreEnumLiteral="arduino.ecore#//UnaryBooleanOperatorKind/NOT"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="arduino.ecore#//Color">
       <genEnumLiterals ecoreEnumLiteral="arduino.ecore#//Color/blue"/>

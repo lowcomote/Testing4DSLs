@@ -131,8 +131,8 @@
     <eLiterals name="infOrEqual" value="2" literal="infOrEqual"/>
     <eLiterals name="supOrEqual" value="3" literal="supOrEqual"/>
     <eLiterals name="equal" value="4" literal="equal"/>
-    <eLiterals name="and" value="5" literal="and"/>
-    <eLiterals name="or" value="6" literal="or"/>
+    <eLiterals name="AND" value="5" literal="AND"/>
+    <eLiterals name="OR" value="6" literal="OR"/>
     <eLiterals name="Different" value="7"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="UnaryIntegerOperatorKind">
@@ -140,7 +140,7 @@
     <eLiterals name="squareRoot" value="1" literal="squareRoot"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="UnaryBooleanOperatorKind">
-    <eLiterals name="not" literal="not"/>
+    <eLiterals name="NOT" literal="NOT"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnaryExpression" abstract="true" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operand" lowerBound="1"

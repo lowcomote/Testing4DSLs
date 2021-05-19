@@ -2,7 +2,7 @@ behavior arduino;
 open class Instruction{
 	def Project getProject(Module module) {
 		Project project := null;
-		EObject current := self.eContainer();
+		current := self.eContainer();
 		while (current != null) {
 			if (current.oclIsTypeOf(arduino::Project)) {
 				project := current.oclAsType(arduino::Project);
@@ -235,6 +235,187 @@ open class WaitFor extends Utilities{
 		}
 	}
 	def void loop(){
-		Thread.sleep(10);
+		//Thread.sleep(100);
+		'waiting'.log();
+	}
+	def void setActivated() {
+		if (self.waiting) {
+			self.moduleActivated := true;
+		}
+	}
+}
+open class BinaryIntegerExpression{
+	@step
+	def int evaluate() {
+		int res := 0;
+		int iLeft := 0;
+		int iRight := 0;
+		if(self.left.oclIsTypeOf(arduino::IntegerExpression)){
+			iLeft := self.left.oclAsType(arduino::IntegerExpression).evaluate();
+		}
+		if(self.right.oclIsTypeOf(arduino::IntegerExpression)){
+			iRight := self.right.oclAsType(arduino::IntegerExpression).evaluate();
+		}
+		if (self.operator = arduino::BinaryIntegerOperatorKind::div) {
+			result := iLeft / iRight;
+		} else if (self.operator = arduino::BinaryIntegerOperatorKind::max) {
+			result := Math.max(iLeft, iRight);
+		} else if (self.operator = arduino::BinaryIntegerOperatorKind::min) {
+			result := Math.min(iLeft, iRight);
+		} else if (self.operator = arduino::BinaryIntegerOperatorKind::minus) {
+			result := iLeft - iRight;
+		} else if (self.operator = arduino::BinaryIntegerOperatorKind::mul) {
+			result := iLeft * iRight;
+		} else if (self.operator = arduino::BinaryIntegerOperatorKind::plus) {
+			result := iLeft + iRight;
+		} else if (self.operator = arduino::BinaryIntegerOperatorKind::pourcent) {
+			result := iLeft - (iLeft / iRight);
+		} 
+	}
+}
+open class BooleanModuleGet{
+	def Boolean evaluate() {	
+		pin := self.instruction.getPin(self.module);
+		if (pin.level = 0){
+			result :=false;
+		}
+		result := true;
+	}
+}
+open class BooleanConstant{
+	def Booelean evaluate() {	
+		result := self.value;
+	}
+}
+open class IntegerConstant{
+	def int evaluate() {	
+		result := self.value;
+	}
+}
+open class IntegerModuleGet{
+	def int evaluate() {	
+		//FIXME Here it is dirty but I think we should 'transmit' the value in the module itself as the wire should do in true life
+		if (self.module.oclIsTypeOf(arduino::BluetoothTransceiver)){
+			l := self.module.oclAsType(arduino::BluetoothTransceiver).dataReceived;
+			res := l->at(1);
+			if (res != null) {
+				l->remove(0);
+				result := res;
+			} else {
+				result := 0;
+			}
+		}
+		
+		pin := self.instruction.getPin(self.module);
+		result := pin.level;
+	}
+}
+open class BinaryBooleanExpression{
+	def Boolean evaluate(){
+		leftIsBoolean := false;
+		rightIsBoolean := false;
+		bLeft := false;
+		bRight := false;
+		if(self.left.oclIsTypeOf(arduino::BooleanExpression)){
+			bLeft := self.left.oclAsType(arduino::BooleanExpression).evaluate();
+			leftIsBoolean := true;
+		}
+		if(self.right.oclIsTypeOf(arduino::BooleanExpression)){
+			bRight := self.right.oclAsType(arduino::BooleanExpression).evaluate();
+			rightIsBoolean := true;
+		}
+		if (leftIsBoolean != rightIsBoolean){
+			('left operand type does not match right operand type.').log();
+			result := false;
+		}
+		if (self.operator = (arduino::BinaryBooleanOperatorKind::AND)) {
+			if (bLeft){
+				result := bRight;
+			}
+			result := false;
+		}else if (self.operator = (arduino::BinaryBooleanOperatorKind::OR)) {
+			if (bLeft){
+				result := true;
+			}
+			result := bRight;
+		}else if (self.operator = arduino::BinaryBooleanOperatorKind::inf) {
+			result := bLeft < bRight;
+		} else if (self.operator = arduino::BinaryBooleanOperatorKind::infOrEqual) {
+			result := bLeft <= bRight;
+		} else if (self.operator = arduino::BinaryBooleanOperatorKind::equal) {
+			result := bLeft = bRight;
+		} else if (self.operator = arduino::BinaryBooleanOperatorKind::supOrEqual) {
+			result := bLeft >= bRight;
+		} else if (self.operator = arduino::BinaryBooleanOperatorKind::sup) {
+			result := bLeft > bRight;
+		} else if (self.operator = arduino::BinaryBooleanOperatorKind::Different) {
+			result := bLeft != bRight;
+		}else{
+			('Operator '+ self.operator + ' not simulated yet.').log();
+		}
+	}
+}
+open class BooleanConstant{
+	def Boolean evaluate(){
+		result := self.value;
+	}
+}
+open class IntegerConstant{
+	def int evaluate(){
+		result := self.value;
+	}
+}
+open class Delay{
+	def void execute(){
+		Thread.sleep(self.value);
+	}
+}
+open class Pin{
+	int LOW := 0;
+	int HIGH := 1023;
+}
+open class IntegerVariable{
+	int value := 0;
+	def int evaluate(){
+		result := self.value;
+	}
+}
+open class BooleanVariable{
+	Boolean value := false;
+	def int evaluate(){
+		result := self.value;
+	}
+}
+open class BooleanVariableRef{
+	def Boolean evaluate(){
+		self.variable.evaluate();
+	}
+}
+open class IntegerVariableRef{
+	def int evaluate(){
+		self.variable.evaluate();
+	}
+}
+open class Expression{
+	def Instruction getInstruction() {
+		Instruction instruction := null;
+		current := self.eContainer();
+		while (current != null) {
+			if (current.oclIsTypeOf(arduino::Instruction)) {
+				instruction := current.oclAsType(arduino::Instruction);
+				result := instruction;
+			}
+			current := current.eContainer();
+		}
+		result := instruction;
+	}
+}
+open class UnaryBooleanExpression{
+	@step
+	def Boolean evaluate() {
+		if (self.operator = arduino::UnaryBooleanOperatorKind::NOT) {
+			result := not self.operand.evaluate();
+		}
+		result := self.operand.evaluate();
 	}
 }
