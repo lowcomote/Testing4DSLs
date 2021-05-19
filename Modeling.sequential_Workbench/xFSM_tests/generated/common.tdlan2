@@ -8,6 +8,8 @@ Package common {
 	Verdict INCONCLUSINVE ;
 	Type modelExecutionCommand ;
 	modelExecutionCommand runModel ;
+	modelExecutionCommand runModelAsynchronous ;
+	modelExecutionCommand stopModelExecution ;
 	modelExecutionCommand resetModel ;
 	modelExecutionCommand getModelState ;
 }
