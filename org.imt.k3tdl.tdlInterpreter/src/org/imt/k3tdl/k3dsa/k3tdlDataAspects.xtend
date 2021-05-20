@@ -453,9 +453,15 @@ class LiteralValueUseAspect extends StaticDataUseAspect{
 		try{
 			domain.getCommandStack().execute(new RecordingCommand(domain) {
 	        override protected doExecute() {
-	        	var String parameterValue = _self.value
+	        	var parameterValue = _self.value
 				parameterValue = parameterValue.substring(1, parameterValue.length-1)//remove quotation marks
-	            object.eSet(matchedFeature, parameterValue);										
+				if (matchedFeature.EType.name.equals("EInt")){
+					object.eSet(matchedFeature, Integer.parseInt(parameterValue));
+				} else if (matchedFeature.EType.name.equals("EBoolean")){
+					object.eSet(matchedFeature, Boolean.parseBoolean(parameterValue));
+				} else {
+					object.eSet(matchedFeature, parameterValue);
+				}     										
 	        }
    			});
 		}catch(IllegalArgumentException e){
