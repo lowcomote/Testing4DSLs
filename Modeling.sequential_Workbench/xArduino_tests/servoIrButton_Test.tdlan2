@@ -3,7 +3,62 @@ Package testSuite {
 	Import all from arduinoSpecificTypes ;
 	Import all from testConfiguration ;
 	
+	DigitalPin buttonNewState (_name = "pushButton", level = ?);
+	DigitalPin IRSensorNewState(_name = "IRSensor", level=? );
+	DigitalPin ledNewState (_name = "blueLED", level =?);
+	DigitalPin ServoNewState (_name = "Servo", level =?);
+	
 	Test Description test1 uses configuration servoIrbuttonConfiguration{
-		tester.genericGate sends runModel to arduino.genericGate;
+		tester.genericGate sends buttonNewState (level = '0') to arduino.genericGate;
+		tester.genericGate sends runModelAsynchronous to arduino.genericGate;
+		component tester waits for '500';
+		tester.genericGate sends stopModelExecution to arduino.genericGate;
+		tester.genericGate sends getModelState to arduino.genericGate;
+		arduino.genericGate sends {
+			ledNewState (level='0'), 
+			ServoNewState (level = '0')
+		} to tester.genericGate;
+	}
+	Test Description test2 uses configuration servoIrbuttonConfiguration{
+		tester.genericGate sends {
+			buttonNewState (level = '1'), 
+			IRSensorNewState(level = '0')
+		} to arduino.genericGate;
+		tester.genericGate sends runModelAsynchronous to arduino.genericGate;
+		component tester waits for '2000';
+		tester.genericGate sends stopModelExecution to arduino.genericGate;
+		tester.genericGate sends getModelState to arduino.genericGate;
+		arduino.genericGate sends {
+			ledNewState (level='1'), 
+			ServoNewState (level = '0')
+		} to tester.genericGate;
+	}
+	Test Description test3 uses configuration servoIrbuttonConfiguration{
+		tester.genericGate sends {
+			buttonNewState (level = '1'), 
+			IRSensorNewState(level = '1')
+		} to arduino.genericGate;
+		tester.genericGate sends runModelAsynchronous to arduino.genericGate;
+		component tester waits for '100';
+		tester.genericGate sends stopModelExecution to arduino.genericGate;
+		tester.genericGate sends getModelState to arduino.genericGate;
+		arduino.genericGate sends {
+			ledNewState (level='0'), 
+			ServoNewState (level = '6')
+		} to tester.genericGate;
+	}
+	Test Description test4 uses configuration servoIrbuttonConfiguration{
+		tester.genericGate sends {
+			buttonNewState (level = '1'), 
+			IRSensorNewState(level = '1')
+		} to arduino.genericGate;
+		tester.genericGate sends runModelAsynchronous to arduino.genericGate;
+		component tester waits for '3500';
+		tester.genericGate sends stopModelExecution to arduino.genericGate;
+		tester.genericGate sends getModelState to arduino.genericGate;
+		arduino.genericGate sends {
+			ledNewState (level='0'), 
+			ServoNewState (level = '186')
+		} to tester.genericGate;
 	}
 }

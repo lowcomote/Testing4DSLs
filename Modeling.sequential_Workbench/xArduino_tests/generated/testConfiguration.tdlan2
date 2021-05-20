@@ -48,15 +48,6 @@ Package testConfiguration {
 		connect tester.genericGate to arduino.genericGate ;
 		connect tester.oclGate to arduino.oclGate ;
 	}
-		Test Configuration photoresistorConfiguration {
-		create Tester tester of type TestSystem ;
-		create SUT arduino of type MUT with { 
-			MUTPath : '/xArduino_models/photoresistor.arduino' ; 
-			DSLName : 'org.gemoc.arduino.k3' ;
-		} ;
-		connect tester.genericGate to arduino.genericGate ;
-		connect tester.oclGate to arduino.oclGate ;
-	}
 	Test Configuration servo9gConfiguration {
 		create Tester tester of type TestSystem ;
 		create SUT arduino of type MUT with { 
@@ -70,15 +61,6 @@ Package testConfiguration {
 		create Tester tester of type TestSystem ;
 		create SUT arduino of type MUT with { 
 			MUTPath : '/xArduino_models/servoIrbutton.arduino' ; 
-			DSLName : 'org.gemoc.arduino.k3' ;
-		} ;
-		connect tester.genericGate to arduino.genericGate ;
-		connect tester.oclGate to arduino.oclGate ;
-	}
-	Test Configuration waitForConfiguration {
-		create Tester tester of type TestSystem ;
-		create SUT arduino of type MUT with { 
-			MUTPath : '/xArduino_models/waitForIRBlueLed.arduino' ; 
 			DSLName : 'org.gemoc.arduino.k3' ;
 		} ;
 		connect tester.genericGate to arduino.genericGate ;

@@ -3,11 +3,17 @@
   <semanticResources>generated/common.tdlan2</semanticResources>
   <semanticResources>generated/arduinoSpecificTypes.tdlan2</semanticResources>
   <semanticResources>generated/testConfiguration.tdlan2</semanticResources>
-  <semanticResources>photoresistor_Test.tdlan2</semanticResources>
   <semanticResources>servo9g_Test.tdlan2</semanticResources>
   <semanticResources>servoIrButton_Test.tdlan2</semanticResources>
-  <semanticResources>waitForIRBlueLed_Test.tdlan2</semanticResources>
   <semanticResources>activeWaitIRBlueLed_Test.tdlan2</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210519_110140/blink_Test.tdlan2</semanticResources>
   <semanticResources>turnOnLed_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210520_001331/turnOnLed_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210520_001355/turnOnLed_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210520_001410/turnOnLed_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210520_001425/turnOnLed_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210520_004820/turnOnLed_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210520_004932/turnOnLed_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210520_012017/servoIrButton_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210520_012212/servoIrButton_Test.tdlan2</semanticResources>
 </viewpoint:DAnalysis>
