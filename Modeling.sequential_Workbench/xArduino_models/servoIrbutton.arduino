@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <arduino:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:arduino="http://www.obeo.fr/arduino">
   <boards xsi:type="arduino:ArduinoBoard" name="board">
-    <digitalPins name="0" level="1">
+    <digitalPins name="pushButton" level="1">
       <module xsi:type="arduino:PushButton" name="button"/>
     </digitalPins>
-    <digitalPins name="3" level="1">
-      <module xsi:type="arduino:InfraRedSensor" name="IRSensor1"/>
+    <digitalPins name="IRSensor" level="1">
+      <module xsi:type="arduino:InfraRedSensor" name="IRSensor"/>
     </digitalPins>
-    <digitalPins name="13">
-      <module xsi:type="arduino:LED" name="LED1"/>
+    <digitalPins name="blueLED">
+      <module xsi:type="arduino:LED" name="blueLED"/>
     </digitalPins>
-    <digitalPins name="10">
-      <module xsi:type="arduino:MicroServo" name="Servo1"/>
+    <digitalPins name="Servo">
+      <module xsi:type="arduino:MicroServo" name="Servo"/>
     </digitalPins>
   </boards>
   <sketches name="sketch" board="//@boards.0">
@@ -34,7 +34,7 @@
                 </operand>
               </instructions>
             </block>
-            <condition xsi:type="arduino:BinaryBooleanExpression" operator="and">
+            <condition xsi:type="arduino:BinaryBooleanExpression" operator="AND">
               <left xsi:type="arduino:BooleanModuleGet" module="//@boards.0/@digitalPins.1/@module"/>
               <right xsi:type="arduino:BinaryBooleanExpression" operator="infOrEqual">
                 <left xsi:type="arduino:IntegerVariableRef" variable="//@sketches.0/@block/@instructions.0/@variable"/>

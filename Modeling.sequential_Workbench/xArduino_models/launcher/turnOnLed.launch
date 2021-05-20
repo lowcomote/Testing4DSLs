@@ -10,7 +10,7 @@
     <booleanAttribute key="Generic MultiDimensional Data Trace" value="false"/>
     <stringAttribute key="LAUNCH_METHOD_ENTRY_POINT" value="public static void org.gemoc.arduino.sequential.k3dsa.Project_ExecutableAspect.main(org.gemoc.sequential.model.arduino.Project)"/>
     <stringAttribute key="LAUNCH_MODEL_ENTRY_POINT" value="/"/>
-    <stringAttribute key="Resource" value="/xArduino_models/waitForIRBlueLed.arduino"/>
+    <stringAttribute key="Resource" value="/xArduino_models/turnOnLed.arduino"/>
     <stringAttribute key="airdResource" value=""/>
     <booleanAttribute key="org.eclipse.gemoc.trace.gemoc.addon_booleanOption" value="false"/>
 </launchConfiguration>
