@@ -48,6 +48,7 @@ import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
 import org.etsi.mts.tdl.Target
 import org.imt.tdl.testResult.TDLMessageResult
+import org.etsi.mts.tdl.LiteralValueUse
 
 @Aspect (className = BehaviourDescription)
 class BehaviourDescriptionAspect{
@@ -272,7 +273,12 @@ class WaitAspect extends TimeOperationAspect{
 	@Step
 	@OverrideAspectMethod
 	def boolean performBehavior(){
-		return false
+		if (_self.period instanceof LiteralValueUse){
+			val delay = (_self.period as LiteralValueUse).value;
+			val miliSec = Long.parseLong(delay.substring(1, delay.length-1));
+			Thread.sleep(miliSec);
+		}
+		return true;
 	}
 }
 @Aspect (className = Quiescence)
