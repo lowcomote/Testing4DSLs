@@ -126,7 +126,9 @@ class GateInstanceAspect {
 	def String sendArgument2sut(DataUse argument) {
 		if (argument instanceof DataInstanceUse) {
 			var arg = (argument as DataInstanceUse)
-			if (arg.dataInstance.name == 'runModel') {
+			if (arg.item != null && arg.item.size > 0){
+				return _self.setModelState(arg);
+			} else if (arg.dataInstance.name == 'runModel') {
 				println("--Start MUT Execution synchronous:")
 				return _self.gateLauncher.executeModel(true)
 			}else if (arg.dataInstance.name == 'runModelAsynchronous') {
@@ -155,7 +157,6 @@ class GateInstanceAspect {
 	}
 
 	def String setModelState(DataInstanceUse arg){
-		//get the current MUTResource
 		var MUTResource = _self.gateLauncher.MUTResource;
 		var String status = null
 		if (arg.item != null && arg.item.size > 0){
