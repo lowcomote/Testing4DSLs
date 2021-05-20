@@ -25,7 +25,7 @@ Package testSuite {
 			IRSensorNewState(level = '0')
 		} to arduino.genericGate;
 		tester.genericGate sends runModelAsynchronous to arduino.genericGate;
-		component tester waits for '2000';
+		component tester waits for '300';
 		tester.genericGate sends stopModelExecution to arduino.genericGate;
 		tester.genericGate sends getModelState to arduino.genericGate;
 		arduino.genericGate sends {
@@ -39,7 +39,7 @@ Package testSuite {
 			IRSensorNewState(level = '1')
 		} to arduino.genericGate;
 		tester.genericGate sends runModelAsynchronous to arduino.genericGate;
-		component tester waits for '100';
+		component tester waits for '150';
 		tester.genericGate sends stopModelExecution to arduino.genericGate;
 		tester.genericGate sends getModelState to arduino.genericGate;
 		arduino.genericGate sends {
@@ -53,7 +53,7 @@ Package testSuite {
 			IRSensorNewState(level = '1')
 		} to arduino.genericGate;
 		tester.genericGate sends runModelAsynchronous to arduino.genericGate;
-		component tester waits for '3500';
+		component tester waits for '4000';
 		tester.genericGate sends stopModelExecution to arduino.genericGate;
 		tester.genericGate sends getModelState to arduino.genericGate;
 		arduino.genericGate sends {
