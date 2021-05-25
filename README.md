@@ -31,6 +31,7 @@ XTDL is a generic approach that provides testing facilities for executable DSLs.
 **Requirements**: 
 - Gemoc studio V3.2.0 ([udpate site](http://download.eclipse.org/gemoc/updates/releases/3.2.0))
 - TDL tools ([udpate site](https://tdl.etsi.org/eclipse/latest/))
+- ATL transformation language ([update site](http://download.eclipse.org/mmt/atl/updates/releases/4.4.0))
 
 To use XTDL for a given DSL, the following steps have to be followed.
 1. Import the intended input DSL into the plugins workspace. For example, any of the DSLs in the *Language.sequential_Workbench* folder can be used.
