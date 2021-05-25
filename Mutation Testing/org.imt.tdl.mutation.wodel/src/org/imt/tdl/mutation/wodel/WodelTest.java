@@ -1,4 +1,4 @@
-package mutator.wodeltest.xFSMMutation;
+package org.imt.tdl.mutation.wodel;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class WodelTest implements IWodelTest {
 	
 	@Override
 	public String getProjectName() {
-		return "xFSMMutation";
+		return "org.imt.tdl.mutation.wodel";
 	}
 
 	@Override

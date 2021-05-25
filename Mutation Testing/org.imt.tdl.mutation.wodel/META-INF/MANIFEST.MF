@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: xFSMMutation
-Bundle-SymbolicName: xFSMMutation; singleton:=true
+Bundle-SymbolicName: org.imt.tdl.mutation.wodel;singleton:=true
 Bundle-Version: 1.0.0
 Require-Bundle: org.eclipse.emf.ecore,
  wodel.models;bundle-version="1.0.0",
