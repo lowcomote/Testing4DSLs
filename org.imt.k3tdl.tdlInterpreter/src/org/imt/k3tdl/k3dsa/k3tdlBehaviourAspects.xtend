@@ -249,6 +249,7 @@ class TimerStartAspect extends TimerOperationAspect{
 	@Step
 	@OverrideAspectMethod
 	def boolean performBehavior(){
+		println("Start timer")
 		return false
 	}
 }
