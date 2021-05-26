@@ -35,6 +35,9 @@ import static extension org.imt.k3tdl.k3dsa.MemberAssignmentAspect.*
 import static extension org.imt.k3tdl.k3dsa.ParameterBindingAspect.*
 import static extension org.imt.k3tdl.k3dsa.StaticDataUseAspect.*
 import static extension org.imt.k3tdl.k3dsa.StructuredDataInstanceAspect.*
+import org.eclipse.emf.transaction.TransactionalEditingDomain
+import org.eclipse.emf.transaction.util.TransactionUtil
+import org.eclipse.emf.transaction.RecordingCommand
 
 @Aspect (className = DataType)
 class DataTypeAspect{
@@ -304,32 +307,45 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 	
 	@OverrideAspectMethod
 	def String updateData(Resource MUTResource, EObject object, EStructuralFeature matchedFeature, String DSLPath){
-		val ArrayList<EObject> matchedObjects = new ArrayList
 		if (_self.item != null && _self.item.size > 0){//there are several intances of data
-			for (i : 0 ..<_self.item.size){
-				val matchedObject = (_self.item.get(i) as DataInstanceUse).getMatchedMUTElement(MUTResource , true, DSLPath)			
-				val propertyName = (_self.item.get(i) as DataInstanceUse).dataInstance.name
-				if (matchedObject == null){
-					println("There is no " + propertyName + " property in the MUT")
-					return "FAIL: There is no MUT element matched with " + propertyName
-				}
-				matchedObjects.add(matchedObject)
-			}
+			val TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(object);
 			try{
-				object.eSet(matchedFeature, matchedObjects)
-			}catch(IllegalArgumentException e){
-				println("New value cannot be set for the " + matchedFeature.name + " property of the MUT")
-				return "FAIL: New value cannot be set for the " + matchedFeature.name + " property of the MUT"
+				domain.getCommandStack().execute(new RecordingCommand(domain) {
+			        override protected doExecute() {
+			        	val ArrayList<EObject> matchedObjects = new ArrayList
+						for (i : 0 ..<_self.item.size){
+							val matchedObject = (_self.item.get(i) as DataInstanceUse).getMatchedMUTElement(MUTResource , true, DSLPath)			
+							val propertyName = (_self.item.get(i) as DataInstanceUse).dataInstance.name
+							if (matchedObject == null){
+								println("There is no " + propertyName + " property in the MUT")
+							}else{
+								matchedObjects.add(matchedObject)
+							}							
+						}
+						if (matchedObjects.size == _self.item.size){
+							object.eSet(matchedFeature, matchedObjects)
+						}		        											
+			        }
+		   		});
+	   		}catch(IllegalArgumentException e){
+				println("FAIL: The new value cannot be set for the " + matchedFeature.name + " property of the MUT")
+				return "FAIL: The new value cannot be set for the " + matchedFeature.name + " property of the MUT"
 			}
 		}else{//there is just one data instance
 			val matchedObject = _self.getMatchedMUTElement(MUTResource, true, DSLPath)
 			if (matchedObject == null){
 				println("There is no " + _self.dataInstance.name + " property in the MUT")
-					return "FAIL: There is no MUT element matched with " + _self.dataInstance.name
+				return "FAIL: There is no MUT element matched with " + _self.dataInstance.name
 			}
+			val TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(object);
 			try{
-				object.eSet(matchedFeature, matchedObject)
-			}catch(IllegalArgumentException e){
+				domain.getCommandStack().execute(new RecordingCommand(domain) {
+			        override protected doExecute() {
+			        	val matchedObject = _self.getMatchedMUTElement(MUTResource, true, DSLPath)
+			        	object.eSet(matchedFeature, matchedObject)										
+			        }
+		   		});
+	   		}catch(IllegalArgumentException e){
 				println("New value cannot be set for the " + matchedFeature.name + " property of the MUT")
 				return "FAIL: New value cannot be set for the " + matchedFeature.name + " property of the MUT"
 			}
@@ -352,6 +368,7 @@ class MemberAssignmentAspect{
 		}
 		return _self.memberSpec.assertEquals(featureValue)
 	} 
+	
 	def String setMatchedMember(EObject rootElement, Resource MUTResource, String DSLPath){
 		val validDataType = _self.member.dataType.validName
 		val EStructuralFeature matchedFeature = _self.member.getMatchedFeature(rootElement)	
@@ -363,6 +380,7 @@ class MemberAssignmentAspect{
 }
 @Aspect (className = ParameterBinding)
 class ParameterBindingAspect{
+	
 	def String isMatchedParameter(EObject rootElement, Resource MUTResource, String DSLPath){
 		val EStructuralFeature matchedFeature = (_self.parameter as Member).getMatchedFeature(rootElement) 
 		if (matchedFeature == null){
@@ -375,6 +393,7 @@ class ParameterBindingAspect{
 		}
 		return _self.dataUse.assertEquals(featureValue)
 	} 
+	
 	def String setMatchedParameter(EObject rootElement, Resource MUTResource, String DSLPath){
 		val EStructuralFeature matchedFeature = (_self.parameter as Member).getMatchedFeature(rootElement)
 		if (_self.dataUse instanceof DataInstanceUse){
@@ -385,11 +404,13 @@ class ParameterBindingAspect{
 }
 @Aspect (className = Member)
 class MemberAspect{
+	
 	def EStructuralFeature getMatchedFeature(EObject rootElement){
 		val EStructuralFeature matchedFeature = rootElement.eClass.EAllStructuralFeatures.
 				findFirst[f | f.name.equals(_self.validName)]
 		return matchedFeature	
 	}
+	
 	def String getValidName(){
 		var tdlName = _self.name
 		if (_self.name.startsWith("_")){
@@ -397,6 +418,7 @@ class MemberAspect{
 		}
 		return tdlName
 	}
+	
 	def boolean isDynamicMember() {
 		for (j : 0 ..<_self.annotation.size){
 			if (_self.annotation.get(j).key.name.toString.contains("dynamic")) {
@@ -454,14 +476,26 @@ class LiteralValueUseAspect extends StaticDataUseAspect{
 
 	@OverrideAspectMethod
 	def String updateData(EObject object, EStructuralFeature matchedFeature){
-		var String parameterValue = _self.value
-		parameterValue = parameterValue.substring(1, parameterValue.length-1)//remove quotation marks
+		val TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(object);
 		try{
-			object.eSet(matchedFeature, parameterValue)
+			domain.getCommandStack().execute(new RecordingCommand(domain) {
+	        override protected doExecute() {
+	        	var parameterValue = _self.value
+				parameterValue = parameterValue.substring(1, parameterValue.length-1)//remove quotation marks
+				if (matchedFeature.EType.name.equals("EInt")){
+					object.eSet(matchedFeature, Integer.parseInt(parameterValue));
+				} else if (matchedFeature.EType.name.equals("EBoolean")){
+					object.eSet(matchedFeature, Boolean.parseBoolean(parameterValue));
+				} else {
+					object.eSet(matchedFeature, parameterValue);
+				}     										
+	        }
+   			});
 		}catch(IllegalArgumentException e){
 			println("FAIL: The new value cannot be set for the " + matchedFeature.name + " property of the MUT")
 			return "FAIL: The new value cannot be set for the " + matchedFeature.name + " property of the MUT"
 		}
+		
 		return "PASS: New value is set for the " + matchedFeature.name + " property of the MUT"
 	}
 }

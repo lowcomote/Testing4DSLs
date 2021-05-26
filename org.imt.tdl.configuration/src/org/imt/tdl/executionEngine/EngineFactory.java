@@ -10,7 +10,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
-import org.eclipse.gemoc.executionframework.event.manager.GenericEventManager;
 import org.imt.tdl.eventManager.K3EventManagerLauncher;
 import org.imt.tdl.oclInterpreter.OCLInterpreter;
 
@@ -48,13 +47,22 @@ public class EngineFactory{
 			}
 		}
 	}
-	public String executeGenericCommand() throws CoreException, EngineContextException {
-		return this.engineLauncher.executeModel();
+	public String executeModel(Boolean sync) throws CoreException, EngineContextException {
+		if (sync) {
+			return this.engineLauncher.executeModelSynchronous();
+		}
+		return this.engineLauncher.executeModelAsynchronous();
 	}
+	
+	public String stopAsyncExecution() {
+		return this.engineLauncher.stopAsynchronousExecution();
+	}
+	
 	public String executeOCLCommand (String query){
 		//send the query without quotation marks
 		return this.oclLauncher.runQuery(this.engineLauncher.getModelResource(), query.substring(1, query.length()-1));
 	}
+	
 	public String executeDSLSpecificCommand(String eventType, String eventName, Map<String, Object> parameters) {
 		switch (eventType) {
 		case "ACCEPTED":
