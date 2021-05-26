@@ -93,6 +93,7 @@ public class OCLInterpreter {
 		}
 		return "PASS: The ocl query evaluated successfully";
 	}
+	
 	public String queryResultLabelProvider(EObject object) {
 		final Class<?> IItemLabelProviderClass = IItemLabelProvider.class;
 		final Class<?> ITreeItemContentProviderClass = ITreeItemContentProvider.class;

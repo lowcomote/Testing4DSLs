@@ -347,6 +347,7 @@ class MemberAssignmentAspect{
 		}
 		return _self.memberSpec.assertEquals(featureValue)
 	} 
+	
 	def String setMatchedMember(EObject rootElement, Resource MUTResource, String DSLPath){
 		val validDataType = _self.member.dataType.validName
 		val EStructuralFeature matchedFeature = _self.member.getMatchedFeature(rootElement)	
@@ -358,6 +359,7 @@ class MemberAssignmentAspect{
 }
 @Aspect (className = ParameterBinding)
 class ParameterBindingAspect{
+	
 	def String isMatchedParameter(EObject rootElement, Resource MUTResource, String DSLPath){
 		val EStructuralFeature matchedFeature = (_self.parameter as Member).getMatchedFeature(rootElement) 
 		if (matchedFeature == null){
@@ -370,6 +372,7 @@ class ParameterBindingAspect{
 		}
 		return _self.dataUse.assertEquals(featureValue)
 	} 
+	
 	def String setMatchedParameter(EObject rootElement, Resource MUTResource, String DSLPath){
 		val EStructuralFeature matchedFeature = (_self.parameter as Member).getMatchedFeature(rootElement)
 		if (_self.dataUse instanceof DataInstanceUse){
@@ -380,11 +383,13 @@ class ParameterBindingAspect{
 }
 @Aspect (className = Member)
 class MemberAspect{
+	
 	def EStructuralFeature getMatchedFeature(EObject rootElement){
 		val EStructuralFeature matchedFeature = rootElement.eClass.EAllStructuralFeatures.
 				findFirst[f | f.name.equals(_self.validName)]
 		return matchedFeature	
 	}
+	
 	def String getValidName(){
 		var tdlName = _self.name
 		if (_self.name.startsWith("_")){
@@ -392,6 +397,7 @@ class MemberAspect{
 		}
 		return tdlName
 	}
+	
 	def boolean isDynamicMember() {
 		for (j : 0 ..<_self.annotation.size){
 			if (_self.annotation.get(j).key.name.toString.contains("dynamic")) {

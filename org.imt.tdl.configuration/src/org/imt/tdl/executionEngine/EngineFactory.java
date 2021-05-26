@@ -2,8 +2,6 @@ package org.imt.tdl.executionEngine;
 
 import java.util.ArrayList;
 
-import java.util.Map;
-
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -43,19 +41,23 @@ public class EngineFactory{
 			}
 		}
 	}
+	
 	public String executeModel(Boolean sync) throws CoreException, EngineContextException {
 		if (sync) {
 			return this.engineLauncher.executeModelSynchronous();
 		}
 		return this.engineLauncher.executeModelAsynchronous();
 	}
+	
 	public String stopAsyncExecution() {
 		return this.engineLauncher.stopAsynchronousExecution();
 	}
+	
 	public String executeOCLCommand (String query){
 		//send the query without quotation marks
 		return this.oclLauncher.runQuery(this.engineLauncher.getModelResource(), query.substring(1, query.length()-1));
 	}
+	
 	private String getEngineType() {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(this.DSLPath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);

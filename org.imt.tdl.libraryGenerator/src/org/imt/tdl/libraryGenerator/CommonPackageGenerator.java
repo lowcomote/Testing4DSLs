@@ -5,21 +5,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.etsi.mts.tdl.Package;
-import org.etsi.mts.tdl.SimpleDataInstance;
-import org.etsi.mts.tdl.tdlFactory;
-
-import org.etsi.mts.tdl.SimpleDataType;
-import org.etsi.mts.tdl.StructuredDataInstance;
-import org.etsi.mts.tdl.StructuredDataType;
-import org.etsi.mts.tdl.UnassignedMemberTreatment;
-import org.etsi.mts.tdl.AnnotationType;
 import org.etsi.mts.tdl.AnyValue;
 import org.etsi.mts.tdl.DataInstance;
 import org.etsi.mts.tdl.DataType;
 import org.etsi.mts.tdl.ElementImport;
 import org.etsi.mts.tdl.Member;
 import org.etsi.mts.tdl.MemberAssignment;
+import org.etsi.mts.tdl.Package;
+import org.etsi.mts.tdl.SimpleDataInstance;
+import org.etsi.mts.tdl.SimpleDataType;
+import org.etsi.mts.tdl.StructuredDataInstance;
+import org.etsi.mts.tdl.StructuredDataType;
+import org.etsi.mts.tdl.UnassignedMemberTreatment;
+import org.etsi.mts.tdl.tdlFactory;
 
 public class CommonPackageGenerator {
 	private tdlFactory factory;

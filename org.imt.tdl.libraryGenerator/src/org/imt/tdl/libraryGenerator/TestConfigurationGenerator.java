@@ -1,21 +1,16 @@
 package org.imt.tdl.libraryGenerator;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.etsi.mts.tdl.Annotation;
 import org.etsi.mts.tdl.AnnotationType;
 import org.etsi.mts.tdl.ComponentInstance;
 import org.etsi.mts.tdl.ComponentInstanceRole;
 import org.etsi.mts.tdl.ComponentType;
 import org.etsi.mts.tdl.Connection;
-import org.etsi.mts.tdl.DataType;
 import org.etsi.mts.tdl.ElementImport;
 import org.etsi.mts.tdl.GateInstance;
 import org.etsi.mts.tdl.GateReference;
@@ -24,8 +19,6 @@ import org.etsi.mts.tdl.GateTypeKind;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestConfiguration;
 import org.etsi.mts.tdl.tdlFactory;
-
-import com.google.inject.Injector;
 
 public class TestConfigurationGenerator {
 	private String dslName;

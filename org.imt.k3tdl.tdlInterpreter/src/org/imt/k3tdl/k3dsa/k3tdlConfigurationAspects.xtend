@@ -128,7 +128,9 @@ class GateInstanceAspect {
 			var arg = (argument as DataInstanceUse)
 			if (arg.item != null && arg.item.size > 0){
 				return _self.setModelState(arg);
-			} else if (arg.dataInstance.name == 'runModel') {
+			}else if (arg.dataInstance.dataType.isConcreteEcoreType(_self.DSLPath)){//request for setting the model state
+				return _self.setModelState(arg);
+			}else if (arg.dataInstance.name == 'runModel') {
 				println("--Start MUT Execution synchronous:")
 				return _self.gateLauncher.executeModel(true)
 			}else if (arg.dataInstance.name == 'runModelAsynchronous') {
@@ -144,8 +146,6 @@ class GateInstanceAspect {
 			}else if (arg.dataInstance.name == 'getModelState') {
 				_self.receivedOutput = _self.gateLauncher.MUTResource
 				return "PASS: The current state of the MUT is retrieved"
-			}else if (arg.dataInstance.dataType.isConcreteEcoreType(_self.DSLPath)){//request for setting the model state
-				return _self.setModelState(arg);
 			}else if (arg.dataInstance.dataType.name == 'OCL') {
 				// extracting the query from the argument and sending for validation
 				var query = argument.argument.get(0).dataUse as LiteralValueUse
