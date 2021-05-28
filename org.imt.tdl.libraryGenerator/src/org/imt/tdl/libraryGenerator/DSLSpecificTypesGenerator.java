@@ -1,8 +1,6 @@
 package org.imt.tdl.libraryGenerator;
 
 import java.io.IOException;
-
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +14,6 @@ import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.m2m.atl.common.ATLExecutionException;
 import org.eclipse.m2m.atl.core.ATLCoreException;
 import org.eclipse.m2m.atl.core.emf.EMFModel;
-import org.etsi.mts.tdl.Annotation;
 import org.etsi.mts.tdl.DataType;
 import org.etsi.mts.tdl.Member;
 import org.etsi.mts.tdl.Package;
