@@ -38,6 +38,7 @@ public class InterpretedStateMachinesImplementationRelationship extends SimpleIm
 	}
 
 	public InterpretedStateMachinesImplementationRelationship(BehavioralInterface behavioralInterface) {
-		super(behavioralInterface, computeRunToCompletionMap(behavioralInterface.getEvents()), computeEventToMethodMap(), "k3");
+		//TODO: we manually set the name of the DSL as the last argument but it has to be the rule executor
+		super(behavioralInterface, computeRunToCompletionMap(behavioralInterface.getEvents()), computeEventToMethodMap(), "org.imt.pssm.InterpretedStatemachines");
 	}
 }
