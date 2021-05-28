@@ -29,4 +29,5 @@
   <semanticResources>gemoc-gen/execution/execution-20210518_171526/StringLowerCase_Test.tdlan2</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210518_171741/StringUpperCase_Test.tdlan2</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210518_172134/TrafficLight_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210528_200030/BitShifting_Test.tdlan2</semanticResources>
 </viewpoint:DAnalysis>
