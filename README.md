@@ -33,6 +33,11 @@ XTDL is a generic approach that provides testing facilities for executable DSLs.
 - TDL tools ([udpate site](https://tdl.etsi.org/eclipse/latest/))
 - ATL transformation language ([update site](http://download.eclipse.org/mmt/atl/updates/releases/4.4.0))
 
+**Setup**
+Find the `GenerateData.mwe` from org.etsi.mts.tdl.graphical.labels.data -> src -> org.etsi.mts.tdl.graphical.labels
+Right click and select Run As -> MWE2 Workflow
+
+**Using the XTDL**
 To use XTDL for a given DSL, the following steps have to be followed.
 1. Import the intended input DSL into the plugins workspace. For example, any of the DSLs in the *Language.sequential_Workbench* folder can be used.
 2. Run as `Eclipse Application`
