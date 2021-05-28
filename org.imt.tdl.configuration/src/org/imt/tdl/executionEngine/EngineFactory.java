@@ -99,10 +99,13 @@ public class EngineFactory{
 		this.engineLauncher.setModelResource(MUTResource);
 	}
 	public Resource getMUTResource() {
-		if (this.engineLauncher == null) {
-			return (new ResourceSetImpl()).getResource(URI.createURI(MUTPath), true);
+		if (this.engineLauncher != null) {
+			return this.engineLauncher.getModelResource();
 		}
-		return this.engineLauncher.getModelResource();
+		if (this.eventManager != null) {
+			return this.eventManager.getModelResource();
+		}
+		return (new ResourceSetImpl()).getResource(URI.createURI(MUTPath), true);
 	}
 	public ArrayList<EObject> getOCLResultAsObject() {
 		return this.oclLauncher.getResultAsObject();
