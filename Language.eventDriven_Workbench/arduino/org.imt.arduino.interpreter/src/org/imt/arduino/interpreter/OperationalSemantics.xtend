@@ -49,6 +49,7 @@ class PushButtonAspect extends ModuleAspect {
 	
 	@Step
 	def void press() {
+		println("Button " + _self.name + " pressed")
 		_self.level = 1
 		_self.project.sketch.eAllContents.filter(WaitFor)
 			.filter[w|w.module == _self].forEach[w|w.setActivated]
@@ -56,6 +57,7 @@ class PushButtonAspect extends ModuleAspect {
 	
 	@Step
 	def void release() {
+		println("Button " + _self.name + " released")
 		_self.level = 0
 	}
 }
@@ -129,6 +131,7 @@ abstract class SetLedAspect extends ModuleSetAspect {
 	@OverrideAspectMethod
 	def void execute() {
 		_self.led.level = _self.value.evaluate
+		println("Level of the " + _self.led.name + " LED changed to " + _self.led.level)
 	}
 } 
 
