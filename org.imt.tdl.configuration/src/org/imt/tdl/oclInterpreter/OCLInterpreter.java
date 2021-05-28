@@ -28,6 +28,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.labels.DefaultLabelGeneratorBuilder;
 import org.eclipse.ocl.pivot.labels.ILabelGenerator;
 import org.eclipse.ocl.pivot.labels.ILabelGenerator.Registry;
+import org.imt.tdl.testResult.TestResultUtil;
 
 public class OCLInterpreter {
 
@@ -67,7 +68,7 @@ public class OCLInterpreter {
 				while (it.hasNext()) {
 					EObject object = (EObject) it.next();
 					this.resultAsObject.add(object);
-					this.resultAsString.add(queryResultLabelProvider(object));
+					this.resultAsString.add(TestResultUtil.getInstance().eObjectLabelProvider(object));
 				}
 			}else if (res instanceof ArrayList<?>) {
 				ArrayList<?> queryResult =  (ArrayList<?>) res;
@@ -85,7 +86,7 @@ public class OCLInterpreter {
 			if (res instanceof EObject) {
 				EObject object = (EObject) res;
 				this.resultAsObject.add(object);
-				this.resultAsString.add(queryResultLabelProvider(object));
+				this.resultAsString.add(TestResultUtil.getInstance().eObjectLabelProvider(object));
 			}else {
 				this.resultAsObject.add(null);
 				this.resultAsString.add("'" + res.toString() + "'");
@@ -93,30 +94,7 @@ public class OCLInterpreter {
 		}
 		return "PASS: The ocl query evaluated successfully";
 	}
-	
-	public String queryResultLabelProvider(EObject object) {
-		final Class<?> IItemLabelProviderClass = IItemLabelProvider.class;
-		final Class<?> ITreeItemContentProviderClass = ITreeItemContentProvider.class;
-		ArrayList<AdapterFactory> factories = new ArrayList<AdapterFactory>();
-		factories.add(new ResourceItemProviderAdapterFactory());
-		factories.add(new EcoreItemProviderAdapterFactory());
-		factories.add(new ReflectiveItemProviderAdapterFactory());
-		
-		ComposedAdapterFactory composedAdapterFactory = new ComposedAdapterFactory(factories);
-	    IItemLabelProvider itemLabelProvider  ;  
-	    ITreeItemContentProvider treeItemContentProvider ;
-    	AdapterFactory adapterFactory = composedAdapterFactory;
-    	
-    	itemLabelProvider = (IItemLabelProvider)adapterFactory.adapt(object, IItemLabelProviderClass);
-	    String objectLabel = itemLabelProvider.getText(object) ;
-	    
-	    treeItemContentProvider = (ITreeItemContentProvider)adapterFactory.adapt(object, ITreeItemContentProviderClass);
-        Object container = treeItemContentProvider.getParent(object) ; 
-        itemLabelProvider = (IItemLabelProvider)adapterFactory.adapt(container, IItemLabelProviderClass);
-        String containerLabel = itemLabelProvider.getText(container);
-        
-		return (containerLabel + "::" + objectLabel);
-	}
+
 	public ArrayList<String> getResultAsString(){
 		return this.resultAsString;
 	}
