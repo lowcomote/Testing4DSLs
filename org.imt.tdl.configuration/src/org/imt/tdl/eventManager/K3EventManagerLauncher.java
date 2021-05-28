@@ -30,6 +30,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gemoc.dsl.Dsl;
@@ -50,17 +51,30 @@ import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrence;
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrenceArgument;
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrenceType;
 import org.eclipse.gemoc.executionframework.event.model.event.StopEventOccurrence;
+import org.eclipse.gemoc.executionframework.value.model.value.BooleanAttributeValue;
+import org.eclipse.gemoc.executionframework.value.model.value.BooleanObjectAttributeValue;
+import org.eclipse.gemoc.executionframework.value.model.value.FloatAttributeValue;
+import org.eclipse.gemoc.executionframework.value.model.value.FloatObjectAttributeValue;
+import org.eclipse.gemoc.executionframework.value.model.value.IntegerAttributeValue;
+import org.eclipse.gemoc.executionframework.value.model.value.IntegerObjectAttributeValue;
+import org.eclipse.gemoc.executionframework.value.model.value.SingleObjectValue;
+import org.eclipse.gemoc.executionframework.value.model.value.SingleReferenceValue;
+import org.eclipse.gemoc.executionframework.value.model.value.StringAttributeValue;
 import org.eclipse.gemoc.executionframework.value.model.value.Value;
+import org.eclipse.gemoc.executionframework.value.model.value.ValuePackage;
 import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
 import org.eclipse.gemoc.xdsmlframework.api.core.IExecutionEngine;
 import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
+import org.imt.tdl.testResult.TestResultUtil;
 
 public class K3EventManagerLauncher {
 
 	private String DSLPath;
-	protected final List<EventBasedExecutionEngine> _executionEngines = new ArrayList<>();
+	private Resource MUTResource = null;
+	
+	protected EventBasedExecutionEngine executionEngine = null;
 	GenericEventManager eventManager = null;
-	LinkedTransferQueue<EventOccurrence> eventOccurrences = null;
+	ArrayList<EventOccurrence> eventOccurrences = null;
 	// progress monitor used during launch; useful for operations that wish to
 	// contribute to the progress bar
 	protected IProgressMonitor launchProgressMonitor = null;
@@ -96,7 +110,9 @@ public class K3EventManagerLauncher {
 		//final Set<String> subtypeRelIds = configuration.getAttribute("SUBTYPE_REL_IDS", Collections.emptySet());
 		this.DSLPath = DSLPath;
 		final String languageName = this.getDslName(DSLPath);
+		//TODO: must find the RelIds automatically
 		//final String implemRelId = "org.imt.arduino.relationships.implementation_relationship";
+		//final String subtypeRelId = "";
 		final String implemRelId = "org.imt.pssm.relationships.implementation_relationship";
 		final String subtypeRelId = "org.imt.pssm.relationships.subtyping_relationship";
 		final Set<String> implRelIds = new HashSet<>();
@@ -108,7 +124,9 @@ public class K3EventManagerLauncher {
 			final ILaunchConfiguration launchConf = getLaunchConfiguration(MUTPath, languageName, implRelIds, subtypeRelIds);
 			final EventBasedRunConfiguration runConf = new EventBasedRunConfiguration(launchConf);
 			final EventBasedExecutionEngine engine = createExecutionEngine(runConf, ExecutionMode.Run);
-			eventOccurrences = new LinkedTransferQueue<>();
+			this.executionEngine = engine;
+			
+			eventOccurrences = new ArrayList();
 			String PLUGIN_ID = "org.eclipse.gemoc.execution.sequential.javaengine.ui"; 		
 			Job job = new Job(getDebugJobName()) {
 				@Override
@@ -148,34 +166,175 @@ public class K3EventManagerLauncher {
 		}
 	}
 	public String processAcceptedEvent(String eventName, Map<String, Object> parameters) {
-		EventOccurrence eventOccurrence = createEventOccurance(eventName, parameters);
+		EventOccurrence eventOccurrence = createEventOccurance(EventOccurrenceType.ACCEPTED, eventName, parameters);
 		eventManager.processEventOccurrence(eventOccurrence);
 		return "PASS";
 	}
 	public String getExposedEvent(String eventName, Map<String, Object> parameters) {
-		EventOccurrence eventOccurrence = createEventOccurance(eventName, parameters);
+		EventOccurrence eventOccurrence = createEventOccurance(EventOccurrenceType.EXPOSED, eventName, parameters);
 		if (eventOccurrence == null) {
-			return "FAIL: The expected event is not received from MUT";
+			return "FAIL: The expected event does not match to the interface or its parameters does not exist in the MUT";
 		}
-		try {
-			EventOccurrence occ = eventOccurrences.poll(10000, TimeUnit.MILLISECONDS);
-			while (occ != null && !occ.getEvent().getName().equals(eventOccurrence.getEvent().getName())) {
-				occ = eventOccurrences.poll(5000, TimeUnit.MILLISECONDS);
-			}
-			if (occ != null && occ.getEvent().getName().equals(eventOccurrence.getEvent().getName())) {
+		for (int i=0; i< this.eventOccurrences.size(); i++) {
+			EventOccurrence occ = this.eventOccurrences.get(i);
+			if (occ != null && this.compareEventOccurrences(occ, eventOccurrence)) {
+				this.eventOccurrences.remove(i);
 				return "PASS";
 			}
-		} catch (InterruptedException e) {
-			e.printStackTrace();
 		}
-		return "FAIL: The expected event is not received from MUT";
+		String result = "FAIL: The expected event is not received from MUT";
+		if (this.eventOccurrences.size() == 0) {
+			result += "\nThere is no received event.";
+		}
+		if (this.eventOccurrences.size()>0) {
+			result += "\nThe received events are:\n";
+			for (int i=0; i< this.eventOccurrences.size()-1; i++) {
+				result += this.eventOccurenceToString(this.eventOccurrences.get(i)) + ", ";
+			}
+			result +=  this.eventOccurenceToString(this.eventOccurrences.get(this.eventOccurrences.size()-1));
+		}
+		return result;
+	}
+	
+	public Boolean compareEventOccurrences(EventOccurrence e1, EventOccurrence e2) {
+		if (!e1.getEvent().getName().equals(e2.getEvent().getName())) {
+			return false;
+		}
+		if (!e1.getType().equals(e2.getType())){
+			return false;
+		}
+		if (e1.getArgs().size() != e2.getArgs().size()) {
+			return false;
+		}
+		for (int i=0; i<e1.getArgs().size(); i++) {
+			EventOccurrenceArgument e1Arg = e1.getArgs().get(i);
+			EventOccurrenceArgument e2Arg = e2.getArgs().get(i);
+			if (!e1Arg.getParameter().getName().equals(e2Arg.getParameter().getName())) {
+				return false;
+			}
+			if (!e1Arg.getParameter().getType().equals(e2Arg.getParameter().getType())) {
+				return false;
+			}
+			EObject value1;
+			EObject value2;
+			switch (e1Arg.getValue().eClass().getClassifierID()) {
+			case ValuePackage.SINGLE_REFERENCE_VALUE:
+				value1 = ((SingleReferenceValue) e1Arg.getValue()).getReferenceValue();
+				value2 = ((SingleReferenceValue) e2Arg.getValue()).getReferenceValue();
+				if (value1.toString().equals(value2.toString())) {
+					return true;
+				}
+				break;
+			case ValuePackage.SINGLE_OBJECT_VALUE:
+				value1 = ((SingleObjectValue) e1Arg.getValue()).getObjectValue();
+				value2 = ((SingleObjectValue) e2Arg.getValue()).getObjectValue();
+				if (value1.toString().equals(value2.toString())) {
+					return true;
+				}
+				break;
+			case ValuePackage.BOOLEAN_ATTRIBUTE_VALUE:
+				if (((BooleanAttributeValue) e1Arg.getValue()).isAttributeValue()
+						== ((BooleanAttributeValue) e2Arg.getValue()).isAttributeValue()){
+					return true;
+				}
+				break;
+			case ValuePackage.BOOLEAN_OBJECT_ATTRIBUTE_VALUE:
+				if (((BooleanObjectAttributeValue) e1Arg.getValue()).getAttributeValue()
+						== ((BooleanObjectAttributeValue) e2Arg.getValue()).getAttributeValue()){
+					return true;
+				}
+				break;
+			case ValuePackage.INTEGER_ATTRIBUTE_VALUE:
+				if (((IntegerAttributeValue) e1Arg.getValue()).getAttributeValue()
+						== ((IntegerAttributeValue) e2Arg.getValue()).getAttributeValue()){
+					return true;
+				}
+				break;
+			case ValuePackage.INTEGER_OBJECT_ATTRIBUTE_VALUE:
+				if (((IntegerObjectAttributeValue) e1Arg.getValue()).getAttributeValue()
+						== ((IntegerObjectAttributeValue) e2Arg.getValue()).getAttributeValue()){
+					return true;
+				}
+				break;
+			case ValuePackage.FLOAT_ATTRIBUTE_VALUE:
+				if (((FloatAttributeValue) e1Arg.getValue()).getAttributeValue()
+						== ((FloatAttributeValue) e2Arg.getValue()).getAttributeValue()){
+					return true;
+				}
+				break;
+			case ValuePackage.FLOAT_OBJECT_ATTRIBUTE_VALUE:
+				if (((FloatObjectAttributeValue) e1Arg.getValue()).getAttributeValue()
+						== ((FloatObjectAttributeValue) e2Arg.getValue()).getAttributeValue()){
+					return true;
+				}
+				break;
+			case ValuePackage.STRING_ATTRIBUTE_VALUE:
+				if (((StringAttributeValue) e1Arg.getValue()).getAttributeValue()
+						.equals(((StringAttributeValue) e2Arg.getValue()).getAttributeValue())){
+					return true;
+				}
+				break;
+			}
+		}
+		return false;
+	}
+	
+	public String eventOccurenceToString (EventOccurrence occurrence) {
+		String result = occurrence.getEvent().getName();
+		if (occurrence.getArgs().size()>0) {
+			result += " (";
+		}
+		for (int i=0; i<occurrence.getArgs().size(); i++) {
+			EventOccurrenceArgument arg = occurrence.getArgs().get(i);
+			EObject value;
+			switch (arg.getValue().eClass().getClassifierID()) {
+			case ValuePackage.SINGLE_REFERENCE_VALUE:
+				value = ((SingleReferenceValue) arg.getValue()).getReferenceValue();
+				String label = TestResultUtil.getInstance().eObjectLabelProvider(value);
+				result += label.substring(label.lastIndexOf(":")+1);
+				break;
+			case ValuePackage.SINGLE_OBJECT_VALUE:
+				value = ((SingleObjectValue) arg.getValue()).getObjectValue();
+				label = TestResultUtil.getInstance().eObjectLabelProvider(value);
+				result += label.substring(label.lastIndexOf(":")+1);
+				break;
+			case ValuePackage.BOOLEAN_ATTRIBUTE_VALUE:
+				result += ((BooleanAttributeValue) arg.getValue()).isAttributeValue();
+				break;
+			case ValuePackage.BOOLEAN_OBJECT_ATTRIBUTE_VALUE:
+				result += ((BooleanObjectAttributeValue) arg.getValue()).getAttributeValue().toString();
+				break;
+			case ValuePackage.INTEGER_ATTRIBUTE_VALUE:
+				result += ((IntegerAttributeValue) arg.getValue()).getAttributeValue();
+				break;
+			case ValuePackage.INTEGER_OBJECT_ATTRIBUTE_VALUE:
+				result += ((IntegerObjectAttributeValue) arg.getValue()).getAttributeValue().toString();
+				break;
+			case ValuePackage.FLOAT_ATTRIBUTE_VALUE:
+				result += ((FloatAttributeValue) arg.getValue()).getAttributeValue();
+				break;
+			case ValuePackage.FLOAT_OBJECT_ATTRIBUTE_VALUE:
+				result += ((FloatObjectAttributeValue) arg.getValue()).getAttributeValue().toString();
+				break;
+			case ValuePackage.STRING_ATTRIBUTE_VALUE:
+				result += ((StringAttributeValue) arg.getValue()).getAttributeValue();
+				break;
+			}
+			if (i < occurrence.getArgs().size()-1) {
+				result += ", ";
+			}
+		}
+		if (occurrence.getArgs().size()>0) {
+			result += ")";
+		}
+		return result;
 	}
 	public void sendStopEvent() {
 		StopEventOccurrence stopEvent = EventFactory.eINSTANCE.createStopEventOccurrence();
 		stopEvent.setType(EventOccurrenceType.ACCEPTED);
 		eventManager.processEventOccurrence(stopEvent);
 	}
-	public EventOccurrence createEventOccurance(String eventName, Map<String, Object> parameters) {
+	public EventOccurrence createEventOccurance(EventOccurrenceType eventType, String eventName, Map<String, Object> parameters) {
 		BehavioralInterface bInterface = this.getBehavioralInterfaceRootElement(this.DSLPath);
 		Event event = null;
 		for (int i=0; i<bInterface.getEvents().size();i++) {
@@ -189,6 +348,7 @@ public class K3EventManagerLauncher {
 		}
 		EventOccurrence eventOccurance = EventFactory.eINSTANCE.createEventOccurrence();
 		eventOccurance.setEvent(event);
+		eventOccurance.setType(eventType);
 		Iterator<String> paramNames = parameters.keySet().iterator();
 		for (int i = 0; i < parameters.size(); i++) {
 			String paramName = paramNames.next();
@@ -230,5 +390,12 @@ public class K3EventManagerLauncher {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
 		return dsl.getEntry("name").getValue().toString();
+	}
+	public void setModelResource(Resource resource) {
+		this.MUTResource = resource;
+	}
+	public Resource getModelResource() {
+		this.MUTResource = this.executionEngine.getExecutionContext().getResourceModel();
+		return this.MUTResource;
 	}
 }
