@@ -16,9 +16,12 @@ import org.eclipse.gemoc.executionframework.event.testsuite.TestsuitePackage
 import org.eclipse.gemoc.executionframework.value.model.value.ValuePackage
 import org.etsi.mts.tdl.Annotation
 import org.etsi.mts.tdl.AnnotationType
+import org.etsi.mts.tdl.BehaviourDescription
+import org.etsi.mts.tdl.Block
 import org.etsi.mts.tdl.ComponentInstance
 import org.etsi.mts.tdl.ComponentInstanceRole
 import org.etsi.mts.tdl.ComponentType
+import org.etsi.mts.tdl.CompoundBehaviour
 import org.etsi.mts.tdl.Connection
 import org.etsi.mts.tdl.ElementImport
 import org.etsi.mts.tdl.GateReference
@@ -33,25 +36,29 @@ import org.imt.pssm.model.statemachines.StateMachine
 import org.imt.pssm.model.statemachines.StatemachinesPackage
 
 class ETest2TDLTest {
-	def static void main(String[] args) {
-		
-	}
+	
+	private static var pluginPath = "platform:/resource/org.imt.generateTdlTest4pssm"
+//	private static val IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot()
+//	private static val IProject plugin = root.getProject(pluginPath);
+	
 	def static URI getBehavioralInterfaceURI() {
-		URI::createFileURI("/org.imt.generateTdlTest4pssm/InterpretedStateMachines.bi")
+		//URI::createFileURI(plugin.getFile("InterpretedStateMachines.bi").locationURI.path)
+		URI::createFileURI( pluginPath + "/InterpretedStateMachines.bi")
 	}
 	def static URI getPSSMTestSuiteURI() {
-		URI::createFileURI("/org.imt.generateTdlTest4pssm/models/StateMachineTestSuite.xmi")
+		//URI::createFileURI(plugin.getFolder("models").getFile("StateMachineTestSuite.xmi").locationURI.path)
+		URI::createFileURI( pluginPath + "/models/StateMachineTestSuite.xmi")
 	}
 	def static URI getStateMachineURI(StateMachine stateMachine) {
-		URI::createFileURI("/org.imt.generateTdlTest4pssm/models/" + stateMachine.name + ".xmi")
+		URI::createFileURI( pluginPath + "/models/" + stateMachine.name + ".xmi")
 	}
 	def static URI getTDLPackageURI(String packageName) {
-		URI::createFileURI("/org.imt.generateTdlTest4pssm/generatedTDLPackages/" + packageName + ".tdlan2")
+		//URI::createFileURI(plugin.getFolder("generatedTDLPackages").getFile(packageName + ".tdlan2").locationURI.path)
+		URI::createFileURI( pluginPath + "/generatedTDLPackages/" + packageName + ".tdlan2")
 	}
 	def static URI getTDLTestSuiteURI() {
-		URI::createFileURI("/org.imt.generateTdlTest4pssm/TDLTestSuite.xmi")
+		URI::createFileURI( pluginPath + "/TDLTestSuite.xmi")
 	}
-	
 	def static BehavioralInterface loadBehavioralInterface(URI uri, ResourceSet resourceSet) {
 		val Resource res = resourceSet.getResource(uri, true)
 		try {
@@ -61,7 +68,8 @@ class ETest2TDLTest {
 		}
 		return (res.getContents().get(0)) as BehavioralInterface
 	}
-	def static TestSuite getPSSMTestSuite() {
+	
+	def TestSuite getPSSMTestSuite() {
 		val rs = new ResourceSetImpl
 		val p1 = TestsuitePackage.eINSTANCE
 		val p2 = EventPackage.eINSTANCE
@@ -83,31 +91,33 @@ class ETest2TDLTest {
 	private var Package testConfigurationPackage 
 	private var Package tdlTestSutiePackage 
 	
-	def void loadTdlPackages(){
-		val rs = new ResourceSetImpl
-		val p = tdlPackage.eINSTANCE
-		rs.getPackageRegistry().put(p.getNsURI(), p)
-		rs.resourceFactoryRegistry.extensionToFactoryMap.put("tdlan2", new tdlResourceFactoryImpl)
-		var res = rs.getResource(getTDLPackageURI("common"), true)
-		commonPackage = res.contents.head as Package
-		res = rs.getResource(getTDLPackageURI("pssmTypes"), true)
-		pssmTypesPackage = res.contents.head as Package
-		res = rs.getResource(getTDLPackageURI("pssmEvents"), true)
-		pssmEventsPackage = res.contents.head as Package
-		res = rs.getResource(getTDLPackageURI("testConfiguration"), true)
-		testConfigurationPackage = res.contents.head as Package
-	}
 	def void transformTestSuite() {
 		val rs = new ResourceSetImpl
 		//load the existing TDL packages (generated previously)
 		loadTdlPackages
 		//perform the transformation
 		generateTDLTestSuitePackage
-		val testSuite = PSSMTestSuite
-		testSuite.testCases.forEach[c|tdlTestSutiePackage.packagedElement.add(testCase2testDescription(c))]
+		PSSMTestSuite.testCases.forEach[c|tdlTestSutiePackage.packagedElement.add(testCase2testDescription(c))]
 
 		savePackages
 	}
+	
+	def void loadTdlPackages(){
+		val rs = new ResourceSetImpl
+		val p = tdlPackage.eINSTANCE
+		rs.getPackageRegistry().put(p.getNsURI(), p)
+		rs.resourceFactoryRegistry.extensionToFactoryMap.put("tdlan2", new tdlResourceFactoryImpl)
+		
+		var res = rs.getResource(getTDLPackageURI("common"), true)
+		commonPackage = res.contents.head as Package
+		res = rs.getResource(getTDLPackageURI("pssmSpecificTypes"), true)
+		pssmTypesPackage = res.contents.head as Package
+		res = rs.getResource(getTDLPackageURI("pssmSpecificEvents"), true)
+		pssmEventsPackage = res.contents.head as Package
+		res = rs.getResource(getTDLPackageURI("testConfiguration"), true)
+		testConfigurationPackage = res.contents.head as Package
+	}
+	
 	def void generateTDLTestSuitePackage(){
 		tdlTestSutiePackage = TDL_FACTORY.createPackage	
 		tdlTestSutiePackage.name = "PSSMTestSuite"
@@ -125,18 +135,30 @@ class ETest2TDLTest {
 		tdlTestSutiePackage.getImport().add(dslSpecificEventsPackageImport);
 		tdlTestSutiePackage.getImport().add(testConfigurationImport);
 	}
+	
 	def TestDescription testCase2testDescription (TestCase testcase){
 		//generate a specific test configuration for each test case (for each PSSM model)
-		generateTestConfiguration(testcase.model as StateMachine)
-		//parse the expected trace
-		//generate tdl messages in the order of the expected trace
+		val TestConfiguration configuration = generateTestConfiguration(testcase.model as StateMachine)
+		
+		//generate a tdl test case for each PSSM test case (for each PSSM model)
+		val TestDescription tdlTestCase = TDL_FACTORY.createTestDescription
+		tdlTestCase.name = testcase.name
+		tdlTestCase.testConfiguration = configuration
+		
+		val BehaviourDescription bd = TDL_FACTORY.createBehaviourDescription
+		tdlTestCase.behaviourDescription = bd
+		
+		val CompoundBehaviour cb = TDL_FACTORY.createCompoundBehaviour
+		bd.behaviour = cb
+		
+		val Block block = TDL_FACTORY.createBlock
+		cb.block = block
+		
+		testcase.scenario.forEach[s | block.behaviour.add(eventOccurance2message(s))]
+		
 		return null
 	}
-	def Message eventOccurance2message (EventOccurrence scenario){
-		val rs = new ResourceSetImpl
-		val bi = loadBehavioralInterface(behavioralInterfaceURI, rs)
-		return null
-	}
+
 	def TestConfiguration generateTestConfiguration(StateMachine stateMachine){
 		//generate one test configuration per statemachine
 		var TestConfiguration dslSpecificConfiguration = TDL_FACTORY.createTestConfiguration();
@@ -152,7 +174,7 @@ class ETest2TDLTest {
 		dslSpecificConfiguration.getComponentInstance().add(testerInstance);
 		
 		//generate one component instance for Model-Under Test (MUT) as SUT
-		//that has annotations for MUTPath and DSLPath
+		//that has annotations for MUTPath and DSLName
 		var ComponentInstance mutInstance = TDL_FACTORY.createComponentInstance();
 		mutInstance.setName("PSSM");
 		mutInstance.setRole(ComponentInstanceRole.SUT);
@@ -163,21 +185,21 @@ class ETest2TDLTest {
 		
 		var Annotation mutPathAnnotation = TDL_FACTORY.createAnnotation();
 		mutPathAnnotation.setAnnotatedElement(mutInstance);
-		val MUTPathAnnotation = testConfigurationPackage.packagedElement.findFirst[
+		val mutPathAnnotationType = testConfigurationPackage.packagedElement.findFirst[
 			e | e instanceof AnnotationType && e.name.equals("MUTPath")
 		]
-		mutPathAnnotation.setKey(MUTPathAnnotation as AnnotationType);
+		mutPathAnnotation.setKey(mutPathAnnotationType as AnnotationType);
 		mutPathAnnotation.setValue("\'" + stateMachine.stateMachineURI.toString + "\'");
 		mutInstance.getAnnotation().add(mutPathAnnotation);
 		
-		var Annotation dslPathAnnotation = TDL_FACTORY.createAnnotation();
-		dslPathAnnotation.setAnnotatedElement(mutInstance);
-		val DSLPathAnnotation = testConfigurationPackage.packagedElement.findFirst[
-			e | e instanceof AnnotationType && e.name.equals("DSLPath")
+		var Annotation dslNameAnnotation = TDL_FACTORY.createAnnotation();
+		dslNameAnnotation.setAnnotatedElement(mutInstance);
+		val dslNameAnnotationType = testConfigurationPackage.packagedElement.findFirst[
+			e | e instanceof AnnotationType && e.name.equals("DSLName")
 		]
-		dslPathAnnotation.setKey(DSLPathAnnotation as AnnotationType);
-		dslPathAnnotation.setValue("\'platform:/plugin/org.imt.pssm.xdsml/InterpretedStatemachines.dsl'");
-		mutInstance.getAnnotation().add(dslPathAnnotation);
+		dslNameAnnotation.setKey(dslNameAnnotationType as AnnotationType);
+		dslNameAnnotation.setValue("\'org.imt.pssm.InterpretedStatemachines'");
+		mutInstance.getAnnotation().add(dslNameAnnotation);
 		dslSpecificConfiguration.getComponentInstance().add(mutInstance);
 		
 		//generate connection between the gates
@@ -197,12 +219,18 @@ class ETest2TDLTest {
 		return dslSpecificConfiguration
 	}
 	
+	def Message eventOccurance2message (EventOccurrence scenario){
+		val rs = new ResourceSetImpl
+		val bi = loadBehavioralInterface(behavioralInterfaceURI, rs)
+		return null
+	}
+	
 	def void savePackages(){
 		val rs = new ResourceSetImpl
 		val Resource commonRes = rs.createResource(getTDLPackageURI("common"));
-		val Resource pssmTypesRes = rs.createResource(getTDLPackageURI("pssmTypes"));
-		val Resource pssmEventsRes = rs.createResource(getTDLPackageURI("pssmEvents"));
-		val Resource configurationRes = rs.createResource(getTDLPackageURI("pssmConfiguration"));
+		val Resource pssmTypesRes = rs.createResource(getTDLPackageURI("pssmSpecificTypes"));
+		val Resource pssmEventsRes = rs.createResource(getTDLPackageURI("pssmSpecificEvents"));
+		val Resource configurationRes = rs.createResource(getTDLPackageURI("testConfiguration"));
 		val Resource testSuiteRes = rs.createResource(TDLTestSuiteURI);
 
 		commonRes.getContents().add(commonPackage);
