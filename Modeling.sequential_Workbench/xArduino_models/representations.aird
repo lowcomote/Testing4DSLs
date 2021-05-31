@@ -44,4 +44,6 @@
   <semanticResources>gemoc-gen/execution/execution-20210520_100146/activeWaitIRBlueLed.arduino</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210520_100147/activeWaitIRBlueLed.arduino</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210520_100149/activeWaitIRBlueLed.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210528_214429/turnOnLed.arduino</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210528_214501/turnOnLed.arduino</semanticResources>
 </viewpoint:DAnalysis>

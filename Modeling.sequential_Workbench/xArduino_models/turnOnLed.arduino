@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <arduino:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:arduino="http://www.obeo.fr/arduino">
   <boards xsi:type="arduino:ArduinoBoard" name="board">
-    <digitalPins name="pushButton" level="1">
+    <digitalPins name="pushButton">
       <module xsi:type="arduino:PushButton" name="button"/>
     </digitalPins>
     <digitalPins name="led">

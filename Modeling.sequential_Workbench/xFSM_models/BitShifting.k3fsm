@@ -1,5 +1,5 @@
 FSM BitShifting {
- unprocessedString "0110" initialState S0
+ unprocessedString "" producedString "" initialState S0
  ownedStates {
  	State S0 {
  		outgoingTransitions {

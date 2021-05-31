@@ -10,6 +10,7 @@ Package testSuite {
 		tester.genericGate sends FSMNewState (unprocessedString = "10010110") to k3fsm.genericGate;
 		tester.genericGate sends runModel to k3fsm.genericGate;
 		tester.genericGate sends getModelState to k3fsm.genericGate;
+		//assertion
 		k3fsm.genericGate sends FSMNewState (producedString = "01001011") to tester.genericGate;
 	}
 	Test Description test2 uses configuration bitShiftingConfiguration{

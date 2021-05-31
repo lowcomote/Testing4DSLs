@@ -10,24 +10,6 @@
   <semanticResources>TrafficLight_Test.tdlan2</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210517_155038/BitShifting_Test.tdlan2</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210517_155313/BitShifting_Test.tdlan2</semanticResources>
-  <semanticResources>gemoc-gen/execution/execution-20210518_132022/BitShifting_Test.tdlan2</semanticResources>
-  <semanticResources>gemoc-gen/execution/execution-20210518_132113/BitShifting_Test.tdlan2</semanticResources>
-  <semanticResources>gemoc-gen/execution/execution-20210518_164957/EdgeDetector_Test.tdlan2</semanticResources>
-  <semanticResources>gemoc-gen/execution/execution-20210518_165020/EdgeDetector_Test.tdlan2</semanticResources>
-  <semanticResources>gemoc-gen/execution/execution-20210518_165058/EdgeDetector_Test.tdlan2</semanticResources>
-  <semanticResources>gemoc-gen/execution/execution-20210518_165249/StringLowerCase_Test.tdlan2</semanticResources>
-  <semanticResources>gemoc-gen/execution/execution-20210518_165350/StringUpperCase_Test.tdlan2</semanticResources>
-  <semanticResources>gemoc-gen/execution/execution-20210518_165418/StringUpperCase_Test.tdlan2</semanticResources>
-  <semanticResources>gemoc-gen/execution/execution-20210518_165451/StringUpperCase_Test.tdlan2</semanticResources>
-  <semanticResources>gemoc-gen/execution/execution-20210518_165535/TrafficLight_Test.tdlan2</semanticResources>
-  <semanticResources>gemoc-gen/execution/execution-20210518_165607/TrafficLight_Test.tdlan2</semanticResources>
-  <semanticResources>gemoc-gen/execution/execution-20210518_170129/BitShifting_Test.tdlan2</semanticResources>
-  <semanticResources>gemoc-gen/execution/execution-20210518_170621/EdgeDetector_Test.tdlan2</semanticResources>
-  <semanticResources>gemoc-gen/execution/execution-20210518_170754/EdgeDetector_Test.tdlan2</semanticResources>
-  <semanticResources>gemoc-gen/execution/execution-20210518_171059/StringLowerCase_Test.tdlan2</semanticResources>
-  <semanticResources>gemoc-gen/execution/execution-20210518_171131/StringLowerCase_Test.tdlan2</semanticResources>
-  <semanticResources>gemoc-gen/execution/execution-20210518_171526/StringLowerCase_Test.tdlan2</semanticResources>
-  <semanticResources>gemoc-gen/execution/execution-20210518_171741/StringUpperCase_Test.tdlan2</semanticResources>
-  <semanticResources>gemoc-gen/execution/execution-20210518_172134/TrafficLight_Test.tdlan2</semanticResources>
-  <semanticResources>gemoc-gen/execution/execution-20210528_200030/BitShifting_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210528_205253/BitShifting_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210528_205756/BitShifting_Test.tdlan2</semanticResources>
 </viewpoint:DAnalysis>
