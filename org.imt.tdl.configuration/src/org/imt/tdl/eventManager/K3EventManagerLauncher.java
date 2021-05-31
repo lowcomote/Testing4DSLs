@@ -110,11 +110,8 @@ public class K3EventManagerLauncher {
 		//final Set<String> subtypeRelIds = configuration.getAttribute("SUBTYPE_REL_IDS", Collections.emptySet());
 		this.DSLPath = DSLPath;
 		final String languageName = this.getDslName(DSLPath);
-		//TODO: must find the RelIds automatically
-		//final String implemRelId = "org.imt.arduino.relationships.implementation_relationship";
-		//final String subtypeRelId = "";
-		final String implemRelId = "org.imt.pssm.relationships.implementation_relationship";
-		final String subtypeRelId = "org.imt.pssm.relationships.subtyping_relationship";
+		final String implemRelId = this.getImplRel(DSLPath);
+		final String subtypeRelId = this.getSubRel(DSLPath);
 		final Set<String> implRelIds = new HashSet<>();
 		implRelIds.add(implemRelId);
 		final Set<String> subtypeRelIds =  new HashSet<>();
@@ -390,6 +387,22 @@ public class K3EventManagerLauncher {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
 		return dsl.getEntry("name").getValue().toString();
+	}
+	private String getImplRel(String dslFilePath) {
+		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
+		Dsl dsl = (Dsl)dslRes.getContents().get(0);
+		if (dsl.getEntry("implemRelId") == null) {
+			return null;
+		}
+		return dsl.getEntry("implemRelId").getValue().toString();
+	}
+	private String getSubRel(String dslFilePath) {
+		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
+		Dsl dsl = (Dsl)dslRes.getContents().get(0);
+		if (dsl.getEntry("subtypeRelId") == null) {
+			return null;
+		}
+		return dsl.getEntry("subtypeRelId").getValue().toString();
 	}
 	public void setModelResource(Resource resource) {
 		this.MUTResource = resource;
