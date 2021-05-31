@@ -1,17 +1,47 @@
 Package testConfiguration {
 	Import all from common ;
-	Import all from pssmEvents ;
-	Gate Type genericGate accepts genericCommand ;
+	Import all from pssmSpecificEvents ;
+	
+	Gate Type genericGate accepts modelExecutionCommand ;
 	Gate Type dslSpecificGate accepts _run , signal_received , behavior_effected ;
 	Gate Type oclGate accepts OCL ;
+	
 	Component Type TestSystem having {
 		gate genericTestGate of type genericGate ;
-		gate dslSpecificTestGate of type dslSpecificGate ; gate oclTestGate of type oclGate ;
+		gate dslSpecificTestGate of type dslSpecificGate ; 
+		gate oclTestGate of type oclGate ;
 	}
 	Component Type MUT having {
 		gate genericMUTGate of type genericGate ;
-		gate dslSpecificMUTGate of type dslSpecificGate ; gate oclMUTGate of type oclGate ;
+		gate dslSpecificMUTGate of type dslSpecificGate ; 
+		gate oclMUTGate of type oclGate ;
 	}
 	Annotation MUTPath ;
-	Annotation DSLPath ;
+	Annotation DSLName ;
+	
+	Test Configuration genericConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT sm of type MUT with {
+			MUTPath : '/PSSM.Transition007/Transition007_Test$behavior$1.xmi' ; 
+			DSLName : 'org.imt.pssm.InterpretedStatemachines' ;
+		};
+		connect tester.genericTestGate to sm.genericMUTGate ;
+	}
+	Test Configuration dslSpecificConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT sm of type MUT with {
+			MUTPath : '/PSSM.Transition007/Transition007_Test$behavior$1.xmi' ; 
+			DSLName : 'org.imt.pssm.InterpretedStatemachines' ;
+		};
+		connect tester.dslSpecificTestGate to sm.dslSpecificMUTGate ;
+	}
+	Test Configuration oclConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT sm of type MUT with {
+			MUTPath : '/PSSM.Transition007/Transition007_Test$behavior$1.xmi' ; 
+			DSLName : 'org.imt.pssm.InterpretedStatemachines' ;
+		};
+		connect tester.genericTestGate to sm.genericMUTGate ;
+		connect tester.oclTestGate to sm.oclMUTGate ;
+	}
 }
