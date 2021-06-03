@@ -3,11 +3,13 @@ package org.imt.generateTdlTest4pssm
 import java.io.File
 import java.io.IOException
 import java.util.Collections
-import org.eclipse.core.resources.ResourcesPlugin
+import java.util.List
 import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.BehavioralInterface
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrence
@@ -32,18 +34,10 @@ import org.etsi.mts.tdl.Package
 import org.etsi.mts.tdl.TestConfiguration
 import org.etsi.mts.tdl.TestDescription
 import org.etsi.mts.tdl.tdlFactory
-import org.etsi.mts.tdl.tdlPackage
-import org.etsi.mts.tdl.util.tdlResourceFactoryImpl
+import org.imt.pssm.model.statemachines.CustomSystem
 import org.imt.pssm.model.statemachines.StateMachine
 import org.imt.pssm.model.statemachines.StatemachinesPackage
-import org.eclipse.emf.ecore.util.EcoreUtil
-import java.lang.reflect.Proxy
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl
-import java.util.Map
-import java.util.HashMap
-import org.eclipse.emf.ecore.xmi.XMIResource
-import org.imt.pssm.model.statemachines.CustomSystem
+import java.util.ArrayList
 
 class ETest2TDLTest {
 	
@@ -53,15 +47,19 @@ class ETest2TDLTest {
 	private var Package commonPackage
 	private var Package pssmTypesPackage
 	private var Package pssmEventsPackage
-	private var Package testConfigurationPackage 
-	private var Package tdlTestSutiePackage 
+	private var Package testConfigurationPackage
+	private val List<Package> tdlTestSuitePackages = new ArrayList
 	
 	def void transformTestSuite() {
 		//load the existing TDL packages (generated previously)
 		loadTdlPackages
 		//perform the transformation
-		generateTDLTestSuitePackage
-		PSSMTestSuite.testCases.forEach[c|tdlTestSutiePackage.packagedElement.add(testCase2testDescription(c))]
+		//for each test case: generate a separated test suite file
+		PSSMTestSuite.testCases.forEach[c|
+			val package = generateTDLTestSuitePackage(c.name)
+			package.packagedElement.add(testCase2testDescription(package, c))
+			tdlTestSuitePackages.add(package)
+		]
 
 		savePackages
 	}
@@ -89,9 +87,9 @@ class ETest2TDLTest {
 		testConfigurationPackage = res.contents.get(0) as Package
 	}
 	
-	def void generateTDLTestSuitePackage(){
-		tdlTestSutiePackage = TDL_FACTORY.createPackage	
-		tdlTestSutiePackage.name = "PSSMTestSuite"
+	def Package generateTDLTestSuitePackage(String name){
+		val tdlTestSutiePackage = TDL_FACTORY.createPackage	
+		tdlTestSutiePackage.name = name + "_TestSuite"
 		//generate imports
 		var ElementImport commonPackageImport = TDL_FACTORY.createElementImport();
 		commonPackageImport.setImportedPackage(commonPackage);
@@ -101,16 +99,19 @@ class ETest2TDLTest {
 		dslSpecificEventsPackageImport.setImportedPackage(pssmEventsPackage);
 		var ElementImport testConfigurationImport = TDL_FACTORY.createElementImport();
 		testConfigurationImport.setImportedPackage(testConfigurationPackage);
-		tdlTestSutiePackage.getImport().add(commonPackageImport);
-		tdlTestSutiePackage.getImport().add(dslSpecificTypesPackageImport);
-		tdlTestSutiePackage.getImport().add(dslSpecificEventsPackageImport);
-		tdlTestSutiePackage.getImport().add(testConfigurationImport);
+		tdlTestSutiePackage.getImport().add(commonPackageImport)
+		tdlTestSutiePackage.getImport().add(dslSpecificTypesPackageImport)
+		tdlTestSutiePackage.getImport().add(dslSpecificEventsPackageImport)
+		tdlTestSutiePackage.getImport().add(testConfigurationImport)
+		return tdlTestSutiePackage
 	}
 	
-	def TestDescription testCase2testDescription (TestCase testcase){
+	def TestDescription testCase2testDescription (Package containerPackage, TestCase testcase){
 		//generate a specific test configuration for each test case (for each PSSM model)
 		val CustomSystem system = loadPSSMModel(testcase.model)
 		val TestConfiguration configuration = generateTestConfiguration(system.statemachine)
+		
+		generateTestData(containerPackage, system.statemachine)
 		
 		//generate a tdl test case for each PSSM test case (for each PSSM model)
 		val TestDescription tdlTestCase = TDL_FACTORY.createTestDescription
@@ -128,38 +129,21 @@ class ETest2TDLTest {
 		
 		testcase.scenario.forEach[s | block.behaviour.add(eventOccurance2message(s))]
 		
-		return null
+		return tdlTestCase
 	}
 
 	def TestConfiguration generateTestConfiguration(StateMachine stateMachine){
 		//generate one test configuration per statemachine
 		var TestConfiguration dslSpecificConfiguration = TDL_FACTORY.createTestConfiguration();
 		dslSpecificConfiguration.setName("configuration4" + stateMachine.name);
+		
 		//generate one component instance as TESTER
-		
-//		var ComponentType testComponent = null
-//		var ComponentType mutComponent = null
-//		var AnnotationType mutPathAnnotationType = null
-//		var AnnotationType dslNameAnnotationType = null
-//		for (i:0..<testConfigurationPackage.packagedElement.size){
-//			val e = testConfigurationPackage.packagedElement.get(i)
-//			if (e instanceof ComponentType && e.name.equals("TestSystem")){
-//				testComponent = e as ComponentType
-//			}else if (e instanceof ComponentType && e.name.equals("MUT")){
-//				mutComponent = e as ComponentType
-//			}else if (e instanceof AnnotationType && e.name.equals("MUTPath")){
-//				mutPathAnnotationType = e as AnnotationType
-//			}else if (e instanceof AnnotationType && e.name.equals("DSLName")){
-//				dslNameAnnotationType = e as AnnotationType
-//			}
-//		}
-		
 		var ComponentInstance testerInstance = TDL_FACTORY.createComponentInstance();
 		testerInstance.setName("tester");
 		testerInstance.setRole(ComponentInstanceRole.TESTER);
-		val testComponent = testConfigurationPackage.packagedElement.findFirst[
-			e | e instanceof ComponentType && e.name.equals("TestSystem")
-		] as ComponentType
+		var testComponent = testConfigurationPackage.packagedElement.findFirst[e | 
+			e instanceof ComponentType && e.name.toString.equals("TestSystem")
+		] as ComponentType 
 		testerInstance.setType(testComponent);
 		dslSpecificConfiguration.getComponentInstance().add(testerInstance);
 		
@@ -209,18 +193,22 @@ class ETest2TDLTest {
 		return dslSpecificConfiguration
 	}
 	
+	def void generateTestData(Package testSuitePackage, StateMachine machine) {
+		
+	}
+	
 	def Message eventOccurance2message (EventOccurrence scenario){
 		val rs = new ResourceSetImpl
 		val bi = loadBehavioralInterface(behavioralInterfaceURI, rs)
-		return null
+		var Message msg = TDL_FACTORY.createMessage
+		  
+		return msg
 	}
 	
 	def static URI getBehavioralInterfaceURI() {
-		//URI::createFileURI(plugin.getFile("InterpretedStateMachines.bi").locationURI.path)
-		URI::createFileURI( pluginName + "/InterpretedStateMachines.bi")
+		URI::createFileURI( pluginName + "/bi/InterpretedStateMachines.bi")
 	}
 	def static URI getPSSMTestSuiteURI() {
-		//URI::createFileURI(plugin.getFolder("models").getFile("StateMachineTestSuite.xmi").locationURI.path)
 		URI::createFileURI( pluginName + "/models/StateMachineTestSuite.xmi")
 	}
 	def static URI getStateMachineURI(String stateMachineName) {
@@ -272,28 +260,31 @@ class ETest2TDLTest {
 	
 	def void savePackages(){
 		val rs = new ResourceSetImpl
-		val Resource commonRes = rs.createResource(getTDLPackageURI("common"));
-		val Resource pssmTypesRes = rs.createResource(getTDLPackageURI("pssmSpecificTypes"));
-		val Resource pssmEventsRes = rs.createResource(getTDLPackageURI("pssmSpecificEvents"));
-		val Resource configurationRes = rs.createResource(getTDLPackageURI("testConfiguration"));
-		val Resource testSuiteRes = rs.createResource(getTDLPackageURI("TDLTestSuite4PSSM"));
-
-		commonRes.getContents().add(commonPackage);
-		pssmTypesRes.getContents().add(pssmTypesPackage);
-		pssmEventsRes.getContents().add(pssmEventsPackage);
-		configurationRes.getContents().add(testConfigurationPackage);
-		testSuiteRes.getContents().add(tdlTestSutiePackage);
+		val Resource commonRes = rs.createResource(getTDLPackageURI("common"))
+		val Resource pssmTypesRes = rs.createResource(getTDLPackageURI("pssmSpecificTypes"))
+		val Resource pssmEventsRes = rs.createResource(getTDLPackageURI("pssmSpecificEvents"))
+		val Resource configurationRes = rs.createResource(getTDLPackageURI("testConfiguration"))
+		var List<Resource> testSuiteResources = new ArrayList
+		for (i:0..<tdlTestSuitePackages.size){
+			val Resource testSuiteRes = rs.createResource(getTDLPackageURI(tdlTestSuitePackages.get(i).name))
+			testSuiteRes.contents.add(tdlTestSuitePackages.get(i))
+			testSuiteResources.add(testSuiteRes)
+		}
+		commonRes.contents.add(commonPackage)
+		pssmTypesRes.contents.add(pssmTypesPackage)
+		pssmEventsRes.contents.add(pssmEventsPackage)
+		configurationRes.contents.add(testConfigurationPackage)
 		
-		commonRes.save(null);
-		pssmTypesRes.save(null);
-		pssmEventsRes.save(null);
-		configurationRes.save(null);
-		testSuiteRes.save(null);
+		commonRes.save(null)
+		pssmTypesRes.save(null)
+		pssmEventsRes.save(null)
+		configurationRes.save(null)
+		testSuiteResources.forEach[r | r.save(null)]
 		
-		commonRes.unload();
-		pssmTypesRes.unload();
-		pssmEventsRes.unload();
-		configurationRes.unload();
-		testSuiteRes.unload();
+		commonRes.unload
+		pssmTypesRes.unload
+		pssmEventsRes.unload
+		configurationRes.unload
+		testSuiteResources.forEach[r | r.unload]
 	}
 }
