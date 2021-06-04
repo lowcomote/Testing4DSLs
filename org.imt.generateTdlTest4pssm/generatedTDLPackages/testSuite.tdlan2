@@ -7,7 +7,10 @@ Package testSuite {
 	StateMachine transition007 (_name = "Transition007_Test$behavior$1");
 	Signal anotherSignal(_name = "AnotherSignal");
 	Signal continue(_name = "Continue");
-	Behavior doTraversal (_name = ?);
+	Behavior T1_doTraversal (_name = "T1(doTraversal)");
+	Behavior T2_doTraversal (_name = "T2(doTraversal)");
+	Behavior T3_doTraversal (_name = "T3(doTraversal)");
+	Behavior T4_testEnd (_name = "T4(testEnd)");
 	
 	Test Description test1 uses configuration dslSpecificConfiguration{
 		tester.dslSpecificTestGate sends _run (state_machine = transition007) 
@@ -16,22 +19,22 @@ Package testSuite {
 			signal_received (state_machine = transition007, signal = anotherSignal) 
 			to sm.dslSpecificMUTGate;		
 		sm.dslSpecificMUTGate sends 
-			behavior_effected (behavior = doTraversal(_name = "T1(doTraversal)")) 
+			behavior_effected (behavior = T1_doTraversal) 
 			to tester.dslSpecificTestGate;
 		tester.dslSpecificTestGate sends 
 			signal_received (state_machine = transition007, signal = continue) 
 			to sm.dslSpecificMUTGate;
 		sm.dslSpecificMUTGate sends 
-			behavior_effected (behavior = doTraversal(_name = "T2(doTraversal)"))
+			behavior_effected (behavior = T2_doTraversal)
 			to tester.dslSpecificTestGate;
 		tester.dslSpecificTestGate sends 
 			signal_received (state_machine = transition007, signal = continue)
 			to sm.dslSpecificMUTGate;
 		sm.dslSpecificMUTGate sends 
-			behavior_effected (behavior = doTraversal(_name = "T3(doTraversal)"))
+			behavior_effected (behavior = T3_doTraversal)
 			to tester.dslSpecificTestGate;
 		sm.dslSpecificMUTGate sends 
-			behavior_effected (behavior = doTraversal(_name = "T4(testEnd)"))
+			behavior_effected (behavior = T4_testEnd)
 			to tester.dslSpecificTestGate;
 	}
 }
