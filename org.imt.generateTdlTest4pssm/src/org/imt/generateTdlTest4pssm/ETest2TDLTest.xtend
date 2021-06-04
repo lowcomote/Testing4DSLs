@@ -348,12 +348,12 @@ class ETest2TDLTest {
 				}
 				val name = occurrenceArgValueName
 				parameterValue.dataInstance = containerPackage.packagedElement.findFirst[e | 
-					e instanceof StructuredDataInstance && e.name.equals(name)
+					e instanceof StructuredDataInstance && e.name.equals(name.validName)
 				] as StructuredDataInstance
 			} else if (occurrence.type.equals(EventOccurrenceType.EXPOSED)){
 				val behaviorName = expected.replace("(" , "_").substring(0, expected.length-1)
 				parameterValue.dataInstance = containerPackage.packagedElement.findFirst[e | 
-					e instanceof StructuredDataInstance && e.name.equals(behaviorName)
+					e instanceof StructuredDataInstance && e.name.equals(behaviorName.validName)
 				] as StructuredDataInstance
 			}
 			parameterBinding.dataUse = parameterValue
