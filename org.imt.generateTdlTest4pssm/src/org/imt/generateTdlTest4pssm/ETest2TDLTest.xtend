@@ -1,17 +1,18 @@
 package org.imt.generateTdlTest4pssm
 
-import java.io.File
-import java.io.IOException
 import java.util.ArrayList
 import java.util.Collections
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.BehavioralInterface
+import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.Event
+import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.EventParameter
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrence
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrenceType
 import org.eclipse.gemoc.executionframework.event.model.event.EventPackage
@@ -45,23 +46,18 @@ import org.etsi.mts.tdl.TestConfiguration
 import org.etsi.mts.tdl.TestDescription
 import org.etsi.mts.tdl.tdlFactory
 import org.imt.pssm.model.statemachines.Behavior
+import org.imt.pssm.model.statemachines.CallEventOccurrence
 import org.imt.pssm.model.statemachines.CustomSystem
 import org.imt.pssm.model.statemachines.SignalEventOccurrence
 import org.imt.pssm.model.statemachines.State
 import org.imt.pssm.model.statemachines.StateMachine
 import org.imt.pssm.model.statemachines.StatemachinesPackage
 import org.imt.pssm.model.statemachines.Transition
-import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.BehavioralInterfacePackage
-import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.impl.BehavioralInterfaceFactoryImpl
-import org.imt.pssm.model.statemachines.CallEventOccurrence
-import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.Event
-import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.EventParameter
-import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrenceArgument
 
 class ETest2TDLTest {
 
-	private ResourceSet rs
+	private ResourceSet pssmResourceSet
+	private ResourceSet tdlResourceSet
 	private BehavioralInterface bi
 	private static val pluginName = "/org.imt.generateTdlTest4pssm"
 	
@@ -87,22 +83,22 @@ class ETest2TDLTest {
 	}
 	
 	def void loadTdlPackages(){
-		val rs = new ResourceSetImpl
+		tdlResourceSet = new ResourceSetImpl
 		
-		var File tdlFile = new File(getTDLPackageURI("common").toString);
-		var Resource res = rs.getResource(getTDLPackageURI("common"), true)
-		commonPackage = res.contents.get(0) as Package
-		
-		tdlFile = new File(getTDLPackageURI("pssmSpecificTypes").toString);
-		res = rs.getResource(getTDLPackageURI("pssmSpecificTypes"), true)
+		var Resource res = tdlResourceSet.getResource(getTDLPackageURI("pssmSpecificTypes"), true)
+		res.load(Collections.emptyMap())
 		pssmTypesPackage = res.contents.get(0) as Package
 		
-		tdlFile = new File(getTDLPackageURI("pssmSpecificEvents").toString);
-		res = rs.getResource(getTDLPackageURI("pssmSpecificEvents"), true)
+		res = tdlResourceSet.getResource(getTDLPackageURI("common"), true)
+		res.load(Collections.emptyMap())
+		commonPackage = res.contents.get(0) as Package
+		
+		res = tdlResourceSet.getResource(getTDLPackageURI("pssmSpecificEvents"), true)
+		res.load(Collections.emptyMap())
 		pssmEventsPackage = res.contents.get(0) as Package
 		
-		tdlFile = new File(getTDLPackageURI("testConfiguration").toString);
-		res = rs.getResource(getTDLPackageURI("testConfiguration"), true)
+		res = tdlResourceSet.getResource(getTDLPackageURI("testConfiguration"), true)
+		res.load(Collections.emptyMap())
 		testConfigurationPackage = res.contents.get(0) as Package
 	}
 	
@@ -127,7 +123,7 @@ class ETest2TDLTest {
 	
 	def TestDescription testCase2testDescription (Package containerPackage, TestCase testcase){
 		//generate a specific test configuration for each test case (for each PSSM model)
-		val CustomSystem system = EcoreUtil.resolve(testcase.model, rs) as CustomSystem
+		val CustomSystem system = EcoreUtil.resolve(testcase.model, pssmResourceSet) as CustomSystem
 		val TestConfiguration configuration = generateTestConfiguration(system.statemachine)
 		
 		generateTestData(containerPackage, system)
@@ -315,7 +311,7 @@ class ETest2TDLTest {
 		
 		//defining the message argument
 		var DataInstanceUse msgArgument = TDL_FACTORY.createDataInstanceUse
-		val event = EcoreUtil.resolve(occurrence.event, rs) as Event
+		val event = EcoreUtil.resolve(occurrence.event, pssmResourceSet) as Event
 		val biTdlEventInstance = this.pssmEventsPackage.packagedElement.findFirst[e |
 			e instanceof StructuredDataInstance && e.name.contains(event.name)
 		] as StructuredDataInstance
@@ -330,14 +326,14 @@ class ETest2TDLTest {
 			
 			//set the value of the parameter based on the event occurrence arguments
 			val occurrenceArg = occurrence.args.findFirst[a | 
-				val eventParam = (EcoreUtil.resolve(a.parameter, rs) as EventParameter)
+				val eventParam = (EcoreUtil.resolve(a.parameter, pssmResourceSet) as EventParameter)
 				eventParam.name.contains(biTdlEventType.member.get(i).name)
 			]
 			if (occurrence.type.equals(EventOccurrenceType.ACCEPTED)){
 				var String occurrenceArgValueName = ""
 				if (occurrenceArg.value instanceof SingleReferenceValue){
 					val value = (occurrenceArg.value as SingleReferenceValue).referenceValue
-					occurrenceArgValueName = (EcoreUtil.resolve(value, rs) as StateMachine).name
+					occurrenceArgValueName = (EcoreUtil.resolve(value, pssmResourceSet) as StateMachine).name
 				}else if (occurrenceArg.value instanceof SingleObjectValue){
 					var value = (occurrenceArg.value as SingleObjectValue).objectValue
 					if (value instanceof SignalEventOccurrence){
@@ -383,27 +379,32 @@ class ETest2TDLTest {
 		URI::createFileURI( pluginName + "/models/" + stateMachineName + ".xmi")
 	}
 	def static URI getTDLPackageURI(String packageName) {
-		URI::createFileURI( pluginName + "/generatedTDLPackages/" + packageName + ".tdlan2")
-	}
+		//URI::createFileURI( "C:/labtop/GitHub/xtdl_EventManager/org.imt.generateTdlTest4pssm/initialTDLPackages/" + packageName + ".tdlan2")
+		URI::createFileURI( pluginName + "/initialTDLPackages/" + packageName + ".tdlan2")
 	
+	}
+	def static URI getPSSMTDLPackageURI(String packageName) {
+		//URI::createFileURI( "C:/labtop/GitHub/xtdl_EventManager/org.imt.generateTdlTest4pssm/PSSMTDLPackages/" + packageName + ".tdlan2")
+		URI::createFileURI( pluginName + "/PSSMTDLPackages/" + packageName + ".tdlan2")
+	}
 	def TestSuite getPSSMTestSuite() {
-		this.rs = new ResourceSetImpl
+		this.pssmResourceSet = new ResourceSetImpl
 		val p1 = TestsuitePackage.eINSTANCE
 		val p2 = EventPackage.eINSTANCE
 		val p3 = StatemachinesPackage.eINSTANCE
 		val p4 = ValuePackage.eINSTANCE
-		rs.getPackageRegistry().put(p1.getNsURI(), p1);
-		rs.getPackageRegistry().put(p2.getNsURI(), p2);
-		rs.getPackageRegistry().put(p3.getNsURI(), p3);
-		rs.getPackageRegistry().put(p4.getNsURI(), p4);
-		rs.resourceFactoryRegistry.extensionToFactoryMap.put("xmi", new XMIResourceFactoryImpl)
+		pssmResourceSet.getPackageRegistry().put(p1.getNsURI(), p1);
+		pssmResourceSet.getPackageRegistry().put(p2.getNsURI(), p2);
+		pssmResourceSet.getPackageRegistry().put(p3.getNsURI(), p3);
+		pssmResourceSet.getPackageRegistry().put(p4.getNsURI(), p4);
+		pssmResourceSet.resourceFactoryRegistry.extensionToFactoryMap.put("xmi", new XMIResourceFactoryImpl)
 		
 		val uri = "C:/labtop/GitHub/xtdl_EventManager/org.imt.generateTdlTest4pssm/models/StateMachineTestSuite.xmi"
-		var res = rs.getResource(URI.createFileURI(uri), true)
+		var res = pssmResourceSet.getResource(URI.createFileURI(uri), true)
 		val testSuite = res.contents.get(0) as TestSuite
 		
 		val biUri = "C:/labtop/GitHub/xtdl_EventManager/org.imt.generateTdlTest4pssm/models/InterpretedStateMachines.bi"
-		res = rs.getResource(URI.createFileURI(biUri), true)
+		res = pssmResourceSet.getResource(URI.createFileURI(biUri), true)
 		res.load(Collections.emptyMap())
 		bi = (res.getContents().get(0)) as BehavioralInterface
 		
@@ -411,32 +412,28 @@ class ETest2TDLTest {
 	}
 	
 	def void savePackages(){
-		val rs = new ResourceSetImpl
-		val Resource commonRes = rs.createResource(getTDLPackageURI("common"))
-		val Resource pssmTypesRes = rs.createResource(getTDLPackageURI("pssmSpecificTypes"))
-		val Resource pssmEventsRes = rs.createResource(getTDLPackageURI("pssmSpecificEvents"))
-		val Resource configurationRes = rs.createResource(getTDLPackageURI("testConfiguration"))
+
+		val Resource pssmTypesRes = tdlResourceSet.createResource(getPSSMTDLPackageURI("pssmSpecificTypes"))
+		val Resource commonRes = tdlResourceSet.createResource(getPSSMTDLPackageURI("common"))
+		val Resource pssmEventsRes = tdlResourceSet.createResource(getPSSMTDLPackageURI("pssmSpecificEvents"))
+		val Resource configurationRes = tdlResourceSet.createResource(getPSSMTDLPackageURI("testConfiguration"))
 		var List<Resource> testSuiteResources = new ArrayList
 		for (i:0..<tdlTestSuitePackages.size){
-			val Resource testSuiteRes = rs.createResource(getTDLPackageURI(tdlTestSuitePackages.get(i).name))
+			val Resource testSuiteRes = tdlResourceSet.createResource(getPSSMTDLPackageURI(tdlTestSuitePackages.get(i).name))
 			testSuiteRes.contents.add(tdlTestSuitePackages.get(i))
 			testSuiteResources.add(testSuiteRes)
 		}
-		commonRes.contents.add(commonPackage)
+
 		pssmTypesRes.contents.add(pssmTypesPackage)
+		commonRes.contents.add(commonPackage)
 		pssmEventsRes.contents.add(pssmEventsPackage)
 		configurationRes.contents.add(testConfigurationPackage)
-		
-		commonRes.save(null)
-		pssmTypesRes.save(null)
-		pssmEventsRes.save(null)
-		configurationRes.save(null)
-		testSuiteResources.forEach[r | r.save(null)]
-		
-		commonRes.unload
-		pssmTypesRes.unload
-		pssmEventsRes.unload
-		configurationRes.unload
-		testSuiteResources.forEach[r | r.unload]
+
+		pssmTypesRes.save(Collections.EMPTY_MAP)
+		commonRes.save(Collections.EMPTY_MAP)
+		pssmEventsRes.save(Collections.EMPTY_MAP)
+		configurationRes.save(Collections.EMPTY_MAP)
+		testSuiteResources.forEach[r | r.save(Collections.EMPTY_MAP)]
+
 	}
 }
