@@ -108,7 +108,6 @@ class ETest2TDLTest {
 	
 	def Package generateTDLTestSuitePackage(String name){
 		val tdlTestSutiePackage = TDL_FACTORY.createPackage	
-		name.validName
 		tdlTestSutiePackage.name = name.validName + "_TestSuite"
 		//generate imports
 		var ElementImport commonPackageImport = TDL_FACTORY.createElementImport();
@@ -235,7 +234,7 @@ class ETest2TDLTest {
 		var MemberAssignment nameMemberAssign = TDL_FACTORY.createMemberAssignment
 		nameMemberAssign.member = stateMachineType.allMembers.findFirst[m|m.name.equals("_name")]
 		var LiteralValueUse nameValue = TDL_FACTORY.createLiteralValueUse
-		nameValue.value = "'" + stateMachineInstance.name + "'"
+		nameValue.value = "'" + system.statemachine.name + "'"
 		nameMemberAssign.memberSpec = nameValue
 		stateMachineInstance.memberAssignment.add(nameMemberAssign)
 		testSuitePackage.packagedElement.add(stateMachineInstance)
@@ -249,7 +248,7 @@ class ETest2TDLTest {
 			nameMemberAssign = TDL_FACTORY.createMemberAssignment
 			nameMemberAssign.member = signalType.allMembers.findFirst[m|m.name.equals("_name")]
 			nameValue = TDL_FACTORY.createLiteralValueUse
-			nameValue.value = "'" + signalInstance.name + "'"
+			nameValue.value = "'" + system.signals.get(i).name + "'"
 			nameMemberAssign.memberSpec = nameValue
 			signalInstance.memberAssignment.add(nameMemberAssign)
 			testSuitePackage.packagedElement.add(signalInstance)
@@ -264,7 +263,7 @@ class ETest2TDLTest {
 			nameMemberAssign = TDL_FACTORY.createMemberAssignment
 			nameMemberAssign.member = opType.allMembers.findFirst[m|m.name.equals("_name")]
 			nameValue = TDL_FACTORY.createLiteralValueUse
-			nameValue.value = "'" + opInstance.name + "'"
+			nameValue.value = "'" + system.operations.get(i).name + "'"
 			nameMemberAssign.memberSpec = nameValue
 			opInstance.memberAssignment.add(nameMemberAssign)
 			testSuitePackage.packagedElement.add(opInstance)
@@ -367,7 +366,18 @@ class ETest2TDLTest {
 	}
 	
 	def String getValidName (String name){
-		return name.replaceAll("&", "_").replaceAll(".", "_")
+		val String[] tokenNames = #['Package', '{', '}', 'with', 'perform', 'action', '(', ',', ')', 'on', 'test', 'objectives', ':', ';', 'name', 'time', 'label', 'constraints', 'Action', 'alternatively', 'or', 'Annotation', '*', '?', '=', 'assert', 'otherwise', 'set', 'verdict', 'to', '->', '[', ']', 'times', 'repeat', 'break', 'Note', 'create', 'of', 'type', 'bind', 'Component', 'Type', 'having', 'if', 'else', 'connect', 'as', 'Map', 'in', '.', 'new', 'containing', 'Use', 'Signature', 'Collection', 'default', '+', '-', '/', 'mod', '>', '<', '>=', '<=', '==', '!=', 'and', 'xor', 'not', 'size', 'Import', 'all', 'from', 'Function', 'returns', 'instance', 'returned', 'Predefined', 'gate', 'Gate', 'accepts', 'sends', 'triggers', 'calls', 'responds', 'response', 'interrupt', 'optional', 'mapped', 'omit', 'argument', 'optionally', 'run', 'parallel', 'parameter', 'every', 'component', 'is', 'quiet', 'for', 'terminate', 'where', 'it', 'assigned', 'Test', 'Configuration', 'Description', 'Implementation', 'uses', 'configuration', 'execute', 'bindings', 'Objective', 'description', 'Time', 'out', 'timer', 'start', 'stop', 'variable', 'waits', 'extends', 'SUT', 'Tester', 'Message', 'Procedure', 'In', 'Out', 'Exception', 'last', 'previous', 'first']
+		var result = name
+		if (result.contains('$')){
+			result = result.substring(0, result.indexOf('$'))
+		}
+		if (result.contains('.')){
+			result = result.replace('.', '_')
+		}
+		if (tokenNames.contains(result)){
+			result = "_" + result
+		}
+		return result
 	}
 	def static URI getStateMachineURI(String stateMachineName) {
 		URI::createFileURI( pluginName + "/models/" + stateMachineName + ".xmi")
