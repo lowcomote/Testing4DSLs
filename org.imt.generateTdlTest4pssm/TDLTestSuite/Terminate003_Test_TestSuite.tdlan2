@@ -1,0 +1,25 @@
+Package Terminate003_Test_TestSuite {
+	Import all from common ;
+	Import all from pssmSpecificTypes ;
+	Import all from pssmSpecificEvents ;
+	Import all from testConfiguration ;
+	StateMachine Terminate003_Test ( _name = 'Terminate003_Test$behavior$1' ) ;
+	Signal Start ( _name = 'Start' ) ;
+	Behavior S1_testEnd ( _name = 'S1(testEnd)' ) ;
+	Behavior T2_effect ( _name = 'T2(effect)' ) ;
+	Test Description Terminate003_Test uses configuration configuration4Terminate003_Test {
+		tester.dslSpecificTestGate sends _run (
+			state_machine = Terminate003_Test
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Terminate003_Test ,
+			signal = Start
+		) to PSSM.dslSpecificMUTGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = T2_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = S1_testEnd
+		) to tester.dslSpecificTestGate ;
+	}
+}

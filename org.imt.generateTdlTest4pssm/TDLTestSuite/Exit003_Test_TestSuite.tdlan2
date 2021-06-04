@@ -1,0 +1,35 @@
+Package Exit003_Test_TestSuite {
+	Import all from common ;
+	Import all from pssmSpecificTypes ;
+	Import all from pssmSpecificEvents ;
+	Import all from testConfiguration ;
+	StateMachine Exit003_Test ( _name = 'Exit003_Test$behavior$1' ) ;
+	Signal Start ( _name = 'Start' ) ;
+	Behavior T1_2_effect ( _name = 'T1.2(effect)' ) ;
+	Behavior S1_exit ( _name = 'S1(exit)' ) ;
+	Behavior T3_effect ( _name = 'T3(effect)' ) ;
+	Behavior T4_effect ( _name = 'T4(effect)' ) ;
+	Behavior T6_testEnd ( _name = 'T6(testEnd)' ) ;
+	Behavior T5_effect ( _name = 'T5(effect)' ) ;
+	Test Description Exit003_Test uses configuration configuration4Exit003_Test {
+		tester.dslSpecificTestGate sends _run (
+			state_machine = Exit003_Test
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Exit003_Test ,
+			signal = Start
+		) to PSSM.dslSpecificMUTGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = T1_2_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = S1_exit
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = T3_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = T6_testEnd
+		) to tester.dslSpecificTestGate ;
+	}
+}

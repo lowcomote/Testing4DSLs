@@ -1,0 +1,326 @@
+Package testConfiguration {
+	Import all from common ;
+	Import all from pssmSpecificEvents ;
+	
+	Gate Type genericGate accepts modelExecutionCommand ;
+	Gate Type dslSpecificGate accepts _run , signal_received , behavior_effected ;
+	Gate Type oclGate accepts OCL ;
+	
+	Component Type TestSystem having {
+		gate genericTestGate of type genericGate ;
+		gate dslSpecificTestGate of type dslSpecificGate ; 
+		gate oclTestGate of type oclGate ;
+	}
+	Component Type MUT having {
+		gate genericMUTGate of type genericGate ;
+		gate dslSpecificMUTGate of type dslSpecificGate ; 
+		gate oclMUTGate of type oclGate ;
+	}
+	Annotation MUTPath ;
+	Annotation DSLName ;
+Test Configuration configuration4Behavior001_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Behavior001_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Behavior002_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Behavior002_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4TransitionExecutionAlgorithm_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/TransitionExecutionAlgorithm_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Transition001_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Transition001_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Transition007_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Transition007_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Transition010 {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Transition010$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Transition011_Test_A {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Transition011_Test_A$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Transition011_Test_B {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Transition011_Test_B$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Transition011_Test_D {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Transition011_Test_D$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Transition011_Test_E {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Transition011_Test_E$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Transition015_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Transition015_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Transition016_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Transition016_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Transition017_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Transition017_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Transition019_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Transition019_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Transition020_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Transition020_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Event001_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Event001_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Event002 {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Event002$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Event008_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Event008_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Event009_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Event009_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Event010_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Event010_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Event015_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Event015_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Event016_Test_A {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Event016_Test_A$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Event016_Test_B {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Event016_Test_B$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Event017_Test_A {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Event017_Test_A$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Event017_Test_B {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Event017_Test_B$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Event018_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Event018_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Event019_Test_A {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Event019_Test_A$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Event019_Test_B {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Event019_Test_B$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Event019_Test_C {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Event019_Test_C$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Event019_Test_D {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Event019_Test_D$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Event019_Test_E {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Event019_Test_E$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Entering004_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Entering004_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Entering005_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Entering005_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Entering009_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Entering009_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Entering010_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Entering010_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Entering011_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Entering011_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Exiting001_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Exiting001_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Exiting003_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Exiting003_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Exiting004 {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Exiting004$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Exiting005_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Exiting005_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Exit001_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Exit001_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Exit002_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Exit002_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Exit003_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Exit003_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Entry002_Test_A {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Entry002_Test_A$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Entry002_Test_B {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Entry002_Test_B$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Entry002_Test_C {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Entry002_Test_C$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Entry002_Test_D {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Entry002_Test_D$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Fork001_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Fork001_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Fork002_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Fork002_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Join001_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Join001_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Join002_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Join002_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Join003_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Join003_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Terminate001_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Terminate001_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Terminate003_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Terminate003_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Final001_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Final001_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Deferred001_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Deferred001_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Deferred002_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Deferred002_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Deferred003_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Deferred003_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Deferred004_Test_A {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Deferred004_Test_A$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Deferred004_Test_B {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Deferred004_Test_B$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+	Test Configuration configuration4Deferred007_Test {
+		create Tester tester of type TestSystem ;
+		create SUT PSSM of type MUT with { MUTPath : '/org.imt.generateTdlTest4pssm/models/Deferred007_Test$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
+		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+	}
+}
