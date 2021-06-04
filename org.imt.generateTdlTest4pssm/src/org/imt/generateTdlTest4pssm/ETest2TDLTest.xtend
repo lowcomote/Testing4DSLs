@@ -45,6 +45,8 @@ import org.etsi.mts.tdl.Target
 import org.etsi.mts.tdl.TestConfiguration
 import org.etsi.mts.tdl.TestDescription
 import org.etsi.mts.tdl.tdlFactory
+import org.etsi.mts.tdl.tdlPackage
+import org.etsi.mts.tdl.util.tdlResourceFactoryImpl
 import org.imt.pssm.model.statemachines.Behavior
 import org.imt.pssm.model.statemachines.CallEventOccurrence
 import org.imt.pssm.model.statemachines.CustomSystem
@@ -58,6 +60,7 @@ class ETest2TDLTest {
 
 	private ResourceSet pssmResourceSet
 	private ResourceSet tdlResourceSet
+
 	private BehavioralInterface bi
 	private static val pluginName = "/org.imt.generateTdlTest4pssm"
 	
@@ -65,7 +68,7 @@ class ETest2TDLTest {
 	private var Package commonPackage
 	private var Package pssmTypesPackage
 	private var Package pssmEventsPackage
-	private var Package testConfigurationPackage
+	private var Package testConfigurationPackage	
 	private val List<Package> tdlTestSuitePackages = new ArrayList
 	
 	def void transformTestSuite() {
@@ -83,22 +86,20 @@ class ETest2TDLTest {
 	}
 	
 	def void loadTdlPackages(){
-		tdlResourceSet = new ResourceSetImpl
+		this.tdlResourceSet = new ResourceSetImpl
+		val p = tdlPackage.eINSTANCE
+		tdlResourceSet.getPackageRegistry().put(p.getNsURI(), p)
 		
 		var Resource res = tdlResourceSet.getResource(getTDLPackageURI("pssmSpecificTypes"), true)
-		res.load(Collections.emptyMap())
 		pssmTypesPackage = res.contents.get(0) as Package
 		
 		res = tdlResourceSet.getResource(getTDLPackageURI("common"), true)
-		res.load(Collections.emptyMap())
 		commonPackage = res.contents.get(0) as Package
 		
 		res = tdlResourceSet.getResource(getTDLPackageURI("pssmSpecificEvents"), true)
-		res.load(Collections.emptyMap())
 		pssmEventsPackage = res.contents.get(0) as Package
 		
 		res = tdlResourceSet.getResource(getTDLPackageURI("testConfiguration"), true)
-		res.load(Collections.emptyMap())
 		testConfigurationPackage = res.contents.get(0) as Package
 	}
 	
@@ -379,14 +380,9 @@ class ETest2TDLTest {
 		URI::createFileURI( pluginName + "/models/" + stateMachineName + ".xmi")
 	}
 	def static URI getTDLPackageURI(String packageName) {
-		//URI::createFileURI( "C:/labtop/GitHub/xtdl_EventManager/org.imt.generateTdlTest4pssm/initialTDLPackages/" + packageName + ".tdlan2")
-		URI::createFileURI( pluginName + "/initialTDLPackages/" + packageName + ".tdlan2")
+		URI::createFileURI( pluginName + "/TDLTestSuite/" + packageName + ".tdlan2")
+	}
 	
-	}
-	def static URI getPSSMTDLPackageURI(String packageName) {
-		//URI::createFileURI( "C:/labtop/GitHub/xtdl_EventManager/org.imt.generateTdlTest4pssm/PSSMTDLPackages/" + packageName + ".tdlan2")
-		URI::createFileURI( pluginName + "/PSSMTDLPackages/" + packageName + ".tdlan2")
-	}
 	def TestSuite getPSSMTestSuite() {
 		this.pssmResourceSet = new ResourceSetImpl
 		val p1 = TestsuitePackage.eINSTANCE
@@ -405,35 +401,23 @@ class ETest2TDLTest {
 		
 		val biUri = "C:/labtop/GitHub/xtdl_EventManager/org.imt.generateTdlTest4pssm/models/InterpretedStateMachines.bi"
 		res = pssmResourceSet.getResource(URI.createFileURI(biUri), true)
-		res.load(Collections.emptyMap())
 		bi = (res.getContents().get(0)) as BehavioralInterface
 		
 		return testSuite
 	}
 	
 	def void savePackages(){
-
-		val Resource pssmTypesRes = tdlResourceSet.createResource(getPSSMTDLPackageURI("pssmSpecificTypes"))
-		val Resource commonRes = tdlResourceSet.createResource(getPSSMTDLPackageURI("common"))
-		val Resource pssmEventsRes = tdlResourceSet.createResource(getPSSMTDLPackageURI("pssmSpecificEvents"))
-		val Resource configurationRes = tdlResourceSet.createResource(getPSSMTDLPackageURI("testConfiguration"))
+		val Resource configurationRes = tdlResourceSet.getResource(getTDLPackageURI("testConfiguration"), true)
+		configurationRes.contents.clear
+		configurationRes.contents.add(testConfigurationPackage)
+		configurationRes.save(Collections.EMPTY_MAP)
+		
 		var List<Resource> testSuiteResources = new ArrayList
 		for (i:0..<tdlTestSuitePackages.size){
-			val Resource testSuiteRes = tdlResourceSet.createResource(getPSSMTDLPackageURI(tdlTestSuitePackages.get(i).name))
+			val Resource testSuiteRes = tdlResourceSet.createResource(getTDLPackageURI(tdlTestSuitePackages.get(i).name))
 			testSuiteRes.contents.add(tdlTestSuitePackages.get(i))
 			testSuiteResources.add(testSuiteRes)
 		}
-
-		pssmTypesRes.contents.add(pssmTypesPackage)
-		commonRes.contents.add(commonPackage)
-		pssmEventsRes.contents.add(pssmEventsPackage)
-		configurationRes.contents.add(testConfigurationPackage)
-
-		pssmTypesRes.save(Collections.EMPTY_MAP)
-		commonRes.save(Collections.EMPTY_MAP)
-		pssmEventsRes.save(Collections.EMPTY_MAP)
-		configurationRes.save(Collections.EMPTY_MAP)
 		testSuiteResources.forEach[r | r.save(Collections.EMPTY_MAP)]
-
 	}
 }
