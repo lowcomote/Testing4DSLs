@@ -174,7 +174,7 @@ public class K3EventManagerLauncher {
 		}
 		for (int i=0; i< this.eventOccurrences.size(); i++) {
 			EventOccurrence occ = this.eventOccurrences.get(i);
-			if (occ != null && this.compareEventOccurrences(occ, eventOccurrence)) {
+			if (occ != null && this.equalEventOccurrences(occ, eventOccurrence)) {
 				this.eventOccurrences.remove(i);
 				return "PASS";
 			}
@@ -193,7 +193,7 @@ public class K3EventManagerLauncher {
 		return result;
 	}
 	
-	public Boolean compareEventOccurrences(EventOccurrence e1, EventOccurrence e2) {
+	public Boolean equalEventOccurrences(EventOccurrence e1, EventOccurrence e2) {
 		if (!e1.getEvent().getName().equals(e2.getEvent().getName())) {
 			return false;
 		}
