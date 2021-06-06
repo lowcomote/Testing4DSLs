@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: ETest2tdlTest
-Bundle-SymbolicName: org.imt.generateTdlTest4pssm
+Bundle-SymbolicName: org.imt.TdlTest4pssm
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: org.imt.eTest2tdlTest
