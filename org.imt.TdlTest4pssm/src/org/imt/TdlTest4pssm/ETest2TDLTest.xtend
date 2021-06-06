@@ -1,4 +1,4 @@
-package org.imt.generateTdlTest4pssm
+package org.imt.TdlTest4pssm
 
 import java.util.ArrayList
 import java.util.Collections

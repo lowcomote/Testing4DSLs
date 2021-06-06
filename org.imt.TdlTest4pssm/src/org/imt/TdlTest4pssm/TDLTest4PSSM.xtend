@@ -1,4 +1,4 @@
-package org.imt.generateTdlTest4pssm
+package org.imt.TdlTest4pssm
 
 import java.io.File
 
@@ -41,7 +41,7 @@ class TDLTest4PSSM {
 	def static void main(String[] args) {
 		
 	}
-	val static PLUGIN_PATH = "/org.imt.generateTdlTest4pssm"
+	val static PLUGIN_PATH = "/org.imt.TdlTest4pssm"
 	
 	def static URI getBehavioralInterfaceURI() {
 		URI::createFileURI(PLUGIN_PATH + "/InterpretedStateMachines.bi")
