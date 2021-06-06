@@ -62,7 +62,7 @@ class ETest2TDLTest {
 	private ResourceSet tdlResourceSet
 
 	private BehavioralInterface bi
-	private static val pluginName = "/org.imt.generateTdlTest4pssm"
+	private static val pluginName = "/TDLTestSuite4PSSM"
 	
 	static tdlFactory TDL_FACTORY = tdlFactory.eINSTANCE
 	private var Package commonPackage
@@ -377,12 +377,14 @@ class ETest2TDLTest {
 		return result
 	}
 	def static URI getStateMachineURI(String stateMachineName) {
-		URI::createFileURI( pluginName + "/models/" + stateMachineName + ".xmi")
+		URI::createFileURI( pluginName + "/PSSMModels&Tests/" + stateMachineName + ".xmi")
 	}
 	def static URI getTDLPackageURI(String packageName) {
+		URI::createFileURI( pluginName + "/TDLTestSuite/TDLLibrary4PSSM/" + packageName + ".tdlan2")
+	}
+	def static URI getTDLTestSuiteURI(String packageName) {
 		URI::createFileURI( pluginName + "/TDLTestSuite/" + packageName + ".tdlan2")
 	}
-	
 	def TestSuite getPSSMTestSuite() {
 		this.pssmResourceSet = new ResourceSetImpl
 		val p1 = TestsuitePackage.eINSTANCE
@@ -395,11 +397,11 @@ class ETest2TDLTest {
 		pssmResourceSet.getPackageRegistry().put(p4.getNsURI(), p4);
 		pssmResourceSet.resourceFactoryRegistry.extensionToFactoryMap.put("xmi", new XMIResourceFactoryImpl)
 		
-		val uri = "C:/labtop/GitHub/xtdl_EventManager/org.imt.generateTdlTest4pssm/models/StateMachineTestSuite.xmi"
+		val uri = "C:/labtop/gemoc_studio-nightly/workspaces/xTDL_EventManager/runtime-eventDriven/TDLTestSuite4PSSM/PSSMModels&Tests/StateMachineTestSuite.xmi"
 		var res = pssmResourceSet.getResource(URI.createFileURI(uri), true)
 		val testSuite = res.contents.get(0) as TestSuite
 		
-		val biUri = "C:/labtop/GitHub/xtdl_EventManager/org.imt.generateTdlTest4pssm/models/InterpretedStateMachines.bi"
+		val biUri = "C:/labtop/gemoc_studio-nightly/workspaces/xTDL_EventManager/runtime-eventDriven/TDLTestSuite4PSSM/PSSMModels&Tests/InterpretedStateMachines.bi"
 		res = pssmResourceSet.getResource(URI.createFileURI(biUri), true)
 		bi = (res.getContents().get(0)) as BehavioralInterface
 		
@@ -414,7 +416,7 @@ class ETest2TDLTest {
 		
 		var List<Resource> testSuiteResources = new ArrayList
 		for (i:0..<tdlTestSuitePackages.size){
-			val Resource testSuiteRes = tdlResourceSet.createResource(getTDLPackageURI(tdlTestSuitePackages.get(i).name))
+			val Resource testSuiteRes = tdlResourceSet.createResource(getTDLTestSuiteURI(tdlTestSuitePackages.get(i).name))
 			testSuiteRes.contents.add(tdlTestSuitePackages.get(i))
 			testSuiteResources.add(testSuiteRes)
 		}

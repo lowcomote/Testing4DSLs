@@ -3,12 +3,20 @@ Package Event019_Test_E_TestSuite {
 	Import all from pssmSpecificTypes ;
 	Import all from pssmSpecificEvents ;
 	Import all from testConfiguration ;
+	
 	StateMachine Event019_Test_E ( _name = 'Event019_Test_E$behavior$1' ) ;
 	Signal Continue ( _name = 'Continue' ) ;
-	Operation _or ( _name = 'or' ) ;
+	
 	Behavior S1_1_entry ( _name = 'S1.1(entry)' ) ;
 	Behavior S2_1_1_entry ( _name = 'S2.1.1(entry)' ) ;
 	Behavior T3_testEnd ( _name = 'T3(testEnd)' ) ;
+	
+	Attribute left ( _name = 'left');
+	Attribute right ( _name = 'right');
+	Attribute result ( _name = 'result');
+	Attribute return ( _name = 'return');
+	Operation _or ( _name = 'or' , inParameters = {left, right}, outParameters = result, return = return) ;
+	
 	Test Description Event019_Test_E uses configuration configuration4Event019_Test_E {
 		tester.dslSpecificTestGate sends _run (
 			state_machine = Event019_Test_E
