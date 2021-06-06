@@ -1,17 +1,8 @@
 package org.imt.tdl.runner;
 
-import java.util.ArrayList;
-
-
-
-import java.util.HashMap;
-import java.util.List;
-
-import org.etsi.mts.tdl.Message;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
 import org.imt.k3tdl.k3dsa.TestDescriptionAspect;
-import org.imt.tdl.testResult.TDLMessageResult;
 import org.imt.tdl.testResult.TDLTestCaseResult;
 
 public class TDLCore {
