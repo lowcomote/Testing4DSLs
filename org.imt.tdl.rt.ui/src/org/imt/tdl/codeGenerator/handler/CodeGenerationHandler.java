@@ -24,7 +24,7 @@ public class CodeGenerationHandler extends AbstractHandler {
 			if (wizard.performFinish()) {
 				TDLCodeGenerator tdlCodeGenerator = new TDLCodeGenerator(dslFilePath, tdlProjectPath);
 				//TODO: The following code (and its related dependency) has to be removed
-				ETest2TDLTest tdl4pssm = new ETest2TDLTest();
+				//ETest2TDLTest tdl4pssm = new ETest2TDLTest();
 				//tdl4pssm.transformTestSuite();
 			}
 		}catch (Exception e) {
