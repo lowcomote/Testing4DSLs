@@ -25,9 +25,9 @@ public class InterpretedStateMachinesImplementationRelationship extends SimpleIm
 	
 	private static Set<String> computeRunToCompletionMap(List<Event> events) {
 		final Set<String> result = new HashSet<>();
-		events.stream().filter(e -> e.getName().equals("call_signal_received")).findFirst()
+		events.stream().filter(e -> e.getName().equals("run")).findFirst()
 				.ifPresent(e -> result.add(e.eResource().getURIFragment(e)));
-		events.stream().filter(e -> e.getName().equals("call_run")).findFirst()
+		events.stream().filter(e -> e.getName().equals("signal_received")).findFirst()
 				.ifPresent(e -> result.add(e.eResource().getURIFragment(e)));
 		return result;
 	}
