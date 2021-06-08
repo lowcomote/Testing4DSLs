@@ -422,20 +422,4 @@ class ETest2TDLTest {
 		}
 		testSuiteResources.forEach[r | r.save(Collections.EMPTY_MAP)]
 	}
-	
-//	def void runTestSuite() {
-//		for (j:0..<tdlTestSuitePackages.size){
-//			val Package testPackage = tdlTestSuitePackages.get(j)
-//			for (i:0..<testPackage.getPackagedElement().size()) {
-//				val Object o = testPackage.getPackagedElement().get(i)
-//				if (o instanceof TestDescription) {
-//					val TestDescription testCase = o as TestDescription
-//					val TestDescriptionAspect testCaseRunner = new TestDescriptionAspect
-//					println("Test case: " + testCase.getName());
-//					testCaseRunner.executeTestCase(testCase)
-//					println("Verdict: " + testCaseRunner.testCaseResult(testCase).getValue())
-//				}
-//			}
-//		}
-//	}
 }
