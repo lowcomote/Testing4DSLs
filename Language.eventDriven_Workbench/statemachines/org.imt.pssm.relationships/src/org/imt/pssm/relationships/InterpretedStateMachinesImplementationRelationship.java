@@ -19,16 +19,16 @@ public class InterpretedStateMachinesImplementationRelationship extends SimpleIm
 		final Map<String, String> result = new HashMap<>();
 		result.put("run", "org.imt.pssm.interpreter.StateMachineAspect.run");
 		result.put("signal_received", "org.imt.pssm.interpreter.StateMachineAspect.eventOccurrenceReceived");
+		result.put("callOperation_received", "org.imt.pssm.interpreter.StateMachineAspect.callOperationReceived");
 		result.put("behavior_effected", "org.imt.pssm.model.statemachines.Behavior.execute");
 		return result;
 	}
 	
-	private static Set<String> computeRunToCompletionMap(List<Event> events) {
+	private static Set<String> computeRunToCompletionMap() {
 		final Set<String> result = new HashSet<>();
-		events.stream().filter(e -> e.getName().equals("run")).findFirst()
-				.ifPresent(e -> result.add(e.eResource().getURIFragment(e)));
-		events.stream().filter(e -> e.getName().equals("signal_received")).findFirst()
-				.ifPresent(e -> result.add(e.eResource().getURIFragment(e)));
+		result.add("org.imt.pssm.interpreter.StateMachineAspect.run");
+		result.add("org.imt.pssm.interpreter.StateMachineAspect.eventOccurrenceReceived");
+		result.add("org.imt.pssm.interpreter.StateMachineAspect.callOperationReceived");
 		return result;
 	}
 
@@ -39,6 +39,6 @@ public class InterpretedStateMachinesImplementationRelationship extends SimpleIm
 
 	public InterpretedStateMachinesImplementationRelationship(BehavioralInterface behavioralInterface) {
 		//TODO: we manually set the name of the DSL as the last argument but it has to be the rule executor
-		super(behavioralInterface, computeRunToCompletionMap(behavioralInterface.getEvents()), computeEventToMethodMap(), "org.imt.pssm.InterpretedStatemachines");
+		super(behavioralInterface, computeRunToCompletionMap(), computeEventToMethodMap(), "org.imt.pssm.InterpretedStatemachines");
 	}
 }
