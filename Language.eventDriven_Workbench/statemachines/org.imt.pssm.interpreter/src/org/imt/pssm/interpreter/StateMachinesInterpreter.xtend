@@ -744,41 +744,46 @@ class BehaviorAspect {
 			//"(" + _self.name + ")" + if (eventOccurrence !== null)
 			//	{eventOccurrence.parameters} else {""})
 		println (_self.name)
-		if (_self instanceof OperationBehavior){
-			val callEventOccurrence = eventOccurrence as CallEventOccurrence
-			val op = callEventOccurrence.operation
-			val outParameters = new ArrayList(op.outParameters)
-			val returnParameter = op.^return
-			_self.attributeValues.forEach[toSet|
-				val attribute = toSet._attribute
-				val value = toSet._value
-				var paramValue = callEventOccurrence.outParameterValues.findFirst[v|v._attribute == attribute]
-				if (paramValue === null) {
-					if (attribute instanceof BooleanAttribute) {
-						paramValue = StatemachinesFactory::eINSTANCE.createBooleanAttributeValue;
-						(paramValue as BooleanAttributeValue).attribute = attribute
-					} else if (attribute instanceof IntegerAttribute) {
-						paramValue = StatemachinesFactory::eINSTANCE.createIntegerAttributeValue;
-						(paramValue as IntegerAttributeValue).attribute = (attribute as IntegerAttribute)
-					} else {
-						paramValue = StatemachinesFactory::eINSTANCE.createStringAttributeValue;
-						(paramValue as StringAttributeValue).attribute = (attribute as StringAttribute)
-					}
-					if (outParameters.contains(attribute)) {
-						callEventOccurrence.outParameterValues.add(paramValue)
-					} else if (returnParameter == attribute) {
-						callEventOccurrence.returnValue = paramValue
-					}
-				}
-				paramValue.set_value(value)
-			]
-			println((_self.eContainer as NamedElement).name +
-					"(" + _self.name + ")" + if (eventOccurrence !== null)
-					{eventOccurrence.parameters} else {""})
-		}
 	}
 }
 
+@Aspect(className=OperationBehavior)
+class OperationBehaviorAspect extends BehaviorAspect {
+	@Step
+	@OverrideAspectMethod
+	protected def void execute(EventOccurrence eventOccurrence) {
+		val callEventOccurrence = eventOccurrence as CallEventOccurrence
+		val op = callEventOccurrence.operation
+		val outParameters = new ArrayList(op.outParameters)
+		val returnParameter = op.^return
+		_self.attributeValues.forEach[toSet|
+			val attribute = toSet._attribute
+			val value = toSet._value
+			var paramValue = callEventOccurrence.outParameterValues.findFirst[v|v._attribute == attribute]
+			if (paramValue === null) {
+				if (attribute instanceof BooleanAttribute) {
+					paramValue = StatemachinesFactory::eINSTANCE.createBooleanAttributeValue;
+					(paramValue as BooleanAttributeValue).attribute = attribute
+				} else if (attribute instanceof IntegerAttribute) {
+					paramValue = StatemachinesFactory::eINSTANCE.createIntegerAttributeValue;
+					(paramValue as IntegerAttributeValue).attribute = (attribute as IntegerAttribute)
+				} else {
+					paramValue = StatemachinesFactory::eINSTANCE.createStringAttributeValue;
+					(paramValue as StringAttributeValue).attribute = (attribute as StringAttribute)
+				}
+				if (outParameters.contains(attribute)) {
+					callEventOccurrence.outParameterValues.add(paramValue)
+				} else if (returnParameter == attribute) {
+					callEventOccurrence.returnValue = paramValue
+				}
+			}
+			paramValue.set_value(value)
+		]
+		println((_self.eContainer as NamedElement).name +
+				"(" + _self.name + ")" + if (eventOccurrence !== null)
+				{eventOccurrence.parameters} else {""})
+	}	
+}
 @Aspect(className=Constraint)
 class ConstraintAspect {
 	protected def boolean evaluate(EventOccurrence eventOccurrence) {
