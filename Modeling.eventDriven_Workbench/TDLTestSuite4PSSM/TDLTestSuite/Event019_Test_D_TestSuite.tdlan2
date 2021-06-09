@@ -5,7 +5,8 @@ Package Event019_Test_D_TestSuite {
 	Import all from testConfiguration ;
 	StateMachine Event019_Test_D ( _name = 'Event019_Test_D$behavior$1' ) ;
 	Signal Continue ( _name = 'Continue' ) ;
-	Operation op ( _name = 'op' ) ;
+	Operation op ( _name = 'op' , outParameters = _out ) ;
+	BooleanAttribute _out (_name = 'out');
 	Behavior S1_entry ( _name = 'S1(entry)' ) ;
 	Behavior S2_exit ( _name = 'S2(exit)' ) ;
 	Behavior T2_effect ( _name = 'T2(effect)' ) ;
