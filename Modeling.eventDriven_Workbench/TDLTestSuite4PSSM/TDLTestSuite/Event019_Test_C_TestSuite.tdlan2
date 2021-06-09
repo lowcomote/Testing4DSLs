@@ -1,0 +1,46 @@
+Package Event019_Test_C_TestSuite {
+	Import all from common ;
+	Import all from pssmSpecificTypes ;
+	Import all from pssmSpecificEvents ;
+	Import all from testConfiguration ;
+	StateMachine Event019_Test_C ( _name = 'Event019_Test_C$behavior$1' ) ;
+	Operation op1 ( _name = 'op1' ) ;
+	Operation op2 ( _name = 'op2' ) ;
+	Behavior S1_1_1_entry ( _name = 'S1.1.1(entry)' ) ;
+	Behavior S1_1_1_exit ( _name = 'S1.1.1(exit)' ) ;
+	Behavior T1_1_2_effect ( _name = 'T1.1.2(effect)' ) ;
+	Behavior S1_1_entry ( _name = 'S1.1(entry)' ) ;
+	Behavior S1_entry ( _name = 'S1(entry)' ) ;
+	Behavior T3_testEnd ( _name = 'T3(testEnd)' ) ;
+	Test Description Event019_Test_C uses configuration configuration4Event019_Test_C {
+		tester.dslSpecificTestGate sends _run (
+			state_machine = Event019_Test_C
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends callOperation_received (
+			state_machine = Event019_Test_C ,
+			operation = op1
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends callOperation_received (
+			state_machine = Event019_Test_C ,
+			operation = op2
+		) to PSSM.dslSpecificMUTGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = S1_entry
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = S1_1_entry
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = S1_1_1_entry
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = S1_1_1_exit
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = T1_1_2_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = T3_testEnd
+		) to tester.dslSpecificTestGate ;
+	}
+}

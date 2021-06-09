@@ -1,0 +1,53 @@
+Package Deferred001_Test_TestSuite {
+	Import all from common ;
+	Import all from pssmSpecificTypes ;
+	Import all from pssmSpecificEvents ;
+	Import all from testConfiguration ;
+	StateMachine Deferred001_Test ( _name = 'Deferred001_Test$behavior$1' ) ;
+	Signal Continue ( _name = 'Continue' ) ;
+	Signal Start ( _name = 'Start' ) ;
+	Signal AnotherSignal ( _name = 'AnotherSignal' ) ;
+	Signal Pending ( _name = 'Pending' ) ;
+	Behavior S1_exit ( _name = 'S1(exit)' ) ;
+	Behavior S2_entry ( _name = 'S2(entry)' ) ;
+	Behavior S3_entry ( _name = 'S3(entry)' ) ;
+	Behavior T4_effect ( _name = 'T4(effect)' ) ;
+	Behavior T5_effect ( _name = 'T5(effect)' ) ;
+	Behavior T6_testEnd ( _name = 'T6(testEnd)' ) ;
+	Test Description Deferred001_Test uses configuration configuration4Deferred001_Test {
+		tester.dslSpecificTestGate sends _run (
+			state_machine = Deferred001_Test
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Deferred001_Test ,
+			signal = Start
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Deferred001_Test ,
+			signal = Continue
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Deferred001_Test ,
+			signal = AnotherSignal
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Deferred001_Test ,
+			signal = Pending
+		) to PSSM.dslSpecificMUTGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = S1_exit
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = S2_entry
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = T4_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = S3_entry
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = T6_testEnd
+		) to tester.dslSpecificTestGate ;
+	}
+}

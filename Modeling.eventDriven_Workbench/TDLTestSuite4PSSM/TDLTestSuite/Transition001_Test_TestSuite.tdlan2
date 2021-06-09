@@ -1,0 +1,25 @@
+Package Transition001_Test_TestSuite {
+	Import all from common ;
+	Import all from pssmSpecificTypes ;
+	Import all from pssmSpecificEvents ;
+	Import all from testConfiguration ;
+	StateMachine Transition001_Test ( _name = 'Transition001_Test$behavior$1' ) ;
+	Signal Start ( _name = 'Start' ) ;
+	Behavior T2_effect ( _name = 'T2(effect)' ) ;
+	Behavior T3_testEnd ( _name = 'T3(testEnd)' ) ;
+	Test Description Transition001_Test uses configuration configuration4Transition001_Test {
+		tester.dslSpecificTestGate sends _run (
+			state_machine = Transition001_Test
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Transition001_Test ,
+			signal = Start
+		) to PSSM.dslSpecificMUTGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = T2_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = T3_testEnd
+		) to tester.dslSpecificTestGate ;
+	}
+}
