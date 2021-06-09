@@ -1,8 +1,6 @@
 package org.imt.pssm.interpreter
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
-
-
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 import fr.inria.diverse.k3.al.annotationprocessor.Step
 import java.util.ArrayList
@@ -13,6 +11,7 @@ import org.imt.pssm.model.statemachines.AttributeValue
 import org.imt.pssm.model.statemachines.Behavior
 import org.imt.pssm.model.statemachines.BooleanAttribute
 import org.imt.pssm.model.statemachines.BooleanAttributeValue
+import org.imt.pssm.model.statemachines.BooleanConstraint
 import org.imt.pssm.model.statemachines.CallEventOccurrence
 import org.imt.pssm.model.statemachines.CallEventType
 import org.imt.pssm.model.statemachines.CompletionEventOccurrence
@@ -21,11 +20,14 @@ import org.imt.pssm.model.statemachines.EventOccurrence
 import org.imt.pssm.model.statemachines.FinalState
 import org.imt.pssm.model.statemachines.IntegerAttribute
 import org.imt.pssm.model.statemachines.IntegerAttributeValue
+import org.imt.pssm.model.statemachines.IntegerConstraint
 import org.imt.pssm.model.statemachines.NamedElement
+import org.imt.pssm.model.statemachines.Operation
 import org.imt.pssm.model.statemachines.OperationBehavior
 import org.imt.pssm.model.statemachines.Pseudostate
 import org.imt.pssm.model.statemachines.PseudostateKind
 import org.imt.pssm.model.statemachines.Region
+import org.imt.pssm.model.statemachines.Signal
 import org.imt.pssm.model.statemachines.SignalEventOccurrence
 import org.imt.pssm.model.statemachines.SignalEventType
 import org.imt.pssm.model.statemachines.State
@@ -33,11 +35,9 @@ import org.imt.pssm.model.statemachines.StateMachine
 import org.imt.pssm.model.statemachines.StatemachinesFactory
 import org.imt.pssm.model.statemachines.StringAttribute
 import org.imt.pssm.model.statemachines.StringAttributeValue
+import org.imt.pssm.model.statemachines.StringConstraint
 import org.imt.pssm.model.statemachines.Transition
 import org.imt.pssm.model.statemachines.Vertex
-import org.imt.pssm.model.statemachines.StringConstraint
-import org.imt.pssm.model.statemachines.IntegerConstraint
-import org.imt.pssm.model.statemachines.BooleanConstraint
 
 import static extension org.imt.pssm.interpreter.AttributeValueAspect.*
 import static extension org.imt.pssm.interpreter.BehaviorAspect.*
@@ -49,8 +49,6 @@ import static extension org.imt.pssm.interpreter.StateAspect.*
 import static extension org.imt.pssm.interpreter.StateMachineAspect.*
 import static extension org.imt.pssm.interpreter.TransitionAspect.*
 import static extension org.imt.pssm.interpreter.VertexAspect.*
-import org.imt.pssm.model.statemachines.Signal
-import org.imt.pssm.model.statemachines.impl.SignalEventOccurrenceImpl
 
 @Aspect(className=StateMachine)
 class StateMachineAspect {
@@ -65,15 +63,23 @@ class StateMachineAspect {
 		_self.dispatchCompletionEvents
 	}
 	
-	//@Step
-	//def void eventOccurrenceReceived(EventOccurrence event) {
-	//	_self.dispatchEventOccurrence(event)
-	//}
+//	@Step
+//	def void eventOccurrenceReceived(EventOccurrence event) {
+//		_self.dispatchEventOccurrence(event)
+//	}
 	
 	@Step
 	def void eventOccurrenceReceived(Signal signal) {
 		var SignalEventOccurrence event = StatemachinesFactory.eINSTANCE.createSignalEventOccurrence
 		event.signal = signal
+		
+		_self.dispatchEventOccurrence(event)
+	}
+	
+	@Step
+	def void callOperationReceived(Operation operation) {
+		var CallEventOccurrence event = StatemachinesFactory.eINSTANCE.createCallEventOccurrence
+		event.operation = operation
 		_self.dispatchEventOccurrence(event)
 	}
 	
@@ -738,44 +744,38 @@ class BehaviorAspect {
 			//"(" + _self.name + ")" + if (eventOccurrence !== null)
 			//	{eventOccurrence.parameters} else {""})
 		println (_self.name)
-	}
-}
-
-@Aspect(className=OperationBehavior)
-class OperationBehaviorAspect extends BehaviorAspect {
-	@Step
-	@OverrideAspectMethod
-	protected def void execute(EventOccurrence eventOccurrence) {
-		val callEventOccurrence = eventOccurrence as CallEventOccurrence
-		val op = callEventOccurrence.operation
-		val outParameters = new ArrayList(op.outParameters)
-		val returnParameter = op.^return
-		_self.attributeValues.forEach[toSet|
-			val attribute = toSet._attribute
-			val value = toSet._value
-			var paramValue = callEventOccurrence.outParameterValues.findFirst[v|v._attribute == attribute]
-			if (paramValue === null) {
-				if (attribute instanceof BooleanAttribute) {
-					paramValue = StatemachinesFactory::eINSTANCE.createBooleanAttributeValue;
-					(paramValue as BooleanAttributeValue).attribute = attribute
-				} else if (attribute instanceof IntegerAttribute) {
-					paramValue = StatemachinesFactory::eINSTANCE.createIntegerAttributeValue;
-					(paramValue as IntegerAttributeValue).attribute = (attribute as IntegerAttribute)
-				} else {
-					paramValue = StatemachinesFactory::eINSTANCE.createStringAttributeValue;
-					(paramValue as StringAttributeValue).attribute = (attribute as StringAttribute)
+		if (_self instanceof OperationBehavior){
+			val callEventOccurrence = eventOccurrence as CallEventOccurrence
+			val op = callEventOccurrence.operation
+			val outParameters = new ArrayList(op.outParameters)
+			val returnParameter = op.^return
+			_self.attributeValues.forEach[toSet|
+				val attribute = toSet._attribute
+				val value = toSet._value
+				var paramValue = callEventOccurrence.outParameterValues.findFirst[v|v._attribute == attribute]
+				if (paramValue === null) {
+					if (attribute instanceof BooleanAttribute) {
+						paramValue = StatemachinesFactory::eINSTANCE.createBooleanAttributeValue;
+						(paramValue as BooleanAttributeValue).attribute = attribute
+					} else if (attribute instanceof IntegerAttribute) {
+						paramValue = StatemachinesFactory::eINSTANCE.createIntegerAttributeValue;
+						(paramValue as IntegerAttributeValue).attribute = (attribute as IntegerAttribute)
+					} else {
+						paramValue = StatemachinesFactory::eINSTANCE.createStringAttributeValue;
+						(paramValue as StringAttributeValue).attribute = (attribute as StringAttribute)
+					}
+					if (outParameters.contains(attribute)) {
+						callEventOccurrence.outParameterValues.add(paramValue)
+					} else if (returnParameter == attribute) {
+						callEventOccurrence.returnValue = paramValue
+					}
 				}
-				if (outParameters.contains(attribute)) {
-					callEventOccurrence.outParameterValues.add(paramValue)
-				} else if (returnParameter == attribute) {
-					callEventOccurrence.returnValue = paramValue
-				}
-			}
-			paramValue.set_value(value)
-		]
-		println((_self.eContainer as NamedElement).name +
-				"(" + _self.name + ")" + if (eventOccurrence !== null)
-				{eventOccurrence.parameters} else {""})
+				paramValue.set_value(value)
+			]
+			println((_self.eContainer as NamedElement).name +
+					"(" + _self.name + ")" + if (eventOccurrence !== null)
+					{eventOccurrence.parameters} else {""})
+		}
 	}
 }
 
