@@ -4,8 +4,11 @@ Package Event019_Test_C_TestSuite {
 	Import all from pssmSpecificEvents ;
 	Import all from testConfiguration ;
 	StateMachine Event019_Test_C ( _name = 'Event019_Test_C$behavior$1' ) ;
-	Operation op1 ( _name = 'op1' ) ;
-	Operation op2 ( _name = 'op2' ) ;
+	Operation op1 ( _name = 'op1' , inParameters = {p1_1, p1_2}) ;
+	IntegerAttribute p1_1 (_name = 'p1.1');
+	BooleanAttribute p1_2 (_name = 'p1.2');
+	Operation op2 ( _name = 'op2' , inParameters = p2_1) ;
+	BooleanAttribute p2_1 (_name = 'p2.1');
 	Behavior S1_1_1_entry ( _name = 'S1.1.1(entry)' ) ;
 	Behavior S1_1_1_exit ( _name = 'S1.1.1(exit)' ) ;
 	Behavior T1_1_2_effect ( _name = 'T1.1.2(effect)' ) ;
