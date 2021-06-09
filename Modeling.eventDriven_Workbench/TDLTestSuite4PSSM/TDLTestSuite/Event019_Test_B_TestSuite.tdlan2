@@ -4,7 +4,9 @@ Package Event019_Test_B_TestSuite {
 	Import all from pssmSpecificEvents ;
 	Import all from testConfiguration ;
 	StateMachine Event019_Test_B ( _name = 'Event019_Test_B$behavior$1' ) ;
-	Operation op ( _name = 'op' ) ;
+	Operation op ( _name = 'op', inParameters = {p1, p2}) ;
+	IntegerAttribute p1 (_name = 'p1');
+	BooleanAttribute p2 (_name = 'p2');	
 	Behavior S1_exit ( _name = 'S1(exit)' ) ;
 	Behavior S2_entry ( _name = 'S2(entry)' ) ;
 	Behavior T2_effect ( _name = 'T2(effect)' ) ;
