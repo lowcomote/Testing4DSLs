@@ -43,11 +43,6 @@
 			org.imt.pssm.interpreter.FinalStateAspect.enter((org.imt.pssm.model.statemachines.FinalState)_self,enteringTransition,eventOccurrence,leastCommonAncestor);
 		} else
 		// EndInjectInto org.imt.pssm.interpreter.VertexAspect#void enter(Transition,EventOccurrence,Region) from org.imt.pssm.interpreter.FinalStateAspect
-	// BeginInjectInto org.imt.pssm.interpreter.BehaviorAspect#void execute(EventOccurrence) from org.imt.pssm.interpreter.OperationBehaviorAspect
-		if (_self instanceof org.imt.pssm.model.statemachines.OperationBehavior){
-			org.imt.pssm.interpreter.OperationBehaviorAspect.execute((org.imt.pssm.model.statemachines.OperationBehavior)_self,eventOccurrence);
-		} else
-		// EndInjectInto org.imt.pssm.interpreter.BehaviorAspect#void execute(EventOccurrence) from org.imt.pssm.interpreter.OperationBehaviorAspect
 	// BeginInjectInto org.imt.pssm.interpreter.VertexAspect#boolean isActive() from org.imt.pssm.interpreter.PseudostateAspect
 		if (_self instanceof org.imt.pssm.model.statemachines.Pseudostate){
 			result = org.imt.pssm.interpreter.PseudostateAspect.isActive((org.imt.pssm.model.statemachines.Pseudostate)_self);
