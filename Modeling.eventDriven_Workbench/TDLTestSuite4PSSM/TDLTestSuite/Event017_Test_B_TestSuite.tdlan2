@@ -4,7 +4,8 @@ Package Event017_Test_B_TestSuite {
 	Import all from pssmSpecificEvents ;
 	Import all from testConfiguration ;
 	StateMachine Event017_Test_B ( _name = 'Event017_Test_B$behavior$1' ) ;
-	Signal Data ( _name = 'Data' ) ;
+	Signal Data ( _name = 'Data', attributes = value) ;
+	BooleanAttribute value (_name = 'value');
 	Signal Continue ( _name = 'Continue' ) ;
 	Behavior S1_1_entry ( _name = 'S1.1(entry)' ) ;
 	Behavior S1_1_doActivity ( _name = 'S1.1(doActivity)' ) ;
