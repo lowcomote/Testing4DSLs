@@ -275,6 +275,8 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 	@OverrideAspectMethod
 	def String assertEquals(Resource MUTResource, Object featureValue, String DSLPath){
 		val ArrayList<EObject> matchedObjects = new ArrayList
+		var String expectedData;
+		var String mutData;
 		if (_self.item != null && _self.item.size > 0){//there are several intances of data
 			for (i : 0 ..<_self.item.size){
 				val matchedObject = (_self.item.get(i) as DataInstanceUse).getMatchedMUTElement(MUTResource , true, DSLPath)			
@@ -288,19 +290,28 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 			if ((featureValue as EList).equals(matchedObjects)){
 				return "PASS: The expected data is equal to the current data"
 			}
-			val expectedData = TestResultUtil.instance.getDataAsString(featureValue as EList)
-			val mutData = TestResultUtil.instance.getDataAsString(matchedObjects)
+			expectedData = TestResultUtil.instance.getDataAsString(featureValue as EList)
+			mutData = TestResultUtil.instance.getDataAsString(matchedObjects)
 			return "FAIL: The expected data is: " + expectedData + ", but the current data is: " + mutData;
 		}else{//there is just one data instance
 			val matchedObject = _self.getMatchedMUTElement(MUTResource , true, DSLPath)
 			if (matchedObject == null){
 				println("There is no " + _self.dataInstance.name + " property in the MUT")
 				return "FAIL: There is no MUT element matched with " + _self.dataInstance.name
-			}else if (matchedObject.equals(featureValue)){
-				return "PASS: The expected data is equal to the current data"
+			}else{
+				if (featureValue instanceof EList){
+					if ((featureValue as EList).contains(matchedObject)){
+						return "PASS: The expected data is equal to the current data"
+					}
+					expectedData = "[" + TestResultUtil.instance.getDataAsString(featureValue as EList) + "]"
+				}else if (featureValue instanceof EObject){
+					if (matchedObject.equals(featureValue as EObject)){
+						return "PASS: The expected data is equal to the current data"
+					}
+					expectedData = "[" + TestResultUtil.instance.eObjectLabelProvider(featureValue as EObject) + "]"
+				}
 			}
-			val expectedData = "[" + TestResultUtil.instance.eObjectLabelProvider(featureValue as EObject) + "]"
-			val mutData = "[" + TestResultUtil.instance.eObjectLabelProvider(matchedObject as EObject) + "]"
+			mutData = "[" + TestResultUtil.instance.eObjectLabelProvider(matchedObject as EObject) + "]"
 			return "FAIL: The expected data is: " + expectedData + ", but the current data is: " + mutData;
 		}
 	}
