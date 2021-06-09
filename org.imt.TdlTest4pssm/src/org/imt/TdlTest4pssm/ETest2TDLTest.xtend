@@ -236,7 +236,7 @@ class ETest2TDLTest {
 		stateMachineInstance.memberAssignment.add(nameMemberAssign)
 		testSuitePackage.packagedElement.add(stateMachineInstance)
 		
-		//create a data instance for each Signal
+		//create a data instance and a SignalEventOccurrence for each Signal
 		for (i:0..<system.signals.size){
 			var StructuredDataInstance signalInstance = TDL_FACTORY.createStructuredDataInstance
 			signalInstance.name = system.signals.get(i).name.validName
@@ -249,9 +249,21 @@ class ETest2TDLTest {
 			nameMemberAssign.memberSpec = nameValue
 			signalInstance.memberAssignment.add(nameMemberAssign)
 			testSuitePackage.packagedElement.add(signalInstance)
+			
+			var StructuredDataInstance signalOccurrenceInstance = TDL_FACTORY.createStructuredDataInstance
+			signalOccurrenceInstance.name = signalInstance.name + "Occurrence"
+			val signalOccurrenceType = this.pssmTypesPackage.packagedElement.findFirst[t | t.name.equals("SignalEventOccurrence")] as StructuredDataType
+			signalOccurrenceInstance.dataType = signalOccurrenceType
+			var signalMemberAssign = TDL_FACTORY.createMemberAssignment
+			signalMemberAssign.member = signalOccurrenceType.allMembers.findFirst[m|m.name.equals("signal")]
+			var signalValue = TDL_FACTORY.createDataInstanceUse
+			signalValue.dataInstance = signalInstance
+			signalMemberAssign.memberSpec = signalValue
+			signalOccurrenceInstance.memberAssignment.add(signalMemberAssign)
+			testSuitePackage.packagedElement.add(signalOccurrenceInstance)
 		}
 		
-		//create a data instance for each Operation
+		//create a data instance and a CallEventOccurrence for each Operation
 		for (i:0..<system.operations.size){
 			var StructuredDataInstance opInstance = TDL_FACTORY.createStructuredDataInstance
 			opInstance.name = system.operations.get(i).name.validName
@@ -264,6 +276,18 @@ class ETest2TDLTest {
 			nameMemberAssign.memberSpec = nameValue
 			opInstance.memberAssignment.add(nameMemberAssign)
 			testSuitePackage.packagedElement.add(opInstance)
+			
+			var StructuredDataInstance operationOccurrenceInstance = TDL_FACTORY.createStructuredDataInstance
+			operationOccurrenceInstance.name = opInstance.name + "Occurrence"
+			val operationOccurrenceType = this.pssmTypesPackage.packagedElement.findFirst[t | t.name.equals("CallEventOccurrence")] as StructuredDataType
+			operationOccurrenceInstance.dataType = operationOccurrenceType
+			var operationMemberAssign = TDL_FACTORY.createMemberAssignment
+			operationMemberAssign.member = operationOccurrenceType.allMembers.findFirst[m|m.name.equals("operation")]
+			var operationValue = TDL_FACTORY.createDataInstanceUse
+			operationValue.dataInstance = opInstance
+			operationMemberAssign.memberSpec = operationValue
+			operationOccurrenceInstance.memberAssignment.add(operationMemberAssign)
+			testSuitePackage.packagedElement.add(operationOccurrenceInstance)
 		}
 		
 		//create a data instance for each Behavior
