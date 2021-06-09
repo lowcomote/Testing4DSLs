@@ -5,7 +5,8 @@ Package Join003_Test_TestSuite {
 	Import all from testConfiguration ;
 	StateMachine Join003_Test ( _name = 'Join003_Test$behavior$1' ) ;
 	Signal Start ( _name = 'Start' ) ;
-	Signal IntegerData ( _name = 'IntegerData' ) ;
+	Signal IntegerData ( _name = 'IntegerData', attributes = value) ;
+	IntegerAttribute value (_name = 'value');
 	Behavior T1_2_effect ( _name = 'T1.2(effect)' ) ;
 	Behavior T1_4_effect ( _name = 'T1.4(effect)' ) ;
 	Behavior T3_effect ( _name = 'T3(effect)' ) ;
