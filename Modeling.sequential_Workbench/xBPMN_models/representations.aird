@@ -14,4 +14,17 @@
   <semanticResources>gemoc-gen/execution/execution-20210519_234633/verifyUserAccess.bpmn</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210519_234646/verifyUserAccess.bpmn</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210520_105600/promoteEmployee.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210609_164522/promoteEmployee.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210609_164604/promoteEmployee.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210609_164638/promoteEmployee.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210609_165811/promoteEmployee.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210609_165914/promoteEmployee.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210609_170245/promoteEmployee.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210609_170912/promoteEmployee.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210610_101202/promoteEmployee.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210610_152828/promoteEmployee.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210610_153027/promoteEmployee.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210610_153056/promoteEmployee.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210610_153909/promoteEmployee.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210610_154302/promoteEmployee.bpmn</semanticResources>
 </viewpoint:DAnalysis>

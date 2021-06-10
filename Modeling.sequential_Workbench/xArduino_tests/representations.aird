@@ -22,4 +22,11 @@
   <semanticResources>gemoc-gen/execution/execution-20210520_101305/servoIrButton_Test.tdlan2</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210520_101653/servoIrButton_Test.tdlan2</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210520_101811/servoIrButton_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210610_162851/servo9g_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210610_162926/servoIrButton_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210610_163031/servoIrButton_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210610_163214/servoIrButton_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210610_163358/servo9g_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210610_163444/servoIrButton_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210610_163554/turnOnLed_Test.tdlan2</semanticResources>
 </viewpoint:DAnalysis>

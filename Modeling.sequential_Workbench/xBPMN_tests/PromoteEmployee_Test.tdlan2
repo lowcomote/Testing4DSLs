@@ -3,8 +3,8 @@ Package testSuite {
 	Import all from bpmnSpecificTypes ;
 	Import all from testConfiguration ;
 	
-	Entity employeeNewState(_name = "Employee", attributes = employeeLevel);
-	StringVariable employeeLevel (_name = "level", valueObject = newLevel);
+	Entity employeeNewState(_name = "Employee");
+	StringVariable employeeLevel (_name = "level");
 	StringValue newLevel (value = ?);
 	
 	Test Description test1 uses configuration promoteEmployeeConfiguration{
