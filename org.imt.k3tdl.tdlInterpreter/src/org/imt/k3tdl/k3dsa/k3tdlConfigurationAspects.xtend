@@ -1,11 +1,9 @@
 package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
-
-
-
-
-import fr.inria.diverse.k3.al.annotationprocessor.Step
+import java.util.ArrayList
+import java.util.HashMap
+import java.util.Map
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
@@ -15,16 +13,12 @@ import org.etsi.mts.tdl.DataUse
 import org.etsi.mts.tdl.GateInstance
 import org.etsi.mts.tdl.GateType
 import org.etsi.mts.tdl.LiteralValueUse
-import org.etsi.mts.tdl.StaticDataUse
 import org.imt.tdl.executionEngine.EngineFactory
+import org.imt.tdl.testResult.TestResultUtil
 
 import static extension org.imt.k3tdl.k3dsa.DataInstanceAspect.*
 import static extension org.imt.k3tdl.k3dsa.DataInstanceUseAspect.*
 import static extension org.imt.k3tdl.k3dsa.DataTypeAspect.*
-import java.util.ArrayList
-import java.util.Map
-import java.util.HashMap
-import org.imt.tdl.testResult.TestResultUtil
 
 @Aspect(className=GateType)
 class GateTypeAspect {
@@ -40,6 +34,14 @@ class GateInstanceAspect {
 	
 	private EngineFactory gateLauncher
 
+	public final static String RUN_MODEL = "runModel"
+	public final static String RUN_MODEL_ASYNC = "runModelAsynchronous"
+	public final static String STOP_EXECUTION = "stopModelExecution"
+	public final static String RESET_MODEL = "resetModel"
+	public final static String GET_MODEL = "getModelState"
+	public final static String OCL_TYPE = "OCL"
+	public final static String OCL_GATE = "oclGate";
+	
 	def void setLauncher(EngineFactory launcher) {
 		_self.gateLauncher = launcher;
 	}
@@ -52,7 +54,7 @@ class GateInstanceAspect {
 			_self.expectedOutput = expected;
 			//when asserting ocl query validation result:
 			//if the expected result is String, use the labeled result of validation 
-			if (_self.name.equals('oclMUTGate')){
+			if (_self.name.equals(OCL_GATE)){
 				_self.receivedOutput = _self.gateLauncher.OCLResultAsString
 			}
 			if (_self.receivedOutput != null) {
@@ -68,7 +70,7 @@ class GateInstanceAspect {
 				}
 			} else if (_self.receivedOutput == null) {
 				return "FAIL: The expected data is: " + _self.expectedOutput.toString + 
-						", but the current data is: " + _self.receivedOutput.toString;
+						", but the current data is: null";
 			} else {
 				return "FAIL: The expected data is: " + _self.expectedOutput.toString + 
 						", but the current data is: " + _self.receivedOutput.toString;
@@ -81,10 +83,10 @@ class GateInstanceAspect {
 			if (_self.receivedOutput instanceof Resource){
 				MUTResource = _self.receivedOutput as Resource//the MUTResource is the received output
 			}
-			if (_self.name.equals('oclMUTGate')){
+			if (_self.name.equals(OCL_GATE)){
 				MUTResource = _self.gateLauncher.MUTResource//the MUT objects are the received output
 			}
-			else if (arg.dataInstance.dataType.isExposedEvent(_self.DSLPath)){
+			else if (arg.item == null && arg.dataInstance.dataType.isExposedEvent(_self.DSLPath)){
 				//the message is an event conforming to the behavioral interface of the DSL
 				return _self.gateLauncher.executeDSLSpecificCommand("EXPOSED",arg.dataInstance.validName, _self.getEventParameters(arg))
 			}	
@@ -111,7 +113,7 @@ class GateInstanceAspect {
 					status = data.dataInstance.info	
 				}
 			}
-			if(_self.name.equals('oclMUTGate')){
+			if(_self.name.equals(OCL_GATE)){
 				val Object[] receivedObjects = _self.gateLauncher.OCLResultAsObject
 				if (receivedObjects.elementsEqual(matchedMUTElements)){
 					return "PASS: The expected data is equal to the current data"
@@ -133,23 +135,23 @@ class GateInstanceAspect {
 				return _self.setModelState(arg);
 			}else if (arg.dataInstance.dataType.isConcreteEcoreType(_self.DSLPath)){//request for setting the model state
 				return _self.setModelState(arg);
-			}else if (arg.dataInstance.name == 'runModel') {
+			}else if (arg.dataInstance.name == RUN_MODEL) {
 				println("--Start MUT Execution synchronous:")
 				return _self.gateLauncher.executeModel(true)
-			}else if (arg.dataInstance.name == 'runModelAsynchronous') {
+			}else if (arg.dataInstance.name == RUN_MODEL_ASYNC) {
 				println("--Start MUT Execution Asynchronous:")
 				return _self.gateLauncher.executeModel(false)
-			}else if (arg.dataInstance.name == 'stopModelExecution') {
+			}else if (arg.dataInstance.name == STOP_EXECUTION) {
 				println("--Stop Asynchronous MUT Execution")
 				return _self.gateLauncher.stopAsyncExecution
-			}else if (arg.dataInstance.name == 'resetModel') {
+			}else if (arg.dataInstance.name == RESET_MODEL) {
 				_self.gateLauncher.MUTResource = 
 					(new ResourceSetImpl()).getResource(URI.createURI(_self.MUTPath), true)
 				return "PASS: The MUT is reset to its initial state"
-			}else if (arg.dataInstance.name == 'getModelState') {
+			}else if (arg.dataInstance.name == GET_MODEL) {
 				_self.receivedOutput = _self.gateLauncher.MUTResource
 				return "PASS: The current state of the MUT is retrieved"
-			}else if (arg.dataInstance.dataType.name == 'OCL') {
+			}else if (arg.dataInstance.dataType.name == OCL_TYPE) {
 				// extracting the query from the argument and sending for validation
 				var query = argument.argument.get(0).dataUse as LiteralValueUse
 				return _self.gateLauncher.executeOCLCommand(query.value)				
