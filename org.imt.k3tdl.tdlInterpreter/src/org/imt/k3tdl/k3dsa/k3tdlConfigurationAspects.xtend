@@ -126,7 +126,6 @@ class GateInstanceAspect {
 		}
 	}
 
-
 	def String sendArgument2sut(DataUse argument) {
 		if (argument instanceof DataInstanceUse) {
 			var arg = (argument as DataInstanceUse)
