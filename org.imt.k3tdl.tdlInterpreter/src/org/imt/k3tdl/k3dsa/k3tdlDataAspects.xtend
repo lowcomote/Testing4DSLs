@@ -273,6 +273,21 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 		}
 		return status;
 	}
+	
+	def String setMatchedMUTElement(EObject matchedObject, Resource MUTResource, String DSLPath){
+		var String status = ""
+		for (i : 0 ..<_self.argument.size){
+			var parameterBinding = _self.argument.get(i);
+			if (parameterBinding.parameter.dataType.isDynamicType
+				|| (parameterBinding.parameter as Member).isDynamicMember){
+				status = parameterBinding.setMatchedParameter(matchedObject, MUTResource, DSLPath);
+			}
+			if (status.contains("FAIL")){
+				return status
+			}			
+		}
+		return status
+	}
 	@OverrideAspectMethod
 	def String assertEquals(Resource MUTResource, Object featureValue, String DSLPath){
 		val ArrayList<EObject> matchedObjects = new ArrayList
@@ -326,11 +341,12 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 			        override protected doExecute() {
 			        	val ArrayList<EObject> matchedObjects = new ArrayList
 						for (i : 0 ..<_self.item.size){
-							val matchedObject = (_self.item.get(i) as DataInstanceUse).getMatchedMUTElement(MUTResource , false, DSLPath)			
-							val propertyName = (_self.item.get(i) as DataInstanceUse).dataInstance.name
+							val item = _self.item.get(i) as DataInstanceUse
+							val matchedObject = item.getMatchedMUTElement(MUTResource, false, DSLPath)			
 							if (matchedObject == null){
-								println("There is no " + propertyName + " property in the MUT")
+								println("There is no " + item.dataInstance.name + " property in the MUT")
 							}else{
+								_self.setMatchedMUTElement(matchedObject, MUTResource, DSLPath)
 								matchedObjects.add(matchedObject)
 							}							
 						}
@@ -354,7 +370,14 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 				domain.getCommandStack().execute(new RecordingCommand(domain) {
 			        override protected doExecute() {
 			        	val matchedObject = _self.getMatchedMUTElement(MUTResource, false, DSLPath)
-			        	object.eSet(matchedFeature, matchedObject)										
+			        	_self.setMatchedMUTElement(matchedObject, MUTResource, DSLPath)
+			        	if (matchedFeature.many){
+			        		val ArrayList<EObject> matchedObjects = new ArrayList
+			        		matchedObjects.add(matchedObject)
+			        		object.eSet(matchedFeature, matchedObjects)
+			        	}else{
+			        		object.eSet(matchedFeature, matchedObject)
+			        	}										
 			        }
 		   		});
 	   		}catch(IllegalArgumentException e){
