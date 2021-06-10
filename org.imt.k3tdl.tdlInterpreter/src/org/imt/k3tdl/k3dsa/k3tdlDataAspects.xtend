@@ -218,6 +218,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 		}
 		return null
 	}
+	
 	def String isMatchedParametrizedElement(EObject rootElement, Resource MUTResource, boolean isAssertion, String DSLPath){
 		var EObject matchedElement = null
 		//find matched element based on the parameter bindings of dataInstance
@@ -279,7 +280,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 		var String mutData;
 		if (_self.item != null && _self.item.size > 0){//there are several intances of data
 			for (i : 0 ..<_self.item.size){
-				val matchedObject = (_self.item.get(i) as DataInstanceUse).getMatchedMUTElement(MUTResource , true, DSLPath)			
+				val matchedObject = (_self.item.get(i) as DataInstanceUse).getMatchedMUTElement(MUTResource, true, DSLPath)			
 				val propertyName = (_self.item.get(i) as DataInstanceUse).dataInstance.name
 				if (matchedObject == null){
 					println("There is no " + propertyName + " property in the MUT")
@@ -294,7 +295,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 			mutData = TestResultUtil.instance.getDataAsString(matchedObjects)
 			return "FAIL: The expected data is: " + expectedData + ", but the current data is: " + mutData;
 		}else{//there is just one data instance
-			val matchedObject = _self.getMatchedMUTElement(MUTResource , true, DSLPath)
+			val matchedObject = _self.getMatchedMUTElement(MUTResource, true, DSLPath)
 			if (matchedObject == null){
 				println("There is no " + _self.dataInstance.name + " property in the MUT")
 				return "FAIL: There is no MUT element matched with " + _self.dataInstance.name
@@ -325,7 +326,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 			        override protected doExecute() {
 			        	val ArrayList<EObject> matchedObjects = new ArrayList
 						for (i : 0 ..<_self.item.size){
-							val matchedObject = (_self.item.get(i) as DataInstanceUse).getMatchedMUTElement(MUTResource , true, DSLPath)			
+							val matchedObject = (_self.item.get(i) as DataInstanceUse).getMatchedMUTElement(MUTResource , false, DSLPath)			
 							val propertyName = (_self.item.get(i) as DataInstanceUse).dataInstance.name
 							if (matchedObject == null){
 								println("There is no " + propertyName + " property in the MUT")
@@ -343,7 +344,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 				return "FAIL: The new value cannot be set for the " + matchedFeature.name + " property of the MUT"
 			}
 		}else{//there is just one data instance
-			val matchedObject = _self.getMatchedMUTElement(MUTResource, true, DSLPath)
+			val matchedObject = _self.getMatchedMUTElement(MUTResource, false, DSLPath)
 			if (matchedObject == null){
 				println("There is no " + _self.dataInstance.name + " property in the MUT")
 				return "FAIL: There is no MUT element matched with " + _self.dataInstance.name
@@ -352,7 +353,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 			try{
 				domain.getCommandStack().execute(new RecordingCommand(domain) {
 			        override protected doExecute() {
-			        	val matchedObject = _self.getMatchedMUTElement(MUTResource, true, DSLPath)
+			        	val matchedObject = _self.getMatchedMUTElement(MUTResource, false, DSLPath)
 			        	object.eSet(matchedFeature, matchedObject)										
 			        }
 		   		});
