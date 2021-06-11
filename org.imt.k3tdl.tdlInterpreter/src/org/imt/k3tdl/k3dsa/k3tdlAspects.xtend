@@ -84,8 +84,14 @@ class TestDescriptionAspect{
 	@Step
 	def TDLTestCaseResult executeTestCase(String MUTPath){
 		_self.launcher.MUTPath = MUTPath
+		_self.testCaseResult.testCaseName = _self.name
 		_self.testConfiguration.activateConfiguration(_self.launcher, MUTPath)
 		_self.behaviourDescription.callBehavior()
+		if (_self.testCaseResult.numOfFailures > 0) {
+			println("Test case FAILED")
+		}else{
+			println("Test case PASSED")
+		}
 		_self.testConfiguration.stopModelExecutionEngine(_self.launcher)
 		return _self.testCaseResult
 	}
