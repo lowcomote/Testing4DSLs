@@ -86,7 +86,8 @@ class GateInstanceAspect {
 			if (_self.name.equals(OCL_GATE)){
 				MUTResource = _self.gateLauncher.MUTResource//the MUT objects are the received output
 			}
-			else if (arg.item == null && arg.dataInstance.dataType.isExposedEvent(_self.DSLPath)){
+			else if ((arg.item == null || arg.item.size <= 0) 
+				&& arg.dataInstance.dataType.isExposedEvent(_self.DSLPath)){
 				//the message is an event conforming to the behavioral interface of the DSL
 				return _self.gateLauncher.executeDSLSpecificCommand("EXPOSED",arg.dataInstance.validName, _self.getEventParameters(arg))
 			}	
