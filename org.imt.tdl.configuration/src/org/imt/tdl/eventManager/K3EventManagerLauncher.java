@@ -64,6 +64,7 @@ import org.eclipse.gemoc.executionframework.value.model.value.Value;
 import org.eclipse.gemoc.executionframework.value.model.value.ValuePackage;
 import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
 import org.eclipse.gemoc.xdsmlframework.api.core.IExecutionEngine;
+import org.eclipse.gemoc.xdsmlframework.api.core.EngineStatus.RunStatus;
 import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
 import org.imt.tdl.testResult.TestResultUtil;
 
@@ -324,10 +325,20 @@ public class K3EventManagerLauncher {
 		}
 		return result;
 	}
-	public void sendStopEvent() {
-		StopEventOccurrence stopEvent = EventFactory.eINSTANCE.createStopEventOccurrence();
-		stopEvent.setType(EventOccurrenceType.ACCEPTED);
-		eventManager.processEventOccurrence(stopEvent);
+	public String sendStopEvent() {
+		if (this.executionEngine.getRunningStatus() == RunStatus.WaitingForEvent) {
+			this.executionEngine.stop();
+			this.executionEngine.dispose();
+			return "PASS";
+		}else if (this.executionEngine.getRunningStatus() == RunStatus.Running) {
+			this.executionEngine.stop();
+			this.executionEngine.dispose();
+			return "FAIL: Infinite loop in the Model";
+		}
+		return null;
+//		StopEventOccurrence stopEvent = EventFactory.eINSTANCE.createStopEventOccurrence();
+//		stopEvent.setType(EventOccurrenceType.ACCEPTED);
+//		eventManager.processEventOccurrence(stopEvent);
 	}
 	public EventOccurrence createEventOccurance(EventOccurrenceType eventType, String eventName, Map<String, Object> parameters) {
 		BehavioralInterface bInterface = this.getBehavioralInterfaceRootElement(this.DSLPath);
