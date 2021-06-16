@@ -70,7 +70,7 @@ public class EngineFactory{
 		case "EXPOSED":
 			return this.eventManager.getExposedEvent(eventName, parameters);
 		case "STOP":
-			this.eventManager.sendStopEvent();
+			return this.eventManager.sendStopEvent();
 		default:
 			break;
 		}
