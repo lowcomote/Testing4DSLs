@@ -74,7 +74,7 @@ public class K3EventManagerLauncher {
 	
 	protected EventBasedExecutionEngine executionEngine = null;
 	GenericEventManager eventManager = null;
-	ArrayList<EventOccurrence> eventOccurrences = null;
+	LinkedTransferQueue<EventOccurrence> eventOccurrences = null;
 	// progress monitor used during launch; useful for operations that wish to
 	// contribute to the progress bar
 	protected IProgressMonitor launchProgressMonitor = null;
@@ -123,7 +123,7 @@ public class K3EventManagerLauncher {
 			final EventBasedExecutionEngine engine = createExecutionEngine(runConf, ExecutionMode.Run);
 			this.executionEngine = engine;
 			
-			eventOccurrences = new ArrayList();
+			eventOccurrences = new LinkedTransferQueue<>();
 			String PLUGIN_ID = "org.eclipse.gemoc.execution.sequential.javaengine.ui"; 		
 			Job job = new Job(getDebugJobName()) {
 				@Override
@@ -172,25 +172,23 @@ public class K3EventManagerLauncher {
 		if (eventOccurrence == null) {
 			return "FAIL: The expected event does not match to the interface or its parameters does not exist in the MUT";
 		}
-		for (int i=0; i< this.eventOccurrences.size(); i++) {
-			EventOccurrence occ = this.eventOccurrences.get(i);
-			if (occ != null && this.equalEventOccurrences(occ, eventOccurrence)) {
-				this.eventOccurrences.remove(i);
-				return "PASS";
-			}
-		}
-		String result = "FAIL: The expected event is not received from MUT";
-		if (this.eventOccurrences.size() == 0) {
-			result += "\nThere is no received event.";
-		}
+		
 		if (this.eventOccurrences.size()>0) {
-			result += "\nThe received events are:\n";
-			for (int i=0; i< this.eventOccurrences.size()-1; i++) {
-				result += this.eventOccurenceToString(this.eventOccurrences.get(i)) + ", ";
+			EventOccurrence occ;
+			try {
+				occ = this.eventOccurrences.poll(10000, TimeUnit.MILLISECONDS);
+				if (occ != null && this.equalEventOccurrences(occ, eventOccurrence)) {
+					return "PASS";
+				}else {
+					String result= "FAIL: The expected event is not received from MUT\nThe received event is:\n";
+					result += this.eventOccurenceToString(occ);
+					return result;
+				}
+			} catch (InterruptedException e) {
+				return e.getMessage();
 			}
-			result +=  this.eventOccurenceToString(this.eventOccurrences.get(this.eventOccurrences.size()-1));
 		}
-		return result;
+		return "FAIL: The expected event is not received from MUT\nThere is no received event.";
 	}
 	
 	public Boolean equalEventOccurrences(EventOccurrence e1, EventOccurrence e2) {
