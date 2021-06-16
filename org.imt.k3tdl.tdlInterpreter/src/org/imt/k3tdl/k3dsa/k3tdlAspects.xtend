@@ -2,6 +2,7 @@ package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 
+
 import fr.inria.diverse.k3.al.annotationprocessor.InitializeModel
 import fr.inria.diverse.k3.al.annotationprocessor.Main
 import fr.inria.diverse.k3.al.annotationprocessor.Step
@@ -12,6 +13,7 @@ import org.etsi.mts.tdl.Annotation
 import org.etsi.mts.tdl.Package
 import org.etsi.mts.tdl.TestConfiguration
 import org.etsi.mts.tdl.TestDescription
+import org.etsi.mts.tdl.BehaviourDescription
 import org.imt.tdl.executionEngine.EngineFactory
 import org.imt.tdl.testResult.TDLTestCaseResult
 import org.imt.tdl.testResult.TDLTestPackageResult
@@ -25,6 +27,15 @@ import java.util.Arrays
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.core.runtime.IConfigurationElement
+import java.util.concurrent.ScheduledExecutorService
+import java.util.concurrent.Executors
+import java.util.concurrent.Future
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.TimeoutException
+import org.eclipse.emf.transaction.TransactionalEditingDomain
+import org.eclipse.emf.transaction.util.TransactionUtil
+import org.eclipse.emf.transaction.RecordingCommand
 
 @Aspect(className = Package)
 class PackageAspect {
@@ -66,18 +77,22 @@ class PackageAspect {
 class TestDescriptionAspect{
 	public EngineFactory launcher = new EngineFactory()
 	public TDLTestCaseResult testCaseResult = new TDLTestCaseResult
+
 	@Step
 	def TDLTestCaseResult executeTestCase(){
 		println("Start test case execution: " + _self.name)
 		_self.testCaseResult.testCaseName = _self.name
 		_self.testConfiguration.activateConfiguration(_self.launcher)
 		_self.behaviourDescription.callBehavior()
-		if (_self.testCaseResult.numOfFailures > 0) {
-			println("Test case FAILED")
-		}else{
-			println("Test case PASSED")
+		val modelExecutionResult = _self.testConfiguration.stopModelExecutionEngine(_self.launcher)
+		if (modelExecutionResult.contains("FAIL")){
+			_self.testCaseResult.value = modelExecutionResult
 		}
-		_self.testConfiguration.stopModelExecutionEngine(_self.launcher)
+		if (_self.testCaseResult.value.equals("PASS")) {
+			println("Test case PASSED")
+		}else{
+			println("Test case FAILED")
+		}
 		return _self.testCaseResult
 	}
 	//this method is called from TDL runner
@@ -87,15 +102,19 @@ class TestDescriptionAspect{
 		_self.testCaseResult.testCaseName = _self.name
 		_self.testConfiguration.activateConfiguration(_self.launcher, MUTPath)
 		_self.behaviourDescription.callBehavior()
-		if (_self.testCaseResult.numOfFailures > 0) {
-			println("Test case FAILED")
-		}else{
-			println("Test case PASSED")
+		val modelExecutionResult = _self.testConfiguration.stopModelExecutionEngine(_self.launcher)
+		if (modelExecutionResult.contains("FAIL")){
+			_self.testCaseResult.value = modelExecutionResult
 		}
-		_self.testConfiguration.stopModelExecutionEngine(_self.launcher)
+		if (_self.testCaseResult.value.equals("PASS")) {
+			println("Test case PASSED")
+		}else{
+			println("Test case FAILED")
+		}
 		return _self.testCaseResult
 	}
 }
+
 @Aspect (className = TestConfiguration)
 class TestConfigurationAspect{
 	public String MUTPath;
@@ -158,9 +177,9 @@ class TestConfigurationAspect{
 			launcher.setUp(EngineFactory.OCL);
 		}
 	}
-	def void stopModelExecutionEngine(EngineFactory launcher){
+	def String stopModelExecutionEngine(EngineFactory launcher){
 		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.contains('dslSpecific')]]) {
-			launcher.executeDSLSpecificCommand("STOP", null, null);
+			return launcher.executeDSLSpecificCommand("STOP", null, null);
 		}
 	}
 }
