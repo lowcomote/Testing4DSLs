@@ -5,12 +5,10 @@ import static org.eclipse.gemoc.executionframework.event.manager.IImplementation
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.BehavioralInterface;
-import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.Event;
 import org.eclipse.gemoc.executionframework.event.manager.SimpleImplementationRelationship;
 
 public class InterpretedStateMachinesImplementationRelationship extends SimpleImplementationRelationship {
