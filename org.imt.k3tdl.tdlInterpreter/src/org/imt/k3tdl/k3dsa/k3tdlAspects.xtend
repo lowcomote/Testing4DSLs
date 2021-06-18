@@ -86,7 +86,8 @@ class TestDescriptionAspect{
 		_self.behaviourDescription.callBehavior()
 		val modelExecutionResult = _self.testConfiguration.stopModelExecutionEngine(_self.launcher)
 		if (modelExecutionResult.contains("FAIL")){
-			_self.testCaseResult.value = modelExecutionResult
+			_self.testCaseResult.value = "FAIL"
+			_self.testCaseResult.description = modelExecutionResult.substring(modelExecutionResult.indexOf(":")+1)
 		}
 		if (_self.testCaseResult.value.equals("PASS")) {
 			println("Test case PASSED")
