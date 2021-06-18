@@ -326,19 +326,19 @@ public class K3EventManagerLauncher {
 		return result;
 	}
 	public String sendStopEvent() {
+		String result = null;
 		if (this.executionEngine.getRunningStatus() == RunStatus.WaitingForEvent) {
-			this.executionEngine.stop();
-			this.executionEngine.dispose();
-			return "PASS";
+			if (this.eventOccurrences.size()>0) {
+				result = "FAIL:There are extra received events";
+			}else {
+				result = "PASS";
+			}
 		}else if (this.executionEngine.getRunningStatus() == RunStatus.Running) {
-			this.executionEngine.stop();
-			this.executionEngine.dispose();
-			return "FAIL: Infinite loop in the Model";
+			result = "FAIL:Infinite loop in the Model";
 		}
-		return null;
-//		StopEventOccurrence stopEvent = EventFactory.eINSTANCE.createStopEventOccurrence();
-//		stopEvent.setType(EventOccurrenceType.ACCEPTED);
-//		eventManager.processEventOccurrence(stopEvent);
+		this.executionEngine.stop();
+		this.executionEngine.dispose();
+		return result;
 	}
 	public EventOccurrence createEventOccurance(EventOccurrenceType eventType, String eventName, Map<String, Object> parameters) {
 		BehavioralInterface bInterface = this.getBehavioralInterfaceRootElement(this.DSLPath);
