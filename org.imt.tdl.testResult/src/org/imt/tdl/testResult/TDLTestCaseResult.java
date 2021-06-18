@@ -13,6 +13,8 @@ public class TDLTestCaseResult {
 	
 	private String value;
 	
+	private String description;
+	
 	private List<TDLMessageResult> tdlMessages;
 	
 	private int messageNumber = 0;
@@ -36,6 +38,13 @@ public class TDLTestCaseResult {
 	
 	public void setValue(String value) {
 		this.value = value;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getDescription() {
+		return this.description;
 	}
 	
 	public List<TDLMessageResult> getTdlMessages() {

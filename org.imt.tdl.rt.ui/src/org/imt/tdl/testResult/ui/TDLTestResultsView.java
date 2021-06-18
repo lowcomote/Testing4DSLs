@@ -105,7 +105,15 @@ public class TDLTestResultsView extends ViewPart{
 			public void handleEvent(Event event) {
 				Point point = new Point(event.x, event.y);
 				TreeItem item = addressTree.getItem(point);
-				if (item.getData() instanceof TDLMessageResult) {
+				if (item.getData() instanceof TDLTestCaseResult) {
+					TDLTestCaseResult verdict = (TDLTestCaseResult) item.getData();
+					final String description = verdict.getDescription();
+            		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+						public void run() {
+							detailTextBox.setText(description);
+						}
+					});
+				} else if (item.getData() instanceof TDLMessageResult) {
 					TDLMessageResult verdict = (TDLMessageResult) item.getData();
 					final String description = verdict.getMessage();
             		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
@@ -305,7 +313,7 @@ public class TDLTestResultsView extends ViewPart{
 					columnText = result.getValue();
 					break;
 				case 2:
-					columnText = "";
+					columnText = result.getDescription();
 					break;
 				}
 			}
