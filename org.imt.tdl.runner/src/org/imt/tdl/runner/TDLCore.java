@@ -21,7 +21,7 @@ public class TDLCore {
 				testCaseRunner.executeTestCase(testCase, artifactPath);
 				result.addNumExecutedTests();
 				TDLTestCaseResult verdict = testCaseRunner.testCaseResult(testCase);
-				if (verdict.getValue() == "FAIL") {
+				if (verdict.getValue().contains("FAIL")) {
 					result.addTest(testCase.getName(), false);
 					result.addNumFailedTests();
 					result.addFailure(testCase);
