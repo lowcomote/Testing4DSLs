@@ -14,7 +14,7 @@
         </triggers>
         <effect name="T2(testEnd)"/>
       </transitions>
-      <transitions name="eFQ">
+      <transitions name="t">
         <source xsi:type="statemachines:State" href="../../../../../PSSMMutation/data/model/Behavior002_Test$behavior$1.mutation10.0.model#//@statemachine/@regions.0/@vertice.1"/>
       </transitions>
     </regions>

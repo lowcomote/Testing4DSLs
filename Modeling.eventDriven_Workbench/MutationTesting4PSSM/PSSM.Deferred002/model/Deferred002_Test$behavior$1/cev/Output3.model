@@ -33,7 +33,9 @@
         <triggers name="ContinueTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <triggers name="hs"/>
+        <triggers name="HO">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
+        </triggers>
         <effect name="T4(effect)"/>
       </transitions>
       <transitions name="T5" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.4" kind="external">

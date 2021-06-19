@@ -50,9 +50,9 @@
       <transitions name="T7" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <effect name="T7(testEnd)"/>
       </transitions>
-      <transitions name="l">
-        <source xsi:type="statemachines:State" href="../../../../../PSSMMutation/data/model/Deferred002_Test$behavior$1.mutation7.0.model#//@statemachine/@regions.0/@vertice.1"/>
-        <target xsi:type="statemachines:State" href="../../../../../PSSMMutation/data/model/Deferred002_Test$behavior$1.mutation8.0.model#//@statemachine/@regions.0/@vertice.1"/>
+      <transitions name="LDI">
+        <source xsi:type="statemachines:State" href="../../../../../PSSMMutation/data/model/Deferred002_Test$behavior$1.mutation7.0.model#//@statemachine/@regions.0/@vertice.4"/>
+        <target xsi:type="statemachines:State" href="../../../../../PSSMMutation/data/model/Deferred002_Test$behavior$1.mutation8.0.model#//@statemachine/@regions.0/@vertice.4"/>
       </transitions>
     </regions>
   </statemachine>

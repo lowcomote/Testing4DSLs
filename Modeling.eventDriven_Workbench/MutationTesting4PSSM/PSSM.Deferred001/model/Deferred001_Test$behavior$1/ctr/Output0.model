@@ -43,9 +43,9 @@
       <transitions name="T6" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <effect name="T6(testEnd)"/>
       </transitions>
-      <transitions name="Ap">
-        <source xsi:type="statemachines:State" href="../../../../../PSSMMutation/data/model/Deferred001_Test$behavior$1.mutation7.0.model#//@statemachine/@regions.0/@vertice.1"/>
-        <target xsi:type="statemachines:State" href="../../../../../PSSMMutation/data/model/Deferred001_Test$behavior$1.mutation8.0.model#//@statemachine/@regions.0/@vertice.1"/>
+      <transitions name="yw">
+        <source xsi:type="statemachines:State" href="../../../../../PSSMMutation/data/model/Deferred001_Test$behavior$1.mutation7.0.model#//@statemachine/@regions.0/@vertice.3"/>
+        <target xsi:type="statemachines:State" href="../../../../../PSSMMutation/data/model/Deferred001_Test$behavior$1.mutation8.0.model#//@statemachine/@regions.0/@vertice.3"/>
       </transitions>
     </regions>
   </statemachine>

@@ -18,7 +18,7 @@
                 <triggers name="ContinueTrigger">
                   <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
                 </triggers>
-                <effect name="T3(testEnd)"/>
+                <effect name="T1.1.2(effect)"/>
               </transitions>
             </regions>
             <exit name="S1.1(exit)"/>
@@ -45,7 +45,7 @@
             <triggers name="ContinueTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
             </triggers>
-            <effect name="T1.3(effect)"/>
+            <effect name="T3(testEnd)"/>
           </transitions>
         </regions>
       </vertice>

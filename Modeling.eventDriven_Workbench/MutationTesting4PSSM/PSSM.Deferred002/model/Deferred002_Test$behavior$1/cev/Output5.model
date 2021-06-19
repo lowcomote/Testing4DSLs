@@ -45,7 +45,9 @@
         <triggers name="AnoterSignalTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
         </triggers>
-        <triggers name="hs"/>
+        <triggers name="HO">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
+        </triggers>
         <effect name="T6(effect)"/>
       </transitions>
       <transitions name="T7" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">

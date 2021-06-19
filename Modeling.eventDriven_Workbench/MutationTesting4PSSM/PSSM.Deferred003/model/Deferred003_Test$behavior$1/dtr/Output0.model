@@ -20,6 +20,10 @@
                 </triggers>
                 <effect name="T1.1.2(effect)"/>
               </transitions>
+              <transitions>
+                <source xsi:type="statemachines:Pseudostate" href="../../../../../PSSMMutation/data/model/Deferred003_Test$behavior$1.mutation13.0.model#//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@vertice.1"/>
+                <target xsi:type="statemachines:State" href="../../../../../PSSMMutation/data/model/Deferred003_Test$behavior$1.mutation13.0.model#//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@vertice.0"/>
+              </transitions>
             </regions>
             <exit name="S1.1(exit)"/>
             <deferrableTriggers name="ContinueTrigger">
@@ -61,10 +65,6 @@
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
         <effect name="T3(testEnd)"/>
-      </transitions>
-      <transitions>
-        <source xsi:type="statemachines:Pseudostate" href="../../../../../PSSMMutation/data/model/Deferred003_Test$behavior$1.mutation13.0.model#//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@vertice.1"/>
-        <target xsi:type="statemachines:State" href="../../../../../PSSMMutation/data/model/Deferred003_Test$behavior$1.mutation13.0.model#//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@vertice.0"/>
       </transitions>
     </regions>
   </statemachine>

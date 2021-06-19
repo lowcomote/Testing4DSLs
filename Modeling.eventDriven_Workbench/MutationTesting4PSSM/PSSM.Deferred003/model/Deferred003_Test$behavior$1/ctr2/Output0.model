@@ -62,8 +62,8 @@
         </triggers>
         <effect name="T3(testEnd)"/>
       </transitions>
-      <transitions name="DS">
-        <source xsi:type="statemachines:State" href="../../../../../PSSMMutation/data/model/Deferred003_Test$behavior$1.mutation10.0.model#//@statemachine/@regions.0/@vertice.1"/>
+      <transitions name="Z">
+        <source xsi:type="statemachines:State" href="../../../../../PSSMMutation/data/model/Deferred003_Test$behavior$1.mutation10.0.model#//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2"/>
       </transitions>
     </regions>
   </statemachine>

@@ -18,7 +18,7 @@
                 <triggers name="ContinueTrigger">
                   <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
                 </triggers>
-                <effect name="uN"/>
+                <effect name="Qxe"/>
               </transitions>
             </regions>
             <exit name="S1.1(exit)"/>

@@ -177,7 +177,7 @@ public class K3EventManagerLauncher {
 		if (this.eventOccurrences.size()>0) {
 			EventOccurrence occ;
 			try {
-				occ = this.eventOccurrences.poll(10000, TimeUnit.MILLISECONDS);
+				occ = this.eventOccurrences.poll(100, TimeUnit.MILLISECONDS);
 				if (occ != null && this.equalEventOccurrences(occ, eventOccurrence)) {
 					return "PASS";
 				}else {

@@ -20,7 +20,7 @@
                 </triggers>
                 <effect name="T1.1.2(effect)"/>
               </transitions>
-              <transitions name="Cpc">
+              <transitions name="ybX">
                 <source xsi:type="statemachines:State" href="../../../../../PSSMMutation/data/model/Deferred003_Test$behavior$1.mutation7.0.model#//@statemachine/@regions.0/@vertice.1"/>
                 <target xsi:type="statemachines:State" href="../../../../../PSSMMutation/data/model/Deferred003_Test$behavior$1.mutation8.0.model#//@statemachine/@regions.0/@vertice.1"/>
               </transitions>

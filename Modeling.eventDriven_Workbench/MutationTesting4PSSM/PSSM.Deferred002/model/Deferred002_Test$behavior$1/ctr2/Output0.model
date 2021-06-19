@@ -50,7 +50,7 @@
       <transitions name="T7" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <effect name="T7(testEnd)"/>
       </transitions>
-      <transitions name="dh">
+      <transitions name="Ud">
         <source xsi:type="statemachines:State" href="../../../../../PSSMMutation/data/model/Deferred002_Test$behavior$1.mutation10.0.model#//@statemachine/@regions.0/@vertice.1"/>
       </transitions>
     </regions>

@@ -13,6 +13,7 @@
               </vertice>
               <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@transitions.0"/>
               <vertice xsi:type="statemachines:FinalState" name="FinalState1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@transitions.1"/>
+              <vertice xsi:type="statemachines:State" name="NV" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.3"/>
               <transitions name="T1.1.1" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@vertice.0" kind="external"/>
               <transitions name="T1.1.2" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@vertice.2" kind="external">
                 <triggers name="ContinueTrigger">
@@ -47,6 +48,9 @@
             </triggers>
             <effect name="T1.3(effect)"/>
           </transitions>
+          <transitions target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@vertice.3">
+            <source xsi:type="statemachines:State" href="../../../../../PSSMMutation/data/model/Deferred003_Test$behavior$1.mutation1.0.model#//@statemachine/@regions.0/@vertice.1"/>
+          </transitions>
         </regions>
       </vertice>
       <vertice xsi:type="statemachines:FinalState" name="FinalState1" incomingTransitions="//@statemachine/@regions.0/@transitions.2"/>
@@ -61,9 +65,6 @@
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
         <effect name="T3(testEnd)"/>
-      </transitions>
-      <transitions>
-        <source xsi:type="statemachines:State" href="../../../../../PSSMMutation/data/model/Deferred003_Test$behavior$1.mutation1.0.model#//@statemachine/@regions.0/@vertice.1"/>
       </transitions>
     </regions>
   </statemachine>

@@ -39,7 +39,7 @@
             <triggers name="PendingTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
             </triggers>
-            <effect name="uN"/>
+            <effect name="Qxe"/>
           </transitions>
           <transitions name="T1.3" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.3" kind="external">
             <triggers name="ContinueTrigger">
