@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="ASCII"?>
+<testsuite:TestSuite
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:event="http://www.eclipse.org/gemoc/event"
+    xmlns:statemachines="http://org.tetrabox.examples.statemachines.interpretedstatemachines/statemachines/"
+    xmlns:testsuite="http://http://www.eclipse.org/gemoc/event/testsuite"
+    xmlns:value="http://www.eclipse.org/gemoc/value">
+  <testCases
+      name="Fork001_Test$behavior$1"
+      expectedTrace="T3(effect)::S1(entry)::T3.1(effect)::S1.3(entry)::S1.1(entry)::T4(effect)::S1.2(entry)::T5(testEnd)">
+    <model href="platform:/resource/PSSM.Fork001/model/Fork001_Test$behavior$1.model#/"/>
+    <scenario>
+      <event
+          href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.0"/>
+      <args>
+        <parameter
+            href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.0/@params.0"/>
+        <value
+            xsi:type="value:SingleReferenceValue">
+          <referenceValue
+              href="platform:/resource/PSSM.Fork001/model/Fork001_Test$behavior$1.model#//@statemachine"/>
+        </value>
+      </args>
+    </scenario>
+    <scenario>
+      <event
+          href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.1"/>
+      <args>
+        <parameter
+            href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.1/@params.0"/>
+        <value
+            xsi:type="value:SingleReferenceValue">
+          <referenceValue
+              href="platform:/resource/PSSM.Fork001/model/Fork001_Test$behavior$1.model#//@statemachine"/>
+        </value>
+      </args>
+      <args>
+        <parameter
+            href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.1/@params.1"/>
+        <value
+            xsi:type="value:SingleObjectValue">
+          <objectValue
+              xsi:type="statemachines:SignalEventOccurrence">
+            <signal
+                href="platform:/resource/PSSM.Fork001/model/Fork001_Test$behavior$1.model#//@signals.0"/>
+          </objectValue>
+        </value>
+      </args>
+    </scenario>
+    <scenario
+        type="EXPOSED">
+      <event
+          href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.2"/>
+      <args>
+        <parameter
+            href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.2/@params.0"/>
+        <value
+            xsi:type="value:SingleReferenceValue"
+            referenceValue="//@storage.0"/>
+      </args>
+    </scenario>
+    <scenario
+        type="EXPOSED">
+      <event
+          href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.2"/>
+      <args>
+        <parameter
+            href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.2/@params.0"/>
+        <value
+            xsi:type="value:SingleReferenceValue"
+            referenceValue="//@storage.2"/>
+      </args>
+    </scenario>
+    <scenario
+        type="EXPOSED">
+      <event
+          href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.2"/>
+      <args>
+        <parameter
+            href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.2/@params.0"/>
+        <value
+            xsi:type="value:SingleReferenceValue"
+            referenceValue="//@storage.4"/>
+      </args>
+    </scenario>
+    <scenario
+        type="EXPOSED">
+      <event
+          href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.2"/>
+      <args>
+        <parameter
+            href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.2/@params.0"/>
+        <value
+            xsi:type="value:SingleReferenceValue"
+            referenceValue="//@storage.6"/>
+      </args>
+    </scenario>
+    <scenario
+        type="EXPOSED">
+      <event
+          href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.2"/>
+      <args>
+        <parameter
+            href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.2/@params.0"/>
+        <value
+            xsi:type="value:SingleReferenceValue"
+            referenceValue="//@storage.8"/>
+      </args>
+    </scenario>
+    <scenario
+        type="EXPOSED">
+      <event
+          href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.2"/>
+      <args>
+        <parameter
+            href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.2/@params.0"/>
+        <value
+            xsi:type="value:SingleReferenceValue"
+            referenceValue="//@storage.10"/>
+      </args>
+    </scenario>
+    <scenario
+        type="EXPOSED">
+      <event
+          href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.2"/>
+      <args>
+        <parameter
+            href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.2/@params.0"/>
+        <value
+            xsi:type="value:SingleReferenceValue"
+            referenceValue="//@storage.12"/>
+      </args>
+    </scenario>
+    <scenario
+        type="EXPOSED">
+      <event
+          href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.2"/>
+      <args>
+        <parameter
+            href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.2/@params.0"/>
+        <value
+            xsi:type="value:SingleReferenceValue"
+            referenceValue="//@storage.14"/>
+      </args>
+    </scenario>
+    <scenario
+        xsi:type="event:StopEventOccurrence"/>
+  </testCases>
+  <storage xsi:type="statemachines:SignalEventOccurrence"
+      signal="//@storage.1"/>
+  <storage xsi:type="statemachines:Signal"
+      name="T3(effect)"/>
+  <storage xsi:type="statemachines:SignalEventOccurrence"
+      signal="//@storage.3"/>
+  <storage xsi:type="statemachines:Signal"
+      name="S1(entry)"/>
+  <storage xsi:type="statemachines:SignalEventOccurrence"
+      signal="//@storage.5"/>
+  <storage xsi:type="statemachines:Signal"
+      name="T3.1(effect)"/>
+  <storage xsi:type="statemachines:SignalEventOccurrence"
+      signal="//@storage.7"/>
+  <storage xsi:type="statemachines:Signal"
+      name="S1.3(entry)"/>
+  <storage xsi:type="statemachines:SignalEventOccurrence"
+      signal="//@storage.9"/>
+  <storage xsi:type="statemachines:Signal"
+      name="S1.1(entry)"/>
+  <storage xsi:type="statemachines:SignalEventOccurrence"
+      signal="//@storage.11"/>
+  <storage xsi:type="statemachines:Signal"
+      name="T4(effect)"/>
+  <storage xsi:type="statemachines:SignalEventOccurrence"
+      signal="//@storage.13"/>
+  <storage xsi:type="statemachines:Signal"
+      name="S1.2(entry)"/>
+  <storage xsi:type="statemachines:SignalEventOccurrence"
+      signal="//@storage.15"/>
+  <storage xsi:type="statemachines:Signal"
+      name="T5(testEnd)"/>
+</testsuite:TestSuite>

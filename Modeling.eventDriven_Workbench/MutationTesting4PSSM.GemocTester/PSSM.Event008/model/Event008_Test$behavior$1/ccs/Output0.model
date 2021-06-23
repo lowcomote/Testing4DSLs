@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:statemachines="http://org.tetrabox.examples.statemachines.interpretedstatemachines/statemachines/">
+  <statemachines:CustomSystem>
+    <statemachine name="Event008_Test$behavior$1"/>
+    <signals name="Start"/>
+    <signals name="Continue"/>
+  </statemachines:CustomSystem>
+  <statemachines:Transition>
+    <source xsi:type="statemachines:State" href="../../../../../org.imt.tdl.PSSMMutation/data/model/Event008_Test$behavior$1.mutation1.0.model#//@statemachine/@regions.0/@vertice.1"/>
+    <target xsi:type="statemachines:State" href="../../../../../org.imt.tdl.PSSMMutation/data/model/Event008_Test$behavior$1.mutation1.0.model#//@statemachine/@regions.0/@vertice.5"/>
+  </statemachines:Transition>
+</xmi:XMI>

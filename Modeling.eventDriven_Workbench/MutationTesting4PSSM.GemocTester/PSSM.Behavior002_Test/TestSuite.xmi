@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ASCII"?>
+<testsuite:TestSuite
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:event="http://www.eclipse.org/gemoc/event"
+    xmlns:statemachines="http://org.tetrabox.examples.statemachines.interpretedstatemachines/statemachines/"
+    xmlns:testsuite="http://http://www.eclipse.org/gemoc/event/testsuite"
+    xmlns:value="http://www.eclipse.org/gemoc/value">
+  <testCases
+      name="Behavior002_Test$behavior$1"
+      expectedTrace="S1(exit)::T2(testEnd)">
+    <model href="../PSSM.Behavior002/model/Behavior002_Test$behavior$1.model#/"/>
+    <scenario>
+      <event
+          href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.0"/>
+      <args>
+        <parameter
+            href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.0/@params.0"/>
+        <value
+            xsi:type="value:SingleReferenceValue">
+          <referenceValue
+              href="../PSSM.Behavior002/model/Behavior002_Test$behavior$1.model#//@statemachine"/>
+        </value>
+      </args>
+    </scenario>
+    <scenario>
+      <event
+          href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.1"/>
+      <args>
+        <parameter
+            href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.1/@params.0"/>
+        <value
+            xsi:type="value:SingleReferenceValue">
+          <referenceValue
+              href="../PSSM.Behavior002/model/Behavior002_Test$behavior$1.model#//@statemachine"/>
+        </value>
+      </args>
+      <args>
+        <parameter
+            href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.1/@params.1"/>
+        <value
+            xsi:type="value:SingleObjectValue">
+          <objectValue
+              xsi:type="statemachines:SignalEventOccurrence">
+            <signal
+                href="../PSSM.Behavior002/model/Behavior002_Test$behavior$1.model#//@signals.0"/>
+          </objectValue>
+        </value>
+      </args>
+    </scenario>
+    <scenario
+        type="EXPOSED">
+      <event
+          href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.2"/>
+      <args>
+        <parameter
+            href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.2/@params.0"/>
+        <value
+            xsi:type="value:SingleReferenceValue"
+            referenceValue="//@storage.0"/>
+      </args>
+    </scenario>
+    <scenario
+        type="EXPOSED">
+      <event
+          href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.2"/>
+      <args>
+        <parameter
+            href="../../plugin/org.tetrabox.examples.statemachines.interpretedstatemachines.relationships/InterpretedStateMachines.bi#//@events.2/@params.0"/>
+        <value
+            xsi:type="value:SingleReferenceValue"
+            referenceValue="//@storage.2"/>
+      </args>
+    </scenario>
+    <scenario
+        xsi:type="event:StopEventOccurrence"/>
+  </testCases>
+  <storage xsi:type="statemachines:SignalEventOccurrence"
+      signal="//@storage.1"/>
+  <storage xsi:type="statemachines:Signal"
+      name="S1(exit)"/>
+  <storage xsi:type="statemachines:SignalEventOccurrence"
+      signal="//@storage.3"/>
+  <storage xsi:type="statemachines:Signal"
+      name="T2(testEnd)"/>
+</testsuite:TestSuite>
