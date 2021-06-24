@@ -85,7 +85,7 @@ class TestDescriptionAspect{
 		_self.testConfiguration.activateConfiguration(_self.launcher)
 		_self.behaviourDescription.callBehavior()
 		val modelExecutionResult = _self.testConfiguration.stopModelExecutionEngine(_self.launcher)
-		if (modelExecutionResult.contains("FAIL")){
+		if (modelExecutionResult != null && modelExecutionResult.contains("FAIL")){
 			_self.testCaseResult.value = "FAIL"
 			_self.testCaseResult.description = modelExecutionResult.substring(modelExecutionResult.indexOf(":")+1)
 		}
@@ -104,7 +104,7 @@ class TestDescriptionAspect{
 		_self.testConfiguration.activateConfiguration(_self.launcher, MUTPath)
 		_self.behaviourDescription.callBehavior()
 		val modelExecutionResult = _self.testConfiguration.stopModelExecutionEngine(_self.launcher)
-		if (modelExecutionResult.contains("FAIL")){
+		if (modelExecutionResult != null && modelExecutionResult.contains("FAIL")){
 			_self.testCaseResult.value = modelExecutionResult
 		}
 		if (_self.testCaseResult.value.equals("PASS")) {
