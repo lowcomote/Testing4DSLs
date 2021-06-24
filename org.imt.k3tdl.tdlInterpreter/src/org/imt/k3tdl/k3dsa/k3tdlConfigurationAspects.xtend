@@ -33,7 +33,7 @@ class GateInstanceAspect {
 	private Object expectedOutput = null
 	
 	private EngineFactory gateLauncher
-
+	
 	public final static String RUN_MODEL = "runModel"
 	public final static String RUN_MODEL_ASYNC = "runModelAsynchronous"
 	public final static String STOP_EXECUTION = "stopModelExecution"
@@ -164,7 +164,7 @@ class GateInstanceAspect {
 		}
 		return "FAIL: Cannot send data to the MUT"
 	}
-
+	
 	def String setModelState(DataInstanceUse arg){
 		//get the current MUTResource
 		var MUTResource = _self.gateLauncher.MUTResource;
