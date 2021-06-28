@@ -1,6 +1,7 @@
 package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
+
 import fr.inria.diverse.k3.al.annotationprocessor.Step
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 
@@ -49,6 +50,7 @@ import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
 import org.etsi.mts.tdl.Target
 import org.imt.tdl.testResult.TDLMessageResult
 import org.etsi.mts.tdl.LiteralValueUse
+import org.etsi.mts.tdl.DataInstanceUse
 
 @Aspect (className = BehaviourDescription)
 class BehaviourDescriptionAspect{
@@ -219,7 +221,14 @@ class MessageAspect extends InteractoinAspect{
 				return true //continue test case execution
 			}else{//the argument has to be sent to the MUT
 				t.targetGate.gate.setLauncher(_self.parentTestDescription.launcher)
-				var String verdict = t.targetGate.gate.sendArgument2sut(_self.argument)			
+				var String verdict
+				val arg = (_self.argument as DataInstanceUse)
+				if (arg.dataInstance.name == "debugModel") {
+					_self.parentTestDescription.launcher.debugModel
+					verdict = "PASS: Debugging the model under test"
+				}else{
+					verdict = t.targetGate.gate.sendArgument2sut(_self.argument)
+				}			
 				_self.addMessageResult(verdict)
 				var boolean result = true
 				if (verdict.contains("FAIL")){
