@@ -3,6 +3,7 @@ package org.imt.tdl.executionEngine;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.debug.core.DebugPlugin;
+import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.ILaunchManager;
@@ -19,8 +20,10 @@ import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
 
 public abstract class AbstractEngine implements IExecutionEngine{
 	
+	protected ILaunchConfiguration launchConfiguration;
 	protected SequentialRunConfiguration runConfiguration;
 	protected CustomModelExecutionContext executioncontext;
+	
 	protected ExecutionMode executionMode;
 	protected String _modelLocation;
 	protected String _siriusRepresentationLocation;
@@ -37,7 +40,7 @@ public abstract class AbstractEngine implements IExecutionEngine{
 	@Override
 	public void setUp(String MUTPath, String DSLPath) {
 		this._modelLocation = MUTPath;
-		//this._siriusRepresentationLocation = this.getModelResource().getURI().toString().split("/")[1] + "/representations.aird";
+		this._siriusRepresentationLocation = MUTPath.split("/")[1] + "/representations.aird";
 		this._delay = "0";
 		this._language = this.getDslName(DSLPath);
 		this._entryPointModelElement = "/";
@@ -45,20 +48,21 @@ public abstract class AbstractEngine implements IExecutionEngine{
 		this._animationFirstBreak = true;
 		this._modelInitializationMethod = getModelInitializationMethodName();
 		this._modelInitializationArguments = "";
-		this.executionMode = ExecutionMode.Run;
+		this.executionMode = ExecutionMode.Animation;
+		this.createLaunchConfiguration();
 		this.configureEngine();
 	}
 	
 	protected abstract String getModelInitializationMethodName();
 	protected abstract String getModelEntryPointMethodName();
 	
-	private void configureEngine() {
+	private void createLaunchConfiguration() {
 		// Create a new Launch Configuration
 		ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
 		ILaunchConfigurationType type = manager.getLaunchConfigurationType("org.eclipse.gemoc.execution.sequential.javaengine.ui.launcher");
 		ILaunchConfigurationWorkingCopy configuration = null;
 		try {
-			configuration = type.newInstance(null, "Run MUT");
+			configuration = type.newInstance(null, "Debug MUT");
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
@@ -73,9 +77,20 @@ public abstract class AbstractEngine implements IExecutionEngine{
 		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_ARGUMENTS, this._modelInitializationArguments);
 		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_BREAK_START, this._animationFirstBreak);
 		// DebugModelID for sequential engine
-		configuration.setAttribute(SequentialRunConfiguration.DEBUG_MODEL_ID, Activator.DEBUG_MODEL_ID);
+		
+		//configuration.setAttribute(SequentialRunConfiguration.DEBUG_MODEL_ID, Activator.DEBUG_MODEL_ID);
+		configuration.setAttribute(SequentialRunConfiguration.DEBUG_MODEL_ID, "org.eclipse.gemoc.execution.sequential.javaengine.ui.debugModel");
 		try {
-			this.runConfiguration = new SequentialRunConfiguration(configuration);
+			this.launchConfiguration = configuration.doSave();
+		} catch (CoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void configureEngine() {
+		try {
+			this.runConfiguration = new SequentialRunConfiguration(this.launchConfiguration);
 			this.executioncontext = new CustomModelExecutionContext(this.runConfiguration, this.executionMode);
 		} catch (CoreException e) {
 			e.printStackTrace();
@@ -90,7 +105,6 @@ public abstract class AbstractEngine implements IExecutionEngine{
 		}
 		this.MUTResource = this.executioncontext.getResourceModel();
 	}
-
 	@Override
 	public void setModelResource(Resource resource) {
 		this.MUTResource = resource;
