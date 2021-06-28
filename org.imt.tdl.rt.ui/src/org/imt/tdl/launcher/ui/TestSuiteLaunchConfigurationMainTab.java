@@ -13,6 +13,7 @@ package org.imt.tdl.launcher.ui;
 import java.util.ArrayList;
 
 
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -32,8 +33,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gemoc.commons.eclipse.ui.dialogs.SelectAnyIFileDialog;
 import org.eclipse.gemoc.execution.eventBasedEngine.EventBasedRunConfiguration;
 import org.eclipse.gemoc.execution.sequential.javaengine.PlainK3ExecutionEngine;
-import org.eclipse.gemoc.execution.sequential.javaengine.ui.Activator;
-import org.eclipse.gemoc.execution.sequential.javaengine.ui.launcher.LauncherMessages;
 import org.eclipse.gemoc.executionframework.engine.commons.DslHelper;
 import org.eclipse.gemoc.executionframework.engine.ui.launcher.tabs.AbstractLaunchConfigurationTab;
 import org.eclipse.jface.dialogs.Dialog;
@@ -57,6 +56,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
+import org.eclipse.gemoc.execution.sequential.javaengine.ui.Activator;
+import org.eclipse.gemoc.execution.sequential.javaengine.ui.launcher.LauncherMessages;
 
 public class TestSuiteLaunchConfigurationMainTab extends AbstractLaunchConfigurationTab {
 
