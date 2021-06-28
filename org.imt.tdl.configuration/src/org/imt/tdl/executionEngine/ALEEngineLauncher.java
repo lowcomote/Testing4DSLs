@@ -6,6 +6,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.debug.core.DebugPlugin;
+import org.eclipse.debug.core.ILaunchManager;
+import org.eclipse.debug.core.Launch;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecoretools.ale.core.env.IAleEnvironment;
@@ -17,13 +22,17 @@ import org.eclipse.gemoc.ale.interpreted.engine.AleEngine;
 import org.eclipse.gemoc.ale.interpreted.engine.Helper;
 import org.eclipse.gemoc.ale.interpreted.engine.sirius.ALESiriusInterpreter;
 import org.eclipse.gemoc.ale.interpreted.engine.sirius.ALESiriusInterpreterProviderAddon;
+import org.eclipse.gemoc.execution.sequential.javaengine.ui.launcher.GemocSourceLocator;
 import org.eclipse.gemoc.executionframework.engine.commons.DslHelper;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.eclipse.gemoc.executionframework.engine.ui.Activator;
 import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
+import org.imt.sequential.javaengine.custom.ui.launcher.CustomALELauncher;
+import org.imt.sequential.javaengine.custom.ui.launcher.CustomK3Launcher;
 
 public class ALEEngineLauncher extends AbstractEngine{
 	private AleEngine aleEngine = null;
+	
 	@Override
 	public String executeModelSynchronous() {
 		try{
@@ -38,6 +47,7 @@ public class ALEEngineLauncher extends AbstractEngine{
 		this.aleEngine.dispose();
 		return "PASS: The model under test executed successfully";
 	}
+	
 	@Override
 	public String executeModelAsynchronous() {
 		try{
@@ -50,6 +60,7 @@ public class ALEEngineLauncher extends AbstractEngine{
 		this.aleEngine.start();
 		return "The engine is running";
 	}
+	
 	@Override
 	public String stopAsynchronousExecution() {
 		this.aleEngine.stop();
@@ -57,6 +68,22 @@ public class ALEEngineLauncher extends AbstractEngine{
 		this.aleEngine.dispose();
 		return "PASS: The model under test executed successfully";
 	}
+	
+	@Override
+	public void debugModel() {
+		this.executioncontext.setResourceModel(this.getModelResource());
+		CustomALELauncher launcher = new CustomALELauncher();
+		launcher.executioncontext = this.executioncontext;
+		Launch debugLaunch = new Launch(this.launchConfiguration, ILaunchManager.DEBUG_MODE, new GemocSourceLocator());
+		DebugPlugin.getDefault().getLaunchManager().addLaunch(debugLaunch);
+		try{
+			launcher.launch(this.launchConfiguration, ILaunchManager.DEBUG_MODE, debugLaunch, new NullProgressMonitor());
+		} catch (CoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	private AleEngine createExecutionEngine() throws EngineContextException{
 		AleEngine engine = new AleEngine();
 		//if the resource is updated (e.g., the value of its dynamic features are set by the test case)
