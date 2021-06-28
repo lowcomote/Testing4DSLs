@@ -1,20 +1,22 @@
 package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
-
-
 import fr.inria.diverse.k3.al.annotationprocessor.InitializeModel
 import fr.inria.diverse.k3.al.annotationprocessor.Main
 import fr.inria.diverse.k3.al.annotationprocessor.Step
 import java.util.ArrayList
+import java.util.Arrays
 import java.util.List
+import org.eclipse.core.runtime.IConfigurationElement
+import org.eclipse.core.runtime.Platform
 import org.eclipse.emf.common.util.EList
+import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.etsi.mts.tdl.Annotation
 import org.etsi.mts.tdl.Package
 import org.etsi.mts.tdl.TestConfiguration
 import org.etsi.mts.tdl.TestDescription
-import org.etsi.mts.tdl.BehaviourDescription
-import org.imt.tdl.executionEngine.EngineFactory
+import org.imt.tdl.configuration.EngineFactory
 import org.imt.tdl.testResult.TDLTestCaseResult
 import org.imt.tdl.testResult.TDLTestPackageResult
 import org.imt.tdl.testResult.TestResultUtil
@@ -22,20 +24,6 @@ import org.imt.tdl.testResult.TestResultUtil
 import static extension org.imt.k3tdl.k3dsa.BehaviourDescriptionAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
-import org.eclipse.core.runtime.Platform
-import java.util.Arrays
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
-import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.core.runtime.IConfigurationElement
-import java.util.concurrent.ScheduledExecutorService
-import java.util.concurrent.Executors
-import java.util.concurrent.Future
-import java.util.concurrent.TimeUnit
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.TimeoutException
-import org.eclipse.emf.transaction.TransactionalEditingDomain
-import org.eclipse.emf.transaction.util.TransactionUtil
-import org.eclipse.emf.transaction.RecordingCommand
 
 @Aspect(className = Package)
 class PackageAspect {
