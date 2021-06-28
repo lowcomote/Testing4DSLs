@@ -11,6 +11,7 @@
 package org.imt.tdl.eventManager;
 
 import java.util.ArrayList;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -38,7 +39,6 @@ import org.eclipse.gemoc.dsl.debug.ide.launch.AbstractDSLLaunchConfigurationDele
 import org.eclipse.gemoc.execution.eventBasedEngine.EventBasedExecutionEngine;
 import org.eclipse.gemoc.execution.eventBasedEngine.EventBasedModelExecutionContext;
 import org.eclipse.gemoc.execution.eventBasedEngine.EventBasedRunConfiguration;
-import org.eclipse.gemoc.execution.sequential.javaengine.ui.Activator;
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.BehavioralInterface;
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.Event;
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.EventParameter;
@@ -66,6 +66,7 @@ import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
 import org.eclipse.gemoc.xdsmlframework.api.core.IExecutionEngine;
 import org.eclipse.gemoc.xdsmlframework.api.core.EngineStatus.RunStatus;
 import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
+import org.eclipse.gemoc.execution.sequential.javaengine.ui.Activator;
 import org.imt.tdl.testResult.TestResultUtil;
 
 public class K3EventManagerLauncher {
