@@ -4,7 +4,7 @@ Bundle-Name: Runner
 Bundle-SymbolicName: org.imt.tdl.runner
 Bundle-Version: 1.0.0.qualifier
 Export-Package: org.imt.tdl.runner
-Require-Bundle: org.eclipse.gemoc.execution.sequential.javaengine.ui,
+Require-Bundle: org.imt.sequential.javaengine.custom.ui,
  org.eclipse.gemoc.executionframework.engine,
  org.eclipse.gemoc.xdsmlframework.api,
  org.eclipse.core.resources,
