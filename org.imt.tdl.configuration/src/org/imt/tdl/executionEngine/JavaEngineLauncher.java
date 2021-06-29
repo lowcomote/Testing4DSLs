@@ -1,7 +1,6 @@
 package org.imt.tdl.executionEngine;
 
 import java.lang.reflect.Method;
-
 import java.util.Iterator;
 import java.util.Set;
 
@@ -10,13 +9,12 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.Launch;
-import org.eclipse.debug.core.model.ISourceLocator;
 import org.eclipse.gemoc.execution.sequential.javaengine.PlainK3ExecutionEngine;
 import org.eclipse.gemoc.execution.sequential.javaengine.ui.launcher.GemocSourceLocator;
 import org.eclipse.gemoc.executionframework.engine.commons.DslHelper;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.eclipse.gemoc.executionframework.engine.commons.K3DslHelper;
-import org.imt.sequential.javaengine.custom.ui.launcher.CustomK3Launcher;
+import org.imt.sequential.engine.custom.launcher.CustomK3Launcher;
 import org.osgi.framework.Bundle;
 
 public class JavaEngineLauncher extends AbstractEngine{
@@ -86,7 +84,7 @@ public class JavaEngineLauncher extends AbstractEngine{
 		CustomK3Launcher launcher = new CustomK3Launcher();
 		launcher.executioncontext = this.executioncontext;
 		
-		return launcher.createExecutionEngine(this.runConfiguration, this.executionMode);
+		return (PlainK3ExecutionEngine) launcher.createExecutionEngine(this.runConfiguration, this.executionMode);
 	}
 	@Override
 	protected String getModelEntryPointMethodName(){

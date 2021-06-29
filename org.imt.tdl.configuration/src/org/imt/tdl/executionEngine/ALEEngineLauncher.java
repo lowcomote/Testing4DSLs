@@ -27,8 +27,7 @@ import org.eclipse.gemoc.executionframework.engine.commons.DslHelper;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.eclipse.gemoc.executionframework.engine.ui.Activator;
 import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
-import org.imt.sequential.javaengine.custom.ui.launcher.CustomALELauncher;
-import org.imt.sequential.javaengine.custom.ui.launcher.CustomK3Launcher;
+import org.imt.sequential.engine.custom.launcher.CustomALELauncher;
 
 public class ALEEngineLauncher extends AbstractEngine{
 	private AleEngine aleEngine = null;
