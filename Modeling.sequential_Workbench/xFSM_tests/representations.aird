@@ -18,4 +18,11 @@
   <semanticResources>gemoc-gen/execution/execution-20210610_161628/TrafficLight_Test.tdlan2</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210610_161713/TrafficLight_Test.tdlan2</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210610_161728/StringUpperCase_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210624_131109/BitShifting_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210624_131231/BitShifting_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210624_131420/BitShifting_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210624_141233/BitShifting_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210624_141309/BitShifting_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210624_145930/BitShifting_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210624_150056/BitShifting_Test.tdlan2</semanticResources>
 </viewpoint:DAnalysis>

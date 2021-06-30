@@ -9,8 +9,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.sirius,
  org.eclipse.sirius.common.acceleo.aql,
  org.eclipse.xtext,
- org.eclipse.gemoc.executionframework.extensions.sirius;bundle-version="0.0.0";visibility:="reexport",
- org.eclipse.gemoc.execution.sequential.javaengine.ui;bundle-version=0.0.0;visibility:=reexport
+ org.eclipse.gemoc.executionframework.extensions.sirius;bundle-version="0.0.0";visibility:=reexport,
+ org.eclipse.gemoc.execution.sequential.javaengine.ui;bundle-version="4.0.0"
 Bundle-ManifestVersion: 2
 Bundle-Activator: org.eclipse.gemoc.example.k3fsm.design.Activator
 Bundle-ActivationPolicy: lazy
