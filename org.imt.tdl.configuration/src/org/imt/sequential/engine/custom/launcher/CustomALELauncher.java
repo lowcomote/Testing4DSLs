@@ -22,7 +22,6 @@ import org.eclipse.gemoc.commons.eclipse.ui.ViewHelper;
 import org.eclipse.gemoc.execution.sequential.javaengine.ui.Activator;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.eclipse.gemoc.executionframework.engine.commons.GenericModelExecutionContext;
-import org.eclipse.gemoc.executionframework.engine.commons.sequential.ISequentialRunConfiguration;
 import org.eclipse.gemoc.executionframework.engine.commons.sequential.SequentialRunConfiguration;
 import org.eclipse.gemoc.executionframework.engine.ui.launcher.AbstractSequentialGemocLauncher;
 import org.eclipse.gemoc.executionframework.ui.views.engine.EnginesStatusView;
@@ -37,7 +36,7 @@ public class CustomALELauncher extends AbstractSequentialGemocLauncher<GenericMo
 	public GenericModelExecutionContext<SequentialRunConfiguration> executioncontext;
 
 	@Override
-	protected IExecutionEngine<GenericModelExecutionContext<SequentialRunConfiguration>> createExecutionEngine(SequentialRunConfiguration runConfiguration, ExecutionMode executionMode)
+	public IExecutionEngine<GenericModelExecutionContext<SequentialRunConfiguration>> createExecutionEngine(SequentialRunConfiguration runConfiguration, ExecutionMode executionMode)
 			throws CoreException, EngineContextException {
 		AleEngine engine = new AleEngine();
 		engine.initialize(this.executioncontext);
