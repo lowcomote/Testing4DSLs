@@ -11,6 +11,7 @@
 package org.imt.sequential.engine.custom.launcher;
 
 import org.eclipse.core.runtime.CoreException;
+
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.emf.ecore.EObject;
