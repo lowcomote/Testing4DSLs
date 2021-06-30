@@ -1,7 +1,6 @@
 package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
-
 import java.util.ArrayList
 import java.util.HashMap
 import java.util.Map
