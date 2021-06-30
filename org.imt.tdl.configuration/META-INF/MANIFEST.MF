@@ -29,7 +29,6 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.17.100",
  org.eclipse.gemoc.dsl;bundle-version="3.3.0",
  org.eclipse.gemoc.dsl.debug.ide;bundle-version="3.0.1",
  org.eclipse.gemoc.dsl.debug.ide.sirius.ui;bundle-version="3.0.1",
- org.eclipse.gemoc.commons.eclipse,
  org.eclipse.gemoc.commons.eclipse.ui;bundle-version="0.1.0",
  org.eclipse.gemoc.commons.eclipse.messagingsystem.api;bundle-version="2.4.0",
  org.eclipse.gemoc.commons.eclipse.messagingsystem.ui;bundle-version="2.4.0",
@@ -57,6 +56,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.17.100",
  org.eclipse.gemoc.dsl.debug.ide.sirius.ui;bundle-version="1.0.0",
  fr.inria.diverse.k3.al.annotationprocessor.plugin,
  fr.inria.diverse.melange.resource,
- org.imt.tdl.testResult;bundle-version="1.0.0"
+ org.imt.tdl.testResult;bundle-version="1.0.0",
+ org.eclipse.gemoc.execution.eventBasedEngine.ui
 Import-Package: org.eclipse.emf.ecore.provider,
  org.eclipse.ui.plugin
