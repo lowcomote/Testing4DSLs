@@ -10,26 +10,22 @@
  *******************************************************************************/
 package org.imt.tdl.eventManager;
 
-import java.util.ArrayList;
-
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TransferQueue;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.debug.core.ILaunchManager;
+import org.eclipse.debug.core.Launch;
+import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -37,20 +33,19 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.dsl.debug.ide.launch.AbstractDSLLaunchConfigurationDelegate;
 import org.eclipse.gemoc.execution.eventBasedEngine.EventBasedExecutionEngine;
-import org.eclipse.gemoc.execution.eventBasedEngine.EventBasedModelExecutionContext;
 import org.eclipse.gemoc.execution.eventBasedEngine.EventBasedRunConfiguration;
+import org.eclipse.gemoc.execution.eventBasedEngine.ui.launcher.EventBasedLauncher;
+import org.eclipse.gemoc.execution.sequential.javaengine.ui.Activator;
+import org.eclipse.gemoc.execution.sequential.javaengine.ui.launcher.GemocSourceLocator;
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.BehavioralInterface;
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.Event;
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.EventParameter;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.eclipse.gemoc.executionframework.event.manager.EventManagerUtils;
-import org.eclipse.gemoc.executionframework.event.manager.GenericEventManager;
-import org.eclipse.gemoc.executionframework.event.manager.IEventManagerListener;
 import org.eclipse.gemoc.executionframework.event.model.event.EventFactory;
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrence;
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrenceArgument;
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrenceType;
-import org.eclipse.gemoc.executionframework.event.model.event.StopEventOccurrence;
 import org.eclipse.gemoc.executionframework.value.model.value.BooleanAttributeValue;
 import org.eclipse.gemoc.executionframework.value.model.value.BooleanObjectAttributeValue;
 import org.eclipse.gemoc.executionframework.value.model.value.FloatAttributeValue;
@@ -62,21 +57,22 @@ import org.eclipse.gemoc.executionframework.value.model.value.SingleReferenceVal
 import org.eclipse.gemoc.executionframework.value.model.value.StringAttributeValue;
 import org.eclipse.gemoc.executionframework.value.model.value.Value;
 import org.eclipse.gemoc.executionframework.value.model.value.ValuePackage;
-import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
-import org.eclipse.gemoc.xdsmlframework.api.core.IExecutionEngine;
 import org.eclipse.gemoc.xdsmlframework.api.core.EngineStatus.RunStatus;
-import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
-import org.eclipse.gemoc.execution.sequential.javaengine.ui.Activator;
+import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
 import org.imt.tdl.testResult.TestResultUtil;
 
 public class K3EventManagerLauncher {
-
+	
+	private String MUTPath;
 	private String DSLPath;
 	private Resource MUTResource = null;
 	
+	private ILaunchConfiguration launchConf;
+	private EventBasedRunConfiguration runConf;
 	protected EventBasedExecutionEngine executionEngine = null;
-	GenericEventManager eventManager = null;
-	LinkedTransferQueue<EventOccurrence> eventOccurrences = null;
+	
+	private EventBasedLauncher launcher;
+	
 	// progress monitor used during launch; useful for operations that wish to
 	// contribute to the progress bar
 	protected IProgressMonitor launchProgressMonitor = null;
@@ -84,32 +80,8 @@ public class K3EventManagerLauncher {
 	private final ILaunchConfigurationType launchType = DebugPlugin.getDefault().getLaunchManager()
 			.getLaunchConfigurationType("org.eclipse.gemoc.execution.sequential.javaengine.ui.launcher");
 
-	private EventBasedExecutionEngine createExecutionEngine(EventBasedRunConfiguration runConfiguration, ExecutionMode executionMode)
-			throws CoreException, EngineContextException {
-		// create and initialize engine
-		EventBasedExecutionEngine executionEngine = new EventBasedExecutionEngine();
-		EventBasedModelExecutionContext executioncontext = new EventBasedModelExecutionContext(runConfiguration, executionMode);
-		executioncontext.getExecutionPlatform().getModelLoader().setProgressMonitor(this.launchProgressMonitor);
-		executioncontext.initializeResourceModel();
-		executionEngine.initialize(executioncontext);
-		return executionEngine;
-	}
-
-	private ILaunchConfiguration getLaunchConfiguration(String MUTPath, String languageName, Set<String> implRelIds, Set<String> subtypeRelIds) throws CoreException {
-		final ILaunchConfigurationWorkingCopy configuration = launchType.newInstance(null, "event_basedTesting");
-		configuration.setAttribute(AbstractDSLLaunchConfigurationDelegate.RESOURCE_URI, MUTPath);
-		configuration.setAttribute(EventBasedRunConfiguration.LAUNCH_SELECTED_LANGUAGE, languageName);
-		configuration.setAttribute(EventBasedRunConfiguration.WAIT_FOR_EVENT, true);
-		configuration.setAttribute(EventBasedRunConfiguration.IMPL_REL_IDS, implRelIds);
-		configuration.setAttribute(EventBasedRunConfiguration.SUBTYPE_REL_IDS, subtypeRelIds);
-		configuration.setAttribute(EventBasedRunConfiguration.DEBUG_MODEL_ID, Activator.DEBUG_MODEL_ID);
-		return configuration;
-	}
-
 	public final void setup(String MUTPath, String DSLPath){
-		//final String languageName = configuration.getAttribute("LANGUAGE_NAME", "");
-		//final Set<String> implRelIds = configuration.getAttribute("IMPL_REL_IDS", Collections.emptySet());
-		//final Set<String> subtypeRelIds = configuration.getAttribute("SUBTYPE_REL_IDS", Collections.emptySet());
+		this.MUTPath = MUTPath;
 		this.DSLPath = DSLPath;
 		final String languageName = this.getDslName(DSLPath);
 		final String implemRelId = this.getImplRel(DSLPath);
@@ -118,55 +90,60 @@ public class K3EventManagerLauncher {
 		implRelIds.add(implemRelId);
 		final Set<String> subtypeRelIds =  new HashSet<>();
 		subtypeRelIds.add(subtypeRelId);
-			
+		
 		try {
-			final ILaunchConfiguration launchConf = getLaunchConfiguration(MUTPath, languageName, implRelIds, subtypeRelIds);
-			final EventBasedRunConfiguration runConf = new EventBasedRunConfiguration(launchConf);
-			final EventBasedExecutionEngine engine = createExecutionEngine(runConf, ExecutionMode.Run);
-			this.executionEngine = engine;
-			
-			eventOccurrences = new LinkedTransferQueue<>();
-			String PLUGIN_ID = "org.eclipse.gemoc.execution.sequential.javaengine.ui"; 		
-			Job job = new Job(getDebugJobName()) {
-				@Override
-				protected IStatus run(IProgressMonitor monitor) {
-					engine.startSynchronous();
-					return new Status(IStatus.OK, PLUGIN_ID, "Execution started");
-				}
-			};
-			final TransferQueue<Object> queue = new LinkedTransferQueue<>();
-			engine.getExecutionContext().getExecutionPlatform().addEngineAddon(new IEngineAddon() {
-				@Override
-				public void engineInitialized(IExecutionEngine<?> executionEngine) {
-					queue.add(new Object());
-				}
-			});
-			job.schedule();
-			boolean result = true;
-			if (queue.poll(5000, TimeUnit.MILLISECONDS) != null) {
-				eventManager = engine.getAddon(GenericEventManager.class);
-				eventManager.addListener(new IEventManagerListener() {
-					@Override
-					public void eventReceived(EventOccurrence e) {
-						eventOccurrences.add(e);
-					}
-					@Override
-					public Set<BehavioralInterface> getBehavioralInterfaces() {
-						return eventManager.getBehavioralInterfaces();
-					}
-				});					
-			}
+			this.launchConf = getLaunchConfiguration(MUTPath, languageName, implRelIds, subtypeRelIds);
+			this.runConf = new EventBasedRunConfiguration(launchConf);
 		}catch (CoreException e) {
-			e.printStackTrace();
-		} catch (EngineContextException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
+	
+	private ILaunchConfiguration getLaunchConfiguration(String MUTPath, String languageName, Set<String> implRelIds, Set<String> subtypeRelIds) throws CoreException {
+		final ILaunchConfigurationWorkingCopy configuration = launchType.newInstance(null, "event_basedTesting");
+		configuration.setAttribute(AbstractDSLLaunchConfigurationDelegate.RESOURCE_URI, MUTPath);
+		configuration.setAttribute(EventBasedRunConfiguration.LAUNCH_SELECTED_LANGUAGE, languageName);
+		configuration.setAttribute(EventBasedRunConfiguration.WAIT_FOR_EVENT, true);
+		configuration.setAttribute(EventBasedRunConfiguration.IMPL_REL_IDS, implRelIds);
+		configuration.setAttribute(EventBasedRunConfiguration.SUBTYPE_REL_IDS, subtypeRelIds);
+		configuration.setAttribute(EventBasedRunConfiguration.LAUNCH_BREAK_START, true);
+		configuration.setAttribute(EventBasedRunConfiguration.DEBUG_MODEL_ID, Activator.DEBUG_MODEL_ID);
+		return configuration;
+	}
+	
+	public void startEngine() {
+		this.launcher = new EventBasedLauncher();
+		IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
+		if (debugTargets.length > 0) {
+			//we are in the Debug mode, so debug the model under test
+			Launch debugLaunch = new Launch(launchConf, ILaunchManager.DEBUG_MODE, new GemocSourceLocator());
+			DebugPlugin.getDefault().getLaunchManager().addLaunch(debugLaunch);	
+			try{
+				launcher.launch(launchConf, ILaunchManager.DEBUG_MODE, debugLaunch, new NullProgressMonitor());
+				this.executionEngine = (EventBasedExecutionEngine) launcher.getExecutionEngine();
+			} catch (CoreException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else {
+			try {
+				final EventBasedExecutionEngine engine = (EventBasedExecutionEngine) launcher.createExecutionEngine(this.runConf, ExecutionMode.Run);
+				this.executionEngine = engine;
+			}catch (CoreException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (EngineContextException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+		}
+	}
 	public String processAcceptedEvent(String eventName, Map<String, Object> parameters) {
+		if (this.launcher == null) {
+			startEngine();
+		}
 		EventOccurrence eventOccurrence = createEventOccurance(EventOccurrenceType.ACCEPTED, eventName, parameters);
-		eventManager.processEventOccurrence(eventOccurrence);
+		this.launcher.eventManager.processEventOccurrence(eventOccurrence);
 		return "PASS";
 	}
 	public String getExposedEvent(String eventName, Map<String, Object> parameters) {
@@ -175,10 +152,10 @@ public class K3EventManagerLauncher {
 			return "FAIL: The expected event does not match to the interface or its parameters does not exist in the MUT";
 		}
 		
-		if (this.eventOccurrences.size()>0) {
+		if (this.launcher.eventOccurrences.size()>0) {
 			EventOccurrence occ;
 			try {
-				occ = this.eventOccurrences.poll(100, TimeUnit.MILLISECONDS);
+				occ = this.launcher.eventOccurrences.poll(100, TimeUnit.MILLISECONDS);
 				if (occ != null && this.equalEventOccurrences(occ, eventOccurrence)) {
 					return "PASS";
 				}else {
@@ -329,7 +306,7 @@ public class K3EventManagerLauncher {
 	public String sendStopEvent() {
 		String result = null;
 		if (this.executionEngine.getRunningStatus() == RunStatus.WaitingForEvent) {
-			if (this.eventOccurrences.size()>0) {
+			if (this.launcher.eventOccurrences.size()>0) {
 				result = "FAIL:There are extra received events";
 			}else {
 				result = "PASS";
@@ -390,9 +367,7 @@ public class K3EventManagerLauncher {
 		}
 		return null;
 	}
-	private String getDebugJobName() {
-		return "Gemoc debug job";
-	}
+
 	private String getDslName(String dslFilePath) {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
@@ -418,7 +393,11 @@ public class K3EventManagerLauncher {
 		this.MUTResource = resource;
 	}
 	public Resource getModelResource() {
-		this.MUTResource = this.executionEngine.getExecutionContext().getResourceModel();
+		if (this.executionEngine == null) {
+			this.MUTResource = (new ResourceSetImpl()).getResource(URI.createURI(MUTPath), true);
+		}else{
+			this.MUTResource = this.executionEngine.getExecutionContext().getResourceModel();
+		}
 		return this.MUTResource;
 	}
 }
