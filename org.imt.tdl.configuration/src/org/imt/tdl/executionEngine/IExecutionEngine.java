@@ -8,7 +8,6 @@ public interface IExecutionEngine {
 	public String executeModelSynchronous();
 	public String executeModelAsynchronous();
 	public String stopAsynchronousExecution();
-	public void debugModel();
 	public void setModelResource(Resource resource);
 	public Resource getModelResource();
 }
