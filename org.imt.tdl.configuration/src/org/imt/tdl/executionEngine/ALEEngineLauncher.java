@@ -21,16 +21,10 @@ import org.eclipse.emf.ecoretools.ale.implementation.Method;
 import org.eclipse.emf.ecoretools.ale.implementation.ModelUnit;
 import org.eclipse.gemoc.ale.interpreted.engine.AleEngine;
 import org.eclipse.gemoc.ale.interpreted.engine.Helper;
-import org.eclipse.gemoc.ale.interpreted.engine.sirius.ALESiriusInterpreter;
-import org.eclipse.gemoc.ale.interpreted.engine.sirius.ALESiriusInterpreterProviderAddon;
-import org.eclipse.gemoc.execution.sequential.javaengine.PlainK3ExecutionEngine;
 import org.eclipse.gemoc.execution.sequential.javaengine.ui.launcher.GemocSourceLocator;
 import org.eclipse.gemoc.executionframework.engine.commons.DslHelper;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
-import org.eclipse.gemoc.executionframework.engine.ui.Activator;
-import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
 import org.imt.sequential.engine.custom.launcher.CustomALELauncher;
-import org.imt.sequential.engine.custom.launcher.CustomK3Launcher;
 
 public class ALEEngineLauncher extends AbstractEngine{
 	private AleEngine aleEngine = null;
