@@ -223,12 +223,7 @@ class MessageAspect extends InteractoinAspect{
 				t.targetGate.gate.setLauncher(_self.parentTestDescription.launcher)
 				var String verdict
 				val arg = (_self.argument as DataInstanceUse)
-				if (arg.dataInstance.name == "debugModel") {
-					_self.parentTestDescription.launcher.debugModel
-					verdict = "PASS: Debugging the model under test"
-				}else{
-					verdict = t.targetGate.gate.sendArgument2sut(_self.argument)
-				}			
+				verdict = t.targetGate.gate.sendArgument2sut(_self.argument)
 				_self.addMessageResult(verdict)
 				var boolean result = true
 				if (verdict.contains("FAIL")){
