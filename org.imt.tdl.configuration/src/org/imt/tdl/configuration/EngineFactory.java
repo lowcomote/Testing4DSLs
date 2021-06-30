@@ -56,10 +56,7 @@ public class EngineFactory{
 		}
 		return this.engineLauncher.executeModelAsynchronous();
 	}
-	
-	public void debugModel() {
-		this.engineLauncher.debugModel();
-	}
+
 	public String stopAsyncExecution() {
 		return this.engineLauncher.stopAsynchronousExecution();
 	}
