@@ -8,10 +8,12 @@ import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.Launch;
 import org.eclipse.debug.core.model.IDebugTarget;
+import org.eclipse.debug.core.model.IThread;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecoretools.ale.core.env.IAleEnvironment;
@@ -21,48 +23,70 @@ import org.eclipse.emf.ecoretools.ale.implementation.Method;
 import org.eclipse.emf.ecoretools.ale.implementation.ModelUnit;
 import org.eclipse.gemoc.ale.interpreted.engine.AleEngine;
 import org.eclipse.gemoc.ale.interpreted.engine.Helper;
+import org.eclipse.gemoc.dsl.debug.ide.adapter.DSLThreadAdapter;
 import org.eclipse.gemoc.execution.sequential.javaengine.ui.launcher.GemocSourceLocator;
 import org.eclipse.gemoc.executionframework.engine.commons.DslHelper;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
-import org.imt.sequential.engine.custom.launcher.CustomALELauncher;
+import org.imt.gemoc.engine.custom.launcher.CustomALELauncher;
+import org.imt.gemoc.engine.custom.launcher.CustomK3Launcher;
 
 public class ALEEngineLauncher extends AbstractEngine{
 	private AleEngine aleEngine = null;
 	
 	@Override
-	public String executeModelSynchronous() {
+	public String debugModel() {
 		IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
-		if (debugTargets.length > 0) {
-			//we are in the Debug mode, so debug the model under test
-			this.executioncontext.setResourceModel(this.getModelResource());
-			CustomALELauncher launcher = new CustomALELauncher();
-			launcher.executioncontext = this.executioncontext;
-			Launch debugLaunch = new Launch(this.launchConfiguration, ILaunchManager.DEBUG_MODE, new GemocSourceLocator());
-			DebugPlugin.getDefault().getLaunchManager().addLaunch(debugLaunch);
-			try{
-				launcher.launch(this.launchConfiguration, ILaunchManager.DEBUG_MODE, debugLaunch, new NullProgressMonitor());
-			} catch (CoreException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return "PASS: The model debugging started";
-		}else {
-			//we are in the Run mode, so run the model under test
-			try{
-				this.aleEngine = createExecutionEngine();
-			}catch (EngineContextException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return "FAIL: Cannot execute the model under test";
-			} catch (CoreException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			this.aleEngine.startSynchronous();
-			this.setModelResource(this.aleEngine.getExecutionContext().getResourceModel());
-			this.aleEngine.dispose();
-			return "PASS: The model under test executed successfully";
+		IThread[] testCaseDebuggerThreads = null;
+		try {
+			testCaseDebuggerThreads = debugTargets[0].getThreads();
+		} catch (DebugException e1) {
+			e1.printStackTrace();
 		}
+		//get the thread running the test case debugger to suspend it during model debugging
+		DSLThreadAdapter testCaseDebugThread = (DSLThreadAdapter) testCaseDebuggerThreads[0];
+		
+		this.executioncontext.setResourceModel(this.getModelResource());
+		CustomALELauncher launcher = new CustomALELauncher();
+		launcher.executioncontext = this.executioncontext;
+		Launch debugLaunch = new Launch(this.launchConfiguration, ILaunchManager.DEBUG_MODE, new GemocSourceLocator());
+		DebugPlugin.getDefault().getLaunchManager().addLaunch(debugLaunch);	
+		try {
+			//launch the debugger for the model under test
+			launcher.launch(launchConfiguration, ILaunchManager.DEBUG_MODE, debugLaunch, new NullProgressMonitor());
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+		
+		//suspend the test case debugger while the model debugger is running
+		while (!debugLaunch.isTerminated()) {	
+			synchronized (testCaseDebugThread) {
+				if (!testCaseDebugThread.isSuspended()) {
+					try {
+						testCaseDebugThread.suspend();
+					} catch (DebugException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}	
+			}
+		}
+		return "PASS: The model debugging started";
+	}
+	
+	@Override
+	public String executeModelSynchronous() {
+		try{
+			this.aleEngine = createExecutionEngine();
+		}catch (EngineContextException e) {
+			e.printStackTrace();
+			return "FAIL: Cannot execute the model under test";
+		} catch (CoreException e) {
+				e.printStackTrace();
+		}
+		this.aleEngine.startSynchronous();
+		this.setModelResource(this.aleEngine.getExecutionContext().getResourceModel());
+		this.aleEngine.dispose();
+		return "PASS: The model under test executed successfully";
 	}
 	
 	@Override

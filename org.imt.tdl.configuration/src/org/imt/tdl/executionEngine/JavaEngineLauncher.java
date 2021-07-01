@@ -4,60 +4,84 @@ import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.jobs.IJobManager;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
+import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.Launch;
 import org.eclipse.debug.core.model.IDebugTarget;
+import org.eclipse.debug.core.model.IThread;
+import org.eclipse.gemoc.dsl.debug.ide.adapter.DSLThreadAdapter;
 import org.eclipse.gemoc.execution.sequential.javaengine.PlainK3ExecutionEngine;
 import org.eclipse.gemoc.execution.sequential.javaengine.ui.launcher.GemocSourceLocator;
 import org.eclipse.gemoc.executionframework.engine.commons.DslHelper;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.eclipse.gemoc.executionframework.engine.commons.K3DslHelper;
-import org.imt.sequential.engine.custom.launcher.CustomK3Launcher;
+import org.imt.gemoc.engine.custom.launcher.CustomK3Launcher;
 import org.osgi.framework.Bundle;
 
 public class JavaEngineLauncher extends AbstractEngine{
 	private PlainK3ExecutionEngine javaEngine = null;
 	
 	@Override
-	public String executeModelSynchronous() {
+	public String debugModel() {
 		IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
-		if (debugTargets.length > 0) {
-			//we are in the Debug mode, so debug the model under test
-			this.executioncontext.setResourceModel(this.getModelResource());
-			CustomK3Launcher launcher = new CustomK3Launcher();
-			launcher.executioncontext = this.executioncontext;
-			Launch debugLaunch = new Launch(this.launchConfiguration, ILaunchManager.DEBUG_MODE, new GemocSourceLocator());
-			DebugPlugin.getDefault().getLaunchManager().addLaunch(debugLaunch);	
-			try{
-				launcher.launch(this.launchConfiguration, ILaunchManager.DEBUG_MODE, debugLaunch, new NullProgressMonitor());
-			} catch (CoreException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return "PASS: The model debugging started";
-		}else {
-			//we are in the Run mode, so run the model under test
-			try{
-				this.javaEngine = createExecutionEngine();
-			}catch (EngineContextException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return "FAIL: Cannot execute the model under test";
-			} catch (CoreException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			this.javaEngine.startSynchronous();
-			this.setModelResource(this.javaEngine.getExecutionContext().getResourceModel());
-			this.javaEngine.dispose();
-			return "PASS: The model under test executed successfully";
+		IThread[] testCaseDebuggerThreads = null;
+		try {
+			testCaseDebuggerThreads = debugTargets[0].getThreads();
+		} catch (DebugException e1) {
+			e1.printStackTrace();
 		}
+		//get the thread running the test case debugger to suspend it during model debugging
+		DSLThreadAdapter testCaseDebugThread = (DSLThreadAdapter) testCaseDebuggerThreads[0];
+		
+		this.executioncontext.setResourceModel(this.getModelResource());
+		CustomK3Launcher launcher = new CustomK3Launcher();
+		launcher.executioncontext = this.executioncontext;
+		Launch debugLaunch = new Launch(this.launchConfiguration, ILaunchManager.DEBUG_MODE, new GemocSourceLocator());
+		DebugPlugin.getDefault().getLaunchManager().addLaunch(debugLaunch);	
+		try {
+			//launch the debugger for the model under test
+			launcher.launch(launchConfiguration, ILaunchManager.DEBUG_MODE, debugLaunch, new NullProgressMonitor());
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+		
+		//suspend the test case debugger while the model debugger is running
+		while (!debugLaunch.isTerminated()) {	
+			synchronized (testCaseDebugThread) {
+				if (!testCaseDebugThread.isSuspended()) {
+					try {
+						testCaseDebugThread.suspend();
+					} catch (DebugException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}	
+			}
+		}
+		return "PASS: The model debugging started";
+	}
+	
+	@Override
+	public String executeModelSynchronous(){
+		try{
+			this.javaEngine = createExecutionEngine();
+		}catch (EngineContextException e) {
+			e.printStackTrace();
+			return "FAIL: Cannot execute the model under test";
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+		this.javaEngine.startSynchronous();
+		this.setModelResource(this.javaEngine.getExecutionContext().getResourceModel());
+		this.javaEngine.dispose();
+		return "PASS: The model under test executed successfully";
 	}
 	
 	@Override
@@ -136,5 +160,8 @@ public class JavaEngineLauncher extends AbstractEngine{
 		}
 			
 		return "";
+	}
+	private String getDebugJobName() {
+		return "Gemoc debug job";
 	}
 }
