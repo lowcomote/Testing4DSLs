@@ -8,10 +8,11 @@
  * Contributors:
  *     Inria - initial API and implementation
  *******************************************************************************/
-package org.imt.sequential.engine.custom.launcher;
+package org.imt.gemoc.engine.custom.launcher;
 
 import org.eclipse.core.runtime.CoreException;
-
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.emf.ecore.EObject;
