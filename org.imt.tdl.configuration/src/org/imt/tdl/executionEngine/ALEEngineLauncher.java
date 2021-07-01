@@ -39,8 +39,8 @@ public class ALEEngineLauncher extends AbstractEngine{
 		IThread[] testCaseDebuggerThreads = null;
 		try {
 			testCaseDebuggerThreads = debugTargets[0].getThreads();
-		} catch (DebugException e1) {
-			e1.printStackTrace();
+		} catch (DebugException e) {
+			return "FAIL: Cannot find the test case debugger thread\n" + e.getMessage();
 		}
 		//get the thread running the test case debugger to suspend it during model debugging
 		DSLThreadAdapter testCaseDebugThread = (DSLThreadAdapter) testCaseDebuggerThreads[0];
@@ -54,7 +54,7 @@ public class ALEEngineLauncher extends AbstractEngine{
 			//launch the debugger for the model under test
 			launcher.launch(launchConfiguration, ILaunchManager.DEBUG_MODE, debugLaunch, new NullProgressMonitor());
 		} catch (CoreException e) {
-			e.printStackTrace();
+			return "FAIL: Cannot launch the MUT debugger\n" + e.getMessage();
 		}
 		
 		//suspend the test case debugger while the model debugger is running
@@ -64,13 +64,12 @@ public class ALEEngineLauncher extends AbstractEngine{
 					try {
 						testCaseDebugThread.suspend();
 					} catch (DebugException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						return "FAIL: Cannot suspend the test case debugger\n" + e.getMessage();
 					}
 				}	
 			}
 		}
-		return "PASS: The model debugging started";
+		return "PASS: Debugging of the model under test finished successfully";
 	}
 	
 	@Override
