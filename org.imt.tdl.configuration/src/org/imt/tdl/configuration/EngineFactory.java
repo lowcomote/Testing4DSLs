@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.debug.core.DebugPlugin;
+import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -52,7 +54,14 @@ public class EngineFactory{
 	}
 	public String executeModel(Boolean sync) throws CoreException, EngineContextException {
 		if (sync) {
-			return this.engineLauncher.executeModelSynchronous();
+			IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
+			if (debugTargets.length > 0) {
+				//we are in the Debug mode, so debug the model under test
+				return this.engineLauncher.debugModel();
+			}else {
+				//we are in the Run mode, so run the model under test
+				return this.engineLauncher.executeModelSynchronous();
+			}
 		}
 		return this.engineLauncher.executeModelAsynchronous();
 	}
