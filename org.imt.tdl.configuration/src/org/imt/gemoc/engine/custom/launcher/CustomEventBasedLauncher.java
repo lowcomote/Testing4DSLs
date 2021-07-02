@@ -45,8 +45,6 @@ public class CustomEventBasedLauncher
 		extends AbstractSequentialGemocLauncher<EventBasedModelExecutionContext, EventBasedRunConfiguration> {
 
 	public final static String TYPE_ID = Activator.PLUGIN_ID + ".launcher";
-	public GenericEventManager eventManager = null;
-	public LinkedTransferQueue<EventOccurrence> eventOccurrences = new LinkedTransferQueue<EventOccurrence>();
 	
 	@Override
 	public IExecutionEngine<EventBasedModelExecutionContext> createExecutionEngine(
@@ -58,40 +56,6 @@ public class CustomEventBasedLauncher
 		executioncontext.getExecutionPlatform().getModelLoader().setProgressMonitor(this.launchProgressMonitor);
 		executioncontext.initializeResourceModel();
 		executionEngine.initialize(executioncontext);
-		String PLUGIN_ID = "org.eclipse.gemoc.execution.sequential.javaengine.ui"; 		
-		Job job = new Job(getDebugJobName()) {
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-				executionEngine.startSynchronous();
-				return new Status(IStatus.OK, PLUGIN_ID, "Execution started");
-			}
-		};
-		final TransferQueue<Object> queue = new LinkedTransferQueue<>();
-		executionEngine.getExecutionContext().getExecutionPlatform().addEngineAddon(new IEngineAddon() {
-			@Override
-			public void engineInitialized(IExecutionEngine<?> executionEngine) {
-				queue.add(new Object());
-			}
-		});
-		job.schedule();
-		try {
-			if (queue.poll(5000, TimeUnit.MILLISECONDS) != null) {
-				eventManager = executionEngine.getAddon(GenericEventManager.class);
-				eventManager.addListener(new IEventManagerListener() {
-					@Override
-					public void eventReceived(EventOccurrence e) {
-						eventOccurrences.add(e);
-					}
-					@Override
-					public Set<BehavioralInterface> getBehavioralInterfaces() {
-						return eventManager.getBehavioralInterfaces();
-					}
-				});					
-			}
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
 		return executionEngine;
 	}
 
@@ -139,8 +103,5 @@ public class CustomEventBasedLauncher
 	@Override
 	protected void error(String message, Exception e) {
 		Activator.error(message, e);
-	}
-	private String getDebugJobName() {
-		return "Gemoc debug job";
 	}
 }
