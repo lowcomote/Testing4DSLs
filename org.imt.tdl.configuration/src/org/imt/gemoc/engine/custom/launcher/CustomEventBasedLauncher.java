@@ -11,16 +11,7 @@
  *******************************************************************************/
 package org.imt.gemoc.engine.custom.launcher;
 
-import java.util.Set;
-import java.util.concurrent.LinkedTransferQueue;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TransferQueue;
-
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.emf.ecore.EObject;
@@ -30,16 +21,11 @@ import org.eclipse.gemoc.execution.eventBasedEngine.EventBasedExecutionEngine;
 import org.eclipse.gemoc.execution.eventBasedEngine.EventBasedModelExecutionContext;
 import org.eclipse.gemoc.execution.eventBasedEngine.EventBasedRunConfiguration;
 import org.eclipse.gemoc.execution.sequential.javaengine.ui.Activator;
-import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.BehavioralInterface;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.eclipse.gemoc.executionframework.engine.ui.launcher.AbstractSequentialGemocLauncher;
-import org.eclipse.gemoc.executionframework.event.manager.GenericEventManager;
-import org.eclipse.gemoc.executionframework.event.manager.IEventManagerListener;
-import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrence;
 import org.eclipse.gemoc.executionframework.ui.views.engine.EnginesStatusView;
 import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
 import org.eclipse.gemoc.xdsmlframework.api.core.IExecutionEngine;
-import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
 
 public class CustomEventBasedLauncher
 		extends AbstractSequentialGemocLauncher<EventBasedModelExecutionContext, EventBasedRunConfiguration> {
