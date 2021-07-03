@@ -29,13 +29,13 @@ public class JavaEngineLauncher extends AbstractEngine{
 	private PlainK3ExecutionEngine javaEngine = null;
 	
 	@Override
-	public String debugModel() {
+	public void launchModelDebugger() {
 		IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
 		IThread[] testCaseDebuggerThreads = null;
 		try {
 			testCaseDebuggerThreads = debugTargets[0].getThreads();
 		} catch (DebugException e) {
-			return "FAIL: Cannot find the test case debugger thread\n" + e.getMessage();
+			e.printStackTrace();
 		}
 		//get the thread running the test case debugger to suspend it during model debugging
 		DSLThreadAdapter testCaseDebugThread = (DSLThreadAdapter) testCaseDebuggerThreads[0];
@@ -49,7 +49,7 @@ public class JavaEngineLauncher extends AbstractEngine{
 			//launch the debugger for the model under test
 			launcher.launch(launchConfiguration, ILaunchManager.DEBUG_MODE, debugLaunch, new NullProgressMonitor());
 		} catch (CoreException e) {
-			return "FAIL: Cannot launch the MUT debugger\n" + e.getMessage();
+			e.printStackTrace();
 		}
 		
 		//suspend the test case debugger while the model debugger is running
@@ -59,12 +59,11 @@ public class JavaEngineLauncher extends AbstractEngine{
 					try {
 						testCaseDebugThread.suspend();
 					} catch (DebugException e) {
-						return "FAIL: Cannot suspend the test case debugger\n" + e.getMessage();
+						e.printStackTrace();
 					}
 				}	
 			}
 		}
-		return "PASS: Debugging of the model under test finished successfully";
 	}
 	
 	@Override

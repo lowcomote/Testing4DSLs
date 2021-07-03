@@ -17,7 +17,7 @@ import org.eclipse.gemoc.executionframework.engine.commons.EngineContextExceptio
 import org.eclipse.gemoc.executionframework.engine.commons.sequential.SequentialRunConfiguration;
 import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
 
-public abstract class AbstractEngine implements IExecutionEngine{
+public abstract class AbstractEngine implements ISequentialExecutionEngine{
 	
 	protected ExecutionMode executionMode;
 	protected String _modelLocation;

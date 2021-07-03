@@ -14,7 +14,8 @@ import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.imt.tdl.eventManager.K3EventManagerLauncher;
 import org.imt.tdl.executionEngine.ALEEngineLauncher;
-import org.imt.tdl.executionEngine.IExecutionEngine;
+import org.imt.tdl.executionEngine.IEventBasedExecutionEngine;
+import org.imt.tdl.executionEngine.ISequentialExecutionEngine;
 import org.imt.tdl.executionEngine.JavaEngineLauncher;
 import org.imt.tdl.oclInterpreter.OCLInterpreter;
 
@@ -23,9 +24,9 @@ public class EngineFactory{
 	private String DSLPath;
 	private String MUTPath;
 	
-	private IExecutionEngine engineLauncher;
+	private ISequentialExecutionEngine engineLauncher;
 	private OCLInterpreter oclLauncher;
-	private K3EventManagerLauncher eventManager;
+	private IEventBasedExecutionEngine eventManagerLauncher;
 	
 	public final static String GENERIC = "Generic";
 	public final static String DSL_SPECIFIC = "DSL-Specific";
@@ -41,8 +42,8 @@ public class EngineFactory{
 			}
 			this.engineLauncher.setUp(this.MUTPath, this.DSLPath);
 		}else if(commandType.equals(DSL_SPECIFIC)) {
-			this.eventManager = new K3EventManagerLauncher();
-			this.eventManager.setup(this.MUTPath, this.DSLPath);
+			this.eventManagerLauncher = new K3EventManagerLauncher();
+			this.eventManagerLauncher.setUp(this.MUTPath, this.DSLPath);
 		}else if (commandType.equals(OCL)) {
 			if (this.engineLauncher == null) {
 				System.out.println("There is no model under execution. You have to run the model first.");
@@ -57,7 +58,8 @@ public class EngineFactory{
 			IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
 			if (debugTargets.length > 0) {
 				//we are in the Debug mode, so debug the model under test
-				return this.engineLauncher.debugModel();
+				this.engineLauncher.launchModelDebugger();
+				return "PASS: Debugging of the model under test launched successfully";
 			}else {
 				//we are in the Run mode, so run the model under test
 				return this.engineLauncher.executeModelSynchronous();
@@ -75,14 +77,27 @@ public class EngineFactory{
 		return this.oclLauncher.runQuery(this.engineLauncher.getModelResource(), query.substring(1, query.length()-1));
 	}
 	
+	private Boolean modelDebuggerLaunched = true;
+	
 	public String executeDSLSpecificCommand(String eventType, String eventName, Map<String, Object> parameters) {
+		if (modelDebuggerLaunched) {
+			IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
+			if (debugTargets.length > 0) {
+				//we are in the Debug mode, so debug the model under test
+				this.eventManagerLauncher.launchModelDebugger();
+			}else {
+				this.eventManagerLauncher.startEngine();
+			}
+			modelDebuggerLaunched = false;
+		}
+		
 		switch (eventType) {
 		case "ACCEPTED":
-			return this.eventManager.processAcceptedEvent(eventName, parameters);
+			return this.eventManagerLauncher.processAcceptedEvent(eventName, parameters);
 		case "EXPOSED":
-			return this.eventManager.getExposedEvent(eventName, parameters);
+			return this.eventManagerLauncher.assertExposedEvent(eventName, parameters);
 		case "STOP":
-			return this.eventManager.sendStopEvent();
+			return this.eventManagerLauncher.sendStopEvent();
 		default:
 			break;
 		}
@@ -114,8 +129,8 @@ public class EngineFactory{
 		if (this.engineLauncher != null) {
 			return this.engineLauncher.getModelResource();
 		}
-		if (this.eventManager != null) {
-			return this.eventManager.getModelResource();
+		if (this.eventManagerLauncher != null) {
+			return this.eventManagerLauncher.getModelResource();
 		}
 		return (new ResourceSetImpl()).getResource(URI.createURI(MUTPath), true);
 	}

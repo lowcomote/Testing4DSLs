@@ -66,15 +66,15 @@ import org.eclipse.gemoc.executionframework.value.model.value.SingleReferenceVal
 import org.eclipse.gemoc.executionframework.value.model.value.StringAttributeValue;
 import org.eclipse.gemoc.executionframework.value.model.value.Value;
 import org.eclipse.gemoc.executionframework.value.model.value.ValuePackage;
-import org.eclipse.gemoc.xdsmlframework.api.core.EngineStatus;
 import org.eclipse.gemoc.xdsmlframework.api.core.EngineStatus.RunStatus;
-import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
 import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
 import org.eclipse.gemoc.xdsmlframework.api.core.IExecutionEngine;
+import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
 import org.imt.gemoc.engine.custom.launcher.CustomEventBasedLauncher;
+import org.imt.tdl.executionEngine.IEventBasedExecutionEngine;
 import org.imt.tdl.testResult.TestResultUtil;
 
-public class K3EventManagerLauncher {
+public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	
 	private String MUTPath;
 	private String DSLPath;
@@ -94,7 +94,8 @@ public class K3EventManagerLauncher {
 	private final ILaunchConfigurationType launchType = DebugPlugin.getDefault().getLaunchManager()
 			.getLaunchConfigurationType("org.eclipse.gemoc.execution.sequential.javaengine.ui.launcher");
 
-	public final void setup(String MUTPath, String DSLPath){
+	@Override
+	public void setUp(String MUTPath, String DSLPath){
 		this.MUTPath = MUTPath;
 		this.DSLPath = DSLPath;
 		final String languageName = this.getDslName(DSLPath);
@@ -111,12 +112,11 @@ public class K3EventManagerLauncher {
 		}catch (CoreException e) {
 			e.printStackTrace();
 		}
+		this.launcher = new CustomEventBasedLauncher();
 	}
 	
+	@Override
 	public String processAcceptedEvent(String eventName, Map<String, Object> parameters) {
-		if (this.launcher == null) {
-			startEngine();
-		}
 		EventOccurrence eventOccurrence = createEventOccurance(EventOccurrenceType.ACCEPTED, eventName, parameters);
 		this.eventManager.processEventOccurrence(eventOccurrence);
 		if (isDebugMode) {
@@ -125,7 +125,8 @@ public class K3EventManagerLauncher {
 		return "PASS";
 	}
 
-	public String getExposedEvent(String eventName, Map<String, Object> parameters) {
+	@Override
+	public String assertExposedEvent(String eventName, Map<String, Object> parameters) {
 		EventOccurrence eventOccurrence = createEventOccurance(EventOccurrenceType.EXPOSED, eventName, parameters);
 		if (eventOccurrence == null) {
 			return "FAIL: The expected event does not match to the interface or its parameters does not exist in the MUT";
@@ -161,44 +162,39 @@ public class K3EventManagerLauncher {
 		return configuration;
 	}
 
-	public GenericEventManager eventManager = null;
-	public LinkedTransferQueue<EventOccurrence> eventOccurrences = new LinkedTransferQueue<EventOccurrence>();
+	private GenericEventManager eventManager = null;
+	private LinkedTransferQueue<EventOccurrence> eventOccurrences = new LinkedTransferQueue<EventOccurrence>();
 	
+	@Override
 	public void startEngine() {
-		this.launcher = new CustomEventBasedLauncher();
-		IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
-		if (debugTargets.length > 0) {
-			//we are in the Debug mode, so debug the model under test
-			isDebugMode = true;
-			debugModel();
-		}else {
-			try {
-				this.executionEngine = (EventBasedExecutionEngine) launcher.createExecutionEngine(this.runConf, ExecutionMode.Run);
-			}catch (CoreException | EngineContextException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			String PLUGIN_ID = "org.eclipse.gemoc.execution.sequential.javaengine.ui"; 		
-			Job job = new Job(getDebugJobName()) {
-				@Override
-				protected IStatus run(IProgressMonitor monitor) {
-					executionEngine.startSynchronous();
-					return new Status(IStatus.OK, PLUGIN_ID, "Execution started");
-				}
-			};
-			final TransferQueue<Object> queue = new LinkedTransferQueue<>();
-			this.executionEngine.getExecutionContext().getExecutionPlatform().addEngineAddon(new IEngineAddon() {
-				@Override
-				public void engineInitialized(IExecutionEngine<?> executionEngine) {
-					queue.add(new Object());
-				}
-			});
-			job.schedule();
-			addEventManagerListener(queue);
+		try {
+			this.executionEngine = (EventBasedExecutionEngine) launcher.createExecutionEngine(this.runConf, ExecutionMode.Run);
+		}catch (CoreException | EngineContextException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		String PLUGIN_ID = "org.eclipse.gemoc.execution.sequential.javaengine.ui"; 		
+		Job job = new Job(getDebugJobName()) {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				executionEngine.startSynchronous();
+				return new Status(IStatus.OK, PLUGIN_ID, "Execution started");
+			}
+		};
+		final TransferQueue<Object> queue = new LinkedTransferQueue<>();
+		this.executionEngine.getExecutionContext().getExecutionPlatform().addEngineAddon(new IEngineAddon() {
+			@Override
+			public void engineInitialized(IExecutionEngine<?> executionEngine) {
+				queue.add(new Object());
+			}
+		});
+		job.schedule();
+		addEventManagerListener(queue);
 	}
 	
-	public void debugModel() {
+	@Override
+	public void launchModelDebugger() {
+		isDebugMode = true;
 		Launch debugLaunch = new Launch(launchConf, ILaunchManager.DEBUG_MODE, new GemocSourceLocator());
 		DebugPlugin.getDefault().getLaunchManager().addLaunch(debugLaunch);	
 		try{
@@ -258,7 +254,64 @@ public class K3EventManagerLauncher {
 			}
 		}
 	}
-	public Boolean equalEventOccurrences(EventOccurrence e1, EventOccurrence e2) {
+	
+	@Override
+	public String sendStopEvent() {
+		String result = null;
+		if (this.executionEngine.getRunningStatus() == RunStatus.WaitingForEvent) {
+			if (this.eventOccurrences.size()>0) {
+				result = "FAIL:There are extra received events";
+			}else {
+				result = "PASS";
+			}
+		}else if (this.executionEngine.getRunningStatus() == RunStatus.Running) {
+			result = "FAIL:Infinite loop in the Model";
+		}
+		this.executionEngine.stop();
+		this.executionEngine.dispose();
+		return result;
+	}
+	
+	private EventOccurrence createEventOccurance(EventOccurrenceType eventType, String eventName, Map<String, Object> parameters) {
+		BehavioralInterface bInterface = this.getBehavioralInterfaceRootElement(this.DSLPath);
+		Event event = null;
+		for (int i=0; i<bInterface.getEvents().size();i++) {
+			event = bInterface.getEvents().get(i);
+			if (event.getName().equals(eventName)) {
+				break;
+			}
+		}
+		if (event == null) {
+			return null;
+		}
+		EventOccurrence eventOccurance = EventFactory.eINSTANCE.createEventOccurrence();
+		eventOccurance.setEvent(event);
+		eventOccurance.setType(eventType);
+		Iterator<String> paramNames = parameters.keySet().iterator();
+		for (int i = 0; i < parameters.size(); i++) {
+			String paramName = paramNames.next();
+			EventParameter parameter = null;
+			for (int j = 0; j < event.getParams().size(); j++) {
+				parameter = event.getParams().get(j);
+				if (parameter.getName().equals(paramName)) {
+					break;
+				}
+			}
+			if (parameter == null) {
+				return null;
+			}
+			EventOccurrenceArgument argument = EventFactory.eINSTANCE.createEventOccurrenceArgument();
+			argument.setParameter(parameter);
+			if (parameters.get(paramName) == null) {
+				return null;
+			}
+			argument.setValue((Value) EventManagerUtils.convertObjectToValue(parameters.get(paramName)));
+			eventOccurance.getArgs().add(argument);
+		}
+		return eventOccurance;
+	}
+	
+	private Boolean equalEventOccurrences(EventOccurrence e1, EventOccurrence e2) {
 		if (!e1.getEvent().getName().equals(e2.getEvent().getName())) {
 			return false;
 		}
@@ -341,7 +394,7 @@ public class K3EventManagerLauncher {
 		return false;
 	}
 	
-	public String eventOccurenceToString (EventOccurrence occurrence) {
+	private String eventOccurenceToString (EventOccurrence occurrence) {
 		String result = occurrence.getEvent().getName();
 		if (occurrence.getArgs().size()>0) {
 			result += " (";
@@ -391,59 +444,7 @@ public class K3EventManagerLauncher {
 		}
 		return result;
 	}
-	public String sendStopEvent() {
-		String result = null;
-		if (this.executionEngine.getRunningStatus() == RunStatus.WaitingForEvent) {
-			if (this.eventOccurrences.size()>0) {
-				result = "FAIL:There are extra received events";
-			}else {
-				result = "PASS";
-			}
-		}else if (this.executionEngine.getRunningStatus() == RunStatus.Running) {
-			result = "FAIL:Infinite loop in the Model";
-		}
-		this.executionEngine.stop();
-		this.executionEngine.dispose();
-		return result;
-	}
-	public EventOccurrence createEventOccurance(EventOccurrenceType eventType, String eventName, Map<String, Object> parameters) {
-		BehavioralInterface bInterface = this.getBehavioralInterfaceRootElement(this.DSLPath);
-		Event event = null;
-		for (int i=0; i<bInterface.getEvents().size();i++) {
-			event = bInterface.getEvents().get(i);
-			if (event.getName().equals(eventName)) {
-				break;
-			}
-		}
-		if (event == null) {
-			return null;
-		}
-		EventOccurrence eventOccurance = EventFactory.eINSTANCE.createEventOccurrence();
-		eventOccurance.setEvent(event);
-		eventOccurance.setType(eventType);
-		Iterator<String> paramNames = parameters.keySet().iterator();
-		for (int i = 0; i < parameters.size(); i++) {
-			String paramName = paramNames.next();
-			EventParameter parameter = null;
-			for (int j = 0; j < event.getParams().size(); j++) {
-				parameter = event.getParams().get(j);
-				if (parameter.getName().equals(paramName)) {
-					break;
-				}
-			}
-			if (parameter == null) {
-				return null;
-			}
-			EventOccurrenceArgument argument = EventFactory.eINSTANCE.createEventOccurrenceArgument();
-			argument.setParameter(parameter);
-			if (parameters.get(paramName) == null) {
-				return null;
-			}
-			argument.setValue((Value) EventManagerUtils.convertObjectToValue(parameters.get(paramName)));
-			eventOccurance.getArgs().add(argument);
-		}
-		return eventOccurance;
-	}
+	
 	private BehavioralInterface getBehavioralInterfaceRootElement(String dslFilePath) {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
