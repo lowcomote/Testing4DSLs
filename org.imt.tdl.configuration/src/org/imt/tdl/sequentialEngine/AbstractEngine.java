@@ -1,4 +1,4 @@
-package org.imt.tdl.executionEngine;
+package org.imt.tdl.sequentialEngine;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;

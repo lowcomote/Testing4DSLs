@@ -1,4 +1,4 @@
-package org.imt.tdl.executionEngine;
+package org.imt.tdl.sequentialEngine;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;

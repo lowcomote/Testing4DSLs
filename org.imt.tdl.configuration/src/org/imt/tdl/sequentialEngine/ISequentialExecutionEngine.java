@@ -1,4 +1,4 @@
-package org.imt.tdl.executionEngine;
+package org.imt.tdl.sequentialEngine;
 
 public interface ISequentialExecutionEngine extends IExecutionEngine {
 	
