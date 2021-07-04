@@ -78,10 +78,8 @@ public class EngineFactory{
 		return this.oclLauncher.runQuery(this.engineLauncher.getModelResource(), query.substring(1, query.length()-1));
 	}
 	
-	private Boolean modelDebuggerLaunched = true;
-	
 	public String executeDSLSpecificCommand(String eventType, String eventName, Map<String, Object> parameters) {
-		if (modelDebuggerLaunched) {
+		if (!this.eventManagerLauncher.isEngineStarted()) {
 			IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
 			if (debugTargets.length > 0) {
 				//we are in the Debug mode, so debug the model under test
@@ -89,7 +87,6 @@ public class EngineFactory{
 			}else {
 				this.eventManagerLauncher.startEngine();
 			}
-			modelDebuggerLaunched = false;
 		}
 		
 		switch (eventType) {
