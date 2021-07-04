@@ -129,7 +129,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	public String assertExposedEvent(String eventName, Map<String, Object> parameters) {
 		EventOccurrence eventOccurrence = createEventOccurance(EventOccurrenceType.EXPOSED, eventName, parameters);
 		if (eventOccurrence == null) {
-			return null;
+			return "FAIL: The expected event does not match to the interface or its parameters does not exist in the MUT";
 		}
 		
 		if (this.eventOccurrences.size()>0) {
