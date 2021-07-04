@@ -125,7 +125,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	}
 
 	@Override
-	public EventOccurrence getExposedEvent(String eventName, Map<String, Object> parameters) {
+	public String assertExposedEvent(String eventName, Map<String, Object> parameters) {
 		EventOccurrence eventOccurrence = createEventOccurance(EventOccurrenceType.EXPOSED, eventName, parameters);
 		if (eventOccurrence == null) {
 			return null;

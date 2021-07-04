@@ -96,7 +96,7 @@ public class EngineFactory{
 		case "ACCEPTED":
 			return this.eventManagerLauncher.processAcceptedEvent(eventName, parameters);
 		case "EXPOSED":
-			return this.eventManagerLauncher.getExposedEvent(eventName, parameters);
+			return this.eventManagerLauncher.assertExposedEvent(eventName, parameters);
 		case "STOP":
 			return this.eventManagerLauncher.sendStopEvent();
 		default:
