@@ -11,6 +11,7 @@
 package org.imt.tdl.eventBasedEngine;
 
 import java.util.HashSet;
+
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -81,7 +82,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	
 	private ILaunchConfiguration launchConf;
 	private EventBasedRunConfiguration runConf;
-	protected EventBasedExecutionEngine executionEngine = null;
+	private EventBasedExecutionEngine executionEngine = null;
 	
 	private CustomEventBasedLauncher launcher;
 	private boolean isDebugMode = false;
@@ -495,5 +496,10 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	
 	private String getDebugJobName() {
 		return "Gemoc debug job";
+	}
+
+	@Override
+	public Boolean isEngineStarted() {
+		return this.executionEngine != null;
 	}
 }
