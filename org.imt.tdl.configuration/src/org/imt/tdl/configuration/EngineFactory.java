@@ -12,12 +12,13 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
-import org.imt.tdl.eventManager.K3EventManagerLauncher;
-import org.imt.tdl.executionEngine.ALEEngineLauncher;
-import org.imt.tdl.executionEngine.IEventBasedExecutionEngine;
-import org.imt.tdl.executionEngine.ISequentialExecutionEngine;
-import org.imt.tdl.executionEngine.JavaEngineLauncher;
+import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrence;
+import org.imt.tdl.eventBasedEngine.IEventBasedExecutionEngine;
+import org.imt.tdl.eventBasedEngine.K3EventManagerLauncher;
 import org.imt.tdl.oclInterpreter.OCLInterpreter;
+import org.imt.tdl.sequentialEngine.ALEEngineLauncher;
+import org.imt.tdl.sequentialEngine.ISequentialExecutionEngine;
+import org.imt.tdl.sequentialEngine.JavaEngineLauncher;
 
 public class EngineFactory{
 	
@@ -95,7 +96,7 @@ public class EngineFactory{
 		case "ACCEPTED":
 			return this.eventManagerLauncher.processAcceptedEvent(eventName, parameters);
 		case "EXPOSED":
-			return this.eventManagerLauncher.assertExposedEvent(eventName, parameters);
+			return this.eventManagerLauncher.getExposedEvent(eventName, parameters);
 		case "STOP":
 			return this.eventManagerLauncher.sendStopEvent();
 		default:
