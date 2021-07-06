@@ -120,7 +120,26 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		EventOccurrence eventOccurrence = createEventOccurance(EventOccurrenceType.ACCEPTED, eventName, parameters);
 		this.eventManager.processEventOccurrence(eventOccurrence);
 		if (isDebugMode) {
-			suspendTestCaseDebugger();
+			IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
+			IThread[] testCaseDebuggerThreads = null;
+			try {
+				testCaseDebuggerThreads = debugTargets[0].getThreads();
+			} catch (DebugException e) {
+				e.printStackTrace();
+			}
+			//get the thread running the test case debugger to suspend it during model debugging
+			DSLThreadAdapter testCaseDebugThread = (DSLThreadAdapter) testCaseDebuggerThreads[0];
+			while (this.executionEngine.getRunningStatus() == RunStatus.Running) {
+				synchronized (testCaseDebugThread) {
+					if (!testCaseDebugThread.isSuspended()) {
+						try {
+							testCaseDebugThread.suspend();
+						} catch (DebugException e) {
+							e.printStackTrace();
+						}
+					}	
+				}
+			}
 		}
 		return "PASS";
 	}
@@ -135,7 +154,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		if (this.eventOccurrences.size()>0) {
 			EventOccurrence occ;
 			try {
-				occ = this.eventOccurrences.poll(100, TimeUnit.MILLISECONDS);
+				occ = this.eventOccurrences.poll(1000, TimeUnit.MILLISECONDS);
 				if (occ != null && this.equalEventOccurrences(occ, eventOccurrence)) {
 					return "PASS";
 				}else {
@@ -256,16 +275,21 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	}
 	
 	@Override
-	public String sendStopEvent() {
+	public String sendStopEvent(boolean checkStatus) {
 		String result = null;
-		if (this.executionEngine.getRunningStatus() == RunStatus.WaitingForEvent) {
-			if (this.eventOccurrences.size()>0) {
-				result = "FAIL:There are extra received events";
-			}else {
-				result = "PASS";
+		if (checkStatus) {
+			if (this.executionEngine.getRunningStatus() == RunStatus.WaitingForEvent) {
+				if (this.eventOccurrences.size()>0) {
+					result = "FAIL:There are extra received events";
+				}else {
+					result = "PASS";
+				}
+			}else if (this.executionEngine.getRunningStatus() == RunStatus.Running) {
+				result = "FAIL:Infinite loop in the Model";
 			}
-		}else if (this.executionEngine.getRunningStatus() == RunStatus.Running) {
-			result = "FAIL:Infinite loop in the Model";
+		}
+		else {
+			result = "PASS";
 		}
 		this.executionEngine.stop();
 		this.executionEngine.dispose();
