@@ -89,7 +89,7 @@ public class OCLInterpreter {
 				this.resultAsString.add(TestResultUtil.getInstance().eObjectLabelProvider(object));
 			}else {
 				this.resultAsObject.add(null);
-				this.resultAsString.add("'" + res.toString() + "'");
+				this.resultAsString.add("'" + "null" + "'");
 			}
 		}
 		return "PASS: The ocl query evaluated successfully";
