@@ -189,7 +189,7 @@ class GateInstanceAspect {
 			val DataUse argValue = event.argument.get(i).dataUse
 			if (argValue instanceof DataInstanceUse){
 				//put the name of the parameter along with its matched object in the MUTResource
-				val value = (argValue as DataInstanceUse).getMatchedMUTElement(_self.gateLauncher.MUTResource, true, _self.DSLPath)
+				val value = (argValue as DataInstanceUse).getMatchedMUTElement(_self.gateLauncher.MUTResource, false, _self.DSLPath)
 				parameters.put(argName, value)
 			}			
 		}
