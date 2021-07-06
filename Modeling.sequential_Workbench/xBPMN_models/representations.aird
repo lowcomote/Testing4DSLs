@@ -27,4 +27,9 @@
   <semanticResources>gemoc-gen/execution/execution-20210610_153056/promoteEmployee.bpmn</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210610_153909/promoteEmployee.bpmn</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210610_154302/promoteEmployee.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210706_095755/promoteEmployee.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210706_095807/promoteEmployee.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210706_095925/promoteEmployee.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210706_095944/verifyUserAccess.bpmn</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210706_095944/promoteEmployee.bpmn</semanticResources>
 </viewpoint:DAnalysis>
