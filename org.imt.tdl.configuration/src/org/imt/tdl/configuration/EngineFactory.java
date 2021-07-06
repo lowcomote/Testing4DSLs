@@ -46,9 +46,7 @@ public class EngineFactory{
 			this.eventManagerLauncher = new K3EventManagerLauncher();
 			this.eventManagerLauncher.setUp(this.MUTPath, this.DSLPath);
 		}else if (commandType.equals(OCL)) {
-			if (this.engineLauncher == null) {
-				System.out.println("There is no model under execution. You have to run the model first.");
-			}else if (this.oclLauncher == null) {
+			if (this.oclLauncher == null) {
 				this.oclLauncher = new OCLInterpreter();
 				this.oclLauncher.setUp();
 			}
@@ -75,7 +73,7 @@ public class EngineFactory{
 	
 	public String executeOCLCommand (String query){
 		//send the query without quotation marks
-		return this.oclLauncher.runQuery(this.engineLauncher.getModelResource(), query.substring(1, query.length()-1));
+		return this.oclLauncher.runQuery(getMUTResource(), query.substring(1, query.length()-1));
 	}
 	
 	public String executeDSLSpecificCommand(String eventType, String eventName, Map<String, Object> parameters) {
@@ -95,7 +93,13 @@ public class EngineFactory{
 		case "EXPOSED":
 			return this.eventManagerLauncher.assertExposedEvent(eventName, parameters);
 		case "STOP":
-			return this.eventManagerLauncher.sendStopEvent();
+			if (this.oclLauncher != null) {
+				//if the test case contains OCL queries, just stop the engine regardless of its status
+				return this.eventManagerLauncher.sendStopEvent(false);
+			}else {
+				//stop the engine and set the result based on the execution engine status
+				return this.eventManagerLauncher.sendStopEvent(true);
+			}
 		default:
 			break;
 		}
