@@ -214,29 +214,30 @@ class StructuredDataInstanceAspect extends DataInstanceAspect{
 @Aspect (className = DataInstanceUse)
 class DataInstanceUseAspect extends StaticDataUseAspect{
 	def EObject getMatchedMUTElement(Resource MUTResource, boolean isAssertion, String DSLPath){
-		if (_self.dataInstance.dataType.isEventOccurrence){
-			//create the event occurrence
+		if (_self.dataInstance.dataType.isEventOccurrence){//create the event occurrence	
 			return _self.createEventOccurrence(MUTResource, isAssertion, DSLPath)
-		}else{
-			var ArrayList<EObject> rootElement = new ArrayList
-			//if data type is abstract return null
-			if (!_self.dataInstance.dataType.isConcreteEcoreType(DSLPath)){
-				println("The " + _self.dataInstance.name + " element is abstract")
-				_self.dataInstance.info = "FAIL: The " + _self.dataInstance.name + " element is abstract"
-				return null;
-			}
-			val dataTypeName = _self.dataInstance.dataType.validName
-			rootElement.add(MUTResource.getContents().get(0))
-			if (!rootElement.get(0).eClass.name.equals(dataTypeName)){
-				var container = rootElement.get(0)
-				rootElement.remove(0)
-				rootElement.addAll(container.eAllContents.filter[object | object.eClass.name.equals(dataTypeName)].toList)
-			}
-			return _self.getMatchedMUTElement(rootElement, MUTResource, isAssertion, DSLPath)
 		}
+		var ArrayList<EObject> rootElement = new ArrayList
+		//if data type is abstract return null
+		if (!_self.dataInstance.dataType.isConcreteEcoreType(DSLPath)){
+			println("The " + _self.dataInstance.name + " element is abstract")
+			_self.dataInstance.info = "FAIL: The " + _self.dataInstance.name + " element is abstract"
+			return null;
+		}
+		val dataTypeName = _self.dataInstance.dataType.validName
+		rootElement.add(MUTResource.getContents().get(0))
+		if (!rootElement.get(0).eClass.name.equals(dataTypeName)){
+			var container = rootElement.get(0)
+			rootElement.remove(0)
+			rootElement.addAll(container.eAllContents.filter[object | object.eClass.name.equals(dataTypeName)].toList)
+		}
+		return _self.getMatchedMUTElement(rootElement, MUTResource, isAssertion, DSLPath)
 	}
 	
 	def EObject getMatchedMUTElement(ArrayList<EObject> rootElement, Resource MUTResource, boolean isAssertion, String DSLPath){
+		if (_self.dataInstance.dataType.isEventOccurrence){//create the event occurrence
+			return _self.createEventOccurrence(MUTResource, isAssertion, DSLPath)
+		}
 		var ArrayList<EObject> containers = new ArrayList
 		var EObject matchedElement = null
 		if (_self.dataInstance instanceof StructuredDataInstance){
@@ -529,12 +530,12 @@ class MemberAssignmentAspect{
 			return "FAIL: There is no MUT element matched with " + _self.member.name
 		}
 		val featureValue = rootElement.eGet(matchedFeature)
+		if (!isAssertion && _self.member.isDynamicMember){
+			return "PASS"
+		}
 		//Assert the data instances of the member assignment
 		if (_self.memberSpec instanceof DataInstanceUse){
 			return _self.memberSpec.assertEquals(MUTResource, featureValue, isAssertion, DSLPath)
-		}
-		if (!isAssertion && _self.member.isDynamicMember){
-			return "PASS"
 		}
 		return _self.memberSpec.assertEquals(featureValue)
 	} 
@@ -565,11 +566,11 @@ class ParameterBindingAspect{
 			return "FAIL: There is no MUT element matched with " + _self.parameter.name
 		}
 		val featureValue = rootElement.eGet(matchedFeature)
-		if (_self.dataUse instanceof DataInstanceUse){
-			return _self.dataUse.assertEquals(MUTResource, featureValue, isAssertion, DSLPath)
-		}
 		if (!isAssertion && (_self.parameter as Member).isDynamicMember){
 			return "PASS"
+		}
+		if (_self.dataUse instanceof DataInstanceUse){
+			return _self.dataUse.assertEquals(MUTResource, featureValue, isAssertion, DSLPath)
 		}
 		return _self.dataUse.assertEquals(featureValue)
 	} 
