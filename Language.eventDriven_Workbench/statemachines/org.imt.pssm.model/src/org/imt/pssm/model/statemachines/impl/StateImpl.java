@@ -39,9 +39,6 @@ import org.imt.pssm.model.statemachines.Trigger;
  *   <li>{@link org.imt.pssm.model.statemachines.impl.StateImpl#getExit <em>Exit</em>}</li>
  *   <li>{@link org.imt.pssm.model.statemachines.impl.StateImpl#getDeferrableTriggers <em>Deferrable Triggers</em>}</li>
  *   <li>{@link org.imt.pssm.model.statemachines.impl.StateImpl#getConnectionPoint <em>Connection Point</em>}</li>
- *   <li>{@link org.imt.pssm.model.statemachines.impl.StateImpl#isIsEntryCompleted <em>Is Entry Completed</em>}</li>
- *   <li>{@link org.imt.pssm.model.statemachines.impl.StateImpl#isIsDoActivityCompleted <em>Is Do Activity Completed</em>}</li>
- *   <li>{@link org.imt.pssm.model.statemachines.impl.StateImpl#isIsExitCompleted <em>Is Exit Completed</em>}</li>
  * </ul>
  *
  * @generated
@@ -106,66 +103,6 @@ public class StateImpl extends VertexImpl implements State {
 	 * @ordered
 	 */
 	protected EList<Pseudostate> connectionPoint;
-
-	/**
-	 * The default value of the '{@link #isIsEntryCompleted() <em>Is Entry Completed</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsEntryCompleted()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_ENTRY_COMPLETED_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isIsEntryCompleted() <em>Is Entry Completed</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsEntryCompleted()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean isEntryCompleted = IS_ENTRY_COMPLETED_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isIsDoActivityCompleted() <em>Is Do Activity Completed</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsDoActivityCompleted()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_DO_ACTIVITY_COMPLETED_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isIsDoActivityCompleted() <em>Is Do Activity Completed</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsDoActivityCompleted()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean isDoActivityCompleted = IS_DO_ACTIVITY_COMPLETED_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isIsExitCompleted() <em>Is Exit Completed</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsExitCompleted()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_EXIT_COMPLETED_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isIsExitCompleted() <em>Is Exit Completed</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsExitCompleted()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean isExitCompleted = IS_EXIT_COMPLETED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -356,69 +293,6 @@ public class StateImpl extends VertexImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isIsEntryCompleted() {
-		return isEntryCompleted;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsEntryCompleted(boolean newIsEntryCompleted) {
-		boolean oldIsEntryCompleted = isEntryCompleted;
-		isEntryCompleted = newIsEntryCompleted;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATE__IS_ENTRY_COMPLETED, oldIsEntryCompleted, isEntryCompleted));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isIsDoActivityCompleted() {
-		return isDoActivityCompleted;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsDoActivityCompleted(boolean newIsDoActivityCompleted) {
-		boolean oldIsDoActivityCompleted = isDoActivityCompleted;
-		isDoActivityCompleted = newIsDoActivityCompleted;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATE__IS_DO_ACTIVITY_COMPLETED, oldIsDoActivityCompleted, isDoActivityCompleted));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isIsExitCompleted() {
-		return isExitCompleted;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsExitCompleted(boolean newIsExitCompleted) {
-		boolean oldIsExitCompleted = isExitCompleted;
-		isExitCompleted = newIsExitCompleted;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATE__IS_EXIT_COMPLETED, oldIsExitCompleted, isExitCompleted));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -475,12 +349,6 @@ public class StateImpl extends VertexImpl implements State {
 				return getDeferrableTriggers();
 			case StatemachinesPackage.STATE__CONNECTION_POINT:
 				return getConnectionPoint();
-			case StatemachinesPackage.STATE__IS_ENTRY_COMPLETED:
-				return isIsEntryCompleted();
-			case StatemachinesPackage.STATE__IS_DO_ACTIVITY_COMPLETED:
-				return isIsDoActivityCompleted();
-			case StatemachinesPackage.STATE__IS_EXIT_COMPLETED:
-				return isIsExitCompleted();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -515,15 +383,6 @@ public class StateImpl extends VertexImpl implements State {
 				getConnectionPoint().clear();
 				getConnectionPoint().addAll((Collection<? extends Pseudostate>)newValue);
 				return;
-			case StatemachinesPackage.STATE__IS_ENTRY_COMPLETED:
-				setIsEntryCompleted((Boolean)newValue);
-				return;
-			case StatemachinesPackage.STATE__IS_DO_ACTIVITY_COMPLETED:
-				setIsDoActivityCompleted((Boolean)newValue);
-				return;
-			case StatemachinesPackage.STATE__IS_EXIT_COMPLETED:
-				setIsExitCompleted((Boolean)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -554,15 +413,6 @@ public class StateImpl extends VertexImpl implements State {
 			case StatemachinesPackage.STATE__CONNECTION_POINT:
 				getConnectionPoint().clear();
 				return;
-			case StatemachinesPackage.STATE__IS_ENTRY_COMPLETED:
-				setIsEntryCompleted(IS_ENTRY_COMPLETED_EDEFAULT);
-				return;
-			case StatemachinesPackage.STATE__IS_DO_ACTIVITY_COMPLETED:
-				setIsDoActivityCompleted(IS_DO_ACTIVITY_COMPLETED_EDEFAULT);
-				return;
-			case StatemachinesPackage.STATE__IS_EXIT_COMPLETED:
-				setIsExitCompleted(IS_EXIT_COMPLETED_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -587,34 +437,8 @@ public class StateImpl extends VertexImpl implements State {
 				return deferrableTriggers != null && !deferrableTriggers.isEmpty();
 			case StatemachinesPackage.STATE__CONNECTION_POINT:
 				return connectionPoint != null && !connectionPoint.isEmpty();
-			case StatemachinesPackage.STATE__IS_ENTRY_COMPLETED:
-				return isEntryCompleted != IS_ENTRY_COMPLETED_EDEFAULT;
-			case StatemachinesPackage.STATE__IS_DO_ACTIVITY_COMPLETED:
-				return isDoActivityCompleted != IS_DO_ACTIVITY_COMPLETED_EDEFAULT;
-			case StatemachinesPackage.STATE__IS_EXIT_COMPLETED:
-				return isExitCompleted != IS_EXIT_COMPLETED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (isEntryCompleted: ");
-		result.append(isEntryCompleted);
-		result.append(", isDoActivityCompleted: ");
-		result.append(isDoActivityCompleted);
-		result.append(", isExitCompleted: ");
-		result.append(isExitCompleted);
-		result.append(')');
-		return result.toString();
 	}
 
 } //StateImpl

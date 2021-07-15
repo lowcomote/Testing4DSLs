@@ -402,6 +402,24 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getCustomSystem_EventOccurrences() {
+		return (EReference)customSystemEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCustomSystem_PerformedBehaviors() {
+		return (EReference)customSystemEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSignal() {
 		return signalEClass;
 	}
@@ -843,33 +861,6 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getState_IsEntryCompleted() {
-		return (EAttribute)stateEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getState_IsDoActivityCompleted() {
-		return (EAttribute)stateEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getState_IsExitCompleted() {
-		return (EAttribute)stateEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getFinalState() {
 		return finalStateEClass;
 	}
@@ -1239,6 +1230,8 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		createEReference(customSystemEClass, CUSTOM_SYSTEM__STATEMACHINE);
 		createEReference(customSystemEClass, CUSTOM_SYSTEM__SIGNALS);
 		createEReference(customSystemEClass, CUSTOM_SYSTEM__OPERATIONS);
+		createEReference(customSystemEClass, CUSTOM_SYSTEM__EVENT_OCCURRENCES);
+		createEReference(customSystemEClass, CUSTOM_SYSTEM__PERFORMED_BEHAVIORS);
 
 		signalEClass = createEClass(SIGNAL);
 		createEReference(signalEClass, SIGNAL__ATTRIBUTES);
@@ -1307,9 +1300,6 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		createEReference(stateEClass, STATE__EXIT);
 		createEReference(stateEClass, STATE__DEFERRABLE_TRIGGERS);
 		createEReference(stateEClass, STATE__CONNECTION_POINT);
-		createEAttribute(stateEClass, STATE__IS_ENTRY_COMPLETED);
-		createEAttribute(stateEClass, STATE__IS_DO_ACTIVITY_COMPLETED);
-		createEAttribute(stateEClass, STATE__IS_EXIT_COMPLETED);
 
 		finalStateEClass = createEClass(FINAL_STATE);
 
@@ -1425,6 +1415,8 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		initEReference(getCustomSystem_Statemachine(), this.getStateMachine(), null, "statemachine", null, 1, 1, CustomSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCustomSystem_Signals(), this.getSignal(), null, "signals", null, 0, -1, CustomSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCustomSystem_Operations(), this.getOperation(), null, "operations", null, 0, -1, CustomSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCustomSystem_EventOccurrences(), this.getEventOccurrence(), null, "eventOccurrences", null, 0, -1, CustomSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCustomSystem_PerformedBehaviors(), this.getBehavior(), null, "performedBehaviors", null, 0, -1, CustomSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(signalEClass, Signal.class, "Signal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSignal_Attributes(), this.getAttribute(), null, "attributes", null, 0, -1, Signal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1493,9 +1485,6 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		initEReference(getState_Exit(), this.getBehavior(), null, "exit", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getState_DeferrableTriggers(), this.getTrigger(), null, "deferrableTriggers", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getState_ConnectionPoint(), this.getPseudostate(), this.getPseudostate_State(), "connectionPoint", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getState_IsEntryCompleted(), ecorePackage.getEBoolean(), "isEntryCompleted", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getState_IsDoActivityCompleted(), ecorePackage.getEBoolean(), "isDoActivityCompleted", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getState_IsExitCompleted(), ecorePackage.getEBoolean(), "isExitCompleted", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(finalStateEClass, FinalState.class, "FinalState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1577,22 +1566,17 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	protected void createDynamicAnnotations() {
 		String source = "dynamic";
 		addAnnotation
+		  (getCustomSystem_EventOccurrences(),
+		   source,
+		   new String[] {
+		   });
+		addAnnotation
+		  (getCustomSystem_PerformedBehaviors(),
+		   source,
+		   new String[] {
+		   });
+		addAnnotation
 		  (getRegion_CurrentVertex(),
-		   source,
-		   new String[] {
-		   });
-		addAnnotation
-		  (getState_IsEntryCompleted(),
-		   source,
-		   new String[] {
-		   });
-		addAnnotation
-		  (getState_IsDoActivityCompleted(),
-		   source,
-		   new String[] {
-		   });
-		addAnnotation
-		  (getState_IsExitCompleted(),
 		   source,
 		   new String[] {
 		   });

@@ -95,13 +95,31 @@ public interface StatemachinesPackage extends EPackage {
 	int CUSTOM_SYSTEM__OPERATIONS = 2;
 
 	/**
+	 * The feature id for the '<em><b>Event Occurrences</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_SYSTEM__EVENT_OCCURRENCES = 3;
+
+	/**
+	 * The feature id for the '<em><b>Performed Behaviors</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOM_SYSTEM__PERFORMED_BEHAVIORS = 4;
+
+	/**
 	 * The number of structural features of the '<em>Custom System</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOM_SYSTEM_FEATURE_COUNT = 3;
+	int CUSTOM_SYSTEM_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Custom System</em>' class.
@@ -1050,40 +1068,13 @@ public interface StatemachinesPackage extends EPackage {
 	int STATE__CONNECTION_POINT = VERTEX_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>Is Entry Completed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATE__IS_ENTRY_COMPLETED = VERTEX_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Is Do Activity Completed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATE__IS_DO_ACTIVITY_COMPLETED = VERTEX_FEATURE_COUNT + 7;
-
-	/**
-	 * The feature id for the '<em><b>Is Exit Completed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATE__IS_EXIT_COMPLETED = VERTEX_FEATURE_COUNT + 8;
-
-	/**
 	 * The number of structural features of the '<em>State</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_FEATURE_COUNT = VERTEX_FEATURE_COUNT + 9;
+	int STATE_FEATURE_COUNT = VERTEX_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>State</em>' class.
@@ -1193,33 +1184,6 @@ public interface StatemachinesPackage extends EPackage {
 	 * @ordered
 	 */
 	int FINAL_STATE__CONNECTION_POINT = STATE__CONNECTION_POINT;
-
-	/**
-	 * The feature id for the '<em><b>Is Entry Completed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FINAL_STATE__IS_ENTRY_COMPLETED = STATE__IS_ENTRY_COMPLETED;
-
-	/**
-	 * The feature id for the '<em><b>Is Do Activity Completed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FINAL_STATE__IS_DO_ACTIVITY_COMPLETED = STATE__IS_DO_ACTIVITY_COMPLETED;
-
-	/**
-	 * The feature id for the '<em><b>Is Exit Completed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FINAL_STATE__IS_EXIT_COMPLETED = STATE__IS_EXIT_COMPLETED;
 
 	/**
 	 * The number of structural features of the '<em>Final State</em>' class.
@@ -1892,6 +1856,28 @@ public interface StatemachinesPackage extends EPackage {
 	EReference getCustomSystem_Operations();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.imt.pssm.model.statemachines.CustomSystem#getEventOccurrences <em>Event Occurrences</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Event Occurrences</em>'.
+	 * @see org.imt.pssm.model.statemachines.CustomSystem#getEventOccurrences()
+	 * @see #getCustomSystem()
+	 * @generated
+	 */
+	EReference getCustomSystem_EventOccurrences();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.imt.pssm.model.statemachines.CustomSystem#getPerformedBehaviors <em>Performed Behaviors</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Performed Behaviors</em>'.
+	 * @see org.imt.pssm.model.statemachines.CustomSystem#getPerformedBehaviors()
+	 * @see #getCustomSystem()
+	 * @generated
+	 */
+	EReference getCustomSystem_PerformedBehaviors();
+
+	/**
 	 * Returns the meta object for class '{@link org.imt.pssm.model.statemachines.Signal <em>Signal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2412,39 +2398,6 @@ public interface StatemachinesPackage extends EPackage {
 	EReference getState_ConnectionPoint();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.imt.pssm.model.statemachines.State#isIsEntryCompleted <em>Is Entry Completed</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Entry Completed</em>'.
-	 * @see org.imt.pssm.model.statemachines.State#isIsEntryCompleted()
-	 * @see #getState()
-	 * @generated
-	 */
-	EAttribute getState_IsEntryCompleted();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.imt.pssm.model.statemachines.State#isIsDoActivityCompleted <em>Is Do Activity Completed</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Do Activity Completed</em>'.
-	 * @see org.imt.pssm.model.statemachines.State#isIsDoActivityCompleted()
-	 * @see #getState()
-	 * @generated
-	 */
-	EAttribute getState_IsDoActivityCompleted();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.imt.pssm.model.statemachines.State#isIsExitCompleted <em>Is Exit Completed</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Exit Completed</em>'.
-	 * @see org.imt.pssm.model.statemachines.State#isIsExitCompleted()
-	 * @see #getState()
-	 * @generated
-	 */
-	EAttribute getState_IsExitCompleted();
-
-	/**
 	 * Returns the meta object for class '{@link org.imt.pssm.model.statemachines.FinalState <em>Final State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2905,6 +2858,22 @@ public interface StatemachinesPackage extends EPackage {
 		EReference CUSTOM_SYSTEM__OPERATIONS = eINSTANCE.getCustomSystem_Operations();
 
 		/**
+		 * The meta object literal for the '<em><b>Event Occurrences</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CUSTOM_SYSTEM__EVENT_OCCURRENCES = eINSTANCE.getCustomSystem_EventOccurrences();
+
+		/**
+		 * The meta object literal for the '<em><b>Performed Behaviors</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CUSTOM_SYSTEM__PERFORMED_BEHAVIORS = eINSTANCE.getCustomSystem_PerformedBehaviors();
+
+		/**
 		 * The meta object literal for the '{@link org.imt.pssm.model.statemachines.impl.SignalImpl <em>Signal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3333,30 +3302,6 @@ public interface StatemachinesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STATE__CONNECTION_POINT = eINSTANCE.getState_ConnectionPoint();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Entry Completed</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute STATE__IS_ENTRY_COMPLETED = eINSTANCE.getState_IsEntryCompleted();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Do Activity Completed</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute STATE__IS_DO_ACTIVITY_COMPLETED = eINSTANCE.getState_IsDoActivityCompleted();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Exit Completed</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute STATE__IS_EXIT_COMPLETED = eINSTANCE.getState_IsExitCompleted();
 
 		/**
 		 * The meta object literal for the '{@link org.imt.pssm.model.statemachines.impl.FinalStateImpl <em>Final State</em>}' class.

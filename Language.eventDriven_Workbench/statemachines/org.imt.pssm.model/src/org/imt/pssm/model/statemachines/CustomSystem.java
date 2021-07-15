@@ -18,6 +18,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.imt.pssm.model.statemachines.CustomSystem#getStatemachine <em>Statemachine</em>}</li>
  *   <li>{@link org.imt.pssm.model.statemachines.CustomSystem#getSignals <em>Signals</em>}</li>
  *   <li>{@link org.imt.pssm.model.statemachines.CustomSystem#getOperations <em>Operations</em>}</li>
+ *   <li>{@link org.imt.pssm.model.statemachines.CustomSystem#getEventOccurrences <em>Event Occurrences</em>}</li>
+ *   <li>{@link org.imt.pssm.model.statemachines.CustomSystem#getPerformedBehaviors <em>Performed Behaviors</em>}</li>
  * </ul>
  *
  * @see org.imt.pssm.model.statemachines.StatemachinesPackage#getCustomSystem()
@@ -70,5 +72,29 @@ public interface CustomSystem extends EObject {
 	 * @generated
 	 */
 	EList<Operation> getOperations();
+
+	/**
+	 * Returns the value of the '<em><b>Event Occurrences</b></em>' reference list.
+	 * The list contents are of type {@link org.imt.pssm.model.statemachines.EventOccurrence}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Event Occurrences</em>' reference list.
+	 * @see org.imt.pssm.model.statemachines.StatemachinesPackage#getCustomSystem_EventOccurrences()
+	 * @model annotation="dynamic"
+	 * @generated
+	 */
+	EList<EventOccurrence> getEventOccurrences();
+
+	/**
+	 * Returns the value of the '<em><b>Performed Behaviors</b></em>' reference list.
+	 * The list contents are of type {@link org.imt.pssm.model.statemachines.Behavior}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Performed Behaviors</em>' reference list.
+	 * @see org.imt.pssm.model.statemachines.StatemachinesPackage#getCustomSystem_PerformedBehaviors()
+	 * @model annotation="dynamic"
+	 * @generated
+	 */
+	EList<Behavior> getPerformedBehaviors();
 
 } // CustomSystem
