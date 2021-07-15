@@ -130,14 +130,10 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			//get the thread running the test case debugger to suspend it during model debugging
 			DSLThreadAdapter testCaseDebugThread = (DSLThreadAdapter) testCaseDebuggerThreads[0];
 			while (this.executionEngine.getRunningStatus() == RunStatus.Running) {
-				synchronized (testCaseDebugThread) {
-					if (!testCaseDebugThread.isSuspended()) {
-						try {
-							testCaseDebugThread.suspend();
-						} catch (DebugException e) {
-							e.printStackTrace();
-						}
-					}	
+				try {
+					testCaseDebugThread.suspend();
+				} catch (DebugException e) {
+					e.printStackTrace();
 				}
 			}
 		}
@@ -150,11 +146,10 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		if (eventOccurrence == null) {
 			return "FAIL: The expected event does not match to the interface or its parameters does not exist in the MUT";
 		}
-		
 		if (this.eventOccurrences.size()>0) {
 			EventOccurrence occ;
 			try {
-				occ = this.eventOccurrences.poll(1000, TimeUnit.MILLISECONDS);
+				occ = this.eventOccurrences.poll(10000, TimeUnit.MILLISECONDS);
 				if (occ != null && this.equalEventOccurrences(occ, eventOccurrence)) {
 					return "PASS";
 				}else {
