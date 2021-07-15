@@ -34,13 +34,15 @@ class GateInstanceAspect {
 	
 	private EngineFactory gateLauncher
 	
-	public final static String RUN_MODEL = "runModel"
-	public final static String RUN_MODEL_ASYNC = "runModelAsynchronous"
-	public final static String STOP_EXECUTION = "stopModelExecution"
-	public final static String RESET_MODEL = "resetModel"
-	public final static String GET_MODEL = "getModelState"
-	public final static String OCL_TYPE = "OCL"
-	public final static String OCL_GATE = "oclGate";
+	private final static String RUN_MODEL = "runModel"
+	private final static String RUN_MODEL_ASYNC = "runModelAsynchronous"
+	private final static String STOP_EXECUTION = "stopModelExecution"
+	private final static String RESET_MODEL = "resetModel"
+	private final static String GET_MODEL = "getModelState"
+	private final static String OCL_TYPE = "OCL"
+	private final static String OCL_GATE = "oclGate";
+	private final static String ACCEPTED_EVENT = "ACCEPTED";
+	private final static String EXPOSED_EVENT = "EXPOSED";
 	
 	def void setLauncher(EngineFactory launcher) {
 		_self.gateLauncher = launcher;
@@ -89,7 +91,7 @@ class GateInstanceAspect {
 			else if ((arg.item == null || arg.item.size <= 0) 
 				&& arg.dataInstance.dataType.isExposedEvent(_self.DSLPath)){
 				//the message is an event conforming to the behavioral interface of the DSL
-				return _self.gateLauncher.executeDSLSpecificCommand("EXPOSED",arg.dataInstance.validName, _self.getEventParameters(arg))
+				return _self.gateLauncher.executeDSLSpecificCommand(EXPOSED_EVENT,arg.dataInstance.validName, _self.getEventParameters(arg, EXPOSED_EVENT))
 			}	
 			var String status = null
 			var ArrayList<EObject> matchedMUTElements = new ArrayList<EObject>();
@@ -158,7 +160,7 @@ class GateInstanceAspect {
 				return _self.gateLauncher.executeOCLCommand(query.value)				
 			}else if (arg.dataInstance.dataType.isAcceptedEvent(_self.DSLPath)){
 				//the message is an event conforming to the behavioral interface of the DSL
-				return _self.gateLauncher.executeDSLSpecificCommand("ACCEPTED",arg.dataInstance.validName, _self.getEventParameters(arg))
+				return _self.gateLauncher.executeDSLSpecificCommand(ACCEPTED_EVENT, arg.dataInstance.validName, _self.getEventParameters(arg, ACCEPTED_EVENT))
 			}
 			return "FAIL: Cannot send data to the MUT"
 		}
@@ -182,16 +184,15 @@ class GateInstanceAspect {
 		return status
 	}
 	//retrieve a map of the parameter name and its corresponding model element
-	def Map<String, Object> getEventParameters(DataInstanceUse event){
+	def Map<String, Object> getEventParameters(DataInstanceUse event, String eventType){
 		var Map<String, Object> parameters = new HashMap;
 		for (i : 0 ..<event.argument.size){//the parameterBindings of the event
 			val argName = event.argument.get(i).parameter.name
-			val DataUse argValue = event.argument.get(i).dataUse
-			if (argValue instanceof DataInstanceUse){
-				//put the name of the parameter along with its matched object in the MUTResource
-				val value = (argValue as DataInstanceUse).getMatchedMUTElement(_self.gateLauncher.MUTResource, false, _self.DSLPath)
-				parameters.put(argName, value)
-			}			
+			var EObject argValue = null
+			val DataUse argTdlValue = event.argument.get(i).dataUse
+			argValue = (argTdlValue as DataInstanceUse).getMatchedMUTElement(_self.gateLauncher.MUTResource, false, _self.DSLPath)
+			//put the name of the parameter along with its value
+			parameters.put(argName, argValue)		
 		}
 		return parameters
 	}
