@@ -108,13 +108,10 @@ public class EngineFactory{
 	private String getEngineType() {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(this.DSLPath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
-		if (dsl.getEntry("metaprog") != null) {
-			String metaprog = dsl.getEntry("metaprog").getValue();
-			if (metaprog.contains("ale")) {
-				return "ale";
-			}else if(metaprog.contains("kermeta3")) {
-				return "k3";
-			}
+		if (dsl.getEntry("k3") != null) {
+			return "k3";
+		}else if (dsl.getEntry("ale") != null) {
+			return "ale";
 		}
 		return null;
 	}
