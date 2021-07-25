@@ -355,7 +355,11 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			case ValuePackage.SINGLE_REFERENCE_VALUE:
 				value1 = ((SingleReferenceValue) e1Arg.getValue()).getReferenceValue();
 				value2 = ((SingleReferenceValue) e2Arg.getValue()).getReferenceValue();
-				if (value1.toString().equals(value2.toString())) {
+				String svalue1 = value1.toString();
+				String svalue2 = value2.toString();
+				svalue1 = svalue1.replace(svalue1.substring(svalue1.indexOf("@"), svalue1.indexOf("(")), "_");
+				svalue2 = svalue2.replace(svalue2.substring(svalue2.indexOf("@"), svalue2.indexOf("(")), "_");
+				if (svalue1.equals(svalue2)) {
 					return true;
 				}
 				break;
