@@ -155,19 +155,24 @@ class TestConfigurationAspect{
 			return xdsmlFilePath
 		}
 	}
+	
+	private final static String GENERIC_GATE = "genericGate";
+	private final static String DSL_GATE = "reactiveGate";
+	private final static String OCL_GATE = "oclGate";
+	
 	def void setUpLauncher (EngineFactory launcher){
-		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.contains('generic')]]) {
+		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.equals(GENERIC_GATE)]]) {
 			launcher.setUp(EngineFactory.GENERIC);
 		}
-		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.contains('dslSpecific')]]) {
+		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.equals(DSL_GATE)]]) {
 			launcher.setUp(EngineFactory.DSL_SPECIFIC);
 		}
-		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.contains('ocl')]]){
+		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.equals(OCL_GATE)]]){
 			launcher.setUp(EngineFactory.OCL);
 		}
 	}
 	def String stopModelExecutionEngine(EngineFactory launcher){
-		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.contains('dslSpecific')]]) {
+		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.equals(DSL_GATE)]]) {
 			return launcher.executeDSLSpecificCommand("STOP", null, null);
 		}
 	}
