@@ -3,7 +3,7 @@ XTDL is a generic approach that provides testing facilities for executable DSLs.
 
 **Contents of this repository:**
 
-- *Language.Workbench*
+- *Language_Workbench*
 
 | DSL Definition| 
 | ------ |
@@ -12,8 +12,8 @@ XTDL is a generic approach that provides testing facilities for executable DSLs.
 *XFSM-ALE*: the complete definition of an executable FSM DSL. The operational semantics is implemented using the ALE metaprogramming approach.
 *XFSM-K3*: the complete definition of an executable FSM DSL. The operational semantics is implemented using the Kermeta3 metaprogramming approach.
 
-- *Modeling.Workbench*: A set of models conforming to the provided DSLs along with a set of test cases for each of them.
-- *Mutation Testing*: The integration of TDL Execution Engine with the [WODEL-TEST mutation testing framework](https://gomezabajo.github.io/Wodel/Wodel-Test/). There are also two sample projects for mutation testing of state machines.
+- *Modeling_Workbench*: A set of models conforming to the provided DSLs along with a set of test cases for each of them.
+- *Mutation Testing*: The integration of the TDL Execution Engine with the [WODEL-TEST mutation testing framework](https://gomezabajo.github.io/Wodel/Wodel-Test/) for providing mutation testing of executable models. There are also two sample projects for mutation testing of state machines.
 - *org.etsi.mts.graphical...*: A set of plugins from [TDL open-source project](https://labs.etsi.org/rep/top/ide) which define the graphical concrete syntax of the TDL. We extended the standard to provide model animation.
 - *org.imt.atl.ecore2tdl*: An ATL transformation from Ecore to TDL.
 - *org.imt.k3tdl.tdlInterpreter*: The operational semantics of TDL language implemented using Kermeta3 metaprogramming approach.
