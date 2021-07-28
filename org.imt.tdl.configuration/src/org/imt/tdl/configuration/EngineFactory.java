@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
-import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrence;
 import org.imt.tdl.eventBasedEngine.IEventBasedExecutionEngine;
 import org.imt.tdl.eventBasedEngine.K3EventManagerLauncher;
 import org.imt.tdl.oclInterpreter.OCLInterpreter;
