@@ -117,7 +117,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	
 	@Override
 	public String processAcceptedEvent(String eventName, Map<String, Object> parameters) {
-		EventOccurrence eventOccurrence = createEventOccurance(EventOccurrenceType.ACCEPTED, eventName, parameters);
+		EventOccurrence eventOccurrence = createEventOccurance(EventOccurrenceType.ACCEPTED, eventName, parameters);	
 		this.eventManager.processEventOccurrence(eventOccurrence);
 		if (isDebugMode) {
 			IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
