@@ -34,10 +34,10 @@ public class TestConfigurationGenerator {
 	private Map<String, TestConfiguration> configurations = new HashMap<String, TestConfiguration>();
 	
 	private final static String GENERIC_GATE_TYPE = "genericGateType";
-	private final static String DSL_GATE_TYPE = "dslSpecificGateType";
+	private final static String DSL_GATE_TYPE = "reactiveGateType";
 	private final static String OCL_GATE_TYPE = "oclGateType";
 	private final static String GENERIC_GATE = "genericGate";
-	private final static String DSL_GATE = "dslSpecificGate";
+	private final static String DSL_GATE = "reactiveGate";
 	private final static String OCL_GATE = "oclGate";
 	
 	public TestConfigurationGenerator(String dslFilePath) throws IOException {
@@ -138,21 +138,21 @@ public class TestConfigurationGenerator {
 		TestConfiguration genericConfiguration = factory.createTestConfiguration();
 		genericConfiguration.setName("genericConfiguration");
 		generateComponentInstances(genericConfiguration);
-		generateConnection(genericConfiguration, "generic");
-		generateConnection(genericConfiguration, "ocl");
+		generateConnection(genericConfiguration, GENERIC_GATE);
+		generateConnection(genericConfiguration, OCL_GATE);
 		this.testConfigurationPackage.getPackagedElement().add(genericConfiguration);
 		this.configurations.put(genericConfiguration.getName(), genericConfiguration);
 		
 		//if the dsl has an interface and specific gate types are generated for it,
 		//a new test configuration has to be defined
 		if (this.gateTypes.get(DSL_GATE_TYPE) != null) {
-			TestConfiguration dslSpecificConfiguration = factory.createTestConfiguration();
-			dslSpecificConfiguration.setName("dslSpecificConfiguration");
-			generateComponentInstances(dslSpecificConfiguration);
-			generateConnection(dslSpecificConfiguration, "dslSpecific");
-			generateConnection(dslSpecificConfiguration, "ocl");
-			this.testConfigurationPackage.getPackagedElement().add(dslSpecificConfiguration);
-			this.configurations.put(dslSpecificConfiguration.getName(), dslSpecificConfiguration);
+			TestConfiguration reactiveConfiguration = factory.createTestConfiguration();
+			reactiveConfiguration.setName("reactiveConfiguration");
+			generateComponentInstances(reactiveConfiguration);
+			generateConnection(reactiveConfiguration, DSL_GATE);
+			generateConnection(reactiveConfiguration, OCL_GATE);
+			this.testConfigurationPackage.getPackagedElement().add(reactiveConfiguration);
+			this.configurations.put(reactiveConfiguration.getName(), reactiveConfiguration);
 		}
 	}
 	
@@ -182,7 +182,7 @@ public class TestConfigurationGenerator {
 
 		configuration.getComponentInstance().add(mutInstance);
 	}
-	private void generateConnection(TestConfiguration configuration, String configurationType) {
+	private void generateConnection(TestConfiguration configuration, String gateName) {
 		//retrieve the component instances of the current test configuration
 		List<ComponentInstance> configComponentInstances = configuration.getComponentInstance();
 		ComponentInstance testerComponent = factory.createComponentInstance();
@@ -201,7 +201,7 @@ public class TestConfigurationGenerator {
 		GateInstance gate = null;
 		for (int i=0; i<testerComponent.getType().getGateInstance().size();i++) {
 			gate = testerComponent.getType().getGateInstance().get(i);
-			if (gate.getName().equals(configurationType + "Gate")) {
+			if (gate.getName().equals(gateName)) {
 				referenceToTestGate.setGate (gate);
 			}
 		}
@@ -209,7 +209,7 @@ public class TestConfigurationGenerator {
 		referenceToMUTGate.setComponent(MUTComponent);
 		for (int i=0; i<MUTComponent.getType().getGateInstance().size();i++) {
 			gate = MUTComponent.getType().getGateInstance().get(i);
-			if (gate.getName().equals(configurationType + "Gate")) {
+			if (gate.getName().equals(gateName)) {
 				referenceToMUTGate.setGate (gate);
 			}
 		}		
