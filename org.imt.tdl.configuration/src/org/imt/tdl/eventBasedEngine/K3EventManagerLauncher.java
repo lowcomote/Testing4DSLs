@@ -115,6 +115,10 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		this.launcher = new CustomEventBasedLauncher();
 	}
 	
+	private GenericEventManager eventManager = null;
+	private LinkedTransferQueue<EventOccurrence> eventOccurrences = new LinkedTransferQueue<EventOccurrence>();
+	
+	
 	@Override
 	public String processAcceptedEvent(String eventName, Map<String, Object> parameters) {
 		EventOccurrence eventOccurrence = createEventOccurance(EventOccurrenceType.ACCEPTED, eventName, parameters);	
@@ -176,9 +180,6 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		return configuration;
 	}
 
-	private GenericEventManager eventManager = null;
-	private LinkedTransferQueue<EventOccurrence> eventOccurrences = new LinkedTransferQueue<EventOccurrence>();
-	
 	@Override
 	public void startEngine() {
 		try {
@@ -355,10 +356,18 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			case ValuePackage.SINGLE_REFERENCE_VALUE:
 				value1 = ((SingleReferenceValue) e1Arg.getValue()).getReferenceValue();
 				value2 = ((SingleReferenceValue) e2Arg.getValue()).getReferenceValue();
+				if (value1 == value2) {
+					return true;
+				}
 				String svalue1 = value1.toString();
 				String svalue2 = value2.toString();
-				svalue1 = svalue1.replace(svalue1.substring(svalue1.indexOf("@"), svalue1.indexOf("(")), "_");
-				svalue2 = svalue2.replace(svalue2.substring(svalue2.indexOf("@"), svalue2.indexOf("(")), "_");
+				if (svalue1.contains("(") && svalue2.contains("(")) {
+					svalue1 = svalue1.replace(svalue1.substring(svalue1.indexOf("@"), svalue1.indexOf("(")), "_");
+					svalue2 = svalue2.replace(svalue2.substring(svalue2.indexOf("@"), svalue2.indexOf("(")), "_");
+				}else {
+					svalue1 = svalue1.substring(0, svalue1.indexOf("@"));
+					svalue2 = svalue2.substring(0, svalue2.indexOf("@"));
+				}
 				if (svalue1.equals(svalue2)) {
 					return true;
 				}
