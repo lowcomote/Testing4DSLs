@@ -70,7 +70,6 @@ class Instruction_UtilitesAspect {
 			}
 			current = current.eContainer()
 		}
-		
 		return project
 	}
 	
