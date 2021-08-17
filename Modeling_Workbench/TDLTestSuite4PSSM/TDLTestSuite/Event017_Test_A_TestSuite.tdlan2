@@ -22,10 +22,10 @@ Package Event017_Test_A_TestSuite {
 			state_machine = Event017_Test_A ,
 			signal = Data
 		) to PSSM.dslSpecificMUTGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = T3_effect
 		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = T5_testEnd
 		) to tester.dslSpecificTestGate ;
 	}

@@ -20,25 +20,25 @@ Package Event018_Test_TestSuite {
 			state_machine = Event018_Test ,
 			signal = Start
 		) to PSSM.dslSpecificMUTGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = S1_1_1_exit
 		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = S1_1_exit
 		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = S1_exit
 		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = T3_effect
 		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = S2_entry
 		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = S1_2_entry
 		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = T4_testEnd
 		) to tester.dslSpecificTestGate ;
 	}

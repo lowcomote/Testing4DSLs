@@ -19,22 +19,22 @@ Package Exit001_Test_TestSuite {
 			state_machine = Exit001_Test ,
 			signal = Start
 		) to PSSM.dslSpecificMUTGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = S1_1_1_exit
 		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = S1_1_exit
 		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = T1_2_effect
 		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = S1_exit
 		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = T3_effect
 		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = T4_testEnd
 		) to tester.dslSpecificTestGate ;
 	}

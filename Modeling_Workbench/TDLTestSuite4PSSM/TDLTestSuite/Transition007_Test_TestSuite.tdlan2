@@ -26,16 +26,16 @@ Package Transition007_Test_TestSuite {
 			state_machine = Transition007_Test ,
 			signal = Continue
 		) to PSSM.dslSpecificMUTGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = T1_doTraversal
 		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = T2_doTraversal
 		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = T3_doTraversal
 		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = T4_testEnd
 		) to tester.dslSpecificTestGate ;
 	}

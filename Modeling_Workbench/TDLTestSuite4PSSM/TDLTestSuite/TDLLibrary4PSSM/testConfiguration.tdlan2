@@ -3,7 +3,7 @@ Package testConfiguration {
 	Import all from pssmSpecificEvents ;
 	
 	Gate Type genericGate accepts modelExecutionCommand ;
-	Gate Type dslSpecificGate accepts _run , signal_received , behavior_effected ;
+	Gate Type dslSpecificGate accepts _run , signal_received , behavior_executed ;
 	Gate Type oclGate accepts OCL ;
 	
 	Component Type TestSystem having {

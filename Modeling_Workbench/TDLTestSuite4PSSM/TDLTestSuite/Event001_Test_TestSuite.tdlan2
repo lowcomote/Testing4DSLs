@@ -15,10 +15,10 @@ Package Event001_Test_TestSuite {
 			state_machine = Event001_Test ,
 			signal = Start
 		) to PSSM.dslSpecificMUTGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = wait_exit
 		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = T2_testEnd
 		) to tester.dslSpecificTestGate ;
 	}

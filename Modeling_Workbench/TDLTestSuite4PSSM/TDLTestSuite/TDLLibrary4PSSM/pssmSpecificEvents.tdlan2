@@ -24,9 +24,9 @@ Package pssmSpecificEvents {
 	
 	callOperation_received callOperation_received ( state_machine = ? , operation = ? ) ;
 	
-	Type behavior_effected ( 
+	Type behavior_executed ( 
 		behavior of type Behavior
 	) with {ExposedEvent ;} ;
 	
-	behavior_effected behavior_effected ( behavior = ? ) ;
+	behavior_executed behavior_executed ( behavior = ? ) ;
 }
