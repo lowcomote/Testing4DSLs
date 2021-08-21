@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.gemoc.dsl.Dsl;
 import org.etsi.mts.tdl.Annotation;
 import org.etsi.mts.tdl.AnnotationType;
 import org.etsi.mts.tdl.ComponentInstance;
@@ -22,6 +26,8 @@ import org.etsi.mts.tdl.tdlFactory;
 
 public class TestConfigurationGenerator {
 	private String dslName;
+	private String dslID;
+	
 	private tdlFactory factory;
 	private Package testConfigurationPackage;
 	private CommonPackageGenerator commonPackageGenerator;
@@ -49,6 +55,7 @@ public class TestConfigurationGenerator {
 		this.dslSpecificEventsGenerator = this.dslSpecificTypesGenerator.getDslSpecificEventsGenerator();
 		this.commonPackageGenerator = this.dslSpecificTypesGenerator.getCommonPackageGenerator();
 		this.dslName = this.dslSpecificEventsGenerator.getDslName(dslFilePath);
+		this.dslID = this.getDslID(dslFilePath);
 		generateTestConfigurationPackage();
 	}
 	private void generateTestConfigurationPackage() {
@@ -177,7 +184,7 @@ public class TestConfigurationGenerator {
 		Annotation DSLNameAnnotation = factory.createAnnotation();
 		DSLNameAnnotation.setAnnotatedElement(mutInstance);
 		DSLNameAnnotation.setKey(this.annotations.get("DSLName"));
-		DSLNameAnnotation.setValue("\'TODO: Put the name of the DSL\'");
+		DSLNameAnnotation.setValue("\'" + this.dslID + "\'");
 		mutInstance.getAnnotation().add(DSLNameAnnotation);
 
 		configuration.getComponentInstance().add(mutInstance);
@@ -232,5 +239,10 @@ public class TestConfigurationGenerator {
 	}
 	public Map<String, TestConfiguration> getTestConfigurations(){
 		return this.configurations;
+	}
+	protected String getDslID(String dslFilePath) {
+		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
+		Dsl dsl = (Dsl)dslRes.getContents().get(0);
+		return dsl.getEntry("name").getValue();
 	}
 }
