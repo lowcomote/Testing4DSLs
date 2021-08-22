@@ -99,7 +99,7 @@ public class DSLSpecificEventsGenerator {
 			typeForEvent.getAnnotation().add(annotation);
 			//generating an instance of the event type to be able to use it when writing test cases
 			StructuredDataInstance eventInstance = factory.createStructuredDataInstance();
-			eventInstance.setName(typeForEvent.getName().toLowerCase());
+			eventInstance.setName(typeForEvent.getName());
 			eventInstance.setDataType(typeForEvent);
 			eventInstance.setUnassignedMember(UnassignedMemberTreatment.ANY_VALUE);
 			
