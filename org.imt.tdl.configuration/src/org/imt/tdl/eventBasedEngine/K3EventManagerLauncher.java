@@ -150,22 +150,19 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		if (eventOccurrence == null) {
 			return "FAIL: The expected event does not match to the interface or its parameters does not exist in the MUT";
 		}
-		if (this.eventOccurrences.size()>0) {
-			EventOccurrence occ;
-			try {
-				occ = this.eventOccurrences.poll(10000, TimeUnit.MILLISECONDS);
-				if (occ != null && this.equalEventOccurrences(occ, eventOccurrence)) {
-					return "PASS";
-				}else {
-					String result= "FAIL: The expected event is not received from MUT\nThe received event is:\n";
-					result += this.eventOccurenceToString(occ);
-					return result;
-				}
-			} catch (InterruptedException e) {
-				return e.getMessage();
+		EventOccurrence occ;
+		try {
+			occ = this.eventOccurrences.poll(10000, TimeUnit.MILLISECONDS);
+			if (occ != null && this.equalEventOccurrences(occ, eventOccurrence)) {
+				return "PASS";
+			}else {
+				String result= "FAIL: The expected event is not received from MUT\nThe received event is:\n";
+				result += this.eventOccurenceToString(occ);
+				return result;
 			}
+		} catch (InterruptedException e) {
+			return e.getMessage();
 		}
-		return "FAIL: The expected event is not received from MUT\nThere is no received event.";
 	}
 	
 	private ILaunchConfiguration getLaunchConfiguration(String MUTPath, String languageName, Set<String> implRelIds, Set<String> subtypeRelIds) throws CoreException {
