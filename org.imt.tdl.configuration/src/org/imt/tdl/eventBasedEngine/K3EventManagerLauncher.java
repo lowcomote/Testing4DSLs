@@ -156,8 +156,12 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			if (occ != null && this.equalEventOccurrences(occ, eventOccurrence)) {
 				return "PASS";
 			}else {
-				String result= "FAIL: The expected event is not received from MUT\nThe received event is:\n";
-				result += this.eventOccurenceToString(occ);
+				String result= "FAIL: The expected event is not received from MUT";
+				if (occ == null) {
+					result += "\nThere is no received event";
+				}else {
+					result += "\nThe received event is:\n" + this.eventOccurenceToString(occ);
+				}
 				return result;
 			}
 		} catch (InterruptedException e) {
