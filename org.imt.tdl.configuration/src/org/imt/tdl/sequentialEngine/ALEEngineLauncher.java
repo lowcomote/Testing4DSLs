@@ -24,6 +24,7 @@ import org.eclipse.emf.ecoretools.ale.implementation.ModelUnit;
 import org.eclipse.gemoc.ale.interpreted.engine.AleEngine;
 import org.eclipse.gemoc.ale.interpreted.engine.Helper;
 import org.eclipse.gemoc.dsl.debug.ide.adapter.DSLThreadAdapter;
+import org.eclipse.gemoc.dsl.debug.impl.ThreadImpl;
 import org.eclipse.gemoc.execution.sequential.javaengine.ui.launcher.GemocSourceLocator;
 import org.eclipse.gemoc.executionframework.engine.commons.DslHelper;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
@@ -44,6 +45,11 @@ public class ALEEngineLauncher extends AbstractEngine{
 		}
 		//get the thread running the test case debugger to suspend it during model debugging
 		DSLThreadAdapter testCaseDebugThread = (DSLThreadAdapter) testCaseDebuggerThreads[0];
+		
+		ThreadImpl testDebugger = (ThreadImpl) testCaseDebugThread.getTarget();
+		if (testDebugger.getState().toString() == "STEPPING_INTO") {
+			this.breakAtStart();
+		}
 		
 		this.executioncontext.setResourceModel(this.getModelResource());
 		CustomALELauncher launcher = new CustomALELauncher();

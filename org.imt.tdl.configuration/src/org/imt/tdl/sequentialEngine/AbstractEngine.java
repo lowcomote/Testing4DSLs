@@ -32,6 +32,7 @@ public abstract class AbstractEngine implements ISequentialExecutionEngine{
 	
 	private Resource MUTResource = null;
 	
+	private ILaunchConfigurationWorkingCopy configurationWorkingCopy;
 	protected ILaunchConfiguration launchConfiguration;
 	protected SequentialRunConfiguration runConfiguration;
 	protected CustomModelExecutionContext executioncontext;
@@ -44,7 +45,7 @@ public abstract class AbstractEngine implements ISequentialExecutionEngine{
 		this._language = this.getDslName(DSLPath);
 		this._entryPointModelElement = "/";
 		this._entryPointMethod = getModelEntryPointMethodName();
-		this._animationFirstBreak = true;
+		this._animationFirstBreak = false;
 		this._modelInitializationMethod = getModelInitializationMethodName();
 		this._modelInitializationArguments = "";
 		this.executionMode = ExecutionMode.Animation;
@@ -59,28 +60,28 @@ public abstract class AbstractEngine implements ISequentialExecutionEngine{
 		// Create a new Launch Configuration
 		ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
 		ILaunchConfigurationType type = manager.getLaunchConfigurationType("org.eclipse.gemoc.execution.sequential.javaengine.ui.launcher");
-		ILaunchConfigurationWorkingCopy configuration = null;
+		configurationWorkingCopy = null;
 		try {
-			configuration = type.newInstance(null, "Debug MUT");
+			configurationWorkingCopy = type.newInstance(null, "Debug MUT");
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
 		// Set its attributes
-		configuration.setAttribute(AbstractDSLLaunchConfigurationDelegate.RESOURCE_URI, this._modelLocation);
-		configuration.setAttribute(AbstractDSLLaunchConfigurationDelegateSiriusUI.SIRIUS_RESOURCE_URI, this._siriusRepresentationLocation);
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_DELAY, Integer.parseInt(this._delay));
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_SELECTED_LANGUAGE, this._language);
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_MODEL_ENTRY_POINT, this._entryPointModelElement);
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_METHOD_ENTRY_POINT, this._entryPointMethod);
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_METHOD, this._modelInitializationMethod);
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_ARGUMENTS, this._modelInitializationArguments);
-		configuration.setAttribute(SequentialRunConfiguration.LAUNCH_BREAK_START, this._animationFirstBreak);
+		configurationWorkingCopy.setAttribute(AbstractDSLLaunchConfigurationDelegate.RESOURCE_URI, this._modelLocation);
+		configurationWorkingCopy.setAttribute(AbstractDSLLaunchConfigurationDelegateSiriusUI.SIRIUS_RESOURCE_URI, this._siriusRepresentationLocation);
+		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_DELAY, Integer.parseInt(this._delay));
+		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_SELECTED_LANGUAGE, this._language);
+		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_MODEL_ENTRY_POINT, this._entryPointModelElement);
+		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_METHOD_ENTRY_POINT, this._entryPointMethod);
+		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_METHOD, this._modelInitializationMethod);
+		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_ARGUMENTS, this._modelInitializationArguments);
+		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_BREAK_START, this._animationFirstBreak);
 		// DebugModelID for sequential engine
 		
 		//configuration.setAttribute(SequentialRunConfiguration.DEBUG_MODEL_ID, Activator.DEBUG_MODEL_ID);
-		configuration.setAttribute(SequentialRunConfiguration.DEBUG_MODEL_ID, "org.eclipse.gemoc.execution.sequential.javaengine.ui.debugModel");
+		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.DEBUG_MODEL_ID, "org.eclipse.gemoc.execution.sequential.javaengine.ui.debugModel");
 		try {
-			this.launchConfiguration = configuration.doSave();
+			this.launchConfiguration = configurationWorkingCopy.doSave();
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -117,5 +118,15 @@ public abstract class AbstractEngine implements ISequentialExecutionEngine{
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
 		return dsl.getEntry("name").getValue().toString();
+	}
+
+	public void breakAtStart() {
+		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_BREAK_START, true);
+		try {
+			this.launchConfiguration = configurationWorkingCopy.doSave();
+		} catch (CoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

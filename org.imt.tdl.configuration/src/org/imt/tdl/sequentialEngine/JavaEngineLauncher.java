@@ -4,14 +4,11 @@ import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.eclipse.gemoc.dsl.debug.impl.ThreadImpl;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.core.runtime.jobs.IJobManager;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
-import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.Launch;
 import org.eclipse.debug.core.model.IDebugTarget;
@@ -39,7 +36,11 @@ public class JavaEngineLauncher extends AbstractEngine{
 		}
 		//get the thread running the test case debugger to suspend it during model debugging
 		DSLThreadAdapter testCaseDebugThread = (DSLThreadAdapter) testCaseDebuggerThreads[0];
-		
+		ThreadImpl testDebugger = (ThreadImpl) testCaseDebugThread.getTarget();
+		if (testDebugger.getState().toString() == "STEPPING_INTO") {
+			this.breakAtStart();
+		}
+
 		this.executioncontext.setResourceModel(this.getModelResource());
 		CustomK3Launcher launcher = new CustomK3Launcher();
 		launcher.executioncontext = this.executioncontext;

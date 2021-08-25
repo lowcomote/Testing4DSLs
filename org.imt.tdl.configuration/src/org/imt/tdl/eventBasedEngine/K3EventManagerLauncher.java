@@ -1,17 +1,6 @@
-/*******************************************************************************
- * Copyright (c) 2016 Inria and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     Inria - initial API and implementation
- *******************************************************************************/
 package org.imt.tdl.eventBasedEngine;
 
 import java.util.HashSet;
-
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -33,7 +22,6 @@ import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.Launch;
 import org.eclipse.debug.core.model.IDebugTarget;
-import org.eclipse.debug.core.model.IThread;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -41,6 +29,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.dsl.debug.ide.adapter.DSLThreadAdapter;
 import org.eclipse.gemoc.dsl.debug.ide.launch.AbstractDSLLaunchConfigurationDelegate;
+import org.eclipse.gemoc.dsl.debug.impl.ThreadImpl;
 import org.eclipse.gemoc.execution.eventBasedEngine.EventBasedExecutionEngine;
 import org.eclipse.gemoc.execution.eventBasedEngine.EventBasedRunConfiguration;
 import org.eclipse.gemoc.execution.sequential.javaengine.ui.Activator;
@@ -122,26 +111,49 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	@Override
 	public String processAcceptedEvent(String eventName, Map<String, Object> parameters) {
 		EventOccurrence eventOccurrence = createEventOccurance(EventOccurrenceType.ACCEPTED, eventName, parameters);	
-		this.eventManager.processEventOccurrence(eventOccurrence);
 		if (isDebugMode) {
-			IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
-			IThread[] testCaseDebuggerThreads = null;
-			try {
-				testCaseDebuggerThreads = debugTargets[0].getThreads();
-			} catch (DebugException e) {
-				e.printStackTrace();
+			ThreadImpl testDebugger = (ThreadImpl) testCaseDebugThread.getTarget();
+			if (testDebugger.getState().toString() == "STEPPING_OVER") {
+				//Skip the breakpoint
+				if (this.modelDebugThread == null) {
+					getModelDebugger();
+				}
+				this.eventManager.processEventOccurrence(eventOccurrence);
+				try {
+					this.modelDebugThread.resume();
+				} catch (DebugException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}else {
+				this.eventManager.processEventOccurrence(eventOccurrence);
 			}
-			//get the thread running the test case debugger to suspend it during model debugging
-			DSLThreadAdapter testCaseDebugThread = (DSLThreadAdapter) testCaseDebuggerThreads[0];
 			while (this.executionEngine.getRunningStatus() == RunStatus.Running) {
 				try {
-					testCaseDebugThread.suspend();
+					this.testCaseDebugThread.suspend();
 				} catch (DebugException e) {
 					e.printStackTrace();
 				}
 			}
+		}else {
+			this.eventManager.processEventOccurrence(eventOccurrence);
 		}
 		return "PASS";
+	}
+
+	private void getModelDebugger() {
+		IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
+		try {
+			for (int i=debugTargets.length -1 ; i>=0; i--) {
+				if ((DSLThreadAdapter)debugTargets[i].getThreads()[0] == this.testCaseDebugThread) {
+					i--;
+				}else {
+					this.modelDebugThread = (DSLThreadAdapter)debugTargets[i].getThreads()[0];
+				}
+			}
+		} catch (DebugException e) {
+			e.printStackTrace();
+		}	
 	}
 
 	@Override
@@ -170,15 +182,15 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	}
 	
 	private ILaunchConfiguration getLaunchConfiguration(String MUTPath, String languageName, Set<String> implRelIds, Set<String> subtypeRelIds) throws CoreException {
-		final ILaunchConfigurationWorkingCopy configuration = launchType.newInstance(null, "event_basedTesting");
-		configuration.setAttribute(AbstractDSLLaunchConfigurationDelegate.RESOURCE_URI, MUTPath);
-		configuration.setAttribute(EventBasedRunConfiguration.LAUNCH_SELECTED_LANGUAGE, languageName);
-		configuration.setAttribute(EventBasedRunConfiguration.WAIT_FOR_EVENT, true);
-		configuration.setAttribute(EventBasedRunConfiguration.IMPL_REL_IDS, implRelIds);
-		configuration.setAttribute(EventBasedRunConfiguration.SUBTYPE_REL_IDS, subtypeRelIds);
-		configuration.setAttribute(EventBasedRunConfiguration.LAUNCH_BREAK_START, true);
-		configuration.setAttribute(EventBasedRunConfiguration.DEBUG_MODEL_ID, Activator.DEBUG_MODEL_ID);
-		return configuration;
+		ILaunchConfigurationWorkingCopy configurationWorkingCopy = launchType.newInstance(null, "event_basedTesting");
+		configurationWorkingCopy.setAttribute(AbstractDSLLaunchConfigurationDelegate.RESOURCE_URI, MUTPath);
+		configurationWorkingCopy.setAttribute(EventBasedRunConfiguration.LAUNCH_SELECTED_LANGUAGE, languageName);
+		configurationWorkingCopy.setAttribute(EventBasedRunConfiguration.WAIT_FOR_EVENT, true);
+		configurationWorkingCopy.setAttribute(EventBasedRunConfiguration.IMPL_REL_IDS, implRelIds);
+		configurationWorkingCopy.setAttribute(EventBasedRunConfiguration.SUBTYPE_REL_IDS, subtypeRelIds);
+		configurationWorkingCopy.setAttribute(EventBasedRunConfiguration.LAUNCH_BREAK_START, true);
+		configurationWorkingCopy.setAttribute(EventBasedRunConfiguration.DEBUG_MODEL_ID, Activator.DEBUG_MODEL_ID);
+		return configurationWorkingCopy;
 	}
 
 	@Override
@@ -208,8 +220,19 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		addEventManagerListener(queue);
 	}
 	
+	private DSLThreadAdapter testCaseDebugThread;
+	private DSLThreadAdapter modelDebugThread;
+	
 	@Override
 	public void launchModelDebugger() {
+		IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
+		try {
+			//get the thread running the test case debugger to suspend it during model debugging
+			this.testCaseDebugThread = (DSLThreadAdapter)debugTargets[0].getThreads()[0];
+		} catch (DebugException e) {
+			e.printStackTrace();
+		}
+		
 		isDebugMode = true;
 		Launch debugLaunch = new Launch(launchConf, ILaunchManager.DEBUG_MODE, new GemocSourceLocator());
 		DebugPlugin.getDefault().getLaunchManager().addLaunch(debugLaunch);	
@@ -220,6 +243,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		final TransferQueue<Object> queue = new LinkedTransferQueue<>();
 		this.executionEngine.getExecutionContext().getExecutionPlatform().addEngineAddon(new IEngineAddon() {
 			@Override
@@ -248,26 +272,6 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-	}
-	
-	private void suspendTestCaseDebugger() {
-		IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
-		IThread[] testCaseDebuggerThreads = null;
-		try {
-			testCaseDebuggerThreads = debugTargets[0].getThreads();
-		} catch (DebugException e) {
-			e.printStackTrace();
-		}
-		//get the thread running the test case debugger to suspend it during model debugging
-		DSLThreadAdapter testCaseDebugThread = (DSLThreadAdapter) testCaseDebuggerThreads[0];
-		while (this.executionEngine.getRunningStatus() == RunStatus.Running) {
-			try {
-				testCaseDebugThread.suspend();
-			} catch (DebugException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 	}
 	
