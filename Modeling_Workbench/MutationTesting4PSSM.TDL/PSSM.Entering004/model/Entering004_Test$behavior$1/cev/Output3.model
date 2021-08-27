@@ -24,7 +24,9 @@
         <triggers name="StartTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <triggers name="n"/>
+        <triggers name="QG">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+        </triggers>
       </transitions>
     </regions>
   </statemachine>

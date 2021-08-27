@@ -41,7 +41,7 @@
         <effect name="T3(effect)"/>
       </transitions>
       <transitions name="T4" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.4" kind="external">
-        <effect name="hY"/>
+        <effect name="sYy"/>
       </transitions>
       <transitions name="T5" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <effect name="T5(testEnd)"/>

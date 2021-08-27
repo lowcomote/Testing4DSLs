@@ -3,12 +3,11 @@
   <statemachine name="Join001_Test$behavior$1">
     <regions name="Region1">
       <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@transitions.0"/>
-      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0">
-        <entry name="vX"/>
-      </vertice>
+      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0"/>
       <vertice xsi:type="statemachines:State" name="S1">
         <regions name="Region1">
           <vertice xsi:type="statemachines:State" name="S2.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0" incomingTransitions="//@statemachine/@regions.0/@transitions.3">
+            <entry name="Ufg"/>
             <exit name="S2.1(exit)"/>
           </vertice>
           <transitions name="T2.4" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.4" kind="external">

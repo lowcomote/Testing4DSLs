@@ -25,7 +25,9 @@
             <exit name="S2.1(exit)"/>
           </vertice>
           <transitions source="//@statemachine/@regions.0/@vertice.2/@regions.1/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.1/@vertice.1" kind="external">
-            <triggers name="r"/>
+            <triggers name="sR">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+            </triggers>
           </transitions>
         </regions>
         <exit name="S1(exit)"/>

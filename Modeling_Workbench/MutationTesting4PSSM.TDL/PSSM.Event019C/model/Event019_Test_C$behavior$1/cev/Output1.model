@@ -20,7 +20,9 @@
                 <triggers name="CallEventOp2trigger">
                   <eventType xsi:type="statemachines:CallEventType" operation="//@operations.1"/>
                 </triggers>
-                <triggers name="JW"/>
+                <triggers name="s">
+                  <eventType xsi:type="statemachines:CallEventType" operation="//@operations.0"/>
+                </triggers>
                 <effect name="T1.1.2(effect)"/>
               </transitions>
             </regions>

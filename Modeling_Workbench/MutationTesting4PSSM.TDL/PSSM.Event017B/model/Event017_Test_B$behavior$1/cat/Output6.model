@@ -18,10 +18,9 @@
             <triggers name="DataSignalEventTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
             </triggers>
-            <effect name="T3(testEnd)"/>
+            <effect name="S1(entry)"/>
           </transitions>
         </regions>
-        <entry name="S1(entry)"/>
       </vertice>
       <vertice xsi:type="statemachines:FinalState" name="FinalState1" incomingTransitions="//@statemachine/@regions.0/@transitions.2"/>
       <transitions name="T1" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>
@@ -34,6 +33,7 @@
         <triggers name="ContinueSignalEventTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
+        <effect name="T3(testEnd)"/>
       </transitions>
     </regions>
   </statemachine>

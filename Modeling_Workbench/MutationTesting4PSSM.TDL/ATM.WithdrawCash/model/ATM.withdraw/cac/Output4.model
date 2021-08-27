@@ -39,7 +39,7 @@
         <triggers name="amountEntered">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
         </triggers>
-        <effect name="O"/>
+        <effect name="X"/>
         <constraint xsi:type="statemachines:IntegerConstraint" attribute="//@signals.2/@attributes.0" value="500"/>
       </transitions>
       <transitions name="getAmount_final" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.5" kind="external">

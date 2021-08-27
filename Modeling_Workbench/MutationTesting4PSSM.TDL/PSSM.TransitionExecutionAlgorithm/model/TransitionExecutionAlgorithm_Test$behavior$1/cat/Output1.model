@@ -13,6 +13,7 @@
             <triggers name="ContinueTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
             </triggers>
+            <effect name="T1.2(effect)"/>
           </transitions>
           <transitions name="T1.1" source="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0" kind="external"/>
         </regions>
@@ -27,10 +28,9 @@
                 <entry name="S2.1.1(entry)"/>
               </vertice>
               <transitions name="T2.1" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@connectionPoint.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@vertice.0" kind="local">
-                <effect name="T1.2(effect)"/>
+                <effect name="S2.1(entry)"/>
               </transitions>
             </regions>
-            <entry name="S2.1(entry)"/>
             <connectionPoint name="EntryPoint1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@transitions.0" incomingTransitions="//@statemachine/@regions.0/@transitions.1" kind="entrypoint"/>
           </vertice>
         </regions>

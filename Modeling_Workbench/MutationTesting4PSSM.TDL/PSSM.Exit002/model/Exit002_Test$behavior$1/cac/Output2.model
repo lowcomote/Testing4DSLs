@@ -17,7 +17,7 @@
           <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.1/@transitions.1"/>
           <vertice xsi:type="statemachines:State" name="S2.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.1/@transitions.0" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.1/@transitions.1"/>
           <transitions name="T2.2" source="//@statemachine/@regions.0/@vertice.2/@regions.1/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@connectionPoint.0" kind="external">
-            <effect name="rEi"/>
+            <effect name="up"/>
           </transitions>
           <transitions name="T2.1" source="//@statemachine/@regions.0/@vertice.2/@regions.1/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.1/@vertice.1" kind="external"/>
         </regions>

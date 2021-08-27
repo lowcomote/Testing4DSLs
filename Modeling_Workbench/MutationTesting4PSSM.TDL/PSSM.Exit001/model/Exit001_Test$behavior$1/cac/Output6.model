@@ -38,7 +38,7 @@
         <triggers name="Start">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <effect name="sJ"/>
+        <effect name="w"/>
       </transitions>
     </regions>
   </statemachine>

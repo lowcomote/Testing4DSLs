@@ -13,11 +13,11 @@
       <vertice xsi:type="statemachines:State" name="S2" outgoingTransitions="//@statemachine/@regions.0/@transitions.3 //@statemachine/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@transitions.2">
         <entry name="S2(entry)"/>
       </vertice>
-      <vertice xsi:type="statemachines:State" name="S3" outgoingTransitions="//@statemachine/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@transitions.3 //@statemachine/@regions.0/@transitions.4">
+      <vertice xsi:type="statemachines:State" name="S3" outgoingTransitions="//@statemachine/@regions.0/@transitions.5 //@statemachine/@regions.0/@transitions.6" incomingTransitions="//@statemachine/@regions.0/@transitions.3 //@statemachine/@regions.0/@transitions.4">
         <entry name="S3(entry)"/>
       </vertice>
       <vertice xsi:type="statemachines:FinalState" name="FinalState1" incomingTransitions="//@statemachine/@regions.0/@transitions.5"/>
-      <vertice xsi:type="statemachines:FinalState" name="h" incomingTransitions="//@statemachine/@regions.0/@transitions.6"/>
+      <vertice xsi:type="statemachines:FinalState" name="RV" incomingTransitions="//@statemachine/@regions.0/@transitions.6"/>
       <transitions name="T1" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>
       <transitions name="T2" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="StartTrigger">
@@ -44,9 +44,7 @@
       <transitions name="T6" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <effect name="T6(testEnd)"/>
       </transitions>
-      <transitions target="//@statemachine/@regions.0/@vertice.6">
-        <source xsi:type="statemachines:State" href="../../../../../PSSMMutation/data/model/Deferred001_Test$behavior$1.mutation4.0.model#//@statemachine/@regions.0/@vertice.3"/>
-      </transitions>
+      <transitions source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.6"/>
     </regions>
   </statemachine>
   <signals name="Continue"/>

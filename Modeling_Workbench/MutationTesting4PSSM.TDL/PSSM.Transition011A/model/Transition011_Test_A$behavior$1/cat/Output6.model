@@ -32,14 +32,12 @@
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
       </transitions>
-      <transitions name="T3" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
-        <effect name="T3(testEnd)"/>
-      </transitions>
+      <transitions name="T3" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external"/>
       <transitions name="T1.3" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" kind="local">
         <triggers name="Continue">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
-        <effect name="T1.3(effect)"/>
+        <effect name="T3(testEnd)"/>
       </transitions>
     </regions>
   </statemachine>

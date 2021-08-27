@@ -13,7 +13,7 @@
             <triggers name="continueTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
             </triggers>
-            <effect name="Jg"/>
+            <effect name="JQp"/>
           </transitions>
         </regions>
       </vertice>

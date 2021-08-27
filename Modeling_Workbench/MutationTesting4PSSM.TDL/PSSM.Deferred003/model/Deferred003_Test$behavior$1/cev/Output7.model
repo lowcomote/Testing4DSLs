@@ -60,8 +60,8 @@
         <triggers name="AnotherSignalTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
-        <triggers name="tkK">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
+        <triggers name="MwQ">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
         </triggers>
         <effect name="T3(testEnd)"/>
       </transitions>

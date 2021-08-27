@@ -48,7 +48,7 @@
         <effect name="T6(effect)"/>
       </transitions>
       <transitions name="T7" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">
-        <effect name="IUf"/>
+        <effect name="aY"/>
       </transitions>
     </regions>
   </statemachine>

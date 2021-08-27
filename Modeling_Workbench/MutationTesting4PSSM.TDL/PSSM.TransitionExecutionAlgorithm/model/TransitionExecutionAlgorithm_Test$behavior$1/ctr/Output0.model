@@ -22,17 +22,13 @@
       </vertice>
       <vertice xsi:type="statemachines:State" name="S2">
         <regions name="Region1">
-          <vertice xsi:type="statemachines:State" name="S2.1">
+          <vertice xsi:type="statemachines:State" name="S2.1" outgoingTransitions="//@statemachine/@regions.0/@transitions.3">
             <regions name="T1.1">
-              <vertice xsi:type="statemachines:State" name="S2.1.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@transitions.0">
+              <vertice xsi:type="statemachines:State" name="S2.1.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@transitions.0 //@statemachine/@regions.0/@transitions.3">
                 <entry name="S2.1.1(entry)"/>
               </vertice>
               <transitions name="T2.1" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@connectionPoint.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@vertice.0" kind="local">
                 <effect name="T2.1(effect)"/>
-              </transitions>
-              <transitions name="CSw">
-                <source xsi:type="statemachines:State" href="../../../../../org.imt.tdl.PSSMMutation/data/model/TransitionExecutionAlgorithm_Test$behavior$1.mutation7.0.model#//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0"/>
-                <target xsi:type="statemachines:State" href="../../../../../org.imt.tdl.PSSMMutation/data/model/TransitionExecutionAlgorithm_Test$behavior$1.mutation8.0.model#//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0"/>
               </transitions>
             </regions>
             <entry name="S2.1(entry)"/>
@@ -51,6 +47,7 @@
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
       </transitions>
+      <transitions name="Jf" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@vertice.0"/>
     </regions>
   </statemachine>
   <signals name="Start"/>

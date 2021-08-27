@@ -22,7 +22,7 @@
         <regions name="Region2">
           <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.1/@transitions.0"/>
           <vertice xsi:type="statemachines:State" name="S2.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.1/@transitions.0">
-            <entry name="W"/>
+            <entry name="SRI"/>
             <exit name="S2.1(exit)"/>
           </vertice>
           <transitions source="//@statemachine/@regions.0/@vertice.2/@regions.1/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.1/@vertice.1" kind="external"/>

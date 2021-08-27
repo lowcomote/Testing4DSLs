@@ -24,16 +24,16 @@
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
       </transitions>
-      <transitions name="T3" source="//@statemachine/@regions.0/@vertice.2/@connectionPoint.0" target="//@statemachine/@regions.0/@vertice.4" kind="external">
-        <effect name="T3(effect)"/>
-      </transitions>
+      <transitions name="T3" source="//@statemachine/@regions.0/@vertice.2/@connectionPoint.0" target="//@statemachine/@regions.0/@vertice.4" kind="external"/>
       <transitions name="T4" source="//@statemachine/@regions.0/@vertice.2/@connectionPoint.0" target="//@statemachine/@regions.0/@vertice.4" kind="external">
-        <effect name="T5(effect)"/>
+        <effect name="T3(effect)"/>
       </transitions>
       <transitions name="T6" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <effect name="T6(testEnd)"/>
       </transitions>
-      <transitions name="T5" source="//@statemachine/@regions.0/@vertice.2/@connectionPoint.0" target="//@statemachine/@regions.0/@vertice.4" kind="external"/>
+      <transitions name="T5" source="//@statemachine/@regions.0/@vertice.2/@connectionPoint.0" target="//@statemachine/@regions.0/@vertice.4" kind="external">
+        <effect name="T5(effect)"/>
+      </transitions>
     </regions>
   </statemachine>
   <signals name="Start"/>

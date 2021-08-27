@@ -26,7 +26,7 @@
             <triggers name="Continue">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
             </triggers>
-            <effect name="U"/>
+            <effect name="D"/>
           </transitions>
         </regions>
       </vertice>

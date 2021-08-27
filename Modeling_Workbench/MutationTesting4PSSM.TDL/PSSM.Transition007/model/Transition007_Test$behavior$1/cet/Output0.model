@@ -15,12 +15,12 @@
         <triggers name="ContinueTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
-        <triggers name="AnotherSignalTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
-        </triggers>
         <effect name="T3(doTraversal)"/>
       </transitions>
       <transitions name="T4" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.3" kind="external">
+        <triggers name="AnotherSignalTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+        </triggers>
         <effect name="T4(testEnd)"/>
       </transitions>
       <transitions name="T2" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.1" kind="external">

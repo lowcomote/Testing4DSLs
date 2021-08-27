@@ -12,7 +12,7 @@
         <triggers name="AnotherSignalTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <effect name="jNL"/>
+        <effect name="u"/>
       </transitions>
       <transitions name="T3" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="ContinueTrigger">

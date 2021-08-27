@@ -6,6 +6,7 @@
       <vertice xsi:type="statemachines:State" name="S1" incomingTransitions="//@statemachine/@regions.0/@transitions.2">
         <regions name="Region1">
           <vertice xsi:type="statemachines:State" name="S1.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@transitions.0" incomingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@transitions.1">
+            <entry name="uZH"/>
             <exit name="S1.1(exit)"/>
           </vertice>
           <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@transitions.1"/>
@@ -31,7 +32,7 @@
                 <effect name="T2.1(effect)"/>
               </transitions>
             </regions>
-            <entry name="rLJ"/>
+            <entry name="S2.1(entry)"/>
             <connectionPoint name="EntryPoint1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@transitions.0" incomingTransitions="//@statemachine/@regions.0/@transitions.1" kind="entrypoint"/>
           </vertice>
         </regions>

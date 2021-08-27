@@ -25,13 +25,13 @@
           <vertice xsi:type="statemachines:State" name="S2.1">
             <regions name="T1.1">
               <vertice xsi:type="statemachines:State" name="S2.1.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@transitions.0">
-                <entry name="rLJ"/>
+                <entry name="S2.1.1(entry)"/>
               </vertice>
               <transitions name="T2.1" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@connectionPoint.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@vertice.0" kind="local">
                 <effect name="T2.1(effect)"/>
               </transitions>
             </regions>
-            <entry name="S2.1(entry)"/>
+            <entry name="uZH"/>
             <connectionPoint name="EntryPoint1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@transitions.0" incomingTransitions="//@statemachine/@regions.0/@transitions.1" kind="entrypoint"/>
           </vertice>
         </regions>

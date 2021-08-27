@@ -28,7 +28,9 @@
             <effect name="T2.2(effect)"/>
           </transitions>
           <transitions name="T2.5" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" kind="external">
-            <triggers name="m"/>
+            <triggers name="Do">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+            </triggers>
           </transitions>
         </regions>
         <entry name="S1(entry)"/>

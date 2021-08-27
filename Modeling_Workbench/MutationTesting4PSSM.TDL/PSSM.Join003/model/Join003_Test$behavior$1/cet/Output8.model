@@ -13,6 +13,9 @@
             <triggers name="IntegerDataSignalEventTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
             </triggers>
+            <triggers name="StartSignalEventTrigger">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+            </triggers>
             <effect name="T1.2(effect)"/>
           </transitions>
         </regions>
@@ -40,9 +43,6 @@
         <effect name="T4(effect)"/>
       </transitions>
       <transitions name="T5" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">
-        <triggers name="StartSignalEventTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
-        </triggers>
         <effect name="T5(testEnd)"/>
       </transitions>
     </regions>

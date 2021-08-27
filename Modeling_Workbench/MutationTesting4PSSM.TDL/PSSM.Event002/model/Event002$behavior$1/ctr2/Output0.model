@@ -3,7 +3,7 @@
   <statemachine name="Event002$behavior$1">
     <regions name="Region1">
       <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@transitions.0"/>
-      <vertice xsi:type="statemachines:State" name="Waiting" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0"/>
+      <vertice xsi:type="statemachines:State" name="Waiting" outgoingTransitions="//@statemachine/@regions.0/@transitions.1 //@statemachine/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@transitions.0"/>
       <vertice xsi:type="statemachines:State" name="S1" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.1">
         <regions name="Region1">
           <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0"/>
@@ -16,9 +16,6 @@
             <triggers>
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
             </triggers>
-          </transitions>
-          <transitions name="k">
-            <source xsi:type="statemachines:State" href="../../../../../org.imt.tdl.PSSMMutation/data/model/Event002$behavior$1.mutation10.0.model#//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2"/>
           </transitions>
         </regions>
         <entry name="S1(entry)"/>
@@ -37,6 +34,7 @@
         </triggers>
         <effect name="T3(testEnd)"/>
       </transitions>
+      <transitions name="aZ" source="//@statemachine/@regions.0/@vertice.1"/>
     </regions>
   </statemachine>
   <signals name="Start"/>

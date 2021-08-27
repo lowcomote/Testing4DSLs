@@ -15,7 +15,7 @@
         <triggers name="CallEventOpTrigger">
           <eventType xsi:type="statemachines:CallEventType" operation="//@operations.0"/>
         </triggers>
-        <triggers name="Qem">
+        <triggers name="M">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
         <effect name="T2(effect)"/>

@@ -31,7 +31,7 @@
         </triggers>
       </transitions>
       <transitions name="T3" source="//@statemachine/@regions.0/@vertice.2/@connectionPoint.0" target="//@statemachine/@regions.0/@vertice.3" kind="external">
-        <effect name="rEi"/>
+        <effect name="up"/>
       </transitions>
     </regions>
   </statemachine>

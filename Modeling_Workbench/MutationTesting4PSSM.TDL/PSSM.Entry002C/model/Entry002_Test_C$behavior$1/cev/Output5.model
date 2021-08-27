@@ -27,7 +27,7 @@
         <effect name="T3(testEnd)"/>
       </transitions>
       <transitions name="T1.1" source="//@statemachine/@regions.0/@vertice.2/@connectionPoint.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" kind="local">
-        <triggers name="i">
+        <triggers name="GcL">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
         <effect name="T1.1(effect)"/>

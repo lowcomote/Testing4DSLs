@@ -53,7 +53,9 @@
         <effect name="T4(effect)"/>
       </transitions>
       <transitions name="T5" source="//@statemachine/@regions.0/@vertice.2/@connectionPoint.0" target="//@statemachine/@regions.0/@vertice.4" kind="external">
-        <triggers name="oDr"/>
+        <triggers name="KvP">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+        </triggers>
         <effect name="T5(testEnd)"/>
       </transitions>
     </regions>

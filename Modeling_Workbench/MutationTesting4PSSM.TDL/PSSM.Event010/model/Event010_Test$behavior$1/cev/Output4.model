@@ -32,8 +32,8 @@
           </transitions>
           <transitions name="T1.4" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.4" kind="external"/>
           <transitions name="T1.5" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.4" kind="external">
-            <triggers name="b">
-              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
+            <triggers name="ZfJ">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
             </triggers>
           </transitions>
         </regions>

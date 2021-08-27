@@ -5,7 +5,6 @@
       <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@transitions.0"/>
       <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0"/>
       <vertice xsi:type="statemachines:State" name="S1" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.1">
-        <exit name="S1(exit)"/>
         <deferrableTriggers name="OpCallEventTrigger">
           <eventType xsi:type="statemachines:CallEventType" operation="//@operations.0"/>
         </deferrableTriggers>
@@ -39,7 +38,7 @@
         <effect name="T6(effect)"/>
       </transitions>
       <transitions name="T7" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">
-        <effect name="T7(testEnd)"/>
+        <effect name="S1(exit)"/>
       </transitions>
     </regions>
   </statemachine>

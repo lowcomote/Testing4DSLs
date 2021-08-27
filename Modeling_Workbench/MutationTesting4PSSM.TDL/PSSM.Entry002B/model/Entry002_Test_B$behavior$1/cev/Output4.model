@@ -26,7 +26,7 @@
           <transitions source="//@statemachine/@regions.0/@vertice.2/@regions.1/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.1/@vertice.1" kind="external"/>
           <transitions name="T1.1" source="//@statemachine/@regions.0/@vertice.2/@regions.1/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@regions.1/@vertice.2" kind="external"/>
           <transitions name="T1.3" source="//@statemachine/@regions.0/@vertice.2/@regions.1/@vertice.2" target="//@statemachine/@regions.0/@vertice.2/@regions.1/@vertice.3" kind="external">
-            <triggers name="GX">
+            <triggers name="l">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
             </triggers>
           </transitions>

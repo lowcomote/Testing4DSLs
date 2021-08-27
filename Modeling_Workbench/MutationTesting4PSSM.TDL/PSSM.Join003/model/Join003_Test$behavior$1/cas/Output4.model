@@ -3,7 +3,9 @@
   <statemachine name="Join003_Test$behavior$1">
     <regions name="Region1">
       <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@transitions.0"/>
-      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0"/>
+      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0">
+        <entry name="i"/>
+      </vertice>
       <vertice xsi:type="statemachines:State" name="S1" incomingTransitions="//@statemachine/@regions.0/@transitions.1">
         <regions name="Region1">
           <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0"/>
@@ -27,7 +29,6 @@
             <effect name="T1.4(effect)"/>
           </transitions>
         </regions>
-        <entry name="Hm"/>
       </vertice>
       <vertice xsi:type="statemachines:Pseudostate" name="Join1" outgoingTransitions="//@statemachine/@regions.0/@transitions.2 //@statemachine/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1 //@statemachine/@regions.0/@vertice.2/@regions.1/@transitions.1" kind="join"/>
       <vertice xsi:type="statemachines:State" name="S2" outgoingTransitions="//@statemachine/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@transitions.2 //@statemachine/@regions.0/@transitions.3"/>

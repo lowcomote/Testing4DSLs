@@ -9,13 +9,13 @@
       <vertice xsi:type="statemachines:State" name="getPin" outgoingTransitions="//@statemachine/@regions.0/@transitions.2 //@statemachine/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@transitions.1">
         <entry name="enterPinMsg"/>
       </vertice>
-      <vertice xsi:type="statemachines:State" name="getWithdrawAmount" outgoingTransitions="//@statemachine/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@transitions.2 //@statemachine/@regions.0/@transitions.6">
+      <vertice xsi:type="statemachines:State" name="getWithdrawAmount" outgoingTransitions="//@statemachine/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@transitions.2 //@statemachine/@regions.0/@transitions.5">
         <entry name="enterAmountMsg"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="makeWithdrawal" outgoingTransitions="//@statemachine/@regions.0/@transitions.6" incomingTransitions="//@statemachine/@regions.0/@transitions.4">
         <doActivity name="updateCardBalance"/>
       </vertice>
-      <vertice xsi:type="statemachines:FinalState" name="FinalState" outgoingTransitions="//@statemachine/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@transitions.3 //@statemachine/@regions.0/@transitions.5"/>
+      <vertice xsi:type="statemachines:FinalState" name="FinalState" outgoingTransitions="//@statemachine/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@transitions.3 //@statemachine/@regions.0/@transitions.6"/>
       <transitions name="initial_wait" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>
       <transitions name="wait_getPin" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="cardInserted">
@@ -41,14 +41,14 @@
         </triggers>
         <constraint xsi:type="statemachines:IntegerConstraint" attribute="//@signals.2/@attributes.0" value="500"/>
       </transitions>
-      <transitions name="getAmount_final" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.5" kind="external">
+      <transitions name="getAmount_final" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <triggers name="amountEntered">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
         </triggers>
         <effect name="notEnoughMoneyMsg"/>
         <constraint xsi:type="statemachines:IntegerConstraint" attribute="//@signals.2/@attributes.0" value="1500"/>
       </transitions>
-      <transitions name="withdraw_final" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.3" kind="external">
+      <transitions name="withdraw_final" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <effect name="deliverCash"/>
       </transitions>
     </regions>

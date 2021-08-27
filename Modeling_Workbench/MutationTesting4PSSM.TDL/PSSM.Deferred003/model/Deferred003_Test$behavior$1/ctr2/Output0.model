@@ -3,7 +3,7 @@
   <statemachine name="Deferred003_Test$behavior$1">
     <regions name="Region1">
       <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@transitions.0"/>
-      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0"/>
+      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1 //@statemachine/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@transitions.0"/>
       <vertice xsi:type="statemachines:State" name="S1" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.1">
         <regions name="Region1">
           <vertice xsi:type="statemachines:State" name="S1.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0">
@@ -62,9 +62,7 @@
         </triggers>
         <effect name="T3(testEnd)"/>
       </transitions>
-      <transitions name="Z">
-        <source xsi:type="statemachines:State" href="../../../../../PSSMMutation/data/model/Deferred003_Test$behavior$1.mutation10.0.model#//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2"/>
-      </transitions>
+      <transitions name="RZT" source="//@statemachine/@regions.0/@vertice.1"/>
     </regions>
   </statemachine>
   <signals name="Continue"/>

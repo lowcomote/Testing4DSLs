@@ -10,7 +10,9 @@
           <vertice xsi:type="statemachines:State" name="S1.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0">
             <regions name="Region1">
               <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@transitions.0"/>
-              <vertice xsi:type="statemachines:State" name="S1.1.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@transitions.0"/>
+              <vertice xsi:type="statemachines:State" name="S1.1.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@transitions.0">
+                <exit name="S1.1.1(exit)"/>
+              </vertice>
               <vertice xsi:type="statemachines:FinalState" name="FSR1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@transitions.1"/>
               <transitions name="T1.1.1" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@vertice.1" kind="external"/>
               <transitions name="T1.1.2" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@vertice.2" kind="external">
@@ -32,7 +34,6 @@
                 </triggers>
               </transitions>
             </regions>
-            <exit name="S1.1(exit)"/>
           </vertice>
           <transitions name="T1.1" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" kind="external"/>
         </regions>
@@ -49,7 +50,7 @@
         <triggers name="ContinueTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
-        <effect name="S1.1.1(exit)"/>
+        <effect name="S1.1(exit)"/>
       </transitions>
     </regions>
   </statemachine>

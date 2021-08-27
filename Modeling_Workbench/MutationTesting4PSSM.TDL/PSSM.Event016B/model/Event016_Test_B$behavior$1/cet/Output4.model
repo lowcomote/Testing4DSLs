@@ -48,9 +48,6 @@
                 <triggers name="ContinueTrigger">
                   <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
                 </triggers>
-                <triggers name="ContinueTrigger">
-                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
-                </triggers>
                 <effect name="T2.2.2(effect)"/>
               </transitions>
             </regions>
@@ -87,6 +84,9 @@
         </triggers>
       </transitions>
       <transitions name="T3" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
+        <triggers name="ContinueTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
+        </triggers>
         <triggers name="ContinueTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>

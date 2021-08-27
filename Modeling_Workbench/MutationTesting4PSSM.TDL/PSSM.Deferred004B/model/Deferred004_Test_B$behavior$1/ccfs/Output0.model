@@ -9,7 +9,7 @@
           <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0"/>
           <vertice xsi:type="statemachines:State" name="S1.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0">
             <regions name="Region1">
-              <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@transitions.0"/>
+              <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@transitions.0 //@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@transitions.2"/>
               <vertice xsi:type="statemachines:State" name="S1.1.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@transitions.0">
                 <exit name="S1.1.1(exit)"/>
                 <deferrableTriggers name="AnotherSignalDeferrableTrigger">
@@ -17,6 +17,7 @@
                 </deferrableTriggers>
               </vertice>
               <vertice xsi:type="statemachines:FinalState" name="FinalState1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@transitions.1"/>
+              <vertice xsi:type="statemachines:FinalState" name="f" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@transitions.2"/>
               <transitions name="T1.1.1" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@vertice.1" kind="external"/>
               <transitions name="T1.1.2" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@vertice.2" kind="external">
                 <triggers name="ContinueTrigger">
@@ -24,9 +25,7 @@
                 </triggers>
                 <effect name="T1.1.2(effect)"/>
               </transitions>
-              <transitions>
-                <source xsi:type="statemachines:State" href="../../../../../PSSMMutation/data/model/Deferred004_Test_B$behavior$1.mutation4.0.model#//@statemachine/@regions.0/@vertice.1"/>
-              </transitions>
+              <transitions source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@vertice.3"/>
             </regions>
             <exit name="S1.1(exit)"/>
           </vertice>

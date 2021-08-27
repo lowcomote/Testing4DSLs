@@ -48,13 +48,13 @@
         <triggers name="StartTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <effect name="T3(effect)"/>
+        <effect name="S1.1(entry)"/>
       </transitions>
       <transitions name="T5" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <effect name="T5(testEnd)"/>
       </transitions>
       <transitions name="T4" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.4" kind="external">
-        <effect name="S1.1(entry)"/>
+        <effect name="T4(testEnd)"/>
       </transitions>
     </regions>
   </statemachine>

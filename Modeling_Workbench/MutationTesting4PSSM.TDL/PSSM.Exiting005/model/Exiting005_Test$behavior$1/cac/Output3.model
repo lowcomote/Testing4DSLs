@@ -25,7 +25,7 @@
             <triggers name="PendingTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
             </triggers>
-            <effect name="h"/>
+            <effect name="eP"/>
           </transitions>
         </regions>
         <exit name="S1(exit)"/>

@@ -12,7 +12,7 @@
         <triggers name="StartEvent">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <effect name="sZN"/>
+        <effect name="n"/>
       </transitions>
     </regions>
   </statemachine>

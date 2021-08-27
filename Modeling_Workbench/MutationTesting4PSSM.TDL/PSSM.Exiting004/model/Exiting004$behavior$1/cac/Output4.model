@@ -27,7 +27,7 @@
         <triggers name="StartTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <effect name="cd"/>
+        <effect name="m"/>
       </transitions>
     </regions>
   </statemachine>

@@ -30,7 +30,9 @@
         <triggers name="AnotherSignalTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <triggers name="U"/>
+        <triggers name="oQF">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
+        </triggers>
         <effect name="T2(doTraversal)"/>
       </transitions>
     </regions>

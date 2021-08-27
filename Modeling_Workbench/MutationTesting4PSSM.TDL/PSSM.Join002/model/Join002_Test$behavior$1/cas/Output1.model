@@ -23,6 +23,7 @@
                 <effect name="T1.2(effect)"/>
               </transitions>
             </regions>
+            <entry name="Wq"/>
           </vertice>
           <vertice xsi:type="statemachines:Pseudostate" name="Join1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@transitions.1 //@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.1/@transitions.1" kind="join"/>
           <transitions name="T3" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.4" kind="external">
@@ -33,7 +34,7 @@
       </vertice>
       <vertice xsi:type="statemachines:FinalState" name="FinalState1" incomingTransitions="//@statemachine/@regions.0/@transitions.2"/>
       <vertice xsi:type="statemachines:State" name="S2" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0">
-        <entry name="w"/>
+        <entry name="S2(entry)"/>
       </vertice>
       <transitions name="T1" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>
       <transitions name="T2" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0" kind="external">

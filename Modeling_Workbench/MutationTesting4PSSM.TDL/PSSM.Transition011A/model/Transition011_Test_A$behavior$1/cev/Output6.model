@@ -39,7 +39,9 @@
         <triggers name="Continue">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
-        <triggers name="U"/>
+        <triggers name="sM">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+        </triggers>
         <effect name="T1.3(effect)"/>
       </transitions>
     </regions>

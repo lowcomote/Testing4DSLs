@@ -36,7 +36,7 @@
         <entry name="S2(entry)"/>
       </vertice>
       <transitions name="T1" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external">
-        <effect name="xUr"/>
+        <effect name="x"/>
       </transitions>
       <transitions name="T2" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0" kind="external">
         <triggers name="StartTrigger">

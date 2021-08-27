@@ -7,14 +7,12 @@
       <vertice xsi:type="statemachines:State" name="S1" incomingTransitions="//@statemachine/@regions.0/@transitions.1">
         <regions name="Region1">
           <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0"/>
-          <vertice xsi:type="statemachines:State" name="S1.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0"/>
+          <vertice xsi:type="statemachines:State" name="S1.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0"/>
           <transitions name="T1.1" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" kind="external"/>
           <transitions name="T1.2" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@connectionPoint.0" kind="external">
             <effect name="T1.2(effect)"/>
           </transitions>
-          <transitions target="//@statemachine/@regions.0/@vertice.4">
-            <source xsi:type="statemachines:State" href="../../../../../org.imt.tdl.PSSMMutation/data/model/Exit002_Test$behavior$1.mutation1.0.model#//@statemachine/@regions.0/@vertice.1"/>
-          </transitions>
+          <transitions source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" kind="external"/>
         </regions>
         <regions name="Region2">
           <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.1/@transitions.1"/>
@@ -27,7 +25,6 @@
         <connectionPoint name="ExitPoint1" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1 //@statemachine/@regions.0/@vertice.2/@regions.1/@transitions.0" kind="exitpoint"/>
       </vertice>
       <vertice xsi:type="statemachines:FinalState" name="FS1" incomingTransitions="//@statemachine/@regions.0/@transitions.2"/>
-      <vertice xsi:type="statemachines:State" name="cb" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.2"/>
       <transitions name="T1" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>
       <transitions name="T2" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="StartTrigger">

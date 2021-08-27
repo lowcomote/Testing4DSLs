@@ -31,7 +31,7 @@
         <triggers name="Start">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <effect name="RFT"/>
+        <effect name="m"/>
       </transitions>
       <transitions name="T3" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <effect name="T3(testEnd)"/>

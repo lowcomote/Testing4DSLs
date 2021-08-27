@@ -49,8 +49,8 @@
         <constraint xsi:type="statemachines:IntegerConstraint" attribute="//@signals.2/@attributes.0" value="1500"/>
       </transitions>
       <transitions name="withdraw_final" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">
-        <triggers name="Hd">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
+        <triggers name="Rk">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
         <effect name="deliverCash"/>
       </transitions>

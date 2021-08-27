@@ -11,7 +11,6 @@
             <regions name="Region1">
               <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@transitions.0"/>
               <vertice xsi:type="statemachines:State" name="S1.1.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@transitions.0">
-                <entry name="S1.1.1(entry)"/>
                 <exit name="S1.1.1(exit)"/>
               </vertice>
               <vertice xsi:type="statemachines:FinalState" name="FinalState1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@transitions.1"/>
@@ -20,9 +19,10 @@
                 <triggers name="CallEventOp2trigger">
                   <eventType xsi:type="statemachines:CallEventType" operation="//@operations.1"/>
                 </triggers>
-                <effect name="S1.1(entry)"/>
+                <effect name="S1.1.1(entry)"/>
               </transitions>
             </regions>
+            <entry name="S1.1(entry)"/>
           </vertice>
           <vertice xsi:type="statemachines:FinalState" name="FinalState1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1"/>
           <transitions name="T1.1" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" kind="external"/>

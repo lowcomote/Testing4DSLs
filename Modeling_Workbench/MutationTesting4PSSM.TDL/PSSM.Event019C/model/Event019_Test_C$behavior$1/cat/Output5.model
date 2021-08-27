@@ -20,7 +20,6 @@
                 <triggers name="CallEventOp2trigger">
                   <eventType xsi:type="statemachines:CallEventType" operation="//@operations.1"/>
                 </triggers>
-                <effect name="T3(testEnd)"/>
               </transitions>
             </regions>
             <entry name="S1.1(entry)"/>
@@ -38,7 +37,9 @@
           <eventType xsi:type="statemachines:CallEventType" operation="//@operations.0"/>
         </triggers>
       </transitions>
-      <transitions name="T3" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external"/>
+      <transitions name="T3" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
+        <effect name="T1.1.2(effect)"/>
+      </transitions>
     </regions>
   </statemachine>
   <operations name="op1">

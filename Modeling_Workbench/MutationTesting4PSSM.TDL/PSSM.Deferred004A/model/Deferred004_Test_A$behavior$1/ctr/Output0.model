@@ -7,7 +7,7 @@
       <vertice xsi:type="statemachines:State" name="S1" outgoingTransitions="//@statemachine/@regions.0/@transitions.2 //@statemachine/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@transitions.1">
         <regions name="Region1">
           <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0"/>
-          <vertice xsi:type="statemachines:State" name="S1.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0">
+          <vertice xsi:type="statemachines:State" name="S1.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1 //@statemachine/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0">
             <exit name="S1.1(exit)"/>
             <deferrableTriggers name="ContinueTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
@@ -35,14 +35,10 @@
             </triggers>
             <effect name="T2.2(effect)"/>
           </transitions>
-          <transitions name="RYL">
-            <source xsi:type="statemachines:State" href="../../../../../org.imt.tdl.PSSMMutation/data/model/Deferred004_Test_A$behavior$1.mutation7.0.model#//@statemachine/@regions.0/@vertice.4"/>
-            <target xsi:type="statemachines:State" href="../../../../../org.imt.tdl.PSSMMutation/data/model/Deferred004_Test_A$behavior$1.mutation8.0.model#//@statemachine/@regions.0/@vertice.4"/>
-          </transitions>
         </regions>
         <exit name="S1(exit)"/>
       </vertice>
-      <vertice xsi:type="statemachines:FinalState" name="FinalState1" incomingTransitions="//@statemachine/@regions.0/@transitions.4"/>
+      <vertice xsi:type="statemachines:FinalState" name="FinalState1" incomingTransitions="//@statemachine/@regions.0/@transitions.4 //@statemachine/@regions.0/@transitions.5"/>
       <vertice xsi:type="statemachines:State" name="end" outgoingTransitions="//@statemachine/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@transitions.2 //@statemachine/@regions.0/@transitions.3"/>
       <transitions name="T1" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>
       <transitions name="T2" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">
@@ -65,6 +61,7 @@
       <transitions name="T5" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <effect name="T5(testEnd)"/>
       </transitions>
+      <transitions name="VR" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.3"/>
     </regions>
   </statemachine>
   <signals name="Continue"/>

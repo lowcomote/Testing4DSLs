@@ -28,7 +28,7 @@
         <effect name="T3(effect)"/>
       </transitions>
       <transitions name="T4" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
-        <triggers name="O">
+        <triggers name="S">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
         <effect name="T4(testEnd)"/>

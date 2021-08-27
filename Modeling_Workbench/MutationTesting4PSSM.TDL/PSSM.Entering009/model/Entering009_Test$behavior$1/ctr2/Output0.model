@@ -19,7 +19,7 @@
         <entry name="S1(entry)"/>
         <connectionPoint name="EntryPoint1" outgoingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@transitions.0" incomingTransitions="//@statemachine/@regions.0/@transitions.0" kind="entrypoint"/>
       </vertice>
-      <vertice xsi:type="statemachines:State" name="waiting" outgoingTransitions="//@statemachine/@regions.0/@transitions.0" incomingTransitions="//@statemachine/@regions.0/@transitions.1"/>
+      <vertice xsi:type="statemachines:State" name="waiting" outgoingTransitions="//@statemachine/@regions.0/@transitions.0 //@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.1"/>
       <transitions name="T2" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.1/@connectionPoint.0" kind="external">
         <triggers name="StartTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
@@ -27,9 +27,7 @@
         <effect name="T2(doTraversal)"/>
       </transitions>
       <transitions name="T1" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2" kind="external"/>
-      <transitions name="O">
-        <source xsi:type="statemachines:State" href="../../../../../org.imt.tdl.PSSMMutation/data/model/Entering009_Test$behavior$1.mutation10.0.model#//@statemachine/@regions.0/@vertice.1"/>
-      </transitions>
+      <transitions name="ty" source="//@statemachine/@regions.0/@vertice.2"/>
     </regions>
   </statemachine>
   <signals name="Start"/>

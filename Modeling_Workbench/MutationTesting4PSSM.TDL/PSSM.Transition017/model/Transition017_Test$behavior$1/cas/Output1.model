@@ -26,7 +26,6 @@
                 <effect name="T3.1.2(doTraversal)"/>
               </transitions>
             </regions>
-            <entry name="FZr"/>
             <doActivity name="S3.1(doActivity)"/>
           </vertice>
           <vertice xsi:type="statemachines:FinalState" name="FinalState1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.1/@transitions.1"/>
@@ -35,7 +34,7 @@
             <effect name="T3.2(doTraversal)"/>
           </transitions>
         </regions>
-        <entry name="S1(entry)"/>
+        <entry name="GQz"/>
       </vertice>
       <vertice xsi:type="statemachines:FinalState" name="FinalState1" incomingTransitions="//@statemachine/@regions.0/@transitions.2"/>
       <transitions name="T1" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>

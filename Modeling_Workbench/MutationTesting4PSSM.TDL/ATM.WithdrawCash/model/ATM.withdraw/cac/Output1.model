@@ -21,7 +21,7 @@
         <triggers name="cardInserted">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <effect name="O"/>
+        <effect name="X"/>
       </transitions>
       <transitions name="getPin_getAmount" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <triggers name="pinEntered">

@@ -3,7 +3,7 @@
   <statemachine name="Entry002_Test_D$behavior$1">
     <regions name="Region1">
       <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@transitions.0"/>
-      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0"/>
+      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.0"/>
       <vertice xsi:type="statemachines:State" name="S1" outgoingTransitions="//@statemachine/@regions.0/@transitions.2">
         <regions name="Region1">
           <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0"/>
@@ -15,9 +15,7 @@
           <transitions name="T1.2" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" kind="external">
             <effect name="T1.2(effect)"/>
           </transitions>
-          <transitions name="Pe">
-            <source xsi:type="statemachines:State" href="../../../../../org.imt.tdl.PSSMMutation/data/model/Entry002_Test_D$behavior$1.mutation10.0.model#//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1"/>
-          </transitions>
+          <transitions name="ZQC" source="//@statemachine/@regions.0/@vertice.1"/>
         </regions>
         <entry name="S1(entry)"/>
         <connectionPoint name="EntryPoint1" incomingTransitions="//@statemachine/@regions.0/@transitions.1" kind="entrypoint"/>

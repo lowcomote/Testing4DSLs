@@ -6,17 +6,14 @@
       <vertice xsi:type="statemachines:State" name="waiting" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0"/>
       <vertice xsi:type="statemachines:State" name="S1" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.1">
         <regions name="Region2">
-          <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0"/>
+          <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.2"/>
           <vertice xsi:type="statemachines:FinalState" name="FinalState1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1"/>
-          <vertice xsi:type="statemachines:State" name="S2.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0"/>
+          <vertice xsi:type="statemachines:State" name="S2.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.2"/>
           <transitions name="T2.1" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" kind="external"/>
           <transitions name="T2.2" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" kind="external">
             <effect name="T2.2(doTraversal)"/>
           </transitions>
-          <transitions>
-            <source xsi:type="statemachines:Pseudostate" href="../../../../../org.imt.tdl.PSSMMutation/data/model/Transition017_Test$behavior$1.mutation13.0.model#//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0"/>
-            <target xsi:type="statemachines:State" href="../../../../../org.imt.tdl.PSSMMutation/data/model/Transition017_Test$behavior$1.mutation13.0.model#//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2"/>
-          </transitions>
+          <transitions name="T2.1" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" kind="external"/>
         </regions>
         <regions name="Region3">
           <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.1/@transitions.0"/>

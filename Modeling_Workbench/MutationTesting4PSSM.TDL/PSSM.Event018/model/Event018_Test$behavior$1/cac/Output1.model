@@ -15,7 +15,7 @@
                 <effect name="T3(effect)"/>
               </transitions>
               <transitions name="T1.1.1" source="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@vertice.0" kind="external">
-                <effect name="j"/>
+                <effect name="G"/>
               </transitions>
             </regions>
             <exit name="S1.1(exit)"/>

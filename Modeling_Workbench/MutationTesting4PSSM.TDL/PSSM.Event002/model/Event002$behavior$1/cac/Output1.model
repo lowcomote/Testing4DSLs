@@ -16,7 +16,7 @@
             <triggers>
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
             </triggers>
-            <effect name="dK"/>
+            <effect name="Y"/>
           </transitions>
         </regions>
         <entry name="S1(entry)"/>

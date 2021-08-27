@@ -34,7 +34,9 @@
         <triggers name="Continue">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <triggers name="R"/>
+        <triggers name="dd">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+        </triggers>
         <effect name="T2.2(testEnd)"/>
       </transitions>
     </regions>

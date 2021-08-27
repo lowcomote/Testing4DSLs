@@ -42,7 +42,7 @@
             <triggers name="AnotherSignalTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
             </triggers>
-            <effect name="mkv"/>
+            <effect name="dm"/>
           </transitions>
           <transitions name="T2.3" source="//@statemachine/@regions.0/@vertice.2/@regions.1/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@regions.1/@vertice.2" kind="external">
             <triggers name="PendingTrigger">

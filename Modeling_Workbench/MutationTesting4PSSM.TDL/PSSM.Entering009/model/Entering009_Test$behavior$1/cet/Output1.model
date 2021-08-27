@@ -10,6 +10,9 @@
           </vertice>
           <vertice xsi:type="statemachines:FinalState" name="FS1" incomingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@transitions.1"/>
           <transitions name="T1.1" source="//@statemachine/@regions.0/@vertice.1/@connectionPoint.0" target="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0" kind="local">
+            <triggers name="StartTrigger">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+            </triggers>
             <effect name="T1.1(doTraversal)"/>
           </transitions>
           <transitions name="T1.2" source="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.1" kind="external">
@@ -21,9 +24,6 @@
       </vertice>
       <vertice xsi:type="statemachines:State" name="waiting" outgoingTransitions="//@statemachine/@regions.0/@transitions.0" incomingTransitions="//@statemachine/@regions.0/@transitions.1"/>
       <transitions name="T2" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.1/@connectionPoint.0" kind="external">
-        <triggers name="StartTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
-        </triggers>
         <effect name="T2(doTraversal)"/>
       </transitions>
       <transitions name="T1" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2" kind="external"/>

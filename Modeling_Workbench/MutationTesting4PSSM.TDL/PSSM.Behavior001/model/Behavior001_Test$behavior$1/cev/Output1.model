@@ -12,7 +12,7 @@
         <triggers name="StartEvent">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <triggers name="Rag">
+        <triggers name="g">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
         <effect name="T2(testEnd)"/>

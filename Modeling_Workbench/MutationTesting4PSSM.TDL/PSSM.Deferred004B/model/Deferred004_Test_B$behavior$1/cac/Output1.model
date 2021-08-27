@@ -22,7 +22,7 @@
                 <triggers name="ContinueTrigger">
                   <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
                 </triggers>
-                <effect name="mkv"/>
+                <effect name="dm"/>
               </transitions>
             </regions>
             <exit name="S1.1(exit)"/>

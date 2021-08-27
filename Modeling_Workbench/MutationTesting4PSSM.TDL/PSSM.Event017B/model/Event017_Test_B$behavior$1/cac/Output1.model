@@ -18,7 +18,7 @@
             <triggers name="DataSignalEventTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
             </triggers>
-            <effect name="WLM"/>
+            <effect name="Fs"/>
           </transitions>
         </regions>
         <entry name="S1(entry)"/>

@@ -8,7 +8,7 @@
         <regions name="Region1">
           <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0"/>
           <vertice xsi:type="statemachines:State" name="S1.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0">
-            <entry name="vHo"/>
+            <entry name="A"/>
             <doActivity name="S1.1(doActivity)"/>
             <exit name="S1.1(exit)"/>
           </vertice>

@@ -9,19 +9,16 @@
           <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0"/>
           <vertice xsi:type="statemachines:State" name="S1.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0">
             <regions name="Region1">
-              <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@transitions.0"/>
+              <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@transitions.0 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1"/>
               <vertice xsi:type="statemachines:State" name="S1.1.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@transitions.0">
                 <exit name="S1.1.1(exit)"/>
               </vertice>
-              <vertice xsi:type="statemachines:State" name="M" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1"/>
               <transitions name="T1.1.1" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@vertice.1" kind="external"/>
             </regions>
             <exit name="S1.1(exit)"/>
           </vertice>
           <transitions name="T1.1" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" kind="external"/>
-          <transitions target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@vertice.2">
-            <source xsi:type="statemachines:State" href="../../../../../org.imt.tdl.PSSMMutation/data/model/Exiting001_Test$behavior$1.mutation1.0.model#//@statemachine/@regions.0/@vertice.1"/>
-          </transitions>
+          <transitions source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@vertice.0" kind="external"/>
         </regions>
         <regions name="Region2">
           <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.1/@transitions.0"/>

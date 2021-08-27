@@ -3,7 +3,7 @@
   <statemachine name="Event001_Test$behavior$1">
     <regions name="Region1">
       <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@transitions.0"/>
-      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0">
+      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1 //@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.0">
         <exit name="wait(exit)"/>
       </vertice>
       <vertice xsi:type="statemachines:FinalState" name="FinalState1" incomingTransitions="//@statemachine/@regions.0/@transitions.1"/>
@@ -14,9 +14,7 @@
         </triggers>
         <effect name="T2(testEnd)"/>
       </transitions>
-      <transitions name="bEc">
-        <source xsi:type="statemachines:State" href="../../../../../org.imt.tdl.PSSMMutation/data/model/Event001_Test$behavior$1.mutation10.0.model#//@statemachine/@regions.0/@vertice.1"/>
-      </transitions>
+      <transitions name="XP" source="//@statemachine/@regions.0/@vertice.1"/>
     </regions>
   </statemachine>
   <signals name="Start"/>

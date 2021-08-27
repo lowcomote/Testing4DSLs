@@ -13,7 +13,7 @@
             <triggers name="continueTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
             </triggers>
-            <triggers name="O">
+            <triggers name="S">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
             </triggers>
             <effect name="T1.2(effect)"/>

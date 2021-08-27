@@ -25,8 +25,8 @@
         <triggers name="ContinueSignalEventTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
-        <triggers name="rv">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
+        <triggers name="Or">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
         <effect name="T3(effect)"/>
       </transitions>

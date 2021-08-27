@@ -7,7 +7,7 @@
         <exit name="S1(exit)"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="S2" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.1">
-        <entry name="X"/>
+        <entry name="Vd"/>
         <exit name="S2(entry)"/>
       </vertice>
       <vertice xsi:type="statemachines:FinalState" name="FinalState1" incomingTransitions="//@statemachine/@regions.0/@transitions.2"/>

@@ -21,7 +21,7 @@
         <triggers name="ContinueSignalEventTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <effect name="c"/>
+        <effect name="e"/>
       </transitions>
     </regions>
   </statemachine>

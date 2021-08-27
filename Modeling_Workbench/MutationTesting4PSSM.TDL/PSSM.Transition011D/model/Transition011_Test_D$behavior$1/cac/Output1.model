@@ -17,7 +17,7 @@
             <triggers name="PendingTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
             </triggers>
-            <effect name="OgM"/>
+            <effect name="K"/>
           </transitions>
         </regions>
         <regions name="Region2">

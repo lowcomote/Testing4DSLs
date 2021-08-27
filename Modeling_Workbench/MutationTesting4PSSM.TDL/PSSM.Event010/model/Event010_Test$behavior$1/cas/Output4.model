@@ -11,7 +11,7 @@
             <entry name="S1.1(entry)"/>
           </vertice>
           <vertice xsi:type="statemachines:State" name="S1.2" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1">
-            <entry name="XV"/>
+            <entry name="pD"/>
           </vertice>
           <vertice xsi:type="statemachines:State" name="S1.3" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.2">
             <entry name="S1.3(entry)"/>

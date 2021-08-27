@@ -15,7 +15,7 @@
         <triggers name="StartTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <effect name="I"/>
+        <effect name="EC"/>
       </transitions>
     </regions>
   </statemachine>

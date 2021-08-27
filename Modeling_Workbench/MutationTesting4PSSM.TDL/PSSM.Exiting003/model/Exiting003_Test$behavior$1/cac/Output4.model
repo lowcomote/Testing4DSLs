@@ -37,7 +37,7 @@
             <exit name="S1.1(exit)"/>
           </vertice>
           <transitions name="T1.1" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" kind="external">
-            <effect name="Q"/>
+            <effect name="cxL"/>
           </transitions>
         </regions>
         <exit name="S1(exit)"/>

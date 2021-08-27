@@ -8,7 +8,7 @@
         <regions name="Region1">
           <vertice xsi:type="statemachines:Pseudostate" name="Terminate1" incomingTransitions="//@statemachine/@regions.0/@transitions.1" kind="terminate"/>
         </regions>
-        <entry name="N"/>
+        <entry name="z"/>
       </vertice>
       <transitions name="T1" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>
       <transitions name="T2" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0" kind="external">

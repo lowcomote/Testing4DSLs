@@ -3,7 +3,7 @@
   <statemachine name="Transition007_Test$behavior$1">
     <regions name="Region1">
       <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@transitions.0"/>
-      <vertice xsi:type="statemachines:State" name="S1" outgoingTransitions="//@statemachine/@regions.0/@transitions.1 //@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.0 //@statemachine/@regions.0/@transitions.4"/>
+      <vertice xsi:type="statemachines:State" name="S1" outgoingTransitions="//@statemachine/@regions.0/@transitions.1 //@statemachine/@regions.0/@transitions.2 //@statemachine/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@transitions.0 //@statemachine/@regions.0/@transitions.4"/>
       <vertice xsi:type="statemachines:State" name="S3" outgoingTransitions="//@statemachine/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@transitions.1"/>
       <vertice xsi:type="statemachines:FinalState" name="FinalState1" incomingTransitions="//@statemachine/@regions.0/@transitions.3"/>
       <vertice xsi:type="statemachines:State" name="S2" outgoingTransitions="//@statemachine/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@transitions.2"/>
@@ -32,9 +32,7 @@
         </triggers>
         <effect name="T2(doTraversal)"/>
       </transitions>
-      <transitions name="C">
-        <source xsi:type="statemachines:State" href="../../../../../org.imt.tdl.PSSMMutation/data/model/Transition007_Test$behavior$1.mutation10.0.model#//@statemachine/@regions.0/@vertice.1"/>
-      </transitions>
+      <transitions name="f" source="//@statemachine/@regions.0/@vertice.1"/>
     </regions>
   </statemachine>
   <signals name="AnotherSignal"/>

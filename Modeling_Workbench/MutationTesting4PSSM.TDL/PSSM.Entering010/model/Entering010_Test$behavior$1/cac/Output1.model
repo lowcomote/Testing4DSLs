@@ -15,7 +15,7 @@
             <effect name="T1.1(effect)"/>
           </transitions>
           <transitions name="T1.2" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" kind="external">
-            <effect name="BuH"/>
+            <effect name="mrK"/>
           </transitions>
         </regions>
         <regions name="Region2">

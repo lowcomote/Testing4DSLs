@@ -39,7 +39,7 @@
         <triggers name="Continue">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
-        <effect name="RFT"/>
+        <effect name="m"/>
       </transitions>
     </regions>
   </statemachine>

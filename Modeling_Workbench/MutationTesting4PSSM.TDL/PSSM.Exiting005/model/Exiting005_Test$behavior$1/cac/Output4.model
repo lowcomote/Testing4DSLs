@@ -32,7 +32,7 @@
       </vertice>
       <vertice xsi:type="statemachines:FinalState" name="FS1" incomingTransitions="//@statemachine/@regions.0/@transitions.2"/>
       <transitions name="T1" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external">
-        <effect name="h"/>
+        <effect name="eP"/>
       </transitions>
       <transitions name="T2" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="StartTrigger">

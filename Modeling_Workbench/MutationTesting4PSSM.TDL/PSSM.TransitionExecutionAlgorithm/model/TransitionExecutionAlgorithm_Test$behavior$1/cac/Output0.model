@@ -13,7 +13,7 @@
             <triggers name="ContinueTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
             </triggers>
-            <effect name="oHO"/>
+            <effect name="J"/>
           </transitions>
           <transitions name="T1.1" source="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0" kind="external"/>
         </regions>

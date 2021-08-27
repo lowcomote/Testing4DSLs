@@ -13,7 +13,9 @@
             <triggers name="IntegerDataSignalEventTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
             </triggers>
-            <triggers name="H"/>
+            <triggers name="Wa">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+            </triggers>
             <effect name="T1.2(effect)"/>
           </transitions>
         </regions>

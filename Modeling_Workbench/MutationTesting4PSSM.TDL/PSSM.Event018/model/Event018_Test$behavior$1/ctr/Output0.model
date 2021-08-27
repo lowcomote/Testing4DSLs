@@ -7,7 +7,7 @@
         <regions name="Region1">
           <vertice xsi:type="statemachines:State" name="S1.1" incomingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@transitions.0">
             <regions name="Region1">
-              <vertice xsi:type="statemachines:State" name="S1.1.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@transitions.0" incomingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@transitions.1">
+              <vertice xsi:type="statemachines:State" name="S1.1.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@transitions.0 //@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@transitions.1 //@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@transitions.2">
                 <exit name="S1.1.1(exit)"/>
               </vertice>
               <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@transitions.1"/>
@@ -15,10 +15,7 @@
                 <effect name="T3(effect)"/>
               </transitions>
               <transitions name="T1.1.1" source="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@vertice.0" kind="external"/>
-              <transitions name="sSA">
-                <source xsi:type="statemachines:State" href="../../../../../org.imt.tdl.PSSMMutation/data/model/Event018_Test$behavior$1.mutation7.0.model#//@statemachine/@regions.0/@vertice.3"/>
-                <target xsi:type="statemachines:State" href="../../../../../org.imt.tdl.PSSMMutation/data/model/Event018_Test$behavior$1.mutation8.0.model#//@statemachine/@regions.0/@vertice.3"/>
-              </transitions>
+              <transitions name="Ifk" source="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@vertice.0"/>
             </regions>
             <exit name="S1.1(exit)"/>
           </vertice>

@@ -19,7 +19,7 @@
                 <triggers name="PendingTrigger">
                   <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
                 </triggers>
-                <effect name="Q"/>
+                <effect name="cxL"/>
               </transitions>
             </regions>
             <regions name="Region2">

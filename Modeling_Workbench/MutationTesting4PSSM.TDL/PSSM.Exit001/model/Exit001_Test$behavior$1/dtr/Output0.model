@@ -7,10 +7,11 @@
         <regions name="Region1">
           <vertice xsi:type="statemachines:State" name="S1.1" incomingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@transitions.0">
             <regions name="Region1">
-              <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@transitions.0"/>
-              <vertice xsi:type="statemachines:State" name="S1.1.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@transitions.0">
+              <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@transitions.0 //@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@transitions.1"/>
+              <vertice xsi:type="statemachines:State" name="S1.1.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@transitions.0 //@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@transitions.1">
                 <exit name="S1.1.1(exit)"/>
               </vertice>
+              <transitions name="T1.1.1" source="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@vertice.1" kind="external"/>
               <transitions name="T1.1.1" source="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@vertice.1" kind="external"/>
             </regions>
             <exit name="S1.1(exit)"/>
@@ -38,10 +39,6 @@
         <triggers name="Start">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-      </transitions>
-      <transitions>
-        <source xsi:type="statemachines:Pseudostate" href="../../../../../org.imt.tdl.PSSMMutation/data/model/Exit001_Test$behavior$1.mutation13.0.model#//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@vertice.0"/>
-        <target xsi:type="statemachines:State" href="../../../../../org.imt.tdl.PSSMMutation/data/model/Exit001_Test$behavior$1.mutation13.0.model#//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@vertice.1"/>
       </transitions>
     </regions>
   </statemachine>

@@ -11,7 +11,7 @@
             <regions name="Region1">
               <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@transitions.0"/>
               <vertice xsi:type="statemachines:State" name="S1.1.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1/@regions.0/@transitions.0">
-                <entry name="dB"/>
+                <entry name="v"/>
                 <exit name="S1.1.1(exit)"/>
                 <deferrableTriggers name="AnotherSignalDeferrableTrigger">
                   <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>

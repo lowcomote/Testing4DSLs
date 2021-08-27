@@ -3,7 +3,7 @@
   <statemachine name="Exit003_Test$behavior$1">
     <regions name="Region1">
       <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@transitions.0"/>
-      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0"/>
+      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1 //@statemachine/@regions.0/@transitions.6" incomingTransitions="//@statemachine/@regions.0/@transitions.0"/>
       <vertice xsi:type="statemachines:State" name="S1" incomingTransitions="//@statemachine/@regions.0/@transitions.1">
         <regions name="Region1">
           <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0"/>
@@ -36,9 +36,7 @@
       <transitions name="T5" source="//@statemachine/@regions.0/@vertice.2/@connectionPoint.0" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <effect name="T5(effect)"/>
       </transitions>
-      <transitions name="kd">
-        <source xsi:type="statemachines:State" href="../../../../../org.imt.tdl.PSSMMutation/data/model/Exit003_Test$behavior$1.mutation10.0.model#//@statemachine/@regions.0/@vertice.2"/>
-      </transitions>
+      <transitions name="T" source="//@statemachine/@regions.0/@vertice.1"/>
     </regions>
   </statemachine>
   <signals name="Start"/>

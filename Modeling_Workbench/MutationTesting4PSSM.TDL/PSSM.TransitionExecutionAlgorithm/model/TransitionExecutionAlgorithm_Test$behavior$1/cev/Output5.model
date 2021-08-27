@@ -46,7 +46,9 @@
         <triggers name="StartTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <triggers name="AQ"/>
+        <triggers name="jMS">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+        </triggers>
       </transitions>
     </regions>
   </statemachine>

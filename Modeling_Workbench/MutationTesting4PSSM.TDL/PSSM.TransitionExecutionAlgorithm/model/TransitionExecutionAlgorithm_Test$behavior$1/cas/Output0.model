@@ -35,11 +35,9 @@
             <connectionPoint name="EntryPoint1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@transitions.0" incomingTransitions="//@statemachine/@regions.0/@transitions.1" kind="entrypoint"/>
           </vertice>
         </regions>
-        <entry name="S2(entry)"/>
+        <entry name="uZH"/>
       </vertice>
-      <vertice xsi:type="statemachines:State" name="Waiting" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.0">
-        <entry name="rLJ"/>
-      </vertice>
+      <vertice xsi:type="statemachines:State" name="Waiting" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.0"/>
       <transitions source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.3" kind="external"/>
       <transitions name="T2" source="//@statemachine/@regions.0/@vertice.1/@connectionPoint.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@connectionPoint.0" kind="external">
         <effect name="T2(effect)"/>

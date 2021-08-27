@@ -26,8 +26,8 @@
             <effect name="T1.1(effect)"/>
           </transitions>
           <transitions name="T1.2" source="//@statemachine/@regions.0/@vertice.2/@regions.1/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@regions.1/@vertice.2" kind="external">
-            <triggers name="cFL">
-              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+            <triggers name="ass">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
             </triggers>
           </transitions>
         </regions>

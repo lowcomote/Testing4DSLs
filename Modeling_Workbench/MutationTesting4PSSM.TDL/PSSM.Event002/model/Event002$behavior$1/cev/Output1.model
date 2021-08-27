@@ -16,8 +16,8 @@
             <triggers>
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
             </triggers>
-            <triggers name="c">
-              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+            <triggers name="qKz">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
             </triggers>
           </transitions>
         </regions>

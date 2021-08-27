@@ -6,7 +6,6 @@
       <vertice xsi:type="statemachines:State" name="S1" incomingTransitions="//@statemachine/@regions.0/@transitions.2">
         <regions name="Region1">
           <vertice xsi:type="statemachines:State" name="S1.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@transitions.0" incomingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@transitions.1">
-            <entry name="rLJ"/>
             <exit name="S1.1(exit)"/>
           </vertice>
           <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@transitions.1"/>
@@ -38,7 +37,9 @@
         </regions>
         <entry name="S2(entry)"/>
       </vertice>
-      <vertice xsi:type="statemachines:State" name="Waiting" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.0"/>
+      <vertice xsi:type="statemachines:State" name="Waiting" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.0">
+        <entry name="uZH"/>
+      </vertice>
       <transitions source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.3" kind="external"/>
       <transitions name="T2" source="//@statemachine/@regions.0/@vertice.1/@connectionPoint.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@connectionPoint.0" kind="external">
         <effect name="T2(effect)"/>

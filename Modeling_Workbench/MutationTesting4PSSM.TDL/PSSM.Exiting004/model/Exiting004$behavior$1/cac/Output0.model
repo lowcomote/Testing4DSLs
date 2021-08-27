@@ -10,7 +10,7 @@
             <exit name="S1.1(exit)"/>
           </vertice>
           <transitions name="T1.1" source="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.1" kind="external">
-            <effect name="cd"/>
+            <effect name="m"/>
           </transitions>
           <transitions name="T1.2" source="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.1/@connectionPoint.0" kind="external">
             <effect name="T1.2(effect)"/>

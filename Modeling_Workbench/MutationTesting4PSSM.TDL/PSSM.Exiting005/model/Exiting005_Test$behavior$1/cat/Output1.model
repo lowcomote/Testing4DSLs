@@ -23,7 +23,7 @@
             <triggers name="PendingTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
             </triggers>
-            <effect name="S2.1(exit)"/>
+            <effect name="T2.2(effect)"/>
           </transitions>
         </regions>
         <exit name="S1(exit)"/>
@@ -39,7 +39,7 @@
         <triggers name="ContinueTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
-        <effect name="T3(testEnd)"/>
+        <effect name="S2.1(exit)"/>
       </transitions>
     </regions>
   </statemachine>

@@ -51,7 +51,7 @@
         <triggers name="ContinueTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
-        <effect name="Q"/>
+        <effect name="cxL"/>
       </transitions>
     </regions>
   </statemachine>

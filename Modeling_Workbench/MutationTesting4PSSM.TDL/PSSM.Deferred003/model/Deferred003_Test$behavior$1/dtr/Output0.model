@@ -8,10 +8,10 @@
         <regions name="Region1">
           <vertice xsi:type="statemachines:State" name="S1.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0">
             <regions name="Region1">
-              <vertice xsi:type="statemachines:State" name="S1.1.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@transitions.0">
+              <vertice xsi:type="statemachines:State" name="S1.1.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@transitions.0 //@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@transitions.2">
                 <exit name="S1.1.1(exit)"/>
               </vertice>
-              <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@transitions.0"/>
+              <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@transitions.0 //@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@transitions.2"/>
               <vertice xsi:type="statemachines:FinalState" name="FinalState1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@transitions.1"/>
               <transitions name="T1.1.1" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@vertice.0" kind="external"/>
               <transitions name="T1.1.2" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@vertice.2" kind="external">
@@ -20,10 +20,7 @@
                 </triggers>
                 <effect name="T1.1.2(effect)"/>
               </transitions>
-              <transitions>
-                <source xsi:type="statemachines:Pseudostate" href="../../../../../PSSMMutation/data/model/Deferred003_Test$behavior$1.mutation13.0.model#//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@vertice.1"/>
-                <target xsi:type="statemachines:State" href="../../../../../PSSMMutation/data/model/Deferred003_Test$behavior$1.mutation13.0.model#//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@vertice.0"/>
-              </transitions>
+              <transitions name="T1.1.1" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@vertice.0" kind="external"/>
             </regions>
             <exit name="S1.1(exit)"/>
             <deferrableTriggers name="ContinueTrigger">

@@ -34,8 +34,8 @@
         <triggers name="ContinueSignalEventTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
-        <triggers name="l">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
+        <triggers name="mlt">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
         <effect name="T3(testEnd)"/>
       </transitions>

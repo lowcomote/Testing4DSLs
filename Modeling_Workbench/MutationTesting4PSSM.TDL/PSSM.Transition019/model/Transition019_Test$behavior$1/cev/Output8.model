@@ -49,7 +49,9 @@
         </triggers>
       </transitions>
       <transitions name="T3" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.4" kind="external">
-        <triggers name="Squ"/>
+        <triggers name="qeI">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+        </triggers>
         <effect name="T3(testEnd)"/>
       </transitions>
     </regions>

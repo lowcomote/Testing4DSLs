@@ -48,8 +48,8 @@
         <effect name="T3(effect)"/>
       </transitions>
       <transitions name="T4" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.3" kind="external">
-        <triggers name="kX">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+        <triggers name="h">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
         </triggers>
         <effect name="T4(testEnd)"/>
       </transitions>

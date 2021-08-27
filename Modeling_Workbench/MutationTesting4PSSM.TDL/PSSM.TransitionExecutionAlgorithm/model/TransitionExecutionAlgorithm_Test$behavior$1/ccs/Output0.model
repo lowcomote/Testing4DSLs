@@ -16,9 +16,6 @@
             <effect name="T1.2(effect)"/>
           </transitions>
           <transitions name="T1.1" source="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0" kind="external"/>
-          <transitions target="//@statemachine/@regions.0/@vertice.4">
-            <source xsi:type="statemachines:State" href="../../../../../org.imt.tdl.PSSMMutation/data/model/TransitionExecutionAlgorithm_Test$behavior$1.mutation1.0.model#//@statemachine/@regions.0/@vertice.1"/>
-          </transitions>
         </regions>
         <exit name="S1(exit)"/>
         <connectionPoint name="ExitPoint1" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@transitions.0" kind="exitpoint"/>
@@ -30,18 +27,19 @@
               <vertice xsi:type="statemachines:State" name="S2.1.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@transitions.0">
                 <entry name="S2.1.1(entry)"/>
               </vertice>
+              <vertice xsi:type="statemachines:State" name="xI" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0"/>
               <transitions name="T2.1" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@connectionPoint.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@vertice.0" kind="local">
                 <effect name="T2.1(effect)"/>
               </transitions>
             </regions>
             <entry name="S2.1(entry)"/>
-            <connectionPoint name="EntryPoint1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@transitions.0" incomingTransitions="//@statemachine/@regions.0/@transitions.1" kind="entrypoint"/>
+            <connectionPoint name="EntryPoint1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@transitions.0 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0" incomingTransitions="//@statemachine/@regions.0/@transitions.1" kind="entrypoint"/>
           </vertice>
+          <transitions source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@connectionPoint.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@regions.0/@vertice.1" kind="external"/>
         </regions>
         <entry name="S2(entry)"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="Waiting" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.0"/>
-      <vertice xsi:type="statemachines:State" name="XxR" incomingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@transitions.2"/>
       <transitions source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.3" kind="external"/>
       <transitions name="T2" source="//@statemachine/@regions.0/@vertice.1/@connectionPoint.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0/@connectionPoint.0" kind="external">
         <effect name="T2(effect)"/>

@@ -9,9 +9,6 @@
       <vertice xsi:type="statemachines:State" name="S2" outgoingTransitions="//@statemachine/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@transitions.2"/>
       <transitions name="Initial_S1" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>
       <transitions name="T1" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">
-        <triggers name="AnotherSignalTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
-        </triggers>
         <effect name="T1(doTraversal)"/>
       </transitions>
       <transitions name="T3" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.4" kind="external">
@@ -26,6 +23,9 @@
       <transitions name="T2" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.1" kind="external">
         <triggers name="ContinueTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
+        </triggers>
+        <triggers name="AnotherSignalTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
         <triggers name="AnotherSignalTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>

@@ -37,7 +37,7 @@
         </triggers>
       </transitions>
       <transitions name="T3" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
-        <effect name="BuH"/>
+        <effect name="mrK"/>
       </transitions>
     </regions>
   </statemachine>

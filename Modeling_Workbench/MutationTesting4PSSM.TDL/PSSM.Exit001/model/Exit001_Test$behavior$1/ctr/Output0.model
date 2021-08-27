@@ -12,10 +12,7 @@
                 <exit name="S1.1.1(exit)"/>
               </vertice>
               <transitions name="T1.1.1" source="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@vertice.1" kind="external"/>
-              <transitions name="e">
-                <source xsi:type="statemachines:State" href="../../../../../org.imt.tdl.PSSMMutation/data/model/Exit001_Test$behavior$1.mutation7.0.model#//@statemachine/@regions.0/@vertice.2"/>
-                <target xsi:type="statemachines:State" href="../../../../../org.imt.tdl.PSSMMutation/data/model/Exit001_Test$behavior$1.mutation8.0.model#//@statemachine/@regions.0/@vertice.2"/>
-              </transitions>
+              <transitions name="mtN" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.2"/>
             </regions>
             <exit name="S1.1(exit)"/>
           </vertice>
@@ -28,7 +25,7 @@
         <exit name="S1(exit)"/>
         <connectionPoint name="ExitPoint1" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@transitions.1" kind="exitpoint"/>
       </vertice>
-      <vertice xsi:type="statemachines:State" name="S2" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.2"/>
+      <vertice xsi:type="statemachines:State" name="S2" outgoingTransitions="//@statemachine/@regions.0/@transitions.1 //@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.2 //@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@transitions.1"/>
       <vertice xsi:type="statemachines:FinalState" name="FinalState1" incomingTransitions="//@statemachine/@regions.0/@transitions.1"/>
       <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@transitions.0"/>
       <transitions name="T1" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.4" kind="external"/>

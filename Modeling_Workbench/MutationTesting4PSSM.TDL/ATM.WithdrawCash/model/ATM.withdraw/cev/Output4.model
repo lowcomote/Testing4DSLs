@@ -39,8 +39,8 @@
         <triggers name="amountEntered">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
         </triggers>
-        <triggers name="Hd">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
+        <triggers name="Rk">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
         <constraint xsi:type="statemachines:IntegerConstraint" attribute="//@signals.2/@attributes.0" value="500"/>
       </transitions>

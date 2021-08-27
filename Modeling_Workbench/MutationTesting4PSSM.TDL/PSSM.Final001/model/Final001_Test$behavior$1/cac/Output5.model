@@ -34,7 +34,7 @@
         <triggers name="Continue">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <effect name="Jv"/>
+        <effect name="dJ"/>
       </transitions>
     </regions>
   </statemachine>

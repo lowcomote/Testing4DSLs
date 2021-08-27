@@ -20,7 +20,7 @@
                 <triggers name="CallEventOp2trigger">
                   <eventType xsi:type="statemachines:CallEventType" operation="//@operations.1"/>
                 </triggers>
-                <effect name="UQ"/>
+                <effect name="T"/>
               </transitions>
             </regions>
             <entry name="S1.1(entry)"/>

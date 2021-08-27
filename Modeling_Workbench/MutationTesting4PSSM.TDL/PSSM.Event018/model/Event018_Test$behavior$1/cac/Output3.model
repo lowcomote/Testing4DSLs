@@ -31,7 +31,7 @@
           </vertice>
           <vertice xsi:type="statemachines:FinalState" name="FS1.2" incomingTransitions="//@statemachine/@regions.0/@vertice.3/@regions.0/@transitions.0"/>
           <transitions name="T1.1" source="//@statemachine/@regions.0/@vertice.3/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.3/@regions.0/@vertice.1" kind="external">
-            <effect name="j"/>
+            <effect name="G"/>
           </transitions>
         </regions>
         <entry name="S2(entry)"/>

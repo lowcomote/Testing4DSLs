@@ -32,8 +32,8 @@
         <triggers name="ContinueTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <triggers name="a">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+        <triggers name="N">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
         </triggers>
         <effect name="T4(effect)"/>
       </transitions>

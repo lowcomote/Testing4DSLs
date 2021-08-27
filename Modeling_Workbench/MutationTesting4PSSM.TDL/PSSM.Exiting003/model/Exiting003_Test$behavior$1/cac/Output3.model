@@ -32,7 +32,7 @@
                 <triggers name="PendingTrigger">
                   <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
                 </triggers>
-                <effect name="Q"/>
+                <effect name="cxL"/>
               </transitions>
             </regions>
             <exit name="S1.1(exit)"/>

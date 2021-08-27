@@ -22,7 +22,9 @@
                 <triggers name="ContinueTrigger">
                   <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
                 </triggers>
-                <triggers name="GoV"/>
+                <triggers name="cbs">
+                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+                </triggers>
                 <effect name="T1.1.2(effect)"/>
               </transitions>
             </regions>

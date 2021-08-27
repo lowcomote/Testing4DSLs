@@ -40,8 +40,8 @@
         <triggers name="ContinueTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
-        <triggers name="cFL">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+        <triggers name="ass">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
         <effect name="T3(testEnd)"/>
       </transitions>

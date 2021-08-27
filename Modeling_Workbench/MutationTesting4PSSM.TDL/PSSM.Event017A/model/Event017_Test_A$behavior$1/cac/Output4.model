@@ -26,7 +26,7 @@
         <effect name="T4(effect)"/>
       </transitions>
       <transitions name="T5" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.3" kind="external">
-        <effect name="j"/>
+        <effect name="U"/>
       </transitions>
     </regions>
   </statemachine>
