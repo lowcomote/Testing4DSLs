@@ -1,11 +1,9 @@
 package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
-
-
-
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 import java.util.ArrayList
+import java.util.List
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
@@ -13,6 +11,9 @@ import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.eclipse.emf.transaction.RecordingCommand
+import org.eclipse.emf.transaction.TransactionalEditingDomain
+import org.eclipse.emf.transaction.util.TransactionUtil
 import org.eclipse.gemoc.dsl.Dsl
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.BehavioralInterface
 import org.etsi.mts.tdl.DataInstance
@@ -28,10 +29,20 @@ import org.etsi.mts.tdl.SpecialValueUse
 import org.etsi.mts.tdl.StaticDataUse
 import org.etsi.mts.tdl.StructuredDataInstance
 import org.etsi.mts.tdl.StructuredDataType
+import org.imt.pssm.reactive.model.statemachines.BooleanAttribute
+import org.imt.pssm.reactive.model.statemachines.BooleanAttributeValue
+import org.imt.pssm.reactive.model.statemachines.CallEventOccurrence
+import org.imt.pssm.reactive.model.statemachines.IntegerAttribute
+import org.imt.pssm.reactive.model.statemachines.IntegerAttributeValue
+import org.imt.pssm.reactive.model.statemachines.Signal
+import org.imt.pssm.reactive.model.statemachines.SignalEventOccurrence
+import org.imt.pssm.reactive.model.statemachines.StatemachinesFactory
+import org.imt.pssm.reactive.model.statemachines.StringAttribute
+import org.imt.pssm.reactive.model.statemachines.StringAttributeValue
 import org.imt.tdl.testResult.TestResultUtil
 
-import static extension org.imt.k3tdl.k3dsa.DataInstanceUseAspect.*
 import static extension org.imt.k3tdl.k3dsa.DataInstanceAspect.*
+import static extension org.imt.k3tdl.k3dsa.DataInstanceUseAspect.*
 import static extension org.imt.k3tdl.k3dsa.DataTypeAspect.*
 import static extension org.imt.k3tdl.k3dsa.DataUseAspect.*
 import static extension org.imt.k3tdl.k3dsa.MemberAspect.*
@@ -39,22 +50,6 @@ import static extension org.imt.k3tdl.k3dsa.MemberAssignmentAspect.*
 import static extension org.imt.k3tdl.k3dsa.ParameterBindingAspect.*
 import static extension org.imt.k3tdl.k3dsa.StaticDataUseAspect.*
 import static extension org.imt.k3tdl.k3dsa.StructuredDataInstanceAspect.*
-import org.eclipse.emf.transaction.TransactionalEditingDomain
-import org.eclipse.emf.transaction.util.TransactionUtil
-import org.eclipse.emf.transaction.RecordingCommand
-import org.imt.pssm.model.statemachines.SignalEventOccurrence
-import org.imt.pssm.model.statemachines.StatemachinesFactory
-import org.imt.pssm.model.statemachines.CallEventOccurrence
-import org.imt.pssm.model.statemachines.Signal
-import java.util.List
-import org.imt.pssm.model.statemachines.IntegerAttributeValue
-import java.util.HashMap
-import org.imt.pssm.model.statemachines.IntegerAttribute
-import org.imt.pssm.model.statemachines.StringAttributeValue
-import org.imt.pssm.model.statemachines.StringAttribute
-import org.imt.pssm.model.statemachines.BooleanAttributeValue
-import org.imt.pssm.model.statemachines.BooleanAttribute
-import org.imt.pssm.model.statemachines.AttributeValue
 
 @Aspect (className = DataType)
 class DataTypeAspect{

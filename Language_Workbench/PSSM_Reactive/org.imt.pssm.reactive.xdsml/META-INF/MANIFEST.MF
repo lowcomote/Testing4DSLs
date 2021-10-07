@@ -17,5 +17,5 @@ Require-Bundle: org.eclipse.xtend.lib;bundle-version="2.21.0";visibility:="priva
  org.eclipse.gemoc.executionframework.engine;bundle-version="4.0.0";visibility:="reexport",
  org.imt.pssm.reactive.interpreter;bundle-version="0.0.0";visibility:="private",
  org.eclipse.gemoc.executionframework.extensions.sirius;bundle-version="0.0.0";visibility:=reexport,
- org.imt.pssm.model;bundle-version="1.0.0"
+ org.imt.pssm.reactive.model;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy

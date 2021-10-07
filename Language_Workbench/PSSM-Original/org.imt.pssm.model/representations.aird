@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" uid="_IQQ0kOxzEeuAJ8HKlTJ7TQ" version="14.3.1.202003261200">
-  <semanticResources>build.properties</semanticResources>
-  <semanticResources>model/statemachines.ecore</semanticResources>
-  <semanticResources>model/statemachines.genmodel</semanticResources>
-  <semanticResources>plugin.properties</semanticResources>
-</viewpoint:DAnalysis>

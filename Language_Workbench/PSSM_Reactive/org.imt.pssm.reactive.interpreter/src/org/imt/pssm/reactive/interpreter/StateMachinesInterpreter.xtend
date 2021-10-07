@@ -4,37 +4,38 @@ import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 
 
 
+
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 import fr.inria.diverse.k3.al.annotationprocessor.Step
 import java.util.ArrayList
 import java.util.List
 import org.eclipse.emf.ecore.EObject
-import org.imt.pssm.model.statemachines.Attribute
-import org.imt.pssm.model.statemachines.AttributeValue
-import org.imt.pssm.model.statemachines.Behavior
-import org.imt.pssm.model.statemachines.BooleanAttributeValue
-import org.imt.pssm.model.statemachines.BooleanConstraint
-import org.imt.pssm.model.statemachines.CallEventOccurrence
-import org.imt.pssm.model.statemachines.CallEventType
-import org.imt.pssm.model.statemachines.CompletionEventOccurrence
-import org.imt.pssm.model.statemachines.Constraint
-import org.imt.pssm.model.statemachines.EventOccurrence
-import org.imt.pssm.model.statemachines.FinalState
-import org.imt.pssm.model.statemachines.IntegerAttributeValue
-import org.imt.pssm.model.statemachines.IntegerConstraint
-import org.imt.pssm.model.statemachines.OperationBehavior
-import org.imt.pssm.model.statemachines.Pseudostate
-import org.imt.pssm.model.statemachines.PseudostateKind
-import org.imt.pssm.model.statemachines.Region
-import org.imt.pssm.model.statemachines.SignalEventOccurrence
-import org.imt.pssm.model.statemachines.SignalEventType
-import org.imt.pssm.model.statemachines.State
-import org.imt.pssm.model.statemachines.StateMachine
-import org.imt.pssm.model.statemachines.StatemachinesFactory
-import org.imt.pssm.model.statemachines.StringAttributeValue
-import org.imt.pssm.model.statemachines.StringConstraint
-import org.imt.pssm.model.statemachines.Transition
-import org.imt.pssm.model.statemachines.Vertex
+import org.imt.pssm.reactive.model.statemachines.Attribute
+import org.imt.pssm.reactive.model.statemachines.AttributeValue
+import org.imt.pssm.reactive.model.statemachines.Behavior
+import org.imt.pssm.reactive.model.statemachines.BooleanAttributeValue
+import org.imt.pssm.reactive.model.statemachines.BooleanConstraint
+import org.imt.pssm.reactive.model.statemachines.CallEventOccurrence
+import org.imt.pssm.reactive.model.statemachines.CallEventType
+import org.imt.pssm.reactive.model.statemachines.CompletionEventOccurrence
+import org.imt.pssm.reactive.model.statemachines.Constraint
+import org.imt.pssm.reactive.model.statemachines.EventOccurrence
+import org.imt.pssm.reactive.model.statemachines.FinalState
+import org.imt.pssm.reactive.model.statemachines.IntegerAttributeValue
+import org.imt.pssm.reactive.model.statemachines.IntegerConstraint
+import org.imt.pssm.reactive.model.statemachines.OperationBehavior
+import org.imt.pssm.reactive.model.statemachines.Pseudostate
+import org.imt.pssm.reactive.model.statemachines.PseudostateKind
+import org.imt.pssm.reactive.model.statemachines.Region
+import org.imt.pssm.reactive.model.statemachines.SignalEventOccurrence
+import org.imt.pssm.reactive.model.statemachines.SignalEventType
+import org.imt.pssm.reactive.model.statemachines.State
+import org.imt.pssm.reactive.model.statemachines.StateMachine
+import org.imt.pssm.reactive.model.statemachines.StatemachinesFactory
+import org.imt.pssm.reactive.model.statemachines.StringAttributeValue
+import org.imt.pssm.reactive.model.statemachines.StringConstraint
+import org.imt.pssm.reactive.model.statemachines.Transition
+import org.imt.pssm.reactive.model.statemachines.Vertex
 
 import static extension org.imt.pssm.reactive.interpreter.BehaviorAspect.*
 import static extension org.imt.pssm.reactive.interpreter.ConstraintAspect.*

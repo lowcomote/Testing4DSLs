@@ -18,7 +18,7 @@ public class InterpretedStateMachinesImplementationRelationship extends SimpleIm
 		result.put("run", "org.imt.pssm.reactive.interpreter.StateMachineAspect.run");
 		result.put("signal_received", "org.imt.pssm.reactive.interpreter.StateMachineAspect.eventOccurrenceReceived");
 		result.put("callOperation_received", "org.imt.pssm.reactive.interpreter.StateMachineAspect.eventOccurrenceReceived");
-		result.put("behavior_executed", "org.imt.pssm.model.statemachines.Behavior.execute");
+		result.put("behavior_executed", "org.imt.pssm.reactive.model.statemachines.Behavior.execute");
 		return result;
 	}
 	
