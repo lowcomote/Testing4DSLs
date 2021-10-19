@@ -77,9 +77,11 @@ public abstract class AbstractEngine implements ISequentialExecutionEngine{
 		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_ARGUMENTS, this._modelInitializationArguments);
 		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_BREAK_START, this._animationFirstBreak);
 		// DebugModelID for sequential engine
-		
 		//configuration.setAttribute(SequentialRunConfiguration.DEBUG_MODEL_ID, Activator.DEBUG_MODEL_ID);
 		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.DEBUG_MODEL_ID, "org.eclipse.gemoc.execution.sequential.javaengine.ui.debugModel");
+		
+		//enabling trace addon
+		configurationWorkingCopy.setAttribute("Generic MultiDimensional Data Trace", true);
 		try {
 			this.launchConfiguration = configurationWorkingCopy.doSave();
 		} catch (CoreException e) {
@@ -98,7 +100,6 @@ public abstract class AbstractEngine implements ISequentialExecutionEngine{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		this.executioncontext.getExecutionPlatform().getModelLoader().setProgressMonitor(new NullProgressMonitor());
 		if (!this.executioncontext.modelInitialized()) {
 			this.executioncontext.initializeResourceModel();

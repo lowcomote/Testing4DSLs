@@ -28,6 +28,11 @@ import org.eclipse.gemoc.dsl.debug.impl.ThreadImpl;
 import org.eclipse.gemoc.execution.sequential.javaengine.ui.launcher.GemocSourceLocator;
 import org.eclipse.gemoc.executionframework.engine.commons.DslHelper;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
+import org.eclipse.gemoc.trace.commons.model.trace.State;
+import org.eclipse.gemoc.trace.commons.model.trace.Step;
+import org.eclipse.gemoc.trace.commons.model.trace.Trace;
+import org.eclipse.gemoc.trace.commons.model.trace.TracedObject;
+import org.eclipse.gemoc.trace.gemoc.traceaddon.GenericTraceEngineAddon;
 import org.imt.gemoc.engine.custom.launcher.CustomALELauncher;
 import org.imt.gemoc.engine.custom.launcher.CustomK3Launcher;
 
@@ -204,5 +209,10 @@ public class ALEEngineLauncher extends AbstractEngine{
 			return sb.toString();
 		}
 		else return element == null ? "" : element.toString();
+	}
+
+	@Override
+	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {
+		return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) this.aleEngine.getAddon(GenericTraceEngineAddon.class).getTrace();
 	}
 }

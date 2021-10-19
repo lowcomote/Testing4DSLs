@@ -19,6 +19,11 @@ import org.eclipse.gemoc.execution.sequential.javaengine.ui.launcher.GemocSource
 import org.eclipse.gemoc.executionframework.engine.commons.DslHelper;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.eclipse.gemoc.executionframework.engine.commons.K3DslHelper;
+import org.eclipse.gemoc.trace.commons.model.trace.State;
+import org.eclipse.gemoc.trace.commons.model.trace.Step;
+import org.eclipse.gemoc.trace.commons.model.trace.Trace;
+import org.eclipse.gemoc.trace.commons.model.trace.TracedObject;
+import org.eclipse.gemoc.trace.gemoc.traceaddon.GenericTraceEngineAddon;
 import org.imt.gemoc.engine.custom.launcher.CustomK3Launcher;
 import org.osgi.framework.Bundle;
 
@@ -162,5 +167,10 @@ public class JavaEngineLauncher extends AbstractEngine{
 	}
 	private String getDebugJobName() {
 		return "Gemoc debug job";
+	}
+
+	@Override
+	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {
+		return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) this.javaEngine.getAddon(GenericTraceEngineAddon.class).getTrace();
 	}
 }

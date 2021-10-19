@@ -12,6 +12,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
+import org.eclipse.gemoc.trace.commons.model.trace.State;
+import org.eclipse.gemoc.trace.commons.model.trace.Step;
+import org.eclipse.gemoc.trace.commons.model.trace.Trace;
+import org.eclipse.gemoc.trace.commons.model.trace.TracedObject;
+import org.eclipse.gemoc.trace.gemoc.traceaddon.GenericTraceEngineAddon;
 import org.imt.tdl.eventBasedEngine.IEventBasedExecutionEngine;
 import org.imt.tdl.eventBasedEngine.K3EventManagerLauncher;
 import org.imt.tdl.oclInterpreter.OCLInterpreter;
@@ -104,6 +109,11 @@ public class EngineFactory{
 		}
 		return "FAIL";
 	}
+	
+	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {
+		return this.engineLauncher.getExecutionTrace();
+	}
+	
 	private String getEngineType() {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(this.DSLPath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
