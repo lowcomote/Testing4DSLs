@@ -1,6 +1,7 @@
 package org.imt.tdl.sequentialEngine;
 
 import java.lang.reflect.Method;
+
 import java.util.Iterator;
 import java.util.Set;
 
@@ -23,6 +24,7 @@ import org.eclipse.gemoc.trace.commons.model.trace.State;
 import org.eclipse.gemoc.trace.commons.model.trace.Step;
 import org.eclipse.gemoc.trace.commons.model.trace.Trace;
 import org.eclipse.gemoc.trace.commons.model.trace.TracedObject;
+import org.eclipse.gemoc.trace.gemoc.api.IMultiDimensionalTraceAddon;
 import org.eclipse.gemoc.trace.gemoc.traceaddon.GenericTraceEngineAddon;
 import org.imt.gemoc.engine.custom.launcher.CustomK3Launcher;
 import org.osgi.framework.Bundle;
@@ -84,7 +86,6 @@ public class JavaEngineLauncher extends AbstractEngine{
 		}
 		this.javaEngine.startSynchronous();
 		this.setModelResource(this.javaEngine.getExecutionContext().getResourceModel());
-		this.javaEngine.dispose();
 		return "PASS: The model under test executed successfully";
 	}
 	
@@ -108,7 +109,6 @@ public class JavaEngineLauncher extends AbstractEngine{
 	public String stopAsynchronousExecution() {
 		this.javaEngine.stop();
 		this.setModelResource(this.javaEngine.getExecutionContext().getResourceModel());
-		this.javaEngine.dispose();
 		return "PASS: The model under test executed successfully";
 	}
 	

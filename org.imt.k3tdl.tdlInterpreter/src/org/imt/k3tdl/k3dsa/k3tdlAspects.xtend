@@ -82,6 +82,7 @@ class TestDescriptionAspect{
 		}else{
 			println("Test case FAILED")
 		}
+		val trace = _self.launcher.executionTrace
 		return _self.testCaseResult
 	}
 	//this method is called from TDL runner

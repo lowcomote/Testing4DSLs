@@ -94,7 +94,6 @@ public class ALEEngineLauncher extends AbstractEngine{
 		}
 		this.aleEngine.startSynchronous();
 		this.setModelResource(this.aleEngine.getExecutionContext().getResourceModel());
-		this.aleEngine.dispose();
 		return "PASS: The model under test executed successfully";
 	}
 	
@@ -118,7 +117,6 @@ public class ALEEngineLauncher extends AbstractEngine{
 	public String stopAsynchronousExecution() {
 		this.aleEngine.stop();
 		this.setModelResource(this.aleEngine.getExecutionContext().getResourceModel());
-		this.aleEngine.dispose();
 		return "PASS: The model under test executed successfully";
 	}
 	

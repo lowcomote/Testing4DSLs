@@ -82,6 +82,11 @@ public abstract class AbstractEngine implements ISequentialExecutionEngine{
 		
 		//enabling trace addon
 		configurationWorkingCopy.setAttribute("Generic MultiDimensional Data Trace", true);
+		configurationWorkingCopy.setAttribute("org.eclipse.gemoc.trace.gemoc.addon_booleanOption", false);
+		configurationWorkingCopy.setAttribute("org.eclipse.gemoc.trace.gemoc.addon_equivClassComputing_booleanOption", false);
+		configurationWorkingCopy.setAttribute("org.eclipse.gemoc.trace.gemoc.addon_saveTraceOnEngineStop_booleanOption", true);
+		configurationWorkingCopy.setAttribute("org.eclipse.gemoc.trace.gemoc.addon_saveTraceOnStep_booleanOption", false);
+		
 		try {
 			this.launchConfiguration = configurationWorkingCopy.doSave();
 		} catch (CoreException e) {

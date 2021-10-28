@@ -195,6 +195,14 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		configurationWorkingCopy.setAttribute(EventBasedRunConfiguration.SUBTYPE_REL_IDS, subtypeRelIds);
 		configurationWorkingCopy.setAttribute(EventBasedRunConfiguration.LAUNCH_BREAK_START, true);
 		configurationWorkingCopy.setAttribute(EventBasedRunConfiguration.DEBUG_MODEL_ID, Activator.DEBUG_MODEL_ID);
+		
+		//enabling trace addon
+		configurationWorkingCopy.setAttribute("Generic MultiDimensional Data Trace", true);
+		configurationWorkingCopy.setAttribute("org.eclipse.gemoc.trace.gemoc.addon_booleanOption", false);
+		configurationWorkingCopy.setAttribute("org.eclipse.gemoc.trace.gemoc.addon_equivClassComputing_booleanOption", false);
+		configurationWorkingCopy.setAttribute("org.eclipse.gemoc.trace.gemoc.addon_saveTraceOnEngineStop_booleanOption", true);
+		configurationWorkingCopy.setAttribute("org.eclipse.gemoc.trace.gemoc.addon_saveTraceOnStep_booleanOption", false);
+				
 		return configurationWorkingCopy;
 	}
 
@@ -298,7 +306,6 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			result = "PASS";
 		}
 		this.executionEngine.stop();
-		this.executionEngine.dispose();
 		return result;
 	}
 	
