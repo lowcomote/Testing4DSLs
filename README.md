@@ -52,8 +52,11 @@ To write test cases from scratch, do the following steps:
 ## Mutation Analysis
 Using our approach, you can perform mutation analysis on TDL test suites written for executable models.
 This is the result of integrating our approach with [WODEL-Test](https://link.springer.com/article/10.1007/s10270-020-00827-0) which is a model-based framework for language-independent mutation testing. 
-For example, we performed mutation analysis on PSSM test suites in the `Mutation Testing/PSSMMutation` project.
 
+**Requirements**:
+- WODEL framework ([udpate site](http://gomezabajo.github.io/Wodel/update-site))
+
+For example, we performed mutation analysis on PSSM test suites in the `Mutation Testing/PSSMMutation` project.
 The result is accessbile in the `Modeling_Workbench` folder under [MutationTesting4PSSM.TDL](https://gitlab.univ-nantes.fr/naomod/faezeh-public/xtdl/-/tree/xTDL_EventManager/Modeling_Workbench/MutationTesting4PSSM.TDL).
 This is ![a sample screenshot of our tool](https://gitlab.univ-nantes.fr/naomod/faezeh-public/xtdl/-/blob/xTDL_EventManager/mutation.PNG).
 
