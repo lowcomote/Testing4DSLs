@@ -111,7 +111,12 @@ public class EngineFactory{
 	}
 	
 	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {
-		return this.engineLauncher.getExecutionTrace();
+		if (this.engineLauncher != null) {
+			return this.engineLauncher.getExecutionTrace();
+		}else if (this.eventManagerLauncher != null) {
+			return this.eventManagerLauncher.getExecutionTrace();
+		}
+		return null;
 	}
 	
 	private String getEngineType() {
