@@ -56,6 +56,11 @@ import org.eclipse.gemoc.executionframework.value.model.value.SingleReferenceVal
 import org.eclipse.gemoc.executionframework.value.model.value.StringAttributeValue;
 import org.eclipse.gemoc.executionframework.value.model.value.Value;
 import org.eclipse.gemoc.executionframework.value.model.value.ValuePackage;
+import org.eclipse.gemoc.trace.commons.model.trace.State;
+import org.eclipse.gemoc.trace.commons.model.trace.Step;
+import org.eclipse.gemoc.trace.commons.model.trace.Trace;
+import org.eclipse.gemoc.trace.commons.model.trace.TracedObject;
+import org.eclipse.gemoc.trace.gemoc.traceaddon.GenericTraceEngineAddon;
 import org.eclipse.gemoc.xdsmlframework.api.core.EngineStatus.RunStatus;
 import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
 import org.eclipse.gemoc.xdsmlframework.api.core.IExecutionEngine;
@@ -538,5 +543,10 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	@Override
 	public Boolean isEngineStarted() {
 		return this.executionEngine != null;
+	}
+	
+	@Override
+	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {
+		return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) this.executionEngine.getAddon(GenericTraceEngineAddon.class).getTrace();
 	}
 }
