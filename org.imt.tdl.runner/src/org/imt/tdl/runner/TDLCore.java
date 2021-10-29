@@ -16,11 +16,10 @@ public class TDLCore {
 			Object o = testPackage.getPackagedElement().get(i);
 			if (o instanceof TestDescription) {
 				TestDescription testCase = (TestDescription) o;
-				TestDescriptionAspect testCaseRunner = new TestDescriptionAspect();
 				System.out.println("Test case: " + testCase.getName());
-				testCaseRunner.executeTestCase(testCase, artifactPath);
+				TestDescriptionAspect.executeTestCase(testCase, artifactPath);
 				result.addNumExecutedTests();
-				TDLTestCaseResult verdict = testCaseRunner.testCaseResult(testCase);
+				TDLTestCaseResult verdict = TestDescriptionAspect.testCaseResult(testCase);
 				if (verdict.getValue().contains("FAIL")) {
 					result.addTest(testCase.getName(), false);
 					result.addNumFailedTests();
