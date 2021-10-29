@@ -1,6 +1,7 @@
 package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
+
 import fr.inria.diverse.k3.al.annotationprocessor.InitializeModel
 import fr.inria.diverse.k3.al.annotationprocessor.Main
 import fr.inria.diverse.k3.al.annotationprocessor.Step
@@ -20,18 +21,23 @@ import org.imt.tdl.configuration.EngineFactory
 import org.imt.tdl.testResult.TDLTestCaseResult
 import org.imt.tdl.testResult.TDLTestPackageResult
 import org.imt.tdl.testResult.TestResultUtil
+import org.imt.tdl.coverage.TDLTestCaseCoverage
 
 import static extension org.imt.k3tdl.k3dsa.BehaviourDescriptionAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
+import org.imt.tdl.coverage.TDLTestSuiteCoverage
+import org.imt.tdl.coverage.TDLCoverageUtil
 
 @Aspect(className = Package)
 class PackageAspect {
 	
-	public TDLTestPackageResult testPackageResults = new TDLTestPackageResult
-	public List<TestDescription> testcases = new ArrayList<TestDescription>
-	public TestDescription enabledTestCase
-	public TestConfiguration enabledConfiguration
+	List<TestDescription> testcases = new ArrayList<TestDescription>
+	TestDescription enabledTestCase
+	TestConfiguration enabledConfiguration
+	
+	TDLTestPackageResult testPackageResults = new TDLTestPackageResult
+	TDLTestSuiteCoverage testSuiteCoverage = new TDLTestSuiteCoverage
 	
 	@Step
 	@InitializeModel
@@ -53,9 +59,13 @@ class PackageAspect {
     			_self.enabledConfiguration = tc.testConfiguration;
     			val TDLTestCaseResult verdict = _self.enabledTestCase.executeTestCase()
     			_self.testPackageResults.addResult(verdict)
+    			_self.testSuiteCoverage.addTCCoverage(_self.enabledTestCase.testCaseCoverage)
     			println()
     		}
-    		TestResultUtil.instance.testPackageResult = _self.testPackageResults  		
+    		
+    		TestResultUtil.instance.testPackageResult = _self.testPackageResults
+    		TDLCoverageUtil.instance.testSuiteCoverage = _self.testSuiteCoverage
+    		  		
 		} catch (TDLRuntimeException nt){
 			println("Stopped due "+nt.message)	
 		}
@@ -65,7 +75,8 @@ class PackageAspect {
 class TestDescriptionAspect{
 	public EngineFactory launcher = new EngineFactory()
 	public TDLTestCaseResult testCaseResult = new TDLTestCaseResult
-
+	public TDLTestCaseCoverage testCaseCoverage = new TDLTestCaseCoverage();
+	
 	@Step
 	def TDLTestCaseResult executeTestCase(){
 		println("Start test case execution: " + _self.name)
@@ -73,7 +84,7 @@ class TestDescriptionAspect{
 		_self.testConfiguration.activateConfiguration(_self.launcher)
 		_self.behaviourDescription.callBehavior()
 		val modelExecutionResult = _self.testConfiguration.stopModelExecutionEngine(_self.launcher)
-		if (modelExecutionResult != null && modelExecutionResult.contains("FAIL")){
+		if (modelExecutionResult !== null && modelExecutionResult.contains("FAIL")){
 			_self.testCaseResult.value = "FAIL"
 			_self.testCaseResult.description = modelExecutionResult.substring(modelExecutionResult.indexOf(":")+1)
 		}
@@ -82,9 +93,14 @@ class TestDescriptionAspect{
 		}else{
 			println("Test case FAILED")
 		}
-		val trace = _self.launcher.executionTrace
+		
+		//save the model execution trace related to this test case
+		//this is required when calculating the coverage
+		_self.testCaseCoverage.setTrace(_self.launcher.executionTrace)
+		
 		return _self.testCaseResult
 	}
+	
 	//this method is called from TDL runner
 	@Step
 	def TDLTestCaseResult executeTestCase(String MUTPath){
@@ -101,6 +117,11 @@ class TestDescriptionAspect{
 		}else{
 			println("Test case FAILED")
 		}
+		
+		//save the model execution trace related to this test case
+		//this is required when calculating the coverage
+		_self.testCaseCoverage.setTrace(_self.launcher.executionTrace)
+		
 		return _self.testCaseResult
 	}
 }
@@ -157,9 +178,9 @@ class TestConfigurationAspect{
 		}
 	}
 	
-	private final static String GENERIC_GATE = "genericGate";
-	private final static String DSL_GATE = "reactiveGate";
-	private final static String OCL_GATE = "oclGate";
+	final static String GENERIC_GATE = "genericGate";
+	final static String DSL_GATE = "reactiveGate";
+	final static String OCL_GATE = "oclGate";
 	
 	def void setUpLauncher (EngineFactory launcher){
 		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.equals(GENERIC_GATE)]]) {
