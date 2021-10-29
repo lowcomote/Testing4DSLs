@@ -60,7 +60,7 @@
             class="org.imt.tdl.testResult.ui.TDLTestResultsView"
             icon="icons/tdl.png"
             id="test.views.TDLTestResultsTestViewPart"
-            name="TDL Test Results"
+            name="Test Results"
             restorable="true">
       </view>
       <category
@@ -71,8 +71,8 @@
             category="tdl.views"
             class="org.imt.tdl.coverage.ui.TDLCoverageView"
             icon="icons/coverage.png"
-            id="test.views.TDLCoverageViewPart"
-            name="TDL Coverage"
+            id="org.imt.tdl.rt.ui.coverageView"
+            name="Coverage"
             restorable="true">
       </view>
    </extension>
