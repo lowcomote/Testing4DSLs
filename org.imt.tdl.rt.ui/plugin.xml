@@ -67,5 +67,13 @@
             id="tdl.views"
             name="TDL">
       </category>
+      <view
+            category="tdl.views"
+            class="org.imt.tdl.coverage.ui.TDLCoverageView"
+            icon="icons/coverage.png"
+            id="test.views.TDLCoverageViewPart"
+            name="TDL Coverage"
+            restorable="true">
+      </view>
    </extension>
 </plugin>
