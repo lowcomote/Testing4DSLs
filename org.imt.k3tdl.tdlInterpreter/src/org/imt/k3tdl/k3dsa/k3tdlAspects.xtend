@@ -94,9 +94,11 @@ class TestDescriptionAspect{
 			println("Test case FAILED")
 		}
 		
-		//save the model execution trace related to this test case
+		_self.launcher.executionTrace
+		//save the model execution trace related to this test case and its MUT
 		//this is required when calculating the coverage
 		_self.testCaseCoverage.setTrace(_self.launcher.executionTrace)
+		_self.testCaseCoverage.MUTPath = _self.testConfiguration.MUTPath
 		
 		return _self.testCaseResult
 	}
@@ -118,9 +120,10 @@ class TestDescriptionAspect{
 			println("Test case FAILED")
 		}
 		
-		//save the model execution trace related to this test case
+		//save the model execution trace related to this test case and its MUT
 		//this is required when calculating the coverage
 		_self.testCaseCoverage.setTrace(_self.launcher.executionTrace)
+		_self.testCaseCoverage.MUTPath = MUTPath
 		
 		return _self.testCaseResult
 	}
