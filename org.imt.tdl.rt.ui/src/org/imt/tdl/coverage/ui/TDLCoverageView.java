@@ -1,5 +1,9 @@
 package org.imt.tdl.coverage.ui;
 
+import java.util.List;
+import java.util.Set;
+
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ITableColorProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
@@ -23,6 +27,9 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.part.ViewPart;
 import org.imt.tdl.coverage.TDLCoverageUtil;
+import org.imt.tdl.testResult.TDLMessageResult;
+import org.imt.tdl.testResult.TDLTestCaseResult;
+import org.imt.tdl.testResult.TDLTestPackageResult;
 
 public class TDLCoverageView extends ViewPart{
 
@@ -108,9 +115,12 @@ public class TDLCoverageView extends ViewPart{
 		tsColumn.setText("Test Suite");
 		tsColumn.setWidth(130);
 		
+		//calculating the coverage
+		TDLCoverageUtil.getInstance().getTestSuiteCoverage().calculateTSCoverage();
+
 		m_treeViewer.setContentProvider(new TDLCoverageContentProvider());
 		m_treeViewer.setLabelProvider(new TableLabelProvider());
-		m_treeViewer.setInput(TDLCoverageUtil.getInstance().getTestSuiteCoverage());
+		m_treeViewer.setInput(TDLCoverageUtil.getInstance().getModelContents().next());
 		m_treeViewer.addFilter(new DataFilter());
 		m_treeViewer.collapseAll();
 	}
@@ -119,25 +129,51 @@ public class TDLCoverageView extends ViewPart{
 
 		@Override
 		public Object[] getElements(Object inputElement) {
-			// TODO Auto-generated method stub
-			return null;
+			return getChildren(inputElement);
 		}
 
 		@Override
 		public Object[] getChildren(Object parentElement) {
-			// TODO Auto-generated method stub
-			return null;
+//			if (parentElement instanceof List<?>) {
+//				return ((List<?>) parentElement).toArray();
+//			}
+//			if (parentElement instanceof TDLTestPackageResult) {
+//				return ((TDLTestPackageResult) parentElement).getResults().toArray();
+//			}
+//			if (parentElement instanceof TDLTestCaseResult) {
+//				return ((TDLTestCaseResult) parentElement).getTdlMessages().toArray();
+//			}
+			return new Object[0]; 
 		}
 
 		@Override
 		public Object getParent(Object element) {
-			// TODO Auto-generated method stub
+//			if (element instanceof String) {
+//				return (String) element;
+//			}
+//			if (element instanceof TDLTestPackageResult) {
+//				return ((TDLTestPackageResult) element).getTestPackageName();
+//			}
+//			if (element instanceof TDLTestCaseResult) {
+//				return ((TDLTestCaseResult) element).getTestCaseName();
+//			}
+//			if (element instanceof TDLMessageResult) {
+//				return ((TDLMessageResult) element).getTdlMessageName();
+//			}
 			return null;
 		}
 
 		@Override
 		public boolean hasChildren(Object element) {
-			// TODO Auto-generated method stub
+//			if (element instanceof List<?>) {
+//				return ((List<?>) element).size() > 0;
+//			}
+//			if (element instanceof TDLTestPackageResult) {
+//				return ((TDLTestPackageResult) element).getResults().size() > 0;
+//			}
+//			if (element instanceof TDLTestCaseResult) {
+//				return ((TDLTestCaseResult) element).getTdlMessages().size() > 0;
+//			}
 			return false;
 		}
 		
