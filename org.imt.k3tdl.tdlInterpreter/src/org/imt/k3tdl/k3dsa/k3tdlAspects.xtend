@@ -64,6 +64,8 @@ class PackageAspect {
     		}
     		
     		TestResultUtil.instance.testPackageResult = _self.testPackageResults
+    		TDLCoverageUtil.instance.MUTPath = _self.testcases.get(0).testConfiguration.MUTPath
+			TDLCoverageUtil.instance.DSLPath = _self.testcases.get(0).testConfiguration.DSLPath
     		TDLCoverageUtil.instance.testSuiteCoverage = _self.testSuiteCoverage
     		  		
 		} catch (TDLRuntimeException nt){
@@ -94,12 +96,10 @@ class TestDescriptionAspect{
 			println("Test case FAILED")
 		}
 		
-		_self.launcher.executionTrace
 		//save the model execution trace related to this test case and its MUT
 		//this is required when calculating the coverage
 		_self.testCaseCoverage.setTrace(_self.launcher.executionTrace)
-		_self.testCaseCoverage.MUTPath = _self.testConfiguration.MUTPath
-		
+
 		return _self.testCaseResult
 	}
 	
@@ -123,7 +123,8 @@ class TestDescriptionAspect{
 		//save the model execution trace related to this test case and its MUT
 		//this is required when calculating the coverage
 		_self.testCaseCoverage.setTrace(_self.launcher.executionTrace)
-		_self.testCaseCoverage.MUTPath = MUTPath
+		TDLCoverageUtil.instance.MUTPath = MUTPath
+		TDLCoverageUtil.instance.DSLPath = _self.testConfiguration.DSLPath
 		
 		return _self.testCaseResult
 	}
