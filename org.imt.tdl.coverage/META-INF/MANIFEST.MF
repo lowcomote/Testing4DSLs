@@ -5,7 +5,12 @@ Bundle-SymbolicName: org.imt.tdl.coverage
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: org.imt.tdl.coverage
-Import-Package: org.eclipse.gemoc.trace.commons.model.trace
+Import-Package: fr.inria.diverse.k3.al.annotationprocessor,
+ fr.inria.diverse.k3.al.annotationprocessor.stepmanager,
+ org.eclipse.core.runtime;version="3.7.0",
+ org.eclipse.gemoc.trace.commons.model.trace,
+ org.osgi.framework;version="1.10.0"
 Export-Package: org.imt.tdl.coverage
 Require-Bundle: org.eclipse.emf.ecore,
- org.eclipse.emf.common
+ org.eclipse.emf.common,
+ org.eclipse.gemoc.dsl.model
