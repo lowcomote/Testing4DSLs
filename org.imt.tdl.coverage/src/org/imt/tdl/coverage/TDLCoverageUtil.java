@@ -35,7 +35,7 @@ public class TDLCoverageUtil {
 	public static final String COVERED = "Covered";
 	public static final String NOT_COVERED = "Not_Covered";
 	public static final String COVERABLE = "Coverable";
-	public static final String UNCOVERABLE = "Uncoverable";
+	public static final String NOT_COVERABLE = "Not_Coverable";
 	
 	private TDLTestSuiteCoverage testSuiteCoverage;
 
@@ -58,8 +58,8 @@ public class TDLCoverageUtil {
 		return MUTPath;
 	}
 
-	public void setMUTPath(String mUTPath) {
-		MUTPath = mUTPath;
+	public void setMUTPath(String MUTPath) {
+		this.MUTPath = MUTPath;
 		Resource MUTResource = (new ResourceSetImpl()).getResource(URI.createURI(MUTPath), true);
 		modelContents = MUTResource.getAllContents();
 	}
@@ -68,10 +68,10 @@ public class TDLCoverageUtil {
 		return DSLPath;
 	}
 
-	public void setDSLPath(String dSLPath) {
-		DSLPath = dSLPath;
+	public void setDSLPath(String DSLPath) {
+		this.DSLPath = DSLPath;
 		findCoverableClasses();
-		findUnCoverableObjects();
+		findNotCoverableObjects();
 		this.testSuiteCoverage.calculateTSCoverage();
 	}
 
@@ -124,7 +124,7 @@ public class TDLCoverageUtil {
 		return result;
 	}
 	
-	public void findUnCoverableObjects() {
+	public void findNotCoverableObjects() {
 		while (this.modelContents.hasNext()) {
 			modelSize++;
 			EObject modelObject = this.modelContents.next();
@@ -133,7 +133,7 @@ public class TDLCoverageUtil {
 			if (this.coverableClasses.contains(modelObject.getClass())) {
 				this.objectCoverageStatus.put(modelObject, COVERABLE);
 			}else {
-				this.objectCoverageStatus.put(modelObject, UNCOVERABLE);
+				this.objectCoverageStatus.put(modelObject, NOT_COVERABLE);
 			}
 		}
 	}
