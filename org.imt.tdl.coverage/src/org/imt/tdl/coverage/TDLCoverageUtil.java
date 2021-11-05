@@ -1,12 +1,10 @@
 package org.imt.tdl.coverage;
 
-import fr.inria.diverse.k3.al.annotationprocessor.Step;
-
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,17 +19,20 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gemoc.dsl.Dsl;
 import org.osgi.framework.Bundle;
 
+import fr.inria.diverse.k3.al.annotationprocessor.Aspect;
+import fr.inria.diverse.k3.al.annotationprocessor.Step;
+
 public class TDLCoverageUtil {
 	
 	private static TDLCoverageUtil instance = new TDLCoverageUtil();
 	
-	private String MUTPath;
+	private Resource MUTResource;
 	private String DSLPath;
 	private TreeIterator<EObject> modelContents;
-	private int modelSize;
+	private int modelSize = 0;
 	
-	private List<Class<?>> coverableClasses = new ArrayList<>();
-	public HashMap<EObject, String> objectCoverageStatus = new HashMap<>();
+	private List<String> coverableClasses = new ArrayList<>();
+	public LinkedHashMap<EObject, String> objectCoverageStatus = new LinkedHashMap<>();
 	public static final String COVERED = "Covered";
 	public static final String NOT_COVERED = "Not_Covered";
 	public static final String COVERABLE = "Coverable";
@@ -52,16 +53,18 @@ public class TDLCoverageUtil {
 	}
 	public void setTestSuiteCoverage(TDLTestSuiteCoverage coverage) {
 		instance.testSuiteCoverage = coverage;
+		instance.modelSize = 0;
+		instance.coverableClasses = new ArrayList<>();
+		instance.objectCoverageStatus = new LinkedHashMap<>();
 	}
 
-	public String getMUTPath() {
-		return MUTPath;
+	public Resource getMUTResource() {
+		return instance.MUTResource;
 	}
 
-	public void setMUTPath(String MUTPath) {
-		this.MUTPath = MUTPath;
-		Resource MUTResource = (new ResourceSetImpl()).getResource(URI.createURI(MUTPath), true);
-		modelContents = MUTResource.getAllContents();
+	public void setMUTResource(Resource MUTResource) {
+		instance.MUTResource = MUTResource;
+		instance.modelContents = MUTResource.getAllContents();
 	}
 
 	public String getDSLPath() {
@@ -72,19 +75,17 @@ public class TDLCoverageUtil {
 		this.DSLPath = DSLPath;
 		findCoverableClasses();
 		findNotCoverableObjects();
-		this.testSuiteCoverage.calculateTSCoverage();
+		instance.testSuiteCoverage.calculateTSCoverage();
 	}
 
 	public int getModelSize() {
-		return modelSize;
+		return instance.modelSize;
 	}
 
 	public TreeIterator<EObject> getModelContents() {
-		return modelContents;
+		return instance.modelContents;
 	}
 	
-	//if a class is opened and has a stepping rule in the xDSL's interpreter, 
-	//the objects of the class are coverable
 	public void findCoverableClasses(){
 		final ResourceSet resSet = new ResourceSetImpl();
 		IConfigurationElement language = Arrays
@@ -103,11 +104,15 @@ public class TDLCoverageUtil {
 						.filter(c -> c != null).collect(Collectors.toList()))
 				.orElse(Collections.emptyList()).stream().map(c -> (Class<?>) c).collect(Collectors.toList());
 		
-		for (Class clazz : classes) {
+		//if a class is opened and has a stepping rule in the xDSL's interpreter, 
+		//the objects of the class are coverable
+		for (Class<?> clazz : classes) {
 			Method[] methods = clazz.getDeclaredMethods();
 			for (Method method: methods) {
 				if (method.getAnnotationsByType(Step.class).length > 0) {
-					coverableClasses.add(clazz);
+					String ecoreClassName = clazz.getDeclaredAnnotation(Aspect.class).className().getName();
+					ecoreClassName = ecoreClassName.substring(ecoreClassName.lastIndexOf(".") + 1);
+					instance.coverableClasses.add(ecoreClassName + "Impl");
 					break;
 				}
 			}
@@ -126,14 +131,14 @@ public class TDLCoverageUtil {
 	
 	public void findNotCoverableObjects() {
 		while (this.modelContents.hasNext()) {
-			modelSize++;
 			EObject modelObject = this.modelContents.next();
-			modelObject.getClass();
-			//TODO: here we compare Impl classes with Aspect classes, what to do?
-			if (this.coverableClasses.contains(modelObject.getClass())) {
-				this.objectCoverageStatus.put(modelObject, COVERABLE);
+			instance.modelSize++;
+			String objectClassName = modelObject.getClass().getName();
+			objectClassName = objectClassName.substring(objectClassName.lastIndexOf(".") + 1);
+			if (instance.coverableClasses.contains(objectClassName)) {
+				instance.objectCoverageStatus.put(modelObject, COVERABLE);
 			}else {
-				this.objectCoverageStatus.put(modelObject, NOT_COVERABLE);
+				instance.objectCoverageStatus.put(modelObject, NOT_COVERABLE);
 			}
 		}
 	}
