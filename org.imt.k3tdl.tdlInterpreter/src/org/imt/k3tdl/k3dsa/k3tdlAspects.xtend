@@ -1,7 +1,6 @@
 package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
-
 import fr.inria.diverse.k3.al.annotationprocessor.InitializeModel
 import fr.inria.diverse.k3.al.annotationprocessor.Main
 import fr.inria.diverse.k3.al.annotationprocessor.Step
@@ -11,23 +10,21 @@ import java.util.List
 import org.eclipse.core.runtime.IConfigurationElement
 import org.eclipse.core.runtime.Platform
 import org.eclipse.emf.common.util.EList
-import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.etsi.mts.tdl.Annotation
 import org.etsi.mts.tdl.Package
 import org.etsi.mts.tdl.TestConfiguration
 import org.etsi.mts.tdl.TestDescription
 import org.imt.tdl.configuration.EngineFactory
+import org.imt.tdl.coverage.TDLCoverageUtil
+import org.imt.tdl.coverage.TDLTestCaseCoverage
+import org.imt.tdl.coverage.TDLTestSuiteCoverage
 import org.imt.tdl.testResult.TDLTestCaseResult
 import org.imt.tdl.testResult.TDLTestPackageResult
 import org.imt.tdl.testResult.TestResultUtil
-import org.imt.tdl.coverage.TDLTestCaseCoverage
 
 import static extension org.imt.k3tdl.k3dsa.BehaviourDescriptionAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
-import org.imt.tdl.coverage.TDLTestSuiteCoverage
-import org.imt.tdl.coverage.TDLCoverageUtil
 
 @Aspect(className = Package)
 class PackageAspect {
@@ -64,9 +61,10 @@ class PackageAspect {
     		}
     		
     		TestResultUtil.instance.testPackageResult = _self.testPackageResults
-    		TDLCoverageUtil.instance.MUTPath = _self.testcases.get(0).testConfiguration.MUTPath
-			TDLCoverageUtil.instance.DSLPath = _self.testcases.get(0).testConfiguration.DSLPath
+    		
     		TDLCoverageUtil.instance.testSuiteCoverage = _self.testSuiteCoverage
+    		TDLCoverageUtil.instance.MUTResource = _self.testcases.get(0).launcher.MUTResource
+			TDLCoverageUtil.instance.DSLPath = _self.testcases.get(0).testConfiguration.DSLPath
     		  		
 		} catch (TDLRuntimeException nt){
 			println("Stopped due "+nt.message)	
@@ -111,7 +109,7 @@ class TestDescriptionAspect{
 		_self.testConfiguration.activateConfiguration(_self.launcher, MUTPath)
 		_self.behaviourDescription.callBehavior()
 		val modelExecutionResult = _self.testConfiguration.stopModelExecutionEngine(_self.launcher)
-		if (modelExecutionResult != null && modelExecutionResult.contains("FAIL")){
+		if (modelExecutionResult !== null && modelExecutionResult.contains("FAIL")){
 			_self.testCaseResult.value = modelExecutionResult
 		}
 		if (_self.testCaseResult.value.equals("PASS")) {
@@ -123,7 +121,8 @@ class TestDescriptionAspect{
 		//save the model execution trace related to this test case and its MUT
 		//this is required when calculating the coverage
 		_self.testCaseCoverage.setTrace(_self.launcher.executionTrace)
-		TDLCoverageUtil.instance.MUTPath = MUTPath
+		TDLCoverageUtil.instance.testSuiteCoverage = new TDLTestSuiteCoverage
+		TDLCoverageUtil.instance.MUTResource = _self.launcher.MUTResource
 		TDLCoverageUtil.instance.DSLPath = _self.testConfiguration.DSLPath
 		
 		return _self.testCaseResult
@@ -165,7 +164,6 @@ class TestConfigurationAspect{
 	}
 	
 	def String getDSLPath (String DSLName){
-		val ResourceSet resSet = new ResourceSetImpl()
 		val IConfigurationElement language = Arrays
 				.asList(Platform.getExtensionRegistry()
 						.getConfigurationElementsFor("org.eclipse.gemoc.gemoc_language_workbench.xdsml"))
@@ -173,7 +171,7 @@ class TestConfigurationAspect{
 						&& l.getAttribute("name").equals(DSLName))
 				.findFirst().orElse(null);
 		
-		if (language != null) {
+		if (language !== null) {
 			var xdsmlFilePath = language.getAttribute("xdsmlFilePath");
 			if (!xdsmlFilePath.startsWith("platform:/plugin")) {
 				xdsmlFilePath = "platform:/plugin" + xdsmlFilePath;
