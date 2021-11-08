@@ -60,11 +60,9 @@ class PackageAspect {
     			println()
     		}
     		
-    		TestResultUtil.instance.testPackageResult = _self.testPackageResults
-    		
+    		TestResultUtil.instance.testPackageResult = _self.testPackageResults		
     		TDLCoverageUtil.instance.testSuiteCoverage = _self.testSuiteCoverage
-    		TDLCoverageUtil.instance.MUTResource = _self.testcases.get(0).launcher.MUTResource
-			TDLCoverageUtil.instance.DSLPath = _self.testcases.get(0).testConfiguration.DSLPath
+    		TDLCoverageUtil.instance.DSLPath = _self.testcases.get(0).testConfiguration.DSLPath
     		  		
 		} catch (TDLRuntimeException nt){
 			println("Stopped due "+nt.message)	
@@ -94,10 +92,11 @@ class TestDescriptionAspect{
 			println("Test case FAILED")
 		}
 		
-		//save the model execution trace related to this test case and its MUT
-		//this is required when calculating the coverage
-		_self.testCaseCoverage.setTrace(_self.launcher.executionTrace)
-
+		//save the model execution trace and the MUTResource related to this test case
+		_self.testCaseCoverage.testCaseName = _self.name
+		_self.testCaseCoverage.trace = _self.launcher.executionTrace
+    	_self.testCaseCoverage.MUTResource = _self.launcher.MUTResource
+		
 		return _self.testCaseResult
 	}
 	
@@ -120,9 +119,9 @@ class TestDescriptionAspect{
 		
 		//save the model execution trace related to this test case and its MUT
 		//this is required when calculating the coverage
-		_self.testCaseCoverage.setTrace(_self.launcher.executionTrace)
 		TDLCoverageUtil.instance.testSuiteCoverage = new TDLTestSuiteCoverage
-		TDLCoverageUtil.instance.MUTResource = _self.launcher.MUTResource
+		_self.testCaseCoverage.trace = _self.launcher.executionTrace
+    	_self.testCaseCoverage.MUTResource = _self.launcher.MUTResource
 		TDLCoverageUtil.instance.DSLPath = _self.testConfiguration.DSLPath
 		
 		return _self.testCaseResult
