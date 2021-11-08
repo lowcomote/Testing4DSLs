@@ -1,65 +1,70 @@
 package org.imt.tdl.coverage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gemoc.trace.commons.model.trace.SequentialStep;
 import org.eclipse.gemoc.trace.commons.model.trace.Step;
 import org.eclipse.gemoc.trace.commons.model.trace.Trace;
 
 public class TDLTestCaseCoverage {
 
+	public String testCaseName;
+	private Resource MUTResource;
 	private Trace<?, ?, ?> trace;
 	
-	public LinkedHashMap<EObject, String> tcObjectCoverageStatus= new LinkedHashMap<>();
+	public List<String> tcObjectCoverageStatus = new ArrayList<>();
 	int numOfCoveredObjs = 0;
 	private double tcCoveragePercentage;
 	
 	//calculating the coverage of the test case based on the model execution trace
-	public void calculateTCCoverage (LinkedHashMap<EObject, String> tsObjectCoverageStatus) {
-		this.tcObjectCoverageStatus = TDLCoverageUtil.getInstance().objectCoverageStatus;
-		
+	public void calculateTCCoverage () {
+		//find coverable objects using the MUTResource of the test case
+		TDLCoverageUtil.getInstance().setMUTResource(this.MUTResource);
+		TDLCoverageUtil.getInstance().findNotCoverableObjects();
+		List<EObject> objects = TDLCoverageUtil.getInstance().modelObjects;
+		this.tcObjectCoverageStatus.addAll(TDLCoverageUtil.getInstance().objectCoverageStatus);
+
 		Step<?> rootStep = this.trace.getRootStep();
 		if (rootStep instanceof SequentialStep) {
 			SequentialStep<?, ?> step = (SequentialStep<?, ?>) rootStep;
 			if (step.getMseoccurrence() != null) {
 				EObject object = step.getMseoccurrence().getMse().getCaller();
-				if (this.tcObjectCoverageStatus.get(object) != TDLCoverageUtil.COVERED) {
+				int objectIndex = TDLCoverageUtil.getInstance().modelObjects.indexOf(object);
+				if (this.tcObjectCoverageStatus.get(objectIndex) != TDLCoverageUtil.COVERED) {
 					this.numOfCoveredObjs++;
-					this.tcObjectCoverageStatus.replace(object, TDLCoverageUtil.COVERED);
-				}
-				if (tsObjectCoverageStatus.get(object) != TDLCoverageUtil.COVERED) {
-					tsObjectCoverageStatus.replace(object, TDLCoverageUtil.COVERED);
+					this.tcObjectCoverageStatus.set(objectIndex, TDLCoverageUtil.COVERED);
 				}
 			}
 			if (step.getSubSteps() != null) {
 				for (int i=0; i < step.getSubSteps().size(); i++) {
-					calculateObjectCoverage(step.getSubSteps().get(i), tsObjectCoverageStatus);
+					calculateObjectCoverage(step.getSubSteps().get(i));
 				}
 			}
 		}
 		
 		this.tcCoveragePercentage = (this.numOfCoveredObjs*100)/TDLCoverageUtil.getInstance().getModelSize();
-		System.out.println("Test case coverage: " + this.tcCoveragePercentage);
+		System.out.println(this.testCaseName + " coverage: " + this.tcCoveragePercentage);
 	}
 	
-	public void calculateObjectCoverage(Object rootStep, HashMap<EObject, String> tsObjectCoverageStatus) {
+	public void calculateObjectCoverage(Object rootStep) {
 		if (rootStep instanceof SequentialStep) {
 			SequentialStep<?, ?> step = (SequentialStep<?, ?>) rootStep;
 			if (step.getMseoccurrence() != null) {
 				EObject object = step.getMseoccurrence().getMse().getCaller();
-				if (this.tcObjectCoverageStatus.get(object) != TDLCoverageUtil.COVERED) {
+				int objectIndex = TDLCoverageUtil.getInstance().modelObjects.indexOf(object);
+				if (this.tcObjectCoverageStatus.get(objectIndex) != TDLCoverageUtil.COVERED) {
 					this.numOfCoveredObjs++;
-					this.tcObjectCoverageStatus.replace(object, TDLCoverageUtil.COVERED);
-				}
-				if (tsObjectCoverageStatus.get(object) != TDLCoverageUtil.COVERED) {
-					tsObjectCoverageStatus.replace(object, TDLCoverageUtil.COVERED);
+					this.tcObjectCoverageStatus.set(objectIndex, TDLCoverageUtil.COVERED);
 				}
 			}
 			if (step.getSubSteps() != null) {
 				for (int i=0; i < step.getSubSteps().size(); i++) {
-					calculateObjectCoverage(step.getSubSteps().get(i), tsObjectCoverageStatus);
+					calculateObjectCoverage(step.getSubSteps().get(i));
 				}
 			}
 		}
@@ -79,5 +84,13 @@ public class TDLTestCaseCoverage {
 
 	public void setTcCoveragePercentage(double tcCoveragePercentage) {
 		this.tcCoveragePercentage = tcCoveragePercentage;
+	}
+
+	public Resource getMUTResource() {
+		return this.MUTResource;
+	}
+
+	public void setMUTResource(Resource MUTResource) {
+		this.MUTResource = MUTResource;
 	}
 }
