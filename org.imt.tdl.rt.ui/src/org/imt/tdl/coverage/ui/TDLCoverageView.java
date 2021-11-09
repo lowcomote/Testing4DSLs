@@ -79,7 +79,19 @@ public class TDLCoverageView extends ViewPart{
 		gd.verticalAlignment = SWT.ON_TOP;
 		gd.widthHint = 100;
 		filter.setLayoutData(gd);
-        final Combo coverageFilterCombo = new Combo(filter, SWT.NONE);
+		
+		Group coverageFilter = new Group(filter, SWT.FILL);
+	    layout = new GridLayout();
+	    coverageFilter.setLayout(layout);
+	    layout.numColumns = 1;
+	    layout.verticalSpacing = 9;
+	    coverageFilter.setText("Coverage Filters");
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.horizontalAlignment = SWT.FILL;
+		gd.verticalAlignment = SWT.ON_TOP;
+		gd.widthHint = 100;
+		coverageFilter.setLayoutData(gd);
+        final Combo coverageFilterCombo = new Combo(coverageFilter, SWT.NONE);
         coverageFilterCombo.add("All");
         coverageFilterCombo.add("Covered");
         coverageFilterCombo.add("Not-Covered");
@@ -93,7 +105,18 @@ public class TDLCoverageView extends ViewPart{
 			}
 		});
 		
-        final Combo elementFilterCombo = new Combo(filter, SWT.NONE);
+        Group elementFilter = new Group(filter, SWT.FILL);
+	    layout = new GridLayout();
+	    elementFilter.setLayout(layout);
+	    layout.numColumns = 1;
+	    layout.verticalSpacing = 9;
+	    elementFilter.setText("Model Element Filters");
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.horizontalAlignment = SWT.FILL;
+		gd.verticalAlignment = SWT.ON_TOP;
+		gd.widthHint = 100;
+		elementFilter.setLayoutData(gd);
+        final Combo elementFilterCombo = new Combo(elementFilter, SWT.NONE);
         elementFilterCombo.add("All");
         //add the meta-classes included in the coverage information as filter
         List<TestCoverageInfo> coverageInfos = TDLCoverageUtil.getInstance().getTestSuiteCoverage().getCoverageInfos();
@@ -107,7 +130,6 @@ public class TDLCoverageView extends ViewPart{
         	classFilters.add(metaClass.getName());
         	elementFilterCombo.add(metaClass.getName());
         }
-        List<String> filters = classFilters;
         elementFilterCombo.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
