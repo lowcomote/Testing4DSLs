@@ -35,7 +35,8 @@ public class TDLTestCaseCoverage {
 			if (step.getMseoccurrence() != null) {
 				EObject object = step.getMseoccurrence().getMse().getCaller();
 				int objectIndex = TDLCoverageUtil.getInstance().modelObjects.indexOf(object);
-				if (this.tcObjectCoverageStatus.get(objectIndex) != TDLCoverageUtil.COVERED) {
+				if (this.tcObjectCoverageStatus.get(objectIndex) != TDLCoverageUtil.COVERED &&
+						this.tcObjectCoverageStatus.get(objectIndex) != TDLCoverageUtil.NOT_COVERABLE) {
 					this.numOfCoveredObjs++;
 					this.tcObjectCoverageStatus.set(objectIndex, TDLCoverageUtil.COVERED);
 				}
@@ -57,7 +58,8 @@ public class TDLTestCaseCoverage {
 			if (step.getMseoccurrence() != null) {
 				EObject object = step.getMseoccurrence().getMse().getCaller();
 				int objectIndex = TDLCoverageUtil.getInstance().modelObjects.indexOf(object);
-				if (this.tcObjectCoverageStatus.get(objectIndex) != TDLCoverageUtil.COVERED) {
+				if (this.tcObjectCoverageStatus.get(objectIndex) != TDLCoverageUtil.COVERED &&
+						this.tcObjectCoverageStatus.get(objectIndex) != TDLCoverageUtil.NOT_COVERABLE) {
 					this.numOfCoveredObjs++;
 					this.tcObjectCoverageStatus.set(objectIndex, TDLCoverageUtil.COVERED);
 				}
