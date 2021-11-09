@@ -12,10 +12,12 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecoretools.ale.BehavioredClass;
 import org.eclipse.emf.ecoretools.ale.Operation;
 import org.eclipse.emf.ecoretools.ale.Tag;
@@ -102,7 +104,6 @@ public class TDLCoverageUtil {
 			Method[] methods = clazz.getDeclaredMethods();
 			for (Method method: methods) {
 				if (method.getAnnotationsByType(Step.class).length > 0) {
-					String ecoreClassName = clazz.getDeclaredAnnotation(Aspect.class).className().getName();
 					instance.coverableClasses.add(clazz.getDeclaredAnnotation(Aspect.class).className());
 					break;
 				}
@@ -158,7 +159,12 @@ public class TDLCoverageUtil {
 		TreeIterator<EObject> modelContents = instance.MUTResource.getAllContents();
 		while (modelContents.hasNext()) {
 			EObject modelObject = modelContents.next();
-			Class<?>[] interfaces = modelObject.getClass().getInterfaces();
+			List<Class<?>> interfaces = Arrays.asList(modelObject.getClass().getInterfaces());
+			//we also consider super classes because if there is an execution rule for the super class,
+			//the objects conforming to the class can be covered
+			for (EClass superClass:modelObject.eClass().getEAllSuperTypes()) {
+				interfaces.add(superClass.getInstanceClass());
+			}
 			boolean covered = false;
 			for (Class<?> cInterface: interfaces) {
 				if (instance.coverableClasses.contains(cInterface)) {
