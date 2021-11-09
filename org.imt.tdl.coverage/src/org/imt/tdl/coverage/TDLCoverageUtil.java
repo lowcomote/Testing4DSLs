@@ -4,7 +4,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,7 +35,7 @@ public class TDLCoverageUtil {
 	private int modelSize = 0;
 	
 	private String DSLPath;
-	private List<String> coverableClasses = new ArrayList<>();
+	private List<Class<?>> coverableClasses = new ArrayList<>();
 	public List<String> objectCoverageStatus = new ArrayList<>();
 	public static final String COVERED = "Covered";
 	public static final String NOT_COVERED = "Not_Covered";
@@ -104,8 +103,7 @@ public class TDLCoverageUtil {
 			for (Method method: methods) {
 				if (method.getAnnotationsByType(Step.class).length > 0) {
 					String ecoreClassName = clazz.getDeclaredAnnotation(Aspect.class).className().getName();
-					ecoreClassName = ecoreClassName.substring(ecoreClassName.lastIndexOf(".") + 1);
-					instance.coverableClasses.add(ecoreClassName + "Impl");
+					instance.coverableClasses.add(clazz.getDeclaredAnnotation(Aspect.class).className());
 					break;
 				}
 			}
@@ -127,7 +125,7 @@ public class TDLCoverageUtil {
 			for (int i=0; i<operations.size(); i++) {
 				for (Tag tag:operations.get(i).getTag()) {
 					if (tag.getName().equals("step")) {
-						instance.coverableClasses.add(clazz.getName() + "Impl");
+						instance.coverableClasses.add(clazz.getClass());
 						i = operations.size();
 						break;
 					}
@@ -160,13 +158,18 @@ public class TDLCoverageUtil {
 		TreeIterator<EObject> modelContents = instance.MUTResource.getAllContents();
 		while (modelContents.hasNext()) {
 			EObject modelObject = modelContents.next();
-			String objectClassName = modelObject.getClass().getName();
-			objectClassName = objectClassName.substring(objectClassName.lastIndexOf(".") + 1);
-			if (instance.coverableClasses.contains(objectClassName)) {
-				instance.modelObjects.add(modelObject);
-				instance.objectCoverageStatus.add(COVERABLE);
-				instance.modelSize++;
-			}else {
+			Class<?>[] interfaces = modelObject.getClass().getInterfaces();
+			boolean covered = false;
+			for (Class<?> cInterface: interfaces) {
+				if (instance.coverableClasses.contains(cInterface)) {
+					instance.modelObjects.add(modelObject);
+					instance.objectCoverageStatus.add(COVERABLE);
+					instance.modelSize++;
+					covered = true;
+					break;
+				}
+			}
+			if (!covered) {
 				instance.modelObjects.add(modelObject);
 				instance.objectCoverageStatus.add(NOT_COVERABLE);
 			}
