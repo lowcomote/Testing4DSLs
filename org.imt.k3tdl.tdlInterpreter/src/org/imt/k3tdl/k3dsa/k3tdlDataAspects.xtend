@@ -458,7 +458,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 	
 	@OverrideAspectMethod
 	def String updateData(Resource MUTResource, EObject object, EStructuralFeature matchedFeature, String DSLPath){
-		if (_self.item != null && _self.item.size > 0){//there are several intances of data
+		if (_self.item != null && _self.item.size > 0){//there are several instances of data
 			val TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(object);
 			try{
 				domain.getCommandStack().execute(new RecordingCommand(domain) {
