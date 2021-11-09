@@ -56,6 +56,7 @@ public class TDLTestSuiteCoverage {
 		for (int i=0; i<modelObjects.size(); i++) {
 			TestCoverageInfo cInfo = new TestCoverageInfo();
 			cInfo.setModelObject(modelObjects.get(i));
+			cInfo.setMetaclass(modelObjects.get(i).eClass());
 			for (TDLTestCaseCoverage tcCoverageObj : this.tcCoverages) {
 				String tcCoverage = tcCoverageObj.tcObjectCoverageStatus.get(i);
 				if (tcCoverage == TDLCoverageUtil.COVERABLE) {
@@ -71,6 +72,7 @@ public class TDLTestSuiteCoverage {
 			this.coverageInfos.add(cInfo);
 		}
 		//add the overall result as the last row of the info array
+		this.overallResult.setMetaclass(null);
 		this.overallResult.setModelObject(null);
 		this.coverageInfos.add(this.overallResult);
 	}
