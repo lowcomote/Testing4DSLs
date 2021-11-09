@@ -1,9 +1,12 @@
 package org.imt.tdl.coverage.ui;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -50,7 +53,9 @@ public class TDLCoverageView extends ViewPart{
 
 	private static final Color GRAY = new Color(Display.getCurrent(), 237, 237, 237);
 	
-	private static int filterIndex = -1;
+	private static int coverageFilterIndex = -1;
+	private static int elementFilterIndex = -1;
+	private static List<String> classFilters = new ArrayList<>();
 	
 	@Override
 	public void createPartControl(Composite parent) {
@@ -65,24 +70,48 @@ public class TDLCoverageView extends ViewPart{
 	    
 	    Group filter = new Group(contents, SWT.FILL);
 	    layout = new GridLayout();
-		filter.setLayout(layout);
-		layout.numColumns = 1;
-		layout.verticalSpacing = 9;
-	    filter.setText("Filter");
-	    gd = new GridData(GridData.FILL_HORIZONTAL);
+	    filter.setLayout(layout);
+	    layout.numColumns = 1;
+	    layout.verticalSpacing = 9;
+		filter.setText("Filters");
+		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalAlignment = SWT.FILL;
 		gd.verticalAlignment = SWT.ON_TOP;
 		gd.widthHint = 100;
-	    filter.setLayoutData(gd);
-        final Combo filterCombo = new Combo(filter, SWT.NONE);
-        filterCombo.add("All");
-        filterCombo.add("Covered");
-        filterCombo.add("Not-Covered");
-        filterCombo.add("Not Coverable");
-		filterCombo.addSelectionListener(new SelectionAdapter() {
+		filter.setLayoutData(gd);
+        final Combo coverageFilterCombo = new Combo(filter, SWT.NONE);
+        coverageFilterCombo.add("All");
+        coverageFilterCombo.add("Covered");
+        coverageFilterCombo.add("Not-Covered");
+        coverageFilterCombo.add("Not Coverable");
+        coverageFilterCombo.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				filterIndex = filterCombo.getSelectionIndex();
+				coverageFilterIndex = coverageFilterCombo.getSelectionIndex();
+				m_treeViewer.collapseAll();
+				m_treeViewer.refresh();
+			}
+		});
+		
+        final Combo elementFilterCombo = new Combo(filter, SWT.NONE);
+        elementFilterCombo.add("All");
+        //add the meta-classes included in the coverage information as filter
+        List<TestCoverageInfo> coverageInfos = TDLCoverageUtil.getInstance().getTestSuiteCoverage().getCoverageInfos();
+        Set<EClass> metaClasses = new HashSet<EClass>();
+        classFilters.clear();
+        for (TestCoverageInfo cInfo: coverageInfos) {
+        	metaClasses.add(cInfo.getMetaclass());      	
+        }
+        metaClasses.remove(null);
+        for (EClass metaClass: metaClasses) {
+        	classFilters.add(metaClass.getName());
+        	elementFilterCombo.add(metaClass.getName());
+        }
+        List<String> filters = classFilters;
+        elementFilterCombo.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				elementFilterIndex = elementFilterCombo.getSelectionIndex();
 				m_treeViewer.collapseAll();
 				m_treeViewer.refresh();
 			}
@@ -103,10 +132,15 @@ public class TDLCoverageView extends ViewPart{
 		addressTree.setLinesVisible(true);
 		m_treeViewer = new TreeViewer(addressTree);
 
+		TreeColumn metaclassColumn = new TreeColumn(addressTree, SWT.LEFT);
+		metaclassColumn.setAlignment(SWT.LEFT);
+		metaclassColumn.setText("Meta-Class");
+		metaclassColumn.setWidth(130);
+		
 		TreeColumn modelColumn = new TreeColumn(addressTree, SWT.LEFT);
 		modelColumn.setAlignment(SWT.LEFT);
 		modelColumn.setText("Model Element");
-		modelColumn.setWidth(200);
+		modelColumn.setWidth(150);
 		
 		int colNum = TDLCoverageUtil.getInstance().getTestSuiteCoverage().getTCCoverages().size();
 		for (int i=0; i<colNum; i++) {
@@ -124,7 +158,7 @@ public class TDLCoverageView extends ViewPart{
 		m_treeViewer.setContentProvider(new TDLCoverageContentProvider());
 		m_treeViewer.setLabelProvider(new TableLabelProvider());
 		m_treeViewer.setInput(TDLCoverageUtil.getInstance().getTestSuiteCoverage());
-		m_treeViewer.addFilter(new DataFilter());
+		m_treeViewer.setFilters(new CoverageFilter(), new ElementFilter());
 		m_treeViewer.collapseAll();
 	}
 
@@ -207,10 +241,13 @@ public class TDLCoverageView extends ViewPart{
 				TestCoverageInfo cInfo = (TestCoverageInfo) element;
 				switch(columnIndex) {
 				case 0:
+					//the column containing metaclasses
+					return null;
+				case 1:
 					//the column containing model elements
 					return null;
 				default:
-					String colText = cInfo.getCoverage().get(columnIndex-1);
+					String colText = cInfo.getCoverage().get(columnIndex-2);
 					if (colText == TDLCoverageUtil.COVERED) {
 						return GREEN;
 					}
@@ -246,12 +283,19 @@ public class TDLCoverageView extends ViewPart{
 				TestCoverageInfo cInfo = (TestCoverageInfo) element;
 				switch(columnIndex) {
 				case 0:
+					if (cInfo.getMetaclass() != null) {
+						columnText = cInfo.getMetaclass().getName();
+					}
+					break;
+				case 1:
 					if (cInfo.getModelObject() != null) {
-						columnText = this.eObjectLabelProvider(cInfo.getModelObject());
+						String metaclassName = cInfo.getMetaclass().getName();
+						columnText = this.eObjectLabelProvider(cInfo.getModelObject()).replaceAll("\\s", "");
+						columnText = columnText.substring(metaclassName.length());
 					}
 					break;
 				default:
-					columnText = cInfo.getCoverage().get(columnIndex-1);
+					columnText = cInfo.getCoverage().get(columnIndex-2);
 					break;
 				}
 			}
@@ -276,27 +320,27 @@ public class TDLCoverageView extends ViewPart{
 		}
 
 	}
-private class DataFilter extends ViewerFilter {
+private class CoverageFilter extends ViewerFilter {
 		
 		@Override
 		public boolean select(Viewer viewer, Object parentElement, Object element) {
-			if (filterIndex == -1 || filterIndex == 0) {
+			if (coverageFilterIndex == -1 || coverageFilterIndex == 0) {
 				return true;
 			}
-			if (filterIndex == 1) {//covered elements
+			if (coverageFilterIndex == 1) {//covered elements
 				if (element instanceof TestCoverageInfo) {
 					TestCoverageInfo cInfo = (TestCoverageInfo) element;
 					//the last element of the coverage is related to the test suite
 					return cInfo.getCoverage().get(cInfo.getCoverage().size()-1) == TDLCoverageUtil.COVERED;
 				}
 			}
-			if (filterIndex == 2) {//not covered elements
+			if (coverageFilterIndex == 2) {//not covered elements
 				if (element instanceof TestCoverageInfo) {
 					TestCoverageInfo cInfo = (TestCoverageInfo) element;
 					return cInfo.getCoverage().get(cInfo.getCoverage().size()-1) == TDLCoverageUtil.NOT_COVERED;
 			}
 			}
-			if (filterIndex == 3) {//elements that are not coverable
+			if (coverageFilterIndex == 3) {//elements that are not coverable
 				if (element instanceof TestCoverageInfo) {
 					TestCoverageInfo cInfo = (TestCoverageInfo) element;
 					return cInfo.getCoverage().get(cInfo.getCoverage().size()-1) == TDLCoverageUtil.NOT_COVERABLE;
@@ -305,6 +349,34 @@ private class DataFilter extends ViewerFilter {
 			return false;
 		}
 	}
+
+private class ElementFilter extends ViewerFilter {
+	
+	@Override
+	public boolean select(Viewer viewer, Object parentElement, Object element) {
+		if (elementFilterIndex == -1 || elementFilterIndex == 0) {
+			return true;
+		}else {
+			if (element instanceof TestCoverageInfo) {
+				TestCoverageInfo cInfo = (TestCoverageInfo) element;
+				if (cInfo.getMetaclass() == null) {
+					return false;
+				}else {
+					int index = elementFilterIndex;
+					List<String> filters = classFilters;
+					String filter = classFilters.get(elementFilterIndex-1);
+					String objectType = cInfo.getMetaclass().getName();
+					if (objectType.equals(filter)) {
+						filter = objectType;
+						//true
+					}
+					return cInfo.getMetaclass().getName().equals(classFilters.get(elementFilterIndex-1));
+				}
+			}
+		}
+		return false;
+	}
+}
 
 	@Override
 	public void setFocus() {
