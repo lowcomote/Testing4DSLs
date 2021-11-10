@@ -22,6 +22,16 @@ public class TDLTestPackageResult {
 		return results;
 	}
 	
+	public int getNumOfPassedTestCases() {
+		int numPassedTests = 0;
+		for (TDLTestCaseResult result : results) {
+			if (result.getValue().equals("PASS")) {
+				numPassedTests++;
+			}
+		}
+		return numPassedTests;
+	}
+	
 	public int getNumOfFailedTestCases() {
 		int numFailedTests = 0;
 		for (TDLTestCaseResult result : results) {
@@ -31,6 +41,7 @@ public class TDLTestPackageResult {
 		}
 		return numFailedTests;
 	}
+	
 	public int getNumOfInconclusiveTestCases() {
 		int num = 0;
 		for (TDLTestCaseResult result : results) {
