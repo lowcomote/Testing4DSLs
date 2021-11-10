@@ -16,6 +16,10 @@ public class TestResultUtil {
 	
 	private static TestResultUtil instance = new TestResultUtil();
 	private TDLTestPackageResult testResult;
+	
+	public static final String PASS = "PASS";
+	public static final String FAIL = "FAIL";
+	public static final String INCONCLUSIVE = "INCONCLUSIVE";
 
 	   //make the constructor private so that this class cannot be
 	   //instantiated

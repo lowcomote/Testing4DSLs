@@ -53,6 +53,7 @@ import org.imt.tdl.testResult.TDLMessageResult
 import org.etsi.mts.tdl.LiteralValueUse
 import org.etsi.mts.tdl.DataInstanceUse
 import org.etsi.mts.tdl.LocalExpression
+import org.imt.tdl.testResult.TestResultUtil
 
 @Aspect (className = BehaviourDescription)
 class BehaviourDescriptionAspect{
@@ -228,9 +229,9 @@ class MessageAspect extends InteractoinAspect{
 				verdict = t.targetGate.gate.sendArgument2sut(_self.argument)
 				_self.addMessageResult(verdict)
 				var boolean result = true
-				if (verdict.contains("FAIL")){
+				if (verdict.contains(TestResultUtil.FAIL)){
 					result = false
-					_self.parentTestDescription.testCaseResult.value = "INCONCLUSIVE"//the test case should be interrupted
+					_self.parentTestDescription.testCaseResult.value = TestResultUtil.INCONCLUSIVE//the test case should be interrupted
 				}
 				return result //if the result is false, the test case execution should be interrupted
 			}
@@ -238,9 +239,9 @@ class MessageAspect extends InteractoinAspect{
 	}
 	def void addMessageResult(String info){
 		var boolean result = true
-		if (info.contains("FAIL")){
+		if (info.contains(TestResultUtil.FAIL)){
 			result = false
-			_self.parentTestDescription.testCaseResult.value = "FAIL"
+			_self.parentTestDescription.testCaseResult.value = TestResultUtil.FAIL
 		}
 		var message = info
 		if (info.contains(":")){

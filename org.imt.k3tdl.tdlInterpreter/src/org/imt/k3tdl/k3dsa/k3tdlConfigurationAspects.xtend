@@ -29,20 +29,20 @@ class GateInstanceAspect {
 	public String MUTPath = ""
 	public String DSLPath = ""
 	
-	private Object receivedOutput = null
-	private Object expectedOutput = null
+	Object receivedOutput = null
+	Object expectedOutput = null
 	
-	private EngineFactory gateLauncher
+	EngineFactory gateLauncher
 	
-	private final static String RUN_MODEL = "runModel"
-	private final static String RUN_MODEL_ASYNC = "runModelAsynchronous"
-	private final static String STOP_EXECUTION = "stopModelExecution"
-	private final static String RESET_MODEL = "resetModel"
-	private final static String GET_MODEL = "getModelState"
-	private final static String OCL_TYPE = "OCL"
-	private final static String OCL_GATE = "oclGate";
-	private final static String ACCEPTED_EVENT = "ACCEPTED";
-	private final static String EXPOSED_EVENT = "EXPOSED";
+	final static String RUN_MODEL = "runModel"
+	final static String RUN_MODEL_ASYNC = "runModelAsynchronous"
+	final static String STOP_EXECUTION = "stopModelExecution"
+	final static String RESET_MODEL = "resetModel"
+	final static String GET_MODEL = "getModelState"
+	final static String OCL_TYPE = "OCL"
+	final static String OCL_GATE = "oclGate";
+	final static String ACCEPTED_EVENT = "ACCEPTED";
+	final static String EXPOSED_EVENT = "EXPOSED";
 	
 	def void setLauncher(EngineFactory launcher) {
 		_self.gateLauncher = launcher;
@@ -65,16 +65,16 @@ class GateInstanceAspect {
 					_self.receivedOutput = result.subSequence(1, result.length-1)
 				}
 				if (_self.receivedOutput.toString.equals(_self.expectedOutput.toString)){
-					return "PASS: The expected data is equal to the current data"
+					return TestResultUtil.PASS + ": The expected data is equal to the current data"
 				}else{
-					return "FAIL: The expected data is: " + _self.expectedOutput.toString + 
+					return TestResultUtil.FAIL + ": The expected data is: " + _self.expectedOutput.toString + 
 						", but the current data is: " + _self.receivedOutput.toString;
 				}
 			} else if (_self.receivedOutput == null) {
-				return "FAIL: The expected data is: " + _self.expectedOutput.toString + 
+				return TestResultUtil.FAIL + ": The expected data is: " + _self.expectedOutput.toString + 
 						", but the current data is: null";
 			} else {
-				return "FAIL: The expected data is: " + _self.expectedOutput.toString + 
+				return TestResultUtil.FAIL + ": The expected data is: " + _self.expectedOutput.toString + 
 						", but the current data is: " + _self.receivedOutput.toString;
 			}
 		}
@@ -119,10 +119,10 @@ class GateInstanceAspect {
 			if(_self.name.equals(OCL_GATE)){
 				val Object[] receivedObjects = _self.gateLauncher.OCLResultAsObject
 				if (receivedObjects.elementsEqual(matchedMUTElements)){
-					return "PASS: The expected data is equal to the current data"
+					return TestResultUtil.PASS + ": The expected data is equal to the current data"
 				}else{
 					var expectedData = TestResultUtil.instance.getDataAsString(matchedMUTElements)
-					return "FAIL: The expected data is: " + expectedData + 
+					return TestResultUtil.FAIL + ": The expected data is: " + expectedData + 
 						", but the current data is: " + _self.gateLauncher.OCLResultAsString;
 				}
 			}else{
@@ -150,10 +150,10 @@ class GateInstanceAspect {
 			}else if (arg.dataInstance.name == RESET_MODEL) {
 				_self.gateLauncher.MUTResource = 
 					(new ResourceSetImpl()).getResource(URI.createURI(_self.MUTPath), true)
-				return "PASS: The MUT is reset to its initial state"
+				return TestResultUtil.PASS + ": The MUT is reset to its initial state"
 			}else if (arg.dataInstance.name == GET_MODEL) {
 				_self.receivedOutput = _self.gateLauncher.MUTResource
-				return "PASS: The current state of the MUT is retrieved"
+				return TestResultUtil.PASS + ": The current state of the MUT is retrieved"
 			}else if (arg.dataInstance.dataType.name == OCL_TYPE) {
 				// extracting the query from the argument and sending for validation
 				var query = argument.argument.get(0).dataUse as LiteralValueUse
@@ -162,9 +162,9 @@ class GateInstanceAspect {
 				//the message is an event conforming to the behavioral interface of the DSL
 				return _self.gateLauncher.executeDSLSpecificCommand(ACCEPTED_EVENT, arg.dataInstance.validName, _self.getEventParameters(arg, ACCEPTED_EVENT))
 			}
-			return "FAIL: Cannot send data to the MUT"
+			return TestResultUtil.FAIL + ": Cannot send data to the MUT"
 		}
-		return "FAIL: Cannot send data to the MUT"
+		return TestResultUtil.FAIL + ": Cannot send data to the MUT"
 	}
 	
 	def String setModelState(DataInstanceUse arg){
@@ -174,7 +174,7 @@ class GateInstanceAspect {
 		if (arg.item != null && arg.item.size > 0){
 			for (i : 0 ..<arg.item.size){
 				status = (arg.item.get(i) as DataInstanceUse).setMatchedMUTElement(MUTResource, _self.DSLPath)
-				if (status.contains("FAIL")){
+				if (status.contains(TestResultUtil.FAIL)){
 					return status
 				}
 			}

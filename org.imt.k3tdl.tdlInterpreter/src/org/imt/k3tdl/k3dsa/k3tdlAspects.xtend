@@ -56,7 +56,10 @@ class PackageAspect {
     			_self.enabledConfiguration = tc.testConfiguration;
     			val TDLTestCaseResult verdict = _self.enabledTestCase.executeTestCase()
     			_self.testPackageResults.addResult(verdict)
-    			_self.testSuiteCoverage.addTCCoverage(_self.enabledTestCase.testCaseCoverage)
+    			//for coverage, only considering passed and failed test cases
+    			if (verdict.value != TestResultUtil.INCONCLUSIVE){
+    				_self.testSuiteCoverage.addTCCoverage(_self.enabledTestCase.testCaseCoverage)
+    			}
     			println()
     		}
     		
@@ -82,11 +85,11 @@ class TestDescriptionAspect{
 		_self.testConfiguration.activateConfiguration(_self.launcher)
 		_self.behaviourDescription.callBehavior()
 		val modelExecutionResult = _self.testConfiguration.stopModelExecutionEngine(_self.launcher)
-		if (modelExecutionResult !== null && modelExecutionResult.contains("FAIL")){
-			_self.testCaseResult.value = "FAIL"
+		if (modelExecutionResult !== null && modelExecutionResult.contains(TestResultUtil.FAIL)){
+			_self.testCaseResult.value = TestResultUtil.FAIL
 			_self.testCaseResult.description = modelExecutionResult.substring(modelExecutionResult.indexOf(":")+1)
 		}
-		if (_self.testCaseResult.value.equals("PASS")) {
+		if (_self.testCaseResult.value.equals(TestResultUtil.PASS)) {
 			println("Test case PASSED")
 		}else{
 			println("Test case FAILED")
@@ -108,10 +111,10 @@ class TestDescriptionAspect{
 		_self.testConfiguration.activateConfiguration(_self.launcher, MUTPath)
 		_self.behaviourDescription.callBehavior()
 		val modelExecutionResult = _self.testConfiguration.stopModelExecutionEngine(_self.launcher)
-		if (modelExecutionResult !== null && modelExecutionResult.contains("FAIL")){
+		if (modelExecutionResult !== null && modelExecutionResult.contains(TestResultUtil.FAIL)){
 			_self.testCaseResult.value = modelExecutionResult
 		}
-		if (_self.testCaseResult.value.equals("PASS")) {
+		if (_self.testCaseResult.value.equals(TestResultUtil.PASS)) {
 			println("Test case PASSED")
 		}else{
 			println("Test case FAILED")
