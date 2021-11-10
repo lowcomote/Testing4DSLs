@@ -125,7 +125,7 @@ public class TDLCoverageUtil {
 			for (int i=0; i<operations.size(); i++) {
 				for (Tag tag:operations.get(i).getTag()) {
 					if (tag.getName().equals("step")) {
-						instance.coverableClasses.add(clazz.getClass());
+						instance.coverableClasses.add(clazz.eClass().getInstanceClass());
 						i = operations.size();
 						break;
 					}
