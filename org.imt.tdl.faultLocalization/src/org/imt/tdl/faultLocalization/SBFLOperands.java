@@ -3,7 +3,7 @@ package org.imt.tdl.faultLocalization;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-public class SBFLOperandInfo {
+public class SBFLOperands {
 
 	private EClass metaclass;
 	private EObject modelObject;
