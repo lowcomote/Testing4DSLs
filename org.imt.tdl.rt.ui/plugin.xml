@@ -75,5 +75,13 @@
             name="Coverage"
             restorable="true">
       </view>
+      <view
+            category="tdl.views"
+            class="org.imt.tdl.sbfl.ui.TDLSBFLView"
+            icon="icons/faultLocalization.jpg"
+            id="org.imt.tdl.rt.ui.sbflView"
+            name="FaultLocalization"
+            restorable="true">
+      </view>
    </extension>
 </plugin>
