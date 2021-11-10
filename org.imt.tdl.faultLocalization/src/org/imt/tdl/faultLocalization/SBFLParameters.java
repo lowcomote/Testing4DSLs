@@ -1,12 +1,16 @@
 package org.imt.tdl.faultLocalization;
 
+import java.util.ArrayList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-public class SBFLOperands {
+public class SBFLParameters implements Comparable<SBFLParameters>{
 
 	private EClass metaclass;
 	private EObject modelObject;
+	private ArrayList<String> coverage = new ArrayList<>();
+	
 	private int NCF;//number of failed test cases that cover a coverable model element
 	private int NUF;//number of failed test cases that do not cover a coverable model element
 	private int NCS;//number of successful test cases that cover a coverable model element 
@@ -89,5 +93,15 @@ public class SBFLOperands {
 	}
 	public void setRank(int rank) {
 		this.rank = rank;
+	}
+	public ArrayList<String> getCoverage() {
+		return coverage;
+	}
+	public void setCoverage(ArrayList<String> coverage) {
+		this.coverage = coverage;
+	}
+	@Override
+	public int compareTo(SBFLParameters o) {
+		return Double.compare(this.Susp, o.Susp);
 	}
 }
