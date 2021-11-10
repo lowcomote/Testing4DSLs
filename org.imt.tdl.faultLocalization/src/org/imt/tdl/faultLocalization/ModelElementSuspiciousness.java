@@ -35,7 +35,7 @@ public class ModelElementSuspiciousness {
 			if (elementCoverageStatus.get(elementCoverageStatus.size()-1) == TDLCoverageUtil.NOT_COVERABLE) {
 				coverageMatix.remove(i);
 			}else {
-				SBFLOperandInfo operands4modelElement = new SBFLOperandInfo();
+				SBFLOperands operands4modelElement = new SBFLOperands();
 				operands4modelElement.setModelObject(modelElement);
 				operands4modelElement.setMetaclass(modelElement.eClass());
 				operands4modelElement.setNF(this.testSuiteResult.getNumOfFailedTestCases());
