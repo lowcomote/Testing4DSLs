@@ -159,7 +159,8 @@ public class TDLCoverageUtil {
 		TreeIterator<EObject> modelContents = instance.MUTResource.getAllContents();
 		while (modelContents.hasNext()) {
 			EObject modelObject = modelContents.next();
-			List<Class<?>> interfaces = Arrays.asList(modelObject.getClass().getInterfaces());
+			List<Class<?>> interfaces = new ArrayList<>();
+			interfaces.addAll(Arrays.asList(modelObject.getClass().getInterfaces()));
 			//we also consider super classes because if there is an execution rule for the super class,
 			//the objects conforming to the class can be covered
 			for (EClass superClass:modelObject.eClass().getEAllSuperTypes()) {
