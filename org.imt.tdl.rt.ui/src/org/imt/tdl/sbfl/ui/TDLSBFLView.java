@@ -157,8 +157,8 @@ public class TDLSBFLView extends ViewPart{
 					measure.currentTechnique = selectedTechnique;
 					double susp = suspComputing.getSuspiciousness(measure, selectedTechnique);
 					measure.getSusp().put(selectedTechnique, susp);
-					//suspComputing.calculateRanks();
 				}
+				suspComputing.calculateRanks();
 				m_treeViewer.collapseAll();
 				m_treeViewer.refresh();
 			}

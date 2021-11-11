@@ -308,20 +308,19 @@ public class ModelElementSuspiciousness {
 		measures.addAll(this.elementsSBFLMeasures);
 		Collections.sort(measures, Collections.reverseOrder());
 		int rank = 1;
-		int num = 0;
 		for (int i=0; i<measures.size(); i++) {	
 			String technique = measures.get(i).currentTechnique;
 			if (i > 0) {
-				if (measures.get(i).getSusp() == measures.get(i-1).getSusp()) {
+				double a = measures.get(i).getSusp().get(technique);
+				double b = measures.get(i-1).getSusp().get(technique);
+				if (Double.compare(a, b) == 0) {
 					measures.get(i).getRank().put(technique, rank);
-					num++;
 				}else {
-					rank = rank + num;
+					rank = i + 1;
 					measures.get(i).getRank().put(technique, rank);
 				}
 			}else {
 				measures.get(i).getRank().put(technique, rank);
-				num++;
 			}
 			for (SBFLMeasures originalOperands: this.elementsSBFLMeasures) {
 				if (originalOperands.getMetaclass() == measures.get(i).getMetaclass()
