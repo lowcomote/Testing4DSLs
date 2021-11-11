@@ -1,7 +1,6 @@
 package org.imt.tdl.sbfl.ui;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,10 +36,9 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.part.ViewPart;
 import org.imt.tdl.coverage.TDLCoverageUtil;
-import org.imt.tdl.coverage.TDLTestSuiteCoverage;
-import org.imt.tdl.coverage.TestCoverageInfo;
-import org.imt.tdl.faultLocalization.ModelElementSuspiciousness;
+import org.imt.tdl.faultLocalization.SuspiciousnessRanking;
 import org.imt.tdl.faultLocalization.SBFLMeasures;
+import org.imt.tdl.testResult.TestResultUtil;
 
 public class TDLSBFLView extends ViewPart{
 
@@ -58,7 +56,7 @@ public class TDLSBFLView extends ViewPart{
 	
 	@Override
 	public void createPartControl(Composite parent) {
-		ModelElementSuspiciousness suspComputing = new ModelElementSuspiciousness();
+		SuspiciousnessRanking suspComputing = new SuspiciousnessRanking();
 		suspComputing.calculateMeasures();
 		
 		Composite contents = new Group(parent, SWT.FILL);
@@ -87,7 +85,7 @@ public class TDLSBFLView extends ViewPart{
 	    elementFilter.setLayout(layout);
 	    layout.numColumns = 1;
 	    layout.verticalSpacing = 9;
-	    elementFilter.setText("Model Element Filters");
+	    elementFilter.setText("Type of Model Element");
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalAlignment = SWT.FILL;
 		gd.verticalAlignment = SWT.ON_TOP;
@@ -121,7 +119,7 @@ public class TDLSBFLView extends ViewPart{
 	    techniqueFilter.setLayout(layout);
 	    layout.numColumns = 1;
 	    layout.verticalSpacing = 9;
-	    techniqueFilter.setText("SBFL Technique Filters");
+	    techniqueFilter.setText("SBFL Technique");
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalAlignment = SWT.FILL;
 		gd.verticalAlignment = SWT.ON_TOP;
@@ -129,25 +127,25 @@ public class TDLSBFLView extends ViewPart{
 		techniqueFilter.setLayoutData(gd);
         final Combo technqiueFilterCombo = new Combo(techniqueFilter, SWT.NONE);
         technqiueFilterCombo.add("All");
-        technqiueFilterCombo.add(ModelElementSuspiciousness.ARITHMETICMEAN);
-        technqiueFilterCombo.add(ModelElementSuspiciousness.BARINEL);
-        technqiueFilterCombo.add(ModelElementSuspiciousness.BARONIETAL);
-        technqiueFilterCombo.add(ModelElementSuspiciousness.BRAUNBANQUET);
-        technqiueFilterCombo.add(ModelElementSuspiciousness.COHEN);
-        technqiueFilterCombo.add(ModelElementSuspiciousness.CONFIDENCE);
-        technqiueFilterCombo.add(ModelElementSuspiciousness.DSTAR);
-        technqiueFilterCombo.add(ModelElementSuspiciousness.KULCYNSKI2);
-        technqiueFilterCombo.add(ModelElementSuspiciousness.MOUNTFORD);
-        technqiueFilterCombo.add(ModelElementSuspiciousness.OCHIAI);
-        technqiueFilterCombo.add(ModelElementSuspiciousness.OCHIAI2);
-        technqiueFilterCombo.add(ModelElementSuspiciousness.OP2);
-        technqiueFilterCombo.add(ModelElementSuspiciousness.PHI);
-        technqiueFilterCombo.add(ModelElementSuspiciousness.PIERCE);
-        technqiueFilterCombo.add(ModelElementSuspiciousness.ROGERSTANIMOTO);
-        technqiueFilterCombo.add(ModelElementSuspiciousness.RUSSELRAO);
-        technqiueFilterCombo.add(ModelElementSuspiciousness.SIMPLEMATCHING);
-        technqiueFilterCombo.add(ModelElementSuspiciousness.TARANTULA);
-        technqiueFilterCombo.add(ModelElementSuspiciousness.ZOLTAR);
+        technqiueFilterCombo.add(SuspiciousnessRanking.ARITHMETICMEAN);
+        technqiueFilterCombo.add(SuspiciousnessRanking.BARINEL);
+        technqiueFilterCombo.add(SuspiciousnessRanking.BARONIETAL);
+        technqiueFilterCombo.add(SuspiciousnessRanking.BRAUNBANQUET);
+        technqiueFilterCombo.add(SuspiciousnessRanking.COHEN);
+        technqiueFilterCombo.add(SuspiciousnessRanking.CONFIDENCE);
+        technqiueFilterCombo.add(SuspiciousnessRanking.DSTAR);
+        technqiueFilterCombo.add(SuspiciousnessRanking.KULCYNSKI2);
+        technqiueFilterCombo.add(SuspiciousnessRanking.MOUNTFORD);
+        technqiueFilterCombo.add(SuspiciousnessRanking.OCHIAI);
+        technqiueFilterCombo.add(SuspiciousnessRanking.OCHIAI2);
+        technqiueFilterCombo.add(SuspiciousnessRanking.OP2);
+        technqiueFilterCombo.add(SuspiciousnessRanking.PHI);
+        technqiueFilterCombo.add(SuspiciousnessRanking.PIERCE);
+        technqiueFilterCombo.add(SuspiciousnessRanking.ROGERSTANIMOTO);
+        technqiueFilterCombo.add(SuspiciousnessRanking.RUSSELRAO);
+        technqiueFilterCombo.add(SuspiciousnessRanking.SIMPLEMATCHING);
+        technqiueFilterCombo.add(SuspiciousnessRanking.TARANTULA);
+        technqiueFilterCombo.add(SuspiciousnessRanking.ZOLTAR);
         technqiueFilterCombo.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -259,8 +257,8 @@ public class TDLSBFLView extends ViewPart{
 			if (parentElement instanceof List<?>) {
 				return ((List<?>) parentElement).toArray();
 			}
-			if (parentElement instanceof ModelElementSuspiciousness) {
-				return ((ModelElementSuspiciousness) parentElement).getElementsSBFLMeasures().toArray();
+			if (parentElement instanceof SuspiciousnessRanking) {
+				return ((SuspiciousnessRanking) parentElement).getElementsSBFLMeasures().toArray();
 			}
 			return new Object[0]; 
 		}
@@ -270,7 +268,7 @@ public class TDLSBFLView extends ViewPart{
 			if (element instanceof String) {
 				return (String) element;
 			}
-			if (element instanceof ModelElementSuspiciousness) {
+			if (element instanceof SuspiciousnessRanking) {
 				return "Model Element Suspiciousness";
 			}
 			return null;
@@ -281,8 +279,8 @@ public class TDLSBFLView extends ViewPart{
 			if (element instanceof List<?>) {
 				return ((List<?>) element).size() > 0;
 			}
-			if (element instanceof ModelElementSuspiciousness) {
-				return ((ModelElementSuspiciousness) element).getElementsSBFLMeasures().size() > 0;
+			if (element instanceof SuspiciousnessRanking) {
+				return ((SuspiciousnessRanking) element).getElementsSBFLMeasures().size() > 0;
 			}
 			return false;
 		}
@@ -323,14 +321,14 @@ public class TDLSBFLView extends ViewPart{
 		@Override
 		public Color getBackground(Object element, int columnIndex) {
 			if (element instanceof SBFLMeasures) {
-				SBFLMeasures sbflParameters = (SBFLMeasures) element;
-				if (columnIndex > 1 && columnIndex < sbflParameters.getCoverage().size() + 2) {
+				SBFLMeasures sbflMeasures = (SBFLMeasures) element;
+				if (columnIndex > 1 && columnIndex < sbflMeasures.getCoverage().size() + 2) {
 					//the test case coverages
-					String coverage = sbflParameters.getCoverage().get(columnIndex-2);
-					if (coverage == TDLCoverageUtil.COVERED) {
+					String tcEntry = sbflMeasures.getCoverage().get(columnIndex-2);
+					if (tcEntry == TDLCoverageUtil.COVERED || tcEntry == TestResultUtil.PASS) {
 						return GREEN;
 					}
-					else if (coverage == TDLCoverageUtil.NOT_COVERED) {
+					else if (tcEntry == TDLCoverageUtil.NOT_COVERED || tcEntry == TestResultUtil.FAIL) {
 						return RED;
 					}
 				}
@@ -355,59 +353,73 @@ public class TDLSBFLView extends ViewPart{
 				}
 			}
 			if (element instanceof SBFLMeasures) {
-				SBFLMeasures sbflParameters = (SBFLMeasures) element;
-				int sbflOperandsStartIndex = (sbflParameters.getCoverage().size() + 2);
-				if (columnIndex == 0 && sbflParameters.getMetaclass() != null) {
-					columnText = sbflParameters.getMetaclass().getName();
+				SBFLMeasures sbflMeasures = (SBFLMeasures) element;
+				int sbflOperandsStartIndex = (sbflMeasures.getCoverage().size() + 2);
+				if (columnIndex == 0 && sbflMeasures.getMetaclass() != null) {
+					columnText = sbflMeasures.getMetaclass().getName();
 				}
-				else if (columnIndex == 1 && sbflParameters.getModelObject() != null) {
-					String metaclassName = sbflParameters.getMetaclass().getName();
-					columnText = this.eObjectLabelProvider(sbflParameters.getModelObject()).replaceAll("\\s", "");
+				else if (columnIndex == 1 && sbflMeasures.getModelObject() != null) {
+					String metaclassName = sbflMeasures.getMetaclass().getName();
+					columnText = this.eObjectLabelProvider(sbflMeasures.getModelObject()).replaceAll("\\s", "");
 					columnText = columnText.substring(metaclassName.length());
 				}
 				else if (columnIndex > 1 && columnIndex < sbflOperandsStartIndex) {
-					//the test case coverages
-					columnText = "";
+					//the test case coverages and test case verdicts
+					String tcEntry = sbflMeasures.getCoverage().get(columnIndex-2);
+					if (tcEntry == TestResultUtil.PASS) {
+						columnText = TestResultUtil.PASS;
+					}
+					else if (tcEntry == TestResultUtil.FAIL) {
+						columnText = TestResultUtil.FAIL;
+					}else {
+						columnText = "";
+					}	
 				}
 				else if (columnIndex >= sbflOperandsStartIndex) {
-					if (columnIndex == sbflOperandsStartIndex) {
-						columnText = sbflParameters.getNCF() + "";
-					}
-					else if (columnIndex == sbflOperandsStartIndex + 1) {
-						columnText = sbflParameters.getNUF() + "";
-					}
-					else if (columnIndex == sbflOperandsStartIndex + 2) {
-						columnText = sbflParameters.getNCS() + "";
-					}
-					else if (columnIndex == sbflOperandsStartIndex + 3) {
-						columnText = sbflParameters.getNUS() + "";
-					}
-					else if (columnIndex == sbflOperandsStartIndex + 4) {
-						columnText = sbflParameters.getNC() + "";
-					}
-					else if (columnIndex == sbflOperandsStartIndex + 5) {
-						columnText = sbflParameters.getNU() + "";
-					}
-					else if (columnIndex == sbflOperandsStartIndex + 6) {
-						columnText = sbflParameters.getNS() + "";
-					}
-					else if (columnIndex == sbflOperandsStartIndex + 7) {
-						columnText = sbflParameters.getNF() + "";
-					}
-					else if (columnIndex == sbflOperandsStartIndex + 8) {
-						if (sbflParameters.getSusp().get(sbflParameters.currentTechnique) == null) {
-							columnText = "";
-						}else {
-							columnText = sbflParameters.getSusp().get(sbflParameters.currentTechnique) + "";
-						}	
-					}
-					else if (columnIndex == sbflOperandsStartIndex + 9) {
-						if (sbflParameters.getRank().get(sbflParameters.currentTechnique) == null) {
-							columnText = "";
-						}else {
-							columnText = sbflParameters.getRank().get(sbflParameters.currentTechnique) + "";
+					//for the last row, the measures are zero, so not showing anything
+					if (sbflMeasures.getMetaclass() == null) {
+						columnText = "";
+					}else {
+						if (columnIndex == sbflOperandsStartIndex) {
+							columnText = sbflMeasures.getNCF() + "";
+						}
+						else if (columnIndex == sbflOperandsStartIndex + 1) {
+							columnText = sbflMeasures.getNUF() + "";
+						}
+						else if (columnIndex == sbflOperandsStartIndex + 2) {
+							columnText = sbflMeasures.getNCS() + "";
+						}
+						else if (columnIndex == sbflOperandsStartIndex + 3) {
+							columnText = sbflMeasures.getNUS() + "";
+						}
+						else if (columnIndex == sbflOperandsStartIndex + 4) {
+							columnText = sbflMeasures.getNC() + "";
+						}
+						else if (columnIndex == sbflOperandsStartIndex + 5) {
+							columnText = sbflMeasures.getNU() + "";
+						}
+						else if (columnIndex == sbflOperandsStartIndex + 6) {
+							columnText = sbflMeasures.getNS() + "";
+						}
+						else if (columnIndex == sbflOperandsStartIndex + 7) {
+							columnText = sbflMeasures.getNF() + "";
+						}
+						else if (columnIndex == sbflOperandsStartIndex + 8) {
+							if (sbflMeasures.getSusp().get(sbflMeasures.currentTechnique) == null) {
+								columnText = "";
+							}else {
+								columnText = sbflMeasures.getSusp().get(sbflMeasures.currentTechnique) + "";
+							}	
+						}
+						else if (columnIndex == sbflOperandsStartIndex + 9) {
+							if (sbflMeasures.getRank().get(sbflMeasures.currentTechnique) == null) {
+								columnText = "";
+							}else {
+								columnText = sbflMeasures.getRank().get(sbflMeasures.currentTechnique) + "";
+							}
 						}
 					}
+					
 				}
 			}
 			return columnText; 

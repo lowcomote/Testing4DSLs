@@ -12,7 +12,7 @@ import org.imt.tdl.testResult.TDLTestCaseResult;
 import org.imt.tdl.testResult.TDLTestPackageResult;
 import org.imt.tdl.testResult.TestResultUtil;
 
-public class ModelElementSuspiciousness {
+public class SuspiciousnessRanking {
 	
 	private final TDLTestPackageResult testSuiteResult;
 	private final List<TDLTestCaseResult> errorVector;
@@ -41,7 +41,7 @@ public class ModelElementSuspiciousness {
 	public static final String DSTAR = "DStar";
 	public static final String CONFIDENCE = "confidence";
 	
-	public ModelElementSuspiciousness() {
+	public SuspiciousnessRanking() {
 		this.testSuiteResult = TestResultUtil.getInstance().getTestPackageResult();
 		this.errorVector = this.testSuiteResult.getResults();
 		this.testSuiteCoverage = TDLCoverageUtil.getInstance().getTestSuiteCoverage();
@@ -107,12 +107,19 @@ public class ModelElementSuspiciousness {
 				this.elementsSBFLMeasures.add(elementSBFLMeasures);
 			}		
 		}
+		//to show the verdicts in the view, we add a new SBFLMeasure object at the end of the list elementsSBFLMeasures
+		//this object only contains verdicts for the test cases
+		SBFLMeasures testsVerdicts = new SBFLMeasures();
+		for (TDLTestCaseResult tcResult:this.errorVector) {
+			testsVerdicts.getCoverage().add(tcResult.getValue());
+		}
+		this.elementsSBFLMeasures.add(testsVerdicts);
 	}
 	
 	//reference: https://github.com/javitroya/SBFL_MT/blob/6f623acab0d4b673314feca58d72cac705dc0967/Spectrum-based_FaultLoc_MT/SpecBased_FaultLoc_MT/src/es/us/eii/fault/localization/mt/main/FaultLocalizationMT_Main.java#L1031
 	public double getSuspiciousness(SBFLMeasures elementMeasures, String technique){
 		Double susp = 0.0;
-		if (technique.equals(ModelElementSuspiciousness.OCHIAI)){
+		if (technique.equals(SuspiciousnessRanking.OCHIAI)){
 			if (elementMeasures.getNCF() == 0.0){
 				susp = 0.0;
 			} else if (Math.sqrt(elementMeasures.getNF()*(elementMeasures.getNCF()+elementMeasures.getNCS()))==0.0){
@@ -121,7 +128,7 @@ public class ModelElementSuspiciousness {
 				susp = (double) elementMeasures.getNCF() / 
 						Math.sqrt(elementMeasures.getNF()*(elementMeasures.getNCF()+elementMeasures.getNCS()));
 			}
-		}else if (technique.equals(ModelElementSuspiciousness.TARANTULA)){
+		}else if (technique.equals(SuspiciousnessRanking.TARANTULA)){
 			/*According to Empirical Evaluation of the Tarantula Automatic FaultLocalization Technique,
 			* If any of the denominators evaluates to zero, we assign zero to that fraction. */
 			if (elementMeasures.getNF()==0 || elementMeasures.getNCS() == 0.0 && elementMeasures.getNCF()==0.0){
@@ -134,7 +141,7 @@ public class ModelElementSuspiciousness {
 						(((double)elementMeasures.getNCF()/elementMeasures.getNF()) + 
 						 ((double)elementMeasures.getNCS()/elementMeasures.getNS())));
 			}
-		} else if (technique.equals(ModelElementSuspiciousness.OCHIAI2)){
+		} else if (technique.equals(SuspiciousnessRanking.OCHIAI2)){
 			if (elementMeasures.getNCF() * elementMeasures.getNUS() == 0.0){
 				susp = 0.0;
 			} else if (Math.sqrt((elementMeasures.getNCF() + elementMeasures.getNCS()) * 
@@ -149,11 +156,11 @@ public class ModelElementSuspiciousness {
 						(elementMeasures.getNCF() + elementMeasures.getNUF()) *
 						(elementMeasures.getNCS() + elementMeasures.getNUS())));
 			}
-		} else if (technique.equals(ModelElementSuspiciousness.BRAUNBANQUET)){
+		} else if (technique.equals(SuspiciousnessRanking.BRAUNBANQUET)){
 			susp =  ((double) elementMeasures.getNCF() / 
 					Math.max(elementMeasures.getNCF() + elementMeasures.getNCS(), 
 							elementMeasures.getNCF() + elementMeasures.getNUF()));
-		} else if (technique.equals(ModelElementSuspiciousness.MOUNTFORD)){
+		} else if (technique.equals(SuspiciousnessRanking.MOUNTFORD)){
 			if (elementMeasures.getNCF() == 0.0){
 				susp = 0.0;
 			} else if (0.5 * ((elementMeasures.getNCF()*elementMeasures.getNCS())+
@@ -165,7 +172,7 @@ public class ModelElementSuspiciousness {
 						(elementMeasures.getNCF()*elementMeasures.getNUF())) + 
 						(elementMeasures.getNCS() * elementMeasures.getNUF()));
 			}
-		} else if (technique.equals(ModelElementSuspiciousness.ARITHMETICMEAN)){
+		} else if (technique.equals(SuspiciousnessRanking.ARITHMETICMEAN)){
 			if (2*((elementMeasures.getNCF()*elementMeasures.getNUS())-
 					(elementMeasures.getNUF()*elementMeasures.getNCS())) == 0.0){
 				susp = 0.0;
@@ -182,7 +189,7 @@ public class ModelElementSuspiciousness {
 								(elementMeasures.getNCF()+elementMeasures.getNUF())*
 								(elementMeasures.getNCS()+elementMeasures.getNUS())));					
 			}
-		} else if (technique.equals(ModelElementSuspiciousness.ZOLTAR)){
+		} else if (technique.equals(SuspiciousnessRanking.ZOLTAR)){
 			if (elementMeasures.getNCF() == 0.0){
 				susp = 0.0;
 			} else if (elementMeasures.getNCF()+elementMeasures.getNUF()+elementMeasures.getNCS()+
@@ -194,15 +201,15 @@ public class ModelElementSuspiciousness {
 								((double)(10000*elementMeasures.getNUF()*elementMeasures.getNCS())/elementMeasures.getNCF())));
 			}
 		} 
-		else if (technique.equals(ModelElementSuspiciousness.SIMPLEMATCHING)){
+		else if (technique.equals(SuspiciousnessRanking.SIMPLEMATCHING)){
 			susp =  ((double)(elementMeasures.getNCF()+elementMeasures.getNUS())/
 					(elementMeasures.getNCF()+elementMeasures.getNCS()+elementMeasures.getNUS()+elementMeasures.getNUF()));
 		} 
-		else if (technique.equals(ModelElementSuspiciousness.RUSSELRAO)){
+		else if (technique.equals(SuspiciousnessRanking.RUSSELRAO)){
 			susp =  ((double) elementMeasures.getNCF() / 
 					(elementMeasures.getNCF()+elementMeasures.getNUF()+elementMeasures.getNCS()+elementMeasures.getNUS()));
 		} 
-		else if (technique.equals(ModelElementSuspiciousness.KULCYNSKI2)){
+		else if (technique.equals(SuspiciousnessRanking.KULCYNSKI2)){
 			if (elementMeasures.getNCF() == 0.0){
 				susp = 0.0;
 			} else if (elementMeasures.getNCF()+elementMeasures.getNUF() ==0.0 || elementMeasures.getNCF()+elementMeasures.getNCS()==0.0){
@@ -212,7 +219,7 @@ public class ModelElementSuspiciousness {
 						 ((double)elementMeasures.getNCF()/(elementMeasures.getNCF()+elementMeasures.getNCS())));
 			}				
 		} 
-		else if (technique.equals(ModelElementSuspiciousness.COHEN)){
+		else if (technique.equals(SuspiciousnessRanking.COHEN)){
 			if (2*elementMeasures.getNCF()*elementMeasures.getNUS()-
 					2*elementMeasures.getNUF()*elementMeasures.getNCS() == 0.0){
 				susp = 0.0;
@@ -230,7 +237,7 @@ public class ModelElementSuspiciousness {
 								(elementMeasures.getNUF()+elementMeasures.getNUS())));
 			}
 		} 
-		else if (technique.equals(ModelElementSuspiciousness.PIERCE)) {
+		else if (technique.equals(SuspiciousnessRanking.PIERCE)) {
 			if (elementMeasures.getNCF() * elementMeasures.getNUF() + 
 					elementMeasures.getNUF() * elementMeasures.getNCS() == 0.0){
 				susp = 0.0;
@@ -246,12 +253,12 @@ public class ModelElementSuspiciousness {
 								elementMeasures.getNCS() * elementMeasures.getNUS()));					
 			}
 		}
-		else if (technique.equals(ModelElementSuspiciousness.BARONIETAL)){
+		else if (technique.equals(SuspiciousnessRanking.BARONIETAL)){
 			susp = ((double)Math.sqrt(elementMeasures.getNCF() * elementMeasures.getNUS())+elementMeasures.getNCF())/
 					(Math.sqrt(elementMeasures.getNCF() * elementMeasures.getNUS()) 
 							+ elementMeasures.getNCF() + elementMeasures.getNCS() + elementMeasures.getNUF());
 		}  
-		else if (technique.equals(ModelElementSuspiciousness.PHI)){
+		else if (technique.equals(SuspiciousnessRanking.PHI)){
 			if (elementMeasures.getNCF() * elementMeasures.getNUS() - 
 					elementMeasures.getNUF()*elementMeasures.getNCS() == 0.0){
 				susp = 0.0;
@@ -269,18 +276,18 @@ public class ModelElementSuspiciousness {
 								(elementMeasures.getNUF()+elementMeasures.getNUS())));
 			}
 		} 
-		else if (technique.equals(ModelElementSuspiciousness.ROGERSTANIMOTO)){
+		else if (technique.equals(SuspiciousnessRanking.ROGERSTANIMOTO)){
 			susp = ((double)(elementMeasures.getNCF() + elementMeasures.getNUS())/
 					(elementMeasures.getNCF() + elementMeasures.getNUS() + 
 							2*(elementMeasures.getNUF() + elementMeasures.getNCS())));
 		}
-		else if (technique.equals(ModelElementSuspiciousness.OP2)){
+		else if (technique.equals(SuspiciousnessRanking.OP2)){
 			susp = (elementMeasures.getNCF() - ((double) elementMeasures.getNCS() / (elementMeasures.getNS() + 1)));
 		} 
-		else if (technique.equals(ModelElementSuspiciousness.BARINEL)){
+		else if (technique.equals(SuspiciousnessRanking.BARINEL)){
 			susp = (1 - ((double) elementMeasures.getNCS() / (elementMeasures.getNCS() + elementMeasures.getNCF())));
 		} 
-		else if (technique.equals(ModelElementSuspiciousness.DSTAR)){
+		else if (technique.equals(SuspiciousnessRanking.DSTAR)){
 			if (Math.pow(elementMeasures.getNCF(),2) == 0.0){
 				susp = 0.0;
 			} else if ((elementMeasures.getNCS() + elementMeasures.getNF() - elementMeasures.getNCF()) ==0.0){
@@ -290,7 +297,7 @@ public class ModelElementSuspiciousness {
 						(elementMeasures.getNCS() + elementMeasures.getNF() - elementMeasures.getNCF());
 			}				
 		}
-		else if (technique.equals(ModelElementSuspiciousness.CONFIDENCE)){
+		else if (technique.equals(SuspiciousnessRanking.CONFIDENCE)){
 			if ((elementMeasures.getNF())==0){
 				susp = ((double) elementMeasures.getNCS()/elementMeasures.getNS());
 			} else if ((elementMeasures.getNS())==0){
