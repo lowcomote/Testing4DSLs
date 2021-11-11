@@ -127,12 +127,12 @@ public class ModelElementSuspiciousness {
 			if (elementMeasures.getNF()==0 || elementMeasures.getNCS() == 0.0 && elementMeasures.getNCF()==0.0){
 				susp = 0.0;
 			}else if (elementMeasures.getNS() == 0.0){
-				susp = ((double)(elementMeasures.getNCF()/elementMeasures.getNF())  / 
-						(double)(elementMeasures.getNCF()/elementMeasures.getNF()));
+				susp = (((double)elementMeasures.getNCF()/elementMeasures.getNF())  / 
+						((double)elementMeasures.getNCF()/elementMeasures.getNF()));
 			} else {
-				susp = ((double)(elementMeasures.getNCF()/elementMeasures.getNF())  / 
-						((double)(elementMeasures.getNCF()/elementMeasures.getNF()) + 
-						 (double)(elementMeasures.getNCS()/elementMeasures.getNS())));
+				susp = (((double)elementMeasures.getNCF()/elementMeasures.getNF())  / 
+						(((double)elementMeasures.getNCF()/elementMeasures.getNF()) + 
+						 ((double)elementMeasures.getNCS()/elementMeasures.getNS())));
 			}
 		} else if (technique.equals(ModelElementSuspiciousness.OCHIAI2)){
 			if (elementMeasures.getNCF() * elementMeasures.getNUS() == 0.0){
@@ -150,7 +150,7 @@ public class ModelElementSuspiciousness {
 						(elementMeasures.getNCS() + elementMeasures.getNUS())));
 			}
 		} else if (technique.equals(ModelElementSuspiciousness.BRAUNBANQUET)){
-			susp = (double) (elementMeasures.getNCF() / 
+			susp =  ((double) elementMeasures.getNCF() / 
 					Math.max(elementMeasures.getNCF() + elementMeasures.getNCS(), 
 							elementMeasures.getNCF() + elementMeasures.getNUF()));
 		} else if (technique.equals(ModelElementSuspiciousness.MOUNTFORD)){
@@ -189,17 +189,17 @@ public class ModelElementSuspiciousness {
 					((double)(10000*elementMeasures.getNUF()*elementMeasures.getNCS())/elementMeasures.getNCF())==0.0){
 				susp = 1.0;
 			} else {
-				susp = (double) (elementMeasures.getNCF() / 
+				susp =  ((double)elementMeasures.getNCF() / 
 						(elementMeasures.getNCF()+elementMeasures.getNUF()+elementMeasures.getNCS()+
-								((10000*elementMeasures.getNUF()*elementMeasures.getNCS())/elementMeasures.getNCF())));
+								((double)(10000*elementMeasures.getNUF()*elementMeasures.getNCS())/elementMeasures.getNCF())));
 			}
 		} 
 		else if (technique.equals(ModelElementSuspiciousness.SIMPLEMATCHING)){
-			susp = (double) ((elementMeasures.getNCF()+elementMeasures.getNUS())/
+			susp =  ((double)(elementMeasures.getNCF()+elementMeasures.getNUS())/
 					(elementMeasures.getNCF()+elementMeasures.getNCS()+elementMeasures.getNUS()+elementMeasures.getNUF()));
 		} 
 		else if (technique.equals(ModelElementSuspiciousness.RUSSELRAO)){
-			susp = (double) (elementMeasures.getNCF() / 
+			susp =  ((double) elementMeasures.getNCF() / 
 					(elementMeasures.getNCF()+elementMeasures.getNUF()+elementMeasures.getNCS()+elementMeasures.getNUS()));
 		} 
 		else if (technique.equals(ModelElementSuspiciousness.KULCYNSKI2)){
@@ -208,8 +208,8 @@ public class ModelElementSuspiciousness {
 			} else if (elementMeasures.getNCF()+elementMeasures.getNUF() ==0.0 || elementMeasures.getNCF()+elementMeasures.getNCS()==0.0){
 				susp = 1.0;
 			} else {
-				susp = 0.5 * ((double)(elementMeasures.getNCF()/(elementMeasures.getNCF()+elementMeasures.getNUF()))+
-						(double) (elementMeasures.getNCF()/(elementMeasures.getNCF()+elementMeasures.getNCS())));
+				susp = 0.5 * (((double)elementMeasures.getNCF()/(elementMeasures.getNCF()+elementMeasures.getNUF()))+
+						 ((double)elementMeasures.getNCF()/(elementMeasures.getNCF()+elementMeasures.getNCS())));
 			}				
 		} 
 		else if (technique.equals(ModelElementSuspiciousness.COHEN)){
@@ -222,7 +222,7 @@ public class ModelElementSuspiciousness {
 					(elementMeasures.getNUF()+elementMeasures.getNUS()) ==0.0){
 				susp = 1.0;
 			} else {
-				susp = (double) ((2*elementMeasures.getNCF()*elementMeasures.getNUS()-
+				susp =  ((double)(2*elementMeasures.getNCF()*elementMeasures.getNUS()-
 						2*elementMeasures.getNUF()*elementMeasures.getNCS())/
 						((elementMeasures.getNCF()+elementMeasures.getNCS())*
 								(elementMeasures.getNUS()+elementMeasures.getNCS())+
@@ -239,7 +239,7 @@ public class ModelElementSuspiciousness {
 					elementMeasures.getNCS() * elementMeasures.getNUS() ==0.0){
 				susp = 1.0;
 			} else {
-				susp = (double) ((elementMeasures.getNCF() * elementMeasures.getNUF() + 
+				susp = ((double)(elementMeasures.getNCF() * elementMeasures.getNUF() + 
 						elementMeasures.getNUF() * elementMeasures.getNCS()) / 
 						(elementMeasures.getNCF() * elementMeasures.getNUF() + 
 								2*elementMeasures.getNUF() * elementMeasures.getNUS() + 
@@ -247,7 +247,7 @@ public class ModelElementSuspiciousness {
 			}
 		}
 		else if (technique.equals(ModelElementSuspiciousness.BARONIETAL)){
-			susp = (double)(Math.sqrt(elementMeasures.getNCF() * elementMeasures.getNUS())+elementMeasures.getNCF())/
+			susp = ((double)Math.sqrt(elementMeasures.getNCF() * elementMeasures.getNUS())+elementMeasures.getNCF())/
 					(Math.sqrt(elementMeasures.getNCF() * elementMeasures.getNUS()) 
 							+ elementMeasures.getNCF() + elementMeasures.getNCS() + elementMeasures.getNUF());
 		}  
@@ -270,15 +270,15 @@ public class ModelElementSuspiciousness {
 			}
 		} 
 		else if (technique.equals(ModelElementSuspiciousness.ROGERSTANIMOTO)){
-			susp = (double) ((elementMeasures.getNCF() + elementMeasures.getNUS())/
+			susp = ((double)(elementMeasures.getNCF() + elementMeasures.getNUS())/
 					(elementMeasures.getNCF() + elementMeasures.getNUS() + 
 							2*(elementMeasures.getNUF() + elementMeasures.getNCS())));
 		}
 		else if (technique.equals(ModelElementSuspiciousness.OP2)){
-			susp = (double)(elementMeasures.getNCF() - (double)(elementMeasures.getNCS() / (elementMeasures.getNS() + 1)));
+			susp = (elementMeasures.getNCF() - ((double) elementMeasures.getNCS() / (elementMeasures.getNS() + 1)));
 		} 
 		else if (technique.equals(ModelElementSuspiciousness.BARINEL)){
-			susp = (double)(1 - (double)(elementMeasures.getNCS() / (elementMeasures.getNCS() + elementMeasures.getNCF())));
+			susp = (1 - ((double) elementMeasures.getNCS() / (elementMeasures.getNCS() + elementMeasures.getNCF())));
 		} 
 		else if (technique.equals(ModelElementSuspiciousness.DSTAR)){
 			if (Math.pow(elementMeasures.getNCF(),2) == 0.0){
@@ -292,11 +292,11 @@ public class ModelElementSuspiciousness {
 		}
 		else if (technique.equals(ModelElementSuspiciousness.CONFIDENCE)){
 			if ((elementMeasures.getNF())==0){
-				susp = (double) (elementMeasures.getNCS()/elementMeasures.getNS());
+				susp = ((double) elementMeasures.getNCS()/elementMeasures.getNS());
 			} else if ((elementMeasures.getNS())==0){
-				susp = (double) (elementMeasures.getNCF()/elementMeasures.getNF());
+				susp = ((double) elementMeasures.getNCF()/elementMeasures.getNF());
 			} else {
-				susp = (double) Math.max((double)elementMeasures.getNCF()/elementMeasures.getNF(),
+				susp = Math.max((double)elementMeasures.getNCF()/elementMeasures.getNF(),
 						(double)elementMeasures.getNCS()/elementMeasures.getNS());
 			}		
 		}
