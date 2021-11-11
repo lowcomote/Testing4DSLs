@@ -1,11 +1,13 @@
 package org.imt.tdl.faultLocalization;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-public class SBFLParameters implements Comparable<SBFLParameters>{
+public class SBFLMeasures implements Comparable<SBFLMeasures>{
 
 	private EClass metaclass;
 	private EObject modelObject;
@@ -19,8 +21,10 @@ public class SBFLParameters implements Comparable<SBFLParameters>{
 	private int NU;//total number of test cases that do not cover a coverable model element 
 	private int NS;//total number of successful test cases
 	private int NF;//total number of failed test cases
-	private double Susp;//Suspiciousness score
-	private int rank;//Suspiciousness rank
+	private Map<String, Double> Susp = new HashMap<>();//Suspiciousness score for each technique
+	private Map<String, Integer> rank = new HashMap<>();//Suspiciousness rank for each technique
+	
+	public String currentTechnique;
 	
 	public EClass getMetaclass() {
 		return metaclass;
@@ -82,16 +86,16 @@ public class SBFLParameters implements Comparable<SBFLParameters>{
 	public void setNF(int nF) {
 		NF = nF;
 	}
-	public double getSusp() {
+	public Map<String, Double> getSusp() {
 		return Susp;
 	}
-	public void setSusp(double susp) {
+	public void setSusp(Map<String, Double> susp) {
 		Susp = susp;
 	}
-	public int getRank() {
+	public Map<String, Integer> getRank() {
 		return rank;
 	}
-	public void setRank(int rank) {
+	public void setRank(Map<String, Integer> rank) {
 		this.rank = rank;
 	}
 	public ArrayList<String> getCoverage() {
@@ -101,7 +105,9 @@ public class SBFLParameters implements Comparable<SBFLParameters>{
 		this.coverage = coverage;
 	}
 	@Override
-	public int compareTo(SBFLParameters o) {
-		return Double.compare(this.Susp, o.Susp);
+	public int compareTo(SBFLMeasures o) {
+		double susp1 = this.Susp.get(currentTechnique);
+		double susp2 = o.Susp.get(currentTechnique);
+		return Double.compare(susp1, susp2);
 	}
 }
