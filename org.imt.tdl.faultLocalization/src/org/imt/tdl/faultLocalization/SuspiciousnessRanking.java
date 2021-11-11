@@ -46,8 +46,11 @@ public class SuspiciousnessRanking {
 		this.errorVector = this.testSuiteResult.getResults();
 		this.testSuiteCoverage = TDLCoverageUtil.getInstance().getTestSuiteCoverage();
 		this.coverageMatix = this.testSuiteCoverage.coverageInfos;
-		//the last row of the matrix contains coverage percentages which is not required here, so should be removed 
-		this.coverageMatix.remove(this.coverageMatix.size()-1);
+		//the row of the matrix containing coverage percentages should be removed 
+		this.coverageMatix.removeIf(element -> element.getMetaclass() == null);
+		//if the element is not coverable, remove it from the matrix
+		this.coverageMatix.removeIf(element -> 
+			element.getCoverage().get(element.getCoverage().size()-1) == TDLCoverageUtil.NOT_COVERABLE);
 		this.elementsSBFLMeasures.clear();
 	}
 	
@@ -55,57 +58,52 @@ public class SuspiciousnessRanking {
 		for (int i=0; i<coverageMatix.size(); i++) {
 			EObject modelElement = coverageMatix.get(i).getModelObject();
 			ArrayList<String> elementCoverageStatus = coverageMatix.get(i).getCoverage();
-			//if the element is not coverable, remove it from the matrix
-			if (elementCoverageStatus.get(elementCoverageStatus.size()-1) == TDLCoverageUtil.NOT_COVERABLE) {
-				coverageMatix.remove(i);
-			}else {
-				SBFLMeasures elementSBFLMeasures = new SBFLMeasures();
-				elementSBFLMeasures.setModelObject(modelElement);
-				elementSBFLMeasures.setMetaclass(modelElement.eClass());
-				elementSBFLMeasures.setNF(this.testSuiteResult.getNumOfFailedTestCases());
-				elementSBFLMeasures.setNS(this.testSuiteResult.getNumOfPassedTestCases());
+			SBFLMeasures elementSBFLMeasures = new SBFLMeasures();
+			elementSBFLMeasures.setModelObject(modelElement);
+			elementSBFLMeasures.setMetaclass(modelElement.eClass());
+			elementSBFLMeasures.setNF(this.testSuiteResult.getNumOfFailedTestCases());
+			elementSBFLMeasures.setNS(this.testSuiteResult.getNumOfPassedTestCases());
 
-				int NCF = 0;//number of failed test cases that cover a coverable model element
-				int NUF = 0;//number of failed test cases that do not cover a coverable model element
-				int NCS = 0;//number of successful test cases that cover a coverable model element 
-				int NUS = 0;//number of successful test cases that do not cover a coverable model element 
-				int NC = 0;//total number of test cases that cover a coverable model element
-				int NU = 0;//total number of test cases that do not cover a coverable model element 
-				for (int j=0; j<elementCoverageStatus.size()-1; j++) {
-					elementSBFLMeasures.getCoverage().add(elementCoverageStatus.get(j));
-					String testCaseName = this.testSuiteCoverage.getTCCoverages().get(j).testCaseName;
-					//find the result of the test case
-					String testCaseVerdict = "";
-					for (TDLTestCaseResult testResult:this.errorVector) {
-						if (testResult.getTestCaseName().equals(testCaseName)) {
-							testCaseVerdict = testResult.getValue();
-							break;
-						}
-					}
-					if (elementCoverageStatus.get(j) == TDLCoverageUtil.COVERED) {
-						NC++;
-						if (testCaseVerdict == TestResultUtil.PASS) {
-							NCS++;
-						}else if (testCaseVerdict == TestResultUtil.FAIL) {
-							NCF++;
-						}
-					}else if (elementCoverageStatus.get(j) == TDLCoverageUtil.NOT_COVERED) {
-						NU++;
-						if (testCaseVerdict == TestResultUtil.PASS) {
-							NUS++;
-						}else if (testCaseVerdict == TestResultUtil.FAIL) {
-							NUF++;
-						}
+			int NCF = 0;//number of failed test cases that cover a coverable model element
+			int NUF = 0;//number of failed test cases that do not cover a coverable model element
+			int NCS = 0;//number of successful test cases that cover a coverable model element 
+			int NUS = 0;//number of successful test cases that do not cover a coverable model element 
+			int NC = 0;//total number of test cases that cover a coverable model element
+			int NU = 0;//total number of test cases that do not cover a coverable model element 
+			for (int j=0; j<elementCoverageStatus.size()-1; j++) {
+				elementSBFLMeasures.getCoverage().add(elementCoverageStatus.get(j));
+				String testCaseName = this.testSuiteCoverage.getTCCoverages().get(j).testCaseName;
+				//find the result of the test case
+				String testCaseVerdict = "";
+				for (TDLTestCaseResult testResult:this.errorVector) {
+					if (testResult.getTestCaseName().equals(testCaseName)) {
+						testCaseVerdict = testResult.getValue();
+						break;
 					}
 				}
-				elementSBFLMeasures.setNC(NC);
-				elementSBFLMeasures.setNCF(NCF);
-				elementSBFLMeasures.setNCS(NCS);
-				elementSBFLMeasures.setNU(NU);
-				elementSBFLMeasures.setNUF(NUF);
-				elementSBFLMeasures.setNUS(NUS);
-				this.elementsSBFLMeasures.add(elementSBFLMeasures);
-			}		
+				if (elementCoverageStatus.get(j) == TDLCoverageUtil.COVERED) {
+					NC++;
+					if (testCaseVerdict == TestResultUtil.PASS) {
+						NCS++;
+					}else if (testCaseVerdict == TestResultUtil.FAIL) {
+						NCF++;
+					}
+				}else if (elementCoverageStatus.get(j) == TDLCoverageUtil.NOT_COVERED) {
+					NU++;
+					if (testCaseVerdict == TestResultUtil.PASS) {
+						NUS++;
+					}else if (testCaseVerdict == TestResultUtil.FAIL) {
+						NUF++;
+					}
+				}
+			}
+			elementSBFLMeasures.setNC(NC);
+			elementSBFLMeasures.setNCF(NCF);
+			elementSBFLMeasures.setNCS(NCS);
+			elementSBFLMeasures.setNU(NU);
+			elementSBFLMeasures.setNUF(NUF);
+			elementSBFLMeasures.setNUS(NUS);
+			this.elementsSBFLMeasures.add(elementSBFLMeasures);		
 		}
 		//to show the verdicts in the view, we add a new SBFLMeasure object at the end of the list elementsSBFLMeasures
 		//this object only contains verdicts for the test cases
@@ -285,7 +283,12 @@ public class SuspiciousnessRanking {
 			susp = (elementMeasures.getNCF() - ((double) elementMeasures.getNCS() / (elementMeasures.getNS() + 1)));
 		} 
 		else if (technique.equals(SuspiciousnessRanking.BARINEL)){
-			susp = (1 - ((double) elementMeasures.getNCS() / (elementMeasures.getNCS() + elementMeasures.getNCF())));
+			if (elementMeasures.getNCS()==0 && elementMeasures.getNCF()==0) {
+				susp = (double) 1;
+			}else {
+				susp = (1 - ((double) elementMeasures.getNCS() / 
+						(elementMeasures.getNCS() + elementMeasures.getNCF())));
+			}
 		} 
 		else if (technique.equals(SuspiciousnessRanking.DSTAR)){
 			if (Math.pow(elementMeasures.getNCF(),2) == 0.0){
@@ -313,6 +316,7 @@ public class SuspiciousnessRanking {
 	public void calculateRanks() {
 		List<SBFLMeasures> measures = new ArrayList<SBFLMeasures>();
 		measures.addAll(this.elementsSBFLMeasures);
+		measures.remove(measures.size()-1);
 		Collections.sort(measures, Collections.reverseOrder());
 		int rank = 1;
 		for (int i=0; i<measures.size(); i++) {	
