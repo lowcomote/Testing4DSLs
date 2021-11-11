@@ -1,6 +1,7 @@
 package org.imt.tdl.sbfl.ui;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,7 +40,7 @@ import org.imt.tdl.coverage.TDLCoverageUtil;
 import org.imt.tdl.coverage.TDLTestSuiteCoverage;
 import org.imt.tdl.coverage.TestCoverageInfo;
 import org.imt.tdl.faultLocalization.ModelElementSuspiciousness;
-import org.imt.tdl.faultLocalization.SBFLParameters;
+import org.imt.tdl.faultLocalization.SBFLMeasures;
 
 public class TDLSBFLView extends ViewPart{
 
@@ -52,12 +53,13 @@ public class TDLSBFLView extends ViewPart{
 	private static final Color GREEN = new Color(Display.getCurrent(), 102, 255, 102);
 	
 	private static int elementFilterIndex = -1;
+	private static int techniqueFilterIndex = -1;
 	private static List<String> classFilters = new ArrayList<>();
 	
 	@Override
 	public void createPartControl(Composite parent) {
 		ModelElementSuspiciousness suspComputing = new ModelElementSuspiciousness();
-		suspComputing.calculateSuspiciousness();
+		suspComputing.calculateMeasures();
 		
 		Composite contents = new Group(parent, SWT.FILL);
 	    GridLayout layout = new GridLayout();
@@ -94,10 +96,10 @@ public class TDLSBFLView extends ViewPart{
         final Combo elementFilterCombo = new Combo(elementFilter, SWT.NONE);
         elementFilterCombo.add("All");
         //add the meta-classes included in the coverage information as filter
-        List<SBFLParameters> elementsSBFLOperands = suspComputing.getElementsSBFLOperands();
+        List<SBFLMeasures> elementsSBFLMeasures = suspComputing.getElementsSBFLMeasures();
         Set<EClass> metaClasses = new HashSet<EClass>();
         classFilters.clear();
-        for (SBFLParameters parameter: elementsSBFLOperands) {
+        for (SBFLMeasures parameter: elementsSBFLMeasures) {
         	metaClasses.add(parameter.getMetaclass());      	
         }
         metaClasses.remove(null);
@@ -114,6 +116,54 @@ public class TDLSBFLView extends ViewPart{
 			}
 		});
 		
+        Group techniqueFilter = new Group(filter, SWT.FILL);
+	    layout = new GridLayout();
+	    techniqueFilter.setLayout(layout);
+	    layout.numColumns = 1;
+	    layout.verticalSpacing = 9;
+	    techniqueFilter.setText("SBFL Technique Filters");
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.horizontalAlignment = SWT.FILL;
+		gd.verticalAlignment = SWT.ON_TOP;
+		gd.widthHint = 100;
+		techniqueFilter.setLayoutData(gd);
+        final Combo technqiueFilterCombo = new Combo(techniqueFilter, SWT.NONE);
+        technqiueFilterCombo.add("All");
+        technqiueFilterCombo.add(ModelElementSuspiciousness.ARITHMETICMEAN);
+        technqiueFilterCombo.add(ModelElementSuspiciousness.BARINEL);
+        technqiueFilterCombo.add(ModelElementSuspiciousness.BARONIETAL);
+        technqiueFilterCombo.add(ModelElementSuspiciousness.BRAUNBANQUET);
+        technqiueFilterCombo.add(ModelElementSuspiciousness.COHEN);
+        technqiueFilterCombo.add(ModelElementSuspiciousness.CONFIDENCE);
+        technqiueFilterCombo.add(ModelElementSuspiciousness.DSTAR);
+        technqiueFilterCombo.add(ModelElementSuspiciousness.KULCYNSKI2);
+        technqiueFilterCombo.add(ModelElementSuspiciousness.MOUNTFORD);
+        technqiueFilterCombo.add(ModelElementSuspiciousness.OCHIAI);
+        technqiueFilterCombo.add(ModelElementSuspiciousness.OCHIAI2);
+        technqiueFilterCombo.add(ModelElementSuspiciousness.OP2);
+        technqiueFilterCombo.add(ModelElementSuspiciousness.PHI);
+        technqiueFilterCombo.add(ModelElementSuspiciousness.PIERCE);
+        technqiueFilterCombo.add(ModelElementSuspiciousness.ROGERSTANIMOTO);
+        technqiueFilterCombo.add(ModelElementSuspiciousness.RUSSELRAO);
+        technqiueFilterCombo.add(ModelElementSuspiciousness.SIMPLEMATCHING);
+        technqiueFilterCombo.add(ModelElementSuspiciousness.TARANTULA);
+        technqiueFilterCombo.add(ModelElementSuspiciousness.ZOLTAR);
+        technqiueFilterCombo.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				techniqueFilterIndex = technqiueFilterCombo.getSelectionIndex();
+				String selectedTechnique = technqiueFilterCombo.getItem(techniqueFilterIndex);
+				for (SBFLMeasures measure:elementsSBFLMeasures) {
+					measure.currentTechnique = selectedTechnique;
+					double susp = suspComputing.getSuspiciousness(measure, selectedTechnique);
+					measure.getSusp().put(selectedTechnique, susp);
+					//suspComputing.calculateRanks();
+				}
+				m_treeViewer.collapseAll();
+				m_treeViewer.refresh();
+			}
+		});
+        
 		Group sbflInfo = new Group(contents, SWT.FILL);
 		FillLayout fill = new FillLayout(SWT.VERTICAL);
 		sbflInfo.setLayout(fill);
@@ -139,7 +189,7 @@ public class TDLSBFLView extends ViewPart{
 		modelColumn.setText("Model Element");
 		modelColumn.setWidth(150);
 		
-		int colNum = elementsSBFLOperands.get(0).getCoverage().size();
+		int colNum = elementsSBFLMeasures.get(0).getCoverage().size();
 		for (int i=0; i<colNum; i++) {
 			TreeColumn column = new TreeColumn(addressTree, SWT.LEFT);
 			column.setAlignment(SWT.CENTER);
@@ -193,7 +243,7 @@ public class TDLSBFLView extends ViewPart{
 		m_treeViewer.setContentProvider(new TDLSBFLContentProvider());
 		m_treeViewer.setLabelProvider(new TableLabelProvider());
 		m_treeViewer.setInput(suspComputing);
-		m_treeViewer.addFilter(new ElementFilter());
+		m_treeViewer.setFilters(new ElementFilter(), new TechniqueFilter());
 		m_treeViewer.collapseAll();
 	}
 
@@ -210,7 +260,7 @@ public class TDLSBFLView extends ViewPart{
 				return ((List<?>) parentElement).toArray();
 			}
 			if (parentElement instanceof ModelElementSuspiciousness) {
-				return ((ModelElementSuspiciousness) parentElement).getElementsSBFLOperands().toArray();
+				return ((ModelElementSuspiciousness) parentElement).getElementsSBFLMeasures().toArray();
 			}
 			return new Object[0]; 
 		}
@@ -232,7 +282,7 @@ public class TDLSBFLView extends ViewPart{
 				return ((List<?>) element).size() > 0;
 			}
 			if (element instanceof ModelElementSuspiciousness) {
-				return ((ModelElementSuspiciousness) element).getElementsSBFLOperands().size() > 0;
+				return ((ModelElementSuspiciousness) element).getElementsSBFLMeasures().size() > 0;
 			}
 			return false;
 		}
@@ -272,8 +322,8 @@ public class TDLSBFLView extends ViewPart{
 
 		@Override
 		public Color getBackground(Object element, int columnIndex) {
-			if (element instanceof SBFLParameters) {
-				SBFLParameters sbflParameters = (SBFLParameters) element;
+			if (element instanceof SBFLMeasures) {
+				SBFLMeasures sbflParameters = (SBFLMeasures) element;
 				if (columnIndex > 1 && columnIndex < sbflParameters.getCoverage().size() + 2) {
 					//the test case coverages
 					String coverage = sbflParameters.getCoverage().get(columnIndex-2);
@@ -304,8 +354,8 @@ public class TDLSBFLView extends ViewPart{
 					break;
 				}
 			}
-			if (element instanceof SBFLParameters) {
-				SBFLParameters sbflParameters = (SBFLParameters) element;
+			if (element instanceof SBFLMeasures) {
+				SBFLMeasures sbflParameters = (SBFLMeasures) element;
 				int sbflOperandsStartIndex = (sbflParameters.getCoverage().size() + 2);
 				if (columnIndex == 0 && sbflParameters.getMetaclass() != null) {
 					columnText = sbflParameters.getMetaclass().getName();
@@ -345,10 +395,18 @@ public class TDLSBFLView extends ViewPart{
 						columnText = sbflParameters.getNF() + "";
 					}
 					else if (columnIndex == sbflOperandsStartIndex + 8) {
-						columnText = sbflParameters.getSusp() + "";
+						if (sbflParameters.getSusp().get(sbflParameters.currentTechnique) == null) {
+							columnText = "";
+						}else {
+							columnText = sbflParameters.getSusp().get(sbflParameters.currentTechnique) + "";
+						}	
 					}
 					else if (columnIndex == sbflOperandsStartIndex + 9) {
-						columnText = sbflParameters.getRank() + "";
+						if (sbflParameters.getRank().get(sbflParameters.currentTechnique) == null) {
+							columnText = "";
+						}else {
+							columnText = sbflParameters.getRank().get(sbflParameters.currentTechnique) + "";
+						}
 					}
 				}
 			}
@@ -381,8 +439,8 @@ private class ElementFilter extends ViewerFilter {
 		if (elementFilterIndex == -1 || elementFilterIndex == 0) {
 			return true;
 		}else {
-			if (element instanceof SBFLParameters) {
-				SBFLParameters parameters = (SBFLParameters) element;
+			if (element instanceof SBFLMeasures) {
+				SBFLMeasures parameters = (SBFLMeasures) element;
 				if (parameters.getMetaclass() == null) {
 					return false;
 				}else {
@@ -399,6 +457,14 @@ private class ElementFilter extends ViewerFilter {
 			}
 		}
 		return false;
+	}
+}
+
+private class TechniqueFilter extends ViewerFilter {
+	
+	@Override
+	public boolean select(Viewer viewer, Object parentElement, Object element) {
+		return true;
 	}
 }
 
