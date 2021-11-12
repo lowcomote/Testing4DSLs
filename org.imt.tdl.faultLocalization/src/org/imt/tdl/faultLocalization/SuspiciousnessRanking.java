@@ -2,7 +2,10 @@ package org.imt.tdl.faultLocalization;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.ecore.EObject;
 import org.imt.tdl.coverage.TDLCoverageUtil;
@@ -40,6 +43,10 @@ public class SuspiciousnessRanking {
 	public static final String BARINEL = "barinel";
 	public static final String DSTAR = "DStar";
 	public static final String CONFIDENCE = "confidence";
+	
+	private Map<String, Double> bestEXAMScore = new HashMap<>();//best-case EXAM score for each technique
+	private Map<String, Double> averageEXAMScore = new HashMap<>();//average-case EXAM score for each technique
+	private Map<String, Double> worseEXAMScore = new HashMap<>();//wore-case EXAM score for each technique
 	
 	public SuspiciousnessRanking() {
 		this.testSuiteResult = TestResultUtil.getInstance().getTestPackageResult();
@@ -333,13 +340,52 @@ public class SuspiciousnessRanking {
 			}else {
 				measures.get(i).getRank().put(technique, rank);
 			}
-			for (SBFLMeasures originalOperands: this.elementsSBFLMeasures) {
-				if (originalOperands.getMetaclass() == measures.get(i).getMetaclass()
-						&& originalOperands.getModelObject() == measures.get(i).getModelObject()) {
-					originalOperands.getRank().put(technique, rank);
+			for (SBFLMeasures objectMeasures: this.elementsSBFLMeasures) {
+				if (objectMeasures.getMetaclass() == measures.get(i).getMetaclass()
+						&& objectMeasures.getModelObject() == measures.get(i).getModelObject()) {
+					objectMeasures.getRank().put(technique, rank);
 					break;
 				}
 			}
+		}
+		//TODO: only for testing purposes, must be removed later
+		measureEXAMScores(4);
+	}
+	
+	public void measureEXAMScores(int faultyObjIndex) {
+		SBFLMeasures measures4faultyObject = this.elementsSBFLMeasures.get(faultyObjIndex);
+		int numOfObjects = this.elementsSBFLMeasures.size();
+		for (Entry<String, Integer> rank4technique : measures4faultyObject.getRank().entrySet()) {
+		    String technique = rank4technique.getKey();
+			int rank4faultyObject = rank4technique.getValue();
+		    int numOfTies = 0;
+		    //calculate number of ties based on the ranks of other objects for the same technique
+		    for (int i=0; i<this.elementsSBFLMeasures.size(); i++) {
+		    	if (i != faultyObjIndex && this.elementsSBFLMeasures.get(i).getModelObject()!=null) {
+		    		if (this.elementsSBFLMeasures.get(i).getRank().get(technique) == rank4faultyObject) {
+		    			numOfTies++;
+		    		}
+		    	}
+		    }
+		    if (numOfTies == 0) {
+		    	double examScore = (double)rank4faultyObject/numOfObjects;
+		    	this.bestEXAMScore.put(technique, examScore);
+		    	this.averageEXAMScore.put(technique, examScore);
+		    	this.worseEXAMScore.put(technique, examScore);
+		    }
+		    else {
+		    	double bestExamScore = (double)rank4faultyObject/numOfObjects;
+		    	this.bestEXAMScore.put(technique, bestExamScore);
+		    	double averageExamScore = (double) (rank4faultyObject + ((double) numOfTies/2))/numOfObjects;
+		    	this.averageEXAMScore.put(technique, averageExamScore);
+		    	double worseExamScore = (double) (rank4faultyObject + numOfTies)/numOfObjects;
+		    	this.worseEXAMScore.put(technique, worseExamScore);
+		    	
+		    	System.out.println("Best EXAM Score for " + technique + ": " + bestExamScore);
+		    	System.out.println("Average EXAM Score for " + technique + ": " + averageExamScore);
+		    	System.out.println("Worse EXAM Score for " + technique + ": " + worseExamScore);
+		    	System.out.println();
+		    }
 		}
 	}
 	
