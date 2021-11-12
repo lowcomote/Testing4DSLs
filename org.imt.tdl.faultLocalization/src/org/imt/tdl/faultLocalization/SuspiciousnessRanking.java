@@ -372,6 +372,8 @@ public class SuspiciousnessRanking {
 		    	this.bestEXAMScore.put(technique, examScore);
 		    	this.averageEXAMScore.put(technique, examScore);
 		    	this.worseEXAMScore.put(technique, examScore);
+		    	System.out.println("EXAM Score for " + technique + ": " + examScore);
+		    	System.out.println();
 		    }
 		    else {
 		    	double bestExamScore = (double)rank4faultyObject/numOfObjects;
