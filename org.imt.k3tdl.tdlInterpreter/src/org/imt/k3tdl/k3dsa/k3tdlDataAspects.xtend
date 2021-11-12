@@ -261,6 +261,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 		}
 		return null
 	}
+	
 	def String isMatchedParametrizedElement(EObject rootElement, Resource MUTResource, boolean isAssertion, String DSLPath){
 		//find matched element based on the parameter bindings of dataInstance
 		for (i : 0 ..<_self.argument.size){
