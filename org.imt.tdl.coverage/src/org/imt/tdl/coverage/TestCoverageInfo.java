@@ -16,7 +16,6 @@ public class TestCoverageInfo {
 	}
 	public void setModelObject(EObject modelObject) {
 		this.modelObject = modelObject;
-		this.metaclass = modelObject.eClass();
 	}
 	public ArrayList<String> getCoverage() {
 		return coverage;
