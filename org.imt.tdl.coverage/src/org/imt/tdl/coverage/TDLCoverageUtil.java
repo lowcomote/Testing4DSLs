@@ -13,7 +13,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -88,6 +91,38 @@ public class TDLCoverageUtil {
 		}else if (dsl.getEntry("ale") != null) {
 			findAleClasses(dsl, bundle);
 		} 
+		//foreach class that is not coverable (it is not extended in the interpreter)
+		//if all of its contained classes are coverable, the class must be set as coverable 
+		String ecoreFilePath = dsl.getEntry("ecore").getValue().replaceFirst("resource", "plugin");
+		Resource ecoreResource = (new ResourceSetImpl()).getResource(URI.createURI(ecoreFilePath), true);
+		EPackage metamodelRootElement = (EPackage) ecoreResource.getContents().get(0);
+		for (EClassifier clazz: metamodelRootElement.getEClassifiers()) {
+			
+			for (Class<?> cInterface:clazz.getClass().getInterfaces()) {
+				if (!instance.coverableClasses.contains(cInterface)) {
+					boolean coverable = true;
+					boolean refCovered = false;
+					for (EReference containmentRef: clazz.eClass().getEAllContainments()) {
+						for (Class<?> rInterface:containmentRef.getEReferenceType().getClass().getInterfaces()) {
+							if (instance.coverableClasses.contains(rInterface)) {
+								refCovered = true;
+								break;
+							}
+						}
+						if (!refCovered) {
+							coverable = false;
+							break;
+						}
+					}
+					if (coverable) {
+						instance.coverableClasses.add(cInterface);
+					}
+				}else {
+					//if one of the interfaces is in the coverableClasses, there is no need to check the others
+					break;
+				}
+			}
+		}
 	}
 	
 	private void findK3Classes(Dsl dsl, Bundle bundle) {
@@ -111,10 +146,7 @@ public class TDLCoverageUtil {
 	}
 	
 	private void findAleClasses(Dsl dsl, Bundle bundle) {
-		String aleFilePath = dsl.getEntry("ale").getValue();
-		if (aleFilePath.contains("platform:/resource/")) {
-			aleFilePath = aleFilePath.replace("platform:/resource/", "platform:/plugin/");
-		}
+		String aleFilePath = dsl.getEntry("ale").getValue().replaceFirst("resource", "plugin");
 		Resource aleResource = (new ResourceSetImpl()).getResource(URI.createURI(aleFilePath), true);
 		Unit interpreter = (Unit) aleResource.getContents().get(0);
 		List<BehavioredClass> classes = interpreter.getXtendedClasses();
@@ -160,8 +192,8 @@ public class TDLCoverageUtil {
 			EObject modelObject = modelContents.next();
 			List<Class<?>> interfaces = new ArrayList<>();
 			interfaces.addAll(Arrays.asList(modelObject.getClass().getInterfaces()));
-			//we also consider super classes because if there is an execution rule for the super class,
-			//the objects conforming to the class can be covered
+			//we also consider all super classes because if the superclass is coverable,
+			//all its subclasses must be considered as coverable
 			for (EClass superClass:modelObject.eClass().getEAllSuperTypes()) {
 				interfaces.add(superClass.getInstanceClass());
 			}
@@ -185,5 +217,9 @@ public class TDLCoverageUtil {
 	public int getModelSize() {
 		//this returns the size of the model in terms of its coverable elements
 		return instance.modelSize;
+	}
+	
+	public void increaseModelSize() {
+		instance.modelSize++;
 	}
 }
