@@ -20,7 +20,7 @@ public class SuspiciousnessRanking {
 	private final TDLTestPackageResult testSuiteResult;
 	private final List<TDLTestCaseResult> errorVector;
 	private final TDLTestSuiteCoverage testSuiteCoverage;
-	private final List<TestCoverageInfo> coverageMatix;
+	private List<TestCoverageInfo> coverageMatix = new ArrayList<TestCoverageInfo>();
 	
 	private List<SBFLMeasures> elementsSBFLMeasures = new ArrayList<SBFLMeasures>();
 
@@ -52,7 +52,7 @@ public class SuspiciousnessRanking {
 		this.testSuiteResult = TestResultUtil.getInstance().getTestPackageResult();
 		this.errorVector = this.testSuiteResult.getResults();
 		this.testSuiteCoverage = TDLCoverageUtil.getInstance().getTestSuiteCoverage();
-		this.coverageMatix = this.testSuiteCoverage.coverageInfos;
+		this.coverageMatix.addAll(this.testSuiteCoverage.coverageInfos);
 		//the row of the matrix containing coverage percentages should be removed 
 		this.coverageMatix.removeIf(element -> element.getMetaclass() == null);
 		//if the element is not coverable, remove it from the matrix
@@ -326,8 +326,9 @@ public class SuspiciousnessRanking {
 		measures.remove(measures.size()-1);
 		Collections.sort(measures, Collections.reverseOrder());
 		int rank = 1;
+		String technique = "";
 		for (int i=0; i<measures.size(); i++) {	
-			String technique = measures.get(i).currentTechnique;
+			technique = measures.get(i).currentTechnique;
 			if (i > 0) {
 				double a = measures.get(i).getSusp().get(technique);
 				double b = measures.get(i-1).getSusp().get(technique);
@@ -349,45 +350,42 @@ public class SuspiciousnessRanking {
 			}
 		}
 		//TODO: only for testing purposes, must be removed later
-		measureEXAMScores(4);
+		measureEXAMScores(this.elementsSBFLMeasures.get(9), technique);
 	}
 	
-	public void measureEXAMScores(int faultyObjIndex) {
-		SBFLMeasures measures4faultyObject = this.elementsSBFLMeasures.get(faultyObjIndex);
+	public void measureEXAMScores(SBFLMeasures measures4faultyObject, String technique) { 
+		int faultyObjIndex = this.elementsSBFLMeasures.indexOf(measures4faultyObject);
 		int numOfObjects = this.elementsSBFLMeasures.size();
-		for (Entry<String, Integer> rank4technique : measures4faultyObject.getRank().entrySet()) {
-		    String technique = rank4technique.getKey();
-			int rank4faultyObject = rank4technique.getValue();
-		    int numOfTies = 0;
-		    //calculate number of ties based on the ranks of other objects for the same technique
-		    for (int i=0; i<this.elementsSBFLMeasures.size(); i++) {
-		    	if (i != faultyObjIndex && this.elementsSBFLMeasures.get(i).getModelObject()!=null) {
-		    		if (this.elementsSBFLMeasures.get(i).getRank().get(technique) == rank4faultyObject) {
-		    			numOfTies++;
-		    		}
+		int rank4faultyObject = measures4faultyObject.getRank().get(technique);
+		int numOfTies = 0;
+		//calculate number of ties based on the ranks of other objects for the same technique
+		for (int i=0; i<this.elementsSBFLMeasures.size(); i++) {
+		    if (i != faultyObjIndex && this.elementsSBFLMeasures.get(i).getModelObject()!=null) {
+		    	if (this.elementsSBFLMeasures.get(i).getRank().get(technique) == rank4faultyObject) {
+		    		numOfTies++;
 		    	}
 		    }
-		    if (numOfTies == 0) {
-		    	double examScore = (double)rank4faultyObject/numOfObjects;
-		    	this.bestEXAMScore.put(technique, examScore);
-		    	this.averageEXAMScore.put(technique, examScore);
-		    	this.worseEXAMScore.put(technique, examScore);
-		    	System.out.println("EXAM Score for " + technique + ": " + examScore);
-		    	System.out.println();
-		    }
-		    else {
-		    	double bestExamScore = (double)rank4faultyObject/numOfObjects;
-		    	this.bestEXAMScore.put(technique, bestExamScore);
-		    	double averageExamScore = (double) (rank4faultyObject + ((double) numOfTies/2))/numOfObjects;
-		    	this.averageEXAMScore.put(technique, averageExamScore);
-		    	double worseExamScore = (double) (rank4faultyObject + numOfTies)/numOfObjects;
-		    	this.worseEXAMScore.put(technique, worseExamScore);
+		}
+		if (numOfTies == 0) {
+			double examScore = (double)rank4faultyObject/numOfObjects;
+		    this.bestEXAMScore.put(technique, examScore);
+		    this.averageEXAMScore.put(technique, examScore);
+		    this.worseEXAMScore.put(technique, examScore);
+		    System.out.println("EXAM Score for " + technique + ": " + examScore);
+		    System.out.println();
+		}
+		else {
+		    double bestExamScore = (double)rank4faultyObject/numOfObjects;
+		    this.bestEXAMScore.put(technique, bestExamScore);
+		    double averageExamScore = (double) (rank4faultyObject + ((double) numOfTies/2))/numOfObjects;
+		    this.averageEXAMScore.put(technique, averageExamScore);
+		    double worseExamScore = (double) (rank4faultyObject + numOfTies)/numOfObjects;
+		    this.worseEXAMScore.put(technique, worseExamScore);
 		    	
-		    	System.out.println("Best EXAM Score for " + technique + ": " + bestExamScore);
-		    	System.out.println("Average EXAM Score for " + technique + ": " + averageExamScore);
-		    	System.out.println("Worse EXAM Score for " + technique + ": " + worseExamScore);
-		    	System.out.println();
-		    }
+		    System.out.println("Best EXAM Score for " + technique + ": " + bestExamScore);
+		    System.out.println("Average EXAM Score for " + technique + ": " + averageExamScore);
+		    System.out.println("Worse EXAM Score for " + technique + ": " + worseExamScore);
+		    System.out.println();
 		}
 	}
 	
