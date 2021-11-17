@@ -36,7 +36,7 @@ public class TDLCoverageUtil {
 
 	private Resource MUTResource;
 	public List<EObject> modelObjects = new ArrayList<>();
-	private int modelSize = 0;
+	private int numOfCoverableElements = 0;
 	
 	private String DSLPath;
 	private List<Class<?>> coverableClasses = new ArrayList<>();
@@ -91,38 +91,6 @@ public class TDLCoverageUtil {
 		}else if (dsl.getEntry("ale") != null) {
 			findAleClasses(dsl, bundle);
 		} 
-		//foreach class that is not coverable (it is not extended in the interpreter)
-		//if all of its contained classes are coverable, the class must be set as coverable 
-		String ecoreFilePath = dsl.getEntry("ecore").getValue().replaceFirst("resource", "plugin");
-		Resource ecoreResource = (new ResourceSetImpl()).getResource(URI.createURI(ecoreFilePath), true);
-		EPackage metamodelRootElement = (EPackage) ecoreResource.getContents().get(0);
-		for (EClassifier clazz: metamodelRootElement.getEClassifiers()) {
-			
-			for (Class<?> cInterface:clazz.getClass().getInterfaces()) {
-				if (!instance.coverableClasses.contains(cInterface)) {
-					boolean coverable = true;
-					boolean refCovered = false;
-					for (EReference containmentRef: clazz.eClass().getEAllContainments()) {
-						for (Class<?> rInterface:containmentRef.getEReferenceType().getClass().getInterfaces()) {
-							if (instance.coverableClasses.contains(rInterface)) {
-								refCovered = true;
-								break;
-							}
-						}
-						if (!refCovered) {
-							coverable = false;
-							break;
-						}
-					}
-					if (coverable) {
-						instance.coverableClasses.add(cInterface);
-					}
-				}else {
-					//if one of the interfaces is in the coverableClasses, there is no need to check the others
-					break;
-				}
-			}
-		}
 	}
 	
 	private void findK3Classes(Dsl dsl, Bundle bundle) {
@@ -157,6 +125,7 @@ public class TDLCoverageUtil {
 			for (int i=0; i<operations.size(); i++) {
 				for (Tag tag:operations.get(i).getTag()) {
 					if (tag.getName().equals("step")) {
+						//TODO: it doesn't work correctly. The clazz format in ALE is different from K3
 						instance.coverableClasses.add(clazz.eClass().getInstanceClass());
 						i = operations.size();
 						break;
@@ -181,7 +150,7 @@ public class TDLCoverageUtil {
 
 	public void setMUTResource(Resource MUTResource) {
 		instance.MUTResource = MUTResource;
-		instance.modelSize = 0;
+		instance.numOfCoverableElements = 0;
 		instance.modelObjects.clear();
 		instance.objectCoverageStatus.clear();
 	}
@@ -202,7 +171,7 @@ public class TDLCoverageUtil {
 				if (instance.coverableClasses.contains(cInterface)) {
 					instance.modelObjects.add(modelObject);
 					instance.objectCoverageStatus.add(COVERABLE);
-					instance.modelSize++;
+					instance.numOfCoverableElements++;
 					covered = true;
 					break;
 				}
@@ -212,14 +181,43 @@ public class TDLCoverageUtil {
 				instance.objectCoverageStatus.add(NOT_COVERABLE);
 			}
 		}
+		checkContainmentRelations(instance.modelObjects.get(0));
 	}
 	
-	public int getModelSize() {
+	private void checkContainmentRelations(EObject rootObject) {
+		int rootObjectIndex = instance.modelObjects.indexOf(rootObject);
+		String coverage = instance.objectCoverageStatus.get(rootObjectIndex);
+		if (coverage == TDLCoverageUtil.NOT_COVERABLE && rootObject.eContents().size() > 0) {
+			for (int j=0; j<rootObject.eContents().size(); j++) {
+				EObject containmentRef = rootObject.eContents().get(j);
+				int refIndexInObjectList = instance.modelObjects.indexOf(containmentRef);
+				if (instance.objectCoverageStatus.get(refIndexInObjectList) == TDLCoverageUtil.NOT_COVERABLE) {
+					checkContainmentRelations(containmentRef);
+				}
+			}
+			//if all containments are COVERABLE, set the object as COVERABLE
+			boolean coverable = true;
+			for (int j=0; j<rootObject.eContents().size(); j++) {
+				EObject containmentRef = rootObject.eContents().get(j);
+				int refIndexInObjectList = instance.modelObjects.indexOf(containmentRef);
+				if (instance.objectCoverageStatus.get(refIndexInObjectList) != TDLCoverageUtil.COVERABLE) {
+					coverable = false;
+					break;
+				}
+			}
+			if (coverable) {
+				instance.numOfCoverableElements++;
+				instance.objectCoverageStatus.set(rootObjectIndex, TDLCoverageUtil.COVERABLE);
+			}
+		}
+		//check containment relations for the next elements
+		if (rootObjectIndex < instance.modelObjects.size() - 1) {
+			checkContainmentRelations(instance.modelObjects.get(rootObjectIndex + 1));
+		}	
+	}
+
+	public int getNumOfCoverableElements() {
 		//this returns the size of the model in terms of its coverable elements
-		return instance.modelSize;
-	}
-	
-	public void increaseModelSize() {
-		instance.modelSize++;
+		return instance.numOfCoverableElements;
 	}
 }

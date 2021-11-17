@@ -44,7 +44,7 @@ public class TDLTestSuiteCoverage {
 			}
 		}
 		
-		double tsCoveragePercentage = (numOfCoveredObjs*100)/TDLCoverageUtil.getInstance().getModelSize();
+		double tsCoveragePercentage = (numOfCoveredObjs*100)/TDLCoverageUtil.getInstance().getNumOfCoverableElements();
 		this.overallResult.getCoverage().add(tsCoveragePercentage + "");
 		this.setCoverageInfos();
 		System.out.println("Test suite coverage: " + tsCoveragePercentage);
