@@ -14,4 +14,5 @@ Import-Package: fr.inria.diverse.k3.al.annotationprocessor,
 Export-Package: org.imt.tdl.coverage
 Require-Bundle: org.eclipse.emf.ecore,
  org.eclipse.emf.common,
- org.eclipse.gemoc.dsl.model
+ org.eclipse.gemoc.dsl.model,
+ org.eclipse.core.resources
