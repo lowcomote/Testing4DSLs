@@ -20,15 +20,10 @@ public class TDLTestCaseCoverage {
 	
 	public List<String> tcObjectCoverageStatus = new ArrayList<>();
 	
-	private int numOfCoverableElements;
-	public int numOfCoveredObjs;
-	double tcCoveragePercentage;
-	
 	//calculating the coverage of the test case based on the model execution trace
 	public void calculateTCCoverage () {
 		//find coverable objects using the MUTResource of the test case
 		findNotCoverableObjects();
-
 		Step<?> rootStep = this.trace.getRootStep();
 		calculateObjectCoverage(rootStep);
 		checkContainmentRelations(TDLCoverageUtil.getInstance().modelObjects.get(0));
@@ -42,7 +37,6 @@ public class TDLTestCaseCoverage {
 			TDLCoverageUtil.getInstance().modelObjects.add(modelObject);
 			if (TDLCoverageUtil.getInstance().coverableClasses.contains(modelObject.eClass().getName())) {
 				this.tcObjectCoverageStatus.add(TDLCoverageUtil.COVERABLE);
-				this.numOfCoverableElements++;
 			}
 			else {
 				this.tcObjectCoverageStatus.add(TDLCoverageUtil.NOT_COVERABLE);
@@ -59,7 +53,6 @@ public class TDLTestCaseCoverage {
 				String objectCoverage = this.tcObjectCoverageStatus.get(objectIndex);
 				if (objectCoverage != TDLCoverageUtil.COVERED && objectCoverage != TDLCoverageUtil.NOT_COVERABLE) {
 					this.tcObjectCoverageStatus.set(objectIndex, TDLCoverageUtil.COVERED);
-					this.numOfCoveredObjs++;
 				}
 			}
 			if (step.getSubSteps() != null) {
@@ -95,7 +88,6 @@ public class TDLTestCaseCoverage {
 				if (!TDLCoverageUtil.getInstance().coverableClasses.contains(rootObject.eClass().getName())) {
 					TDLCoverageUtil.getInstance().coverableClasses.add(rootObject.eClass().getName());
 				}
-				this.numOfCoveredObjs++;
 			}
 		}
 		//check containment relations for the next elements
@@ -104,18 +96,34 @@ public class TDLTestCaseCoverage {
 		}
 	}
 	
+	int numOfCoveredObjs;
+	int numOfNotCoverableElements;
+	
+	public void countNumOfElements() {
+		this.numOfCoveredObjs = 0;
+		this.numOfNotCoverableElements = 0;
+		for (String coverage:this.tcObjectCoverageStatus) {
+			if (coverage == TDLCoverageUtil.NOT_COVERABLE) {
+				this.numOfNotCoverableElements++;
+			}
+			else if (coverage == TDLCoverageUtil.COVERED) {
+				this.numOfCoveredObjs++;
+			}
+		}
+	}
 	public int getNumOfCoverableElements() {
 		//this returns the size of the model in terms of its coverable elements
-		return this.numOfCoverableElements;
+		return this.tcObjectCoverageStatus.size() - this.numOfNotCoverableElements;
 	}
 	
-	public void addNumOfCoveredObjs() {
-		this.numOfCoveredObjs++;
+	public int getNumOfCoveredObjs() {
+		return this.numOfCoveredObjs;
 	}
 	
-	public void calculateCoveragePercentage() {
-		this.tcCoveragePercentage = (double)(this.numOfCoveredObjs*100)/this.numOfCoverableElements;
-		System.out.println(this.testCaseName + " coverage: " + this.tcCoveragePercentage);
+	public double getCoveragePercentage() {
+		double tcCoveragePercentage = Math.ceil((double)(this.numOfCoveredObjs*100)/getNumOfCoverableElements());
+		System.out.println(this.testCaseName + " coverage: " + tcCoveragePercentage);
+		return tcCoveragePercentage;
 	}
 	
 	public Trace<?, ?, ?> getTrace() {
@@ -124,14 +132,6 @@ public class TDLTestCaseCoverage {
 
 	public void setTrace(Trace<?, ?, ?> trace) {
 		this.trace = trace;
-	}
-
-	public double getTcCoveragePercentage() {
-		return this.tcCoveragePercentage;
-	}
-
-	public void setTcCoveragePercentage(double tcCoveragePercentage) {
-		this.tcCoveragePercentage = tcCoveragePercentage;
 	}
 
 	public Resource getMUTResource() {
