@@ -34,14 +34,11 @@ import fr.inria.diverse.k3.al.annotationprocessor.Step;
 public class TDLCoverageUtil {
 	
 	private static TDLCoverageUtil instance = new TDLCoverageUtil();
-
-	private Resource MUTResource;
-	public List<EObject> modelObjects = new ArrayList<>();
-	private int numOfCoverableElements = 0;
 	
 	private String DSLPath;
-	private List<String> coverableClasses = new ArrayList<>();
-	public List<String> objectCoverageStatus = new ArrayList<>();
+	public List<String> coverableClasses = new ArrayList<>();
+	public List<EObject> modelObjects = new ArrayList<>();
+
 	public static final String COVERED = "Covered";
 	public static final String NOT_COVERED = "Not_Covered";
 	public static final String COVERABLE = "Coverable";
@@ -75,9 +72,8 @@ public class TDLCoverageUtil {
 		instance.testSuiteCoverage.calculateTSCoverage();
 	}
 	
-	private EPackage metamodelRootElement;
-	
 	public void findCoverableClasses(){
+		EPackage metamodelRootElement;
 		final ResourceSet resSet = new ResourceSetImpl();
 		IConfigurationElement language = Arrays
 				.asList(Platform.getExtensionRegistry()
@@ -90,7 +86,7 @@ public class TDLCoverageUtil {
 		final Bundle bundle = Platform.getBundle(language.getContributor().getName());
 		String ecoreFilePath = dsl.getEntry("ecore").getValue().replaceFirst("resource", "plugin");
 		Resource ecoreResource = (new ResourceSetImpl()).getResource(URI.createURI(ecoreFilePath), true);
-		instance.metamodelRootElement = (EPackage) ecoreResource.getContents().get(0);
+		metamodelRootElement = (EPackage) ecoreResource.getContents().get(0);
 		
 		if (dsl.getEntry("k3") != null) {
 			findK3Classes(dsl, bundle);
@@ -98,13 +94,10 @@ public class TDLCoverageUtil {
 			findAleClasses(dsl, bundle);
 		} 
 		
-		for (EClassifier clazz: instance.metamodelRootElement.getEClassifiers()) {
+		for (EClassifier clazz: metamodelRootElement.getEClassifiers()) {
 			String className = clazz.getName();
 			if (clazz instanceof EClass && !instance.coverableClasses.contains(className)) {
 				checkInheritance((EClass) clazz);
-				if (!instance.coverableClasses.contains(className)) {
-					checkContainment((EClass) clazz);
-				}
 			}
 		}
 	}
@@ -162,17 +155,6 @@ public class TDLCoverageUtil {
 		return result;
 	}
 	
-	public Resource getMUTResource() {
-		return instance.MUTResource;
-	}
-
-	public void setMUTResource(Resource MUTResource) {
-		instance.MUTResource = MUTResource;
-		instance.numOfCoverableElements = 0;
-		instance.modelObjects.clear();
-		instance.objectCoverageStatus.clear();
-	}
-	
 	private void checkInheritance(EClass eClazz) {
 		//foreach class that is not coverable (it is not extended in the interpreter)
 		//if one of its super classes is coverable, the class must be set as coverable 
@@ -182,39 +164,5 @@ public class TDLCoverageUtil {
 				break;
 			}
 		}
-	}
-	
-	private void checkContainment(EClass eClazz) {
-		//if a class has containment references, it can be covered based on the objects defined in the model
-		if (eClazz.getEStructuralFeatures().size()>0) {
-			for (EStructuralFeature feature:eClazz.getEStructuralFeatures()) {
-				if (feature instanceof EReference) {
-					EReference refrence = (EReference) feature;
-					if (refrence.isContainment()) {
-						instance.coverableClasses.add(eClazz.getName());
-					}
-				}
-			}
-		}
-	}
-	
-	public void findNotCoverableObjects() {
-		TreeIterator<EObject> modelContents = instance.MUTResource.getAllContents();
-		while (modelContents.hasNext()) {
-			EObject modelObject = modelContents.next();
-			instance.modelObjects.add(modelObject);
-			if (instance.coverableClasses.contains(modelObject.eClass().getName())) {
-				instance.objectCoverageStatus.add(COVERABLE);
-				instance.numOfCoverableElements++;
-			}
-			else {
-				instance.objectCoverageStatus.add(NOT_COVERABLE);
-			}
-		}
-	}
-	
-	public int getNumOfCoverableElements() {
-		//this returns the size of the model in terms of its coverable elements
-		return instance.numOfCoverableElements;
 	}
 }

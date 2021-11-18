@@ -19,23 +19,37 @@ public class TDLTestCaseCoverage {
 	private Trace<?, ?, ?> trace;
 	
 	public List<String> tcObjectCoverageStatus = new ArrayList<>();
-	int numOfCoveredObjs = 0;
-	private double tcCoveragePercentage;
+	
+	private int numOfCoverableElements;
+	public int numOfCoveredObjs;
+	double tcCoveragePercentage;
 	
 	//calculating the coverage of the test case based on the model execution trace
 	public void calculateTCCoverage () {
 		//find coverable objects using the MUTResource of the test case
-		TDLCoverageUtil.getInstance().setMUTResource(this.MUTResource);
-		TDLCoverageUtil.getInstance().findNotCoverableObjects();
-		this.tcObjectCoverageStatus.addAll(TDLCoverageUtil.getInstance().objectCoverageStatus);
+		findNotCoverableObjects();
 
 		Step<?> rootStep = this.trace.getRootStep();
 		calculateObjectCoverage(rootStep);
 		checkContainmentRelations(TDLCoverageUtil.getInstance().modelObjects.get(0));
-		this.tcCoveragePercentage = (this.numOfCoveredObjs*100)/TDLCoverageUtil.getInstance().getNumOfCoverableElements();
-		System.out.println(this.testCaseName + " coverage: " + this.tcCoveragePercentage);
 	}
 
+	public void findNotCoverableObjects() {
+		TDLCoverageUtil.getInstance().modelObjects.clear();
+		TreeIterator<EObject> modelContents = this.MUTResource.getAllContents();
+		while (modelContents.hasNext()) {
+			EObject modelObject = modelContents.next();
+			TDLCoverageUtil.getInstance().modelObjects.add(modelObject);
+			if (TDLCoverageUtil.getInstance().coverableClasses.contains(modelObject.eClass().getName())) {
+				this.tcObjectCoverageStatus.add(TDLCoverageUtil.COVERABLE);
+				this.numOfCoverableElements++;
+			}
+			else {
+				this.tcObjectCoverageStatus.add(TDLCoverageUtil.NOT_COVERABLE);
+			}
+		}
+	}
+	
 	public void calculateObjectCoverage(Object rootStep) {
 		if (rootStep instanceof SequentialStep) {
 			SequentialStep<?, ?> step = (SequentialStep<?, ?>) rootStep;
@@ -44,8 +58,8 @@ public class TDLTestCaseCoverage {
 				int objectIndex = TDLCoverageUtil.getInstance().modelObjects.indexOf(object);
 				String objectCoverage = this.tcObjectCoverageStatus.get(objectIndex);
 				if (objectCoverage != TDLCoverageUtil.COVERED && objectCoverage != TDLCoverageUtil.NOT_COVERABLE) {
-					this.numOfCoveredObjs++;
 					this.tcObjectCoverageStatus.set(objectIndex, TDLCoverageUtil.COVERED);
+					this.numOfCoveredObjs++;
 				}
 			}
 			if (step.getSubSteps() != null) {
@@ -58,8 +72,7 @@ public class TDLTestCaseCoverage {
 	
 	private void checkContainmentRelations(EObject rootObject) {
 		int rootObjectIndex = TDLCoverageUtil.getInstance().modelObjects.indexOf(rootObject);
-		String coverage = this.tcObjectCoverageStatus.get(rootObjectIndex);
-		if (coverage == TDLCoverageUtil.COVERABLE && rootObject.eContents().size()>0) {
+		if (rootObject.eContents().size()>0) {
 			for (int j=0; j<rootObject.eContents().size(); j++) {
 				EObject containmentRef = rootObject.eContents().get(j);
 				int refIndexInObjectList = TDLCoverageUtil.getInstance().modelObjects.indexOf(containmentRef);
@@ -78,14 +91,31 @@ public class TDLTestCaseCoverage {
 				}
 			}
 			if (covered) {
-				this.numOfCoveredObjs++;
 				this.tcObjectCoverageStatus.set(rootObjectIndex, TDLCoverageUtil.COVERED);
+				if (!TDLCoverageUtil.getInstance().coverableClasses.contains(rootObject.eClass().getName())) {
+					TDLCoverageUtil.getInstance().coverableClasses.add(rootObject.eClass().getName());
+				}
+				this.numOfCoveredObjs++;
 			}
 		}
 		//check containment relations for the next elements
 		if (rootObjectIndex < TDLCoverageUtil.getInstance().modelObjects.size() - 1) {
 			checkContainmentRelations(TDLCoverageUtil.getInstance().modelObjects.get(rootObjectIndex + 1));
 		}
+	}
+	
+	public int getNumOfCoverableElements() {
+		//this returns the size of the model in terms of its coverable elements
+		return this.numOfCoverableElements;
+	}
+	
+	public void addNumOfCoveredObjs() {
+		this.numOfCoveredObjs++;
+	}
+	
+	public void calculateCoveragePercentage() {
+		this.tcCoveragePercentage = (double)(this.numOfCoveredObjs*100)/this.numOfCoverableElements;
+		System.out.println(this.testCaseName + " coverage: " + this.tcCoveragePercentage);
 	}
 	
 	public Trace<?, ?, ?> getTrace() {
