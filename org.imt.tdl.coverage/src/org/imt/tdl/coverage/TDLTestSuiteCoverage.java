@@ -14,6 +14,10 @@ public class TDLTestSuiteCoverage {
 	public List<TestCoverageInfo> coverageInfos = new ArrayList<>();
 	private TestCoverageInfo overallResult = new TestCoverageInfo();
 	
+	int numOfCoveredObjs = 0;
+	int numOfCoverableElements = 0;
+	double tsCoveragePercentage;
+	
 	//for every test case of the test suite, add its coverage to the list
 	public void addTCCoverage(TDLTestCaseCoverage tcCoverage) {
 		this.tcCoverages.add(tcCoverage);
@@ -24,30 +28,44 @@ public class TDLTestSuiteCoverage {
 	
 	//Calculating coverage of the test suite based on its test cases coverage
 	public void calculateTSCoverage() {
-		int numOfCoveredObjs = 0;
+		DSLSpecificCoverageHandler dslSpecificCoverageHandler = new DSLSpecificCoverageHandler();
+		IDSLSpecificCoverage dslSpecificCoverage = dslSpecificCoverageHandler.getDSLSpecificCoverage();
+		if (dslSpecificCoverage != null) {
+			dslSpecificCoverage.updateCoverableClasses();
+		}
+		//foreach test case, first calculate coverage using the generic tool
+		//then, if the DSL provides a dsl-specific coverage tool, specialize the coverage based on it
 		for (TDLTestCaseCoverage tcCoverageObj : tcCoverages) {
 			tcCoverageObj.calculateTCCoverage();
-			
+			if (dslSpecificCoverage != null) {
+				dslSpecificCoverage.specializeCoverage(tcCoverageObj);
+			}
+			tcCoverageObj.calculateCoveragePercentage();
 			this.overallResult.getCoverage().add(tcCoverageObj.getTcCoveragePercentage() + "");
+			
 			//if it is the first test case, copy the whole test case object coverage status for the test suite
 			if (this.tsObjectCoverageStatus.size() == 0) {
 				this.tsObjectCoverageStatus.addAll(tcCoverageObj.tcObjectCoverageStatus);
-				numOfCoveredObjs = tcCoverageObj.numOfCoveredObjs;
+				this.numOfCoveredObjs = tcCoverageObj.numOfCoveredObjs;
+				this.numOfCoverableElements = tcCoverageObj.getNumOfCoverableElements();
 			}else {
 				for (int i=0; i<tcCoverageObj.tcObjectCoverageStatus.size(); i++) {
 					String tcCoverage = tcCoverageObj.tcObjectCoverageStatus.get(i);
 					if (tcCoverage == TDLCoverageUtil.COVERED & this.tsObjectCoverageStatus.get(i) != TDLCoverageUtil.COVERED) {
 						this.tsObjectCoverageStatus.set(i, TDLCoverageUtil.COVERED);
-						numOfCoveredObjs++;
+						this.numOfCoveredObjs++;
 					}
 				}
 			}
 		}
-		
-		double tsCoveragePercentage = (numOfCoveredObjs*100)/TDLCoverageUtil.getInstance().getNumOfCoverableElements();
-		this.overallResult.getCoverage().add(tsCoveragePercentage + "");
+		calculateCoveragePercentage();
+	}
+	
+	public void calculateCoveragePercentage() {
+		this.tsCoveragePercentage = (double)(this.numOfCoveredObjs*100)/this.numOfCoverableElements;
+		System.out.println("Test suite coverage: " + this.tsCoveragePercentage);
+		this.overallResult.getCoverage().add(this.tsCoveragePercentage + "");
 		this.setCoverageInfos();
-		System.out.println("Test suite coverage: " + tsCoveragePercentage);
 	}
 
 	public void setCoverageInfos() {
