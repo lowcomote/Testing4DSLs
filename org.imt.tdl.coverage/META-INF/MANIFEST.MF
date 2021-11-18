@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Coverage
-Bundle-SymbolicName: org.imt.tdl.coverage
+Bundle-SymbolicName: org.imt.tdl.coverage;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: org.imt.tdl.coverage
@@ -15,4 +15,6 @@ Export-Package: org.imt.tdl.coverage
 Require-Bundle: org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.eclipse.gemoc.dsl.model,
- org.eclipse.core.resources
+ org.eclipse.core.resources,
+ org.eclipse.core.runtime;bundle-version="3.22.0",
+ org.eclipse.e4.core.di;bundle-version="1.7.800"
