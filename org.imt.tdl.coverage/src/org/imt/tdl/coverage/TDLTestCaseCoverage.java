@@ -26,6 +26,7 @@ public class TDLTestCaseCoverage {
 		findNotCoverableObjects();
 		Step<?> rootStep = this.trace.getRootStep();
 		calculateObjectCoverage(rootStep);
+		changeCoverable2notCovered();
 		checkContainmentRelations(TDLCoverageUtil.getInstance().modelObjects.get(0));
 	}
 
@@ -63,30 +64,43 @@ public class TDLTestCaseCoverage {
 		}
 	}
 	
+	public void changeCoverable2notCovered() {
+		for (int i=0; i<this.tcObjectCoverageStatus.size(); i++) {
+			if (this.tcObjectCoverageStatus.get(i) == TDLCoverageUtil.COVERABLE) {
+				this.tcObjectCoverageStatus.set(i, TDLCoverageUtil.NOT_COVERED);
+			}
+		}
+	}
+	
 	private void checkContainmentRelations(EObject rootObject) {
 		int rootObjectIndex = TDLCoverageUtil.getInstance().modelObjects.indexOf(rootObject);
-		if (rootObject.eContents().size()>0) {
-			for (int j=0; j<rootObject.eContents().size(); j++) {
-				EObject containmentRef = rootObject.eContents().get(j);
-				int refIndexInObjectList = TDLCoverageUtil.getInstance().modelObjects.indexOf(containmentRef);
-				if (this.tcObjectCoverageStatus.get(refIndexInObjectList) == TDLCoverageUtil.COVERABLE) {
-					checkContainmentRelations(containmentRef);
+		if (this.tcObjectCoverageStatus.get(rootObjectIndex) != TDLCoverageUtil.COVERED) {
+			if (rootObject.eContents().size()>0) {
+				for (int j=0; j<rootObject.eContents().size(); j++) {
+					EObject containmentRef = rootObject.eContents().get(j);
+					int refIndexInObjectList = TDLCoverageUtil.getInstance().modelObjects.indexOf(containmentRef);
+					if (this.tcObjectCoverageStatus.get(refIndexInObjectList) == TDLCoverageUtil.NOT_COVERABLE) {
+						checkContainmentRelations(containmentRef);
+					}
 				}
-			}
-			//if all containments are COVERED, set the object as COVERED
-			boolean covered = true;
-			for (int j=0; j<rootObject.eContents().size(); j++) {
-				EObject containmentRef = rootObject.eContents().get(j);
-				int refIndexInObjectList = TDLCoverageUtil.getInstance().modelObjects.indexOf(containmentRef);
-				if (this.tcObjectCoverageStatus.get(refIndexInObjectList) != TDLCoverageUtil.COVERED) {
-					covered = false;
-					break;
+				//if all containments are COVERED, set the object as COVERED
+				int numOfCovered = 0;
+				int numOfNotCovered = 0;
+				for (int j=0; j<rootObject.eContents().size(); j++) {
+					EObject containmentRef = rootObject.eContents().get(j);
+					int refIndexInObjectList = TDLCoverageUtil.getInstance().modelObjects.indexOf(containmentRef);
+					if (this.tcObjectCoverageStatus.get(refIndexInObjectList) == TDLCoverageUtil.COVERED) {
+						numOfCovered++;
+					}
+					else if (this.tcObjectCoverageStatus.get(refIndexInObjectList) == TDLCoverageUtil.NOT_COVERED) {
+						numOfNotCovered++;
+					}
 				}
-			}
-			if (covered) {
-				this.tcObjectCoverageStatus.set(rootObjectIndex, TDLCoverageUtil.COVERED);
-				if (!TDLCoverageUtil.getInstance().coverableClasses.contains(rootObject.eClass().getName())) {
-					TDLCoverageUtil.getInstance().coverableClasses.add(rootObject.eClass().getName());
+				if (numOfCovered == rootObject.eContents().size()) {
+					this.tcObjectCoverageStatus.set(rootObjectIndex, TDLCoverageUtil.COVERED);
+				} 
+				else if (numOfCovered + numOfNotCovered == rootObject.eContents().size()) {
+					this.tcObjectCoverageStatus.set(rootObjectIndex, TDLCoverageUtil.NOT_COVERED);
 				}
 			}
 		}
