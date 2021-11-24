@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  *
  * @see org.imt.pssm.reactive.model.statemachines.StatemachinesPackage#getCallEventOccurrence()
- * @model annotation="dynamic"
+ * @model annotation="aspect"
  * @generated
  */
 public interface CallEventOccurrence extends EventOccurrence {
@@ -54,7 +54,7 @@ public interface CallEventOccurrence extends EventOccurrence {
 	 * @return the value of the '<em>In Parameter Values</em>' containment reference list.
 	 * @see org.imt.pssm.reactive.model.statemachines.StatemachinesPackage#getCallEventOccurrence_InParameterValues()
 	 * @model containment="true"
-	 *        annotation="dynamic"
+	 *        annotation="aspect"
 	 * @generated
 	 */
 	EList<AttributeValue> getInParameterValues();
@@ -67,7 +67,7 @@ public interface CallEventOccurrence extends EventOccurrence {
 	 * @return the value of the '<em>Out Parameter Values</em>' containment reference list.
 	 * @see org.imt.pssm.reactive.model.statemachines.StatemachinesPackage#getCallEventOccurrence_OutParameterValues()
 	 * @model containment="true"
-	 *        annotation="dynamic"
+	 *        annotation="aspect"
 	 * @generated
 	 */
 	EList<AttributeValue> getOutParameterValues();
@@ -80,7 +80,7 @@ public interface CallEventOccurrence extends EventOccurrence {
 	 * @see #setReturnValue(AttributeValue)
 	 * @see org.imt.pssm.reactive.model.statemachines.StatemachinesPackage#getCallEventOccurrence_ReturnValue()
 	 * @model containment="true"
-	 *        annotation="dynamic"
+	 *        annotation="aspect"
 	 * @generated
 	 */
 	AttributeValue getReturnValue();

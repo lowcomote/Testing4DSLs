@@ -15,7 +15,12 @@ import org.imt.pssm.reactive.model.statemachines.AttributeValue;
 import org.imt.pssm.reactive.model.statemachines.Behavior;
 import org.imt.pssm.reactive.model.statemachines.BooleanAttribute;
 import org.imt.pssm.reactive.model.statemachines.BooleanAttributeValue;
+import org.imt.pssm.reactive.model.statemachines.BooleanBinaryExpression;
+import org.imt.pssm.reactive.model.statemachines.BooleanBinaryOperator;
 import org.imt.pssm.reactive.model.statemachines.BooleanConstraint;
+import org.imt.pssm.reactive.model.statemachines.BooleanExpression;
+import org.imt.pssm.reactive.model.statemachines.BooleanUnaryExpression;
+import org.imt.pssm.reactive.model.statemachines.BooleanUnaryOperator;
 import org.imt.pssm.reactive.model.statemachines.CallEventOccurrence;
 import org.imt.pssm.reactive.model.statemachines.CallEventType;
 import org.imt.pssm.reactive.model.statemachines.CompletionEventOccurrence;
@@ -23,9 +28,12 @@ import org.imt.pssm.reactive.model.statemachines.Constraint;
 import org.imt.pssm.reactive.model.statemachines.CustomSystem;
 import org.imt.pssm.reactive.model.statemachines.EventOccurrence;
 import org.imt.pssm.reactive.model.statemachines.EventType;
+import org.imt.pssm.reactive.model.statemachines.Expression;
 import org.imt.pssm.reactive.model.statemachines.FinalState;
 import org.imt.pssm.reactive.model.statemachines.IntegerAttribute;
 import org.imt.pssm.reactive.model.statemachines.IntegerAttributeValue;
+import org.imt.pssm.reactive.model.statemachines.IntegerComparisonExpression;
+import org.imt.pssm.reactive.model.statemachines.IntegerComparisonOperator;
 import org.imt.pssm.reactive.model.statemachines.IntegerConstraint;
 import org.imt.pssm.reactive.model.statemachines.NamedElement;
 import org.imt.pssm.reactive.model.statemachines.Operation;
@@ -42,6 +50,8 @@ import org.imt.pssm.reactive.model.statemachines.StatemachinesFactory;
 import org.imt.pssm.reactive.model.statemachines.StatemachinesPackage;
 import org.imt.pssm.reactive.model.statemachines.StringAttribute;
 import org.imt.pssm.reactive.model.statemachines.StringAttributeValue;
+import org.imt.pssm.reactive.model.statemachines.StringComparisonExpression;
+import org.imt.pssm.reactive.model.statemachines.StringComparisonOperator;
 import org.imt.pssm.reactive.model.statemachines.StringConstraint;
 import org.imt.pssm.reactive.model.statemachines.Transition;
 import org.imt.pssm.reactive.model.statemachines.TransitionKind;
@@ -263,6 +273,48 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass expressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass integerComparisonExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass stringComparisonExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass booleanExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass booleanBinaryExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass booleanUnaryExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass eventOccurrenceEClass = null;
 
 	/**
@@ -285,6 +337,34 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * @generated
 	 */
 	private EClass callEventOccurrenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum booleanBinaryOperatorEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum booleanUnaryOperatorEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum integerComparisonOperatorEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum stringComparisonOperatorEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -573,17 +653,8 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBooleanConstraint_Attribute() {
+	public EReference getBooleanConstraint_Expression() {
 		return (EReference)booleanConstraintEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getBooleanConstraint_Value() {
-		return (EAttribute)booleanConstraintEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -600,17 +671,8 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getIntegerConstraint_Attribute() {
+	public EReference getIntegerConstraint_Expression() {
 		return (EReference)integerConstraintEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getIntegerConstraint_Value() {
-		return (EAttribute)integerConstraintEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -627,17 +689,8 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getStringConstraint_Attribute() {
+	public EReference getStringConstraint_Expression() {
 		return (EReference)stringConstraintEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getStringConstraint_Value() {
-		return (EAttribute)stringConstraintEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1086,6 +1139,159 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getExpression() {
+		return expressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getIntegerComparisonExpression() {
+		return integerComparisonExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIntegerComparisonExpression_Operator() {
+		return (EAttribute)integerComparisonExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIntegerComparisonExpression_Operand1() {
+		return (EReference)integerComparisonExpressionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIntegerComparisonExpression_Operand2() {
+		return (EReference)integerComparisonExpressionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getStringComparisonExpression() {
+		return stringComparisonExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStringComparisonExpression_Operator() {
+		return (EAttribute)stringComparisonExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStringComparisonExpression_Operand1() {
+		return (EReference)stringComparisonExpressionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStringComparisonExpression_Operand2() {
+		return (EReference)stringComparisonExpressionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBooleanExpression() {
+		return booleanExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBooleanBinaryExpression() {
+		return booleanBinaryExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBooleanBinaryExpression_Operator() {
+		return (EAttribute)booleanBinaryExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBooleanBinaryExpression_Operand1() {
+		return (EReference)booleanBinaryExpressionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBooleanBinaryExpression_Operand2() {
+		return (EReference)booleanBinaryExpressionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBooleanUnaryExpression() {
+		return booleanUnaryExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBooleanUnaryExpression_Operator() {
+		return (EAttribute)booleanUnaryExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBooleanUnaryExpression_Operand() {
+		return (EReference)booleanUnaryExpressionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEventOccurrence() {
 		return eventOccurrenceEClass;
 	}
@@ -1185,6 +1391,42 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getBooleanBinaryOperator() {
+		return booleanBinaryOperatorEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getBooleanUnaryOperator() {
+		return booleanUnaryOperatorEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getIntegerComparisonOperator() {
+		return integerComparisonOperatorEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getStringComparisonOperator() {
+		return stringComparisonOperatorEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getPseudostateKind() {
 		return pseudostateKindEEnum;
 	}
@@ -1260,16 +1502,13 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		constraintEClass = createEClass(CONSTRAINT);
 
 		booleanConstraintEClass = createEClass(BOOLEAN_CONSTRAINT);
-		createEReference(booleanConstraintEClass, BOOLEAN_CONSTRAINT__ATTRIBUTE);
-		createEAttribute(booleanConstraintEClass, BOOLEAN_CONSTRAINT__VALUE);
+		createEReference(booleanConstraintEClass, BOOLEAN_CONSTRAINT__EXPRESSION);
 
 		integerConstraintEClass = createEClass(INTEGER_CONSTRAINT);
-		createEReference(integerConstraintEClass, INTEGER_CONSTRAINT__ATTRIBUTE);
-		createEAttribute(integerConstraintEClass, INTEGER_CONSTRAINT__VALUE);
+		createEReference(integerConstraintEClass, INTEGER_CONSTRAINT__EXPRESSION);
 
 		stringConstraintEClass = createEClass(STRING_CONSTRAINT);
-		createEReference(stringConstraintEClass, STRING_CONSTRAINT__ATTRIBUTE);
-		createEAttribute(stringConstraintEClass, STRING_CONSTRAINT__VALUE);
+		createEReference(stringConstraintEClass, STRING_CONSTRAINT__EXPRESSION);
 
 		namedElementEClass = createEClass(NAMED_ELEMENT);
 		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
@@ -1335,6 +1574,29 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		createEReference(stringAttributeValueEClass, STRING_ATTRIBUTE_VALUE__ATTRIBUTE);
 		createEAttribute(stringAttributeValueEClass, STRING_ATTRIBUTE_VALUE__VALUE);
 
+		expressionEClass = createEClass(EXPRESSION);
+
+		integerComparisonExpressionEClass = createEClass(INTEGER_COMPARISON_EXPRESSION);
+		createEAttribute(integerComparisonExpressionEClass, INTEGER_COMPARISON_EXPRESSION__OPERATOR);
+		createEReference(integerComparisonExpressionEClass, INTEGER_COMPARISON_EXPRESSION__OPERAND1);
+		createEReference(integerComparisonExpressionEClass, INTEGER_COMPARISON_EXPRESSION__OPERAND2);
+
+		stringComparisonExpressionEClass = createEClass(STRING_COMPARISON_EXPRESSION);
+		createEAttribute(stringComparisonExpressionEClass, STRING_COMPARISON_EXPRESSION__OPERATOR);
+		createEReference(stringComparisonExpressionEClass, STRING_COMPARISON_EXPRESSION__OPERAND1);
+		createEReference(stringComparisonExpressionEClass, STRING_COMPARISON_EXPRESSION__OPERAND2);
+
+		booleanExpressionEClass = createEClass(BOOLEAN_EXPRESSION);
+
+		booleanBinaryExpressionEClass = createEClass(BOOLEAN_BINARY_EXPRESSION);
+		createEAttribute(booleanBinaryExpressionEClass, BOOLEAN_BINARY_EXPRESSION__OPERATOR);
+		createEReference(booleanBinaryExpressionEClass, BOOLEAN_BINARY_EXPRESSION__OPERAND1);
+		createEReference(booleanBinaryExpressionEClass, BOOLEAN_BINARY_EXPRESSION__OPERAND2);
+
+		booleanUnaryExpressionEClass = createEClass(BOOLEAN_UNARY_EXPRESSION);
+		createEAttribute(booleanUnaryExpressionEClass, BOOLEAN_UNARY_EXPRESSION__OPERATOR);
+		createEReference(booleanUnaryExpressionEClass, BOOLEAN_UNARY_EXPRESSION__OPERAND);
+
 		eventOccurrenceEClass = createEClass(EVENT_OCCURRENCE);
 
 		completionEventOccurrenceEClass = createEClass(COMPLETION_EVENT_OCCURRENCE);
@@ -1351,6 +1613,10 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		createEReference(callEventOccurrenceEClass, CALL_EVENT_OCCURRENCE__RETURN_VALUE);
 
 		// Create enums
+		booleanBinaryOperatorEEnum = createEEnum(BOOLEAN_BINARY_OPERATOR);
+		booleanUnaryOperatorEEnum = createEEnum(BOOLEAN_UNARY_OPERATOR);
+		integerComparisonOperatorEEnum = createEEnum(INTEGER_COMPARISON_OPERATOR);
+		stringComparisonOperatorEEnum = createEEnum(STRING_COMPARISON_OPERATOR);
 		pseudostateKindEEnum = createEEnum(PSEUDOSTATE_KIND);
 		transitionKindEEnum = createEEnum(TRANSITION_KIND);
 	}
@@ -1407,6 +1673,11 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		booleanAttributeValueEClass.getESuperTypes().add(this.getAttributeValue());
 		integerAttributeValueEClass.getESuperTypes().add(this.getAttributeValue());
 		stringAttributeValueEClass.getESuperTypes().add(this.getAttributeValue());
+		integerComparisonExpressionEClass.getESuperTypes().add(this.getExpression());
+		stringComparisonExpressionEClass.getESuperTypes().add(this.getExpression());
+		booleanExpressionEClass.getESuperTypes().add(this.getExpression());
+		booleanBinaryExpressionEClass.getESuperTypes().add(this.getBooleanExpression());
+		booleanUnaryExpressionEClass.getESuperTypes().add(this.getBooleanExpression());
 		signalEventOccurrenceEClass.getESuperTypes().add(this.getEventOccurrence());
 		callEventOccurrenceEClass.getESuperTypes().add(this.getEventOccurrence());
 
@@ -1445,16 +1716,13 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		initEClass(constraintEClass, Constraint.class, "Constraint", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(booleanConstraintEClass, BooleanConstraint.class, "BooleanConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBooleanConstraint_Attribute(), this.getBooleanAttribute(), null, "attribute", null, 0, 1, BooleanConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBooleanConstraint_Value(), ecorePackage.getEBooleanObject(), "value", null, 0, 1, BooleanConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBooleanConstraint_Expression(), this.getBooleanExpression(), null, "expression", null, 1, 1, BooleanConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(integerConstraintEClass, IntegerConstraint.class, "IntegerConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getIntegerConstraint_Attribute(), this.getIntegerAttribute(), null, "attribute", null, 0, 1, IntegerConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getIntegerConstraint_Value(), ecorePackage.getEIntegerObject(), "value", null, 0, 1, IntegerConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIntegerConstraint_Expression(), this.getIntegerComparisonExpression(), null, "expression", null, 1, 1, IntegerConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stringConstraintEClass, StringConstraint.class, "StringConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStringConstraint_Attribute(), this.getStringAttribute(), null, "attribute", null, 0, 1, StringConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getStringConstraint_Value(), ecorePackage.getEString(), "value", null, 0, 1, StringConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStringConstraint_Expression(), this.getStringComparisonExpression(), null, "expression", null, 1, 1, StringConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1520,6 +1788,29 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		initEReference(getStringAttributeValue_Attribute(), this.getStringAttribute(), null, "attribute", null, 0, 1, StringAttributeValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStringAttributeValue_Value(), ecorePackage.getEString(), "value", null, 0, 1, StringAttributeValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(expressionEClass, Expression.class, "Expression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(integerComparisonExpressionEClass, IntegerComparisonExpression.class, "IntegerComparisonExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getIntegerComparisonExpression_Operator(), this.getIntegerComparisonOperator(), "operator", null, 1, 1, IntegerComparisonExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIntegerComparisonExpression_Operand1(), this.getIntegerAttribute(), null, "operand1", null, 1, 1, IntegerComparisonExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIntegerComparisonExpression_Operand2(), this.getIntegerAttribute(), null, "operand2", null, 1, 1, IntegerComparisonExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(stringComparisonExpressionEClass, StringComparisonExpression.class, "StringComparisonExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getStringComparisonExpression_Operator(), this.getStringComparisonOperator(), "operator", null, 1, 1, StringComparisonExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStringComparisonExpression_Operand1(), this.getStringAttribute(), null, "operand1", null, 1, 1, StringComparisonExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStringComparisonExpression_Operand2(), this.getStringAttribute(), null, "operand2", null, 1, 1, StringComparisonExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(booleanExpressionEClass, BooleanExpression.class, "BooleanExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(booleanBinaryExpressionEClass, BooleanBinaryExpression.class, "BooleanBinaryExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBooleanBinaryExpression_Operator(), this.getBooleanBinaryOperator(), "operator", null, 1, 1, BooleanBinaryExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBooleanBinaryExpression_Operand1(), this.getBooleanAttribute(), null, "operand1", null, 1, 1, BooleanBinaryExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBooleanBinaryExpression_Operand2(), this.getBooleanAttribute(), null, "operand2", null, 1, 1, BooleanBinaryExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(booleanUnaryExpressionEClass, BooleanUnaryExpression.class, "BooleanUnaryExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBooleanUnaryExpression_Operator(), this.getBooleanUnaryOperator(), "operator", null, 1, 1, BooleanUnaryExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBooleanUnaryExpression_Operand(), this.getBooleanAttribute(), null, "operand", null, 1, 1, BooleanUnaryExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(eventOccurrenceEClass, EventOccurrence.class, "EventOccurrence", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(completionEventOccurrenceEClass, CompletionEventOccurrence.class, "CompletionEventOccurrence", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1536,6 +1827,25 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		initEReference(getCallEventOccurrence_ReturnValue(), this.getAttributeValue(), null, "returnValue", null, 0, 1, CallEventOccurrence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
+		initEEnum(booleanBinaryOperatorEEnum, BooleanBinaryOperator.class, "BooleanBinaryOperator");
+		addEEnumLiteral(booleanBinaryOperatorEEnum, BooleanBinaryOperator.AND);
+		addEEnumLiteral(booleanBinaryOperatorEEnum, BooleanBinaryOperator.OR);
+
+		initEEnum(booleanUnaryOperatorEEnum, BooleanUnaryOperator.class, "BooleanUnaryOperator");
+		addEEnumLiteral(booleanUnaryOperatorEEnum, BooleanUnaryOperator.NOT);
+
+		initEEnum(integerComparisonOperatorEEnum, IntegerComparisonOperator.class, "IntegerComparisonOperator");
+		addEEnumLiteral(integerComparisonOperatorEEnum, IntegerComparisonOperator.SMALLER);
+		addEEnumLiteral(integerComparisonOperatorEEnum, IntegerComparisonOperator.SMALLER_EQUALS);
+		addEEnumLiteral(integerComparisonOperatorEEnum, IntegerComparisonOperator.EQUALS);
+		addEEnumLiteral(integerComparisonOperatorEEnum, IntegerComparisonOperator.NOT_EQUALS);
+		addEEnumLiteral(integerComparisonOperatorEEnum, IntegerComparisonOperator.GREATER_EQUALS);
+		addEEnumLiteral(integerComparisonOperatorEEnum, IntegerComparisonOperator.GREATER);
+
+		initEEnum(stringComparisonOperatorEEnum, StringComparisonOperator.class, "StringComparisonOperator");
+		addEEnumLiteral(stringComparisonOperatorEEnum, StringComparisonOperator.EQUALS);
+		addEEnumLiteral(stringComparisonOperatorEEnum, StringComparisonOperator.NOT_EQUALS);
+
 		initEEnum(pseudostateKindEEnum, PseudostateKind.class, "PseudostateKind");
 		addEEnumLiteral(pseudostateKindEEnum, PseudostateKind.INITIAL);
 		addEEnumLiteral(pseudostateKindEEnum, PseudostateKind.JOIN);
@@ -1553,18 +1863,18 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		createResource(eNS_URI);
 
 		// Create annotations
-		// dynamic
-		createDynamicAnnotations();
+		// aspect
+		createAspectAnnotations();
 	}
 
 	/**
-	 * Initializes the annotations for <b>dynamic</b>.
+	 * Initializes the annotations for <b>aspect</b>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void createDynamicAnnotations() {
-		String source = "dynamic";
+	protected void createAspectAnnotations() {
+		String source = "aspect";
 		addAnnotation
 		  (getCustomSystem_EventOccurrences(),
 		   source,

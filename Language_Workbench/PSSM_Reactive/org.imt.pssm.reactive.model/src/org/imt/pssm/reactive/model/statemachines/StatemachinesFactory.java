@@ -229,6 +229,42 @@ public interface StatemachinesFactory extends EFactory {
 	StringAttributeValue createStringAttributeValue();
 
 	/**
+	 * Returns a new object of class '<em>Integer Comparison Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Integer Comparison Expression</em>'.
+	 * @generated
+	 */
+	IntegerComparisonExpression createIntegerComparisonExpression();
+
+	/**
+	 * Returns a new object of class '<em>String Comparison Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>String Comparison Expression</em>'.
+	 * @generated
+	 */
+	StringComparisonExpression createStringComparisonExpression();
+
+	/**
+	 * Returns a new object of class '<em>Boolean Binary Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Boolean Binary Expression</em>'.
+	 * @generated
+	 */
+	BooleanBinaryExpression createBooleanBinaryExpression();
+
+	/**
+	 * Returns a new object of class '<em>Boolean Unary Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Boolean Unary Expression</em>'.
+	 * @generated
+	 */
+	BooleanUnaryExpression createBooleanUnaryExpression();
+
+	/**
 	 * Returns a new object of class '<em>Completion Event Occurrence</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

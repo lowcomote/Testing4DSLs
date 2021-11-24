@@ -3,13 +3,12 @@
 package org.imt.pssm.reactive.model.statemachines.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.imt.pssm.reactive.model.statemachines.IntegerAttribute;
+import org.imt.pssm.reactive.model.statemachines.IntegerComparisonExpression;
 import org.imt.pssm.reactive.model.statemachines.IntegerConstraint;
 import org.imt.pssm.reactive.model.statemachines.StatemachinesPackage;
 
@@ -21,43 +20,21 @@ import org.imt.pssm.reactive.model.statemachines.StatemachinesPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.imt.pssm.reactive.model.statemachines.impl.IntegerConstraintImpl#getAttribute <em>Attribute</em>}</li>
- *   <li>{@link org.imt.pssm.reactive.model.statemachines.impl.IntegerConstraintImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.imt.pssm.reactive.model.statemachines.impl.IntegerConstraintImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class IntegerConstraintImpl extends ConstraintImpl implements IntegerConstraint {
 	/**
-	 * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' reference.
+	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAttribute()
+	 * @see #getExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected IntegerAttribute attribute;
-
-	/**
-	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Integer VALUE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected Integer value = VALUE_EDEFAULT;
-
+	protected IntegerComparisonExpression expression;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -82,16 +59,23 @@ public class IntegerConstraintImpl extends ConstraintImpl implements IntegerCons
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IntegerAttribute getAttribute() {
-		if (attribute != null && attribute.eIsProxy()) {
-			InternalEObject oldAttribute = (InternalEObject)attribute;
-			attribute = (IntegerAttribute)eResolveProxy(oldAttribute);
-			if (attribute != oldAttribute) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StatemachinesPackage.INTEGER_CONSTRAINT__ATTRIBUTE, oldAttribute, attribute));
-			}
+	public IntegerComparisonExpression getExpression() {
+		return expression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetExpression(IntegerComparisonExpression newExpression, NotificationChain msgs) {
+		IntegerComparisonExpression oldExpression = expression;
+		expression = newExpression;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StatemachinesPackage.INTEGER_CONSTRAINT__EXPRESSION, oldExpression, newExpression);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
-		return attribute;
+		return msgs;
 	}
 
 	/**
@@ -99,8 +83,18 @@ public class IntegerConstraintImpl extends ConstraintImpl implements IntegerCons
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IntegerAttribute basicGetAttribute() {
-		return attribute;
+	public void setExpression(IntegerComparisonExpression newExpression) {
+		if (newExpression != expression) {
+			NotificationChain msgs = null;
+			if (expression != null)
+				msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StatemachinesPackage.INTEGER_CONSTRAINT__EXPRESSION, null, msgs);
+			if (newExpression != null)
+				msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StatemachinesPackage.INTEGER_CONSTRAINT__EXPRESSION, null, msgs);
+			msgs = basicSetExpression(newExpression, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.INTEGER_CONSTRAINT__EXPRESSION, newExpression, newExpression));
 	}
 
 	/**
@@ -108,32 +102,13 @@ public class IntegerConstraintImpl extends ConstraintImpl implements IntegerCons
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setAttribute(IntegerAttribute newAttribute) {
-		IntegerAttribute oldAttribute = attribute;
-		attribute = newAttribute;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.INTEGER_CONSTRAINT__ATTRIBUTE, oldAttribute, attribute));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Integer getValue() {
-		return value;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setValue(Integer newValue) {
-		Integer oldValue = value;
-		value = newValue;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.INTEGER_CONSTRAINT__VALUE, oldValue, value));
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case StatemachinesPackage.INTEGER_CONSTRAINT__EXPRESSION:
+				return basicSetExpression(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -144,11 +119,8 @@ public class IntegerConstraintImpl extends ConstraintImpl implements IntegerCons
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StatemachinesPackage.INTEGER_CONSTRAINT__ATTRIBUTE:
-				if (resolve) return getAttribute();
-				return basicGetAttribute();
-			case StatemachinesPackage.INTEGER_CONSTRAINT__VALUE:
-				return getValue();
+			case StatemachinesPackage.INTEGER_CONSTRAINT__EXPRESSION:
+				return getExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -161,11 +133,8 @@ public class IntegerConstraintImpl extends ConstraintImpl implements IntegerCons
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StatemachinesPackage.INTEGER_CONSTRAINT__ATTRIBUTE:
-				setAttribute((IntegerAttribute)newValue);
-				return;
-			case StatemachinesPackage.INTEGER_CONSTRAINT__VALUE:
-				setValue((Integer)newValue);
+			case StatemachinesPackage.INTEGER_CONSTRAINT__EXPRESSION:
+				setExpression((IntegerComparisonExpression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -179,11 +148,8 @@ public class IntegerConstraintImpl extends ConstraintImpl implements IntegerCons
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StatemachinesPackage.INTEGER_CONSTRAINT__ATTRIBUTE:
-				setAttribute((IntegerAttribute)null);
-				return;
-			case StatemachinesPackage.INTEGER_CONSTRAINT__VALUE:
-				setValue(VALUE_EDEFAULT);
+			case StatemachinesPackage.INTEGER_CONSTRAINT__EXPRESSION:
+				setExpression((IntegerComparisonExpression)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -197,28 +163,10 @@ public class IntegerConstraintImpl extends ConstraintImpl implements IntegerCons
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StatemachinesPackage.INTEGER_CONSTRAINT__ATTRIBUTE:
-				return attribute != null;
-			case StatemachinesPackage.INTEGER_CONSTRAINT__VALUE:
-				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+			case StatemachinesPackage.INTEGER_CONSTRAINT__EXPRESSION:
+				return expression != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (value: ");
-		result.append(value);
-		result.append(')');
-		return result.toString();
 	}
 
 } //IntegerConstraintImpl

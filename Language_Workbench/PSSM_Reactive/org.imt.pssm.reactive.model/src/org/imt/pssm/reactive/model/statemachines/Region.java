@@ -108,7 +108,7 @@ public interface Region extends NamedElement {
 	 * @return the value of the '<em>Current Vertex</em>' reference.
 	 * @see #setCurrentVertex(Vertex)
 	 * @see org.imt.pssm.reactive.model.statemachines.StatemachinesPackage#getRegion_CurrentVertex()
-	 * @model annotation="dynamic"
+	 * @model annotation="aspect"
 	 * @generated
 	 */
 	Vertex getCurrentVertex();

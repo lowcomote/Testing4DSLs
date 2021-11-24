@@ -272,6 +272,49 @@ public class StatemachinesSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case StatemachinesPackage.EXPRESSION: {
+				Expression expression = (Expression)theEObject;
+				T result = caseExpression(expression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StatemachinesPackage.INTEGER_COMPARISON_EXPRESSION: {
+				IntegerComparisonExpression integerComparisonExpression = (IntegerComparisonExpression)theEObject;
+				T result = caseIntegerComparisonExpression(integerComparisonExpression);
+				if (result == null) result = caseExpression(integerComparisonExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StatemachinesPackage.STRING_COMPARISON_EXPRESSION: {
+				StringComparisonExpression stringComparisonExpression = (StringComparisonExpression)theEObject;
+				T result = caseStringComparisonExpression(stringComparisonExpression);
+				if (result == null) result = caseExpression(stringComparisonExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StatemachinesPackage.BOOLEAN_EXPRESSION: {
+				BooleanExpression booleanExpression = (BooleanExpression)theEObject;
+				T result = caseBooleanExpression(booleanExpression);
+				if (result == null) result = caseExpression(booleanExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StatemachinesPackage.BOOLEAN_BINARY_EXPRESSION: {
+				BooleanBinaryExpression booleanBinaryExpression = (BooleanBinaryExpression)theEObject;
+				T result = caseBooleanBinaryExpression(booleanBinaryExpression);
+				if (result == null) result = caseBooleanExpression(booleanBinaryExpression);
+				if (result == null) result = caseExpression(booleanBinaryExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StatemachinesPackage.BOOLEAN_UNARY_EXPRESSION: {
+				BooleanUnaryExpression booleanUnaryExpression = (BooleanUnaryExpression)theEObject;
+				T result = caseBooleanUnaryExpression(booleanUnaryExpression);
+				if (result == null) result = caseBooleanExpression(booleanUnaryExpression);
+				if (result == null) result = caseExpression(booleanUnaryExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case StatemachinesPackage.EVENT_OCCURRENCE: {
 				EventOccurrence eventOccurrence = (EventOccurrence)theEObject;
 				T result = caseEventOccurrence(eventOccurrence);
@@ -734,6 +777,96 @@ public class StatemachinesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseStringAttributeValue(StringAttributeValue object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExpression(Expression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Integer Comparison Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Integer Comparison Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIntegerComparisonExpression(IntegerComparisonExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>String Comparison Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>String Comparison Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStringComparisonExpression(StringComparisonExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Boolean Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Boolean Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBooleanExpression(BooleanExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Boolean Binary Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Boolean Binary Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBooleanBinaryExpression(BooleanBinaryExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Boolean Unary Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Boolean Unary Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBooleanUnaryExpression(BooleanUnaryExpression object) {
 		return null;
 	}
 

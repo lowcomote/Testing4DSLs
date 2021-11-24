@@ -80,7 +80,7 @@ public interface CustomSystem extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Event Occurrences</em>' reference list.
 	 * @see org.imt.pssm.reactive.model.statemachines.StatemachinesPackage#getCustomSystem_EventOccurrences()
-	 * @model annotation="dynamic"
+	 * @model annotation="aspect"
 	 * @generated
 	 */
 	EList<EventOccurrence> getEventOccurrences();
@@ -92,7 +92,7 @@ public interface CustomSystem extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Performed Behaviors</em>' reference list.
 	 * @see org.imt.pssm.reactive.model.statemachines.StatemachinesPackage#getCustomSystem_PerformedBehaviors()
-	 * @model annotation="dynamic"
+	 * @model annotation="aspect"
 	 * @generated
 	 */
 	EList<Behavior> getPerformedBehaviors();

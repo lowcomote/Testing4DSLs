@@ -3,7 +3,7 @@
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:statemachines="http://org.tetrabox.examples.statemachines.interpretedstatemachines/statemachines/">
+    xmlns:statemachines="http://org.imt.pssm.reactive/statemachines/">
   <statemachine
       name="withdrawCash">
     <regions
@@ -77,9 +77,12 @@
               signal="//@signals.1"/>
         </triggers>
         <constraint
-            xsi:type="statemachines:IntegerConstraint"
-            attribute="//@signals.1/@attributes.0"
-            value="1234"/>
+            xsi:type="statemachines:IntegerConstraint">
+          <expression
+              operator="=="
+              operand1="//@signals.1/@attributes.0"
+              operand2="//@signals.0/@attributes.0"/>
+        </constraint>
       </transitions>
       <transitions
           name="getPin_final"
@@ -95,9 +98,12 @@
         <effect
             name="wrongPinMsg"/>
         <constraint
-            xsi:type="statemachines:IntegerConstraint"
-            attribute="//@signals.1/@attributes.0"
-            value="1111"/>
+            xsi:type="statemachines:IntegerConstraint">
+          <expression
+              operator="!="
+              operand1="//@signals.1/@attributes.0"
+              operand2="//@signals.0/@attributes.0"/>
+        </constraint>
       </transitions>
       <transitions
           name="getAmount_withdraw"
@@ -111,9 +117,12 @@
               signal="//@signals.2"/>
         </triggers>
         <constraint
-            xsi:type="statemachines:IntegerConstraint"
-            attribute="//@signals.2/@attributes.0"
-            value="500"/>
+            xsi:type="statemachines:IntegerConstraint">
+          <expression
+              operator="&lt;="
+              operand1="//@signals.2/@attributes.0"
+              operand2="//@signals.0/@attributes.1"/>
+        </constraint>
       </transitions>
       <transitions
           name="getAmount_final"
@@ -129,9 +138,12 @@
         <effect
             name="notEnoughMoneyMsg"/>
         <constraint
-            xsi:type="statemachines:IntegerConstraint"
-            attribute="//@signals.2/@attributes.0"
-            value="1500"/>
+            xsi:type="statemachines:IntegerConstraint">
+          <expression
+              operator=">"
+              operand1="//@signals.2/@attributes.0"
+              operand2="//@signals.0/@attributes.1"/>
+        </constraint>
       </transitions>
       <transitions
           name="withdraw_final"

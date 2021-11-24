@@ -3,14 +3,14 @@
 package org.imt.pssm.reactive.model.statemachines.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.imt.pssm.reactive.model.statemachines.StatemachinesPackage;
-import org.imt.pssm.reactive.model.statemachines.StringAttribute;
+import org.imt.pssm.reactive.model.statemachines.StringComparisonExpression;
 import org.imt.pssm.reactive.model.statemachines.StringConstraint;
 
 /**
@@ -21,43 +21,21 @@ import org.imt.pssm.reactive.model.statemachines.StringConstraint;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.imt.pssm.reactive.model.statemachines.impl.StringConstraintImpl#getAttribute <em>Attribute</em>}</li>
- *   <li>{@link org.imt.pssm.reactive.model.statemachines.impl.StringConstraintImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.imt.pssm.reactive.model.statemachines.impl.StringConstraintImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class StringConstraintImpl extends ConstraintImpl implements StringConstraint {
 	/**
-	 * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' reference.
+	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAttribute()
+	 * @see #getExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected StringAttribute attribute;
-
-	/**
-	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String VALUE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected String value = VALUE_EDEFAULT;
-
+	protected StringComparisonExpression expression;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -82,16 +60,23 @@ public class StringConstraintImpl extends ConstraintImpl implements StringConstr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StringAttribute getAttribute() {
-		if (attribute != null && attribute.eIsProxy()) {
-			InternalEObject oldAttribute = (InternalEObject)attribute;
-			attribute = (StringAttribute)eResolveProxy(oldAttribute);
-			if (attribute != oldAttribute) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StatemachinesPackage.STRING_CONSTRAINT__ATTRIBUTE, oldAttribute, attribute));
-			}
+	public StringComparisonExpression getExpression() {
+		return expression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetExpression(StringComparisonExpression newExpression, NotificationChain msgs) {
+		StringComparisonExpression oldExpression = expression;
+		expression = newExpression;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STRING_CONSTRAINT__EXPRESSION, oldExpression, newExpression);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
-		return attribute;
+		return msgs;
 	}
 
 	/**
@@ -99,8 +84,18 @@ public class StringConstraintImpl extends ConstraintImpl implements StringConstr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StringAttribute basicGetAttribute() {
-		return attribute;
+	public void setExpression(StringComparisonExpression newExpression) {
+		if (newExpression != expression) {
+			NotificationChain msgs = null;
+			if (expression != null)
+				msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StatemachinesPackage.STRING_CONSTRAINT__EXPRESSION, null, msgs);
+			if (newExpression != null)
+				msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StatemachinesPackage.STRING_CONSTRAINT__EXPRESSION, null, msgs);
+			msgs = basicSetExpression(newExpression, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STRING_CONSTRAINT__EXPRESSION, newExpression, newExpression));
 	}
 
 	/**
@@ -108,32 +103,13 @@ public class StringConstraintImpl extends ConstraintImpl implements StringConstr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setAttribute(StringAttribute newAttribute) {
-		StringAttribute oldAttribute = attribute;
-		attribute = newAttribute;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STRING_CONSTRAINT__ATTRIBUTE, oldAttribute, attribute));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getValue() {
-		return value;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setValue(String newValue) {
-		String oldValue = value;
-		value = newValue;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STRING_CONSTRAINT__VALUE, oldValue, value));
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case StatemachinesPackage.STRING_CONSTRAINT__EXPRESSION:
+				return basicSetExpression(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -144,11 +120,8 @@ public class StringConstraintImpl extends ConstraintImpl implements StringConstr
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StatemachinesPackage.STRING_CONSTRAINT__ATTRIBUTE:
-				if (resolve) return getAttribute();
-				return basicGetAttribute();
-			case StatemachinesPackage.STRING_CONSTRAINT__VALUE:
-				return getValue();
+			case StatemachinesPackage.STRING_CONSTRAINT__EXPRESSION:
+				return getExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -161,11 +134,8 @@ public class StringConstraintImpl extends ConstraintImpl implements StringConstr
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StatemachinesPackage.STRING_CONSTRAINT__ATTRIBUTE:
-				setAttribute((StringAttribute)newValue);
-				return;
-			case StatemachinesPackage.STRING_CONSTRAINT__VALUE:
-				setValue((String)newValue);
+			case StatemachinesPackage.STRING_CONSTRAINT__EXPRESSION:
+				setExpression((StringComparisonExpression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -179,11 +149,8 @@ public class StringConstraintImpl extends ConstraintImpl implements StringConstr
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StatemachinesPackage.STRING_CONSTRAINT__ATTRIBUTE:
-				setAttribute((StringAttribute)null);
-				return;
-			case StatemachinesPackage.STRING_CONSTRAINT__VALUE:
-				setValue(VALUE_EDEFAULT);
+			case StatemachinesPackage.STRING_CONSTRAINT__EXPRESSION:
+				setExpression((StringComparisonExpression)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -197,28 +164,10 @@ public class StringConstraintImpl extends ConstraintImpl implements StringConstr
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StatemachinesPackage.STRING_CONSTRAINT__ATTRIBUTE:
-				return attribute != null;
-			case StatemachinesPackage.STRING_CONSTRAINT__VALUE:
-				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+			case StatemachinesPackage.STRING_CONSTRAINT__EXPRESSION:
+				return expression != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (value: ");
-		result.append(value);
-		result.append(')');
-		return result.toString();
 	}
 
 } //StringConstraintImpl

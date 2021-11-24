@@ -21,13 +21,13 @@ Package Event019_Test_E_TestSuite {
 			state_machine = Event019_Test_E ,
 			signal = Continue
 		) to PSSM.dslSpecificMUTGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = S1_1_entry
 		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = S2_1_1_entry
 		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		PSSM.dslSpecificMUTGate sends behavior_executed (
 			behavior = T3_testEnd
 		) to tester.dslSpecificTestGate ;
 	}
