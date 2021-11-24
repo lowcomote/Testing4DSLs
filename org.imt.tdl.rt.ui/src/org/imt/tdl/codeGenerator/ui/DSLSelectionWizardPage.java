@@ -133,7 +133,9 @@ public class DSLSelectionWizardPage extends WizardPage{
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		IProject[] tdlProjects = root.getProjects();
 		for (int i=0; i<tdlProjects.length; i++) {
-			projects.put(tdlProjects[i].getName(), tdlProjects[i].getFullPath());
+			if (tdlProjects[i].isAccessible()) {
+				projects.put(tdlProjects[i].getName(), tdlProjects[i].getFullPath());
+			}
 		}
 		return projects;
 	}
