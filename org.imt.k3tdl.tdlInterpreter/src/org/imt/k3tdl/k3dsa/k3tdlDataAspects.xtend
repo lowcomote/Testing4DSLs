@@ -3,7 +3,6 @@ package org.imt.k3tdl.k3dsa
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 import java.util.ArrayList
-import java.util.List
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
@@ -29,16 +28,6 @@ import org.etsi.mts.tdl.SpecialValueUse
 import org.etsi.mts.tdl.StaticDataUse
 import org.etsi.mts.tdl.StructuredDataInstance
 import org.etsi.mts.tdl.StructuredDataType
-import org.imt.pssm.reactive.model.statemachines.BooleanAttribute
-import org.imt.pssm.reactive.model.statemachines.BooleanAttributeValue
-import org.imt.pssm.reactive.model.statemachines.CallEventOccurrence
-import org.imt.pssm.reactive.model.statemachines.IntegerAttribute
-import org.imt.pssm.reactive.model.statemachines.IntegerAttributeValue
-import org.imt.pssm.reactive.model.statemachines.Signal
-import org.imt.pssm.reactive.model.statemachines.SignalEventOccurrence
-import org.imt.pssm.reactive.model.statemachines.StatemachinesFactory
-import org.imt.pssm.reactive.model.statemachines.StringAttribute
-import org.imt.pssm.reactive.model.statemachines.StringAttributeValue
 import org.imt.tdl.testResult.TestResultUtil
 
 import static extension org.imt.k3tdl.k3dsa.DataInstanceAspect.*
@@ -79,7 +68,7 @@ class DataTypeAspect{
 	def boolean isConcreteEcoreType(String DSLPath) {
 		var dslRes = (new ResourceSetImpl()).getResource(URI.createURI(DSLPath), true);
 		var dsl = dslRes.getContents().get(0) as Dsl;
-		if (dsl.getEntry("ecore") != null) {
+		if (dsl.getEntry("ecore") !== null) {
 			var metamodelPath = dsl.getEntry("ecore").getValue().replaceFirst("resource", "plugin");
 			var metamodelRes = (new ResourceSetImpl()).getResource(URI.createURI(metamodelPath), true);
 			var metamodelRootElement = metamodelRes.getContents().get(0) as EPackage;
@@ -90,7 +79,7 @@ class DataTypeAspect{
 	def boolean isAcceptedEvent(String DSLPath) {
 		var dslRes = (new ResourceSetImpl()).getResource(URI.createURI(DSLPath), true);
 		var dsl = dslRes.getContents().get(0) as Dsl;
-		if (dsl.getEntry("behavioralInterface") != null) {
+		if (dsl.getEntry("behavioralInterface") !== null) {
 			var interfacePath = dsl.getEntry("behavioralInterface").getValue().replaceFirst("resource", "plugin");
 			var interfaceRes = (new ResourceSetImpl()).getResource(URI.createURI(interfacePath), true);
 			var BehavioralInterface interfaceRootElement= interfaceRes.getContents().get(0) as BehavioralInterface;
@@ -101,7 +90,7 @@ class DataTypeAspect{
 	def boolean isExposedEvent(String DSLPath) {
 		var dslRes = (new ResourceSetImpl()).getResource(URI.createURI(DSLPath), true);
 		var dsl = dslRes.getContents().get(0) as Dsl;
-		if (dsl.getEntry("behavioralInterface") != null) {
+		if (dsl.getEntry("behavioralInterface") !== null) {
 			var interfacePath = dsl.getEntry("behavioralInterface").getValue().replaceFirst("resource", "plugin");
 			var interfaceRes = (new ResourceSetImpl()).getResource(URI.createURI(interfacePath), true);
 			var BehavioralInterface interfaceRootElement= interfaceRes.getContents().get(0) as BehavioralInterface;
@@ -131,7 +120,16 @@ class DataInstanceAspect{
 	def String getValidName(){
 		var tdlName = _self.name
 		if (_self.name.startsWith("_")){
-			return tdlName.substring(1)
+			tdlName = tdlName.substring(1)
+		}
+		if (_self instanceof StructuredDataInstance){
+			val sDataInstance = _self as StructuredDataInstance
+			if (sDataInstance.memberAssignment.size>0){
+				val ma = sDataInstance.memberAssignment.findFirst[ma | ma.member.name.equals("_name")]
+				if (ma !== null && ma.memberSpec instanceof LiteralValueUse){
+					tdlName = (ma.memberSpec as LiteralValueUse).value
+				}
+			}
 		}
 		return tdlName
 	}
@@ -243,7 +241,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 			val dataIns = _self.dataInstance as StructuredDataInstance
 			if (dataIns.memberAssignment.size>0){//if some values are assigned to the members of data instance
 				matchedElement = dataIns.getMatchedMUTElement(rootElement, MUTResource, isAssertion, DSLPath)
-				if (matchedElement == null){
+				if (matchedElement === null){
 					_self.dataInstance.info = TestResultUtil.FAIL + ": There is no MUT element matched with " + dataIns.name
 					return null
 				}
@@ -278,7 +276,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 		//the second parameter is isAssertion that has to be set as false
 		//so only static elements will be matched to then set the values of its dynamic features
 		var EObject matchedObject = _self.getMatchedMUTElement(MUTResource, false, DSLPath)
-		if (matchedObject == null){
+		if (matchedObject === null){
 			println("There is no matched object in the model under test")
 			return TestResultUtil.FAIL + ": There is no MUT element matched with " + _self.dataInstance.name
 		}
@@ -330,78 +328,8 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 	}
 	
 	def EObject createEventOccurrence(Resource MUTResource, boolean isAssertion, String DSLPath){
-		if (_self.dataInstance.dataType.validName.equals("SignalEventOccurrence")){
-			var SignalEventOccurrence signal_occurrence = StatemachinesFactory.eINSTANCE.createSignalEventOccurrence
-			for (i : 0 ..<_self.argument.size){
-				val parameterBinding = _self.argument.get(i)
-				if (parameterBinding.parameter.dataType.validName.equals("Signal")){
-					signal_occurrence.signal = (parameterBinding.dataUse as DataInstanceUse).
-						getMatchedMUTElement(MUTResource, isAssertion, DSLPath) as Signal
-				}else if (parameterBinding.parameter.dataType.validName.equals("AttributeValue")){
-					var List<DataInstanceUse> tdlAttributeValues = new ArrayList<DataInstanceUse>
-					val paramValue = parameterBinding.dataUse as DataInstanceUse
-					if (paramValue.item == null || paramValue.item.size <= 0){
-						tdlAttributeValues.add(parameterBinding.dataUse as DataInstanceUse)
-					}else {
-						for (j:0 ..<paramValue.item.size){
-							tdlAttributeValues.add(paramValue.item.get(j) as DataInstanceUse)
-						}
-					}
-					for (j:0 ..<tdlAttributeValues.size){
-						var tdlAttributeValueUse = tdlAttributeValues.get(j)
-						val tdlAttributeValue = tdlAttributeValueUse.dataInstance as StructuredDataInstance
-						var DataUse attributePropertyValue;
-						var DataUse valuePropertyValue;
-						//get the 'attribute' and 'value' properties of the AttributeValue, a long with their values
-						if (tdlAttributeValue.memberAssignment.size>0){
-							for (k:0 ..<tdlAttributeValue.memberAssignment.size){
-								if (tdlAttributeValue.memberAssignment.get(k).member.name.equals("attribute")){
-									attributePropertyValue = tdlAttributeValue.memberAssignment.get(k).memberSpec
-								}else if (tdlAttributeValue.memberAssignment.get(k).member.name.equals("value")){
-									valuePropertyValue = tdlAttributeValue.memberAssignment.get(k).memberSpec
-								}
-							}
-						}
-						if (tdlAttributeValueUse.argument.size>0){//check parameterBindings
-							for (k:0 ..<tdlAttributeValueUse.argument.size){
-								if (tdlAttributeValueUse.argument.get(k).parameter.name.equals("attribute")){
-									attributePropertyValue = tdlAttributeValueUse.argument.get(k).dataUse
-								}else if (tdlAttributeValueUse.argument.get(k).parameter.name.equals("value")){
-									valuePropertyValue = tdlAttributeValueUse.argument.get(k).dataUse
-								}
-							}
-						}
-						var ArrayList<EObject> rootElements = new ArrayList
-						rootElements.addAll(signal_occurrence.signal.attributes)
-						var value = (valuePropertyValue as LiteralValueUse).value
-						value = value.substring(1, value.length-1)
-						if (tdlAttributeValueUse.dataInstance.dataType.validName.equals("IntegerAttributeValue")){	
-							var IntegerAttributeValue integerAttributeValue = StatemachinesFactory.eINSTANCE.createIntegerAttributeValue
-							integerAttributeValue.attribute = (attributePropertyValue as DataInstanceUse).
-								getMatchedMUTElement(rootElements, MUTResource, isAssertion, DSLPath) as IntegerAttribute
-							integerAttributeValue.value = Integer.parseInt(value)
-							signal_occurrence.attributeValues.add(integerAttributeValue)
-						}else if (tdlAttributeValueUse.dataInstance.dataType.validName.equals("StringAttributeValue")){
-							var StringAttributeValue stringAttributeValue = StatemachinesFactory.eINSTANCE.createStringAttributeValue
-							stringAttributeValue.attribute = (attributePropertyValue as DataInstanceUse).
-								getMatchedMUTElement(rootElements, MUTResource, isAssertion, DSLPath) as StringAttribute
-							stringAttributeValue.value = value
-							signal_occurrence.attributeValues.add(stringAttributeValue)
-						}else if (tdlAttributeValueUse.dataInstance.dataType.validName.equals("BooleanAttributeValue")){
-							var BooleanAttributeValue booleanAttributeValue = StatemachinesFactory.eINSTANCE.createBooleanAttributeValue
-							booleanAttributeValue.attribute = (attributePropertyValue as DataInstanceUse).
-								getMatchedMUTElement(rootElements, MUTResource, isAssertion, DSLPath) as BooleanAttribute
-							booleanAttributeValue.value = Boolean.parseBoolean(value)
-							signal_occurrence.attributeValues.add(booleanAttributeValue)
-						}
-					}
-				}
-			}
-			return signal_occurrence
-		}else if (_self.dataInstance.dataType.validName.equals("CallEventOccurrence")){
-			var CallEventOccurrence call_occurrence = StatemachinesFactory.eINSTANCE.createCallEventOccurrence
-			return call_occurrence
-		}
+		val PSSMEventOccurrenceCreator eventCreator = new PSSMEventOccurrenceCreator
+		return eventCreator.createEventOccurrence(_self, MUTResource, isAssertion, DSLPath)
 	}
 	
 	@OverrideAspectMethod
@@ -416,7 +344,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 		val ArrayList<EObject> matchedObjects = new ArrayList
 		var String expectedData = "";
 		var String mutData = "";
-		if (_self.item != null && _self.item.size > 0){//there are several instances of data
+		if (_self.item !== null && _self.item.size > 0){//there are several instances of data
 			mutData = TestResultUtil.instance.getDataAsString(featureValue as EList)
 			for (i : 0 ..<_self.item.size){
 				val matchedObject = (_self.item.get(i) as DataInstanceUse).getMatchedMUTElement(rootObjects, MUTResource, isAssertion, DSLPath)			
@@ -439,18 +367,18 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 			return TestResultUtil.FAIL + ": The expected data is: " + expectedData + ", but the current data is: " + mutData;
 		}else{//there is just one data instance
 			val matchedObject = _self.getMatchedMUTElement(rootObjects, MUTResource, isAssertion, DSLPath)
-			if (matchedObject == null){
+			if (matchedObject === null){
 				expectedData =  _self.dataInstance.name
 			}else{
 				expectedData = "[" + TestResultUtil.instance.eObjectLabelProvider(matchedObject as EObject) + "]"
 			}
 			if (featureValue instanceof EList){
-				if (matchedObject != null && (featureValue as EList).contains(matchedObject)){
+				if (matchedObject !== null && (featureValue as EList).contains(matchedObject)){
 					return TestResultUtil.PASS + ": The expected data contains in the current data"
 				}
 				mutData = "[" + TestResultUtil.instance.getDataAsString(featureValue as EList) + "]"
 			}else if (featureValue instanceof EObject){
-				if (matchedObject != null && (featureValue as EObject).equals(matchedObject)){
+				if (matchedObject !== null && (featureValue as EObject).equals(matchedObject)){
 					return TestResultUtil.PASS + ": The expected data is equal to the current data"
 				}
 				mutData = "[" + TestResultUtil.instance.eObjectLabelProvider(featureValue as EObject) + "]"
@@ -461,7 +389,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 	
 	@OverrideAspectMethod
 	def String updateData(Resource MUTResource, EObject object, EStructuralFeature matchedFeature, String DSLPath){
-		if (_self.item != null && _self.item.size > 0){//there are several instances of data
+		if (_self.item !== null && _self.item.size > 0){//there are several instances of data
 			val TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(object);
 			try{
 				domain.getCommandStack().execute(new RecordingCommand(domain) {
@@ -472,7 +400,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 						for (i : 0 ..<_self.item.size){
 							val item = _self.item.get(i) as DataInstanceUse
 							val matchedObject = item.getMatchedMUTElement(rootElements, MUTResource, false, DSLPath)			
-							if (matchedObject == null){
+							if (matchedObject === null){
 								println("There is no " + item.dataInstance.name + " property in the MUT")
 							}else{
 								_self.setMatchedMUTElement(matchedObject, MUTResource, DSLPath)
@@ -490,7 +418,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 			}
 		}else{//there is just one data instance
 			val matchedObject = _self.getMatchedMUTElement(MUTResource, false, DSLPath)
-			if (matchedObject == null){
+			if (matchedObject === null){
 				println("There is no " + _self.dataInstance.name + " property in the MUT")
 				return TestResultUtil.FAIL + ": There is no MUT element matched with " + _self.dataInstance.name
 			}
@@ -523,7 +451,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 class MemberAssignmentAspect{
 	def String isMatchedMember(EObject rootElement, Resource MUTResource, Boolean isAssertion, String DSLPath){
 		val EStructuralFeature matchedFeature = _self.member.getMatchedFeature(rootElement)	
-		if (matchedFeature == null){
+		if (matchedFeature === null){
 			println("There is no " + _self.member.name + " property in the MUT")
 			return TestResultUtil.FAIL + ": There is no MUT element matched with " + _self.member.name
 		}
@@ -548,7 +476,7 @@ class MemberAssignmentAspect{
 	
 	def Boolean hasItems(){
 		val data = _self.memberSpec as DataInstanceUse
-		if (data.item != null && data.item.size >0){
+		if (data.item !== null && data.item.size >0){
 			return true
 		}
 		return false
@@ -559,7 +487,7 @@ class ParameterBindingAspect{
 	
 	def String isMatchedParameter(EObject rootElement, Resource MUTResource, Boolean isAssertion, String DSLPath){
 		val EStructuralFeature matchedFeature = (_self.parameter as Member).getMatchedFeature(rootElement) 
-		if (matchedFeature == null){
+		if (matchedFeature === null){
 			println("There is no " + _self.parameter.name + " property in the MUT")
 			return TestResultUtil.FAIL + ": There is no MUT element matched with " + _self.parameter.name
 		}
@@ -583,7 +511,7 @@ class ParameterBindingAspect{
 	
 	def Boolean hasItems(){
 		val data = _self.dataUse as DataInstanceUse
-		if (data.item != null && data.item.size >0){
+		if (data.item !== null && data.item.size >0){
 			return true
 		}
 		return false
