@@ -200,7 +200,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		configurationWorkingCopy.setAttribute("Generic MultiDimensional Data Trace", true);
 		configurationWorkingCopy.setAttribute("org.eclipse.gemoc.trace.gemoc.addon_booleanOption", false);
 		configurationWorkingCopy.setAttribute("org.eclipse.gemoc.trace.gemoc.addon_equivClassComputing_booleanOption", false);
-		configurationWorkingCopy.setAttribute("org.eclipse.gemoc.trace.gemoc.addon_saveTraceOnEngineStop_booleanOption", true);
+		configurationWorkingCopy.setAttribute("org.eclipse.gemoc.trace.gemoc.addon_saveTraceOnEngineStop_booleanOption", false);
 		configurationWorkingCopy.setAttribute("org.eclipse.gemoc.trace.gemoc.addon_saveTraceOnStep_booleanOption", false);
 				
 		return configurationWorkingCopy;
@@ -313,8 +313,8 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		BehavioralInterface bInterface = this.getBehavioralInterfaceRootElement(this.DSLPath);
 		Event event = null;
 		for (int i=0; i<bInterface.getEvents().size();i++) {
-			event = bInterface.getEvents().get(i);
-			if (event.getName().equals(eventName)) {
+			if (bInterface.getEvents().get(i).getName().equals(eventName)) {
+				event = bInterface.getEvents().get(i);
 				break;
 			}
 		}
