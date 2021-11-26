@@ -27,7 +27,7 @@ public class TDLTestCaseCoverage {
 		Step<?> rootStep = this.trace.getRootStep();
 		calculateObjectCoverage(rootStep);
 		changeCoverable2notCovered();
-		checkContainmentRelations(TDLCoverageUtil.getInstance().modelObjects.get(0));
+		//checkContainmentRelations(TDLCoverageUtil.getInstance().modelObjects.get(0));
 	}
 
 	public void findNotCoverableObjects() {
