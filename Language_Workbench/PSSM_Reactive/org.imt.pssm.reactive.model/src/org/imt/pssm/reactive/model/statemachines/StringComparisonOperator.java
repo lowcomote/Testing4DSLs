@@ -26,7 +26,9 @@ public enum StringComparisonOperator implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	EQUALS(0, "EQUALS", "=="), /**
+	EQUALS(0, "EQUALS", "=="),
+
+	/**
 	 * The '<em><b>NOT EQUALS</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

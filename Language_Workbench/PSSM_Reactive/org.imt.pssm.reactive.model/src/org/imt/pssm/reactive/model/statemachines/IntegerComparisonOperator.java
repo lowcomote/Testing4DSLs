@@ -56,7 +56,9 @@ public enum IntegerComparisonOperator implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	NOT_EQUALS(3, "NOT_EQUALS", "!="), /**
+	NOT_EQUALS(3, "NOT_EQUALS", "!="),
+
+	/**
 	 * The '<em><b>GREATER EQUALS</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
