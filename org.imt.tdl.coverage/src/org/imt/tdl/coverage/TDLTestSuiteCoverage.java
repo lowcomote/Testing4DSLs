@@ -9,6 +9,7 @@ public class TDLTestSuiteCoverage {
 
 	private List<TDLTestCaseCoverage> tcCoverages = new ArrayList<>();
 	
+	public List<EObject> modelObjects = new ArrayList<>();
 	private List<String> tsObjectCoverageStatus = new ArrayList<>();
 
 	public List<TestCoverageInfo> coverageInfos = new ArrayList<>();
@@ -28,7 +29,7 @@ public class TDLTestSuiteCoverage {
 		DSLSpecificCoverageHandler dslSpecificCoverageHandler = new DSLSpecificCoverageHandler();
 		IDSLSpecificCoverage dslSpecificCoverage = dslSpecificCoverageHandler.getDSLSpecificCoverage();
 		if (dslSpecificCoverage != null) {
-			dslSpecificCoverage.updateCoverableClasses();
+			TDLCoverageUtil.getInstance().updateCoverableClasses(dslSpecificCoverage.getNewCoverableClasses());
 		}
 		System.out.println("Number of Coverable Classes: " + TDLCoverageUtil.getInstance().coverableClasses.size());
 		//foreach test case, first calculate coverage using the generic tool
@@ -43,6 +44,7 @@ public class TDLTestSuiteCoverage {
 			this.overallResult.getCoverage().add(tcCoveragePercentage + "");
 			//if it is the first test case, copy the whole test case object coverage status for the test suite
 			if (this.tsObjectCoverageStatus.size() == 0) {
+				this.modelObjects.addAll(tcCoverageObj.modelObjects);
 				this.tsObjectCoverageStatus.addAll(tcCoverageObj.tcObjectCoverageStatus);
 			}else {
 				for (int i=0; i<tcCoverageObj.tcObjectCoverageStatus.size(); i++) {
@@ -89,7 +91,7 @@ public class TDLTestSuiteCoverage {
 	}
 
 	public void setCoverageInfos() {
-		List<EObject> modelObjects = TDLCoverageUtil.getInstance().modelObjects;
+		List<EObject> modelObjects = this.modelObjects;
 		//for each model object, the coverage information must be set
 		for (int i=0; i<modelObjects.size(); i++) {
 			TestCoverageInfo cInfo = new TestCoverageInfo();

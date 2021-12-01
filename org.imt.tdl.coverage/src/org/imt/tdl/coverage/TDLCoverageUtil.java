@@ -37,7 +37,7 @@ public class TDLCoverageUtil {
 	
 	private String DSLPath;
 	public List<String> coverableClasses = new ArrayList<>();
-	public List<EObject> modelObjects = new ArrayList<>();
+	//public List<EObject> modelObjects = new ArrayList<>();
 
 	public static final String COVERED = "Covered";
 	public static final String NOT_COVERED = "Not_Covered";
@@ -69,7 +69,7 @@ public class TDLCoverageUtil {
 		this.DSLPath = DSLPath;
 		instance.coverableClasses.clear();
 		findCoverableClasses();
-		instance.testSuiteCoverage.calculateTSCoverage();
+		//instance.testSuiteCoverage.calculateTSCoverage();
 	}
 	
 	public void findCoverableClasses(){
@@ -102,6 +102,15 @@ public class TDLCoverageUtil {
 		}
 	}
 	
+	public void updateCoverableClasses (List<Class> newClasses) {
+		if (newClasses != null) {
+			for (Class newClass: newClasses) {
+				if (!instance.coverableClasses.contains(newClass.getName())) {
+					instance.coverableClasses.add(newClass.getName());
+				}
+			}
+		}
+	}
 	private void findK3Classes(Dsl dsl, Bundle bundle) {
 		final List<Class<?>> classes = dsl.getEntries().stream().filter(e -> e.getKey().equals("k3"))
 				.findFirst()

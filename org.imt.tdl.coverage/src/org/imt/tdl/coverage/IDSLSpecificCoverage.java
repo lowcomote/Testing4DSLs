@@ -1,6 +1,8 @@
 package org.imt.tdl.coverage;
 
+import java.util.List;
+
 public interface IDSLSpecificCoverage {
-	public void updateCoverableClasses();
+	public List<Class> getNewCoverableClasses();
 	public void specializeCoverage(TDLTestCaseCoverage testCaseCoverage);
 }
