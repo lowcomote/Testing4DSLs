@@ -35,9 +35,13 @@ public class TDLTestSuiteCoverage {
 		//foreach test case, first calculate coverage using the generic tool
 		//then, if the DSL provides a dsl-specific coverage tool, specialize the coverage based on it
 		for (TDLTestCaseCoverage tcCoverageObj : tcCoverages) {
-			tcCoverageObj.calculateTCCoverage();
 			if (dslSpecificCoverage != null) {
+				dslSpecificCoverage.ignoreModelObjects(tcCoverageObj.getMUTResource());
+				tcCoverageObj.calculateTCCoverage();
 				dslSpecificCoverage.specializeCoverage(tcCoverageObj);
+			}
+			else {
+				tcCoverageObj.calculateTCCoverage();
 			}
 			tcCoverageObj.countNumOfElements();
 			double tcCoveragePercentage = tcCoverageObj.getCoveragePercentage();

@@ -69,7 +69,7 @@ public class TDLCoverageUtil {
 		this.DSLPath = DSLPath;
 		instance.coverableClasses.clear();
 		findCoverableClasses();
-		//instance.testSuiteCoverage.calculateTSCoverage();
+		instance.testSuiteCoverage.calculateTSCoverage();
 	}
 	
 	public void findCoverableClasses(){
@@ -102,11 +102,11 @@ public class TDLCoverageUtil {
 		}
 	}
 	
-	public void updateCoverableClasses (List<Class> newClasses) {
+	public void updateCoverableClasses (List<String> newClasses) {
 		if (newClasses != null) {
-			for (Class newClass: newClasses) {
-				if (!instance.coverableClasses.contains(newClass.getName())) {
-					instance.coverableClasses.add(newClass.getName());
+			for (String newClassName: newClasses) {
+				if (!instance.coverableClasses.contains(newClassName)) {
+					instance.coverableClasses.add(newClassName);
 				}
 			}
 		}

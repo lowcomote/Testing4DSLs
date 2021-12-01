@@ -30,7 +30,6 @@ public class TDLTestCaseCoverage {
 	}
 
 	private void findNotCoverableObjects() {
-		this.modelObjects.clear();
 		TreeIterator<EObject> modelContents = this.MUTResource.getAllContents();
 		while (modelContents.hasNext()) {
 			EObject modelObject = modelContents.next();
@@ -50,9 +49,11 @@ public class TDLTestCaseCoverage {
 			if (step.getMseoccurrence() != null) {
 				EObject object = step.getMseoccurrence().getMse().getCaller();
 				int objectIndex = this.modelObjects.indexOf(object);
-				String objectCoverage = this.tcObjectCoverageStatus.get(objectIndex);
-				if (objectCoverage != TDLCoverageUtil.COVERED && objectCoverage != TDLCoverageUtil.NOT_COVERABLE) {
-					this.tcObjectCoverageStatus.set(objectIndex, TDLCoverageUtil.COVERED);
+				if (objectIndex != -1) {
+					String objectCoverage = this.tcObjectCoverageStatus.get(objectIndex);
+					if (objectCoverage != TDLCoverageUtil.COVERED && objectCoverage != TDLCoverageUtil.NOT_COVERABLE) {
+						this.tcObjectCoverageStatus.set(objectIndex, TDLCoverageUtil.COVERED);
+					}
 				}
 			}
 			if (step.getSubSteps() != null) {
@@ -73,12 +74,12 @@ public class TDLTestCaseCoverage {
 	
 	private void checkContainmentRelations(EObject rootObject) {
 		int rootObjectIndex = this.modelObjects.indexOf(rootObject);
-		if (this.tcObjectCoverageStatus.get(rootObjectIndex) != TDLCoverageUtil.COVERED) {
+		if (rootObjectIndex != -1 && this.tcObjectCoverageStatus.get(rootObjectIndex) != TDLCoverageUtil.COVERED) {
 			if (rootObject.eContents().size()>0) {
 				for (int j=0; j<rootObject.eContents().size(); j++) {
 					EObject containmentRef = rootObject.eContents().get(j);
 					int refIndexInObjectList = this.modelObjects.indexOf(containmentRef);
-					if (this.tcObjectCoverageStatus.get(refIndexInObjectList) == TDLCoverageUtil.NOT_COVERABLE) {
+					if (refIndexInObjectList != -1 && this.tcObjectCoverageStatus.get(refIndexInObjectList) == TDLCoverageUtil.NOT_COVERABLE) {
 						checkContainmentRelations(containmentRef);
 					}
 				}
@@ -88,7 +89,7 @@ public class TDLTestCaseCoverage {
 				for (int j=0; j<rootObject.eContents().size(); j++) {
 					EObject containmentRef = rootObject.eContents().get(j);
 					int refIndexInObjectList = this.modelObjects.indexOf(containmentRef);
-					if (this.tcObjectCoverageStatus.get(refIndexInObjectList) == TDLCoverageUtil.COVERED) {
+					if (refIndexInObjectList != -1 && this.tcObjectCoverageStatus.get(refIndexInObjectList) == TDLCoverageUtil.COVERED) {
 						numOfCovered++;
 					}
 					else if (this.tcObjectCoverageStatus.get(refIndexInObjectList) == TDLCoverageUtil.NOT_COVERED) {
