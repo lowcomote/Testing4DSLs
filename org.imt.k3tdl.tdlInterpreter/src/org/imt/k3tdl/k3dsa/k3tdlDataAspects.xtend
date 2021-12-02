@@ -254,7 +254,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 		for (i:0 ..<containers.size){
 			_self.dataInstance.info = _self.isMatchedParametrizedElement(containers.get(i), MUTResource, isAssertion, DSLPath)
 			if (_self.dataInstance.info.contains(TestResultUtil.PASS)){
-				return containers.get(i)
+					return containers.get(i)
 			}
 		}
 		return null
@@ -584,7 +584,10 @@ class LiteralValueUseAspect extends StaticDataUseAspect{
 	def String assertEquals(Object featureValue){
 		var String parameterValue = _self.value
 		parameterValue = parameterValue.substring(1, parameterValue.length-1)//remove quotation marks
-		if (featureValue.toString.equals(parameterValue)){
+		if (featureValue === null && (parameterValue == "null" || parameterValue.isNullOrEmpty)){
+			return TestResultUtil.PASS + ": The expected data is equal to the current data"
+		}
+		else if (featureValue.toString.equals(parameterValue)){
 			return TestResultUtil.PASS + ": The expected data is equal to the current data"
 		}
 		return TestResultUtil.FAIL + ": The expected data is: " + parameterValue + ", but the current data is: " + featureValue
