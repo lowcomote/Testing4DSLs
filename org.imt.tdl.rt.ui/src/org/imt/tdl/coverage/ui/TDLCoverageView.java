@@ -169,13 +169,13 @@ public class TDLCoverageView extends ViewPart{
 			TreeColumn column = new TreeColumn(addressTree, SWT.LEFT);
 			column.setAlignment(SWT.CENTER);
 			column.setText("Test " + (i+1));
-			column.setWidth(130);
+			column.setWidth(60);
 		}
 		
 		TreeColumn tsColumn = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
 		tsColumn.setAlignment(SWT.CENTER);
 		tsColumn.setText("Test Suite");
-		tsColumn.setWidth(130);
+		tsColumn.setWidth(100);
 		
 		m_treeViewer.setContentProvider(new TDLCoverageContentProvider());
 		m_treeViewer.setLabelProvider(new TableLabelProvider());
@@ -318,6 +318,15 @@ public class TDLCoverageView extends ViewPart{
 					break;
 				default:
 					columnText = cInfo.getCoverage().get(columnIndex-2);
+					if (columnText == TDLCoverageUtil.COVERED) {
+						columnText = "C";
+					} 
+					else if (columnText == TDLCoverageUtil.NOT_COVERED) {
+						columnText = "NC";
+					}
+					else if (columnText == TDLCoverageUtil.NOT_COVERABLE) {
+						columnText = "-";
+					}
 					break;
 				}
 			}
