@@ -10,14 +10,10 @@ import java.util.stream.Collectors;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -37,7 +33,8 @@ public class TDLCoverageUtil {
 	
 	private String DSLPath;
 	public List<String> coverableClasses = new ArrayList<>();
-	//public List<EObject> modelObjects = new ArrayList<>();
+	private List<String> extendedClassesWithStep = new ArrayList<>();
+	private List<String> extendedClassesWithoutStep = new ArrayList<>();
 
 	public static final String COVERED = "Covered";
 	public static final String NOT_COVERED = "Not_Covered";
@@ -62,12 +59,14 @@ public class TDLCoverageUtil {
 	}
 
 	public String getDSLPath() {
-		return DSLPath;
+		return instance.DSLPath;
 	}
 
 	public void setDSLPath(String DSLPath) {
-		this.DSLPath = DSLPath;
+		instance.DSLPath = DSLPath;
 		instance.coverableClasses.clear();
+		instance.extendedClassesWithStep.clear();
+		instance.extendedClassesWithoutStep.clear();
 		findCoverableClasses();
 		instance.testSuiteCoverage.calculateTSCoverage();
 	}
@@ -94,12 +93,22 @@ public class TDLCoverageUtil {
 			findAleClasses(dsl, bundle);
 		} 
 		
+		int abstractSyntaxSize = 0;
 		for (EClassifier clazz: metamodelRootElement.getEClassifiers()) {
 			String className = clazz.getName();
-			if (clazz instanceof EClass && !instance.coverableClasses.contains(className)) {
-				checkInheritance((EClass) clazz);
+			if (clazz instanceof EClass) {
+				abstractSyntaxSize++;
+				if (!instance.coverableClasses.contains(className) && !instance.extendedClassesWithoutStep.contains(className)) {
+					checkInheritance((EClass) clazz);
+				}
 			}
 		}
+		
+		System.out.println("Abstract Syntax Size (n. of EClasses): " + abstractSyntaxSize);
+		double percentage = Math.ceil((double)(instance.extendedClassesWithStep.size()*100)/abstractSyntaxSize);
+		System.out.println("% of Extended classes with @Step rules: " + percentage);
+		percentage = Math.ceil((double)(instance.coverableClasses.size()*100)/abstractSyntaxSize);
+		System.out.println("% of Coverable classes (considering inheritance): " + percentage);
 	}
 	
 	public void updateCoverableClasses (List<String> newClasses) {
@@ -121,14 +130,19 @@ public class TDLCoverageUtil {
 		//if a class is opened and has a stepping rule in the xDSL's interpreter, 
 		//the objects of the class are coverable
 		for (Class<?> clazz : classes) {
+			String className = clazz.getDeclaredAnnotation(Aspect.class).className().getName();
+			className = className.substring(className.lastIndexOf(".") + 1);
 			Method[] methods = clazz.getDeclaredMethods();
 			for (Method method: methods) {
 				if (method.getAnnotationsByType(Step.class).length > 0) {
-					String className = clazz.getDeclaredAnnotation(Aspect.class).className().getName();
-					className = className.substring(className.lastIndexOf(".") + 1);
+					instance.extendedClassesWithStep.add(className);
 					instance.coverableClasses.add(className);
 					break;
 				}
+			}
+			//if the extended class had no @step rule
+			if (!instance.extendedClassesWithStep.contains(className)) {
+				instance.extendedClassesWithoutStep.add(className);
 			}
 		}
 	}
@@ -142,15 +156,20 @@ public class TDLCoverageUtil {
 		//the objects of the class are coverable
 		for (BehavioredClass clazz : classes) {
 			EList<Operation> operations = clazz.getOperations();
+			String className = clazz.eClass().getName();
 			for (int i=0; i<operations.size(); i++) {
 				for (Tag tag:operations.get(i).getTag()) {
 					if (tag.getName().equals("step")) {
-						//TODO: it doesn't work correctly. The clazz format in ALE is different from K3
-						instance.coverableClasses.add(clazz.eClass().getName());
+						instance.extendedClassesWithStep.add(className);
+						instance.coverableClasses.add(className);
 						i = operations.size();
 						break;
 					}
 				}
+			}
+			//if the extended class had no @step rule
+			if (!instance.extendedClassesWithStep.contains(className)) {
+				instance.extendedClassesWithoutStep.add(className);
 			}
 		}
 	}

@@ -125,19 +125,17 @@ public class TDLTestCaseCoverage {
 			}
 		}
 	}
-	public int getNumOfCoverableElements() {
-		//this returns the size of the model in terms of its coverable elements
-		return this.tcObjectCoverageStatus.size() - this.numOfNotCoverableElements;
-	}
-	
-	public int getNumOfCoveredObjs() {
-		return this.numOfCoveredObjs;
-	}
 	
 	public double getCoveragePercentage() {
-		double tcCoveragePercentage = Math.ceil((double)(this.numOfCoveredObjs*100)/getNumOfCoverableElements());
+		int numOfCoverableElements = this.tcObjectCoverageStatus.size() - this.numOfNotCoverableElements;
+		double tcCoveragePercentage = Math.ceil((double)(this.numOfCoveredObjs*100)/numOfCoverableElements);
 		System.out.println(this.testCaseName + " coverage: " + tcCoveragePercentage);
 		return tcCoveragePercentage;
+	}
+	
+	public void calculateCoveragePercentage() {
+		double tcOverallCoveragePercentage = Math.ceil((double)(this.numOfCoveredObjs*100)/this.tcObjectCoverageStatus.size());
+		System.out.println(this.testCaseName + " overall coverage: " + tcOverallCoveragePercentage);
 	}
 	
 	public Trace<?, ?, ?> getTrace() {

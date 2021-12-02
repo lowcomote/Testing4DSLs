@@ -44,8 +44,9 @@ public class TDLTestSuiteCoverage {
 				tcCoverageObj.calculateTCCoverage();
 			}
 			tcCoverageObj.countNumOfElements();
-			double tcCoveragePercentage = tcCoverageObj.getCoveragePercentage();
-			this.overallResult.getCoverage().add(tcCoveragePercentage + "");
+			this.overallResult.getCoverage().add(tcCoverageObj.getCoveragePercentage() + "");
+			tcCoverageObj.calculateCoveragePercentage();
+			
 			//if it is the first test case, copy the whole test case object coverage status for the test suite
 			if (this.tsObjectCoverageStatus.size() == 0) {
 				this.modelObjects.addAll(tcCoverageObj.modelObjects);
@@ -61,12 +62,13 @@ public class TDLTestSuiteCoverage {
 		}
 		countNumOfElements();
 		calculateCoveragePercentage();
+		calculateOveralCoveragePercentage();
 	}
 	
 	int numOfCoveredObjs;
 	int numOfNotCoverableElements;
 	
-	public void countNumOfElements() {
+	private void countNumOfElements() {
 		this.numOfCoveredObjs = 0;
 		this.numOfNotCoverableElements = 0;
 		for (String coverage:this.tsObjectCoverageStatus) {
@@ -78,20 +80,18 @@ public class TDLTestSuiteCoverage {
 			}
 		}
 	}
-	public int getNumOfCoverableElements() {
-		//this returns the size of the model in terms of its coverable elements
-		return this.tsObjectCoverageStatus.size() - this.numOfNotCoverableElements;
-	}
-	
-	public int getNumOfCoveredObjs() {
-		return this.numOfCoveredObjs;
-	}
 	
 	public void calculateCoveragePercentage() {
-		double tsCoveragePercentage = Math.ceil((double)(getNumOfCoveredObjs()*100)/getNumOfCoverableElements());
+		int numOfCoverableElements = this.tsObjectCoverageStatus.size() - this.numOfNotCoverableElements;
+		double tsCoveragePercentage = Math.ceil((double)(this.numOfCoveredObjs*100)/numOfCoverableElements);
 		System.out.println("Test suite coverage: " + tsCoveragePercentage);
 		this.overallResult.getCoverage().add(tsCoveragePercentage + "");
 		this.setCoverageInfos();
+	}
+	
+	public void calculateOveralCoveragePercentage() {
+		double tsOverallCoveragePercentage = Math.ceil((double)(this.numOfCoveredObjs*100)/this.tsObjectCoverageStatus.size());
+		System.out.println("Test suite overall coverage: " + tsOverallCoveragePercentage);
 	}
 
 	public void setCoverageInfos() {
