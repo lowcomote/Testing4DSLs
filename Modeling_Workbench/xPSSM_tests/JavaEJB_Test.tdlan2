@@ -1,0 +1,204 @@
+Package JavaEJB_testSuite {
+	Import all from common ;
+	Import all from xPSSMTypes;
+	Import all from xPSSMEvents;
+	Import all from testConfiguration ;
+	Import all from JavaEJB_TestData;
+
+	Test Description test1 uses configuration JavaEJBConfiguration{
+		tester.reactiveGate sends _run (state_machine = JavaEJB) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+	}
+	Test Description test2 uses configuration JavaEJBConfiguration{
+		tester.reactiveGate sends _run (state_machine = JavaEJB) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_create_method____occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_Referenced) to tester.reactiveGate;
+	}
+	Test Description test3 uses configuration JavaEJBConfiguration{
+		tester.reactiveGate sends _run (state_machine = JavaEJB) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_create_method____occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = businessMethod___occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_Referenced) to tester.reactiveGate;
+	}
+	Test Description test4 uses configuration JavaEJBConfiguration{
+		tester.reactiveGate sends _run (state_machine = JavaEJB) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_create_method____occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = releaseReference_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_NotReferenced) to tester.reactiveGate;
+	}
+	Test Description test5 uses configuration JavaEJBConfiguration{
+		tester.reactiveGate sends _run (state_machine = JavaEJB) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_create_method____occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = object_remove___occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_Referenced) to tester.reactiveGate;
+	}
+	Test Description test6 uses configuration JavaEJBConfiguration{
+		tester.reactiveGate sends _run (state_machine = JavaEJB) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_create_method____occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_remove___occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_Referenced) to tester.reactiveGate;
+	}
+	Test Description test7 uses configuration JavaEJBConfiguration{
+		tester.reactiveGate sends _run (state_machine = JavaEJB) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_create_method____occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = systemException_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_Referenced) to tester.reactiveGate;
+	}
+	Test Description test8 uses configuration JavaEJBConfiguration{
+		tester.reactiveGate sends _run (state_machine = JavaEJB) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_create_method____occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = beanTimout_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_Referenced) to tester.reactiveGate;
+	}
+	Test Description test9 uses configuration JavaEJBConfiguration{
+		tester.reactiveGate sends _run (state_machine = JavaEJB) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_create_method____occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = containerCrash_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_Referenced) to tester.reactiveGate;
+	}
+	Test Description test10 uses configuration JavaEJBConfiguration{
+		tester.reactiveGate sends _run (state_machine = JavaEJB) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_create_method____occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = object_remove___occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = businessMethod___occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_Referenced) to tester.reactiveGate;
+	}
+	Test Description test11 uses configuration JavaEJBConfiguration{
+		tester.reactiveGate sends _run (state_machine = JavaEJB) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_create_method____occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_remove___occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = businessMethod___occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_Referenced) to tester.reactiveGate;
+}
+	Test Description test12 uses configuration JavaEJBConfiguration{
+		tester.reactiveGate sends _run (state_machine = JavaEJB) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_create_method____occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = systemException_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = businessMethod___occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_Referenced) to tester.reactiveGate;
+	}
+	Test Description test13 uses configuration JavaEJBConfiguration{
+		tester.reactiveGate sends _run (state_machine = JavaEJB) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_create_method____occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = beanTimout_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = businessMethod___occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_Referenced) to tester.reactiveGate;
+	}
+	Test Description test14 uses configuration JavaEJBConfiguration{
+		tester.reactiveGate sends _run (state_machine = JavaEJB) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_create_method____occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = containerCrash_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = businessMethod___occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_Referenced) to tester.reactiveGate;
+	}
+	Test Description test15 uses configuration JavaEJBConfiguration{
+		tester.reactiveGate sends _run (state_machine = JavaEJB) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_create_method____occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = object_remove___occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = releaseReference_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+	}
+	Test Description test16 uses configuration JavaEJBConfiguration{
+		tester.reactiveGate sends _run (state_machine = JavaEJB) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_create_method____occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_remove___occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = releaseReference_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+	}
+	Test Description test17 uses configuration JavaEJBConfiguration{
+		tester.reactiveGate sends _run (state_machine = JavaEJB) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_create_method____occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = systemException_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = releaseReference_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+	}
+	Test Description test18 uses configuration JavaEJBConfiguration{
+		tester.reactiveGate sends _run (state_machine = JavaEJB) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_create_method____occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = beanTimout_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = releaseReference_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+	}
+	Test Description test19 uses configuration JavaEJBConfiguration{
+		tester.reactiveGate sends _run (state_machine = JavaEJB) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_create_method____occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = containerCrash_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = releaseReference_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+	}
+	Test Description test20 uses configuration JavaEJBConfiguration{
+		tester.reactiveGate sends _run (state_machine = JavaEJB) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_create_method____occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = releaseReference_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = handle_getEJBObject___occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_Referenced) to tester.reactiveGate;
+	}
+	Test Description test21 uses configuration JavaEJBConfiguration{
+		tester.reactiveGate sends _run (state_machine = JavaEJB) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_create_method____occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = releaseReference_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = beanTimout_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+	}
+	Test Description test22 uses configuration JavaEJBConfiguration{
+		tester.reactiveGate sends _run (state_machine = JavaEJB) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = home_create_method____occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_Referenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = releaseReference_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectExists_NotReferenced) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = JavaEJB, signal_occurrence = containerCrash_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ObjectNotExisted_NotReferenced) to tester.reactiveGate;
+	}
+}
