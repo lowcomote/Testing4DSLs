@@ -8,262 +8,262 @@ initialState S0
  				output " "
  				target S0
  			},
- 			Transition S0_to_a {
+ 			Transition S0_to_a_A {
  				input "A"
  				output "a"
  				target a
  			},
- 			Transition S0_to_b {
+ 			Transition S0_to_b_B {
  				input "B"
  				output "b"
  				target b
  			},
- 			Transition S0_to_c {
+ 			Transition S0_to_c_C {
  				input "C"
  				output "c"
  				target c
  			},
- 			Transition S0_to_d {
+ 			Transition S0_to_d_D {
  				input "D"
  				output "d"
  				target d
  			},
- 			Transition S0_to_e {
+ 			Transition S0_to_e_E {
  				input "E"
  				output "e"
  				target e
  			},
- 			Transition S0_to_f {
+ 			Transition S0_to_f_F {
  				input "F"
  				output "f"
  				target f
  			},
- 			Transition S0_to_g {
+ 			Transition S0_to_g_G {
  				input "G"
  				output "g"
  				target g
  			},
- 			Transition S0_to_h {
+ 			Transition S0_to_h_H {
  				input "H"
  				output "h"
  				target h
  			},
- 			Transition S0_to_i {
+ 			Transition S0_to_i_I {
  				input "I"
  				output "i"
  				target i
  			},
- 			Transition S0_to_j {
+ 			Transition S0_to_j_J {
  				input "J"
  				output "j"
  				target j
  			},
- 			Transition S0_to_k {
+ 			Transition S0_to_k_K {
  				input "K"
  				output "k"
  				target k
  			},
- 			Transition S0_to_l {
+ 			Transition S0_to_l_L {
  				input "L"
  				output "l"
  				target l
  			},
- 			Transition S0_to_m {
+ 			Transition S0_to_m_M {
  				input "M"
  				output "m"
  				target m
  			},
- 			Transition S0_to_n {
+ 			Transition S0_to_n_N {
  				input "N"
  				output "n"
  				target n
  			},
- 			Transition S0_to_o {
+ 			Transition S0_to_o_O {
  				input "O"
  				output "o"
  				target o
  			},
- 			Transition S0_to_p {
+ 			Transition S0_to_p_P {
  				input "P"
  				output "p"
  				target p
  			},
- 			Transition S0_to_q {
+ 			Transition S0_to_q_Q {
  				input "Q"
  				output "q"
  				target q
  			},
- 			Transition S0_to_r {
+ 			Transition S0_to_r_R {
  				input "R"
  				output "r"
  				target r
  			},
- 			Transition S0_to_s {
+ 			Transition S0_to_s_S {
  				input "S"
  				output "s"
  				target s
  			},
- 			Transition S0_to_t {
+ 			Transition S0_to_t_T {
  				input "T"
  				output "t"
  				target t
  			},
- 			Transition S0_to_u {
+ 			Transition S0_to_u_U {
  				input "U"
  				output "u"
  				target u
  			},
- 			Transition S0_to_v {
+ 			Transition S0_to_v_V {
  				input "V"
  				output "v"
  				target v
  			},
- 			Transition S0_to_w {
+ 			Transition S0_to_w_W {
  				input "W"
  				output "w"
  				target w
  			},
- 			Transition S0_to_x {
+ 			Transition S0_to_x_X {
  				input "X"
  				output "x"
  				target x
  			},
- 			Transition S0_to_y {
+ 			Transition S0_to_y_Y {
  				input "Y"
  				output "y"
  				target y
  			},
- 			Transition S0_to_z {
+ 			Transition S0_to_z_Z {
  				input "Z"
  				output "z"
  				target z
  			},
- 			Transition S0_to_a {
+ 			Transition S0_to_a_a {
  				input "a"
  				output "a"
  				target a
  			},
- 			Transition S0_to_b {
+ 			Transition S0_to_b_b {
  				input "b"
  				output "b"
  				target b
  			},
- 			Transition S0_to_c {
+ 			Transition S0_to_c_c {
  				input "c"
  				output "c"
  				target c
  			},
- 			Transition S0_to_d {
+ 			Transition S0_to_d_d {
  				input "d"
  				output "d"
  				target d
  			},
- 			Transition S0_to_e {
+ 			Transition S0_to_e_e {
  				input "e"
  				output "e"
  				target e
  			},
- 			Transition S0_to_f {
+ 			Transition S0_to_f_f {
  				input "f"
  				output "f"
  				target f
  			},
- 			Transition S0_to_g {
+ 			Transition S0_to_g_g {
  				input "g"
  				output "g"
  				target g
  			},
- 			Transition S0_to_h {
+ 			Transition S0_to_h_h {
  				input "h"
  				output "h"
  				target h
  			},
- 			Transition S0_to_i {
+ 			Transition S0_to_i_i {
  				input "i"
  				output "i"
  				target i
  			},
- 			Transition S0_to_j {
+ 			Transition S0_to_j_j {
  				input "j"
  				output "j"
  				target j
  			},
- 			Transition S0_to_k {
+ 			Transition S0_to_k_k {
  				input "k"
  				output "k"
  				target k
  			},
- 			Transition S0_to_l {
+ 			Transition S0_to_l_l {
  				input "l"
  				output "l"
  				target l
  			},
- 			Transition S0_to_m {
+ 			Transition S0_to_m_m {
  				input "m"
  				output "m"
  				target m
  			},
- 			Transition S0_to_n {
+ 			Transition S0_to_n_n {
  				input "n"
  				output "n"
  				target n
  			},
- 			Transition S0_to_o {
+ 			Transition S0_to_o_o {
  				input "o"
  				output "o"
  				target o
  			},
- 			Transition S0_to_p {
+ 			Transition S0_to_p_p {
  				input "p"
  				output "p"
  				target p
  			},
- 			Transition S0_to_q {
+ 			Transition S0_to_q_q {
  				input "q"
  				output "q"
  				target q
  			},
- 			Transition S0_to_r {
+ 			Transition S0_to_r_r {
  				input "r"
  				output "r"
  				target r
  			},
- 			Transition S0_to_s {
+ 			Transition S0_to_s_s {
  				input "s"
  				output "s"
  				target s
  			},
- 			Transition S0_to_t {
+ 			Transition S0_to_t_t {
  				input "t"
  				output "t"
  				target t
  			},
- 			Transition S0_to_u {
+ 			Transition S0_to_u_u {
  				input "u"
  				output "u"
  				target u
  			},
- 			Transition S0_to_v {
+ 			Transition S0_to_v_v {
  				input "v"
  				output "v"
  				target v
  			},
- 			Transition S0_to_w {
+ 			Transition S0_to_w_w {
  				input "w"
  				output "w"
  				target w
  			},
- 			Transition S0_to_x {
+ 			Transition S0_to_x_x {
  				input "x"
  				output "x"
  				target x
  			},
- 			Transition S0_to_y {
+ 			Transition S0_to_y_y {
  				input "y"
  				output "y"
  				target y
  			},
- 			Transition S0_to_z {
+ 			Transition S0_to_z_z {
  				input "z"
  				output "z"
  				target z
