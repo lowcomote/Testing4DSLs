@@ -12,7 +12,8 @@
       <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//BooleanBinaryOperator/OR"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="statemachines.ecore#//BooleanUnaryOperator">
-      <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//BooleanUnaryOperator/NOT"/>
+      <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//BooleanUnaryOperator/TRUE"/>
+      <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//BooleanUnaryOperator/FALSE"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="statemachines.ecore#//IntegerComparisonOperator">
       <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//IntegerComparisonOperator/SMALLER"/>
@@ -43,8 +44,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statemachines.ecore#//CustomSystem/statemachine"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statemachines.ecore#//CustomSystem/signals"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statemachines.ecore#//CustomSystem/operations"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//CustomSystem/eventOccurrences"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//CustomSystem/performedBehaviors"/>
     </genClasses>
     <genClasses ecoreClass="statemachines.ecore#//Signal">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statemachines.ecore#//Signal/attributes"/>

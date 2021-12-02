@@ -51,6 +51,7 @@ import static extension org.imt.pssm.reactive.interpreter.StringComparisonExpres
 import org.imt.pssm.reactive.model.statemachines.BooleanBinaryOperator
 import org.imt.pssm.reactive.model.statemachines.IntegerComparisonOperator
 import org.imt.pssm.reactive.model.statemachines.StringComparisonOperator
+import org.imt.pssm.reactive.model.statemachines.BooleanUnaryOperator
 
 @Aspect(className=StateMachine)
 class StateMachineAspect {
@@ -722,6 +723,19 @@ class TransitionAspect {
 		}
 		return _self._leastCommonAncestor
 	}
+	
+	public def StateMachine getRootStateMachine(){
+		var Region region = _self.container
+		if (region.stateMachine !== null){
+			return region.stateMachine
+		}
+		while (region.stateMachine === null){
+			region = region.state.container
+			if (region.stateMachine !== null){
+				return region.stateMachine
+			}
+		}
+	}
 }
 
 
@@ -821,15 +835,17 @@ class BooleanUnaryExpressionAspect {
 		val eventAttributeValue = values.findFirst[v|
 			v instanceof BooleanAttributeValue &&
 			(v as BooleanAttributeValue).attribute == operand
-		]
+		] as BooleanAttributeValue
 		if (eventAttributeValue === null) {
 			return false
 		}
-		if (eventAttributeValue == true){		
-			return false
-		}else{
+		else if (_self.operator == BooleanUnaryOperator.TRUE && eventAttributeValue.value == true){
 			return true;
 		}
+		else if (_self.operator == BooleanUnaryOperator.FALSE && eventAttributeValue.value == false){
+			return false;
+		}
+		return false;
 	}
 }
 
@@ -844,7 +860,7 @@ class BooleanBinaryExpressionAspect {
 		var operand1found = false
 		var operand2found = false
 		//finding the values of the operands from the attribute values of the last received event occurrences
-		val stateMachine = ((_self.eContainer as BooleanConstraint).eContainer as Transition).container.stateMachine
+		val stateMachine = ((_self.eContainer as BooleanConstraint).eContainer as Transition).rootStateMachine
 		var values = new ArrayList
 		for (var i = stateMachine.receivedEvents.size - 1; i >= 0 ; i--){
 			val eventOcc = stateMachine.receivedEvents.get(i)
@@ -903,7 +919,7 @@ class IntegerComparisonExpressionAspect {
 		var operand1found = false
 		var operand2found = false
 		//finding the values of the operands from the attribute values of the last received event occurrences
-		val stateMachine = ((_self.eContainer as IntegerConstraint).eContainer as Transition).container.stateMachine
+		val stateMachine = ((_self.eContainer as IntegerConstraint).eContainer as Transition).rootStateMachine
 		var values = new ArrayList
 		for (var i = stateMachine.receivedEvents.size - 1; i >= 0 ; i--){
 			val eventOcc = stateMachine.receivedEvents.get(i)
@@ -973,7 +989,7 @@ class StringComparisonExpressionAspect {
 		var operand1found = false
 		var operand2found = false
 		//finding the values of the operands from the attribute values of the last received event occurrences
-		val stateMachine = ((_self.eContainer as StringConstraint).eContainer as Transition).container.stateMachine
+		val stateMachine = ((_self.eContainer as StringConstraint).eContainer as Transition).rootStateMachine
 		var values = new ArrayList
 		for (var i = stateMachine.receivedEvents.size - 1; i >= 0 ; i--){
 			val eventOcc = stateMachine.receivedEvents.get(i)

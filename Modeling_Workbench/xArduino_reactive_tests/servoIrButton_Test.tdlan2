@@ -14,6 +14,7 @@ Package testSuite {
 		arduino.reactiveGate sends Pin_level_changed (pin = ledPin (level = '1')) to tester.reactiveGate;
 		component tester waits for '500';
 		arduino.reactiveGate sends Pin_level_changed (pin = ledPin (level = '0')) to tester.reactiveGate;
+		
 	}
 	Test Description test2 uses configuration servoIrbuttonConfiguration{
 		tester.reactiveGate sends IRSensor_detected (sensor = IRSensor) to arduino.reactiveGate;

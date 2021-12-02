@@ -482,24 +482,6 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCustomSystem_EventOccurrences() {
-		return (EReference)customSystemEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCustomSystem_PerformedBehaviors() {
-		return (EReference)customSystemEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getSignal() {
 		return signalEClass;
 	}
@@ -1472,8 +1454,6 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		createEReference(customSystemEClass, CUSTOM_SYSTEM__STATEMACHINE);
 		createEReference(customSystemEClass, CUSTOM_SYSTEM__SIGNALS);
 		createEReference(customSystemEClass, CUSTOM_SYSTEM__OPERATIONS);
-		createEReference(customSystemEClass, CUSTOM_SYSTEM__EVENT_OCCURRENCES);
-		createEReference(customSystemEClass, CUSTOM_SYSTEM__PERFORMED_BEHAVIORS);
 
 		signalEClass = createEClass(SIGNAL);
 		createEReference(signalEClass, SIGNAL__ATTRIBUTES);
@@ -1686,8 +1666,6 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		initEReference(getCustomSystem_Statemachine(), this.getStateMachine(), null, "statemachine", null, 1, 1, CustomSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCustomSystem_Signals(), this.getSignal(), null, "signals", null, 0, -1, CustomSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCustomSystem_Operations(), this.getOperation(), null, "operations", null, 0, -1, CustomSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCustomSystem_EventOccurrences(), this.getEventOccurrence(), null, "eventOccurrences", null, 0, -1, CustomSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCustomSystem_PerformedBehaviors(), this.getBehavior(), null, "performedBehaviors", null, 0, -1, CustomSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(signalEClass, Signal.class, "Signal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSignal_Attributes(), this.getAttribute(), null, "attributes", null, 0, -1, Signal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1832,7 +1810,8 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		addEEnumLiteral(booleanBinaryOperatorEEnum, BooleanBinaryOperator.OR);
 
 		initEEnum(booleanUnaryOperatorEEnum, BooleanUnaryOperator.class, "BooleanUnaryOperator");
-		addEEnumLiteral(booleanUnaryOperatorEEnum, BooleanUnaryOperator.NOT);
+		addEEnumLiteral(booleanUnaryOperatorEEnum, BooleanUnaryOperator.TRUE);
+		addEEnumLiteral(booleanUnaryOperatorEEnum, BooleanUnaryOperator.FALSE);
 
 		initEEnum(integerComparisonOperatorEEnum, IntegerComparisonOperator.class, "IntegerComparisonOperator");
 		addEEnumLiteral(integerComparisonOperatorEEnum, IntegerComparisonOperator.SMALLER);
@@ -1875,16 +1854,6 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 */
 	protected void createAspectAnnotations() {
 		String source = "aspect";
-		addAnnotation
-		  (getCustomSystem_EventOccurrences(),
-		   source,
-		   new String[] {
-		   });
-		addAnnotation
-		  (getCustomSystem_PerformedBehaviors(),
-		   source,
-		   new String[] {
-		   });
 		addAnnotation
 		  (getRegion_CurrentVertex(),
 		   source,

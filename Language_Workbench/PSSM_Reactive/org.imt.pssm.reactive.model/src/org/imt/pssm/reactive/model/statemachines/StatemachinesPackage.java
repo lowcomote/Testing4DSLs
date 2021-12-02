@@ -95,31 +95,13 @@ public interface StatemachinesPackage extends EPackage {
 	int CUSTOM_SYSTEM__OPERATIONS = 2;
 
 	/**
-	 * The feature id for the '<em><b>Event Occurrences</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CUSTOM_SYSTEM__EVENT_OCCURRENCES = 3;
-
-	/**
-	 * The feature id for the '<em><b>Performed Behaviors</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CUSTOM_SYSTEM__PERFORMED_BEHAVIORS = 4;
-
-	/**
 	 * The number of structural features of the '<em>Custom System</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOM_SYSTEM_FEATURE_COUNT = 5;
+	int CUSTOM_SYSTEM_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Custom System</em>' class.
@@ -2136,28 +2118,6 @@ public interface StatemachinesPackage extends EPackage {
 	EReference getCustomSystem_Operations();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.imt.pssm.reactive.model.statemachines.CustomSystem#getEventOccurrences <em>Event Occurrences</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Event Occurrences</em>'.
-	 * @see org.imt.pssm.reactive.model.statemachines.CustomSystem#getEventOccurrences()
-	 * @see #getCustomSystem()
-	 * @generated
-	 */
-	EReference getCustomSystem_EventOccurrences();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.imt.pssm.reactive.model.statemachines.CustomSystem#getPerformedBehaviors <em>Performed Behaviors</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Performed Behaviors</em>'.
-	 * @see org.imt.pssm.reactive.model.statemachines.CustomSystem#getPerformedBehaviors()
-	 * @see #getCustomSystem()
-	 * @generated
-	 */
-	EReference getCustomSystem_PerformedBehaviors();
-
-	/**
 	 * Returns the meta object for class '{@link org.imt.pssm.reactive.model.statemachines.Signal <em>Signal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3324,22 +3284,6 @@ public interface StatemachinesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CUSTOM_SYSTEM__OPERATIONS = eINSTANCE.getCustomSystem_Operations();
-
-		/**
-		 * The meta object literal for the '<em><b>Event Occurrences</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CUSTOM_SYSTEM__EVENT_OCCURRENCES = eINSTANCE.getCustomSystem_EventOccurrences();
-
-		/**
-		 * The meta object literal for the '<em><b>Performed Behaviors</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CUSTOM_SYSTEM__PERFORMED_BEHAVIORS = eINSTANCE.getCustomSystem_PerformedBehaviors();
 
 		/**
 		 * The meta object literal for the '{@link org.imt.pssm.reactive.model.statemachines.impl.SignalImpl <em>Signal</em>}' class.

@@ -9,14 +9,6 @@
         eType="#//Signal" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
         eType="#//Operation" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="eventOccurrences" upperBound="-1"
-        eType="#//EventOccurrence">
-      <eAnnotations source="aspect"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="performedBehaviors" upperBound="-1"
-        eType="#//Behavior">
-      <eAnnotations source="aspect"/>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Signal" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
@@ -187,7 +179,8 @@
     <eLiterals name="OR" value="1" literal="||"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="BooleanUnaryOperator">
-    <eLiterals name="NOT" literal="!"/>
+    <eLiterals name="TRUE" literal="TRUE"/>
+    <eLiterals name="FALSE" value="1" literal="False"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="IntegerComparisonOperator">
     <eLiterals name="SMALLER" literal="&lt;"/>

@@ -4,10 +4,12 @@ package org.imt.pssm.reactive.model.statemachines.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.imt.pssm.reactive.model.statemachines.BooleanConstraint;
 import org.imt.pssm.reactive.model.statemachines.BooleanExpression;
 import org.imt.pssm.reactive.model.statemachines.StatemachinesPackage;
@@ -35,6 +37,7 @@ public class BooleanConstraintImpl extends ConstraintImpl implements BooleanCons
 	 * @ordered
 	 */
 	protected BooleanExpression expression;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

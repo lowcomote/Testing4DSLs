@@ -8,5 +8,5 @@
   <semanticResources>activeWaitIRBlueLed_Test.tdlan2</semanticResources>
   <semanticResources>servo9g_Test.tdlan2</semanticResources>
   <semanticResources>servoIrButton_Test.tdlan2</semanticResources>
-  <semanticResources>turnOnLed_Test.tdlan2</semanticResources>
+  <semanticResources>blinkingLED_Test.tdlan2</semanticResources>
 </viewpoint:DAnalysis>

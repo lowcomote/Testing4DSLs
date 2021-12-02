@@ -19,25 +19,46 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum BooleanUnaryOperator implements Enumerator {
 	/**
-	 * The '<em><b>NOT</b></em>' literal object.
+	 * The '<em><b>TRUE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #NOT_VALUE
+	 * @see #TRUE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	NOT(0, "NOT", "!");
+	TRUE(0, "TRUE", "TRUE"),
 
 	/**
-	 * The '<em><b>NOT</b></em>' literal value.
+	 * The '<em><b>FALSE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #NOT
-	 * @model literal="!"
+	 * @see #FALSE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NOT_VALUE = 0;
+	FALSE(1, "FALSE", "False");
+
+	/**
+	 * The '<em><b>TRUE</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #TRUE
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TRUE_VALUE = 0;
+
+	/**
+	 * The '<em><b>FALSE</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #FALSE
+	 * @model literal="False"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FALSE_VALUE = 1;
 
 	/**
 	 * An array of all the '<em><b>Boolean Unary Operator</b></em>' enumerators.
@@ -47,7 +68,8 @@ public enum BooleanUnaryOperator implements Enumerator {
 	 */
 	private static final BooleanUnaryOperator[] VALUES_ARRAY =
 		new BooleanUnaryOperator[] {
-			NOT,
+			TRUE,
+			FALSE,
 		};
 
 	/**
@@ -104,7 +126,8 @@ public enum BooleanUnaryOperator implements Enumerator {
 	 */
 	public static BooleanUnaryOperator get(int value) {
 		switch (value) {
-			case NOT_VALUE: return NOT;
+			case TRUE_VALUE: return TRUE;
+			case FALSE_VALUE: return FALSE;
 		}
 		return null;
 	}

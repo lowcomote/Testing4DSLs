@@ -17,7 +17,6 @@
   <semanticResources>gemoc-gen/execution/execution-20210516_221717/servo9g.arduino</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210516_221725/servoIrbutton.arduino</semanticResources>
   <semanticResources>activeWaitIRBlueLed.arduino</semanticResources>
-  <semanticResources>turnOnLed.arduino</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210520_094513/turnOnLed.arduino</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210520_094553/activeWaitIRBlueLed.arduino</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210520_094936/turnOnLed.arduino</semanticResources>
@@ -62,4 +61,5 @@
   <semanticResources>gemoc-gen/execution/execution-20210610_163501/servoIrbutton.arduino</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210610_163554/turnOnLed.arduino</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20210610_163555/turnOnLed.arduino</semanticResources>
+  <semanticResources>blinkingLED.arduino</semanticResources>
 </viewpoint:DAnalysis>

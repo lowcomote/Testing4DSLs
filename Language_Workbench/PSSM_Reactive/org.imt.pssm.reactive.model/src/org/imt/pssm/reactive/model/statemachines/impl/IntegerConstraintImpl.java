@@ -4,10 +4,12 @@ package org.imt.pssm.reactive.model.statemachines.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.imt.pssm.reactive.model.statemachines.IntegerComparisonExpression;
 import org.imt.pssm.reactive.model.statemachines.IntegerConstraint;
 import org.imt.pssm.reactive.model.statemachines.StatemachinesPackage;
@@ -35,6 +37,7 @@ public class IntegerConstraintImpl extends ConstraintImpl implements IntegerCons
 	 * @ordered
 	 */
 	protected IntegerComparisonExpression expression;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

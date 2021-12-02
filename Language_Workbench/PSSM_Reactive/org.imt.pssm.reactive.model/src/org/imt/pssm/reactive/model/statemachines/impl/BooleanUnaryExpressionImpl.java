@@ -37,7 +37,7 @@ public class BooleanUnaryExpressionImpl extends BooleanExpressionImpl implements
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BooleanUnaryOperator OPERATOR_EDEFAULT = BooleanUnaryOperator.NOT;
+	protected static final BooleanUnaryOperator OPERATOR_EDEFAULT = BooleanUnaryOperator.TRUE;
 
 	/**
 	 * The cached value of the '{@link #getOperator() <em>Operator</em>}' attribute.
