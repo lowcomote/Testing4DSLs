@@ -15,7 +15,7 @@ import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory
 public class TestResultUtil {
 	
 	private static TestResultUtil instance = new TestResultUtil();
-	private TDLTestPackageResult testResult;
+	private TDLTestSuiteResult testResult;
 	
 	public static final String PASS = "PASS";
 	public static final String FAIL = "FAIL";
@@ -29,10 +29,10 @@ public class TestResultUtil {
 	   public static TestResultUtil getInstance(){
 	      return instance;
 	   }
-	   public TDLTestPackageResult getTestPackageResult() {
+	   public TDLTestSuiteResult getTestPackageResult() {
 		   return instance.testResult;
 	   }
-	   public void setTestPackageResult(TDLTestPackageResult result) {
+	   public void setTestPackageResult(TDLTestSuiteResult result) {
 		   instance.testResult = result;
 	   }
 	   public String eObjectLabelProvider(EObject object) {

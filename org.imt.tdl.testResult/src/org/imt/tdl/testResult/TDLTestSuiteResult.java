@@ -3,7 +3,7 @@ package org.imt.tdl.testResult;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TDLTestPackageResult {
+public class TDLTestSuiteResult {
 	
 	private String testPackageName;
 	

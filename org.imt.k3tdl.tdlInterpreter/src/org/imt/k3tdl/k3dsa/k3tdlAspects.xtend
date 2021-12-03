@@ -19,12 +19,12 @@ import org.imt.tdl.coverage.TDLCoverageUtil
 import org.imt.tdl.coverage.TDLTestCaseCoverage
 import org.imt.tdl.coverage.TDLTestSuiteCoverage
 import org.imt.tdl.testResult.TDLTestCaseResult
-import org.imt.tdl.testResult.TDLTestPackageResult
 import org.imt.tdl.testResult.TestResultUtil
 
 import static extension org.imt.k3tdl.k3dsa.BehaviourDescriptionAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
+import org.imt.tdl.testResult.TDLTestSuiteResult
 
 @Aspect(className = Package)
 class PackageAspect {
@@ -33,7 +33,7 @@ class PackageAspect {
 	TestDescription enabledTestCase
 	TestConfiguration enabledConfiguration
 	
-	TDLTestPackageResult testPackageResults = new TDLTestPackageResult
+	TDLTestSuiteResult testPackageResults = new TDLTestSuiteResult
 	TDLTestSuiteCoverage testSuiteCoverage = new TDLTestSuiteCoverage
 	
 	@Step
@@ -50,7 +50,7 @@ class PackageAspect {
 	@Main
 	def void main(){
 		try {
-			_self.testPackageResults.testPackageName = _self.name
+			_self.testPackageResults.setTestPackageName = _self.name
     		for (TestDescription tc:_self.testcases) {
     			_self.enabledTestCase = tc;
     			_self.enabledConfiguration = tc.testConfiguration;

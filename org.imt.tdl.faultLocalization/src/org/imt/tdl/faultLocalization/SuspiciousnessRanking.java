@@ -12,12 +12,12 @@ import org.imt.tdl.coverage.TDLCoverageUtil;
 import org.imt.tdl.coverage.TDLTestSuiteCoverage;
 import org.imt.tdl.coverage.TestCoverageInfo;
 import org.imt.tdl.testResult.TDLTestCaseResult;
-import org.imt.tdl.testResult.TDLTestPackageResult;
+import org.imt.tdl.testResult.TDLTestSuiteResult;
 import org.imt.tdl.testResult.TestResultUtil;
 
 public class SuspiciousnessRanking {
 	
-	private final TDLTestPackageResult testSuiteResult;
+	private final TDLTestSuiteResult testSuiteResult;
 	private final List<TDLTestCaseResult> errorVector;
 	private final TDLTestSuiteCoverage testSuiteCoverage;
 	private List<TestCoverageInfo> coverageMatix = new ArrayList<TestCoverageInfo>();
