@@ -34,9 +34,14 @@ public class TDLTestResultUtil {
 	   }
 	   public void setTestSuiteResult(TDLTestSuiteResult result) {
 		   instance.testSuiteResult = result;
+		   saveTestReport();
 	   }
 	   
-	   public String eObjectLabelProvider(EObject object) {
+	   private void saveTestReport() {
+		   
+	   }
+
+	public String eObjectLabelProvider(EObject object) {
 			final Class<?> IItemLabelProviderClass = IItemLabelProvider.class;
 			final Class<?> ITreeItemContentProviderClass = ITreeItemContentProvider.class;
 			ArrayList<AdapterFactory> factories = new ArrayList<AdapterFactory>();
