@@ -33,7 +33,7 @@ class PackageAspect {
 	TestDescription enabledTestCase
 	TestConfiguration enabledConfiguration
 	
-	TDLTestSuiteResult testPackageResults = new TDLTestSuiteResult
+	TDLTestSuiteResult testSuiteResult = new TDLTestSuiteResult
 	TDLTestSuiteCoverage testSuiteCoverage = new TDLTestSuiteCoverage
 	
 	@Step
@@ -50,20 +50,20 @@ class PackageAspect {
 	@Main
 	def void main(){
 		try {
-			_self.testPackageResults.setTestSuiteName = _self.name
+			_self.testSuiteResult.setTestSuiteName = _self.name
     		for (TestDescription tc:_self.testcases) {
     			_self.enabledTestCase = tc;
     			_self.enabledConfiguration = tc.testConfiguration;
-    			val TDLTestCaseResult verdict = _self.enabledTestCase.executeTestCase()
-    			_self.testPackageResults.addResult(verdict)
+    			val TDLTestCaseResult testCaseResult = _self.enabledTestCase.executeTestCase()
+    			_self.testSuiteResult.addResult(testCaseResult)
     			//for coverage, only considering passed and failed test cases
-    			if (verdict.value != TDLTestResultUtil.INCONCLUSIVE){
+    			if (testCaseResult.value != TDLTestResultUtil.INCONCLUSIVE){
     				_self.testSuiteCoverage.addTCCoverage(_self.enabledTestCase.testCaseCoverage)
     			}
     			println()
     		}
     		
-    		TDLTestResultUtil.getInstance.setTestSuiteResult = _self.testPackageResults		
+    		TDLTestResultUtil.getInstance.setTestSuiteResult = _self.testSuiteResult		
     		TDLCoverageUtil.instance.testSuiteCoverage = _self.testSuiteCoverage
     		TDLCoverageUtil.instance.DSLPath = _self.testcases.get(0).testConfiguration.DSLPath
     		  		
