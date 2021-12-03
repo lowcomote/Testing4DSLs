@@ -38,7 +38,7 @@ import org.eclipse.ui.part.ViewPart;
 import org.imt.tdl.coverage.TDLCoverageUtil;
 import org.imt.tdl.faultLocalization.SuspiciousnessRanking;
 import org.imt.tdl.faultLocalization.SBFLMeasures;
-import org.imt.tdl.testResult.TestResultUtil;
+import org.imt.tdl.testResult.TDLTestResultUtil;
 
 public class TDLSBFLView extends ViewPart{
 
@@ -325,10 +325,10 @@ public class TDLSBFLView extends ViewPart{
 				if (columnIndex > 1 && columnIndex < sbflMeasures.getCoverage().size() + 2) {
 					//the test case coverages
 					String tcEntry = sbflMeasures.getCoverage().get(columnIndex-2);
-					if (tcEntry == TDLCoverageUtil.COVERED || tcEntry == TestResultUtil.PASS) {
+					if (tcEntry == TDLCoverageUtil.COVERED || tcEntry == TDLTestResultUtil.PASS) {
 						return GREEN;
 					}
-					else if (tcEntry == TDLCoverageUtil.NOT_COVERED || tcEntry == TestResultUtil.FAIL) {
+					else if (tcEntry == TDLCoverageUtil.NOT_COVERED || tcEntry == TDLTestResultUtil.FAIL) {
 						return RED;
 					}
 				}
@@ -366,11 +366,11 @@ public class TDLSBFLView extends ViewPart{
 				else if (columnIndex > 1 && columnIndex < sbflOperandsStartIndex) {
 					//the test case coverages and test case verdicts
 					String tcEntry = sbflMeasures.getCoverage().get(columnIndex-2);
-					if (tcEntry == TestResultUtil.PASS) {
-						columnText = TestResultUtil.PASS;
+					if (tcEntry == TDLTestResultUtil.PASS) {
+						columnText = TDLTestResultUtil.PASS;
 					}
-					else if (tcEntry == TestResultUtil.FAIL) {
-						columnText = TestResultUtil.FAIL;
+					else if (tcEntry == TDLTestResultUtil.FAIL) {
+						columnText = TDLTestResultUtil.FAIL;
 					}else {
 						columnText = "";
 					}	

@@ -14,11 +14,11 @@ import org.etsi.mts.tdl.GateInstance
 import org.etsi.mts.tdl.GateType
 import org.etsi.mts.tdl.LiteralValueUse
 import org.imt.tdl.configuration.EngineFactory
-import org.imt.tdl.testResult.TestResultUtil
 
 import static extension org.imt.k3tdl.k3dsa.DataInstanceAspect.*
 import static extension org.imt.k3tdl.k3dsa.DataInstanceUseAspect.*
 import static extension org.imt.k3tdl.k3dsa.DataTypeAspect.*
+import org.imt.tdl.testResult.TDLTestResultUtil
 
 @Aspect(className=GateType)
 class GateTypeAspect {
@@ -65,16 +65,16 @@ class GateInstanceAspect {
 					_self.receivedOutput = result.subSequence(1, result.length-1)
 				}
 				if (_self.receivedOutput.toString.equals(_self.expectedOutput.toString)){
-					return TestResultUtil.PASS + ": The expected data is equal to the current data"
+					return TDLTestResultUtil.PASS + ": The expected data is equal to the current data"
 				}else{
-					return TestResultUtil.FAIL + ": The expected data is: " + _self.expectedOutput.toString + 
+					return TDLTestResultUtil.FAIL + ": The expected data is: " + _self.expectedOutput.toString + 
 						", but the current data is: " + _self.receivedOutput.toString;
 				}
 			} else if (_self.receivedOutput == null) {
-				return TestResultUtil.FAIL + ": The expected data is: " + _self.expectedOutput.toString + 
+				return TDLTestResultUtil.FAIL + ": The expected data is: " + _self.expectedOutput.toString + 
 						", but the current data is: null";
 			} else {
-				return TestResultUtil.FAIL + ": The expected data is: " + _self.expectedOutput.toString + 
+				return TDLTestResultUtil.FAIL + ": The expected data is: " + _self.expectedOutput.toString + 
 						", but the current data is: " + _self.receivedOutput.toString;
 			}
 		}
@@ -119,10 +119,10 @@ class GateInstanceAspect {
 			if(_self.name.equals(OCL_GATE)){
 				val Object[] receivedObjects = _self.gateLauncher.OCLResultAsObject
 				if (receivedObjects.elementsEqual(matchedMUTElements)){
-					return TestResultUtil.PASS + ": The expected data is equal to the current data"
+					return TDLTestResultUtil.PASS + ": The expected data is equal to the current data"
 				}else{
-					var expectedData = TestResultUtil.instance.getDataAsString(matchedMUTElements)
-					return TestResultUtil.FAIL + ": The expected data is: " + expectedData + 
+					var expectedData = TDLTestResultUtil.getInstance.getDataAsString(matchedMUTElements)
+					return TDLTestResultUtil.FAIL + ": The expected data is: " + expectedData + 
 						", but the current data is: " + _self.gateLauncher.OCLResultAsString;
 				}
 			}else{
@@ -150,10 +150,10 @@ class GateInstanceAspect {
 			}else if (arg.dataInstance.name == RESET_MODEL) {
 				_self.gateLauncher.MUTResource = 
 					(new ResourceSetImpl()).getResource(URI.createURI(_self.MUTPath), true)
-				return TestResultUtil.PASS + ": The MUT is reset to its initial state"
+				return TDLTestResultUtil.PASS + ": The MUT is reset to its initial state"
 			}else if (arg.dataInstance.name == GET_MODEL) {
 				_self.receivedOutput = _self.gateLauncher.MUTResource
-				return TestResultUtil.PASS + ": The current state of the MUT is retrieved"
+				return TDLTestResultUtil.PASS + ": The current state of the MUT is retrieved"
 			}else if (arg.dataInstance.dataType.name == OCL_TYPE) {
 				// extracting the query from the argument and sending for validation
 				var query = argument.argument.get(0).dataUse as LiteralValueUse
@@ -162,9 +162,9 @@ class GateInstanceAspect {
 				//the message is an event conforming to the behavioral interface of the DSL
 				return _self.gateLauncher.executeDSLSpecificCommand(ACCEPTED_EVENT, arg.dataInstance.validName, _self.getEventParameters(arg, ACCEPTED_EVENT))
 			}
-			return TestResultUtil.FAIL + ": Cannot send data to the MUT"
+			return TDLTestResultUtil.FAIL + ": Cannot send data to the MUT"
 		}
-		return TestResultUtil.FAIL + ": Cannot send data to the MUT"
+		return TDLTestResultUtil.FAIL + ": Cannot send data to the MUT"
 	}
 	
 	def String setModelState(DataInstanceUse arg){
@@ -174,7 +174,7 @@ class GateInstanceAspect {
 		if (arg.item != null && arg.item.size > 0){
 			for (i : 0 ..<arg.item.size){
 				status = (arg.item.get(i) as DataInstanceUse).setMatchedMUTElement(MUTResource, _self.DSLPath)
-				if (status.contains(TestResultUtil.FAIL)){
+				if (status.contains(TDLTestResultUtil.FAIL)){
 					return status
 				}
 			}

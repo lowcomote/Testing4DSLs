@@ -28,7 +28,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.labels.DefaultLabelGeneratorBuilder;
 import org.eclipse.ocl.pivot.labels.ILabelGenerator;
 import org.eclipse.ocl.pivot.labels.ILabelGenerator.Registry;
-import org.imt.tdl.testResult.TestResultUtil;
+import org.imt.tdl.testResult.TDLTestResultUtil;
 
 public class OCLInterpreter {
 
@@ -68,7 +68,7 @@ public class OCLInterpreter {
 				while (it.hasNext()) {
 					EObject object = (EObject) it.next();
 					this.resultAsObject.add(object);
-					this.resultAsString.add(TestResultUtil.getInstance().eObjectLabelProvider(object));
+					this.resultAsString.add(TDLTestResultUtil.getInstance().eObjectLabelProvider(object));
 				}
 			}else if (res instanceof ArrayList<?>) {
 				ArrayList<?> queryResult =  (ArrayList<?>) res;
@@ -86,7 +86,7 @@ public class OCLInterpreter {
 			if (res instanceof EObject) {
 				EObject object = (EObject) res;
 				this.resultAsObject.add(object);
-				this.resultAsString.add(TestResultUtil.getInstance().eObjectLabelProvider(object));
+				this.resultAsString.add(TDLTestResultUtil.getInstance().eObjectLabelProvider(object));
 			}else {
 				this.resultAsObject.add(null);
 				this.resultAsString.add("'" + "null" + "'");

@@ -5,26 +5,26 @@ import java.util.List;
 
 public class TDLTestSuiteResult {
 	
-	private String testPackageName;
+	private String testSuiteName;
 	
-	private List<TDLTestCaseResult> results = new ArrayList<>();
+	private List<TDLTestCaseResult> testCaseResults = new ArrayList<>();
 	
-	public String getTestPackageName() {
-		return testPackageName;
+	public String getTestSuiteName() {
+		return testSuiteName;
 	}
-	public void setTestPackageName(String name) {
-		this.testPackageName = name;
+	public void setTestSuiteName(String name) {
+		this.testSuiteName = name;
 	}
 	public void addResult(TDLTestCaseResult result) {
-		this.results.add(result);
+		this.testCaseResults.add(result);
 	}
-	public List<TDLTestCaseResult> getResults() {
-		return results;
+	public List<TDLTestCaseResult> getTestCaseResults() {
+		return testCaseResults;
 	}
 	
 	public int getNumOfPassedTestCases() {
 		int numPassedTests = 0;
-		for (TDLTestCaseResult result : results) {
+		for (TDLTestCaseResult result : testCaseResults) {
 			if (result.getValue().equals("PASS")) {
 				numPassedTests++;
 			}
@@ -34,7 +34,7 @@ public class TDLTestSuiteResult {
 	
 	public int getNumOfFailedTestCases() {
 		int numFailedTests = 0;
-		for (TDLTestCaseResult result : results) {
+		for (TDLTestCaseResult result : testCaseResults) {
 			if (result.getValue().equals("FAIL")) {
 				numFailedTests++;
 			}
@@ -44,7 +44,7 @@ public class TDLTestSuiteResult {
 	
 	public int getNumOfInconclusiveTestCases() {
 		int num = 0;
-		for (TDLTestCaseResult result : results) {
+		for (TDLTestCaseResult result : testCaseResults) {
 			if (result.getValue().equals("INCONCLUSIVE")) {
 				num++;
 			}

@@ -12,10 +12,10 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 
-public class TestResultUtil {
+public class TDLTestResultUtil {
 	
-	private static TestResultUtil instance = new TestResultUtil();
-	private TDLTestSuiteResult testResult;
+	private static TDLTestResultUtil instance = new TDLTestResultUtil();
+	private TDLTestSuiteResult testSuiteResult;
 	
 	public static final String PASS = "PASS";
 	public static final String FAIL = "FAIL";
@@ -23,18 +23,19 @@ public class TestResultUtil {
 
 	   //make the constructor private so that this class cannot be
 	   //instantiated
-	   private TestResultUtil(){}
+	   private TDLTestResultUtil(){}
 
 	   //Get the only object available
-	   public static TestResultUtil getInstance(){
+	   public static TDLTestResultUtil getInstance(){
 	      return instance;
 	   }
-	   public TDLTestSuiteResult getTestPackageResult() {
-		   return instance.testResult;
+	   public TDLTestSuiteResult getTestSuiteResult() {
+		   return instance.testSuiteResult;
 	   }
-	   public void setTestPackageResult(TDLTestSuiteResult result) {
-		   instance.testResult = result;
+	   public void setTestSuiteResult(TDLTestSuiteResult result) {
+		   instance.testSuiteResult = result;
 	   }
+	   
 	   public String eObjectLabelProvider(EObject object) {
 			final Class<?> IItemLabelProviderClass = IItemLabelProvider.class;
 			final Class<?> ITreeItemContentProviderClass = ITreeItemContentProvider.class;

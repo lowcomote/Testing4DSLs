@@ -66,7 +66,7 @@ import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
 import org.eclipse.gemoc.xdsmlframework.api.core.IExecutionEngine;
 import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
 import org.imt.gemoc.engine.custom.launcher.CustomEventBasedLauncher;
-import org.imt.tdl.testResult.TestResultUtil;
+import org.imt.tdl.testResult.TDLTestResultUtil;
 
 public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	
@@ -454,12 +454,12 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			switch (arg.getValue().eClass().getClassifierID()) {
 			case ValuePackage.SINGLE_REFERENCE_VALUE:
 				value = ((SingleReferenceValue) arg.getValue()).getReferenceValue();
-				String label = TestResultUtil.getInstance().eObjectLabelProvider(value);
+				String label = TDLTestResultUtil.getInstance().eObjectLabelProvider(value);
 				result += label.substring(label.lastIndexOf(":")+1);
 				break;
 			case ValuePackage.SINGLE_OBJECT_VALUE:
 				value = ((SingleObjectValue) arg.getValue()).getObjectValue();
-				label = TestResultUtil.getInstance().eObjectLabelProvider(value);
+				label = TDLTestResultUtil.getInstance().eObjectLabelProvider(value);
 				result += label.substring(label.lastIndexOf(":")+1);
 				break;
 			case ValuePackage.BOOLEAN_ATTRIBUTE_VALUE:

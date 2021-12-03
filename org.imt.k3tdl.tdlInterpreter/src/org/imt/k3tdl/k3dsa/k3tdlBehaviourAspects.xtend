@@ -53,7 +53,7 @@ import org.imt.tdl.testResult.TDLMessageResult
 import org.etsi.mts.tdl.LiteralValueUse
 import org.etsi.mts.tdl.DataInstanceUse
 import org.etsi.mts.tdl.LocalExpression
-import org.imt.tdl.testResult.TestResultUtil
+import org.imt.tdl.testResult.TDLTestResultUtil
 
 @Aspect (className = BehaviourDescription)
 class BehaviourDescriptionAspect{
@@ -229,25 +229,28 @@ class MessageAspect extends InteractoinAspect{
 				verdict = t.targetGate.gate.sendArgument2sut(_self.argument)
 				_self.addMessageResult(verdict)
 				var boolean result = true
-				if (verdict.contains(TestResultUtil.FAIL)){
+				if (verdict.contains(TDLTestResultUtil.FAIL)){
 					result = false
-					_self.parentTestDescription.testCaseResult.value = TestResultUtil.INCONCLUSIVE//the test case should be interrupted
+					_self.parentTestDescription.testCaseResult.value = TDLTestResultUtil.INCONCLUSIVE//the test case should be interrupted
 				}
 				return result //if the result is false, the test case execution should be interrupted
 			}
 		}	
 	}
 	def void addMessageResult(String info){
-		var boolean result = true
-		if (info.contains(TestResultUtil.FAIL)){
-			result = false
-			_self.parentTestDescription.testCaseResult.value = TestResultUtil.FAIL
+		var String result = ""
+		if (info.contains(TDLTestResultUtil.FAIL)){
+			result = TDLTestResultUtil.FAIL
+			_self.parentTestDescription.testCaseResult.value = TDLTestResultUtil.FAIL
 		}
-		var message = info
+		else if (info.contains(TDLTestResultUtil.PASS)){
+			result = TDLTestResultUtil.PASS
+		}
+		var description = info
 		if (info.contains(":")){
-			message = info.substring(info.indexOf(":") + 2, info.length)
+			description = info.substring(info.indexOf(":") + 2, info.length)
 		}
-		_self.messageVerdict = new TDLMessageResult(_self.name, result, message, null,!result);
+		_self.messageVerdict = new TDLMessageResult(_self.name, result, description, null);
 		_self.parentTestDescription.testCaseResult.addTdlMessage(_self.messageVerdict)
 	}
 }

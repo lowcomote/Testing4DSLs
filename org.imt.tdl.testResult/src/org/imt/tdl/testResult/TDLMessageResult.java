@@ -7,51 +7,53 @@ import org.etsi.mts.tdl.DataUse;
 
 public class TDLMessageResult {
 	
-	private String tdlMessageName;
+	private String tdlMessageId;
 	
-	private boolean value;
+	private String value;
 	
-	private String message;
+	private String description;
 	//<expectedData, receivedDta>
 	private HashMap<DataUse, DataUse> oracle;
 	
 	private boolean failure;
 	
-	public TDLMessageResult(String tdlMessageName, boolean value, String message, HashMap<DataUse, DataUse> oracle, boolean error) {
-		this.tdlMessageName = tdlMessageName;
+	public TDLMessageResult(String tdlMessageId, String value, String description, HashMap<DataUse, DataUse> oracle) {
+		this.tdlMessageId = tdlMessageId;
 		this.value = value;
-		this.message = message;
+		if (value == TDLTestResultUtil.INCONCLUSIVE) {
+			this.failure = true;
+		}
+		this.description = description;
 		this.oracle = oracle;
-		this.failure = error;
 	}
-	public String getTdlMessageName() {
-		if (this.tdlMessageName == null) {
+	public String getTdlMessageId() {
+		if (this.tdlMessageId == null) {
 			return "NULL";
 		}
-		return this.tdlMessageName;
+		return this.tdlMessageId;
 	}
 	
-	public void setTdlMessageName(String name) {
-		this.tdlMessageName = name;
+	public void setTdlMessageId(String name) {
+		this.tdlMessageId = name;
 	}
 	
-	public boolean getValue() {
-		return value;
+	public String getValue() {
+		return this.value;
 	}
 	
-	public void setValue(boolean value) {
+	public void setValue(String value) {
 		this.value = value;
 	}
 	
-	public String getMessage() {
-		if (this.message == null) {
+	public String getDescription() {
+		if (this.description == null) {
 			return "NULL";
 		}
-		return this.message;
+		return this.description;
 	}
 	
-	public void setMessage(String message) {
-		this.message = message;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	public HashMap<DataUse, DataUse> getOracle() {

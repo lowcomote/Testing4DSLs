@@ -1,11 +1,7 @@
 package org.imt.tdl.testResult;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
-import org.etsi.mts.tdl.DataInstanceUse;
-import org.etsi.mts.tdl.DataUse;
 
 public class TDLTestCaseResult {
 	
@@ -15,13 +11,13 @@ public class TDLTestCaseResult {
 	
 	private String description;
 	
-	private List<TDLMessageResult> tdlMessages;
+	private List<TDLMessageResult> tdlMessageResults;
 	
 	private int messageNumber = 0;
 	
 	public TDLTestCaseResult() {
-		this.value = "PASS";
-		this.tdlMessages = new ArrayList<TDLMessageResult>();
+		this.value = TDLTestResultUtil.PASS;
+		this.tdlMessageResults = new ArrayList<TDLMessageResult>();
 	}
 	
 	public String getTestCaseName() {
@@ -48,11 +44,11 @@ public class TDLTestCaseResult {
 	}
 	
 	public List<TDLMessageResult> getTdlMessages() {
-		return this.tdlMessages;
+		return this.tdlMessageResults;
 	}
 	public List<TDLMessageResult> getFailedTdlMessages() {
 		List<TDLMessageResult> failedTdlMessages = new ArrayList<>();
-		for (TDLMessageResult tdlMessage : this.tdlMessages) {
+		for (TDLMessageResult tdlMessage : this.tdlMessageResults) {
 			if (tdlMessage.getFailure() == true) {
 				failedTdlMessages.add(tdlMessage);
 			}
@@ -61,8 +57,8 @@ public class TDLTestCaseResult {
 	}
 	public int getNumOfPassedtdlMessages() {
 		int passed = 0;
-		for (TDLMessageResult tdlMessage : tdlMessages) {
-			if (tdlMessage.getValue() == true) {
+		for (TDLMessageResult tdlMessage : tdlMessageResults) {
+			if (tdlMessage.getValue() == TDLTestResultUtil.PASS) {
 				passed++;
 			}
 		}
@@ -71,7 +67,7 @@ public class TDLTestCaseResult {
 	
 	public int getNumOfFailures() {
 		int failures = 0;
-		for (TDLMessageResult tdlMessage : tdlMessages) {
+		for (TDLMessageResult tdlMessage : tdlMessageResults) {
 			if (tdlMessage.getFailure() == true) {
 				failures++;
 			}
@@ -79,10 +75,10 @@ public class TDLTestCaseResult {
 		return failures;
 	}
 
-	public void addTdlMessage(TDLMessageResult messageVerdict) {
+	public void addTdlMessage(TDLMessageResult messageResult) {
 		this.messageNumber++;
-		messageVerdict.setTdlMessageName("Message#" + this.messageNumber);
-		this.tdlMessages.add(messageVerdict);
+		messageResult.setTdlMessageId("Message#" + this.messageNumber);
+		this.tdlMessageResults.add(messageResult);
 	}
 	
 }

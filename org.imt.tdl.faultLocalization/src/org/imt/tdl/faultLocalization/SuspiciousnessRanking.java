@@ -13,7 +13,7 @@ import org.imt.tdl.coverage.TDLTestSuiteCoverage;
 import org.imt.tdl.coverage.TestCoverageInfo;
 import org.imt.tdl.testResult.TDLTestCaseResult;
 import org.imt.tdl.testResult.TDLTestSuiteResult;
-import org.imt.tdl.testResult.TestResultUtil;
+import org.imt.tdl.testResult.TDLTestResultUtil;
 
 public class SuspiciousnessRanking {
 	
@@ -49,8 +49,8 @@ public class SuspiciousnessRanking {
 	private Map<String, Double> worseEXAMScore = new HashMap<>();//wore-case EXAM score for each technique
 	
 	public SuspiciousnessRanking() {
-		this.testSuiteResult = TestResultUtil.getInstance().getTestPackageResult();
-		this.errorVector = this.testSuiteResult.getResults();
+		this.testSuiteResult = TDLTestResultUtil.getInstance().getTestSuiteResult();
+		this.errorVector = this.testSuiteResult.getTestCaseResults();
 		this.testSuiteCoverage = TDLCoverageUtil.getInstance().getTestSuiteCoverage();
 		this.coverageMatix.addAll(this.testSuiteCoverage.coverageInfos);
 		//the row of the matrix containing coverage percentages should be removed 
@@ -90,16 +90,16 @@ public class SuspiciousnessRanking {
 				}
 				if (elementCoverageStatus.get(j) == TDLCoverageUtil.COVERED) {
 					NC++;
-					if (testCaseVerdict == TestResultUtil.PASS) {
+					if (testCaseVerdict == TDLTestResultUtil.PASS) {
 						NCS++;
-					}else if (testCaseVerdict == TestResultUtil.FAIL) {
+					}else if (testCaseVerdict == TDLTestResultUtil.FAIL) {
 						NCF++;
 					}
 				}else if (elementCoverageStatus.get(j) == TDLCoverageUtil.NOT_COVERED) {
 					NU++;
-					if (testCaseVerdict == TestResultUtil.PASS) {
+					if (testCaseVerdict == TDLTestResultUtil.PASS) {
 						NUS++;
-					}else if (testCaseVerdict == TestResultUtil.FAIL) {
+					}else if (testCaseVerdict == TDLTestResultUtil.FAIL) {
 						NUF++;
 					}
 				}

@@ -19,12 +19,12 @@ import org.imt.tdl.coverage.TDLCoverageUtil
 import org.imt.tdl.coverage.TDLTestCaseCoverage
 import org.imt.tdl.coverage.TDLTestSuiteCoverage
 import org.imt.tdl.testResult.TDLTestCaseResult
-import org.imt.tdl.testResult.TestResultUtil
 
 import static extension org.imt.k3tdl.k3dsa.BehaviourDescriptionAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
 import org.imt.tdl.testResult.TDLTestSuiteResult
+import org.imt.tdl.testResult.TDLTestResultUtil
 
 @Aspect(className = Package)
 class PackageAspect {
@@ -50,20 +50,20 @@ class PackageAspect {
 	@Main
 	def void main(){
 		try {
-			_self.testPackageResults.setTestPackageName = _self.name
+			_self.testPackageResults.setTestSuiteName = _self.name
     		for (TestDescription tc:_self.testcases) {
     			_self.enabledTestCase = tc;
     			_self.enabledConfiguration = tc.testConfiguration;
     			val TDLTestCaseResult verdict = _self.enabledTestCase.executeTestCase()
     			_self.testPackageResults.addResult(verdict)
     			//for coverage, only considering passed and failed test cases
-    			if (verdict.value != TestResultUtil.INCONCLUSIVE){
+    			if (verdict.value != TDLTestResultUtil.INCONCLUSIVE){
     				_self.testSuiteCoverage.addTCCoverage(_self.enabledTestCase.testCaseCoverage)
     			}
     			println()
     		}
     		
-    		TestResultUtil.instance.testPackageResult = _self.testPackageResults		
+    		TDLTestResultUtil.getInstance.setTestSuiteResult = _self.testPackageResults		
     		TDLCoverageUtil.instance.testSuiteCoverage = _self.testSuiteCoverage
     		TDLCoverageUtil.instance.DSLPath = _self.testcases.get(0).testConfiguration.DSLPath
     		  		
@@ -85,11 +85,11 @@ class TestDescriptionAspect{
 		_self.testConfiguration.activateConfiguration(_self.launcher)
 		_self.behaviourDescription.callBehavior()
 		val modelExecutionResult = _self.testConfiguration.stopModelExecutionEngine(_self.launcher)
-		if (modelExecutionResult !== null && modelExecutionResult.contains(TestResultUtil.FAIL)){
-			_self.testCaseResult.value = TestResultUtil.FAIL
+		if (modelExecutionResult !== null && modelExecutionResult.contains(TDLTestResultUtil.FAIL)){
+			_self.testCaseResult.value = TDLTestResultUtil.FAIL
 			_self.testCaseResult.description = modelExecutionResult.substring(modelExecutionResult.indexOf(":")+1)
 		}
-		if (_self.testCaseResult.value.equals(TestResultUtil.PASS)) {
+		if (_self.testCaseResult.value.equals(TDLTestResultUtil.PASS)) {
 			println("Test case PASSED")
 		}else{
 			println("Test case FAILED")
@@ -111,10 +111,10 @@ class TestDescriptionAspect{
 		_self.testConfiguration.activateConfiguration(_self.launcher, MUTPath)
 		_self.behaviourDescription.callBehavior()
 		val modelExecutionResult = _self.testConfiguration.stopModelExecutionEngine(_self.launcher)
-		if (modelExecutionResult !== null && modelExecutionResult.contains(TestResultUtil.FAIL)){
+		if (modelExecutionResult !== null && modelExecutionResult.contains(TDLTestResultUtil.FAIL)){
 			_self.testCaseResult.value = modelExecutionResult
 		}
-		if (_self.testCaseResult.value.equals(TestResultUtil.PASS)) {
+		if (_self.testCaseResult.value.equals(TDLTestResultUtil.PASS)) {
 			println("Test case PASSED")
 		}else{
 			println("Test case FAILED")
