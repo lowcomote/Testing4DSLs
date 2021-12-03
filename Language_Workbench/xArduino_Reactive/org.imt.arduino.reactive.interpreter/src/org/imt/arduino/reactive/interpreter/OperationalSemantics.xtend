@@ -416,6 +416,7 @@ class While_EvaluableAspect extends Control_EvaluableAspect {
 
 @Aspect(className=While)
 class While_ExecutableAspect extends Control_ExecutableAspect {
+	@Step
 	@OverrideAspectMethod
 	def void execute() {
 		while (_self.evaluate) {
