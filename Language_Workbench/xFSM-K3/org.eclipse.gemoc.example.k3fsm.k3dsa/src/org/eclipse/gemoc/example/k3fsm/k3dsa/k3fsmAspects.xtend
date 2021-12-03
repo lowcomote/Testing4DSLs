@@ -3,6 +3,7 @@ package org.eclipse.gemoc.example.k3fsm.k3dsa
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 
 
+
 import fr.inria.diverse.k3.al.annotationprocessor.InitializeModel
 import fr.inria.diverse.k3.al.annotationprocessor.Main
 import fr.inria.diverse.k3.al.annotationprocessor.Step
@@ -47,8 +48,8 @@ class FSMAspect {
 		println("processed string: "+_self.consumedString)
 		println("produced string: "+_self.producedString)
 	}
-}
 
+}
 @Aspect(className=State)
 class StateAspect {
 	@Step												// <3>

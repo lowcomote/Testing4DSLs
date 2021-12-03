@@ -450,18 +450,18 @@ public class K3fsmPackageImpl extends EPackageImpl implements K3fsmPackage {
 		createResource(eNS_URI);
 
 		// Create annotations
-		// dynamic
-		createDynamicAnnotations();
+		// aspect
+		createAspectAnnotations();
 	}
 
 	/**
-	 * Initializes the annotations for <b>dynamic</b>.
+	 * Initializes the annotations for <b>aspect</b>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void createDynamicAnnotations() {
-		String source = "dynamic";
+	protected void createAspectAnnotations() {
+		String source = "aspect";
 		addAnnotation(getFSM_CurrentState(), source, new String[] {});
 		addAnnotation(getFSM_UnprocessedString(), source, new String[] {});
 		addAnnotation(getFSM_ConsumedString(), source, new String[] {});
