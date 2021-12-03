@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="TDLTestCoverage" nsURI="http://org.imt.tdl.coverage/TDLTestCoverage"
+    nsPrefix="TDLTestCoverage">
+  <eClassifiers xsi:type="ecore:EClass" name="TestSuiteCoverage">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="testSuite" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.etsi.mts.tdl.model/model/tdl.ecore#//Package"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="testCaseCoverages" lowerBound="1"
+        upperBound="-1" eType="#//TestCaseCoverage" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tsObjectCoverageStatus"
+        lowerBound="1">
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+        <eTypeArguments eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+        <eTypeArguments eClassifier="#//CoverageStatus"/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="coveragePercentage" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TestCaseCoverage">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="testCase" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.etsi.mts.tdl.model/model/tdl.ecore#//TestDescription"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tcObjectCoverageStatus"
+        lowerBound="1">
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+        <eTypeArguments eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+        <eTypeArguments eClassifier="#//CoverageStatus"/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="coveragePercentage" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CoverageStatus">
+    <eLiterals name="COVERED"/>
+    <eLiterals name="NOT-COVERED" value="1"/>
+    <eLiterals name="NOT-COVERABLE" value="2"/>
+  </eClassifiers>
+</ecore:EPackage>

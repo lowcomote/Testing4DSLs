@@ -14,6 +14,7 @@ public class TDLTestSuiteCoverage {
 
 	public List<TestCoverageInfo> coverageInfos = new ArrayList<>();
 	private TestCoverageInfo overallResult = new TestCoverageInfo();
+	
 	double tsCoveragePercentage;
 	
 	//for every test case of the test suite, add its coverage to the list
