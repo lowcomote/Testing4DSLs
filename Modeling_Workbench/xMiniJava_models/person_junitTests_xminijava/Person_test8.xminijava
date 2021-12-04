@@ -21,21 +21,15 @@ public class Person {
     }
 
     public int GetAge(){
-    	int age = this.Age;
-    	this.Age = age;
-		return age ;
+		return this.Age ;
     }
     
     public int GetSalary(){
-    	int salary = this.Salary;
-    	this.Salary = salary;
-		return salary ;
+		return this.Salary ;
     }
 
     public boolean GetMarried(){
-    	boolean married = this.Married;
-    	this.Married = married;
-		return married;
+		return this.Married;
     }
 
     // This method returns true if the object "other"

@@ -117,34 +117,14 @@ public class LinkedList{
     }
     
     public boolean GetEnd(){
-    	boolean end = this.end;
-    	this.end = end;
-		return end ;
+		return this.end;
     }
     
     public Person GetElem(){
-    	Person person = this.elem;
-    	this.elem = person;
-		return person;
+		return this.elem;
     }
     
     public LinkedList getNextElem(){
-    	LinkedList nextElem = this.nextElem;
-    	this.nextElem = nextElem;
-		return nextElem ;
+		return this.nextElem ;
     }
-    
-    
-    // Print the linked list
-//    public void Print(){
-//    	LinkedList aux01 = this;
-//		boolean var_end = this.end;
-//		Person var_elem = this.elem;
-//		while (!var_end){
-//		    System.out.println(var_elem.GetAge());
-//		    aux01 = aux01.getNextElem() ;
-//		    var_end = aux01.GetEnd();
-//		    var_elem = aux01.GetElem();
-//		}
-//    }
 }

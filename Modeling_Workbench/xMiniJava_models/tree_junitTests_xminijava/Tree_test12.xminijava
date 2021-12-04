@@ -36,30 +36,23 @@ public class Tree{
 		this.has_right = false ;
     }
 
+    public Tree GetRight(){
+		return this.right ;
+    }
+    
     public void SetRight(Tree rn){
 		this.right = rn ;
     }
 
-    public void SetLeft(Tree ln){
+    public Tree GetLeft(){
+		return this.left;
+    }
+
+	public void SetLeft(Tree ln){
 		this.left = ln ;
     }
-
-    public Tree GetRight(){
-    	Tree right = this.right;
-    	this.right = right;
-		return right ;
-    }
-
-    public Tree GetLeft(){
-    	Tree left = this.left;
-    	this.left = left;
-		return left;
-    }
-
     public int GetKey(){
-    	int key = this.key;
-    	this.key = key;
-		return key ;
+		return this.key ;
     }
 
     public void SetKey(int v_key){
@@ -67,24 +60,20 @@ public class Tree{
     }
 
     public boolean GetHas_Right(){
-    	boolean hasRight = this.has_right;
-    	this.has_right = hasRight;
-		return hasRight;
+		return this.has_right;
     }
 
+	public void SetHas_Right(boolean val){
+		 this.has_right = val ;
+    }
+    
     public boolean GetHas_Left(){
-    	boolean hasLeft = this.has_left;
-    	this.has_left = hasLeft;
-		return hasLeft ;
+		return this.has_left ;
     }
 
     public void SetHas_Left(boolean val){
 		 this.has_left = val ;
-    }
-
-    public void SetHas_Right(boolean val){
-		 this.has_right = val ;
-    }
+    } 
 
     public boolean Compare(int num1 , int num2){
 		boolean ntb = false;
@@ -274,28 +263,4 @@ public class Tree{
 		}
 		return ifound ;
     }
-
-//    public boolean Print(){
-//		Tree current_node = this ;
-//		boolean ntb = this.RecPrint(current_node);
-//		return true ;
-//    }
-//
-//    public boolean RecPrint(Tree node){
-//		boolean ntb = false;
-//		if (node.GetHas_Left()){
-//		    ntb = this.RecPrint(node.GetLeft());
-//		} 
-//		else {
-//			ntb = true ;
-//		}
-//		System.out.println(node.GetKey());
-//		if (node.GetHas_Right()){
-//		    ntb = this.RecPrint(node.GetRight());
-//		} 
-//		else {
-//			ntb = true ;
-//		}
-//		return true ;
-//    }
 }
