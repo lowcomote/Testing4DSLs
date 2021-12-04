@@ -64,7 +64,7 @@ public class TDLTestSuiteCoverage {
 			}
 		}
 		countNumOfElements();
-		System.out.println("\n" + "Model size: " + this.modelObjects.size() + "\n");
+		System.out.println("\n" + "Model size (n. of EObjects): " + this.modelObjects.size() + "\n");
 		calculateCoveragePercentage();
 	}
 	
