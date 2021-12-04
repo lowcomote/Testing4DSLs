@@ -9,21 +9,9 @@ class Main{
     }
 }
 
-// This class contains an array of integers and
-// methods to initialize, print and search the array
-// using Linear Search
 public class LinearSearch {
     public int[] number ;
     public int size ;
-
-    // Print array of integers
-//    public void Print(){
-//		int j = 1;
-//		while (j < (this.size)) {
-//		    System.out.println(this.number[j]);
-//		    j = j + 1 ;
-//		}
-//    }
 
     // Search for a specific value (num) using
     // linear search
@@ -35,7 +23,6 @@ public class LinearSearch {
 		int aux02 = 0;
 		int nt = 0;
 		int aSize = this.size;
-		//System.out.println(num);
 		while (j < aSize) {
 		    aux01 = this.number[j] ;
 		    aux02 = num + 1 ;
