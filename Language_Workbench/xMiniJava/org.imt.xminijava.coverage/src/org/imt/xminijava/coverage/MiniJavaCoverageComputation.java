@@ -1,5 +1,6 @@
 package org.imt.xminijava.coverage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -7,15 +8,15 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
-import org.imt.minijava.xminiJava.Program;
-import org.imt.minijava.xminiJava.StringTypeRef;
-import org.imt.minijava.xminiJava.TypeDeclaration;
-import org.imt.minijava.xminiJava.TypedDeclaration;
+import org.imt.minijava.xminiJava.ArrayTypeRef;
 import org.imt.minijava.xminiJava.Class;
 import org.imt.minijava.xminiJava.Member;
 import org.imt.minijava.xminiJava.Method;
-import org.imt.minijava.xminiJava.ArrayTypeRef;
+import org.imt.minijava.xminiJava.Program;
+import org.imt.minijava.xminiJava.StringTypeRef;
+import org.imt.minijava.xminiJava.TypeDeclaration;
 import org.imt.tdl.coverage.IDSLSpecificCoverage;
+import org.imt.tdl.coverage.TDLCoverageUtil;
 import org.imt.tdl.coverage.TDLTestCaseCoverage;
 
 public class MiniJavaCoverageComputation implements IDSLSpecificCoverage{
@@ -25,19 +26,62 @@ public class MiniJavaCoverageComputation implements IDSLSpecificCoverage{
 	
 	@Override
 	public List<String> getNewCoverableClasses() {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> coverableClasses = new ArrayList<>();
+		coverableClasses.add(Class.class.getName());
+		return coverableClasses;
 	}
 
 	@Override
 	public void specializeCoverage(TDLTestCaseCoverage testCaseCoverage) {
 		this.testCaseCoverage = testCaseCoverage;
 		this.modelObjects = testCaseCoverage.modelObjects;
-		//if a method of a class is called, the class is covered
-		//if an assignment is covered, all its contents are also covered
-		
+		for (int i=0; i<this.modelObjects.size(); i++) {
+			EObject modelObject = this.modelObjects.get(i);
+			String coverage = this.testCaseCoverage.tcObjectCoverageStatus.get(i);
+			if (modelObject instanceof Program) {
+				programCoverage ((Program) modelObject);
+			}
+			else if (modelObject instanceof Class && coverage != TDLCoverageUtil.COVERED) {
+				classCoverage ((Class) modelObject);
+			}
+			else if (modelObject instanceof Method) {
+				methodCoverage ((Method) modelObject);
+			}
+		}
 	}
 
+	private void methodCoverage(Method method) {
+		//to be compatible with JaCoCo, a method signature should not be considered in the coverage computation
+		//only its inner instructions/assignments are considered
+		int index = this.modelObjects.indexOf(method);
+		this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.NOT_COVERABLE);
+	}
+
+	private void programCoverage(Program program) {
+		//to be compatible with JaCoCo, a program should not be considered in the coverage computation
+		int index = this.modelObjects.indexOf(program);
+		this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.NOT_COVERABLE);
+	}
+
+	private void classCoverage(Class clazz) {
+		//a class is covered when at least one of its methods is covered
+		int clazzIndex = this.modelObjects.indexOf(clazz);
+		for (Member member: clazz.getMembers()) {
+			if (member instanceof Method) {
+				int methodIndex = this.modelObjects.indexOf(member);
+				String methodCoverage = this.testCaseCoverage.tcObjectCoverageStatus.get(methodIndex);
+				if (methodCoverage == TDLCoverageUtil.COVERED) {
+					this.testCaseCoverage.tcObjectCoverageStatus.set(clazzIndex, TDLCoverageUtil.COVERED);
+					break;
+				}
+			}
+		}
+		String classCoverage = this.testCaseCoverage.tcObjectCoverageStatus.get(clazzIndex);
+		if (classCoverage != TDLCoverageUtil.COVERED) {
+			this.testCaseCoverage.tcObjectCoverageStatus.set(clazzIndex, TDLCoverageUtil.NOT_COVERED);
+		}
+	}
+	
 	@Override
 	public void ignoreModelObjects(Resource MUTResource) {
 		Program javaPackage = (Program) MUTResource.getContents().get(0);
