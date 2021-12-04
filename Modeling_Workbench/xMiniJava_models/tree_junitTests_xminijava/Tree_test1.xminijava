@@ -70,7 +70,7 @@ public class Tree{
 		boolean ntb = false;
 		int nti = num2 + 1 ;
 		if (num1 < num2) {
-			ntb = false ;//not covered
+			ntb = false ;
 		}
 		else{
 			if (!(num1 < nti)){

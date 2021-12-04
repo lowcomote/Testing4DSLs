@@ -155,34 +155,34 @@ Package Tree_testSuite {
 		tester.genericGate sends getModelState to xminijava.genericGate;
 		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "false")) to tester.genericGate;
 	}
-//	Test Description test20 uses configuration TreeConfiguration20{
-//		tester.genericGate sends runModel to xminijava.genericGate;
-//		tester.genericGate sends getModelState to xminijava.genericGate;
-//		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "true")) to tester.genericGate;
-//	}
-//	Test Description test21 uses configuration TreeConfiguration21{
-//		tester.genericGate sends runModel to xminijava.genericGate;
-//		tester.genericGate sends getModelState to xminijava.genericGate;
-//		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "false")) to tester.genericGate;
-//	}
-//	Test Description test22 uses configuration TreeConfiguration22{
-//		tester.genericGate sends runModel to xminijava.genericGate;
-//		tester.genericGate sends getModelState to xminijava.genericGate;
-//		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "false")) to tester.genericGate;
-//	}
-//	Test Description test23 uses configuration TreeConfiguration23{
-//		tester.genericGate sends runModel to xminijava.genericGate;
-//		tester.genericGate sends getModelState to xminijava.genericGate;
-//		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "true")) to tester.genericGate;
-//	}
-//	Test Description test24 uses configuration TreeConfiguration24{
-//		tester.genericGate sends runModel to xminijava.genericGate;
-//		tester.genericGate sends getModelState to xminijava.genericGate;
-//		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "false")) to tester.genericGate;
-//	}
-//	Test Description test25 uses configuration TreeConfiguration25{
-//		tester.genericGate sends runModel to xminijava.genericGate;
-//		tester.genericGate sends getModelState to xminijava.genericGate;
-//		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "true")) to tester.genericGate;
-//	}
+	Test Description test20 uses configuration TreeConfiguration20{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "true")) to tester.genericGate;
+	}
+	Test Description test21 uses configuration TreeConfiguration21{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test22 uses configuration TreeConfiguration22{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test23 uses configuration TreeConfiguration23{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "true")) to tester.genericGate;
+	}
+	Test Description test24 uses configuration TreeConfiguration24{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test25 uses configuration TreeConfiguration25{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "true")) to tester.genericGate;
+	}
 }

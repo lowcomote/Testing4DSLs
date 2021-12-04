@@ -13,4 +13,7 @@
   <semanticResources>Person_TestSuite.tdlan2</semanticResources>
   <semanticResources>Tree_TestSuite.tdlan2</semanticResources>
   <semanticResources>BinarySearch_TestCase2.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20211204_190643/Tree_TestSuite.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20211204_191511/Tree_TestSuite.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20211204_192350/Factorial_TestSuite.tdlan2</semanticResources>
 </viewpoint:DAnalysis>

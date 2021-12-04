@@ -86,6 +86,8 @@ public class TDLTestSuiteCoverage {
 	
 	public void calculateCoveragePercentage() {
 		int numOfCoverableElements = this.tsObjectCoverageStatus.size() - this.numOfNotCoverableElements;
+		System.out.println("number of coveredObjects: " + this.numOfCoveredObjs);
+		System.out.println("number of coverableElements: " + numOfCoverableElements);
 		double tsCoveragePercentage = (double)(this.numOfCoveredObjs*100)/numOfCoverableElements;
 		BigDecimal bd = new BigDecimal(tsCoveragePercentage).setScale(2, RoundingMode.HALF_UP);
 		tsCoveragePercentage = bd.doubleValue();
