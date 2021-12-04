@@ -49,7 +49,6 @@ public class TDLTestSuiteCoverage {
 			}
 			tcCoverageObj.countNumOfElements();
 			this.overallResult.getCoverage().add(tcCoverageObj.getCoveragePercentage() + "");
-			tcCoverageObj.calculateCoveragePercentage();
 			
 			//if it is the first test case, copy the whole test case object coverage status for the test suite
 			if (this.tsObjectCoverageStatus.size() == 0) {
@@ -65,9 +64,8 @@ public class TDLTestSuiteCoverage {
 			}
 		}
 		countNumOfElements();
-		System.out.println("Model size: " + this.modelObjects.size());
+		System.out.println("\n" + "Model size: " + this.modelObjects.size() + "\n");
 		calculateCoveragePercentage();
-		calculateOveralCoveragePercentage();
 	}
 	
 	int numOfCoveredObjs;
@@ -94,11 +92,6 @@ public class TDLTestSuiteCoverage {
 		System.out.println("Test suite coverage: " + tsCoveragePercentage);
 		this.overallResult.getCoverage().add(tsCoveragePercentage + "");
 		this.setCoverageInfos();
-	}
-	
-	public void calculateOveralCoveragePercentage() {
-		double tsOverallCoveragePercentage = Math.ceil((double)(this.numOfCoveredObjs*100)/this.tsObjectCoverageStatus.size());
-		System.out.println("Test suite overall coverage: " + tsOverallCoveragePercentage);
 	}
 
 	public void setCoverageInfos() {

@@ -138,11 +138,6 @@ public class TDLTestCaseCoverage {
 		return tcCoveragePercentage;
 	}
 	
-	public void calculateCoveragePercentage() {
-		double tcOverallCoveragePercentage = Math.ceil((double)(this.numOfCoveredObjs*100)/this.tcObjectCoverageStatus.size());
-		System.out.println(this.testCaseName + " overall coverage: " + tcOverallCoveragePercentage);
-	}
-	
 	public Trace<?, ?, ?> getTrace() {
 		return trace;
 	}
