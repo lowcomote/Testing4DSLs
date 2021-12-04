@@ -1,5 +1,8 @@
 package org.imt.tdl.coverage;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -128,7 +131,9 @@ public class TDLTestCaseCoverage {
 	
 	public double getCoveragePercentage() {
 		int numOfCoverableElements = this.tcObjectCoverageStatus.size() - this.numOfNotCoverableElements;
-		double tcCoveragePercentage = Math.ceil((double)(this.numOfCoveredObjs*100)/numOfCoverableElements);
+		double tcCoveragePercentage = (double)(this.numOfCoveredObjs*100)/numOfCoverableElements;
+		BigDecimal bd = new BigDecimal(tcCoveragePercentage).setScale(2, RoundingMode.HALF_UP);
+		tcCoveragePercentage = bd.doubleValue();
 		System.out.println(this.testCaseName + " coverage: " + tcCoveragePercentage);
 		return tcCoveragePercentage;
 	}
