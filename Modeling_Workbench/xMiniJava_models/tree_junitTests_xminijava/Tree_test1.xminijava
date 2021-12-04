@@ -70,7 +70,7 @@ public class Tree{
 		boolean ntb = false;
 		int nti = num2 + 1 ;
 		if (num1 < num2) {
-			ntb = false ;
+			ntb = false ;//not covered
 		}
 		else{
 			if (!(num1 < nti)){
@@ -131,7 +131,7 @@ public class Tree{
 				    current_node = current_node.GetLeft() ;
 				}
 				else {
-					cont = false ;
+					cont = false ;//not covered
 				}
 		    }
 		    else {
@@ -147,7 +147,7 @@ public class Tree{
 				else { 
 				    if (is_root) {
 				    	if (!current_node.GetHas_Right() && !current_node.GetHas_Left() ){
-				    		ntb = true ;
+				    		ntb = true ;//not covered
 				    	}    
 						else{
 							ntb = this.Remove(parent_node,current_node); 
