@@ -4,7 +4,7 @@ Package testSuite {
 	Import all from arduinoSpecificEvents;
 	Import all from testConfiguration ;
 	
-		PushButton button (_name = "button");
+	PushButton button (_name = "button");
 	DigitalPin ledPin (_name = "led", level =?);
 
 	Test Description test1 uses configuration blinkingLEDConfiguration{
