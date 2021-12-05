@@ -37,7 +37,7 @@ Package testConfiguration {
 	Test Configuration activeWaitConfiguration {
 		create Tester tester of type TestSystem ;
 		create SUT arduino of type MUT with { 
-			MUTPath : '/xArduino_reactive_models/activeWaitIRBlueLed.arduino' ; 
+			MUTPath : '/xArduino_reactive_models/activeWaitIRBlueLed.model' ; 
 			DSLName : 'org.imt.arduino.reactiveArduino' ;
 		} ;
 		connect tester.reactiveGate to arduino.reactiveGate ;
@@ -46,7 +46,7 @@ Package testConfiguration {
 	Test Configuration blinkingLEDConfiguration {
 		create Tester tester of type TestSystem ;
 		create SUT arduino of type MUT with { 
-			MUTPath : '/xArduino_reactive_models/blinkingLED.arduino' ; 
+			MUTPath : '/xArduino_reactive_models/blinkingLED.model' ; 
 			DSLName : 'org.imt.arduino.reactiveArduino' ;
 		} ;
 		connect tester.reactiveGate to arduino.reactiveGate ;
@@ -55,7 +55,7 @@ Package testConfiguration {
 	Test Configuration servo9gConfiguration {
 		create Tester tester of type TestSystem ;
 		create SUT arduino of type MUT with { 
-			MUTPath : '/xArduino_reactive_models/servo9g.arduino' ; 
+			MUTPath : '/xArduino_reactive_models/servo9g.model' ; 
 			DSLName : 'org.imt.arduino.reactiveArduino' ;
 		} ;
 		connect tester.reactiveGate to arduino.reactiveGate ;
@@ -64,7 +64,7 @@ Package testConfiguration {
 	Test Configuration servoIrbuttonConfiguration {
 		create Tester tester of type TestSystem ;
 		create SUT arduino of type MUT with { 
-			MUTPath : '/xArduino_reactive_models/servoIrbutton.arduino' ; 
+			MUTPath : '/xArduino_reactive_models/servoIrbutton.model' ; 
 			DSLName : 'org.imt.arduino.reactiveArduino' ;
 		} ;
 		connect tester.reactiveGate to arduino.reactiveGate ;
