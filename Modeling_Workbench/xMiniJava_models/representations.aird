@@ -105,4 +105,16 @@
   <semanticResources>gemoc-gen/execution/execution-20211204_173134/Tree_test24.xminijava</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20211204_181809/Factorial_test1.xminijava</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20211204_200326/Person_test1.xminijava</semanticResources>
+  <semanticResources>xminijava-classes/BinarySearch.xminijava</semanticResources>
+  <semanticResources>xminijava-classes/Factorial.xminijava</semanticResources>
+  <semanticResources>xminijava-classes/LinearSearch.xminijava</semanticResources>
+  <semanticResources>xminijava-classes/LinkedList.xminijava</semanticResources>
+  <semanticResources>xminijava-classes/Person.xminijava</semanticResources>
+  <semanticResources>xminijava-classes/Tree.xminijava</semanticResources>
+  <semanticResources>xminijava-classes-xmi/BinarySearch.model</semanticResources>
+  <semanticResources>xminijava-classes-xmi/Factorial.model</semanticResources>
+  <semanticResources>xminijava-classes-xmi/LinearSearch.model</semanticResources>
+  <semanticResources>xminijava-classes-xmi/LinkedList.model</semanticResources>
+  <semanticResources>xminijava-classes-xmi/Person.model</semanticResources>
+  <semanticResources>xminijava-classes-xmi/Tree.model</semanticResources>
 </viewpoint:DAnalysis>
