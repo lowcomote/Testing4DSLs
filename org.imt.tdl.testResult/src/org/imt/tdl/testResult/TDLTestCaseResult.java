@@ -3,10 +3,12 @@ package org.imt.tdl.testResult;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.etsi.mts.tdl.TestDescription;
+
 public class TDLTestCaseResult {
 	
-	private String testCaseName;
-	
+	private TestDescription testCase;
+
 	private String value;
 	
 	private String description;
@@ -20,12 +22,16 @@ public class TDLTestCaseResult {
 		this.tdlMessageResults = new ArrayList<TDLMessageResult>();
 	}
 	
-	public String getTestCaseName() {
-		return testCaseName;
+	public TestDescription getTestCase() {
+		return testCase;
+	}
+
+	public void setTestCase(TestDescription testCase) {
+		this.testCase = testCase;
 	}
 	
-	public void setTestCaseName(String name) {
-		this.testCaseName = name;
+	public String getTestCaseName() {
+		return this.testCase.getName();
 	}
 	
 	public String getValue() {

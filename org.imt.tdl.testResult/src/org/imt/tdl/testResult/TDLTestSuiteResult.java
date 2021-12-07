@@ -3,17 +3,21 @@ package org.imt.tdl.testResult;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.etsi.mts.tdl.Package;
+
 public class TDLTestSuiteResult {
 	
-	private String testSuiteName;
-	
+	private Package testSuite;
 	private List<TDLTestCaseResult> testCaseResults = new ArrayList<>();
 	
-	public String getTestSuiteName() {
-		return testSuiteName;
+	public Package getTestSuite() {
+		return testSuite;
 	}
-	public void setTestSuiteName(String name) {
-		this.testSuiteName = name;
+	public void setTestSuite(Package testSuite) {
+		this.testSuite = testSuite;
+	}
+	public String getTestSuiteName() {
+		return testSuite.getName();
 	}
 	public void addResult(TDLTestCaseResult result) {
 		this.testCaseResults.add(result);

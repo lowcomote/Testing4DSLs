@@ -4,8 +4,11 @@ import java.util.HashMap;
 
 
 import org.etsi.mts.tdl.DataUse;
+import org.etsi.mts.tdl.Message;
 
 public class TDLMessageResult {
+	
+	private Message message;
 	
 	private String tdlMessageId;
 	
@@ -17,8 +20,8 @@ public class TDLMessageResult {
 	
 	private boolean failure;
 	
-	public TDLMessageResult(String tdlMessageId, String value, String description, HashMap<DataUse, DataUse> oracle) {
-		this.tdlMessageId = tdlMessageId;
+	public TDLMessageResult(Message message, String value, String description, HashMap<DataUse, DataUse> oracle) {
+		this.message = message;
 		this.value = value;
 		if (value == TDLTestResultUtil.INCONCLUSIVE) {
 			this.failure = true;
@@ -70,5 +73,11 @@ public class TDLMessageResult {
 	
 	public void setFailure(boolean failure) {
 		this.failure = failure;
+	}
+	public Message getMessage() {
+		return message;
+	}
+	public void setMessage(Message message) {
+		this.message = message;
 	}
 }

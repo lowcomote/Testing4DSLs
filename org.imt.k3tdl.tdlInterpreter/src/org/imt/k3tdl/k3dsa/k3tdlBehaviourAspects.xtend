@@ -209,7 +209,7 @@ class ProcedureCallAspect extends InteractoinAspect{
 }
 @Aspect (className = Message)
 class MessageAspect extends InteractoinAspect{
-	private TDLMessageResult messageVerdict;
+	TDLMessageResult messageVerdict;
 	@Step
 	@OverrideAspectMethod
 	def boolean performBehavior(){
@@ -225,7 +225,6 @@ class MessageAspect extends InteractoinAspect{
 			}else{//the argument has to be sent to the MUT
 				t.targetGate.gate.setLauncher(_self.parentTestDescription.launcher)
 				var String verdict
-				val arg = (_self.argument as DataInstanceUse)
 				verdict = t.targetGate.gate.sendArgument2sut(_self.argument)
 				_self.addMessageResult(verdict)
 				var boolean result = true
@@ -250,7 +249,7 @@ class MessageAspect extends InteractoinAspect{
 		if (info.contains(":")){
 			description = info.substring(info.indexOf(":") + 2, info.length)
 		}
-		_self.messageVerdict = new TDLMessageResult(_self.name, result, description, null);
+		_self.messageVerdict = new TDLMessageResult(_self, result, description, null);
 		_self.parentTestDescription.testCaseResult.addTdlMessage(_self.messageVerdict)
 	}
 }

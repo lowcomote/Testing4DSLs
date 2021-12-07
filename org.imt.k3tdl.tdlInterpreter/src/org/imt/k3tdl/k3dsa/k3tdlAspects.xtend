@@ -50,7 +50,7 @@ class PackageAspect {
 	@Main
 	def void main(){
 		try {
-			_self.testSuiteResult.setTestSuiteName = _self.name
+			_self.testSuiteResult.setTestSuite = _self
     		for (TestDescription tc:_self.testcases) {
     			_self.enabledTestCase = tc;
     			_self.enabledConfiguration = tc.testConfiguration;
@@ -81,7 +81,7 @@ class TestDescriptionAspect{
 	@Step
 	def TDLTestCaseResult executeTestCase(){
 		println("Start test case execution: " + _self.name)
-		_self.testCaseResult.testCaseName = _self.name
+		_self.testCaseResult.testCase = _self
 		_self.testConfiguration.activateConfiguration(_self.launcher)
 		_self.behaviourDescription.callBehavior()
 		val modelExecutionResult = _self.testConfiguration.stopModelExecutionEngine(_self.launcher)
@@ -107,7 +107,7 @@ class TestDescriptionAspect{
 	@Step
 	def TDLTestCaseResult executeTestCase(String MUTPath){
 		_self.launcher.MUTPath = MUTPath
-		_self.testCaseResult.testCaseName = _self.name
+		_self.testCaseResult.testCase = _self
 		_self.testConfiguration.activateConfiguration(_self.launcher, MUTPath)
 		_self.behaviourDescription.callBehavior()
 		val modelExecutionResult = _self.testConfiguration.stopModelExecutionEngine(_self.launcher)
