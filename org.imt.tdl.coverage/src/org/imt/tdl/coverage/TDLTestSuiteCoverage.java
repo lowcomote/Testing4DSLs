@@ -7,19 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.etsi.mts.tdl.Package;
 
 public class TDLTestSuiteCoverage {
 
+	private Package testSuite;
 	private List<TDLTestCaseCoverage> tcCoverages = new ArrayList<>();
 	
 	public List<EObject> modelObjects = new ArrayList<>();
 	private List<String> tsObjectCoverageStatus = new ArrayList<>();
 
-	public List<TestCoverageInfo> coverageInfos = new ArrayList<>();
-	private TestCoverageInfo overallResult = new TestCoverageInfo();
-	
 	double tsCoveragePercentage;
 	
+	public List<TestCoverageInfo> coverageInfos = new ArrayList<>();
+	private TestCoverageInfo overallResult = new TestCoverageInfo();
+
 	//for every test case of the test suite, add its coverage to the list
 	public void addTCCoverage(TDLTestCaseCoverage tcCoverage) {
 		this.tcCoverages.add(tcCoverage);
@@ -125,5 +127,14 @@ public class TDLTestSuiteCoverage {
 	
 	public List<TestCoverageInfo> getCoverageInfos(){
 		return this.coverageInfos;
+	}
+	public Package getTestSuite() {
+		return testSuite;
+	}
+	public void setTestSuite(Package testSuite) {
+		this.testSuite = testSuite;
+	}
+	public String getTestSuiteName() {
+		return testSuite.getName();
 	}
 }

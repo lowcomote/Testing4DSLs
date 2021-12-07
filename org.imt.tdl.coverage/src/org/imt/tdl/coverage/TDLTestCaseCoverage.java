@@ -12,10 +12,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gemoc.trace.commons.model.trace.SequentialStep;
 import org.eclipse.gemoc.trace.commons.model.trace.Step;
 import org.eclipse.gemoc.trace.commons.model.trace.Trace;
+import org.etsi.mts.tdl.TestDescription;
 
 public class TDLTestCaseCoverage {
 
-	public String testCaseName;
+	private TestDescription testCase;
 	private Resource MUTResource;
 	private Trace<?, ?, ?> trace;
 	
@@ -134,7 +135,7 @@ public class TDLTestCaseCoverage {
 		double tcCoveragePercentage = (double)(this.numOfCoveredObjs*100)/numOfCoverableElements;
 		BigDecimal bd = new BigDecimal(tcCoveragePercentage).setScale(2, RoundingMode.HALF_UP);
 		tcCoveragePercentage = bd.doubleValue();
-		System.out.println(this.testCaseName + " coverage: " + tcCoveragePercentage);
+		System.out.println(this.testCase.getName() + " coverage: " + tcCoveragePercentage);
 		return tcCoveragePercentage;
 	}
 	
@@ -152,5 +153,16 @@ public class TDLTestCaseCoverage {
 
 	public void setMUTResource(Resource MUTResource) {
 		this.MUTResource = MUTResource;
+	}
+
+	public TestDescription getTestCase() {
+		return testCase;
+	}
+
+	public void setTestCase(TestDescription testCase) {
+		this.testCase = testCase;
+	}
+	public String getTestCaseName() {
+		return testCase.getName();
 	}
 }

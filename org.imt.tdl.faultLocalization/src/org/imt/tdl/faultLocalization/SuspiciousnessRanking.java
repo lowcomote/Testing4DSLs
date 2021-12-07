@@ -79,7 +79,7 @@ public class SuspiciousnessRanking {
 			int NU = 0;//total number of test cases that do not cover a coverable model element 
 			for (int j=0; j<elementCoverageStatus.size()-1; j++) {
 				elementSBFLMeasures.getCoverage().add(elementCoverageStatus.get(j));
-				String testCaseName = this.testSuiteCoverage.getTCCoverages().get(j).testCaseName;
+				String testCaseName = this.testSuiteCoverage.getTCCoverages().get(j).getTestCaseName();
 				//find the result of the test case
 				String testCaseVerdict = "";
 				for (TDLTestCaseResult testResult:this.errorVector) {

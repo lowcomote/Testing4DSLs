@@ -50,7 +50,8 @@ class PackageAspect {
 	@Main
 	def void main(){
 		try {
-			_self.testSuiteResult.setTestSuite = _self
+			_self.testSuiteResult.testSuite = _self
+			_self.testSuiteCoverage.testSuite = _self
     		for (TestDescription tc:_self.testcases) {
     			_self.enabledTestCase = tc;
     			_self.enabledConfiguration = tc.testConfiguration;
@@ -63,7 +64,7 @@ class PackageAspect {
     			println()
     		}
     		
-    		TDLTestResultUtil.getInstance.setTestSuiteResult = _self.testSuiteResult		
+    		TDLTestResultUtil.instance.setTestSuiteResult = _self.testSuiteResult		
     		TDLCoverageUtil.instance.testSuiteCoverage = _self.testSuiteCoverage
     		TDLCoverageUtil.instance.DSLPath = _self.testcases.get(0).testConfiguration.DSLPath
     		  		
@@ -96,7 +97,7 @@ class TestDescriptionAspect{
 		}
 		
 		//save the model execution trace and the MUTResource related to this test case
-		_self.testCaseCoverage.testCaseName = _self.name
+		_self.testCaseCoverage.testCase = _self
 		_self.testCaseCoverage.trace = _self.launcher.executionTrace
     	_self.testCaseCoverage.MUTResource = _self.launcher.MUTResource
 		
