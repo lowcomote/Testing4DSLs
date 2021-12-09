@@ -5,15 +5,14 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.eclipse.emf.ecore.EObject;
 import org.imt.tdl.coverage.TDLCoverageUtil;
 import org.imt.tdl.coverage.TDLTestSuiteCoverage;
 import org.imt.tdl.coverage.TestCoverageInfo;
 import org.imt.tdl.testResult.TDLTestCaseResult;
-import org.imt.tdl.testResult.TDLTestSuiteResult;
 import org.imt.tdl.testResult.TDLTestResultUtil;
+import org.imt.tdl.testResult.TDLTestSuiteResult;
 
 public class SuspiciousnessRanking {
 	
@@ -349,8 +348,6 @@ public class SuspiciousnessRanking {
 				}
 			}
 		}
-		//TODO: only for testing purposes, must be removed later
-		measureEXAMScores(this.elementsSBFLMeasures.get(9), technique);
 	}
 	
 	public void measureEXAMScores(SBFLMeasures measures4faultyObject, String technique) { 
