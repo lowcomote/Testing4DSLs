@@ -153,7 +153,7 @@ public class TDLSBFLView extends ViewPart{
 				String selectedTechnique = technqiueFilterCombo.getItem(techniqueFilterIndex);
 				for (SBFLMeasures measure:elementsSBFLMeasures) {
 					measure.currentTechnique = selectedTechnique;
-					double susp = suspComputing.getSuspiciousness(measure, selectedTechnique);
+					double susp = suspComputing.getSuspiciousness(measure);
 					measure.getSusp().put(selectedTechnique, susp);
 				}
 				suspComputing.calculateRanks();

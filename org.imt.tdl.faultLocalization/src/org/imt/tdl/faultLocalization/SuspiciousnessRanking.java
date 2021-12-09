@@ -160,7 +160,8 @@ public class SuspiciousnessRanking {
 	}
 	
 	//reference: https://github.com/javitroya/SBFL_MT/blob/6f623acab0d4b673314feca58d72cac705dc0967/Spectrum-based_FaultLoc_MT/SpecBased_FaultLoc_MT/src/es/us/eii/fault/localization/mt/main/FaultLocalizationMT_Main.java#L1031
-	public double getSuspiciousness(SBFLMeasures elementMeasures, String technique){
+	public double getSuspiciousness(SBFLMeasures elementMeasures){
+		String technique = elementMeasures.currentTechnique;
 		Double susp = 0.0;
 		if (technique.equals(SuspiciousnessRanking.OCHIAI)){
 			if (elementMeasures.getNCF() == 0.0){
@@ -426,14 +427,10 @@ public class SuspiciousnessRanking {
 	}
 	
 	public List<SBFLMeasures> getElementsSBFLMeasures() {
-		return elementsSBFLMeasures;
+		return this.elementsSBFLMeasures;
 	}
 
 	public void setElementsSBFLMeasures(List<SBFLMeasures> elementsSBFLMeasures) {
 		this.elementsSBFLMeasures = elementsSBFLMeasures;
-	}
-
-	public List<String> getSbflTechniques() {
-		return sbflTechniques;
 	}
 }
