@@ -67,6 +67,7 @@ class PackageAspect {
     		TDLTestResultUtil.instance.setTestSuiteResult = _self.testSuiteResult		
     		TDLCoverageUtil.instance.testSuiteCoverage = _self.testSuiteCoverage
     		TDLCoverageUtil.instance.DSLPath = _self.testcases.get(0).testConfiguration.DSLPath
+    		TDLCoverageUtil.instance.runCoverageComputation
     		  		
 		} catch (TDLRuntimeException nt){
 			println("Stopped due "+nt.message)	
@@ -121,12 +122,10 @@ class TestDescriptionAspect{
 			println("Test case FAILED")
 		}
 		
-		//save the model execution trace related to this test case and its MUT
-		//this is required when calculating the coverage
-		TDLCoverageUtil.instance.testSuiteCoverage = new TDLTestSuiteCoverage
+		//save the model execution trace and the MUTResource related to this test case
+		_self.testCaseCoverage.testCase = _self
 		_self.testCaseCoverage.trace = _self.launcher.executionTrace
     	_self.testCaseCoverage.MUTResource = _self.launcher.MUTResource
-		TDLCoverageUtil.instance.DSLPath = _self.testConfiguration.DSLPath
 		
 		return _self.testCaseResult
 	}
