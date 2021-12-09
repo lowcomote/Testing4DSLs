@@ -64,6 +64,9 @@ public class TDLCoverageUtil {
 
 	public void setDSLPath(String DSLPath) {
 		instance.DSLPath = DSLPath;
+	}
+	
+	public void runCoverageComputation() {
 		instance.coverableClasses.clear();
 		instance.extendedClassesWithStep.clear();
 		instance.extendedClassesWithoutStep.clear();
