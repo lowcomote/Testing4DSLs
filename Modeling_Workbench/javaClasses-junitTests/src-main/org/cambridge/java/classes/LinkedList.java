@@ -5,6 +5,10 @@ public class LinkedList{
     LinkedList nextElem ;
     boolean end ;
 
+    public LinkedList() {
+    	
+    }
+    
     // Initialize the node list as the last node
     public void Init(){
 		this.end = true ;

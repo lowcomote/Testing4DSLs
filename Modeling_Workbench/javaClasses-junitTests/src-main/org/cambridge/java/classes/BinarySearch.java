@@ -7,7 +7,6 @@ package org.cambridge.java.classes;
 public class BinarySearch{
     int[] number ;
     int size ;
-
     // Search for a specific value (num) using
     // binary search
     public boolean Search(int num){

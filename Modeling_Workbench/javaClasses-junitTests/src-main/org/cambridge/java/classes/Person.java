@@ -5,6 +5,9 @@ public class Person {
     int Salary ;
     boolean Married ;
 
+    public Person() {
+    	
+    }
     // Initialize some class variables
     public void Init(int v_Age, int v_Salary, boolean v_Married){
 		this.Age = v_Age ;
