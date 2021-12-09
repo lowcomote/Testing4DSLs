@@ -23,6 +23,7 @@ public class SuspiciousnessRanking {
 	
 	private List<SBFLMeasures> elementsSBFLMeasures = new ArrayList<SBFLMeasures>();
 
+	public static List<String> sbflTechniques = new ArrayList<>();
 	public static final String OCHIAI = "ochiai";
 	public static final String TARANTULA = "tarantula";
 	public static final String OCHIAI2 = "ochiai2";
@@ -48,6 +49,7 @@ public class SuspiciousnessRanking {
 	private Map<String, Double> worseEXAMScore = new HashMap<>();//wore-case EXAM score for each technique
 	
 	public SuspiciousnessRanking() {
+		setSbflTechniques();
 		this.testSuiteResult = TDLTestResultUtil.getInstance().getTestSuiteResult();
 		this.errorVector = this.testSuiteResult.getTestCaseResults();
 		this.testSuiteCoverage = TDLCoverageUtil.getInstance().getTestSuiteCoverage();
@@ -60,10 +62,47 @@ public class SuspiciousnessRanking {
 		this.elementsSBFLMeasures.clear();
 	}
 	
+	private void setSbflTechniques() {
+		this.sbflTechniques.add(ARITHMETICMEAN);
+		this.sbflTechniques.add(BARINEL);
+		this.sbflTechniques.add(BARONIETAL);
+		this.sbflTechniques.add(BRAUNBANQUET);
+		this.sbflTechniques.add(COHEN);
+		this.sbflTechniques.add(CONFIDENCE);
+		this.sbflTechniques.add(PIERCE);
+		this.sbflTechniques.add(ROGERSTANIMOTO);
+		this.sbflTechniques.add(RUSSELRAO);
+		this.sbflTechniques.add(SIMPLEMATCHING);
+		this.sbflTechniques.add(DSTAR);
+		this.sbflTechniques.add(KULCYNSKI2);
+		this.sbflTechniques.add(MOUNTFORD);
+		this.sbflTechniques.add(OCHIAI);
+		this.sbflTechniques.add(OCHIAI2);
+		this.sbflTechniques.add(OP2);
+		this.sbflTechniques.add(PHI);
+		this.sbflTechniques.add(TARANTULA);
+		this.sbflTechniques.add(ZOLTAR);
+		
+	}
+
+	public SuspiciousnessRanking(TDLTestSuiteResult tsResult, TDLTestSuiteCoverage tsCoverage) {
+		setSbflTechniques();
+		this.testSuiteResult = tsResult;
+		this.errorVector = this.testSuiteResult.getTestCaseResults();
+		this.testSuiteCoverage = tsCoverage;
+		this.coverageMatix.addAll(this.testSuiteCoverage.coverageInfos);
+		//the row of the matrix containing coverage percentages should be removed 
+		this.coverageMatix.removeIf(element -> element.getMetaclass() == null);
+		//if the element is not coverable, remove it from the matrix
+		this.coverageMatix.removeIf(element -> 
+			element.getCoverage().get(element.getCoverage().size()-1) == TDLCoverageUtil.NOT_COVERABLE);
+		this.elementsSBFLMeasures.clear();
+	}
+	
 	public void calculateMeasures() {
-		for (int i=0; i<coverageMatix.size(); i++) {
-			EObject modelElement = coverageMatix.get(i).getModelObject();
-			ArrayList<String> elementCoverageStatus = coverageMatix.get(i).getCoverage();
+		for (int i=0; i<this.coverageMatix.size(); i++) {
+			EObject modelElement = this.coverageMatix.get(i).getModelObject();
+			ArrayList<String> elementCoverageStatus = this.coverageMatix.get(i).getCoverage();
 			SBFLMeasures elementSBFLMeasures = new SBFLMeasures();
 			elementSBFLMeasures.setModelObject(modelElement);
 			elementSBFLMeasures.setMetaclass(modelElement.eClass());
@@ -392,5 +431,9 @@ public class SuspiciousnessRanking {
 
 	public void setElementsSBFLMeasures(List<SBFLMeasures> elementsSBFLMeasures) {
 		this.elementsSBFLMeasures = elementsSBFLMeasures;
+	}
+
+	public List<String> getSbflTechniques() {
+		return sbflTechniques;
 	}
 }
