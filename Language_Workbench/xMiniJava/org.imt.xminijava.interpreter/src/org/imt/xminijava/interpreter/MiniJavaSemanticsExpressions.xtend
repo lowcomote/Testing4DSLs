@@ -62,6 +62,7 @@ import org.imt.minijava.xminiJava.StringTypeRef
 import org.imt.minijava.xminiJava.NullValue
 import java.util.Map
 import java.util.HashMap
+import fr.inria.diverse.k3.al.annotationprocessor.Step
 
 @Aspect(className=Expression)
 class ExpressionAspect {
@@ -350,6 +351,7 @@ class MethodAspect {
 
 @Aspect(className=MethodCall)
 class MethodCallExpressionAspect extends ExpressionAspect {
+	@Step
 	@OverrideAspectMethod
 	def Value evaluateExpression(State state) {
 		val realReceiver = (_self.receiver.evaluateExpression(state) as ObjectRefValue).instance
