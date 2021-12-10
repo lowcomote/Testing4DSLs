@@ -8,8 +8,11 @@ import org.etsi.mts.tdl.Package;
 public class TDLTestSuiteResult {
 	
 	private Package testSuite;
-	private List<TDLTestCaseResult> testCaseResults = new ArrayList<>();
+	private List<TDLTestCaseResult> testCaseResults;
 	
+	public TDLTestSuiteResult() {
+		this.testCaseResults = new ArrayList<>();
+	}
 	public Package getTestSuite() {
 		return testSuite;
 	}

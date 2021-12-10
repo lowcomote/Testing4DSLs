@@ -11,16 +11,28 @@ import org.etsi.mts.tdl.Package;
 public class TDLTestSuiteCoverage {
 
 	private Package testSuite;
-	private List<TDLTestCaseCoverage> tcCoverages = new ArrayList<>();
+	private List<TDLTestCaseCoverage> tcCoverages;
 	
-	public List<EObject> modelObjects = new ArrayList<>();
-	private List<String> tsObjectCoverageStatus = new ArrayList<>();
+	private List<EObject> modelObjects;
+	private List<String> tsObjectCoverageStatus;
 
 	double tsCoveragePercentage;
+	int numOfCoveredObjs;
+	int numOfNotCoverableElements;
 	
-	public List<TestCoverageInfo> coverageInfos = new ArrayList<>();
-	private TestCoverageInfo overallResult = new TestCoverageInfo();
+	public List<TestCoverageInfo> coverageInfos;
+	private TestCoverageInfo overallResult;
 
+	public TDLTestSuiteCoverage() {
+		this.tcCoverages = new ArrayList<>();
+		this.modelObjects = new ArrayList<>();
+		this.tsObjectCoverageStatus = new ArrayList<>();
+		this.tsCoveragePercentage = 0;
+		this.numOfCoveredObjs= 0 ;
+		this.numOfNotCoverableElements = 0;
+		this.coverageInfos = new ArrayList<>();
+		this.overallResult = new TestCoverageInfo();
+	}
 	//for every test case of the test suite, add its coverage to the list
 	public void addTCCoverage(TDLTestCaseCoverage tcCoverage) {
 		this.tcCoverages.add(tcCoverage);
@@ -53,11 +65,11 @@ public class TDLTestSuiteCoverage {
 			
 			//if it is the first test case, copy the whole test case object coverage status for the test suite
 			if (this.tsObjectCoverageStatus.size() == 0) {
-				this.modelObjects.addAll(tcCoverageObj.modelObjects);
-				this.tsObjectCoverageStatus.addAll(tcCoverageObj.tcObjectCoverageStatus);
+				this.modelObjects.addAll(tcCoverageObj.getModelObjects());
+				this.tsObjectCoverageStatus.addAll(tcCoverageObj.getTcObjectCoverageStatus());
 			}else {
-				for (int i=0; i<tcCoverageObj.tcObjectCoverageStatus.size(); i++) {
-					String tcCoverage = tcCoverageObj.tcObjectCoverageStatus.get(i);
+				for (int i=0; i<tcCoverageObj.getTcObjectCoverageStatus().size(); i++) {
+					String tcCoverage = tcCoverageObj.getTcObjectCoverageStatus().get(i);
 					if (tcCoverage == TDLCoverageUtil.COVERED & this.tsObjectCoverageStatus.get(i) != TDLCoverageUtil.COVERED) {
 						this.tsObjectCoverageStatus.set(i, TDLCoverageUtil.COVERED);
 					}
@@ -68,9 +80,6 @@ public class TDLTestSuiteCoverage {
 		System.out.println("\n" + "Model size (n. of EObjects): " + this.modelObjects.size() + "\n");
 		calculateCoveragePercentage();
 	}
-	
-	int numOfCoveredObjs;
-	int numOfNotCoverableElements;
 	
 	private void countNumOfElements() {
 		this.numOfCoveredObjs = 0;
@@ -105,7 +114,7 @@ public class TDLTestSuiteCoverage {
 			cInfo.setModelObject(modelObjects.get(i));
 			cInfo.setMetaclass(modelObjects.get(i).eClass());
 			for (TDLTestCaseCoverage tcCoverageObj : this.tcCoverages) {
-				String tcCoverage = tcCoverageObj.tcObjectCoverageStatus.get(i);
+				String tcCoverage = tcCoverageObj.getTcObjectCoverageStatus().get(i);
 				if (tcCoverage == TDLCoverageUtil.COVERABLE) {
 					tcCoverage = TDLCoverageUtil.NOT_COVERED;
 				}
@@ -135,5 +144,8 @@ public class TDLTestSuiteCoverage {
 	}
 	public String getTestSuiteName() {
 		return testSuite.getName();
+	}
+	public List<EObject> getModelObjects() {
+		return modelObjects;
 	}
 }

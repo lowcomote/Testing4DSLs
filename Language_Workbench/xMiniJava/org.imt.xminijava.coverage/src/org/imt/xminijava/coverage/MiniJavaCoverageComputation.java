@@ -39,10 +39,10 @@ public class MiniJavaCoverageComputation implements IDSLSpecificCoverage{
 	@Override
 	public void specializeCoverage(TDLTestCaseCoverage testCaseCoverage) {
 		this.testCaseCoverage = testCaseCoverage;
-		this.modelObjects = testCaseCoverage.modelObjects;
+		this.modelObjects = testCaseCoverage.getModelObjects();
 		for (int i=0; i<this.modelObjects.size(); i++) {
 			EObject modelObject = this.modelObjects.get(i);
-			String coverage = this.testCaseCoverage.tcObjectCoverageStatus.get(i);
+			String coverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(i);
 			if (modelObject instanceof Program) {
 				programCoverage ((Program) modelObject);
 			}
@@ -73,7 +73,7 @@ public class MiniJavaCoverageComputation implements IDSLSpecificCoverage{
 		MethodCall methodCall = (MethodCall) modelObject;
 		if (!(methodCall.eContainer() instanceof Block)) {
 			int index = this.modelObjects.indexOf(methodCall);
-			this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.NOT_COVERABLE);
+			this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.NOT_COVERABLE);
 		}
 	}
 
@@ -81,35 +81,35 @@ public class MiniJavaCoverageComputation implements IDSLSpecificCoverage{
 		//for statement coverage, for statements should not be considered in the coverage computation
 		//only its inner instructions/assignments are considered
 		int index = this.modelObjects.indexOf(forStatement);
-		this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.NOT_COVERABLE);
+		this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.NOT_COVERABLE);
 	}
 
 	private void whileCoverage(WhileStatement whileStatement) {
 		//for statement coverage, while statements should not be considered in the coverage computation
 		//only its inner instructions/assignments are considered
 		int index = this.modelObjects.indexOf(whileStatement);
-		this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.NOT_COVERABLE);
+		this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.NOT_COVERABLE);
 	}
 
 	private void ifCoverage(IfStatement ifStatement) {
 		//for statement coverage, if statements should not be considered in the coverage computation
 		//only its inner instructions/assignments are considered
 		int index = this.modelObjects.indexOf(ifStatement);
-		this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.NOT_COVERABLE);
+		this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.NOT_COVERABLE);
 	}
 
 	private void methodCoverage(Method method) {
 		//for statement coverage, a method signature should not be considered in the coverage computation
 		//only its inner instructions/assignments are considered
 		int index = this.modelObjects.indexOf(method);
-		this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.NOT_COVERABLE);
+		this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.NOT_COVERABLE);
 	}
 
 	private void programCoverage(Program program) {
 		//for statement coverage, program should not be considered in the coverage computation
 		//only its inner instructions/assignments are considered
 		int index = this.modelObjects.indexOf(program);
-		this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.NOT_COVERABLE);
+		this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.NOT_COVERABLE);
 	}
 
 	private void classCoverage(Class clazz) {
@@ -119,16 +119,16 @@ public class MiniJavaCoverageComputation implements IDSLSpecificCoverage{
 		for (Member member: clazz.getMembers()) {
 			if (member instanceof Method) {
 				int methodIndex = this.modelObjects.indexOf(member);
-				String methodCoverage = this.testCaseCoverage.tcObjectCoverageStatus.get(methodIndex);
+				String methodCoverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(methodIndex);
 				if (methodCoverage == TDLCoverageUtil.COVERED) {
-					this.testCaseCoverage.tcObjectCoverageStatus.set(clazzIndex, TDLCoverageUtil.COVERED);
+					this.testCaseCoverage.getTcObjectCoverageStatus().set(clazzIndex, TDLCoverageUtil.COVERED);
 					break;
 				}
 			}
 		}
-		String classCoverage = this.testCaseCoverage.tcObjectCoverageStatus.get(clazzIndex);
+		String classCoverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(clazzIndex);
 		if (classCoverage != TDLCoverageUtil.COVERED) {
-			this.testCaseCoverage.tcObjectCoverageStatus.set(clazzIndex, TDLCoverageUtil.NOT_COVERED);
+			this.testCaseCoverage.getTcObjectCoverageStatus().set(clazzIndex, TDLCoverageUtil.NOT_COVERED);
 		}
 	}
 	

@@ -51,9 +51,9 @@ public class SBFLEvaluation {
 		}
 		
 		testMutants();
-//		for (String mutant:this.mutantRegistry.keySet()) {
-//			localizeFaultOfMutant(mutant);
-//		}
+		for (String mutant:this.mutantRegistry.keySet()) {
+			localizeFaultOfMutant(mutant);
+		}
 	}
 	
 	String workspacePath;
@@ -152,7 +152,7 @@ public class SBFLEvaluation {
 		TDLTestSuiteResult testSuiteResult = this.mutantVerdict.get(mutant);
 		TDLTestSuiteCoverage testSuiteCoverage = this.mutantCoverage.get(mutant);
 		EObject faultyObject = getFaultyObjectOfMutant(mutant);
-		int indexOfFaultyObject = testSuiteCoverage.modelObjects.indexOf(faultyObject);
+		int indexOfFaultyObject = testSuiteCoverage.getModelObjects().indexOf(faultyObject);
 		
 		SuspiciousnessRanking suspComputing = new SuspiciousnessRanking(testSuiteResult, testSuiteCoverage);
 		suspComputing.calculateMeasures();
@@ -175,8 +175,8 @@ public class SBFLEvaluation {
 	}
 	
 	private EObject getFaultyObjectOfMutant(String mutant) {
-		String mutantRegistryPath = this.mutantRegistry.get(mutant);
-		Resource registryResource = (new ResourceSetImpl()).createResource(URI.createURI(mutantRegistryPath));
+		String mutantRegistryPath = "platform:/resource" + this.mutantRegistry.get(mutant).replace("\\", "/");
+		Resource registryResource = (new ResourceSetImpl()).getResource(URI.createURI(mutantRegistryPath), true);
 		Mutations mutations = (Mutations) registryResource.getContents().get(0);
 		Optional<AppMutation> informationChangedMutation = mutations.getMuts().stream().filter(m -> m instanceof InformationChanged).findFirst();
 		if (informationChangedMutation.isPresent()) {

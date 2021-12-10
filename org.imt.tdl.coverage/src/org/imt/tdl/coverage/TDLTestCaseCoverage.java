@@ -20,9 +20,18 @@ public class TDLTestCaseCoverage {
 	private Resource MUTResource;
 	private Trace<?, ?, ?> trace;
 	
-	public List<EObject> modelObjects = new ArrayList<>();
-	public List<String> tcObjectCoverageStatus = new ArrayList<>();
+	private List<EObject> modelObjects;
+	private List<String> tcObjectCoverageStatus;
 	
+	int numOfCoveredObjs;
+	int numOfNotCoverableElements;
+	
+	public TDLTestCaseCoverage() {
+		this.modelObjects = new ArrayList<>();
+		this.tcObjectCoverageStatus = new ArrayList<>();	
+		this.numOfCoveredObjs= 0 ;
+		this.numOfNotCoverableElements = 0;
+	}
 	//calculating the coverage of the test case based on the model execution trace
 	public void calculateTCCoverage () {
 		//find coverable objects using the MUTResource of the test case
@@ -114,9 +123,6 @@ public class TDLTestCaseCoverage {
 		}
 	}
 	
-	int numOfCoveredObjs;
-	int numOfNotCoverableElements;
-	
 	public void countNumOfElements() {
 		this.numOfCoveredObjs = 0;
 		this.numOfNotCoverableElements = 0;
@@ -164,5 +170,11 @@ public class TDLTestCaseCoverage {
 	}
 	public String getTestCaseName() {
 		return testCase.getName();
+	}
+	public List<EObject> getModelObjects() {
+		return modelObjects;
+	}
+	public List<String> getTcObjectCoverageStatus() {
+		return tcObjectCoverageStatus;
 	}
 }
