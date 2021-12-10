@@ -108,8 +108,11 @@ class TestDescriptionAspect{
 	//this method is called from TDL runner
 	@Step
 	def TDLTestCaseResult executeTestCase(String MUTPath){
-		_self.launcher.MUTPath = MUTPath
+		_self.launcher = new EngineFactory()
+		_self.testCaseResult = new TDLTestCaseResult
 		_self.testCaseResult.testCase = _self
+		_self.testCaseCoverage = new TDLTestCaseCoverage
+		_self.launcher.MUTPath = MUTPath
 		_self.testConfiguration.activateConfiguration(_self.launcher, MUTPath)
 		_self.behaviourDescription.callBehavior()
 		val modelExecutionResult = _self.testConfiguration.stopModelExecutionEngine(_self.launcher)

@@ -38,7 +38,7 @@ public class TDLTestSuiteCoverage {
 		this.tcCoverages.add(tcCoverage);
 	}
 	public List<TDLTestCaseCoverage> getTCCoverages() {
-		return tcCoverages;
+		return this.tcCoverages;
 	}
 	
 	//Calculating coverage of the test suite based on its test cases coverage
@@ -51,7 +51,7 @@ public class TDLTestSuiteCoverage {
 		System.out.println("Number of Coverable Classes: " + TDLCoverageUtil.getInstance().coverableClasses.size());
 		//foreach test case, first calculate coverage using the generic tool
 		//then, if the DSL provides a dsl-specific coverage tool, specialize the coverage based on it
-		for (TDLTestCaseCoverage tcCoverageObj : tcCoverages) {
+		for (TDLTestCaseCoverage tcCoverageObj : this.tcCoverages) {
 			if (dslSpecificCoverage != null) {
 				dslSpecificCoverage.ignoreModelObjects(tcCoverageObj.getMUTResource());
 				tcCoverageObj.calculateTCCoverage();
