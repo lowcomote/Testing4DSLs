@@ -1,17 +1,10 @@
 package org.imt.tdl.sbfl.evaluation;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
@@ -47,52 +40,33 @@ public class SBFLEvaluation {
 		this.testSuiteProject = testSuiteProject;
 	}
 	public void evaluateSBFLTechniques() {
-		findMutantsAndTestProjects();
-		testMutants();
-		for (String mutant:this.mutantRegistry.keySet()) {
-			localizeFaultOfMutant(mutant);
-		}
-	}
-
-	private void findMutantsAndTestProjects() {
-		String dir = this.mutantsProject.getFullPath().toOSString();
-		dir = this.mutantsProject.getFullPath().toPortableString();
-		dir = this.mutantsProject.getFullPath().toString();
-		Set<String> fileList = new HashSet<>();
-	    try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(dir))) {
-	        for (Path path : stream) {
-	            if (!Files.isDirectory(path)) {
-	                fileList.add(path.getFileName()
-	                    .toString());
-	            }
-	        }
-	    }
 		//finding mutants and mapping them to their registry
-		//findMutantRegistryMapping(mutantsProject);
-	    catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		findMutantRegistryMapping(this.mutantsProject);
 		
 		//finding test suite and run it on mutants to find live ones and keep verdict and coverage of killed ones
-//		String testResourcePath = "platform:/resource/"+ testSuiteProject.getName() + "/";
-//		File testsFolder = new File(testSuiteProject.getFullPath().toString());	
-//		for (File testFile : testsFolder.listFiles()) {
-//			this.testSuite = getTestSuite(testResourcePath, testFile);
+		String testResourcePath = "platform:/resource/"+ testSuiteProject.getName() + "/";
+		File testsFolder = new File(testSuiteProject.getLocation().toString());	
+		for (File testFile : testsFolder.listFiles()) {
+			this.testSuite = getTestSuite(testResourcePath, testFile);
+		}
+		
+		testMutants();
+//		for (String mutant:this.mutantRegistry.keySet()) {
+//			localizeFaultOfMutant(mutant);
 //		}
 	}
 	
 	String workspacePath;
 	
-	private void findMutantRegistryMapping(IProject mutantProject) {
-		File projectFolder = new File(mutantProject.getFullPath() + "\\model");
+	private void findMutantRegistryMapping(IProject mutantsProject) {
+		File projectFolder = new File(mutantsProject.getLocation() + "\\model");
 		for (File file : projectFolder.listFiles()) {
-			pathsHelper(mutantProject.getName(), file);
+			pathsHelper(mutantsProject.getName(), file);
 		}
 		for (String mutantPath:this.mutants) {
 			String mutator = getMutator(mutantPath);
-			String mutantName = mutantPath.substring(mutantPath.lastIndexOf("\\"), mutantPath.indexOf(".model")-1);
-			Optional<String> registery = this.registeries.stream().filter(r -> r.contains(mutator) && r.contains(mutantName)).findFirst();
+			String mutantName = mutantPath.substring(mutantPath.lastIndexOf("\\") + 1, mutantPath.indexOf(".model"));
+			Optional<String> registery = this.registeries.stream().filter(r -> r.contains(mutator) && r.contains(mutantName + "Registry")).findFirst();
 			if (registery.isPresent()) {
 				this.mutantRegistry.put(mutantPath, registery.get());
 			}
@@ -122,7 +96,7 @@ public class SBFLEvaluation {
 	
 	public String getMutator (String filePath) {
 		filePath = filePath.replace(this.workspacePath, "");
-		String[] filePathSections = filePath.split("\\");
+		String[] filePathSections = filePath.split("\\\\");
 		if (filePath.contains("Registry.model")) {
 			return filePathSections[filePathSections.length-3];
 		}else {
