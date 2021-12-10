@@ -2,10 +2,8 @@ package org.imt.tdl.testResult;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.util.EList;

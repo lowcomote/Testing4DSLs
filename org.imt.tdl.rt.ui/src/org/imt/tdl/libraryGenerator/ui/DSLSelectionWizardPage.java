@@ -1,4 +1,4 @@
-package org.imt.tdl.codeGenerator.ui;
+package org.imt.tdl.libraryGenerator.ui;
 
 import java.awt.Font;
 

@@ -13,5 +13,20 @@
             class="org.imt.tdl.TDLTestReport.TDLTestReportPackage"
             genModel="model/TDLTestReport.genmodel"/>
    </extension>
+   <extension
+         point="org.eclipse.ui.views">   
+      <category
+            id="tdl.views"
+            name="TDL">
+      </category>   
+      <view
+            category="tdl.views"
+            class="org.imt.tdl.testResult.ui.TDLTestResultsView"
+            icon="icons/tdl.png"
+            id="test.views.TDLTestResultsTestViewPart"
+            name="Test Results"
+            restorable="true">
+      </view>
+   </extension>
 
 </plugin>

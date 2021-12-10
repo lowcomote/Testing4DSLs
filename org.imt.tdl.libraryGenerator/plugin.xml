@@ -4,10 +4,6 @@
 
    <extension
          point="org.eclipse.ui.commands">
-      <category
-            name="TDL"
-            id="org.etsi.mts.tdl.tools.rt.ui.commands.category">
-      </category>
       <command
             name="Generate TDL Library"
             categoryId="org.etsi.mts.tdl.tools.rt.ui.commands.category"
@@ -52,36 +48,5 @@
             </command>
          </toolbar>
       </menuContribution>
-   </extension>
-   <extension
-         point="org.eclipse.ui.views">
-      <view
-            category="tdl.views"
-            class="org.imt.tdl.testResult.ui.TDLTestResultsView"
-            icon="icons/tdl.png"
-            id="test.views.TDLTestResultsTestViewPart"
-            name="Test Results"
-            restorable="true">
-      </view>
-      <category
-            id="tdl.views"
-            name="TDL">
-      </category>
-      <view
-            category="tdl.views"
-            class="org.imt.tdl.coverage.ui.TDLCoverageView"
-            icon="icons/coverage.png"
-            id="org.imt.tdl.rt.ui.coverageView"
-            name="Coverage"
-            restorable="true">
-      </view>
-      <view
-            category="tdl.views"
-            class="org.imt.tdl.sbfl.ui.TDLSBFLView"
-            icon="icons/faultLocalization.jpg"
-            id="org.imt.tdl.rt.ui.sbflView"
-            name="FaultLocalization"
-            restorable="true">
-      </view>
    </extension>
 </plugin>

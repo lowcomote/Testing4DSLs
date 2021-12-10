@@ -1,13 +1,13 @@
-package org.imt.tdl.codeGenerator.handler;
+package org.imt.tdl.libraryGenerator.handler;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Display;
-import org.imt.tdl.codeGenerator.ui.DSLSelectionWizard;
-import org.imt.tdl.codeGenerator.ui.DSLSelectionWizardPage;
 import org.imt.tdl.libraryGenerator.TDLCodeGenerator;
+import org.imt.tdl.libraryGenerator.ui.DSLSelectionWizard;
+import org.imt.tdl.libraryGenerator.ui.DSLSelectionWizardPage;
 
 public class CodeGenerationHandler extends AbstractHandler {
 	
