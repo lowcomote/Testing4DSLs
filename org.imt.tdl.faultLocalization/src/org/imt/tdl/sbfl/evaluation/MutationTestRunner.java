@@ -32,6 +32,9 @@ public class MutationTestRunner {
 					this.DSLPath = TestConfigurationAspect.DSLPath(testCase.getTestConfiguration());
 				}
 			}
+		}
+		//keep test result and test coverage for killed mutants
+		if (this.testSuiteResult.getNumOfFailedTestCases() != 0) {
 			TDLTestResultUtil.getInstance().setTestSuiteResult(this.testSuiteResult);
 		    TDLCoverageUtil.getInstance().setTestSuiteCoverage(this.testSuiteCoverage);
 		    TDLCoverageUtil.getInstance().setDSLPath(this.DSLPath);
