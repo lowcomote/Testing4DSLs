@@ -1,14 +1,19 @@
 package org.imt.tdl.sbfl.evaluation;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -34,6 +39,13 @@ public class SBFLEvaluation {
 	private HashMap<String, TDLTestSuiteResult> mutantVerdict = new HashMap<>();
 	private HashMap<String, TDLTestSuiteCoverage> mutantCoverage = new HashMap<>();
 	
+	IProject mutantsProject;
+	IProject testSuiteProject;
+	
+	public SBFLEvaluation (IProject mutantsProject, IProject testSuiteProject) {
+		this.mutantsProject = mutantsProject;
+		this.testSuiteProject = testSuiteProject;
+	}
 	public void evaluateSBFLTechniques() {
 		findMutantsAndTestProjects();
 		testMutants();
@@ -43,34 +55,37 @@ public class SBFLEvaluation {
 	}
 
 	private void findMutantsAndTestProjects() {
-		String mutantsProjectName = "";
-		String testSuiteProjectName = "";
-		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		IProject[] projects = root.getProjects();
-		IProject mutantsProject = null;
-		IProject testSuiteProject = null;
-		for (int i=0; i<projects.length; i++) {
-			if (projects[i].getName().equals(mutantsProjectName)) {
-				mutantsProject = projects[i];
-			}else if (projects[i].getName().equals(testSuiteProjectName)) {
-				testSuiteProject = projects[i];
-			}
-		}
+		String dir = this.mutantsProject.getFullPath().toOSString();
+		dir = this.mutantsProject.getFullPath().toPortableString();
+		dir = this.mutantsProject.getFullPath().toString();
+		Set<String> fileList = new HashSet<>();
+	    try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(dir))) {
+	        for (Path path : stream) {
+	            if (!Files.isDirectory(path)) {
+	                fileList.add(path.getFileName()
+	                    .toString());
+	            }
+	        }
+	    }
 		//finding mutants and mapping them to their registry
-		findMutantRegistryMapping(mutantsProject);
+		//findMutantRegistryMapping(mutantsProject);
+	    catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		//finding test suite and run it on mutants to find live ones and keep verdict and coverage of killed ones
-		String testResourcePath = "platform:/resource/"+ testSuiteProjectName + "/";
-		File testsFolder = new File(testSuiteProject.getProjectRelativePath().toString());	
-		for (File testFile : testsFolder.listFiles()) {
-			this.testSuite = getTestSuite(testResourcePath, testFile);
-		}
+//		String testResourcePath = "platform:/resource/"+ testSuiteProject.getName() + "/";
+//		File testsFolder = new File(testSuiteProject.getFullPath().toString());	
+//		for (File testFile : testsFolder.listFiles()) {
+//			this.testSuite = getTestSuite(testResourcePath, testFile);
+//		}
 	}
 	
 	String workspacePath;
 	
 	private void findMutantRegistryMapping(IProject mutantProject) {
-		File projectFolder = new File(mutantProject.getProjectRelativePath() + "\\model");
+		File projectFolder = new File(mutantProject.getFullPath() + "\\model");
 		for (File file : projectFolder.listFiles()) {
 			pathsHelper(mutantProject.getName(), file);
 		}
