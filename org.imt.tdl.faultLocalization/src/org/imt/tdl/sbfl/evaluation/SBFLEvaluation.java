@@ -5,12 +5,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
 import org.imt.tdl.coverage.TDLTestSuiteCoverage;
@@ -26,11 +35,13 @@ public class SBFLEvaluation {
 
 	private List<String> mutants = new ArrayList<>();
 	private List<String> registeries = new ArrayList<>();	
-	private HashMap<String, String> mutantRegistry = new HashMap<>();
+	private HashMap<String, String> mutant_Registry = new HashMap<>();
+	
 	private Package testSuite = null;
 	
-	private HashMap<String, TDLTestSuiteResult> mutantVerdict = new HashMap<>();
-	private HashMap<String, TDLTestSuiteCoverage> mutantCoverage = new HashMap<>();
+	private HashMap<String, TDLTestSuiteResult> mutant_Verdict = new HashMap<>();
+	private HashMap<String, TDLTestSuiteCoverage> mutant_Coverage = new HashMap<>();
+	private HashMap<String, SBFLMeasures> mutant_SBFLMeasures4FaultyObject = new HashMap<>();
 	
 	IProject mutantsProject;
 	IProject testSuiteProject;
@@ -51,9 +62,10 @@ public class SBFLEvaluation {
 		}
 		
 		testMutants();
-		for (String mutant:this.mutantRegistry.keySet()) {
+		for (String mutant:this.mutant_Registry.keySet()) {
 			localizeFaultOfMutant(mutant);
 		}
+		System.out.println("Evaluation finished");
 	}
 	
 	String workspacePath;
@@ -68,7 +80,7 @@ public class SBFLEvaluation {
 			String mutantName = mutantPath.substring(mutantPath.lastIndexOf("\\") + 1, mutantPath.indexOf(".model"));
 			Optional<String> registery = this.registeries.stream().filter(r -> r.contains(mutator) && r.contains(mutantName + "Registry")).findFirst();
 			if (registery.isPresent()) {
-				this.mutantRegistry.put(mutantPath, registery.get());
+				this.mutant_Registry.put(mutantPath, registery.get());
 			}
 		}
 	}
@@ -138,22 +150,28 @@ public class SBFLEvaluation {
 			testRunner.runTestAndCalculateCoverage(this.testSuite, mutant);
 			if (testRunner.getTestSuiteResult().getNumOfFailedTestCases() == 0) {
 				//the mutant is alive, so it must be removed from the evaluation data
-				this.mutantRegistry.remove(mutant);
+				this.mutant_Registry.remove(mutant);
 			}
 			else {
 				//the mutant is killed, so its test result and its coverage must be kept
-				this.mutantVerdict.put(mutant, testRunner.getTestSuiteResult());
-				this.mutantCoverage.put(mutant, testRunner.getTestSuiteCoverage());
+				this.mutant_Verdict.put(mutant, testRunner.getTestSuiteResult());
+				this.mutant_Coverage.put(mutant, testRunner.getTestSuiteCoverage());
 			}
 		}
 	}
 	
 	public void localizeFaultOfMutant(String mutant) {
-		TDLTestSuiteResult testSuiteResult = this.mutantVerdict.get(mutant);
-		TDLTestSuiteCoverage testSuiteCoverage = this.mutantCoverage.get(mutant);
+		TDLTestSuiteResult testSuiteResult = this.mutant_Verdict.get(mutant);
+		TDLTestSuiteCoverage testSuiteCoverage = this.mutant_Coverage.get(mutant);
 		EObject faultyObject = getFaultyObjectOfMutant(mutant);
-		int indexOfFaultyObject = testSuiteCoverage.getModelObjects().indexOf(faultyObject);
-		
+		clearRuntimeData(faultyObject);
+		int indexOfFaultyObject = -1;
+		Optional<EObject> eobjectOptional = testSuiteCoverage.getModelObjectsWithoutRuntimeState().stream().
+			filter(o -> EcoreUtil.equals(o, faultyObject)).findFirst();
+		if (eobjectOptional.isPresent()) {
+			indexOfFaultyObject = testSuiteCoverage.getModelObjectsWithoutRuntimeState().indexOf(eobjectOptional.get());
+		}
+
 		SuspiciousnessRanking suspComputing = new SuspiciousnessRanking(testSuiteResult, testSuiteCoverage);
 		suspComputing.calculateMeasures();
 		List<SBFLMeasures> mutantSBFLMeasures = suspComputing.getElementsSBFLMeasures();
@@ -172,10 +190,11 @@ public class SBFLEvaluation {
 		for (String sbflTechnique : suspComputing.sbflTechniques) {
 			suspComputing.measureEXAMScores(measures4faultyObject, sbflTechnique);
 		}
+		mutant_SBFLMeasures4FaultyObject.put(mutant, measures4faultyObject);
 	}
 	
 	private EObject getFaultyObjectOfMutant(String mutant) {
-		String mutantRegistryPath = "platform:/resource" + this.mutantRegistry.get(mutant).replace("\\", "/");
+		String mutantRegistryPath = "platform:/resource" + this.mutant_Registry.get(mutant).replace("\\", "/");
 		Resource registryResource = (new ResourceSetImpl()).getResource(URI.createURI(mutantRegistryPath), true);
 		Mutations mutations = (Mutations) registryResource.getContents().get(0);
 		Optional<AppMutation> informationChangedMutation = mutations.getMuts().stream().filter(m -> m instanceof InformationChanged).findFirst();
@@ -183,5 +202,51 @@ public class SBFLEvaluation {
 			return ((InformationChanged)informationChangedMutation.get()).getObject();
 		}
 		return null;
+	}
+	
+	private void clearRuntimeData(EObject faultyObject) {
+		Resource mutantResource = faultyObject.eResource();
+		TreeIterator<EObject> mutantContents = mutantResource.getAllContents();
+		while (mutantContents.hasNext()) {
+			clearRuntimeDataOfObject(mutantContents.next());
+		}	
+	}
+	
+	private void clearRuntimeDataOfObject(EObject object) {
+		EClass eobjectType = object.eClass();
+		List<EAnnotation> typeDynamicAnnotations = eobjectType.getEAnnotations().stream().
+				filter(a -> a.getSource().equals("dynamic") || a.getSource().equals("aspect")).collect(Collectors.toList());
+		//if the type of the object is dynamic, all of its features must be set to the default values
+		if (typeDynamicAnnotations != null && typeDynamicAnnotations.size()>0) {
+			eobjectType.getEAllStructuralFeatures().forEach(f -> clearRuntimeDataOfFeature(object, f));
+		}
+		else {
+			List<EStructuralFeature> dynamicFeatures = eobjectType.getEAllStructuralFeatures().stream().
+					filter(f -> isDynamicFeature(f)).collect(Collectors.toList());
+			dynamicFeatures.forEach(f -> clearRuntimeDataOfFeature(object, f));
+		}
+	}
+	
+	private void clearRuntimeDataOfFeature(EObject object, EStructuralFeature feature) {
+		if (feature.eResource().getResourceSet() == null) {
+			object.eSet(feature, feature.getDefaultValue());
+		}else {
+			TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(feature);
+			try{
+				domain.getCommandStack().execute(new RecordingCommand(domain) {
+					@Override
+					protected void doExecute() {
+						object.eSet(feature, feature.getDefaultValue());
+					}
+		   		});
+	   		}catch(IllegalArgumentException e){
+				e.printStackTrace();
+			}
+		}
+	}
+	private boolean isDynamicFeature(EStructuralFeature feature) {
+		List<EAnnotation> featureDynamicAnnotations = feature.getEAnnotations().stream().
+				filter(a -> a.getSource().equals("dynamic") || a.getSource().equals("aspect")).collect(Collectors.toList());
+		return (featureDynamicAnnotations != null && featureDynamicAnnotations.size() > 0);
 	}
 }
