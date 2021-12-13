@@ -72,8 +72,7 @@ rule simpleAbstractDynamicClass2Type{
 		name <- if (thisModule.tokenNames.includes(class.name))
 				then '_' + class.name
 				else class.name
-				endif,
-		annotation <- abstractAnnotation.append(dynamicAnnotation)),
+				endif),
 		abstractAnnotation: TDL!Annotation(
 			key <- if (thisModule.abstractAnnotationType.oclIsUndefined())
 				   then thisModule.abstract2annotationType()
@@ -176,8 +175,7 @@ rule featuredAbstractDynamicClass2Type{
 				if (feature.eAnnotations.notEmpty() and feature.isDynamicFeature)
 					then thisModule.dynamicFeature2annotatedMember(feature)
 					else thisModule.staticFeature2member(feature)
-					endif),
-		annotation <- abstractAnnotation.append(dynamicAnnotation)),
+					endif)),
 		abstractAnnotation: TDL!Annotation(
 			key <- if (thisModule.abstractAnnotationType.oclIsUndefined())
 				   then thisModule.abstract2annotationType()
@@ -287,8 +285,7 @@ rule abstractInheritedDynamicClass2Type{
 					then thisModule.dynamicFeature2annotatedMember(feature)
 					else thisModule.staticFeature2member(feature)
 					endif),
-		extension <- thisModule.superClass2extension(class),
-		annotation <- abstractAnnotation.append(dynamicAnnotation)),
+		extension <- thisModule.superClass2extension(class)),
 		abstractAnnotation: TDL!Annotation(
 			key <- if (thisModule.abstractAnnotationType.oclIsUndefined())
 				   then thisModule.abstract2annotationType()
