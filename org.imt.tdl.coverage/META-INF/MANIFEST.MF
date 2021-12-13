@@ -22,4 +22,5 @@ Require-Bundle: org.eclipse.emf.ecore,
  org.etsi.mts.tdl.model;bundle-version="1.4.0",
  org.eclipse.jface;bundle-version="3.22.200",
  org.eclipse.emf.edit;bundle-version="2.16.0",
- org.eclipse.ui;bundle-version="3.119.0"
+ org.eclipse.ui;bundle-version="3.119.0",
+ org.eclipse.emf.transaction

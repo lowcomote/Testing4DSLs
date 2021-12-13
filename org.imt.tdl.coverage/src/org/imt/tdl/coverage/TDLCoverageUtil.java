@@ -11,9 +11,11 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -35,7 +37,10 @@ public class TDLCoverageUtil {
 	public List<String> coverableClasses = new ArrayList<>();
 	private List<String> extendedClassesWithStep = new ArrayList<>();
 	private List<String> extendedClassesWithoutStep = new ArrayList<>();
-
+	
+	private List<EClass> classesWithDynamicFeatures = new ArrayList<>();
+	private List<EClass> dynamicClasses = new ArrayList<>();
+	
 	public static final String COVERED = "Covered";
 	public static final String NOT_COVERED = "Not_Covered";
 	public static final String COVERABLE = "Coverable";
@@ -70,6 +75,9 @@ public class TDLCoverageUtil {
 		instance.coverableClasses.clear();
 		instance.extendedClassesWithStep.clear();
 		instance.extendedClassesWithoutStep.clear();
+		instance.dynamicClasses.clear();
+		instance.classesWithDynamicFeatures.clear();
+		
 		findCoverableClasses();
 		instance.testSuiteCoverage.calculateTSCoverage();
 	}
@@ -104,6 +112,7 @@ public class TDLCoverageUtil {
 				if (!instance.coverableClasses.contains(className) && !instance.extendedClassesWithoutStep.contains(className)) {
 					checkInheritance((EClass) clazz);
 				}
+				checkDynamicAspectsOfClass(clazz);
 			}
 		}
 		
@@ -113,7 +122,7 @@ public class TDLCoverageUtil {
 		percentage = Math.ceil((double)(instance.coverableClasses.size()*100)/abstractSyntaxSize);
 		System.out.println("% of Coverable classes (considering inheritance): " + percentage);
 	}
-	
+
 	public void updateCoverableClasses (List<String> newClasses) {
 		if (newClasses != null) {
 			for (String newClassName: newClasses) {
@@ -196,4 +205,36 @@ public class TDLCoverageUtil {
 			}
 		}
 	}
+	
+	private void checkDynamicAspectsOfClass(EClassifier clazz) {
+		List<EAnnotation> classDynamicAnnotations = clazz.getEAnnotations().stream().
+				filter(a -> a.getSource().equals("dynamic") || a.getSource().equals("aspect")).collect(Collectors.toList());
+		//if the type of the object is dynamic, all of its features must be set to the default values
+		if (classDynamicAnnotations != null && classDynamicAnnotations.size()>0) {
+			this.dynamicClasses.add((EClass) clazz);
+		}
+		else {
+			List<EStructuralFeature> dynamicFeatures = ((EClass) clazz).getEAllStructuralFeatures().stream().
+					filter(f -> isDynamicFeature(f)).collect(Collectors.toList());
+			if (dynamicFeatures != null && dynamicFeatures.size()>0) {
+				this.classesWithDynamicFeatures.add((EClass) clazz);
+			}
+		}
+	}
+	
+	private boolean isDynamicFeature(EStructuralFeature feature) {
+		List<EAnnotation> featureDynamicAnnotations = feature.getEAnnotations().stream().
+				filter(a -> a.getSource().equals("dynamic") || a.getSource().equals("aspect")).collect(Collectors.toList());
+		return (featureDynamicAnnotations != null && featureDynamicAnnotations.size() > 0);
+	}
+
+	public List<EClass> getClassesWithDynamicFeatures() {
+		return classesWithDynamicFeatures;
+	}
+
+	public List<EClass> getDynamicClasses() {
+		return dynamicClasses;
+	}
+	
+	
 }
