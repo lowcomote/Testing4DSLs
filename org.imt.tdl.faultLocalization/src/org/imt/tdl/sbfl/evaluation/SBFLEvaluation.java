@@ -22,6 +22,7 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
+import org.imt.tdl.coverage.TDLCoverageUtil;
 import org.imt.tdl.coverage.TDLTestSuiteCoverage;
 import org.imt.tdl.faultLocalization.SBFLMeasures;
 import org.imt.tdl.faultLocalization.SuspiciousnessRanking;
@@ -208,23 +209,24 @@ public class SBFLEvaluation {
 		Resource mutantResource = faultyObject.eResource();
 		TreeIterator<EObject> mutantContents = mutantResource.getAllContents();
 		while (mutantContents.hasNext()) {
-			clearRuntimeDataOfObject(mutantContents.next());
+			EObject eobject = mutantContents.next();
+			EClass eobjectType = eobject.eClass();
+			Optional<EClass> eclass = TDLCoverageUtil.getInstance().getDynamicClasses().stream().
+					filter(c -> c.getName().equals(eobjectType.getName())).findFirst();
+			if (eclass.isPresent()) {
+				eobjectType.getEAllStructuralFeatures().forEach(f -> clearRuntimeDataOfFeature(eobject, f));
+			}
+			else {
+
+				eclass = TDLCoverageUtil.getInstance().getClassesWithDynamicFeatures().stream().
+						filter(c -> c.getName().equals(eobjectType.getName())).findFirst();
+				if (eclass.isPresent()) {
+					List<EStructuralFeature> dynamicFeatures = eobjectType.getEAllStructuralFeatures().stream().
+							filter(f -> isDynamicFeature(f)).collect(Collectors.toList());
+					dynamicFeatures.forEach(f -> clearRuntimeDataOfFeature(eobject, f));
+				}
+			}
 		}	
-	}
-	
-	private void clearRuntimeDataOfObject(EObject object) {
-		EClass eobjectType = object.eClass();
-		List<EAnnotation> typeDynamicAnnotations = eobjectType.getEAnnotations().stream().
-				filter(a -> a.getSource().equals("dynamic") || a.getSource().equals("aspect")).collect(Collectors.toList());
-		//if the type of the object is dynamic, all of its features must be set to the default values
-		if (typeDynamicAnnotations != null && typeDynamicAnnotations.size()>0) {
-			eobjectType.getEAllStructuralFeatures().forEach(f -> clearRuntimeDataOfFeature(object, f));
-		}
-		else {
-			List<EStructuralFeature> dynamicFeatures = eobjectType.getEAllStructuralFeatures().stream().
-					filter(f -> isDynamicFeature(f)).collect(Collectors.toList());
-			dynamicFeatures.forEach(f -> clearRuntimeDataOfFeature(object, f));
-		}
 	}
 	
 	private void clearRuntimeDataOfFeature(EObject object, EStructuralFeature feature) {

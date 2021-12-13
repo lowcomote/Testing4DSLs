@@ -4,12 +4,18 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.etsi.mts.tdl.Package;
 
 public class TDLTestSuiteCoverage {
@@ -153,32 +159,47 @@ public class TDLTestSuiteCoverage {
 		return modelObjects;
 	}
 	public List<EObject> getModelObjectsWithoutRuntimeState() {
-		this.modelObjects.forEach(o -> clearRuntimeData(o));
+		for (EObject eobject: this.modelObjects) {
+			EClass eobjectType = eobject.eClass();
+			Optional<EClass> eclass = TDLCoverageUtil.getInstance().getDynamicClasses().stream().
+					filter(c -> c.getName().equals(eobjectType.getName())).findFirst();
+			if (eclass.isPresent()) {
+				eobjectType.getEAllStructuralFeatures().forEach(f -> clearRuntimeDataOfFeature(eobject, f));
+			}
+			else {
+				eclass = TDLCoverageUtil.getInstance().getClassesWithDynamicFeatures().stream().
+						filter(c -> c.getName().equals(eobjectType.getName())).findFirst();
+				if (eclass.isPresent()) {
+					List<EStructuralFeature> dynamicFeatures = eobjectType.getEAllStructuralFeatures().stream().
+							filter(f -> isDynamicFeature(f)).collect(Collectors.toList());
+					dynamicFeatures.forEach(f -> clearRuntimeDataOfFeature(eobject, f));
+				}
+			}
+		}
 		return this.modelObjects;
-	}
-	
-	private void clearRuntimeData(EObject object) {
-		EClass eobjectType = object.eClass();
-		List<EAnnotation> typeDynamicAnnotations = eobjectType.getEAnnotations().stream().
-				filter(a -> a.getSource().equals("dynamic") || a.getSource().equals("aspect")).collect(Collectors.toList());
-		//if the type of the object is dynamic, all of its features must be set to the default values
-		if (typeDynamicAnnotations != null && typeDynamicAnnotations.size()>0) {
-			for (EStructuralFeature feature: eobjectType.getEAllStructuralFeatures()) {
-				object.eSet(feature, feature.getDefaultValue());
-			}
-		}
-		else {
-			List<EStructuralFeature> dynamicFeatures = eobjectType.getEAllStructuralFeatures().stream().
-					filter(f -> isDynamicFeature(f)).collect(Collectors.toList());
-			for (EStructuralFeature feature: dynamicFeatures) {
-				object.eSet(feature, feature.getDefaultValue());
-			}
-		}
 	}
 	
 	private boolean isDynamicFeature(EStructuralFeature feature) {
 		List<EAnnotation> featureDynamicAnnotations = feature.getEAnnotations().stream().
 				filter(a -> a.getSource().equals("dynamic") || a.getSource().equals("aspect")).collect(Collectors.toList());
 		return (featureDynamicAnnotations != null && featureDynamicAnnotations.size() > 0);
+	}
+	
+	private void clearRuntimeDataOfFeature(EObject object, EStructuralFeature feature) {
+		if (feature.eResource().getResourceSet() == null) {
+			object.eSet(feature, feature.getDefaultValue());
+		}else {
+			TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(feature);
+			try{
+				domain.getCommandStack().execute(new RecordingCommand(domain) {
+					@Override
+					protected void doExecute() {
+						object.eSet(feature, feature.getDefaultValue());
+					}
+		   		});
+	   		}catch(IllegalArgumentException e){
+				e.printStackTrace();
+			}
+		}
 	}
 }
