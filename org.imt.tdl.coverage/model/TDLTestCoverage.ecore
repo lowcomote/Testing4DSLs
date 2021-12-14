@@ -4,31 +4,31 @@
     nsPrefix="TDLTestCoverage">
   <eClassifiers xsi:type="ecore:EClass" name="TestSuiteCoverage">
     <eStructuralFeatures xsi:type="ecore:EReference" name="testSuite" lowerBound="1"
-        eType="ecore:EClass platform:/plugin/org.etsi.mts.tdl.model/model/tdl.ecore#//Package"/>
+        eType="ecore:EClass ../../org.etsi.mts.tdl.model/model/tdl.ecore#//Package"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="testCaseCoverages" lowerBound="1"
         upperBound="-1" eType="#//TestCaseCoverage" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tsObjectCoverageStatus"
-        lowerBound="1" upperBound="-1" eType="#//ModelObjectCoverageStatus"/>
+        lowerBound="1" upperBound="-1" eType="#//ModelObjectCoverageStatus" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="coveragePercentage" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TestCaseCoverage">
     <eStructuralFeatures xsi:type="ecore:EReference" name="testCase" lowerBound="1"
-        eType="ecore:EClass platform:/plugin/org.etsi.mts.tdl.model/model/tdl.ecore#//TestDescription"/>
+        eType="ecore:EClass ../../org.etsi.mts.tdl.model/model/tdl.ecore#//TestDescription"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tcObjectCoverageStatus"
-        lowerBound="1" upperBound="-1" eType="#//ModelObjectCoverageStatus"/>
+        lowerBound="1" upperBound="-1" eType="#//ModelObjectCoverageStatus" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="coveragePercentage" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="CoverageStatus">
-    <eLiterals name="COVERED"/>
-    <eLiterals name="NOTCOVERED" value="1"/>
-    <eLiterals name="NOTCOVERABLE" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ModelObjectCoverageStatus">
     <eStructuralFeatures xsi:type="ecore:EReference" name="modelObject" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="coverageStatus" lowerBound="1"
         eType="#//CoverageStatus"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CoverageStatus">
+    <eLiterals name="COVERED"/>
+    <eLiterals name="NOTCOVERED" value="1"/>
+    <eLiterals name="NOTCOVERABLE" value="2"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -22,7 +22,7 @@ public class TDLTestSuiteCoverage {
 
 	private Package testSuite;
 	private List<TDLTestCaseCoverage> tcCoverages;
-	
+
 	private List<EObject> modelObjects;
 	private List<String> tsObjectCoverageStatus;
 
@@ -71,7 +71,8 @@ public class TDLTestSuiteCoverage {
 				tcCoverageObj.calculateTCCoverage();
 			}
 			tcCoverageObj.countNumOfElements();
-			this.overallResult.getCoverage().add(tcCoverageObj.getCoveragePercentage() + "");
+			tcCoverageObj.calculateCoveragePercentage();
+			this.overallResult.getCoverage().add(tcCoverageObj.getTcCoveragePercentage() + "");
 			
 			//if it is the first test case, copy the whole test case object coverage status for the test suite
 			if (this.tsObjectCoverageStatus.size() == 0) {
@@ -108,7 +109,7 @@ public class TDLTestSuiteCoverage {
 		int numOfCoverableElements = this.tsObjectCoverageStatus.size() - this.numOfNotCoverableElements;
 		System.out.println("number of coveredObjects: " + this.numOfCoveredObjs);
 		System.out.println("number of coverableElements: " + numOfCoverableElements);
-		double tsCoveragePercentage = (double)(this.numOfCoveredObjs*100)/numOfCoverableElements;
+		tsCoveragePercentage = (double)(this.numOfCoveredObjs*100)/numOfCoverableElements;
 		BigDecimal bd = new BigDecimal(tsCoveragePercentage).setScale(2, RoundingMode.HALF_UP);
 		tsCoveragePercentage = bd.doubleValue();
 		System.out.println("Test suite coverage: " + tsCoveragePercentage);
@@ -157,6 +158,16 @@ public class TDLTestSuiteCoverage {
 	}
 	public List<EObject> getModelObjects() {
 		return modelObjects;
+	}
+	public List<TDLTestCaseCoverage> getTcCoverages() {
+		return tcCoverages;
+	}
+	public double getTsCoveragePercentage() {
+		return tsCoveragePercentage;
+	}
+	
+	public List<String> getTsObjectCoverageStatus() {
+		return tsObjectCoverageStatus;
 	}
 	public List<EObject> getModelObjectsWithoutRuntimeState() {
 		for (EObject eobject: this.modelObjects) {

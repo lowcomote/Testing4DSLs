@@ -22,6 +22,7 @@ public class TDLTestCaseCoverage {
 	private List<EObject> modelObjects;
 	private List<String> tcObjectCoverageStatus;
 	
+	double tcCoveragePercentage;
 	int numOfCoveredObjs;
 	int numOfNotCoverableElements;
 	
@@ -135,13 +136,12 @@ public class TDLTestCaseCoverage {
 		}
 	}
 	
-	public double getCoveragePercentage() {
+	public void calculateCoveragePercentage() {
 		int numOfCoverableElements = this.tcObjectCoverageStatus.size() - this.numOfNotCoverableElements;
-		double tcCoveragePercentage = (double)(this.numOfCoveredObjs*100)/numOfCoverableElements;
+		tcCoveragePercentage = (double)(this.numOfCoveredObjs*100)/numOfCoverableElements;
 		BigDecimal bd = new BigDecimal(tcCoveragePercentage).setScale(2, RoundingMode.HALF_UP);
 		tcCoveragePercentage = bd.doubleValue();
 		System.out.println(this.testCase.getName() + " coverage: " + tcCoveragePercentage);
-		return tcCoveragePercentage;
 	}
 	
 	public Trace<?, ?, ?> getTrace() {
@@ -176,4 +176,8 @@ public class TDLTestCaseCoverage {
 	public List<String> getTcObjectCoverageStatus() {
 		return tcObjectCoverageStatus;
 	}
+	public double getTcCoveragePercentage() {
+		return tcCoveragePercentage;
+	}
+	
 }

@@ -1,16 +1,29 @@
 package org.imt.tdl.coverage.persistence;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.Optional;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gemoc.xdsmlframework.api.core.IExecutionContext;
 import org.eclipse.gemoc.xdsmlframework.api.core.IExecutionEngine;
 import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
+import org.etsi.mts.tdl.PackageableElement;
+import org.etsi.mts.tdl.TestDescription;
+import org.imt.tdl.coverage.TDLCoverageUtil;
+import org.imt.tdl.coverage.TDLTestCaseCoverage;
+
+import TDLTestCoverage.CoverageStatus;
+import TDLTestCoverage.ModelObjectCoverageStatus;
+import TDLTestCoverage.TDLTestCoverageFactory;
+import TDLTestCoverage.TestCaseCoverage;
+import TDLTestCoverage.TestSuiteCoverage;
 
 public class TestCoveragePersistence implements IEngineAddon{
 	
@@ -23,60 +36,65 @@ public class TestCoveragePersistence implements IEngineAddon{
 			testSutieResource = getCopyOfTestSuite(_executionContext);
 		}
 	   //create test coverage according to the TDLTestCoverage.ecore structure
-	   Package copiedTestSuite = (Package) testSutieResource.getContents().get(0);
-	   TestSuiteCoverage testSuiteResult = TDLTestReportFactory.eINSTANCE.createTestSuiteResult();
-	   testSuiteResult.setTestSuite(copiedTestSuite);
-	   for (TDLTestCaseResult tcResultObject : TDLTestResultUtil.getInstance().getTestSuiteResult().getTestCaseResults()) {
-		   String testCaseName = tcResultObject.getTestCaseName();
+	   org.etsi.mts.tdl.Package copiedTestSuite = (org.etsi.mts.tdl.Package) testSutieResource.getContents().get(0);
+	   TestSuiteCoverage testSuiteCoverage = TDLTestCoverageFactory.eINSTANCE.createTestSuiteCoverage();
+	   testSuiteCoverage.setTestSuite(copiedTestSuite);
+	   testSuiteCoverage.setCoveragePercentage(TDLCoverageUtil.getInstance().getTestSuiteCoverage().getTsCoveragePercentage());
+	   for (TDLTestCaseCoverage tcCoverageObject : TDLCoverageUtil.getInstance().getTestSuiteCoverage().getTcCoverages()) {
+		   String testCaseName = tcCoverageObject.getTestCaseName();
 		   Optional<PackageableElement> optionalTC = copiedTestSuite.getPackagedElement().stream().filter(p -> p instanceof TestDescription).
 			filter(t -> t.getName().equals(testCaseName)).findFirst();
 		   if (optionalTC.isPresent()) {
 			   TestDescription copiedTestCase = (TestDescription) optionalTC.get();
-			   TestCaseResult testCaseResult = TDLTestReportFactory.eINSTANCE.createTestCaseResult();
-			   testCaseResult.setTestCase(copiedTestCase);
-			   String testCaseVerdict = tcResultObject.getValue();
-			   if (testCaseVerdict == TDLTestResultUtil.PASS) {
-				   testCaseResult.setValue(Verdicts.PASS);
-			   }else if (testCaseVerdict == TDLTestResultUtil.FAIL) {
-				   testCaseResult.setValue(Verdicts.FAIL);
-			   }else if (testCaseVerdict == TDLTestResultUtil.INCONCLUSIVE) {
-				   testCaseResult.setValue(Verdicts.INCONCLUSIVE);
+			   TestCaseCoverage testCaseCoverage = TDLTestCoverageFactory.eINSTANCE.createTestCaseCoverage();
+			   testCaseCoverage.setTestCase(copiedTestCase);
+			   testCaseCoverage.setCoveragePercentage(tcCoverageObject.getTcCoveragePercentage());
+			   for (int i=0; i<tcCoverageObject.getModelObjects().size(); i++) {
+				   ModelObjectCoverageStatus tsModelObjectCoverageStatus = TDLTestCoverageFactory.eINSTANCE.createModelObjectCoverageStatus();
+				   ModelObjectCoverageStatus tcModelObjectCoverageStatus = TDLTestCoverageFactory.eINSTANCE.createModelObjectCoverageStatus();
+				   
+				   EObject modelObject = tcCoverageObject.getModelObjects().get(i);
+				   tsModelObjectCoverageStatus.setModelObject(modelObject);
+				   tcModelObjectCoverageStatus.setModelObject(modelObject);
+				   String tsCoverage = TDLCoverageUtil.getInstance().getTestSuiteCoverage().getTsObjectCoverageStatus().get(i);
+				   String tcCoverage = tcCoverageObject.getTcObjectCoverageStatus().get(i);
+				   tsModelObjectCoverageStatus.setCoverageStatus(getCoverageStatus(tsCoverage));
+				   tcModelObjectCoverageStatus.setCoverageStatus(getCoverageStatus(tcCoverage));
+				   
+				   testSuiteCoverage.getTsObjectCoverageStatus().add(tsModelObjectCoverageStatus);
+				   testCaseCoverage.getTcObjectCoverageStatus().add(tcModelObjectCoverageStatus);
 			   }
-			   testCaseResult.setDescription(tcResultObject.getDescription());
-			   for (int i=0; i<tcResultObject.getTdlMessages().size(); i++) {
-				   TDLMessageResult messageResultObject = tcResultObject.getTdlMessages().get(i);
-				   TestMessageResult testMessageResult = TDLTestReportFactory.eINSTANCE.createTestMessageResult();
-				   testMessageResult.setMessage(findEquivalentTDLMessage(copiedTestCase, i));
-				   String testMsgVerdict = messageResultObject.getValue();
-				   if (testMsgVerdict == TDLTestResultUtil.PASS) {
-					   testMessageResult.setValue(Verdicts.PASS);
-				   }else if (testMsgVerdict == TDLTestResultUtil.FAIL) {
-					   testMessageResult.setValue(Verdicts.FAIL);
-				   }else if (testMsgVerdict == TDLTestResultUtil.INCONCLUSIVE) {
-					   testMessageResult.setValue(Verdicts.INCONCLUSIVE);
-				   }
-				   testMessageResult.setDescription(messageResultObject.getDescription());
-				   testMessageResult.setTdlMessageId(messageResultObject.getTdlMessageId());
-				   testCaseResult.getTestMessageResults().add(testMessageResult);
-			   }
-			   testSuiteResult.getTestCaseResults().add(testCaseResult);
+			   testSuiteCoverage.getTestCaseCoverages().add(testCaseCoverage);
 		   }
 	   }
 	   
 	   //create a resource for the test result
-	   URI testReportURI = URI.createURI(
-				_executionContext.getWorkspace().getExecutionPath().toString() + "/testReport.xmi", false);
-	   Resource testResultResource = (new ResourceSetImpl()).createResource(testReportURI);
-	   testResultResource.getContents().add(testSuiteResult);
+	   URI testCoverageURI = URI.createURI(
+				_executionContext.getWorkspace().getExecutionPath().toString() + "/testCoverage.xmi", false);
+	   Resource testCoverageResource = (new ResourceSetImpl()).createResource(testCoverageURI);
+	   testCoverageResource.getContents().add(testSuiteCoverage);
 	   //saving resources
 	   try {
-			testResultResource.save(null);
+		   testCoverageResource.save(null);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 				e.printStackTrace();
 		}
 	}
 		
+	private CoverageStatus getCoverageStatus(String coverage) {
+		if (coverage == TDLCoverageUtil.COVERED) {
+			return CoverageStatus.COVERED;
+		}
+		else if (coverage == TDLCoverageUtil.NOT_COVERED) {
+			return CoverageStatus.NOTCOVERED;
+		}
+		else if (coverage == TDLCoverageUtil.NOT_COVERABLE) {
+			return CoverageStatus.NOTCOVERABLE;
+		}
+		return null;
+	}
+
 	private Resource getCopyOfTestSuite(IExecutionContext<?, ?, ?> _executionContext) {
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		String projectName = _executionContext.getWorkspace().getProjectPath().toString().substring(1);

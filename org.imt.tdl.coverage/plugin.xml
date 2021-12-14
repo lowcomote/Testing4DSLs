@@ -29,4 +29,12 @@
           shortDescription="Save the result of TDL test coverage">
     </addon>
  </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated TDLTestCoverage -->
+      <package
+            uri="http://org.imt.tdl.coverage/TDLTestCoverage"
+            class="TDLTestCoverage.TDLTestCoveragePackage"
+            genModel="model/TDLTestCoverage.genmodel"/>
+   </extension>
+
 </plugin>
