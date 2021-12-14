@@ -36,7 +36,7 @@ public enum StringComparisonOperator implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	NOT_EQUALS(1, "NOT_EQUALS", "NOT_EQUALS");
+	NOT_EQUALS(1, "NOT_EQUALS", "!=");
 
 	/**
 	 * The '<em><b>EQUALS</b></em>' literal value.
@@ -54,7 +54,7 @@ public enum StringComparisonOperator implements Enumerator {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #NOT_EQUALS
-	 * @model
+	 * @model literal="!="
 	 * @generated
 	 * @ordered
 	 */
