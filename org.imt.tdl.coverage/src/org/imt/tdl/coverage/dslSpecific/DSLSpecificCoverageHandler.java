@@ -1,4 +1,4 @@
-package org.imt.tdl.coverage;
+package org.imt.tdl.coverage.dslSpecific;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -11,6 +11,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gemoc.dsl.Dsl;
+import org.imt.tdl.coverage.TDLCoverageUtil;
 
 public class DSLSpecificCoverageHandler {
 	

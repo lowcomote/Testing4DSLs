@@ -20,9 +20,9 @@ import org.imt.minijava.xminiJava.Program;
 import org.imt.minijava.xminiJava.StringTypeRef;
 import org.imt.minijava.xminiJava.TypeDeclaration;
 import org.imt.minijava.xminiJava.WhileStatement;
-import org.imt.tdl.coverage.IDSLSpecificCoverage;
 import org.imt.tdl.coverage.TDLCoverageUtil;
 import org.imt.tdl.coverage.TDLTestCaseCoverage;
+import org.imt.tdl.coverage.dslSpecific.IDSLSpecificCoverage;
 
 public class MiniJavaCoverageComputation implements IDSLSpecificCoverage{
 
