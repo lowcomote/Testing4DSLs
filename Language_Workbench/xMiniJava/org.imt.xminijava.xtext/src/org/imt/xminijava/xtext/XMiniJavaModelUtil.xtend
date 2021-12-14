@@ -1,20 +1,19 @@
 package org.imt.xminijava.xtext
 
+import java.util.Set
 import org.imt.minijava.xminiJava.Block
 import org.imt.minijava.xminiJava.BooleanTypeRef
 import org.imt.minijava.xminiJava.Class
 import org.imt.minijava.xminiJava.ClassRef
 import org.imt.minijava.xminiJava.Field
 import org.imt.minijava.xminiJava.IntegerTypeRef
+import org.imt.minijava.xminiJava.Interface
 import org.imt.minijava.xminiJava.Member
 import org.imt.minijava.xminiJava.Method
 import org.imt.minijava.xminiJava.Return
 import org.imt.minijava.xminiJava.StringTypeRef
-import org.imt.minijava.xminiJava.TypeRef
 import org.imt.minijava.xminiJava.TypeDeclaration
-import org.imt.minijava.xminiJava.Interface
-import java.util.Set
-import org.imt.minijava.xminiJava.TypedDeclaration
+import org.imt.minijava.xminiJava.TypeRef
 
 class XMiniJavaModelUtil {
 
