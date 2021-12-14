@@ -68,7 +68,7 @@ public class TestCoveragePersistence implements IEngineAddon{
 		   }
 	   }
 	   
-	   //create a resource for the test result
+	   //create a resource for the test coverage
 	   URI testCoverageURI = URI.createURI(
 				_executionContext.getWorkspace().getExecutionPath().toString() + "/testCoverage.xmi", false);
 	   Resource testCoverageResource = (new ResourceSetImpl()).createResource(testCoverageURI);
