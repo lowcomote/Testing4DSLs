@@ -179,7 +179,7 @@
     <eLiterals name="OR" value="1" literal="||"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="BooleanUnaryOperator">
-    <eLiterals name="TRUE" literal="TRUE"/>
+    <eLiterals name="TRUE" literal="True"/>
     <eLiterals name="FALSE" value="1" literal="False"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="IntegerComparisonOperator">
@@ -192,7 +192,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="StringComparisonOperator">
     <eLiterals name="EQUALS" literal="=="/>
-    <eLiterals name="NOT_EQUALS" value="1"/>
+    <eLiterals name="NOT_EQUALS" value="1" literal="!="/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EventOccurrence" abstract="true">
     <eAnnotations source="aspect"/>

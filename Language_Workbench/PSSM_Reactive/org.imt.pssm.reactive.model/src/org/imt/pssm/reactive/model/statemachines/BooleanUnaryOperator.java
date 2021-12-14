@@ -26,7 +26,7 @@ public enum BooleanUnaryOperator implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	TRUE(0, "TRUE", "TRUE"),
+	TRUE(0, "TRUE", "True"),
 
 	/**
 	 * The '<em><b>FALSE</b></em>' literal object.
@@ -43,7 +43,7 @@ public enum BooleanUnaryOperator implements Enumerator {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #TRUE
-	 * @model
+	 * @model literal="True"
 	 * @generated
 	 * @ordered
 	 */
