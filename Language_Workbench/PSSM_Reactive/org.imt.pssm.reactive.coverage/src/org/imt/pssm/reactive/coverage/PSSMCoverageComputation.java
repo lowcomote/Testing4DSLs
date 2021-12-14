@@ -2,7 +2,6 @@ package org.imt.pssm.reactive.coverage;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.imt.pssm.reactive.model.statemachines.BooleanBinaryExpression;
@@ -29,9 +28,9 @@ import org.imt.pssm.reactive.model.statemachines.StringConstraint;
 import org.imt.pssm.reactive.model.statemachines.Transition;
 import org.imt.pssm.reactive.model.statemachines.Trigger;
 import org.imt.pssm.reactive.model.statemachines.Vertex;
-import org.imt.tdl.coverage.IDSLSpecificCoverage;
 import org.imt.tdl.coverage.TDLCoverageUtil;
 import org.imt.tdl.coverage.TDLTestCaseCoverage;
+import org.imt.tdl.coverage.dslSpecific.IDSLSpecificCoverage;
 
 public class PSSMCoverageComputation implements IDSLSpecificCoverage{
 	
@@ -70,10 +69,10 @@ public class PSSMCoverageComputation implements IDSLSpecificCoverage{
 	@Override
 	public void specializeCoverage(TDLTestCaseCoverage testCaseCoverage) {
 		this.testCaseCoverage = testCaseCoverage;
-		this.modelObjects = testCaseCoverage.modelObjects;
+		this.modelObjects = testCaseCoverage.getModelObjects();
 		for (int i=0; i<this.modelObjects.size(); i++) {
 			EObject modelObject = this.modelObjects.get(i);
-			String coverage = this.testCaseCoverage.tcObjectCoverageStatus.get(i);
+			String coverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(i);
 			if (modelObject instanceof CustomSystem && coverage != TDLCoverageUtil.COVERED) {
 				customSystemCoverage ((CustomSystem) modelObject);
 			}
@@ -104,14 +103,14 @@ public class PSSMCoverageComputation implements IDSLSpecificCoverage{
 	private void customSystemCoverage(CustomSystem customSystem) {
 		//a customSystem is covered when its inner stateMachine is covered
 		int index = this.modelObjects.indexOf(customSystem.getStatemachine());
-		String smCoverage = this.testCaseCoverage.tcObjectCoverageStatus.get(index);
+		String smCoverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(index);
 		if (smCoverage != TDLCoverageUtil.COVERED) {
 			//if stateMachine is not covered, check its coverage first
 			smCoverage = stateMachineCoverage(customSystem.getStatemachine());
 		}
 		if (smCoverage == TDLCoverageUtil.COVERED) {
 			index = this.modelObjects.indexOf(customSystem);
-			this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.COVERED);			
+			this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.COVERED);			
 		}
 	}
 
@@ -119,7 +118,7 @@ public class PSSMCoverageComputation implements IDSLSpecificCoverage{
 		//a stateMachine is covered when all of its inner regions are covered
 		for (Region innerRegion: statemachine.getRegions()) {
 			int index = this.modelObjects.indexOf(innerRegion);
-			String regionCoverage = this.testCaseCoverage.tcObjectCoverageStatus.get(index);
+			String regionCoverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(index);
 			//if the region is not covered, first check its coverage
 			if (regionCoverage != TDLCoverageUtil.COVERED) {
 				regionCoverage = regionCoverage(innerRegion);
@@ -127,13 +126,13 @@ public class PSSMCoverageComputation implements IDSLSpecificCoverage{
 			//if after checking its coverage, it is still not covered, the state machine is also not covered
 			if (regionCoverage != TDLCoverageUtil.COVERED)  {
 				index = this.modelObjects.indexOf(statemachine);
-				this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.NOT_COVERED);				
+				this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.NOT_COVERED);				
 				return TDLCoverageUtil.NOT_COVERED;
 			}
 		}
 		//all the regions are covered, so the state machine is covered
 		int index = this.modelObjects.indexOf(statemachine);
-		this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.COVERED);
+		this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.COVERED);
 		
 		
 		return TDLCoverageUtil.COVERED;
@@ -142,23 +141,23 @@ public class PSSMCoverageComputation implements IDSLSpecificCoverage{
 	private String regionCoverage(Region innerRegion) {
 		for (Transition transition: innerRegion.getTransitions()) {
 			int index = this.modelObjects.indexOf(transition);
-			String transitionCoverage = this.testCaseCoverage.tcObjectCoverageStatus.get(index);
+			String transitionCoverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(index);
 			//if at least one transition is covered, the region is entered, so it is covered too
 			if (transitionCoverage == TDLCoverageUtil.COVERED) {
 				index = this.modelObjects.indexOf(innerRegion);
-				this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.COVERED);
+				this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.COVERED);
 				return TDLCoverageUtil.COVERED;
 			}
 		}
 		//if there is no covered transition for the region, the region is not covered
 		int index = this.modelObjects.indexOf(innerRegion);
-		this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.NOT_COVERED);
+		this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.NOT_COVERED);
 		return TDLCoverageUtil.NOT_COVERED;
 	}
 
 	private void transitionCoverage(Transition transition) {
 		int index = this.modelObjects.indexOf(transition);
-		String coverage = this.testCaseCoverage.tcObjectCoverageStatus.get(index);
+		String coverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(index);
 		//if a transition is covered, check its related elements
 		if (coverage == TDLCoverageUtil.COVERED) {
 			//When a transition is covered, its source and target states are also covered
@@ -179,15 +178,15 @@ public class PSSMCoverageComputation implements IDSLSpecificCoverage{
 	
 	private void constraintCoverage(Constraint constraint) {
 		int index = this.modelObjects.indexOf(constraint);
-		if (this.testCaseCoverage.tcObjectCoverageStatus.get(index) == TDLCoverageUtil.NOT_COVERABLE) {
-			this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.NOT_COVERED);			
+		if (this.testCaseCoverage.getTcObjectCoverageStatus().get(index) == TDLCoverageUtil.NOT_COVERABLE) {
+			this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.NOT_COVERED);			
 		}
 	}
 	
 	private void constraintCoverage(Transition coveredTransition, Constraint constraint) {
 		int index = this.modelObjects.indexOf(constraint);
-		if (this.testCaseCoverage.tcObjectCoverageStatus.get(index) != TDLCoverageUtil.COVERED) {
-			this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.COVERED);						
+		if (this.testCaseCoverage.getTcObjectCoverageStatus().get(index) != TDLCoverageUtil.COVERED) {
+			this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.COVERED);						
 		}
 		if (constraint instanceof BooleanConstraint) {
 			expressionCoverage(constraint, ((BooleanConstraint) constraint).getExpression());
@@ -202,36 +201,36 @@ public class PSSMCoverageComputation implements IDSLSpecificCoverage{
 	
 	private void expressionCoverage(Expression expression) {
 		int index = this.modelObjects.indexOf(expression);
-		if (this.testCaseCoverage.tcObjectCoverageStatus.get(index) == TDLCoverageUtil.NOT_COVERABLE) {
-			this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.NOT_COVERED);			
+		if (this.testCaseCoverage.getTcObjectCoverageStatus().get(index) == TDLCoverageUtil.NOT_COVERABLE) {
+			this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.NOT_COVERED);			
 		}
 	}
 	
 	private void expressionCoverage(Constraint constraint, Expression expression) {
 		int index = this.modelObjects.indexOf(expression);
-		if (this.testCaseCoverage.tcObjectCoverageStatus.get(index) != TDLCoverageUtil.COVERED) {
-			this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.COVERED);						
+		if (this.testCaseCoverage.getTcObjectCoverageStatus().get(index) != TDLCoverageUtil.COVERED) {
+			this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.COVERED);						
 		}
 	}
 	
 	private void vertexCoverage(Vertex vertex) {
 		int index = this.modelObjects.indexOf(vertex);
-		if (this.testCaseCoverage.tcObjectCoverageStatus.get(index) == TDLCoverageUtil.NOT_COVERABLE) {
-			this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.NOT_COVERED);			
+		if (this.testCaseCoverage.getTcObjectCoverageStatus().get(index) == TDLCoverageUtil.NOT_COVERABLE) {
+			this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.NOT_COVERED);			
 		}
 	}
 	
 	private void vertexCoverage(Transition coveredTransition, Vertex vertex) {
 		int index = this.modelObjects.indexOf(vertex);
-		if (this.testCaseCoverage.tcObjectCoverageStatus.get(index) != TDLCoverageUtil.COVERED) {
-			this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.COVERED);						
+		if (this.testCaseCoverage.getTcObjectCoverageStatus().get(index) != TDLCoverageUtil.COVERED) {
+			this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.COVERED);						
 		}
 	}
 	
 	private void triggerCoverage(Trigger trigger) {
 		int index = this.modelObjects.indexOf(trigger);
-		if (this.testCaseCoverage.tcObjectCoverageStatus.get(index) == TDLCoverageUtil.NOT_COVERABLE) {
-			this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.NOT_COVERED);			
+		if (this.testCaseCoverage.getTcObjectCoverageStatus().get(index) == TDLCoverageUtil.NOT_COVERABLE) {
+			this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.NOT_COVERED);			
 		}
 		EventType triggerEventType = trigger.getEventType();
 		if (triggerEventType instanceof SignalEventType) {
@@ -244,8 +243,8 @@ public class PSSMCoverageComputation implements IDSLSpecificCoverage{
 	
 	private void triggerCoverage(Transition coveredTransition, Trigger trigger) {
 		int index = this.modelObjects.indexOf(trigger);
-		if (this.testCaseCoverage.tcObjectCoverageStatus.get(index) != TDLCoverageUtil.COVERED) {
-			this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.COVERED);						
+		if (this.testCaseCoverage.getTcObjectCoverageStatus().get(index) != TDLCoverageUtil.COVERED) {
+			this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.COVERED);						
 		}
 		EventType triggerEventType = trigger.getEventType();
 		if (triggerEventType instanceof SignalEventType) {
@@ -258,61 +257,61 @@ public class PSSMCoverageComputation implements IDSLSpecificCoverage{
 	
 	private void signalEventTypeCoverage(SignalEventType signalEventType) {
 		int index = this.modelObjects.indexOf(signalEventType);
-		if (this.testCaseCoverage.tcObjectCoverageStatus.get(index) == TDLCoverageUtil.NOT_COVERABLE) {
-			this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.NOT_COVERED);			
+		if (this.testCaseCoverage.getTcObjectCoverageStatus().get(index) == TDLCoverageUtil.NOT_COVERABLE) {
+			this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.NOT_COVERED);			
 		}
 		signalCoverage(signalEventType.getSignal());
 	}
 	
 	private void signalEventTypeCoverage(Trigger coveredTrigger, SignalEventType signalEventType) {
 		int index = this.modelObjects.indexOf(signalEventType);
-		if (this.testCaseCoverage.tcObjectCoverageStatus.get(index) != TDLCoverageUtil.COVERED) {
-			this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.COVERED);						
+		if (this.testCaseCoverage.getTcObjectCoverageStatus().get(index) != TDLCoverageUtil.COVERED) {
+			this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.COVERED);						
 		}
 		signalCoverage(signalEventType, signalEventType.getSignal());
 	}
 	
 	private void callEventTypeCoverage(CallEventType callEventType) {
 		int index = this.modelObjects.indexOf(callEventType);
-		if (this.testCaseCoverage.tcObjectCoverageStatus.get(index) == TDLCoverageUtil.NOT_COVERABLE) {
-			this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.NOT_COVERED);			
+		if (this.testCaseCoverage.getTcObjectCoverageStatus().get(index) == TDLCoverageUtil.NOT_COVERABLE) {
+			this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.NOT_COVERED);			
 		}
 		operationCoverage(callEventType.getOperation());
 	}
 	
 	private void callEventTypeCoverage(Trigger coveredTrigger, CallEventType callEventType) {
 		int index = this.modelObjects.indexOf(callEventType);
-		if (this.testCaseCoverage.tcObjectCoverageStatus.get(index) != TDLCoverageUtil.COVERED) {
-			this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.COVERED);						
+		if (this.testCaseCoverage.getTcObjectCoverageStatus().get(index) != TDLCoverageUtil.COVERED) {
+			this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.COVERED);						
 		}
 		operationCoverage(callEventType, callEventType.getOperation());
 	}
 	
 	private void signalCoverage(Signal signal) {
 		int index = this.modelObjects.indexOf(signal);
-		if (this.testCaseCoverage.tcObjectCoverageStatus.get(index) == TDLCoverageUtil.NOT_COVERABLE) {
-			this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.NOT_COVERED);			
+		if (this.testCaseCoverage.getTcObjectCoverageStatus().get(index) == TDLCoverageUtil.NOT_COVERABLE) {
+			this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.NOT_COVERED);			
 		}
 	}
 	
 	private void signalCoverage(SignalEventType coveredEventType, Signal signal) {
 		int index = this.modelObjects.indexOf(signal);
-		if (this.testCaseCoverage.tcObjectCoverageStatus.get(index) != TDLCoverageUtil.COVERED) {
-			this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.COVERED);			
+		if (this.testCaseCoverage.getTcObjectCoverageStatus().get(index) != TDLCoverageUtil.COVERED) {
+			this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.COVERED);			
 		}
 	}
 	
 	private void operationCoverage(Operation operation) {
 		int index = this.modelObjects.indexOf(operation);
-		if (this.testCaseCoverage.tcObjectCoverageStatus.get(index) == TDLCoverageUtil.NOT_COVERABLE) {
-			this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.NOT_COVERED);			
+		if (this.testCaseCoverage.getTcObjectCoverageStatus().get(index) == TDLCoverageUtil.NOT_COVERABLE) {
+			this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.NOT_COVERED);			
 		}
 	}
 	
 	private void operationCoverage(CallEventType coveredEventType, Operation operation) {
 		int index = this.modelObjects.indexOf(operation);
-		if (this.testCaseCoverage.tcObjectCoverageStatus.get(index) != TDLCoverageUtil.COVERED) {
-			this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.COVERED);
+		if (this.testCaseCoverage.getTcObjectCoverageStatus().get(index) != TDLCoverageUtil.COVERED) {
+			this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.COVERED);
 		}
 	}
 
@@ -322,3 +321,5 @@ public class PSSMCoverageComputation implements IDSLSpecificCoverage{
 		
 	}
 }
+
+	

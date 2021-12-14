@@ -14,9 +14,9 @@ import org.imt.arduino.reactive.arduino.Pin;
 import org.imt.arduino.reactive.arduino.Project;
 import org.imt.arduino.reactive.arduino.Sketch;
 import org.imt.arduino.reactive.arduino.Module;
-import org.imt.tdl.coverage.IDSLSpecificCoverage;
 import org.imt.tdl.coverage.TDLCoverageUtil;
 import org.imt.tdl.coverage.TDLTestCaseCoverage;
+import org.imt.tdl.coverage.dslSpecific.IDSLSpecificCoverage;
 
 public class ArduinoCoverageComputation implements IDSLSpecificCoverage{
 
@@ -32,10 +32,10 @@ public class ArduinoCoverageComputation implements IDSLSpecificCoverage{
 	@Override
 	public void specializeCoverage(TDLTestCaseCoverage testCaseCoverage) {
 		this.testCaseCoverage = testCaseCoverage;
-		this.modelObjects = testCaseCoverage.modelObjects;
+		this.modelObjects = testCaseCoverage.getModelObjects();
 		for (int i=0; i<this.modelObjects.size(); i++) {
 			EObject modelObject = this.modelObjects.get(i);
-			String coverage = this.testCaseCoverage.tcObjectCoverageStatus.get(i);
+			String coverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(i);
 			if (modelObject instanceof Project && coverage != TDLCoverageUtil.COVERED) {
 				projectCoverage ((Project) modelObject);
 			}
@@ -56,9 +56,9 @@ public class ArduinoCoverageComputation implements IDSLSpecificCoverage{
 
 	private void projectCoverage(Project project) {
 		//Project is the root element of the model, so if there is at least one covered element, it is also covered
-		if (this.testCaseCoverage.tcObjectCoverageStatus.contains(TDLCoverageUtil.COVERED)) {
+		if (this.testCaseCoverage.getTcObjectCoverageStatus().contains(TDLCoverageUtil.COVERED)) {
 			int index = this.modelObjects.indexOf(project);
-			this.testCaseCoverage.tcObjectCoverageStatus.set(index, TDLCoverageUtil.COVERED);
+			this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.COVERED);
 		}	
 	}
 
@@ -68,14 +68,14 @@ public class ArduinoCoverageComputation implements IDSLSpecificCoverage{
 		Block block = sketch.getBlock();
 		if (block != null) {
 			int blockIndex = this.modelObjects.indexOf(block);
-			String blockCoverage = this.testCaseCoverage.tcObjectCoverageStatus.get(blockIndex);
+			String blockCoverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(blockIndex);
 			if (blockCoverage != TDLCoverageUtil.COVERED) {
 				blockCoverage(block);
-				blockCoverage = this.testCaseCoverage.tcObjectCoverageStatus.get(blockIndex);
+				blockCoverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(blockIndex);
 			}
 			if (blockCoverage == TDLCoverageUtil.COVERED) {
 				int sketchIndex = this.modelObjects.indexOf(sketch);
-				this.testCaseCoverage.tcObjectCoverageStatus.set(sketchIndex, TDLCoverageUtil.COVERED);
+				this.testCaseCoverage.getTcObjectCoverageStatus().set(sketchIndex, TDLCoverageUtil.COVERED);
 			}
 		}
 	}
@@ -85,17 +85,17 @@ public class ArduinoCoverageComputation implements IDSLSpecificCoverage{
 		Block block = (Block) modelObject;
 		for (Instruction instruction: block.getInstructions()) {
 			int instructionIndex = this.modelObjects.indexOf(instruction);
-			String instrcutionCoverge = this.testCaseCoverage.tcObjectCoverageStatus.get(instructionIndex);
+			String instrcutionCoverge = this.testCaseCoverage.getTcObjectCoverageStatus().get(instructionIndex);
 			if (instrcutionCoverge == TDLCoverageUtil.COVERED) {
 				int blockIndex = this.modelObjects.indexOf(block);
-				this.testCaseCoverage.tcObjectCoverageStatus.set(blockIndex, TDLCoverageUtil.COVERED); 
+				this.testCaseCoverage.getTcObjectCoverageStatus().set(blockIndex, TDLCoverageUtil.COVERED); 
 				break;
 			}
 		}
 		int blockIndex = this.modelObjects.indexOf(block);
-		String blockCoverage = this.testCaseCoverage.tcObjectCoverageStatus.get(blockIndex);
+		String blockCoverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(blockIndex);
 		if (blockCoverage != TDLCoverageUtil.COVERED) {
-			this.testCaseCoverage.tcObjectCoverageStatus.set(blockIndex, TDLCoverageUtil.NOT_COVERED);
+			this.testCaseCoverage.getTcObjectCoverageStatus().set(blockIndex, TDLCoverageUtil.NOT_COVERED);
 		}
 	}
 	
@@ -111,15 +111,15 @@ public class ArduinoCoverageComputation implements IDSLSpecificCoverage{
 	private void digitalPinCoverage(DigitalPin pin) {
 		//if the pin has a module, the coverage of the module is equals to the coverage of its container pin
 		int pinIndex = this.modelObjects.indexOf(pin);
-		String pinCoverage = this.testCaseCoverage.tcObjectCoverageStatus.get(pinIndex);
+		String pinCoverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(pinIndex);
 		if (pin.getModule() != null) {
 			int moduleIndex =  this.modelObjects.indexOf(pin.getModule());
-			String moduleCoverage = this.testCaseCoverage.tcObjectCoverageStatus.get(moduleIndex);
+			String moduleCoverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(moduleIndex);
 			if (pinCoverage == TDLCoverageUtil.COVERED && moduleCoverage != TDLCoverageUtil.COVERED) {
-				this.testCaseCoverage.tcObjectCoverageStatus.set(moduleIndex, TDLCoverageUtil.COVERED);
+				this.testCaseCoverage.getTcObjectCoverageStatus().set(moduleIndex, TDLCoverageUtil.COVERED);
 			}
 			else if (pinCoverage != TDLCoverageUtil.COVERED && moduleCoverage == TDLCoverageUtil.COVERED) {
-				this.testCaseCoverage.tcObjectCoverageStatus.set(pinIndex, TDLCoverageUtil.COVERED);
+				this.testCaseCoverage.getTcObjectCoverageStatus().set(pinIndex, TDLCoverageUtil.COVERED);
 			}
 		}
 	}
@@ -127,12 +127,12 @@ public class ArduinoCoverageComputation implements IDSLSpecificCoverage{
 	private void analogPinCoverage(AnalogPin pin) {
 		//if the pin has a module, the coverage of the module is equals to the coverage of its container pin
 		int pinIndex = this.modelObjects.indexOf(pin);
-		String pinCoverage = this.testCaseCoverage.tcObjectCoverageStatus.get(pinIndex);
+		String pinCoverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(pinIndex);
 		if (pin.getModule() != null) {
 			int moduleIndex =  this.modelObjects.indexOf(pin.getModule());
-			String moduleCoverage = this.testCaseCoverage.tcObjectCoverageStatus.get(moduleIndex);
+			String moduleCoverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(moduleIndex);
 			if (moduleCoverage == TDLCoverageUtil.COVERED) {
-				this.testCaseCoverage.tcObjectCoverageStatus.set(pinIndex, TDLCoverageUtil.COVERED);
+				this.testCaseCoverage.getTcObjectCoverageStatus().set(pinIndex, TDLCoverageUtil.COVERED);
 			}
 		}
 	}
@@ -142,9 +142,9 @@ public class ArduinoCoverageComputation implements IDSLSpecificCoverage{
 		Module module = (Module) modelObject;
 		int moduleIndex = this.modelObjects.indexOf(module);
 		int pinIndex  =  this.modelObjects.indexOf(module.eContainer());
-		String pinCoverage  = this.testCaseCoverage.tcObjectCoverageStatus.get(pinIndex);
+		String pinCoverage  = this.testCaseCoverage.getTcObjectCoverageStatus().get(pinIndex);
 		if (pinCoverage == TDLCoverageUtil.COVERED) {
-			this.testCaseCoverage.tcObjectCoverageStatus.set(moduleIndex, TDLCoverageUtil.COVERED);
+			this.testCaseCoverage.getTcObjectCoverageStatus().set(moduleIndex, TDLCoverageUtil.COVERED);
 		}
 	}
 	
