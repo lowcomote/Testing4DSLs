@@ -20,4 +20,13 @@
             restorable="true">
       </view>
    </extension>
+ <extension
+       point="org.eclipse.gemoc.gemoc_language_workbench.engine_addon">
+    <addon
+          class="org.imt.tdl.coverage.persistence.TestCoveragePersistence"
+          id="org.imt.tdl.coverage.reportAddon"
+          name="TDL Test Coverage"
+          shortDescription="Save the result of TDL test coverage">
+    </addon>
+ </extension>
 </plugin>

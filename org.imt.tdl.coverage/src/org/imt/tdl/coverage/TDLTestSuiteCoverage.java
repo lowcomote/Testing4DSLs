@@ -5,18 +5,18 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.etsi.mts.tdl.Package;
+import org.imt.tdl.coverage.dslSpecific.DSLSpecificCoverageHandler;
+import org.imt.tdl.coverage.dslSpecific.IDSLSpecificCoverage;
 
 public class TDLTestSuiteCoverage {
 
