@@ -1,0 +1,194 @@
+generate 20 mutants
+in "data/out/"
+from "data/model/"
+metamodel "/MiniJavaMutation/data/model/XMiniJava.ecore"
+description "Removing not"
+
+with blocks {
+	codreturn "Removes an unary conditional operator for return statement" {
+		return = select one Return where {expression is typed Not}
+		notExp = select one Not in return->expression
+		exp2 = select one Expression in notExp->expression
+		modify return with {expression = exp2}
+	}
+	codif "Removes an unary conditional operator for ifStatement" {
+		if = select one IfStatement where {expression is typed Not}
+		notExp = select one Not in if->expression
+		exp2 = select one Expression in notExp->expression
+		modify if with {expression = exp2}
+	}
+	codwhile "Removes an unary conditional operator for whileStatement" {
+		while = select one WhileStatement where {condition is typed Not}
+		notExp = select one Not in while->condition
+		exp2 = select one Expression in notExp->expression
+		modify while with {condition = exp2}
+	}
+	codFor "Removes an unary conditional operator for forStatement" {
+		forS = select one ForStatement where {condition is typed Not}
+		notExp = select one Not in forS->condition
+		exp2 = select one Expression in notExp->expression
+		modify forS with {condition = exp2}
+	}
+	codAss "Removes an unary conditional operator for Assignment" {
+		assignment = select one Assignment where {value is typed Not}
+		notExp = select one Not in assignment->value
+		exp2 = select one Expression in notExp->expression
+		modify assignment with {value = exp2}
+	}
+	apar "Removes an unary conditional operator And Expression rightOperand" {
+		exp0 = select one And where {right is typed MethodCall}
+		methodCall = select one MethodCall in exp0->right
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {right = param}
+	}
+	apal "Removes an unary conditional operator And Expression leftOperand" {
+		exp0 = select one And where {left is typed MethodCall}
+		methodCall = select one MethodCall in exp0->left
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {left = param}
+	}
+	apor "Removes an unary conditional operator Or Expression rightOperand" {
+		exp0 = select one Or where {right is typed MethodCall}
+		methodCall = select one MethodCall in exp0->right
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {right = param}
+	}
+	apol "Removes an unary conditional operator Or Expression leftOperand" {
+		exp0 = select one Or where {left is typed MethodCall}
+		methodCall = select one MethodCall in exp0->left
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {left = param}
+	}
+	aper "Removes an unary conditional operator Equality Expression rightOperand" {
+		exp0 = select one Equality where {right is typed MethodCall}
+		methodCall = select one MethodCall in exp0->right
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {right = param}
+	}
+	apel "Removes an unary conditional operator Equality Expression leftOperand" {
+		exp0 = select one Equality where {left is typed MethodCall}
+		methodCall = select one MethodCall in exp0->left
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {left = param}
+	}
+	apixr "Removes an unary conditional operator Inequality Expression rightOperand" {
+		exp0 = select one Inequality where {right is typed MethodCall}
+		methodCall = select one MethodCall in exp0->right
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {right = param}
+	}
+	apixl "Removes an unary conditional operator Inequality Expression leftOperand" {
+		exp0 = select one Inequality where {left is typed MethodCall}
+		methodCall = select one MethodCall in exp0->left
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {left = param}
+	}
+	apser "Removes an unary conditional operator SuperiorOrEqual Expression rightOperand" {
+		exp0 = select one SuperiorOrEqual where {right is typed MethodCall}
+		methodCall = select one MethodCall in exp0->right
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {right = param}
+	}
+	apsel "Removes an unary conditional operator SuperiorOrEqual Expression leftOperand" {
+		exp0 = select one SuperiorOrEqual where {left is typed MethodCall}
+		methodCall = select one MethodCall in exp0->left
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {left = param}
+	}
+	apier "Removes an unary conditional operator InferiorOrEqual Expression rightOperand" {
+		exp0 = select one InferiorOrEqual where {right is typed MethodCall}
+		methodCall = select one MethodCall in exp0->right
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {right = param}
+	}
+	apiel "Removes an unary conditional operator InferiorOrEqual Expression leftOperand" {
+		exp0 = select one InferiorOrEqual where {left is typed MethodCall}
+		methodCall = select one MethodCall in exp0->left
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {left = param}
+	}
+	apsr "Removes an unary conditional operator Superior Expression rightOperand" {
+		exp0 = select one Superior where {right is typed MethodCall}
+		methodCall = select one MethodCall in exp0->right
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {right = param}
+	}
+	apsl "Removes an unary conditional operator SuperiorExpression leftOperand" {
+		exp0 = select one Superior where {left is typed MethodCall}
+		methodCall = select one MethodCall in exp0->left
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {left = param}
+	}
+	apir "Removes an unary conditional operator Inferior Expression rightOperand" {
+		exp0 = select one Inferior where {right is typed MethodCall}
+		methodCall = select one MethodCall in exp0->right
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {right = param}
+	}
+	apil "Removes an unary conditional operator Inferior Expression leftOperand" {
+		exp0 = select one Inferior where {left is typed MethodCall}
+		methodCall = select one MethodCall in exp0->left
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {left = param}
+	}
+	appr "Removes an unary conditional operator Plus Expression rightOperand" {
+		exp0 = select one Plus where {right is typed MethodCall}
+		methodCall = select one MethodCall in exp0->right
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {right = param}
+	}
+	appl "Removes an unary conditional operator Plus Expression leftOperand" {
+		exp0 = select one Plus where {left is typed MethodCall}
+		methodCall = select one MethodCall in exp0->left
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {left = param}
+	}
+	apmr "Removes an unary conditional operator Minus Expression rightOperand" {
+		exp0 = select one Minus where {right is typed MethodCall}
+		methodCall = select one MethodCall in exp0->right
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {right = param}
+	}
+	apml "Removes an unary conditional operator Minus Expression leftOperand" {
+		exp0 = select one Minus where {left is typed MethodCall}
+		methodCall = select one MethodCall in exp0->left
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {left = param}
+	}
+	apmur "Removes an unary conditional operator Multiplication Expression rightOperand" {
+		exp0 = select one Multiplication where {right is typed MethodCall}
+		methodCall = select one MethodCall in exp0->right
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef} 
+		modify exp0 with {right = param}
+	}
+	apmul "Removes an unary conditional operator Multiplication Expression leftOperand" {
+		exp0 = select one Multiplication where {left is typed MethodCall}
+		methodCall = select one MethodCall in exp0->left
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {left = param}
+	}
+	apdr "Removes an unary conditional operator Division Expression rightOperand" {
+		exp0 = select one Division where {right is typed MethodCall}
+		methodCall = select one MethodCall in exp0->right
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {right = param}
+	}
+	apdl "Removes an unary conditional operator Division Expression leftOperand" {
+		exp0 = select one Division where {left is typed MethodCall}
+		methodCall = select one MethodCall in exp0->left
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {left = param}
+	}
+	apnot "Removes an unary conditional operator Not Expression" {
+		exp0 = select one Not where {expression is typed MethodCall}
+		methodCall = select one MethodCall in exp0->expression
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {expression = param}
+	}
+	apneg "Removes an unary conditional operator Neg Expression" {
+		exp0 = select one Neg where {expression is typed MethodCall}
+		methodCall = select one MethodCall in exp0->expression
+		param = select one SymbolRef in methodCall->args where {symbol->typeRef = methodCall->method->typeRef}
+		modify exp0 with {expression = param}
+	}
+}
