@@ -35,8 +35,8 @@ import appliedMutations.Mutations;
 public class SBFLEvaluation {
 
 	private List<String> mutants = new ArrayList<>();
-	private List<String> registeries = new ArrayList<>();	
-	private HashMap<String, String> mutant_Registry = new HashMap<>();
+	private List<String> registeries = new ArrayList<>();
+	private HashMap<String, String> mutant_registry = new HashMap<>();
 	
 	private Package testSuite = null;
 	
@@ -46,6 +46,8 @@ public class SBFLEvaluation {
 	
 	IProject mutantsProject;
 	IProject testSuiteProject;
+	String workspacePath;
+	String seedModePath;
 	
 	public SBFLEvaluation (IProject mutantsProject, IProject testSuiteProject) {
 		this.mutantsProject = mutantsProject;
@@ -63,25 +65,29 @@ public class SBFLEvaluation {
 		}
 		
 		testMutants();
-		for (String mutant:this.mutant_Registry.keySet()) {
+		for (String mutant:this.mutant_registry.keySet()) {
 			localizeFaultOfMutant(mutant);
 		}
 		System.out.println("Evaluation finished");
 	}
-	
-	String workspacePath;
 	
 	private void findMutantRegistryMapping(IProject mutantsProject) {
 		File projectFolder = new File(mutantsProject.getLocation() + "\\model");
 		for (File file : projectFolder.listFiles()) {
 			pathsHelper(mutantsProject.getName(), file);
 		}
-		for (String mutantPath:this.mutants) {
-			String mutator = getMutator(mutantPath);
-			String mutantName = mutantPath.substring(mutantPath.lastIndexOf("\\") + 1, mutantPath.indexOf(".model"));
-			Optional<String> registery = this.registeries.stream().filter(r -> r.contains(mutator) && r.contains(mutantName + "Registry")).findFirst();
-			if (registery.isPresent()) {
-				this.mutant_Registry.put(mutantPath, registery.get());
+		//if the mutants have registries, find their mappings.
+		for (String mutantPath:this.mutants){
+			if (this.registeries.size()>0){
+				String mutator = getMutator(mutantPath);
+				String mutantName = mutantPath.substring(mutantPath.lastIndexOf("\\") + 1, mutantPath.indexOf(".model"));
+				Optional<String> registery = this.registeries.stream().filter(r -> r.contains(mutator) && r.contains(mutantName + "Registry")).findFirst();
+				if (registery.isPresent()) {
+					this.mutant_registry.put(mutantPath, registery.get());
+				}
+			}
+			else {
+				this.mutant_registry.put(mutantPath, null);
 			}
 		}
 	}
@@ -94,6 +100,14 @@ public class SBFLEvaluation {
 			}		
 			//get the relative path of the file
 			filePath = filePath.replace(this.workspacePath, "");
+			//get the name of the seed model
+			if (this.seedModePath == null) {
+				String seedName = filePath.substring(1);
+				seedName = filePath.substring(filePath.indexOf("\\model\\") + "\\model\\".length(), filePath.length());
+				if (file.getName().equals(seedName)) {//file is the seed model
+					this.seedModePath = filePath;
+				}
+			}
 			if (file.getName().endsWith("Registry.model")) {
 				this.registeries.add(filePath);
 			}else {
@@ -151,7 +165,9 @@ public class SBFLEvaluation {
 			testRunner.runTestAndCalculateCoverage(this.testSuite, mutant);
 			if (testRunner.getTestSuiteResult().getNumOfFailedTestCases() == 0) {
 				//the mutant is alive, so it must be removed from the evaluation data
-				this.mutant_Registry.remove(mutant);
+				if (this.mutant_registry.size()>0) {
+					this.mutant_registry.remove(mutant);
+				}
 			}
 			else {
 				//the mutant is killed, so its test result and its coverage must be kept
@@ -195,12 +211,19 @@ public class SBFLEvaluation {
 	}
 	
 	private EObject getFaultyObjectOfMutant(String mutant) {
-		String mutantRegistryPath = "platform:/resource" + this.mutant_Registry.get(mutant).replace("\\", "/");
-		Resource registryResource = (new ResourceSetImpl()).getResource(URI.createURI(mutantRegistryPath), true);
-		Mutations mutations = (Mutations) registryResource.getContents().get(0);
-		Optional<AppMutation> informationChangedMutation = mutations.getMuts().stream().filter(m -> m instanceof InformationChanged).findFirst();
-		if (informationChangedMutation.isPresent()) {
-			return ((InformationChanged)informationChangedMutation.get()).getObject();
+		//if there is a registry for the mutant, find the faulty object using the registry
+		if (this.mutant_registry.get(mutant) != null) {
+			String mutantRegistryPath = "platform:/resource" + this.mutant_registry.get(mutant).replace("\\", "/");
+			Resource registryResource = (new ResourceSetImpl()).getResource(URI.createURI(mutantRegistryPath), true);
+			Mutations mutations = (Mutations) registryResource.getContents().get(0);
+			Optional<AppMutation> informationChangedMutation = mutations.getMuts().stream().filter(m -> m instanceof InformationChanged).findFirst();
+			if (informationChangedMutation.isPresent()) {
+				return ((InformationChanged)informationChangedMutation.get()).getObject();
+			}
+		}
+		//otherwise, use EMF Compare to find the faulty object
+		else {
+			//TODO: use EMF Compare and comparing the mutant with the seed model
 		}
 		return null;
 	}
