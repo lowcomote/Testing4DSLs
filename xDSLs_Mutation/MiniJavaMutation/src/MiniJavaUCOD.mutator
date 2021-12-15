@@ -1,4 +1,4 @@
-generate 20 mutants
+generate exhaustive mutants
 in "data/out/"
 from "data/model/"
 metamodel "/MiniJavaMutation/data/model/XMiniJava.ecore"
