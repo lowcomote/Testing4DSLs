@@ -23,6 +23,9 @@ public class SBFLMeasures implements Comparable<SBFLMeasures>{
 	private int NF;//total number of failed test cases
 	private Map<String, Double> Susp = new HashMap<>();//Suspiciousness score for each technique
 	private Map<String, Integer> rank = new HashMap<>();//Suspiciousness rank for each technique
+	private Map<String, Double> bestEXAMScore = new HashMap<>();//best-case EXAM score for each technique
+	private Map<String, Double> averageEXAMScore = new HashMap<>();//average-case EXAM score for each technique
+	private Map<String, Double> worseEXAMScore = new HashMap<>();//wore-case EXAM score for each technique
 	
 	public String currentTechnique;
 	
@@ -109,5 +112,23 @@ public class SBFLMeasures implements Comparable<SBFLMeasures>{
 		double susp1 = this.Susp.get(currentTechnique);
 		double susp2 = o.Susp.get(currentTechnique);
 		return Double.compare(susp1, susp2);
+	}
+	public Map<String, Double> getBestEXAMScore() {
+		return bestEXAMScore;
+	}
+	public void setBestEXAMScore(Map<String, Double> bestEXAMScore) {
+		this.bestEXAMScore = bestEXAMScore;
+	}
+	public Map<String, Double> getAverageEXAMScore() {
+		return averageEXAMScore;
+	}
+	public void setAverageEXAMScore(Map<String, Double> averageEXAMScore) {
+		this.averageEXAMScore = averageEXAMScore;
+	}
+	public Map<String, Double> getWorseEXAMScore() {
+		return worseEXAMScore;
+	}
+	public void setWorseEXAMScore(Map<String, Double> worseEXAMScore) {
+		this.worseEXAMScore = worseEXAMScore;
 	}
 }

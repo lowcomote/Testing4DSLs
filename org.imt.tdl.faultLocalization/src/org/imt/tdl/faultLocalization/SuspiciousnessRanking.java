@@ -46,10 +46,6 @@ public class SuspiciousnessRanking {
 	public static final String DSTAR = "DStar";
 	public static final String CONFIDENCE = "confidence";
 	
-	private Map<String, Double> bestEXAMScore = new HashMap<>();//best-case EXAM score for each technique
-	private Map<String, Double> averageEXAMScore = new HashMap<>();//average-case EXAM score for each technique
-	private Map<String, Double> worseEXAMScore = new HashMap<>();//wore-case EXAM score for each technique
-	
 	public SuspiciousnessRanking() {
 		setSbflTechniques();
 		this.testSuiteResult = TDLTestResultUtil.getInstance().getTestSuiteResult();
@@ -408,22 +404,22 @@ public class SuspiciousnessRanking {
 		if (numOfTies == 0) {
 			double examScore = (double)rank4faultyObject/numOfObjects;
 			BigDecimal examScoreBd = new BigDecimal(examScore).setScale(3, RoundingMode.HALF_UP);
-		    this.bestEXAMScore.put(technique, examScoreBd.doubleValue());
-		    this.averageEXAMScore.put(technique, examScoreBd.doubleValue());
-		    this.worseEXAMScore.put(technique, examScoreBd.doubleValue());
+			measures4faultyObject.getBestEXAMScore().put(technique, examScoreBd.doubleValue());
+			measures4faultyObject.getAverageEXAMScore().put(technique, examScoreBd.doubleValue());
+			measures4faultyObject.getWorseEXAMScore().put(technique, examScoreBd.doubleValue());
 		    System.out.println("EXAM Score for " + technique + ": " + examScoreBd.doubleValue());
 		    System.out.println();
 		}
 		else {
 		    double bestExamScore = (double)rank4faultyObject/numOfObjects;
 		    BigDecimal bestExamScoreBd = new BigDecimal(bestExamScore).setScale(3, RoundingMode.HALF_UP);
-		    this.bestEXAMScore.put(technique, bestExamScoreBd.doubleValue());
+		    measures4faultyObject.getBestEXAMScore().put(technique, bestExamScoreBd.doubleValue());
 		    double averageExamScore = (double) (rank4faultyObject + ((double) numOfTies/2))/numOfObjects;
 		    BigDecimal avgExamScoreBd = new BigDecimal(averageExamScore).setScale(3, RoundingMode.HALF_UP);
-		    this.averageEXAMScore.put(technique, avgExamScoreBd.doubleValue());
+		    measures4faultyObject.getAverageEXAMScore().put(technique, avgExamScoreBd.doubleValue());
 		    double worseExamScore = (double) (rank4faultyObject + numOfTies)/numOfObjects;
 		    BigDecimal worseExamScoreBd = new BigDecimal(worseExamScore).setScale(3, RoundingMode.HALF_UP);
-		    this.worseEXAMScore.put(technique, worseExamScoreBd.doubleValue());
+		    measures4faultyObject.getWorseEXAMScore().put(technique, worseExamScoreBd.doubleValue());
 		    	
 		    System.out.println("Best EXAM Score for " + technique + ": " + bestExamScoreBd.doubleValue());
 		    System.out.println("Average EXAM Score for " + technique + ": " + avgExamScoreBd.doubleValue());
