@@ -14,11 +14,19 @@ import org.imt.tdl.faultLocalization.SBFLMeasures;
 
 public class ExcelExporter {
 
-	public void saveResult2Excel(String modelName, HashMap<String, SBFLMeasures> mutant_SBFLMeasures4FaultyObject) {
+	@SuppressWarnings("resource")
+	public void saveResult2Excel(HashMap<String, SBFLMeasures> mutant_SBFLMeasures4FaultyObject) {
 		String[] titles = {"SBFL Technique", "Susp", "Rank", "BC", "AC", "WC"};
 		XSSFWorkbook workbook = new XSSFWorkbook();
+		String seedModelName = "";
 		for (Map.Entry<String, SBFLMeasures> entry:mutant_SBFLMeasures4FaultyObject.entrySet()) {//create one sheet per mutant
-			XSSFSheet sheet = workbook.createSheet((String)entry.getKey());
+			String mutantPath = entry.getKey();
+			String mutantName = mutantPath.substring(mutantPath.indexOf("model\\") + 6, mutantPath.indexOf(".model")).replaceAll("\\\\", "\\."); 
+			if (seedModelName.isEmpty()) {
+				seedModelName = mutantName.substring(0, mutantName.indexOf("."));
+			}
+			mutantName = mutantName.substring(seedModelName.length()+1);
+			XSSFSheet sheet = workbook.createSheet(mutantName);
 			//create header row
 			XSSFRow headerRow = sheet.createRow(0);
 	        for (int i = 0; i < titles.length; i++) {
@@ -40,7 +48,8 @@ public class ExcelExporter {
 			}
 		}
 		try {
-			FileOutputStream fos = new FileOutputStream(".\\evaluationData\\" + modelName + ".xlsx");
+			String filePath = "C:\\labtop\\GitHub\\xtdl_FaultLocalization\\org.imt.tdl.sbfl.evaluation\\evaluationData\\" + seedModelName + ".xlsx";
+			FileOutputStream fos = new FileOutputStream(filePath);
 			workbook.write(fos);
 			fos.close();
 		} catch (FileNotFoundException e) {
