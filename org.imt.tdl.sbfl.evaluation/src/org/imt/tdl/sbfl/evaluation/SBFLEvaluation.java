@@ -48,7 +48,6 @@ public class SBFLEvaluation {
 	IProject testSuiteProject;
 	String workspacePath;
 	String seedModePath;
-	String seedModelName;
 	
 	public SBFLEvaluation (IProject mutantsProject, IProject testSuiteProject) {
 		this.mutantsProject = mutantsProject;
@@ -72,7 +71,7 @@ public class SBFLEvaluation {
 			localizeFaultOfMutant(mutant);
 		}
 		System.out.println("Evaluation finished");
-		(new ExcelExporter()).saveResult2Excel(seedModelName, mutant_SBFLMeasures4FaultyObject);
+		(new ExcelExporter()).saveResult2Excel(mutant_SBFLMeasures4FaultyObject);
 	}
 	
 	private void findMutantRegistryMapping(IProject mutantsProject) {
@@ -106,7 +105,7 @@ public class SBFLEvaluation {
 			filePath = filePath.replace(this.workspacePath, "");
 			//get the name of the seed model
 			if (this.seedModePath == null) {
-				seedModelName = filePath.substring(1);
+				String seedModelName = filePath.substring(1);
 				seedModelName = filePath.substring(filePath.indexOf("\\model\\") + "\\model\\".length(), filePath.length());
 				if (file.getName().equals(seedModelName)) {//file is the seed model
 					this.seedModePath = filePath;
