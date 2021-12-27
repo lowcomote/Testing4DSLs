@@ -67,14 +67,17 @@ public class SBFLEvaluation {
 		}
 		testMutants();
 		
-		for (String mutant:this.mutant_registry.keySet()) {
-			localizeFaultOfMutant(mutant);
+		if (this.mutant_registry.size()>0) {
+			for (String mutant:this.mutant_registry.keySet()) {
+				localizeFaultOfMutant(mutant);
+			}
+			//export results to Excel
+			ExcelExporter excelExporter = new ExcelExporter(mutant_SBFLMeasures4FaultyObject);
+			excelExporter.saveResults2Excelfile();
+			System.out.println("Results saved in an Excel file");
 		}
-		System.out.println("Evaluation finished");
-		//export results to Excel
 		
-		ExcelExporter excelExporter = new ExcelExporter(mutant_SBFLMeasures4FaultyObject);
-		excelExporter.saveResults2Excelfile();
+		System.out.println("Evaluation finished");
 	}
 	
 	private void findMutantRegistryMapping(IProject mutantsProject) {
@@ -194,7 +197,9 @@ public class SBFLEvaluation {
 		if (eobjectOptional.isPresent()) {
 			indexOfFaultyObject = testSuiteCoverage.getModelObjectsWithoutRuntimeState().indexOf(eobjectOptional.get());
 		}
-
+		if (indexOfFaultyObject == -1) {
+			System.out.print(false);
+		}
 		SuspiciousnessRanking suspComputing = new SuspiciousnessRanking(testSuiteResult, testSuiteCoverage);
 		suspComputing.calculateMeasures();
 		List<SBFLMeasures> mutantSBFLMeasures = suspComputing.getElementsSBFLMeasures();
@@ -206,7 +211,7 @@ public class SBFLEvaluation {
 			}
 			suspComputing.calculateRanks();
 			Integer rank = mutantSBFLMeasures.get(indexOfFaultyObject).getRank().get(sbflTechnique);
-			System.out.println("Rank of object " + indexOfFaultyObject + " calculated by " + sbflTechnique + ": " + rank);
+			System.out.println("Rank of " + faultyObject + " calculated by " + sbflTechnique + ": " + rank);
 		}
 
 		SBFLMeasures measures4faultyObject = mutantSBFLMeasures.get(indexOfFaultyObject);
