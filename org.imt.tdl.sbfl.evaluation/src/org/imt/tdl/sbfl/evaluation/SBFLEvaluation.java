@@ -71,7 +71,10 @@ public class SBFLEvaluation {
 			localizeFaultOfMutant(mutant);
 		}
 		System.out.println("Evaluation finished");
-		(new ExcelExporter()).saveResult2Excel(mutant_SBFLMeasures4FaultyObject);
+		//export results to Excel
+		
+		ExcelExporter excelExporter = new ExcelExporter(mutant_SBFLMeasures4FaultyObject);
+		excelExporter.saveResults2Excelfile();
 	}
 	
 	private void findMutantRegistryMapping(IProject mutantsProject) {
