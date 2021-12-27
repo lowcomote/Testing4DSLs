@@ -14,15 +14,14 @@ public class CalculateStandardDeviation {
 	private double standardDeviation;
 	
 	public void calculateSum() {
+		this.sum = 0;
 		this.EXAMScores.forEach(s -> this.sum += s);
 		BigDecimal bd = new BigDecimal(this.sum).setScale(3, RoundingMode.HALF_UP);
 		this.sum = bd.doubleValue();
 	}
 	
 	public void calculateMean() {
-		if (this.sum == 0) {
-			this.calculateSum();
-		}
+		this.calculateSum();
 		this.mean = this.sum / this.EXAMScores.size();
 		BigDecimal bd = new BigDecimal(this.mean).setScale(3, RoundingMode.HALF_UP);
 		this.mean = bd.doubleValue();
@@ -39,11 +38,12 @@ public class CalculateStandardDeviation {
 		if (this.mean == 0) {
 			this.calculateMean();
 		}
+		this.standardDeviation = 0;
 		for (double score:this.EXAMScores) {
-			standardDeviation += Math.pow((score - this.mean), 2);
+			this.standardDeviation += Math.pow((score - this.mean), 2);
 		}
-		standardDeviation /= this.EXAMScores.size();
-		standardDeviation = Math.sqrt(standardDeviation);
+		this.standardDeviation /= this.EXAMScores.size();
+		this.standardDeviation = Math.sqrt(this.standardDeviation);
 		BigDecimal bd = new BigDecimal(this.standardDeviation).setScale(3, RoundingMode.HALF_UP);
 		this.standardDeviation = bd.doubleValue();
 	}
@@ -57,18 +57,18 @@ public class CalculateStandardDeviation {
 	}
 	
 	public double getSum() {
-		return sum;
+		return this.sum;
 	}
 
 	public double getMean() {
-		return mean;
+		return this.mean;
 	}
 	
 	public double getMedian() {
-		return median;
+		return this.median;
 	}
 	
 	public double getStandardDeviation() {
-		return standardDeviation;
+		return this.standardDeviation;
 	}
 }
