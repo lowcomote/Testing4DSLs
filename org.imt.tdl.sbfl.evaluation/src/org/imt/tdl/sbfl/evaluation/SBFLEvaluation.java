@@ -57,8 +57,6 @@ public class SBFLEvaluation {
 		//finding mutants and mapping them to their registry
 		findMutantRegistryMapping(this.mutantsProject);
 		
-		//getFaultyObjectOfMutant(this.mutants.get(0));
-		
 		//finding test suite and run it on mutants to find live ones and keep verdict and coverage of killed ones
 		String testResourcePath = "platform:/resource/"+ testSuiteProject.getName() + "/";
 		File testsFolder = new File(testSuiteProject.getLocation().toString());	
@@ -76,7 +74,6 @@ public class SBFLEvaluation {
 			excelExporter.saveResults2Excelfile();
 			System.out.println("Results saved in an Excel file");
 		}
-		
 		System.out.println("Evaluation finished");
 	}
 	
