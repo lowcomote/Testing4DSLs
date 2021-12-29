@@ -139,13 +139,13 @@ class GateInstanceAspect {
 			}else if (arg.dataInstance.dataType.isConcreteEcoreType(_self.DSLPath)){//request for setting the model state
 				return _self.setModelState(arg);
 			}else if (arg.dataInstance.name == RUN_MODEL) {
-				println("--Start MUT Execution synchronous:")
+				//println("--Start MUT Execution synchronous:")
 				return _self.gateLauncher.executeModel(true)
 			}else if (arg.dataInstance.name == RUN_MODEL_ASYNC) {
-				println("--Start MUT Execution Asynchronous:")
+				//println("--Start MUT Execution Asynchronous:")
 				return _self.gateLauncher.executeModel(false)
 			}else if (arg.dataInstance.name == STOP_EXECUTION) {
-				println("--Stop Asynchronous MUT Execution")
+				//println("--Stop Asynchronous MUT Execution")
 				return _self.gateLauncher.stopAsyncExecution
 			}else if (arg.dataInstance.name == RESET_MODEL) {
 				_self.gateLauncher.MUTResource = 
