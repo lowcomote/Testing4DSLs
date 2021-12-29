@@ -92,9 +92,9 @@ class TestDescriptionAspect{
 			_self.testCaseResult.description = modelExecutionResult.substring(modelExecutionResult.indexOf(":")+1)
 		}
 		if (_self.testCaseResult.value.equals(TDLTestResultUtil.PASS)) {
-			println("Test case PASSED")
+			println("Test case "+ _self.name + " PASSED")
 		}else{
-			println("Test case FAILED")
+			println("Test case "+ _self.name + " FAILED")
 		}
 		
 		//save the model execution trace and the MUTResource related to this test case
@@ -120,9 +120,9 @@ class TestDescriptionAspect{
 			_self.testCaseResult.value = modelExecutionResult
 		}
 		if (_self.testCaseResult.value.equals(TDLTestResultUtil.PASS)) {
-			println("Test case PASSED")
+			println("Test case "+ _self.name + " PASSED")
 		}else{
-			println("Test case FAILED")
+			println("Test case "+ _self.name + " FAILED")
 		}
 		
 		//save the model execution trace and the MUTResource related to this test case
