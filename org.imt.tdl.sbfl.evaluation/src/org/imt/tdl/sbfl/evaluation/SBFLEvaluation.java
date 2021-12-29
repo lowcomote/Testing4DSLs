@@ -47,7 +47,7 @@ public class SBFLEvaluation {
 	IProject mutantsProject;
 	IProject testSuiteProject;
 	String workspacePath;
-	String seedModePath;
+	String seedModelPath;
 	
 	public SBFLEvaluation (IProject mutantsProject, IProject testSuiteProject) {
 		this.mutantsProject = mutantsProject;
@@ -56,6 +56,8 @@ public class SBFLEvaluation {
 	public void evaluateSBFLTechniques() {
 		//finding mutants and mapping them to their registry
 		findMutantRegistryMapping(this.mutantsProject);
+		System.out.println("seed model: " + seedModelPath);
+		System.out.println("# of generated mutants: " + this.mutant_registry.size());
 		
 		//finding test suite and run it on mutants to find live ones and keep verdict and coverage of killed ones
 		String testResourcePath = "platform:/resource/"+ testSuiteProject.getName() + "/";
@@ -64,6 +66,7 @@ public class SBFLEvaluation {
 			this.testSuite = getTestSuite(testResourcePath, testFile);
 		}
 		testMutants();
+		System.out.println("# of killed mutants: " + this.mutant_Verdict.size());
 		
 		if (this.mutant_registry.size()>0) {
 			for (String mutant:this.mutant_registry.keySet()) {
@@ -107,16 +110,16 @@ public class SBFLEvaluation {
 			//get the relative path of the file
 			filePath = filePath.replace(this.workspacePath, "");
 			//get the name of the seed model
-			if (this.seedModePath == null) {
+			if (this.seedModelPath == null) {
 				String seedModelName = filePath.substring(1);
 				seedModelName = filePath.substring(filePath.indexOf("\\model\\") + "\\model\\".length(), filePath.length());
 				if (file.getName().equals(seedModelName)) {//file is the seed model
-					this.seedModePath = filePath;
+					this.seedModelPath = filePath;
 				}
 			}
 			if (file.getName().endsWith("Registry.model")) {
 				this.registeries.add(filePath);
-			}else {
+			}else if (!filePath.equals(seedModelPath)){
 				this.mutants.add(filePath);
 			}
 		}
@@ -240,7 +243,7 @@ public class SBFLEvaluation {
 			FaultyObjectFinder finder = new FaultyObjectFinder();
 			String mutantPath = "platform:/resource" + mutant.replace("\\", "/");
 			Resource mutantResource = (new ResourceSetImpl()).getResource(URI.createURI(mutantPath), true);
-			String seedPath = "platform:/resource" + this.seedModePath.replace("\\", "/");
+			String seedPath = "platform:/resource" + this.seedModelPath.replace("\\", "/");
 			Resource originalModelResource = (new ResourceSetImpl()).getResource(URI.createURI(seedPath), true);
 			return finder.findFaultyObjectOfMutant(mutantResource, originalModelResource);
 		}
