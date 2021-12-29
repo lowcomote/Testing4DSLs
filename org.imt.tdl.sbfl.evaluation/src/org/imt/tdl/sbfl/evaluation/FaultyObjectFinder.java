@@ -40,14 +40,8 @@ public class FaultyObjectFinder {
 			if (diff instanceof AttributeChange && ((MatchSpec) diff.eContainer()).getLeft().eResource() == mutant) {
 				mutantDiffs.add(diff);
 			}
-			if (diff instanceof ReferenceChange) {
-				ReferenceChange refDiff = (ReferenceChange) diff;
-				if (refDiff.getReference().isContainment() && ((ReferenceChange) diff).getValue().eResource() == mutant) {
-					mutantDiffs.add(diff);
-				}
-				else if (!refDiff.getReference().isContainment() && ((MatchSpec)refDiff.eContainer()).getLeft().eResource() == mutant) {
-					mutantDiffs.add(diff);
-				}
+			if (diff instanceof ReferenceChange && ((ReferenceChange) diff).getValue().eResource() == mutant) {
+				mutantDiffs.add(diff);
 			}
 		}
 		
