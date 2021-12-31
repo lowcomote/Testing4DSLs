@@ -4,7 +4,9 @@ import java.io.IOException;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
@@ -33,14 +35,15 @@ public class MiniJavaMutationTestHelper {
 				break;
 			}
 		}
-		Resource miniJaveResource = (new ResourceSetImpl()).getResource(URI.createURI("platform:/resource" + MUTPath), true);
+		ResourceSet resSet = new ResourceSetImpl();
+		Resource miniJaveResource = resSet.getResource(URI.createURI("platform:/resource" + MUTPath), true);
 		Program miniJavaPackage = (Program) miniJaveResource.getContents().get(0);
 		Class mainClass = getMainClass(miniJavaPackage);
 		if (mainClass != null) {
-			Resource mutantResource = (new ResourceSetImpl()).getResource(URI.createURI("platform:/resource" + mutantPath), true);
+			Resource mutantResource = resSet.getResource(URI.createURI("platform:/resource" + mutantPath), true);
 			//add main class to mutant
 			Program mutantPackage = (Program) mutantResource.getContents().get(0);
-			mutantPackage.getClasses().add(mainClass);
+			mutantPackage.getClasses().add(0, mainClass);
 			try {
 				mutantResource.save(null);
 			} catch (IOException e) {
@@ -55,7 +58,8 @@ public class MiniJavaMutationTestHelper {
 		Program miniJavaPackage = (Program) mutantResource.getContents().get(0);
 		Class mainClass = getMainClass(miniJavaPackage);
 		if (mainClass != null) {
-			removeMainClass(mutantResource, miniJavaPackage, mainClass);
+			miniJavaPackage.getClasses().remove(mainClass);
+			//removeMainClass(mutantResource, miniJavaPackage, mainClass);
 			try {
 				mutantResource.save(null);
 			} catch (IOException e) {
