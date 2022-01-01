@@ -407,8 +407,8 @@ public class SuspiciousnessRanking {
 			measures4faultyObject.getBestEXAMScore().put(technique, examScoreBd.doubleValue());
 			measures4faultyObject.getAverageEXAMScore().put(technique, examScoreBd.doubleValue());
 			measures4faultyObject.getWorseEXAMScore().put(technique, examScoreBd.doubleValue());
-		    System.out.println("EXAM Score for " + technique + ": " + examScoreBd.doubleValue());
-		    System.out.println();
+		    //System.out.println("EXAM Score for " + technique + ": " + examScoreBd.doubleValue());
+		    //System.out.println();
 		}
 		else {
 		    double bestExamScore = (double)rank4faultyObject/numOfObjects;
@@ -421,10 +421,10 @@ public class SuspiciousnessRanking {
 		    BigDecimal worseExamScoreBd = new BigDecimal(worseExamScore).setScale(3, RoundingMode.HALF_UP);
 		    measures4faultyObject.getWorseEXAMScore().put(technique, worseExamScoreBd.doubleValue());
 		    	
-		    System.out.println("Best EXAM Score for " + technique + ": " + bestExamScoreBd.doubleValue());
-		    System.out.println("Average EXAM Score for " + technique + ": " + avgExamScoreBd.doubleValue());
-		    System.out.println("Worse EXAM Score for " + technique + ": " + worseExamScoreBd.doubleValue());
-		    System.out.println();
+//		    System.out.println("Best EXAM Score for " + technique + ": " + bestExamScoreBd.doubleValue());
+//		    System.out.println("Average EXAM Score for " + technique + ": " + avgExamScoreBd.doubleValue());
+//		    System.out.println("Worse EXAM Score for " + technique + ": " + worseExamScoreBd.doubleValue());
+//		    System.out.println();
 		}
 	}
 	

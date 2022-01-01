@@ -56,7 +56,6 @@ public class SBFLEvaluation {
 	public void evaluateSBFLTechniques() {
 		//finding mutants and mapping them to their registry
 		findMutantRegistryMapping(this.mutantsProject);
-		System.out.println("seed model: " + seedModelPath);
 		System.out.println("# of generated mutants: " + this.mutant_registry.size());
 		
 		//finding test suite and run it on mutants to find live ones and keep verdict and coverage of killed ones
@@ -171,6 +170,7 @@ public class SBFLEvaluation {
 	private void testMutants() {
 		for (String mutant:this.mutants) {
 			MutationTestRunner testRunner = new MutationTestRunner();
+			System.out.println("run tests on: " + mutant);
 			testRunner.runTestAndCalculateCoverage(this.testSuite, mutant);
 			if (testRunner.getTestSuiteResult().getNumOfFailedTestCases() == 0) {
 				//the mutant is alive, so it must be removed from the evaluation data
@@ -197,9 +197,6 @@ public class SBFLEvaluation {
 		if (eobjectOptional.isPresent()) {
 			indexOfFaultyObject = testSuiteCoverage.getModelObjectsWithoutRuntimeState().indexOf(eobjectOptional.get());
 		}
-		if (indexOfFaultyObject == -1) {
-			System.out.print(false);
-		}
 		SuspiciousnessRanking suspComputing = new SuspiciousnessRanking(testSuiteResult, testSuiteCoverage);
 		suspComputing.calculateMeasures();
 		List<SBFLMeasures> mutantSBFLMeasures = suspComputing.getElementsSBFLMeasures();
@@ -211,7 +208,7 @@ public class SBFLEvaluation {
 			}
 			suspComputing.calculateRanks();
 			Integer rank = mutantSBFLMeasures.get(indexOfFaultyObject).getRank().get(sbflTechnique);
-			System.out.println("Rank of " + faultyObject + " calculated by " + sbflTechnique + ": " + rank);
+			//System.out.println("Rank of " + faultyObject + " calculated by " + sbflTechnique + ": " + rank);
 		}
 
 		SBFLMeasures measures4faultyObject = mutantSBFLMeasures.get(indexOfFaultyObject);

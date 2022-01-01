@@ -141,7 +141,7 @@ public class TDLTestCaseCoverage {
 		tcCoveragePercentage = (double)(this.numOfCoveredObjs*100)/numOfCoverableElements;
 		BigDecimal bd = new BigDecimal(tcCoveragePercentage).setScale(2, RoundingMode.HALF_UP);
 		tcCoveragePercentage = bd.doubleValue();
-		System.out.println(this.testCase.getName() + " coverage: " + tcCoveragePercentage);
+		//System.out.println(this.testCase.getName() + " coverage: " + tcCoveragePercentage);
 	}
 	
 	public Trace<?, ?, ?> getTrace() {

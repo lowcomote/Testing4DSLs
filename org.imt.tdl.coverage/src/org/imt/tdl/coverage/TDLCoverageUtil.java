@@ -116,11 +116,11 @@ public class TDLCoverageUtil {
 			}
 		}
 		
-		System.out.println("Abstract Syntax Size (n. of EClasses): " + abstractSyntaxSize);
+		//System.out.println("Abstract Syntax Size (n. of EClasses): " + abstractSyntaxSize);
 		double percentage = Math.ceil((double)(instance.extendedClassesWithStep.size()*100)/abstractSyntaxSize);
-		System.out.println("% of Extended classes with @Step rules: " + percentage);
+		//System.out.println("% of Extended classes with @Step rules: " + percentage);
 		percentage = Math.ceil((double)(instance.coverableClasses.size()*100)/abstractSyntaxSize);
-		System.out.println("% of Coverable classes (considering inheritance): " + percentage);
+		//System.out.println("% of Coverable classes (considering inheritance): " + percentage);
 	}
 
 	public void updateCoverableClasses (List<String> newClasses) {
