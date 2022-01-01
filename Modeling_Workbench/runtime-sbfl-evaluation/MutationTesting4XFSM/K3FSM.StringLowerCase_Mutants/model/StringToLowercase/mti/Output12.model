@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="ASCII"?>
+<k3fsm:FSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:k3fsm="http://www.eclipse.org/gemoc/example/k3fsm" xsi:schemaLocation="http://www.eclipse.org/gemoc/example/k3fsm ../../../model/k3fsm.ecore" name="toLowerCase" initialState="//@ownedStates.0">
+  <ownedStates name="S0" incomingTransitions="//@ownedStates.0/@outgoingTransitions.0 //@ownedStates.1/@outgoingTransitions.1 //@ownedStates.2/@outgoingTransitions.1 //@ownedStates.3/@outgoingTransitions.1 //@ownedStates.4/@outgoingTransitions.1 //@ownedStates.5/@outgoingTransitions.1 //@ownedStates.6/@outgoingTransitions.1 //@ownedStates.7/@outgoingTransitions.1 //@ownedStates.8/@outgoingTransitions.1 //@ownedStates.9/@outgoingTransitions.1 //@ownedStates.10/@outgoingTransitions.1 //@ownedStates.11/@outgoingTransitions.1 //@ownedStates.12/@outgoingTransitions.1 //@ownedStates.13/@outgoingTransitions.1 //@ownedStates.14/@outgoingTransitions.1 //@ownedStates.15/@outgoingTransitions.1 //@ownedStates.16/@outgoingTransitions.1 //@ownedStates.17/@outgoingTransitions.1 //@ownedStates.18/@outgoingTransitions.1 //@ownedStates.19/@outgoingTransitions.1 //@ownedStates.20/@outgoingTransitions.1 //@ownedStates.21/@outgoingTransitions.1 //@ownedStates.22/@outgoingTransitions.1 //@ownedStates.23/@outgoingTransitions.1 //@ownedStates.24/@outgoingTransitions.1 //@ownedStates.25/@outgoingTransitions.1 //@ownedStates.26/@outgoingTransitions.1">
+    <outgoingTransitions input=" " target="//@ownedStates.0" name="S0_to_S0_space" output=" "/>
+    <outgoingTransitions input="A" target="//@ownedStates.1" name="S0_to_a_A" output="a"/>
+    <outgoingTransitions input="B" target="//@ownedStates.2" name="S0_to_b_B" output="b"/>
+    <outgoingTransitions input="C" target="//@ownedStates.3" name="S0_to_c_C" output="c"/>
+    <outgoingTransitions input="D" target="//@ownedStates.4" name="S0_to_d_D" output="d"/>
+    <outgoingTransitions input="E" target="//@ownedStates.5" name="S0_to_e_E" output="e"/>
+    <outgoingTransitions input="F" target="//@ownedStates.6" name="S0_to_f_F" output="f"/>
+    <outgoingTransitions input="G" target="//@ownedStates.7" name="S0_to_g_G" output="g"/>
+    <outgoingTransitions input="H" target="//@ownedStates.8" name="S0_to_h_H" output="h"/>
+    <outgoingTransitions input="I" target="//@ownedStates.9" name="S0_to_i_I" output="i"/>
+    <outgoingTransitions input="J" target="//@ownedStates.10" name="S0_to_j_J" output="j"/>
+    <outgoingTransitions input="K" target="//@ownedStates.11" name="S0_to_k_K" output="k"/>
+    <outgoingTransitions input="L" target="//@ownedStates.12" name="S0_to_l_L" output="l"/>
+    <outgoingTransitions input="M" target="//@ownedStates.13" name="S0_to_m_M" output="m"/>
+    <outgoingTransitions input="N" target="//@ownedStates.14" name="S0_to_n_N" output="n"/>
+    <outgoingTransitions input="O" target="//@ownedStates.15" name="S0_to_o_O" output="o"/>
+    <outgoingTransitions input="P" target="//@ownedStates.16" name="S0_to_p_P" output="p"/>
+    <outgoingTransitions input="Q" target="//@ownedStates.17" name="S0_to_q_Q" output="q"/>
+    <outgoingTransitions input="R" target="//@ownedStates.18" name="S0_to_r_R" output="r"/>
+    <outgoingTransitions input="S" target="//@ownedStates.19" name="S0_to_s_S" output="s"/>
+    <outgoingTransitions input="T" target="//@ownedStates.20" name="S0_to_t_T" output="t"/>
+    <outgoingTransitions input="U" target="//@ownedStates.21" name="S0_to_u_U" output="u"/>
+    <outgoingTransitions input="V" target="//@ownedStates.22" name="S0_to_v_V" output="v"/>
+    <outgoingTransitions input="W" target="//@ownedStates.23" name="S0_to_w_W" output="w"/>
+    <outgoingTransitions input="X" target="//@ownedStates.24" name="S0_to_x_X" output="x"/>
+    <outgoingTransitions input="Y" target="//@ownedStates.25" name="S0_to_y_Y" output="y"/>
+    <outgoingTransitions input="Z" target="//@ownedStates.26" name="S0_to_z_Z" output="z"/>
+    <outgoingTransitions input="a" target="//@ownedStates.1" name="S0_to_a_a" output="a"/>
+    <outgoingTransitions input="b" target="//@ownedStates.2" name="S0_to_b_b" output="b"/>
+    <outgoingTransitions input="c" target="//@ownedStates.3" name="S0_to_c_c" output="c"/>
+    <outgoingTransitions input="d" target="//@ownedStates.4" name="S0_to_d_d" output="d"/>
+    <outgoingTransitions input="e" target="//@ownedStates.5" name="S0_to_e_e" output="e"/>
+    <outgoingTransitions input="f" target="//@ownedStates.6" name="S0_to_f_f" output="f"/>
+    <outgoingTransitions input="g" target="//@ownedStates.7" name="S0_to_g_g" output="g"/>
+    <outgoingTransitions input="h" target="//@ownedStates.8" name="S0_to_h_h" output="h"/>
+    <outgoingTransitions input="i" target="//@ownedStates.9" name="S0_to_i_i" output="i"/>
+    <outgoingTransitions input="j" target="//@ownedStates.10" name="S0_to_j_j" output="j"/>
+    <outgoingTransitions input="k" target="//@ownedStates.11" name="S0_to_k_k" output="k"/>
+    <outgoingTransitions input="l" target="//@ownedStates.12" name="S0_to_l_l" output="l"/>
+    <outgoingTransitions input="m" target="//@ownedStates.13" name="S0_to_m_m" output="m"/>
+    <outgoingTransitions input="n" target="//@ownedStates.14" name="S0_to_n_n" output="n"/>
+    <outgoingTransitions input="o" target="//@ownedStates.15" name="S0_to_o_o" output="o"/>
+    <outgoingTransitions input="p" target="//@ownedStates.16" name="S0_to_p_p" output="p"/>
+    <outgoingTransitions input="q" target="//@ownedStates.17" name="S0_to_q_q" output="q"/>
+    <outgoingTransitions input="r" target="//@ownedStates.18" name="S0_to_r_r" output="r"/>
+    <outgoingTransitions input="s" target="//@ownedStates.19" name="S0_to_s_s" output="s"/>
+    <outgoingTransitions input="t" target="//@ownedStates.20" name="S0_to_t_t" output="t"/>
+    <outgoingTransitions input="u" target="//@ownedStates.21" name="S0_to_u_u" output="u"/>
+    <outgoingTransitions input="v" target="//@ownedStates.22" name="S0_to_v_v" output="v"/>
+    <outgoingTransitions input="w" target="//@ownedStates.23" name="S0_to_w_w" output="w"/>
+    <outgoingTransitions input="x" target="//@ownedStates.24" name="S0_to_x_x" output="x"/>
+    <outgoingTransitions input="y" target="//@ownedStates.25" name="S0_to_y_y" output="y"/>
+    <outgoingTransitions input="z" target="//@ownedStates.26" name="S0_to_z_z" output="z"/>
+  </ownedStates>
+  <ownedStates name="a" incomingTransitions="//@ownedStates.0/@outgoingTransitions.1 //@ownedStates.0/@outgoingTransitions.27 //@ownedStates.1/@outgoingTransitions.0">
+    <outgoingTransitions input="a" target="//@ownedStates.1" name="a_to_a" output="a"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="b" incomingTransitions="//@ownedStates.0/@outgoingTransitions.2 //@ownedStates.0/@outgoingTransitions.28 //@ownedStates.2/@outgoingTransitions.0">
+    <outgoingTransitions input="b" target="//@ownedStates.2" name="b_to_b" output="b"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="c" incomingTransitions="//@ownedStates.0/@outgoingTransitions.3 //@ownedStates.0/@outgoingTransitions.29 //@ownedStates.3/@outgoingTransitions.0">
+    <outgoingTransitions input="c" target="//@ownedStates.3" name="c_to_c" output="c"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="d" incomingTransitions="//@ownedStates.0/@outgoingTransitions.4 //@ownedStates.0/@outgoingTransitions.30 //@ownedStates.4/@outgoingTransitions.0">
+    <outgoingTransitions input="d" target="//@ownedStates.4" name="d_to_d" output="d"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="e" incomingTransitions="//@ownedStates.0/@outgoingTransitions.5 //@ownedStates.0/@outgoingTransitions.31 //@ownedStates.5/@outgoingTransitions.0">
+    <outgoingTransitions input="e" target="//@ownedStates.5" name="e_to_e" output="e"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="f" incomingTransitions="//@ownedStates.0/@outgoingTransitions.6 //@ownedStates.0/@outgoingTransitions.32 //@ownedStates.6/@outgoingTransitions.0">
+    <outgoingTransitions input="f" target="//@ownedStates.6" name="f_to_f" output="f"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="g" incomingTransitions="//@ownedStates.0/@outgoingTransitions.7 //@ownedStates.0/@outgoingTransitions.33 //@ownedStates.7/@outgoingTransitions.0">
+    <outgoingTransitions input="g" target="//@ownedStates.7" name="g_to_g" output="g"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="h" incomingTransitions="//@ownedStates.0/@outgoingTransitions.8 //@ownedStates.0/@outgoingTransitions.34 //@ownedStates.8/@outgoingTransitions.0">
+    <outgoingTransitions input="h" target="//@ownedStates.8" name="h_to_h" output="h"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="i" incomingTransitions="//@ownedStates.0/@outgoingTransitions.9 //@ownedStates.0/@outgoingTransitions.35 //@ownedStates.9/@outgoingTransitions.0">
+    <outgoingTransitions input="i" target="//@ownedStates.9" name="i_to_i" output="i"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="j" incomingTransitions="//@ownedStates.0/@outgoingTransitions.10 //@ownedStates.0/@outgoingTransitions.36 //@ownedStates.10/@outgoingTransitions.0">
+    <outgoingTransitions input="j" target="//@ownedStates.10" name="j_to_j" output="j"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="k" incomingTransitions="//@ownedStates.0/@outgoingTransitions.11 //@ownedStates.0/@outgoingTransitions.37 //@ownedStates.11/@outgoingTransitions.0">
+    <outgoingTransitions input="k" target="//@ownedStates.11" name="k_to_k" output="k"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="l" incomingTransitions="//@ownedStates.0/@outgoingTransitions.12 //@ownedStates.0/@outgoingTransitions.38 //@ownedStates.12/@outgoingTransitions.0">
+    <outgoingTransitions input="l" target="//@ownedStates.12" name="l_to_l" output="l"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="m" incomingTransitions="//@ownedStates.0/@outgoingTransitions.13 //@ownedStates.0/@outgoingTransitions.39 //@ownedStates.13/@outgoingTransitions.0">
+    <outgoingTransitions input="m" target="//@ownedStates.13" name="m_to_m" output="m"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="n" incomingTransitions="//@ownedStates.0/@outgoingTransitions.14 //@ownedStates.0/@outgoingTransitions.40 //@ownedStates.14/@outgoingTransitions.0">
+    <outgoingTransitions input="n" target="//@ownedStates.14" name="n_to_n" output="n"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="o" incomingTransitions="//@ownedStates.0/@outgoingTransitions.15 //@ownedStates.0/@outgoingTransitions.41 //@ownedStates.15/@outgoingTransitions.0">
+    <outgoingTransitions input="o" target="//@ownedStates.15" name="o_to_o" output="o"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="p" incomingTransitions="//@ownedStates.0/@outgoingTransitions.16 //@ownedStates.0/@outgoingTransitions.42 //@ownedStates.16/@outgoingTransitions.0">
+    <outgoingTransitions input="p" target="//@ownedStates.16" name="p_to_p" output="p"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="q" incomingTransitions="//@ownedStates.0/@outgoingTransitions.17 //@ownedStates.0/@outgoingTransitions.43 //@ownedStates.17/@outgoingTransitions.0">
+    <outgoingTransitions input="q" target="//@ownedStates.17" name="q_to_q" output="q"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="r" incomingTransitions="//@ownedStates.0/@outgoingTransitions.18 //@ownedStates.0/@outgoingTransitions.44 //@ownedStates.18/@outgoingTransitions.0">
+    <outgoingTransitions input="r" target="//@ownedStates.18" name="r_to_r" output="r"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="s" incomingTransitions="//@ownedStates.0/@outgoingTransitions.19 //@ownedStates.0/@outgoingTransitions.45 //@ownedStates.19/@outgoingTransitions.0">
+    <outgoingTransitions input="s" target="//@ownedStates.19" name="s_to_s" output="s"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="t" incomingTransitions="//@ownedStates.0/@outgoingTransitions.20 //@ownedStates.0/@outgoingTransitions.46 //@ownedStates.20/@outgoingTransitions.0">
+    <outgoingTransitions input="t" target="//@ownedStates.20" name="t_to_t" output="t"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="u" incomingTransitions="//@ownedStates.0/@outgoingTransitions.21 //@ownedStates.0/@outgoingTransitions.47 //@ownedStates.21/@outgoingTransitions.0">
+    <outgoingTransitions input="u" target="//@ownedStates.21" name="u_to_u" output="u"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="v" incomingTransitions="//@ownedStates.0/@outgoingTransitions.22 //@ownedStates.0/@outgoingTransitions.48 //@ownedStates.22/@outgoingTransitions.0">
+    <outgoingTransitions input="v" target="//@ownedStates.22" name="v_to_v" output="v"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="w" incomingTransitions="//@ownedStates.0/@outgoingTransitions.23 //@ownedStates.0/@outgoingTransitions.49 //@ownedStates.23/@outgoingTransitions.0">
+    <outgoingTransitions input="w" target="//@ownedStates.23" name="w_to_w" output="w"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="x" incomingTransitions="//@ownedStates.0/@outgoingTransitions.24 //@ownedStates.0/@outgoingTransitions.50 //@ownedStates.24/@outgoingTransitions.0">
+    <outgoingTransitions input="zCC" target="//@ownedStates.24" name="x_to_x" output="x"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="y" incomingTransitions="//@ownedStates.0/@outgoingTransitions.25 //@ownedStates.0/@outgoingTransitions.51 //@ownedStates.25/@outgoingTransitions.0">
+    <outgoingTransitions input="y" target="//@ownedStates.25" name="y_to_y" output="y"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+  <ownedStates name="z" incomingTransitions="//@ownedStates.0/@outgoingTransitions.26 //@ownedStates.0/@outgoingTransitions.52 //@ownedStates.26/@outgoingTransitions.0">
+    <outgoingTransitions input="z" target="//@ownedStates.26" name="z_to_z" output="z"/>
+    <outgoingTransitions target="//@ownedStates.0" name="back_to_S0"/>
+  </ownedStates>
+</k3fsm:FSM>

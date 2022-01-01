@@ -1,0 +1,2 @@
+Mutant generation mode: exhaustive for all models
+There was nullPointerExceptions when trying to generate registry models

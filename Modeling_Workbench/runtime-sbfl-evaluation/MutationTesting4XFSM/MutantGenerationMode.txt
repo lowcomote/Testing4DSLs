@@ -1,0 +1,3 @@
+Mutant generation mode:
+1) exhaustive: for small models (BitShifting, TrafficLight, EdgeDetector)
+2) 20: for large models (String.toLowerCase, String.toUpperCase)
