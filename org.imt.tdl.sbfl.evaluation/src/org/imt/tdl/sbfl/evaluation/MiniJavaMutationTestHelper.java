@@ -44,6 +44,7 @@ public class MiniJavaMutationTestHelper {
 			//add main class to mutant
 			Program mutantPackage = (Program) mutantResource.getContents().get(0);
 			mutantPackage.getClasses().add(0, mainClass);
+			EcoreUtil.resolveAll(mutantResource);
 			try {
 				mutantResource.save(null);
 			} catch (IOException e) {
