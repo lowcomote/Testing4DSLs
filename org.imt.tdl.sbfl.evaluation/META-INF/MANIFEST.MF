@@ -15,7 +15,8 @@ Require-Bundle: org.imt.tdl.testResult;bundle-version="1.0.0",
  wodel.models;bundle-version="1.0.0",
  org.eclipse.emf.compare;bundle-version="3.5.3",
  org.eclipse.emf.compare.rcp;bundle-version="2.5.2",
- org.eclipse.ui;bundle-version="3.119.0"
+ org.eclipse.ui;bundle-version="3.119.0",
+ org.imt.xminijava.model
 Bundle-ClassPath: lib/commons-codec-1.15.jar,
  lib/commons-collections4-4.4.jar,
  lib/commons-compress-1.21.jar,
