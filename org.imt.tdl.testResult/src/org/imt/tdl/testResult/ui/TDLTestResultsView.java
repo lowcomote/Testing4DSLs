@@ -145,7 +145,6 @@ public class TDLTestResultsView extends ViewPart{
 		column3.setAlignment(SWT.LEFT);
 		column3.setText("Description");
 		column3.setWidth(600);
-		
 		m_treeViewer.setContentProvider(new TDLTestResultContentProvider());
 		m_treeViewer.setLabelProvider(new TableLabelProvider());
 		m_treeViewer.setInput(TDLTestResultUtil.getInstance().getTestSuiteResult());
@@ -247,20 +246,25 @@ public class TDLTestResultsView extends ViewPart{
 			}
 			if (element instanceof TDLTestCaseResult) {
 				TDLTestCaseResult result = (TDLTestCaseResult) element;
-				if (result.getValue().equals("PASS")) {
+				if (result.getValue() == TDLTestResultUtil.PASS) {
 					return GREEN;
 				}
-				else if(result.getValue().equals("INCONCLUSIVE")) {
+				else if(result.getValue() == TDLTestResultUtil.INCONCLUSIVE) {
 					return YELLOW;
 				}
-				else return RED;
+				else if(result.getValue() == TDLTestResultUtil.FAIL) {
+					return RED;
+				}
 			}
 			if (element instanceof TDLMessageResult) {
 				TDLMessageResult result = (TDLMessageResult) element;
-				if (result.getFailure() == false) {
+				if (result.getValue() == TDLTestResultUtil.PASS) {
 					return GREEN;
 				}
-				else {
+				else if (result.getFailure()) {
+					return YELLOW;
+				}
+				else if (result.getValue() == TDLTestResultUtil.FAIL) {
 					return RED;
 				}
 			}
@@ -296,11 +300,11 @@ public class TDLTestResultsView extends ViewPart{
 					break;
 				case 1:
 					if (result.getNumOfFailedTestCases() == 0) {
-						columnText = "PASS";
+						columnText = TDLTestResultUtil.PASS;
 					}else if (result.getNumOfInconclusiveTestCases() > 0) {
-						columnText = "INCONCLUSIVE";
+						columnText = TDLTestResultUtil.INCONCLUSIVE;
 					}else {
-						columnText = "FAIL";
+						columnText = TDLTestResultUtil.FAIL;
 					}
 					break;
 				case 2:
@@ -329,11 +333,7 @@ public class TDLTestResultsView extends ViewPart{
 					columnText = result.getTdlMessageId();
 					break;
 				case 1:
-					if (result.getFailure() == false) {
-						columnText = "PASS";
-					}else {
-						columnText = "FAIL";
-					}
+					columnText = result.getValue();
 					break;
 				case 2:
 					columnText = result.getDescription();
