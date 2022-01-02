@@ -59,7 +59,7 @@ class GateInstanceAspect {
 			if (_self.name.equals(OCL_GATE)){
 				_self.receivedOutput = _self.gateLauncher.OCLResultAsString
 			}
-			if (_self.receivedOutput != null) {
+			if (_self.receivedOutput !== null) {
 				if (_self.gateLauncher.OCLResultAsString.size==1){
 					val String result = _self.gateLauncher.OCLResultAsString.get(0)
 					_self.receivedOutput = result.subSequence(1, result.length-1)
@@ -70,7 +70,7 @@ class GateInstanceAspect {
 					return TDLTestResultUtil.FAIL + ": The expected data is: " + _self.expectedOutput.toString + 
 						", but the current data is: " + _self.receivedOutput.toString;
 				}
-			} else if (_self.receivedOutput == null) {
+			} else if (_self.receivedOutput === null) {
 				return TDLTestResultUtil.FAIL + ": The expected data is: " + _self.expectedOutput.toString + 
 						", but the current data is: null";
 			} else {
@@ -88,18 +88,18 @@ class GateInstanceAspect {
 			if (_self.name.equals(OCL_GATE)){
 				MUTResource = _self.gateLauncher.MUTResource//the MUT objects are the received output
 			}
-			else if ((arg.item == null || arg.item.size <= 0) 
+			else if ((arg.item === null || arg.item.size <= 0) 
 				&& arg.dataInstance.dataType.isExposedEvent(_self.DSLPath)){
 				//the message is an event conforming to the behavioral interface of the DSL
 				return _self.gateLauncher.executeDSLSpecificCommand(EXPOSED_EVENT,arg.dataInstance.validName, _self.getEventParameters(arg, EXPOSED_EVENT))
 			}	
 			var String status = null
 			var ArrayList<EObject> matchedMUTElements = new ArrayList<EObject>();
-			if (arg.item != null && arg.item.size > 0){//there is a list of objects in the expected output
+			if (arg.item !== null && arg.item.size > 0){//there is a list of objects in the expected output
 				for (i : 0 ..<arg.item.size){
 					val DataInstanceUse data = (arg.item.get(i) as DataInstanceUse)
 					val EObject matchedObject = data.getMatchedMUTElement(MUTResource as Resource, true, _self.DSLPath)		
-					if (matchedObject == null){
+					if (matchedObject === null){
 						return data.dataInstance.info //the info must contains FAIL information			
 					}else{
 						matchedMUTElements.add(matchedObject)
@@ -109,7 +109,7 @@ class GateInstanceAspect {
 			}else{//there is only one object in the expected output
 				val DataInstanceUse data = (arg as DataInstanceUse)
 				val EObject matchedObject = data.getMatchedMUTElement(MUTResource as Resource, true, _self.DSLPath)
-				if (matchedObject == null){
+				if (matchedObject === null){
 					return data.dataInstance.info //the info must contains FAIL information
 				}else{
 					matchedMUTElements.add(matchedObject)
@@ -134,7 +134,7 @@ class GateInstanceAspect {
 	def String sendArgument2sut(DataUse argument) {
 		if (argument instanceof DataInstanceUse) {
 			var arg = (argument as DataInstanceUse)
-			if (arg.item != null && arg.item.size > 0){
+			if (arg.item !== null && arg.item.size > 0){
 				return _self.setModelState(arg);
 			}else if (arg.dataInstance.dataType.isConcreteEcoreType(_self.DSLPath)){//request for setting the model state
 				return _self.setModelState(arg);
@@ -171,7 +171,7 @@ class GateInstanceAspect {
 		//get the current MUTResource
 		var MUTResource = _self.gateLauncher.MUTResource;
 		var String status = null
-		if (arg.item != null && arg.item.size > 0){
+		if (arg.item !== null && arg.item.size > 0){
 			for (i : 0 ..<arg.item.size){
 				status = (arg.item.get(i) as DataInstanceUse).setMatchedMUTElement(MUTResource, _self.DSLPath)
 				if (status.contains(TDLTestResultUtil.FAIL)){

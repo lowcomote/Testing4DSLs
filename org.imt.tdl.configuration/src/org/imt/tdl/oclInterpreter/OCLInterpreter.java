@@ -4,35 +4,24 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-import java.util.List;
 
-import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
-import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 import org.eclipse.ocl.OCL;
-import org.eclipse.ocl.helper.OCLHelper;
-import org.eclipse.ocl.ecore.EcoreEnvironmentFactory;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
+import org.eclipse.ocl.ecore.EcoreEnvironmentFactory;
 import org.eclipse.ocl.expressions.OCLExpression;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.labels.DefaultLabelGeneratorBuilder;
-import org.eclipse.ocl.pivot.labels.ILabelGenerator;
-import org.eclipse.ocl.pivot.labels.ILabelGenerator.Registry;
+import org.eclipse.ocl.helper.OCLHelper;
 import org.imt.tdl.testResult.TDLTestResultUtil;
 
 public class OCLInterpreter {
 
+	@SuppressWarnings("rawtypes")
 	protected OCL ocl = null;
+	@SuppressWarnings("rawtypes")
 	protected OCLHelper oclHelper = null;
 
 	protected OCLExpression<EClassifier> expression = null;
@@ -46,6 +35,7 @@ public class OCLInterpreter {
 		this.oclHelper = ocl.createOCLHelper();
 	}
 
+	@SuppressWarnings("unchecked")
 	public String runQuery(Resource MUTResource, String query) {
 		// The root element of the dsl is the context for ocl
 		this.oclHelper.setContext(MUTResource.getContents().get(0).eClass());
@@ -64,7 +54,7 @@ public class OCLInterpreter {
 		if (res instanceof Collection<?>) {
 			if (res instanceof LinkedHashSet<?>) {
 				LinkedHashSet<?> queryResult =  (LinkedHashSet<?>) res;
-				Iterator it = queryResult.iterator();
+				Iterator<?> it = queryResult.iterator();
 				while (it.hasNext()) {
 					EObject object = (EObject) it.next();
 					this.resultAsObject.add(object);

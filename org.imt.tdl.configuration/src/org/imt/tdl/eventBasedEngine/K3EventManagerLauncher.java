@@ -552,6 +552,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		return this.executionEngine != null;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {
 		return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) this.executionEngine.getAddon(GenericTraceEngineAddon.class).getTrace();

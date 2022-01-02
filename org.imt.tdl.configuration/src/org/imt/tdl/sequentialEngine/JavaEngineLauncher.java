@@ -1,7 +1,6 @@
 package org.imt.tdl.sequentialEngine;
 
 import java.lang.reflect.Method;
-
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
@@ -11,7 +10,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import org.eclipse.gemoc.dsl.debug.impl.ThreadImpl;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.debug.core.DebugException;
@@ -21,6 +19,7 @@ import org.eclipse.debug.core.Launch;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.gemoc.dsl.debug.ide.adapter.DSLThreadAdapter;
+import org.eclipse.gemoc.dsl.debug.impl.ThreadImpl;
 import org.eclipse.gemoc.execution.sequential.javaengine.PlainK3ExecutionEngine;
 import org.eclipse.gemoc.execution.sequential.javaengine.ui.launcher.GemocSourceLocator;
 import org.eclipse.gemoc.executionframework.engine.commons.DslHelper;
@@ -30,7 +29,6 @@ import org.eclipse.gemoc.trace.commons.model.trace.State;
 import org.eclipse.gemoc.trace.commons.model.trace.Step;
 import org.eclipse.gemoc.trace.commons.model.trace.Trace;
 import org.eclipse.gemoc.trace.commons.model.trace.TracedObject;
-import org.eclipse.gemoc.trace.gemoc.api.IMultiDimensionalTraceAddon;
 import org.eclipse.gemoc.trace.gemoc.traceaddon.GenericTraceEngineAddon;
 import org.imt.gemoc.engine.custom.launcher.CustomK3Launcher;
 import org.osgi.framework.Bundle;
@@ -38,6 +36,7 @@ import org.osgi.framework.Bundle;
 public class JavaEngineLauncher extends AbstractEngine{
 	private PlainK3ExecutionEngine javaEngine = null;
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void launchModelDebugger() {
 		IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
@@ -99,6 +98,7 @@ public class JavaEngineLauncher extends AbstractEngine{
 		};
 
 		final ExecutorService executor = Executors.newSingleThreadExecutor();
+		@SuppressWarnings("rawtypes")
 		final Future future = executor.submit(modelRunner);
 		executor.shutdown(); // This does not cancel the already-scheduled task.
 
@@ -147,6 +147,7 @@ public class JavaEngineLauncher extends AbstractEngine{
 		return "PASS: The model under test executed successfully";
 	}
 	
+	@SuppressWarnings("unchecked")
 	public PlainK3ExecutionEngine createExecutionEngine() throws EngineContextException, CoreException{
 		//if the resource is updated (e.g., the value of its dynamic features are set by the test case)
 		//then the execution context should be updated
@@ -156,6 +157,7 @@ public class JavaEngineLauncher extends AbstractEngine{
 		
 		return (PlainK3ExecutionEngine) launcher.createExecutionEngine(this.runConfiguration, this.executionMode);
 	}
+	@SuppressWarnings("rawtypes")
 	@Override
 	protected String getModelEntryPointMethodName(){
 		Set<Class<?>> candidateAspects = K3DslHelper.getAspects(this._language);
@@ -200,10 +202,8 @@ public class JavaEngineLauncher extends AbstractEngine{
 			
 		return "";
 	}
-	private String getDebugJobName() {
-		return "Gemoc debug job";
-	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {
 		return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) this.javaEngine.getAddon(GenericTraceEngineAddon.class).getTrace();

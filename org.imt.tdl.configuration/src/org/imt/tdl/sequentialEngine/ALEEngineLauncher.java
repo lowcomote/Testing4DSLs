@@ -40,11 +40,11 @@ import org.eclipse.gemoc.trace.commons.model.trace.Trace;
 import org.eclipse.gemoc.trace.commons.model.trace.TracedObject;
 import org.eclipse.gemoc.trace.gemoc.traceaddon.GenericTraceEngineAddon;
 import org.imt.gemoc.engine.custom.launcher.CustomALELauncher;
-import org.imt.gemoc.engine.custom.launcher.CustomK3Launcher;
 
 public class ALEEngineLauncher extends AbstractEngine{
 	private AleEngine aleEngine = null;
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void launchModelDebugger() {
 		IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
@@ -106,6 +106,7 @@ public class ALEEngineLauncher extends AbstractEngine{
 			};
 
 			final ExecutorService executor = Executors.newSingleThreadExecutor();
+			@SuppressWarnings("rawtypes")
 			final Future future = executor.submit(modelRunner);
 			executor.shutdown(); // This does not cancel the already-scheduled task.
 
@@ -154,6 +155,7 @@ public class ALEEngineLauncher extends AbstractEngine{
 		return "PASS: The model under test executed successfully";
 	}
 	
+	@SuppressWarnings("unchecked")
 	private AleEngine createExecutionEngine() throws EngineContextException, CoreException{
 		//if the resource is updated (e.g., the value of its dynamic features are set by the test case)
 		//then the execution context should be updated
@@ -182,7 +184,7 @@ public class ALEEngineLauncher extends AbstractEngine{
     		.filter(op -> op.getTags().contains("main"))
     		.collect(Collectors.toList());
 		
-		Iterator it = mainOperations.iterator();
+		Iterator<Method> it = mainOperations.iterator();
 		return provideMethodLabel(it.next());
 	}
 	@Override
@@ -243,6 +245,7 @@ public class ALEEngineLauncher extends AbstractEngine{
 		else return element == null ? "" : element.toString();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {
 		return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) this.aleEngine.getAddon(GenericTraceEngineAddon.class).getTrace();

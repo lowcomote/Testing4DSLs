@@ -345,7 +345,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 		var String expectedData = "";
 		var String mutData = "";
 		if (_self.item !== null && _self.item.size > 0){//there are several instances of data
-			mutData = TDLTestResultUtil.getInstance.getDataAsString(featureValue as EList)
+			mutData = TDLTestResultUtil.getInstance.getDataAsString(featureValue as EList<?>)
 			for (i : 0 ..<_self.item.size){
 				val matchedObject = (_self.item.get(i) as DataInstanceUse).getMatchedMUTElement(rootObjects, MUTResource, isAssertion, DSLPath)			
 				matchedObjects.add(matchedObject)
@@ -356,11 +356,11 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 				return TDLTestResultUtil.FAIL + ": The expected data is: " + expectedData + ", but the current data is NULL";
 			}
 			if (isAssertion){
-				if ((featureValue as EList).equals(matchedObjects)){
+				if ((featureValue as EList<?>).equals(matchedObjects)){
 					return TDLTestResultUtil.PASS + ": The expected data is equal to the current data"
 				}
 			}else{
-				if ((featureValue as EList).containsAll(matchedObjects)){
+				if ((featureValue as EList<?>).containsAll(matchedObjects)){
 					return TDLTestResultUtil.PASS + ": The expected data contains the current data"
 				}
 			}		
@@ -373,10 +373,10 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 				expectedData = "[" + TDLTestResultUtil.getInstance.eObjectLabelProvider(matchedObject as EObject) + "]"
 			}
 			if (featureValue instanceof EList){
-				if (matchedObject !== null && (featureValue as EList).contains(matchedObject)){
+				if (matchedObject !== null && (featureValue as EList<?>).contains(matchedObject)){
 					return TDLTestResultUtil.PASS + ": The expected data contains in the current data"
 				}
-				mutData = "[" + TDLTestResultUtil.getInstance.getDataAsString(featureValue as EList) + "]"
+				mutData = "[" + TDLTestResultUtil.getInstance.getDataAsString(featureValue as EList<?>) + "]"
 			}else if (featureValue instanceof EObject){
 				if (matchedObject !== null && (featureValue as EObject).equals(matchedObject)){
 					return TDLTestResultUtil.PASS + ": The expected data is equal to the current data"

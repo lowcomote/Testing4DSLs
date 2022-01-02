@@ -429,18 +429,17 @@ class BlockAspect{
 				}
 			}catch (InterruptedException e) {
 				//break the loop since one of the guards is not validated
+				return false;
 			}	
 		}
-		if (canExecute){
-			var result = true
-			for (Behaviour b:_self.behaviour){
-				result = b.performBehavior()
-				if (!result){
-					return false
-				}
+		var result = true
+		for (Behaviour b:_self.behaviour){
+			result = b.performBehavior()
+			if (!result){
+				return false
 			}
-			return true
 		}
+		return true
 	}
 }
 @Aspect (className = LocalExpression)
@@ -452,10 +451,22 @@ class ExpressionAspect{
 				if (expression.dataType.name.equals("EBoolean")){
 					return Boolean.parseBoolean(expression.name)
 				}
+				else{
+					//TODO:Check for other types
+					return false
+				}
 			} else if (_self.expression instanceof LiteralValueUse){
 				val value = (_self.expression as LiteralValueUse).value;
 				return Boolean.parseBoolean(value.substring(1, value.length-1));
 			}
+			else{
+				//TODO:Check for other types
+				return false
+			}
+		}
+		else{
+			//TODO:Check for other types
+			return false
 		}
 	}
 	def int getNumIteration(){
@@ -466,7 +477,17 @@ class ExpressionAspect{
 			} else if (_self.expression instanceof LiteralValueUse){
 				val value = (_self.expression as LiteralValueUse).value;
 				return Integer.parseInt(value.substring(1, value.length-1));
+			}else{
+				//TODO:Check for other types
+				return 0
 			}
+		}else if (_self.expression instanceof LiteralValueUse){
+			val value = (_self.expression as LiteralValueUse).value;
+			return Integer.parseInt(value.substring(1, value.length-1));
+		}
+		else{
+			//TODO:Check for other types
+			return 0
 		}
 	}
 }
