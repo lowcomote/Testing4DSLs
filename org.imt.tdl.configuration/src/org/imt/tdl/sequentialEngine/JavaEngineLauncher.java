@@ -4,6 +4,12 @@ import java.lang.reflect.Method;
 
 import java.util.Iterator;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import org.eclipse.gemoc.dsl.debug.impl.ThreadImpl;
 import org.eclipse.core.runtime.CoreException;
@@ -84,7 +90,36 @@ public class JavaEngineLauncher extends AbstractEngine{
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
-		this.javaEngine.startSynchronous();
+		
+		final Runnable modelRunner = new Thread() {
+		  @Override 
+		  public void run() { 
+			  javaEngine.startSynchronous();
+		  }
+		};
+
+		final ExecutorService executor = Executors.newSingleThreadExecutor();
+		final Future future = executor.submit(modelRunner);
+		executor.shutdown(); // This does not cancel the already-scheduled task.
+
+		try { 
+		  future.get(10, TimeUnit.SECONDS); 
+		}
+		catch (InterruptedException ie) { 
+			ie.printStackTrace();
+		}
+		catch (ExecutionException ee) { 
+			ee.printStackTrace();
+		}
+		catch (TimeoutException te) { 
+			te.printStackTrace();
+			future.cancel(true);
+			return "FAIL: TimeoutException -> There is an infinite loop in the model under test";
+		}
+		if (!executor.isTerminated()) {
+		    executor.shutdownNow(); // If you want to stop the code that hasn't finished
+		    return "FAIL: There is an infinite loop in the model under test";
+		}
 		this.setModelResource(this.javaEngine.getExecutionContext().getResourceModel());
 		return "PASS: The model under test executed successfully";
 	}
