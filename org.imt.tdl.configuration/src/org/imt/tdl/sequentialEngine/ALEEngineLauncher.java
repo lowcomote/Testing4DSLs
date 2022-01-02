@@ -121,13 +121,13 @@ public class ALEEngineLauncher extends AbstractEngine{
 			catch (TimeoutException te) { 
 				te.printStackTrace();
 				future.cancel(true);
+				aleEngine.stop();
 				return "FAIL: TimeoutException -> There is an infinite loop in the model under test";
 			}
 			if (!executor.isTerminated()) {
 			    executor.shutdownNow(); // If you want to stop the code that hasn't finished
-			    return "FAIL: There is an infinite loop in the model under test";
 			}
-			this.setModelResource(this.javaEngine.getExecutionContext().getResourceModel());
+			this.setModelResource(this.aleEngine.getExecutionContext().getResourceModel());
 			return "PASS: The model under test executed successfully";
 	}
 	
