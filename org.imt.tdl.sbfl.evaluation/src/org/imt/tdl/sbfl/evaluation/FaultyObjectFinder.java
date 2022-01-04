@@ -44,7 +44,9 @@ public class FaultyObjectFinder {
 				mutantDiffs.add(diff);
 			}
 		}
-		
+		if (mutantDiffs.size() == 1) {
+			return getDiffObject(mutantDiffs.get(0));
+		}
 		//Filter diffs that do not have any equivalence and requirement
 		List<Diff> mutantDiffsFiltered = mutantDiffs.stream().filter(md -> (md.getRequires() == null || md.getRequires().size() == 0) && 
 				(md.getEquivalence() == null || md.getEquivalence().getDifferences().size() == 0)).collect(Collectors.toList());
