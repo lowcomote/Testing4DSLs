@@ -21,16 +21,16 @@ class FSMAspect {
 	@Step 												
 	@InitializeModel									// <1>
 	def void initializeModel(EList<String> args){
-		if (_self.currentState == null){
+		if (_self.currentState === null){
 			_self.currentState = _self.initialState;
 		}
-		if (_self.unprocessedString == null || _self.unprocessedString.isEmpty){			
+		if (_self.unprocessedString === null || _self.unprocessedString.isEmpty){			
 	 		_self.unprocessedString = args.get(0);
 		}
-		if (_self.consumedString == null){
+		if (_self.consumedString === null){
 			_self.consumedString = "";
 		}
-		if (_self.producedString == null){
+		if (_self.producedString === null){
 			_self.producedString = "";
 		}
 	}
@@ -42,11 +42,11 @@ class FSMAspect {
     			_self.currentState.step(_self.unprocessedString)
     		}    		
 		} catch (FSMRuntimeException nt){
-			println("Stopped due to "+nt.message)
+			//println("Stopped due to "+nt.message)
 		}
-		println("unprocessed string: "+_self.unprocessedString)
-		println("processed string: "+_self.consumedString)
-		println("produced string: "+_self.producedString)
+		//println("unprocessed string: "+_self.unprocessedString)
+		//println("processed string: "+_self.consumedString)
+		//println("produced string: "+_self.producedString)
 	}
 
 }
@@ -56,7 +56,7 @@ class StateAspect {
 	def void step(String inputString) {
 		// Get the valid transitions	
 		var validTransitions =  _self.outgoingTransitions.filter[t | 
-			if (t.input != null){
+			if (t.input !== null){
 				inputString.startsWith(t.input)
 			}else{
 				false
@@ -64,7 +64,7 @@ class StateAspect {
 		]
 		if(validTransitions.empty) {
 			//throw new FSMRuntimeException("No Transition")
-			validTransitions =  _self.outgoingTransitions.filter[t | t.input == null]
+			validTransitions =  _self.outgoingTransitions.filter[t | t.input === null]
 		}
 		if(validTransitions.empty) {
 			throw new FSMRuntimeException("No Transition")
@@ -83,18 +83,18 @@ class TransitionAspect {
 	
 	@Step												// <4>
 	def void fire() {
-		println("Firing " + _self.name + " and entering " + _self.target.name)
+		//println("Firing " + _self.name + " and entering " + _self.target.name)
 		val fsm = _self.source.owningFSM
 		fsm.currentState = _self.target
-		if (_self.output != null){
-			if (fsm.producedString != null){
+		if (_self.output !== null){
+			if (fsm.producedString !== null){
 				fsm.producedString = fsm.producedString + _self.output
 			}else{
 				fsm.producedString = _self.output
 			}
 		}
-		if (_self.input != null){
-			if (fsm.consumedString != null){
+		if (_self.input !== null){
+			if (fsm.consumedString !== null){
 				fsm.consumedString = fsm.consumedString + _self.input
 			}else{
 				fsm.consumedString = _self.input
@@ -109,5 +109,3 @@ class FSMRuntimeException extends Exception {
 		super(message)
 	}					
 }
-
-
