@@ -10,6 +10,7 @@ import org.imt.tdl.coverage.TDLCoverageUtil;
 import org.imt.tdl.coverage.TDLTestCaseCoverage;
 import org.imt.tdl.coverage.TDLTestSuiteCoverage;
 import org.imt.tdl.testResult.TDLTestCaseResult;
+import org.imt.tdl.testResult.TDLTestResultUtil;
 import org.imt.tdl.testResult.TDLTestSuiteResult;
 
 public class MutationTestRunner {
@@ -24,6 +25,7 @@ public class MutationTestRunner {
 	}
 	public void runTestAndCalculateCoverage(Package testPackage, String mutantPath) {
 		mutantPath = mutantPath.replace("\\", "/");
+		this.testSuiteResult.setTestSuite(testPackage);
 		for (int i=0; i<testPackage.getPackagedElement().size(); i++) {
 			Object o = testPackage.getPackagedElement().get(i);
 			if (o instanceof TestDescription) {
@@ -35,6 +37,10 @@ public class MutationTestRunner {
 				}
 				TestDescriptionAspect.executeTestCase(testCase, mutantPath);
 				TDLTestCaseResult testCaseResult = TestDescriptionAspect.testCaseResult(testCase);
+				//we consider inconclusive tests as failed
+				if (testCaseResult.getValue() == TDLTestResultUtil.INCONCLUSIVE) {
+					testCaseResult.setValue(TDLTestResultUtil.FAIL);
+				}
 				TDLTestCaseCoverage testCaseCoverage = TestDescriptionAspect.testCaseCoverage(testCase);
 				this.testSuiteResult.addResult(testCaseResult);
 				this.testSuiteCoverage.addTCCoverage(testCaseCoverage);
