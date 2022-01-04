@@ -42,7 +42,7 @@ public class MiniJavaCoverageComputation implements IDSLSpecificCoverage{
 		this.modelObjects = testCaseCoverage.getModelObjects();
 		for (int i=0; i<this.modelObjects.size(); i++) {
 			EObject modelObject = this.modelObjects.get(i);
-			String coverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(i);
+			//String coverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(i);
 			if (modelObject instanceof Program) {
 				programCoverage ((Program) modelObject);
 			}
@@ -112,6 +112,7 @@ public class MiniJavaCoverageComputation implements IDSLSpecificCoverage{
 		this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.NOT_COVERABLE);
 	}
 
+	@SuppressWarnings("unused")
 	private void classCoverage(Class clazz) {
 		//a class is covered when at least one of its methods is covered
 		//this method is useful when we need to have class coverage
