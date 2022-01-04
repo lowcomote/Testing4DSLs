@@ -88,7 +88,9 @@ class TestDescriptionAspect{
 		}
 		if (_self.testCaseResult.value.equals(TDLTestResultUtil.PASS)) {
 			println("Test case "+ _self.name + " PASSED")
-		}else{
+		}else if (_self.testCaseResult.value.equals(TDLTestResultUtil.INCONCLUSIVE)){
+			println("Test case "+ _self.name + " INCONCLUSIVE")
+		}else if (_self.testCaseResult.value.equals(TDLTestResultUtil.FAIL)){
 			println("Test case "+ _self.name + " FAILED")
 		}
 		
@@ -116,7 +118,9 @@ class TestDescriptionAspect{
 		}
 		if (_self.testCaseResult.value.equals(TDLTestResultUtil.PASS)) {
 			println("Test case "+ _self.name + " PASSED")
-		}else{
+		}else if (_self.testCaseResult.value.equals(TDLTestResultUtil.INCONCLUSIVE)){
+			println("Test case "+ _self.name + " INCONCLUSIVE")
+		}else if (_self.testCaseResult.value.equals(TDLTestResultUtil.FAIL)){
 			println("Test case "+ _self.name + " FAILED")
 		}
 		
