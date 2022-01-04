@@ -87,9 +87,11 @@ public class TDLTestSuiteCoverage {
 				}
 			}
 		}
-		countNumOfElements();
-		//System.out.println("\n" + "Model size (n. of EObjects): " + this.modelObjects.size() + "\n");
-		calculateCoveragePercentage();
+		if (this.tsObjectCoverageStatus.size() != 0) {
+			countNumOfElements();
+			//System.out.println("\n" + "Model size (n. of EObjects): " + this.modelObjects.size() + "\n");
+			calculateCoveragePercentage();
+		}
 	}
 	
 	private void countNumOfElements() {
