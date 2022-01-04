@@ -30,9 +30,6 @@ import org.imt.tdl.testResult.TDLTestResultUtil
 class PackageAspect {
 	
 	List<TestDescription> testcases = new ArrayList<TestDescription>
-	TestDescription enabledTestCase
-	TestConfiguration enabledConfiguration
-	
 	TDLTestSuiteResult testSuiteResult = new TDLTestSuiteResult
 	TDLTestSuiteCoverage testSuiteCoverage = new TDLTestSuiteCoverage
 	
@@ -52,14 +49,12 @@ class PackageAspect {
 		try {
 			_self.testSuiteResult.testSuite = _self
 			_self.testSuiteCoverage.testSuite = _self
-    		for (TestDescription tc:_self.testcases) {
-    			_self.enabledTestCase = tc;
-    			_self.enabledConfiguration = tc.testConfiguration;
-    			val TDLTestCaseResult testCaseResult = _self.enabledTestCase.executeTestCase()
+    		for (TestDescription testCase:_self.testcases) {
+    			val TDLTestCaseResult testCaseResult = testCase.executeTestCase()
     			_self.testSuiteResult.addResult(testCaseResult)
     			//for coverage, only considering passed and failed test cases
     			if (testCaseResult.value != TDLTestResultUtil.INCONCLUSIVE){
-    				_self.testSuiteCoverage.addTCCoverage(_self.enabledTestCase.testCaseCoverage)
+    				_self.testSuiteCoverage.addTCCoverage(testCase.testCaseCoverage)
     			}
     			println()
     		}
@@ -108,7 +103,7 @@ class TestDescriptionAspect{
 	//this method is called from TDL runner
 	@Step
 	def TDLTestCaseResult executeTestCase(String MUTPath){
-		_self.launcher = new EngineFactory()
+		_self.launcher = new EngineFactory
 		_self.testCaseResult = new TDLTestCaseResult
 		_self.testCaseResult.testCase = _self
 		_self.testCaseCoverage = new TDLTestCaseCoverage
