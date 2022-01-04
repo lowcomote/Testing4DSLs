@@ -37,6 +37,9 @@ public class MutationTestRunner {
 				}
 				TestDescriptionAspect.executeTestCase(testCase, mutantPath);
 				TDLTestCaseResult testCaseResult = TestDescriptionAspect.testCaseResult(testCase);
+				if (testCaseResult.getValue() == TDLTestResultUtil.INCONCLUSIVE) {
+					testCaseResult.setValue(TDLTestResultUtil.FAIL);
+				}
 				TDLTestCaseCoverage testCaseCoverage = TestDescriptionAspect.testCaseCoverage(testCase);
 				this.testSuiteResult.addResult(testCaseResult);
 				this.testSuiteCoverage.addTCCoverage(testCaseCoverage);
