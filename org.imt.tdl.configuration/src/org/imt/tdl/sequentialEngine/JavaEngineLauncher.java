@@ -89,7 +89,7 @@ public class JavaEngineLauncher extends AbstractEngine{
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
-		
+		//javaEngine.startSynchronous();
 		final Runnable modelRunner = new Thread() {
 		  @Override 
 		  public void run() { 
