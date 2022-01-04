@@ -199,10 +199,10 @@ public class TDLTestSuiteCoverage {
 	}
 	
 	private void clearRuntimeDataOfFeature(EObject object, EStructuralFeature feature) {
-		if (feature.eResource().getResourceSet() == null) {
+		if (object.eResource().getResourceSet() == null) {
 			object.eSet(feature, feature.getDefaultValue());
 		}else {
-			TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(feature);
+			TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(object);
 			try{
 				domain.getCommandStack().execute(new RecordingCommand(domain) {
 					@Override
