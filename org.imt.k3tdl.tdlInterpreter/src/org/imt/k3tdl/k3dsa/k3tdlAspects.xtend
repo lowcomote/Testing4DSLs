@@ -77,44 +77,25 @@ class TestDescriptionAspect{
 	
 	@Step
 	def TDLTestCaseResult executeTestCase(){
-		println("Start test case execution: " + _self.name)
-		_self.testCaseResult.testCase = _self
 		_self.testConfiguration.activateConfiguration(_self.launcher)
-		_self.behaviourDescription.callBehavior()
-		val modelExecutionResult = _self.testConfiguration.stopModelExecutionEngine(_self.launcher)
-		if (modelExecutionResult !== null && modelExecutionResult.contains(TDLTestResultUtil.FAIL)){
-			_self.testCaseResult.value = TDLTestResultUtil.FAIL
-			_self.testCaseResult.description = modelExecutionResult.substring(modelExecutionResult.indexOf(":")+1)
-		}
-		if (_self.testCaseResult.value.equals(TDLTestResultUtil.PASS)) {
-			println("Test case "+ _self.name + " PASSED")
-		}else if (_self.testCaseResult.value.equals(TDLTestResultUtil.INCONCLUSIVE)){
-			println("Test case "+ _self.name + " INCONCLUSIVE")
-		}else if (_self.testCaseResult.value.equals(TDLTestResultUtil.FAIL)){
-			println("Test case "+ _self.name + " FAILED")
-		}
-		
-		//save the model execution trace and the MUTResource related to this test case
-		_self.testCaseCoverage.testCase = _self
-		_self.testCaseCoverage.trace = _self.launcher.executionTrace
-    	_self.testCaseCoverage.MUTResource = _self.launcher.MUTResource
-		
-		return _self.testCaseResult
+		return _self.testCaseExecutor
 	}
 	
 	//this method is called from TDL runner
 	@Step
 	def TDLTestCaseResult executeTestCase(String MUTPath){
-		_self.launcher = new EngineFactory
-		_self.testCaseResult = new TDLTestCaseResult
-		_self.testCaseResult.testCase = _self
-		_self.testCaseCoverage = new TDLTestCaseCoverage
-		_self.launcher.MUTPath = MUTPath
 		_self.testConfiguration.activateConfiguration(_self.launcher, MUTPath)
+		return _self.testCaseExecutor
+	}
+	
+	def TDLTestCaseResult testCaseExecutor(){
+		println("Start test case execution: " + _self.name)
+		_self.testCaseResult.testCase = _self
 		_self.behaviourDescription.callBehavior()
 		val modelExecutionResult = _self.testConfiguration.stopModelExecutionEngine(_self.launcher)
 		if (modelExecutionResult !== null && modelExecutionResult.contains(TDLTestResultUtil.FAIL)){
-			_self.testCaseResult.value = modelExecutionResult
+			_self.testCaseResult.value = TDLTestResultUtil.FAIL
+			_self.testCaseResult.description = modelExecutionResult.substring(modelExecutionResult.indexOf(":")+1)
 		}
 		if (_self.testCaseResult.value.equals(TDLTestResultUtil.PASS)) {
 			println("Test case "+ _self.name + " PASSED")
