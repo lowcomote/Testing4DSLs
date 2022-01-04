@@ -59,6 +59,7 @@ public class FaultyObjectFinder {
 			}
 			else if (mutantDiffsFiltered.size() == 0) {
 				System.out.println("no main diffs");
+				return null;
 			}
 		}
 		System.out.println("several main diffs");
