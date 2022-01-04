@@ -120,7 +120,8 @@ public class ALEEngineLauncher extends AbstractEngine{
 				ee.printStackTrace();
 			}
 			catch (TimeoutException te) { 
-				te.printStackTrace();
+				//te.printStackTrace();
+				System.out.println("TimeoutException -> There is an infinite loop in the model under test");
 				future.cancel(true);
 				aleEngine.stop();
 				return "FAIL: TimeoutException -> There is an infinite loop in the model under test";
