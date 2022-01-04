@@ -189,14 +189,6 @@ public class SBFLEvaluation {
 	public void localizeFaultOfMutant(String mutant) {
 		TDLTestSuiteResult testSuiteResult = this.mutant_Verdict.get(mutant);
 		TDLTestSuiteCoverage testSuiteCoverage = this.mutant_Coverage.get(mutant);
-		EObject faultyObject = getFaultyObjectOfMutant(mutant);
-		clearRuntimeData(faultyObject);
-		int indexOfFaultyObject = -1;
-		Optional<EObject> eobjectOptional = testSuiteCoverage.getModelObjectsWithoutRuntimeState().stream().
-			filter(o -> EcoreUtil.equals(o, faultyObject)).findFirst();
-		if (eobjectOptional.isPresent()) {
-			indexOfFaultyObject = testSuiteCoverage.getModelObjectsWithoutRuntimeState().indexOf(eobjectOptional.get());
-		}
 		SuspiciousnessRanking suspComputing = new SuspiciousnessRanking(testSuiteResult, testSuiteCoverage);
 		suspComputing.calculateMeasures();
 		List<SBFLMeasures> mutantSBFLMeasures = suspComputing.getElementsSBFLMeasures();
@@ -207,15 +199,29 @@ public class SBFLEvaluation {
 				measure.getSusp().put(sbflTechnique, susp);
 			}
 			suspComputing.calculateRanks();
-			Integer rank = mutantSBFLMeasures.get(indexOfFaultyObject).getRank().get(sbflTechnique);
+			//Integer rank = mutantSBFLMeasures.get(indexOfFaultyObject).getRank().get(sbflTechnique);
 			//System.out.println("Rank of " + faultyObject + " calculated by " + sbflTechnique + ": " + rank);
 		}
-
+		EObject faultyObject = getFaultyObjectOfMutant(mutant);
+		clearRuntimeData(faultyObject);
+		int indexOfFaultyObject = findCoveredFaultyObject(faultyObject, testSuiteCoverage);
 		SBFLMeasures measures4faultyObject = mutantSBFLMeasures.get(indexOfFaultyObject);
 		for (String sbflTechnique : suspComputing.sbflTechniques) {
 			suspComputing.measureEXAMScores(measures4faultyObject, sbflTechnique);
 		}
 		mutant_SBFLMeasures4FaultyObject.put(mutant, measures4faultyObject);
+	}
+	
+	private int findCoveredFaultyObject(EObject faultyObject, TDLTestSuiteCoverage testSuiteCoverage) {
+		Optional<EObject> eobjectOptional = testSuiteCoverage.getModelObjectsWithoutRuntimeState().stream().
+				filter(o -> EcoreUtil.equals(o, faultyObject)).findFirst();
+		if (eobjectOptional.isPresent()) {
+			//if the faulty object is covered, return its index 
+			return testSuiteCoverage.getModelObjectsWithoutRuntimeState().indexOf(eobjectOptional.get());
+		}else {
+			//if the faulty object is not covered, find the index of its container
+			return findCoveredFaultyObject(faultyObject.eContainer(), testSuiteCoverage);
+		}
 	}
 	
 	private EObject getFaultyObjectOfMutant(String mutant) {
@@ -259,7 +265,6 @@ public class SBFLEvaluation {
 				eobjectType.getEAllStructuralFeatures().forEach(f -> clearRuntimeDataOfFeature(eobject, f));
 			}
 			else {
-
 				eclass = TDLCoverageUtil.getInstance().getClassesWithDynamicFeatures().stream().
 						filter(c -> c.getName().equals(eobjectType.getName())).findFirst();
 				if (eclass.isPresent()) {
