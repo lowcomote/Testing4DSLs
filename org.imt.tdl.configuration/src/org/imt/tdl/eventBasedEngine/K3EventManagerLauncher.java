@@ -101,12 +101,12 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		subtypeRelIds.add(subtypeRelId);
 		
 		try {
-			this.launchConf = getLaunchConfiguration(MUTPath, languageName, implRelIds, subtypeRelIds);
-			this.runConf = new EventBasedRunConfiguration(launchConf);
+			launchConf = getLaunchConfiguration(MUTPath, languageName, implRelIds, subtypeRelIds);
+			runConf = new EventBasedRunConfiguration(launchConf);
 		}catch (CoreException e) {
 			e.printStackTrace();
 		}
-		this.launcher = new CustomEventBasedLauncher();
+		launcher = new CustomEventBasedLauncher();
 	}
 	
 	private GenericEventManager eventManager = null;
@@ -116,6 +116,9 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	@Override
 	public String processAcceptedEvent(String eventName, Map<String, Object> parameters) {
 		EventOccurrence eventOccurrence = createEventOccurance(EventOccurrenceType.ACCEPTED, eventName, parameters);	
+		if (eventOccurrence == null) {
+			return "FAIL: There is an issue in the format of the event occurrence";
+		}
 		if (isDebugMode) {
 			ThreadImpl testDebugger = (ThreadImpl) testCaseDebugThread.getTarget();
 			if (testDebugger.getState().toString() == "STEPPING_OVER") {
@@ -141,7 +144,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 				}
 			}
 		}else {
-			this.eventManager.processEventOccurrence(eventOccurrence);
+			eventManager.processEventOccurrence(eventOccurrence);
 		}
 		return "PASS";
 	}
@@ -209,7 +212,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	@Override
 	public void startEngine() {
 		try {
-			this.executionEngine = (EventBasedExecutionEngine) launcher.createExecutionEngine(this.runConf, ExecutionMode.Run);
+			executionEngine = (EventBasedExecutionEngine) launcher.createExecutionEngine(this.runConf, ExecutionMode.Run);
 		}catch (CoreException | EngineContextException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -223,7 +226,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			}
 		};
 		final TransferQueue<Object> queue = new LinkedTransferQueue<>();
-		this.executionEngine.getExecutionContext().getExecutionPlatform().addEngineAddon(new IEngineAddon() {
+		executionEngine.getExecutionContext().getExecutionPlatform().addEngineAddon(new IEngineAddon() {
 			@Override
 			public void engineInitialized(IExecutionEngine<?> executionEngine) {
 				queue.add(new Object());
@@ -270,8 +273,8 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	private void addEventManagerListener(TransferQueue<Object> queue) {
 		try {
 			if (queue.poll(5000, TimeUnit.MILLISECONDS) != null) {
-				this.eventManager = (GenericEventManager) this.executionEngine.getAddonsTypedBy(GenericEventManager.class).stream().findFirst().orElse(null);
-				this.eventManager.addListener(new IEventManagerListener() {
+				eventManager = (GenericEventManager) this.executionEngine.getAddonsTypedBy(GenericEventManager.class).stream().findFirst().orElse(null);
+				eventManager.addListener(new IEventManagerListener() {
 					@Override
 					public void eventReceived(EventOccurrence e) {
 						eventOccurrences.add(e);
