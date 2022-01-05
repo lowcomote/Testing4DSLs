@@ -199,8 +199,6 @@ public class SBFLEvaluation {
 				measure.getSusp().put(sbflTechnique, susp);
 			}
 			suspComputing.calculateRanks();
-			//Integer rank = mutantSBFLMeasures.get(indexOfFaultyObject).getRank().get(sbflTechnique);
-			//System.out.println("Rank of " + faultyObject + " calculated by " + sbflTechnique + ": " + rank);
 		}
 		EObject faultyObject = getFaultyObjectOfMutant(mutant);
 		clearRuntimeData(faultyObject);
