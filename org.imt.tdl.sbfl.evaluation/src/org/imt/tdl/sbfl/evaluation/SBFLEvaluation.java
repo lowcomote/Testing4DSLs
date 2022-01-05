@@ -24,6 +24,7 @@ import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
 import org.imt.tdl.coverage.TDLCoverageUtil;
 import org.imt.tdl.coverage.TDLTestSuiteCoverage;
+import org.imt.tdl.coverage.ObjectCoverageStatus;
 import org.imt.tdl.faultLocalization.SBFLMeasures;
 import org.imt.tdl.faultLocalization.SuspiciousnessRanking;
 import org.imt.tdl.testResult.TDLTestSuiteResult;
@@ -201,25 +202,41 @@ public class SBFLEvaluation {
 			suspComputing.calculateRanks();
 		}
 		EObject faultyObject = getFaultyObjectOfMutant(mutant);
-		clearRuntimeData(faultyObject);
-		int indexOfFaultyObject = findCoveredFaultyObject(faultyObject, testSuiteCoverage);
-		SBFLMeasures measures4faultyObject = mutantSBFLMeasures.get(indexOfFaultyObject);
-		for (String sbflTechnique : suspComputing.sbflTechniques) {
-			suspComputing.measureEXAMScores(measures4faultyObject, sbflTechnique);
+		int indexOfFaultyObject = findCoveredFaultyObject(faultyObject, suspComputing.getCoverageMatix());
+		try {
+			SBFLMeasures measures4faultyObject = mutantSBFLMeasures.get(indexOfFaultyObject);
+			for (String sbflTechnique : suspComputing.sbflTechniques) {
+				suspComputing.measureEXAMScores(measures4faultyObject, sbflTechnique);
+			}
+			mutant_SBFLMeasures4FaultyObject.put(mutant, measures4faultyObject);
+		} catch (IndexOutOfBoundsException e){
+			System.out.println("Cannot find the index of the faulty object");
 		}
-		mutant_SBFLMeasures4FaultyObject.put(mutant, measures4faultyObject);
 	}
 	
-	private int findCoveredFaultyObject(EObject faultyObject, TDLTestSuiteCoverage testSuiteCoverage) {
-		Optional<EObject> eobjectOptional = testSuiteCoverage.getModelObjectsWithoutRuntimeState().stream().
-				filter(o -> EcoreUtil.equals(o, faultyObject)).findFirst();
-		if (eobjectOptional.isPresent()) {
-			//if the faulty object is covered, return its index 
-			return testSuiteCoverage.getModelObjectsWithoutRuntimeState().indexOf(eobjectOptional.get());
-		}else {
-			//if the faulty object is not covered, find the index of its container
-			return findCoveredFaultyObject(faultyObject.eContainer(), testSuiteCoverage);
+	private int findCoveredFaultyObject(EObject faultyObject, List<ObjectCoverageStatus> coverageMatrix) {
+		//clean the runtime data of the faulty object and the objects captured in the coverage matrix
+		clearRuntimeData(faultyObject);
+		coverageMatrix.forEach(c -> clearRuntimeData(c.getModelObject()));
+		//find the object of the coverage matrix that is equals to the faulty object
+		List<ObjectCoverageStatus> relatedCoverages = coverageMatrix.stream().
+				filter(info -> EcoreUtil.equals(info.getModelObject(), faultyObject)).collect(Collectors.toList());
+		if (relatedCoverages.size()==1) {
+			return coverageMatrix.indexOf(relatedCoverages.get(0));
 		}
+		else if (relatedCoverages.size() > 1){
+			ObjectCoverageStatus relatedCoverageByContainer = coverageMatrix.stream().
+					filter(info -> EcoreUtil.equals(info.getModelObject().eContainer(), faultyObject.eContainer())).findFirst().get();
+			int index = coverageMatrix.indexOf(relatedCoverageByContainer);
+			if (index > 0) {
+				return index;
+			}
+		}
+		//if the faulty object is not covered, find the index of its container
+		if (faultyObject.eContainer() != null) {
+			return findCoveredFaultyObject(faultyObject.eContainer(), coverageMatrix);
+		}
+		return -1;
 	}
 	
 	private EObject getFaultyObjectOfMutant(String mutant) {
