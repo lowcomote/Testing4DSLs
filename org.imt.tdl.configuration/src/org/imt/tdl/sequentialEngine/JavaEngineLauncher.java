@@ -82,14 +82,13 @@ public class JavaEngineLauncher extends AbstractEngine{
 	@Override
 	public String executeModelSynchronous(){
 		try{
-			this.javaEngine = createExecutionEngine();
+			javaEngine = createExecutionEngine();
 		}catch (EngineContextException e) {
 			e.printStackTrace();
 			return "FAIL: Cannot execute the model under test";
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
-		//javaEngine.startSynchronous();
 		final Runnable modelRunner = new Thread() {
 		  @Override 
 		  public void run() { 
@@ -121,14 +120,14 @@ public class JavaEngineLauncher extends AbstractEngine{
 		if (!executor.isTerminated()) {
 		    executor.shutdownNow(); // If you want to stop the code that hasn't finished
 		}
-		this.setModelResource(this.javaEngine.getExecutionContext().getResourceModel());
+		setModelResource(javaEngine.getExecutionContext().getResourceModel());
 		return "PASS: The model under test executed successfully";
 	}
 	
 	@Override
 	public String executeModelAsynchronous() {	
 		try{
-			this.javaEngine = createExecutionEngine();
+			javaEngine = createExecutionEngine();
 		}catch (EngineContextException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -143,8 +142,8 @@ public class JavaEngineLauncher extends AbstractEngine{
 	
 	@Override
 	public String stopAsynchronousExecution() {
-		this.javaEngine.stop();
-		this.setModelResource(this.javaEngine.getExecutionContext().getResourceModel());
+		javaEngine.stop();
+		setModelResource(javaEngine.getExecutionContext().getResourceModel());
 		return "PASS: The model under test executed successfully";
 	}
 	

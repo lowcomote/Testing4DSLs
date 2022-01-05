@@ -99,38 +99,36 @@ public class ALEEngineLauncher extends AbstractEngine{
 				e.printStackTrace();
 		}
 		final Runnable modelRunner = new Thread() {
-			  @Override 
-			  public void run() { 
-				  aleEngine.startSynchronous();
-			  }
-			};
-
-			final ExecutorService executor = Executors.newSingleThreadExecutor();
-			@SuppressWarnings("rawtypes")
-			final Future future = executor.submit(modelRunner);
-			executor.shutdown(); // This does not cancel the already-scheduled task.
-
-			try { 
-			  future.get(10, TimeUnit.SECONDS); 
+			@Override 
+			public void run() { 
+				aleEngine.startSynchronous();
 			}
-			catch (InterruptedException ie) { 
-				ie.printStackTrace();
-			}
-			catch (ExecutionException ee) { 
-				ee.printStackTrace();
-			}
-			catch (TimeoutException te) { 
-				//te.printStackTrace();
-				System.out.println("TimeoutException -> There is an infinite loop in the model under test");
-				future.cancel(true);
-				aleEngine.stop();
-				return "FAIL: TimeoutException -> There is an infinite loop in the model under test";
-			}
-			if (!executor.isTerminated()) {
-			    executor.shutdownNow(); // If you want to stop the code that hasn't finished
-			}
-			this.setModelResource(this.aleEngine.getExecutionContext().getResourceModel());
-			return "PASS: The model under test executed successfully";
+		};
+		final ExecutorService executor = Executors.newSingleThreadExecutor();
+		@SuppressWarnings("rawtypes")
+		final Future future = executor.submit(modelRunner);
+		executor.shutdown(); // This does not cancel the already-scheduled task.
+		try { 
+		  future.get(10, TimeUnit.SECONDS); 
+		}
+		catch (InterruptedException ie) { 
+			ie.printStackTrace();
+		}
+		catch (ExecutionException ee) { 
+			ee.printStackTrace();
+		}
+		catch (TimeoutException te) { 
+			//te.printStackTrace();
+			System.out.println("TimeoutException -> There is an infinite loop in the model under test");
+			future.cancel(true);
+			aleEngine.stop();
+			return "FAIL: TimeoutException -> There is an infinite loop in the model under test";
+		}
+		if (!executor.isTerminated()) {
+		    executor.shutdownNow(); // If you want to stop the code that hasn't finished
+		}
+		this.setModelResource(this.aleEngine.getExecutionContext().getResourceModel());
+		return "PASS: The model under test executed successfully";
 	}
 	
 	@Override
