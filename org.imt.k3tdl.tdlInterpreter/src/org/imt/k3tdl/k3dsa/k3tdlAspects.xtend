@@ -71,9 +71,9 @@ class PackageAspect {
 }
 @Aspect (className = TestDescription)
 class TestDescriptionAspect{
-	public EngineFactory launcher = new EngineFactory()
+	public EngineFactory launcher = new EngineFactory
 	public TDLTestCaseResult testCaseResult = new TDLTestCaseResult
-	public TDLTestCaseCoverage testCaseCoverage = new TDLTestCaseCoverage();
+	public TDLTestCaseCoverage testCaseCoverage = new TDLTestCaseCoverage
 	
 	@Step
 	def TDLTestCaseResult executeTestCase(){
@@ -84,6 +84,9 @@ class TestDescriptionAspect{
 	//this method is called from TDL runner
 	@Step
 	def TDLTestCaseResult executeTestCase(String MUTPath){
+		_self.launcher = new EngineFactory
+		_self.testCaseResult = new TDLTestCaseResult
+		_self.testCaseCoverage = new TDLTestCaseCoverage
 		_self.testConfiguration.activateConfiguration(_self.launcher, MUTPath)
 		return _self.testCaseExecutor
 	}
