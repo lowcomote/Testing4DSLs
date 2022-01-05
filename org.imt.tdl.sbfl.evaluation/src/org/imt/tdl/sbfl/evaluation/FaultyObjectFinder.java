@@ -44,8 +44,9 @@ public class FaultyObjectFinder {
 		if (mutantDiffs.size() == 1) {
 			return getDiffObject(mutantDiffs.get(0));
 		}
-		//Filter diffs that do not have any equivalence and requirement
-		List<Diff> mutantDiffsFiltered = mutantDiffs.stream().filter(md -> (md.getRequires() == null || md.getRequires().size() == 0) && 
+		//Filter diffs that do not have any equivalence and requirement, or they require the diffs related to the seed model
+		List<Diff> mutantDiffsFiltered = mutantDiffs.stream().
+				filter(md -> (md.getRequires() == null || md.getRequires().size() == 0 || !mutantDiffs.containsAll(md.getRequires())) && 
 				(md.getEquivalence() == null || md.getEquivalence().getDifferences().size() == 0)).collect(Collectors.toList());
 		if (mutantDiffsFiltered.size() == 1) {
 			return getDiffObject(mutantDiffsFiltered.get(0));
@@ -57,12 +58,12 @@ public class FaultyObjectFinder {
 				return getDiffObject(mutantDiffsFiltered.get(0));
 			}
 			else if (mutantDiffsFiltered.size() == 0) {
-				System.out.println("no main diffs");
-				return null;
+				System.out.println("no main diffs for mutant: " + mutant.getURI().toString());
+				throw new NullPointerException();
 			}
 		}
-		System.out.println("several main diffs");
-		return null;
+		System.out.println("several main diffs for mutant: " + mutant.getURI().toString());
+		throw new NullPointerException();
 	}
 	
 	private EObject getDiffObject(Diff diff) {
