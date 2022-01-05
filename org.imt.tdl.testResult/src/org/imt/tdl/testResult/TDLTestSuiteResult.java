@@ -32,7 +32,7 @@ public class TDLTestSuiteResult {
 	public int getNumOfPassedTestCases() {
 		int numPassedTests = 0;
 		for (TDLTestCaseResult result : testCaseResults) {
-			if (result.getValue().equals("PASS")) {
+			if (result.getValue() == TDLTestResultUtil.PASS) {
 				numPassedTests++;
 			}
 		}
@@ -42,7 +42,7 @@ public class TDLTestSuiteResult {
 	public int getNumOfFailedTestCases() {
 		int numFailedTests = 0;
 		for (TDLTestCaseResult result : testCaseResults) {
-			if (result.getValue().equals("FAIL")) {
+			if (result.getValue() == TDLTestResultUtil.FAIL) {
 				numFailedTests++;
 			}
 		}
@@ -52,7 +52,7 @@ public class TDLTestSuiteResult {
 	public int getNumOfInconclusiveTestCases() {
 		int num = 0;
 		for (TDLTestCaseResult result : testCaseResults) {
-			if (result.getValue().equals("INCONCLUSIVE")) {
+			if (result.getValue() == TDLTestResultUtil.INCONCLUSIVE) {
 				num++;
 			}
 		}
