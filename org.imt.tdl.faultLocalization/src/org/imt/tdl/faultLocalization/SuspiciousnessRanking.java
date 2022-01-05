@@ -4,14 +4,12 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.imt.tdl.coverage.TDLCoverageUtil;
 import org.imt.tdl.coverage.TDLTestSuiteCoverage;
-import org.imt.tdl.coverage.TestCoverageInfo;
+import org.imt.tdl.coverage.ObjectCoverageStatus;
 import org.imt.tdl.testResult.TDLTestCaseResult;
 import org.imt.tdl.testResult.TDLTestResultUtil;
 import org.imt.tdl.testResult.TDLTestSuiteResult;
@@ -21,8 +19,12 @@ public class SuspiciousnessRanking {
 	private final TDLTestSuiteResult testSuiteResult;
 	private final List<TDLTestCaseResult> errorVector;
 	private final TDLTestSuiteCoverage testSuiteCoverage;
-	private List<TestCoverageInfo> coverageMatix = new ArrayList<TestCoverageInfo>();
+	private List<ObjectCoverageStatus> coverageMatix = new ArrayList<ObjectCoverageStatus>();
 	
+	public List<ObjectCoverageStatus> getCoverageMatix() {
+		return coverageMatix;
+	}
+
 	private List<SBFLMeasures> elementsSBFLMeasures = new ArrayList<SBFLMeasures>();
 
 	public List<String> sbflTechniques = new ArrayList<>();
@@ -51,7 +53,7 @@ public class SuspiciousnessRanking {
 		this.testSuiteResult = TDLTestResultUtil.getInstance().getTestSuiteResult();
 		this.errorVector = this.testSuiteResult.getTestCaseResults();
 		this.testSuiteCoverage = TDLCoverageUtil.getInstance().getTestSuiteCoverage();
-		this.coverageMatix.addAll(this.testSuiteCoverage.coverageInfos);
+		this.coverageMatix.addAll(this.testSuiteCoverage.coverageOfModelObjects);
 		//the row of the matrix containing coverage percentages should be removed 
 		this.coverageMatix.removeIf(element -> element.getMetaclass() == null);
 		//if the element is not coverable, remove it from the matrix
@@ -88,7 +90,7 @@ public class SuspiciousnessRanking {
 		this.testSuiteResult = tsResult;
 		this.errorVector = this.testSuiteResult.getTestCaseResults();
 		this.testSuiteCoverage = tsCoverage;
-		this.coverageMatix.addAll(this.testSuiteCoverage.coverageInfos);
+		this.coverageMatix.addAll(this.testSuiteCoverage.coverageOfModelObjects);
 		//the row of the matrix containing coverage percentages should be removed 
 		this.coverageMatix.removeIf(element -> element.getMetaclass() == null);
 		//if the element is not coverable, remove it from the matrix

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-public class TestCoverageInfo {
+public class ObjectCoverageStatus {
 	
 	private EClass metaclass;
 	private EObject modelObject;

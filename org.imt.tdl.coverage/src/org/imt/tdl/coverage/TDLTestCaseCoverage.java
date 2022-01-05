@@ -61,6 +61,7 @@ public class TDLTestCaseCoverage {
 			SequentialStep<?, ?> step = (SequentialStep<?, ?>) rootStep;
 			if (step.getMseoccurrence() != null) {
 				EObject object = step.getMseoccurrence().getMse().getCaller();
+				//EObject equalObjectInRes = this.modelObjects.stream().filter(o -> EcoreUtil.equals(o, object)).findFirst().get();
 				int objectIndex = this.modelObjects.indexOf(object);
 				if (objectIndex != -1) {
 					String objectCoverage = this.tcObjectCoverageStatus.get(objectIndex);
@@ -85,6 +86,7 @@ public class TDLTestCaseCoverage {
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private void checkContainmentRelations(EObject rootObject) {
 		int rootObjectIndex = this.modelObjects.indexOf(rootObject);
 		if (rootObjectIndex != -1 && this.tcObjectCoverageStatus.get(rootObjectIndex) != TDLCoverageUtil.COVERED) {

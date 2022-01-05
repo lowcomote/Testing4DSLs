@@ -58,8 +58,10 @@ public class MiniJavaMutationTestHelper {
 		Resource mutantResource = (new ResourceSetImpl()).getResource(URI.createURI("platform:/resource" + mutantPath), true);
 		Program miniJavaPackage = (Program) mutantResource.getContents().get(0);
 		Class mainClass = getMainClass(miniJavaPackage);
+		EcoreUtil.UsageCrossReferencer.find(mainClass, mutantResource);
 		if (mainClass != null) {
 			miniJavaPackage.getClasses().remove(mainClass);
+			EcoreUtil.resolveAll(mutantResource);
 			//removeMainClass(mutantResource, miniJavaPackage, mainClass);
 			try {
 				mutantResource.save(null);
