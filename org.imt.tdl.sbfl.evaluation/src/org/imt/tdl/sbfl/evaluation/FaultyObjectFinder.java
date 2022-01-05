@@ -1,14 +1,10 @@
 package org.imt.tdl.sbfl.evaluation;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.compare.AttributeChange;
 import org.eclipse.emf.compare.Comparison;
 import org.eclipse.emf.compare.Diff;
@@ -23,6 +19,7 @@ import org.eclipse.emf.compare.scope.IComparisonScope;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
+@SuppressWarnings("restriction")
 public class FaultyObjectFinder {
 	
 	public EObject findFaultyObjectOfMutant(Resource mutant, Resource originalModel) {					
@@ -68,7 +65,6 @@ public class FaultyObjectFinder {
 		return null;
 	}
 	
-	@SuppressWarnings("restriction")
 	private EObject getDiffObject(Diff diff) {
 		if (diff instanceof AttributeChange) {
 			return ((MatchSpec)diff.eContainer()).getLeft();
