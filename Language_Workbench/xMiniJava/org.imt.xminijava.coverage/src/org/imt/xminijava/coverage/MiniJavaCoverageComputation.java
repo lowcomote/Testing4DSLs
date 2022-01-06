@@ -55,15 +55,16 @@ public class MiniJavaCoverageComputation implements IDSLSpecificCoverage{
 //			else if (modelObject instanceof Class && coverage != TDLCoverageUtil.COVERED) {
 //				classCoverage ((Class) modelObject);
 //			}
-			else if (modelObject instanceof IfStatement) {
-				ifCoverage ((IfStatement) modelObject);
-			}
-			else if (modelObject instanceof WhileStatement) {
-				whileCoverage ((WhileStatement) modelObject);
-			}
-			else if (modelObject instanceof ForStatement) {
-				forCoverage ((ForStatement) modelObject);
-			}
+			//the following are required to be compatible with CodeCover tool
+//			else if (modelObject instanceof IfStatement) {
+//				ifCoverage ((IfStatement) modelObject);
+//			}
+//			else if (modelObject instanceof WhileStatement) {
+//				whileCoverage ((WhileStatement) modelObject);
+//			}
+//			else if (modelObject instanceof ForStatement) {
+//				forCoverage ((ForStatement) modelObject);
+//			}
 		}
 	}
 
