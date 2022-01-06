@@ -58,11 +58,8 @@ public class MiniJavaMutationTestHelper {
 		Resource mutantResource = (new ResourceSetImpl()).getResource(URI.createURI("platform:/resource" + mutantPath), true);
 		Program miniJavaPackage = (Program) mutantResource.getContents().get(0);
 		Class mainClass = getMainClass(miniJavaPackage);
-		EcoreUtil.UsageCrossReferencer.find(mainClass, mutantResource);
 		if (mainClass != null) {
-			miniJavaPackage.getClasses().remove(mainClass);
-			EcoreUtil.resolveAll(mutantResource);
-			//removeMainClass(mutantResource, miniJavaPackage, mainClass);
+			this.removeMainClass(mutantResource, miniJavaPackage, mainClass);
 			try {
 				mutantResource.save(null);
 			} catch (IOException e) {
@@ -92,10 +89,10 @@ public class MiniJavaMutationTestHelper {
 	}
 	
 	public void removeMainClass (Resource MUTResource, Program javaPackage, Class javaClass) {
-		if (MUTResource.getResourceSet() == null) {
+		try {
 			javaPackage.getClasses().remove(javaClass);
 		}
-		else {
+		catch (IllegalStateException e) {
 			TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(javaPackage);
 			try{
 				domain.getCommandStack().execute(new RecordingCommand(domain) {
@@ -104,8 +101,8 @@ public class MiniJavaMutationTestHelper {
 						javaPackage.getClasses().remove(javaClass);	
 					}
 		   		});
-	   		}catch(IllegalArgumentException e){
-				e.printStackTrace();
+	   		}catch(IllegalArgumentException e1){
+				e1.printStackTrace();
 			}
 		}
 	}
