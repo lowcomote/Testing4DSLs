@@ -329,7 +329,7 @@
           <assignee xsi:type="xminiJava:VariableDeclaration" name="k">
             <typeRef xsi:type="xminiJava:IntegerTypeRef"/>
           </assignee>
-          <value xsi:type="xminiJava:Plus">
+          <value xsi:type="xminiJava:Minus">
             <left xsi:type="xminiJava:FieldAccess" field="//@classes.0/@members.1">
               <receiver xsi:type="xminiJava:This"/>
             </left>
@@ -377,7 +377,7 @@
                 </object>
                 <index xsi:type="xminiJava:SymbolRef" symbol="//@classes.0/@members.5/@body/@statements.2/@assignee"/>
               </assignee>
-              <value xsi:type="xminiJava:Minus">
+              <value xsi:type="xminiJava:Plus">
                 <left xsi:type="xminiJava:SymbolRef" symbol="//@classes.0/@members.5/@body/@statements.5/@assignee"/>
                 <right xsi:type="xminiJava:SymbolRef" symbol="//@classes.0/@members.5/@body/@statements.4/@assignee"/>
               </value>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xminiJava:Program xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xminiJava="http://org.imt.minijava.xminijava/xminiJava/" xsi:schemaLocation="http://org.imt.minijava.xminijava/xminiJava/ ../../../model/XMiniJava.ecore" name="org.cambridge.minijava.models">
+<xminiJava:Program xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xminiJava="http://org.imt.minijava.xminijava/xminiJava/" name="org.cambridge.minijava.models">
   <classes xsi:type="xminiJava:Class" name="BinarySearch" accessLevel="public">
     <members xsi:type="xminiJava:Field" name="number">
       <typeRef xsi:type="xminiJava:ArrayTypeRef">
@@ -225,7 +225,7 @@
               <assignee xsi:type="xminiJava:SymbolRef" symbol="//@classes.0/@members.3/@body/@statements.1/@assignee"/>
               <value xsi:type="xminiJava:Plus">
                 <left xsi:type="xminiJava:SymbolRef" symbol="//@classes.0/@members.3/@body/@statements.1/@assignee"/>
-                <right xsi:type="xminiJava:IntConstant" value="2"/>
+                <right xsi:type="xminiJava:IntConstant" value="-1"/>
               </value>
             </statements>
           </block>
@@ -367,7 +367,7 @@
               <assignee xsi:type="xminiJava:SymbolRef" symbol="//@classes.0/@members.5/@body/@statements.4/@assignee"/>
               <value xsi:type="xminiJava:Minus">
                 <left xsi:type="xminiJava:SymbolRef" symbol="//@classes.0/@members.5/@body/@statements.3/@assignee"/>
-                <right xsi:type="xminiJava:IntConstant" value="-1"/>
+                <right xsi:type="xminiJava:IntConstant" value="3"/>
               </value>
             </statements>
             <statements xsi:type="xminiJava:Assignment">

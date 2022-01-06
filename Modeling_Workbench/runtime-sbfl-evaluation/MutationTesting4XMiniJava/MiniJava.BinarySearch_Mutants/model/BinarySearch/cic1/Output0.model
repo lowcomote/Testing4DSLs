@@ -42,7 +42,7 @@
           <assignee xsi:type="xminiJava:VariableDeclaration" name="left">
             <typeRef xsi:type="xminiJava:IntegerTypeRef"/>
           </assignee>
-          <value xsi:type="xminiJava:IntConstant" value="1"/>
+          <value xsi:type="xminiJava:IntConstant"/>
         </statements>
         <statements xsi:type="xminiJava:Assignment">
           <assignee xsi:type="xminiJava:VariableDeclaration" name="var_cont">
@@ -225,7 +225,7 @@
               <assignee xsi:type="xminiJava:SymbolRef" symbol="//@classes.0/@members.3/@body/@statements.1/@assignee"/>
               <value xsi:type="xminiJava:Plus">
                 <left xsi:type="xminiJava:SymbolRef" symbol="//@classes.0/@members.3/@body/@statements.1/@assignee"/>
-                <right xsi:type="xminiJava:IntConstant" value="2"/>
+                <right xsi:type="xminiJava:IntConstant" value="1"/>
               </value>
             </statements>
           </block>

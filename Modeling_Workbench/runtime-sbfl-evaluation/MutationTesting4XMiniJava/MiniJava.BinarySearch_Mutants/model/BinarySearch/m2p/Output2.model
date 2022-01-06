@@ -33,7 +33,7 @@
         </statements>
         <statements xsi:type="xminiJava:Assignment">
           <assignee xsi:type="xminiJava:SymbolRef" symbol="//@classes.0/@members.2/@body/@statements.1/@assignee"/>
-          <value xsi:type="xminiJava:Plus">
+          <value xsi:type="xminiJava:Minus">
             <left xsi:type="xminiJava:SymbolRef" symbol="//@classes.0/@members.2/@body/@statements.1/@assignee"/>
             <right xsi:type="xminiJava:IntConstant" value="1"/>
           </value>
@@ -102,7 +102,7 @@
               <thenBlock>
                 <statements xsi:type="xminiJava:Assignment">
                   <assignee xsi:type="xminiJava:SymbolRef" symbol="//@classes.0/@members.2/@body/@statements.1/@assignee"/>
-                  <value xsi:type="xminiJava:Minus">
+                  <value xsi:type="xminiJava:Plus">
                     <left xsi:type="xminiJava:SymbolRef" symbol="//@classes.0/@members.2/@body/@statements.5/@assignee"/>
                     <right xsi:type="xminiJava:IntConstant" value="1"/>
                   </value>

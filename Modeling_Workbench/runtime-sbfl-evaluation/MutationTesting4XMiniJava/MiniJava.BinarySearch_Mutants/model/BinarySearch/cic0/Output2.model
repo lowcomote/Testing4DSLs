@@ -225,7 +225,7 @@
               <assignee xsi:type="xminiJava:SymbolRef" symbol="//@classes.0/@members.3/@body/@statements.1/@assignee"/>
               <value xsi:type="xminiJava:Plus">
                 <left xsi:type="xminiJava:SymbolRef" symbol="//@classes.0/@members.3/@body/@statements.1/@assignee"/>
-                <right xsi:type="xminiJava:IntConstant" value="2"/>
+                <right xsi:type="xminiJava:IntConstant"/>
               </value>
             </statements>
           </block>
@@ -367,7 +367,7 @@
               <assignee xsi:type="xminiJava:SymbolRef" symbol="//@classes.0/@members.5/@body/@statements.4/@assignee"/>
               <value xsi:type="xminiJava:Minus">
                 <left xsi:type="xminiJava:SymbolRef" symbol="//@classes.0/@members.5/@body/@statements.3/@assignee"/>
-                <right xsi:type="xminiJava:IntConstant"/>
+                <right xsi:type="xminiJava:IntConstant" value="3"/>
               </value>
             </statements>
             <statements xsi:type="xminiJava:Assignment">

@@ -66,7 +66,6 @@ public class SBFLEvaluation {
 			this.testSuite = getTestSuite(testResourcePath, testFile);
 		}
 		testMutants();
-		System.out.println("# of killed mutants: " + mutant_Verdict.size());
 		
 		//perform fault localization if there are killed mutants
 		if (mutant_Verdict.size()>0) {
@@ -78,7 +77,9 @@ public class SBFLEvaluation {
 			excelExporter.saveResults2Excelfile();
 			System.out.println("Results saved in an Excel file");
 		}
-		System.out.println("Evaluation finished");
+		System.out.println("Evaluation finished: ");
+		System.out.println("# of killed mutants: " + mutant_Verdict.size());
+		System.out.println("# of mutants that their fault is localized: " + mutant_SBFLMeasures4FaultyObject.size());
 	}
 	
 	private void findMutantRegistryMapping(IProject mutantsProject) {
@@ -212,7 +213,7 @@ public class SBFLEvaluation {
 				}
 				mutant_SBFLMeasures4FaultyObject.put(mutant, measures4faultyObject);
 			} catch (IndexOutOfBoundsException e){
-				System.out.println("Cannot find the index of the faulty object for mutant: " + mutant);
+				System.out.println("The faulty object is not covered for mutant : " + mutant);
 			}
 		}
 		catch (NullPointerException e) {
