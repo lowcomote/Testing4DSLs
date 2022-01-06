@@ -30,7 +30,7 @@ public abstract class AbstractEngine implements ISequentialExecutionEngine{
 	protected String _modelInitializationMethod;
 	protected String _modelInitializationArguments;
 	
-	private Resource MUTResource = null;
+	protected Resource MUTResource = null;
 	
 	private ILaunchConfigurationWorkingCopy configurationWorkingCopy;
 	protected ILaunchConfiguration launchConfiguration;
@@ -116,10 +116,7 @@ public abstract class AbstractEngine implements ISequentialExecutionEngine{
 	public void setModelResource(Resource resource) {
 		this.MUTResource = resource;
 	}
-	@Override
-	public Resource getModelResource() {
-		return this.MUTResource;
-	}
+
 	private String getDslName(String dslFilePath) {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
