@@ -7,9 +7,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.transaction.RecordingCommand;
-import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.etsi.mts.tdl.Annotation;
 import org.etsi.mts.tdl.ComponentInstance;
 import org.etsi.mts.tdl.TestDescription;
@@ -25,7 +22,7 @@ public class MiniJavaMutationTestHelper {
 
 	//the minijava code of the test case is in the 'main' method of minijava model and must be added to the mutant to be able to run test case
 	//the path to the minijava model is provided in the 'MUTPath' annotation of the test case's configuration
-	public void addMainClassToMutant(String mutantPath, TestDescription testCase) {
+	public void addMainClassToMutant(String mutantPath, TestDescription testCase, String mutantTestPath) {
 		ComponentInstance sutComponent = testCase.getTestConfiguration().getComponentInstance().stream().
 				filter(ci -> ci.getRole().toString().equals("SUT")).findFirst().get();
 		String MUTPath = "";
@@ -36,32 +33,21 @@ public class MiniJavaMutationTestHelper {
 			}
 		}
 		ResourceSet resSet = new ResourceSetImpl();
-		Resource miniJaveResource = resSet.getResource(URI.createURI("platform:/resource" + MUTPath), true);
-		Program miniJavaPackage = (Program) miniJaveResource.getContents().get(0);
-		Class mainClass = getMainClass(miniJavaPackage);
+		//find the 'Main' class from the seed MUTResource
+		Resource seedResource = resSet.getResource(URI.createURI("platform:/resource" + MUTPath), true);
+		Program seedPackage = (Program) seedResource.getContents().get(0);
+		Class mainClass = getMainClass(seedPackage);
 		if (mainClass != null) {
+			//add main class to mutant and save the result in a new resource
 			Resource mutantResource = resSet.getResource(URI.createURI("platform:/resource" + mutantPath), true);
-			//add main class to mutant
 			Program mutantPackage = (Program) mutantResource.getContents().get(0);
 			mutantPackage.getClasses().add(0, mainClass);
-			EcoreUtil.resolveAll(mutantResource);
-			try {
-				mutantResource.save(null);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	public void removeMainClassFromMutant(String mutantPath) {
-		Resource mutantResource = (new ResourceSetImpl()).getResource(URI.createURI("platform:/resource" + mutantPath), true);
-		Program miniJavaPackage = (Program) mutantResource.getContents().get(0);
-		Class mainClass = getMainClass(miniJavaPackage);
-		if (mainClass != null) {
-			this.removeMainClass(mutantResource, miniJavaPackage, mainClass);
-			try {
-				mutantResource.save(null);
+			EcoreUtil.resolveAll(mutantPackage);
+			Resource mutantTestResource = (new ResourceSetImpl()).createResource(URI.createURI("platform:/resource" + mutantTestPath));
+			mutantTestResource.getContents().add(mutantPackage);
+			EcoreUtil.resolveAll(mutantTestResource);
+			try {			
+				mutantTestResource.save(null);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -86,24 +72,5 @@ public class MiniJavaMutationTestHelper {
 			}
 		}
 		return null;
-	}
-	
-	public void removeMainClass (Resource MUTResource, Program javaPackage, Class javaClass) {
-		try {
-			javaPackage.getClasses().remove(javaClass);
-		}
-		catch (IllegalStateException e) {
-			TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(javaPackage);
-			try{
-				domain.getCommandStack().execute(new RecordingCommand(domain) {
-					@Override
-					protected void doExecute() {
-						javaPackage.getClasses().remove(javaClass);	
-					}
-		   		});
-	   		}catch(IllegalArgumentException e1){
-				e1.printStackTrace();
-			}
-		}
 	}
 }

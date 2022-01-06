@@ -32,10 +32,12 @@ public class MutationTestRunner {
 				TestDescription testCase = (TestDescription) o;
 				String dslName = getDSLName(testCase);
 				//for minijava mutants, the mutant must be changed to enable the test case execution ('main' method required)
+				String mutantTestPath = mutantPath;
 				if (dslName.equals("org.imt.xminijava.Xminijava")) {
-					(new MiniJavaMutationTestHelper()).addMainClassToMutant(mutantPath, testCase);
+					mutantTestPath = mutantPath.substring(0, mutantPath.indexOf(".model")) + "_" + testCase.getName() + ".model";
+					(new MiniJavaMutationTestHelper()).addMainClassToMutant(mutantPath, testCase, mutantTestPath);
 				}
-				TestDescriptionAspect.executeTestCase(testCase, mutantPath);
+				TestDescriptionAspect.executeTestCase(testCase, mutantTestPath);
 				TDLTestCaseResult testCaseResult = TestDescriptionAspect.testCaseResult(testCase);
 				if (testCaseResult.getValue() == TDLTestResultUtil.INCONCLUSIVE) {
 					testCaseResult.setValue(TDLTestResultUtil.FAIL);
@@ -45,10 +47,6 @@ public class MutationTestRunner {
 				this.testSuiteCoverage.addTCCoverage(testCaseCoverage);
 				if (this.DSLPath == "") {
 					this.DSLPath = TestConfigurationAspect.DSLPath(testCase.getTestConfiguration());
-				}
-				//for minijava mutants, after test case execution, the mutant must be returned to its initial state
-				if (dslName.equals("org.imt.xminijava.Xminijava")) {
-					(new MiniJavaMutationTestHelper()).removeMainClassFromMutant(mutantPath);
 				}
 			}
 		}
