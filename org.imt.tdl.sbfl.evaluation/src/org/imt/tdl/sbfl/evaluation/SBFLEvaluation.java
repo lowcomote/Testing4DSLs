@@ -66,10 +66,11 @@ public class SBFLEvaluation {
 			this.testSuite = getTestSuite(testResourcePath, testFile);
 		}
 		testMutants();
-		System.out.println("# of killed mutants: " + this.mutant_Verdict.size());
+		System.out.println("# of killed mutants: " + mutant_Verdict.size());
 		
-		if (this.mutant_registry.size()>0) {
-			for (String mutant:this.mutant_registry.keySet()) {
+		//perform fault localization if there are killed mutants
+		if (mutant_Verdict.size()>0) {
+			for (String mutant:mutant_Verdict.keySet()) {
 				localizeFaultOfMutant(mutant);
 			}
 			//export results to Excel
