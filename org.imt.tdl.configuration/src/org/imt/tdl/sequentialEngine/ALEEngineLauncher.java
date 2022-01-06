@@ -22,6 +22,7 @@ import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecoretools.ale.core.env.IAleEnvironment;
 import org.eclipse.emf.ecoretools.ale.core.parser.ParsedFile;
 import org.eclipse.emf.ecoretools.ale.implementation.ExtendedClass;
@@ -62,7 +63,7 @@ public class ALEEngineLauncher extends AbstractEngine{
 			this.breakAtStart();
 		}
 		
-		this.executioncontext.setResourceModel(this.getModelResource());
+		this.executioncontext.setResourceModel(this.MUTResource);
 		CustomALELauncher launcher = new CustomALELauncher();
 		launcher.executioncontext = this.executioncontext;
 		Launch debugLaunch = new Launch(this.launchConfiguration, ILaunchManager.DEBUG_MODE, new GemocSourceLocator());
@@ -158,7 +159,7 @@ public class ALEEngineLauncher extends AbstractEngine{
 	private AleEngine createExecutionEngine() throws EngineContextException, CoreException{
 		//if the resource is updated (e.g., the value of its dynamic features are set by the test case)
 		//then the execution context should be updated
-		this.executioncontext.setResourceModel(this.getModelResource());
+		this.executioncontext.setResourceModel(this.MUTResource);
 		CustomALELauncher launcher = new CustomALELauncher();
 		launcher.executioncontext = this.executioncontext;
 		
@@ -244,6 +245,11 @@ public class ALEEngineLauncher extends AbstractEngine{
 		else return element == null ? "" : element.toString();
 	}
 
+	@Override
+	public Resource getModelResource() {
+		return this.aleEngine.getExecutionContext().getResourceModel();
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {

@@ -18,6 +18,7 @@ import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.Launch;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IThread;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gemoc.dsl.debug.ide.adapter.DSLThreadAdapter;
 import org.eclipse.gemoc.dsl.debug.impl.ThreadImpl;
 import org.eclipse.gemoc.execution.sequential.javaengine.PlainK3ExecutionEngine;
@@ -53,7 +54,7 @@ public class JavaEngineLauncher extends AbstractEngine{
 			this.breakAtStart();
 		}
 
-		this.executioncontext.setResourceModel(this.getModelResource());
+		this.executioncontext.setResourceModel(this.MUTResource);
 		CustomK3Launcher launcher = new CustomK3Launcher();
 		launcher.executioncontext = this.executioncontext;
 		Launch debugLaunch = new Launch(this.launchConfiguration, ILaunchManager.DEBUG_MODE, new GemocSourceLocator());
@@ -151,7 +152,7 @@ public class JavaEngineLauncher extends AbstractEngine{
 	public PlainK3ExecutionEngine createExecutionEngine() throws EngineContextException, CoreException{
 		//if the resource is updated (e.g., the value of its dynamic features are set by the test case)
 		//then the execution context should be updated
-		this.executioncontext.setResourceModel(this.getModelResource());
+		this.executioncontext.setResourceModel(this.MUTResource);
 		CustomK3Launcher launcher = new CustomK3Launcher();
 		launcher.executioncontext = this.executioncontext;
 		
@@ -203,6 +204,11 @@ public class JavaEngineLauncher extends AbstractEngine{
 		return "";
 	}
 
+	@Override
+	public Resource getModelResource() {
+		return this.javaEngine.getExecutionContext().getResourceModel();
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {
