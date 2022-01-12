@@ -1,8 +1,10 @@
 package org.imt.tdl.sbfl.evaluation;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.compare.AttributeChange;
@@ -22,7 +24,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 @SuppressWarnings("restriction")
 public class FaultyObjectFinder {
 	
-	public EObject findFaultyObjectOfMutant(Resource mutant, Resource originalModel) {					
+	public <T> EObject findFaultyObjectOfMutant(Resource mutant, Resource originalModel) {					
 		final IComparisonScope scope = new DefaultComparisonScope(mutant, originalModel, null);		
 		IMatchEngine.Factory.Registry registry = EMFCompareRCPPlugin.getDefault().getMatchEngineFactoryRegistry();	
 		Comparison comparison = EMFCompare.builder().setMatchEngineFactoryRegistry(registry).build().compare(scope);
@@ -62,8 +64,22 @@ public class FaultyObjectFinder {
 				throw new NullPointerException();
 			}
 		}
-		System.out.println("several main diffs for mutant: " + mutant.getURI().toString());
-		throw new NullPointerException();
+		//when the program reaches this line, it means there are several diffs in mutantDiffsFiltered
+		//for SBFL, we should return the one that points to the first object regarding the object's position in the model
+		Iterable<EObject> iterable = () -> (Iterator<EObject>) mutant.getAllContents();
+        List<EObject> mutantObjects = StreamSupport
+                           .stream(iterable.spliterator(), false)
+                           .collect(Collectors.toList());
+        int lowestIndex = 0;
+        EObject firstDifferentObject = null;
+		for (Diff diff:mutantDiffsFiltered) {
+			EObject diffObject = getDiffObject(diff);
+			if (mutantObjects.indexOf(diffObject) <= lowestIndex) {
+				lowestIndex = mutantObjects.indexOf(diffObject);
+				firstDifferentObject = diffObject;
+			}
+		}
+		return firstDifferentObject;
 	}
 	
 	private EObject getDiffObject(Diff diff) {
