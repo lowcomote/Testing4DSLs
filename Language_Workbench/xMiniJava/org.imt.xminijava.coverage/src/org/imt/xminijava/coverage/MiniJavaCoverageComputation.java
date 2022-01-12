@@ -183,10 +183,9 @@ public class MiniJavaCoverageComputation implements IDSLSpecificCoverage{
 	
 	//the class of a minijava model containing the main method should be ignored in coverage computation
 	public void removeClassContainingMainMethod (Resource MUTResource, Program javaPackage, Class javaClass) {
-		if (MUTResource.getResourceSet() == null) {
+		try {
 			javaPackage.getClasses().remove(javaClass);
-		}
-		else {
+		}catch (IllegalStateException e) {
 			TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(javaPackage);
 			try{
 				domain.getCommandStack().execute(new RecordingCommand(domain) {
@@ -195,7 +194,7 @@ public class MiniJavaCoverageComputation implements IDSLSpecificCoverage{
 						javaPackage.getClasses().remove(javaClass);	
 					}
 		   		});
-	   		}catch(IllegalArgumentException e){
+	   		}catch(IllegalArgumentException e1){
 				e.printStackTrace();
 			}
 		}
