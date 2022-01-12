@@ -37,6 +37,8 @@ import org.imt.arduino.reactive.arduino.Pin
 import org.imt.arduino.reactive.arduino.Project
 import org.imt.arduino.reactive.arduino.PushButton
 import org.imt.arduino.reactive.arduino.Repeat
+import org.imt.arduino.reactive.arduino.Sketch
+import org.imt.arduino.reactive.arduino.Time
 import org.imt.arduino.reactive.arduino.UnaryBooleanExpression
 import org.imt.arduino.reactive.arduino.UnaryBooleanOperatorKind
 import org.imt.arduino.reactive.arduino.Utilities
@@ -46,9 +48,7 @@ import org.imt.arduino.reactive.arduino.VariableDeclaration
 import org.imt.arduino.reactive.arduino.VariableRef
 import org.imt.arduino.reactive.arduino.WaitFor
 import org.imt.arduino.reactive.arduino.While
-import org.imt.arduino.reactive.arduino.Sketch
 
-import static extension org.imt.arduino.reactive.interpreter.Pin_EvaluableAspect.*
 import static extension org.imt.arduino.reactive.interpreter.Block_ExecutableAspect.*
 import static extension org.imt.arduino.reactive.interpreter.BluetoothTransceiver_PushAspect.*
 import static extension org.imt.arduino.reactive.interpreter.BooleanVariable_EvaluableAspect.*
@@ -58,6 +58,7 @@ import static extension org.imt.arduino.reactive.interpreter.If_EvaluableAspect.
 import static extension org.imt.arduino.reactive.interpreter.Instruction_ExecutableAspect.*
 import static extension org.imt.arduino.reactive.interpreter.Instruction_UtilitesAspect.*
 import static extension org.imt.arduino.reactive.interpreter.IntegerVariable_EvaluableAspect.*
+import static extension org.imt.arduino.reactive.interpreter.Pin_EvaluableAspect.*
 import static extension org.imt.arduino.reactive.interpreter.Project_ExecutableAspect.*
 
 @Aspect(className=Instruction)
@@ -66,7 +67,7 @@ class Instruction_UtilitesAspect {
 		var Project project = null
 
 		var current = _self.eContainer()
-		while (current != null) {
+		while (current !== null) {
 			if (current instanceof Project) {
 				project = current as Project
 				return project
@@ -82,7 +83,7 @@ class Instruction_UtilitesAspect {
 		val project = _self.getProject(module)
 
 		for (board : project.boards) {
-			if (board != null && board instanceof ArduinoBoard) {
+			if (board !== null && board instanceof ArduinoBoard) {
 				var ArduinoBoard arduinoBoard = board as ArduinoBoard
 				for (analogPin : arduinoBoard.analogPins) {
 					if (analogPin.module == module) {
@@ -125,7 +126,7 @@ class Project_ExecutableAspect {
 		val start = System.nanoTime
 		_self.execute
 		val stop = System.nanoTime
-		println("time to execute " + (stop - start))
+		//println("time to execute " + (stop - start))
 	}
 	
 	@Step
@@ -140,7 +141,7 @@ class Project_ExecutableAspect {
 	}
 	
 	@InitializeModel
-	def public void initializeModel(EList<String> args){
+	def void initializeModel(EList<String> args){
 		_self.setup
 	}
 }
@@ -166,7 +167,7 @@ class ModuleAspect {
 		var Project project = null
 
 		var current = _self.eContainer()
-		while (current != null) {
+		while (current !== null) {
 			if (current instanceof Project) {
 				project = current as Project
 				return project
@@ -182,7 +183,7 @@ class ModuleAspect {
 		val project = _self.getProject()
 
 		for (board : project.boards) {
-			if (board != null && board instanceof ArduinoBoard) {
+			if (board !== null && board instanceof ArduinoBoard) {
 				var ArduinoBoard arduinoBoard = board as ArduinoBoard
 				for (analogPin : arduinoBoard.analogPins) {
 					if (analogPin.module == _self) {
@@ -206,14 +207,14 @@ class PushButtonAspect extends ModuleAspect{
 	
 	@Step
 	def void press() {
-		println("Button " + _self.name + " pressed")
+		//println("Button " + _self.name + " pressed")
 		_self.pin.level = 1
 		_self.project.execute
 	}
 	
 	@Step
 	def void release() {
-		println("Button " + _self.name + " released")
+		//println("Button " + _self.name + " released")
 		_self.pin.level = 0
 		_self.project.execute
 	}
@@ -224,13 +225,13 @@ class InfraRedSensorAspect extends ModuleAspect{
 	
 	@Step
 	def void detect(){
-		println("Sensor " + _self.name + " detected")
+		//println("Sensor " + _self.name + " detected")
 		_self.pin.level = 1
 		_self.project.execute
 	}
 	@Step
 	def void notDetect(){
-		println("Sensor " + _self.name + " not detected")
+		//println("Sensor " + _self.name + " not detected")
 		_self.pin.level = 0
 		_self.project.execute
 	}
@@ -367,7 +368,7 @@ class If_ExecutableAspect extends Control_ExecutableAspect {
 		if (_self.evaluate) {
 			_self.block.execute
 		} else {
-			if (_self.elseBlock != null) {
+			if (_self.elseBlock !== null) {
 				_self.elseBlock.execute
 			}
 		}
@@ -515,7 +516,6 @@ class BinaryIntegerExpression_EvaluableAspect extends Expression_EvaluableAspect
 			}
 			case PLUS: {				
 				res = iLeft + iRight
-				println(res)
 			}
 			case POURCENT: {
 				res = iLeft % iRight
@@ -569,7 +569,7 @@ class IntegerModuleGet_ExecutableAspect extends Expression_EvaluableAspect{
 		if (_self.module instanceof BluetoothTransceiver){
 			val l = (_self.module as BluetoothTransceiver).dataReceived
 			val res = l.head
-			if (res != null) {
+			if (res !== null) {
 				l.remove(0)
 				return res
 			} else {
@@ -677,8 +677,15 @@ class Delay_ExecutableAspect extends Utilities_ExecutableAspect {
 	@OverrideAspectMethod
 	def void execute() {
 		try {
-			Thread.sleep(_self.value)
+			if (_self.unit == Time.MICRO_SECOND){
+				val value = _self.value / 1000;
+				Thread.sleep(value)
+			}
+			else{
+				Thread.sleep(_self.value)
+			}
 		} catch (InterruptedException e) {
+			System.out.println("InterruptedException thrown because of Delay")
 			e.printStackTrace()
 		}
 	}
@@ -692,7 +699,7 @@ class Pin_EvaluableAspect {
 	
 	@Step
 	def void changeLevel(){
-		println("The level of " + _self.name + " pin changed to " + _self.level)
+		//println("The level of " + _self.name + " pin changed to " + _self.level)
 	}
 }
 
