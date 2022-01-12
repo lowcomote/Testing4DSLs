@@ -166,24 +166,21 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 
 	@Override
 	public String assertExposedEvent(String eventName, Map<String, Object> parameters) {
-		EventOccurrence eventOccurrence = createEventOccurance(EventOccurrenceType.EXPOSED, eventName, parameters);
-		if (eventOccurrence == null) {
-			return "FAIL: The expected event does not match to the interface or its parameters does not exist in the MUT";
-		}
-		EventOccurrence occ;
 		try {
-			occ = this.eventOccurrences.poll(10000, TimeUnit.MILLISECONDS);
-			if (occ != null && this.equalEventOccurrences(occ, eventOccurrence)) {
-				return "PASS";
-			}else {
-				String result= "FAIL: The expected event is not received from MUT";
-				if (occ == null) {
-					result += "\nThere is no received event";
-				}else {
-					result += "\nThe received event is:\n" + this.eventOccurenceToString(occ);
-				}
-				return result;
+			EventOccurrence receivedEventOccurrence = this.eventOccurrences.poll(10000, TimeUnit.MILLISECONDS);
+			EventOccurrence expectedEventOccurrence = createEventOccurance(EventOccurrenceType.EXPOSED, eventName, parameters);
+			if (expectedEventOccurrence == null) {
+				return "FAIL: The expected event occurrence does not match to the interface or its parameters does not exist in the MUT";
 			}
+			if (receivedEventOccurrence == null) {
+				return "FAIL: There is no received event occurrence from the MUT";
+			}
+			if (this.equalEventOccurrences(receivedEventOccurrence, expectedEventOccurrence)) {
+				return "PASS";
+			}
+			return "FAIL: The expected event is not received from MUT \nThe received event is:\n" + 
+				this.eventOccurenceToString(receivedEventOccurrence);
+
 		} catch (InterruptedException e) {
 			return e.getMessage();
 		}
