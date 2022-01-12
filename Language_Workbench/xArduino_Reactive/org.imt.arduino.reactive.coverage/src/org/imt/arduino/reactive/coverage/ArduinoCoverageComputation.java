@@ -2,18 +2,17 @@ package org.imt.arduino.reactive.coverage;
 
 import java.util.List;
 
-
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.imt.arduino.reactive.arduino.AnalogPin;
 import org.imt.arduino.reactive.arduino.Block;
+import org.imt.arduino.reactive.arduino.Board;
 import org.imt.arduino.reactive.arduino.DigitalPin;
 import org.imt.arduino.reactive.arduino.Instruction;
+import org.imt.arduino.reactive.arduino.Module;
 import org.imt.arduino.reactive.arduino.Pin;
 import org.imt.arduino.reactive.arduino.Project;
 import org.imt.arduino.reactive.arduino.Sketch;
-import org.imt.arduino.reactive.arduino.Module;
 import org.imt.tdl.coverage.TDLCoverageUtil;
 import org.imt.tdl.coverage.TDLTestCaseCoverage;
 import org.imt.tdl.coverage.dslSpecific.IDSLSpecificCoverage;
@@ -45,13 +44,24 @@ public class ArduinoCoverageComputation implements IDSLSpecificCoverage{
 			else if (modelObject instanceof Block && coverage != TDLCoverageUtil.COVERED) {
 				blockCoverage ((Block) modelObject);
 			}
-			else if (modelObject instanceof Pin && coverage != TDLCoverageUtil.COVERED) {
+			//The board and its contained elements must be ignored from coverage computation because only the sketch is important
+			else if (modelObject instanceof Board) {
+				boardCoverage ((Board) modelObject);
+			}
+			else if (modelObject instanceof Pin) {
 				pinCoverage ((Pin) modelObject);
 			}
-			else if (modelObject instanceof Module && coverage != TDLCoverageUtil.COVERED) {
+			else if (modelObject instanceof Module) {
 				moduleCoverage ((Module) modelObject);
 			}
 		}
+	}
+
+	private void boardCoverage(Board modelObject) {
+		// TODO Auto-generated method stub
+		Board board = (Board) modelObject;
+		int index = this.modelObjects.indexOf(board);
+		this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.NOT_COVERABLE);
 	}
 
 	private void projectCoverage(Project project) {
@@ -100,12 +110,14 @@ public class ArduinoCoverageComputation implements IDSLSpecificCoverage{
 	}
 	
 	private void pinCoverage(Pin pin) {
-		if (pin instanceof DigitalPin) {
-			digitalPinCoverage ((DigitalPin) pin);
-		}
-		else if (pin instanceof AnalogPin) {
-			analogPinCoverage ((AnalogPin) pin);
-		}
+		int pinIndex = this.modelObjects.indexOf(pin);
+		this.testCaseCoverage.getTcObjectCoverageStatus().set(pinIndex, TDLCoverageUtil.NOT_COVERABLE);
+//		if (pin instanceof DigitalPin) {
+//			digitalPinCoverage ((DigitalPin) pin);
+//		}
+//		else if (pin instanceof AnalogPin) {
+//			analogPinCoverage ((AnalogPin) pin);
+//		}
 	}
 
 	private void digitalPinCoverage(DigitalPin pin) {
@@ -141,16 +153,16 @@ public class ArduinoCoverageComputation implements IDSLSpecificCoverage{
 		//if the container of the module i.e., a pin is covered, the module is also covered
 		Module module = (Module) modelObject;
 		int moduleIndex = this.modelObjects.indexOf(module);
-		int pinIndex  =  this.modelObjects.indexOf(module.eContainer());
-		String pinCoverage  = this.testCaseCoverage.getTcObjectCoverageStatus().get(pinIndex);
-		if (pinCoverage == TDLCoverageUtil.COVERED) {
-			this.testCaseCoverage.getTcObjectCoverageStatus().set(moduleIndex, TDLCoverageUtil.COVERED);
-		}
+		this.testCaseCoverage.getTcObjectCoverageStatus().set(moduleIndex, TDLCoverageUtil.NOT_COVERABLE);
+//		int pinIndex  =  this.modelObjects.indexOf(module.eContainer());
+//		String pinCoverage  = this.testCaseCoverage.getTcObjectCoverageStatus().get(pinIndex);
+//		if (pinCoverage == TDLCoverageUtil.COVERED) {
+//			this.testCaseCoverage.getTcObjectCoverageStatus().set(moduleIndex, TDLCoverageUtil.COVERED);
+//		}
 	}
 	
 	@Override
 	public void ignoreModelObjects(Resource MUTResource) {
-		// TODO Auto-generated method stub
 		
 	}
 }
