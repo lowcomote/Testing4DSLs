@@ -112,7 +112,7 @@ class StateMachineAspect {
 			if (eventOccurrence !== null && eventOccurrence instanceof CallEventOccurrence) {
 				val out = (eventOccurrence as CallEventOccurrence).outParameterValues
 				if (!out.empty) {
-					println(out)
+					//println(out)
 				}
 			}
 			_self.dispatchCompletionEvents
@@ -746,7 +746,7 @@ class BehaviorAspect {
 		//println((_self.eContainer as NamedElement).name +
 			//"(" + _self.name + ")" + if (eventOccurrence !== null)
 			//	{eventOccurrence.parameters} else {""})
-		println (_self.name)
+		//println (_self.name)
 		var StateMachine containerSM = null;
 		if (_self.eContainer instanceof State){
 			containerSM = (_self.eContainer as State).containingRegion.containingStateMachine
