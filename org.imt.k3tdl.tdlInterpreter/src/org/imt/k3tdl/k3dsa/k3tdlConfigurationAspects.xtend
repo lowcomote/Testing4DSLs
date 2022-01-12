@@ -190,7 +190,7 @@ class GateInstanceAspect {
 			val argName = event.argument.get(i).parameter.name
 			var EObject argValue = null
 			val DataUse argTdlValue = event.argument.get(i).dataUse
-			argValue = (argTdlValue as DataInstanceUse).getMatchedMUTElement(_self.gateLauncher.MUTResource, false, _self.DSLPath)
+			argValue = (argTdlValue as DataInstanceUse).getMatchedMUTElement(_self.gateLauncher.MUTResource, true, _self.DSLPath)
 			//put the name of the parameter along with its value
 			parameters.put(argName, argValue)		
 		}
