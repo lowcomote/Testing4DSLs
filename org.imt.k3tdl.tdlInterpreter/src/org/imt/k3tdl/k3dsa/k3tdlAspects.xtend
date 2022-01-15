@@ -100,19 +100,13 @@ class TestDescriptionAspect{
 			_self.testCaseResult.value = TDLTestResultUtil.FAIL
 			_self.testCaseResult.description = modelExecutionResult.substring(modelExecutionResult.indexOf(":")+1)
 		}
-		if (_self.testCaseResult.value.equals(TDLTestResultUtil.PASS)) {
-			println("Test case "+ _self.name + " PASSED")
-		}else if (_self.testCaseResult.value.equals(TDLTestResultUtil.INCONCLUSIVE)){
-			println("Test case "+ _self.name + " INCONCLUSIVE")
-		}else if (_self.testCaseResult.value.equals(TDLTestResultUtil.FAIL)){
-			println("Test case "+ _self.name + " FAILED")
+		println("Test case "+ _self.name + ": " + _self.testCaseResult.value)
+		if (_self.testCaseResult.value != TDLTestResultUtil.INCONCLUSIVE){
+			//save the model execution trace and the MUTResource related to this test case if its result is not INCONCLUSIVE
+			_self.testCaseCoverage.testCase = _self
+			_self.testCaseCoverage.trace = _self.launcher.executionTrace
+	    	_self.testCaseCoverage.MUTResource = _self.launcher.MUTResource
 		}
-		
-		//save the model execution trace and the MUTResource related to this test case
-		_self.testCaseCoverage.testCase = _self
-		_self.testCaseCoverage.trace = _self.launcher.executionTrace
-    	_self.testCaseCoverage.MUTResource = _self.launcher.MUTResource
-		
 		return _self.testCaseResult
 	}
 }
