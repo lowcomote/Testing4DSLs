@@ -1,11 +1,13 @@
 package org.imt.tdl.sbfl.evaluation;
 
+import org.eclipse.gmf.runtime.emf.core.internal.util.Trace;
 import org.etsi.mts.tdl.Annotation;
 import org.etsi.mts.tdl.ComponentInstance;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
 import org.imt.k3tdl.k3dsa.TestConfigurationAspect;
 import org.imt.k3tdl.k3dsa.TestDescriptionAspect;
+import org.imt.tdl.configuration.EngineFactory;
 import org.imt.tdl.coverage.TDLCoverageUtil;
 import org.imt.tdl.coverage.TDLTestCaseCoverage;
 import org.imt.tdl.coverage.TDLTestSuiteCoverage;
@@ -39,12 +41,20 @@ public class MutationTestRunner {
 				}
 				TestDescriptionAspect.executeTestCase(testCase, mutantTestPath);
 				TDLTestCaseResult testCaseResult = TestDescriptionAspect.testCaseResult(testCase);
-				if (testCaseResult.getValue() == TDLTestResultUtil.INCONCLUSIVE) {
-					testCaseResult.setValue(TDLTestResultUtil.FAIL);
-				}
 				TDLTestCaseCoverage testCaseCoverage = TestDescriptionAspect.testCaseCoverage(testCase);
+				if (testCaseResult.getValue() == TDLTestResultUtil.INCONCLUSIVE) {
+					//for minijava models, inconclusive tests can be considered as failed and will be used in the coverage and SBFL
+					if (dslName.equals("org.imt.xminijava.Xminijava")) {
+						testCaseResult.setValue(TDLTestResultUtil.FAIL);
+						testCaseCoverage.setTestCase(testCase);
+						testCaseCoverage.setTrace(TestDescriptionAspect.launcher(testCase).getExecutionTrace());
+						testCaseCoverage.setMUTResource(TestDescriptionAspect.launcher(testCase).getMUTResource());
+						this.testSuiteResult.addResult(testCaseResult);
+					}
+				}else {
+					this.testSuiteCoverage.addTCCoverage(testCaseCoverage);
+				}
 				this.testSuiteResult.addResult(testCaseResult);
-				this.testSuiteCoverage.addTCCoverage(testCaseCoverage);
 				if (this.DSLPath == "") {
 					this.DSLPath = TestConfigurationAspect.DSLPath(testCase.getTestConfiguration());
 				}
