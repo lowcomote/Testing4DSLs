@@ -256,6 +256,9 @@ public class ALEEngineLauncher extends AbstractEngine{
 	@SuppressWarnings("unchecked")
 	@Override
 	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {
-		return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) this.aleEngine.getAddon(GenericTraceEngineAddon.class).getTrace();
+		if (this.aleEngine != null) {
+			return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) this.aleEngine.getAddon(GenericTraceEngineAddon.class).getTrace();
+		}
+		return null;
 	}
 }

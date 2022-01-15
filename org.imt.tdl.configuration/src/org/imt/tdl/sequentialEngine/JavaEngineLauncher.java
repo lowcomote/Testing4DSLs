@@ -215,6 +215,9 @@ public class JavaEngineLauncher extends AbstractEngine{
 	@SuppressWarnings("unchecked")
 	@Override
 	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {
-		return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) this.javaEngine.getAddon(GenericTraceEngineAddon.class).getTrace();
+		if (this.javaEngine != null) {
+			return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) this.javaEngine.getAddon(GenericTraceEngineAddon.class).getTrace();
+		}
+		return null;
 	}
 }
