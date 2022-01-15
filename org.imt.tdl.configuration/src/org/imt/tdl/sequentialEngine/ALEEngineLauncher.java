@@ -247,7 +247,10 @@ public class ALEEngineLauncher extends AbstractEngine{
 
 	@Override
 	public Resource getModelResource() {
-		return this.aleEngine.getExecutionContext().getResourceModel();
+		if (this.aleEngine != null) {
+			return this.aleEngine.getExecutionContext().getResourceModel();
+		}
+		return this.MUTResource;
 	}
 	
 	@SuppressWarnings("unchecked")

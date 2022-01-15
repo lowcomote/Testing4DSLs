@@ -206,7 +206,10 @@ public class JavaEngineLauncher extends AbstractEngine{
 
 	@Override
 	public Resource getModelResource() {
-		return this.javaEngine.getExecutionContext().getResourceModel();
+		if (this.javaEngine != null) {
+			return this.javaEngine.getExecutionContext().getResourceModel();
+		}
+		return this.MUTResource;
 	}
 	
 	@SuppressWarnings("unchecked")
