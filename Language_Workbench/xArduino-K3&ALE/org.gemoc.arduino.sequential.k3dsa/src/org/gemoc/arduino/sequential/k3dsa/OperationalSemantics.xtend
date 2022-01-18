@@ -1,4 +1,3 @@
-
 package org.gemoc.arduino.sequential.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
@@ -63,7 +62,7 @@ class Instruction_UtilitesAspect {
 		var Project project = null
 
 		var current = _self.eContainer()
-		while (current != null) {
+		while (current !== null) {
 			if (current instanceof Project) {
 				project = current as Project
 				return project
@@ -79,7 +78,7 @@ class Instruction_UtilitesAspect {
 		val project = _self.getProject(module)
 
 		for (board : project.boards) {
-			if (board != null && board instanceof ArduinoBoard) {
+			if (board !== null && board instanceof ArduinoBoard) {
 				var ArduinoBoard arduinoBoard = board as ArduinoBoard
 				for (analogPin : arduinoBoard.analogPins) {
 					if (analogPin.module == module) {
@@ -135,9 +134,9 @@ class Project_ExecutableAspect {
 			} 
 		}]
 	}
-	
+	 												
 	@InitializeModel
-	def public void initializeModel(EList<String> args){
+	def void initializeModel(EList<String> args){
 		_self.setup
 	}
 }
@@ -272,7 +271,7 @@ class If_ExecutableAspect extends Control_ExecutableAspect {
 		if (_self.evaluate) {
 			_self.block.execute
 		} else {
-			if (_self.elseBlock != null) {
+			if (_self.elseBlock !== null) {
 				_self.elseBlock.execute
 			}
 		}
@@ -473,7 +472,7 @@ class IntegerModuleGet_ExecutableAspect extends Expression_EvaluableAspect{
 		if (_self.module instanceof BluetoothTransceiver){
 			val l = (_self.module as BluetoothTransceiver).dataReceived
 			val res = l.head
-			if (res != null) {
+			if (res !== null) {
 				l.remove(0)
 				return res
 			} else {
