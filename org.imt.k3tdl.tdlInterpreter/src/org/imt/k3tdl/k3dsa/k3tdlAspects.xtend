@@ -81,7 +81,7 @@ class TestDescriptionAspect{
 		return _self.testCaseExecutor
 	}
 	
-	//this method is called from TDL runner
+	//this method is called from other codes (not GEMOC engine)
 	@Step
 	def TDLTestCaseResult executeTestCase(String MUTPath){
 		_self.launcher = new EngineFactory
