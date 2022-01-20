@@ -72,6 +72,8 @@ public class SBFLEvaluation {
 			for (String mutant:mutant_Verdict.keySet()) {
 				localizeFaultOfMutant(mutant);
 			}
+		}
+		if (mutant_SBFLMeasures4FaultyObject.size()>0) {
 			//export results to Excel
 			ExcelExporter excelExporter = new ExcelExporter(mutant_SBFLMeasures4FaultyObject);
 			excelExporter.saveResults2Excelfile();
@@ -253,7 +255,8 @@ public class SBFLEvaluation {
 	private int findCoveredFaultyObject(EObject faultyObject, List<ObjectCoverageStatus> coverageMatrix) {
 		//clean the runtime data of the faulty object and the objects captured in the coverage matrix
 		clearRuntimeData(faultyObject);
-		coverageMatrix.forEach(c -> clearRuntimeData(c.getModelObject()));
+		clearRuntimeData(coverageMatrix.get(0).getModelObject());
+		
 		//find the object of the coverage matrix that is equals to the faulty object
 		List<ObjectCoverageStatus> relatedCoverages = coverageMatrix.stream().
 				filter(info -> EcoreUtil.equals(info.getModelObject(), faultyObject)).collect(Collectors.toList());
@@ -261,12 +264,15 @@ public class SBFLEvaluation {
 			return coverageMatrix.indexOf(relatedCoverages.get(0));
 		}
 		else if (relatedCoverages.size() > 1){
-			ObjectCoverageStatus relatedCoverageByContainer = coverageMatrix.stream().
-					filter(info -> EcoreUtil.equals(info.getModelObject().eContainer(), faultyObject.eContainer())).findFirst().get();
-			int index = coverageMatrix.indexOf(relatedCoverageByContainer);
-			if (index > 0) {
-				return index;
+			Optional<ObjectCoverageStatus> relatedCoverageByContainer = coverageMatrix.stream().
+					filter(c -> EcoreUtil.equals(c.getModelObject().eContainer(), faultyObject.eContainer())).findFirst();
+			if (relatedCoverageByContainer.isPresent()) {
+				int index = coverageMatrix.indexOf(relatedCoverageByContainer.get());
+				if (index > 0) {
+					return index;
+				}
 			}
+			return -1;
 		}
 		//if the faulty object is not covered, find the index of its container
 		if (faultyObject.eContainer() != null) {
@@ -281,19 +287,13 @@ public class SBFLEvaluation {
 		while (mutantContents.hasNext()) {
 			EObject eobject = mutantContents.next();
 			EClass eobjectType = eobject.eClass();
-			Optional<EClass> eclass = TDLCoverageUtil.getInstance().getDynamicClasses().stream().
-					filter(c -> c.getName().equals(eobjectType.getName())).findFirst();
-			if (eclass.isPresent()) {
+			if (this.isDynamicClass(eobjectType)) {
 				eobjectType.getEAllStructuralFeatures().forEach(f -> clearRuntimeDataOfFeature(eobject, f));
 			}
-			else {
-				eclass = TDLCoverageUtil.getInstance().getClassesWithDynamicFeatures().stream().
-						filter(c -> c.getName().equals(eobjectType.getName())).findFirst();
-				if (eclass.isPresent()) {
-					List<EStructuralFeature> dynamicFeatures = eobjectType.getEAllStructuralFeatures().stream().
-							filter(f -> isDynamicFeature(f)).collect(Collectors.toList());
-					dynamicFeatures.forEach(f -> clearRuntimeDataOfFeature(eobject, f));
-				}
+			else if (this.isClassWithDynamiFeature(eobjectType)) {
+				List<EStructuralFeature> dynamicFeatures = eobjectType.getEAllStructuralFeatures().stream().
+						filter(f -> isDynamicFeature(f)).collect(Collectors.toList());
+				dynamicFeatures.forEach(f -> clearRuntimeDataOfFeature(eobject, f));
 			}
 		}	
 	}
@@ -315,6 +315,25 @@ public class SBFLEvaluation {
 			}
 		}
 	}
+	
+	private boolean isDynamicClass(EClass eobjectType) {
+		Optional<EClass> eclass = TDLCoverageUtil.getInstance().getDynamicClasses().stream().
+				filter(c -> c.getName().equals(eobjectType.getName())).findFirst();
+		if (eclass.isPresent()) {
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean isClassWithDynamiFeature(EClass eobjectType) {
+		Optional<EClass> eclass = TDLCoverageUtil.getInstance().getClassesWithDynamicFeatures().stream().
+				filter(c -> c.getName().equals(eobjectType.getName())).findFirst();
+		if (eclass.isPresent()) {
+			return true;
+		}
+		return false;
+	}
+	
 	private boolean isDynamicFeature(EStructuralFeature feature) {
 		List<EAnnotation> featureDynamicAnnotations = feature.getEAnnotations().stream().
 				filter(a -> a.getSource().equals("dynamic") || a.getSource().equals("aspect")).collect(Collectors.toList());
