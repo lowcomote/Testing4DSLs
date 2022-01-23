@@ -116,9 +116,9 @@ class Project_ExecutableAspect {
 	
 	def void execute() {
 		val sketches = _self.sketches
-		while(true) {
+		//while(true) {
 			sketches.forEach[s|s.block.execute]
-		}
+		//}
 	}
 	
 	@Main
@@ -151,9 +151,9 @@ class SketchAspect{
 	
 	@Step
 	def void execute(){
-		while(true) {
+		//while(true) {
 			_self.block.execute
-		}
+		//}
 	}
 }
 @Aspect(className=Module)
@@ -278,6 +278,7 @@ class ModuleAssignment_ExecutableAspect extends ModuleInstruction_ExecutableAspe
 	@OverrideAspectMethod
 	def void execute() {
 		val Pin pin = _self.getPin(_self.module)
+		val previousValue = pin.level
 		//println("Changing the level of the pin " + pin.name + ":")
 		//println("The current level is: " + pin.level)
 		if (_self.operand instanceof IntegerExpression){
@@ -290,7 +291,9 @@ class ModuleAssignment_ExecutableAspect extends ModuleInstruction_ExecutableAspe
 				pin.level = LOW
 			}
 		}
-		pin.changeLevel
+		if (pin.level != previousValue){
+			pin.changeLevel
+		}
 		//println("The new level is: " + pin.level)
 		//FIXME Here it is dirty but I think we should 'transmit' the value in the module itself as the wire should do in true life
 		if (_self.module instanceof BluetoothTransceiver){

@@ -110,6 +110,7 @@ public class ArduinoCoverageComputation implements IDSLSpecificCoverage{
 	}
 	
 	private void pinCoverage(Pin pin) {
+		//ignoring board-related elements for coverage computation
 		int pinIndex = this.modelObjects.indexOf(pin);
 		this.testCaseCoverage.getTcObjectCoverageStatus().set(pinIndex, TDLCoverageUtil.NOT_COVERABLE);
 //		if (pin instanceof DigitalPin) {
@@ -120,6 +121,7 @@ public class ArduinoCoverageComputation implements IDSLSpecificCoverage{
 //		}
 	}
 
+	@SuppressWarnings("unused")
 	private void digitalPinCoverage(DigitalPin pin) {
 		//if the pin has a module, the coverage of the module is equals to the coverage of its container pin
 		int pinIndex = this.modelObjects.indexOf(pin);
@@ -136,6 +138,7 @@ public class ArduinoCoverageComputation implements IDSLSpecificCoverage{
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void analogPinCoverage(AnalogPin pin) {
 		//if the pin has a module, the coverage of the module is equals to the coverage of its container pin
 		int pinIndex = this.modelObjects.indexOf(pin);
@@ -150,10 +153,12 @@ public class ArduinoCoverageComputation implements IDSLSpecificCoverage{
 	}
 
 	private void moduleCoverage(Module modelObject) {
-		//if the container of the module i.e., a pin is covered, the module is also covered
+		//ignoring the board related elements in coverage computation
 		Module module = (Module) modelObject;
 		int moduleIndex = this.modelObjects.indexOf(module);
 		this.testCaseCoverage.getTcObjectCoverageStatus().set(moduleIndex, TDLCoverageUtil.NOT_COVERABLE);
+		
+		//if the container of the module i.e., a pin is covered, the module is also covered
 //		int pinIndex  =  this.modelObjects.indexOf(module.eContainer());
 //		String pinCoverage  = this.testCaseCoverage.getTcObjectCoverageStatus().get(pinIndex);
 //		if (pinCoverage == TDLCoverageUtil.COVERED) {
