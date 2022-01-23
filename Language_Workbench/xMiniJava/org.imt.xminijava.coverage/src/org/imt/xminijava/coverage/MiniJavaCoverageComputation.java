@@ -78,6 +78,7 @@ public class MiniJavaCoverageComputation implements IDSLSpecificCoverage{
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void forCoverage(ForStatement forStatement) {
 		//for statement coverage, for statements should not be considered in the coverage computation
 		//only its inner instructions/assignments are considered
@@ -85,6 +86,7 @@ public class MiniJavaCoverageComputation implements IDSLSpecificCoverage{
 		this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.NOT_COVERABLE);
 	}
 
+	@SuppressWarnings("unused")
 	private void whileCoverage(WhileStatement whileStatement) {
 		//for statement coverage, while statements should not be considered in the coverage computation
 		//only its inner instructions/assignments are considered
@@ -92,6 +94,7 @@ public class MiniJavaCoverageComputation implements IDSLSpecificCoverage{
 		this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.NOT_COVERABLE);
 	}
 
+	@SuppressWarnings("unused")
 	private void ifCoverage(IfStatement ifStatement) {
 		//for statement coverage, if statements should not be considered in the coverage computation
 		//only its inner instructions/assignments are considered
