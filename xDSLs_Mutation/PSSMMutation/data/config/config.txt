@@ -1,3 +1,0 @@
-data/model
-data/out
-PSSMMutation.mutator
