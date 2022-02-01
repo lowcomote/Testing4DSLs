@@ -1,0 +1,8 @@
+generate 2 mutants
+in "data/out/"
+from "data/model/"
+metamodel "/MiniJavaMutation/data/model/XMiniJava.ecore"
+
+with commands {
+	create Program
+}

@@ -1,33 +1,37 @@
 package org.imt.tdl.testResult;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import org.etsi.mts.tdl.DataInstanceUse;
-import org.etsi.mts.tdl.DataUse;
+import org.etsi.mts.tdl.TestDescription;
 
 public class TDLTestCaseResult {
 	
-	private String testCaseName;
-	
+	private TestDescription testCase;
+
 	private String value;
 	
-	private List<TDLMessageResult> tdlMessages;
+	private String description;
+	
+	private List<TDLMessageResult> tdlMessageResults;
 	
 	private int messageNumber = 0;
 	
 	public TDLTestCaseResult() {
-		this.value = "PASS";
-		this.tdlMessages = new ArrayList<TDLMessageResult>();
+		this.value = TDLTestResultUtil.PASS;
+		this.tdlMessageResults = new ArrayList<TDLMessageResult>();
+	}
+	
+	public TestDescription getTestCase() {
+		return testCase;
+	}
+
+	public void setTestCase(TestDescription testCase) {
+		this.testCase = testCase;
 	}
 	
 	public String getTestCaseName() {
-		return testCaseName;
-	}
-	
-	public void setTestCaseName(String name) {
-		this.testCaseName = name;
+		return this.testCase.getName();
 	}
 	
 	public String getValue() {
@@ -38,12 +42,19 @@ public class TDLTestCaseResult {
 		this.value = value;
 	}
 	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getDescription() {
+		return this.description;
+	}
+	
 	public List<TDLMessageResult> getTdlMessages() {
-		return this.tdlMessages;
+		return this.tdlMessageResults;
 	}
 	public List<TDLMessageResult> getFailedTdlMessages() {
 		List<TDLMessageResult> failedTdlMessages = new ArrayList<>();
-		for (TDLMessageResult tdlMessage : this.tdlMessages) {
+		for (TDLMessageResult tdlMessage : this.tdlMessageResults) {
 			if (tdlMessage.getFailure() == true) {
 				failedTdlMessages.add(tdlMessage);
 			}
@@ -52,8 +63,8 @@ public class TDLTestCaseResult {
 	}
 	public int getNumOfPassedtdlMessages() {
 		int passed = 0;
-		for (TDLMessageResult tdlMessage : tdlMessages) {
-			if (tdlMessage.getValue() == true) {
+		for (TDLMessageResult tdlMessage : tdlMessageResults) {
+			if (tdlMessage.getValue() == TDLTestResultUtil.PASS) {
 				passed++;
 			}
 		}
@@ -62,7 +73,7 @@ public class TDLTestCaseResult {
 	
 	public int getNumOfFailures() {
 		int failures = 0;
-		for (TDLMessageResult tdlMessage : tdlMessages) {
+		for (TDLMessageResult tdlMessage : tdlMessageResults) {
 			if (tdlMessage.getFailure() == true) {
 				failures++;
 			}
@@ -70,10 +81,10 @@ public class TDLTestCaseResult {
 		return failures;
 	}
 
-	public void addTdlMessage(TDLMessageResult messageVerdict) {
+	public void addTdlMessage(TDLMessageResult messageResult) {
 		this.messageNumber++;
-		messageVerdict.setTdlMessageName("Message#" + this.messageNumber);
-		this.tdlMessages.add(messageVerdict);
+		messageResult.setTdlMessageId("Message#" + this.messageNumber);
+		this.tdlMessageResults.add(messageResult);
 	}
 	
 }

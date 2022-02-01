@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<extension
+         point="org.eclipse.ui.views">   
+      <category
+            id="tdl.views"
+            name="TDL">
+      </category>   
+      <view
+            category="tdl.views"
+            class="org.imt.tdl.faultLocalization.ui.TDLSBFLView"
+            icon="icons/faultLocalization.jpg"
+            id="org.imt.tdl.rt.ui.sbflView"
+            name="FaultLocalization"
+            restorable="true">
+      </view>
+   </extension>
+</plugin>

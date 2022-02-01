@@ -1,0 +1,107 @@
+Package LinkedList_testSuite {
+	Import all from common ;
+	Import all from miniJavaSpecificTypes ;
+	Import all from testConfiguration ;
+	
+	VariableDeclaration result (_name = "result");
+	SymbolBinding symbolBinding (symbol = ?);
+	
+	Test Description test1 uses configuration LinkedListConfiguration1{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = "null") to tester.genericGate;
+	}
+	
+	Class Person (_name = "Person");
+	Field Age (_name = "Age");
+	Field Salary (_name = "Salary");
+	Field Married (_name = "Married");
+	IntegerValue intValue (value = ?);
+	BooleanValue boolValue (value = ?);
+	
+	FieldBinding ageBinding (field = Age, value = intValue (value = "25"));
+	FieldBinding salaryBinding (field = Salary, value = intValue (value = "37000"));
+	FieldBinding marriedBinding (field = Married, value = boolValue (value = "false"));
+	ObjectInstance personInstance (_type = Person, fieldbindings = {ageBinding, salaryBinding, marriedBinding});
+	ObjectRefValue objectRefValue (_instance = personInstance);
+	
+	VariableDeclaration person1 (_name = "person1");
+	VariableDeclaration headPerson (_name = "headPerson");
+	
+	Test Description test2 uses configuration LinkedListConfiguration2{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		//we expect to have symbolBindings for person1 and headPerson with the same value
+		xminijava.genericGate sends {
+			symbolBinding (symbol = headPerson, value = objectRefValue), 
+			symbolBinding (symbol = person1, value = objectRefValue)
+		} to tester.genericGate;
+	}
+	
+	VariableDeclaration next (_name  = "next");
+	
+	Test Description test3 uses configuration LinkedListConfiguration3{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = next, value = "null") to tester.genericGate;
+	}
+	
+	VariableDeclaration nextPerson (_name = "nextPerson");
+	
+	Test Description test4 uses configuration LinkedListConfiguration4{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = nextPerson, value = "null") to tester.genericGate;
+	}
+	
+	Test Description test5 uses configuration LinkedListConfiguration5{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends {
+			symbolBinding (symbol = nextPerson, value = objectRefValue), 
+			symbolBinding (symbol = person1, value = objectRefValue)
+		} to tester.genericGate;
+	}
+	
+	VariableDeclaration end (_name = "end");
+	
+	Test Description test6 uses configuration LinkedListConfiguration6{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = end, value = boolValue (value = "true")) to tester.genericGate;
+	}
+	Test Description test7 uses configuration LinkedListConfiguration7{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = end, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	
+	VariableDeclaration found (_name = "found");
+	
+	Test Description test8 uses configuration LinkedListConfiguration8{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = found, value = boolValue (value = "true")) to tester.genericGate;
+	}
+	Test Description test9 uses configuration LinkedListConfiguration9{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = found, value = boolValue (value = "true")) to tester.genericGate;
+	}
+	Test Description test10 uses configuration LinkedListConfiguration10{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = headPerson, value = "null") to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = end, value = boolValue (value = "true")) to tester.genericGate;
+	}
+	
+	VariableDeclaration found1 (_name = "found1");
+	VariableDeclaration found2 (_name = "found2");
+	
+	Test Description test11 uses configuration LinkedListConfiguration11{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = found1, value = boolValue (value = "false")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = found2, value = boolValue (value = "true")) to tester.genericGate;
+	}
+}

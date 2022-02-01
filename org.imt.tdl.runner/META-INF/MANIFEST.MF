@@ -4,8 +4,7 @@ Bundle-Name: Runner
 Bundle-SymbolicName: org.imt.tdl.runner
 Bundle-Version: 1.0.0.qualifier
 Export-Package: org.imt.tdl.runner
-Require-Bundle: org.eclipse.gemoc.execution.sequential.javaengine.ui,
- org.eclipse.gemoc.executionframework.engine,
+Require-Bundle: org.eclipse.gemoc.executionframework.engine,
  org.eclipse.gemoc.xdsmlframework.api,
  org.eclipse.core.resources,
  org.eclipse.debug.core,
@@ -16,5 +15,4 @@ Require-Bundle: org.eclipse.gemoc.execution.sequential.javaengine.ui,
  fr.inria.diverse.k3.al.annotationprocessor.plugin;bundle-version="3.2.3",
  org.etsi.mts.tdl.model;bundle-version="1.4.0",
  org.imt.k3tdl.tdlInterpreter;bundle-version="1.0.0",
- org.imt.tdl.configuration;bundle-version="1.0.0",
- org.imt.tdl.testResult;bundle-version="1.0.0"
+ org.imt.tdl.testResult

@@ -1,0 +1,57 @@
+Package Deferred002_Test_TestSuite {
+	Import all from common ;
+	Import all from pssmSpecificTypes ;
+	Import all from pssmSpecificEvents ;
+	Import all from testConfiguration ;
+	StateMachine Deferred002_Test ( _name = 'Deferred002_Test$behavior$1' ) ;
+	Signal Continue ( _name = 'Continue' ) ;
+	Signal Start ( _name = 'Start' ) ;
+	Signal AnotherSignal ( _name = 'AnotherSignal' ) ;
+	Behavior S1_exit ( _name = 'S1(exit)' ) ;
+	Behavior S2_entry ( _name = 'S2(entry)' ) ;
+	Behavior S3_entry ( _name = 'S3(entry)' ) ;
+	Behavior T3_effect ( _name = 'T3(effect)' ) ;
+	Behavior T4_effect ( _name = 'T4(effect)' ) ;
+	Behavior T5_effect ( _name = 'T5(effect)' ) ;
+	Behavior T6_effect ( _name = 'T6(effect)' ) ;
+	Behavior T7_testEnd ( _name = 'T7(testEnd)' ) ;
+	Test Description Deferred002_Test uses configuration configuration4Deferred002_Test {
+		tester.dslSpecificTestGate sends _run (
+			state_machine = Deferred002_Test
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Deferred002_Test ,
+			signal = Start
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Deferred002_Test ,
+			signal = Continue
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Deferred002_Test ,
+			signal = AnotherSignal
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Deferred002_Test ,
+			signal = Continue
+		) to PSSM.dslSpecificMUTGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = S1_exit
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = T4_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = S2_entry
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = T6_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = S3_entry
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = T7_testEnd
+		) to tester.dslSpecificTestGate ;
+	}
+}

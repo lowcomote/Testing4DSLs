@@ -1,0 +1,33 @@
+Package Event019_Test_B_TestSuite {
+	Import all from common ;
+	Import all from pssmSpecificTypes ;
+	Import all from pssmSpecificEvents ;
+	Import all from testConfiguration ;
+	StateMachine Event019_Test_B ( _name = 'Event019_Test_B$behavior$1' ) ;
+	Operation op ( _name = 'op' ) ;
+	Behavior S1_exit ( _name = 'S1(exit)' ) ;
+	Behavior S2_entry ( _name = 'S2(entry)' ) ;
+	Behavior T2_effect ( _name = 'T2(effect)' ) ;
+	Behavior T3_testEnd ( _name = 'T3(testEnd)' ) ;
+	Test Description Event019_Test_B uses configuration configuration4Event019_Test_B {
+		tester.dslSpecificTestGate sends _run (
+			state_machine = Event019_Test_B
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Event019_Test_B ,
+			signal = op
+		) to PSSM.dslSpecificMUTGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = S1_exit
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = T2_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = S2_entry
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = T3_testEnd
+		) to tester.dslSpecificTestGate ;
+	}
+}

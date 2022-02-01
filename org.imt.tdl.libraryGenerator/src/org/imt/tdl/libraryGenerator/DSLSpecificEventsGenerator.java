@@ -47,7 +47,6 @@ import org.etsi.mts.tdl.tdlFactory;
 public class DSLSpecificEventsGenerator {
 	private String dslName;
 	private EPackage metamodelRootElement;
-	//private Unit aleSemanticRootElement;
 	private BehavioralInterface interfaceRootElement;
 	
 	private tdlFactory factory;
@@ -61,7 +60,6 @@ public class DSLSpecificEventsGenerator {
 		this.factory = tdlFactory.eINSTANCE; 
 		this.dslName = validName(getDslName(dslFilePath));
 		this.metamodelRootElement = getMetamodelRootElement(dslFilePath);
-		//this.aleSemanticRootElement = getAleSemanticsRootElement(dslFilePath);
 		this.interfaceRootElement = getBehavioralInterfaceRootElement(dslFilePath);
 	}
 	
@@ -101,7 +99,7 @@ public class DSLSpecificEventsGenerator {
 			typeForEvent.getAnnotation().add(annotation);
 			//generating an instance of the event type to be able to use it when writing test cases
 			StructuredDataInstance eventInstance = factory.createStructuredDataInstance();
-			eventInstance.setName(typeForEvent.getName().toLowerCase());
+			eventInstance.setName(typeForEvent.getName());
 			eventInstance.setDataType(typeForEvent);
 			eventInstance.setUnassignedMember(UnassignedMemberTreatment.ANY_VALUE);
 			
@@ -149,22 +147,7 @@ public class DSLSpecificEventsGenerator {
 		}
 		return name;
 	}
-	//mapping from ALE basic data types to the ecore basic data types which are transformed to TDL types
-	private DataType aleTypeLiteral2tdlType (typeLiteral typeLiteral) {
-		if (typeLiteral instanceof StringType) {
-			return this.dslSpecificTypes.get("EString".toLowerCase());
-		} else if (typeLiteral instanceof IntType) {
-			return this.dslSpecificTypes.get("EInt".toLowerCase());
-		} else if (typeLiteral instanceof RealType) {
-			return this.dslSpecificTypes.get("EDouble".toLowerCase());
-		} else if (typeLiteral instanceof BoolType) {
-			return this.dslSpecificTypes.get("EBoolean".toLowerCase());
-		} else if (typeLiteral instanceof SeqType || typeLiteral instanceof SetType) {
-			SeqType seqType = (SeqType) typeLiteral;
-			return aleTypeLiteral2tdlType(seqType.getType());
-		}
-		return null;
-	}
+	
 	protected String getDslName(String dslFilePath) {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
@@ -182,18 +165,7 @@ public class DSLSpecificEventsGenerator {
 		}
 		return null;
 	}
-
-	protected static Unit getAleSemanticsRootElement(String dslFilePath) {
-		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
-		Dsl dsl = (Dsl)dslRes.getContents().get(0);
-		if (dsl.getEntry("ale") != null) {
-			String interpreterPath = dsl.getEntry("ale").getValue().replaceFirst("resource", "plugin");
-			Resource interpreterRes = (new ResourceSetImpl()).getResource(URI.createURI(interpreterPath), true);
-			Unit interpreterRootClass = (Unit) interpreterRes.getContents().get(0);
-			return interpreterRootClass;
-		}
-		return null;
-	}
+	
 	protected static BehavioralInterface getBehavioralInterfaceRootElement(String dslFilePath) {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);

@@ -1,0 +1,73 @@
+Package testConfiguration {
+	Import all from common ;
+	Import all from arduinoSpecificEvents ;
+	Gate Type genericGateType accepts modelExecutionCommand ;
+	Gate Type reactiveGateType accepts _run, button_pressed , button_released , IRSensor_detected , IRSensor_notDetected , Pin_level_changed ;
+	Gate Type oclGateType accepts OCL ;
+	Component Type TestSystem having {
+		gate genericGate of type genericGateType ;
+		gate reactiveGate of type reactiveGateType ; gate oclGate of type oclGateType ;
+	}
+	Component Type MUT having {
+		gate genericGate of type genericGateType ;
+		gate reactiveGate of type reactiveGateType ; gate oclGate of type oclGateType ;
+	}
+	Annotation MUTPath ;
+	Annotation DSLName ;
+	Test Configuration genericConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT arduino of type MUT with { 
+			MUTPath : 'TODO: Put the address of the Model-Under Test here' ; 
+			DSLName : 'org.imt.arduino.reactiveArduino' ;
+		} ;
+		connect tester.genericGate to arduino.genericGate ;
+		connect tester.oclGate to arduino.oclGate ;
+	}
+	Test Configuration reactiveConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT arduino of type MUT with { 
+			MUTPath : 'TODO: Put the address of the Model-Under Test here' ; 
+			DSLName : 'org.imt.arduino.reactiveArduino' ;
+		} ;
+		connect tester.reactiveGate to arduino.reactiveGate ;
+		connect tester.oclGate to arduino.oclGate ;
+	}
+	
+	//manually defined: one test configuration per xArduino model
+	Test Configuration activeWaitConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT arduino of type MUT with { 
+			MUTPath : '/xArduino_reactive_models/activeWaitIRBlueLed.model' ; 
+			DSLName : 'org.imt.arduino.reactiveArduino' ;
+		} ;
+		connect tester.reactiveGate to arduino.reactiveGate ;
+		connect tester.oclGate to arduino.oclGate ;
+	}
+	Test Configuration blinkingLEDConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT arduino of type MUT with { 
+			MUTPath : '/xArduino_reactive_models/blinkingLED.model' ; 
+			DSLName : 'org.imt.arduino.reactiveArduino' ;
+		} ;
+		connect tester.reactiveGate to arduino.reactiveGate ;
+		connect tester.oclGate to arduino.oclGate ;
+	}
+	Test Configuration servo9gConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT arduino of type MUT with { 
+			MUTPath : '/xArduino_reactive_models/servo9g.model' ; 
+			DSLName : 'org.imt.arduino.reactiveArduino' ;
+		} ;
+		connect tester.reactiveGate to arduino.reactiveGate ;
+		connect tester.oclGate to arduino.oclGate ;
+	}
+	Test Configuration servoIrbuttonConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT arduino of type MUT with { 
+			MUTPath : '/xArduino_reactive_models/servoIrbutton.model' ; 
+			DSLName : 'org.imt.arduino.reactiveArduino' ;
+		} ;
+		connect tester.reactiveGate to arduino.reactiveGate ;
+		connect tester.oclGate to arduino.oclGate ;
+	}
+}

@@ -1,36 +1,30 @@
 package org.imt.tdl.runner;
 
-import java.util.ArrayList;
-
-
-
-import java.util.HashMap;
-import java.util.List;
-
-import org.etsi.mts.tdl.Message;
 import org.etsi.mts.tdl.Package;
+
 import org.etsi.mts.tdl.TestDescription;
+import org.imt.k3tdl.k3dsa.TestConfigurationAspect;
 import org.imt.k3tdl.k3dsa.TestDescriptionAspect;
-import org.imt.tdl.testResult.TDLMessageResult;
 import org.imt.tdl.testResult.TDLTestCaseResult;
+import org.imt.tdl.testResult.TDLTestResultUtil;
+import org.imt.tdl.testResult.TDLTestSuiteResult;
 
 public class TDLCore {
 	
-
+	//this method is called from WODEL tool
 	public Result run(Package testPackage, String artifactPath) {
 		Result result = new Result();
 		artifactPath = artifactPath.replace("\\", "/");
-		System.out.println("Model under test: " + artifactPath);
+		System.out.println("\\Model under test: " + artifactPath);
 		for (int i=0; i<testPackage.getPackagedElement().size(); i++) {
 			Object o = testPackage.getPackagedElement().get(i);
 			if (o instanceof TestDescription) {
 				TestDescription testCase = (TestDescription) o;
-				TestDescriptionAspect testCaseRunner = new TestDescriptionAspect();
 				System.out.println("Test case: " + testCase.getName());
-				testCaseRunner.executeTestCase(testCase, artifactPath);
+				TestDescriptionAspect.executeTestCase(testCase, artifactPath);
 				result.addNumExecutedTests();
-				TDLTestCaseResult verdict = testCaseRunner.testCaseResult(testCase);
-				if (verdict.getValue() == "FAIL") {
+				TDLTestCaseResult verdict = TestDescriptionAspect.testCaseResult(testCase);
+				if (verdict.getValue().contains("FAIL")) {
 					result.addTest(testCase.getName(), false);
 					result.addNumFailedTests();
 					result.addFailure(testCase);
@@ -41,5 +35,4 @@ public class TDLCore {
 		}
 		return result;
 	}
-
 }

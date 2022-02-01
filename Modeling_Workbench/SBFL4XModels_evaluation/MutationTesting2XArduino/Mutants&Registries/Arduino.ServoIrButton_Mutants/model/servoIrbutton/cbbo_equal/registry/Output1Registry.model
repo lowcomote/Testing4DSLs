@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ASCII"?>
+<appliedMutations:Mutations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:appliedMutations="http://appliedMutations/1.0">
+  <muts xsi:type="appliedMutations:InformationChanged">
+    <def href="../../../XArduinoMutation.model#//@blocks.15/@commands.0"/>
+    <object href="../../../../model/servoIrbutton.mutation18.0.model#//@sketches.0/@block/@instructions.1/@block/@instructions.0/@condition"/>
+    <attChanges attName="operator" oldVal="AND" newVal="equal">
+      <def href="../../../XArduinoMutation.model#//@blocks.15/@commands.0"/>
+    </attChanges>
+  </muts>
+  <muts xsi:type="appliedMutations:InformationChanged">
+    <def href="../../../XArduinoMutation.model#//@blocks.15/@commands.0"/>
+    <object href="../../../../model/servoIrbutton.mutation18.1.model#//@sketches.0/@block/@instructions.1/@block/@instructions.0/@condition/@right"/>
+    <attChanges attName="operator" oldVal="infOrEqual" newVal="equal">
+      <def href="../../../XArduinoMutation.model#//@blocks.15/@commands.0"/>
+    </attChanges>
+  </muts>
+</appliedMutations:Mutations>

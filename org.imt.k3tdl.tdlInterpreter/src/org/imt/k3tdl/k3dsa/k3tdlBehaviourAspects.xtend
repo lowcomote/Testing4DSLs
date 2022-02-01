@@ -1,6 +1,7 @@
 package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
+
 import fr.inria.diverse.k3.al.annotationprocessor.Step
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 
@@ -46,9 +47,13 @@ import static extension org.imt.k3tdl.k3dsa.BlockAspect.*
 import static extension org.imt.k3tdl.k3dsa.GateInstanceAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
+import static extension org.imt.k3tdl.k3dsa.ExpressionAspect.*
 import org.etsi.mts.tdl.Target
 import org.imt.tdl.testResult.TDLMessageResult
 import org.etsi.mts.tdl.LiteralValueUse
+import org.etsi.mts.tdl.DataInstanceUse
+import org.etsi.mts.tdl.LocalExpression
+import org.imt.tdl.testResult.TDLTestResultUtil
 
 @Aspect (className = BehaviourDescription)
 class BehaviourDescriptionAspect{
@@ -204,7 +209,7 @@ class ProcedureCallAspect extends InteractoinAspect{
 }
 @Aspect (className = Message)
 class MessageAspect extends InteractoinAspect{
-	private TDLMessageResult messageVerdict;
+	TDLMessageResult messageVerdict;
 	@Step
 	@OverrideAspectMethod
 	def boolean performBehavior(){
@@ -219,28 +224,32 @@ class MessageAspect extends InteractoinAspect{
 				return true //continue test case execution
 			}else{//the argument has to be sent to the MUT
 				t.targetGate.gate.setLauncher(_self.parentTestDescription.launcher)
-				var String verdict = t.targetGate.gate.sendArgument2sut(_self.argument)			
+				var String verdict
+				verdict = t.targetGate.gate.sendArgument2sut(_self.argument)
 				_self.addMessageResult(verdict)
 				var boolean result = true
-				if (verdict.contains("FAIL")){
+				if (verdict.contains(TDLTestResultUtil.FAIL)){
 					result = false
-					_self.parentTestDescription.testCaseResult.value = "INCONCLUSIVE"//the test case should be interrupted
+					_self.parentTestDescription.testCaseResult.value = TDLTestResultUtil.INCONCLUSIVE//the test case should be interrupted
 				}
 				return result //if the result is false, the test case execution should be interrupted
 			}
 		}	
 	}
 	def void addMessageResult(String info){
-		var boolean result = true
-		if (info.contains("FAIL")){
-			result = false
-			_self.parentTestDescription.testCaseResult.value = "FAIL"
+		var String result = ""
+		if (info.contains(TDLTestResultUtil.FAIL)){
+			result = TDLTestResultUtil.FAIL
+			_self.parentTestDescription.testCaseResult.value = TDLTestResultUtil.FAIL
 		}
-		var message = info
+		else if (info.contains(TDLTestResultUtil.PASS)){
+			result = TDLTestResultUtil.PASS
+		}
+		var description = info
 		if (info.contains(":")){
-			message = info.substring(info.indexOf(":") + 2, info.length)
+			description = info.substring(info.indexOf(":") + 2, info.length)
 		}
-		_self.messageVerdict = new TDLMessageResult(_self.name, result, message, null,!result);
+		_self.messageVerdict = new TDLMessageResult(_self, result, description, null);
 		_self.parentTestDescription.testCaseResult.addTdlMessage(_self.messageVerdict)
 	}
 }
@@ -249,7 +258,6 @@ class TimerStartAspect extends TimerOperationAspect{
 	@Step
 	@OverrideAspectMethod
 	def boolean performBehavior(){
-		println("Start timer")
 		return false
 	}
 }
@@ -311,7 +319,14 @@ class BoundedLoopBehaviourAspect extends SingleCombinedBehaviourAspect{
 
 	@OverrideAspectMethod
 	def boolean performBehavior(){
-		return _self.block.traverseBlock()
+		var boolean result = true
+		for (i:0..<_self.numIteration.get(0).numIteration){
+			result = _self.block.traverseBlock()
+			if (!result){
+				return false
+			}
+		}
+		return true
 	}
 }
 @Aspect (className = UnboundedLoopBehaviour)
@@ -319,7 +334,19 @@ class UnBoundedLoopBehaviourAspect extends SingleCombinedBehaviourAspect{
 
 	@OverrideAspectMethod
 	def boolean performBehavior(){
-		return _self.block.traverseBlock()
+		var boolean result = true
+		if (_self.block.guard.size>0){
+			val guard = _self.block.guard.get(0)
+			while (guard.validateExpression){
+				result = _self.block.traverseBlock()
+				if (!result){
+					return false
+				}
+			}
+		}else{
+			//it shall be executed an infinite number of times, unless it contains a 'Break' or a 'Stop'.
+		}
+		return true
 	}
 }
 @Aspect (className = CompoundBehaviour)
@@ -391,12 +418,76 @@ class InterruptBehaviourAspect extends ExceptionalBehaviourAspect{
 class BlockAspect{
 
 	def boolean traverseBlock(){
+		var boolean canExecute = true
+		if (_self.guard.size>0){
+			try{
+				for (i:0..<_self.guard.size){
+					canExecute = _self.guard.get(i).validateExpression
+					if (!canExecute){
+						throw new InterruptedException()
+					}
+				}
+			}catch (InterruptedException e) {
+				//break the loop since one of the guards is not validated
+				return false;
+			}	
+		}
 		var result = true
 		for (Behaviour b:_self.behaviour){
 			result = b.performBehavior()
 			if (!result){
-				return result
+				return false
 			}
+		}
+		return true
+	}
+}
+@Aspect (className = LocalExpression)
+class ExpressionAspect{
+	def boolean validateExpression(){
+		if (_self.expression instanceof DataInstanceUse){
+			if (_self.expression instanceof DataInstanceUse){
+				val expression = (_self.expression as DataInstanceUse).dataInstance
+				if (expression.dataType.name.equals("EBoolean")){
+					return Boolean.parseBoolean(expression.name)
+				}
+				else{
+					//TODO:Check for other types
+					return false
+				}
+			} else if (_self.expression instanceof LiteralValueUse){
+				val value = (_self.expression as LiteralValueUse).value;
+				return Boolean.parseBoolean(value.substring(1, value.length-1));
+			}
+			else{
+				//TODO:Check for other types
+				return false
+			}
+		}
+		else{
+			//TODO:Check for other types
+			return false
+		}
+	}
+	def int getNumIteration(){
+		if (_self.expression instanceof DataInstanceUse){
+			val expression = (_self.expression as DataInstanceUse).dataInstance
+			if (expression.dataType.name.equals("EInt")){
+				return Integer.parseInt(expression.name)
+			} else if (_self.expression instanceof LiteralValueUse){
+				val value = (_self.expression as LiteralValueUse).value;
+				return Integer.parseInt(value.substring(1, value.length-1));
+			}else{
+				//TODO:Check for other types
+				return 0
+			}
+		}else if (_self.expression instanceof LiteralValueUse){
+			val value = (_self.expression as LiteralValueUse).value;
+			return Integer.parseInt(value.substring(1, value.length-1));
+		}
+		else{
+			//TODO:Check for other types
+			return 0
 		}
 	}
 }

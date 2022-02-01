@@ -2,46 +2,10 @@ package org.imt.tdl.libraryGenerator;
 
 import java.io.IOException;
 
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import org.imt.atl.ecore2tdl.files.Ecore2tdl;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.*;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecoretools.ale.implementation.ModelUnit;
-import org.eclipse.gemoc.dsl.Dsl;
-import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.BehavioralInterface;
-import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.Event;
-import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.EventType;
-import org.eclipse.m2m.atl.common.ATLExecutionException;
-import org.eclipse.m2m.atl.core.ATLCoreException;
-import org.etsi.mts.tdl.Annotation;
-import org.etsi.mts.tdl.AnnotationType;
-import org.etsi.mts.tdl.ComponentInstance;
-import org.etsi.mts.tdl.ComponentInstanceRole;
-import org.etsi.mts.tdl.ComponentType;
-import org.etsi.mts.tdl.Connection;
-import org.etsi.mts.tdl.DataInstance;
-import org.etsi.mts.tdl.DataType;
-import org.etsi.mts.tdl.ElementImport;
-import org.etsi.mts.tdl.GateInstance;
-import org.etsi.mts.tdl.GateReference;
-import org.etsi.mts.tdl.GateType;
-import org.etsi.mts.tdl.GateTypeKind;
-import org.etsi.mts.tdl.Member;
-import org.etsi.mts.tdl.Package;
-import org.etsi.mts.tdl.SimpleDataInstance;
-import org.etsi.mts.tdl.SimpleDataType;
-import org.etsi.mts.tdl.StructuredDataType;
 import org.etsi.mts.tdl.TDLan2StandaloneSetup;
-import org.etsi.mts.tdl.TestConfiguration;
-import org.etsi.mts.tdl.tdlFactory;
 
 import com.google.inject.Injector;
 
@@ -55,7 +19,7 @@ public class TDLCodeGenerator {
 	private TestConfigurationGenerator testConfigurationPackageGenerator;
 	private TestSuitePackageGenerator testSuitePackageGenerator;
 	
-	public TDLCodeGenerator(String dslFilePath, String tdlProjectPath) throws IOException {
+	public TDLCodeGenerator(String dslFilePath, String tdlProjectPath) throws IOException {		
 		System.out.println("Start TDL Code generation");
 		
 		this.testSuitePackageGenerator = new TestSuitePackageGenerator(dslFilePath);
@@ -65,7 +29,7 @@ public class TDLCodeGenerator {
 		this.dslSpecificTypesGenerator = this.testConfigurationPackageGenerator.getDslSpecificTypesGenerator();
 		this.dslSpecificEventsGenerator = this.dslSpecificTypesGenerator.getDslSpecificEventsGenerator();
 		this.commonPackageGenerator = this.dslSpecificTypesGenerator.getCommonPackageGenerator();
-		
+				
 		System.out.println("start saving packages");
 		savePackages(tdlProjectPath);
 		System.out.println("all packages are saved successfully");

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<appliedMutations:Mutations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:appliedMutations="http://appliedMutations/1.0">
+  <muts xsi:type="appliedMutations:ObjectCreated">
+    <def href="../../../../MiniJavaMutation.model#//@blocks.1/@commands.1"/>
+    <object href="../Output1_0_1_5.model#//@classes.0/@members.2/@body/@statements.10/@expression"/>
+  </muts>
+</appliedMutations:Mutations>

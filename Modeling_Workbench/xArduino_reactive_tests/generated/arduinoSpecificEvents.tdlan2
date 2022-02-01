@@ -1,0 +1,29 @@
+Package arduinoSpecificEvents {
+	Import all from arduinoSpecificTypes ;
+	Annotation AcceptedEvent ;
+	Annotation ExposedEvent ;
+	Type _run ( sketch of type Sketch ) with {
+		AcceptedEvent ;
+	} ;
+	_run _run ( sketch = ? ) ;
+	Type button_pressed ( button of type PushButton ) with {
+		AcceptedEvent ;
+	} ;
+	button_pressed button_pressed ( button = ? ) ;
+	Type button_released ( button of type PushButton ) with {
+		AcceptedEvent ;
+	} ;
+	button_released button_released ( button = ? ) ;
+	Type IRSensor_detected ( sensor of type InfraRedSensor ) with {
+		AcceptedEvent ;
+	} ;
+	IRSensor_detected IRSensor_detected ( sensor = ? ) ;
+	Type IRSensor_notDetected ( sensor of type InfraRedSensor ) with {
+		AcceptedEvent ;
+	} ;
+	IRSensor_notDetected IRSensor_notDetected ( sensor = ? ) ;
+	Type Pin_level_changed ( pin of type Pin ) with {
+		ExposedEvent ;
+	} ;
+	Pin_level_changed Pin_level_changed ( pin = ? ) ;
+}

@@ -1,0 +1,47 @@
+Package Transition011_Test_A_TestSuite {
+	Import all from common ;
+	Import all from pssmSpecificTypes ;
+	Import all from pssmSpecificEvents ;
+	Import all from testConfiguration ;
+	StateMachine Transition011_Test_A ( _name = 'Transition011_Test_A$behavior$1' ) ;
+	Signal Start ( _name = 'Start' ) ;
+	Signal Continue ( _name = 'Continue' ) ;
+	Signal Pending ( _name = 'Pending' ) ;
+	Behavior S1_1_entry ( _name = 'S1.1(entry)' ) ;
+	Behavior S1_1_exit ( _name = 'S1.1(exit)' ) ;
+	Behavior S1_2_entry ( _name = 'S1.2(entry)' ) ;
+	Behavior S1_exit ( _name = 'S1(exit)' ) ;
+	Behavior T3_testEnd ( _name = 'T3(testEnd)' ) ;
+	Behavior T1_3_effect ( _name = 'T1.3(effect)' ) ;
+	Test Description Transition011_Test_A uses configuration configuration4Transition011_Test_A {
+		tester.dslSpecificTestGate sends _run (
+			state_machine = Transition011_Test_A
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Transition011_Test_A ,
+			signal = Start
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Transition011_Test_A ,
+			signal = Continue
+		) to PSSM.dslSpecificMUTGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = S1_1_entry
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = S1_1_exit
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = T1_3_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = S1_2_entry
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = S1_exit
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = T3_testEnd
+		) to tester.dslSpecificTestGate ;
+	}
+}

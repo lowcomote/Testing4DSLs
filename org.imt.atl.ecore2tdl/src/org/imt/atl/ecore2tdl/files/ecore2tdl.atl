@@ -1,4 +1,3 @@
-
 -- @nsURI Ecore=http://www.eclipse.org/emf/2002/Ecore
 -- @path TDL=/org.etsi.mts.tdl.model/model/tdl.ecore
 
@@ -15,11 +14,13 @@ helper context Ecore!EPackage def: basicDataTypes: Set(Ecore!EDataType) = Ecore!
 
 helper def: dynamicAnnotationType: TDL!AnnotationType = OclUndefined;
 helper context Ecore!EStructuralFeature def: isDynamicFeature: Boolean = 
-	if (self.eAnnotations->select(a | a.source = 'dynamic')->notEmpty()) then true else false endif;
+	if (self.eAnnotations->select(a | a.source = 'dynamic' or a.source = 'aspect')->notEmpty()) then true else false endif;
+helper context Ecore!EClass def: isDynamicClass: Boolean = 
+	if (self.eAnnotations->select(a | a.source = 'dynamic' or a.source = 'aspect')->notEmpty()) then true else false endif;
 helper def: abstractAnnotationType: TDL!AnnotationType = OclUndefined;
 
-rule simpleConcreteClass2Type{
-	from class: Ecore!EClass (class.eAllStructuralFeatures.isEmpty() and not class.abstract)
+rule simpleConcreteStaticClass2Type{
+	from class: Ecore!EClass (class.eAllStructuralFeatures.isEmpty() and not class.abstract and not class.isDynamicClass)
 	to type: TDL!StructuredDataType(
 		name <- if (thisModule.tokenNames.includes(class.name))
 				then '_' + class.name
@@ -29,8 +30,26 @@ rule simpleConcreteClass2Type{
 		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
 	}
 }
-rule simpleAbstractClass2Type{
-	from class: Ecore!EClass (class.eAllStructuralFeatures.isEmpty() and class.abstract)
+rule simpleConcreteDynamicClass2Type{
+	from class: Ecore!EClass (class.eAllStructuralFeatures.isEmpty() and not class.abstract and class.isDynamicClass)
+	to type: TDL!StructuredDataType(
+		name <- if (thisModule.tokenNames.includes(class.name))
+				then '_' + class.name
+				else class.name
+				endif,
+		annotation <- dynamicAnnotation),
+		dynamicAnnotation: TDL!Annotation(
+			key <- if (thisModule.dynamicAnnotationType.oclIsUndefined())
+				   then thisModule.eAnnotation2annotationType()
+				   else thisModule.dynamicAnnotationType
+				   endif,
+			annotatedElement <- type)
+	do{
+		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
+	}
+}
+rule simpleAbstractStaticClass2Type{
+	from class: Ecore!EClass (class.eAllStructuralFeatures.isEmpty() and class.abstract and not class.isDynamicClass)
 	to type: TDL!StructuredDataType(
 		name <- if (thisModule.tokenNames.includes(class.name))
 				then '_' + class.name
@@ -47,10 +66,34 @@ rule simpleAbstractClass2Type{
 		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
 	}
 }
-rule featuredConcreteClass2Type{
+rule simpleAbstractDynamicClass2Type{
+	from class: Ecore!EClass (class.eAllStructuralFeatures.isEmpty() and class.abstract and class.isDynamicClass)
+	to type: TDL!StructuredDataType(
+		name <- if (thisModule.tokenNames.includes(class.name))
+				then '_' + class.name
+				else class.name
+				endif),
+		abstractAnnotation: TDL!Annotation(
+			key <- if (thisModule.abstractAnnotationType.oclIsUndefined())
+				   then thisModule.abstract2annotationType()
+				   else thisModule.abstractAnnotationType
+				   endif,
+			annotatedElement <- type),
+		dynamicAnnotation: TDL!Annotation(
+			key <- if (thisModule.dynamicAnnotationType.oclIsUndefined())
+				   then thisModule.eAnnotation2annotationType()
+				   else thisModule.dynamicAnnotationType
+				   endif,
+			annotatedElement <- type)
+	do{
+		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
+	}
+}
+rule featuredConcreteStaticClass2Type{
 	from class: Ecore!EClass (class.eAllStructuralFeatures.notEmpty() 
 								and class.eSuperTypes.isEmpty()
-								and not class.abstract)
+								and not class.abstract
+								and not class.isDynamicClass)
 	to type: TDL!StructuredDataType(
 		name <- if (thisModule.tokenNames.includes(class.name))
 				then '_' + class.name
@@ -65,10 +108,37 @@ rule featuredConcreteClass2Type{
 		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
 	}
 }
-rule featuredAbstractClass2Type{
+rule featuredConcreteDynamicClass2Type{
 	from class: Ecore!EClass (class.eAllStructuralFeatures.notEmpty() 
 								and class.eSuperTypes.isEmpty()
-								and class.abstract)
+								and not class.abstract
+								and class.isDynamicClass)
+	to type: TDL!StructuredDataType(
+		name <- if (thisModule.tokenNames.includes(class.name))
+				then '_' + class.name
+				else class.name
+				endif,
+		member <- class.eStructuralFeatures-> collect(feature | 
+				if (feature.eAnnotations.notEmpty() and feature.isDynamicFeature)
+					then thisModule.dynamicFeature2annotatedMember(feature)
+					else thisModule.staticFeature2member(feature)
+					endif),
+		annotation <- dynamicAnnotation),
+		dynamicAnnotation: TDL!Annotation(
+			key <- if (thisModule.dynamicAnnotationType.oclIsUndefined())
+				   then thisModule.eAnnotation2annotationType()
+				   else thisModule.dynamicAnnotationType
+				   endif,
+			annotatedElement <- type)
+	do{
+		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
+	}
+}
+rule featuredAbstractStaticClass2Type{
+	from class: Ecore!EClass (class.eAllStructuralFeatures.notEmpty() 
+								and class.eSuperTypes.isEmpty()
+								and class.abstract
+								and not class.isDynamicClass)
 	to type: TDL!StructuredDataType(
 		name <- if (thisModule.tokenNames.includes(class.name))
 				then '_' + class.name
@@ -90,10 +160,44 @@ rule featuredAbstractClass2Type{
 		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
 	}
 }
-rule concreteInheritedClass2Type{
+
+rule featuredAbstractDynamicClass2Type{
+	from class: Ecore!EClass (class.eAllStructuralFeatures.notEmpty() 
+								and class.eSuperTypes.isEmpty()
+								and class.abstract
+								and class.isDynamicClass)
+	to type: TDL!StructuredDataType(
+		name <- if (thisModule.tokenNames.includes(class.name))
+				then '_' + class.name
+				else class.name
+				endif,
+		member <- class.eStructuralFeatures-> collect(feature | 
+				if (feature.eAnnotations.notEmpty() and feature.isDynamicFeature)
+					then thisModule.dynamicFeature2annotatedMember(feature)
+					else thisModule.staticFeature2member(feature)
+					endif)),
+		abstractAnnotation: TDL!Annotation(
+			key <- if (thisModule.abstractAnnotationType.oclIsUndefined())
+				   then thisModule.abstract2annotationType()
+				   else thisModule.abstractAnnotationType
+				   endif,
+			annotatedElement <- type),
+		dynamicAnnotation: TDL!Annotation(
+			key <- if (thisModule.dynamicAnnotationType.oclIsUndefined())
+				   then thisModule.eAnnotation2annotationType()
+				   else thisModule.dynamicAnnotationType
+				   endif,
+			annotatedElement <- type)
+	do{
+		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
+	}
+}
+
+rule concreteInheritedStaticClass2Type{
 	from class: Ecore!EClass (class.eAllStructuralFeatures.notEmpty() 
 								and class.eSuperTypes.notEmpty()
-								and not class.abstract)
+								and not class.abstract
+								and not class.isDynamicClass)
 	to type: TDL!StructuredDataType(
 		name <- if (thisModule.tokenNames.includes(class.name))
 				then '_' + class.name
@@ -109,10 +213,40 @@ rule concreteInheritedClass2Type{
 		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
 	}
 }
-rule abstractInheritedClass2Type{
+
+rule concreteInheritedDynamicClass2Type{
 	from class: Ecore!EClass (class.eAllStructuralFeatures.notEmpty() 
 								and class.eSuperTypes.notEmpty()
-								and class.abstract)
+								and not class.abstract
+								and class.isDynamicClass)
+	to type: TDL!StructuredDataType(
+		name <- if (thisModule.tokenNames.includes(class.name))
+				then '_' + class.name
+				else class.name
+				endif,
+		member <- class.eStructuralFeatures-> collect(feature | 
+				if (feature.eAnnotations.notEmpty() and feature.isDynamicFeature)
+					then thisModule.dynamicFeature2annotatedMember(feature)
+					else thisModule.staticFeature2member(feature)
+					endif),
+		extension <- thisModule.superClass2extension(class),
+		annotation <- dynamicAnnotation),
+		dynamicAnnotation: TDL!Annotation(
+			key <- if (thisModule.dynamicAnnotationType.oclIsUndefined())
+				   then thisModule.eAnnotation2annotationType()
+				   else thisModule.dynamicAnnotationType
+				   endif,
+			annotatedElement <- type)
+	do{
+		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
+	}
+}
+
+rule abstractInheritedStaticClass2Type{
+	from class: Ecore!EClass (class.eAllStructuralFeatures.notEmpty() 
+								and class.eSuperTypes.notEmpty()
+								and class.abstract
+								and not class.isDynamicClass)
 	to type: TDL!StructuredDataType(
 		name <- if (thisModule.tokenNames.includes(class.name))
 				then '_' + class.name
@@ -135,6 +269,40 @@ rule abstractInheritedClass2Type{
 		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
 	}
 }
+
+rule abstractInheritedDynamicClass2Type{
+	from class: Ecore!EClass (class.eAllStructuralFeatures.notEmpty() 
+								and class.eSuperTypes.notEmpty()
+								and class.abstract
+								and class.isDynamicClass)
+	to type: TDL!StructuredDataType(
+		name <- if (thisModule.tokenNames.includes(class.name))
+				then '_' + class.name
+				else class.name
+				endif,
+		member <- class.eStructuralFeatures-> collect(feature | 
+				if (feature.eAnnotations.notEmpty() and feature.isDynamicFeature)
+					then thisModule.dynamicFeature2annotatedMember(feature)
+					else thisModule.staticFeature2member(feature)
+					endif),
+		extension <- thisModule.superClass2extension(class)),
+		abstractAnnotation: TDL!Annotation(
+			key <- if (thisModule.abstractAnnotationType.oclIsUndefined())
+				   then thisModule.abstract2annotationType()
+				   else thisModule.abstractAnnotationType
+				   endif,
+			annotatedElement <- type),
+		dynamicAnnotation: TDL!Annotation(
+			key <- if (thisModule.dynamicAnnotationType.oclIsUndefined())
+				   then thisModule.eAnnotation2annotationType()
+				   else thisModule.dynamicAnnotationType
+				   endif,
+			annotatedElement <- type)
+	do{
+		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
+	}
+}
+
 unique lazy rule superClass2extension{
 	from class: Ecore!EClass (class.eSuperTypes.notEmpty())
 	to parent : TDL!Extension(

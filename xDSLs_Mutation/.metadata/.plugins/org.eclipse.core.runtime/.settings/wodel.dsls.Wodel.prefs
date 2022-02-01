@@ -1,0 +1,5 @@
+Discard\ invalid\ mutants=true
+Discard\ syntactic\ duplicate\ mutants=true
+Duplicate\ mutants\ detection\ extension=Syntactic Comparison
+Mutants\ validation\ extension=EMF Model Validation
+eclipse.preferences.version=1

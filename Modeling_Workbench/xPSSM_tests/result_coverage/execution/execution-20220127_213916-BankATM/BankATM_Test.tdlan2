@@ -1,0 +1,420 @@
+Package BankATM_testSuite {
+	Import all from common ;
+	Import all from xPSSMTypes;
+	Import all from xPSSMEvents;
+	Import all from testConfiguration ;
+	Import all from BankATM_TestData;
+	
+	Test Description test1 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+	}
+	Test Description test2 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+	}
+	Test Description test3 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = failure_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = outOfService) to tester.reactiveGate;
+	}
+	Test Description test4 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = success_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+	}
+	Test Description test5 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = success_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOff_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = shutDown) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+	}
+	Test Description test6 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = failure_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = outOfService) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOff_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = shutDown) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+	}
+	Test Description test7 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = failure_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = outOfService) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = service_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underMaintenance) to tester.reactiveGate;
+	}
+	Test Description test8 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = failure_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = outOfService) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = service_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underMaintenance) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = failure_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = outOfService) to tester.reactiveGate;
+	}
+	Test Description test9 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = failure_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = outOfService) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = service_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underMaintenance) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = success_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+	}
+	Test Description test10 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = success_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = service_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underMaintenance) to tester.reactiveGate;
+	}
+	Test Description test11 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = success_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = service_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underMaintenance) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = failure_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = outOfService) to tester.reactiveGate;
+	}
+	Test Description test12 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = success_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = service_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underMaintenance) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = success_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+	}
+	Test Description test13 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = success_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = service_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underMaintenance) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = failure_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = outOfService) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOff_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = shutDown) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+	}
+	Test Description test14 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = success_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = service_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underMaintenance) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = failure_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = outOfService) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = service_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underMaintenance) to tester.reactiveGate;
+	}
+	Test Description test15 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = success_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = 
+			Card_occurrence (attributeValues = {cardPinValue (value = "1344"), cardBalanceValue (value = "1100")})
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = readCard) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = customerAuthentication) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = enterPinMsg) to tester.reactiveGate;
+	}
+	//cancel operation after inserting the card -> the card must be ejected
+	Test Description test16 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = success_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = 
+			Card_occurrence (attributeValues = {cardPinValue (value = "1344"), cardBalanceValue (value = "1100")})
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = readCard) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = customerAuthentication) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = enterPinMsg) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = cancel_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ejectCard) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+	}
+	//failure occurrence during service customer -> the ATM must be OutOfService
+	Test Description test17 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = success_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = 
+			Card_occurrence (attributeValues = {cardPinValue (value = "1344"), cardBalanceValue (value = "1100")})
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = readCard) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = customerAuthentication) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = enterPinMsg) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = failure_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ejectCard) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = outOfService) to tester.reactiveGate;
+	}
+	//if the enteredPin is not equals to the card's pin, the ATM ejects the card
+	Test Description test18 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = success_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = 
+			Card_occurrence (attributeValues = {cardPinValue (value = "1344"), cardBalanceValue (value = "1100")})
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = readCard) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = customerAuthentication) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = enterPinMsg) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = 
+			Pin_occurrence (attributeValues = pinValue (value = "1212"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = wrongPinMsg) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ejectCard) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+	}
+	//if the enteredPin is equals to the card's pin, the ATM asks for selecting a transaction
+	Test Description test19 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = success_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = 
+			Card_occurrence (attributeValues = {cardPinValue (value = "1344"), cardBalanceValue (value = "1100")})
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = readCard) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = customerAuthentication) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = enterPinMsg) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = 
+			Pin_occurrence (attributeValues = pinValue (value = "1344"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = selectTransaction) to tester.reactiveGate;
+	}
+	//after authentication: selecting withdraw transaction -> asking for entering the amount
+	Test Description test20 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = success_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = 
+			Card_occurrence (attributeValues = {cardPinValue (value = "1344"), cardBalanceValue (value = "1100")})
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = readCard) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = customerAuthentication) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = enterPinMsg) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = 
+			Pin_occurrence (attributeValues = pinValue (value = "1344"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = selectTransaction) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = WithdrawTransaction_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = enterAmountMsg) to tester.reactiveGate;
+	}
+	//after authentication: selecting transfer transaction -> show card number is valid and asking for entering the amount
+	Test Description test21 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = success_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = 
+			Card_occurrence (attributeValues = {cardPinValue (value = "1344"), cardBalanceValue (value = "1100")})
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = readCard) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = customerAuthentication) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = enterPinMsg) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = 
+			Pin_occurrence (attributeValues = pinValue (value = "1344"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = selectTransaction) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = TransferTransaction_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = cardNumberIsValid) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = enterAmountMsg) to tester.reactiveGate;
+	}
+	//if (enteredAmount < card's balance), it is a successful transaction, otherwise, it fails
+	Test Description test22 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = success_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = 
+			Card_occurrence (attributeValues = {cardPinValue (value = "1344"), cardBalanceValue (value = "1100")})
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = readCard) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = customerAuthentication) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = enterPinMsg) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = 
+			Pin_occurrence (attributeValues = pinValue (value = "1344"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = selectTransaction) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = WithdrawTransaction_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = enterAmountMsg) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = 
+			Amount_occurrence (attributeValues = enteredAmountValue (value = "500"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = updateCardBalance) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = deliverCash) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ejectCard) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+	}
+	Test Description test23 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = success_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = 
+			Card_occurrence (attributeValues = {cardPinValue (value = "1344"), cardBalanceValue (value = "1100")})
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = readCard) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = customerAuthentication) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = enterPinMsg) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = 
+			Pin_occurrence (attributeValues = pinValue (value = "1344"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = selectTransaction) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = WithdrawTransaction_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = enterAmountMsg) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = 
+			Amount_occurrence (attributeValues = enteredAmountValue (value = "1600"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = notEnoughMoneyMsg) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ejectCard) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+	}
+	//if (enteredAmount < card's balance), it is a successful transaction, otherwise, it fails
+	Test Description test24 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = success_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = 
+			Card_occurrence (attributeValues = {cardPinValue (value = "1344"), cardBalanceValue (value = "1100")})
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = readCard) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = customerAuthentication) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = enterPinMsg) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = 
+			Pin_occurrence (attributeValues = pinValue (value = "1344"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = selectTransaction) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = TransferTransaction_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = cardNumberIsValid) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = enterAmountMsg) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = 
+			Amount_occurrence (attributeValues = enteredAmountValue (value = "500"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = updateCardBalance) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = successfullyTransferred) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ejectCard) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+	}
+	Test Description test25 uses configuration BankATMConfiguration{
+		tester.reactiveGate sends _run (state_machine = BankATM) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ATMIsOff) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = turnOn_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = startup) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = underTesting) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = success_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = 
+			Card_occurrence (attributeValues = {cardPinValue (value = "1344"), cardBalanceValue (value = "1100")})
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = readCard) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = customerAuthentication) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = enterPinMsg) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = 
+			Pin_occurrence (attributeValues = pinValue (value = "1344"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = selectTransaction) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = TransferTransaction_occurrence) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = cardNumberIsValid) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = enterAmountMsg) to tester.reactiveGate;
+		tester.reactiveGate sends signal_received (state_machine = BankATM, signal_occurrence = 
+			Amount_occurrence (attributeValues = enteredAmountValue (value = "1600"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = notEnoughMoneyMsg) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = ejectCard) to tester.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = waitingForCard) to tester.reactiveGate;
+	}
+}

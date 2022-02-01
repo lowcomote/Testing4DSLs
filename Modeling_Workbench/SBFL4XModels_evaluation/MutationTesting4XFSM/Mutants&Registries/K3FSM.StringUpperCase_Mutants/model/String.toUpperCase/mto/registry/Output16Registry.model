@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<appliedMutations:Mutations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:appliedMutations="http://appliedMutations/1.0">
+  <muts xsi:type="appliedMutations:InformationChanged">
+    <def href="../../../XFSMMutation.model#//@blocks.4/@commands.0"/>
+    <object href="../../../../model/String.toUpperCase.model#//@ownedStates.1/@outgoingTransitions.1"/>
+    <attChanges attName="output" newVal="Z">
+      <def href="../../../XFSMMutation.model#//@blocks.4/@commands.0"/>
+    </attChanges>
+  </muts>
+</appliedMutations:Mutations>
