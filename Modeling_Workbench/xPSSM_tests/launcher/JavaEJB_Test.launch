@@ -11,6 +11,8 @@
     <stringAttribute key="LAUNCH_METHOD_ENTRY_POINT" value="public static void org.imt.k3tdl.k3dsa.PackageAspect.main(org.etsi.mts.tdl.Package)"/>
     <stringAttribute key="LAUNCH_MODEL_ENTRY_POINT" value="/"/>
     <stringAttribute key="Resource" value="/xPSSM_tests/JavaEJB_Test.tdlan2"/>
+    <booleanAttribute key="TDL Test Coverage" value="true"/>
+    <booleanAttribute key="TDL Test Report" value="true"/>
     <stringAttribute key="airdResource" value=""/>
     <booleanAttribute key="org.eclipse.gemoc.trace.gemoc.addon_equivClassComputing_booleanOption" value="false"/>
     <booleanAttribute key="org.eclipse.gemoc.trace.gemoc.addon_saveTraceOnEngineStop_booleanOption" value="true"/>

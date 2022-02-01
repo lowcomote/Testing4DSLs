@@ -33,7 +33,7 @@ Package testConfiguration {
 	Test Configuration BankATMConfiguration {
 		create Tester tester of type TestSystem ;
 		create SUT statemachine of type MUT with { 
-			MUTPath : '/xPSSM_models/BankATM.xmi' ; 
+			MUTPath : '/xPSSM_models/BankATM.model' ; 
 			DSLName : 'org.imt.pssm.reactive.ReactivePSSM' ;
 		} ;
 		//connect tester.genericGate to statemachine.genericGate;
@@ -44,7 +44,7 @@ Package testConfiguration {
 	Test Configuration JavaEJBConfiguration {
 		create Tester tester of type TestSystem ;
 		create SUT statemachine of type MUT with { 
-			MUTPath : '/xPSSM_models/JavaEJB.xmi' ; 
+			MUTPath : '/xPSSM_models/JavaEJB.model' ; 
 			DSLName : 'org.imt.pssm.reactive.ReactivePSSM' ;
 		} ;
 		//connect tester.genericGate to statemachine.genericGate;
@@ -55,7 +55,7 @@ Package testConfiguration {
 	Test Configuration JavaThreadLifeCycleConfiguration {
 		create Tester tester of type TestSystem ;
 		create SUT statemachine of type MUT with { 
-			MUTPath : '/xPSSM_models/JavaThreadLifeCycle.xmi' ; 
+			MUTPath : '/xPSSM_models/JavaThreadLifeCycle.model' ; 
 			DSLName : 'org.imt.pssm.reactive.ReactivePSSM' ;
 		} ;
 		//connect tester.genericGate to statemachine.genericGate;
@@ -66,7 +66,7 @@ Package testConfiguration {
 	Test Configuration OnlineShoppingConfiguration {
 		create Tester tester of type TestSystem ;
 		create SUT statemachine of type MUT with { 
-			MUTPath : '/xPSSM_models/OnlineShopping.xmi' ; 
+			MUTPath : '/xPSSM_models/OnlineShopping.model' ; 
 			DSLName : 'org.imt.pssm.reactive.ReactivePSSM' ;
 		} ;
 		//connect tester.genericGate to statemachine.genericGate;

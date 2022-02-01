@@ -117,4 +117,5 @@
   <semanticResources>xminijava-classes-xmi/LinkedList.model</semanticResources>
   <semanticResources>xminijava-classes-xmi/Person.model</semanticResources>
   <semanticResources>xminijava-classes-xmi/Tree.model</semanticResources>
+  <semanticResources>xminijava-classes-xmi/BinarySearch2.model</semanticResources>
 </viewpoint:DAnalysis>
