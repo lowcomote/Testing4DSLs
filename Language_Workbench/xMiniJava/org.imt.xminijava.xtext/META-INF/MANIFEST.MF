@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: org.imt.xminijava.xtext
+Bundle-ManifestVersion: 2
+Bundle-Name: org.imt.xminijava.xtext
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: org.imt.xminijava.xtext; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.imt.xminijava.model,
+ org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.util,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: org.imt.xminijava.xtext.parser.antlr,
+ org.imt.xminijava.xtext,
+ org.imt.xminijava.xtext.validation,
+ org.imt.xminijava.xtext.serializer,
+ org.imt.xminijava.xtext.generator,
+ org.imt.xminijava.xtext.formatting2,
+ org.imt.xminijava.xtext.scoping,
+ org.imt.xminijava.xtext.services,
+ org.imt.xminijava.xtext.parser.antlr.internal
+Import-Package: org.apache.log4j

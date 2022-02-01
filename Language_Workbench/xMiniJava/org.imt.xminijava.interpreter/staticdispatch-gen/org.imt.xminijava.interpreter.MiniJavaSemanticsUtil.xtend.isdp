@@ -1,0 +1,30 @@
+	// BeginInjectInto org.imt.xminijava.interpreter.ValueAspect#Value copy() from org.imt.xminijava.interpreter.ObjectRefValueAspect
+		if (_self instanceof org.imt.minijava.xminiJava.ObjectRefValue){
+			result = org.imt.xminijava.interpreter.ObjectRefValueAspect.copy((org.imt.minijava.xminiJava.ObjectRefValue)_self);
+		} else
+		// EndInjectInto org.imt.xminijava.interpreter.ValueAspect#Value copy() from org.imt.xminijava.interpreter.ObjectRefValueAspect
+	// BeginInjectInto org.imt.xminijava.interpreter.ValueAspect#Value copy() from org.imt.xminijava.interpreter.IntegerValueAspect
+		if (_self instanceof org.imt.minijava.xminiJava.IntegerValue){
+			result = org.imt.xminijava.interpreter.IntegerValueAspect.copy((org.imt.minijava.xminiJava.IntegerValue)_self);
+		} else
+		// EndInjectInto org.imt.xminijava.interpreter.ValueAspect#Value copy() from org.imt.xminijava.interpreter.IntegerValueAspect
+	// BeginInjectInto org.imt.xminijava.interpreter.ValueAspect#Value copy() from org.imt.xminijava.interpreter.BooleanValueAspect
+		if (_self instanceof org.imt.minijava.xminiJava.BooleanValue){
+			result = org.imt.xminijava.interpreter.BooleanValueAspect.copy((org.imt.minijava.xminiJava.BooleanValue)_self);
+		} else
+		// EndInjectInto org.imt.xminijava.interpreter.ValueAspect#Value copy() from org.imt.xminijava.interpreter.BooleanValueAspect
+	// BeginInjectInto org.imt.xminijava.interpreter.ValueAspect#Value copy() from org.imt.xminijava.interpreter.StringValueAspect
+		if (_self instanceof org.imt.minijava.xminiJava.StringValue){
+			result = org.imt.xminijava.interpreter.StringValueAspect.copy((org.imt.minijava.xminiJava.StringValue)_self);
+		} else
+		// EndInjectInto org.imt.xminijava.interpreter.ValueAspect#Value copy() from org.imt.xminijava.interpreter.StringValueAspect
+	// BeginInjectInto org.imt.xminijava.interpreter.ValueAspect#Value copy() from org.imt.xminijava.interpreter.ArrayRefValueAspect
+		if (_self instanceof org.imt.minijava.xminiJava.ArrayRefValue){
+			result = org.imt.xminijava.interpreter.ArrayRefValueAspect.copy((org.imt.minijava.xminiJava.ArrayRefValue)_self);
+		} else
+		// EndInjectInto org.imt.xminijava.interpreter.ValueAspect#Value copy() from org.imt.xminijava.interpreter.ArrayRefValueAspect
+	// BeginInjectInto org.imt.xminijava.interpreter.ValueAspect#Value copy() from org.imt.xminijava.interpreter.NullValueAspect
+		if (_self instanceof org.imt.minijava.xminiJava.NullValue){
+			result = org.imt.xminijava.interpreter.NullValueAspect.copy((org.imt.minijava.xminiJava.NullValue)_self);
+		} else
+		// EndInjectInto org.imt.xminijava.interpreter.ValueAspect#Value copy() from org.imt.xminijava.interpreter.NullValueAspect
