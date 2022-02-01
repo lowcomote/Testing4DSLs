@@ -1,0 +1,18 @@
+generate exhaustive mutants
+in "data/out/"
+from "data/model/"
+metamodel "/XArduinoMutation/data/model/arduino.ecore"
+
+with blocks {
+	cdt "Changes delay time from mili to micro" {
+		modify one Delay where {unit = 'MilliSecond'} with {unit = 'MicroSecond'}
+	}
+	cdt2 "Changes delay time from micro to mili" {
+		modify one Delay where {unit = 'MicroSecond'} with {unit = 'MilliSecond'}
+	}
+	cbo_minus "Changes Binary integer expression operator: minus"{
+		modify one BinaryIntegerExpression where {
+			operator in ['plus', 'mul', 'div', 'min', 'max', 'pourcent']
+		} with {operator = 'minus'}
+	}
+}

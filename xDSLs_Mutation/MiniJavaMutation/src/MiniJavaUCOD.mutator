@@ -1,0 +1,182 @@
+generate exhaustive mutants
+in "data/out/"
+from "data/model/"
+metamodel "/MiniJavaMutation/data/model/XMiniJava.ecore"
+description "Removing not"
+
+with blocks {
+	ucreturn "Removes an unary conditional operator for return statement" {
+		return = select one Return where {expression is typed Not}
+		notExp = select one Not in return->expression
+		exp2 = select one Expression in notExp->expression
+		modify return with {expression = exp2}
+	}
+	ucif "Removes an unary conditional operator for ifStatement" {
+		if = select one IfStatement where {expression is typed Not}
+		notExp = select one Not in if->expression
+		exp2 = select one Expression in notExp->expression
+		modify if with {expression = exp2}
+	}
+	ucwhile "Removes an unary conditional operator for whileStatement" {
+		while = select one WhileStatement where {condition is typed Not}
+		notExp = select one Not in while->condition
+		exp2 = select one Expression in notExp->expression
+		modify while with {condition = exp2}
+	}
+	ucfor "Removes an unary conditional operator for forStatement" {
+		forS = select one ForStatement where {condition is typed Not}
+		notExp = select one Not in forS->condition
+		exp2 = select one Expression in notExp->expression
+		modify forS with {condition = exp2}
+	}
+	ucass "Removes an unary conditional operator for Assignment" {
+		assignment = select one Assignment where {value is typed Not}
+		notExp = select one Not in assignment->value
+		exp2 = select one Expression in notExp->expression
+		modify assignment with {value = exp2}
+	}
+	ucar "Removes an unary conditional operator And Expression rightOperand" {
+		exp0 = select one And where {right is typed Not}
+		notExp = select one Not in exp0->right
+		exp2 = select one Expression in notExp->expression
+		modify exp0 with {right = exp2}
+	}
+	ucal "Removes an unary conditional operator And Expression leftOperand" {
+		exp0 = select one And where {left is typed Not}
+		notExp = select one Not in exp0->left
+		exp2 = select one Expression in notExp->expression
+		modify exp0 with {left = exp2}
+	}
+	ucor "Removes an unary conditional operator Or Expression rightOperand" {
+		exp0 = select one Or where {right is typed Not}
+		notExp = select one Not in exp0->right
+		exp2 = select one Expression in notExp->expression
+		modify exp0 with {right = exp2}
+	}
+	ucol "Removes an unary conditional operator Or Expression leftOperand" {
+		exp0 = select one Or where {left is typed Not}
+		notExp = select one Not in exp0->left
+		exp2 = select one Expression in notExp->expression
+		modify exp0 with {left = exp2}
+	}
+	ucer "Removes an unary conditional operator Equality Expression rightOperand" {
+		exp0 = select one Equality where {right is typed Not}
+		notExp = select one Not in exp0->right
+		exp2 = select one Expression in notExp->expression
+		modify exp0 with {right = exp2}
+	}
+	ucel "Removes an unary conditional operator Equality Expression leftOperand" {
+		exp0 = select one Equality where {left is typed Not}
+		notExp = select one Not in exp0->left
+		exp2 = select one Expression in notExp->expression
+		modify exp0 with {left = exp2}
+	}
+	ucixr "Removes an unary conditional operator Inequality Expression rightOperand" {
+		exp0 = select one Inequality where {right is typed Not}
+		notExp = select one Not in exp0->right
+		exp2 = select one Expression in notExp->expression
+		modify exp0 with {right = exp2}
+	}
+	ucixl "Removes an unary conditional operator Inequality Expression leftOperand" {
+		exp0 = select one Inequality where {left is typed Not}
+		notExp = select one Not in exp0->left
+		exp2 = select one Expression in notExp->expression
+		modify exp0 with {left = exp2}
+	}
+	ucser "Removes an unary conditional operator SuperiorOrEqual Expression rightOperand" {
+		exp0 = select one SuperiorOrEqual where {right is typed Not}
+		notExp = select one Not in exp0->right
+		exp2 = select one Expression in notExp->expression
+		modify exp0 with {right = exp2}
+	}
+	ucsel "Removes an unary conditional operator SuperiorOrEqual Expression leftOperand" {
+		exp0 = select one SuperiorOrEqual where {left is typed Not}
+		notExp = select one Not in exp0->left
+		exp2 = select one Expression in notExp->expression
+		modify exp0 with {left = exp2}
+	}
+	ucier "Removes an unary conditional operator InferiorOrEqual Expression rightOperand" {
+		exp0 = select one InferiorOrEqual where {right is typed Not}
+		notExp = select one Not in exp0->right
+		exp2 = select one Expression in notExp->expression
+		modify exp0 with {right = exp2}
+	}
+	uciel "Removes an unary conditional operator InferiorOrEqual Expression leftOperand" {
+		exp0 = select one InferiorOrEqual where {left is typed Not}
+		notExp = select one Not in exp0->left
+		exp2 = select one Expression in notExp->expression
+		modify exp0 with {left = exp2}
+	}
+	ucsr "Removes an unary conditional operator Superior Expression rightOperand" {
+		exp0 = select one Superior where {right is typed Not}
+		notExp = select one Not in exp0->right
+		exp2 = select one Expression in notExp->expression
+		modify exp0 with {right = exp2}
+	}
+	ucsl "Removes an unary conditional operator SuperiorExpression leftOperand" {
+		exp0 = select one Superior where {left is typed Not}
+		notExp = select one Not in exp0->left
+		exp2 = select one Expression in notExp->expression
+		modify exp0 with {left = exp2}
+	}
+	ucir "Removes an unary conditional operator Inferior Expression rightOperand" {
+		exp0 = select one Inferior where {right is typed Not}
+		notExp = select one Not in exp0->right
+		exp2 = select one Expression in notExp->expression
+		modify exp0 with {right = exp2}
+	}
+	ucil "Removes an unary conditional operator Inferior Expression leftOperand" {
+		exp0 = select one Inferior where {left is typed Not}
+		notExp = select one Not in exp0->left
+		exp2 = select one Expression in notExp->expression
+		modify exp0 with {left = exp2}
+	}
+	ucpr "Removes an unary conditional operator Plus Expression rightOperand" {
+		exp0 = select one Plus where {right is typed Not}
+		notExp = select one Not in exp0->right
+		exp2 = select one Expression in notExp->expression
+		modify exp0 with {right = exp2}
+	}
+	ucpl "Removes an unary conditional operator Plus Expression leftOperand" {
+		exp0 = select one Plus where {left is typed Not}
+		notExp = select one Not in exp0->left
+		exp2 = select one Expression in notExp->expression
+		modify exp0 with {left = exp2}
+	}
+	ucmr "Removes an unary conditional operator Minus Expression rightOperand" {
+		exp0 = select one Minus where {right is typed Not}
+		notExp = select one Not in exp0->right
+		exp2 = select one Expression in notExp->expression
+		modify exp0 with {right = exp2}
+	}
+	ucml "Removes an unary conditional operator Minus Expression leftOperand" {
+		exp0 = select one Minus where {left is typed Not}
+		notExp = select one Not in exp0->left
+		exp2 = select one Expression in notExp->expression
+		modify exp0 with {left = exp2}
+	}
+	ucmur "Removes an unary conditional operator Multiplication Expression rightOperand" {
+		exp0 = select one Multiplication where {right is typed Not}
+		notExp = select one Not in exp0->right
+		exp2 = select one Expression in notExp->expression 
+		modify exp0 with {right = exp2}
+	}
+	ucmul "Removes an unary conditional operator Multiplication Expression leftOperand" {
+		exp0 = select one Multiplication where {left is typed Not}
+		notExp = select one Not in exp0->left
+		exp2 = select one Expression in notExp->expression
+		modify exp0 with {left = exp2}
+	}
+	ucdr "Removes an unary conditional operator Division Expression rightOperand" {
+		exp0 = select one Division where {right is typed Not}
+		notExp = select one Not in exp0->right
+		exp2 = select one Expression in notExp->expression
+		modify exp0 with {right = exp2}
+	}
+	ucdl "Removes an unary conditional operator Division Expression leftOperand" {
+		exp0 = select one Division where {left is typed Not}
+		notExp = select one Not in exp0->left
+		exp2 = select one Expression in notExp->expression
+		modify exp0 with {left = exp2}
+	}
+}
