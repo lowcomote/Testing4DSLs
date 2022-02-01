@@ -1,7 +1,7 @@
 generate exhaustive mutants
 in "data/out/"
 from "data/model/"
-metamodel "C:/labtop/gemoc_studio-nightly/workspaces/xTDL_EventManager/PSSMMutation/data/model/statemachines.ecore"
+metamodel "/PSSMMutation/data/model/statemachines.ecore"
 
 with blocks {
 	ccs "Creates a connected state" {

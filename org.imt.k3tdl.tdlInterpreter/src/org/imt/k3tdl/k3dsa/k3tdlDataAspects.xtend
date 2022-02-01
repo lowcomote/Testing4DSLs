@@ -3,7 +3,6 @@ package org.imt.k3tdl.k3dsa
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 import java.util.ArrayList
-import java.util.List
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
@@ -29,17 +28,6 @@ import org.etsi.mts.tdl.SpecialValueUse
 import org.etsi.mts.tdl.StaticDataUse
 import org.etsi.mts.tdl.StructuredDataInstance
 import org.etsi.mts.tdl.StructuredDataType
-import org.imt.pssm.reactive.model.statemachines.BooleanAttribute
-import org.imt.pssm.reactive.model.statemachines.BooleanAttributeValue
-import org.imt.pssm.reactive.model.statemachines.CallEventOccurrence
-import org.imt.pssm.reactive.model.statemachines.IntegerAttribute
-import org.imt.pssm.reactive.model.statemachines.IntegerAttributeValue
-import org.imt.pssm.reactive.model.statemachines.Signal
-import org.imt.pssm.reactive.model.statemachines.SignalEventOccurrence
-import org.imt.pssm.reactive.model.statemachines.StatemachinesFactory
-import org.imt.pssm.reactive.model.statemachines.StringAttribute
-import org.imt.pssm.reactive.model.statemachines.StringAttributeValue
-import org.imt.tdl.testResult.TestResultUtil
 
 import static extension org.imt.k3tdl.k3dsa.DataInstanceAspect.*
 import static extension org.imt.k3tdl.k3dsa.DataInstanceUseAspect.*
@@ -50,23 +38,26 @@ import static extension org.imt.k3tdl.k3dsa.MemberAssignmentAspect.*
 import static extension org.imt.k3tdl.k3dsa.ParameterBindingAspect.*
 import static extension org.imt.k3tdl.k3dsa.StaticDataUseAspect.*
 import static extension org.imt.k3tdl.k3dsa.StructuredDataInstanceAspect.*
+import org.imt.tdl.testResult.TDLTestResultUtil
 
 @Aspect (className = DataType)
 class DataTypeAspect{
 	def boolean isDynamicType() {
 		if (_self instanceof StructuredDataType){
 			val StructuredDataType type = _self as StructuredDataType
-			//check if the type has a 'dynamic' annotation itself
+			//check if the type has a 'dynamic' or 'aspect' annotation itself
 			for (i : 0 ..<type.annotation.size){
-				if (type.annotation.get(i).key.name.toString.contains("dynamic")) {
+				val annotation = type.annotation.get(i).key.name.toString
+				if (annotation.contains("dynamic") || annotation.contains("aspect")) {
 					return true;
 				}
 			}
-			//check if as least one of the members of type has a 'dynamic' annotation
+			//check if as least one of the members of type has a 'dynamic' or 'aspect' annotation
 			for (i : 0 ..<type.member.size){
 				val Member m = type.member.get(i)
 				for (j : 0 ..<m.annotation.size){
-					if (m.annotation.get(j).key.name.toString.contains("dynamic")) {
+					val annotation = m.annotation.get(j).key.name.toString
+					if (annotation.contains("dynamic") || annotation.contains("aspect")) {
 						return true;
 					}
 				}
@@ -77,7 +68,7 @@ class DataTypeAspect{
 	def boolean isConcreteEcoreType(String DSLPath) {
 		var dslRes = (new ResourceSetImpl()).getResource(URI.createURI(DSLPath), true);
 		var dsl = dslRes.getContents().get(0) as Dsl;
-		if (dsl.getEntry("ecore") != null) {
+		if (dsl.getEntry("ecore") !== null) {
 			var metamodelPath = dsl.getEntry("ecore").getValue().replaceFirst("resource", "plugin");
 			var metamodelRes = (new ResourceSetImpl()).getResource(URI.createURI(metamodelPath), true);
 			var metamodelRootElement = metamodelRes.getContents().get(0) as EPackage;
@@ -88,7 +79,7 @@ class DataTypeAspect{
 	def boolean isAcceptedEvent(String DSLPath) {
 		var dslRes = (new ResourceSetImpl()).getResource(URI.createURI(DSLPath), true);
 		var dsl = dslRes.getContents().get(0) as Dsl;
-		if (dsl.getEntry("behavioralInterface") != null) {
+		if (dsl.getEntry("behavioralInterface") !== null) {
 			var interfacePath = dsl.getEntry("behavioralInterface").getValue().replaceFirst("resource", "plugin");
 			var interfaceRes = (new ResourceSetImpl()).getResource(URI.createURI(interfacePath), true);
 			var BehavioralInterface interfaceRootElement= interfaceRes.getContents().get(0) as BehavioralInterface;
@@ -99,7 +90,7 @@ class DataTypeAspect{
 	def boolean isExposedEvent(String DSLPath) {
 		var dslRes = (new ResourceSetImpl()).getResource(URI.createURI(DSLPath), true);
 		var dsl = dslRes.getContents().get(0) as Dsl;
-		if (dsl.getEntry("behavioralInterface") != null) {
+		if (dsl.getEntry("behavioralInterface") !== null) {
 			var interfacePath = dsl.getEntry("behavioralInterface").getValue().replaceFirst("resource", "plugin");
 			var interfaceRes = (new ResourceSetImpl()).getResource(URI.createURI(interfacePath), true);
 			var BehavioralInterface interfaceRootElement= interfaceRes.getContents().get(0) as BehavioralInterface;
@@ -126,10 +117,20 @@ class DataInstanceAspect{
 	def EObject getMatchedMUTElement(ArrayList<EObject> rootElement, Resource MUTResource, boolean isAssertion, String DSLPath){
 		
 	}
+	
 	def String getValidName(){
 		var tdlName = _self.name
 		if (_self.name.startsWith("_")){
-			return tdlName.substring(1)
+			tdlName = tdlName.substring(1)
+		}
+		if (_self instanceof StructuredDataInstance){
+			val sDataInstance = _self as StructuredDataInstance
+			if (sDataInstance.memberAssignment.size>0){
+				val ma = sDataInstance.memberAssignment.findFirst[ma | ma.member.name.equals("_name")]
+				if (ma !== null && ma.memberSpec instanceof LiteralValueUse){
+					tdlName = (ma.memberSpec as LiteralValueUse).value
+				}
+			}
 		}
 		return tdlName
 	}
@@ -139,7 +140,7 @@ class SimpleDataInstanceAspect extends DataInstanceAspect{
 	@OverrideAspectMethod
 	def EObject getMatchedMUTElement(ArrayList<EObject> rootElement, Resource MUTResource, boolean isAssertion, String DSLPath){
 		println("The " + _self.name + " element cannot be found since it has no identifier")
-		_self.info = "FAIL: The " + _self.name + " element cannot be found since it has no identifier"
+		_self.info = TDLTestResultUtil.FAIL + ": The " + _self.name + " element cannot be found since it has no identifier"
 		return null;
 	}
 }
@@ -155,7 +156,7 @@ class StructuredDataInstanceAspect extends DataInstanceAspect{
 			try{
 				_self.memberAssignment.forEach[memberAssign |
 					_self.info = memberAssign.isMatchedMember(rootElement.get(i), MUTResource, isAssertion, DSLPath)
-					if(_self.info.contains("FAIL")){
+					if(_self.info.contains(TDLTestResultUtil.FAIL)){
 						throw new InterruptedException()
 					}
 				]
@@ -187,19 +188,19 @@ class StructuredDataInstanceAspect extends DataInstanceAspect{
 						val item = data.item.get(j) as DataInstanceUse
 						val rootObject = item.getMatchedMUTElement(MUTResource, false, DSLPath)
 						status = (data.item.get(j) as DataInstanceUse).setMatchedMUTElement(rootObject, MUTResource, DSLPath)
-						if (status.contains("FAIL")){
+						if (status.contains(TDLTestResultUtil.FAIL)){
 							return status
 						}
 					}
 				}else{
 					val rootObject = data.getMatchedMUTElement(MUTResource, false, DSLPath)
 					status = data.setMatchedMUTElement(rootObject, MUTResource, DSLPath)
-					if (status.contains("FAIL")){
+					if (status.contains(TDLTestResultUtil.FAIL)){
 						return status
 					}
 				}
 			}
-			if (status.contains("FAIL")){
+			if (status.contains(TDLTestResultUtil.FAIL)){
 				return status
 			}
 		}
@@ -216,7 +217,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 		//if data type is abstract return null
 		if (!_self.dataInstance.dataType.isConcreteEcoreType(DSLPath)){
 			println("The " + _self.dataInstance.name + " element is abstract")
-			_self.dataInstance.info = "FAIL: The " + _self.dataInstance.name + " element is abstract"
+			_self.dataInstance.info = TDLTestResultUtil.FAIL + ": The " + _self.dataInstance.name + " element is abstract"
 			return null;
 		}
 		val dataTypeName = _self.dataInstance.dataType.validName
@@ -241,8 +242,8 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 			val dataIns = _self.dataInstance as StructuredDataInstance
 			if (dataIns.memberAssignment.size>0){//if some values are assigned to the members of data instance
 				matchedElement = dataIns.getMatchedMUTElement(rootElement, MUTResource, isAssertion, DSLPath)
-				if (matchedElement == null){
-					_self.dataInstance.info = "FAIL: There is no MUT element matched with " + dataIns.name
+				if (matchedElement === null){
+					_self.dataInstance.info = TDLTestResultUtil.FAIL + ": There is no MUT element matched with " + dataIns.name
 					return null
 				}
 			}	
@@ -253,31 +254,32 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 		//find matched elements based on the parameter bindings of dataInstanceUse
 		for (i:0 ..<containers.size){
 			_self.dataInstance.info = _self.isMatchedParametrizedElement(containers.get(i), MUTResource, isAssertion, DSLPath)
-			if (_self.dataInstance.info.contains("PASS")){
-				return containers.get(i)
+			if (_self.dataInstance.info.contains(TDLTestResultUtil.PASS)){
+					return containers.get(i)
 			}
 		}
 		return null
 	}
+	
 	def String isMatchedParametrizedElement(EObject rootElement, Resource MUTResource, boolean isAssertion, String DSLPath){
 		//find matched element based on the parameter bindings of dataInstance
 		for (i : 0 ..<_self.argument.size){
 			val parameterBinding = _self.argument.get(i);
 			val status = parameterBinding.isMatchedParameter(rootElement, MUTResource, isAssertion, DSLPath)
-			if (status.contains("FAIL")){
+			if (status.contains(TDLTestResultUtil.FAIL)){
 				return status;
 			}		
 		}
-		return "PASS";
+		return TDLTestResultUtil.PASS;
 	}
 
 	def String setMatchedMUTElement(Resource MUTResource, String DSLPath){
 		//the second parameter is isAssertion that has to be set as false
 		//so only static elements will be matched to then set the values of its dynamic features
 		var EObject matchedObject = _self.getMatchedMUTElement(MUTResource, false, DSLPath)
-		if (matchedObject == null){
+		if (matchedObject === null){
 			println("There is no matched object in the model under test")
-			return "FAIL: There is no MUT element matched with " + _self.dataInstance.name
+			return TDLTestResultUtil.FAIL + ": There is no MUT element matched with " + _self.dataInstance.name
 		}
 		_self.setMatchedMUTElement(matchedObject, MUTResource, DSLPath)
 	}
@@ -289,7 +291,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 			//so find the matched element based on the dataInstance
 			val dataIns = _self.dataInstance as StructuredDataInstance
 			status = dataIns.setMatchedMUTElement(matchedObject, MUTResource, DSLPath)
-			if (status.contains("FAIL")){
+			if (status.contains(TDLTestResultUtil.FAIL)){
 				return status
 			}
 		}
@@ -307,19 +309,19 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 						val item = data.item.get(j) as DataInstanceUse
 						val rootObject = item.getMatchedMUTElement(MUTResource, false, DSLPath)
 						status = (data.item.get(j) as DataInstanceUse).setMatchedMUTElement(rootObject, MUTResource, DSLPath)
-						if (status.contains("FAIL")){
+						if (status.contains(TDLTestResultUtil.FAIL)){
 							return status
 						}
 					}
 				}else{
 					val rootObject = data.getMatchedMUTElement(MUTResource, false, DSLPath)
 					status = data.setMatchedMUTElement(rootObject, MUTResource, DSLPath)
-					if (status.contains("FAIL")){
+					if (status.contains(TDLTestResultUtil.FAIL)){
 						return status
 					}
 				}
 			}
-			if (status.contains("FAIL")){
+			if (status.contains(TDLTestResultUtil.FAIL)){
 				return status
 			}			
 		}
@@ -327,78 +329,8 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 	}
 	
 	def EObject createEventOccurrence(Resource MUTResource, boolean isAssertion, String DSLPath){
-		if (_self.dataInstance.dataType.validName.equals("SignalEventOccurrence")){
-			var SignalEventOccurrence signal_occurrence = StatemachinesFactory.eINSTANCE.createSignalEventOccurrence
-			for (i : 0 ..<_self.argument.size){
-				val parameterBinding = _self.argument.get(i)
-				if (parameterBinding.parameter.dataType.validName.equals("Signal")){
-					signal_occurrence.signal = (parameterBinding.dataUse as DataInstanceUse).
-						getMatchedMUTElement(MUTResource, isAssertion, DSLPath) as Signal
-				}else if (parameterBinding.parameter.dataType.validName.equals("AttributeValue")){
-					var List<DataInstanceUse> tdlAttributeValues = new ArrayList<DataInstanceUse>
-					val paramValue = parameterBinding.dataUse as DataInstanceUse
-					if (paramValue.item == null || paramValue.item.size <= 0){
-						tdlAttributeValues.add(parameterBinding.dataUse as DataInstanceUse)
-					}else {
-						for (j:0 ..<paramValue.item.size){
-							tdlAttributeValues.add(paramValue.item.get(j) as DataInstanceUse)
-						}
-					}
-					for (j:0 ..<tdlAttributeValues.size){
-						var tdlAttributeValueUse = tdlAttributeValues.get(j)
-						val tdlAttributeValue = tdlAttributeValueUse.dataInstance as StructuredDataInstance
-						var DataUse attributePropertyValue;
-						var DataUse valuePropertyValue;
-						//get the 'attribute' and 'value' properties of the AttributeValue, a long with their values
-						if (tdlAttributeValue.memberAssignment.size>0){
-							for (k:0 ..<tdlAttributeValue.memberAssignment.size){
-								if (tdlAttributeValue.memberAssignment.get(k).member.name.equals("attribute")){
-									attributePropertyValue = tdlAttributeValue.memberAssignment.get(k).memberSpec
-								}else if (tdlAttributeValue.memberAssignment.get(k).member.name.equals("value")){
-									valuePropertyValue = tdlAttributeValue.memberAssignment.get(k).memberSpec
-								}
-							}
-						}
-						if (tdlAttributeValueUse.argument.size>0){//check parameterBindings
-							for (k:0 ..<tdlAttributeValueUse.argument.size){
-								if (tdlAttributeValueUse.argument.get(k).parameter.name.equals("attribute")){
-									attributePropertyValue = tdlAttributeValueUse.argument.get(k).dataUse
-								}else if (tdlAttributeValueUse.argument.get(k).parameter.name.equals("value")){
-									valuePropertyValue = tdlAttributeValueUse.argument.get(k).dataUse
-								}
-							}
-						}
-						var ArrayList<EObject> rootElements = new ArrayList
-						rootElements.addAll(signal_occurrence.signal.attributes)
-						var value = (valuePropertyValue as LiteralValueUse).value
-						value = value.substring(1, value.length-1)
-						if (tdlAttributeValueUse.dataInstance.dataType.validName.equals("IntegerAttributeValue")){	
-							var IntegerAttributeValue integerAttributeValue = StatemachinesFactory.eINSTANCE.createIntegerAttributeValue
-							integerAttributeValue.attribute = (attributePropertyValue as DataInstanceUse).
-								getMatchedMUTElement(rootElements, MUTResource, isAssertion, DSLPath) as IntegerAttribute
-							integerAttributeValue.value = Integer.parseInt(value)
-							signal_occurrence.attributeValues.add(integerAttributeValue)
-						}else if (tdlAttributeValueUse.dataInstance.dataType.validName.equals("StringAttributeValue")){
-							var StringAttributeValue stringAttributeValue = StatemachinesFactory.eINSTANCE.createStringAttributeValue
-							stringAttributeValue.attribute = (attributePropertyValue as DataInstanceUse).
-								getMatchedMUTElement(rootElements, MUTResource, isAssertion, DSLPath) as StringAttribute
-							stringAttributeValue.value = value
-							signal_occurrence.attributeValues.add(stringAttributeValue)
-						}else if (tdlAttributeValueUse.dataInstance.dataType.validName.equals("BooleanAttributeValue")){
-							var BooleanAttributeValue booleanAttributeValue = StatemachinesFactory.eINSTANCE.createBooleanAttributeValue
-							booleanAttributeValue.attribute = (attributePropertyValue as DataInstanceUse).
-								getMatchedMUTElement(rootElements, MUTResource, isAssertion, DSLPath) as BooleanAttribute
-							booleanAttributeValue.value = Boolean.parseBoolean(value)
-							signal_occurrence.attributeValues.add(booleanAttributeValue)
-						}
-					}
-				}
-			}
-			return signal_occurrence
-		}else if (_self.dataInstance.dataType.validName.equals("CallEventOccurrence")){
-			var CallEventOccurrence call_occurrence = StatemachinesFactory.eINSTANCE.createCallEventOccurrence
-			return call_occurrence
-		}
+		val PSSMEventOccurrenceCreator eventCreator = new PSSMEventOccurrenceCreator
+		return eventCreator.createEventOccurrence(_self, MUTResource, isAssertion, DSLPath)
 	}
 	
 	@OverrideAspectMethod
@@ -413,8 +345,8 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 		val ArrayList<EObject> matchedObjects = new ArrayList
 		var String expectedData = "";
 		var String mutData = "";
-		if (_self.item != null && _self.item.size > 0){//there are several instances of data
-			mutData = TestResultUtil.instance.getDataAsString(featureValue as EList)
+		if (_self.item !== null && _self.item.size > 0){//there are several instances of data
+			mutData = TDLTestResultUtil.getInstance.getDataAsString(featureValue as EList<?>)
 			for (i : 0 ..<_self.item.size){
 				val matchedObject = (_self.item.get(i) as DataInstanceUse).getMatchedMUTElement(rootObjects, MUTResource, isAssertion, DSLPath)			
 				matchedObjects.add(matchedObject)
@@ -422,43 +354,43 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 			}
 			expectedData = "[" + expectedData.substring(0, expectedData.length-2) + "]"
 			if (mutData.equals("[]") && !expectedData.isNullOrEmpty){
-				return "FAIL: The expected data is: " + expectedData + ", but the current data is NULL";
+				return TDLTestResultUtil.FAIL + ": The expected data is: " + expectedData + ", but the current data is NULL";
 			}
 			if (isAssertion){
-				if ((featureValue as EList).equals(matchedObjects)){
-					return "PASS: The expected data is equal to the current data"
+				if ((featureValue as EList<?>).equals(matchedObjects)){
+					return TDLTestResultUtil.PASS + ": The expected data is equal to the current data"
 				}
 			}else{
-				if ((featureValue as EList).containsAll(matchedObjects)){
-					return "PASS: The expected data contains the current data"
+				if ((featureValue as EList<?>).containsAll(matchedObjects)){
+					return TDLTestResultUtil.PASS + ": The expected data contains the current data"
 				}
 			}		
-			return "FAIL: The expected data is: " + expectedData + ", but the current data is: " + mutData;
+			return TDLTestResultUtil.FAIL + ": The expected data is: " + expectedData + ", but the current data is: " + mutData;
 		}else{//there is just one data instance
 			val matchedObject = _self.getMatchedMUTElement(rootObjects, MUTResource, isAssertion, DSLPath)
-			if (matchedObject == null){
+			if (matchedObject === null){
 				expectedData =  _self.dataInstance.name
 			}else{
-				expectedData = "[" + TestResultUtil.instance.eObjectLabelProvider(matchedObject as EObject) + "]"
+				expectedData = "[" + TDLTestResultUtil.getInstance.eObjectLabelProvider(matchedObject as EObject) + "]"
 			}
 			if (featureValue instanceof EList){
-				if (matchedObject != null && (featureValue as EList).contains(matchedObject)){
-					return "PASS: The expected data contains in the current data"
+				if (matchedObject !== null && (featureValue as EList<?>).contains(matchedObject)){
+					return TDLTestResultUtil.PASS + ": The expected data contains in the current data"
 				}
-				mutData = "[" + TestResultUtil.instance.getDataAsString(featureValue as EList) + "]"
+				mutData = "[" + TDLTestResultUtil.getInstance.getDataAsString(featureValue as EList<?>) + "]"
 			}else if (featureValue instanceof EObject){
-				if (matchedObject != null && (featureValue as EObject).equals(matchedObject)){
-					return "PASS: The expected data is equal to the current data"
+				if (matchedObject !== null && (featureValue as EObject).equals(matchedObject)){
+					return TDLTestResultUtil.PASS + ": The expected data is equal to the current data"
 				}
-				mutData = "[" + TestResultUtil.instance.eObjectLabelProvider(featureValue as EObject) + "]"
+				mutData = "[" + TDLTestResultUtil.getInstance.eObjectLabelProvider(featureValue as EObject) + "]"
 			}
-			return "FAIL: The expected data is: " + expectedData + ", but the current data is: " + mutData;
+			return TDLTestResultUtil.FAIL + ": The expected data is: " + expectedData + ", but the current data is: " + mutData;
 		}
 	}
 	
 	@OverrideAspectMethod
 	def String updateData(Resource MUTResource, EObject object, EStructuralFeature matchedFeature, String DSLPath){
-		if (_self.item != null && _self.item.size > 0){//there are several intances of data
+		if (_self.item !== null && _self.item.size > 0){//there are several instances of data
 			val TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(object);
 			try{
 				domain.getCommandStack().execute(new RecordingCommand(domain) {
@@ -469,7 +401,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 						for (i : 0 ..<_self.item.size){
 							val item = _self.item.get(i) as DataInstanceUse
 							val matchedObject = item.getMatchedMUTElement(rootElements, MUTResource, false, DSLPath)			
-							if (matchedObject == null){
+							if (matchedObject === null){
 								println("There is no " + item.dataInstance.name + " property in the MUT")
 							}else{
 								_self.setMatchedMUTElement(matchedObject, MUTResource, DSLPath)
@@ -483,13 +415,13 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 		   		});
 	   		}catch(IllegalArgumentException e){
 				println("FAIL: The new value cannot be set for the " + matchedFeature.name + " property of the MUT")
-				return "FAIL: The new value cannot be set for the " + matchedFeature.name + " property of the MUT"
+				return TDLTestResultUtil.FAIL + ": The new value cannot be set for the " + matchedFeature.name + " property of the MUT"
 			}
 		}else{//there is just one data instance
 			val matchedObject = _self.getMatchedMUTElement(MUTResource, false, DSLPath)
-			if (matchedObject == null){
+			if (matchedObject === null){
 				println("There is no " + _self.dataInstance.name + " property in the MUT")
-				return "FAIL: There is no MUT element matched with " + _self.dataInstance.name
+				return TDLTestResultUtil.FAIL + ": There is no MUT element matched with " + _self.dataInstance.name
 			}
 			val TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(object);
 			try{
@@ -510,23 +442,23 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 		   		});
 	   		}catch(IllegalArgumentException e){
 				println("New value cannot be set for the " + matchedFeature.name + " property of the MUT")
-				return "FAIL: New value cannot be set for the " + matchedFeature.name + " property of the MUT"
+				return TDLTestResultUtil.FAIL + ": New value cannot be set for the " + matchedFeature.name + " property of the MUT"
 			}
 		}
-		return "PASS: New value is set for the " + matchedFeature.name + " property of the MUT"
+		return TDLTestResultUtil.PASS + ": New value is set for the " + matchedFeature.name + " property of the MUT"
 	}
 }
 @Aspect (className = MemberAssignment)
 class MemberAssignmentAspect{
 	def String isMatchedMember(EObject rootElement, Resource MUTResource, Boolean isAssertion, String DSLPath){
 		val EStructuralFeature matchedFeature = _self.member.getMatchedFeature(rootElement)	
-		if (matchedFeature == null){
+		if (matchedFeature === null){
 			println("There is no " + _self.member.name + " property in the MUT")
-			return "FAIL: There is no MUT element matched with " + _self.member.name
+			return TDLTestResultUtil.FAIL + ": There is no MUT element matched with " + _self.member.name
 		}
 		val featureValue = rootElement.eGet(matchedFeature)
 		if (!isAssertion && _self.member.isDynamicMember){
-			return "PASS"
+			return TDLTestResultUtil.PASS
 		}
 		//Assert the data instances of the member assignment
 		if (_self.memberSpec instanceof DataInstanceUse){
@@ -545,7 +477,7 @@ class MemberAssignmentAspect{
 	
 	def Boolean hasItems(){
 		val data = _self.memberSpec as DataInstanceUse
-		if (data.item != null && data.item.size >0){
+		if (data.item !== null && data.item.size >0){
 			return true
 		}
 		return false
@@ -556,13 +488,13 @@ class ParameterBindingAspect{
 	
 	def String isMatchedParameter(EObject rootElement, Resource MUTResource, Boolean isAssertion, String DSLPath){
 		val EStructuralFeature matchedFeature = (_self.parameter as Member).getMatchedFeature(rootElement) 
-		if (matchedFeature == null){
+		if (matchedFeature === null){
 			println("There is no " + _self.parameter.name + " property in the MUT")
-			return "FAIL: There is no MUT element matched with " + _self.parameter.name
+			return TDLTestResultUtil.FAIL + ": There is no MUT element matched with " + _self.parameter.name
 		}
 		val featureValue = rootElement.eGet(matchedFeature)
 		if (!isAssertion && (_self.parameter as Member).isDynamicMember){
-			return "PASS"
+			return TDLTestResultUtil.PASS
 		}
 		if (_self.dataUse instanceof DataInstanceUse){
 			return _self.dataUse.assertEquals(MUTResource, featureValue, isAssertion, DSLPath)
@@ -580,7 +512,7 @@ class ParameterBindingAspect{
 	
 	def Boolean hasItems(){
 		val data = _self.dataUse as DataInstanceUse
-		if (data.item != null && data.item.size >0){
+		if (data.item !== null && data.item.size >0){
 			return true
 		}
 		return false
@@ -605,7 +537,8 @@ class MemberAspect{
 	
 	def boolean isDynamicMember() {
 		for (j : 0 ..<_self.annotation.size){
-			if (_self.annotation.get(j).key.name.toString.contains("dynamic")) {
+			val annotation = _self.annotation.get(j).key.name.toString
+			if (annotation.contains("dynamic") || annotation.contains("aspect")) {
 				return true
 			}
 		}
@@ -652,10 +585,13 @@ class LiteralValueUseAspect extends StaticDataUseAspect{
 	def String assertEquals(Object featureValue){
 		var String parameterValue = _self.value
 		parameterValue = parameterValue.substring(1, parameterValue.length-1)//remove quotation marks
-		if (featureValue.toString.equals(parameterValue)){
-			return "PASS: The expected data is equal to the current data"
+		if (featureValue === null && (parameterValue == "null" || parameterValue.isNullOrEmpty)){
+			return TDLTestResultUtil.PASS + ": The expected data is equal to the current data"
 		}
-		return "FAIL: The expected data is: " + parameterValue + ", but the current data is: " + featureValue
+		else if (featureValue.toString.equals(parameterValue)){
+			return TDLTestResultUtil.PASS + ": The expected data is equal to the current data"
+		}
+		return TDLTestResultUtil.FAIL + ": The expected data is: " + parameterValue + ", but the current data is: " + featureValue
 	}
 
 	@OverrideAspectMethod
@@ -677,10 +613,10 @@ class LiteralValueUseAspect extends StaticDataUseAspect{
    			});
 		}catch(IllegalArgumentException e){
 			println("FAIL: The new value cannot be set for the " + matchedFeature.name + " property of the MUT")
-			return "FAIL: The new value cannot be set for the " + matchedFeature.name + " property of the MUT"
+			return TDLTestResultUtil.FAIL + ": The new value cannot be set for the " + matchedFeature.name + " property of the MUT"
 		}
 		
-		return "PASS: New value is set for the " + matchedFeature.name + " property of the MUT"
+		return TDLTestResultUtil.PASS + ": New value is set for the " + matchedFeature.name + " property of the MUT"
 	}
 }
 @Aspect (className = SpecialValueUse)
@@ -688,11 +624,11 @@ class SpecialValueUseAspect extends StaticDataUseAspect{
 	@OverrideAspectMethod
 	def String assertEquals(Object featureValue){
 		//the value is ('?' or '*' or 'omit') that should be ignored
-		return "PASS";
+		return TDLTestResultUtil.PASS;
 	}
 	@OverrideAspectMethod
 	def String updateData(EObject object, EStructuralFeature matchedFeature){
 		//the value is ('?' or '*' or 'omit') that should be ignored
-		return "PASS";
+		return TDLTestResultUtil.PASS;
 	}
 }

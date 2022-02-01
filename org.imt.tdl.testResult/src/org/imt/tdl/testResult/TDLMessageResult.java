@@ -4,54 +4,59 @@ import java.util.HashMap;
 
 
 import org.etsi.mts.tdl.DataUse;
+import org.etsi.mts.tdl.Message;
 
 public class TDLMessageResult {
 	
-	private String tdlMessageName;
+	private Message message;
 	
-	private boolean value;
+	private String tdlMessageId;
 	
-	private String message;
+	private String value;
+	
+	private String description;
 	//<expectedData, receivedDta>
 	private HashMap<DataUse, DataUse> oracle;
 	
 	private boolean failure;
 	
-	public TDLMessageResult(String tdlMessageName, boolean value, String message, HashMap<DataUse, DataUse> oracle, boolean error) {
-		this.tdlMessageName = tdlMessageName;
-		this.value = value;
+	public TDLMessageResult(Message message, String value, String description, HashMap<DataUse, DataUse> oracle) {
 		this.message = message;
+		this.value = value;
+		if (value == TDLTestResultUtil.INCONCLUSIVE) {
+			this.failure = true;
+		}
+		this.description = description;
 		this.oracle = oracle;
-		this.failure = error;
 	}
-	public String getTdlMessageName() {
-		if (this.tdlMessageName == null) {
+	public String getTdlMessageId() {
+		if (this.tdlMessageId == null) {
 			return "NULL";
 		}
-		return this.tdlMessageName;
+		return this.tdlMessageId;
 	}
 	
-	public void setTdlMessageName(String name) {
-		this.tdlMessageName = name;
+	public void setTdlMessageId(String name) {
+		this.tdlMessageId = name;
 	}
 	
-	public boolean getValue() {
-		return value;
+	public String getValue() {
+		return this.value;
 	}
 	
-	public void setValue(boolean value) {
+	public void setValue(String value) {
 		this.value = value;
 	}
 	
-	public String getMessage() {
-		if (this.message == null) {
+	public String getDescription() {
+		if (this.description == null) {
 			return "NULL";
 		}
-		return this.message;
+		return this.description;
 	}
 	
-	public void setMessage(String message) {
-		this.message = message;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	public HashMap<DataUse, DataUse> getOracle() {
@@ -68,5 +73,11 @@ public class TDLMessageResult {
 	
 	public void setFailure(boolean failure) {
 		this.failure = failure;
+	}
+	public Message getMessage() {
+		return message;
+	}
+	public void setMessage(Message message) {
+		this.message = message;
 	}
 }

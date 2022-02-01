@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Generator
-Bundle-SymbolicName: org.imt.tdl.libraryGenerator
+Bundle-SymbolicName: org.imt.tdl.libraryGenerator;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Export-Package: .,
  org.imt.tdl.libraryGenerator
@@ -27,7 +27,11 @@ Require-Bundle: org.etsi.mts.tdl.model;bundle-version="1.4.0",
  org.imt.atl.ecore2tdl;bundle-version="1.0.0",
  org.eclipse.emf.ecoretools.ale.xtext;bundle-version="1.2.0",
  org.eclipse.emf.ecore,
- org.eclipse.emf.common
+ org.eclipse.emf.common,
+ org.eclipse.core.commands;bundle-version="3.10.0",
+ org.eclipse.jface;bundle-version="3.22.200",
+ org.eclipse.ui;bundle-version="3.119.0",
+ org.eclipse.gemoc.xdsmlframework.api;bundle-version="4.0.0"
 Import-Package: javax.inject;version="1.0.0",
  org.eclipse.emf.mwe.internal.core.ast.util,
  org.eclipse.xtext.resource,

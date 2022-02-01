@@ -22,7 +22,7 @@ import org.etsi.mts.tdl.StructuredDataType;
 import org.imt.atl.ecore2tdl.files.Ecore2tdl;
 
 public class DSLSpecificTypesGenerator {
-	
+
 	private Package dslSpecificTypesPackage;
 	private Map<String, DataType> dslSpecificTypes = new HashMap<String, DataType>();
 	private List<DataType> dynamicTypes = new ArrayList<>();
@@ -45,7 +45,7 @@ public class DSLSpecificTypesGenerator {
 		this.dslSpecificEventsGenerator.generateDSLSpecificEventsPackage(dslFilePath);
 		System.out.println("dsl-specific events package generated successfully");
 	}
-	//TODO: generating types for the required elements not all of them
+
 	private void generateDslSpecificTypes(String dslFilePath) throws IOException {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);

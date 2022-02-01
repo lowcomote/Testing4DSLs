@@ -3,8 +3,13 @@ package org.imt.tdl.sequentialEngine;
 import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
-import org.eclipse.gemoc.dsl.debug.impl.ThreadImpl;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.debug.core.DebugException;
@@ -13,7 +18,9 @@ import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.Launch;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IThread;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gemoc.dsl.debug.ide.adapter.DSLThreadAdapter;
+import org.eclipse.gemoc.dsl.debug.impl.ThreadImpl;
 import org.eclipse.gemoc.execution.sequential.javaengine.PlainK3ExecutionEngine;
 import org.eclipse.gemoc.execution.sequential.javaengine.ui.launcher.GemocSourceLocator;
 import org.eclipse.gemoc.executionframework.engine.commons.DslHelper;
@@ -30,6 +37,7 @@ import org.osgi.framework.Bundle;
 public class JavaEngineLauncher extends AbstractEngine{
 	private PlainK3ExecutionEngine javaEngine = null;
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void launchModelDebugger() {
 		IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
@@ -46,7 +54,7 @@ public class JavaEngineLauncher extends AbstractEngine{
 			this.breakAtStart();
 		}
 
-		this.executioncontext.setResourceModel(this.getModelResource());
+		this.executioncontext.setResourceModel(this.MUTResource);
 		CustomK3Launcher launcher = new CustomK3Launcher();
 		launcher.executioncontext = this.executioncontext;
 		Launch debugLaunch = new Launch(this.launchConfiguration, ILaunchManager.DEBUG_MODE, new GemocSourceLocator());
@@ -75,23 +83,52 @@ public class JavaEngineLauncher extends AbstractEngine{
 	@Override
 	public String executeModelSynchronous(){
 		try{
-			this.javaEngine = createExecutionEngine();
+			javaEngine = createExecutionEngine();
 		}catch (EngineContextException e) {
 			e.printStackTrace();
 			return "FAIL: Cannot execute the model under test";
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
-		this.javaEngine.startSynchronous();
-		this.setModelResource(this.javaEngine.getExecutionContext().getResourceModel());
-		this.javaEngine.dispose();
+		final Runnable modelRunner = new Thread() {
+		  @Override 
+		  public void run() { 
+			  javaEngine.startSynchronous();
+		  }
+		};
+
+		final ExecutorService executor = Executors.newSingleThreadExecutor();
+		@SuppressWarnings("rawtypes")
+		final Future future = executor.submit(modelRunner);
+		executor.shutdown(); // This does not cancel the already-scheduled task.
+
+		try { 
+		  future.get(10, TimeUnit.SECONDS); 
+		}
+		catch (InterruptedException ie) { 
+			ie.printStackTrace();
+		}
+		catch (ExecutionException ee) { 
+			ee.printStackTrace();
+		}
+		catch (TimeoutException te) { 
+			//te.printStackTrace();
+			System.out.println("TimeoutException -> There is an infinite loop in the model under test");
+			future.cancel(true);
+			javaEngine.stop();
+			return "FAIL: TimeoutException -> There is an infinite loop in the model under test";
+		}
+		if (!executor.isTerminated()) {
+		    executor.shutdownNow(); // If you want to stop the code that hasn't finished
+		}
+		setModelResource(javaEngine.getExecutionContext().getResourceModel());
 		return "PASS: The model under test executed successfully";
 	}
 	
 	@Override
 	public String executeModelAsynchronous() {	
 		try{
-			this.javaEngine = createExecutionEngine();
+			javaEngine = createExecutionEngine();
 		}catch (EngineContextException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -106,21 +143,22 @@ public class JavaEngineLauncher extends AbstractEngine{
 	
 	@Override
 	public String stopAsynchronousExecution() {
-		this.javaEngine.stop();
-		this.setModelResource(this.javaEngine.getExecutionContext().getResourceModel());
-		this.javaEngine.dispose();
+		javaEngine.stop();
+		setModelResource(javaEngine.getExecutionContext().getResourceModel());
 		return "PASS: The model under test executed successfully";
 	}
 	
+	@SuppressWarnings("unchecked")
 	public PlainK3ExecutionEngine createExecutionEngine() throws EngineContextException, CoreException{
 		//if the resource is updated (e.g., the value of its dynamic features are set by the test case)
 		//then the execution context should be updated
-		this.executioncontext.setResourceModel(this.getModelResource());
+		this.executioncontext.setResourceModel(this.MUTResource);
 		CustomK3Launcher launcher = new CustomK3Launcher();
 		launcher.executioncontext = this.executioncontext;
 		
 		return (PlainK3ExecutionEngine) launcher.createExecutionEngine(this.runConfiguration, this.executionMode);
 	}
+	@SuppressWarnings("rawtypes")
 	@Override
 	protected String getModelEntryPointMethodName(){
 		Set<Class<?>> candidateAspects = K3DslHelper.getAspects(this._language);
@@ -165,12 +203,21 @@ public class JavaEngineLauncher extends AbstractEngine{
 			
 		return "";
 	}
-	private String getDebugJobName() {
-		return "Gemoc debug job";
-	}
 
 	@Override
+	public Resource getModelResource() {
+		if (this.javaEngine != null) {
+			return this.javaEngine.getExecutionContext().getResourceModel();
+		}
+		return this.MUTResource;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
 	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {
-		return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) this.javaEngine.getAddon(GenericTraceEngineAddon.class).getTrace();
+		if (this.javaEngine != null) {
+			return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) this.javaEngine.getAddon(GenericTraceEngineAddon.class).getTrace();
+		}
+		return null;
 	}
 }

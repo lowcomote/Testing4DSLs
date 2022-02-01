@@ -6,6 +6,7 @@ import org.eclipse.gemoc.executionframework.engine.commons.GenericModelExecution
 import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
 import org.eclipse.gemoc.xdsmlframework.api.core.IRunConfiguration;
 
+@SuppressWarnings("rawtypes")
 public class CustomModelExecutionContext extends GenericModelExecutionContext {
 
 	@SuppressWarnings("unchecked")
@@ -15,6 +16,7 @@ public class CustomModelExecutionContext extends GenericModelExecutionContext {
 		// TODO Auto-generated constructor stub
 	}
 
+	@SuppressWarnings("unchecked")
 	public void setResourceModel(Resource modifiedResource) {
 		this._resourceModel = modifiedResource;
 	}

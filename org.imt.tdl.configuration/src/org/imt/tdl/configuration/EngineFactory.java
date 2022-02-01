@@ -16,7 +16,6 @@ import org.eclipse.gemoc.trace.commons.model.trace.State;
 import org.eclipse.gemoc.trace.commons.model.trace.Step;
 import org.eclipse.gemoc.trace.commons.model.trace.Trace;
 import org.eclipse.gemoc.trace.commons.model.trace.TracedObject;
-import org.eclipse.gemoc.trace.gemoc.traceaddon.GenericTraceEngineAddon;
 import org.imt.tdl.eventBasedEngine.IEventBasedExecutionEngine;
 import org.imt.tdl.eventBasedEngine.K3EventManagerLauncher;
 import org.imt.tdl.oclInterpreter.OCLInterpreter;
@@ -34,7 +33,7 @@ public class EngineFactory{
 	private IEventBasedExecutionEngine eventManagerLauncher;
 	
 	public final static String GENERIC = "Generic";
-	public final static String DSL_SPECIFIC = "DSL-Specific";
+	public final static String DSL_SPECIFIC = "reactiveGate";
 	public final static String OCL = "OCL";
 
 	public void setUp(String commandType) throws CoreException, EngineContextException {

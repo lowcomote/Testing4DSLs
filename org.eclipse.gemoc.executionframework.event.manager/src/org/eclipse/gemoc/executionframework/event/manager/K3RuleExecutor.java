@@ -38,7 +38,9 @@ public class K3RuleExecutor implements IMetalanguageRuleExecutor{
 		try {
 			result = toCall.invoke(null, args.toArray());
 		} catch (Throwable e1) {
-			e1.printStackTrace();
+			//TODO: we must check why it throws exceptions while the runtime state is correct
+			//e1.printStackTrace();
+			System.out.println("InvocationTargetException -> thrown because of calling '" + toCall.getName() + "' method");
 		}
 		return result;
 	}

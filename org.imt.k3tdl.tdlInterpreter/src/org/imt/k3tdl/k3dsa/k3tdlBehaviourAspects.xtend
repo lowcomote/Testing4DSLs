@@ -53,6 +53,7 @@ import org.imt.tdl.testResult.TDLMessageResult
 import org.etsi.mts.tdl.LiteralValueUse
 import org.etsi.mts.tdl.DataInstanceUse
 import org.etsi.mts.tdl.LocalExpression
+import org.imt.tdl.testResult.TDLTestResultUtil
 
 @Aspect (className = BehaviourDescription)
 class BehaviourDescriptionAspect{
@@ -208,7 +209,7 @@ class ProcedureCallAspect extends InteractoinAspect{
 }
 @Aspect (className = Message)
 class MessageAspect extends InteractoinAspect{
-	private TDLMessageResult messageVerdict;
+	TDLMessageResult messageVerdict;
 	@Step
 	@OverrideAspectMethod
 	def boolean performBehavior(){
@@ -224,29 +225,31 @@ class MessageAspect extends InteractoinAspect{
 			}else{//the argument has to be sent to the MUT
 				t.targetGate.gate.setLauncher(_self.parentTestDescription.launcher)
 				var String verdict
-				val arg = (_self.argument as DataInstanceUse)
 				verdict = t.targetGate.gate.sendArgument2sut(_self.argument)
 				_self.addMessageResult(verdict)
 				var boolean result = true
-				if (verdict.contains("FAIL")){
+				if (verdict.contains(TDLTestResultUtil.FAIL)){
 					result = false
-					_self.parentTestDescription.testCaseResult.value = "INCONCLUSIVE"//the test case should be interrupted
+					_self.parentTestDescription.testCaseResult.value = TDLTestResultUtil.INCONCLUSIVE//the test case should be interrupted
 				}
 				return result //if the result is false, the test case execution should be interrupted
 			}
 		}	
 	}
 	def void addMessageResult(String info){
-		var boolean result = true
-		if (info.contains("FAIL")){
-			result = false
-			_self.parentTestDescription.testCaseResult.value = "FAIL"
+		var String result = ""
+		if (info.contains(TDLTestResultUtil.FAIL)){
+			result = TDLTestResultUtil.FAIL
+			_self.parentTestDescription.testCaseResult.value = TDLTestResultUtil.FAIL
 		}
-		var message = info
+		else if (info.contains(TDLTestResultUtil.PASS)){
+			result = TDLTestResultUtil.PASS
+		}
+		var description = info
 		if (info.contains(":")){
-			message = info.substring(info.indexOf(":") + 2, info.length)
+			description = info.substring(info.indexOf(":") + 2, info.length)
 		}
-		_self.messageVerdict = new TDLMessageResult(_self.name, result, message, null,!result);
+		_self.messageVerdict = new TDLMessageResult(_self, result, description, null);
 		_self.parentTestDescription.testCaseResult.addTdlMessage(_self.messageVerdict)
 	}
 }
@@ -426,18 +429,17 @@ class BlockAspect{
 				}
 			}catch (InterruptedException e) {
 				//break the loop since one of the guards is not validated
+				return false;
 			}	
 		}
-		if (canExecute){
-			var result = true
-			for (Behaviour b:_self.behaviour){
-				result = b.performBehavior()
-				if (!result){
-					return false
-				}
+		var result = true
+		for (Behaviour b:_self.behaviour){
+			result = b.performBehavior()
+			if (!result){
+				return false
 			}
-			return true
 		}
+		return true
 	}
 }
 @Aspect (className = LocalExpression)
@@ -449,10 +451,22 @@ class ExpressionAspect{
 				if (expression.dataType.name.equals("EBoolean")){
 					return Boolean.parseBoolean(expression.name)
 				}
+				else{
+					//TODO:Check for other types
+					return false
+				}
 			} else if (_self.expression instanceof LiteralValueUse){
 				val value = (_self.expression as LiteralValueUse).value;
 				return Boolean.parseBoolean(value.substring(1, value.length-1));
 			}
+			else{
+				//TODO:Check for other types
+				return false
+			}
+		}
+		else{
+			//TODO:Check for other types
+			return false
 		}
 	}
 	def int getNumIteration(){
@@ -463,7 +477,17 @@ class ExpressionAspect{
 			} else if (_self.expression instanceof LiteralValueUse){
 				val value = (_self.expression as LiteralValueUse).value;
 				return Integer.parseInt(value.substring(1, value.length-1));
+			}else{
+				//TODO:Check for other types
+				return 0
 			}
+		}else if (_self.expression instanceof LiteralValueUse){
+			val value = (_self.expression as LiteralValueUse).value;
+			return Integer.parseInt(value.substring(1, value.length-1));
+		}
+		else{
+			//TODO:Check for other types
+			return 0
 		}
 	}
 }

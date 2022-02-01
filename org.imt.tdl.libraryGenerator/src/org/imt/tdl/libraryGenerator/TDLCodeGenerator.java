@@ -19,7 +19,7 @@ public class TDLCodeGenerator {
 	private TestConfigurationGenerator testConfigurationPackageGenerator;
 	private TestSuitePackageGenerator testSuitePackageGenerator;
 	
-	public TDLCodeGenerator(String dslFilePath, String tdlProjectPath) throws IOException {
+	public TDLCodeGenerator(String dslFilePath, String tdlProjectPath) throws IOException {		
 		System.out.println("Start TDL Code generation");
 		
 		this.testSuitePackageGenerator = new TestSuitePackageGenerator(dslFilePath);
@@ -29,7 +29,7 @@ public class TDLCodeGenerator {
 		this.dslSpecificTypesGenerator = this.testConfigurationPackageGenerator.getDslSpecificTypesGenerator();
 		this.dslSpecificEventsGenerator = this.dslSpecificTypesGenerator.getDslSpecificEventsGenerator();
 		this.commonPackageGenerator = this.dslSpecificTypesGenerator.getCommonPackageGenerator();
-		
+				
 		System.out.println("start saving packages");
 		savePackages(tdlProjectPath);
 		System.out.println("all packages are saved successfully");

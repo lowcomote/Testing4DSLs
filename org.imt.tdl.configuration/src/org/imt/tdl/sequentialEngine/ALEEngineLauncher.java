@@ -4,6 +4,12 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.CoreException;
@@ -16,6 +22,7 @@ import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecoretools.ale.core.env.IAleEnvironment;
 import org.eclipse.emf.ecoretools.ale.core.parser.ParsedFile;
 import org.eclipse.emf.ecoretools.ale.implementation.ExtendedClass;
@@ -34,11 +41,11 @@ import org.eclipse.gemoc.trace.commons.model.trace.Trace;
 import org.eclipse.gemoc.trace.commons.model.trace.TracedObject;
 import org.eclipse.gemoc.trace.gemoc.traceaddon.GenericTraceEngineAddon;
 import org.imt.gemoc.engine.custom.launcher.CustomALELauncher;
-import org.imt.gemoc.engine.custom.launcher.CustomK3Launcher;
 
 public class ALEEngineLauncher extends AbstractEngine{
 	private AleEngine aleEngine = null;
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void launchModelDebugger() {
 		IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
@@ -56,7 +63,7 @@ public class ALEEngineLauncher extends AbstractEngine{
 			this.breakAtStart();
 		}
 		
-		this.executioncontext.setResourceModel(this.getModelResource());
+		this.executioncontext.setResourceModel(this.MUTResource);
 		CustomALELauncher launcher = new CustomALELauncher();
 		launcher.executioncontext = this.executioncontext;
 		Launch debugLaunch = new Launch(this.launchConfiguration, ILaunchManager.DEBUG_MODE, new GemocSourceLocator());
@@ -92,9 +99,36 @@ public class ALEEngineLauncher extends AbstractEngine{
 		} catch (CoreException e) {
 				e.printStackTrace();
 		}
-		this.aleEngine.startSynchronous();
+		final Runnable modelRunner = new Thread() {
+			@Override 
+			public void run() { 
+				aleEngine.startSynchronous();
+			}
+		};
+		final ExecutorService executor = Executors.newSingleThreadExecutor();
+		@SuppressWarnings("rawtypes")
+		final Future future = executor.submit(modelRunner);
+		executor.shutdown(); // This does not cancel the already-scheduled task.
+		try { 
+		  future.get(10, TimeUnit.SECONDS); 
+		}
+		catch (InterruptedException ie) { 
+			ie.printStackTrace();
+		}
+		catch (ExecutionException ee) { 
+			ee.printStackTrace();
+		}
+		catch (TimeoutException te) { 
+			//te.printStackTrace();
+			System.out.println("TimeoutException -> There is an infinite loop in the model under test");
+			future.cancel(true);
+			aleEngine.stop();
+			return "FAIL: TimeoutException -> There is an infinite loop in the model under test";
+		}
+		if (!executor.isTerminated()) {
+		    executor.shutdownNow(); // If you want to stop the code that hasn't finished
+		}
 		this.setModelResource(this.aleEngine.getExecutionContext().getResourceModel());
-		this.aleEngine.dispose();
 		return "PASS: The model under test executed successfully";
 	}
 	
@@ -118,14 +152,14 @@ public class ALEEngineLauncher extends AbstractEngine{
 	public String stopAsynchronousExecution() {
 		this.aleEngine.stop();
 		this.setModelResource(this.aleEngine.getExecutionContext().getResourceModel());
-		this.aleEngine.dispose();
 		return "PASS: The model under test executed successfully";
 	}
 	
+	@SuppressWarnings("unchecked")
 	private AleEngine createExecutionEngine() throws EngineContextException, CoreException{
 		//if the resource is updated (e.g., the value of its dynamic features are set by the test case)
 		//then the execution context should be updated
-		this.executioncontext.setResourceModel(this.getModelResource());
+		this.executioncontext.setResourceModel(this.MUTResource);
 		CustomALELauncher launcher = new CustomALELauncher();
 		launcher.executioncontext = this.executioncontext;
 		
@@ -150,7 +184,7 @@ public class ALEEngineLauncher extends AbstractEngine{
     		.filter(op -> op.getTags().contains("main"))
     		.collect(Collectors.toList());
 		
-		Iterator it = mainOperations.iterator();
+		Iterator<Method> it = mainOperations.iterator();
 		return provideMethodLabel(it.next());
 	}
 	@Override
@@ -212,7 +246,19 @@ public class ALEEngineLauncher extends AbstractEngine{
 	}
 
 	@Override
+	public Resource getModelResource() {
+		if (this.aleEngine != null) {
+			return this.aleEngine.getExecutionContext().getResourceModel();
+		}
+		return this.MUTResource;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
 	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {
-		return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) this.aleEngine.getAddon(GenericTraceEngineAddon.class).getTrace();
+		if (this.aleEngine != null) {
+			return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) this.aleEngine.getAddon(GenericTraceEngineAddon.class).getTrace();
+		}
+		return null;
 	}
 }

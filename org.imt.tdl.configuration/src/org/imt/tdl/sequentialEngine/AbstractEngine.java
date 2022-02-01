@@ -30,7 +30,7 @@ public abstract class AbstractEngine implements ISequentialExecutionEngine{
 	protected String _modelInitializationMethod;
 	protected String _modelInitializationArguments;
 	
-	private Resource MUTResource = null;
+	protected Resource MUTResource = null;
 	
 	private ILaunchConfigurationWorkingCopy configurationWorkingCopy;
 	protected ILaunchConfiguration launchConfiguration;
@@ -82,6 +82,11 @@ public abstract class AbstractEngine implements ISequentialExecutionEngine{
 		
 		//enabling trace addon
 		configurationWorkingCopy.setAttribute("Generic MultiDimensional Data Trace", true);
+		configurationWorkingCopy.setAttribute("org.eclipse.gemoc.trace.gemoc.addon_booleanOption", false);
+		configurationWorkingCopy.setAttribute("org.eclipse.gemoc.trace.gemoc.addon_equivClassComputing_booleanOption", false);
+		configurationWorkingCopy.setAttribute("org.eclipse.gemoc.trace.gemoc.addon_saveTraceOnEngineStop_booleanOption", false);
+		configurationWorkingCopy.setAttribute("org.eclipse.gemoc.trace.gemoc.addon_saveTraceOnStep_booleanOption", false);
+		
 		try {
 			this.launchConfiguration = configurationWorkingCopy.doSave();
 		} catch (CoreException e) {
@@ -111,10 +116,7 @@ public abstract class AbstractEngine implements ISequentialExecutionEngine{
 	public void setModelResource(Resource resource) {
 		this.MUTResource = resource;
 	}
-	@Override
-	public Resource getModelResource() {
-		return this.MUTResource;
-	}
+
 	private String getDslName(String dslFilePath) {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);

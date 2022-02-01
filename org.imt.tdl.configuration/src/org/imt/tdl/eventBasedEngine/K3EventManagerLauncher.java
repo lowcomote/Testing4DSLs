@@ -66,7 +66,7 @@ import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
 import org.eclipse.gemoc.xdsmlframework.api.core.IExecutionEngine;
 import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
 import org.imt.gemoc.engine.custom.launcher.CustomEventBasedLauncher;
-import org.imt.tdl.testResult.TestResultUtil;
+import org.imt.tdl.testResult.TDLTestResultUtil;
 
 public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	
@@ -101,12 +101,12 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		subtypeRelIds.add(subtypeRelId);
 		
 		try {
-			this.launchConf = getLaunchConfiguration(MUTPath, languageName, implRelIds, subtypeRelIds);
-			this.runConf = new EventBasedRunConfiguration(launchConf);
+			launchConf = getLaunchConfiguration(MUTPath, languageName, implRelIds, subtypeRelIds);
+			runConf = new EventBasedRunConfiguration(launchConf);
 		}catch (CoreException e) {
 			e.printStackTrace();
 		}
-		this.launcher = new CustomEventBasedLauncher();
+		launcher = new CustomEventBasedLauncher();
 	}
 	
 	private GenericEventManager eventManager = null;
@@ -116,6 +116,9 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	@Override
 	public String processAcceptedEvent(String eventName, Map<String, Object> parameters) {
 		EventOccurrence eventOccurrence = createEventOccurance(EventOccurrenceType.ACCEPTED, eventName, parameters);	
+		if (eventOccurrence == null) {
+			return "FAIL: There is an issue in the format of the event occurrence";
+		}
 		if (isDebugMode) {
 			ThreadImpl testDebugger = (ThreadImpl) testCaseDebugThread.getTarget();
 			if (testDebugger.getState().toString() == "STEPPING_OVER") {
@@ -141,7 +144,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 				}
 			}
 		}else {
-			this.eventManager.processEventOccurrence(eventOccurrence);
+			eventManager.processEventOccurrence(eventOccurrence);
 		}
 		return "PASS";
 	}
@@ -163,24 +166,21 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 
 	@Override
 	public String assertExposedEvent(String eventName, Map<String, Object> parameters) {
-		EventOccurrence eventOccurrence = createEventOccurance(EventOccurrenceType.EXPOSED, eventName, parameters);
-		if (eventOccurrence == null) {
-			return "FAIL: The expected event does not match to the interface or its parameters does not exist in the MUT";
-		}
-		EventOccurrence occ;
 		try {
-			occ = this.eventOccurrences.poll(10000, TimeUnit.MILLISECONDS);
-			if (occ != null && this.equalEventOccurrences(occ, eventOccurrence)) {
-				return "PASS";
-			}else {
-				String result= "FAIL: The expected event is not received from MUT";
-				if (occ == null) {
-					result += "\nThere is no received event";
-				}else {
-					result += "\nThe received event is:\n" + this.eventOccurenceToString(occ);
-				}
-				return result;
+			EventOccurrence receivedEventOccurrence = this.eventOccurrences.poll(10000, TimeUnit.MILLISECONDS);
+			EventOccurrence expectedEventOccurrence = createEventOccurance(EventOccurrenceType.EXPOSED, eventName, parameters);
+			if (expectedEventOccurrence == null) {
+				return "FAIL: The expected event occurrence does not match to the interface or its parameters does not exist in the MUT";
 			}
+			if (receivedEventOccurrence == null) {
+				return "FAIL: There is no received event occurrence from the MUT";
+			}
+			if (this.equalEventOccurrences(receivedEventOccurrence, expectedEventOccurrence)) {
+				return "PASS";
+			}
+			return "FAIL: The expected event is not received from MUT \nThe received event is:\n" + 
+				this.eventOccurenceToString(receivedEventOccurrence);
+
 		} catch (InterruptedException e) {
 			return e.getMessage();
 		}
@@ -195,13 +195,21 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		configurationWorkingCopy.setAttribute(EventBasedRunConfiguration.SUBTYPE_REL_IDS, subtypeRelIds);
 		configurationWorkingCopy.setAttribute(EventBasedRunConfiguration.LAUNCH_BREAK_START, true);
 		configurationWorkingCopy.setAttribute(EventBasedRunConfiguration.DEBUG_MODEL_ID, Activator.DEBUG_MODEL_ID);
+		
+		//enabling trace addon
+		configurationWorkingCopy.setAttribute("Generic MultiDimensional Data Trace", true);
+		configurationWorkingCopy.setAttribute("org.eclipse.gemoc.trace.gemoc.addon_booleanOption", false);
+		configurationWorkingCopy.setAttribute("org.eclipse.gemoc.trace.gemoc.addon_equivClassComputing_booleanOption", false);
+		configurationWorkingCopy.setAttribute("org.eclipse.gemoc.trace.gemoc.addon_saveTraceOnEngineStop_booleanOption", false);
+		configurationWorkingCopy.setAttribute("org.eclipse.gemoc.trace.gemoc.addon_saveTraceOnStep_booleanOption", false);
+				
 		return configurationWorkingCopy;
 	}
 
 	@Override
 	public void startEngine() {
 		try {
-			this.executionEngine = (EventBasedExecutionEngine) launcher.createExecutionEngine(this.runConf, ExecutionMode.Run);
+			executionEngine = (EventBasedExecutionEngine) launcher.createExecutionEngine(this.runConf, ExecutionMode.Run);
 		}catch (CoreException | EngineContextException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -215,7 +223,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			}
 		};
 		final TransferQueue<Object> queue = new LinkedTransferQueue<>();
-		this.executionEngine.getExecutionContext().getExecutionPlatform().addEngineAddon(new IEngineAddon() {
+		executionEngine.getExecutionContext().getExecutionPlatform().addEngineAddon(new IEngineAddon() {
 			@Override
 			public void engineInitialized(IExecutionEngine<?> executionEngine) {
 				queue.add(new Object());
@@ -262,8 +270,8 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	private void addEventManagerListener(TransferQueue<Object> queue) {
 		try {
 			if (queue.poll(5000, TimeUnit.MILLISECONDS) != null) {
-				this.eventManager = (GenericEventManager) this.executionEngine.getAddonsTypedBy(GenericEventManager.class).stream().findFirst().orElse(null);
-				this.eventManager.addListener(new IEventManagerListener() {
+				eventManager = (GenericEventManager) this.executionEngine.getAddonsTypedBy(GenericEventManager.class).stream().findFirst().orElse(null);
+				eventManager.addListener(new IEventManagerListener() {
 					@Override
 					public void eventReceived(EventOccurrence e) {
 						eventOccurrences.add(e);
@@ -298,7 +306,6 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			result = "PASS";
 		}
 		this.executionEngine.stop();
-		this.executionEngine.dispose();
 		return result;
 	}
 	
@@ -306,8 +313,8 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		BehavioralInterface bInterface = this.getBehavioralInterfaceRootElement(this.DSLPath);
 		Event event = null;
 		for (int i=0; i<bInterface.getEvents().size();i++) {
-			event = bInterface.getEvents().get(i);
-			if (event.getName().equals(eventName)) {
+			if (bInterface.getEvents().get(i).getName().equals(eventName)) {
+				event = bInterface.getEvents().get(i);
 				break;
 			}
 		}
@@ -447,12 +454,12 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			switch (arg.getValue().eClass().getClassifierID()) {
 			case ValuePackage.SINGLE_REFERENCE_VALUE:
 				value = ((SingleReferenceValue) arg.getValue()).getReferenceValue();
-				String label = TestResultUtil.getInstance().eObjectLabelProvider(value);
+				String label = TDLTestResultUtil.getInstance().eObjectLabelProvider(value);
 				result += label.substring(label.lastIndexOf(":")+1);
 				break;
 			case ValuePackage.SINGLE_OBJECT_VALUE:
 				value = ((SingleObjectValue) arg.getValue()).getObjectValue();
-				label = TestResultUtil.getInstance().eObjectLabelProvider(value);
+				label = TDLTestResultUtil.getInstance().eObjectLabelProvider(value);
 				result += label.substring(label.lastIndexOf(":")+1);
 				break;
 			case ValuePackage.BOOLEAN_ATTRIBUTE_VALUE:
@@ -545,6 +552,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		return this.executionEngine != null;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {
 		return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) this.executionEngine.getAddon(GenericTraceEngineAddon.class).getTrace();

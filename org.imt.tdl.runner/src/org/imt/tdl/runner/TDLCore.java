@@ -1,13 +1,17 @@
 package org.imt.tdl.runner;
 
 import org.etsi.mts.tdl.Package;
+
 import org.etsi.mts.tdl.TestDescription;
+import org.imt.k3tdl.k3dsa.TestConfigurationAspect;
 import org.imt.k3tdl.k3dsa.TestDescriptionAspect;
 import org.imt.tdl.testResult.TDLTestCaseResult;
+import org.imt.tdl.testResult.TDLTestResultUtil;
+import org.imt.tdl.testResult.TDLTestSuiteResult;
 
 public class TDLCore {
 	
-
+	//this method is called from WODEL tool
 	public Result run(Package testPackage, String artifactPath) {
 		Result result = new Result();
 		artifactPath = artifactPath.replace("\\", "/");
@@ -16,11 +20,10 @@ public class TDLCore {
 			Object o = testPackage.getPackagedElement().get(i);
 			if (o instanceof TestDescription) {
 				TestDescription testCase = (TestDescription) o;
-				TestDescriptionAspect testCaseRunner = new TestDescriptionAspect();
 				System.out.println("Test case: " + testCase.getName());
-				testCaseRunner.executeTestCase(testCase, artifactPath);
+				TestDescriptionAspect.executeTestCase(testCase, artifactPath);
 				result.addNumExecutedTests();
-				TDLTestCaseResult verdict = testCaseRunner.testCaseResult(testCase);
+				TDLTestCaseResult verdict = TestDescriptionAspect.testCaseResult(testCase);
 				if (verdict.getValue().contains("FAIL")) {
 					result.addTest(testCase.getName(), false);
 					result.addNumFailedTests();
@@ -32,5 +35,4 @@ public class TDLCore {
 		}
 		return result;
 	}
-
 }

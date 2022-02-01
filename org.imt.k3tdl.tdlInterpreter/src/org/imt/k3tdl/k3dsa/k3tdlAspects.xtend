@@ -10,28 +10,24 @@ import java.util.List
 import org.eclipse.core.runtime.IConfigurationElement
 import org.eclipse.core.runtime.Platform
 import org.eclipse.emf.common.util.EList
-import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.etsi.mts.tdl.Annotation
 import org.etsi.mts.tdl.Package
 import org.etsi.mts.tdl.TestConfiguration
 import org.etsi.mts.tdl.TestDescription
 import org.imt.tdl.configuration.EngineFactory
 import org.imt.tdl.testResult.TDLTestCaseResult
-import org.imt.tdl.testResult.TDLTestPackageResult
-import org.imt.tdl.testResult.TestResultUtil
 
 import static extension org.imt.k3tdl.k3dsa.BehaviourDescriptionAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
+import org.imt.tdl.testResult.TDLTestSuiteResult
+import org.imt.tdl.testResult.TDLTestResultUtil
 
 @Aspect(className = Package)
 class PackageAspect {
 	
-	public TDLTestPackageResult testPackageResults = new TDLTestPackageResult
-	public List<TestDescription> testcases = new ArrayList<TestDescription>
-	public TestDescription enabledTestCase
-	public TestConfiguration enabledConfiguration
+	List<TestDescription> testcases = new ArrayList<TestDescription>
+	TDLTestSuiteResult testSuiteResult = new TDLTestSuiteResult
 	
 	@Step
 	@InitializeModel
@@ -47,15 +43,15 @@ class PackageAspect {
 	@Main
 	def void main(){
 		try {
-			_self.testPackageResults.testPackageName = _self.name
-    		for (TestDescription tc:_self.testcases) {
-    			_self.enabledTestCase = tc;
-    			_self.enabledConfiguration = tc.testConfiguration;
-    			val TDLTestCaseResult verdict = _self.enabledTestCase.executeTestCase()
-    			_self.testPackageResults.addResult(verdict)
+			_self.testSuiteResult.testSuite = _self
+    		for (TestDescription testCase:_self.testcases) {
+    			val TDLTestCaseResult testCaseResult = testCase.executeTestCase()
+    			_self.testSuiteResult.addResult(testCaseResult)
     			println()
     		}
-    		TestResultUtil.instance.testPackageResult = _self.testPackageResults  		
+    		
+    		TDLTestResultUtil.instance.setTestSuiteResult = _self.testSuiteResult		
+    		  		
 		} catch (TDLRuntimeException nt){
 			println("Stopped due "+nt.message)	
 		}
@@ -63,43 +59,34 @@ class PackageAspect {
 }
 @Aspect (className = TestDescription)
 class TestDescriptionAspect{
-	public EngineFactory launcher = new EngineFactory()
+	public EngineFactory launcher = new EngineFactory
 	public TDLTestCaseResult testCaseResult = new TDLTestCaseResult
-
+	
 	@Step
 	def TDLTestCaseResult executeTestCase(){
-		println("Start test case execution: " + _self.name)
-		_self.testCaseResult.testCaseName = _self.name
 		_self.testConfiguration.activateConfiguration(_self.launcher)
-		_self.behaviourDescription.callBehavior()
-		val modelExecutionResult = _self.testConfiguration.stopModelExecutionEngine(_self.launcher)
-		if (modelExecutionResult != null && modelExecutionResult.contains("FAIL")){
-			_self.testCaseResult.value = "FAIL"
-			_self.testCaseResult.description = modelExecutionResult.substring(modelExecutionResult.indexOf(":")+1)
-		}
-		if (_self.testCaseResult.value.equals("PASS")) {
-			println("Test case PASSED")
-		}else{
-			println("Test case FAILED")
-		}
-		return _self.testCaseResult
+		return _self.testCaseExecutor
 	}
-	//this method is called from TDL runner
+	
+	//this method is called from other codes (not GEMOC engine)
 	@Step
 	def TDLTestCaseResult executeTestCase(String MUTPath){
-		_self.launcher.MUTPath = MUTPath
-		_self.testCaseResult.testCaseName = _self.name
+		_self.launcher = new EngineFactory
+		_self.testCaseResult = new TDLTestCaseResult
 		_self.testConfiguration.activateConfiguration(_self.launcher, MUTPath)
+		return _self.testCaseExecutor
+	}
+	
+	def TDLTestCaseResult testCaseExecutor(){
+		println("Start test case execution: " + _self.name)
+		_self.testCaseResult.testCase = _self
 		_self.behaviourDescription.callBehavior()
 		val modelExecutionResult = _self.testConfiguration.stopModelExecutionEngine(_self.launcher)
-		if (modelExecutionResult != null && modelExecutionResult.contains("FAIL")){
-			_self.testCaseResult.value = modelExecutionResult
+		if (modelExecutionResult !== null && modelExecutionResult.contains(TDLTestResultUtil.FAIL)){
+			_self.testCaseResult.value = TDLTestResultUtil.FAIL
+			_self.testCaseResult.description = modelExecutionResult.substring(modelExecutionResult.indexOf(":")+1)
 		}
-		if (_self.testCaseResult.value.equals("PASS")) {
-			println("Test case PASSED")
-		}else{
-			println("Test case FAILED")
-		}
+		println("Test case "+ _self.name + ": " + _self.testCaseResult.value)
 		return _self.testCaseResult
 	}
 }
@@ -139,7 +126,6 @@ class TestConfigurationAspect{
 	}
 	
 	def String getDSLPath (String DSLName){
-		val ResourceSet resSet = new ResourceSetImpl()
 		val IConfigurationElement language = Arrays
 				.asList(Platform.getExtensionRegistry()
 						.getConfigurationElementsFor("org.eclipse.gemoc.gemoc_language_workbench.xdsml"))
@@ -147,7 +133,7 @@ class TestConfigurationAspect{
 						&& l.getAttribute("name").equals(DSLName))
 				.findFirst().orElse(null);
 		
-		if (language != null) {
+		if (language !== null) {
 			var xdsmlFilePath = language.getAttribute("xdsmlFilePath");
 			if (!xdsmlFilePath.startsWith("platform:/plugin")) {
 				xdsmlFilePath = "platform:/plugin" + xdsmlFilePath;
@@ -156,15 +142,15 @@ class TestConfigurationAspect{
 		}
 	}
 	
-	private final static String GENERIC_GATE = "genericGate";
-	private final static String DSL_GATE = "reactiveGate";
-	private final static String OCL_GATE = "oclGate";
+	final static String GENERIC_GATE = "genericGate";
+	final static String REACTIVE_GATE = "reactiveGate";
+	final static String OCL_GATE = "oclGate";
 	
 	def void setUpLauncher (EngineFactory launcher){
 		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.equals(GENERIC_GATE)]]) {
 			launcher.setUp(EngineFactory.GENERIC);
 		}
-		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.equals(DSL_GATE)]]) {
+		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.equals(org.imt.k3tdl.k3dsa.TestConfigurationAspect.REACTIVE_GATE)]]) {
 			launcher.setUp(EngineFactory.DSL_SPECIFIC);
 		}
 		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.equals(OCL_GATE)]]){
@@ -172,7 +158,7 @@ class TestConfigurationAspect{
 		}
 	}
 	def String stopModelExecutionEngine(EngineFactory launcher){
-		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.equals(DSL_GATE)]]) {
+		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.equals(org.imt.k3tdl.k3dsa.TestConfigurationAspect.REACTIVE_GATE)]]) {
 			return launcher.executeDSLSpecificCommand("STOP", null, null);
 		}
 	}

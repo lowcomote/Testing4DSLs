@@ -32,7 +32,12 @@ public class TdlAnimatorServices extends AbstractGemocAnimatorServices {
 	public boolean isPassedMessage(EObject o){    
 		if(o.eContainer() instanceof Message){
 			Message message = (Message) o.eContainer();
-			return MessageAspectMessageAspectContext.INSTANCE.getSelf(message).messageVerdict.getValue();
+			String messageResult = MessageAspectMessageAspectContext.INSTANCE.getSelf(message).messageVerdict.getValue();
+			if (messageResult == "PASS") {
+				return true;
+			}else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -40,7 +45,12 @@ public class TdlAnimatorServices extends AbstractGemocAnimatorServices {
 	public boolean isFailedMessage(EObject o){     
 		if(o.eContainer() instanceof Message){
 			Message message = (Message) o.eContainer();
-			return !MessageAspectMessageAspectContext.INSTANCE.getSelf(message).messageVerdict.getValue();
+			String messageResult = MessageAspectMessageAspectContext.INSTANCE.getSelf(message).messageVerdict.getValue();
+			if (messageResult == "PASS") {
+				return true;
+			}else {
+				return false;
+			}
 		} else {
 			return false;
 		}
