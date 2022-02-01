@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ASCII"?>
+<k3fsm:FSM xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:k3fsm="http://www.eclipse.org/gemoc/example/k3fsm" xsi:schemaLocation="http://www.eclipse.org/gemoc/example/k3fsm ../../../model/k3fsm.ecore" name="BitShifting" initialState="//@ownedStates.0" unprocessedString="1011" producedString="">
+  <ownedStates name="S0">
+    <outgoingTransitions input="1" target="//@ownedStates.1" name="S0_to_S1" output="0"/>
+    <outgoingTransitions input="0" target="//@ownedStates.2" name="S0_to_S2" output="0"/>
+  </ownedStates>
+  <ownedStates name="S1" incomingTransitions="//@ownedStates.0/@outgoingTransitions.0 //@ownedStates.1/@outgoingTransitions.0 //@ownedStates.2/@outgoingTransitions.1">
+    <outgoingTransitions input="1" target="//@ownedStates.1" name="S1_to_S1" output="Q"/>
+    <outgoingTransitions input="0" target="//@ownedStates.2" name="S1_to_S2" output="1"/>
+  </ownedStates>
+  <ownedStates name="S2" incomingTransitions="//@ownedStates.0/@outgoingTransitions.1 //@ownedStates.1/@outgoingTransitions.1 //@ownedStates.2/@outgoingTransitions.0">
+    <outgoingTransitions input="0" target="//@ownedStates.2" name="S2_to_S2" output="0"/>
+    <outgoingTransitions input="1" target="//@ownedStates.1" name="S2_to_S1" output="0"/>
+  </ownedStates>
+</k3fsm:FSM>

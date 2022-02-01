@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xminiJava:Program xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xminiJava="http://org.imt.minijava.xminijava/xminiJava/" name="org.cambridge.minijava.models">
+  <classes xsi:type="xminiJava:Class" name="Main">
+    <members xsi:type="xminiJava:Method" name="main" access="public" static="true">
+      <typeRef xsi:type="xminiJava:VoidTypeRef"/>
+      <params name="a">
+        <typeRef xsi:type="xminiJava:ArrayTypeRef">
+          <typeRef xsi:type="xminiJava:StringTypeRef"/>
+        </typeRef>
+      </params>
+      <body>
+        <statements xsi:type="xminiJava:Assignment">
+          <assignee xsi:type="xminiJava:VariableDeclaration" name="person1">
+            <typeRef xsi:type="xminiJava:ClassRef" referencedClass="//@classes.1"/>
+          </assignee>
+          <value xsi:type="xminiJava:NewObject" type="//@classes.1"/>
+        </statements>
+        <statements xsi:type="xminiJava:Assignment">
+          <assignee xsi:type="xminiJava:VariableDeclaration" name="person2">
+            <typeRef xsi:type="xminiJava:ClassRef" referencedClass="//@classes.1"/>
+          </assignee>
+          <value xsi:type="xminiJava:NewObject" type="//@classes.1"/>
+        </statements>
+        <statements xsi:type="xminiJava:MethodCall" method="//@classes.1/@members.3">
+          <receiver xsi:type="xminiJava:SymbolRef" symbol="//@classes.0/@members.0/@body/@statements.0/@assignee"/>
+          <args xsi:type="xminiJava:IntConstant" value="23"/>
+          <args xsi:type="xminiJava:IntConstant" value="2500"/>
+          <args xsi:type="xminiJava:BoolConstant" value="false"/>
+        </statements>
+        <statements xsi:type="xminiJava:MethodCall" method="//@classes.1/@members.3">
+          <receiver xsi:type="xminiJava:SymbolRef" symbol="//@classes.0/@members.0/@body/@statements.1/@assignee"/>
+          <args xsi:type="xminiJava:IntConstant" value="23"/>
+          <args xsi:type="xminiJava:IntConstant" value="2500"/>
+          <args xsi:type="xminiJava:BoolConstant" value="false"/>
+        </statements>
+        <statements xsi:type="xminiJava:Assignment">
+          <assignee xsi:type="xminiJava:VariableDeclaration" name="result">
+            <typeRef xsi:type="xminiJava:BooleanTypeRef"/>
+          </assignee>
+          <value xsi:type="xminiJava:MethodCall" method="//@classes.1/@members.7">
+            <receiver xsi:type="xminiJava:SymbolRef" symbol="//@classes.0/@members.0/@body/@statements.0/@assignee"/>
+            <args xsi:type="xminiJava:SymbolRef" symbol="//@classes.0/@members.0/@body/@statements.1/@assignee"/>
+          </value>
+        </statements>
+      </body>
+    </members>
+  </classes>
+  <classes xsi:type="xminiJava:Class" name="Person" accessLevel="public">
+    <members xsi:type="xminiJava:Field" name="Age">
+      <typeRef xsi:type="xminiJava:IntegerTypeRef"/>
+    </members>
+    <members xsi:type="xminiJava:Field" name="Salary">
+      <typeRef xsi:type="xminiJava:IntegerTypeRef"/>
+    </members>
+    <members xsi:type="xminiJava:Field" name="Married">
+      <typeRef xsi:type="xminiJava:BooleanTypeRef"/>
+    </members>
+    <members xsi:type="xminiJava:Method" name="Init" access="public">
+      <typeRef xsi:type="xminiJava:VoidTypeRef"/>
+      <params name="v_Age">
+        <typeRef xsi:type="xminiJava:IntegerTypeRef"/>
+      </params>
+      <params name="v_Salary">
+        <typeRef xsi:type="xminiJava:IntegerTypeRef"/>
+      </params>
+      <params name="v_Married">
+        <typeRef xsi:type="xminiJava:BooleanTypeRef"/>
+      </params>
+      <body>
+        <statements xsi:type="xminiJava:Assignment">
+          <assignee xsi:type="xminiJava:FieldAccess" field="//@classes.1/@members.0">
+            <receiver xsi:type="xminiJava:This"/>
+          </assignee>
+          <value xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.3/@params.0"/>
+        </statements>
+        <statements xsi:type="xminiJava:Assignment">
+          <assignee xsi:type="xminiJava:FieldAccess" field="//@classes.1/@members.1">
+            <receiver xsi:type="xminiJava:This"/>
+          </assignee>
+          <value xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.3/@params.1"/>
+        </statements>
+        <statements xsi:type="xminiJava:Assignment">
+          <assignee xsi:type="xminiJava:FieldAccess" field="//@classes.1/@members.2">
+            <receiver xsi:type="xminiJava:This"/>
+          </assignee>
+          <value xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.3/@params.2"/>
+        </statements>
+      </body>
+    </members>
+    <members xsi:type="xminiJava:Method" name="GetAge" access="public">
+      <typeRef xsi:type="xminiJava:IntegerTypeRef"/>
+      <body>
+        <statements xsi:type="xminiJava:Return">
+          <expression xsi:type="xminiJava:FieldAccess" field="//@classes.1/@members.0">
+            <receiver xsi:type="xminiJava:This"/>
+          </expression>
+        </statements>
+      </body>
+    </members>
+    <members xsi:type="xminiJava:Method" name="GetSalary" access="public">
+      <typeRef xsi:type="xminiJava:IntegerTypeRef"/>
+      <body>
+        <statements xsi:type="xminiJava:Return">
+          <expression xsi:type="xminiJava:FieldAccess" field="//@classes.1/@members.1">
+            <receiver xsi:type="xminiJava:This"/>
+          </expression>
+        </statements>
+      </body>
+    </members>
+    <members xsi:type="xminiJava:Method" name="GetMarried" access="public">
+      <typeRef xsi:type="xminiJava:BooleanTypeRef"/>
+      <body>
+        <statements xsi:type="xminiJava:Return">
+          <expression xsi:type="xminiJava:FieldAccess" field="//@classes.1/@members.2">
+            <receiver xsi:type="xminiJava:This"/>
+          </expression>
+        </statements>
+      </body>
+    </members>
+    <members xsi:type="xminiJava:Method" name="Equal" access="public">
+      <typeRef xsi:type="xminiJava:BooleanTypeRef"/>
+      <params name="other">
+        <typeRef xsi:type="xminiJava:ClassRef" referencedClass="//@classes.1"/>
+      </params>
+      <body>
+        <statements xsi:type="xminiJava:Assignment">
+          <assignee xsi:type="xminiJava:VariableDeclaration" name="ret_val">
+            <typeRef xsi:type="xminiJava:BooleanTypeRef"/>
+          </assignee>
+          <value xsi:type="xminiJava:BoolConstant" value="true"/>
+        </statements>
+        <statements xsi:type="xminiJava:Assignment">
+          <assignee xsi:type="xminiJava:VariableDeclaration" name="nt">
+            <typeRef xsi:type="xminiJava:IntegerTypeRef"/>
+          </assignee>
+          <value xsi:type="xminiJava:IntConstant" value="-1"/>
+        </statements>
+        <statements xsi:type="xminiJava:Assignment">
+          <assignee xsi:type="xminiJava:VariableDeclaration" name="thisAge">
+            <typeRef xsi:type="xminiJava:IntegerTypeRef"/>
+          </assignee>
+          <value xsi:type="xminiJava:MethodCall" method="//@classes.1/@members.4">
+            <receiver xsi:type="xminiJava:This"/>
+          </value>
+        </statements>
+        <statements xsi:type="xminiJava:Assignment">
+          <assignee xsi:type="xminiJava:VariableDeclaration" name="otherAge">
+            <typeRef xsi:type="xminiJava:IntegerTypeRef"/>
+          </assignee>
+          <value xsi:type="xminiJava:MethodCall" method="//@classes.1/@members.4">
+            <receiver xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.7/@params.0"/>
+          </value>
+        </statements>
+        <statements xsi:type="xminiJava:IfStatement">
+          <expression xsi:type="xminiJava:Not">
+            <expression xsi:type="xminiJava:MethodCall" method="//@classes.1/@members.8">
+              <receiver xsi:type="xminiJava:This"/>
+              <args xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.7/@body/@statements.2/@assignee"/>
+              <args xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.7/@body/@statements.3/@assignee"/>
+            </expression>
+          </expression>
+          <thenBlock>
+            <statements xsi:type="xminiJava:Assignment">
+              <assignee xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.7/@body/@statements.0/@assignee"/>
+              <value xsi:type="xminiJava:BoolConstant" value="false"/>
+            </statements>
+          </thenBlock>
+          <elseBlock>
+            <statements xsi:type="xminiJava:Assignment">
+              <assignee xsi:type="xminiJava:VariableDeclaration" name="thisSalary">
+                <typeRef xsi:type="xminiJava:IntegerTypeRef"/>
+              </assignee>
+              <value xsi:type="xminiJava:MethodCall" method="//@classes.1/@members.5">
+                <receiver xsi:type="xminiJava:This"/>
+              </value>
+            </statements>
+            <statements xsi:type="xminiJava:Assignment">
+              <assignee xsi:type="xminiJava:VariableDeclaration" name="otherSalary">
+                <typeRef xsi:type="xminiJava:IntegerTypeRef"/>
+              </assignee>
+              <value xsi:type="xminiJava:MethodCall" method="//@classes.1/@members.5">
+                <receiver xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.7/@params.0"/>
+              </value>
+            </statements>
+            <statements xsi:type="xminiJava:IfStatement">
+              <expression xsi:type="xminiJava:Not">
+                <expression xsi:type="xminiJava:MethodCall" method="//@classes.1/@members.8">
+                  <receiver xsi:type="xminiJava:This"/>
+                  <args xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.7/@body/@statements.4/@elseBlock/@statements.0/@assignee"/>
+                  <args xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.7/@body/@statements.4/@elseBlock/@statements.1/@assignee"/>
+                </expression>
+              </expression>
+              <thenBlock>
+                <statements xsi:type="xminiJava:Assignment">
+                  <assignee xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.7/@body/@statements.0/@assignee"/>
+                  <value xsi:type="xminiJava:BoolConstant" value="false"/>
+                </statements>
+              </thenBlock>
+              <elseBlock>
+                <statements xsi:type="xminiJava:Assignment">
+                  <assignee xsi:type="xminiJava:VariableDeclaration" name="thisMarried">
+                    <typeRef xsi:type="xminiJava:BooleanTypeRef"/>
+                  </assignee>
+                  <value xsi:type="xminiJava:MethodCall" method="//@classes.1/@members.6">
+                    <receiver xsi:type="xminiJava:This"/>
+                  </value>
+                </statements>
+                <statements xsi:type="xminiJava:Assignment">
+                  <assignee xsi:type="xminiJava:VariableDeclaration" name="otherMarried">
+                    <typeRef xsi:type="xminiJava:BooleanTypeRef"/>
+                  </assignee>
+                  <value xsi:type="xminiJava:MethodCall" method="//@classes.1/@members.6">
+                    <receiver xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.7/@params.0"/>
+                  </value>
+                </statements>
+                <statements xsi:type="xminiJava:IfStatement">
+                  <expression xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.7/@body/@statements.4/@elseBlock/@statements.2/@elseBlock/@statements.0/@assignee"/>
+                  <thenBlock>
+                    <statements xsi:type="xminiJava:IfStatement">
+                      <expression xsi:type="xminiJava:Not">
+                        <expression xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.7/@body/@statements.4/@elseBlock/@statements.2/@elseBlock/@statements.1/@assignee"/>
+                      </expression>
+                      <thenBlock>
+                        <statements xsi:type="xminiJava:Assignment">
+                          <assignee xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.7/@body/@statements.0/@assignee"/>
+                          <value xsi:type="xminiJava:BoolConstant" value="false"/>
+                        </statements>
+                      </thenBlock>
+                      <elseBlock>
+                        <statements xsi:type="xminiJava:Assignment">
+                          <assignee xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.7/@body/@statements.1/@assignee"/>
+                          <value xsi:type="xminiJava:IntConstant"/>
+                        </statements>
+                      </elseBlock>
+                    </statements>
+                  </thenBlock>
+                  <elseBlock>
+                    <statements xsi:type="xminiJava:IfStatement">
+                      <expression xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.7/@body/@statements.4/@elseBlock/@statements.2/@elseBlock/@statements.1/@assignee"/>
+                      <thenBlock>
+                        <statements xsi:type="xminiJava:Assignment">
+                          <assignee xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.7/@body/@statements.0/@assignee"/>
+                          <value xsi:type="xminiJava:BoolConstant" value="false"/>
+                        </statements>
+                      </thenBlock>
+                      <elseBlock>
+                        <statements xsi:type="xminiJava:Assignment">
+                          <assignee xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.7/@body/@statements.1/@assignee"/>
+                          <value xsi:type="xminiJava:IntConstant"/>
+                        </statements>
+                      </elseBlock>
+                    </statements>
+                  </elseBlock>
+                </statements>
+              </elseBlock>
+            </statements>
+          </elseBlock>
+        </statements>
+        <statements xsi:type="xminiJava:Return">
+          <expression xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.7/@body/@statements.0/@assignee"/>
+        </statements>
+      </body>
+    </members>
+    <members xsi:type="xminiJava:Method" name="Compare" access="public">
+      <typeRef xsi:type="xminiJava:BooleanTypeRef"/>
+      <params name="num1">
+        <typeRef xsi:type="xminiJava:IntegerTypeRef"/>
+      </params>
+      <params name="num2">
+        <typeRef xsi:type="xminiJava:IntegerTypeRef"/>
+      </params>
+      <body>
+        <statements xsi:type="xminiJava:Assignment">
+          <assignee xsi:type="xminiJava:VariableDeclaration" name="retval">
+            <typeRef xsi:type="xminiJava:BooleanTypeRef"/>
+          </assignee>
+          <value xsi:type="xminiJava:BoolConstant" value="false"/>
+        </statements>
+        <statements xsi:type="xminiJava:Assignment">
+          <assignee xsi:type="xminiJava:VariableDeclaration" name="aux02">
+            <typeRef xsi:type="xminiJava:IntegerTypeRef"/>
+          </assignee>
+          <value xsi:type="xminiJava:Plus">
+            <left xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.8/@params.1"/>
+            <right xsi:type="xminiJava:IntConstant" value="1"/>
+          </value>
+        </statements>
+        <statements xsi:type="xminiJava:IfStatement">
+          <expression xsi:type="xminiJava:Inferior">
+            <left xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.8/@params.0"/>
+            <right xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.8/@params.1"/>
+          </expression>
+          <thenBlock>
+            <statements xsi:type="xminiJava:Assignment">
+              <assignee xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.8/@body/@statements.0/@assignee"/>
+              <value xsi:type="xminiJava:BoolConstant" value="false"/>
+            </statements>
+          </thenBlock>
+          <elseBlock>
+            <statements xsi:type="xminiJava:IfStatement">
+              <expression xsi:type="xminiJava:Not">
+                <expression xsi:type="xminiJava:Inferior">
+                  <left xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.8/@params.0"/>
+                  <right xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.8/@body/@statements.1/@assignee"/>
+                </expression>
+              </expression>
+              <thenBlock>
+                <statements xsi:type="xminiJava:Assignment">
+                  <assignee xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.8/@body/@statements.0/@assignee"/>
+                  <value xsi:type="xminiJava:BoolConstant" value="false"/>
+                </statements>
+              </thenBlock>
+              <elseBlock>
+                <statements xsi:type="xminiJava:Assignment">
+                  <assignee xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.8/@body/@statements.0/@assignee"/>
+                  <value xsi:type="xminiJava:BoolConstant" value="true"/>
+                </statements>
+              </elseBlock>
+            </statements>
+          </elseBlock>
+        </statements>
+        <statements xsi:type="xminiJava:Return">
+          <expression xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.8/@body/@statements.0/@assignee"/>
+        </statements>
+      </body>
+    </members>
+  </classes>
+</xminiJava:Program>
