@@ -15,6 +15,9 @@ import org.etsi.mts.tdl.Package
 import org.etsi.mts.tdl.TestConfiguration
 import org.etsi.mts.tdl.TestDescription
 import org.imt.tdl.configuration.EngineFactory
+import org.imt.tdl.coverage.TDLCoverageUtil
+import org.imt.tdl.coverage.TDLTestCaseCoverage
+import org.imt.tdl.coverage.TDLTestSuiteCoverage
 import org.imt.tdl.testResult.TDLTestCaseResult
 
 import static extension org.imt.k3tdl.k3dsa.BehaviourDescriptionAspect.*
@@ -28,6 +31,7 @@ class PackageAspect {
 	
 	List<TestDescription> testcases = new ArrayList<TestDescription>
 	TDLTestSuiteResult testSuiteResult = new TDLTestSuiteResult
+	TDLTestSuiteCoverage testSuiteCoverage = new TDLTestSuiteCoverage
 	
 	@Step
 	@InitializeModel
@@ -44,13 +48,21 @@ class PackageAspect {
 	def void main(){
 		try {
 			_self.testSuiteResult.testSuite = _self
+			_self.testSuiteCoverage.testSuite = _self
     		for (TestDescription testCase:_self.testcases) {
     			val TDLTestCaseResult testCaseResult = testCase.executeTestCase()
     			_self.testSuiteResult.addResult(testCaseResult)
+    			//for coverage, only considering passed and failed test cases
+    			if (testCaseResult.value != TDLTestResultUtil.INCONCLUSIVE){
+    				_self.testSuiteCoverage.addTCCoverage(testCase.testCaseCoverage)
+    			}
     			println()
     		}
     		
     		TDLTestResultUtil.instance.setTestSuiteResult = _self.testSuiteResult		
+    		TDLCoverageUtil.instance.testSuiteCoverage = _self.testSuiteCoverage
+    		TDLCoverageUtil.instance.DSLPath = _self.testcases.get(0).testConfiguration.DSLPath
+    		TDLCoverageUtil.instance.runCoverageComputation
     		  		
 		} catch (TDLRuntimeException nt){
 			println("Stopped due "+nt.message)	
@@ -61,6 +73,7 @@ class PackageAspect {
 class TestDescriptionAspect{
 	public EngineFactory launcher = new EngineFactory
 	public TDLTestCaseResult testCaseResult = new TDLTestCaseResult
+	public TDLTestCaseCoverage testCaseCoverage = new TDLTestCaseCoverage
 	
 	@Step
 	def TDLTestCaseResult executeTestCase(){
@@ -73,6 +86,7 @@ class TestDescriptionAspect{
 	def TDLTestCaseResult executeTestCase(String MUTPath){
 		_self.launcher = new EngineFactory
 		_self.testCaseResult = new TDLTestCaseResult
+		_self.testCaseCoverage = new TDLTestCaseCoverage
 		_self.testConfiguration.activateConfiguration(_self.launcher, MUTPath)
 		return _self.testCaseExecutor
 	}
@@ -87,6 +101,12 @@ class TestDescriptionAspect{
 			_self.testCaseResult.description = modelExecutionResult.substring(modelExecutionResult.indexOf(":")+1)
 		}
 		println("Test case "+ _self.name + ": " + _self.testCaseResult.value)
+		if (_self.testCaseResult.value != TDLTestResultUtil.INCONCLUSIVE){
+			//save the model execution trace and the MUTResource related to this test case if its result is not INCONCLUSIVE
+			_self.testCaseCoverage.testCase = _self
+			_self.testCaseCoverage.trace = _self.launcher.executionTrace
+	    	_self.testCaseCoverage.MUTResource = _self.launcher.MUTResource
+		}
 		return _self.testCaseResult
 	}
 }
