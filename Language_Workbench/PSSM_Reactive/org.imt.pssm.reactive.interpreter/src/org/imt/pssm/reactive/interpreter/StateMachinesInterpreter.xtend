@@ -1,10 +1,6 @@
 package org.imt.pssm.reactive.interpreter
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
-
-
-
-
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 import fr.inria.diverse.k3.al.annotationprocessor.Step
 import java.util.ArrayList
@@ -36,6 +32,10 @@ import org.imt.pssm.reactive.model.statemachines.StringAttributeValue
 import org.imt.pssm.reactive.model.statemachines.StringConstraint
 import org.imt.pssm.reactive.model.statemachines.Transition
 import org.imt.pssm.reactive.model.statemachines.Vertex
+import org.imt.pssm.reactive.model.statemachines.BooleanUnaryExpression
+import org.imt.pssm.reactive.model.statemachines.BooleanBinaryExpression
+import org.imt.pssm.reactive.model.statemachines.IntegerComparisonExpression
+import org.imt.pssm.reactive.model.statemachines.StringComparisonExpression
 
 import static extension org.imt.pssm.reactive.interpreter.BehaviorAspect.*
 import static extension org.imt.pssm.reactive.interpreter.ConstraintAspect.*
@@ -44,6 +44,14 @@ import static extension org.imt.pssm.reactive.interpreter.StateAspect.*
 import static extension org.imt.pssm.reactive.interpreter.StateMachineAspect.*
 import static extension org.imt.pssm.reactive.interpreter.TransitionAspect.*
 import static extension org.imt.pssm.reactive.interpreter.VertexAspect.*
+import static extension org.imt.pssm.reactive.interpreter.BooleanUnaryExpressionAspect.*
+import static extension org.imt.pssm.reactive.interpreter.BooleanBinaryExpressionAspect.*
+import static extension org.imt.pssm.reactive.interpreter.IntegerComparisonExpressionAspect.*
+import static extension org.imt.pssm.reactive.interpreter.StringComparisonExpressionAspect.*
+import org.imt.pssm.reactive.model.statemachines.BooleanBinaryOperator
+import org.imt.pssm.reactive.model.statemachines.IntegerComparisonOperator
+import org.imt.pssm.reactive.model.statemachines.StringComparisonOperator
+import org.imt.pssm.reactive.model.statemachines.BooleanUnaryOperator
 
 @Aspect(className=StateMachine)
 class StateMachineAspect {
@@ -51,6 +59,9 @@ class StateMachineAspect {
 	protected val List<CompletionEventOccurrence> completionEvents = new ArrayList
 	protected val List<EventOccurrence> deferredEvents = new ArrayList
 	protected val List<Vertex> activeVertice = new ArrayList
+	
+	//added by me
+	public List<EventOccurrence> receivedEvents = new ArrayList
 
 	@Step
 	def void run() {
@@ -60,6 +71,7 @@ class StateMachineAspect {
 	
 	@Step
 	def void eventOccurrenceReceived(EventOccurrence event) {
+		_self.receivedEvents.add(event)
 		_self.dispatchEventOccurrence(event)
 	}
 	
@@ -100,7 +112,7 @@ class StateMachineAspect {
 			if (eventOccurrence !== null && eventOccurrence instanceof CallEventOccurrence) {
 				val out = (eventOccurrence as CallEventOccurrence).outParameterValues
 				if (!out.empty) {
-					println(out)
+					//println(out)
 				}
 			}
 			_self.dispatchCompletionEvents
@@ -711,6 +723,19 @@ class TransitionAspect {
 		}
 		return _self._leastCommonAncestor
 	}
+	
+	public def StateMachine getRootStateMachine(){
+		var Region region = _self.container
+		if (region.stateMachine !== null){
+			return region.stateMachine
+		}
+		while (region.stateMachine === null){
+			region = region.state.container
+			if (region.stateMachine !== null){
+				return region.stateMachine
+			}
+		}
+	}
 }
 
 
@@ -721,7 +746,7 @@ class BehaviorAspect {
 		//println((_self.eContainer as NamedElement).name +
 			//"(" + _self.name + ")" + if (eventOccurrence !== null)
 			//	{eventOccurrence.parameters} else {""})
-		println (_self.name)
+		//println (_self.name)
 		var StateMachine containerSM = null;
 		if (_self.eContainer instanceof State){
 			containerSM = (_self.eContainer as State).containingRegion.containingStateMachine
@@ -782,8 +807,21 @@ class ConstraintAspect {
 @Aspect(className=BooleanConstraint)
 class BooleanConstraintAspect extends ConstraintAspect{
 	protected def boolean evaluate(EventOccurrence eventOccurrence) {
-		val attribute = _self.attribute
-		if (attribute === null) {
+		if (_self.expression instanceof BooleanUnaryExpression){
+			return (_self.expression as BooleanUnaryExpression).evaluate (eventOccurrence)
+		}
+		else if (_self.expression instanceof BooleanBinaryExpression){
+			return (_self.expression as BooleanBinaryExpression).evaluate ()
+		}
+		return false
+	}
+}
+
+@Aspect(className=BooleanUnaryExpression)
+class BooleanUnaryExpressionAspect {
+	def boolean evaluate (EventOccurrence eventOccurrence){
+		val operand = _self.operand
+		if (operand === null) {
 			return true
 		}
 		val values = if (eventOccurrence instanceof SignalEventOccurrence) {
@@ -796,73 +834,198 @@ class BooleanConstraintAspect extends ConstraintAspect{
 		}
 		val eventAttributeValue = values.findFirst[v|
 			v instanceof BooleanAttributeValue &&
-			(v as BooleanAttributeValue).attribute == attribute
-		]
+			(v as BooleanAttributeValue).attribute == operand
+		] as BooleanAttributeValue
 		if (eventAttributeValue === null) {
 			return false
 		}
-		if (_self.value instanceof Boolean) {
-			return (eventAttributeValue as BooleanAttributeValue).value == if (_self.value as Boolean) 1 else 0
+		else if (_self.operator == BooleanUnaryOperator.TRUE && eventAttributeValue.value == true){
+			return true;
 		}
-		return (eventAttributeValue as BooleanAttributeValue).value == _self.value
+		else if (_self.operator == BooleanUnaryOperator.FALSE && eventAttributeValue.value == false){
+			return false;
+		}
+		return false;
+	}
+}
+
+@Aspect(className=BooleanBinaryExpression)
+class BooleanBinaryExpressionAspect {
+	def boolean evaluate (){	
+		val operand1 = _self.operand1
+		val operand2 = _self.operand2
+		var Boolean operand1value 
+		var Boolean operand2value
+		
+		var operand1found = false
+		var operand2found = false
+		//finding the values of the operands from the attribute values of the last received event occurrences
+		val stateMachine = ((_self.eContainer as BooleanConstraint).eContainer as Transition).rootStateMachine
+		var values = new ArrayList
+		for (var i = stateMachine.receivedEvents.size - 1; i >= 0 ; i--){
+			val eventOcc = stateMachine.receivedEvents.get(i)
+			if (eventOcc instanceof SignalEventOccurrence) {
+				values.addAll(eventOcc.attributeValues)
+			} else if (eventOcc instanceof CallEventOccurrence) {
+				val result = new ArrayList(eventOcc.inParameterValues)
+				result.addAll(eventOcc.outParameterValues)
+				result.add(eventOcc.returnValue)
+				values.addAll(result)
+			}
+			if (!operand1found){
+				val eventAttributeValue = values.findFirst[v | v instanceof BooleanAttributeValue && (v as BooleanAttributeValue).attribute == operand1]
+				if (eventAttributeValue !== null){
+					operand1value = (eventAttributeValue as BooleanAttributeValue).value
+					operand1found = true
+				}
+			}
+			if (!operand2found){
+				val eventAttributeValue = values.findFirst[v | v instanceof BooleanAttributeValue && (v as BooleanAttributeValue).attribute == operand2]
+				if (eventAttributeValue !== null){
+					operand2value = (eventAttributeValue as BooleanAttributeValue).value
+					operand2found = true
+				}
+			}
+			if (operand1found && operand2found){
+				i = -1
+			}
+		}
+		
+		if (_self.operator == BooleanBinaryOperator.AND){
+			return operand1value && operand2value
+		}
+		else if (_self.operator == BooleanBinaryOperator.OR){
+			return operand1value || operand2value
+		}
+		return false
 	}
 }
 
 @Aspect(className=IntegerConstraint)
 class IntegerConstraintAspect extends ConstraintAspect{
 	protected def boolean evaluate(EventOccurrence eventOccurrence) {
-		val attribute = _self.attribute
-		if (attribute === null) {
-			return true
+		return _self.expression.evaluate ()
+	}
+}
+
+@Aspect(className=IntegerComparisonExpression)
+class IntegerComparisonExpressionAspect {
+	def boolean evaluate (){	
+		val operand1 = _self.operand1
+		val operand2 = _self.operand2
+		var int operand1value 
+		var int operand2value
+		
+		var operand1found = false
+		var operand2found = false
+		//finding the values of the operands from the attribute values of the last received event occurrences
+		val stateMachine = ((_self.eContainer as IntegerConstraint).eContainer as Transition).rootStateMachine
+		var values = new ArrayList
+		for (var i = stateMachine.receivedEvents.size - 1; i >= 0 ; i--){
+			val eventOcc = stateMachine.receivedEvents.get(i)
+			if (eventOcc instanceof SignalEventOccurrence) {
+				values.addAll(eventOcc.attributeValues)
+			} else if (eventOcc instanceof CallEventOccurrence) {
+				val result = new ArrayList(eventOcc.inParameterValues)
+				result.addAll(eventOcc.outParameterValues)
+				result.add(eventOcc.returnValue)
+				values.addAll(result)
+			}
+			if (!operand1found){
+				val eventAttributeValue = values.findFirst[v | v instanceof IntegerAttributeValue && (v as IntegerAttributeValue).attribute == operand1]
+				if (eventAttributeValue !== null){
+					operand1value = (eventAttributeValue as IntegerAttributeValue).value
+					operand1found = true
+				}
+			}
+			if (!operand2found){
+				val eventAttributeValue = values.findFirst[v | v instanceof IntegerAttributeValue && (v as IntegerAttributeValue).attribute == operand2]
+				if (eventAttributeValue !== null){
+					operand2value = (eventAttributeValue as IntegerAttributeValue).value
+					operand2found = true
+				}
+			}
+			if (operand1found && operand2found){
+				i = -1
+			}
 		}
-		val values = if (eventOccurrence instanceof SignalEventOccurrence) {
-			new ArrayList(eventOccurrence.attributeValues)
-		} else if (eventOccurrence instanceof CallEventOccurrence) {
-			val result = new ArrayList(eventOccurrence.inParameterValues)
-			result.addAll(eventOccurrence.outParameterValues)
-			result.add(eventOccurrence.returnValue)
-			result
+		if (_self.operator == IntegerComparisonOperator.GREATER){
+			return operand1value > operand2value
 		}
-		val eventAttributeValue = values.findFirst[v|
-			v instanceof IntegerAttributeValue &&
-			(v as IntegerAttributeValue).attribute == attribute
-		]
-		if (eventAttributeValue === null) {
-			return false
+		else if (_self.operator == IntegerComparisonOperator.GREATER_EQUALS){
+			return operand1value >= operand2value
 		}
-		if (_self.value instanceof Integer) {
-			return (eventAttributeValue as IntegerAttributeValue).value == (_self.value as Integer)
+		else if (_self.operator == IntegerComparisonOperator.EQUALS){
+			return operand1value == operand2value
 		}
-		return (eventAttributeValue as IntegerAttributeValue).value == _self.value
+		else if (_self.operator == IntegerComparisonOperator.NOT_EQUALS){
+			return operand1value != operand2value
+		}
+		else if (_self.operator == IntegerComparisonOperator.SMALLER_EQUALS){
+			return operand1value <= operand2value
+		}
+		else if (_self.operator == IntegerComparisonOperator.SMALLER){
+			return operand1value < operand2value
+		}
+		return false
 	}
 }
 
 @Aspect(className=StringConstraint)
 class StringConstraintAspect extends ConstraintAspect{
 	protected def boolean evaluate(EventOccurrence eventOccurrence) {
-		val attribute = _self.attribute
-		if (attribute === null) {
-			return true
+		return _self.expression.evaluate ()
+	}
+}
+
+@Aspect(className=StringComparisonExpression)
+class StringComparisonExpressionAspect {
+	def boolean evaluate (){
+		val operand1 = _self.operand1
+		val operand2 = _self.operand2
+		var String operand1value 
+		var String operand2value
+		
+		var operand1found = false
+		var operand2found = false
+		//finding the values of the operands from the attribute values of the last received event occurrences
+		val stateMachine = ((_self.eContainer as StringConstraint).eContainer as Transition).rootStateMachine
+		var values = new ArrayList
+		for (var i = stateMachine.receivedEvents.size - 1; i >= 0 ; i--){
+			val eventOcc = stateMachine.receivedEvents.get(i)
+			if (eventOcc instanceof SignalEventOccurrence) {
+				values.addAll(eventOcc.attributeValues)
+			} else if (eventOcc instanceof CallEventOccurrence) {
+				val result = new ArrayList(eventOcc.inParameterValues)
+				result.addAll(eventOcc.outParameterValues)
+				result.add(eventOcc.returnValue)
+				values.addAll(result)
+			}
+			if (!operand1found){
+				val eventAttributeValue = values.findFirst[v | v instanceof StringAttributeValue && (v as StringAttributeValue).attribute == operand1]
+				if (eventAttributeValue !== null){
+					operand1value = (eventAttributeValue as StringAttributeValue).value
+					operand1found = true
+				}
+			}
+			if (!operand2found){
+				val eventAttributeValue = values.findFirst[v | v instanceof StringAttributeValue && (v as StringAttributeValue).attribute == operand2]
+				if (eventAttributeValue !== null){
+					operand2value = (eventAttributeValue as StringAttributeValue).value
+					operand2found = true
+				}
+			}
+			if (operand1found && operand2found){
+				i = -1
+			}
 		}
-		val values = if (eventOccurrence instanceof SignalEventOccurrence) {
-			new ArrayList(eventOccurrence.attributeValues)
-		} else if (eventOccurrence instanceof CallEventOccurrence) {
-			val result = new ArrayList(eventOccurrence.inParameterValues)
-			result.addAll(eventOccurrence.outParameterValues)
-			result.add(eventOccurrence.returnValue)
-			result
+		if (_self.operator == StringComparisonOperator.EQUALS){
+			return operand1value.equals(operand2value)
+		} 
+		else if (_self.operator == StringComparisonOperator.NOT_EQUALS){
+			return !operand1value.equals(operand2value)
 		}
-		val eventAttributeValue = values.findFirst[v|
-			v instanceof StringAttributeValue &&
-			(v as IntegerAttributeValue).attribute == attribute
-		]
-		if (eventAttributeValue === null) {
-			return false
-		}
-		if (_self.value instanceof String) {
-			return (eventAttributeValue as StringAttributeValue).value.equals((_self.value as String))
-		}
-		return (eventAttributeValue as StringAttributeValue).value == _self.value
+		return false
 	}
 }
 

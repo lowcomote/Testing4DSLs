@@ -184,6 +184,30 @@ public class StatemachinesAdapterFactory extends AdapterFactoryImpl {
 				return createStringAttributeValueAdapter();
 			}
 			@Override
+			public Adapter caseExpression(Expression object) {
+				return createExpressionAdapter();
+			}
+			@Override
+			public Adapter caseIntegerComparisonExpression(IntegerComparisonExpression object) {
+				return createIntegerComparisonExpressionAdapter();
+			}
+			@Override
+			public Adapter caseStringComparisonExpression(StringComparisonExpression object) {
+				return createStringComparisonExpressionAdapter();
+			}
+			@Override
+			public Adapter caseBooleanExpression(BooleanExpression object) {
+				return createBooleanExpressionAdapter();
+			}
+			@Override
+			public Adapter caseBooleanBinaryExpression(BooleanBinaryExpression object) {
+				return createBooleanBinaryExpressionAdapter();
+			}
+			@Override
+			public Adapter caseBooleanUnaryExpression(BooleanUnaryExpression object) {
+				return createBooleanUnaryExpressionAdapter();
+			}
+			@Override
 			public Adapter caseEventOccurrence(EventOccurrence object) {
 				return createEventOccurrenceAdapter();
 			}
@@ -622,6 +646,90 @@ public class StatemachinesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createStringAttributeValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.imt.pssm.reactive.model.statemachines.Expression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.imt.pssm.reactive.model.statemachines.Expression
+	 * @generated
+	 */
+	public Adapter createExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.imt.pssm.reactive.model.statemachines.IntegerComparisonExpression <em>Integer Comparison Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.imt.pssm.reactive.model.statemachines.IntegerComparisonExpression
+	 * @generated
+	 */
+	public Adapter createIntegerComparisonExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.imt.pssm.reactive.model.statemachines.StringComparisonExpression <em>String Comparison Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.imt.pssm.reactive.model.statemachines.StringComparisonExpression
+	 * @generated
+	 */
+	public Adapter createStringComparisonExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.imt.pssm.reactive.model.statemachines.BooleanExpression <em>Boolean Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.imt.pssm.reactive.model.statemachines.BooleanExpression
+	 * @generated
+	 */
+	public Adapter createBooleanExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.imt.pssm.reactive.model.statemachines.BooleanBinaryExpression <em>Boolean Binary Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.imt.pssm.reactive.model.statemachines.BooleanBinaryExpression
+	 * @generated
+	 */
+	public Adapter createBooleanBinaryExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.imt.pssm.reactive.model.statemachines.BooleanUnaryExpression <em>Boolean Unary Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.imt.pssm.reactive.model.statemachines.BooleanUnaryExpression
+	 * @generated
+	 */
+	public Adapter createBooleanUnaryExpressionAdapter() {
 		return null;
 	}
 

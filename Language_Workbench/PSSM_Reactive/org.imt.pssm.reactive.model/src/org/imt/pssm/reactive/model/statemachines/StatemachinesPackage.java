@@ -39,7 +39,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://org.tetrabox.examples.statemachines.interpretedstatemachines/statemachines/";
+	String eNS_URI = "http://org.imt.pssm.reactive/statemachines/";
 
 	/**
 	 * The package namespace name.
@@ -95,31 +95,13 @@ public interface StatemachinesPackage extends EPackage {
 	int CUSTOM_SYSTEM__OPERATIONS = 2;
 
 	/**
-	 * The feature id for the '<em><b>Event Occurrences</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CUSTOM_SYSTEM__EVENT_OCCURRENCES = 3;
-
-	/**
-	 * The feature id for the '<em><b>Performed Behaviors</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CUSTOM_SYSTEM__PERFORMED_BEHAVIORS = 4;
-
-	/**
 	 * The number of structural features of the '<em>Custom System</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOM_SYSTEM_FEATURE_COUNT = 5;
+	int CUSTOM_SYSTEM_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Custom System</em>' class.
@@ -566,22 +548,13 @@ public interface StatemachinesPackage extends EPackage {
 	int BOOLEAN_CONSTRAINT = 11;
 
 	/**
-	 * The feature id for the '<em><b>Attribute</b></em>' reference.
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOOLEAN_CONSTRAINT__ATTRIBUTE = CONSTRAINT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_CONSTRAINT__VALUE = CONSTRAINT_FEATURE_COUNT + 1;
+	int BOOLEAN_CONSTRAINT__EXPRESSION = CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Boolean Constraint</em>' class.
@@ -590,7 +563,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BOOLEAN_CONSTRAINT_FEATURE_COUNT = CONSTRAINT_FEATURE_COUNT + 2;
+	int BOOLEAN_CONSTRAINT_FEATURE_COUNT = CONSTRAINT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Boolean Constraint</em>' class.
@@ -612,22 +585,13 @@ public interface StatemachinesPackage extends EPackage {
 	int INTEGER_CONSTRAINT = 12;
 
 	/**
-	 * The feature id for the '<em><b>Attribute</b></em>' reference.
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_CONSTRAINT__ATTRIBUTE = CONSTRAINT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_CONSTRAINT__VALUE = CONSTRAINT_FEATURE_COUNT + 1;
+	int INTEGER_CONSTRAINT__EXPRESSION = CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Integer Constraint</em>' class.
@@ -636,7 +600,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_CONSTRAINT_FEATURE_COUNT = CONSTRAINT_FEATURE_COUNT + 2;
+	int INTEGER_CONSTRAINT_FEATURE_COUNT = CONSTRAINT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Integer Constraint</em>' class.
@@ -658,22 +622,13 @@ public interface StatemachinesPackage extends EPackage {
 	int STRING_CONSTRAINT = 13;
 
 	/**
-	 * The feature id for the '<em><b>Attribute</b></em>' reference.
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STRING_CONSTRAINT__ATTRIBUTE = CONSTRAINT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_CONSTRAINT__VALUE = CONSTRAINT_FEATURE_COUNT + 1;
+	int STRING_CONSTRAINT__EXPRESSION = CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>String Constraint</em>' class.
@@ -682,7 +637,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRING_CONSTRAINT_FEATURE_COUNT = CONSTRAINT_FEATURE_COUNT + 2;
+	int STRING_CONSTRAINT_FEATURE_COUNT = CONSTRAINT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>String Constraint</em>' class.
@@ -1617,6 +1572,273 @@ public interface StatemachinesPackage extends EPackage {
 	int STRING_ATTRIBUTE_VALUE_OPERATION_COUNT = ATTRIBUTE_VALUE_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.imt.pssm.reactive.model.statemachines.impl.ExpressionImpl <em>Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.imt.pssm.reactive.model.statemachines.impl.ExpressionImpl
+	 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getExpression()
+	 * @generated
+	 */
+	int EXPRESSION = 29;
+
+	/**
+	 * The number of structural features of the '<em>Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_FEATURE_COUNT = 0;
+
+	/**
+	 * The number of operations of the '<em>Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.imt.pssm.reactive.model.statemachines.impl.IntegerComparisonExpressionImpl <em>Integer Comparison Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.imt.pssm.reactive.model.statemachines.impl.IntegerComparisonExpressionImpl
+	 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getIntegerComparisonExpression()
+	 * @generated
+	 */
+	int INTEGER_COMPARISON_EXPRESSION = 30;
+
+	/**
+	 * The feature id for the '<em><b>Operator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_COMPARISON_EXPRESSION__OPERATOR = EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Operand1</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_COMPARISON_EXPRESSION__OPERAND1 = EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Operand2</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_COMPARISON_EXPRESSION__OPERAND2 = EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Integer Comparison Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_COMPARISON_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Integer Comparison Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_COMPARISON_EXPRESSION_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.imt.pssm.reactive.model.statemachines.impl.StringComparisonExpressionImpl <em>String Comparison Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.imt.pssm.reactive.model.statemachines.impl.StringComparisonExpressionImpl
+	 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getStringComparisonExpression()
+	 * @generated
+	 */
+	int STRING_COMPARISON_EXPRESSION = 31;
+
+	/**
+	 * The feature id for the '<em><b>Operator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_COMPARISON_EXPRESSION__OPERATOR = EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Operand1</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_COMPARISON_EXPRESSION__OPERAND1 = EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Operand2</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_COMPARISON_EXPRESSION__OPERAND2 = EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>String Comparison Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_COMPARISON_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>String Comparison Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_COMPARISON_EXPRESSION_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.imt.pssm.reactive.model.statemachines.impl.BooleanExpressionImpl <em>Boolean Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.imt.pssm.reactive.model.statemachines.impl.BooleanExpressionImpl
+	 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getBooleanExpression()
+	 * @generated
+	 */
+	int BOOLEAN_EXPRESSION = 32;
+
+	/**
+	 * The number of structural features of the '<em>Boolean Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Boolean Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_EXPRESSION_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.imt.pssm.reactive.model.statemachines.impl.BooleanBinaryExpressionImpl <em>Boolean Binary Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.imt.pssm.reactive.model.statemachines.impl.BooleanBinaryExpressionImpl
+	 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getBooleanBinaryExpression()
+	 * @generated
+	 */
+	int BOOLEAN_BINARY_EXPRESSION = 33;
+
+	/**
+	 * The feature id for the '<em><b>Operator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_BINARY_EXPRESSION__OPERATOR = BOOLEAN_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Operand1</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_BINARY_EXPRESSION__OPERAND1 = BOOLEAN_EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Operand2</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_BINARY_EXPRESSION__OPERAND2 = BOOLEAN_EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Boolean Binary Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_BINARY_EXPRESSION_FEATURE_COUNT = BOOLEAN_EXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Boolean Binary Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_BINARY_EXPRESSION_OPERATION_COUNT = BOOLEAN_EXPRESSION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.imt.pssm.reactive.model.statemachines.impl.BooleanUnaryExpressionImpl <em>Boolean Unary Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.imt.pssm.reactive.model.statemachines.impl.BooleanUnaryExpressionImpl
+	 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getBooleanUnaryExpression()
+	 * @generated
+	 */
+	int BOOLEAN_UNARY_EXPRESSION = 34;
+
+	/**
+	 * The feature id for the '<em><b>Operator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_UNARY_EXPRESSION__OPERATOR = BOOLEAN_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Operand</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_UNARY_EXPRESSION__OPERAND = BOOLEAN_EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Boolean Unary Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_UNARY_EXPRESSION_FEATURE_COUNT = BOOLEAN_EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Boolean Unary Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_UNARY_EXPRESSION_OPERATION_COUNT = BOOLEAN_EXPRESSION_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.imt.pssm.reactive.model.statemachines.impl.EventOccurrenceImpl <em>Event Occurrence</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1624,7 +1846,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getEventOccurrence()
 	 * @generated
 	 */
-	int EVENT_OCCURRENCE = 29;
+	int EVENT_OCCURRENCE = 35;
 
 	/**
 	 * The number of structural features of the '<em>Event Occurrence</em>' class.
@@ -1652,7 +1874,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getCompletionEventOccurrence()
 	 * @generated
 	 */
-	int COMPLETION_EVENT_OCCURRENCE = 30;
+	int COMPLETION_EVENT_OCCURRENCE = 36;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' reference.
@@ -1689,7 +1911,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getSignalEventOccurrence()
 	 * @generated
 	 */
-	int SIGNAL_EVENT_OCCURRENCE = 31;
+	int SIGNAL_EVENT_OCCURRENCE = 37;
 
 	/**
 	 * The feature id for the '<em><b>Signal</b></em>' reference.
@@ -1735,7 +1957,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getCallEventOccurrence()
 	 * @generated
 	 */
-	int CALL_EVENT_OCCURRENCE = 32;
+	int CALL_EVENT_OCCURRENCE = 38;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -1792,6 +2014,46 @@ public interface StatemachinesPackage extends EPackage {
 	int CALL_EVENT_OCCURRENCE_OPERATION_COUNT = EVENT_OCCURRENCE_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.imt.pssm.reactive.model.statemachines.BooleanBinaryOperator <em>Boolean Binary Operator</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.imt.pssm.reactive.model.statemachines.BooleanBinaryOperator
+	 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getBooleanBinaryOperator()
+	 * @generated
+	 */
+	int BOOLEAN_BINARY_OPERATOR = 39;
+
+	/**
+	 * The meta object id for the '{@link org.imt.pssm.reactive.model.statemachines.BooleanUnaryOperator <em>Boolean Unary Operator</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.imt.pssm.reactive.model.statemachines.BooleanUnaryOperator
+	 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getBooleanUnaryOperator()
+	 * @generated
+	 */
+	int BOOLEAN_UNARY_OPERATOR = 40;
+
+	/**
+	 * The meta object id for the '{@link org.imt.pssm.reactive.model.statemachines.IntegerComparisonOperator <em>Integer Comparison Operator</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.imt.pssm.reactive.model.statemachines.IntegerComparisonOperator
+	 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getIntegerComparisonOperator()
+	 * @generated
+	 */
+	int INTEGER_COMPARISON_OPERATOR = 41;
+
+	/**
+	 * The meta object id for the '{@link org.imt.pssm.reactive.model.statemachines.StringComparisonOperator <em>String Comparison Operator</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.imt.pssm.reactive.model.statemachines.StringComparisonOperator
+	 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getStringComparisonOperator()
+	 * @generated
+	 */
+	int STRING_COMPARISON_OPERATOR = 42;
+
+	/**
 	 * The meta object id for the '{@link org.imt.pssm.reactive.model.statemachines.PseudostateKind <em>Pseudostate Kind</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1799,7 +2061,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getPseudostateKind()
 	 * @generated
 	 */
-	int PSEUDOSTATE_KIND = 33;
+	int PSEUDOSTATE_KIND = 43;
 
 	/**
 	 * The meta object id for the '{@link org.imt.pssm.reactive.model.statemachines.TransitionKind <em>Transition Kind</em>}' enum.
@@ -1809,7 +2071,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getTransitionKind()
 	 * @generated
 	 */
-	int TRANSITION_KIND = 34;
+	int TRANSITION_KIND = 44;
 
 
 	/**
@@ -1854,28 +2116,6 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCustomSystem_Operations();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.imt.pssm.reactive.model.statemachines.CustomSystem#getEventOccurrences <em>Event Occurrences</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Event Occurrences</em>'.
-	 * @see org.imt.pssm.reactive.model.statemachines.CustomSystem#getEventOccurrences()
-	 * @see #getCustomSystem()
-	 * @generated
-	 */
-	EReference getCustomSystem_EventOccurrences();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.imt.pssm.reactive.model.statemachines.CustomSystem#getPerformedBehaviors <em>Performed Behaviors</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Performed Behaviors</em>'.
-	 * @see org.imt.pssm.reactive.model.statemachines.CustomSystem#getPerformedBehaviors()
-	 * @see #getCustomSystem()
-	 * @generated
-	 */
-	EReference getCustomSystem_PerformedBehaviors();
 
 	/**
 	 * Returns the meta object for class '{@link org.imt.pssm.reactive.model.statemachines.Signal <em>Signal</em>}'.
@@ -2054,26 +2294,15 @@ public interface StatemachinesPackage extends EPackage {
 	EClass getBooleanConstraint();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.imt.pssm.reactive.model.statemachines.BooleanConstraint#getAttribute <em>Attribute</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.imt.pssm.reactive.model.statemachines.BooleanConstraint#getExpression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Attribute</em>'.
-	 * @see org.imt.pssm.reactive.model.statemachines.BooleanConstraint#getAttribute()
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.BooleanConstraint#getExpression()
 	 * @see #getBooleanConstraint()
 	 * @generated
 	 */
-	EReference getBooleanConstraint_Attribute();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.imt.pssm.reactive.model.statemachines.BooleanConstraint#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see org.imt.pssm.reactive.model.statemachines.BooleanConstraint#getValue()
-	 * @see #getBooleanConstraint()
-	 * @generated
-	 */
-	EAttribute getBooleanConstraint_Value();
+	EReference getBooleanConstraint_Expression();
 
 	/**
 	 * Returns the meta object for class '{@link org.imt.pssm.reactive.model.statemachines.IntegerConstraint <em>Integer Constraint</em>}'.
@@ -2086,26 +2315,15 @@ public interface StatemachinesPackage extends EPackage {
 	EClass getIntegerConstraint();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.imt.pssm.reactive.model.statemachines.IntegerConstraint#getAttribute <em>Attribute</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.imt.pssm.reactive.model.statemachines.IntegerConstraint#getExpression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Attribute</em>'.
-	 * @see org.imt.pssm.reactive.model.statemachines.IntegerConstraint#getAttribute()
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.IntegerConstraint#getExpression()
 	 * @see #getIntegerConstraint()
 	 * @generated
 	 */
-	EReference getIntegerConstraint_Attribute();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.imt.pssm.reactive.model.statemachines.IntegerConstraint#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see org.imt.pssm.reactive.model.statemachines.IntegerConstraint#getValue()
-	 * @see #getIntegerConstraint()
-	 * @generated
-	 */
-	EAttribute getIntegerConstraint_Value();
+	EReference getIntegerConstraint_Expression();
 
 	/**
 	 * Returns the meta object for class '{@link org.imt.pssm.reactive.model.statemachines.StringConstraint <em>String Constraint</em>}'.
@@ -2118,26 +2336,15 @@ public interface StatemachinesPackage extends EPackage {
 	EClass getStringConstraint();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.imt.pssm.reactive.model.statemachines.StringConstraint#getAttribute <em>Attribute</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.imt.pssm.reactive.model.statemachines.StringConstraint#getExpression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Attribute</em>'.
-	 * @see org.imt.pssm.reactive.model.statemachines.StringConstraint#getAttribute()
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.StringConstraint#getExpression()
 	 * @see #getStringConstraint()
 	 * @generated
 	 */
-	EReference getStringConstraint_Attribute();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.imt.pssm.reactive.model.statemachines.StringConstraint#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see org.imt.pssm.reactive.model.statemachines.StringConstraint#getValue()
-	 * @see #getStringConstraint()
-	 * @generated
-	 */
-	EAttribute getStringConstraint_Value();
+	EReference getStringConstraint_Expression();
 
 	/**
 	 * Returns the meta object for class '{@link org.imt.pssm.reactive.model.statemachines.NamedElement <em>Named Element</em>}'.
@@ -2664,6 +2871,187 @@ public interface StatemachinesPackage extends EPackage {
 	EAttribute getStringAttributeValue_Value();
 
 	/**
+	 * Returns the meta object for class '{@link org.imt.pssm.reactive.model.statemachines.Expression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Expression</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.Expression
+	 * @generated
+	 */
+	EClass getExpression();
+
+	/**
+	 * Returns the meta object for class '{@link org.imt.pssm.reactive.model.statemachines.IntegerComparisonExpression <em>Integer Comparison Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Integer Comparison Expression</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.IntegerComparisonExpression
+	 * @generated
+	 */
+	EClass getIntegerComparisonExpression();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.imt.pssm.reactive.model.statemachines.IntegerComparisonExpression#getOperator <em>Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Operator</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.IntegerComparisonExpression#getOperator()
+	 * @see #getIntegerComparisonExpression()
+	 * @generated
+	 */
+	EAttribute getIntegerComparisonExpression_Operator();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.imt.pssm.reactive.model.statemachines.IntegerComparisonExpression#getOperand1 <em>Operand1</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Operand1</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.IntegerComparisonExpression#getOperand1()
+	 * @see #getIntegerComparisonExpression()
+	 * @generated
+	 */
+	EReference getIntegerComparisonExpression_Operand1();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.imt.pssm.reactive.model.statemachines.IntegerComparisonExpression#getOperand2 <em>Operand2</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Operand2</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.IntegerComparisonExpression#getOperand2()
+	 * @see #getIntegerComparisonExpression()
+	 * @generated
+	 */
+	EReference getIntegerComparisonExpression_Operand2();
+
+	/**
+	 * Returns the meta object for class '{@link org.imt.pssm.reactive.model.statemachines.StringComparisonExpression <em>String Comparison Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>String Comparison Expression</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.StringComparisonExpression
+	 * @generated
+	 */
+	EClass getStringComparisonExpression();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.imt.pssm.reactive.model.statemachines.StringComparisonExpression#getOperator <em>Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Operator</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.StringComparisonExpression#getOperator()
+	 * @see #getStringComparisonExpression()
+	 * @generated
+	 */
+	EAttribute getStringComparisonExpression_Operator();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.imt.pssm.reactive.model.statemachines.StringComparisonExpression#getOperand1 <em>Operand1</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Operand1</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.StringComparisonExpression#getOperand1()
+	 * @see #getStringComparisonExpression()
+	 * @generated
+	 */
+	EReference getStringComparisonExpression_Operand1();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.imt.pssm.reactive.model.statemachines.StringComparisonExpression#getOperand2 <em>Operand2</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Operand2</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.StringComparisonExpression#getOperand2()
+	 * @see #getStringComparisonExpression()
+	 * @generated
+	 */
+	EReference getStringComparisonExpression_Operand2();
+
+	/**
+	 * Returns the meta object for class '{@link org.imt.pssm.reactive.model.statemachines.BooleanExpression <em>Boolean Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Boolean Expression</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.BooleanExpression
+	 * @generated
+	 */
+	EClass getBooleanExpression();
+
+	/**
+	 * Returns the meta object for class '{@link org.imt.pssm.reactive.model.statemachines.BooleanBinaryExpression <em>Boolean Binary Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Boolean Binary Expression</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.BooleanBinaryExpression
+	 * @generated
+	 */
+	EClass getBooleanBinaryExpression();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.imt.pssm.reactive.model.statemachines.BooleanBinaryExpression#getOperator <em>Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Operator</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.BooleanBinaryExpression#getOperator()
+	 * @see #getBooleanBinaryExpression()
+	 * @generated
+	 */
+	EAttribute getBooleanBinaryExpression_Operator();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.imt.pssm.reactive.model.statemachines.BooleanBinaryExpression#getOperand1 <em>Operand1</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Operand1</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.BooleanBinaryExpression#getOperand1()
+	 * @see #getBooleanBinaryExpression()
+	 * @generated
+	 */
+	EReference getBooleanBinaryExpression_Operand1();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.imt.pssm.reactive.model.statemachines.BooleanBinaryExpression#getOperand2 <em>Operand2</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Operand2</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.BooleanBinaryExpression#getOperand2()
+	 * @see #getBooleanBinaryExpression()
+	 * @generated
+	 */
+	EReference getBooleanBinaryExpression_Operand2();
+
+	/**
+	 * Returns the meta object for class '{@link org.imt.pssm.reactive.model.statemachines.BooleanUnaryExpression <em>Boolean Unary Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Boolean Unary Expression</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.BooleanUnaryExpression
+	 * @generated
+	 */
+	EClass getBooleanUnaryExpression();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.imt.pssm.reactive.model.statemachines.BooleanUnaryExpression#getOperator <em>Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Operator</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.BooleanUnaryExpression#getOperator()
+	 * @see #getBooleanUnaryExpression()
+	 * @generated
+	 */
+	EAttribute getBooleanUnaryExpression_Operator();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.imt.pssm.reactive.model.statemachines.BooleanUnaryExpression#getOperand <em>Operand</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Operand</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.BooleanUnaryExpression#getOperand()
+	 * @see #getBooleanUnaryExpression()
+	 * @generated
+	 */
+	EReference getBooleanUnaryExpression_Operand();
+
+	/**
 	 * Returns the meta object for class '{@link org.imt.pssm.reactive.model.statemachines.EventOccurrence <em>Event Occurrence</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2781,6 +3169,46 @@ public interface StatemachinesPackage extends EPackage {
 	EReference getCallEventOccurrence_ReturnValue();
 
 	/**
+	 * Returns the meta object for enum '{@link org.imt.pssm.reactive.model.statemachines.BooleanBinaryOperator <em>Boolean Binary Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Boolean Binary Operator</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.BooleanBinaryOperator
+	 * @generated
+	 */
+	EEnum getBooleanBinaryOperator();
+
+	/**
+	 * Returns the meta object for enum '{@link org.imt.pssm.reactive.model.statemachines.BooleanUnaryOperator <em>Boolean Unary Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Boolean Unary Operator</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.BooleanUnaryOperator
+	 * @generated
+	 */
+	EEnum getBooleanUnaryOperator();
+
+	/**
+	 * Returns the meta object for enum '{@link org.imt.pssm.reactive.model.statemachines.IntegerComparisonOperator <em>Integer Comparison Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Integer Comparison Operator</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.IntegerComparisonOperator
+	 * @generated
+	 */
+	EEnum getIntegerComparisonOperator();
+
+	/**
+	 * Returns the meta object for enum '{@link org.imt.pssm.reactive.model.statemachines.StringComparisonOperator <em>String Comparison Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>String Comparison Operator</em>'.
+	 * @see org.imt.pssm.reactive.model.statemachines.StringComparisonOperator
+	 * @generated
+	 */
+	EEnum getStringComparisonOperator();
+
+	/**
 	 * Returns the meta object for enum '{@link org.imt.pssm.reactive.model.statemachines.PseudostateKind <em>Pseudostate Kind</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2856,22 +3284,6 @@ public interface StatemachinesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CUSTOM_SYSTEM__OPERATIONS = eINSTANCE.getCustomSystem_Operations();
-
-		/**
-		 * The meta object literal for the '<em><b>Event Occurrences</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CUSTOM_SYSTEM__EVENT_OCCURRENCES = eINSTANCE.getCustomSystem_EventOccurrences();
-
-		/**
-		 * The meta object literal for the '<em><b>Performed Behaviors</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CUSTOM_SYSTEM__PERFORMED_BEHAVIORS = eINSTANCE.getCustomSystem_PerformedBehaviors();
 
 		/**
 		 * The meta object literal for the '{@link org.imt.pssm.reactive.model.statemachines.impl.SignalImpl <em>Signal</em>}' class.
@@ -3032,20 +3444,12 @@ public interface StatemachinesPackage extends EPackage {
 		EClass BOOLEAN_CONSTRAINT = eINSTANCE.getBooleanConstraint();
 
 		/**
-		 * The meta object literal for the '<em><b>Attribute</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BOOLEAN_CONSTRAINT__ATTRIBUTE = eINSTANCE.getBooleanConstraint_Attribute();
-
-		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BOOLEAN_CONSTRAINT__VALUE = eINSTANCE.getBooleanConstraint_Value();
+		EReference BOOLEAN_CONSTRAINT__EXPRESSION = eINSTANCE.getBooleanConstraint_Expression();
 
 		/**
 		 * The meta object literal for the '{@link org.imt.pssm.reactive.model.statemachines.impl.IntegerConstraintImpl <em>Integer Constraint</em>}' class.
@@ -3058,20 +3462,12 @@ public interface StatemachinesPackage extends EPackage {
 		EClass INTEGER_CONSTRAINT = eINSTANCE.getIntegerConstraint();
 
 		/**
-		 * The meta object literal for the '<em><b>Attribute</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INTEGER_CONSTRAINT__ATTRIBUTE = eINSTANCE.getIntegerConstraint_Attribute();
-
-		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute INTEGER_CONSTRAINT__VALUE = eINSTANCE.getIntegerConstraint_Value();
+		EReference INTEGER_CONSTRAINT__EXPRESSION = eINSTANCE.getIntegerConstraint_Expression();
 
 		/**
 		 * The meta object literal for the '{@link org.imt.pssm.reactive.model.statemachines.impl.StringConstraintImpl <em>String Constraint</em>}' class.
@@ -3084,20 +3480,12 @@ public interface StatemachinesPackage extends EPackage {
 		EClass STRING_CONSTRAINT = eINSTANCE.getStringConstraint();
 
 		/**
-		 * The meta object literal for the '<em><b>Attribute</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STRING_CONSTRAINT__ATTRIBUTE = eINSTANCE.getStringConstraint_Attribute();
-
-		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute STRING_CONSTRAINT__VALUE = eINSTANCE.getStringConstraint_Value();
+		EReference STRING_CONSTRAINT__EXPRESSION = eINSTANCE.getStringConstraint_Expression();
 
 		/**
 		 * The meta object literal for the '{@link org.imt.pssm.reactive.model.statemachines.impl.NamedElementImpl <em>Named Element</em>}' class.
@@ -3522,6 +3910,154 @@ public interface StatemachinesPackage extends EPackage {
 		EAttribute STRING_ATTRIBUTE_VALUE__VALUE = eINSTANCE.getStringAttributeValue_Value();
 
 		/**
+		 * The meta object literal for the '{@link org.imt.pssm.reactive.model.statemachines.impl.ExpressionImpl <em>Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.imt.pssm.reactive.model.statemachines.impl.ExpressionImpl
+		 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getExpression()
+		 * @generated
+		 */
+		EClass EXPRESSION = eINSTANCE.getExpression();
+
+		/**
+		 * The meta object literal for the '{@link org.imt.pssm.reactive.model.statemachines.impl.IntegerComparisonExpressionImpl <em>Integer Comparison Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.imt.pssm.reactive.model.statemachines.impl.IntegerComparisonExpressionImpl
+		 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getIntegerComparisonExpression()
+		 * @generated
+		 */
+		EClass INTEGER_COMPARISON_EXPRESSION = eINSTANCE.getIntegerComparisonExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INTEGER_COMPARISON_EXPRESSION__OPERATOR = eINSTANCE.getIntegerComparisonExpression_Operator();
+
+		/**
+		 * The meta object literal for the '<em><b>Operand1</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INTEGER_COMPARISON_EXPRESSION__OPERAND1 = eINSTANCE.getIntegerComparisonExpression_Operand1();
+
+		/**
+		 * The meta object literal for the '<em><b>Operand2</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INTEGER_COMPARISON_EXPRESSION__OPERAND2 = eINSTANCE.getIntegerComparisonExpression_Operand2();
+
+		/**
+		 * The meta object literal for the '{@link org.imt.pssm.reactive.model.statemachines.impl.StringComparisonExpressionImpl <em>String Comparison Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.imt.pssm.reactive.model.statemachines.impl.StringComparisonExpressionImpl
+		 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getStringComparisonExpression()
+		 * @generated
+		 */
+		EClass STRING_COMPARISON_EXPRESSION = eINSTANCE.getStringComparisonExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STRING_COMPARISON_EXPRESSION__OPERATOR = eINSTANCE.getStringComparisonExpression_Operator();
+
+		/**
+		 * The meta object literal for the '<em><b>Operand1</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STRING_COMPARISON_EXPRESSION__OPERAND1 = eINSTANCE.getStringComparisonExpression_Operand1();
+
+		/**
+		 * The meta object literal for the '<em><b>Operand2</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STRING_COMPARISON_EXPRESSION__OPERAND2 = eINSTANCE.getStringComparisonExpression_Operand2();
+
+		/**
+		 * The meta object literal for the '{@link org.imt.pssm.reactive.model.statemachines.impl.BooleanExpressionImpl <em>Boolean Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.imt.pssm.reactive.model.statemachines.impl.BooleanExpressionImpl
+		 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getBooleanExpression()
+		 * @generated
+		 */
+		EClass BOOLEAN_EXPRESSION = eINSTANCE.getBooleanExpression();
+
+		/**
+		 * The meta object literal for the '{@link org.imt.pssm.reactive.model.statemachines.impl.BooleanBinaryExpressionImpl <em>Boolean Binary Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.imt.pssm.reactive.model.statemachines.impl.BooleanBinaryExpressionImpl
+		 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getBooleanBinaryExpression()
+		 * @generated
+		 */
+		EClass BOOLEAN_BINARY_EXPRESSION = eINSTANCE.getBooleanBinaryExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BOOLEAN_BINARY_EXPRESSION__OPERATOR = eINSTANCE.getBooleanBinaryExpression_Operator();
+
+		/**
+		 * The meta object literal for the '<em><b>Operand1</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BOOLEAN_BINARY_EXPRESSION__OPERAND1 = eINSTANCE.getBooleanBinaryExpression_Operand1();
+
+		/**
+		 * The meta object literal for the '<em><b>Operand2</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BOOLEAN_BINARY_EXPRESSION__OPERAND2 = eINSTANCE.getBooleanBinaryExpression_Operand2();
+
+		/**
+		 * The meta object literal for the '{@link org.imt.pssm.reactive.model.statemachines.impl.BooleanUnaryExpressionImpl <em>Boolean Unary Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.imt.pssm.reactive.model.statemachines.impl.BooleanUnaryExpressionImpl
+		 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getBooleanUnaryExpression()
+		 * @generated
+		 */
+		EClass BOOLEAN_UNARY_EXPRESSION = eINSTANCE.getBooleanUnaryExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BOOLEAN_UNARY_EXPRESSION__OPERATOR = eINSTANCE.getBooleanUnaryExpression_Operator();
+
+		/**
+		 * The meta object literal for the '<em><b>Operand</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BOOLEAN_UNARY_EXPRESSION__OPERAND = eINSTANCE.getBooleanUnaryExpression_Operand();
+
+		/**
 		 * The meta object literal for the '{@link org.imt.pssm.reactive.model.statemachines.impl.EventOccurrenceImpl <em>Event Occurrence</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3616,6 +4152,46 @@ public interface StatemachinesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CALL_EVENT_OCCURRENCE__RETURN_VALUE = eINSTANCE.getCallEventOccurrence_ReturnValue();
+
+		/**
+		 * The meta object literal for the '{@link org.imt.pssm.reactive.model.statemachines.BooleanBinaryOperator <em>Boolean Binary Operator</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.imt.pssm.reactive.model.statemachines.BooleanBinaryOperator
+		 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getBooleanBinaryOperator()
+		 * @generated
+		 */
+		EEnum BOOLEAN_BINARY_OPERATOR = eINSTANCE.getBooleanBinaryOperator();
+
+		/**
+		 * The meta object literal for the '{@link org.imt.pssm.reactive.model.statemachines.BooleanUnaryOperator <em>Boolean Unary Operator</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.imt.pssm.reactive.model.statemachines.BooleanUnaryOperator
+		 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getBooleanUnaryOperator()
+		 * @generated
+		 */
+		EEnum BOOLEAN_UNARY_OPERATOR = eINSTANCE.getBooleanUnaryOperator();
+
+		/**
+		 * The meta object literal for the '{@link org.imt.pssm.reactive.model.statemachines.IntegerComparisonOperator <em>Integer Comparison Operator</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.imt.pssm.reactive.model.statemachines.IntegerComparisonOperator
+		 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getIntegerComparisonOperator()
+		 * @generated
+		 */
+		EEnum INTEGER_COMPARISON_OPERATOR = eINSTANCE.getIntegerComparisonOperator();
+
+		/**
+		 * The meta object literal for the '{@link org.imt.pssm.reactive.model.statemachines.StringComparisonOperator <em>String Comparison Operator</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.imt.pssm.reactive.model.statemachines.StringComparisonOperator
+		 * @see org.imt.pssm.reactive.model.statemachines.impl.StatemachinesPackageImpl#getStringComparisonOperator()
+		 * @generated
+		 */
+		EEnum STRING_COMPARISON_OPERATOR = eINSTANCE.getStringComparisonOperator();
 
 		/**
 		 * The meta object literal for the '{@link org.imt.pssm.reactive.model.statemachines.PseudostateKind <em>Pseudostate Kind</em>}' enum.

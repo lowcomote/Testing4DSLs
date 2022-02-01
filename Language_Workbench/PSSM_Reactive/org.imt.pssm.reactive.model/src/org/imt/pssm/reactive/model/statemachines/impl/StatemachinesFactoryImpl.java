@@ -80,6 +80,10 @@ public class StatemachinesFactoryImpl extends EFactoryImpl implements Statemachi
 			case StatemachinesPackage.BOOLEAN_ATTRIBUTE_VALUE: return createBooleanAttributeValue();
 			case StatemachinesPackage.INTEGER_ATTRIBUTE_VALUE: return createIntegerAttributeValue();
 			case StatemachinesPackage.STRING_ATTRIBUTE_VALUE: return createStringAttributeValue();
+			case StatemachinesPackage.INTEGER_COMPARISON_EXPRESSION: return createIntegerComparisonExpression();
+			case StatemachinesPackage.STRING_COMPARISON_EXPRESSION: return createStringComparisonExpression();
+			case StatemachinesPackage.BOOLEAN_BINARY_EXPRESSION: return createBooleanBinaryExpression();
+			case StatemachinesPackage.BOOLEAN_UNARY_EXPRESSION: return createBooleanUnaryExpression();
 			case StatemachinesPackage.COMPLETION_EVENT_OCCURRENCE: return createCompletionEventOccurrence();
 			case StatemachinesPackage.SIGNAL_EVENT_OCCURRENCE: return createSignalEventOccurrence();
 			case StatemachinesPackage.CALL_EVENT_OCCURRENCE: return createCallEventOccurrence();
@@ -96,6 +100,14 @@ public class StatemachinesFactoryImpl extends EFactoryImpl implements Statemachi
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
+			case StatemachinesPackage.BOOLEAN_BINARY_OPERATOR:
+				return createBooleanBinaryOperatorFromString(eDataType, initialValue);
+			case StatemachinesPackage.BOOLEAN_UNARY_OPERATOR:
+				return createBooleanUnaryOperatorFromString(eDataType, initialValue);
+			case StatemachinesPackage.INTEGER_COMPARISON_OPERATOR:
+				return createIntegerComparisonOperatorFromString(eDataType, initialValue);
+			case StatemachinesPackage.STRING_COMPARISON_OPERATOR:
+				return createStringComparisonOperatorFromString(eDataType, initialValue);
 			case StatemachinesPackage.PSEUDOSTATE_KIND:
 				return createPseudostateKindFromString(eDataType, initialValue);
 			case StatemachinesPackage.TRANSITION_KIND:
@@ -113,6 +125,14 @@ public class StatemachinesFactoryImpl extends EFactoryImpl implements Statemachi
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
+			case StatemachinesPackage.BOOLEAN_BINARY_OPERATOR:
+				return convertBooleanBinaryOperatorToString(eDataType, instanceValue);
+			case StatemachinesPackage.BOOLEAN_UNARY_OPERATOR:
+				return convertBooleanUnaryOperatorToString(eDataType, instanceValue);
+			case StatemachinesPackage.INTEGER_COMPARISON_OPERATOR:
+				return convertIntegerComparisonOperatorToString(eDataType, instanceValue);
+			case StatemachinesPackage.STRING_COMPARISON_OPERATOR:
+				return convertStringComparisonOperatorToString(eDataType, instanceValue);
 			case StatemachinesPackage.PSEUDOSTATE_KIND:
 				return convertPseudostateKindToString(eDataType, instanceValue);
 			case StatemachinesPackage.TRANSITION_KIND:
@@ -357,6 +377,46 @@ public class StatemachinesFactoryImpl extends EFactoryImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public IntegerComparisonExpression createIntegerComparisonExpression() {
+		IntegerComparisonExpressionImpl integerComparisonExpression = new IntegerComparisonExpressionImpl();
+		return integerComparisonExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StringComparisonExpression createStringComparisonExpression() {
+		StringComparisonExpressionImpl stringComparisonExpression = new StringComparisonExpressionImpl();
+		return stringComparisonExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BooleanBinaryExpression createBooleanBinaryExpression() {
+		BooleanBinaryExpressionImpl booleanBinaryExpression = new BooleanBinaryExpressionImpl();
+		return booleanBinaryExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BooleanUnaryExpression createBooleanUnaryExpression() {
+		BooleanUnaryExpressionImpl booleanUnaryExpression = new BooleanUnaryExpressionImpl();
+		return booleanUnaryExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public CompletionEventOccurrence createCompletionEventOccurrence() {
 		CompletionEventOccurrenceImpl completionEventOccurrence = new CompletionEventOccurrenceImpl();
 		return completionEventOccurrence;
@@ -380,6 +440,86 @@ public class StatemachinesFactoryImpl extends EFactoryImpl implements Statemachi
 	public CallEventOccurrence createCallEventOccurrence() {
 		CallEventOccurrenceImpl callEventOccurrence = new CallEventOccurrenceImpl();
 		return callEventOccurrence;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BooleanBinaryOperator createBooleanBinaryOperatorFromString(EDataType eDataType, String initialValue) {
+		BooleanBinaryOperator result = BooleanBinaryOperator.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertBooleanBinaryOperatorToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BooleanUnaryOperator createBooleanUnaryOperatorFromString(EDataType eDataType, String initialValue) {
+		BooleanUnaryOperator result = BooleanUnaryOperator.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertBooleanUnaryOperatorToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IntegerComparisonOperator createIntegerComparisonOperatorFromString(EDataType eDataType, String initialValue) {
+		IntegerComparisonOperator result = IntegerComparisonOperator.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertIntegerComparisonOperatorToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StringComparisonOperator createStringComparisonOperatorFromString(EDataType eDataType, String initialValue) {
+		StringComparisonOperator result = StringComparisonOperator.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertStringComparisonOperatorToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

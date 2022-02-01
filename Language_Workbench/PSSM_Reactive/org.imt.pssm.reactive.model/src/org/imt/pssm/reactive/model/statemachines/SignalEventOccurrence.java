@@ -18,7 +18,7 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  *
  * @see org.imt.pssm.reactive.model.statemachines.StatemachinesPackage#getSignalEventOccurrence()
- * @model annotation="dynamic"
+ * @model annotation="aspect"
  * @generated
  */
 public interface SignalEventOccurrence extends EventOccurrence {
@@ -52,7 +52,7 @@ public interface SignalEventOccurrence extends EventOccurrence {
 	 * @return the value of the '<em>Attribute Values</em>' containment reference list.
 	 * @see org.imt.pssm.reactive.model.statemachines.StatemachinesPackage#getSignalEventOccurrence_AttributeValues()
 	 * @model containment="true"
-	 *        annotation="dynamic"
+	 *        annotation="aspect"
 	 * @generated
 	 */
 	EList<AttributeValue> getAttributeValues();

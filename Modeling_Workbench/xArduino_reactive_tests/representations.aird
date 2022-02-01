@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" uid="_jRkrgAJ8EeycUvCX9RXUlg" version="14.5.1.202106111100">
+  <semanticResources>generated/common.tdlan2</semanticResources>
+  <semanticResources>generated/arduinoSpecificEvents.tdlan2</semanticResources>
+  <semanticResources>generated/arduinoSpecificTypes.tdlan2</semanticResources>
+  <semanticResources>generated/testConfiguration.tdlan2</semanticResources>
+  <semanticResources>testSuite.tdlan2</semanticResources>
+  <semanticResources>activeWaitIRBlueLed_Test.tdlan2</semanticResources>
+  <semanticResources>servo9g_Test.tdlan2</semanticResources>
+  <semanticResources>servoIrButton_Test.tdlan2</semanticResources>
+  <semanticResources>blinkingLED_Test.tdlan2</semanticResources>
+</viewpoint:DAnalysis>

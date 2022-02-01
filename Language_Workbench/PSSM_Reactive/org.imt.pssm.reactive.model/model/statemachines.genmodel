@@ -7,6 +7,26 @@
   <foreignModel>statemachines.ecore</foreignModel>
   <genPackages prefix="Statemachines" basePackage="org.imt.pssm.reactive.model" disposableProviderFactory="true"
       ecorePackage="statemachines.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="statemachines.ecore#//BooleanBinaryOperator">
+      <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//BooleanBinaryOperator/AND"/>
+      <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//BooleanBinaryOperator/OR"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="statemachines.ecore#//BooleanUnaryOperator">
+      <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//BooleanUnaryOperator/TRUE"/>
+      <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//BooleanUnaryOperator/FALSE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="statemachines.ecore#//IntegerComparisonOperator">
+      <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//IntegerComparisonOperator/SMALLER"/>
+      <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//IntegerComparisonOperator/SMALLER_EQUALS"/>
+      <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//IntegerComparisonOperator/EQUALS"/>
+      <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//IntegerComparisonOperator/NOT_EQUALS"/>
+      <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//IntegerComparisonOperator/GREATER_EQUALS"/>
+      <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//IntegerComparisonOperator/GREATER"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="statemachines.ecore#//StringComparisonOperator">
+      <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//StringComparisonOperator/EQUALS"/>
+      <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//StringComparisonOperator/NOT_EQUALS"/>
+    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="statemachines.ecore#//PseudostateKind">
       <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//PseudostateKind/initial"/>
       <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//PseudostateKind/join"/>
@@ -24,8 +44,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statemachines.ecore#//CustomSystem/statemachine"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statemachines.ecore#//CustomSystem/signals"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statemachines.ecore#//CustomSystem/operations"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//CustomSystem/eventOccurrences"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//CustomSystem/performedBehaviors"/>
     </genClasses>
     <genClasses ecoreClass="statemachines.ecore#//Signal">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statemachines.ecore#//Signal/attributes"/>
@@ -48,16 +66,13 @@
     <genClasses ecoreClass="statemachines.ecore#//StringAttribute"/>
     <genClasses image="false" ecoreClass="statemachines.ecore#//Constraint"/>
     <genClasses ecoreClass="statemachines.ecore#//BooleanConstraint">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//BooleanConstraint/attribute"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute statemachines.ecore#//BooleanConstraint/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statemachines.ecore#//BooleanConstraint/expression"/>
     </genClasses>
     <genClasses ecoreClass="statemachines.ecore#//IntegerConstraint">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//IntegerConstraint/attribute"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute statemachines.ecore#//IntegerConstraint/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statemachines.ecore#//IntegerConstraint/expression"/>
     </genClasses>
     <genClasses ecoreClass="statemachines.ecore#//StringConstraint">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//StringConstraint/attribute"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute statemachines.ecore#//StringConstraint/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statemachines.ecore#//StringConstraint/expression"/>
     </genClasses>
     <genClasses image="false" ecoreClass="statemachines.ecore#//NamedElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute statemachines.ecore#//NamedElement/name"/>
@@ -120,6 +135,27 @@
     <genClasses ecoreClass="statemachines.ecore#//StringAttributeValue">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//StringAttributeValue/attribute"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute statemachines.ecore#//StringAttributeValue/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="statemachines.ecore#//Expression"/>
+    <genClasses ecoreClass="statemachines.ecore#//IntegerComparisonExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute statemachines.ecore#//IntegerComparisonExpression/operator"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//IntegerComparisonExpression/operand1"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//IntegerComparisonExpression/operand2"/>
+    </genClasses>
+    <genClasses ecoreClass="statemachines.ecore#//StringComparisonExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute statemachines.ecore#//StringComparisonExpression/operator"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//StringComparisonExpression/operand1"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//StringComparisonExpression/operand2"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="statemachines.ecore#//BooleanExpression"/>
+    <genClasses ecoreClass="statemachines.ecore#//BooleanBinaryExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute statemachines.ecore#//BooleanBinaryExpression/operator"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//BooleanBinaryExpression/operand1"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//BooleanBinaryExpression/operand2"/>
+    </genClasses>
+    <genClasses ecoreClass="statemachines.ecore#//BooleanUnaryExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute statemachines.ecore#//BooleanUnaryExpression/operator"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//BooleanUnaryExpression/operand"/>
     </genClasses>
     <genClasses image="false" ecoreClass="statemachines.ecore#//EventOccurrence"/>
     <genClasses ecoreClass="statemachines.ecore#//CompletionEventOccurrence">

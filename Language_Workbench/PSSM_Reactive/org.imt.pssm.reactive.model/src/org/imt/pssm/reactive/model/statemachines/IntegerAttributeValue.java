@@ -17,7 +17,7 @@ package org.imt.pssm.reactive.model.statemachines;
  * </ul>
  *
  * @see org.imt.pssm.reactive.model.statemachines.StatemachinesPackage#getIntegerAttributeValue()
- * @model annotation="dynamic"
+ * @model annotation="aspect"
  * @generated
  */
 public interface IntegerAttributeValue extends AttributeValue {

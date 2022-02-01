@@ -16,12 +16,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.imt.pssm.reactive.model.statemachines.Behavior;
 import org.imt.pssm.reactive.model.statemachines.CustomSystem;
-import org.imt.pssm.reactive.model.statemachines.EventOccurrence;
 import org.imt.pssm.reactive.model.statemachines.Operation;
 import org.imt.pssm.reactive.model.statemachines.Signal;
 import org.imt.pssm.reactive.model.statemachines.StateMachine;
@@ -38,8 +35,6 @@ import org.imt.pssm.reactive.model.statemachines.StatemachinesPackage;
  *   <li>{@link org.imt.pssm.reactive.model.statemachines.impl.CustomSystemImpl#getStatemachine <em>Statemachine</em>}</li>
  *   <li>{@link org.imt.pssm.reactive.model.statemachines.impl.CustomSystemImpl#getSignals <em>Signals</em>}</li>
  *   <li>{@link org.imt.pssm.reactive.model.statemachines.impl.CustomSystemImpl#getOperations <em>Operations</em>}</li>
- *   <li>{@link org.imt.pssm.reactive.model.statemachines.impl.CustomSystemImpl#getEventOccurrences <em>Event Occurrences</em>}</li>
- *   <li>{@link org.imt.pssm.reactive.model.statemachines.impl.CustomSystemImpl#getPerformedBehaviors <em>Performed Behaviors</em>}</li>
  * </ul>
  *
  * @generated
@@ -74,26 +69,6 @@ public class CustomSystemImpl extends MinimalEObjectImpl.Container implements Cu
 	 * @ordered
 	 */
 	protected EList<Operation> operations;
-
-	/**
-	 * The cached value of the '{@link #getEventOccurrences() <em>Event Occurrences</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEventOccurrences()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<EventOccurrence> eventOccurrences;
-
-	/**
-	 * The cached value of the '{@link #getPerformedBehaviors() <em>Performed Behaviors</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPerformedBehaviors()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Behavior> performedBehaviors;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -186,30 +161,6 @@ public class CustomSystemImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EventOccurrence> getEventOccurrences() {
-		if (eventOccurrences == null) {
-			eventOccurrences = new EObjectResolvingEList<EventOccurrence>(EventOccurrence.class, this, StatemachinesPackage.CUSTOM_SYSTEM__EVENT_OCCURRENCES);
-		}
-		return eventOccurrences;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Behavior> getPerformedBehaviors() {
-		if (performedBehaviors == null) {
-			performedBehaviors = new EObjectResolvingEList<Behavior>(Behavior.class, this, StatemachinesPackage.CUSTOM_SYSTEM__PERFORMED_BEHAVIORS);
-		}
-		return performedBehaviors;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -237,10 +188,6 @@ public class CustomSystemImpl extends MinimalEObjectImpl.Container implements Cu
 				return getSignals();
 			case StatemachinesPackage.CUSTOM_SYSTEM__OPERATIONS:
 				return getOperations();
-			case StatemachinesPackage.CUSTOM_SYSTEM__EVENT_OCCURRENCES:
-				return getEventOccurrences();
-			case StatemachinesPackage.CUSTOM_SYSTEM__PERFORMED_BEHAVIORS:
-				return getPerformedBehaviors();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -265,14 +212,6 @@ public class CustomSystemImpl extends MinimalEObjectImpl.Container implements Cu
 				getOperations().clear();
 				getOperations().addAll((Collection<? extends Operation>)newValue);
 				return;
-			case StatemachinesPackage.CUSTOM_SYSTEM__EVENT_OCCURRENCES:
-				getEventOccurrences().clear();
-				getEventOccurrences().addAll((Collection<? extends EventOccurrence>)newValue);
-				return;
-			case StatemachinesPackage.CUSTOM_SYSTEM__PERFORMED_BEHAVIORS:
-				getPerformedBehaviors().clear();
-				getPerformedBehaviors().addAll((Collection<? extends Behavior>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -294,12 +233,6 @@ public class CustomSystemImpl extends MinimalEObjectImpl.Container implements Cu
 			case StatemachinesPackage.CUSTOM_SYSTEM__OPERATIONS:
 				getOperations().clear();
 				return;
-			case StatemachinesPackage.CUSTOM_SYSTEM__EVENT_OCCURRENCES:
-				getEventOccurrences().clear();
-				return;
-			case StatemachinesPackage.CUSTOM_SYSTEM__PERFORMED_BEHAVIORS:
-				getPerformedBehaviors().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -318,10 +251,6 @@ public class CustomSystemImpl extends MinimalEObjectImpl.Container implements Cu
 				return signals != null && !signals.isEmpty();
 			case StatemachinesPackage.CUSTOM_SYSTEM__OPERATIONS:
 				return operations != null && !operations.isEmpty();
-			case StatemachinesPackage.CUSTOM_SYSTEM__EVENT_OCCURRENCES:
-				return eventOccurrences != null && !eventOccurrences.isEmpty();
-			case StatemachinesPackage.CUSTOM_SYSTEM__PERFORMED_BEHAVIORS:
-				return performedBehaviors != null && !performedBehaviors.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

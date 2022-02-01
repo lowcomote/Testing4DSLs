@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  *
  * @see org.imt.pssm.reactive.model.statemachines.StatemachinesPackage#getCompletionEventOccurrence()
- * @model annotation="dynamic"
+ * @model annotation="aspect"
  * @generated
  */
 public interface CompletionEventOccurrence extends EObject {

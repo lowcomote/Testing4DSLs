@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see org.imt.pssm.reactive.model.statemachines.StatemachinesPackage#getEventOccurrence()
  * @model abstract="true"
- *        annotation="dynamic"
+ *        annotation="aspect"
  * @generated
  */
 public interface EventOccurrence extends EObject {
