@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ASCII"?>
+<k3fsm:FSM xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:k3fsm="http://www.eclipse.org/gemoc/example/k3fsm" xsi:schemaLocation="http://www.eclipse.org/gemoc/example/k3fsm ../../../model/k3fsm.ecore" name="TrafficLight" initialState="//@ownedStates.0" unprocessedString="btt">
+  <ownedStates name="Green" incomingTransitions="//@ownedStates.2/@outgoingTransitions.0">
+    <outgoingTransitions input="t" target="//@ownedStates.1" name="Green_to_Green" output="Green"/>
+    <outgoingTransitions input="b" target="//@ownedStates.1" name="Green_to_Yellow" output="Yellow"/>
+  </ownedStates>
+  <ownedStates name="Yellow" incomingTransitions="//@ownedStates.0/@outgoingTransitions.1 //@ownedStates.0/@outgoingTransitions.0">
+    <outgoingTransitions input="t" target="//@ownedStates.2" name="Yellow_to_Red" output="Red"/>
+  </ownedStates>
+  <ownedStates name="Red" incomingTransitions="//@ownedStates.1/@outgoingTransitions.0">
+    <outgoingTransitions input="t" target="//@ownedStates.0" name="Red_to_Green" output="Green"/>
+  </ownedStates>
+</k3fsm:FSM>

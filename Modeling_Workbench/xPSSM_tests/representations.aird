@@ -16,6 +16,22 @@
     <semanticResources>testData/JavaEJB_TestData.tdlan2</semanticResources>
     <semanticResources>testData/JavaThreadLifeCycle_TestData.tdlan2</semanticResources>
     <semanticResources>testData/OnlineShopping_TestData.tdlan2</semanticResources>
+    <semanticResources>platform:/resource/xPSSM_models/BankATM.model</semanticResources>
+    <semanticResources>platform:/resource/xPSSM_models/JavaEJB.model</semanticResources>
+    <semanticResources>platform:/resource/xPSSM_models/JavaThreadLifeCycle.model</semanticResources>
+    <semanticResources>platform:/resource/xPSSM_models/OnlineShopping.model</semanticResources>
+    <semanticResources>result_coverage/execution/execution-20220127_213916-BankATM/BankATM_Test.tdlan2</semanticResources>
+    <semanticResources>result_coverage/execution/execution-20220127_213916-BankATM/testCoverage.xmi</semanticResources>
+    <semanticResources>result_coverage/execution/execution-20220127_213916-BankATM/testReport.xmi</semanticResources>
+    <semanticResources>result_coverage/execution/execution-20220127_213950-JavaEJB/JavaEJB_Test.tdlan2</semanticResources>
+    <semanticResources>result_coverage/execution/execution-20220127_213950-JavaEJB/testCoverage.xmi</semanticResources>
+    <semanticResources>result_coverage/execution/execution-20220127_213950-JavaEJB/testReport.xmi</semanticResources>
+    <semanticResources>result_coverage/execution/execution-20220127_214017-JavaThread/JavaThreadLifeCycle_Test.tdlan2</semanticResources>
+    <semanticResources>result_coverage/execution/execution-20220127_214017-JavaThread/testCoverage.xmi</semanticResources>
+    <semanticResources>result_coverage/execution/execution-20220127_214017-JavaThread/testReport.xmi</semanticResources>
+    <semanticResources>result_coverage/execution/execution-20220127_214459-OnlineShopping/OnlineShopping_Test.tdlan2</semanticResources>
+    <semanticResources>result_coverage/execution/execution-20220127_214459-OnlineShopping/testCoverage.xmi</semanticResources>
+    <semanticResources>result_coverage/execution/execution-20220127_214459-OnlineShopping/testReport.xmi</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_9KCY4O-lEeuDm6Y4xK1hAA">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.etsi.mts.tdl.graphical.viewpoint/description/AnimatedTDL.odesign#//@ownedViewpoints[name='org.etsi.mts.tdl']"/>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="__GhTsO-lEeuDm6Y4xK1hAA" name="ATM.WrongPin_Test" repPath="#__Gb0IO-lEeuDm6Y4xK1hAA" changeId="dc83a5eb-a3bf-45eb-99f4-dc1ab7803326">

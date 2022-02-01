@@ -1,0 +1,112 @@
+Package Person_testSuite {
+	Import all from common ;
+	Import all from miniJavaSpecificTypes ;
+	Import all from testConfiguration ;
+	
+	VariableDeclaration age (_name = "age");
+	SymbolBinding symbolBinding (symbol = ?);
+	IntegerValue intValue (value = ?);
+	
+	Test Description test1 uses configuration PersonConfiguration1{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = age, value = intValue (value = "23")) to tester.genericGate;
+	}
+	
+	VariableDeclaration salary (_name = "salary");
+	Test Description test2 uses configuration PersonConfiguration2{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = salary, value = intValue (value = "2500")) to tester.genericGate;
+	}
+	
+	VariableDeclaration married (_name = "married");
+	BooleanValue boolValue (value = ?);
+	Test Description test3 uses configuration PersonConfiguration3{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = married, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	
+	VariableDeclaration result (_name = "result");
+	Test Description test4 uses configuration PersonConfiguration4{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "true")) to tester.genericGate;
+	}
+	Test Description test5 uses configuration PersonConfiguration5{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test6 uses configuration PersonConfiguration6{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test7 uses configuration PersonConfiguration7{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "true")) to tester.genericGate;
+	}
+	Test Description test8 uses configuration PersonConfiguration8{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test9 uses configuration PersonConfiguration9{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "true")) to tester.genericGate;
+	}
+	Test Description test10 uses configuration PersonConfiguration10{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "true")) to tester.genericGate;
+	}
+	Test Description test11 uses configuration PersonConfiguration11{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "true")) to tester.genericGate;
+	}
+	Test Description test12 uses configuration PersonConfiguration12{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test13 uses configuration PersonConfiguration13{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test14 uses configuration PersonConfiguration14{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test15 uses configuration PersonConfiguration15{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test16 uses configuration PersonConfiguration16{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test17 uses configuration PersonConfiguration17{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test18 uses configuration PersonConfiguration18{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test19 uses configuration PersonConfiguration19{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "false")) to tester.genericGate;
+	}
+}

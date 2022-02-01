@@ -1,0 +1,411 @@
+Package OnlineShopping_testSuite {
+	Import all from common ;
+	Import all from xPSSMTypes;
+	Import all from xPSSMEvents;
+	Import all from testConfiguration;
+	Import all from OnlineShopping_TestData;
+	
+	Test Description test1 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+	}
+	Test Description test2 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isCancelRequested___occurrence (returnValue = isCancelRequestedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = cancel) to tester.reactiveGate;
+	}
+	Test Description test3 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isVerified___occurrence (returnValue = isVerifiedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = activate) to tester.reactiveGate;
+	}
+	Test Description test4 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isAccountDormant___occurrence (returnValue = isAccountDormantValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = suspend) to tester.reactiveGate;
+	}
+	Test Description test5 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isVerified___occurrence (returnValue = isVerifiedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = activate) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isSuspendRequested___occurrence (returnValue = isSuspendRequestedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = suspend) to tester.reactiveGate;
+	}
+	Test Description test6 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isVerified___occurrence (returnValue = isVerifiedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = activate) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isPasswordAlert___occurrence (returnValue = isPasswordAlertValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = lock) to tester.reactiveGate;
+	}
+	Test Description test7 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isVerified___occurrence (returnValue = isVerifiedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = activate) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isAccountDormant___occurrence (returnValue = isAccountDormantValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = suspend) to tester.reactiveGate;
+	}
+	Test Description test8 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isVerified___occurrence (returnValue = isVerifiedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = activate) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isCancelRequested___occurrence (returnValue = isCancelRequestedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = cancel) to tester.reactiveGate;
+	}
+	Test Description test9 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isVerified___occurrence (returnValue = isVerifiedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = activate) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isPolicyVoilated___occurrence (returnValue = isPolicyVoilatedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = cancel) to tester.reactiveGate;
+	}
+	Test Description test10 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isVerified___occurrence (returnValue = isVerifiedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = activate) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isSuspendRequested___occurrence (returnValue = isSuspendRequestedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = suspend) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isResumeRequested___occurrence (returnValue = isResumeRequestedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = resume) to tester.reactiveGate;
+	}
+	Test Description test11 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isVerified___occurrence (returnValue = isVerifiedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = activate) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isSuspendRequested___occurrence (returnValue = isSuspendRequestedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = suspend) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isLockExpired___occurrence (returnValue = isLockExpiredValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = unlock) to tester.reactiveGate;
+	}
+	Test Description test12 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isVerified___occurrence (returnValue = isVerifiedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = activate) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isSuspendRequested___occurrence (returnValue = isSuspendRequestedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = suspend) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isCancelRequested___occurrence (returnValue = isCancelRequestedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = cancel) to tester.reactiveGate;
+	}
+	Test Description test13 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isVerified___occurrence (returnValue = isVerifiedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = activate) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isSuspendRequested___occurrence (returnValue = isSuspendRequestedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = suspend) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isPolicyVoilated___occurrence (returnValue = isPolicyVoilatedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = cancel) to tester.reactiveGate;
+	}
+	Test Description test14 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isVerified___occurrence (returnValue = isVerifiedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = activate) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isPasswordAlert___occurrence (returnValue = isPasswordAlertValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = lock) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isResumeRequested___occurrence (returnValue = isResumeRequestedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = resume) to tester.reactiveGate;
+	}
+	Test Description test15 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isVerified___occurrence (returnValue = isVerifiedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = activate) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isPasswordAlert___occurrence (returnValue = isPasswordAlertValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = lock) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount,
+			call_occurrence = isLockExpired___occurrence (returnValue = isLockExpiredValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = unlock) to tester.reactiveGate;
+	}
+	Test Description test16 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isVerified___occurrence (returnValue = isVerifiedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = activate) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isPasswordAlert___occurrence (returnValue = isPasswordAlertValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = lock) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isCancelRequested___occurrence (returnValue = isCancelRequestedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = cancel) to tester.reactiveGate;
+	}
+	Test Description test17 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isVerified___occurrence (returnValue = isVerifiedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = activate) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isPasswordAlert___occurrence (returnValue = isPasswordAlertValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = lock) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isPolicyVoilated___occurrence (returnValue = isPolicyVoilatedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = cancel) to tester.reactiveGate;
+	}
+	Test Description test18 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isVerified___occurrence (returnValue = isVerifiedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = activate) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isAccountDormant___occurrence (returnValue = isAccountDormantValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = suspend) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isResumeRequested___occurrence (returnValue = isResumeRequestedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = resume) to tester.reactiveGate;
+	}
+	Test Description test19 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isVerified___occurrence (returnValue = isVerifiedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = activate) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isAccountDormant___occurrence (returnValue = isAccountDormantValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = suspend) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isLockExpired___occurrence (returnValue = isLockExpiredValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = unlock) to tester.reactiveGate;
+	}
+	Test Description test20 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isVerified___occurrence (returnValue = isVerifiedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = activate) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isAccountDormant___occurrence (returnValue = isAccountDormantValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = suspend) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isCancelRequested___occurrence (returnValue = isCancelRequestedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = cancel) to tester.reactiveGate;
+	}
+	Test Description test21 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isVerified___occurrence (returnValue = isVerifiedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = activate) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isAccountDormant___occurrence (returnValue = isAccountDormantValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = suspend) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isPolicyVoilated___occurrence (returnValue = isPolicyVoilatedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = cancel) to tester.reactiveGate;
+	}
+	Test Description test22 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isAccountDormant___occurrence (returnValue = isAccountDormantValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = suspend) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isResumeRequested___occurrence (returnValue = isResumeRequestedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = resume) to tester.reactiveGate;
+	}
+	Test Description test23 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isAccountDormant___occurrence (returnValue = isAccountDormantValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = suspend) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isLockExpired___occurrence (returnValue = isLockExpiredValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = unlock) to tester.reactiveGate;
+	}
+	Test Description test24 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isAccountDormant___occurrence (returnValue = isAccountDormantValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = suspend) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isCancelRequested___occurrence (returnValue = isCancelRequestedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = cancel) to tester.reactiveGate;
+	}
+	Test Description test25 uses configuration OnlineShoppingConfiguration{
+		tester.reactiveGate sends _run (state_machine = UserAccount) to statemachine.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isUniqueId___occurrence (returnValue = isUniqueIdValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = _create) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isAccountDormant___occurrence (returnValue = isAccountDormantValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = suspend) to tester.reactiveGate;
+		tester.reactiveGate sends callOperation_received (state_machine = UserAccount, 
+			call_occurrence = isPolicyVoilated___occurrence (returnValue = isPolicyVoilatedValue (value = "true"))
+		) to statemachine.reactiveGate;
+		statemachine.reactiveGate sends behavior_executed (behavior = cancel) to tester.reactiveGate;
+	}
+}

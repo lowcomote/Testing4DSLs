@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="ASCII"?>
+<mutatorenvironment:MutatorEnvironment xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mutatorenvironment="http://mutatorenvironment/1.0">
+  <definition xsi:type="mutatorenvironment:Program" metamodel="/XArduinoMutation/data/model/arduino.ecore" output="data/out/" exhaustive="true">
+    <source path="data/model/"/>
+  </definition>
+  <blocks name="cdt" description="Changes delay time from mili to micro">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//Delay"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//Delay/unit"/>
+            <value xsi:type="mutatorenvironment:SpecificStringType" value="MilliSecond"/>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//Delay/unit"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="MicroSecond"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cdt2" description="Changes delay time from micro to mili">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//Delay"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//Delay/unit"/>
+            <value xsi:type="mutatorenvironment:SpecificStringType" value="MicroSecond"/>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//Delay/unit"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="MilliSecond"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cmgr" description="Changes ModuleGet reference to another module">
+    <commands xsi:type="mutatorenvironment:SelectObjectMutator" name="m">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//Module"/>
+      </object>
+    </commands>
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//ModuleGet"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//ModuleGet/module"/>
+            <value xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.2/@commands.0"/>
+          </first>
+        </expression>
+      </object>
+      <references xsi:type="mutatorenvironment:ReferenceInit">
+        <reference href="/XArduinoMutation/data/model/arduino.ecore#//ModuleGet/module"/>
+        <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.2/@commands.0"/>
+      </references>
+    </commands>
+  </blocks>
+  <blocks name="cmir" description="Changes ModuleInstruction reference to another module">
+    <commands xsi:type="mutatorenvironment:SelectObjectMutator" name="m">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//Module"/>
+      </object>
+    </commands>
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//ModuleInstruction"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//ModuleInstruction/module"/>
+            <value xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.3/@commands.0"/>
+          </first>
+        </expression>
+      </object>
+      <references xsi:type="mutatorenvironment:ReferenceInit">
+        <reference href="/XArduinoMutation/data/model/arduino.ecore#//ModuleInstruction/module"/>
+        <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.3/@commands.0"/>
+      </references>
+    </commands>
+  </blocks>
+  <blocks name="cbio_minus" description="Changes Binary integer expression operator: minus">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//BinaryIntegerExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//BinaryIntegerExpression/operator"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>plus</value>
+              <value>mul</value>
+              <value>div</value>
+              <value>min</value>
+              <value>max</value>
+              <value>pourcent</value>
+            </value>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//BinaryIntegerExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="minus"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cbio_plus" description="Changes Binary integer expression operator: plus">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//BinaryIntegerExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//BinaryIntegerExpression/operator"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>minus</value>
+              <value>mul</value>
+              <value>div</value>
+              <value>min</value>
+              <value>max</value>
+              <value>pourcent</value>
+            </value>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//BinaryIntegerExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="plus"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cbio_mul" description="Changes Binary integer expression operator: mul">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//BinaryIntegerExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//BinaryIntegerExpression/operator"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>minus</value>
+              <value>plus</value>
+              <value>div</value>
+              <value>min</value>
+              <value>max</value>
+              <value>pourcent</value>
+            </value>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//BinaryIntegerExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="mul"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cbio_div" description="Changes Binary integer expression operator: div">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//BinaryIntegerExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//BinaryIntegerExpression/operator"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>minus</value>
+              <value>plus</value>
+              <value>mul</value>
+              <value>min</value>
+              <value>max</value>
+              <value>pourcent</value>
+            </value>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//BinaryIntegerExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="div"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cbio_min" description="Changes Binary integer expression operator: min">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//BinaryIntegerExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//BinaryIntegerExpression/operator"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>minus</value>
+              <value>plus</value>
+              <value>mul</value>
+              <value>div</value>
+              <value>max</value>
+              <value>pourcent</value>
+            </value>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//BinaryIntegerExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="min"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cbio_max" description="Changes Binary integer expression operator: max">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//BinaryIntegerExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//BinaryIntegerExpression/operator"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>minus</value>
+              <value>plus</value>
+              <value>mul</value>
+              <value>div</value>
+              <value>min</value>
+              <value>pourcent</value>
+            </value>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//BinaryIntegerExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="max"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cbio_pourcent" description="Changes Binary integer expression operator: pourcent">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//BinaryIntegerExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//BinaryIntegerExpression/operator"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>minus</value>
+              <value>plus</value>
+              <value>mul</value>
+              <value>div</value>
+              <value>min</value>
+              <value>max</value>
+            </value>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//BinaryIntegerExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="pourcent"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cbbo_inf" description="Changes Binary boolean expression operator: inf">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression/operator"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>sup</value>
+              <value>infOrEqual</value>
+              <value>supOrEqual</value>
+              <value>equal</value>
+              <value>AND</value>
+              <value>OR</value>
+              <value>Different</value>
+            </value>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="inf"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cbbo_sup" description="Changes Binary boolean expression operator: sup">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression/operator"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>inf</value>
+              <value>infOrEqual</value>
+              <value>supOrEqual</value>
+              <value>equal</value>
+              <value>AND</value>
+              <value>OR</value>
+              <value>Different</value>
+            </value>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="sup"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cbbo_infe" description="Changes Binary boolean expression operator: infOrEqual">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression/operator"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>sup</value>
+              <value>inf</value>
+              <value>supOrEqual</value>
+              <value>equal</value>
+              <value>AND</value>
+              <value>OR</value>
+              <value>Different</value>
+            </value>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="infOrEqual"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cbbo_supe" description="Changes Binary boolean expression operator: supOrEqual">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression/operator"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>sup</value>
+              <value>inf</value>
+              <value>infOrEqual</value>
+              <value>equal</value>
+              <value>AND</value>
+              <value>OR</value>
+              <value>Different</value>
+            </value>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="supOrEqual"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cbbo_equal" description="Changes Binary boolean expression operator: equal">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression/operator"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>sup</value>
+              <value>inf</value>
+              <value>infOrEqual</value>
+              <value>supOrEqual</value>
+              <value>AND</value>
+              <value>OR</value>
+              <value>Different</value>
+            </value>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="equal"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cbbo_and" description="Changes Binary boolean expression operator: AND">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression/operator"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>sup</value>
+              <value>inf</value>
+              <value>infOrEqual</value>
+              <value>supOrEqual</value>
+              <value>equal</value>
+              <value>OR</value>
+              <value>Different</value>
+            </value>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="AND"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cbbo_or" description="Changes Binary boolean expression operator: OR">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression/operator"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>sup</value>
+              <value>inf</value>
+              <value>infOrEqual</value>
+              <value>supOrEqual</value>
+              <value>equal</value>
+              <value>AND</value>
+              <value>Different</value>
+            </value>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="OR"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cbbo_different" description="Changes Binary boolean expression operator: Different">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression/operator"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>sup</value>
+              <value>inf</value>
+              <value>infOrEqual</value>
+              <value>supOrEqual</value>
+              <value>equal</value>
+              <value>AND</value>
+              <value>OR</value>
+            </value>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//BinaryBooleanExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="Different"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cuio_minus" description="Changes Unary integer expression operator: minus">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//UnaryIntegerExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//UnaryIntegerExpression/operator"/>
+            <value xsi:type="mutatorenvironment:SpecificStringType" value="squareRoot"/>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//UnaryIntegerExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="minus"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cuio_squareRoot" description="Changes Unary integer expression operator: squareRoot">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//UnaryIntegerExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//UnaryIntegerExpression/operator"/>
+            <value xsi:type="mutatorenvironment:SpecificStringType" value="minus"/>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//UnaryIntegerExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="squareRoot"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cwm_rise" description="Changes WaitFor mode: RISING">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//WaitFor"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//WaitFor/mode"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>FALLING</value>
+              <value>CHANGE</value>
+            </value>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//WaitFor/mode"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="RISING"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cwm_fall" description="Changes WaitFor mode: FALLING">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//WaitFor"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//WaitFor/mode"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>RISING</value>
+              <value>CHANGE</value>
+            </value>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//WaitFor/mode"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="FALLING"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cwm_change" description="Changes WaitFor mode: CHANGE">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//WaitFor"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//WaitFor/mode"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>RISING</value>
+              <value>FALLING</value>
+            </value>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//WaitFor/mode"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="CHANGE"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cbct" description="Changes the value of boolean constant: true">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//BooleanConstant"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//BooleanConstant/value"/>
+            <value xsi:type="mutatorenvironment:SpecificBooleanType"/>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//BooleanConstant/value"/>
+        <value xsi:type="mutatorenvironment:SpecificBooleanType" value="true"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cbcf" description="Changes the value of boolean constant: false">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//BooleanConstant"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//BooleanConstant/value"/>
+            <value xsi:type="mutatorenvironment:SpecificBooleanType" value="true"/>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//BooleanConstant/value"/>
+        <value xsi:type="mutatorenvironment:SpecificBooleanType"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cbvt" description="Changes the value of boolean variable: true">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//BooleanVariable"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//BooleanVariable/initialValue"/>
+            <value xsi:type="mutatorenvironment:SpecificBooleanType"/>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//BooleanVariable/initialValue"/>
+        <value xsi:type="mutatorenvironment:SpecificBooleanType" value="true"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cbvf" description="Changes the value of boolean variable: false">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//BooleanVariable"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XArduinoMutation/data/model/arduino.ecore#//BooleanVariable/initialValue"/>
+            <value xsi:type="mutatorenvironment:SpecificBooleanType" value="true"/>
+          </first>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//BooleanVariable/initialValue"/>
+        <value xsi:type="mutatorenvironment:SpecificBooleanType"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cic" description="Changes the value of integer constant">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//IntegerConstant"/>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//IntegerConstant/value"/>
+        <value xsi:type="mutatorenvironment:RandomIntegerType"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="civ" description="Changes the value of integer variable">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XArduinoMutation/data/model/arduino.ecore#//IntegerVariable"/>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XArduinoMutation/data/model/arduino.ecore#//IntegerVariable/initialValue"/>
+        <value xsi:type="mutatorenvironment:RandomIntegerType"/>
+      </attributes>
+    </commands>
+  </blocks>
+</mutatorenvironment:MutatorEnvironment>
