@@ -1,0 +1,41 @@
+Package Event009_Test_TestSuite {
+	Import all from common ;
+	Import all from pssmSpecificTypes ;
+	Import all from pssmSpecificEvents ;
+	Import all from testConfiguration ;
+	StateMachine Event009_Test ( _name = 'Event009_Test$behavior$1' ) ;
+	Signal Start ( _name = 'Start' ) ;
+	Signal Pending ( _name = 'Pending' ) ;
+	Signal Continue ( _name = 'Continue' ) ;
+	Behavior T1_2_effect ( _name = 'T1.2(effect)' ) ;
+	Behavior T2_2_effect ( _name = 'T2.2(effect)' ) ;
+	Behavior T5_testEnd ( _name = 'T5(testEnd)' ) ;
+	Behavior T3_effect ( _name = 'T3(effect)' ) ;
+	Behavior T4_testEnd ( _name = 'T4(testEnd)' ) ;
+	Test Description Event009_Test uses configuration configuration4Event009_Test {
+		tester.dslSpecificTestGate sends _run (
+			state_machine = Event009_Test
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Event009_Test ,
+			signal = Start
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Event009_Test ,
+			signal = Continue
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Event009_Test ,
+			signal = Pending
+		) to PSSM.dslSpecificMUTGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = T1_2_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = T2_2_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = T5_testEnd
+		) to tester.dslSpecificTestGate ;
+	}
+}

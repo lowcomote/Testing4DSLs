@@ -1,0 +1,19 @@
+The xPSSM models are defined using the samples provided by https://www.uml-diagrams.org/state-machine-diagrams.html
+Our xPSSM DSL only supports behavioral state machines, but this resource also includes protocol state machines.
+To model such examples, we made a few adaptations:
+
+1. ATM example (https://www.uml-diagrams.org/bank-atm-uml-state-machine-diagram-example.html?context=stm-examples)
+
+2. Online Shopping example (https://www.uml-diagrams.org/examples/online-shopping-user-account-state-diagram-example.html?context=stm-examples):
+- precondition of a transition -> the precondition is defined as an operation with a return value, then the transition is associated
+with a trigger for that operation and a constraint to check its return value.
+- event of a transition -> behavior of the transition to show what happened when firing that transition
+
+3. Java Thread States and Life cycle (https://www.uml-diagrams.org/java-thread-uml-state-machine-diagram-example.html?context=stm-examples):
+- event of a transition -> if it is a method with input parameters, we define it as an operation with input parameters, otherwise, we define it as a signal
+- to be able to define oracle, we add an entry behavior to each state
+
+4. Java EJB Life cycle
+- event and post condition of a transition -> signal triggers
+
+

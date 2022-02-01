@@ -1,0 +1,108 @@
+Package reactiveATM_testSuite {
+	Import all from common ;
+	Import all from xPSSMEvents;
+	Import all from testConfiguration ;
+	Import all from testData ;
+	
+	Test Description test__wrongPin uses configuration xPSSMConfiguration{
+		tester.dslSpecificGate sends _run (state_machine = ATM) to statemachine.dslSpecificGate;
+		statemachine.dslSpecificGate sends behavior_effected (behavior = insertCardMsg) to tester.dslSpecificGate;
+		tester.dslSpecificGate sends signal_received (
+			state_machine = ATM, 
+			signal_occurrence = signal_occurrence (
+				signal = Card,
+				attributeValues = {cardPinValue (value = "1234"), cardBalanceValue (value = "1000")})
+		) to statemachine.dslSpecificGate;
+		statemachine.dslSpecificGate sends behavior_effected (behavior = enterPinMsg) to tester.dslSpecificGate;
+		tester.dslSpecificGate sends signal_received (
+			state_machine = ATM, 
+			signal_occurrence = signal_occurrence (
+				signal = Pin,
+				attributeValues = enteredPinValue (value = "2222"))
+		) to statemachine.dslSpecificGate;
+		statemachine.dslSpecificGate sends behavior_effected (behavior = wrongPinMsg) to tester.dslSpecificGate;
+		tester.oclGate sends oclQuery (query = "self.statemachine.regions -> first().currentVertex") to statemachine.oclGate;
+		statemachine.oclGate sends finalState to tester.oclGate;
+	}
+	
+	Test Description test_successfulWithdraw uses configuration xPSSMConfiguration{
+		tester.dslSpecificGate sends _run (state_machine = ATM) to statemachine.dslSpecificGate;
+		statemachine.dslSpecificGate sends behavior_effected (behavior = insertCardMsg) to tester.dslSpecificGate;
+		tester.dslSpecificGate sends signal_received (
+			state_machine = ATM, 
+			signal_occurrence = signal_occurrence (
+				signal = Card,
+				attributeValues = {cardPinValue (value = "1234"), cardBalanceValue (value = "1000")})
+		) to statemachine.dslSpecificGate;
+		statemachine.dslSpecificGate sends behavior_effected (behavior = enterPinMsg) to tester.dslSpecificGate;
+		tester.dslSpecificGate sends signal_received (
+			state_machine = ATM, 
+			signal_occurrence = signal_occurrence (
+				signal = Pin,
+				attributeValues = {enteredPinValue (value = "1234")})
+		) to statemachine.dslSpecificGate;
+		statemachine.dslSpecificGate sends behavior_effected (behavior = enterAmountMsg) to tester.dslSpecificGate;
+		tester.dslSpecificGate sends signal_received (
+			state_machine = ATM, 
+			signal_occurrence = signal_occurrence (
+				signal = Amount,
+				attributeValues = {enteredAmountValue (value = "500")})
+		) to statemachine.dslSpecificGate;
+		statemachine.dslSpecificGate sends behavior_effected (behavior = updateCardBalance) to tester.dslSpecificGate;
+		statemachine.dslSpecificGate sends behavior_effected (behavior = deliverCash) to tester.dslSpecificGate;
+	}
+	
+	Test Description test_wrongAmount uses configuration xPSSMConfiguration{
+		tester.dslSpecificGate sends _run (state_machine = ATM) to statemachine.dslSpecificGate;
+		statemachine.dslSpecificGate sends behavior_effected (behavior = insertCardMsg) to tester.dslSpecificGate;
+		tester.dslSpecificGate sends signal_received (
+			state_machine = ATM, 
+			signal_occurrence = signal_occurrence (
+				signal = Card,
+				attributeValues = {cardPinValue (value = "1234"), cardBalanceValue (value = "1000")})
+		) to statemachine.dslSpecificGate;
+		statemachine.dslSpecificGate sends behavior_effected (behavior = enterPinMsg) to tester.dslSpecificGate;
+		tester.dslSpecificGate sends signal_received (
+			state_machine = ATM, 
+			signal_occurrence = signal_occurrence (
+				signal = Pin,
+				attributeValues = {enteredPinValue (value = "1234")})
+		) to statemachine.dslSpecificGate;
+		statemachine.dslSpecificGate sends behavior_effected (behavior = enterAmountMsg) to tester.dslSpecificGate;
+		tester.dslSpecificGate sends signal_received (
+			state_machine = ATM, 
+			signal_occurrence = signal_occurrence (
+				signal = Amount,
+				attributeValues = {enteredAmountValue (value = "1500")})
+		) to statemachine.dslSpecificGate;
+		statemachine.dslSpecificGate sends behavior_effected (behavior = notEnoughMoneyMsg) to tester.dslSpecificGate;
+	}
+	
+	Test Description test_ocl uses configuration xPSSMConfiguration{
+		tester.dslSpecificGate sends _run (state_machine = ATM) to statemachine.dslSpecificGate;
+		statemachine.dslSpecificGate sends behavior_effected (behavior = insertCardMsg) to tester.dslSpecificGate;
+		tester.dslSpecificGate sends signal_received (
+			state_machine = ATM, 
+			signal_occurrence = signal_occurrence (
+				signal = Card,
+				attributeValues = {cardPinValue (value = "1234"), cardBalanceValue (value = "1000")})
+		) to statemachine.dslSpecificGate;
+		tester.oclGate sends oclQuery (query = "self.statemachine.regions -> first().currentVertex") to statemachine.oclGate;
+		statemachine.oclGate sends getPinState to tester.oclGate;
+		
+		tester.dslSpecificGate sends signal_received (
+			state_machine = ATM, 
+			signal_occurrence = signal_occurrence (
+				signal = Pin,
+				attributeValues = {enteredPinValue (value = "1234")})
+		) to statemachine.dslSpecificGate;
+		tester.dslSpecificGate sends signal_received (
+			state_machine = ATM, 
+			signal_occurrence = signal_occurrence (
+				signal = Amount,
+				attributeValues = {enteredAmountValue (value = "1500")})
+		) to statemachine.dslSpecificGate;
+		tester.oclGate sends oclQuery (query = "self.statemachine.regions -> first().currentVertex") to statemachine.oclGate;
+		statemachine.oclGate sends finalState to tester.oclGate;
+	}
+}

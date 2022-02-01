@@ -1,0 +1,76 @@
+Package testConfiguration {
+	Import all from common ;
+	Import all from xPSSMEvents ;
+	
+	Gate Type genericGateType accepts modelExecutionCommand ;
+	Gate Type reactiveGateType accepts _run , signal_received , callOperation_received , behavior_executed ;
+	Gate Type oclGateType accepts OCL ;
+	
+	Component Type TestSystem having {
+		//gate genericGate of type genericGateType ;
+		gate reactiveGate of type reactiveGateType ; 
+		gate oclGate of type oclGateType ;
+	}
+	Component Type MUT having {
+		//gate genericGate of type genericGateType ;
+		gate reactiveGate of type reactiveGateType ; 
+		gate oclGate of type oclGateType ;
+	}
+	Annotation MUTPath ;
+	Annotation DSLName ;
+	
+	Test Configuration xPSSMConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT statemachine of type MUT with { 
+			MUTPath : 'TODO: Path to the MUT' ; 
+			DSLName : 'org.imt.pssm.reactive.ReactivePSSM' ;
+		} ;
+		//connect tester.genericGate to statemachine.genericGate;
+		connect tester.oclGate to statemachine.oclGate ;
+		connect tester.reactiveGate to statemachine.reactiveGate ;
+	}
+	
+	Test Configuration BankATMConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT statemachine of type MUT with { 
+			MUTPath : '/xPSSM_models/BankATM.model' ; 
+			DSLName : 'org.imt.pssm.reactive.ReactivePSSM' ;
+		} ;
+		//connect tester.genericGate to statemachine.genericGate;
+		connect tester.oclGate to statemachine.oclGate ;
+		connect tester.reactiveGate to statemachine.reactiveGate ;
+	}
+	
+	Test Configuration JavaEJBConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT statemachine of type MUT with { 
+			MUTPath : '/xPSSM_models/JavaEJB.model' ; 
+			DSLName : 'org.imt.pssm.reactive.ReactivePSSM' ;
+		} ;
+		//connect tester.genericGate to statemachine.genericGate;
+		connect tester.oclGate to statemachine.oclGate ;
+		connect tester.reactiveGate to statemachine.reactiveGate ;
+	}
+	
+	Test Configuration JavaThreadLifeCycleConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT statemachine of type MUT with { 
+			MUTPath : '/xPSSM_models/JavaThreadLifeCycle.model' ; 
+			DSLName : 'org.imt.pssm.reactive.ReactivePSSM' ;
+		} ;
+		//connect tester.genericGate to statemachine.genericGate;
+		connect tester.oclGate to statemachine.oclGate ;
+		connect tester.reactiveGate to statemachine.reactiveGate ;
+	}
+	
+	Test Configuration OnlineShoppingConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT statemachine of type MUT with { 
+			MUTPath : '/xPSSM_models/OnlineShopping.model' ; 
+			DSLName : 'org.imt.pssm.reactive.ReactivePSSM' ;
+		} ;
+		//connect tester.genericGate to statemachine.genericGate;
+		connect tester.oclGate to statemachine.oclGate ;
+		connect tester.reactiveGate to statemachine.reactiveGate ;
+	}
+}

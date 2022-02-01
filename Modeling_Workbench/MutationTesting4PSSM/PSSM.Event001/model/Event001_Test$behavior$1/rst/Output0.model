@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<statemachines:CustomSystem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:statemachines="http://org.tetrabox.examples.statemachines.interpretedstatemachines/statemachines/">
+  <statemachine name="Event001_Test$behavior$1">
+    <regions name="Region1">
+      <vertice xsi:type="statemachines:Pseudostate" name="Initial1"/>
+      <vertice xsi:type="statemachines:FinalState" name="FinalState1"/>
+    </regions>
+  </statemachine>
+  <signals name="Start"/>
+</statemachines:CustomSystem>

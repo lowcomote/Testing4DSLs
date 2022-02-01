@@ -1,0 +1,40 @@
+Package Join003_Test_TestSuite {
+	Import all from common ;
+	Import all from pssmSpecificTypes ;
+	Import all from pssmSpecificEvents ;
+	Import all from testConfiguration ;
+	StateMachine Join003_Test ( _name = 'Join003_Test$behavior$1' ) ;
+	Signal Start ( _name = 'Start' ) ;
+	Signal IntegerData ( _name = 'IntegerData', attributes = value) ;
+	IntegerAttribute value (_name = 'value');
+	Behavior T1_2_effect ( _name = 'T1.2(effect)' ) ;
+	Behavior T1_4_effect ( _name = 'T1.4(effect)' ) ;
+	Behavior T3_effect ( _name = 'T3(effect)' ) ;
+	Behavior T4_effect ( _name = 'T4(effect)' ) ;
+	Behavior T5_testEnd ( _name = 'T5(testEnd)' ) ;
+	Test Description Join003_Test uses configuration configuration4Join003_Test {
+		tester.dslSpecificTestGate sends _run (
+			state_machine = Join003_Test
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Join003_Test ,
+			signal = Start
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Join003_Test ,
+			signal = IntegerData
+		) to PSSM.dslSpecificMUTGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = T1_2_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = T1_4_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = T3_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = T5_testEnd
+		) to tester.dslSpecificTestGate ;
+	}
+}

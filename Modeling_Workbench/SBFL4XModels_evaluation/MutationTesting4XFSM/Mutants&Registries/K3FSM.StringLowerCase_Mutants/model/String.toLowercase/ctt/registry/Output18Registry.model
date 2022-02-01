@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII"?>
+<appliedMutations:Mutations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:appliedMutations="http://appliedMutations/1.0">
+  <muts>
+    <def href="../../../XFSMMutation.model#//@blocks.2/@commands.0"/>
+  </muts>
+  <muts>
+    <def href="../../../XFSMMutation.model#//@blocks.2/@commands.1"/>
+  </muts>
+  <muts xsi:type="appliedMutations:InformationChanged">
+    <def href="../../../XFSMMutation.model#//@blocks.2/@commands.2"/>
+    <object href="../../../../model/String.toLowercase.model#//@ownedStates.25/@outgoingTransitions.0"/>
+    <refChanges refName="target">
+      <def href="../../../XFSMMutation.model#//@blocks.2/@commands.2"/>
+      <object href="../../../../model/String.toLowercase.model#//@ownedStates.25/@outgoingTransitions.0"/>
+      <mutantObject href="../Output18.model#//@ownedStates.25/@outgoingTransitions.0"/>
+      <from href="../../../../model/String.toLowercase.model#//@ownedStates.25"/>
+      <mutantFrom href="../Output18.model#//@ownedStates.25"/>
+      <to href="../../../../model/String.toLowercase.model#//@ownedStates.7"/>
+      <mutantTo href="../Output18.model#//@ownedStates.7"/>
+    </refChanges>
+  </muts>
+</appliedMutations:Mutations>

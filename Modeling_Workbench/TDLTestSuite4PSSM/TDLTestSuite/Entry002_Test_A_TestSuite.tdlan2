@@ -1,0 +1,29 @@
+Package Entry002_Test_A_TestSuite {
+	Import all from common ;
+	Import all from pssmSpecificTypes ;
+	Import all from pssmSpecificEvents ;
+	Import all from testConfiguration ;
+	StateMachine Entry002_Test_A ( _name = 'Entry002_Test_A$behavior$1' ) ;
+	Signal Start ( _name = 'Start' ) ;
+	Behavior S1_1_entry ( _name = 'S1.1(entry)' ) ;
+	Behavior S2_1_entry ( _name = 'S2.1(entry)' ) ;
+	Behavior T3_testEnd ( _name = 'T3(testEnd)' ) ;
+	Test Description Entry002_Test_A uses configuration configuration4Entry002_Test_A {
+		tester.dslSpecificTestGate sends _run (
+			state_machine = Entry002_Test_A
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Entry002_Test_A ,
+			signal = Start
+		) to PSSM.dslSpecificMUTGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = S1_1_entry
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = S2_1_entry
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = T3_testEnd
+		) to tester.dslSpecificTestGate ;
+	}
+}

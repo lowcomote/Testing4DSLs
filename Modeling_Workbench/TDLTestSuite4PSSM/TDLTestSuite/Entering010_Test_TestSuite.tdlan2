@@ -1,0 +1,38 @@
+Package Entering010_Test_TestSuite {
+	Import all from common ;
+	Import all from pssmSpecificTypes ;
+	Import all from pssmSpecificEvents ;
+	Import all from testConfiguration ;
+	StateMachine Entering010_Test ( _name = 'Entering010_Test$behavior$1' ) ;
+	Signal Start ( _name = 'Start' ) ;
+	Behavior S1_1_entry ( _name = 'S1.1(entry)' ) ;
+	Behavior T1_1_effect ( _name = 'T1.1(effect)' ) ;
+	Behavior S2_1_entry ( _name = 'S2.1(entry)' ) ;
+	Behavior T2_1_effect ( _name = 'T2.1(effect)' ) ;
+	Behavior S1_entry ( _name = 'S1(entry)' ) ;
+	Behavior T3_testEnd ( _name = 'T3(testEnd)' ) ;
+	Test Description Entering010_Test uses configuration configuration4Entering010_Test {
+		tester.dslSpecificTestGate sends _run (
+			state_machine = Entering010_Test
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Entering010_Test ,
+			signal = Start
+		) to PSSM.dslSpecificMUTGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = S1_entry
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = T2_1_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = S2_1_entry
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = S1_1_entry
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = T3_testEnd
+		) to tester.dslSpecificTestGate ;
+	}
+}

@@ -1,0 +1,814 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TDLTestCoverage:TestSuiteCoverage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:TDLTestCoverage="http://org.imt.tdl.coverage/TDLTestCoverage" coveragePercentage="100.0">
+  <testSuite href="/xArduino_reactive_tests/result_coverage/execution/execution-20220127_214543-activeWait/activeWaitIRBlueLed_Test.tdlan2#/"/>
+  <testCaseCoverages coveragePercentage="66.67">
+    <testCase href="/xArduino_reactive_tests/result_coverage/execution/execution-20220127_214543-activeWait/activeWaitIRBlueLed_Test.tdlan2#//@packagedElement.2"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.3"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@left"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="83.33">
+    <testCase href="/xArduino_reactive_tests/result_coverage/execution/execution-20220127_214543-activeWait/activeWaitIRBlueLed_Test.tdlan2#//@packagedElement.3"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.3"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@left"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="83.33">
+    <testCase href="/xArduino_reactive_tests/result_coverage/execution/execution-20220127_214543-activeWait/activeWaitIRBlueLed_Test.tdlan2#//@packagedElement.4"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.3"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@left"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="58.33">
+    <testCase href="/xArduino_reactive_tests/result_coverage/execution/execution-20220127_214543-activeWait/activeWaitIRBlueLed_Test.tdlan2#//@packagedElement.5"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.3"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@left"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="100.0">
+    <testCase href="/xArduino_reactive_tests/result_coverage/execution/execution-20220127_214543-activeWait/activeWaitIRBlueLed_Test.tdlan2#//@packagedElement.6"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.3"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@left"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="100.0">
+    <testCase href="/xArduino_reactive_tests/result_coverage/execution/execution-20220127_214543-activeWait/activeWaitIRBlueLed_Test.tdlan2#//@packagedElement.7"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.3"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@left"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#/"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0/@module"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1/@module"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.3"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@left"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@right"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#/"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0/@module"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1/@module"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.3"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@left"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@right"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#/"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0/@module"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1/@module"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.3"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@left"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@right"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#/"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0/@module"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1/@module"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.3"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@left"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@right"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#/"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0/@module"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1/@module"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.3"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@left"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@right"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#/"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.0/@module"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@boards.0/@digitalPins.1/@module"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@block/@instructions.3"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@left"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@condition/@right"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/xArduino_reactive_models/activeWaitIRBlueLed.model#//@sketches.0/@block/@instructions.0/@elseBlock/@instructions.0/@operand"/>
+  </tsObjectCoverageStatus>
+</TDLTestCoverage:TestSuiteCoverage>

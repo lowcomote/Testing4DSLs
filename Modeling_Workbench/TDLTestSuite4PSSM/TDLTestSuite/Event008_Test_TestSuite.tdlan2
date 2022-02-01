@@ -1,0 +1,34 @@
+Package Event008_Test_TestSuite {
+	Import all from common ;
+	Import all from pssmSpecificTypes ;
+	Import all from pssmSpecificEvents ;
+	Import all from testConfiguration ;
+	StateMachine Event008_Test ( _name = 'Event008_Test$behavior$1' ) ;
+	Signal Start ( _name = 'Start' ) ;
+	Signal Continue ( _name = 'Continue' ) ;
+	Behavior T2_effect ( _name = 'T2(effect)' ) ;
+	Behavior T3_effect ( _name = 'T3(effect)' ) ;
+	Behavior T4_testEnd ( _name = 'T4(testEnd)' ) ;
+	Test Description Event008_Test uses configuration configuration4Event008_Test {
+		tester.dslSpecificTestGate sends _run (
+			state_machine = Event008_Test
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Event008_Test ,
+			signal = Start
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Event008_Test ,
+			signal = Continue
+		) to PSSM.dslSpecificMUTGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = T2_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = T3_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = T4_testEnd
+		) to tester.dslSpecificTestGate ;
+	}
+}

@@ -1,0 +1,51 @@
+Package Event017_Test_B_TestSuite {
+	Import all from common ;
+	Import all from pssmSpecificTypes ;
+	Import all from pssmSpecificEvents ;
+	Import all from testConfiguration ;
+	StateMachine Event017_Test_B ( _name = 'Event017_Test_B$behavior$1' ) ;
+	Signal Data ( _name = 'Data', attributes = value) ;
+	BooleanAttribute value (_name = 'value');
+	Signal Continue ( _name = 'Continue' ) ;
+	Behavior S1_1_entry ( _name = 'S1.1(entry)' ) ;
+	Behavior S1_1_doActivity ( _name = 'S1.1(doActivity)' ) ;
+	Behavior S1_1_exit ( _name = 'S1.1(exit)' ) ;
+	Behavior T1_2_effect ( _name = 'T1.2(effect)' ) ;
+	Behavior S1_entry ( _name = 'S1(entry)' ) ;
+	Behavior T3_testEnd ( _name = 'T3(testEnd)' ) ;
+	Test Description Event017_Test_B uses configuration configuration4Event017_Test_B {
+		tester.dslSpecificTestGate sends _run (
+			state_machine = Event017_Test_B
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Event017_Test_B ,
+			signal = Data
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Event017_Test_B ,
+			signal = Data
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Event017_Test_B ,
+			signal = Continue
+		) to PSSM.dslSpecificMUTGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = S1_entry
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = S1_1_entry
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = S1_1_doActivity
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = S1_1_exit
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = T1_2_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_executed (
+			behavior = T3_testEnd
+		) to tester.dslSpecificTestGate ;
+	}
+}
