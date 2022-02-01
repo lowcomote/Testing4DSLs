@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Coverage
+Bundle-SymbolicName: org.imt.pssm.reactive.coverage;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: org.imt.pssm.reactive.coverage
+Require-Bundle: org.imt.tdl.coverage;bundle-version="1.0.0",
+ org.eclipse.emf.ecore,
+ org.imt.pssm.reactive.model,
+ org.eclipse.core.runtime;bundle-version="3.22.0"
