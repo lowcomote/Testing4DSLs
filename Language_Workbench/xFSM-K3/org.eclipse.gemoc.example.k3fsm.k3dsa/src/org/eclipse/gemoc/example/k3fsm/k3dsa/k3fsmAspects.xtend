@@ -54,6 +54,7 @@ class FSMAspect {
 class StateAspect {
 	@Step												// <3>
 	def void step(String inputString) {
+		println("enter(" + _self.name + ")")
 		// Get the valid transitions	
 		var validTransitions =  _self.outgoingTransitions.filter[t | 
 			if (t.input !== null){
@@ -83,7 +84,7 @@ class TransitionAspect {
 	
 	@Step												// <4>
 	def void fire() {
-		//println("Firing " + _self.name + " and entering " + _self.target.name)
+		println("fire(" + _self.name + ")")
 		val fsm = _self.source.owningFSM
 		fsm.currentState = _self.target
 		if (_self.output !== null){
