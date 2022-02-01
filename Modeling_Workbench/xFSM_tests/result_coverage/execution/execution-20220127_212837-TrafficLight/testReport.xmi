@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TDLTestReport:TestSuiteResult xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:TDLTestReport="https://org.imt.tdl.testResult/TDLTestReport">
+  <testSuite href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#/"/>
+  <testCaseResults>
+    <testCase href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.1"/>
+    <testMessageResults tdlMessageId="Message#1" description="New value is set for the unprocessedString property of the MUT">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.1/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="The model under test executed successfully">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.1/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#3" description="The current state of the MUT is retrieved">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.1/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#4" description="PASS">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.1/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
+    </testMessageResults>
+  </testCaseResults>
+  <testCaseResults>
+    <testCase href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.2"/>
+    <testMessageResults tdlMessageId="Message#1" description="New value is set for the unprocessedString property of the MUT">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.2/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="The model under test executed successfully">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.2/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#3" description="The current state of the MUT is retrieved">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.2/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#4" description="PASS">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.2/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
+    </testMessageResults>
+  </testCaseResults>
+  <testCaseResults>
+    <testCase href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.3"/>
+    <testMessageResults tdlMessageId="Message#1" description="New value is set for the unprocessedString property of the MUT">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.3/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="The model under test executed successfully">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.3/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#3" description="The current state of the MUT is retrieved">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.3/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#4" description="PASS">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.3/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
+    </testMessageResults>
+  </testCaseResults>
+  <testCaseResults>
+    <testCase href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.4"/>
+    <testMessageResults tdlMessageId="Message#1" description="New value is set for the unprocessedString property of the MUT">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="The model under test executed successfully">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#3" description="The current state of the MUT is retrieved">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#4" description="PASS">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
+    </testMessageResults>
+  </testCaseResults>
+  <testCaseResults>
+    <testCase href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.5"/>
+    <testMessageResults tdlMessageId="Message#1" description="New value is set for the unprocessedString property of the MUT">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.5/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="The model under test executed successfully">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.5/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#3" description="The current state of the MUT is retrieved">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.5/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#4" description="PASS">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.5/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
+    </testMessageResults>
+  </testCaseResults>
+  <testCaseResults>
+    <testCase href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.6"/>
+    <testMessageResults tdlMessageId="Message#1" description="New value is set for the unprocessedString property of the MUT">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.6/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="The model under test executed successfully">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.6/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#3" description="The current state of the MUT is retrieved">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.6/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#4" description="PASS">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.6/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
+    </testMessageResults>
+  </testCaseResults>
+  <testCaseResults>
+    <testCase href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.7"/>
+    <testMessageResults tdlMessageId="Message#1" description="New value is set for the unprocessedString property of the MUT">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.7/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="The model under test executed successfully">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.7/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#3" description="The current state of the MUT is retrieved">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.7/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#4" description="PASS">
+      <message href="/xFSM_tests/result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2#//@packagedElement.7/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
+    </testMessageResults>
+  </testCaseResults>
+</TDLTestReport:TestSuiteResult>
