@@ -31,16 +31,6 @@ Event-Driven XTDL is a generic approach that provides testing facilities for rea
 - Gemoc studio Version 3.3.0-SNAPSHOT (Based on Eclipse IDE 2020-12) ([download link](https://download.eclipse.org/gemoc/packages/nightly/gemoc_studio-win32.win32.x86_64.zip))
 - TDL tools Version 1.0.0 ([udpate site](https://tdl.etsi.org/eclipse/latest/))
 - ATL transformation language Version 4.4.0 ([update site](http://download.eclipse.org/mmt/atl/updates/releases/4.4.0))
-<<<<<<< HEAD
-
-**Setup**: 
-Find the `GenerateData.mwe` from org.etsi.mts.tdl.graphical.labels.data -> src -> org.etsi.mts.tdl.graphical.labels
-Right click and select Run As -> MWE2 Workflow
-
-**Using the XTDL**: 
-To use XTDL for a given DSL, the following steps have to be followed.
-1. Import the intended input DSL into the plugins workspace. For example, any of the DSLs in the *Language.sequential_Workbench* folder can be used.
-=======
 
 **Setup**: 
 Find the `GenerateData.mwe` from org.etsi.mts.tdl.graphical.labels.data -> src -> org.etsi.mts.tdl.graphical.labels
@@ -49,7 +39,6 @@ Right click and select Run As -> MWE2 Workflow
 **Using the XTDL**: 
 To use XTDL for a given xDSL, the following steps have to be followed.
 1. Import the intended input reactive xDSL into the workspace. For example, any of the xDSLs in the *Language_Workbench* folder can be used.
->>>>>>> xTDL_EventManager
 2. Run as `Eclipse Application`
 3. In the second workspace, define the models conforming to the input xDSL which are going to be tested. For example, the models in the *Modeling_Workbench* folder can be imported.
 4. Define test cases for the models defined in the previous step. For example, the tests in the *Modeling_Workbench* folder can be imported. 
