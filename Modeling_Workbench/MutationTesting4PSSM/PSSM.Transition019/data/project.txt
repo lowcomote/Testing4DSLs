@@ -1,2 +1,0 @@
-PSSMMutation
-org.eclipse.jdt.core.javanature

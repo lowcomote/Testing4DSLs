@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.imt.bpmn.model/src" editDirectory="/org.imt.bpmn.model.edit/src"
+    editorDirectory="/org.imt.bpmn.model.editor/src" modelPluginID="org.imt.bpmn.model"
+    modelName="BPMN" editPluginClass="org.imt.bpmn.provider.BPMNEditPlugin" editorPluginClass="org.imt.bpmn.presentation.BPMNEditorPlugin"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testSuiteClass="org.imt.bpmn.tests.BPMNAllTests"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
+    editPluginID="org.imt.bpmn.model.edit" editorPluginID="org.imt.bpmn.model.editor"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>BPMN.ecore</foreignModel>
+  <genPackages prefix="bpmn" basePackage="org.imt" disposableProviderFactory="true"
+      ecorePackage="BPMN.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="BPMN.ecore#//BooleanBinaryOperator">
+      <genEnumLiterals ecoreEnumLiteral="BPMN.ecore#//BooleanBinaryOperator/AND"/>
+      <genEnumLiterals ecoreEnumLiteral="BPMN.ecore#//BooleanBinaryOperator/OR"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="BPMN.ecore#//BooleanUnaryOperator">
+      <genEnumLiterals ecoreEnumLiteral="BPMN.ecore#//BooleanUnaryOperator/NOT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="BPMN.ecore#//IntegerComparisonOperator">
+      <genEnumLiterals ecoreEnumLiteral="BPMN.ecore#//IntegerComparisonOperator/SMALLER"/>
+      <genEnumLiterals ecoreEnumLiteral="BPMN.ecore#//IntegerComparisonOperator/SMALLER_EQUALS"/>
+      <genEnumLiterals ecoreEnumLiteral="BPMN.ecore#//IntegerComparisonOperator/EQUALS"/>
+      <genEnumLiterals ecoreEnumLiteral="BPMN.ecore#//IntegerComparisonOperator/GREATER_EQUALS"/>
+      <genEnumLiterals ecoreEnumLiteral="BPMN.ecore#//IntegerComparisonOperator/GREATER"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="BPMN.ecore#//StringComparisonOperator">
+      <genEnumLiterals ecoreEnumLiteral="BPMN.ecore#//StringComparisonOperator/EQUALS"/>
+    </genEnums>
+    <genClasses ecoreClass="BPMN.ecore#//Microflow">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BPMN.ecore#//Microflow/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BPMN.ecore#//Microflow/ownedElements"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//Microflow/currentNode"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//Microflow/valuedVariables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BPMN.ecore#//Microflow/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="BPMN.ecore#//MicroflowElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//MicroflowElement/incomingFlows"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BPMN.ecore#//MicroflowElement/outgoingFlows"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BPMN.ecore#//MicroflowElement/label"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference BPMN.ecore#//MicroflowElement/ownerMicroflow"/>
+    </genClasses>
+    <genClasses ecoreClass="BPMN.ecore#//SequenceFlow">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BPMN.ecore#//SequenceFlow/constraint"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference BPMN.ecore#//SequenceFlow/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//SequenceFlow/target"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BPMN.ecore#//Activity"/>
+    <genClasses image="false" ecoreClass="BPMN.ecore#//ObjectActivity">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//ObjectActivity/entity"/>
+    </genClasses>
+    <genClasses ecoreClass="BPMN.ecore#//CreateObject">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BPMN.ecore#//CreateObject/newEntity"/>
+    </genClasses>
+    <genClasses ecoreClass="BPMN.ecore#//DeleteObject"/>
+    <genClasses ecoreClass="BPMN.ecore#//ChangeObject">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//ChangeObject/newValue"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//ChangeObject/variableToBeChanged"/>
+    </genClasses>
+    <genClasses ecoreClass="BPMN.ecore#//RetrieveObject">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BPMN.ecore#//RetrieveObject/constraint"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BPMN.ecore#//ActionCallActivity"/>
+    <genClasses ecoreClass="BPMN.ecore#//MicroflowCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//MicroflowCall/target"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BPMN.ecore#//VariableActivity"/>
+    <genClasses ecoreClass="BPMN.ecore#//CreateVariable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BPMN.ecore#//CreateVariable/newVariable"/>
+    </genClasses>
+    <genClasses ecoreClass="BPMN.ecore#//ChangeVariable">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//ChangeVariable/targetVariable"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//ChangeVariable/newValue"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BPMN.ecore#//ClientActivity"/>
+    <genClasses ecoreClass="BPMN.ecore#//ShowMessage">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BPMN.ecore#//ShowMessage/message"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BPMN.ecore#//Event"/>
+    <genClasses ecoreClass="BPMN.ecore#//StartEvent"/>
+    <genClasses ecoreClass="BPMN.ecore#//EndEvent">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//EndEvent/returnVariable"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BPMN.ecore#//Variable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BPMN.ecore#//Variable/name"/>
+    </genClasses>
+    <genClasses ecoreClass="BPMN.ecore#//Entity">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BPMN.ecore#//Entity/attributes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BPMN.ecore#//Entity/references"/>
+    </genClasses>
+    <genClasses ecoreClass="BPMN.ecore#//Reference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BPMN.ecore#//Reference/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//Reference/referencedEntity"/>
+    </genClasses>
+    <genClasses ecoreClass="BPMN.ecore#//BasicVariable"/>
+    <genClasses ecoreClass="BPMN.ecore#//IntegerVariable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BPMN.ecore#//IntegerVariable/valueObject"/>
+    </genClasses>
+    <genClasses ecoreClass="BPMN.ecore#//BooleanVariable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BPMN.ecore#//BooleanVariable/valueObject"/>
+    </genClasses>
+    <genClasses ecoreClass="BPMN.ecore#//StringVariable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BPMN.ecore#//StringVariable/valueObject"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BPMN.ecore#//Value"/>
+    <genClasses ecoreClass="BPMN.ecore#//IntegerValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BPMN.ecore#//IntegerValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="BPMN.ecore#//BooleanValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BPMN.ecore#//BooleanValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="BPMN.ecore#//StringValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BPMN.ecore#//StringValue/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BPMN.ecore#//Decision"/>
+    <genClasses ecoreClass="BPMN.ecore#//ForkDecision">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BPMN.ecore#//ForkDecision/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="BPMN.ecore#//MergeDecision"/>
+    <genClasses image="false" ecoreClass="BPMN.ecore#//Expression"/>
+    <genClasses ecoreClass="BPMN.ecore#//IntegerComparisonExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BPMN.ecore#//IntegerComparisonExpression/operator"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//IntegerComparisonExpression/operand1"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//IntegerComparisonExpression/operand2"/>
+    </genClasses>
+    <genClasses ecoreClass="BPMN.ecore#//StringComparisonExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BPMN.ecore#//StringComparisonExpression/operator"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//StringComparisonExpression/operand1"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//StringComparisonExpression/operand2"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BPMN.ecore#//BooleanExpression"/>
+    <genClasses ecoreClass="BPMN.ecore#//BooleanBinaryExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BPMN.ecore#//BooleanBinaryExpression/operator"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//BooleanBinaryExpression/operand1"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//BooleanBinaryExpression/operand2"/>
+    </genClasses>
+    <genClasses ecoreClass="BPMN.ecore#//BooleanUnaryExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BPMN.ecore#//BooleanUnaryExpression/operator"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BPMN.ecore#//BooleanUnaryExpression/operand"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

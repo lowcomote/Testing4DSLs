@@ -1,0 +1,80 @@
+Package testConfiguration {
+	Import all from common;
+	
+	Gate Type genericGateType accepts modelExecutionCommand;
+	Gate Type oclGateType accepts OCL;
+	
+	Component Type TestSystem having {
+		gate genericGate of type genericGateType;
+		gate oclGate of type oclGateType;
+	}
+	Component Type MUT having {
+		gate genericGate of type genericGateType;
+		gate oclGate of type oclGateType;
+	}
+	Annotation MUTPath ;
+	Annotation DSLName ;
+	Test Configuration genericConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT k3fsm of type MUT with { 
+			MUTPath : 'TODO: Put the address of the Model-Under Test here' ; 
+			DSLName : 'TODO: Put the name of the DSL' ;
+		} ;
+		connect tester.genericGate to k3fsm.genericGate ;
+	}
+	Test Configuration oclConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT k3fsm of type MUT with { 
+			MUTPath : 'TODO: Put the address of the Model-Under Test here' ; 
+			DSLName : 'TODO: Put the name of the DSL' ;
+		} ;
+		connect tester.genericGate to k3fsm.genericGate ;
+		connect tester.oclGate to k3fsm.oclGate ;
+	}
+	//manually defined: one test configuration per xFSM model
+	Test Configuration bitShiftingConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT k3fsm of type MUT with { 
+			MUTPath : '/xFSM_models/BitShifting.k3fsm' ; 
+			DSLName : 'org.eclipse.gemoc.example.k3fsm.K3fsm' ;
+		} ;
+		connect tester.genericGate to k3fsm.genericGate ;
+		connect tester.oclGate to k3fsm.oclGate ;
+	}
+	Test Configuration EdgeDetectorConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT k3fsm of type MUT with { 
+			MUTPath : '/xFSM_models/EdgeDetector.k3fsm' ; 
+			DSLName : 'org.eclipse.gemoc.example.k3fsm.K3fsm' ;
+		} ;
+		connect tester.genericGate to k3fsm.genericGate ;
+		connect tester.oclGate to k3fsm.oclGate ;
+	}
+	Test Configuration lowerCaseConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT k3fsm of type MUT with { 
+			MUTPath : '/xFSM_models/String.toLowercase.k3fsm' ; 
+			DSLName : 'org.eclipse.gemoc.example.k3fsm.K3fsm' ;
+		} ;
+		connect tester.genericGate to k3fsm.genericGate ;
+		connect tester.oclGate to k3fsm.oclGate ;
+	}
+	Test Configuration upperCaseConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT k3fsm of type MUT with { 
+			MUTPath : '/xFSM_models/String.toUpperCase.k3fsm' ; 
+			DSLName : 'org.eclipse.gemoc.example.k3fsm.K3fsm' ;
+		} ;
+		connect tester.genericGate to k3fsm.genericGate ;
+		connect tester.oclGate to k3fsm.oclGate ;
+	}
+	Test Configuration trafficLightConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT k3fsm of type MUT with { 
+			MUTPath : '/xFSM_models/TrafficLight.k3fsm' ; 
+			DSLName : 'org.eclipse.gemoc.example.k3fsm.K3fsm' ;
+		} ;
+		connect tester.genericGate to k3fsm.genericGate ;
+		connect tester.oclGate to k3fsm.oclGate ;
+	}
+}

@@ -1,1 +1,0 @@
-Mutant generation mode: 20 for all models

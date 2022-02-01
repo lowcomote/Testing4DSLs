@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<statemachines:CustomSystem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:statemachines="http://org.tetrabox.examples.statemachines.interpretedstatemachines/statemachines/">
-  <statemachine name="Entering011_Test$behavior$1"/>
-  <signals name="Start"/>
-  <signals name="Continue"/>
-</statemachines:CustomSystem>

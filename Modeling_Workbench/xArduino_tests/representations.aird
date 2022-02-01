@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" uid="_SRbUsLcDEeuHpq0fRGySPw" version="14.3.1.202003261200">
+  <semanticResources>generated/common.tdlan2</semanticResources>
+  <semanticResources>generated/arduinoSpecificTypes.tdlan2</semanticResources>
+  <semanticResources>generated/testConfiguration.tdlan2</semanticResources>
+  <semanticResources>servo9g_Test.tdlan2</semanticResources>
+  <semanticResources>servoIrButton_Test.tdlan2</semanticResources>
+  <semanticResources>activeWaitIRBlueLed_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210519_110140/blink_Test.tdlan2</semanticResources>
+  <semanticResources>turnOnLed_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210520_094935/turnOnLed_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210520_095036/turnOnLed_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210520_095133/servo9g_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210520_095219/servo9g_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210520_095321/servo9g_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210520_095525/servoIrButton_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210520_095719/servoIrButton_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210520_095915/activeWaitIRBlueLed_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210520_100145/activeWaitIRBlueLed_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210520_101018/servoIrButton_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210520_101130/servoIrButton_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210520_101305/servoIrButton_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210520_101653/servoIrButton_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210520_101811/servoIrButton_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210610_162851/servo9g_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210610_162926/servoIrButton_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210610_163031/servoIrButton_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210610_163214/servoIrButton_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210610_163358/servo9g_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210610_163444/servoIrButton_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210610_163554/turnOnLed_Test.tdlan2</semanticResources>
+</viewpoint:DAnalysis>

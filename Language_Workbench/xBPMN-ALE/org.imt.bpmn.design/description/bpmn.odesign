@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/description/tool/1.1.0" name="bpmn" version="12.0.0.2017041100">
+  <ownedViewpoints name="BPMN_viewpoint">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="MicroflowDiagram" initialisation="true" domainClass="bpmn.Microflow" enablePopupBars="true">
+      <metamodel href="../../org.imt.bpmn.model/model/BPMN.ecore#/"/>
+      <defaultLayer name="Default">
+        <nodeMappings name="StartEvent" semanticCandidatesExpression="feature:ownedElements" domainClass="bpmn.StartEvent">
+          <style xsi:type="style:DotDescription" labelSize="12" showIcon="false" labelExpression="" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_green']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="EndEvent" semanticCandidatesExpression="feature:ownedElements" domainClass="bpmn.EndEvent">
+          <style xsi:type="style:DotDescription" labelSize="9" showIcon="false" labelExpression="[self.returnVariable.name/]" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_red']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_red']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="Activity" semanticCandidatesExpression="feature:ownedElements" domainClass="bpmn.Activity">
+          <style xsi:type="style:SquareDescription" labelSize="9" labelExpression="feature:label" labelPosition="node" resizeKind="NSEW" width="13" height="8">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_blue']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="ForkDecision" semanticCandidatesExpression="feature:ownedElements" domainClass="bpmn.ForkDecision">
+          <style xsi:type="style:LozengeNodeDescription" labelSize="9" labelExpression="feature:label" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_yellow']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_yellow']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="MergeDecision" semanticCandidatesExpression="feature:ownedElements" domainClass="bpmn.MergeDecision">
+          <style xsi:type="style:LozengeNodeDescription" labelSize="9" labelExpression="feature:label" hideLabelByDefault="true" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_purple']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_purple']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="parameter" semanticCandidatesExpression="feature:parameters" domainClass="bpmn.Variable">
+          <style xsi:type="style:WorkspaceImageDescription" labelSize="9" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/org.imt.bpmn.design/icons/parameter.PNG">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </style>
+        </nodeMappings>
+        <edgeMappings name="flow" sourceMapping="//@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='Activity'] //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='ForkDecision'] //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='MergeDecision'] //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='StartEvent']" targetMapping="//@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='Activity'] //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='EndEvent'] //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='ForkDecision'] //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='MergeDecision']" targetFinderExpression="[self.target/]" sourceFinderExpression="[self.source/]" domainClass="bpmn.SequenceFlow" useDomainElement="true">
+          <style sizeComputationExpression="2" endsCentering="Both">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="9" labelExpression="[self.constraint/]">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+      </defaultLayer>
+      <additionalLayers name="Debug" activeByDefault="true">
+        <toolSections name="Debug">
+          <ownedTools xsi:type="tool:PopupMenu" name="Gemoc">
+            <menuItemDescription xsi:type="tool:OperationAction" name="Debug" icon="/org.eclipse.gemoc.executionframework.extensions.sirius/icons/debug_exc.gif">
+              <view name="views"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool:ExternalJavaAction" name="Debug" icon="/org.eclipse.gemoc.executionframework.extensions.sirius/icons/debug_exc.gif" id="org.eclipse.gemoc.execution.sequential.javaengine.ui.debug.sirius.action.gemocDebugAs"/>
+              </initialOperation>
+            </menuItemDescription>
+            <menuItemDescription xsi:type="tool:OperationAction" name="Toggle breakpoint" icon="/org.eclipse.gemoc.executionframework.extensions.sirius/icons/debug_exc.gif">
+              <view name="views"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool:ExternalJavaAction" name="Toggle Gemoc breakpoint" icon="/org.eclipse.gemoc.executionframework.extensions.sirius/icons/breakpoint.gif" id="org.eclipse.gemoc.execution.sequential.javaengine.ui.debug.sirius.action.GemocSequentialToggleBreakpointAction"/>
+              </initialOperation>
+            </menuItemDescription>
+            <menuItemDescription xsi:type="tool:OperationAction" name="Toggle conditional breakpoint" icon="/org.eclipse.gemoc.executionframework.extensions.sirius/icons/debug_exc.gif">
+              <view name="views"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool:ExternalJavaAction" name="Toggle Gemoc conditional breakpoint" icon="/org.eclipse.gemoc.executionframework.extensions.sirius/icons/breakpoint.gif" id="org.eclipse.gemoc.execution.sequential.javaengine.ui.debug.sirius.action.GemocSequentialToggleConditionalBreakpointAction"/>
+              </initialOperation>
+            </menuItemDescription>
+          </ownedTools>
+        </toolSections>
+        <decorationDescriptionsSet>
+          <decorationDescriptions xsi:type="description_1:MappingBasedDecoration" name="Enabled breakpoint" position="WEST" preconditionExpression="service:self.hasEnabledBreakpoint" imageExpression="/org.eclipse.gemoc.executionframework.extensions.sirius/icons/breakpoint_enabled.gif" mappings="//@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='StartEvent'] //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='EndEvent'] //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='Activity'] //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='ForkDecision'] //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='MergeDecision']"/>
+          <decorationDescriptions xsi:type="description_1:MappingBasedDecoration" name="Disabled breakpoint" position="WEST" preconditionExpression="service:self.hasDisabledBreakpoint" imageExpression="/org.eclipse.gemoc.executionframework.extensions.sirius/icons/breakpoint_disabled.gif" mappings="//@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='StartEvent'] //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='EndEvent'] //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='Activity'] //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='ForkDecision'] //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='MergeDecision']"/>
+        </decorationDescriptionsSet>
+        <customization>
+          <vsmElementCustomizations xsi:type="description:VSMElementCustomization" predicateExpression="service:self.isCurrentInstruction">
+            <featureCustomizations xsi:type="description:EReferenceCustomization" appliedOn="//@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='Activity']/@style //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='ForkDecision']/@style //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='MergeDecision']/@style //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='StartEvent']/@style" referenceName="borderColor" value="//@userColorsPalettes[name='MicroflowDiagram%20Palette']/@entries[name='current%20instruction']"/>
+            <featureCustomizations xsi:type="description:EReferenceCustomization" appliedOn="//@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@edgeMappings[name='flow']/@style" referenceName="strokeColor" value="//@userColorsPalettes[name='MicroflowDiagram%20Palette']/@entries[name='current%20instruction']"/>
+            <featureCustomizations xsi:type="description:EReferenceCustomization" appliedOn="//@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='Activity']/@style //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@edgeMappings[name='flow']/@style/@centerLabelStyleDescription //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='ForkDecision']/@style //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='MergeDecision']/@style" referenceName="labelColor" value="//@userColorsPalettes[name='MicroflowDiagram%20Palette']/@entries[name='current%20instruction']"/>
+          </vsmElementCustomizations>
+        </customization>
+      </additionalLayers>
+      <additionalLayers name="Animation" activeByDefault="true">
+        <decorationDescriptionsSet>
+          <decorationDescriptions xsi:type="description_1:MappingBasedDecoration" name="current node" position="SOUTH_EAST" preconditionExpression="ale: self.ownerMicroflow.executionState.currentNode = self" imageExpression="/org.imt.bpmn.design/icons/cursor-3-24.png" mappings="//@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='StartEvent'] //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='EndEvent'] //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='Activity'] //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='ForkDecision'] //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='MergeDecision']"/>
+        </decorationDescriptionsSet>
+        <customization>
+          <vsmElementCustomizations xsi:type="description:VSMElementCustomization" predicateExpression="service:self.hasBeenActivated">
+            <featureCustomizations xsi:type="description:EReferenceCustomization" appliedOn="//@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='Activity']/@style //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='ForkDecision']/@style //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='MergeDecision']/@style //@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@nodeMappings[name='StartEvent']/@style" referenceName="borderColor" value="//@userColorsPalettes[name='MicroflowDiagram%20Palette']/@entries[name='hasBeenAnimated']"/>
+            <featureCustomizations xsi:type="description:EReferenceCustomization" appliedOn="//@ownedViewpoints[name='BPMN_viewpoint']/@ownedRepresentations[name='MicroflowDiagram']/@defaultLayer/@edgeMappings[name='flow']/@style" referenceName="strokeColor" value="//@userColorsPalettes[name='MicroflowDiagram%20Palette']/@entries[name='hasBeenAnimated']"/>
+          </vsmElementCustomizations>
+        </customization>
+      </additionalLayers>
+    </ownedRepresentations>
+    <ownedJavaExtensions qualifiedClassName="org.imt.bpmn.design.Services"/>
+    <ownedJavaExtensions qualifiedClassName="org.imt.bpmn.design.services.MicroflowdiagramDebugServices"/>
+    <ownedJavaExtensions qualifiedClassName="org.imt.bpmn.design.services.MicroflowdiagramAnimatorServices"/>
+  </ownedViewpoints>
+  <userColorsPalettes name="MicroflowDiagram Palette">
+    <entries xsi:type="description:UserFixedColor" red="255" green="255" blue="0" name="current instruction"/>
+    <entries xsi:type="description:UserFixedColor" red="255" green="0" blue="255" name="hasBeenAnimated"/>
+  </userColorsPalettes>
+</description:Group>

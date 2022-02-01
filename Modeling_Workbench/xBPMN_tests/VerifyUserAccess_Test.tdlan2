@@ -1,0 +1,33 @@
+Package testSuite {
+	Import all from common ;
+	Import all from bpmnSpecificTypes ;
+	Import all from testConfiguration ;
+	
+	Entity userNewState(_name = "SystemUser", attributes = {accessLevel, accessStatus});
+	StringVariable accessLevel (_name = "accessLevel", valueObject = newLevel);
+	StringValue newLevel (value = ?);
+	
+	BooleanVariable accessStatus (_name = "accessStatus", valueObject = access);
+	BooleanValue access (value = ?);
+	
+	Test Description test1 uses configuration verifyUserAccessConfiguration{
+		tester.genericGate sends userNewState (
+			attributes = accessLevel (valueObject = newLevel (value = "User")))
+			to bpmn.genericGate;
+		tester.genericGate sends runModel to bpmn.genericGate;
+		tester.genericGate sends getModelState to bpmn.genericGate;
+		bpmn.genericGate sends userNewState (
+			attributes = accessStatus (valueObject = access (value = "false")))
+			to tester.genericGate;
+	}
+	Test Description test2 uses configuration promoteEmployeeConfiguration{
+		tester.genericGate sends userNewState (
+			attributes = accessLevel (valueObject = newLevel (value = "Admin")))
+			to bpmn.genericGate;
+		tester.genericGate sends runModel to bpmn.genericGate;
+		tester.genericGate sends getModelState to bpmn.genericGate;
+		bpmn.genericGate sends userNewState (
+			attributes = accessStatus (valueObject = access (value = "true")))
+			to tester.genericGate;
+	}
+}

@@ -1,0 +1,319 @@
+behavior bpmn;
+
+open class Microflow{
+
+	@main
+	def void main(){
+		'Main'.log();
+		self.executeMicroflow();		
+	}
+	
+	@init
+	def void initializeModel(){
+		'initializeModel start'.log();
+	}
+	
+	@step
+	def void executeMicroflow(){
+		self.setInitialValues();
+		while (not self.currentNode.oclIsTypeOf(bpmn::EndEvent)){
+			self.currentNode.step();
+		}
+		//the currentNode is the end event
+		self.currentNode.step();	
+	}
+	@step
+	def void setInitialValues(){
+		for (param in self.parameters){
+			self.valuedVariables += param;
+		}
+		if (self.currentNode = null){		
+			self.currentNode := self.ownedElements
+				-> filter (bpmn::StartEvent)
+				-> first();
+		}
+	}
+	@step
+	def void executeInnerMicroflow(Microflow ownerMicroflow){
+		('Execute the inner microflow ' + self.name).log();	
+		self.input = '';
+		self.executeMicroflow();
+		//after executing the inner microflow, the execution of the source microflow has to be resumed 
+		//the current node for the source microflow is a 'MicroflowCall' Activity, so its outgoing flows have to be fired.
+		for (flow in ownerMicroflow.currentNode.outgoingFlows){
+			flow.fire();
+		}
+	}
+}
+open class StartEvent{
+	@step
+	def void step(){
+		('Start Microflow ' + self.ownerMicroflow.name).log();
+		//fire outgoing sequence flow
+		self.outgoingFlows -> at(1).fire();
+	}
+}
+open class EndEvent{
+	@step
+	def void step(){
+		if (self.returnVariable!=null){
+			self.ownerMicroflow.valuedVariables += self.returnVariable;
+		}
+		('End Microflow ' + self.ownerMicroflow.name).log();
+	}
+}
+open class SequenceFlow{
+	@step
+	def void fire(){
+		('Firing flow: source = ' + self.source.toString() + 'target = ' + self.target.toString()).log();
+		self.target.ownerMicroflow.currentNode := self.target;
+	}
+}
+open class ForkDecision{
+	@step
+	def void step(){
+		('Start making decision').log();
+		Boolean gatewayValue := false;
+		if (self.expression.oclIsTypeOf(bpmn::BooleanBinaryExpression)){
+			gatewayValue := self.expression.oclAsType(bpmn::BooleanBinaryExpression).calculateExpression();
+		}else if (self.expression.oclIsTypeOf(bpmn::BooleanUnaryExpression)){
+			gatewayValue := self.expression.oclAsType(bpmn::BooleanUnaryExpression).calculateExpression();
+		}else if (self.expression.oclIsTypeOf(bpmn::IntegerComparisonExpression)){
+			gatewayValue := self.expression.oclAsType(bpmn::IntegerComparisonExpression).calculateExpression();
+		}else if (self.expression.oclIsTypeOf(bpmn::StringComparisonExpression)){
+			gatewayValue := self.expression.oclAsType(bpmn::StringComparisonExpression).calculateExpression();
+		}
+		
+		SequenceFlow validFlow := bpmn::SequenceFlow.create();
+		if (gatewayValue = true){
+			validFlow := self.outgoingFlows
+				-> select (f | f.constraint = 'true')
+				-> first();
+			
+		}else{
+			validFlow := self.outgoingFlows
+				-> select (f | f.constraint = 'false')
+				-> first();
+		} 
+		('Decision output = ' + validFlow.constraint).log();
+		validFlow.fire();	
+	}
+}
+open class MergeDecision{
+	@step
+	def void step(){
+		for (flow in self.outgoingFlows){
+			flow.fire();
+		}
+	}
+}
+open class CreateObject{
+	@step
+	def void step(){
+		self.ownerMicroflow.valuedVariables += self.newEntity;
+		('Entity ' + self.newEntity.name + ' is created.').log();
+		for (flow in self.outgoingFlows){
+			flow.fire();
+		}
+	}
+}
+open class ChangeObject{
+	@step
+	def void step(){
+		BasicVariable variable := self.entity.attributes->select(a | a = self.variableToBeChanged)->first();
+		if (variable = null){
+			('There is no ' + self.variableToBeChanged + ' property in the ' + self.entity + ' entity').log();
+		}else{
+			if (variable.oclIsTypeOf(bpmn::IntegerVariable) and
+			self.newValue.oclIsTypeOf(bpmn::IntegerValue)){
+			variable.oclAsType(bpmn::IntegerVariable).valueObject := 
+				self.newValue.oclAsType(bpmn::IntegerValue);
+			}else if (variable.oclIsTypeOf(bpmn::BooleanVariable) and
+				self.newValue.oclIsTypeOf(bpmn::BooleanValue)){
+				variable.oclAsType(bpmn::BooleanVariable).valueObject := 
+					self.newValue.oclAsType(bpmn::BooleanValue);
+			}else if (variable.oclIsTypeOf(bpmn::StringVariable) and
+				self.newValue.oclIsTypeOf(bpmn::StringValue)){
+				variable.oclAsType(bpmn::StringVariable).valueObject := 
+					self.newValue.oclAsType(bpmn::StringValue);
+			}
+			('Entity ' + self.entity.name + ' is updated.').log();
+			for (flow in self.outgoingFlows){
+				flow.fire();
+			}
+		}
+	}
+}
+open class DeleteObject{
+	@step
+	def void step(){
+		self.ownerMicroflow.valuedVariables -= self.entity;
+		('Entity ' + self.entity.name + ' is deleted.').log();
+		for (flow in self.outgoingFlows){
+			flow.fire();
+		}
+	}
+}
+open class RetrieveObject{
+	@step
+	def void step(){
+		Entity retrievedObject := self.ownerMicroflow.valuedVariables 
+			-> select (e | e.name = self.entity.name)-> first();
+		if (retrievedObject != null){
+			('Entity ' + retrievedObject.name + ' is retrieved.').log();
+		}else{
+			('Entity ' + self.entity.name + ' does not exist').log();
+		}
+		for (flow in self.outgoingFlows){
+			flow.fire();
+		}
+	}
+}
+open class CreateVariable{
+	@step
+	def void step(){
+		self.ownerMicroflow.valuedVariables += self.newVariable;
+		('Variable ' + self.newVariable.name + ' is created.').log();
+		for (flow in self.outgoingFlows){
+			flow.fire();
+		}
+	}
+}
+open class ChangeVariable{
+	@step
+	def void step(){
+		if (self.targetVariable.oclIsTypeOf(bpmn::IntegerVariable) and
+			self.newValue.oclIsTypeOf(bpmn::IntegerValue)){
+			self.targetVariable.oclAsType(bpmn::IntegerVariable).valueObject := 
+				self.newValue.oclAsType(bpmn::IntegerValue);
+		}else if (self.targetVariable.oclIsTypeOf(bpmn::BooleanVariable) and
+			self.newValue.oclIsTypeOf(bpmn::BooleanValue)){
+			self.targetVariable.oclAsType(bpmn::BooleanVariable).valueObject := 
+				self.newValue.oclAsType(bpmn::BooleanValue);
+		}else if (self.targetVariable.oclIsTypeOf(bpmn::StringVariable) and
+			self.newValue.oclIsTypeOf(bpmn::StringValue)){
+			self.targetVariable.oclAsType(bpmn::StringVariable).valueObject := 
+				self.newValue.oclAsType(bpmn::StringValue);
+		}
+		('Variable ' + self.targetVariable.name + ' is updated.').log();
+		for (flow in self.outgoingFlows){
+			flow.fire();
+		}
+	}
+}
+open class ShowMessage{
+	@step
+	def void step(){
+		('Show message: ' + self.message).log();
+		for (flow in self.outgoingFlows){
+			flow.fire();
+		}
+	}
+}
+open class MicroflowCall{
+	@step
+	def void step(){
+		self.target.executeInnerMicroflow(self.ownerMicroflow);
+	}
+}
+open class StringComparisonExpression{
+
+	def Boolean calculateExpression(){
+		('Start calculating String comparison expression').log();
+		StringValue operandValue1 := self.operand1.valueObject.oclAsType(bpmn::StringValue);
+		StringValue operandValue2 := self.operand2.valueObject.oclAsType(bpmn::StringValue);
+		BooleanValue assigneeValue := bpmn::BooleanValue.create();
+		if (operandValue1.value = operandValue2.value){		
+			assigneeValue.value := true;
+		}else{
+			assigneeValue.value := false;
+		}
+		('Calculation result = ' + assigneeValue.value).log();
+		result := assigneeValue.value;
+	}
+}
+open class BooleanBinaryExpression{
+
+	def Boolean calculateExpression(){
+		('Start calculating Boolean Binary expression').log();
+		BooleanValue operandValue1 := self.operand1.valueObject.oclAsType(bpmn::BooleanValue);
+		BooleanValue operandValue2 := self.operand2.valueObject.oclAsType(bpmn::BooleanValue);
+		BooleanValue assigneeValue := bpmn::BooleanValue.create();
+		if (self.operator = bpmn::BooleanBinaryOperator :: AND){
+			if (operandValue1.value = true and operandValue2.value = true){
+				assigneeValue.value := true;
+			}else{
+				assigneeValue.value := false;
+			}
+		}
+		else if (self.operator = bpmn::BooleanBinaryOperator :: OR){
+			if (operandValue1.value = false and operandValue2.value = false){
+				assigneeValue.value := false;
+			}else{
+				assigneeValue.value := true;
+			}
+		}
+		('Calculation result = ' + assigneeValue.value).log();
+		result := assigneeValue.value;
+	}
+}
+open class BooleanUnaryExpression{
+
+	def Boolean calculateExpression(){
+		('Start calculating Boolean Unary expression').log();
+		BooleanValue operandValue := self.operand.valueObject.oclAsType(bpmn::BooleanValue);
+		BooleanValue assigneeValue := bpmn::BooleanValue.create();
+		if (operandValue.value = true){		
+			assigneeValue.value := false;
+		}else{
+			assigneeValue.value := true;
+		}
+		('Calculation result = ' + assigneeValue.value).log();
+		result := assigneeValue.value;
+	}
+}
+
+open class IntegerComparisonExpression{
+	
+	def Boolean calculateExpression(){
+		('Start calculating integer expression').log();
+		IntegerValue operandValue1 := self.operand1.valueObject.oclAsType(bpmn::IntegerValue);
+		IntegerValue operandValue2 := self.operand2.valueObject.oclAsType(bpmn::IntegerValue);
+		BooleanValue assigneeValue := bpmn::BooleanValue.create();
+		if (self.operator = bpmn::IntegerComparisonOperator::SMALLER){ 
+			if (operandValue1.value < operandValue2.value){
+				assigneeValue.value := true;
+			}else{
+				assigneeValue.value := false;
+			}
+		}
+		else if (self.operator = bpmn::IntegerComparisonOperator::SMALLER_EQUALS){
+			if (operandValue1.value <= operandValue2.value){
+				assigneeValue.value := true;
+			}else{
+				assigneeValue.value := false;
+			}
+		}
+		else if (self.operator = bpmn::IntegerComparisonOperator::EQUALS){
+			if (operandValue1.value = operandValue2.value){
+				assigneeValue.value := true;
+			}else{
+				assigneeValue.value := false;
+			}
+		}else if (self.operator = bpmn::IntegerComparisonOperator::GREATER_EQUALS){
+			if (operandValue1.value >= operandValue2.value){
+				assigneeValue.value := true;
+			}else{
+				assigneeValue.value := false;
+			}
+		}else if (self.operator = bpmn::IntegerComparisonOperator::GREATER){
+			if (operandValue1.value > operandValue2.value){
+				assigneeValue.value := true;
+			}else{
+				assigneeValue.value := false;
+			}
+		}
+		('Calculation result = ' + assigneeValue.value).log();
+		result := assigneeValue.value;
+	}
+}
