@@ -4,7 +4,7 @@ Package testSuite {
 	Test Configuration configuration4Event019_Test_A {
 		create Tester tester of type TestSystem ;
 		create SUT PSSM of type MUT with { MUTPath : '/TDLTestSuite4PSSM/PSSMModels&Tests/Event019_Test_A$behavior$1.xmi' ; DSLName : 'org.imt.pssm.InterpretedStatemachines' ; } ;
-		connect tester.dslSpecificTestGate to PSSM.dslSpecificMUTGate ;
+		connect tester.reactiveGate to PSSM.reactiveGate ;
 	}
 	
 	//Test Data
@@ -18,23 +18,23 @@ Package testSuite {
 	
 	//Test cases
 	Test Description Event019_Test_A uses configuration configuration4Event019_Test_A {
-		tester.dslSpecificTestGate sends _run (
+		tester.reactiveGate sends _run (
 			state_machine = Event019_Test_A
-		) to PSSM.dslSpecificMUTGate ;
-		tester.dslSpecificTestGate sends signal_received (
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
 			state_machine = Event019_Test_A ,
 			signal = Continue
-		) to PSSM.dslSpecificMUTGate ;
-		tester.dslSpecificTestGate sends callOperation_received (
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends callOperation_received (
 			state_machine = Event019_Test_A ,
 			operation = op
-		) to PSSM.dslSpecificMUTGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		) to PSSM.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_exit
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_effected (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = T2_effect
-		) to tester.dslSpecificTestGate ;
+		) to tester.reactiveGate ;
 	}
 	
 	//pssm types
@@ -238,25 +238,25 @@ Package testSuite {
 	
 	callOperation_received callOperation_received ( state_machine = ? , operation = ? ) ;
 	
-	Type behavior_effected ( 
+	Type behavior_executed ( 
 		behavior of type Behavior
 	) with {ExposedEvent ;} ;
 	
-	behavior_effected behavior_effected ( behavior = ? ) ;
+	behavior_executed behavior_executed ( behavior = ? ) ;
 	
 	//test configuration
 	Gate Type genericGate accepts modelExecutionCommand ;
-	Gate Type dslSpecificGate accepts _run , signal_received , callOperation_received, behavior_effected ;
+	Gate Type dslSpecificGate accepts _run , signal_received , callOperation_received, behavior_executed ;
 	Gate Type oclGate accepts OCL ;
 	
 	Component Type TestSystem having {
 		gate genericTestGate of type genericGate ;
-		gate dslSpecificTestGate of type dslSpecificGate ; 
+		gate reactiveGate of type dslSpecificGate ; 
 		gate oclTestGate of type oclGate ;
 	}
 	Component Type MUT having {
 		gate genericMUTGate of type genericGate ;
-		gate dslSpecificMUTGate of type dslSpecificGate ; 
+		gate reactiveGate of type dslSpecificGate ; 
 		gate oclMUTGate of type oclGate ;
 	}
 	Annotation MUTPath ;
