@@ -16,34 +16,34 @@ Package Event019_Test_C_TestSuite {
 	Behavior S1_entry ( _name = 'S1(entry)' ) ;
 	Behavior T3_testEnd ( _name = 'T3(testEnd)' ) ;
 	Test Description Event019_Test_C uses configuration configuration4Event019_Test_C {
-		tester.dslSpecificTestGate sends _run (
+		tester.reactiveGate sends _run (
 			state_machine = Event019_Test_C
-		) to PSSM.dslSpecificMUTGate ;
-		tester.dslSpecificTestGate sends callOperation_received (
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends callOperation_received (
 			state_machine = Event019_Test_C ,
 			operation = op1
-		) to PSSM.dslSpecificMUTGate ;
-		tester.dslSpecificTestGate sends callOperation_received (
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends callOperation_received (
 			state_machine = Event019_Test_C ,
 			operation = op2
-		) to PSSM.dslSpecificMUTGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to PSSM.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_entry
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_1_entry
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_1_1_entry
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_1_1_exit
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = T1_1_2_effect
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = T3_testEnd
-		) to tester.dslSpecificTestGate ;
+		) to tester.reactiveGate ;
 	}
 }

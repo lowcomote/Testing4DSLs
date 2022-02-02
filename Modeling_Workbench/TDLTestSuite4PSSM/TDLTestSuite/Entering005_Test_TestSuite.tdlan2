@@ -11,27 +11,27 @@ Package Entering005_Test_TestSuite {
 	Behavior S1_entry ( _name = 'S1(entry)' ) ;
 	Behavior T2_effect ( _name = 'T2(effect)' ) ;
 	Test Description Entering005_Test uses configuration configuration4Entering005_Test {
-		tester.dslSpecificTestGate sends _run (
+		tester.reactiveGate sends _run (
 			state_machine = Entering005_Test
-		) to PSSM.dslSpecificMUTGate ;
-		tester.dslSpecificTestGate sends signal_received (
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
 			state_machine = Entering005_Test ,
 			signal = Start
-		) to PSSM.dslSpecificMUTGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to PSSM.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = T2_effect
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_entry
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_1_entry
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_1_1_entry
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = T1_1_2_testEnd
-		) to tester.dslSpecificTestGate ;
+		) to tester.reactiveGate ;
 	}
 }

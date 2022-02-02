@@ -12,30 +12,30 @@ Package Final001_Test_TestSuite {
 	Behavior S2_1_exit ( _name = 'S2.1(exit)' ) ;
 	Behavior T2_2_testEnd ( _name = 'T2.2(testEnd)' ) ;
 	Test Description Final001_Test uses configuration configuration4Final001_Test {
-		tester.dslSpecificTestGate sends _run (
+		tester.reactiveGate sends _run (
 			state_machine = Final001_Test
-		) to PSSM.dslSpecificMUTGate ;
-		tester.dslSpecificTestGate sends signal_received (
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
 			state_machine = Final001_Test ,
 			signal = Continue
-		) to PSSM.dslSpecificMUTGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to PSSM.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_1_1_exit
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = T1_1_2_effect
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_1_exit
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = T1_2_effect
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = S2_1_exit
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = T2_2_testEnd
-		) to tester.dslSpecificTestGate ;
+		) to tester.reactiveGate ;
 	}
 }

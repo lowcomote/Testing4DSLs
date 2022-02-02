@@ -17,45 +17,45 @@ Package Deferred004_Test_B_TestSuite {
 	Behavior S1_exit ( _name = 'S1(exit)' ) ;
 	Behavior T3_testEnd ( _name = 'T3(testEnd)' ) ;
 	Test Description Deferred004_Test_B uses configuration configuration4Deferred004_Test_B {
-		tester.dslSpecificTestGate sends _run (
+		tester.reactiveGate sends _run (
 			state_machine = Deferred004_Test_B
-		) to PSSM.dslSpecificMUTGate ;
-		tester.dslSpecificTestGate sends signal_received (
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
 			state_machine = Deferred004_Test_B ,
 			signal = Start
-		) to PSSM.dslSpecificMUTGate ;
-		tester.dslSpecificTestGate sends signal_received (
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
 			state_machine = Deferred004_Test_B ,
 			signal = AnotherSignal
-		) to PSSM.dslSpecificMUTGate ;
-		tester.dslSpecificTestGate sends signal_received (
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
 			state_machine = Deferred004_Test_B ,
 			signal = Continue
-		) to PSSM.dslSpecificMUTGate ;
-		tester.dslSpecificTestGate sends signal_received (
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
 			state_machine = Deferred004_Test_B ,
 			signal = Pending
-		) to PSSM.dslSpecificMUTGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to PSSM.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_1_1_exit
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = T1_1_2_effect
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_1_exit
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = S2_1_exit
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = T2_2_effect
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_exit
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = T3_testEnd
-		) to tester.dslSpecificTestGate ;
+		) to tester.reactiveGate ;
 	}
 }

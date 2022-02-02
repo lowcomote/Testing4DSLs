@@ -13,42 +13,42 @@ Package Transition010_TestSuite {
 	Behavior IT_doEffectInternalTransition ( _name = 'IT(doEffectInternalTransition)' ) ;
 	Behavior T2_testEnd ( _name = 'T2(testEnd)' ) ;
 	Test Description Transition010 uses configuration configuration4Transition010 {
-		tester.dslSpecificTestGate sends _run (
+		tester.reactiveGate sends _run (
 			state_machine = Transition010
-		) to PSSM.dslSpecificMUTGate ;
-		tester.dslSpecificTestGate sends signal_received (
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
 			state_machine = Transition010 ,
 			signal = Start
-		) to PSSM.dslSpecificMUTGate ;
-		tester.dslSpecificTestGate sends signal_received (
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
 			state_machine = Transition010 ,
 			signal = AnotherSignal
-		) to PSSM.dslSpecificMUTGate ;
-		tester.dslSpecificTestGate sends signal_received (
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
 			state_machine = Transition010 ,
 			signal = AnotherSignal
-		) to PSSM.dslSpecificMUTGate ;
-		tester.dslSpecificTestGate sends signal_received (
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
 			state_machine = Transition010 ,
 			signal = Continue
-		) to PSSM.dslSpecificMUTGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to PSSM.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = Waiting_exit
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_entry
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = IT_doEffectInternalTransition
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = IT_doEffectInternalTransition
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_exit
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = T2_testEnd
-		) to tester.dslSpecificTestGate ;
+		) to tester.reactiveGate ;
 	}
 }

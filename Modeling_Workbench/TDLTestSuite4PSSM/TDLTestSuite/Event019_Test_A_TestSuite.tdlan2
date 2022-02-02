@@ -11,22 +11,22 @@ Package Event019_Test_A_TestSuite {
 	Behavior T2_effect ( _name = 'T2(effect)' ) ;
 	Behavior T3_testEnd ( _name = 'T3(testEnd)' ) ;
 	Test Description Event019_Test_A uses configuration configuration4Event019_Test_A {
-		tester.dslSpecificTestGate sends _run (
+		tester.reactiveGate sends _run (
 			state_machine = Event019_Test_A
-		) to PSSM.dslSpecificMUTGate ;
-		tester.dslSpecificTestGate sends signal_received (
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
 			state_machine = Event019_Test_A ,
 			signal = Continue
-		) to PSSM.dslSpecificMUTGate ;
-		tester.dslSpecificTestGate sends callOperation_received (
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends callOperation_received (
 			state_machine = Event019_Test_A ,
 			operation = op
-		) to PSSM.dslSpecificMUTGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to PSSM.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_exit
-		) to tester.dslSpecificTestGate ;
-		PSSM.dslSpecificMUTGate sends behavior_executed (
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = T2_effect
-		) to tester.dslSpecificTestGate ;
+		) to tester.reactiveGate ;
 	}
 }
