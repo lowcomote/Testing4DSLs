@@ -1,0 +1,40 @@
+	// BeginInjectInto org.imt.xminijava.interpreter.StatementAspect#void evaluateStatement(State) from org.imt.xminijava.interpreter.PrintStatementAspect
+		if (_self instanceof org.imt.minijava.xminiJava.PrintStatement){
+			org.imt.xminijava.interpreter.PrintStatementAspect.evaluateStatement((org.imt.minijava.xminiJava.PrintStatement)_self,state);
+		} else
+		// EndInjectInto org.imt.xminijava.interpreter.StatementAspect#void evaluateStatement(State) from org.imt.xminijava.interpreter.PrintStatementAspect
+	// BeginInjectInto org.imt.xminijava.interpreter.StatementAspect#void evaluateStatement(State) from org.imt.xminijava.interpreter.WhileStatementAspect
+		if (_self instanceof org.imt.minijava.xminiJava.WhileStatement){
+			org.imt.xminijava.interpreter.WhileStatementAspect.evaluateStatement((org.imt.minijava.xminiJava.WhileStatement)_self,state);
+		} else
+		// EndInjectInto org.imt.xminijava.interpreter.StatementAspect#void evaluateStatement(State) from org.imt.xminijava.interpreter.WhileStatementAspect
+	// BeginInjectInto org.imt.xminijava.interpreter.StatementAspect#void evaluateStatement(State) from org.imt.xminijava.interpreter.AssigmentAspect
+		if (_self instanceof org.imt.minijava.xminiJava.Assignment){
+			org.imt.xminijava.interpreter.AssigmentAspect.evaluateStatement((org.imt.minijava.xminiJava.Assignment)_self,state);
+		} else
+		// EndInjectInto org.imt.xminijava.interpreter.StatementAspect#void evaluateStatement(State) from org.imt.xminijava.interpreter.AssigmentAspect
+	// BeginInjectInto org.imt.xminijava.interpreter.StatementAspect#void evaluateStatement(State) from org.imt.xminijava.interpreter.ReturnAspect
+		if (_self instanceof org.imt.minijava.xminiJava.Return){
+			org.imt.xminijava.interpreter.ReturnAspect.evaluateStatement((org.imt.minijava.xminiJava.Return)_self,state);
+		} else
+		// EndInjectInto org.imt.xminijava.interpreter.StatementAspect#void evaluateStatement(State) from org.imt.xminijava.interpreter.ReturnAspect
+	// BeginInjectInto org.imt.xminijava.interpreter.StatementAspect#void evaluateStatement(State) from org.imt.xminijava.interpreter.ExpressionStatementAspect
+		if (_self instanceof org.imt.minijava.xminiJava.Expression){
+			org.imt.xminijava.interpreter.ExpressionStatementAspect.evaluateStatement((org.imt.minijava.xminiJava.Expression)_self,state);
+		} else
+		// EndInjectInto org.imt.xminijava.interpreter.StatementAspect#void evaluateStatement(State) from org.imt.xminijava.interpreter.ExpressionStatementAspect
+	// BeginInjectInto org.imt.xminijava.interpreter.StatementAspect#void evaluateStatement(State) from org.imt.xminijava.interpreter.ForStatementAspect
+		if (_self instanceof org.imt.minijava.xminiJava.ForStatement){
+			org.imt.xminijava.interpreter.ForStatementAspect.evaluateStatement((org.imt.minijava.xminiJava.ForStatement)_self,state);
+		} else
+		// EndInjectInto org.imt.xminijava.interpreter.StatementAspect#void evaluateStatement(State) from org.imt.xminijava.interpreter.ForStatementAspect
+	// BeginInjectInto org.imt.xminijava.interpreter.StatementAspect#void evaluateStatement(State) from org.imt.xminijava.interpreter.IfStatementAspect
+		if (_self instanceof org.imt.minijava.xminiJava.IfStatement){
+			org.imt.xminijava.interpreter.IfStatementAspect.evaluateStatement((org.imt.minijava.xminiJava.IfStatement)_self,state);
+		} else
+		// EndInjectInto org.imt.xminijava.interpreter.StatementAspect#void evaluateStatement(State) from org.imt.xminijava.interpreter.IfStatementAspect
+	// BeginInjectInto org.imt.xminijava.interpreter.StatementAspect#void evaluateStatement(State) from org.imt.xminijava.interpreter.BlockAspect
+		if (_self instanceof org.imt.minijava.xminiJava.Block){
+			org.imt.xminijava.interpreter.BlockAspect.evaluateStatement((org.imt.minijava.xminiJava.Block)_self,state);
+		} else
+		// EndInjectInto org.imt.xminijava.interpreter.StatementAspect#void evaluateStatement(State) from org.imt.xminijava.interpreter.BlockAspect
