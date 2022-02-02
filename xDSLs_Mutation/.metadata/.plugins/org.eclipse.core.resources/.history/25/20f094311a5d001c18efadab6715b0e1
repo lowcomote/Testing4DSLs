@@ -1,0 +1,10 @@
+generate exhaustive mutants
+in "data/out/"
+from "data/model/"
+metamodel "/XArduinoMutation/data/model/arduino.ecore"
+
+with blocks {
+	cis ""{
+		led = select one LED
+	}
+}

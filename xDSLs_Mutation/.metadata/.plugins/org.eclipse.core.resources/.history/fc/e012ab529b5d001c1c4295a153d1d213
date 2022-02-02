@@ -1,0 +1,13 @@
+generate 20 mutants
+in "data/out/"
+from "data/model/"
+metamodel "/MiniJavaMutation/data/model/XMiniJava.ecore"
+
+with blocks {
+	codif "Removes a unary conditional operator for ifStatement" {
+		if1 = select one IfStatement where {expression is typed Not}
+		notExp = select one Expression in if1->expression
+		exp2 = select one Expression in notExp->expression
+		modify if1 with {expression = exp2}
+	}
+}

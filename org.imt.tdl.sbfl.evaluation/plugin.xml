@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            name="Evaluate SBFL Techniques"
+            categoryId="org.etsi.mts.tdl.tools.rt.ui.commands.category"
+            id="org.etsi.mts.tdl.tools.rt.ui.commands.sbflEvaluatorCommand">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="org.etsi.mts.tdl.tools.rt.ui.commands.sbflEvaluatorCommand"
+            class="org.imt.tdl.sbfl.evaluation.ui.SBFLEvaluationHandler">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               label="TDL"
+               mnemonic="T"
+               id="org.etsi.mts.tdl.tools.menus.TDLMenu">
+            <command
+                  commandId="org.etsi.mts.tdl.tools.rt.ui.commands.sbflEvaluatorCommand"
+                  icon="icons/sbfl.jpg"
+                  mnemonic="E"
+                  id="org.etsi.mts.tdl.tools.rt.ui.menus.sbflEvaluatorCommand">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="org.etsi.mts.tdl.tools.rt.ui.toolbars.translate">
+            <command
+                  commandId="org.etsi.mts.tdl.tools.rt.ui.commands.sbflEvaluatorCommand"
+                  icon="icons/sbfl.jpg"
+                  tooltip="Evaluate SBFL Techniques"
+                  id="org.etsi.mts.tdl.tools.rt.ui.menus.sbflEvaluatorCommand">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+</plugin>

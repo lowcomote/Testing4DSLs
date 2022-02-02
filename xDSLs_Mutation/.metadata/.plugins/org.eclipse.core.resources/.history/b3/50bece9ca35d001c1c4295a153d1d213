@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<appliedMutations:Mutations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:appliedMutations="http://appliedMutations/1.0">
+  <muts xsi:type="appliedMutations:InformationChanged">
+    <def href="../../../MiniJavaGeneral.model#//@blocks.9/@commands.0"/>
+    <object href="../../../../model/BinarySearch.model#//@classes.0/@members.3/@body/@statements.1/@value"/>
+    <attChanges attName="value" oldVal="0" newVal="-1">
+      <def href="../../../MiniJavaGeneral.model#//@blocks.9/@commands.0"/>
+    </attChanges>
+  </muts>
+</appliedMutations:Mutations>
