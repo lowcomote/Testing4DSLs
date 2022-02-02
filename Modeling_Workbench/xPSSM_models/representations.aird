@@ -56,4 +56,11 @@
   <semanticResources>gemoc-gen/execution/execution-20220127_214500/OnlineShopping.model</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20220127_214501/OnlineShopping.model</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20220127_214502/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220202_114757/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220202_114758/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220202_114759/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220202_114800/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220202_114801/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220202_114802/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220202_114803/BankATM.model</semanticResources>
 </viewpoint:DAnalysis>
