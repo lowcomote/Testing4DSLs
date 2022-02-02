@@ -1,0 +1,1 @@
+Mutant generation mode: exhaustive for all models
