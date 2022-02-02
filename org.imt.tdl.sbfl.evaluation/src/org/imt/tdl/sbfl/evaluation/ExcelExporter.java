@@ -29,17 +29,14 @@ public class ExcelExporter {
        	firstMeasure.getRank().keySet().stream().forEach(t -> this.SBFLTechniques.add(t));
 	}
 	
-	public void saveResults2Excelfile() {
+	public void saveResults2Excelfile() throws FileNotFoundException{
 		this.exportMutantResult2Excel();
 		this.exportOverallResult2Excel();
 		try {
-			String filePath = "C:\\labtop\\GitHub\\xtdl_FaultLocalization\\org.imt.tdl.sbfl.evaluation\\evaluationData\\" + seedModelName + ".xlsx";
+			String filePath = "C:\\labtop\\GitHub\\xtdl\\org.imt.tdl.sbfl.evaluation\\evaluationData\\" + seedModelName + ".xlsx";
 			FileOutputStream fos = new FileOutputStream(filePath);
 			workbook.write(fos);
 			fos.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,6 +1,7 @@
 package org.imt.tdl.sbfl.evaluation;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -76,8 +77,12 @@ public class SBFLEvaluation {
 		if (mutant_SBFLMeasures4FaultyObject.size()>0) {
 			//export results to Excel
 			ExcelExporter excelExporter = new ExcelExporter(mutant_SBFLMeasures4FaultyObject);
-			excelExporter.saveResults2Excelfile();
-			System.out.println("Results saved in an Excel file");
+			try {
+				excelExporter.saveResults2Excelfile();
+				System.out.println("Results saved in an Excel file");
+			}catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
 		System.out.println("Evaluation finished: ");
 		System.out.println("# of killed mutants: " + mutant_Verdict.size());
