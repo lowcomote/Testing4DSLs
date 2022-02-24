@@ -1,14 +1,6 @@
 package org.imt.tdl.libraryGenerator;
 
 import java.io.IOException;
-
-
-
-
-
-
-
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -16,17 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecoretools.ale.BoolType;
-import org.eclipse.emf.ecoretools.ale.IntType;
-import org.eclipse.emf.ecoretools.ale.RealType;
-import org.eclipse.emf.ecoretools.ale.SeqType;
-import org.eclipse.emf.ecoretools.ale.SetType;
-import org.eclipse.emf.ecoretools.ale.Unit;
-import org.eclipse.emf.ecoretools.ale.typeLiteral;
-import org.eclipse.emf.ecoretools.ale.StringType;
 import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.BehavioralInterface;
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.Event;
@@ -46,7 +29,6 @@ import org.etsi.mts.tdl.tdlFactory;
 
 public class DSLSpecificEventsGenerator {
 	private String dslName;
-	private EPackage metamodelRootElement;
 	private BehavioralInterface interfaceRootElement;
 	
 	private tdlFactory factory;
@@ -59,7 +41,6 @@ public class DSLSpecificEventsGenerator {
 	public DSLSpecificEventsGenerator(String dslFilePath) throws IOException {
 		this.factory = tdlFactory.eINSTANCE; 
 		this.dslName = validName(getDslName(dslFilePath));
-		this.metamodelRootElement = getMetamodelRootElement(dslFilePath);
 		this.interfaceRootElement = getBehavioralInterfaceRootElement(dslFilePath);
 	}
 	
@@ -153,17 +134,6 @@ public class DSLSpecificEventsGenerator {
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
 		String[] dslFullName = dsl.getEntry("name").getValue().split("\\.");
 		return dslFullName[dslFullName.length-1];
-	}
-	protected static EPackage getMetamodelRootElement(String dslFilePath) {
-		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
-		Dsl dsl = (Dsl)dslRes.getContents().get(0);
-		if (dsl.getEntry("ecore") != null) {
-			String metamodelPath = dsl.getEntry("ecore").getValue().replaceFirst("resource", "plugin");
-			Resource metamodelRes = (new ResourceSetImpl()).getResource(URI.createURI(metamodelPath), true);
-			EPackage metamodelRootElement = (EPackage) metamodelRes.getContents().get(0);
-			return metamodelRootElement;
-		}
-		return null;
 	}
 	
 	protected static BehavioralInterface getBehavioralInterfaceRootElement(String dslFilePath) {

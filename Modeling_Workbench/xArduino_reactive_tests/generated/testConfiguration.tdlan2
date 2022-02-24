@@ -70,4 +70,13 @@ Package testConfiguration {
 		connect tester.reactiveGate to arduino.reactiveGate ;
 		connect tester.oclGate to arduino.oclGate ;
 	}
+	Test Configuration sensorLedConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT arduino of type MUT with { 
+			MUTPath : '/xArduino_reactive_models/sensorAlarm.model' ; 
+			DSLName : 'org.imt.arduino.reactiveArduino' ;
+		} ;
+		connect tester.reactiveGate to arduino.reactiveGate ;
+		connect tester.oclGate to arduino.oclGate ;
+	}
 }

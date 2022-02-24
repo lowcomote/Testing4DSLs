@@ -31,4 +31,5 @@
   <semanticResources>result_coverage/execution/execution-20220127_215253-servoIrButton/servoIrButton_Test.tdlan2</semanticResources>
   <semanticResources>result_coverage/execution/execution-20220127_215253-servoIrButton/testCoverage.xmi</semanticResources>
   <semanticResources>result_coverage/execution/execution-20220127_215253-servoIrButton/testReport.xmi</semanticResources>
+  <semanticResources>result_coverage/execution/execution-20220127_214543-activeWait/testCoverage.xmi</semanticResources>
 </viewpoint:DAnalysis>

@@ -1,13 +1,11 @@
 package org.imt.tdl.sbfl.evaluation;
 
-import org.eclipse.gmf.runtime.emf.core.internal.util.Trace;
 import org.etsi.mts.tdl.Annotation;
 import org.etsi.mts.tdl.ComponentInstance;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
 import org.imt.k3tdl.k3dsa.TestConfigurationAspect;
 import org.imt.k3tdl.k3dsa.TestDescriptionAspect;
-import org.imt.tdl.configuration.EngineFactory;
 import org.imt.tdl.coverage.TDLCoverageUtil;
 import org.imt.tdl.coverage.TDLTestCaseCoverage;
 import org.imt.tdl.coverage.TDLTestSuiteCoverage;
