@@ -582,6 +582,7 @@ class StaticDataUseAspect extends DataUseAspect{
 }
 @Aspect (className = LiteralValueUse)
 class LiteralValueUseAspect extends StaticDataUseAspect{
+	
 	@OverrideAspectMethod
 	def String assertEquals(Object featureValue){
 		var String parameterValue = _self.value
@@ -602,7 +603,9 @@ class LiteralValueUseAspect extends StaticDataUseAspect{
 			domain.getCommandStack().execute(new RecordingCommand(domain) {
 	        override protected doExecute() {
 	        	var parameterValue = _self.value
-				parameterValue = parameterValue.substring(1, parameterValue.length-1)//remove quotation marks
+	        	if (parameterValue.startsWith("\"") || parameterValue.startsWith("'")){
+	        		parameterValue = parameterValue.substring(1, parameterValue.length-1)//remove quotation marks
+	        	}
 				if (matchedFeature.EType.name.equals("EInt")){
 					object.eSet(matchedFeature, Integer.parseInt(parameterValue));
 				} else if (matchedFeature.EType.name.equals("EBoolean")){
