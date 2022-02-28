@@ -13,6 +13,11 @@ import org.etsi.mts.tdl.StructuredDataInstance
 
 import static extension org.imt.k3tdl.k3dsa.DataInstanceUseAspect.*
 import static extension org.imt.k3tdl.k3dsa.DataTypeAspect.*
+import java.util.List
+import java.util.ArrayList
+import org.eclipse.emf.ecore.EStructuralFeature
+import org.etsi.mts.tdl.DataUse
+import org.etsi.mts.tdl.LiteralValueUse
 
 class ModelEObjectCreator {
 	
@@ -49,12 +54,7 @@ class ModelEObjectCreator {
 				val eStructuralFeature = eobjectType.getEStructuralFeature(getValidName(memberAssignment.member.name))
 				if (eStructuralFeature !== null && memberAssignment.memberSpec instanceof DataInstanceUse){
 					val memberValue = memberAssignment.memberSpec as DataInstanceUse
-					val EObject featureValue = memberValue.getMatchedMUTElement(MUTResource, isAssertion, DSLPath)
-					if (featureValue !== null){
-						newEObject.eSet(eStructuralFeature, featureValue)
-					}else{
-						newEObject.eSet(eStructuralFeature, createEObject(memberValue))
-					}
+					setFeatureValue(newEObject, eStructuralFeature, getTdlValues(memberValue))
 				}
 			}
 		}
@@ -63,13 +63,48 @@ class ModelEObjectCreator {
 			val eStructuralFeature = eobjectType.getEStructuralFeature(getValidName(parameterBinding.parameter.name))
 			if (eStructuralFeature !== null && parameterBinding.dataUse instanceof DataInstanceUse){
 				val parameterValue = parameterBinding.dataUse as DataInstanceUse
-				val EObject featureValue = parameterValue.getMatchedMUTElement(MUTResource, isAssertion, DSLPath)
+				setFeatureValue(newEObject, eStructuralFeature, getTdlValues(parameterValue))
+			}
+		}
+	}
+	
+	def List<DataUse> getTdlValues (DataInstanceUse dataInstanceUse){
+		var List<DataUse> tdlValues = new ArrayList
+		if (dataInstanceUse.item=== null || dataInstanceUse.item.size <= 0){
+			tdlValues.add(dataInstanceUse)
+		}else{
+			for (i:0 ..<dataInstanceUse.item.size){
+				tdlValues.add(dataInstanceUse.item.get(i))
+			}
+		}
+		return tdlValues
+	}
+	
+	def void setFeatureValue (EObject newEObject, EStructuralFeature feature, List<DataUse> featureTdlValues){
+		
+		//all the values must be from the same type:
+		//(1) if they are dataInstanceUse, it means they are references to EObjects
+		if (featureTdlValues.get(0) instanceof DataInstanceUse){
+			var List<EObject> featureValues = new ArrayList
+			for (DataUse tdlValue : featureTdlValues){
+				val EObject featureValue = (tdlValue as DataInstanceUse).getMatchedMUTElement(MUTResource, isAssertion, DSLPath)
 				if (featureValue !== null){
-					newEObject.eSet(eStructuralFeature, featureValue)
+					featureValues.add(featureValue)
 				}else{
-					newEObject.eSet(eStructuralFeature, createEObject(parameterValue))
+					featureValues.add(createEObject(tdlValue as DataInstanceUse))
 				}
 			}
+			if (!featureValues.empty){
+				if (feature.isMany){//the feature value is a list of eobjects
+					newEObject.eSet(feature, featureValues)
+				}else{//the feature value is only one eobject
+					newEObject.eSet(feature, featureValues.get(0))
+				}
+			}
+		}
+		//if they are LiteralValueUse, it means they are primitives
+		if (featureTdlValues.get(0) instanceof LiteralValueUse){
+			//TODO: check for different supported primitives
 		}
 	}
 	
