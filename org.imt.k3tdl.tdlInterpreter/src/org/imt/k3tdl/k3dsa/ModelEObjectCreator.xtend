@@ -1,23 +1,21 @@
 package org.imt.k3tdl.k3dsa
 
-import org.eclipse.emf.common.util.URI
+import java.util.ArrayList
+import java.util.List
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EPackage
+import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
-import org.eclipse.gemoc.dsl.Dsl
 import org.etsi.mts.tdl.DataInstanceUse
+import org.etsi.mts.tdl.DataUse
+import org.etsi.mts.tdl.LiteralValueUse
 import org.etsi.mts.tdl.MemberAssignment
 import org.etsi.mts.tdl.StructuredDataInstance
 
+import static org.imt.k3tdl.k3dsa.DataTypeAspect.*
+
 import static extension org.imt.k3tdl.k3dsa.DataInstanceUseAspect.*
-import static extension org.imt.k3tdl.k3dsa.DataTypeAspect.*
-import java.util.List
-import java.util.ArrayList
-import org.eclipse.emf.ecore.EStructuralFeature
-import org.etsi.mts.tdl.DataUse
-import org.etsi.mts.tdl.LiteralValueUse
 
 class ModelEObjectCreator {
 	
@@ -31,13 +29,12 @@ class ModelEObjectCreator {
 		this.isAssertion = isAssertion
 		this.DSLPath = DSLPath
 		//create an EObject using the factory of its EClass
-		rootEPackage = getRootEPackage(DSLPath)
+		rootEPackage = MUTResource.contents.get(0).eClass.EPackage
 		return createEObject(TDLObject);
 	}
 	
 	def EObject createEObject(DataInstanceUse TDLObject){
 		//create an EObject using the factory of its EClass
-		rootEPackage = getRootEPackage(DSLPath)
 		val String eclassName = getValidName(TDLObject.dataInstance.dataType)
 		val EClass eobjectType = rootEPackage.getEClassifier(eclassName) as EClass
 		var EObject newEObject = rootEPackage.EFactoryInstance.create(eobjectType)
@@ -52,8 +49,8 @@ class ModelEObjectCreator {
 			val StructuredDataInstance dataInstance = TDLObject.dataInstance as StructuredDataInstance
 			for (MemberAssignment memberAssignment: dataInstance.memberAssignment){
 				val eStructuralFeature = eobjectType.getEStructuralFeature(getValidName(memberAssignment.member.name))
-				if (eStructuralFeature !== null && memberAssignment.memberSpec instanceof DataInstanceUse){
-					val memberValue = memberAssignment.memberSpec as DataInstanceUse
+				if (eStructuralFeature !== null){
+					val memberValue = memberAssignment.memberSpec
 					setFeatureValue(newEObject, eStructuralFeature, getTdlValues(memberValue))
 				}
 			}
@@ -61,36 +58,40 @@ class ModelEObjectCreator {
 		for (i : 0 ..<TDLObject.argument.size){//check the parameter bindings
 			val parameterBinding = TDLObject.argument.get(i)
 			val eStructuralFeature = eobjectType.getEStructuralFeature(getValidName(parameterBinding.parameter.name))
-			if (eStructuralFeature !== null && parameterBinding.dataUse instanceof DataInstanceUse){
-				val parameterValue = parameterBinding.dataUse as DataInstanceUse
+			if (eStructuralFeature !== null){
+				val parameterValue = parameterBinding.dataUse
 				setFeatureValue(newEObject, eStructuralFeature, getTdlValues(parameterValue))
 			}
 		}
 	}
 	
-	def List<DataUse> getTdlValues (DataInstanceUse dataInstanceUse){
+	def List<DataUse> getTdlValues (DataUse dataUse){
 		var List<DataUse> tdlValues = new ArrayList
-		if (dataInstanceUse.item=== null || dataInstanceUse.item.size <= 0){
-			tdlValues.add(dataInstanceUse)
-		}else{
-			for (i:0 ..<dataInstanceUse.item.size){
-				tdlValues.add(dataInstanceUse.item.get(i))
+		if (dataUse instanceof DataInstanceUse){
+			val dataInstanceUse = dataUse as DataInstanceUse
+			if (dataInstanceUse.item=== null || dataInstanceUse.item.size <= 0){
+				tdlValues.add(dataInstanceUse)
+			}else{
+				for (i:0 ..<dataInstanceUse.item.size){
+					tdlValues.add(dataInstanceUse.item.get(i))
+				}
 			}
+		}else if (dataUse instanceof LiteralValueUse){
+			tdlValues.add(dataUse)
 		}
 		return tdlValues
 	}
 	
 	def void setFeatureValue (EObject newEObject, EStructuralFeature feature, List<DataUse> featureTdlValues){
-		
 		//all the values must be from the same type:
-		//(1) if they are dataInstanceUse, it means they are references to EObjects
+		//(1) if they are dataInstanceUse, it means they are references to EObjects of the model under test
 		if (featureTdlValues.get(0) instanceof DataInstanceUse){
 			var List<EObject> featureValues = new ArrayList
 			for (DataUse tdlValue : featureTdlValues){
 				val EObject featureValue = (tdlValue as DataInstanceUse).getMatchedMUTElement(MUTResource, isAssertion, DSLPath)
-				if (featureValue !== null){
+				if (featureValue !== null){//if the EObject found in the model, add it as a value for the feature
 					featureValues.add(featureValue)
-				}else{
+				}else{//if the EObject is not found in the model, we must create it and then add it as a value for the feature
 					featureValues.add(createEObject(tdlValue as DataInstanceUse))
 				}
 			}
@@ -103,20 +104,55 @@ class ModelEObjectCreator {
 			}
 		}
 		//if they are LiteralValueUse, it means they are primitives
-		if (featureTdlValues.get(0) instanceof LiteralValueUse){
-			//TODO: check for different supported primitives
+		else if (featureTdlValues.get(0) instanceof LiteralValueUse){
+			if (feature.name.equals("EInt")){
+				if (!feature.isMany){//a single integer must be set as the value
+					var featureValue = getLiteralValue(featureTdlValues.get(0) as LiteralValueUse)
+					Integer.parseInt(featureValue)
+					newEObject.eSet(feature, Integer.parseInt(featureValue))
+				}else{//a list of integers must be set as the value
+					var List<Integer> featureValues = new ArrayList
+					for (DataUse tdlValue : featureTdlValues){
+						var featureValue = getLiteralValue(tdlValue as LiteralValueUse)
+						Integer.parseInt(featureValue)
+			        	featureValues.add(Integer.parseInt(featureValue))
+					}
+					newEObject.eSet(feature, featureValues)
+				}
+			} else if (feature.EType.name.equals("EBoolean")){
+				if (!feature.isMany){//a single boolean must be set as the value
+					var featureValue = getLiteralValue(featureTdlValues.get(0) as LiteralValueUse)
+					newEObject.eSet(feature, Boolean.parseBoolean(featureValue))
+				}else{//a list of booleans must be set as the value
+					var List<Boolean> featureValues = new ArrayList
+					for (DataUse tdlValue : featureTdlValues){
+						var featureValue = getLiteralValue(tdlValue as LiteralValueUse)
+			        	featureValues.add(Boolean.parseBoolean(featureValue))
+					}
+					newEObject.eSet(feature, featureValues)
+				}
+			} else {
+				if (!feature.isMany){//a single string must be set as the value
+					var featureValue = getLiteralValue(featureTdlValues.get(0) as LiteralValueUse)
+					newEObject.eSet(feature, featureValue)
+				}else{//a list of strings must be set as the value
+					var List<String> featureValues = new ArrayList
+					for (DataUse tdlValue : featureTdlValues){
+						var featureValue = getLiteralValue(tdlValue as LiteralValueUse)
+			        	featureValues.add(featureValue)
+					}
+					newEObject.eSet(feature, featureValues)
+				}
+			} 
 		}
 	}
 	
-	def EPackage getRootEPackage(String DSLPath) {
-		var dslRes = (new ResourceSetImpl()).getResource(URI.createURI(DSLPath), true);
-		var dsl = dslRes.getContents().get(0) as Dsl;
-		if (dsl.getEntry("ecore") !== null) {
-			var metamodelPath = dsl.getEntry("ecore").getValue().replaceFirst("resource", "plugin");
-			var metamodelRes = (new ResourceSetImpl()).getResource(URI.createURI(metamodelPath), true);
-			return metamodelRes.getContents().get(0) as EPackage;
-		}
-		return null;
+	def String getLiteralValue(LiteralValueUse literalValue){
+		var featureValue = literalValue.value
+		if (featureValue.startsWith("\"") || featureValue.startsWith("'")){
+    		featureValue = featureValue.substring(1, featureValue.length-1)//remove quotation marks
+    	}
+    	return featureValue
 	}
 	
 	def String getValidName(String name){
