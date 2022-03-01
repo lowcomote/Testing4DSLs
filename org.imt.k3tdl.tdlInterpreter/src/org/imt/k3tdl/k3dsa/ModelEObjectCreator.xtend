@@ -105,7 +105,7 @@ class ModelEObjectCreator {
 		}
 		//if they are LiteralValueUse, it means they are primitives
 		else if (featureTdlValues.get(0) instanceof LiteralValueUse){
-			if (feature.name.equals("EInt")){
+			if (feature.EType.name.equals("EIntegerObject") || feature.EType.name.equals("EInt")){
 				if (!feature.isMany){//a single integer must be set as the value
 					var featureValue = getLiteralValue(featureTdlValues.get(0) as LiteralValueUse)
 					Integer.parseInt(featureValue)
@@ -119,7 +119,7 @@ class ModelEObjectCreator {
 					}
 					newEObject.eSet(feature, featureValues)
 				}
-			} else if (feature.EType.name.equals("EBoolean")){
+			} else if (feature.EType.name.equals("EBoolean")){//TODO: must be tested
 				if (!feature.isMany){//a single boolean must be set as the value
 					var featureValue = getLiteralValue(featureTdlValues.get(0) as LiteralValueUse)
 					newEObject.eSet(feature, Boolean.parseBoolean(featureValue))

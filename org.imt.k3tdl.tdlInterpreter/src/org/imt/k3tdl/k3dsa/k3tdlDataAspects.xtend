@@ -2,6 +2,7 @@ package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 
+
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 import java.util.ArrayList
 import org.eclipse.emf.common.util.EList
@@ -330,8 +331,9 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 	}
 	
 	def EObject createEventOccurrence(Resource MUTResource, boolean isAssertion, String DSLPath){
-		val PSSMEventOccurrenceCreator eventCreator = new PSSMEventOccurrenceCreator
-		return eventCreator.createEventOccurrence(_self, MUTResource, isAssertion, DSLPath)
+		val ModelEObjectCreator objectCreator = new ModelEObjectCreator
+		val eventOccurrence = objectCreator.createEObject(_self, MUTResource, isAssertion, DSLPath)
+		return eventOccurrence
 	}
 	
 	@OverrideAspectMethod
@@ -606,7 +608,7 @@ class LiteralValueUseAspect extends StaticDataUseAspect{
 	        	if (parameterValue.startsWith("\"") || parameterValue.startsWith("'")){
 	        		parameterValue = parameterValue.substring(1, parameterValue.length-1)//remove quotation marks
 	        	}
-				if (matchedFeature.EType.name.equals("EInt")){
+				if (matchedFeature.EType.name.equals("EInt") || matchedFeature.EType.name.equals("EIntegerObject")){
 					object.eSet(matchedFeature, Integer.parseInt(parameterValue));
 				} else if (matchedFeature.EType.name.equals("EBoolean")){
 					object.eSet(matchedFeature, Boolean.parseBoolean(parameterValue));
