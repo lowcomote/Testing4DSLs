@@ -1,7 +1,6 @@
 package org.imt.pssm.mutation;
 
 import java.io.File;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,10 +30,14 @@ import manager.WodelTestResult;
 import manager.WodelTestResultClass;
 
 public class WodelTest implements IWodelTest {
-	
+
 	String workspacePath;
 	List<String> seedModels = new ArrayList<>();
 	Map<String, Result> seedModelsTestResult = new HashMap<>();
+	
+	//keep the mutation testing result
+	int numOfGeneratedMutants;
+	int numOfKilledMutants;
 	
 	@Override
 	public String getProjectName() {
@@ -54,7 +57,7 @@ public class WodelTest implements IWodelTest {
 		if (file.isFile() && file.getName().endsWith(".model")) {
 			String filePath = file.getPath();
 			if (this.workspacePath == null) {
-				this.workspacePath = filePath.substring(0, filePath.lastIndexOf(projectName)-1);
+				this.workspacePath = filePath.substring(0, filePath.indexOf(projectName)-1);
 			}		
 			//get the relative path of the file
 			filePath = filePath.replace(this.workspacePath, "");
@@ -81,6 +84,7 @@ public class WodelTest implements IWodelTest {
 		for (File file : projectFolder.listFiles()) {
 			artifactPathsHelper(project.getName(), file, artifactPaths);
 		}
+		this.numOfGeneratedMutants = artifactPaths.size();
 		return artifactPaths;
 	}
 	
@@ -99,9 +103,11 @@ public class WodelTest implements IWodelTest {
 		seedTestVerdict = this.seedModelsTestResult.get(seedModel_testcase);
 		Result mutantTestVerdict = tdlCore.run(testPackage, artifactPath);
 		
-		boolean value = true;
-		if (seedTestVerdict.equals(mutantTestVerdict)) {
-			value = false;//when the tests has passed on the mutated model, the mutant is live otherwise is killed
+		//when the tests has passed on the mutated model, the mutant is live otherwise is killed
+		boolean value = false;
+		if (!seedTestVerdict.equals(mutantTestVerdict)) {
+			value = true;
+			this.numOfKilledMutants++;
 		}
 		String message = value ? DIFFERENT : EQUALS;//EQUALS if the value is false and so the mutant is live
 		String MUTName = artifactPath.substring(artifactPath.lastIndexOf('\\'), artifactPath.length());
@@ -133,7 +139,7 @@ public class WodelTest implements IWodelTest {
 	@Override
 	public WodelTestGlobalResult run(IProject project, IProject testSuiteProject, String artifactPath) {
 		WodelTestGlobalResult globalResult = new WodelTestGlobalResult();
-		List<WodelTestResultClass> results = globalResult.getResults();
+		//List<WodelTestResultClass> results = globalResult.getResults();
 
 		String testSuitePath = ModelManager.getWorkspaceAbsolutePath() + "/" + testSuiteProject.getName();
 		String testResourcePath = "platform:/resource/"+ testSuiteProject.getName() + "/";
@@ -148,6 +154,10 @@ public class WodelTest implements IWodelTest {
 				break;
 			}	
 		}
+		System.out.println("# of generated mutants: " + this.numOfGeneratedMutants);
+		System.out.println("# of killed mutants: " + this.numOfKilledMutants);
+		double mutationScore = (double) this.numOfKilledMutants/this.numOfGeneratedMutants;
+		System.out.println("mutation score: " + mutationScore);
 		return globalResult;
 	}
 	private String getSeedModel (String artifactPath) {
