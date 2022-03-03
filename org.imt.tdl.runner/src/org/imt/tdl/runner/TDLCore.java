@@ -1,13 +1,9 @@
 package org.imt.tdl.runner;
 
 import org.etsi.mts.tdl.Package;
-
 import org.etsi.mts.tdl.TestDescription;
-import org.imt.k3tdl.k3dsa.TestConfigurationAspect;
 import org.imt.k3tdl.k3dsa.TestDescriptionAspect;
 import org.imt.tdl.testResult.TDLTestCaseResult;
-import org.imt.tdl.testResult.TDLTestResultUtil;
-import org.imt.tdl.testResult.TDLTestSuiteResult;
 
 public class TDLCore {
 	
