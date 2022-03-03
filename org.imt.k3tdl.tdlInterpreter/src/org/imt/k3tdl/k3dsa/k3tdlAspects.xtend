@@ -78,7 +78,7 @@ class TestDescriptionAspect{
 	@Step
 	def TDLTestCaseResult executeTestCase(){
 		_self.testConfiguration.activateConfiguration(_self.launcher)
-		return _self.testCaseExecutor
+		return _self.runTestAndReturnResult
 	}
 	
 	//this method is called from other codes (not GEMOC engine)
@@ -88,10 +88,10 @@ class TestDescriptionAspect{
 		_self.testCaseResult = new TDLTestCaseResult
 		_self.testCaseCoverage = new TDLTestCaseCoverage
 		_self.testConfiguration.activateConfiguration(_self.launcher, MUTPath)
-		return _self.testCaseExecutor
+		return _self.runTestAndReturnResult
 	}
 	
-	def TDLTestCaseResult testCaseExecutor(){
+	def TDLTestCaseResult runTestAndReturnResult(){
 		println("Start test case execution: " + _self.name)
 		_self.testCaseResult.testCase = _self
 		_self.behaviourDescription.callBehavior()
