@@ -119,7 +119,7 @@ class ModelEObjectCreator {
 					}
 					newEObject.eSet(feature, featureValues)
 				}
-			} else if (feature.EType.name.equals("EBoolean")){//TODO: must be tested
+			} else if (feature.EType.name.equals("EBooleanObject") || feature.EType.name.equals("EBoolean")){//TODO: must be tested
 				if (!feature.isMany){//a single boolean must be set as the value
 					var featureValue = getLiteralValue(featureTdlValues.get(0) as LiteralValueUse)
 					newEObject.eSet(feature, Boolean.parseBoolean(featureValue))
