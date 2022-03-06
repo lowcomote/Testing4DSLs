@@ -46,7 +46,7 @@ public class TdlAnimatorServices extends AbstractGemocAnimatorServices {
 		if(o.eContainer() instanceof Message){
 			Message message = (Message) o.eContainer();
 			String messageResult = MessageAspectMessageAspectContext.INSTANCE.getSelf(message).messageVerdict.getValue();
-			if (messageResult == "PASS") {
+			if (messageResult == "FAIL") {
 				return true;
 			}else {
 				return false;
