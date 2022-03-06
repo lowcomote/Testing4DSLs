@@ -2,7 +2,7 @@
 <description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/sequence/description/2.0.0" xmlns:description_2="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:properties="http://www.eclipse.org/sirius/properties/1.0.0" xmlns:properties-ext-widgets-reference="http://www.eclipse.org/sirius/properties/1.0.0/ext/widgets/reference" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/sequence/description/tool/2.0.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" xmlns:tool_2="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" name="TDL" version="12.0.0.2017041100">
   <ownedViewpoints name="org.etsi.mts.tdl" label="TDL">
     <ownedRepresentations xsi:type="description_1:SequenceDiagramDescription" name="TestDescriptionDiagram" label="TDL Behavior" domainClass="tdl.TestDescription" enablePopupBars="true" endsOrdering="[getOccurrences()->select(e|eventEnds->includes(e))/]" instanceRolesOrdering="[testConfiguration.connection.endPoint->sortedBy(ref|ref.component.name + '.' + ref.gate.name)/]">
-      <metamodel href="../../org.etsi.mts.tdl.model/model/tdl.ecore#/"/>
+      <metamodel href="platform:/plugin/org.etsi.mts.tdl.model/model/tdl.ecore#/"/>
       <defaultLayer name="Default">
         <nodeMappings xsi:type="description_1:InstanceRoleMapping" name="gateReference" semanticCandidatesExpression="[testConfiguration.componentInstance->collect(c|c.type.gateInstance->select(g|self.testConfiguration.connection.endPoint->exists(ref|ref.component = c and ref.gate = g))->collect(g|self.testConfiguration.connection.endPoint->any(ref|ref.component = c and ref.gate = g)))/]" domainClass="tdl.GateReference">
           <borderedNodeMappings xsi:type="description_1:ExecutionMapping" name="lifelineExecution" semanticCandidatesExpression="[self/]" domainClass="tdl.GateReference" startingEndFinderExpression="[self/]" finishingEndFinderExpression="[self/]">
@@ -889,7 +889,7 @@
       </additionalLayers>
     </ownedRepresentations>
     <ownedRepresentations xsi:type="description_2:DiagramDescription" name="GenericDiagram" label="Generic TDL" domainClass="tdl.Package" enablePopupBars="true">
-      <metamodel href="../../org.etsi.mts.tdl.model/model/tdl.ecore#/"/>
+      <metamodel href="platform:/plugin/org.etsi.mts.tdl.model/model/tdl.ecore#/"/>
       <layout xsi:type="description_2:CompositeLayout"/>
       <defaultLayer name="Default">
         <nodeMappings name="comment" labelDirectEdit="//@ownedViewpoints[name='org.etsi.mts.tdl']/@ownedRepresentations[name='GenericDiagram']/@defaultLayer/@toolSections.0/@ownedTools[name='editCommentBody']" semanticCandidatesExpression="[nestedPackage.comment->union(packagedElement.comment)/]" domainClass="tdl.Comment">
