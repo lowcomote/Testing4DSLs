@@ -110,16 +110,18 @@ public class EngineFactory{
 	}
 	
 	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {
-		if (this.engineLauncher != null) {
+		if (!dslHasInterface() && engineLauncher != null) {
 			return this.engineLauncher.getExecutionTrace();
-		}else if (this.eventManagerLauncher != null) {
+		}
+		else if (dslHasInterface() && this.eventManagerLauncher != null) {
 			return this.eventManagerLauncher.getExecutionTrace();
 		}
 		return null;
 	}
 	
+	private Resource dslRes = null;
+	
 	private String getEngineType() {
-		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(this.DSLPath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
 		if (dsl.getEntry("k3") != null) {
 			return "k3";
@@ -128,27 +130,43 @@ public class EngineFactory{
 		}
 		return null;
 	}
+	
+	private boolean dslHasInterface() {
+		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(this.DSLPath), true);
+		Dsl dsl = (Dsl)dslRes.getContents().get(0);
+		if (dsl.getEntry("behavioralInterface") != null) {
+			return true;
+		}
+		return false;
+	}
+	
 	public void setDSLPath (String DSLPath) {
 		this.DSLPath = DSLPath;
+		dslRes = (new ResourceSetImpl()).getResource(URI.createURI(this.DSLPath), true);
 	}
+	
 	public void setMUTPath (String MUTPath) {
 		this.MUTPath = MUTPath;
 	}
+	
 	public void setMUTResource(Resource MUTResource) {
 		this.engineLauncher.setModelResource(MUTResource);
 	}
+	
 	public Resource getMUTResource() {
-		if (this.engineLauncher != null) {
+		if (!dslHasInterface() && engineLauncher != null) {
 			return this.engineLauncher.getModelResource();
 		}
-		if (this.eventManagerLauncher != null) {
+		else if (dslHasInterface() && this.eventManagerLauncher != null) {
 			return this.eventManagerLauncher.getModelResource();
 		}
 		return (new ResourceSetImpl()).getResource(URI.createURI(MUTPath), true);
 	}
+	
 	public ArrayList<EObject> getOCLResultAsObject() {
 		return this.oclLauncher.getResultAsObject();
 	}
+	
 	public ArrayList<String> getOCLResultAsString(){
 		return this.oclLauncher.getResultAsString();
 	}
