@@ -1,6 +1,7 @@
 package org.imt.tdl.configuration;
 
 import java.util.ArrayList;
+
 import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
@@ -20,6 +21,7 @@ import org.imt.tdl.eventBasedEngine.IEventBasedExecutionEngine;
 import org.imt.tdl.eventBasedEngine.K3EventManagerLauncher;
 import org.imt.tdl.oclInterpreter.OCLInterpreter;
 import org.imt.tdl.sequentialEngine.ALEEngineLauncher;
+import org.imt.tdl.sequentialEngine.IExecutionEngine;
 import org.imt.tdl.sequentialEngine.ISequentialExecutionEngine;
 import org.imt.tdl.sequentialEngine.JavaEngineLauncher;
 
@@ -28,7 +30,7 @@ public class EngineFactory{
 	private String DSLPath;
 	private String MUTPath;
 	
-	private ISequentialExecutionEngine engineLauncher;
+	private ISequentialExecutionEngine sequentialEngineLauncher;
 	private OCLInterpreter oclLauncher;
 	private IEventBasedExecutionEngine eventManagerLauncher;
 	
@@ -40,18 +42,18 @@ public class EngineFactory{
 		if (commandType.equals(GENERIC)) {
 			String engineType = this.getEngineType();
 			if (engineType=="ale") {
-				this.engineLauncher = new ALEEngineLauncher();	
+				sequentialEngineLauncher = new ALEEngineLauncher();	
 			}else if(engineType=="k3") {
-				this.engineLauncher = new JavaEngineLauncher();
+				sequentialEngineLauncher = new JavaEngineLauncher();
 			}
-			this.engineLauncher.setUp(this.MUTPath, this.DSLPath);
+			sequentialEngineLauncher.setUp(MUTPath, DSLPath);
 		}else if(commandType.equals(DSL_SPECIFIC)) {
-			this.eventManagerLauncher = new K3EventManagerLauncher();
-			this.eventManagerLauncher.setUp(this.MUTPath, this.DSLPath);
+			eventManagerLauncher = new K3EventManagerLauncher();
+			eventManagerLauncher.setUp(MUTPath, DSLPath);
 		}else if (commandType.equals(OCL)) {
-			if (this.oclLauncher == null) {
-				this.oclLauncher = new OCLInterpreter();
-				this.oclLauncher.setUp();
+			if (oclLauncher == null) {
+				oclLauncher = new OCLInterpreter();
+				oclLauncher.setUp();
 			}
 		}
 	}
@@ -60,48 +62,48 @@ public class EngineFactory{
 			IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
 			if (debugTargets.length > 0) {
 				//we are in the Debug mode, so debug the model under test
-				this.engineLauncher.launchModelDebugger();
+				sequentialEngineLauncher.launchModelDebugger();
 				return "PASS: Debugging of the model under test launched successfully";
 			}else {
 				//we are in the Run mode, so run the model under test
-				return this.engineLauncher.executeModelSynchronous();
+				return sequentialEngineLauncher.executeModelSynchronous();
 			}
 		}
-		return this.engineLauncher.executeModelAsynchronous();
+		return sequentialEngineLauncher.executeModelAsynchronous();
 	}
 
 	public String stopAsyncExecution() {
-		return this.engineLauncher.stopAsynchronousExecution();
+		return sequentialEngineLauncher.stopAsynchronousExecution();
 	}
 	
 	public String executeOCLCommand (String query){
 		//send the query without quotation marks
-		return this.oclLauncher.runQuery(getMUTResource(), query.substring(1, query.length()-1));
+		return oclLauncher.runQuery(getMUTResource(), query.substring(1, query.length()-1));
 	}
 	
 	public String executeDSLSpecificCommand(String eventType, String eventName, Map<String, Object> parameters) {
-		if (!this.eventManagerLauncher.isEngineStarted()) {
+		if (!eventManagerLauncher.isEngineStarted()) {
 			IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
 			if (debugTargets.length > 0) {
 				//we are in the Debug mode, so debug the model under test
-				this.eventManagerLauncher.launchModelDebugger();
+				eventManagerLauncher.launchModelDebugger();
 			}else {
-				this.eventManagerLauncher.startEngine();
+				eventManagerLauncher.startEngine();
 			}
 		}
 		
 		switch (eventType) {
 		case "ACCEPTED":
-			return this.eventManagerLauncher.processAcceptedEvent(eventName, parameters);
+			return eventManagerLauncher.processAcceptedEvent(eventName, parameters);
 		case "EXPOSED":
-			return this.eventManagerLauncher.assertExposedEvent(eventName, parameters);
+			return eventManagerLauncher.assertExposedEvent(eventName, parameters);
 		case "STOP":
-			if (this.oclLauncher != null) {
+			if (oclLauncher != null) {
 				//if the test case contains OCL queries, just stop the engine regardless of its status
-				return this.eventManagerLauncher.sendStopEvent(false);
+				return eventManagerLauncher.sendStopEvent(false);
 			}else {
 				//stop the engine and set the result based on the execution engine status
-				return this.eventManagerLauncher.sendStopEvent(true);
+				return eventManagerLauncher.sendStopEvent(true);
 			}
 		default:
 			break;
@@ -110,11 +112,11 @@ public class EngineFactory{
 	}
 	
 	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {
-		if (!dslHasInterface() && engineLauncher != null) {
-			return this.engineLauncher.getExecutionTrace();
+		if (this.getActiveEngine() instanceof ISequentialExecutionEngine) {
+			return sequentialEngineLauncher.getExecutionTrace();
 		}
-		else if (dslHasInterface() && this.eventManagerLauncher != null) {
-			return this.eventManagerLauncher.getExecutionTrace();
+		else if (this.getActiveEngine() instanceof IEventBasedExecutionEngine) {
+			return eventManagerLauncher.getExecutionTrace();
 		}
 		return null;
 	}
@@ -132,7 +134,7 @@ public class EngineFactory{
 	}
 	
 	private boolean dslHasInterface() {
-		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(this.DSLPath), true);
+		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(DSLPath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
 		if (dsl.getEntry("behavioralInterface") != null) {
 			return true;
@@ -150,24 +152,34 @@ public class EngineFactory{
 	}
 	
 	public void setMUTResource(Resource MUTResource) {
-		this.engineLauncher.setModelResource(MUTResource);
+		sequentialEngineLauncher.setModelResource(MUTResource);
 	}
 	
 	public Resource getMUTResource() {
-		if (!dslHasInterface() && engineLauncher != null) {
-			return this.engineLauncher.getModelResource();
+		if (this.getActiveEngine() instanceof ISequentialExecutionEngine) {
+			return sequentialEngineLauncher.getModelResource();
 		}
-		else if (dslHasInterface() && this.eventManagerLauncher != null) {
-			return this.eventManagerLauncher.getModelResource();
+		else if (this.getActiveEngine() instanceof IEventBasedExecutionEngine) {
+			return eventManagerLauncher.getModelResource();
 		}
 		return (new ResourceSetImpl()).getResource(URI.createURI(MUTPath), true);
 	}
 	
+	public IExecutionEngine getActiveEngine() {
+		if (!dslHasInterface() && sequentialEngineLauncher != null) {
+			return sequentialEngineLauncher;
+		}
+		else if (dslHasInterface() && eventManagerLauncher != null) {
+			return eventManagerLauncher;
+		}
+		return null;
+	}
+	
 	public ArrayList<EObject> getOCLResultAsObject() {
-		return this.oclLauncher.getResultAsObject();
+		return oclLauncher.getResultAsObject();
 	}
 	
 	public ArrayList<String> getOCLResultAsString(){
-		return this.oclLauncher.getResultAsString();
+		return oclLauncher.getResultAsString();
 	}
 }
