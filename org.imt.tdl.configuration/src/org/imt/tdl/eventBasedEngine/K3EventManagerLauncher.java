@@ -1,8 +1,9 @@
 package org.imt.tdl.eventBasedEngine;
 
+import java.util.ArrayList;
 import java.util.HashSet;
-
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.LinkedTransferQueue;
@@ -67,6 +68,7 @@ import org.eclipse.gemoc.xdsmlframework.api.core.ExecutionMode;
 import org.eclipse.gemoc.xdsmlframework.api.core.IExecutionEngine;
 import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
 import org.imt.gemoc.engine.custom.launcher.CustomEventBasedLauncher;
+import org.imt.tdl.observer.ModelExecutionObserver;
 import org.imt.tdl.testResult.TDLTestResultUtil;
 
 public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
@@ -81,7 +83,11 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	
 	private CustomEventBasedLauncher launcher;
 	private boolean isDebugMode = false;
+	private GenericEventManager eventManager = null;
+	private LinkedTransferQueue<EventOccurrence> eventOccurrences = new LinkedTransferQueue<EventOccurrence>();
 	
+	private List<ModelExecutionObserver> observers = new ArrayList<>();
+
 	// progress monitor used during launch; useful for operations that wish to
 	// contribute to the progress bar
 	protected IProgressMonitor launchProgressMonitor = null;
@@ -109,10 +115,6 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		}
 		launcher = new CustomEventBasedLauncher();
 	}
-	
-	private GenericEventManager eventManager = null;
-	private LinkedTransferQueue<EventOccurrence> eventOccurrences = new LinkedTransferQueue<EventOccurrence>();
-	
 	
 	@Override
 	public String processAcceptedEvent(String eventName, Map<String, Object> parameters) {
@@ -276,6 +278,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 					@Override
 					public void eventReceived(EventOccurrence e) {
 						eventOccurrences.add(e);
+						notifyAllObservers(e);
 					}
 					@Override
 					public Set<BehavioralInterface> getBehavioralInterfaces() {
@@ -558,4 +561,14 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {
 		return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) this.executionEngine.getAddon(GenericTraceEngineAddon.class).getTrace();
 	}
+	
+	public void attach (ModelExecutionObserver observer) {
+		this.observers.add(observer);
+	}
+	
+	public void notifyAllObservers(EventOccurrence e){
+      for (ModelExecutionObserver observer : observers) {
+         observer.update(e);
+      }
+   } 
 }

@@ -32,6 +32,7 @@ import org.eclipse.gemoc.trace.commons.model.trace.Trace;
 import org.eclipse.gemoc.trace.commons.model.trace.TracedObject;
 import org.eclipse.gemoc.trace.gemoc.traceaddon.GenericTraceEngineAddon;
 import org.imt.gemoc.engine.custom.launcher.CustomK3Launcher;
+import org.imt.tdl.observer.ModelExecutionObserver;
 import org.osgi.framework.Bundle;
 
 public class JavaEngineLauncher extends AbstractEngine{
@@ -219,5 +220,9 @@ public class JavaEngineLauncher extends AbstractEngine{
 			return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) this.javaEngine.getAddon(GenericTraceEngineAddon.class).getTrace();
 		}
 		return null;
+	}
+	
+	public void attach (ModelExecutionObserver observer) {
+		
 	}
 }

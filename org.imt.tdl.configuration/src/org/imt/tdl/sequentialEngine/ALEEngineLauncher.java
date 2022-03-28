@@ -41,6 +41,7 @@ import org.eclipse.gemoc.trace.commons.model.trace.Trace;
 import org.eclipse.gemoc.trace.commons.model.trace.TracedObject;
 import org.eclipse.gemoc.trace.gemoc.traceaddon.GenericTraceEngineAddon;
 import org.imt.gemoc.engine.custom.launcher.CustomALELauncher;
+import org.imt.tdl.observer.ModelExecutionObserver;
 
 public class ALEEngineLauncher extends AbstractEngine{
 	private AleEngine aleEngine = null;
@@ -260,5 +261,9 @@ public class ALEEngineLauncher extends AbstractEngine{
 			return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) this.aleEngine.getAddon(GenericTraceEngineAddon.class).getTrace();
 		}
 		return null;
+	}
+	
+	public void attach (ModelExecutionObserver observer) {
+		
 	}
 }
