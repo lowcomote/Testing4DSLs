@@ -610,7 +610,7 @@ class LiteralValueUseAspect extends StaticDataUseAspect{
 	        	}
 				if (matchedFeature.EType.name.equals("EInt") || matchedFeature.EType.name.equals("EIntegerObject")){
 					object.eSet(matchedFeature, Integer.parseInt(parameterValue));
-				} else if (matchedFeature.EType.name.equals("EBoolean")){
+				} else if (matchedFeature.EType.name.equals("EBoolean")|| matchedFeature.EType.name.equals("EBooleanObject")){
 					object.eSet(matchedFeature, Boolean.parseBoolean(parameterValue));
 				} else {
 					object.eSet(matchedFeature, parameterValue);
