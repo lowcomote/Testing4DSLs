@@ -4,6 +4,7 @@ Bundle-Name: CustomLaunchConfig
 Bundle-SymbolicName: org.imt.tdl.configuration
 Bundle-Version: 1.0.0.qualifier
 Export-Package: org.imt.tdl.configuration,
+ org.imt.tdl.observer,
  org.imt.tdl.sequentialEngine
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.17.100",
  org.eclipse.core.resources;bundle-version="3.13.700",
