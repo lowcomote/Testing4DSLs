@@ -563,7 +563,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	}
 	
 	public void attach (ModelExecutionObserver observer) {
-		this.observers.add(observer);
+		observers.add(observer);
 	}
 	
 	public void notifyAllObservers(EventOccurrence e){
