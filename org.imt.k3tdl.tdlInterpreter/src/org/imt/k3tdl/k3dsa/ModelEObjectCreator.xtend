@@ -114,7 +114,6 @@ class ModelEObjectCreator {
 					var List<Integer> featureValues = new ArrayList
 					for (DataUse tdlValue : featureTdlValues){
 						var featureValue = getLiteralValue(tdlValue as LiteralValueUse)
-						Integer.parseInt(featureValue)
 			        	featureValues.add(Integer.parseInt(featureValue))
 					}
 					newEObject.eSet(feature, featureValues)
