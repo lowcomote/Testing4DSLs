@@ -29,6 +29,7 @@ public class EngineFactory{
 	
 	private String DSLPath;
 	private String MUTPath;
+	public boolean launcherIsTuned = false;
 	
 	private ISequentialExecutionEngine sequentialEngineLauncher;
 	private OCLInterpreter oclLauncher;
@@ -56,7 +57,9 @@ public class EngineFactory{
 				oclLauncher.setUp();
 			}
 		}
+		launcherIsTuned = true;
 	}
+	
 	public String executeModel(Boolean sync) throws CoreException, EngineContextException {
 		if (sync) {
 			IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
