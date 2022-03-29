@@ -77,18 +77,28 @@ class TestDescriptionAspect{
 	
 	@Step
 	def TDLTestCaseResult executeTestCase(){
-		_self.testConfiguration.activateConfiguration(_self.launcher)
+		if (!_self.launcher.launcherIsTuned){
+			_self.activateConfiguration()
+		}
 		return _self.runTestAndReturnResult
 	}
 	
 	//this method is called from other codes (not GEMOC engine)
-	@Step
 	def TDLTestCaseResult executeTestCase(String MUTPath){
+		if (!_self.launcher.launcherIsTuned){
+			_self.activateConfiguration(MUTPath)
+		}
+		return _self.runTestAndReturnResult
+	}
+	
+	def void activateConfiguration(){
+		_self.testConfiguration.activateConfiguration(_self.launcher)
+	}
+	def void activateConfiguration(String MUTPath){
 		_self.launcher = new EngineFactory
 		_self.testCaseResult = new TDLTestCaseResult
 		_self.testCaseCoverage = new TDLTestCaseCoverage
 		_self.testConfiguration.activateConfiguration(_self.launcher, MUTPath)
-		return _self.runTestAndReturnResult
 	}
 	
 	def TDLTestCaseResult runTestAndReturnResult(){
@@ -177,6 +187,7 @@ class TestConfigurationAspect{
 			launcher.setUp(EngineFactory.OCL);
 		}
 	}
+	
 	def String stopModelExecutionEngine(EngineFactory launcher){
 		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.equals(org.imt.k3tdl.k3dsa.TestConfigurationAspect.REACTIVE_GATE)]]) {
 			return launcher.executeDSLSpecificCommand("STOP", null, null);
