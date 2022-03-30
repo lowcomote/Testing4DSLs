@@ -170,7 +170,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	@Override
 	public String assertExposedEvent(String eventName, Map<String, Object> parameters) {
 		try {
-			EventOccurrence receivedEventOccurrence = this.eventOccurrences.poll(10000, TimeUnit.MILLISECONDS);
+			EventOccurrence receivedEventOccurrence = eventOccurrences.poll(10000, TimeUnit.MILLISECONDS);
 			EventOccurrence expectedEventOccurrence = createEventOccurance(EventOccurrenceType.EXPOSED, eventName, parameters);
 			if (expectedEventOccurrence == null) {
 				return "FAIL: The expected event occurrence does not match to the interface or its parameters does not exist in the MUT";
@@ -296,14 +296,14 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	public String sendStopEvent(boolean checkStatus) {
 		String result = null;
 		if (checkStatus) {
-			if (this.executionEngine.getRunningStatus() == RunStatus.WaitingForEvent) {
-				if (this.eventOccurrences.size()>0) {
+			if (executionEngine.getRunningStatus() == RunStatus.WaitingForEvent) {
+				if (eventOccurrences.size()>0) {
 					result = "FAIL:There are extra received events";
 				}else {
 					result = "PASS";
 				}
-			}else if (this.executionEngine.getRunningStatus() == RunStatus.Running) {
-				result = "FAIL:Infinite loop in the Model";
+			}else if (executionEngine.getRunningStatus() == RunStatus.Running) {
+				result = "FAIL: Infinite loop in the Model";
 			}
 		}
 		else {
