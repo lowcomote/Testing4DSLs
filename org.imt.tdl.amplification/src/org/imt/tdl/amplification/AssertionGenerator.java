@@ -3,11 +3,7 @@ package org.imt.tdl.amplification;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.EventParameter;
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrence;
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrenceArgument;
 import org.eclipse.gemoc.executionframework.value.model.value.BooleanAttributeValue;
@@ -81,7 +77,8 @@ public class AssertionGenerator extends ModelExecutionObserver{
 				Block assertionContainer =  getTestCaseMainBlock(tdlTestCase);
 				assertionContainer.getBehaviour().add(assertion);
 			}catch (ClassCastException e) {
-				System.out.println("ERROR: Cannot assign the assertion Message to the test case");
+				System.out.println("ClassCastException: Cannot add the assertion Message to the test case");
+				e.printStackTrace();
 				return false;
 			}
 		}
@@ -90,7 +87,8 @@ public class AssertionGenerator extends ModelExecutionObserver{
 
 	private DataUse createExpectedData(EventOccurrence exposedEvent) {
 		DataInstanceUse expectedData = tdlFactory.eINSTANCE.createDataInstanceUse();
-		//finding a tdl data instance with the name of the exposed event
+		//finding a tdl data instance with the name of the exposed event 
+		//(the TDL library generator must generated it in the xDSL-specific events package)
 		Optional<DataInstance> diOptional = testSuite.getPackagedElement().stream().
 				filter(p -> p instanceof DataInstance).map(p -> (DataInstance) p).
 				filter(d -> d.getName().equals(exposedEvent.getEvent().getName())).findFirst();
@@ -100,7 +98,7 @@ public class AssertionGenerator extends ModelExecutionObserver{
 		DataInstance di = diOptional.get();
 		/*if the data instance is a structured data instance, 
 		 * it means it has parameters that have to be bind 
-		 * based on the values of the exposed event arguments
+		 * based on the values of the arguments of the exposed event 
 		 */
 		if (di instanceof StructuredDataInstance) {
 			StructuredDataInstance sdi = (StructuredDataInstance) di;
@@ -125,7 +123,7 @@ public class AssertionGenerator extends ModelExecutionObserver{
 	}
 
 	private DataUse getTdlValueOfObjectValue(Value eventOccuArgValue) {
-		ObjectValue2TDLConverter converter = new ObjectValue2TDLConverter(testSuite);
+		EObjectValue2TDLConverter converter = new EObjectValue2TDLConverter(testSuite);
 		switch (eventOccuArgValue.eClass().getClassifierID()) {
 		case ValuePackage.SINGLE_REFERENCE_VALUE:
 			return converter.convertEObject2TDLData(((SingleReferenceValue) eventOccuArgValue).getReferenceValue());
