@@ -2,14 +2,11 @@ package org.imt.tdl.libraryGenerator;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.etsi.mts.tdl.TDLan2StandaloneSetup;
-import org.etsi.mts.tdl.util.tdlResourceFactoryImpl;
 
 import com.google.inject.Injector;
 
@@ -40,11 +37,6 @@ public class TDLCodeGenerator {
 	}
 
 	public void savePackages(String tdlProjectPath) throws IOException {
-//		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
-//		Map<String, Object> m = reg.getExtensionToFactoryMap();
-//		m.put(".tdlan2", new tdlResourceFactoryImpl());
-//		ResourceSet rs = new ResourceSetImpl();
-		
 		Injector injector = new TDLan2StandaloneSetup().createInjectorAndDoEMFRegistration();
 		ResourceSet rs = injector.getInstance(ResourceSet.class);
 		
