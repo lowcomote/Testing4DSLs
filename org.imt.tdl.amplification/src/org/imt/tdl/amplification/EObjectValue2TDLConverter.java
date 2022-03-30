@@ -1,9 +1,8 @@
 package org.imt.tdl.amplification;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -19,40 +18,48 @@ import org.etsi.mts.tdl.StaticDataUse;
 import org.etsi.mts.tdl.StructuredDataInstance;
 import org.etsi.mts.tdl.StructuredDataType;
 
-public class ObjectValue2TDLConverter {
+public class EObjectValue2TDLConverter {
 	
 	org.etsi.mts.tdl.Package tdlTestSuite;
 	org.etsi.mts.tdl.tdlFactory tdlFactory = org.etsi.mts.tdl.tdlFactory.eINSTANCE;
 	
-	public ObjectValue2TDLConverter (org.etsi.mts.tdl.Package testSuite) {
+	public EObjectValue2TDLConverter (org.etsi.mts.tdl.Package testSuite) {
 		this.tdlTestSuite = testSuite;
 	}
 	public DataUse convertEObject2TDLData(EObject eobject){
+		//if there is an existing tdl instance for the eobject, use it
+		StructuredDataInstance eobjectTdlInstance = findMatchedTDLInstance(eobject);
+		if (eobjectTdlInstance == null) {
+			eobjectTdlInstance = createNewTDLInstance4EObject(eobject);
+		}
+		DataInstanceUse messageArg = tdlFactory.createDataInstanceUse();
+		messageArg.setDataInstance(eobjectTdlInstance);
+		return messageArg;
+	}
+	
+	private StructuredDataInstance createNewTDLInstance4EObject (EObject eobject) {
 		String eobjectTypeName = eobject.eClass().getName();
-		StructuredDataType objectTdlType = (StructuredDataType) getTDLDataType(eobjectTypeName);
-		StructuredDataInstance objectTdlInstance = tdlFactory.createStructuredDataInstance();
-		objectTdlInstance.setDataType(objectTdlType);
+		StructuredDataType eobjectTdlType = (StructuredDataType) getTDLDataType(eobjectTypeName);
+		StructuredDataInstance eobjectTdlInstance = tdlFactory.createStructuredDataInstance();
+		eobjectTdlInstance.setDataType(eobjectTdlType);
 		//if the object has a name, use its name for the created tdl instance
-		if (eobject.eClass().getEStructuralFeature("name") != null) {
-			EStructuralFeature nameFeature = eobject.eClass().getEStructuralFeature("name");
-			objectTdlInstance.setName(eobject.eGet(nameFeature).toString());
+		if (getEObjectName(eobject) != null) {
+			eobjectTdlInstance.setName(getEObjectName(eobject));
 		}else {
-			objectTdlInstance.setName(eobjectTypeName + "_" + (int) Math.random());
+			eobjectTdlInstance.setName(eobjectTypeName.toLowerCase() + "_" + (int) Math.random());
 		}
 		//for each feature of the eobject, create a member assignment
 		for (EStructuralFeature efeature:eobject.eClass().getEAllStructuralFeatures()) {
-			Optional<Member> mOptional = objectTdlType.allMembers().stream().filter(m -> getValidName(m.getName()).equals(efeature.getName())).findFirst();
+			Optional<Member> mOptional = eobjectTdlType.allMembers().stream().filter(m -> getValidName(m.getName()).equals(efeature.getName())).findFirst();
 			if (mOptional.isPresent()) {
 				MemberAssignment ma = tdlFactory.createMemberAssignment();
 				ma.setMember(mOptional.get());
 				ma.setMemberSpec(convertFeatureValue2TDLData(eobject, efeature));
-				objectTdlInstance.getMemberAssignment().add(ma);
+				eobjectTdlInstance.getMemberAssignment().add(ma);
 			}
 		}
-		tdlTestSuite.getPackagedElement().add(objectTdlInstance);
-		DataInstanceUse messageArg = tdlFactory.createDataInstanceUse();
-		messageArg.setDataInstance(objectTdlInstance);
-		return messageArg;
+		tdlTestSuite.getPackagedElement().add(eobjectTdlInstance);
+		return eobjectTdlInstance;
 	}
 	
 	private StaticDataUse convertFeatureValue2TDLData(EObject eobject, EStructuralFeature efeature) {
@@ -135,16 +142,50 @@ public class ObjectValue2TDLConverter {
 				List<EObject> eValues = (List<EObject>) eobject.eGet(efeature);
 				DataInstanceUse tdlValues = tdlFactory.createDataInstanceUse();
 				for (EObject eValue:eValues) {
-					//TODO: find for a dataInstance equivalent to eobject, if found use it otherwise create it and add it to the test suite
+					StructuredDataInstance tdlInstance = findMatchedTDLInstance(eValue);
+					//if there is no tdl instance for the eobject, create it and add it to the test suite
+					if (tdlInstance == null) {
+						tdlInstance = createNewTDLInstance4EObject(eValue);
+					}
+					DataInstanceUse tdlValue = tdlFactory.createDataInstanceUse();
+					tdlValue.setDataInstance(tdlInstance);
+					tdlValues.getItem().add(tdlValue);
 				}
 				return tdlValues;
 			}else {
 				EObject eValue = (EObject) eobject.eGet(efeature);
-				//TODO
+				StructuredDataInstance tdlInstance = findMatchedTDLInstance(eValue);
+				//if there is no tdl instance for the eobject, create it and add it to the test suite
+				if (tdlInstance == null) {
+					tdlInstance = createNewTDLInstance4EObject(eValue);
+				}
+				DataInstanceUse tdlValue = tdlFactory.createDataInstanceUse();
+				tdlValue.setDataInstance(tdlInstance);
+				return tdlValue;
+			}
+		}
+	}
+	
+	private StructuredDataInstance findMatchedTDLInstance (EObject eobject) {
+		//only eobjects with name property can be used in TDL
+		if (getEObjectName(eobject) == null) {
+			return null;
+		}
+		String eobjectName = getEObjectName(eobject);
+		String eobjectTypeName = eobject.eClass().getName();
+		StructuredDataType eobjectTdlType = (StructuredDataType) getTDLDataType(eobjectTypeName);
+		List<StructuredDataInstance> dataInstances = tdlTestSuite.getPackagedElement().stream().filter(p -> p instanceof StructuredDataInstance).
+				map(p -> (StructuredDataInstance) p).filter(di -> di.getDataType() == eobjectTdlType).collect(Collectors.toList());
+		for (StructuredDataInstance di: dataInstances) {
+			Optional<MemberAssignment> maOptional = di.getMemberAssignment().stream().filter(ma -> ma.getMember().getName().equals("_name")).findFirst();
+			if (maOptional.isPresent() &&
+				((LiteralValueUse) maOptional.get().getMemberSpec()).getValue().equals(eobjectName)) {
+				return di;
 			}
 		}
 		return null;
 	}
+	
 	public DataUse convertBoolean2TDLData(boolean boolValue){
 		SimpleDataType tdlBooleanType = (SimpleDataType) getTDLDataType("EBoolean");
 		SimpleDataInstance tdlBooleanInstance = tdlFactory.createSimpleDataInstance();
@@ -190,15 +231,10 @@ public class ObjectValue2TDLConverter {
 	}
 	
 	private DataType getTDLDataType (String typeName) {
-		Iterator<EObject> iterator = tdlTestSuite.eAllContents();
-		while (iterator.hasNext()) {
-			EObject eObject = (EObject) iterator.next();
-			if (eObject instanceof DataType) {
-				DataType tdlType = (DataType) eObject;
-				if (getValidName(tdlType.getName()).equals(typeName)) {
-					return tdlType;
-				}
-			}
+		Optional<DataType> dtOptional = tdlTestSuite.getPackagedElement().stream().filter(p -> p instanceof DataType).
+			map(p -> (DataType) p).filter(t -> getValidName(t.getName()).equals(typeName)).findFirst();
+		if (dtOptional.isPresent()) {
+			return dtOptional.get();
 		}
 		return null;
 	}
@@ -210,4 +246,11 @@ public class ObjectValue2TDLConverter {
 		return name;
 	}
 	
+	private String getEObjectName (EObject eobject) {
+		if (eobject.eClass().getEStructuralFeature("name") != null) {
+			EStructuralFeature nameFeature = eobject.eClass().getEStructuralFeature("name");
+			return eobject.eGet(nameFeature).toString();
+		}
+		return null;
+	}
 }
