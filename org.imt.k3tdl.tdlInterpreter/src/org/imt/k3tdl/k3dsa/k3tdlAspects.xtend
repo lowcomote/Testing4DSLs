@@ -85,9 +85,7 @@ class TestDescriptionAspect{
 	
 	//this method is called from other codes (not GEMOC engine)
 	def TDLTestCaseResult executeTestCase(String MUTPath){
-		if (!_self.launcher.launcherIsTuned){
-			_self.activateConfiguration(MUTPath)
-		}
+		_self.activateConfiguration(MUTPath)
 		return _self.runTestAndReturnResult
 	}
 	
