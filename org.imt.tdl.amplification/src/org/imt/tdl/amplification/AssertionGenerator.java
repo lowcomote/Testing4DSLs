@@ -123,7 +123,7 @@ public class AssertionGenerator extends ModelExecutionObserver{
 	}
 
 	private DataUse getTdlValueOfObjectValue(Value eventOccuArgValue) {
-		EObjectValue2TDLConverter converter = new EObjectValue2TDLConverter(testSuite);
+		EObject2TDLConverter converter = new EObject2TDLConverter(testSuite);
 		switch (eventOccuArgValue.eClass().getClassifierID()) {
 		case ValuePackage.SINGLE_REFERENCE_VALUE:
 			return converter.convertEObject2TDLData(((SingleReferenceValue) eventOccuArgValue).getReferenceValue());

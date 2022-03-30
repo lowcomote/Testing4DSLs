@@ -18,12 +18,12 @@ import org.etsi.mts.tdl.StaticDataUse;
 import org.etsi.mts.tdl.StructuredDataInstance;
 import org.etsi.mts.tdl.StructuredDataType;
 
-public class EObjectValue2TDLConverter {
+public class EObject2TDLConverter {
 	
 	org.etsi.mts.tdl.Package tdlTestSuite;
 	org.etsi.mts.tdl.tdlFactory tdlFactory = org.etsi.mts.tdl.tdlFactory.eINSTANCE;
 	
-	public EObjectValue2TDLConverter (org.etsi.mts.tdl.Package testSuite) {
+	public EObject2TDLConverter (org.etsi.mts.tdl.Package testSuite) {
 		this.tdlTestSuite = testSuite;
 	}
 	public DataUse convertEObject2TDLData(EObject eobject){
