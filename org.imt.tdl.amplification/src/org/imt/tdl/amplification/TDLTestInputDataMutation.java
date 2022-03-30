@@ -21,6 +21,7 @@ public class TDLTestInputDataMutation {
 		 * modification of event parameters based on model elements used in the event parameters
 		 */
 		//TODO: create new test cases with new data
+		newTestCases.add(tdlTestCase);
 		return newTestCases;
 	}
 }
