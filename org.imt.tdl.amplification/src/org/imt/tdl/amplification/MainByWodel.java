@@ -9,12 +9,20 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
+import org.etsi.mts.tdl.tdlPackage;
 
 public class MainByWodel {
 
 	public static void main(String[] args) {
+//		String inputPath = "inputTests/AtmTestSuite.xmi";
+//		ResourceSet resSet = new ResourceSetImpl();
+////		resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("tdlan2", new tdlResourceFactoryImpl());
+//		resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
+//		resSet.getPackageRegistry().put(tdlPackage.eNS_URI, tdlPackage.eINSTANCE);
+//		Resource testSuiteRes = (resSet).getResource(URI.createFileURI(inputPath), true);
 		List<String> mutantsPaths = (new MutantPathHelper()).getMutantPaths();
 		for (String path:mutantsPaths) {
 			ResourceSet resSet = new ResourceSetImpl();
