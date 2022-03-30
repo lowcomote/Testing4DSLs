@@ -33,6 +33,8 @@ public class TDLTestAmplifier {
 				filter(p -> p instanceof TestDescription).map(t -> (TestDescription) t).collect(Collectors.toList());
 		
 		List<TestDescription> newTdlTestCases = new ArrayList<>();
+		int numNewTests = 0;
+		
 		for (TestDescription testCase: tdlTestCases) {
 			TestDescription copyTdlTestCase = tdlFactory.eINSTANCE.createTestDescription();
 			copyTdlTestCase.setName(testCase.getName());
@@ -42,14 +44,13 @@ public class TDLTestAmplifier {
 			System.out.println("Phase (1): Removing assertions from the test case");
 			AssertionRemover assertionRemover = new AssertionRemover();
 			assertionRemover.removeAssertionsFromTestCase(copyTdlTestCase);
-			System.out.println("Phase (1) Done!");
 			
 			System.out.println("Phase (2): Mutating test input Data to generate new test cases");
 			TDLTestInputDataMutation mutator = new TDLTestInputDataMutation();
 			newTdlTestCases = mutator.generateNewTestsByInputMutation(copyTdlTestCase);
-			System.out.println("Phase (2) Done: #of generated test cases by mutation = " + newTdlTestCases.size());
+			System.out.println("Done: #of generated test cases by mutation = " + newTdlTestCases.size());
 			
-			System.out.println("Phase (3): Running new tests and generating assertions");
+			System.out.println("\nPhase (3): Running new tests and generating assertions");
 			int i = newTdlTestCases.size();
 			for (TestDescription newTestCase: newTdlTestCases) {
 				tdlTestSuite.getPackagedElement().add(newTestCase);
@@ -60,12 +61,29 @@ public class TDLTestAmplifier {
 					i--;
 				}
 			}
-			System.out.println("Phase (3) Done: #of valid generated test cases (having assertions) = " + i);	
+			System.out.println("Done: #of valid generated test cases (having assertions) = " + i);
+			numNewTests += i;
 		}
-		System.out.println("Phase (4): Saving valid new test cases");
-		
-		System.out.println("Phase (4) Done!");	
-		System.out.println("Test Amplification has been performed successfully.");
+		System.out.println("\nPhase (4): Saving valid new test cases");
+		String sourcePath = testSuiteRes.getURI().toString();
+		String extension = ".tdlan2";
+		if (sourcePath.endsWith(".xmi")) {
+			extension = ".xmi";
+		}
+		String outputPath = sourcePath.substring(0, sourcePath.lastIndexOf(extension)) + "_amplified" + extension;
+		Resource newTestSuiteRes = (resSet).createResource(URI.createURI(outputPath));
+		//all the new elements are in the testSuiteRes
+		newTestSuiteRes.getContents().addAll(EcoreUtil.copyAll(testSuiteRes.getContents()));
+		try {
+			newTestSuiteRes.save(null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		testSuiteRes.unload();
+		newTestSuiteRes.unload();
+		System.out.println("\nTest Amplification has been performed successfully.");
+		System.out.println("Total number of valid generated test cases: " + numNewTests);
 	}
 
 	private static Resource readTestSuiteResource(ResourceSet resSet, IFile testSuiteFile){
