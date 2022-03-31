@@ -67,6 +67,8 @@ class PackageAspect {
 		} catch (TDLRuntimeException nt){
 			println("Stopped due "+nt.message)	
 		}
+		
+		println("Test suite execution has been finished successfully.")
 	}
 }
 @Aspect (className = TestDescription)
