@@ -293,28 +293,26 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	}
 	
 	@Override
-	public String sendStopEvent(boolean checkStatus) {
+	public String sendStopEvent() {
 		String result = null;
-		if (checkStatus) {
-			if (executionEngine.getRunningStatus() == RunStatus.WaitingForEvent) {
-				if (eventOccurrences.size()>0) {
-					result = "FAIL:There are extra received events";
-				}else {
-					result = "PASS";
-				}
-			}else if (executionEngine.getRunningStatus() == RunStatus.Running) {
-				result = "FAIL: Infinite loop in the Model";
+		if (executionEngine.getRunningStatus() == RunStatus.WaitingForEvent) {
+			if (eventOccurrences.size()>0) {
+				result = "FAIL:There are extra received events";
+			}else {
+				result = "PASS";
 			}
-		}
-		else {
-			result = "PASS";
-		}
-		if (executionEngine.getRunningStatus() == RunStatus.Running) {
+		}else if (executionEngine.getRunningStatus() == RunStatus.Running) {
 			try {//wait 1 second because the engine is running
-				Thread.sleep(1000);
+				Thread.sleep(10000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			if (executionEngine.getRunningStatus() == RunStatus.Running) {
+				result = "FAIL: Infinite loop in the Model";
+			}else {
+				result = "PASS";
+			}
+			
 		}
 		this.executionEngine.stop();
 		return result;

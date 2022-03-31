@@ -101,13 +101,7 @@ public class EngineFactory{
 		case "EXPOSED":
 			return eventManagerLauncher.assertExposedEvent(eventName, parameters);
 		case "STOP":
-			if (oclLauncher != null) {
-				//if the test case contains OCL queries, just stop the engine regardless of its status
-				return eventManagerLauncher.sendStopEvent(false);
-			}else {
-				//stop the engine and set the result based on the execution engine status
-				return eventManagerLauncher.sendStopEvent(true);
-			}
+			return eventManagerLauncher.sendStopEvent();
 		default:
 			break;
 		}
