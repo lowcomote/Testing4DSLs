@@ -1,6 +1,0 @@
-INDEX VERSION 1.131+C:\labtop\gemoc_studio\workspaces\xDSLs_Mutation\.metadata\.plugins\org.eclipse.jdt.core
-332383186.index
-326677725.index
-4018157043.index
-908929924.index
-2328269416.index
