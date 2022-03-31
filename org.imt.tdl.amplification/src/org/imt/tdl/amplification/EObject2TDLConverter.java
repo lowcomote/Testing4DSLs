@@ -48,8 +48,10 @@ public class EObject2TDLConverter {
 		}else {
 			eobjectTdlInstance.setName(eobjectTypeName.toLowerCase() + "_" + (int) Math.random());
 		}
-		//for each feature of the eobject, create a member assignment
-		for (EStructuralFeature efeature:eobject.eClass().getEAllStructuralFeatures()) {
+		//for each feature of the eobject that has a value, create a member assignment with corresponding tdl value
+		List<EStructuralFeature> valuedEFeatures = eobject.eClass().getEAllStructuralFeatures().stream().
+				filter(f -> eobject.eGet(f) != null && eobject.eGet(f) != f.getDefaultValue()).collect(Collectors.toList());
+		for (EStructuralFeature efeature:valuedEFeatures) {
 			Optional<Member> mOptional = eobjectTdlType.allMembers().stream().filter(m -> getValidName(m.getName()).equals(efeature.getName())).findFirst();
 			if (mOptional.isPresent()) {
 				MemberAssignment ma = tdlFactory.createMemberAssignment();
@@ -178,9 +180,11 @@ public class EObject2TDLConverter {
 				map(p -> (StructuredDataInstance) p).filter(di -> di.getDataType() == eobjectTdlType).collect(Collectors.toList());
 		for (StructuredDataInstance di: dataInstances) {
 			Optional<MemberAssignment> maOptional = di.getMemberAssignment().stream().filter(ma -> ma.getMember().getName().equals("_name")).findFirst();
-			if (maOptional.isPresent() &&
-				((LiteralValueUse) maOptional.get().getMemberSpec()).getValue().equals(eobjectName)) {
-				return di;
+			if (maOptional.isPresent()) {
+				String tdlName = getLiteralValue ((LiteralValueUse) maOptional.get().getMemberSpec());
+				if (tdlName.equals(eobjectName)) {
+					return di;
+				}
 			}
 		}
 		return null;
@@ -252,5 +256,13 @@ public class EObject2TDLConverter {
 			return eobject.eGet(nameFeature).toString();
 		}
 		return null;
+	}
+	
+	private String getLiteralValue (LiteralValueUse literalValue) {
+		String value = literalValue.getValue();
+		if (value.startsWith("\"") || value.startsWith("'")){
+			return value.substring(1, value.length()-1);//remove quotation marks
+    	}
+		return value;
 	}
 }
