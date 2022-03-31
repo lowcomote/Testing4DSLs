@@ -4,18 +4,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.etsi.mts.tdl.DataInstance;
 import org.etsi.mts.tdl.DataInstanceUse;
 import org.etsi.mts.tdl.DataType;
 import org.etsi.mts.tdl.DataUse;
 import org.etsi.mts.tdl.LiteralValueUse;
-import org.etsi.mts.tdl.Member;
-import org.etsi.mts.tdl.MemberAssignment;
 import org.etsi.mts.tdl.ParameterBinding;
-import org.etsi.mts.tdl.StructuredDataInstance;
 import org.etsi.mts.tdl.TestDescription;
 import org.etsi.mts.tdl.tdlFactory;
 
@@ -69,10 +67,10 @@ public class TDLTestInputDataMutation {
 	private Collection<? extends TestDescription> mutateBooleanData(TestDescription tdlTestCase) {
 		List<TestDescription> generatedTestsByMutation = new ArrayList<>();
 		for (LiteralValueUse boolLiteral:boolLiterals) {
-			if (boolLiteral.getValue().equals("true")) {
+			if (getLiteralValue(boolLiteral).equals("true")) {
 				boolLiteral.setValue("false");
 			}
-			else if (boolLiteral.getValue().equals("false")) {
+			else if (getLiteralValue(boolLiteral).equals("false")) {
 				boolLiteral.setValue("true");
 			}
 			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase));
@@ -80,37 +78,104 @@ public class TDLTestInputDataMutation {
 		return generatedTestsByMutation;
 	}
 
+	/*four operators: 
+	 * 1. add a random char, 
+	 * 2. remove a random char, 
+	 * 3. replace a random char and 
+	 * 4. replace the string by a fully random string of the same size
+	 */
 	private Collection<? extends TestDescription> mutateStringData(TestDescription tdlTestCase) {
-		// TODO Auto-generated method stub
-		return null;
+		List<TestDescription> generatedTestsByMutation = new ArrayList<>();
+		for (LiteralValueUse stringLiteral:stringLiterals) {
+			String value = getLiteralValue(stringLiteral);
+			StringBuilder sb = new StringBuilder(value);
+			Random rand = new Random();
+			int randomIndex = rand.nextInt(sb.length());
+			// 1. add a random char
+			sb.append(RandomStringUtils.randomAlphanumeric(1));
+			stringLiteral.setValue(sb.toString());
+			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase));
+			//2. remove a random char
+			sb = new StringBuilder(value);
+			sb.deleteCharAt(randomIndex);
+			stringLiteral.setValue(sb.toString());
+			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase));
+			//3. replace a random char
+			sb = new StringBuilder(value);
+			sb.replace(randomIndex, randomIndex + 1, RandomStringUtils.randomAlphanumeric(1));
+			stringLiteral.setValue(sb.toString());
+			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase));
+			//4. replace the string by a fully random string of the same size
+			stringLiteral.setValue(RandomStringUtils.randomAlphanumeric(value.length()));
+			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase));
+		}
+		return generatedTestsByMutation;
 	}
 
+	/* five operators for numeric values: 
+	 * plus 1, minus 1, multiply by 2, divide by 2, and replacement by an existing literal of the same type
+	 */
 	private Collection<? extends TestDescription> mutateIntegerData(TestDescription tdlTestCase) {
-		// TODO Auto-generated method stub
-		return null;
+		List<TestDescription> generatedTestsByMutation = new ArrayList<>();
+		for (LiteralValueUse intLiteral:intLiterals) {
+			int value = Integer.parseInt(getLiteralValue(intLiteral));
+			//1. value plus 1
+			intLiteral.setValue("'" + (value + 1) + "'");
+			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase));
+			//2. value minus 1
+			intLiteral.setValue("'" + (value - 1) + "'");
+			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase));
+			//3. value multiply by 2
+			intLiteral.setValue("'" + (value * 2) + "'");
+			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase));
+			//4. value divide by 2
+			intLiteral.setValue("'" + (value / 2) + "'");
+			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase));
+			//5. replacement by an existing literal of the same type
+			Random rand = new Random();
+			int randomIndex = rand.nextInt(intLiterals.size());
+			while (randomIndex == intLiterals.indexOf(intLiteral)) {
+				randomIndex = rand.nextInt(intLiterals.size());
+			}
+			String exValue = intLiterals.get(randomIndex).getValue();
+			intLiteral.setValue(exValue);
+			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase));
+		}
+		return generatedTestsByMutation;
 	}
 
 	private Collection<? extends TestDescription> mutateFloatData(TestDescription tdlTestCase) {
-		// TODO Auto-generated method stub
-		return null;
+		List<TestDescription> generatedTestsByMutation = new ArrayList<>();
+		for (LiteralValueUse floatLiteral:floatLiterals) {
+			float value = Float.parseFloat(getLiteralValue(floatLiteral));
+			//1. value plus 1
+			floatLiteral.setValue("'" + (value + 1) + "'");
+			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase));
+			//2. value minus 1
+			floatLiteral.setValue("'" + (value - 1) + "'");
+			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase));
+			//3. value multiply by 2
+			floatLiteral.setValue("'" + (value * 2) + "'");
+			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase));
+			//4. value divide by 2
+			floatLiteral.setValue("'" + (float)(value / 2) + "'");
+			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase));
+			//5. replacement by an existing literal of the same type
+			Random rand = new Random();
+			int randomIndex = rand.nextInt(floatLiterals.size());
+			while (randomIndex == floatLiterals.indexOf(floatLiteral)) {
+				randomIndex = rand.nextInt(floatLiterals.size());
+			}
+			String exValue = floatLiterals.get(randomIndex).getValue();
+			floatLiteral.setValue(exValue);
+			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase));
+		}
+		return generatedTestsByMutation;
 	}
 
 	private void findLiteralFeaturesOfData (DataInstanceUse dataInstanceUse){
-		DataInstance dataInstance = dataInstanceUse.getDataInstance();
-		if (dataInstance instanceof StructuredDataInstance) {
-			StructuredDataInstance sdi = (StructuredDataInstance) dataInstance;
-			for (MemberAssignment ma: sdi.getMemberAssignment()) {
-				Member member = ma.getMember();
-				DataUse memberValue = ma.getMemberSpec();
-				if (!member.getName().equals("_name")) {
-					if (memberValue instanceof LiteralValueUse) {
-						classifyLiteralBasedOnType ((LiteralValueUse) memberValue, member.getDataType());
-					}else if (memberValue instanceof DataInstanceUse) {
-						findLiteralFeaturesOfData((DataInstanceUse) memberValue);
-					}
-				}
-			}
-		}
+		//finding literals that their value is directly used in the test case
+		//(ignoring memberAssignments and only considering parameterBindings)
 		for (ParameterBinding pb : dataInstanceUse.getArgument()) {
 			DataUse parameterValue = pb.getDataUse();
 			if (!pb.getParameter().getName().equals("_name")) {
@@ -145,5 +210,13 @@ public class TDLTestInputDataMutation {
 		copyTdlTestCase.setTestConfiguration(testCase.getTestConfiguration());
 		copyTdlTestCase.setBehaviourDescription(EcoreUtil.copy(testCase.getBehaviourDescription()));
 		return copyTdlTestCase;
+	}
+	
+	private String getLiteralValue (LiteralValueUse literalValue) {
+		String value = literalValue.getValue();
+		if (value.startsWith("\"") || value.startsWith("'")){
+			return value.substring(1, value.length()-1);//remove quotation marks
+    	}
+		return value;
 	}
 }
