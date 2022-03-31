@@ -92,6 +92,9 @@ public class TDLTestAmplifier {
 		if (testSuiteURI.toString().endsWith(".xmi")) {
 			resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 			resSet.getPackageRegistry().put(tdlPackage.eNS_URI, tdlPackage.eINSTANCE);
+		} else if (testSuiteURI.toString().endsWith(".tdl")) {
+			resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("tdl", new XMIResourceFactoryImpl());
+			resSet.getPackageRegistry().put(tdlPackage.eNS_URI, tdlPackage.eINSTANCE);
 		}
 		else if (testSuiteURI.toString().endsWith(".tdlan2")) {
 			Injector injector = new TDLan2StandaloneSetup().createInjectorAndDoEMFRegistration();
