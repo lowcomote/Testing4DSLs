@@ -20,10 +20,12 @@ import org.etsi.mts.tdl.DataUse;
 import org.etsi.mts.tdl.LiteralValueUse;
 import org.etsi.mts.tdl.Message;
 import org.etsi.mts.tdl.ParameterBinding;
+import org.etsi.mts.tdl.StaticDataUse;
+import org.etsi.mts.tdl.StructuredDataInstance;
 import org.etsi.mts.tdl.TestDescription;
 import org.etsi.mts.tdl.tdlFactory;
 
-public class TDLTestInputDataMutation {
+public class TDLTestInputDataAmplification {
 	
 	List<LiteralValueUse> boolLiterals = new ArrayList<LiteralValueUse>();
 	List<LiteralValueUse> stringLiterals = new ArrayList<LiteralValueUse>();
@@ -31,33 +33,33 @@ public class TDLTestInputDataMutation {
 	List<LiteralValueUse> floatLiterals = new ArrayList<LiteralValueUse>();
 	int numOfNewTests = 0;
 	
-	private static String BOOLMUTATION = "BooleanMutation";
-	private static String STRINGMUTATION = "StringMutation";
-	private static String INTMUTATION = "IntegerMutation";
-	private static String FLOATMUTATION = "FloatMutation";
+	private static String BOOLMODIFICATION = "BooleanModification";
+	private static String STRINGMODIFICATION = "StringModification";
+	private static String INTMODIFICATION = "IntegerModification";
+	private static String FLOATMODIFICATION = "FloatModification";
 	private static String EVENTDUPLICATION = "EventDuplication";
 	private static String EVENTCREATION = "EventCreation";
 	private static String EVENTDELETION = "EventDeletion";
-	private static String EVENTPERMUTATION = "EventPermutation";
+	private static String EVENTPERMUTATION = "EventPermodification";
 	private static String EVENTMODIFICATION = "EventModification";
 	
-	public List<TestDescription> generateNewTestsByInputMutation (TestDescription tdlTestCase) {
-		List<TestDescription> generatedTestsByMutation = new ArrayList<>();
-		generatedTestsByMutation.addAll(mutateLiteralData (tdlTestCase));
-		generatedTestsByMutation.addAll(mutateExchangedEvents (tdlTestCase));
-		return generatedTestsByMutation;
+	public List<TestDescription> generateNewTestsByInputModification (TestDescription tdlTestCase) {
+		List<TestDescription> generatedTestsByModification = new ArrayList<>();
+		generatedTestsByModification.addAll(modifyLiteralData (tdlTestCase));
+		generatedTestsByModification.addAll(modifyExchangedEvents (tdlTestCase));
+		return generatedTestsByModification;
 	}
 
 	/* four operators can be applied:
 	 * 1. addition : duplication of existing & creation of new events based on the interface
 	 * 2. deletion
 	 * 3. reordering
-	 * 4. modification of event parameters based on model elements used in the event parameters
+	 * 4. modification of event parameters values with other values for the same parameter
 	 * 
 	 * NOTE: We assume a TDL test case only contains a series of Message elements each sending an accepted event to the model under test
 	 */
-	private Collection<? extends TestDescription> mutateExchangedEvents(TestDescription tdlTestCase) {
-		List<TestDescription> generatedTestsByMutation = new ArrayList<>();
+	private Collection<? extends TestDescription> modifyExchangedEvents(TestDescription tdlTestCase) {
+		List<TestDescription> generatedTestsByModification = new ArrayList<>();
 		Block messagesContainer = ((CompoundBehaviour) tdlTestCase.getBehaviourDescription().getBehaviour()).getBlock();
 		List<Message> tdlMessages = messagesContainer.getBehaviour().stream().map(b -> (Message) b).collect(Collectors.toList());
 		//1.1. addition-duplication of existing messages
@@ -65,7 +67,7 @@ public class TDLTestInputDataMutation {
 			TestDescription copyTdlTestCase = copyTdlTestCase(tdlTestCase, EVENTDUPLICATION);
 			Block copyContainer = ((CompoundBehaviour) copyTdlTestCase.getBehaviourDescription().getBehaviour()).getBlock();
 			copyContainer.getBehaviour().add(copyTdlMessage(tdlMessage));
-			generatedTestsByMutation.add(copyTdlTestCase);
+			generatedTestsByModification.add(copyTdlTestCase);
 		}
 		//1.2. addition-creation of new events
 		//TODO
@@ -74,7 +76,7 @@ public class TDLTestInputDataMutation {
 			TestDescription copyTdlTestCase = copyTdlTestCase(tdlTestCase, EVENTDELETION);
 			Block copyContainer = ((CompoundBehaviour) copyTdlTestCase.getBehaviourDescription().getBehaviour()).getBlock();
 			copyContainer.getBehaviour().remove(tdlMessage);
-			generatedTestsByMutation.add(copyTdlTestCase);
+			generatedTestsByModification.add(copyTdlTestCase);
 		}
 		//3. permutation
 		TestDescription copyTdlTestCase = copyTdlTestCase(tdlTestCase, EVENTPERMUTATION);
@@ -83,14 +85,56 @@ public class TDLTestInputDataMutation {
 		Collections.shuffle(copyMessages);
 		copyContainer.getBehaviour().clear();
 		copyContainer.getBehaviour().addAll(copyMessages);
-		generatedTestsByMutation.add(copyTdlTestCase);
-		//4. modification
-		//TODO
-		return generatedTestsByMutation;
+		generatedTestsByModification.add(copyTdlTestCase);
+		
+		//4. modification of event parameters values with other values for the same parameter
+		//NOTE: Event parameter values are indeed model objects (according to behavioral interface metalanguage)
+//		Package testSuite = (Package) tdlTestCase.container();
+//		copyTdlTestCase = copyTdlTestCase(tdlTestCase, EVENTMODIFICATION);
+//		List<DataInstanceUse> eobjectRefrences = findEObjectRefsInTestCase (copyTdlTestCase);
+//		for (DataInstanceUse eobjectReference:eobjectRefrences) {
+//			StructuredDataInstance tdlEobject = (StructuredDataInstance) eobjectReference.getDataInstance();
+//			
+//		}
+		return generatedTestsByModification;
 	}
 
-	private List<TestDescription> mutateLiteralData(TestDescription tdlTestCase) {
-		List<TestDescription> generatedTestsByMutation = new ArrayList<>();
+	//finding parameterBindings that their value are eobject instances
+	private List<DataInstanceUse> findEObjectRefsInTestCase(TestDescription tdlTestCase) {
+		Block messagesContainer = ((CompoundBehaviour) tdlTestCase.getBehaviourDescription().getBehaviour()).getBlock();
+		List<Message> tdlMessages = messagesContainer.getBehaviour().stream().map(b -> (Message) b).collect(Collectors.toList());
+		List<DataInstanceUse> exchangedEvents = tdlMessages.stream().map(m -> (DataInstanceUse) m.getArgument()).collect(Collectors.toList());
+		List<DataInstanceUse> eobjectRefrences = new ArrayList<>();
+		for (DataInstanceUse eventInstance: exchangedEvents) {
+			Iterator<EObject> iterator = eventInstance.eAllContents();
+			while (iterator.hasNext()) {
+				EObject object = iterator.next();
+				if (object instanceof ParameterBinding && ((ParameterBinding) object).getDataUse() instanceof DataInstanceUse) {
+					DataInstanceUse reference = (DataInstanceUse)((ParameterBinding) object).getDataUse();
+					eobjectRefrences.addAll(getDirectEObjectReferences(reference));
+				}
+			}
+		}
+		return eobjectRefrences;
+	}
+	
+	private List<DataInstanceUse> getDirectEObjectReferences(DataInstanceUse reference){
+		List<DataInstanceUse> eobjectRefrences = new ArrayList<>();
+		if (reference.getItem() != null && reference.getItem().size()==0) {
+			for (StaticDataUse item: reference.getItem()) {
+				if (item instanceof DataInstanceUse) {
+					eobjectRefrences.addAll(getDirectEObjectReferences((DataInstanceUse)item));
+				}	
+			}
+		}
+		else if (reference.getDataInstance() != null){
+			eobjectRefrences.add(reference);
+		}
+		return eobjectRefrences;
+	}
+
+	private List<TestDescription> modifyLiteralData(TestDescription tdlTestCase) {
+		List<TestDescription> generatedTestsByModification = new ArrayList<>();
 		Iterator<EObject> iterator = tdlTestCase.eAllContents();
 		while (iterator.hasNext()) {
 			EObject object = iterator.next();
@@ -99,22 +143,22 @@ public class TDLTestInputDataMutation {
 			}
 		}
 		if (boolLiterals.size()>0) {
-			generatedTestsByMutation.addAll(mutateBooleanData(tdlTestCase));
+			generatedTestsByModification.addAll(mutateBooleanData(tdlTestCase));
 		}
 		else if (stringLiterals.size()>0) {
-			generatedTestsByMutation.addAll(mutateStringData(tdlTestCase));
+			generatedTestsByModification.addAll(mutateStringData(tdlTestCase));
 		}
 		else if (intLiterals.size()>0) {
-			generatedTestsByMutation.addAll(mutateIntegerData(tdlTestCase));
+			generatedTestsByModification.addAll(mutateIntegerData(tdlTestCase));
 		}
 		else if (floatLiterals.size()>0) {
-			generatedTestsByMutation.addAll(mutateFloatData(tdlTestCase));
+			generatedTestsByModification.addAll(mutateFloatData(tdlTestCase));
 		}
-		return generatedTestsByMutation;
+		return generatedTestsByModification;
 	}
 	
 	private Collection<? extends TestDescription> mutateBooleanData(TestDescription tdlTestCase) {
-		List<TestDescription> generatedTestsByMutation = new ArrayList<>();
+		List<TestDescription> generatedTestsByModification = new ArrayList<>();
 		for (LiteralValueUse boolLiteral:boolLiterals) {
 			if (getLiteralValue(boolLiteral).equals("true")) {
 				boolLiteral.setValue("false");
@@ -122,9 +166,9 @@ public class TDLTestInputDataMutation {
 			else if (getLiteralValue(boolLiteral).equals("false")) {
 				boolLiteral.setValue("true");
 			}
-			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase, BOOLMUTATION));
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, BOOLMODIFICATION));
 		}
-		return generatedTestsByMutation;
+		return generatedTestsByModification;
 	}
 
 	/*four operators: 
@@ -134,7 +178,7 @@ public class TDLTestInputDataMutation {
 	 * 4. replace the string by a fully random string of the same size
 	 */
 	private Collection<? extends TestDescription> mutateStringData(TestDescription tdlTestCase) {
-		List<TestDescription> generatedTestsByMutation = new ArrayList<>();
+		List<TestDescription> generatedTestsByModification = new ArrayList<>();
 		for (LiteralValueUse stringLiteral:stringLiterals) {
 			String value = getLiteralValue(stringLiteral);
 			StringBuilder sb = new StringBuilder(value);
@@ -143,43 +187,43 @@ public class TDLTestInputDataMutation {
 			// 1. add a random char
 			sb.append(RandomStringUtils.randomAlphanumeric(1));
 			stringLiteral.setValue(sb.toString());
-			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase, STRINGMUTATION));
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, STRINGMODIFICATION));
 			//2. remove a random char
 			sb = new StringBuilder(value);
 			sb.deleteCharAt(randomIndex);
 			stringLiteral.setValue(sb.toString());
-			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase, STRINGMUTATION));
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, STRINGMODIFICATION));
 			//3. replace a random char
 			sb = new StringBuilder(value);
 			sb.replace(randomIndex, randomIndex + 1, RandomStringUtils.randomAlphanumeric(1));
 			stringLiteral.setValue(sb.toString());
-			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase, STRINGMUTATION));
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, STRINGMODIFICATION));
 			//4. replace the string by a fully random string of the same size
 			stringLiteral.setValue(RandomStringUtils.randomAlphanumeric(value.length()));
-			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase, STRINGMUTATION));
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, STRINGMODIFICATION));
 		}
-		return generatedTestsByMutation;
+		return generatedTestsByModification;
 	}
 
 	/* five operators for numeric values: 
 	 * plus 1, minus 1, multiply by 2, divide by 2, and replacement by an existing literal of the same type
 	 */
 	private Collection<? extends TestDescription> mutateIntegerData(TestDescription tdlTestCase) {
-		List<TestDescription> generatedTestsByMutation = new ArrayList<>();
+		List<TestDescription> generatedTestsByModification = new ArrayList<>();
 		for (LiteralValueUse intLiteral:intLiterals) {
 			int value = Integer.parseInt(getLiteralValue(intLiteral));
 			//1. value plus 1
 			intLiteral.setValue("'" + (value + 1) + "'");
-			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase, INTMUTATION));
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, INTMODIFICATION));
 			//2. value minus 1
 			intLiteral.setValue("'" + (value - 1) + "'");
-			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase, INTMUTATION));
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, INTMODIFICATION));
 			//3. value multiply by 2
 			intLiteral.setValue("'" + (value * 2) + "'");
-			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase, INTMUTATION));
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, INTMODIFICATION));
 			//4. value divide by 2
 			intLiteral.setValue("'" + (value / 2) + "'");
-			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase, INTMUTATION));
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, INTMODIFICATION));
 			//5. replacement by an existing literal of the same type
 			Random rand = new Random();
 			int randomIndex = rand.nextInt(intLiterals.size());
@@ -188,27 +232,27 @@ public class TDLTestInputDataMutation {
 			}
 			String exValue = intLiterals.get(randomIndex).getValue();
 			intLiteral.setValue(exValue);
-			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase, INTMUTATION));
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, INTMODIFICATION));
 		}
-		return generatedTestsByMutation;
+		return generatedTestsByModification;
 	}
 
 	private Collection<? extends TestDescription> mutateFloatData(TestDescription tdlTestCase) {
-		List<TestDescription> generatedTestsByMutation = new ArrayList<>();
+		List<TestDescription> generatedTestsByModification = new ArrayList<>();
 		for (LiteralValueUse floatLiteral:floatLiterals) {
 			float value = Float.parseFloat(getLiteralValue(floatLiteral));
 			//1. value plus 1
 			floatLiteral.setValue("'" + (value + 1) + "'");
-			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase, FLOATMUTATION));
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, FLOATMODIFICATION));
 			//2. value minus 1
 			floatLiteral.setValue("'" + (value - 1) + "'");
-			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase, FLOATMUTATION));
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, FLOATMODIFICATION));
 			//3. value multiply by 2
 			floatLiteral.setValue("'" + (value * 2) + "'");
-			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase, FLOATMUTATION));
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, FLOATMODIFICATION));
 			//4. value divide by 2
 			floatLiteral.setValue("'" + (float)(value / 2) + "'");
-			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase, FLOATMUTATION));
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, FLOATMODIFICATION));
 			//5. replacement by an existing literal of the same type
 			Random rand = new Random();
 			int randomIndex = rand.nextInt(floatLiterals.size());
@@ -217,9 +261,9 @@ public class TDLTestInputDataMutation {
 			}
 			String exValue = floatLiterals.get(randomIndex).getValue();
 			floatLiteral.setValue(exValue);
-			generatedTestsByMutation.add(copyTdlTestCase(tdlTestCase, FLOATMUTATION));
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, FLOATMODIFICATION));
 		}
-		return generatedTestsByMutation;
+		return generatedTestsByModification;
 	}
 
 	private void findLiteralFeaturesOfData (DataInstanceUse dataInstanceUse){
@@ -253,9 +297,9 @@ public class TDLTestInputDataMutation {
 		}
 	}
 	
-	private TestDescription copyTdlTestCase(TestDescription testCase, String mutationOperator) {
+	private TestDescription copyTdlTestCase(TestDescription testCase, String modificationOperator) {
 		TestDescription copyTdlTestCase = tdlFactory.eINSTANCE.createTestDescription();
-		copyTdlTestCase.setName(testCase.getName() + (numOfNewTests++) + "_" + mutationOperator);
+		copyTdlTestCase.setName(testCase.getName() + (numOfNewTests++) + "_" + modificationOperator);
 		copyTdlTestCase.setTestConfiguration(testCase.getTestConfiguration());
 		copyTdlTestCase.setBehaviourDescription(EcoreUtil.copy(testCase.getBehaviourDescription()));
 		return copyTdlTestCase;
@@ -278,4 +322,17 @@ public class TDLTestInputDataMutation {
     	}
 		return value;
 	}
+	
+//	private static boolean compareModels(Resource model1, Resource model2) {
+//		IComparisonScope scope = new DefaultComparisonScope(model1, model2, null);
+//		Comparison comparison = EMFCompare.builder().build().compare(scope);
+//
+//		List<Diff> differences = comparison.getDifferences();
+//
+//		if (differences.size() == 0) {
+//			return true;
+//		}
+//
+//		return false;
+//	}
 }
