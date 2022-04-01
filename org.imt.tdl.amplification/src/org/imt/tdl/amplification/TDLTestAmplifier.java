@@ -6,7 +6,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.ICoreRunnable;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -46,7 +51,7 @@ public class TDLTestAmplifier {
 			copyTdlTestCase.setTestConfiguration(testCase.getTestConfiguration());
 			copyTdlTestCase.setBehaviourDescription(EcoreUtil.copy(testCase.getBehaviourDescription()));
 			
-			System.out.println("Phase (1): Removing assertions from the test case");
+			System.out.println("\nPhase (1): Removing assertions from the test case");
 			AssertionRemover assertionRemover = new AssertionRemover();
 			assertionRemover.removeAssertionsFromTestCase(copyTdlTestCase);
 			
@@ -100,8 +105,10 @@ public class TDLTestAmplifier {
 		newTestSuiteRes.unload();
 		
 		System.out.println("\nTest Amplification has been performed successfully.");
-		System.out.println("Total number of generated test cases : " + numNewTests);
-		System.out.println("Improvement in the mutation score : " + (scoreCalculator.getMutationScore() - initialMutationScore));
+		System.out.println("Number of test cases improving mutation score: " + numNewTests);
+		System.out.println("- initial mutation score : " + initialMutationScore);
+		System.out.println("- final mutation score : " + scoreCalculator.getMutationScore());
+		System.out.println("=> improvement in the mutation score : " + (scoreCalculator.getMutationScore() - initialMutationScore));
 	}
 
 	private static Resource readTestSuiteResource(ResourceSet resSet, IFile testSuiteFile){
