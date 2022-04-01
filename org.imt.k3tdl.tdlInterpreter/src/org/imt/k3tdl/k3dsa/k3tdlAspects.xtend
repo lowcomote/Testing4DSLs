@@ -94,6 +94,7 @@ class TestDescriptionAspect{
 	def void activateConfiguration(){
 		_self.testConfiguration.activateConfiguration(_self.launcher)
 	}
+	
 	def void activateConfiguration(String MUTPath){
 		_self.launcher = new EngineFactory
 		_self.testCaseResult = new TDLTestCaseResult
