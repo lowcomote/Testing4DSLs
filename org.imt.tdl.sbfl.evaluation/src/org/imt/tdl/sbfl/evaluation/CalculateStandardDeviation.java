@@ -14,38 +14,38 @@ public class CalculateStandardDeviation {
 	private double standardDeviation;
 	
 	public void calculateSum() {
-		this.sum = 0;
-		this.EXAMScores.forEach(s -> this.sum += s);
-		BigDecimal bd = new BigDecimal(this.sum).setScale(3, RoundingMode.HALF_UP);
-		this.sum = bd.doubleValue();
+		sum = 0;
+		EXAMScores.forEach(s -> sum += s);
+		BigDecimal bd = new BigDecimal(sum).setScale(3, RoundingMode.HALF_UP);
+		sum = bd.doubleValue();
 	}
 	
 	public void calculateMean() {
-		this.calculateSum();
-		this.mean = this.sum / this.EXAMScores.size();
-		BigDecimal bd = new BigDecimal(this.mean).setScale(3, RoundingMode.HALF_UP);
-		this.mean = bd.doubleValue();
+		calculateSum();
+		mean = sum / EXAMScores.size();
+		BigDecimal bd = new BigDecimal(mean).setScale(3, RoundingMode.HALF_UP);
+		mean = bd.doubleValue();
 	}
 	
 	public void calculateMedian() {
-		Collections.sort(this.EXAMScores, Collections.reverseOrder());
-		this.median = this.EXAMScores.get(this.EXAMScores.size()/2);
-		BigDecimal bd = new BigDecimal(this.median).setScale(3, RoundingMode.HALF_UP);
-		this.median = bd.doubleValue();
+		Collections.sort(EXAMScores, Collections.reverseOrder());
+		median = EXAMScores.get(EXAMScores.size()/2);
+		BigDecimal bd = new BigDecimal(median).setScale(3, RoundingMode.HALF_UP);
+		median = bd.doubleValue();
 	}
 	
 	public void calculateSD() {
-		if (this.mean == 0) {
-			this.calculateMean();
+		if (mean == 0) {
+			calculateMean();
 		}
-		this.standardDeviation = 0;
-		for (double score:this.EXAMScores) {
-			this.standardDeviation += Math.pow((score - this.mean), 2);
+		standardDeviation = 0;
+		for (double score:EXAMScores) {
+			standardDeviation += Math.pow((score - mean), 2);
 		}
-		this.standardDeviation /= this.EXAMScores.size();
-		this.standardDeviation = Math.sqrt(this.standardDeviation);
-		BigDecimal bd = new BigDecimal(this.standardDeviation).setScale(3, RoundingMode.HALF_UP);
-		this.standardDeviation = bd.doubleValue();
+		standardDeviation /= EXAMScores.size();
+		standardDeviation = Math.sqrt(standardDeviation);
+		BigDecimal bd = new BigDecimal(standardDeviation).setScale(3, RoundingMode.HALF_UP);
+		standardDeviation = bd.doubleValue();
 	}
 	
 	public List<Double> getEXAMScores() {
@@ -57,18 +57,18 @@ public class CalculateStandardDeviation {
 	}
 	
 	public double getSum() {
-		return this.sum;
+		return sum;
 	}
 
 	public double getMean() {
-		return this.mean;
+		return mean;
 	}
 	
 	public double getMedian() {
-		return this.median;
+		return median;
 	}
 	
 	public double getStandardDeviation() {
-		return this.standardDeviation;
+		return standardDeviation;
 	}
 }
