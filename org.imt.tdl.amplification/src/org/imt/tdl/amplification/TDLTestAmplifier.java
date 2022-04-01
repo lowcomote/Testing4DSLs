@@ -20,6 +20,7 @@ import org.etsi.mts.tdl.TDLan2StandaloneSetup;
 import org.etsi.mts.tdl.TestDescription;
 import org.etsi.mts.tdl.tdlFactory;
 import org.etsi.mts.tdl.tdlPackage;
+import org.imt.tdl.amplification.evaluation.mutationScoreCalculator;
 
 import com.google.inject.Injector;
 
@@ -29,6 +30,10 @@ public class TDLTestAmplifier {
 		ResourceSet resSet = new ResourceSetImpl();
 		Resource testSuiteRes = readTestSuiteResource(resSet, testSuiteFile);
 		Package tdlTestSuite = (Package)testSuiteRes.getContents().get(0);
+		//calculating the mutation score of the manually-written test suite (i.e., the input test suite)
+		mutationScoreCalculator scoreCalculator = new mutationScoreCalculator(tdlTestSuite);
+		double initialMutationScore = scoreCalculator.calculateInitialMutationScore();
+		
 		List<TestDescription> tdlTestCases = tdlTestSuite.getPackagedElement().stream().
 				filter(p -> p instanceof TestDescription).map(t -> (TestDescription) t).collect(Collectors.toList());
 		
@@ -45,10 +50,10 @@ public class TDLTestAmplifier {
 			AssertionRemover assertionRemover = new AssertionRemover();
 			assertionRemover.removeAssertionsFromTestCase(copyTdlTestCase);
 			
-			System.out.println("Phase (2): Mutating test input Data to generate new test cases");
-			TDLTestInputDataMutation mutator = new TDLTestInputDataMutation();
-			newTdlTestCases = mutator.generateNewTestsByInputMutation(copyTdlTestCase);
-			System.out.println("Done: #of generated test cases by mutation = " + newTdlTestCases.size());
+			System.out.println("Phase (2): Modifying test input Data to generate new test cases");
+			TDLTestInputDataAmplification mutator = new TDLTestInputDataAmplification();
+			newTdlTestCases = mutator.generateNewTestsByInputModification(copyTdlTestCase);
+			System.out.println("Done: #of generated test cases by input modification = " + newTdlTestCases.size());
 			
 			System.out.println("\nPhase (3): Running new tests and generating assertions");
 			int i = newTdlTestCases.size();
@@ -56,15 +61,26 @@ public class TDLTestAmplifier {
 				tdlTestSuite.getPackagedElement().add(newTestCase);
 				AssertionGenerator generator = new AssertionGenerator();
 				boolean result = generator.generateAssertionsForTestCase(newTestCase);
+				//check whether the assertion can be generated for the new test case
 				if (!result) {
 					tdlTestSuite.getPackagedElement().remove(newTestCase);
 					i--;
 				}
+				//check whether the new test case improves the mutation score
+				else {
+					boolean improvement = scoreCalculator.testCaseImprovesMutationScore(newTestCase);
+					if (!improvement) {
+						tdlTestSuite.getPackagedElement().remove(newTestCase);
+						i--;
+					}
+				}
 			}
-			System.out.println("Done: #of valid generated test cases (having assertions) = " + i);
+			System.out.println("Done: #of test cases improving mutation score = " + i);
 			numNewTests += i;
 		}
-		System.out.println("\nPhase (4): Saving valid new test cases");
+		
+		System.out.println("\nPhase (4): Saving new test cases");
+		
 		String sourcePath = testSuiteRes.getURI().toString();
 		String extension = ".tdlan2";
 		if (sourcePath.endsWith(".xmi")) {
@@ -82,8 +98,10 @@ public class TDLTestAmplifier {
 		}
 		testSuiteRes.unload();
 		newTestSuiteRes.unload();
+		
 		System.out.println("\nTest Amplification has been performed successfully.");
-		System.out.println("Total number of valid generated test cases: " + numNewTests);
+		System.out.println("Total number of generated test cases : " + numNewTests);
+		System.out.println("Improvement in the mutation score : " + (scoreCalculator.getMutationScore() - initialMutationScore));
 	}
 
 	private static Resource readTestSuiteResource(ResourceSet resSet, IFile testSuiteFile){
