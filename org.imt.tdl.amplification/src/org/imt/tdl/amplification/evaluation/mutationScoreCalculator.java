@@ -101,9 +101,9 @@ public class mutationScoreCalculator {
 	}
 	
 	private void findMutants() {
-		String projectName = seedModelPath.substring(1, seedModelPath.indexOf("/"));
+		String projectName = seedModelPath.substring(1, seedModelPath.lastIndexOf("/"));
 		mutantsProject =  ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
-		File modelFolder = new File(mutantsProject.getLocation() + "\\model");
+		File modelFolder = new File(mutantsProject.getLocation() + "\\mutants");
 		for (File file : modelFolder.listFiles()) {
 			pathsHelper(projectName, file);
 		}
