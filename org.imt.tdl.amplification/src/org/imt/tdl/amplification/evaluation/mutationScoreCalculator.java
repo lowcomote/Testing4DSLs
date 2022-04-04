@@ -40,7 +40,7 @@ public class mutationScoreCalculator {
 	}
 	
 	public double calculateInitialMutationScore() {
-		System.out.print("Calculating the mutation score of the input test suite");
+		System.out.print("Calculating the mutation score of the input test suite\n");
 		List<TestDescription> testCases = testSuite.getPackagedElement().stream().filter(p -> p instanceof TestDescription).
 			map(p -> (TestDescription) p).collect(Collectors.toList());
 		testCases.forEach(t -> runTestCaseOnMutants(t));

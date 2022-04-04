@@ -31,11 +31,11 @@ public class TDLTestAmplifier {
 		Resource testSuiteRes = readTestSuiteResource(resSet, testSuiteFile);
 		Package tdlTestSuite = (Package)testSuiteRes.getContents().get(0);
 		//calculating the mutation score of the manually-written test suite (i.e., the input test suite)
-//		mutationScoreCalculator scoreCalculator = new mutationScoreCalculator(tdlTestSuite);
-//		double initialMutationScore = 0;
-//		if (!scoreCalculator.noMutantsExists) {
-//			initialMutationScore = scoreCalculator.calculateInitialMutationScore();
-//		}
+		mutationScoreCalculator scoreCalculator = new mutationScoreCalculator(tdlTestSuite);
+		double initialMutationScore = 0;
+		if (!scoreCalculator.noMutantsExists) {
+			initialMutationScore = scoreCalculator.calculateInitialMutationScore();
+		}
 		
 		List<TestDescription> tdlTestCases = tdlTestSuite.getPackagedElement().stream().
 				filter(p -> p instanceof TestDescription).map(t -> (TestDescription) t).collect(Collectors.toList());
@@ -70,13 +70,13 @@ public class TDLTestAmplifier {
 					i--;
 				}
 				//check whether the new test case improves the mutation score, if there is any mutants
-//				else if (!scoreCalculator.noMutantsExists){
-//					boolean improvement = scoreCalculator.testCaseImprovesMutationScore(newTestCase);
-//					if (!improvement) {
-//						tdlTestSuite.getPackagedElement().remove(newTestCase);
-//						i--;
-//					}
-//				}
+				else if (!scoreCalculator.noMutantsExists){
+					boolean improvement = scoreCalculator.testCaseImprovesMutationScore(newTestCase);
+					if (!improvement) {
+						tdlTestSuite.getPackagedElement().remove(newTestCase);
+						i--;
+					}
+				}
 			}
 			System.out.println("Done: #of valid generated test cases = " + i);
 			numNewTests += i;
@@ -103,14 +103,14 @@ public class TDLTestAmplifier {
 		newTestSuiteRes.unload();
 		
 		System.out.println("\nTest Amplification has been performed successfully.");
-//		if (!scoreCalculator.noMutantsExists) {
-//			System.out.println("Total number of test cases improving mutation score: " + numNewTests);
-//			System.out.println("- initial mutation score : " + initialMutationScore);
-//			System.out.println("- final mutation score : " + scoreCalculator.getMutationScore());
-//			System.out.println("=> improvement in the mutation score : " + (scoreCalculator.getMutationScore() - initialMutationScore));
-//			System.out.println("\n[Test case, mutant killed by the test case]:");
-//			System.out.println(scoreCalculator.testCase_killedMutant);
-//		}
+		if (!scoreCalculator.noMutantsExists) {
+			System.out.println("Total number of test cases improving mutation score: " + numNewTests);
+			System.out.println("- initial mutation score : " + initialMutationScore);
+			System.out.println("- final mutation score : " + scoreCalculator.getMutationScore());
+			System.out.println("=> improvement in the mutation score : " + (scoreCalculator.getMutationScore() - initialMutationScore));
+			System.out.println("\n[Test case, mutant killed by the test case]:");
+			System.out.println(scoreCalculator.testCase_killedMutant);
+		}
 	}
 
 	private static Resource readTestSuiteResource(ResourceSet resSet, IFile testSuiteFile){
