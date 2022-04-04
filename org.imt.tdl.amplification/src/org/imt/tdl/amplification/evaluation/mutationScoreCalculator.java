@@ -21,11 +21,13 @@ import org.imt.tdl.testResult.TDLTestResultUtil;
 public class mutationScoreCalculator {
 	
 	Package testSuite;
+	public boolean noMutantsExists;
 	
 	private static String KILLED = "killed";
 	private static String ALIVE = "alive";
 	
 	private HashMap<String, String> mutant_status = new HashMap<>();
+	public HashMap<String, String> testCase_killedMutant = new HashMap<>();
 	
 	int numOfMutants;
 	int numOfKilledMutants;
@@ -38,6 +40,7 @@ public class mutationScoreCalculator {
 	}
 	
 	public double calculateInitialMutationScore() {
+		System.out.print("Calculating the mutation score of the input test suite");
 		List<TestDescription> testCases = testSuite.getPackagedElement().stream().filter(p -> p instanceof TestDescription).
 			map(p -> (TestDescription) p).collect(Collectors.toList());
 		testCases.forEach(t -> runTestCaseOnMutants(t));
@@ -64,6 +67,7 @@ public class mutationScoreCalculator {
 			TDLTestCaseResult result = TestDescriptionAspect.executeTestCase(testCase, mutantPath);
 			if (result.getValue() == TDLTestResultUtil.FAIL) {
 				mutant_status.replace(mutant, KILLED);
+				testCase_killedMutant.put(testCase.getName(), mutant);
 				numOfKilledMutants++;
 			}
 		}
@@ -104,8 +108,12 @@ public class mutationScoreCalculator {
 		String projectName = seedModelPath.substring(1, seedModelPath.lastIndexOf("/"));
 		mutantsProject =  ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
 		File modelFolder = new File(mutantsProject.getLocation() + "\\mutants");
-		for (File file : modelFolder.listFiles()) {
-			pathsHelper(projectName, file);
+		if (modelFolder.listFiles() == null) {
+			noMutantsExists = true;
+		}else {
+			for (File file : modelFolder.listFiles()) {
+				pathsHelper(projectName, file);
+			}
 		}
 	}
 	

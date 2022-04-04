@@ -40,7 +40,7 @@ public class TDLTestInputDataAmplification {
 	private static String EVENTDUPLICATION = "EventDuplication";
 	private static String EVENTCREATION = "EventCreation";
 	private static String EVENTDELETION = "EventDeletion";
-	private static String EVENTPERMUTATION = "EventPermodification";
+	private static String EVENTPERMUTATION = "EventPermutation";
 	private static String EVENTMODIFICATION = "EventModification";
 	
 	public List<TestDescription> generateNewTestsByInputModification (TestDescription tdlTestCase) {
@@ -70,6 +70,10 @@ public class TDLTestInputDataAmplification {
 			generatedTestsByModification.add(copyTdlTestCase);
 		}
 		//1.2. addition-creation of new events
+		/* for the accepted events of the behavioral interface that are not used in the test cases, create new events
+		 * ?? what if the EObjects used as event parameters are not existed in the model under test?
+		 * ?? should we first check if there is the required EObjects in the model?
+		 */
 		//TODO
 		//2. deletion
 		for (Message tdlMessage: tdlMessages) {
@@ -89,6 +93,7 @@ public class TDLTestInputDataAmplification {
 		
 		//4. modification of event parameters values with other values for the same parameter
 		//NOTE: Event parameter values are indeed model objects (according to behavioral interface metalanguage)
+		//?? should we only use the existing TDL elements related to objects or we should generate new ones for the missing ones?
 //		Package testSuite = (Package) tdlTestCase.container();
 //		copyTdlTestCase = copyTdlTestCase(tdlTestCase, EVENTMODIFICATION);
 //		List<DataInstanceUse> eobjectRefrences = findEObjectRefsInTestCase (copyTdlTestCase);
