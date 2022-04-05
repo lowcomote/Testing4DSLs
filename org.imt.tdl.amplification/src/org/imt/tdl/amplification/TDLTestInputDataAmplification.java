@@ -230,14 +230,11 @@ public class TDLTestInputDataAmplification {
 			intLiteral.setValue("'" + (value / 2) + "'");
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, INTMODIFICATION));
 			//5. replacement by an existing literal of the same type
-			Random rand = new Random();
-			int randomIndex = rand.nextInt(intLiterals.size());
-			while (randomIndex == intLiterals.indexOf(intLiteral)) {
-				randomIndex = rand.nextInt(intLiterals.size());
+			List<LiteralValueUse> otherValues = intLiterals.stream().filter(i -> i != intLiteral).toList();
+			for (LiteralValueUse otherValue: otherValues) {
+				intLiteral.setValue(otherValue.getValue());
+				generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, INTMODIFICATION));
 			}
-			String exValue = intLiterals.get(randomIndex).getValue();
-			intLiteral.setValue(exValue);
-			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, INTMODIFICATION));
 		}
 		return generatedTestsByModification;
 	}
