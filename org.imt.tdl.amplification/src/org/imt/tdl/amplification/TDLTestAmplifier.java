@@ -20,19 +20,23 @@ import org.etsi.mts.tdl.TDLan2StandaloneSetup;
 import org.etsi.mts.tdl.TestDescription;
 import org.etsi.mts.tdl.tdlFactory;
 import org.etsi.mts.tdl.tdlPackage;
-import org.imt.tdl.amplification.evaluation.mutationScoreCalculator;
+import org.imt.tdl.amplification.evaluation.MutationScoreCalculator;
 
 import com.google.inject.Injector;
 
 public class TDLTestAmplifier {
 	
-	public static void amplifyTestSuite(IFile testSuiteFile) {
+	MutationScoreCalculator scoreCalculator;
+	double initialMutationScore;
+	int numNewTests;
+	
+	public void amplifyTestSuite(IFile testSuiteFile) {
 		ResourceSet resSet = new ResourceSetImpl();
 		Resource testSuiteRes = readTestSuiteResource(resSet, testSuiteFile);
 		Package tdlTestSuite = (Package)testSuiteRes.getContents().get(0);
 		//calculating the mutation score of the manually-written test suite (i.e., the input test suite)
-		mutationScoreCalculator scoreCalculator = new mutationScoreCalculator(tdlTestSuite);
-		double initialMutationScore = 0;
+		scoreCalculator = new MutationScoreCalculator(tdlTestSuite);
+		initialMutationScore = 0;
 		if (!scoreCalculator.noMutantsExists) {
 			initialMutationScore = scoreCalculator.calculateInitialMutationScore();
 		}
@@ -41,7 +45,7 @@ public class TDLTestAmplifier {
 				filter(p -> p instanceof TestDescription).map(t -> (TestDescription) t).collect(Collectors.toList());
 		
 		List<TestDescription> newTdlTestCases = new ArrayList<>();
-		int numNewTests = 0;
+		numNewTests = 0;
 		
 		for (TestDescription testCase: tdlTestCases) {
 			TestDescription copyTdlTestCase = tdlFactory.eINSTANCE.createTestDescription();
@@ -96,7 +100,6 @@ public class TDLTestAmplifier {
 		try {
 			newTestSuiteRes.save(null);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		testSuiteRes.unload();
@@ -104,16 +107,29 @@ public class TDLTestAmplifier {
 		
 		System.out.println("\nTest Amplification has been performed successfully.");
 		if (!scoreCalculator.noMutantsExists) {
-			System.out.println("Total number of test cases improving mutation score: " + numNewTests);
-			System.out.println("- initial mutation score : " + initialMutationScore);
-			System.out.println("- final mutation score : " + scoreCalculator.getMutationScore());
-			System.out.println("=> improvement in the mutation score : " + (scoreCalculator.getMutationScore() - initialMutationScore));
-			System.out.println("\n[Test case, mutant killed by the test case]:");
-			System.out.println(scoreCalculator.testCase_killedMutant);
+			printMutationAnalysisResult();
 		}
 	}
 
-	private static Resource readTestSuiteResource(ResourceSet resSet, IFile testSuiteFile){
+	private void printMutationAnalysisResult() {
+		System.out.println("Total number of mutants: " + scoreCalculator.getNumOfMutants());
+		System.out.println("Total number of killed mutants: " + scoreCalculator.getNumOfKilledMutants());
+		System.out.println("Total number of test cases improving mutation score: " + numNewTests);
+		System.out.println("- initial mutation score : " + initialMutationScore);
+		System.out.println("- final mutation score : " + scoreCalculator.getMutationScore());
+		System.out.println("=> improvement in the mutation score : " + (scoreCalculator.getMutationScore() - initialMutationScore));
+		System.out.println("--------------------------------------------------");
+		for (String testCase:scoreCalculator.testCase_killedMutant.keySet()) {
+			System.out.println("Test case: " + testCase);
+			int i = 0;
+			for (String mutant:scoreCalculator.testCase_killedMutant.get(testCase)) {
+				System.out.println("Killed mutant " + (i++) + ": " + mutant);
+			}
+			System.out.println();
+		}
+	}
+
+	private Resource readTestSuiteResource(ResourceSet resSet, IFile testSuiteFile){
 		IPath path = testSuiteFile.getFullPath();
 		URI testSuiteURI = URI.createPlatformResourceURI(path.toString(), true);
 		if (testSuiteURI.toString().endsWith(".xmi")) {
