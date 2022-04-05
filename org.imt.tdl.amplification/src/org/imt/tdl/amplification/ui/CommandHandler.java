@@ -36,7 +36,8 @@ public class CommandHandler implements IHandler {
 						@Override
 						public void run(IProgressMonitor monitor) throws CoreException {
 							try {
-								TDLTestAmplifier.amplifyTestSuite((IFile) element);
+								TDLTestAmplifier amplifier = new TDLTestAmplifier();
+								amplifier.amplifyTestSuite((IFile) element);
 							} catch (Throwable t) {
 								throw new CoreException(Status.error("Error when running test amplifier", t));
 							}
