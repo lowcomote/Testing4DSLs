@@ -52,8 +52,9 @@ public class AssertionGenerator extends ModelExecutionObserver{
 		modelExecutionEngine.attach(this);
 		//run the test case
 		TDLTestCaseResult result = testCaseRunner.executeTestCase(tdlTestCase);
-		//if the new test case cannot be executed completely, it must be ignored from the list of new test cases
-		if (result.getValue() == TDLTestResultUtil.INCONCLUSIVE) {
+		//if the new test case cannot be executed completely, or the model did not expose any event occurrence (i.e., no assertion can be generated)
+		//the test case must be ignored from the list of new test cases
+		if (result.getValue() == TDLTestResultUtil.INCONCLUSIVE || exposedEventOccurrences.size() == 0) {
 			return false;
 		}
 		
