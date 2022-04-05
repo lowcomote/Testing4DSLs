@@ -1,6 +1,7 @@
 package org.imt.tdl.amplification.evaluation;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -18,7 +19,7 @@ import org.imt.k3tdl.k3dsa.TestDescriptionAspect;
 import org.imt.tdl.testResult.TDLTestCaseResult;
 import org.imt.tdl.testResult.TDLTestResultUtil;
 
-public class mutationScoreCalculator {
+public class MutationScoreCalculator {
 	
 	Package testSuite;
 	public boolean noMutantsExists;
@@ -27,13 +28,14 @@ public class mutationScoreCalculator {
 	private static String ALIVE = "alive";
 	
 	private HashMap<String, String> mutant_status = new HashMap<>();
-	public HashMap<String, String> testCase_killedMutant = new HashMap<>();
+	public HashMap<String, List<String>> testCase_killedMutant = new HashMap<>();
 	
 	int numOfMutants;
 	int numOfKilledMutants;
+
 	double mutationScore;
 	
-	public mutationScoreCalculator(Package testSuite) {
+	public MutationScoreCalculator(Package testSuite) {
 		this.testSuite = testSuite;
 		findWorkspacePath();
 		findMutants();
@@ -46,10 +48,6 @@ public class mutationScoreCalculator {
 		testCases.forEach(t -> runTestCaseOnMutants(t));
 		calculateMutationScore();
 		System.out.print("The mutation score of the input test suite is: " + mutationScore);
-		return mutationScore;
-	}
-	
-	public double getMutationScore() {
 		return mutationScore;
 	}
 
@@ -67,12 +65,25 @@ public class mutationScoreCalculator {
 			TDLTestCaseResult result = TestDescriptionAspect.executeTestCase(testCase, mutantPath);
 			if (result.getValue() == TDLTestResultUtil.FAIL) {
 				mutant_status.replace(mutant, KILLED);
-				testCase_killedMutant.put(testCase.getName(), mutant);
+				keepTestCaseKilledMutant(testCase.getName(), mutant);
 				numOfKilledMutants++;
 			}
 		}
 	}
 	
+	private void keepTestCaseKilledMutant(String testCaseName, String mutantPath) {
+		List<String> killedMutants = testCase_killedMutant.get(testCaseName);
+		if (killedMutants == null) {
+			killedMutants = new ArrayList<>();
+			killedMutants.add(mutantPath);
+			testCase_killedMutant.put(testCaseName, killedMutants);
+		}
+		else {
+			killedMutants.add(mutantPath);
+			testCase_killedMutant.replace(testCaseName, killedMutants);
+		}
+	}
+
 	public boolean testCaseImprovesMutationScore (TestDescription testCase) {
 		int pastNumOfKilledMutants = numOfKilledMutants;
 		runTestCaseOnMutants(testCase);
@@ -139,5 +150,18 @@ public class mutationScoreCalculator {
 	
 	private void calculateMutationScore() {
 		mutationScore = (double) numOfKilledMutants/numOfMutants;
+	}
+	
+	
+	public int getNumOfMutants() {
+		return numOfMutants;
+	}
+	
+	public int getNumOfKilledMutants() {
+		return numOfKilledMutants;
+	}
+	
+	public double getMutationScore() {
+		return mutationScore;
 	}
 }
