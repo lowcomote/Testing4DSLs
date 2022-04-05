@@ -37,6 +37,9 @@ class ModelEObjectCreator {
 		//create an EObject using the factory of its EClass
 		val String eclassName = getValidName(TDLObject.dataInstance.dataType)
 		val EClass eobjectType = rootEPackage.getEClassifier(eclassName) as EClass
+		if (eobjectType === null){
+			return null;
+		}
 		var EObject newEObject = rootEPackage.EFactoryInstance.create(eobjectType)
 		//assign the value of its attributes
 		setEObjectFeatures(TDLObject, newEObject, eobjectType)

@@ -91,7 +91,12 @@ class GateInstanceAspect {
 			else if ((arg.item === null || arg.item.size <= 0) 
 				&& arg.dataInstance.dataType.isExposedEvent(_self.DSLPath)){
 				//the message is an event conforming to the behavioral interface of the DSL
-				return _self.gateLauncher.executeDSLSpecificCommand(EXPOSED_EVENT,arg.dataInstance.validName, _self.getEventParameters(arg, EXPOSED_EVENT))
+				val eventParameters = _self.getEventParameters(arg, EXPOSED_EVENT)
+				if (eventParameters === null){
+					return TDLTestResultUtil.FAIL + ": The event parameters cannot be neither found in the model under test nor created. \n"+
+					"There must be a syntactical problem in the test data"
+				}
+				return _self.gateLauncher.executeDSLSpecificCommand(EXPOSED_EVENT,arg.dataInstance.validName, eventParameters)
 			}	
 			var String status = null
 			var ArrayList<EObject> matchedMUTElements = new ArrayList<EObject>();
@@ -160,7 +165,12 @@ class GateInstanceAspect {
 				return _self.gateLauncher.executeOCLCommand(query.value)				
 			}else if (arg.dataInstance.dataType.isAcceptedEvent(_self.DSLPath)){
 				//the message is an event conforming to the behavioral interface of the DSL
-				return _self.gateLauncher.executeDSLSpecificCommand(ACCEPTED_EVENT, arg.dataInstance.validName, _self.getEventParameters(arg, ACCEPTED_EVENT))
+				val eventParameters = _self.getEventParameters(arg, ACCEPTED_EVENT)
+				if (eventParameters === null){
+					return TDLTestResultUtil.FAIL + ": The event parameters cannot be neither found in the model under test nor created. \n"+
+					"There must be a syntactical problem in the test data"
+				}
+				return _self.gateLauncher.executeDSLSpecificCommand(ACCEPTED_EVENT, arg.dataInstance.validName, eventParameters)
 			}
 			return TDLTestResultUtil.FAIL + ": Cannot send data to the MUT"
 		}
@@ -191,6 +201,12 @@ class GateInstanceAspect {
 			var EObject argValue = null
 			val DataUse argTdlValue = event.argument.get(i).dataUse
 			argValue = (argTdlValue as DataInstanceUse).getMatchedMUTElement(_self.gateLauncher.MUTResource, true, _self.DSLPath)
+			if (argValue === null){//if the object does not exist, create it
+				argValue = (argTdlValue as DataInstanceUse).createEObject(_self.gateLauncher.MUTResource, true, _self.DSLPath)
+				if (argValue === null){//if the object cannot be created, return null
+					return null
+				}
+			}
 			//put the name of the parameter along with its value
 			parameters.put(argName, argValue)		
 		}

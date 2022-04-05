@@ -101,10 +101,6 @@ class DataTypeAspect{
 		return false;
 	}
 	
-	def boolean isEventOccurrence() {
-		return _self.validName.contains("EventOccurrence")
-	}
-	
 	def String getValidName(){
 		var tdlName = _self.name
 		if (_self.name.startsWith("_")){
@@ -212,9 +208,6 @@ class StructuredDataInstanceAspect extends DataInstanceAspect{
 @Aspect (className = DataInstanceUse)
 class DataInstanceUseAspect extends StaticDataUseAspect{
 	def EObject getMatchedMUTElement(Resource MUTResource, boolean isAssertion, String DSLPath){
-		if (_self.dataInstance.dataType.isEventOccurrence){//create the event occurrence	
-			return _self.createEventOccurrence(MUTResource, isAssertion, DSLPath)
-		}
 		var ArrayList<EObject> rootElement = new ArrayList
 		//if data type is abstract return null
 		if (!_self.dataInstance.dataType.isConcreteEcoreType(DSLPath)){
@@ -233,9 +226,6 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 	}
 	
 	def EObject getMatchedMUTElement(ArrayList<EObject> rootElement, Resource MUTResource, boolean isAssertion, String DSLPath){
-		if (_self.dataInstance.dataType.isEventOccurrence){//create the event occurrence
-			return _self.createEventOccurrence(MUTResource, isAssertion, DSLPath)
-		}
 		var ArrayList<EObject> containers = new ArrayList
 		var EObject matchedElement = null
 		if (_self.dataInstance instanceof StructuredDataInstance){
@@ -330,10 +320,10 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 		return status
 	}
 	
-	def EObject createEventOccurrence(Resource MUTResource, boolean isAssertion, String DSLPath){
+	def EObject createEObject(Resource MUTResource, boolean isAssertion, String DSLPath){
 		val ModelEObjectCreator objectCreator = new ModelEObjectCreator
-		val eventOccurrence = objectCreator.createEObject(_self, MUTResource, isAssertion, DSLPath)
-		return eventOccurrence
+		val eobject = objectCreator.createEObject(_self, MUTResource, isAssertion, DSLPath)
+		return eobject
 	}
 	
 	@OverrideAspectMethod
