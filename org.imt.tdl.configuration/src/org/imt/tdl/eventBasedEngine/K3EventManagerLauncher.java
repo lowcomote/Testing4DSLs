@@ -540,16 +540,16 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	}
 	
 	public void setModelResource(Resource resource) {
-		this.MUTResource = resource;
+		MUTResource = resource;
 	}
 	
 	public Resource getModelResource() {
-		if (this.executionEngine == null) {
-			this.MUTResource = (new ResourceSetImpl()).getResource(URI.createURI(MUTPath), true);
+		if (executionEngine == null) {
+			MUTResource = (new ResourceSetImpl()).getResource(URI.createURI(MUTPath), true);
 		}else{
-			this.MUTResource = this.executionEngine.getExecutionContext().getResourceModel();
+			MUTResource = executionEngine.getExecutionContext().getResourceModel();
 		}
-		return this.MUTResource;
+		return MUTResource;
 	}
 	
 	private String getDebugJobName() {
@@ -558,7 +558,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 
 	@Override
 	public Boolean isEngineStarted() {
-		return this.executionEngine != null;
+		return executionEngine != null;
 	}
 	
 	@SuppressWarnings("unchecked")
