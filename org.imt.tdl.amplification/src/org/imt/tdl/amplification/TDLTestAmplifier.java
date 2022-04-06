@@ -1,49 +1,49 @@
 package org.imt.tdl.amplification;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.etsi.mts.tdl.Package;
-import org.etsi.mts.tdl.TDLan2StandaloneSetup;
 import org.etsi.mts.tdl.TestDescription;
 import org.etsi.mts.tdl.tdlFactory;
-import org.etsi.mts.tdl.tdlPackage;
 import org.imt.tdl.amplification.evaluation.MutationScoreCalculator;
-
-import com.google.inject.Injector;
 
 public class TDLTestAmplifier {
 	
+	Resource testSuiteRes;
+	
 	MutationScoreCalculator scoreCalculator;
+	int initialNumOfKilledMutants;
 	double initialMutationScore;
+	
 	int numNewTests;
 	
 	public void amplifyTestSuite(IFile testSuiteFile) {
-		ResourceSet resSet = new ResourceSetImpl();
-		Resource testSuiteRes = readTestSuiteResource(resSet, testSuiteFile);
-		Package tdlTestSuite = (Package)testSuiteRes.getContents().get(0);
+		PathHelper.instance.setTestSuiteFile(testSuiteFile);
+		testSuiteRes = PathHelper.instance.getTestSuiteResource();
+		Package tdlTestSuite = PathHelper.instance.getTestSuite();
+		
 		//calculating the mutation score of the manually-written test suite (i.e., the input test suite)
 		scoreCalculator = new MutationScoreCalculator(tdlTestSuite);
+		initialNumOfKilledMutants = 0;
 		initialMutationScore = 0;
 		if (!scoreCalculator.noMutantsExists) {
 			initialMutationScore = scoreCalculator.calculateInitialMutationScore();
+			initialNumOfKilledMutants = scoreCalculator.getNumOfKilledMutants();
 		}
 		
 		List<TestDescription> tdlTestCases = tdlTestSuite.getPackagedElement().stream().
 				filter(p -> p instanceof TestDescription).map(t -> (TestDescription) t).collect(Collectors.toList());
-		
 		List<TestDescription> newTdlTestCases = new ArrayList<>();
 		numNewTests = 0;
 		
@@ -86,15 +86,30 @@ public class TDLTestAmplifier {
 			numNewTests += i;
 		}
 		
-		System.out.println("\nPhase (4): Saving new test cases");
+		System.out.println("\nTest Amplification has been performed successfully.");
+		if (!scoreCalculator.noMutantsExists) {
+			String outputFilePath = PathHelper.instance.getWorkspacePath() + "\\"
+						+ PathHelper.instance.getTestSuiteProjectName() + "\\" 
+						+ PathHelper.instance.getTestSuiteFileName() + 
+						"_amplificationResult.txt";
+			printMutationAnalysisResult(outputFilePath);
+		}
 		
+		if (numNewTests > 0) {
+			System.out.println("\nPhase (4): Saving new test cases");
+			saveAmplifiedTestCases();
+		}
+	}
+
+	private void saveAmplifiedTestCases() {
 		String sourcePath = testSuiteRes.getURI().toString();
 		String extension = ".tdlan2";
 		if (sourcePath.endsWith(".xmi")) {
 			extension = ".xmi";
 		}
-		String outputPath = sourcePath.substring(0, sourcePath.lastIndexOf(extension)) + "_amplified" + extension;
-		Resource newTestSuiteRes = (resSet).createResource(URI.createURI(outputPath));
+		
+		String outputPath = PathHelper.instance.getTestSuiteFileName() + "_amplified" + extension;
+		Resource newTestSuiteRes = (new ResourceSetImpl()).createResource(URI.createURI(outputPath));
 		//all the new elements are in the testSuiteRes
 		newTestSuiteRes.getContents().addAll(EcoreUtil.copyAll(testSuiteRes.getContents()));
 		try {
@@ -104,54 +119,46 @@ public class TDLTestAmplifier {
 		}
 		testSuiteRes.unload();
 		newTestSuiteRes.unload();
-		
-		System.out.println("\nTest Amplification has been performed successfully.");
-		if (!scoreCalculator.noMutantsExists) {
-			printMutationAnalysisResult();
-		}
 	}
 
-	private void printMutationAnalysisResult() {
+	private void printMutationAnalysisResult(String outputFilePath) {
 		System.out.println("Total number of mutants: " + scoreCalculator.getNumOfMutants());
-		System.out.println("Total number of killed mutants: " + scoreCalculator.getNumOfKilledMutants());
+		System.out.println("- initial number of killed mutants: " + initialMutationScore);
+		System.out.println("- total number of killed mutants: " + scoreCalculator.getNumOfKilledMutants());
 		System.out.println("Total number of test cases improving mutation score: " + numNewTests);
 		System.out.println("- initial mutation score : " + initialMutationScore);
 		System.out.println("- final mutation score : " + scoreCalculator.getMutationScore());
 		System.out.println("=> improvement in the mutation score : " + (scoreCalculator.getMutationScore() - initialMutationScore));
 		System.out.println("--------------------------------------------------");
-		for (String testCase:scoreCalculator.testCase_killedMutant.keySet()) {
-			System.out.println("Test case: " + testCase);
-			int i = 0;
-			for (String mutant:scoreCalculator.testCase_killedMutant.get(testCase)) {
-				System.out.println("Killed mutant " + (i++) + ": " + mutant);
+		
+		//saving results into a .txt file
+		try {
+			FileOutputStream fos = new FileOutputStream(outputFilePath);
+			PrintStream fileOut = new PrintStream(fos);
+			//System.setOut(fileOut);
+			fileOut.println("Total number of mutants: " + scoreCalculator.getNumOfMutants());
+			fileOut.println("- initial number of killed mutants: " + initialMutationScore);
+			fileOut.println("- total number of killed mutants: " + scoreCalculator.getNumOfKilledMutants());
+			fileOut.println("Total number of test cases improving mutation score: " + numNewTests);
+			fileOut.println("- initial mutation score : " + initialMutationScore);
+			fileOut.println("- final mutation score : " + scoreCalculator.getMutationScore());
+			fileOut.println("=> improvement in the mutation score : " + (scoreCalculator.getMutationScore() - initialMutationScore));
+			fileOut.println("--------------------------------------------------");
+			for (String testCase:scoreCalculator.testCase_killedMutant.keySet()) {
+				fileOut.println("Test case: " + testCase);
+				int i = 0;
+				for (String mutant:scoreCalculator.testCase_killedMutant.get(testCase)) {
+					fileOut.println("Killed mutant " + (i++) + ": " + mutant);
+				}
+				fileOut.println();
 			}
-			System.out.println();
+			fos.close();
+			fileOut.close();
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-	}
-
-	private Resource readTestSuiteResource(ResourceSet resSet, IFile testSuiteFile){
-		IPath path = testSuiteFile.getFullPath();
-		URI testSuiteURI = URI.createPlatformResourceURI(path.toString(), true);
-		if (testSuiteURI.toString().endsWith(".xmi")) {
-			resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
-			resSet.getPackageRegistry().put(tdlPackage.eNS_URI, tdlPackage.eINSTANCE);
-		} 
-		else if (testSuiteURI.toString().endsWith(".model")) {
-			resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("model", new XMIResourceFactoryImpl());
-			resSet.getPackageRegistry().put(tdlPackage.eNS_URI, tdlPackage.eINSTANCE);
-		}
-		else if (testSuiteURI.toString().endsWith(".tdl")) {
-			resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("tdl", new XMIResourceFactoryImpl());
-			resSet.getPackageRegistry().put(tdlPackage.eNS_URI, tdlPackage.eINSTANCE);
-		}
-		else if (testSuiteURI.toString().endsWith(".tdlan2")) {
-			Injector injector = new TDLan2StandaloneSetup().createInjectorAndDoEMFRegistration();
-			//resSet = injector.getInstance(XtextResourceSet.class);
-			XtextResourceSet xtextResSet = injector.getInstance(XtextResourceSet.class);
-			xtextResSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
-			resSet = xtextResSet;
-		}
-		Resource testSuiteRes = (resSet).getResource(testSuiteURI, true);
-		return testSuiteRes;
 	}
 }

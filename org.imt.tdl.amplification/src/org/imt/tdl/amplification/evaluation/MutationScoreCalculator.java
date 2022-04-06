@@ -5,17 +5,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.etsi.mts.tdl.Annotation;
-import org.etsi.mts.tdl.ComponentInstance;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
 import org.imt.k3tdl.k3dsa.TestDescriptionAspect;
+import org.imt.tdl.amplification.PathHelper;
 import org.imt.tdl.testResult.TDLTestCaseResult;
 import org.imt.tdl.testResult.TDLTestResultUtil;
 
@@ -35,19 +33,25 @@ public class MutationScoreCalculator {
 
 	double mutationScore;
 	
+	String workspacePath;
+	String seedModelPath;
+	IProject mutantsProject;
+	String mutantsFolderPath;
+	
 	public MutationScoreCalculator(Package testSuite) {
 		this.testSuite = testSuite;
-		findWorkspacePath();
+		seedModelPath = PathHelper.getInstance().getSeedModelPath();
+		workspacePath = PathHelper.getInstance().getWorkspacePath();
 		findMutants();
 	}
 	
 	public double calculateInitialMutationScore() {
-		System.out.print("Calculating the mutation score of the input test suite\n");
+		System.out.println("Calculating the mutation score of the input test suite");
 		List<TestDescription> testCases = testSuite.getPackagedElement().stream().filter(p -> p instanceof TestDescription).
 			map(p -> (TestDescription) p).collect(Collectors.toList());
 		testCases.forEach(t -> runTestCaseOnMutants(t));
 		calculateMutationScore();
-		System.out.print("The mutation score of the input test suite is: " + mutationScore);
+		System.out.println("The mutation score of the input test suite is: " + mutationScore);
 		return mutationScore;
 	}
 
@@ -65,13 +69,13 @@ public class MutationScoreCalculator {
 			TDLTestCaseResult result = TestDescriptionAspect.executeTestCase(testCase, mutantPath);
 			if (result.getValue() == TDLTestResultUtil.FAIL) {
 				mutant_status.replace(mutant, KILLED);
-				keepTestCaseKilledMutant(testCase.getName(), mutant);
+				keepTestCaseKilledMutantMapping(testCase.getName(), mutant);
 				numOfKilledMutants++;
 			}
 		}
 	}
 	
-	private void keepTestCaseKilledMutant(String testCaseName, String mutantPath) {
+	private void keepTestCaseKilledMutantMapping(String testCaseName, String mutantPath) {
 		List<String> killedMutants = testCase_killedMutant.get(testCaseName);
 		if (killedMutants == null) {
 			killedMutants = new ArrayList<>();
@@ -90,31 +94,14 @@ public class MutationScoreCalculator {
 		if (numOfKilledMutants > pastNumOfKilledMutants) {
 			double previousScore = mutationScore;
 			calculateMutationScore();
-			System.out.print("The test case " + testCase.getName() + " has improved the mutation score by: " + (mutationScore - previousScore));
-			System.out.print("- previous mutation score: " + previousScore);
-			System.out.print("- new mutation score: " + mutationScore);
+			System.out.println("The test case " + testCase.getName() + " has improved the mutation score by: " + (mutationScore - previousScore));
+			System.out.println("- previous mutation score: " + previousScore);
+			System.out.println("- new mutation score: " + mutationScore);
 			return true;
 		}
 		return false;
 	}
-	
-	String seedModelPath;
-	String workspacePath;
-	IProject mutantsProject;
-	String mutantsFolderPath;
-	
-	private void findWorkspacePath () {
-		Optional<TestDescription> testCase = testSuite.getPackagedElement().stream().filter(p -> p instanceof TestDescription).
-		map(p -> (TestDescription) p).findFirst();
-		Optional<ComponentInstance> sutComponent = testCase.get().getTestConfiguration().getComponentInstance().
-				stream().filter(ci -> ci.getRole().toString().equals("SUT")).findFirst();
-		for (Annotation a:sutComponent.get().getAnnotation()){
-			if (a.getKey().getName().equals("MUTPath")){
-				seedModelPath = a.getValue().substring(1, a.getValue().length()-1);
-			}
-		}
-	}
-	
+
 	private void findMutants() {
 		String projectName = seedModelPath.substring(1, seedModelPath.lastIndexOf("/"));
 		mutantsProject =  ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
@@ -123,12 +110,12 @@ public class MutationScoreCalculator {
 			noMutantsExists = true;
 		}else {
 			for (File file : modelFolder.listFiles()) {
-				pathsHelper(projectName, file);
+				mutantsPathsHelper(projectName, file);
 			}
 		}
 	}
 	
-	private void pathsHelper(String projectName, File file) {
+	private void mutantsPathsHelper(String projectName, File file) {
 		if (file.isFile() && file.getName().endsWith(".model")) {
 			String filePath = file.getPath();
 			if (workspacePath == null) {
@@ -143,7 +130,7 @@ public class MutationScoreCalculator {
 		}
 		else if (file.isDirectory()){
 			for (File innerFile : file.listFiles()) {
-				pathsHelper(projectName, innerFile);
+				mutantsPathsHelper(projectName, innerFile);
 			}
 		}
 	}
@@ -152,6 +139,9 @@ public class MutationScoreCalculator {
 		mutationScore = (double) numOfKilledMutants/numOfMutants;
 	}
 	
+	public String getWorkspacePath() {
+		return workspacePath;
+	}
 	
 	public int getNumOfMutants() {
 		return numOfMutants;
