@@ -10,12 +10,14 @@ Package testData {
 	IntegerAttribute cardBalance (_name="cardBalance");
 	
 	Signal Pin (_name = "Pin", attributes = enteredPin);
-	IntegerAttribute enteredPin (_name = "pin");
+	IntegerAttribute enteredPin (_name = "enteredPin");
 	
 	Signal Amount (_name = "Amount", attributes = enteredAmount);
-	IntegerAttribute enteredAmount (_name = "withdrawAmount");
+	IntegerAttribute enteredAmount (_name = "enteredAmount");
 	
 	SignalEventOccurrence signal_occurrence();
+	SignalEventOccurrence card_occurrence();
+	SignalEventOccurrence pin_occurrence();
 	IntegerAttributeValue cardPinValue (attribute = cardPin);
 	IntegerAttributeValue cardBalanceValue (attribute = cardBalance);
 	IntegerAttributeValue enteredPinValue (attribute = enteredPin);

@@ -1,0 +1,37 @@
+Package testConfiguration {
+	Import all from common ;
+	Import all from xPSSMEvents ;
+	Gate Type genericGateType accepts modelExecutionCommand ;
+	Gate Type reactiveGateType accepts _run , signal_received , callOperation_received , behavior_executed ;
+	Gate Type oclGateType accepts OCL ;
+	Component Type TestSystem having {
+		gate genericGate of type genericGateType ;
+		gate reactiveGate of type reactiveGateType ; gate oclGate of type oclGateType ;
+	}
+	Component Type MUT having {
+		gate genericGate of type genericGateType ;
+		gate reactiveGate of type reactiveGateType ; gate oclGate of type oclGateType ;
+	}
+	Annotation MUTPath ;
+	Annotation DSLName ;
+	Test Configuration genericConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT reactivepssm of type MUT with { MUTPath : 'TODO: Put the address of the Model-Under Test here' ; DSLName : 'org.imt.pssm.reactive.ReactivePSSM' ; } ;
+		connect tester.genericGate to reactivepssm.genericGate ;
+		connect tester.oclGate to reactivepssm.oclGate ;
+	}
+	Test Configuration reactiveConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT reactivepssm of type MUT with { MUTPath : 'TODO: Put the address of the Model-Under Test here' ; DSLName : 'org.imt.pssm.reactive.ReactivePSSM' ; } ;
+		connect tester.reactiveGate to reactivepssm.reactiveGate ;
+		connect tester.oclGate to reactivepssm.oclGate ;
+	}
+	Test Configuration xPSSMConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT reactivepssm of type MUT with { 
+			MUTPath : '/ATM_WithdrawCash/ATM.withdraw.model' ; 
+			DSLName : 'org.imt.pssm.reactive.ReactivePSSM' ;
+		} ;
+		connect tester.reactiveGate to reactivepssm.reactiveGate ;
+	}
+}
