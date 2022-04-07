@@ -1,4 +1,4 @@
-package org.imt.tdl.amplification;
+package org.imt.tdl.amplification.utilities;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.etsi.mts.tdl.DataInstance;
 import org.etsi.mts.tdl.DataInstanceUse;
 import org.etsi.mts.tdl.DataType;
 import org.etsi.mts.tdl.DataUse;
@@ -26,15 +27,25 @@ public class EObject2TDLConverter {
 	public EObject2TDLConverter (org.etsi.mts.tdl.Package testSuite) {
 		this.tdlTestSuite = testSuite;
 	}
-	public DataUse convertEObject2TDLData(EObject eobject){
+	
+	public DataInstance convertEObject2TDLData(EObject eobject){
 		//if there is an existing tdl instance for the eobject, use it
 		StructuredDataInstance eobjectTdlInstance = findMatchedTDLInstance(eobject);
 		if (eobjectTdlInstance == null) {
 			eobjectTdlInstance = createNewTDLInstance4EObject(eobject);
 		}
-		DataInstanceUse messageArg = tdlFactory.createDataInstanceUse();
-		messageArg.setDataInstance(eobjectTdlInstance);
-		return messageArg;
+		return eobjectTdlInstance;
+	}
+	
+	public DataUse convertEObject2TDLDataUse(EObject eobject){
+		//if there is an existing tdl instance for the eobject, use it
+		StructuredDataInstance eobjectTdlInstance = findMatchedTDLInstance(eobject);
+		if (eobjectTdlInstance == null) {
+			eobjectTdlInstance = createNewTDLInstance4EObject(eobject);
+		}
+		DataInstanceUse dataUse = tdlFactory.createDataInstanceUse();
+		dataUse.setDataInstance(eobjectTdlInstance);
+		return dataUse;
 	}
 	
 	private StructuredDataInstance createNewTDLInstance4EObject (EObject eobject) {

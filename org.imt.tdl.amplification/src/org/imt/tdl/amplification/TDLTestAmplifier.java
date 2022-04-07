@@ -17,6 +17,7 @@ import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
 import org.etsi.mts.tdl.tdlFactory;
 import org.imt.tdl.amplification.evaluation.MutationScoreCalculator;
+import org.imt.tdl.amplification.utilities.PathHelper;
 
 public class TDLTestAmplifier {
 	
@@ -29,9 +30,9 @@ public class TDLTestAmplifier {
 	int numNewTests;
 	
 	public void amplifyTestSuite(IFile testSuiteFile) {
-		PathHelper.instance.setTestSuiteFile(testSuiteFile);
-		testSuiteRes = PathHelper.instance.getTestSuiteResource();
-		Package tdlTestSuite = PathHelper.instance.getTestSuite();
+		PathHelper.getInstance().setTestSuiteFile(testSuiteFile);
+		testSuiteRes = PathHelper.getInstance().getTestSuiteResource();
+		Package tdlTestSuite = PathHelper.getInstance().getTestSuite();
 		
 		//calculating the mutation score of the manually-written test suite (i.e., the input test suite)
 		scoreCalculator = new MutationScoreCalculator(tdlTestSuite);
@@ -88,9 +89,9 @@ public class TDLTestAmplifier {
 		
 		System.out.println("\nTest Amplification has been performed successfully.");
 		if (!scoreCalculator.noMutantsExists) {
-			String outputFilePath = PathHelper.instance.getWorkspacePath() + "\\"
-						+ PathHelper.instance.getTestSuiteProjectName() + "\\" 
-						+ PathHelper.instance.getTestSuiteFileName() + 
+			String outputFilePath = PathHelper.getInstance().getWorkspacePath() + "\\"
+						+ PathHelper.getInstance().getTestSuiteProjectName() + "\\" 
+						+ PathHelper.getInstance().getTestSuiteFileName() + 
 						"_amplificationResult.txt";
 			printMutationAnalysisResult(outputFilePath);
 		}
@@ -108,7 +109,7 @@ public class TDLTestAmplifier {
 			extension = ".xmi";
 		}
 		
-		String outputPath = PathHelper.instance.getTestSuiteFileName() + "_amplified" + extension;
+		String outputPath = PathHelper.getInstance().getTestSuiteFileName() + "_amplified" + extension;
 		Resource newTestSuiteRes = (new ResourceSetImpl()).createResource(URI.createURI(outputPath));
 		//all the new elements are in the testSuiteRes
 		newTestSuiteRes.getContents().addAll(EcoreUtil.copyAll(testSuiteRes.getContents()));

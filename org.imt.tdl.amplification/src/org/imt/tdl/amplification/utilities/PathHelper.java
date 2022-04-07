@@ -1,4 +1,4 @@
-package org.imt.tdl.amplification;
+package org.imt.tdl.amplification.utilities;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -39,6 +39,7 @@ public class PathHelper {
 	String workspacePath;
 	String modelsProjectPath;
 	String seedModelPath;
+	Resource MUTResource;
 	
 	String DSLName;
 	String DSLPath;
@@ -166,6 +167,12 @@ public class PathHelper {
 		return seedModelPath;
 	}
 
+	public Resource getMUTResource() {
+		if (MUTResource == null) {
+			MUTResource = (new ResourceSetImpl()).getResource(URI.createURI(seedModelPath), true);
+		}
+		return MUTResource;
+	}
 	public String getDSLName() {
 		return DSLName;
 	}
