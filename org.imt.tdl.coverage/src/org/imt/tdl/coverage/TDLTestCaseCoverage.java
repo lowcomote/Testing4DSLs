@@ -27,31 +27,31 @@ public class TDLTestCaseCoverage {
 	int numOfNotCoverableElements;
 	
 	public TDLTestCaseCoverage() {
-		this.modelObjects = new ArrayList<>();
-		this.tcObjectCoverageStatus = new ArrayList<>();	
-		this.numOfCoveredObjs= 0 ;
-		this.numOfNotCoverableElements = 0;
+		modelObjects = new ArrayList<>();
+		tcObjectCoverageStatus = new ArrayList<>();	
+		numOfCoveredObjs= 0 ;
+		numOfNotCoverableElements = 0;
 	}
 	//calculating the coverage of the test case based on the model execution trace
 	public void calculateTCCoverage () {
 		//find coverable objects using the MUTResource of the test case
 		findNotCoverableObjects();
-		Step<?> rootStep = this.trace.getRootStep();
+		Step<?> rootStep = trace.getRootStep();
 		calculateObjectCoverage(rootStep);
 		changeCoverable2notCovered();
 		//checkContainmentRelations(this.modelObjects.get(0));
 	}
 
 	private void findNotCoverableObjects() {
-		TreeIterator<EObject> modelContents = this.MUTResource.getAllContents();
+		TreeIterator<EObject> modelContents = MUTResource.getAllContents();
 		while (modelContents.hasNext()) {
 			EObject modelObject = modelContents.next();
-			this.modelObjects.add(modelObject);
+			modelObjects.add(modelObject);
 			if (TDLCoverageUtil.getInstance().coverableClasses.contains(modelObject.eClass().getName())) {
-				this.tcObjectCoverageStatus.add(TDLCoverageUtil.COVERABLE);
+				tcObjectCoverageStatus.add(TDLCoverageUtil.COVERABLE);
 			}
 			else {
-				this.tcObjectCoverageStatus.add(TDLCoverageUtil.NOT_COVERABLE);
+				tcObjectCoverageStatus.add(TDLCoverageUtil.NOT_COVERABLE);
 			}
 		}
 	}
@@ -61,11 +61,11 @@ public class TDLTestCaseCoverage {
 			SequentialStep<?, ?> step = (SequentialStep<?, ?>) rootStep;
 			if (step.getMseoccurrence() != null) {
 				EObject object = step.getMseoccurrence().getMse().getCaller();
-				int objectIndex = this.modelObjects.indexOf(object);
+				int objectIndex = modelObjects.indexOf(object);
 				if (objectIndex != -1){
-					String objectCoverage = this.tcObjectCoverageStatus.get(objectIndex);
+					String objectCoverage = tcObjectCoverageStatus.get(objectIndex);
 					if (objectCoverage != TDLCoverageUtil.COVERED && objectCoverage != TDLCoverageUtil.NOT_COVERABLE) {
-						this.tcObjectCoverageStatus.set(objectIndex, TDLCoverageUtil.COVERED);
+						tcObjectCoverageStatus.set(objectIndex, TDLCoverageUtil.COVERED);
 					}
 				}
 			}

@@ -63,11 +63,11 @@ public class DSLSpecificEventsGenerator {
 		acceptedEvent.setName("AcceptedEvent");
 		AnnotationType exposedEvent = factory.createAnnotationType();
 		exposedEvent.setName("ExposedEvent");
-		this.dslSpecificEventsPackage.getPackagedElement().add(acceptedEvent);
-		this.dslSpecificEventsPackage.getPackagedElement().add(exposedEvent);
+		dslSpecificEventsPackage.getPackagedElement().add(acceptedEvent);
+		dslSpecificEventsPackage.getPackagedElement().add(exposedEvent);
 		
-		for (int i=0; i<this.interfaceRootElement.getEvents().size();i++) {
-			Event event = this.interfaceRootElement.getEvents().get(i);
+		for (int i=0; i<interfaceRootElement.getEvents().size();i++) {
+			Event event = interfaceRootElement.getEvents().get(i);
 			StructuredDataType typeForEvent = factory.createStructuredDataType();
 			typeForEvent.setName(validName(event.getName()));
 			Annotation annotation = factory.createAnnotation();
@@ -90,7 +90,7 @@ public class DSLSpecificEventsGenerator {
 				if (paramType.contains(".")) {
 					paramType = paramType.substring(paramType.lastIndexOf(".") + 1, paramType.length());
 				}
-				if (this.dslSpecificTypes.get(paramType) != null) {
+				if (dslSpecificTypes.get(paramType) != null) {
 					Member member = factory.createMember();
 					member.setName(paramName);
 					member.setDataType(this.dslSpecificTypes.get(paramType));
@@ -104,19 +104,19 @@ public class DSLSpecificEventsGenerator {
 					eventInstance.getMemberAssignment().add(memberAssign);
 				}		
 			}
-			this.dslSpecificEventsPackage.getPackagedElement().add(typeForEvent);
-			this.dslSpecificEventsPackage.getPackagedElement().add(eventInstance);
-			this.dslInterfaceTypes.add(typeForEvent);	
+			dslSpecificEventsPackage.getPackagedElement().add(typeForEvent);
+			dslSpecificEventsPackage.getPackagedElement().add(eventInstance);
+			dslInterfaceTypes.add(typeForEvent);	
 		}
 	}
 	public Package getDslSpecificEventsPackage() {
-		return this.dslSpecificEventsPackage;
+		return dslSpecificEventsPackage;
 	}
 	public List<DataType> getTypesOfDslInterfaces(){
-		return this.dslInterfaceTypes;
+		return dslInterfaceTypes;
 	}
 	public void setDslSpecificTypesPackage (Package typesPackage) {
-		this.dslSpecificTypesPackage = typesPackage;
+		dslSpecificTypesPackage = typesPackage;
 	}
 	public void setDslSpecificTypes(Map<String, DataType> dslSpecificTypes) {
 		this.dslSpecificTypes = dslSpecificTypes;
