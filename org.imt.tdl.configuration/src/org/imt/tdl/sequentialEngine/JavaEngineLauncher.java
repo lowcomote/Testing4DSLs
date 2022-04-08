@@ -57,8 +57,8 @@ public class JavaEngineLauncher extends AbstractEngine{
 
 		this.executioncontext.setResourceModel(this.MUTResource);
 		CustomK3Launcher launcher = new CustomK3Launcher();
-		launcher.executioncontext = this.executioncontext;
-		Launch debugLaunch = new Launch(this.launchConfiguration, ILaunchManager.DEBUG_MODE, new GemocSourceLocator());
+		launcher.executioncontext = executioncontext;
+		Launch debugLaunch = new Launch(launchConfiguration, ILaunchManager.DEBUG_MODE, new GemocSourceLocator());
 		DebugPlugin.getDefault().getLaunchManager().addLaunch(debugLaunch);	
 		try {
 			//launch the debugger for the model under test
@@ -153,16 +153,16 @@ public class JavaEngineLauncher extends AbstractEngine{
 	public PlainK3ExecutionEngine createExecutionEngine() throws EngineContextException, CoreException{
 		//if the resource is updated (e.g., the value of its dynamic features are set by the test case)
 		//then the execution context should be updated
-		this.executioncontext.setResourceModel(this.MUTResource);
+		executioncontext.setResourceModel(MUTResource);
 		CustomK3Launcher launcher = new CustomK3Launcher();
-		launcher.executioncontext = this.executioncontext;
+		launcher.executioncontext = executioncontext;
 		
-		return (PlainK3ExecutionEngine) launcher.createExecutionEngine(this.runConfiguration, this.executionMode);
+		return (PlainK3ExecutionEngine) launcher.createExecutionEngine(runConfiguration, executionMode);
 	}
 	@SuppressWarnings("rawtypes")
 	@Override
 	protected String getModelEntryPointMethodName(){
-		Set<Class<?>> candidateAspects = K3DslHelper.getAspects(this._language);
+		Set<Class<?>> candidateAspects = K3DslHelper.getAspects(_language);
 		Iterator it = candidateAspects.iterator();
 		while (it.hasNext()) {
 			Class c = (Class) it.next();
@@ -180,15 +180,15 @@ public class JavaEngineLauncher extends AbstractEngine{
 		String entryPointClassName = null;
 		final String prefix = "public static void ";
 		int startName = prefix.length();
-		int endName = this._entryPointMethod.lastIndexOf("(");
+		int endName = _entryPointMethod.lastIndexOf("(");
 		if(endName == -1) return "";
-		String entryMethod = this._entryPointMethod.substring(startName, endName);
+		String entryMethod = _entryPointMethod.substring(startName, endName);
 		int lastDot = entryMethod.lastIndexOf(".");
 		if(lastDot != -1){
 			entryPointClassName = entryMethod.substring(0, lastDot);
 		}
 		
-		Bundle bundle = DslHelper.getDslBundle(this._language);
+		Bundle bundle = DslHelper.getDslBundle(_language);
 		
 		if(entryPointClassName != null && bundle != null){
 			try {
@@ -207,17 +207,17 @@ public class JavaEngineLauncher extends AbstractEngine{
 
 	@Override
 	public Resource getModelResource() {
-		if (this.javaEngine != null) {
-			return this.javaEngine.getExecutionContext().getResourceModel();
+		if (javaEngine != null) {
+			return javaEngine.getExecutionContext().getResourceModel();
 		}
-		return this.MUTResource;
+		return MUTResource;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {
-		if (this.javaEngine != null) {
-			return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) this.javaEngine.getAddon(GenericTraceEngineAddon.class).getTrace();
+		if (javaEngine != null) {
+			return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) javaEngine.getAddon(GenericTraceEngineAddon.class).getTrace();
 		}
 		return null;
 	}

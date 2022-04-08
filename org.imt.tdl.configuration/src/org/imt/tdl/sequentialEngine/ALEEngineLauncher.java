@@ -66,8 +66,8 @@ public class ALEEngineLauncher extends AbstractEngine{
 		
 		this.executioncontext.setResourceModel(this.MUTResource);
 		CustomALELauncher launcher = new CustomALELauncher();
-		launcher.executioncontext = this.executioncontext;
-		Launch debugLaunch = new Launch(this.launchConfiguration, ILaunchManager.DEBUG_MODE, new GemocSourceLocator());
+		launcher.executioncontext = executioncontext;
+		Launch debugLaunch = new Launch(launchConfiguration, ILaunchManager.DEBUG_MODE, new GemocSourceLocator());
 		DebugPlugin.getDefault().getLaunchManager().addLaunch(debugLaunch);	
 		try {
 			//launch the debugger for the model under test
@@ -93,7 +93,7 @@ public class ALEEngineLauncher extends AbstractEngine{
 	@Override
 	public String executeModelSynchronous() {
 		try{
-			this.aleEngine = createExecutionEngine();
+			aleEngine = createExecutionEngine();
 		}catch (EngineContextException e) {
 			e.printStackTrace();
 			return "FAIL: Cannot execute the model under test";
@@ -248,17 +248,17 @@ public class ALEEngineLauncher extends AbstractEngine{
 
 	@Override
 	public Resource getModelResource() {
-		if (this.aleEngine != null) {
-			return this.aleEngine.getExecutionContext().getResourceModel();
+		if (aleEngine != null) {
+			return aleEngine.getExecutionContext().getResourceModel();
 		}
-		return this.MUTResource;
+		return MUTResource;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {
-		if (this.aleEngine != null) {
-			return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) this.aleEngine.getAddon(GenericTraceEngineAddon.class).getTrace();
+		if (aleEngine != null) {
+			return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) aleEngine.getAddon(GenericTraceEngineAddon.class).getTrace();
 		}
 		return null;
 	}
