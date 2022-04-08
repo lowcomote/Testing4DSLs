@@ -86,6 +86,9 @@ class ModelEObjectCreator {
 	}
 	
 	def void setFeatureValue (EObject newEObject, EStructuralFeature feature, List<DataUse> featureTdlValues){
+		if (featureTdlValues.size == 0){
+			newEObject.eSet(feature, feature.defaultValue)
+		}
 		//all the values must be from the same type:
 		//(1) if they are dataInstanceUse, it means they are references to EObjects of the model under test
 		if (featureTdlValues.get(0) instanceof DataInstanceUse){
