@@ -29,7 +29,7 @@ public class EObject2TDLConverter {
 	}
 	
 	public DataInstance convertEObject2TDLData(EObject eobject){
-		//if there is an existing tdl instance for the eobject, use it
+		//if there is an existing tdl instance for the eobject, use it otherwise create it
 		StructuredDataInstance eobjectTdlInstance = findMatchedTDLInstance(eobject);
 		if (eobjectTdlInstance == null) {
 			eobjectTdlInstance = createNewTDLInstance4EObject(eobject);
@@ -264,7 +264,9 @@ public class EObject2TDLConverter {
 	private String getEObjectName (EObject eobject) {
 		if (eobject.eClass().getEStructuralFeature("name") != null) {
 			EStructuralFeature nameFeature = eobject.eClass().getEStructuralFeature("name");
-			return eobject.eGet(nameFeature).toString();
+			if (eobject.eGet(nameFeature)!= null) {
+				return eobject.eGet(nameFeature).toString();
+			}
 		}
 		return null;
 	}

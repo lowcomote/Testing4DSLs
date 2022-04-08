@@ -59,8 +59,8 @@ public class TDLTestAmplifier {
 			assertionRemover.removeAssertionsFromTestCase(copyTdlTestCase);
 			
 			System.out.println("Phase (2): Modifying test input Data to generate new test cases");
-			TDLTestInputDataAmplification mutator = new TDLTestInputDataAmplification();
-			newTdlTestCases = mutator.generateNewTestsByInputModification(copyTdlTestCase);
+			TDLTestInputDataAmplification mutator = new TDLTestInputDataAmplification(tdlTestSuite, copyTdlTestCase);
+			newTdlTestCases = mutator.generateNewTestsByInputModification();
 			System.out.println("Done: #of generated test cases by input modification = " + newTdlTestCases.size());
 			
 			System.out.println("\nPhase (3): Running new tests and generating assertions");
