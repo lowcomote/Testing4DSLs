@@ -78,7 +78,7 @@ public class TDLTestInputDataAmplification {
 	
 	public List<TestDescription> generateNewTestsByInputModification () {
 		List<TestDescription> generatedTestsByModification = new ArrayList<>();
-		generatedTestsByModification.addAll(modifyLiteralData ());
+		//generatedTestsByModification.addAll(modifyLiteralData ());
 		generatedTestsByModification.addAll(modifyExchangedEvents ());
 		return generatedTestsByModification;
 	}
@@ -97,10 +97,10 @@ public class TDLTestInputDataAmplification {
 		findTdlDataOfMUT();
 		
 		List<TestDescription> generatedTestsByModification = new ArrayList<>();
-		generatedTestsByModification.addAll(generateTestsByEventDuplication());
+		//generatedTestsByModification.addAll(generateTestsByEventDuplication());
 		generatedTestsByModification.addAll(generateTestsByEventCreation());
-		generatedTestsByModification.addAll(generateTestsByEventDeletion());
-		generatedTestsByModification.addAll(generateTestsByEventPermutation());
+		//generatedTestsByModification.addAll(generateTestsByEventDeletion());
+		//generatedTestsByModification.addAll(generateTestsByEventPermutation());
 		generatedTestsByModification.addAll(generateTestsByEventModification());
 		return generatedTestsByModification;
 	}
@@ -134,7 +134,7 @@ public class TDLTestInputDataAmplification {
 		TreeIterator<EObject> modelContents = MUTResource.getAllContents();
 		while (modelContents.hasNext()) {
 			EObject modelObject = modelContents.next();
-			String objectType = modelObject.getClass().toString();
+			String objectType = modelObject.eClass().getName();
 			if (tdlEventParameterTypes.stream().anyMatch(t -> t.getName().equals(objectType))) {
 				StructuredDataInstance tdlInstance4object = (StructuredDataInstance) object2tdlCoverter.convertEObject2TDLData(modelObject);
 				etype_tdlEObjects.get(objectType).add(tdlInstance4object);
@@ -335,7 +335,7 @@ public class TDLTestInputDataAmplification {
 			//if there are some values for this type, generate new test by changing the value to other values of the same type
 			if (!etype_tdlEObjects.get(eobjectType).isEmpty()) {
 				for (StructuredDataInstance tdlEobjectInstance:etype_tdlEObjects.get(eobjectType)) {
-					if (initialEObject != tdlEobjectInstance) {
+					if (!EcoreUtil.equals(initialEObject, tdlEobjectInstance)) {
 						tdlEobjectRef.setDataInstance(tdlEobjectInstance);
 						generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, EVENTMODIFICATION));
 					}
