@@ -59,9 +59,9 @@ public class EObject2TDLConverter {
 		}else {
 			eobjectTdlInstance.setName(eobjectTypeName.toLowerCase() + "_" + (int) Math.random());
 		}
-		//for each feature of the eobject that has a value, create a member assignment with corresponding tdl value
+		//for each mandatory feature of the eobject that has a value, create a member assignment with corresponding tdl value
 		List<EStructuralFeature> valuedEFeatures = eobject.eClass().getEAllStructuralFeatures().stream().
-				filter(f -> eobject.eGet(f) != null && eobject.eGet(f) != f.getDefaultValue()).collect(Collectors.toList());
+				filter(f -> (f.getName().equals("name") || f.getLowerBound()>0) & eobject.eGet(f) != null && eobject.eGet(f) != f.getDefaultValue()).collect(Collectors.toList());
 		for (EStructuralFeature efeature:valuedEFeatures) {
 			Optional<Member> mOptional = eobjectTdlType.allMembers().stream().filter(m -> getValidName(m.getName()).equals(efeature.getName())).findFirst();
 			if (mOptional.isPresent()) {
