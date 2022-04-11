@@ -31,6 +31,7 @@ public class TDLTestAmplifier {
 	
 	int numOfIteration;
 	int numNewTests;
+	Map<Integer, List<TestDescription>> iteration_ampTests = new HashMap<>();
 	
 	public void amplifyTestSuite(IFile testSuiteFile) {
 		PathHelper.getInstance().setTestSuiteFile(testSuiteFile);
@@ -46,79 +47,83 @@ public class TDLTestAmplifier {
 			initialNumOfKilledMutants = scoreCalculator.getNumOfKilledMutants();
 		}
 		
-		/*
-		 * In DSpot, the used stop-criterion is a number of iteration (default = 3). 
-		 * Our stop-criterion is a combination of number of iteration and reaching to 100% mutation score
-		 */
-		numOfIteration = 3;
-		
-		List<TestDescription> tdlTestCases = tdlTestSuite.getPackagedElement().stream().
-				filter(p -> p instanceof TestDescription).map(t -> (TestDescription) t).collect(Collectors.toList());
-		Map<Integer, List<TestDescription>> iteration_ampTests = new HashMap<>();
-		
-		numNewTests = 0;
-		for (TestDescription testCase: tdlTestCases) {
-			TestDescription copyTdlTestCase = tdlFactory.eINSTANCE.createTestDescription();
-			copyTdlTestCase.setName(testCase.getName());
-			copyTdlTestCase.setTestConfiguration(testCase.getTestConfiguration());
-			copyTdlTestCase.setBehaviourDescription(EcoreUtil.copy(testCase.getBehaviourDescription()));
-	
-			List<TestDescription> TMP = new ArrayList<>();
-			TMP.add(copyTdlTestCase);
+		//perform test amplification if the mutation score of the input test suite is not 100%
+		if (initialMutationScore < 1) {
+			/*
+			 * In DSpot, the used stop-criterion is a number of iteration (default = 3). 
+			 * Our stop-criterion is a combination of number of iteration and reaching to 100% mutation score
+			 */
+			numOfIteration = 3;
 			
-			while (numOfIteration > 0 || scoreCalculator.getMutationScore() < 1) {
-				List<TestDescription> newTests = new ArrayList<>();
-				System.out.println("\nPhase (1): Removing assertions from the test case");
-				AssertionRemover assertionRemover = new AssertionRemover();
-				TMP.forEach(tmp -> assertionRemover.removeAssertionsFromTestCase(tmp));
-
-				System.out.println("Phase (2): Modifying test input Data to generate new test cases");
-				TDLTestInputDataAmplification IAmplifier = new TDLTestInputDataAmplification(tdlTestSuite);
-				newTests.addAll(IAmplifier.generateNewTestsByInputModification(TMP));
-				System.out.println("Done: #of generated test cases by input modification = " + newTests.size());
+			List<TestDescription> tdlTestCases = tdlTestSuite.getPackagedElement().stream().
+					filter(p -> p instanceof TestDescription).map(t -> (TestDescription) t).collect(Collectors.toList());
+			
+			numNewTests = 0;
+			for (TestDescription testCase: tdlTestCases) {
+				TestDescription copyTdlTestCase = tdlFactory.eINSTANCE.createTestDescription();
+				copyTdlTestCase.setName(testCase.getName());
+				copyTdlTestCase.setTestConfiguration(testCase.getTestConfiguration());
+				copyTdlTestCase.setBehaviourDescription(EcoreUtil.copy(testCase.getBehaviourDescription()));
+		
+				List<TestDescription> TMP = new ArrayList<>();
+				TMP.add(copyTdlTestCase);
 				
-				System.out.println("\nPhase (3): Running new tests and generating assertions");
-				TMP.addAll(newTests);
-				int i = newTests.size();
-				for (TestDescription newTestCase: newTests) {
-					tdlTestSuite.getPackagedElement().add(newTestCase);
-					AssertionGenerator generator = new AssertionGenerator();
-					boolean result = generator.generateAssertionsForTestCase(newTestCase);
-					//check whether the assertion can be generated for the new test case
-					if (!result) {
-						tdlTestSuite.getPackagedElement().remove(newTestCase);
-						TMP.remove(newTestCase);
-						i--;
-					}
-					//check whether the new test case improves the mutation score, if there is any mutants
-					else if (!scoreCalculator.noMutantsExists){
-						boolean improvement = scoreCalculator.testCaseImprovesMutationScore(newTestCase);
-						if (!improvement) {
+				while (numOfIteration > 0 || scoreCalculator.getMutationScore() < 1) {
+					List<TestDescription> newTests = new ArrayList<>();
+					System.out.println("\nPhase (1): Removing assertions from the test case");
+					AssertionRemover assertionRemover = new AssertionRemover();
+					TMP.forEach(tmp -> assertionRemover.removeAssertionsFromTestCase(tmp));
+
+					System.out.println("Phase (2): Modifying test input Data to generate new test cases");
+					TDLTestInputDataAmplification IAmplifier = new TDLTestInputDataAmplification(tdlTestSuite);
+					newTests.addAll(IAmplifier.generateNewTestsByInputModification(TMP));
+					System.out.println("Done: #of generated test cases by input modification = " + newTests.size());
+					
+					System.out.println("\nPhase (3): Running new tests and generating assertions");
+					TMP.addAll(newTests);
+					int i = newTests.size();
+					for (TestDescription newTestCase: newTests) {
+						tdlTestSuite.getPackagedElement().add(newTestCase);
+						AssertionGenerator generator = new AssertionGenerator();
+						boolean result = generator.generateAssertionsForTestCase(newTestCase);
+						//check whether the assertion can be generated for the new test case
+						if (!result) {
 							tdlTestSuite.getPackagedElement().remove(newTestCase);
 							TMP.remove(newTestCase);
 							i--;
 						}
+						//check whether the new test case improves the mutation score, if there is any mutants
+						else if (!scoreCalculator.noMutantsExists){
+							boolean improvement = scoreCalculator.testCaseImprovesMutationScore(newTestCase);
+							if (!improvement) {
+								tdlTestSuite.getPackagedElement().remove(newTestCase);
+								TMP.remove(newTestCase);
+								i--;
+							}
+						}
 					}
+					iteration_ampTests.put(numOfIteration, new ArrayList<>());
+					iteration_ampTests.get(numOfIteration).addAll(TMP);
+					numNewTests += i;
+					numOfIteration--;
 				}
-				iteration_ampTests.put(numOfIteration, new ArrayList<>());
-				iteration_ampTests.get(numOfIteration).addAll(TMP);
-				numNewTests += i;
-				numOfIteration--;
 			}
-		}
-		
-		System.out.println("\nTest Amplification has been performed successfully.");
-		if (!scoreCalculator.noMutantsExists) {
-			String outputFilePath = PathHelper.getInstance().getWorkspacePath() + "\\"
-						+ PathHelper.getInstance().getTestSuiteProjectName() + "\\" 
-						+ PathHelper.getInstance().getTestSuiteFileName() + 
-						"_amplificationResult.txt";
-			printMutationAnalysisResult(outputFilePath);
-		}
-		
-		if (numNewTests > 0) {
-			System.out.println("\nPhase (4): Saving new test cases");
-			saveAmplifiedTestCases();
+			
+			System.out.println("\nTest Amplification has been performed successfully.");
+			if (!scoreCalculator.noMutantsExists) {
+				String outputFilePath = PathHelper.getInstance().getWorkspacePath() + "\\"
+							+ PathHelper.getInstance().getTestSuiteProjectName() + "\\" 
+							+ PathHelper.getInstance().getTestSuiteFileName() + 
+							"_amplificationResult.txt";
+				printMutationAnalysisResult(outputFilePath);
+			}
+			
+			if (numNewTests > 0) {
+				System.out.println("\nPhase (4): Saving new test cases");
+				saveAmplifiedTestCases();
+			}
+		}else {
+			System.out.println("As the initial mutation score is 100% there is no need for test amplification");
 		}
 	}
 
@@ -144,12 +149,12 @@ public class TDLTestAmplifier {
 
 	private void printMutationAnalysisResult(String outputFilePath) {
 		System.out.println("Total number of mutants: " + scoreCalculator.getNumOfMutants());
-		System.out.println("- initial number of killed mutants: " + initialMutationScore);
+		System.out.println("- initial number of killed mutants: " + initialNumOfKilledMutants);
 		System.out.println("- total number of killed mutants: " + scoreCalculator.getNumOfKilledMutants());
 		System.out.println("Total number of test cases improving mutation score: " + numNewTests);
-		System.out.println("- initial mutation score : " + initialMutationScore);
-		System.out.println("- final mutation score : " + scoreCalculator.getMutationScore());
-		System.out.println("=> improvement in the mutation score : " + (scoreCalculator.getMutationScore() - initialMutationScore));
+		System.out.println("- initial mutation score : " + (initialMutationScore * 100) + "%");
+		System.out.println("- final mutation score : " + (scoreCalculator.getMutationScore() * 100) + "%");
+		System.out.println("=> improvement in the mutation score : " + (scoreCalculator.getMutationScore() - initialMutationScore)*100 + "%");
 		System.out.println("--------------------------------------------------");
 		
 		//saving results into a .txt file
@@ -164,13 +169,18 @@ public class TDLTestAmplifier {
 			fileOut.println("- final mutation score : " + (scoreCalculator.getMutationScore() * 100) + "%");
 			fileOut.println("=> improvement in the mutation score : " + (scoreCalculator.getMutationScore() - initialMutationScore));
 			fileOut.println("--------------------------------------------------");
-			for (String testCase:scoreCalculator.testCase_killedMutant.keySet()) {
-				fileOut.println("Test case: " + testCase);
-				int i = 0;
-				for (String mutant:scoreCalculator.testCase_killedMutant.get(testCase)) {
-					fileOut.println("Killed mutant " + (i++) + ": " + mutant);
+			for (int iteration = 1; iteration <= iteration_ampTests.keySet().size(); iteration++) {
+				fileOut.println("iteration = " + iteration);
+				List<TestDescription> amplifiedTests = iteration_ampTests.get(iteration-1);
+				for (int i=0; i<amplifiedTests.size(); i++) {
+					TestDescription amplifiedTest = amplifiedTests.get(i);
+					fileOut.println("Amplified Test Case: " + amplifiedTest);
+					int j = 1;
+					for (String mutant:scoreCalculator.testCase_killedMutant.get(amplifiedTest)) {
+						fileOut.println("Killed mutant " + (j++) + ": " + mutant);
+					}
+					fileOut.println();
 				}
-				fileOut.println();
 			}
 			fos.close();
 			fileOut.close();
