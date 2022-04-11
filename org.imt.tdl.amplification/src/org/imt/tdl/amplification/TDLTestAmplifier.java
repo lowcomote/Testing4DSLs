@@ -5,7 +5,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IFile;
@@ -27,6 +29,7 @@ public class TDLTestAmplifier {
 	int initialNumOfKilledMutants;
 	double initialMutationScore;
 	
+	int numOfIteration;
 	int numNewTests;
 	
 	public void amplifyTestSuite(IFile testSuiteFile) {
@@ -43,48 +46,65 @@ public class TDLTestAmplifier {
 			initialNumOfKilledMutants = scoreCalculator.getNumOfKilledMutants();
 		}
 		
+		/*
+		 * In DSpot, the used stop-criterion is a number of iteration (default = 3). 
+		 * Our stop-criterion is a combination of number of iteration and reaching to 100% mutation score
+		 */
+		numOfIteration = 3;
+		
 		List<TestDescription> tdlTestCases = tdlTestSuite.getPackagedElement().stream().
 				filter(p -> p instanceof TestDescription).map(t -> (TestDescription) t).collect(Collectors.toList());
-		List<TestDescription> newTdlTestCases = new ArrayList<>();
-		numNewTests = 0;
+		Map<Integer, List<TestDescription>> iteration_ampTests = new HashMap<>();
 		
+		numNewTests = 0;
 		for (TestDescription testCase: tdlTestCases) {
 			TestDescription copyTdlTestCase = tdlFactory.eINSTANCE.createTestDescription();
 			copyTdlTestCase.setName(testCase.getName());
 			copyTdlTestCase.setTestConfiguration(testCase.getTestConfiguration());
 			copyTdlTestCase.setBehaviourDescription(EcoreUtil.copy(testCase.getBehaviourDescription()));
+	
+			List<TestDescription> TMP = new ArrayList<>();
+			TMP.add(copyTdlTestCase);
 			
-			System.out.println("\nPhase (1): Removing assertions from the test case");
-			AssertionRemover assertionRemover = new AssertionRemover();
-			assertionRemover.removeAssertionsFromTestCase(copyTdlTestCase);
-			
-			System.out.println("Phase (2): Modifying test input Data to generate new test cases");
-			TDLTestInputDataAmplification mutator = new TDLTestInputDataAmplification(tdlTestSuite, copyTdlTestCase);
-			newTdlTestCases = mutator.generateNewTestsByInputModification();
-			System.out.println("Done: #of generated test cases by input modification = " + newTdlTestCases.size());
-			
-			System.out.println("\nPhase (3): Running new tests and generating assertions");
-			int i = newTdlTestCases.size();
-			for (TestDescription newTestCase: newTdlTestCases) {
-				tdlTestSuite.getPackagedElement().add(newTestCase);
-				AssertionGenerator generator = new AssertionGenerator();
-				boolean result = generator.generateAssertionsForTestCase(newTestCase);
-				//check whether the assertion can be generated for the new test case
-				if (!result) {
-					tdlTestSuite.getPackagedElement().remove(newTestCase);
-					i--;
-				}
-				//check whether the new test case improves the mutation score, if there is any mutants
-				else if (!scoreCalculator.noMutantsExists){
-					boolean improvement = scoreCalculator.testCaseImprovesMutationScore(newTestCase);
-					if (!improvement) {
+			while (numOfIteration > 0 || scoreCalculator.getMutationScore() < 1) {
+				List<TestDescription> newTests = new ArrayList<>();
+				System.out.println("\nPhase (1): Removing assertions from the test case");
+				AssertionRemover assertionRemover = new AssertionRemover();
+				TMP.forEach(tmp -> assertionRemover.removeAssertionsFromTestCase(tmp));
+
+				System.out.println("Phase (2): Modifying test input Data to generate new test cases");
+				TDLTestInputDataAmplification IAmplifier = new TDLTestInputDataAmplification(tdlTestSuite);
+				newTests.addAll(IAmplifier.generateNewTestsByInputModification(TMP));
+				System.out.println("Done: #of generated test cases by input modification = " + newTests.size());
+				
+				System.out.println("\nPhase (3): Running new tests and generating assertions");
+				TMP.addAll(newTests);
+				int i = newTests.size();
+				for (TestDescription newTestCase: newTests) {
+					tdlTestSuite.getPackagedElement().add(newTestCase);
+					AssertionGenerator generator = new AssertionGenerator();
+					boolean result = generator.generateAssertionsForTestCase(newTestCase);
+					//check whether the assertion can be generated for the new test case
+					if (!result) {
 						tdlTestSuite.getPackagedElement().remove(newTestCase);
+						TMP.remove(newTestCase);
 						i--;
 					}
+					//check whether the new test case improves the mutation score, if there is any mutants
+					else if (!scoreCalculator.noMutantsExists){
+						boolean improvement = scoreCalculator.testCaseImprovesMutationScore(newTestCase);
+						if (!improvement) {
+							tdlTestSuite.getPackagedElement().remove(newTestCase);
+							TMP.remove(newTestCase);
+							i--;
+						}
+					}
 				}
+				iteration_ampTests.put(numOfIteration, new ArrayList<>());
+				iteration_ampTests.get(numOfIteration).addAll(TMP);
+				numNewTests += i;
+				numOfIteration--;
 			}
-			System.out.println("Done: #of valid generated test cases = " + i);
-			numNewTests += i;
 		}
 		
 		System.out.println("\nTest Amplification has been performed successfully.");
@@ -136,13 +156,12 @@ public class TDLTestAmplifier {
 		try {
 			FileOutputStream fos = new FileOutputStream(outputFilePath);
 			PrintStream fileOut = new PrintStream(fos);
-			//System.setOut(fileOut);
 			fileOut.println("Total number of mutants: " + scoreCalculator.getNumOfMutants());
-			fileOut.println("- initial number of killed mutants: " + initialMutationScore);
-			fileOut.println("- total number of killed mutants: " + scoreCalculator.getNumOfKilledMutants());
+			fileOut.println("- initial number of killed mutants: " + initialNumOfKilledMutants);
+			fileOut.println("- initial mutation score: " + (initialMutationScore * 100) + "%");
 			fileOut.println("Total number of test cases improving mutation score: " + numNewTests);
-			fileOut.println("- initial mutation score : " + initialMutationScore);
-			fileOut.println("- final mutation score : " + scoreCalculator.getMutationScore());
+			fileOut.println("- total number of killed mutants : " + scoreCalculator.getNumOfKilledMutants());
+			fileOut.println("- final mutation score : " + (scoreCalculator.getMutationScore() * 100) + "%");
 			fileOut.println("=> improvement in the mutation score : " + (scoreCalculator.getMutationScore() - initialMutationScore));
 			fileOut.println("--------------------------------------------------");
 			for (String testCase:scoreCalculator.testCase_killedMutant.keySet()) {

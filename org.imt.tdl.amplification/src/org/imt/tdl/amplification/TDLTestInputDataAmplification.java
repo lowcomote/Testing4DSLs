@@ -71,15 +71,17 @@ public class TDLTestInputDataAmplification {
 	private static String EVENTPERMUTATION = "EventPermutation";
 	private static String EVENTMODIFICATION = "EventModification";
 	
-	public TDLTestInputDataAmplification(Package tdlTestSuite, TestDescription tdlTestCase) {
+	public TDLTestInputDataAmplification(Package tdlTestSuite) {
 		this.tdlTestSuite = tdlTestSuite;
-		this.tdlTestCase = tdlTestCase;
 	}
 	
-	public List<TestDescription> generateNewTestsByInputModification () {
+	public List<TestDescription> generateNewTestsByInputModification (List<TestDescription> tests) {
 		List<TestDescription> generatedTestsByModification = new ArrayList<>();
-		generatedTestsByModification.addAll(modifyLiteralData ());
-		generatedTestsByModification.addAll(modifyExchangedEvents ());
+		for (TestDescription test: tests) {
+			this.tdlTestCase = test;
+			generatedTestsByModification.addAll(modifyLiteralData());
+			generatedTestsByModification.addAll(modifyExchangedEvents());
+		}
 		return generatedTestsByModification;
 	}
 
