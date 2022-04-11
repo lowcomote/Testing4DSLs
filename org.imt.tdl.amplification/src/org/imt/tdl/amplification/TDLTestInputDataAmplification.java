@@ -78,7 +78,7 @@ public class TDLTestInputDataAmplification {
 	
 	public List<TestDescription> generateNewTestsByInputModification () {
 		List<TestDescription> generatedTestsByModification = new ArrayList<>();
-		//generatedTestsByModification.addAll(modifyLiteralData ());
+		generatedTestsByModification.addAll(modifyLiteralData ());
 		generatedTestsByModification.addAll(modifyExchangedEvents ());
 		return generatedTestsByModification;
 	}
@@ -97,10 +97,10 @@ public class TDLTestInputDataAmplification {
 		findTdlDataOfMUT();
 		
 		List<TestDescription> generatedTestsByModification = new ArrayList<>();
-		//generatedTestsByModification.addAll(generateTestsByEventDuplication());
+		generatedTestsByModification.addAll(generateTestsByEventDuplication());
 		generatedTestsByModification.addAll(generateTestsByEventCreation());
-		//generatedTestsByModification.addAll(generateTestsByEventDeletion());
-		//generatedTestsByModification.addAll(generateTestsByEventPermutation());
+		generatedTestsByModification.addAll(generateTestsByEventDeletion());
+		generatedTestsByModification.addAll(generateTestsByEventPermutation());
 		generatedTestsByModification.addAll(generateTestsByEventModification());
 		return generatedTestsByModification;
 	}
@@ -243,7 +243,7 @@ public class TDLTestInputDataAmplification {
 			return null;
 		}
 		ParameterBinding relatedBinding = pbOptional.get();
-		String paramType = consideredParameter.getDataType().toString();
+		String paramType = consideredParameter.getDataType().getName().toString();
 		int paramValueIndex = 1;
 		int paramValuesSize = etype_tdlEObjects.get(paramType).size();
 		while(paramValueIndex < paramValuesSize) {
@@ -268,7 +268,7 @@ public class TDLTestInputDataAmplification {
 		DataInstanceUse exchangedTdlEventInstance = tdlFactory.eINSTANCE.createDataInstanceUse();
 		exchangedTdlEventInstance.setDataInstance(tdlEventInstance);
 		for (Parameter parameter:((StructuredDataType) tdlEventInstance.getDataType()).allMembers()) {
-			String paramType = parameter.getDataType().toString();
+			String paramType = parameter.getDataType().getName().toString();
 			ParameterBinding tdlParameterValue = tdlFactory.eINSTANCE.createParameterBinding();
 			tdlParameterValue.setParameter(parameter);
 			DataInstanceUse paramValue = tdlFactory.eINSTANCE.createDataInstanceUse();
