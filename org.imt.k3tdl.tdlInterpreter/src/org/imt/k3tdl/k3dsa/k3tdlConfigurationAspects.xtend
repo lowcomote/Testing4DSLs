@@ -199,13 +199,20 @@ class GateInstanceAspect {
 		for (i : 0 ..<event.argument.size){//the parameterBindings of the event
 			val argName = event.argument.get(i).parameter.name
 			var EObject argValue = null
-			val DataUse argTdlValue = event.argument.get(i).dataUse
-			argValue = (argTdlValue as DataInstanceUse).getMatchedMUTElement(_self.gateLauncher.MUTResource, true, _self.DSLPath)
-			if (argValue === null){//if the object does not exist, create it
-				argValue = (argTdlValue as DataInstanceUse).createEObject(_self.gateLauncher.MUTResource, true, _self.DSLPath)
-				if (argValue === null){//if the object cannot be created, return null
-					return null
-				}
+			val DataInstanceUse argTdlValue = event.argument.get(i).dataUse as DataInstanceUse
+			/*
+			 * if the object is conforming to a the xDSL's runtime state definition 
+			 * (its type is annotated as 'dynamic' or 'aspect'),
+			 * the object will not exist in the model under test and must be created
+			 */
+			if (argTdlValue.dataInstance.dataType.isDynamicType){
+				argValue = argTdlValue.createEObject(_self.gateLauncher.MUTResource, true, _self.DSLPath)
+			}
+			else{
+				argValue = argTdlValue.getMatchedMUTElement(_self.gateLauncher.MUTResource, true, _self.DSLPath)
+			}
+			if (argValue === null){
+				return null
 			}
 			//put the name of the parameter along with its value
 			parameters.put(argName, argValue)		
