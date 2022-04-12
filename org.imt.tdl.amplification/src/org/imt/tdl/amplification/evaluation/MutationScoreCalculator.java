@@ -154,4 +154,8 @@ public class MutationScoreCalculator {
 	public double getMutationScore() {
 		return mutationScore;
 	}
+	
+	public Set<String> getAliveMutants(){
+		return mutant_status.keySet().stream().filter(mutant -> mutant_status.get(mutant) == ALIVE).collect(Collectors.toSet());
+	}
 }
