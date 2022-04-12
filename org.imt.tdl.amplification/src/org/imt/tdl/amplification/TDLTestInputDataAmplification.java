@@ -75,13 +75,11 @@ public class TDLTestInputDataAmplification {
 		this.tdlTestSuite = tdlTestSuite;
 	}
 	
-	public List<TestDescription> generateNewTestsByInputModification (List<TestDescription> tests) {
+	public List<TestDescription> generateNewTestsByInputModification (TestDescription testCase) {
 		List<TestDescription> generatedTestsByModification = new ArrayList<>();
-		for (TestDescription test: tests) {
-			this.tdlTestCase = test;
-			generatedTestsByModification.addAll(modifyLiteralData());
-			generatedTestsByModification.addAll(modifyExchangedEvents());
-		}
+		this.tdlTestCase = testCase;
+		generatedTestsByModification.addAll(modifyLiteralData());
+		generatedTestsByModification.addAll(modifyExchangedEvents());
 		return generatedTestsByModification;
 	}
 
