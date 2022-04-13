@@ -5,8 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -158,6 +156,7 @@ public class TDLTestAmplifier {
 		System.out.println("- initial number of killed mutants: " + initialNumOfKilledMutants);
 		System.out.println("- total number of killed mutants: " + scoreCalculator.getNumOfKilledMutants());
 		System.out.println("Total number of test cases improving mutation score: " + numNewTests);
+		System.out.println("- number of mutants killed by improved test cases: " + (scoreCalculator.getNumOfKilledMutants()-initialNumOfKilledMutants));
 		System.out.println("- initial mutation score : " + (initialMutationScore * 100) + "%");
 		System.out.println("- final mutation score : " + (scoreCalculator.getMutationScore() * 100) + "%");
 		System.out.println("=> improvement in the mutation score : " + (scoreCalculator.getMutationScore() - initialMutationScore)*100 + "%");
@@ -171,6 +170,7 @@ public class TDLTestAmplifier {
 			fileOut.println("- initial number of killed mutants: " + initialNumOfKilledMutants);
 			fileOut.println("- initial mutation score: " + (initialMutationScore * 100) + "%");
 			fileOut.println("Total number of test cases improving mutation score: " + numNewTests);
+			fileOut.println("- number of mutants killed by improved test cases: " + (scoreCalculator.getNumOfKilledMutants()-initialNumOfKilledMutants));
 			fileOut.println("- total number of killed mutants : " + scoreCalculator.getNumOfKilledMutants());
 			fileOut.println("- final mutation score : " + (scoreCalculator.getMutationScore() * 100) + "%");
 			fileOut.println("=> improvement in the mutation score : " + (scoreCalculator.getMutationScore() - initialMutationScore)*100 +"%");
