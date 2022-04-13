@@ -295,11 +295,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	@Override
 	public String sendStopEvent() {
 		String result = "PASS";
-		if (executionEngine.getRunningStatus() == RunStatus.WaitingForEvent) {
-			if (eventOccurrences.size()>0) {
-				result = "FAIL:There are extra received events";
-			}
-		}else if (executionEngine.getRunningStatus() == RunStatus.Running) {
+		if (executionEngine.getRunningStatus() == RunStatus.Running) {
 			try {//wait 1 second because the engine is running
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -307,6 +303,9 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			}
 		}
 		executionEngine.stop();
+		if (eventOccurrences.size()>0) {
+			result = "FAIL:There are extra received events";
+		}
 		return result;
 	}
 	
