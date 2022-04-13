@@ -1,5 +1,8 @@
 package org.imt.tdl.amplification.utilities;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -55,15 +58,17 @@ public class EObject2TDLConverter {
 		eobjectTdlInstance.setDataType(eobjectTdlType);
 		//if the object has a name, use its name for the created tdl instance
 		if (getEObjectName(eobject) != null) {
-			eobjectTdlInstance.setName(getEObjectName(eobject));
+			String name = getValidName(getEObjectName(eobject));
+			eobjectTdlInstance.setName(name);
 		}else {
-			eobjectTdlInstance.setName(eobjectTypeName.toLowerCase() + "_" + (int) Math.random());
+			String name = getValidName(eobjectTypeName.toLowerCase() + "_" + (int) Math.random());
+			eobjectTdlInstance.setName(name);
 		}
 		//for each mandatory feature of the eobject that has a value, create a member assignment with corresponding tdl value
 		List<EStructuralFeature> valuedEFeatures = eobject.eClass().getEAllStructuralFeatures().stream().
 				filter(f -> (f.getName().equals("name") || f.getLowerBound()>0) & eobject.eGet(f) != null && eobject.eGet(f) != f.getDefaultValue()).collect(Collectors.toList());
 		for (EStructuralFeature efeature:valuedEFeatures) {
-			Optional<Member> mOptional = eobjectTdlType.allMembers().stream().filter(m -> getValidName(m.getName()).equals(efeature.getName())).findFirst();
+			Optional<Member> mOptional = eobjectTdlType.allMembers().stream().filter(m -> getDSLCompatibleName(m.getName()).equals(efeature.getName())).findFirst();
 			if (mOptional.isPresent()) {
 				MemberAssignment ma = tdlFactory.createMemberAssignment();
 				ma.setMember(mOptional.get());
@@ -84,14 +89,14 @@ public class EObject2TDLConverter {
 				DataInstanceUse tdlValues = tdlFactory.createDataInstanceUse();
 				for (Boolean eValue:eValues) {
 					LiteralValueUse tdlValue = tdlFactory.createLiteralValueUse();
-					tdlValue.setValue(eValue.toString());
+					tdlValue.setValue("\'" + eValue.toString() + "\'");
 					tdlValues.getItem().add(tdlValue);
 				}
 				return tdlValues;
 			}else {
 				boolean eValue = (boolean) eobject.eGet(efeature);
 				LiteralValueUse tdlValue = tdlFactory.createLiteralValueUse();
-				tdlValue.setValue("" + eValue);
+				tdlValue.setValue("\'" + eValue + "\'");
 				return tdlValue;
 			}
 		}
@@ -102,14 +107,14 @@ public class EObject2TDLConverter {
 				DataInstanceUse tdlValues = tdlFactory.createDataInstanceUse();
 				for (Integer eValue:eValues) {
 					LiteralValueUse tdlValue = tdlFactory.createLiteralValueUse();
-					tdlValue.setValue(eValue.toString());
+					tdlValue.setValue("\'" + eValue.toString() + "\'");
 					tdlValues.getItem().add(tdlValue);
 				}
 				return tdlValues;
 			}else {
 				int eValue = (int) eobject.eGet(efeature);
 				LiteralValueUse tdlValue = tdlFactory.createLiteralValueUse();
-				tdlValue.setValue("" + eValue);
+				tdlValue.setValue("\'" + eValue + "\'");
 				return tdlValue;
 			}
 		}
@@ -120,14 +125,14 @@ public class EObject2TDLConverter {
 				DataInstanceUse tdlValues = tdlFactory.createDataInstanceUse();
 				for (Float eValue:eValues) {
 					LiteralValueUse tdlValue = tdlFactory.createLiteralValueUse();
-					tdlValue.setValue(eValue.toString());
+					tdlValue.setValue("\'" + eValue.toString() + "\'");
 					tdlValues.getItem().add(tdlValue);
 				}
 				return tdlValues;
 			}else {
 				float eValue = (float) eobject.eGet(efeature);
 				LiteralValueUse tdlValue = tdlFactory.createLiteralValueUse();
-				tdlValue.setValue("" + eValue);
+				tdlValue.setValue("\'" + eValue + "\'");
 				return tdlValue;
 			}
 		}
@@ -138,14 +143,14 @@ public class EObject2TDLConverter {
 				DataInstanceUse tdlValues = tdlFactory.createDataInstanceUse();
 				for (String eValue:eValues) {
 					LiteralValueUse tdlValue = tdlFactory.createLiteralValueUse();
-					tdlValue.setValue(eValue.toString());
+					tdlValue.setValue("\'" + eValue.toString() + "\'");
 					tdlValues.getItem().add(tdlValue);
 				}
 				return tdlValues;
 			}else {
 				String eValue = (String) eobject.eGet(efeature);
 				LiteralValueUse tdlValue = tdlFactory.createLiteralValueUse();
-				tdlValue.setValue("" + eValue);
+				tdlValue.setValue("\'" + eValue + "\'");
 				return tdlValue;
 			}
 		}
@@ -187,8 +192,11 @@ public class EObject2TDLConverter {
 		String eobjectName = getEObjectName(eobject);
 		String eobjectTypeName = eobject.eClass().getName();
 		StructuredDataType eobjectTdlType = (StructuredDataType) getTDLDataType(eobjectTypeName);
-		List<StructuredDataInstance> dataInstances = tdlTestSuite.getPackagedElement().stream().filter(p -> p instanceof StructuredDataInstance).
-				map(p -> (StructuredDataInstance) p).filter(di -> di.getDataType() == eobjectTdlType).collect(Collectors.toList());
+		List<StructuredDataInstance> dataInstances = tdlTestSuite.getPackagedElement().
+				stream().filter(p -> p instanceof StructuredDataInstance).
+				map(p -> (StructuredDataInstance) p).
+				filter(di -> di.getDataType() == eobjectTdlType).
+				collect(Collectors.toList());
 		for (StructuredDataInstance di: dataInstances) {
 			Optional<MemberAssignment> maOptional = di.getMemberAssignment().stream().filter(ma -> ma.getMember().getName().equals("_name")).findFirst();
 			if (maOptional.isPresent()) {
@@ -238,7 +246,7 @@ public class EObject2TDLConverter {
 		SimpleDataType tdlStringType = (SimpleDataType) getTDLDataType("EString");
 		SimpleDataInstance tdlStringInstance = tdlFactory.createSimpleDataInstance();
 		tdlStringInstance.setDataType(tdlStringType);
-		tdlStringInstance.setName(stringValue);
+		tdlStringInstance.setName(getValidName(stringValue));
 		tdlTestSuite.getPackagedElement().add(tdlStringInstance);
 		DataInstanceUse messageArg = tdlFactory.createDataInstanceUse();
 		messageArg.setDataInstance(tdlStringInstance);
@@ -247,14 +255,14 @@ public class EObject2TDLConverter {
 	
 	private DataType getTDLDataType (String typeName) {
 		Optional<DataType> dtOptional = tdlTestSuite.getPackagedElement().stream().filter(p -> p instanceof DataType).
-			map(p -> (DataType) p).filter(t -> getValidName(t.getName()).equals(typeName)).findFirst();
+			map(p -> (DataType) p).filter(t -> getDSLCompatibleName(t.getName()).equals(typeName)).findFirst();
 		if (dtOptional.isPresent()) {
 			return dtOptional.get();
 		}
 		return null;
 	}
 	
-	private String getValidName(String name){
+	private String getDSLCompatibleName(String name){
 		if (name.startsWith("_")){
 			return name.substring(1);
 		}
@@ -277,5 +285,20 @@ public class EObject2TDLConverter {
 			return value.substring(1, value.length()-1);//remove quotation marks
     	}
 		return value;
+	}
+	
+	private String getValidName (String name){
+		String[] tokenNames = {"Package", "{", "}", "with", "perform", "action", "(", ",", ")", "on", "test", "objectives", ":", ";", "name", "time", "label", "constraints", "Action", "alternatively", "or", "Annotation", "*", "?", "=", "assert", "otherwise", "set", "verdict", "to", "->", "[", "]", "times", "repeat", "break", "Note", "create", "of", "type", "bind", "Component", "Type", "having", "if", "else", "connect", "as", "Map", "in", ".", "new", "containing", "Use", "Signature", "Collection", "default", "+", "-", "/", "mod", ">", "<", ">=", "<=", "==", "!=", "and", "xor", "not", "size", "Import", "all", "from", "Function", "returns", "instance", "returned", "Predefined", "gate", "Gate", "accepts", "sends", "triggers", "calls", "responds", "response", "interrupt", "optional", "mapped", "omit", "argument", "optionally", "run", "parallel", "parameter", "every", "component", "is", "quiet", "for", "terminate", "where", "it", "assigned", "Test", "Configuration", "Description", "Implementation", "uses", "configuration", "execute", "bindings", "Objective", "description", "Time", "out", "timer", "start", "stop", "variable", "waits", "extends", "SUT", "Tester", "Message", "Procedure", "In", "Out", "Exception", "last", "previous", "first"};
+		String result = name;
+		if (result.contains("$")){
+			result = result.substring(0, result.indexOf("$"));
+		}
+		if (result.contains(".")){
+			result = result.replace(".", "_");
+		}
+		if (Arrays.asList(tokenNames).contains(result)){
+			result = "_" + result;
+		}
+		return result;
 	}
 }
