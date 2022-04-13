@@ -23,13 +23,13 @@ public class TDLCodeGenerator {
 	public TDLCodeGenerator(String dslFilePath, String tdlProjectPath) throws IOException {		
 		System.out.println("Start TDL Code generation");
 		
-		this.testSuitePackageGenerator = new TestSuitePackageGenerator(dslFilePath);
+		testSuitePackageGenerator = new TestSuitePackageGenerator(dslFilePath);
 		System.out.println("Test suite package generated successfully");
 		
-		this.testConfigurationPackageGenerator = this.testSuitePackageGenerator.getTestConfigurationGenerator();
-		this.dslSpecificTypesGenerator = this.testConfigurationPackageGenerator.getDslSpecificTypesGenerator();
-		this.dslSpecificEventsGenerator = this.dslSpecificTypesGenerator.getDslSpecificEventsGenerator();
-		this.commonPackageGenerator = this.dslSpecificTypesGenerator.getCommonPackageGenerator();
+		testConfigurationPackageGenerator = testSuitePackageGenerator.getTestConfigurationGenerator();
+		dslSpecificTypesGenerator = testConfigurationPackageGenerator.getDslSpecificTypesGenerator();
+		dslSpecificEventsGenerator = dslSpecificTypesGenerator.getDslSpecificEventsGenerator();
+		commonPackageGenerator = dslSpecificTypesGenerator.getCommonPackageGenerator();
 				
 		System.out.println("start saving packages");
 		savePackages(tdlProjectPath);
@@ -46,11 +46,11 @@ public class TDLCodeGenerator {
 		Resource configurationRes = rs.createResource(URI.createURI(tdlProjectPath + "/generated/" + this.testConfigurationPackageGenerator.getTestConfigurationPackage().getName()+ ".tdlan2"));
 		Resource testSuitePackageRes = rs.createResource(URI.createURI(tdlProjectPath + "/" + this.testSuitePackageGenerator.getTestSuitePackage().getName()+ ".tdlan2"));
 
-		commonPackageRes.getContents().add(this.commonPackageGenerator.getCommonPackage());
-		dslSpecificPackageRes.getContents().add(this.dslSpecificEventsGenerator.getDslSpecificEventsPackage());
-		requiredTypesRes.getContents().add(this.dslSpecificTypesGenerator.getDslSpecificTypesPackage());
-		configurationRes.getContents().add(this.testConfigurationPackageGenerator.getTestConfigurationPackage());
-		testSuitePackageRes.getContents().add(this.testSuitePackageGenerator.getTestSuitePackage());
+		commonPackageRes.getContents().add(commonPackageGenerator.getCommonPackage());
+		dslSpecificPackageRes.getContents().add(dslSpecificEventsGenerator.getDslSpecificEventsPackage());
+		requiredTypesRes.getContents().add(dslSpecificTypesGenerator.getDslSpecificTypesPackage());
+		configurationRes.getContents().add(testConfigurationPackageGenerator.getTestConfigurationPackage());
+		testSuitePackageRes.getContents().add(testSuitePackageGenerator.getTestSuitePackage());
 		
 		commonPackageRes.save(Collections.EMPTY_MAP);
 		dslSpecificPackageRes.save(Collections.EMPTY_MAP);

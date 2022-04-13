@@ -23,39 +23,39 @@ public class TestSuitePackageGenerator {
 	private TestConfigurationGenerator testConfigurationPackageGenerator;
 	
 	public TestSuitePackageGenerator(String dslFilePath) throws IOException {
-		this.factory = tdlFactory.eINSTANCE;
-		this.testConfigurationPackageGenerator = new TestConfigurationGenerator(dslFilePath);
+		factory = tdlFactory.eINSTANCE;
+		testConfigurationPackageGenerator = new TestConfigurationGenerator(dslFilePath);
 		System.out.println("test configuration package generated successfully");
 		
-		this.dslSpecificTyepsGenerator = this.testConfigurationPackageGenerator.getDslSpecificTypesGenerator();
-		this.dslSpecificEventsGenerator = this.dslSpecificTyepsGenerator.getDslSpecificEventsGenerator();
-		this.commonPackageGenerator = this.dslSpecificTyepsGenerator.getCommonPackageGenerator();
+		dslSpecificTyepsGenerator = testConfigurationPackageGenerator.getDslSpecificTypesGenerator();
+		dslSpecificEventsGenerator = dslSpecificTyepsGenerator.getDslSpecificEventsGenerator();
+		commonPackageGenerator = dslSpecificTyepsGenerator.getCommonPackageGenerator();
 		generateTestSuitePackage();
 	}
 	private void generateTestSuitePackage() {
-		this.testSuitePackage = factory.createPackage();
-		this.testSuitePackage.setName("testSuite");
-		generateImports(this.testSuitePackage);
+		testSuitePackage = factory.createPackage();
+		testSuitePackage.setName("testSuite");
+		generateImports(testSuitePackage);
 		//generateGenericDataInstances();
 		//generateAnnotations();
 	}
 
 	private void generateImports(Package testSuitePackage) {
 		ElementImport commonPackageImport = factory.createElementImport();
-		commonPackageImport.setImportedPackage(this.commonPackageGenerator.getCommonPackage());
+		commonPackageImport.setImportedPackage(commonPackageGenerator.getCommonPackage());
 		ElementImport dslSpecificTypesPackageImport = factory.createElementImport();
-		dslSpecificTypesPackageImport.setImportedPackage(this.dslSpecificTyepsGenerator.getDslSpecificTypesPackage());
+		dslSpecificTypesPackageImport.setImportedPackage(dslSpecificTyepsGenerator.getDslSpecificTypesPackage());
 		ElementImport dslSpecificEventsPackageImport = factory.createElementImport();
-		dslSpecificEventsPackageImport.setImportedPackage(this.dslSpecificEventsGenerator.getDslSpecificEventsPackage());
+		dslSpecificEventsPackageImport.setImportedPackage(dslSpecificEventsGenerator.getDslSpecificEventsPackage());
 		ElementImport testConfigurationImport = factory.createElementImport();
-		testConfigurationImport.setImportedPackage(this.testConfigurationPackageGenerator.getTestConfigurationPackage());
+		testConfigurationImport.setImportedPackage(testConfigurationPackageGenerator.getTestConfigurationPackage());
 		testSuitePackage.getImport().add(commonPackageImport);
 		testSuitePackage.getImport().add(dslSpecificTypesPackageImport);
 		testSuitePackage.getImport().add(dslSpecificEventsPackageImport);
 		testSuitePackage.getImport().add(testConfigurationImport);
 	}
 	private void generateGenericDataInstances() {
-		List<DataType> dynamicTypes = this.dslSpecificTyepsGenerator.getDynamicTypes();
+		List<DataType> dynamicTypes = dslSpecificTyepsGenerator.getDynamicTypes();
 		for (int i=0; i< dynamicTypes.size(); i++) {
 			//generate instances for each dynamic type
 			
@@ -79,7 +79,7 @@ public class TestSuitePackageGenerator {
 						}
 					}
 				}
-				this.testSuitePackage.getPackagedElement().add(dynamicTypeInstance);
+				testSuitePackage.getPackagedElement().add(dynamicTypeInstance);
 			}
 		}
 	}
@@ -94,16 +94,16 @@ public class TestSuitePackageGenerator {
 	private void generateAnnotations() {
 		AnnotationType ExactEquivalent = factory.createAnnotationType();
 		ExactEquivalent.setName("ExactEquivalent");
-		this.testSuitePackage.getPackagedElement().add(ExactEquivalent);
+		testSuitePackage.getPackagedElement().add(ExactEquivalent);
 		
 		AnnotationType PartialEquivalent = factory.createAnnotationType();
 		PartialEquivalent.setName("PartialEquivalent");
-		this.testSuitePackage.getPackagedElement().add(PartialEquivalent);
+		testSuitePackage.getPackagedElement().add(PartialEquivalent);
 	}
 	public Package getTestSuitePackage() {
-		return this.testSuitePackage;
+		return testSuitePackage;
 	}
 	public TestConfigurationGenerator getTestConfigurationGenerator() {
-		return this.testConfigurationPackageGenerator;
+		return testConfigurationPackageGenerator;
 	}
 }

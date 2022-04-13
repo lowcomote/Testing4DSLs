@@ -47,20 +47,20 @@ public class TestConfigurationGenerator {
 	private final static String OCL_GATE = "oclGate";
 	
 	public TestConfigurationGenerator(String dslFilePath) throws IOException {
-		this.factory = tdlFactory.eINSTANCE;
+		factory = tdlFactory.eINSTANCE;
 		
-		this.dslSpecificTypesGenerator = new DSLSpecificTypesGenerator(dslFilePath);
+		dslSpecificTypesGenerator = new DSLSpecificTypesGenerator(dslFilePath);
 		System.out.println("dsl-specific types package generated successfully");
 		
-		this.dslSpecificEventsGenerator = this.dslSpecificTypesGenerator.getDslSpecificEventsGenerator();
-		this.commonPackageGenerator = this.dslSpecificTypesGenerator.getCommonPackageGenerator();
-		this.dslName = this.dslSpecificEventsGenerator.getDslName(dslFilePath);
-		this.dslID = this.getDslID(dslFilePath);
+		dslSpecificEventsGenerator = dslSpecificTypesGenerator.getDslSpecificEventsGenerator();
+		commonPackageGenerator = dslSpecificTypesGenerator.getCommonPackageGenerator();
+		dslName = dslSpecificEventsGenerator.getDslName(dslFilePath);
+		dslID = getDslID(dslFilePath);
 		generateTestConfigurationPackage();
 	}
 	private void generateTestConfigurationPackage() {
-		this.testConfigurationPackage = factory.createPackage();
-		this.testConfigurationPackage.setName("testConfiguration");
+		testConfigurationPackage = factory.createPackage();
+		testConfigurationPackage.setName("testConfiguration");
 		generateImports();
 		generateGateTypes();
 		generateComponentTypes();
@@ -69,76 +69,76 @@ public class TestConfigurationGenerator {
 	}
 	private void generateImports() {
 		ElementImport commonPackageImport = factory.createElementImport();
-		commonPackageImport.setImportedPackage(this.commonPackageGenerator.getCommonPackage());
+		commonPackageImport.setImportedPackage(commonPackageGenerator.getCommonPackage());
 		ElementImport dslSpecificPackageImport = factory.createElementImport();
-		dslSpecificPackageImport.setImportedPackage(this.dslSpecificEventsGenerator.getDslSpecificEventsPackage());
-		this.testConfigurationPackage.getImport().add(commonPackageImport);
-		this.testConfigurationPackage.getImport().add(dslSpecificPackageImport);
+		dslSpecificPackageImport.setImportedPackage(dslSpecificEventsGenerator.getDslSpecificEventsPackage());
+		testConfigurationPackage.getImport().add(commonPackageImport);
+		testConfigurationPackage.getImport().add(dslSpecificPackageImport);
 	}
 	private void generateGateTypes() {
 		GateType genericGateType = factory.createGateType();
 		genericGateType.setName(GENERIC_GATE_TYPE);
 		genericGateType.setKind(GateTypeKind.MESSAGE);
-		genericGateType.getDataType().add(this.commonPackageGenerator.getModelExecutionCommand());
-		this.testConfigurationPackage.getPackagedElement().add(genericGateType);
-		this.gateTypes.put(genericGateType.getName(), genericGateType);
-		if (this.dslSpecificEventsGenerator.getTypesOfDslInterfaces().size()>0) {
+		genericGateType.getDataType().add(commonPackageGenerator.getModelExecutionCommand());
+		testConfigurationPackage.getPackagedElement().add(genericGateType);
+		gateTypes.put(genericGateType.getName(), genericGateType);
+		if (dslSpecificEventsGenerator.getTypesOfDslInterfaces().size()>0) {
 			GateType dslSpecificGateType = factory.createGateType();
 			dslSpecificGateType.setName(DSL_GATE_TYPE);
 			dslSpecificGateType.setKind(GateTypeKind.MESSAGE);
-			dslSpecificGateType.getDataType().addAll(this.dslSpecificEventsGenerator.getTypesOfDslInterfaces());
-			this.testConfigurationPackage.getPackagedElement().add(dslSpecificGateType);
-			this.gateTypes.put(dslSpecificGateType.getName(), dslSpecificGateType);
+			dslSpecificGateType.getDataType().addAll(dslSpecificEventsGenerator.getTypesOfDslInterfaces());
+			testConfigurationPackage.getPackagedElement().add(dslSpecificGateType);
+			gateTypes.put(dslSpecificGateType.getName(), dslSpecificGateType);
 		}
 	
 		GateType oclGateType = factory.createGateType();
 		oclGateType.setName(OCL_GATE_TYPE);
 		oclGateType.setKind(GateTypeKind.MESSAGE);
-		oclGateType.getDataType().add(this.commonPackageGenerator.getOCLType());
-		this.testConfigurationPackage.getPackagedElement().add(oclGateType);
-		this.gateTypes.put(oclGateType.getName(), oclGateType);
+		oclGateType.getDataType().add(commonPackageGenerator.getOCLType());
+		testConfigurationPackage.getPackagedElement().add(oclGateType);
+		gateTypes.put(oclGateType.getName(), oclGateType);
 	}
 	private void generateComponentTypes() {
 		ComponentType testSystem = factory.createComponentType();
 		testSystem.setName("TestSystem");
 		generateGateInstances(testSystem);
-		this.testConfigurationPackage.getPackagedElement().add(testSystem);
-		this.componentTypes.put(testSystem.getName(), testSystem);
+		testConfigurationPackage.getPackagedElement().add(testSystem);
+		componentTypes.put(testSystem.getName(), testSystem);
 		
 		ComponentType MUT = factory.createComponentType();
 		MUT.setName("MUT");
 		generateGateInstances(MUT);
-		this.testConfigurationPackage.getPackagedElement().add(MUT);
-		this.componentTypes.put(MUT.getName(), MUT);
+		testConfigurationPackage.getPackagedElement().add(MUT);
+		componentTypes.put(MUT.getName(), MUT);
 	}
 	private void generateGateInstances(ComponentType component) {
 		GateInstance genericGate = factory.createGateInstance();
 		genericGate.setName(GENERIC_GATE);
-		genericGate.setType(this.gateTypes.get(GENERIC_GATE_TYPE));
+		genericGate.setType(gateTypes.get(GENERIC_GATE_TYPE));
 		component.getGateInstance().add(genericGate);
 
 		if (this.gateTypes.get(DSL_GATE_TYPE) != null) {
 			GateInstance dslSpecificGate = factory.createGateInstance();
 			dslSpecificGate.setName(DSL_GATE);
-			dslSpecificGate.setType(this.gateTypes.get(DSL_GATE_TYPE));
+			dslSpecificGate.setType(gateTypes.get(DSL_GATE_TYPE));
 			component.getGateInstance().add(dslSpecificGate);
 		}
 		
 		GateInstance oclGate = factory.createGateInstance();
 		oclGate.setName(OCL_GATE);
-		oclGate.setType(this.gateTypes.get(OCL_GATE_TYPE));
+		oclGate.setType(gateTypes.get(OCL_GATE_TYPE));
 		component.getGateInstance().add(oclGate);
 	}
 	private void generateAnnotations() {
 		AnnotationType MUTPath = factory.createAnnotationType();
 		MUTPath.setName("MUTPath");
-		this.testConfigurationPackage.getPackagedElement().add(MUTPath);
-		this.annotations.put(MUTPath.getName(), MUTPath);
+		testConfigurationPackage.getPackagedElement().add(MUTPath);
+		annotations.put(MUTPath.getName(), MUTPath);
 		
 		AnnotationType DSLName = factory.createAnnotationType();
 		DSLName.setName("DSLName");
-		this.testConfigurationPackage.getPackagedElement().add(DSLName);
-		this.annotations.put(DSLName.getName(), DSLName);
+		testConfigurationPackage.getPackagedElement().add(DSLName);
+		annotations.put(DSLName.getName(), DSLName);
 	}
 	private void generateConfigurations() {
 		//generate one generic test configuration
@@ -147,19 +147,19 @@ public class TestConfigurationGenerator {
 		generateComponentInstances(genericConfiguration);
 		generateConnection(genericConfiguration, GENERIC_GATE);
 		generateConnection(genericConfiguration, OCL_GATE);
-		this.testConfigurationPackage.getPackagedElement().add(genericConfiguration);
-		this.configurations.put(genericConfiguration.getName(), genericConfiguration);
+		testConfigurationPackage.getPackagedElement().add(genericConfiguration);
+		configurations.put(genericConfiguration.getName(), genericConfiguration);
 		
 		//if the dsl has an interface and specific gate types are generated for it,
 		//a new test configuration has to be defined
-		if (this.gateTypes.get(DSL_GATE_TYPE) != null) {
+		if (gateTypes.get(DSL_GATE_TYPE) != null) {
 			TestConfiguration reactiveConfiguration = factory.createTestConfiguration();
 			reactiveConfiguration.setName("reactiveConfiguration");
 			generateComponentInstances(reactiveConfiguration);
 			generateConnection(reactiveConfiguration, DSL_GATE);
 			generateConnection(reactiveConfiguration, OCL_GATE);
-			this.testConfigurationPackage.getPackagedElement().add(reactiveConfiguration);
-			this.configurations.put(reactiveConfiguration.getName(), reactiveConfiguration);
+			testConfigurationPackage.getPackagedElement().add(reactiveConfiguration);
+			configurations.put(reactiveConfiguration.getName(), reactiveConfiguration);
 		}
 	}
 	
@@ -168,23 +168,23 @@ public class TestConfigurationGenerator {
 		ComponentInstance tester = factory.createComponentInstance();
 		tester.setName("tester");
 		tester.setRole(ComponentInstanceRole.TESTER);
-		tester.setType(this.componentTypes.get("TestSystem"));
+		tester.setType(componentTypes.get("TestSystem"));
 		configuration.getComponentInstance().add(tester);
 		
 		//generate one component instance for Model-Under Test (MUT) as SUT
 		ComponentInstance mutInstance = factory.createComponentInstance();
-		mutInstance.setName(this.dslName.toLowerCase());
+		mutInstance.setName(dslName.toLowerCase());
 		mutInstance.setRole(ComponentInstanceRole.SUT);
-		mutInstance.setType(this.componentTypes.get("MUT"));
+		mutInstance.setType(componentTypes.get("MUT"));
 		Annotation mutPathAnnotation = factory.createAnnotation();
 		mutPathAnnotation.setAnnotatedElement(mutInstance);
-		mutPathAnnotation.setKey(this.annotations.get("MUTPath"));
+		mutPathAnnotation.setKey(annotations.get("MUTPath"));
 		mutPathAnnotation.setValue("\'TODO: Put the address of the Model-Under Test here\'");
 		mutInstance.getAnnotation().add(mutPathAnnotation);
 		Annotation DSLNameAnnotation = factory.createAnnotation();
 		DSLNameAnnotation.setAnnotatedElement(mutInstance);
-		DSLNameAnnotation.setKey(this.annotations.get("DSLName"));
-		DSLNameAnnotation.setValue("\'" + this.dslID + "\'");
+		DSLNameAnnotation.setKey(annotations.get("DSLName"));
+		DSLNameAnnotation.setValue("\'" + dslID + "\'");
 		mutInstance.getAnnotation().add(DSLNameAnnotation);
 
 		configuration.getComponentInstance().add(mutInstance);
@@ -226,19 +226,19 @@ public class TestConfigurationGenerator {
 	}
 	
 	public DSLSpecificTypesGenerator getDslSpecificTypesGenerator() {
-		return this.dslSpecificTypesGenerator;
+		return dslSpecificTypesGenerator;
 	}
 	public Package getTestConfigurationPackage() {
-		return this.testConfigurationPackage;
+		return testConfigurationPackage;
 	}
 	public Map<String, GateType> getGateTypes(){
-		return this.gateTypes;
+		return gateTypes;
 	}
 	public Map<String, ComponentType> getComponentTypes(){
-		return this.componentTypes;
+		return componentTypes;
 	}
 	public Map<String, TestConfiguration> getTestConfigurations(){
-		return this.configurations;
+		return configurations;
 	}
 	protected String getDslID(String dslFilePath) {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);

@@ -32,7 +32,7 @@ Package Fork002_Test_TestSuite {
 			behavior = S1_1_entry
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
-			behavior = T2_2_effectss
+			behavior = T2_2_effect
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = T3_testEnd

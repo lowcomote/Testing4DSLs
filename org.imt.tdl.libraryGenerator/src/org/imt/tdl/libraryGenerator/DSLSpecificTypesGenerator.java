@@ -33,16 +33,16 @@ public class DSLSpecificTypesGenerator {
 	public DSLSpecificTypesGenerator (String dslFilePath) throws IOException{
 		generateDslSpecificTypes(dslFilePath);
 		
-		this.commonPackageGenerator = new CommonPackageGenerator();
-		this.commonPackageGenerator.setDslSpecificTypesPackage(this.dslSpecificTypesPackage);
-		this.commonPackageGenerator.setDslSpecificTypes(this.dslSpecificTypes);
-		this.commonPackageGenerator.generateCommonPackage();
+		commonPackageGenerator = new CommonPackageGenerator();
+		commonPackageGenerator.setDslSpecificTypesPackage(dslSpecificTypesPackage);
+		commonPackageGenerator.setDslSpecificTypes(dslSpecificTypes);
+		commonPackageGenerator.generateCommonPackage();
 		System.out.println("common package generated successfully");
 		
-		this.dslSpecificEventsGenerator = new DSLSpecificEventsGenerator(dslFilePath);
-		this.dslSpecificEventsGenerator.setDslSpecificTypesPackage(this.dslSpecificTypesPackage);
-		this.dslSpecificEventsGenerator.setDslSpecificTypes(this.dslSpecificTypes);
-		this.dslSpecificEventsGenerator.generateDSLSpecificEventsPackage(dslFilePath);
+		dslSpecificEventsGenerator = new DSLSpecificEventsGenerator(dslFilePath);
+		dslSpecificEventsGenerator.setDslSpecificTypesPackage(dslSpecificTypesPackage);
+		dslSpecificEventsGenerator.setDslSpecificTypes(dslSpecificTypes);
+		dslSpecificEventsGenerator.generateDSLSpecificEventsPackage(dslFilePath);
 		System.out.println("dsl-specific events package generated successfully");
 	}
 
@@ -57,20 +57,20 @@ public class DSLSpecificTypesGenerator {
 			runner.doEcore2tdl(new NullProgressMonitor());
 			EMFModel outModel = (EMFModel) runner.getOutModel();
 			Resource dslTypesRes = outModel.getResource();
-			this.dslSpecificTypesPackage = (Package) dslTypesRes.getContents().get(0);
-			for (int i=0; i<this.dslSpecificTypesPackage.getPackagedElement().size();i++) {
-				PackageableElement p = this.dslSpecificTypesPackage.getPackagedElement().get(i);
+			dslSpecificTypesPackage = (Package) dslTypesRes.getContents().get(0);
+			for (int i=0; i<dslSpecificTypesPackage.getPackagedElement().size();i++) {
+				PackageableElement p = dslSpecificTypesPackage.getPackagedElement().get(i);
 				if (p instanceof DataType) {
-					this.dslSpecificTypes.put(p.getName().toLowerCase(), (DataType) p);
+					dslSpecificTypes.put(p.getName().toLowerCase(), (DataType) p);
 					//recognizing dynamic data types for being used as model state
 					if (p instanceof StructuredDataType) {
 						StructuredDataType type = (StructuredDataType) p;
 						if (isDynamic(type)) {
-							this.dynamicTypes.add(type);
+							dynamicTypes.add(type);
 						}else if (type.getExtension() != null) {
 							DataType superClass = (DataType) type.getExtension().getExtending();
-							if (isDynamic(superClass) || this.dynamicTypes.contains(superClass)) {
-								this.dynamicTypes.add(type);
+							if (isDynamic(superClass) || dynamicTypes.contains(superClass)) {
+								dynamicTypes.add(type);
 							}
 						}
 					}
@@ -104,15 +104,15 @@ public class DSLSpecificTypesGenerator {
 		return false;
 	}
 	public CommonPackageGenerator getCommonPackageGenerator() {
-		return this.commonPackageGenerator;
+		return commonPackageGenerator;
 	}
 	public DSLSpecificEventsGenerator getDslSpecificEventsGenerator() {
-		return this.dslSpecificEventsGenerator;
+		return dslSpecificEventsGenerator;
 	}
 	public Package getDslSpecificTypesPackage() {
-		return this.dslSpecificTypesPackage;
+		return dslSpecificTypesPackage;
 	}
 	public List<DataType> getDynamicTypes(){
-		return this.dynamicTypes;
+		return dynamicTypes;
 	}
 }

@@ -30,11 +30,11 @@ public class CommonPackageGenerator {
 	private DataType modelExecutionCommand;
 
 	public CommonPackageGenerator() {
-		this.factory = tdlFactory.eINSTANCE;
+		factory = tdlFactory.eINSTANCE;
 	}
 	public void generateCommonPackage(){
-		this.commonPackage = factory.createPackage();
-		this.commonPackage.setName("common");
+		commonPackage = factory.createPackage();
+		commonPackage.setName("common");
 		generateImports();
 		generateTypeForOCL();
 		generateVerdicts();
@@ -42,19 +42,19 @@ public class CommonPackageGenerator {
 	}
 	private void generateImports() {
 		ElementImport dslSpecificTypesPackageImport = factory.createElementImport();
-		dslSpecificTypesPackageImport.setImportedPackage(this.dslSpecificTypesPackage);
-		this.commonPackage.getImport().add(dslSpecificTypesPackageImport);
+		dslSpecificTypesPackageImport.setImportedPackage(dslSpecificTypesPackage);
+		commonPackage.getImport().add(dslSpecificTypesPackageImport);
 	}
 	private void generateTypeForOCL() {
 		StructuredDataType OCL = factory.createStructuredDataType();
 		OCL.setName("OCL");
 		Member query = factory.createMember();
 		query.setName("query");
-		DataType queryType = this.dslSpecificTypes.get("EString".toLowerCase());
+		DataType queryType = dslSpecificTypes.get("EString".toLowerCase());
 		query.setDataType(queryType);
 		OCL.getMember().add(query);
-		this.commonPackage.getPackagedElement().add(OCL);
-		this.oclType = OCL;
+		commonPackage.getPackagedElement().add(OCL);
+		oclType = OCL;
 		
 		StructuredDataInstance oclQuery = factory.createStructuredDataInstance();
 		oclQuery.setName("oclQuery");
@@ -66,7 +66,7 @@ public class CommonPackageGenerator {
 		anyValue.setName("?");
 		queryAssign.setMemberSpec(anyValue);
 		oclQuery.getMemberAssignment().add(queryAssign);
-		this.commonPackage.getPackagedElement().add(oclQuery);
+		commonPackage.getPackagedElement().add(oclQuery);
 	}
 	private void generateVerdicts() {
 		SimpleDataType Verdict = factory.createSimpleDataType();
@@ -80,14 +80,14 @@ public class CommonPackageGenerator {
 		SimpleDataInstance INCONCLUSINVE = factory.createSimpleDataInstance();
 		INCONCLUSINVE.setName("INCONCLUSINVE");
 		INCONCLUSINVE.setDataType(Verdict);
-		this.commonPackage.getPackagedElement().add(Verdict);
-		this.commonPackage.getPackagedElement().add(PASS);
-		this.commonPackage.getPackagedElement().add(FAIL);
-		this.commonPackage.getPackagedElement().add(INCONCLUSINVE);
+		commonPackage.getPackagedElement().add(Verdict);
+		commonPackage.getPackagedElement().add(PASS);
+		commonPackage.getPackagedElement().add(FAIL);
+		commonPackage.getPackagedElement().add(INCONCLUSINVE);
 		
-		this.verdictInstances.add(PASS);
-		this.verdictInstances.add(FAIL);
-		this.verdictInstances.add(INCONCLUSINVE);
+		verdictInstances.add(PASS);
+		verdictInstances.add(FAIL);
+		verdictInstances.add(INCONCLUSINVE);
 	}
 	private void generateTypeForGeneralEvents() {
 		SimpleDataType modelExecutionCommand = factory.createSimpleDataType();
@@ -108,28 +108,28 @@ public class CommonPackageGenerator {
 		getModelState.setName("getModelState");
 		getModelState.setDataType(modelExecutionCommand);
 
-		this.commonPackage.getPackagedElement().add(modelExecutionCommand);
-		this.commonPackage.getPackagedElement().add(runModel);
-		this.commonPackage.getPackagedElement().add(runModelAsynchronous);
-		this.commonPackage.getPackagedElement().add(stopModelExecution);
-		this.commonPackage.getPackagedElement().add(resetModel);
-		this.commonPackage.getPackagedElement().add(getModelState);
+		commonPackage.getPackagedElement().add(modelExecutionCommand);
+		commonPackage.getPackagedElement().add(runModel);
+		commonPackage.getPackagedElement().add(runModelAsynchronous);
+		commonPackage.getPackagedElement().add(stopModelExecution);
+		commonPackage.getPackagedElement().add(resetModel);
+		commonPackage.getPackagedElement().add(getModelState);
 		
 		this.modelExecutionCommand = modelExecutionCommand;
 	}
 	public Package getCommonPackage() {
-		return this.commonPackage;
+		return commonPackage;
 	}
 	public DataType getOCLType() {
-		return this.oclType;
+		return oclType;
 	}
 	public DataType getModelExecutionCommand() {
-		return this.modelExecutionCommand;
+		return modelExecutionCommand;
 	}
 	public void setDslSpecificTypes(Map<String, DataType> dslSpecificTypes) {
 		this.dslSpecificTypes = dslSpecificTypes;
 	}
 	public void setDslSpecificTypesPackage (Package typesPackage) {
-		this.dslSpecificTypesPackage = typesPackage;
+		dslSpecificTypesPackage = typesPackage;
 	}
 }

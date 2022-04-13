@@ -39,23 +39,23 @@ public class DSLSpecificEventsGenerator {
 	private List<DataType> dslInterfaceTypes = new ArrayList<DataType>();
 	
 	public DSLSpecificEventsGenerator(String dslFilePath) throws IOException {
-		this.factory = tdlFactory.eINSTANCE; 
-		this.dslName = validName(getDslName(dslFilePath));
-		this.interfaceRootElement = getBehavioralInterfaceRootElement(dslFilePath);
+		factory = tdlFactory.eINSTANCE; 
+		dslName = validName(getDslName(dslFilePath));
+		interfaceRootElement = getBehavioralInterfaceRootElement(dslFilePath);
 	}
 	
 	public void generateDSLSpecificEventsPackage(String dslFilePath) throws IOException{
-		this.dslSpecificEventsPackage = factory.createPackage();
-		this.dslSpecificEventsPackage.setName(this.dslName.toLowerCase() + "SpecificEvents");
+		dslSpecificEventsPackage = factory.createPackage();
+		dslSpecificEventsPackage.setName(dslName.toLowerCase() + "SpecificEvents");
 		generateImports();
-		if (this.interfaceRootElement != null) {
+		if (interfaceRootElement != null) {
 			generateTypeForDSLInterfaces();
 		}
 	}
 	private void generateImports() {		
 		ElementImport PackageImport = factory.createElementImport();
-		PackageImport.setImportedPackage(this.dslSpecificTypesPackage);
-		this.dslSpecificEventsPackage.getImport().add(PackageImport);
+		PackageImport.setImportedPackage(dslSpecificTypesPackage);
+		dslSpecificEventsPackage.getImport().add(PackageImport);
 	}
 
 	private void generateTypeForDSLInterfaces() {
@@ -93,7 +93,7 @@ public class DSLSpecificEventsGenerator {
 				if (dslSpecificTypes.get(paramType) != null) {
 					Member member = factory.createMember();
 					member.setName(paramName);
-					member.setDataType(this.dslSpecificTypes.get(paramType));
+					member.setDataType(dslSpecificTypes.get(paramType));
 					typeForEvent.getMember().add(member);
 					
 					MemberAssignment memberAssign = factory.createMemberAssignment();
