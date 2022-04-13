@@ -98,12 +98,12 @@ public class TDLTestAmplifier {
 			
 			System.out.println("\nPhase (1): Removing assertions from the test case");
 			AssertionRemover assertionRemover = new AssertionRemover();
-			assertionRemover.removeAssertionsFromTestCase(testCase);
+			assertionRemover.removeAssertionsFromTestCase(copyTdlTestCase);
 
 			List<TestDescription> TMP = new ArrayList<>();
 			System.out.println("Phase (2): Modifying test input Data to generate new test cases");
 			TDLTestInputDataAmplification IAmplifier = new TDLTestInputDataAmplification(tdlTestSuite);
-			TMP.addAll(IAmplifier.generateNewTestsByInputModification(testCase));
+			TMP.addAll(IAmplifier.generateNewTestsByInputModification(copyTdlTestCase));
 			amplifiedTests.addAll(TMP);
 			System.out.println("Done: #of generated test cases by input modification = " + TMP.size());
 			
@@ -140,7 +140,7 @@ public class TDLTestAmplifier {
 			extension = ".xmi";
 		}
 		
-		String outputPath = PathHelper.getInstance().getTestSuiteFileName() + "_amplified" + extension;
+		String outputPath = sourcePath.substring(0, sourcePath.lastIndexOf("/")+1) + PathHelper.getInstance().getTestSuiteFileName() + "_amplified" + extension;
 		Resource newTestSuiteRes = (new ResourceSetImpl()).createResource(URI.createURI(outputPath));
 		//all the new elements are in the testSuiteRes
 		newTestSuiteRes.getContents().addAll(EcoreUtil.copyAll(testSuiteRes.getContents()));
