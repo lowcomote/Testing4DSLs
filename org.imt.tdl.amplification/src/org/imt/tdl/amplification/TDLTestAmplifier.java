@@ -83,6 +83,7 @@ public class TDLTestAmplifier {
 			}
 		}else {
 			System.out.println("As the initial mutation score is 100% there is no need for test amplification");
+			System.out.println("Total number of mutants: " + scoreCalculator.getNumOfMutants());
 		}
 	}
 
