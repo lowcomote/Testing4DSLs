@@ -147,7 +147,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 				}
 			}
 		}else {
-			eventManager.processEventOccurrence(eventOccurrence);
+			this.eventManager.processEventOccurrence(eventOccurrence);
 		}
 		return "PASS";
 	}
@@ -212,7 +212,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	@Override
 	public void startEngine() {
 		try {
-			executionEngine = (EventBasedExecutionEngine) launcher.createExecutionEngine(this.runConf, ExecutionMode.Run);
+			this.executionEngine = (EventBasedExecutionEngine) launcher.createExecutionEngine(this.runConf, ExecutionMode.Run);
 		}catch (CoreException | EngineContextException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -226,7 +226,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			}
 		};
 		final TransferQueue<Object> queue = new LinkedTransferQueue<>();
-		executionEngine.getExecutionContext().getExecutionPlatform().addEngineAddon(new IEngineAddon() {
+		this.executionEngine.getExecutionContext().getExecutionPlatform().addEngineAddon(new IEngineAddon() {
 			@Override
 			public void engineInitialized(IExecutionEngine<?> executionEngine) {
 				queue.add(new Object());
@@ -253,8 +253,8 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		Launch debugLaunch = new Launch(launchConf, ILaunchManager.DEBUG_MODE, new GemocSourceLocator());
 		DebugPlugin.getDefault().getLaunchManager().addLaunch(debugLaunch);	
 		try{
-			launcher.launch(launchConf, ILaunchManager.DEBUG_MODE, debugLaunch, new NullProgressMonitor());
-			this.executionEngine = (EventBasedExecutionEngine) launcher.getExecutionEngine();
+			this.launcher.launch(launchConf, ILaunchManager.DEBUG_MODE, debugLaunch, new NullProgressMonitor());
+			this.executionEngine = (EventBasedExecutionEngine) this.launcher.getExecutionEngine();
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -295,14 +295,14 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	@Override
 	public String sendStopEvent() {
 		String result = "PASS";
-		if (executionEngine.getRunningStatus() == RunStatus.Running) {
+		if (this.executionEngine.getRunningStatus() == RunStatus.Running) {
 			try {//wait 1 second because the engine is running
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		executionEngine.stop();
+		this.executionEngine.stop();
 		if (eventOccurrences.size()>0) {
 			result = "FAIL:There are extra received events";
 		}
@@ -535,10 +535,10 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	}
 	
 	public Resource getModelResource() {
-		if (executionEngine == null) {
+		if (this.executionEngine == null) {
 			MUTResource = (new ResourceSetImpl()).getResource(URI.createURI(MUTPath), true);
 		}else{
-			MUTResource = executionEngine.getExecutionContext().getResourceModel();
+			MUTResource = this.executionEngine.getExecutionContext().getResourceModel();
 		}
 		return MUTResource;
 	}
@@ -549,7 +549,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 
 	@Override
 	public Boolean isEngineStarted() {
-		return executionEngine != null;
+		return this.executionEngine != null;
 	}
 	
 	@SuppressWarnings("unchecked")
