@@ -1,14 +1,12 @@
 package org.imt.tdl.amplification.utilities;
 
 import java.util.Arrays;
-import java.util.Collections;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.etsi.mts.tdl.Annotation;
 import org.etsi.mts.tdl.DataInstance;
 import org.etsi.mts.tdl.DataInstanceUse;
 import org.etsi.mts.tdl.DataType;
@@ -16,6 +14,7 @@ import org.etsi.mts.tdl.DataUse;
 import org.etsi.mts.tdl.LiteralValueUse;
 import org.etsi.mts.tdl.Member;
 import org.etsi.mts.tdl.MemberAssignment;
+import org.etsi.mts.tdl.ParameterBinding;
 import org.etsi.mts.tdl.SimpleDataInstance;
 import org.etsi.mts.tdl.SimpleDataType;
 import org.etsi.mts.tdl.StaticDataUse;
@@ -48,9 +47,27 @@ public class EObject2TDLConverter {
 		}
 		DataInstanceUse dataUse = tdlFactory.createDataInstanceUse();
 		dataUse.setDataInstance(eobjectTdlInstance);
+		createParameterBinding4dynamicFeatures(eobject, dataUse);
 		return dataUse;
 	}
-	
+
+
+	private void createParameterBinding4dynamicFeatures(EObject eobject, DataInstanceUse dataUse) {
+		List<Member> dynamicMembers = ((StructuredDataType) dataUse.getDataInstance().getDataType()).allMembers().stream().
+				filter(m -> isDynamicMember(m)).toList();
+		for (Member m:dynamicMembers) {
+			Optional<EStructuralFeature> feature = eobject.eClass().getEAllStructuralFeatures().stream().
+				filter(f -> f.getName().equals(getDSLCompatibleName(m.getName()))).findFirst();
+			//if there is a feature corresponding to the dynamic member which has a value, create a parameter binding for it
+			if (feature.isPresent() && eobject.eGet(feature.get()) != null) {
+				ParameterBinding parameterBinding = tdlFactory.createParameterBinding();
+				parameterBinding.setParameter(m);
+				parameterBinding.setDataUse(convertFeatureValue2TDLData(eobject, feature.get()));
+				dataUse.getArgument().add(parameterBinding);
+			}	
+		}
+	}
+
 	private StructuredDataInstance createNewTDLInstance4EObject (EObject eobject) {
 		String eobjectTypeName = eobject.eClass().getName();
 		StructuredDataType eobjectTdlType = (StructuredDataType) getTDLDataType(eobjectTypeName);
@@ -66,9 +83,12 @@ public class EObject2TDLConverter {
 		}
 		//for each mandatory feature of the eobject that has a value, create a member assignment with corresponding tdl value
 		List<EStructuralFeature> valuedEFeatures = eobject.eClass().getEAllStructuralFeatures().stream().
-				filter(f -> (f.getName().equals("name") || f.getLowerBound()>0) & eobject.eGet(f) != null && eobject.eGet(f) != f.getDefaultValue()).collect(Collectors.toList());
+				filter(f -> (f.getName().equals("name") || f.getLowerBound()>0) & 
+						eobject.eGet(f) != null &
+						eobject.eGet(f) != f.getDefaultValue()).toList();
 		for (EStructuralFeature efeature:valuedEFeatures) {
-			Optional<Member> mOptional = eobjectTdlType.allMembers().stream().filter(m -> getDSLCompatibleName(m.getName()).equals(efeature.getName())).findFirst();
+			Optional<Member> mOptional = eobjectTdlType.allMembers().stream().
+					filter(m -> getDSLCompatibleName(m.getName()).equals(efeature.getName())).findFirst();
 			if (mOptional.isPresent()) {
 				MemberAssignment ma = tdlFactory.createMemberAssignment();
 				ma.setMember(mOptional.get());
@@ -79,7 +99,7 @@ public class EObject2TDLConverter {
 		tdlTestSuite.getPackagedElement().add(eobjectTdlInstance);
 		return eobjectTdlInstance;
 	}
-	
+
 	private StaticDataUse convertFeatureValue2TDLData(EObject eobject, EStructuralFeature efeature) {
 		//if the feature value is a literal, create LiteralValueUse
 		if (efeature.getEType().getName().equals("EBooleanObject") || efeature.getEType().getName().equals("EBoolean")) {
@@ -167,6 +187,7 @@ public class EObject2TDLConverter {
 					}
 					DataInstanceUse tdlValue = tdlFactory.createDataInstanceUse();
 					tdlValue.setDataInstance(tdlInstance);
+					createParameterBinding4dynamicFeatures(eobject, tdlValue);
 					tdlValues.getItem().add(tdlValue);
 				}
 				return tdlValues;
@@ -179,6 +200,7 @@ public class EObject2TDLConverter {
 				}
 				DataInstanceUse tdlValue = tdlFactory.createDataInstanceUse();
 				tdlValue.setDataInstance(tdlInstance);
+				createParameterBinding4dynamicFeatures(eobject, tdlValue);
 				return tdlValue;
 			}
 		}
@@ -195,8 +217,7 @@ public class EObject2TDLConverter {
 		List<StructuredDataInstance> dataInstances = tdlTestSuite.getPackagedElement().
 				stream().filter(p -> p instanceof StructuredDataInstance).
 				map(p -> (StructuredDataInstance) p).
-				filter(di -> di.getDataType() == eobjectTdlType).
-				collect(Collectors.toList());
+				filter(di -> di.getDataType() == eobjectTdlType).toList();
 		for (StructuredDataInstance di: dataInstances) {
 			Optional<MemberAssignment> maOptional = di.getMemberAssignment().stream().filter(ma -> ma.getMember().getName().equals("_name")).findFirst();
 			if (maOptional.isPresent()) {
@@ -262,6 +283,15 @@ public class EObject2TDLConverter {
 		return null;
 	}
 	
+	private boolean isDynamicMember(Member member) {
+		for (Annotation annotation : member.getAnnotation()){
+			String annotationTitle = annotation.getKey().getName();
+			if (annotationTitle.equals("dynamic") || annotationTitle.equals("aspect")) {
+				return true;
+			}
+		}
+		return false;
+	}
 	private String getDSLCompatibleName(String name){
 		if (name.startsWith("_")){
 			return name.substring(1);
