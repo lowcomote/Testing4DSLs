@@ -574,7 +574,20 @@ class StaticDataUseAspect extends DataUseAspect{
 }
 @Aspect (className = LiteralValueUse)
 class LiteralValueUseAspect extends StaticDataUseAspect{
-	
+	def Object getPrimitiveValue(String primitiveTypeName){
+		var String parameterValue = _self.value
+		parameterValue = parameterValue.substring(1, parameterValue.length-1)//remove quotation marks
+		if (primitiveTypeName.equals("EInt") || primitiveTypeName.equals("EIntegerObject")){
+			return Integer.parseInt(parameterValue)
+		}
+		else if (primitiveTypeName.equals("EBoolean") || primitiveTypeName.equals("EBooleanObject")){
+			return Boolean.parseBoolean(parameterValue)
+		}
+		else if (primitiveTypeName.equals("EString")){
+			return parameterValue
+		}
+		return null;
+	}
 	@OverrideAspectMethod
 	def String assertEquals(Object featureValue){
 		var String parameterValue = _self.value
