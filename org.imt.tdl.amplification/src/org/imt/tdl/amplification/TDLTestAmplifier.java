@@ -179,7 +179,7 @@ public class TDLTestAmplifier {
 			for (int iteration = 1; iteration <= iteration_ampTests.keySet().size(); iteration++) {				
 				List<TestDescription> amplifiedTests = iteration_ampTests.get(iteration-1);
 				if (amplifiedTests.size()>0) {
-					fileOut.println("iteration = " + iteration);
+					fileOut.println("iteration " + iteration + ": " + amplifiedTests.size() + " generated test cases");
 					for (int i=0; i<amplifiedTests.size(); i++) {
 						TestDescription amplifiedTest = amplifiedTests.get(i);
 						fileOut.println("Amplified Test Case: " + amplifiedTest.getName());
