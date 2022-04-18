@@ -549,7 +549,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 
 	@Override
 	public Boolean isEngineStarted() {
-		return this.executionEngine != null;
+		return (this.executionEngine != null && this.eventManager != null);
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -181,7 +181,7 @@ class TestConfigurationAspect{
 		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.equals(GENERIC_GATE)]]) {
 			launcher.setUp(EngineFactory.GENERIC);
 		}
-		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.equals(org.imt.k3tdl.k3dsa.TestConfigurationAspect.REACTIVE_GATE)]]) {
+		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.equals(REACTIVE_GATE)]]) {
 			launcher.setUp(EngineFactory.DSL_SPECIFIC);
 		}
 		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.equals(OCL_GATE)]]){
@@ -190,7 +190,7 @@ class TestConfigurationAspect{
 	}
 	
 	def String stopModelExecutionEngine(EngineFactory launcher){
-		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.equals(org.imt.k3tdl.k3dsa.TestConfigurationAspect.REACTIVE_GATE)]]) {
+		if (_self.connection.exists[c|c.endPoint.exists[g|g.gate.name.equals(REACTIVE_GATE)]]) {
 			return launcher.executeDSLSpecificCommand("STOP", null, null);
 		}
 	}
