@@ -146,6 +146,9 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 					e.printStackTrace();
 				}
 			}
+		}else if (this.eventManager == null){
+			startEngine();
+			this.eventManager.processEventOccurrence(eventOccurrence);	
 		}else {
 			this.eventManager.processEventOccurrence(eventOccurrence);
 		}
@@ -273,8 +276,8 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	private void addEventManagerListener(TransferQueue<Object> queue) {
 		try {
 			if (queue.poll(5000, TimeUnit.MILLISECONDS) != null) {
-				eventManager = (GenericEventManager) this.executionEngine.getAddonsTypedBy(GenericEventManager.class).stream().findFirst().orElse(null);
-				eventManager.addListener(new IEventManagerListener() {
+				this.eventManager = (GenericEventManager) this.executionEngine.getAddonsTypedBy(GenericEventManager.class).stream().findFirst().orElse(null);
+				this.eventManager.addListener(new IEventManagerListener() {
 					@Override
 					public void eventReceived(EventOccurrence e) {
 						eventOccurrences.add(e);

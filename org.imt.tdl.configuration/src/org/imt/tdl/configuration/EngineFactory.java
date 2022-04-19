@@ -49,8 +49,8 @@ public class EngineFactory{
 			}
 			sequentialEngineLauncher.setUp(MUTPath, DSLPath);
 		}else if(commandType.equals(DSL_SPECIFIC)) {
-			eventManagerLauncher = new K3EventManagerLauncher();
-			eventManagerLauncher.setUp(MUTPath, DSLPath);
+			this.eventManagerLauncher = new K3EventManagerLauncher();
+			this.eventManagerLauncher.setUp(MUTPath, DSLPath);
 		}else if (commandType.equals(OCL)) {
 			if (oclLauncher == null) {
 				oclLauncher = new OCLInterpreter();
@@ -85,23 +85,23 @@ public class EngineFactory{
 	}
 	
 	public String executeDSLSpecificCommand(String eventType, String eventName, Map<String, Object> parameters) {
-		if (!eventManagerLauncher.isEngineStarted()) {
+		if (!this.eventManagerLauncher.isEngineStarted()) {
 			IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
 			if (debugTargets.length > 0) {
 				//we are in the Debug mode, so debug the model under test
-				eventManagerLauncher.launchModelDebugger();
+				this.eventManagerLauncher.launchModelDebugger();
 			}else {
-				eventManagerLauncher.startEngine();
+				this.eventManagerLauncher.startEngine();
 			}
 		}
 		
 		switch (eventType) {
 		case "ACCEPTED":
-			return eventManagerLauncher.processAcceptedEvent(eventName, parameters);
+			return this.eventManagerLauncher.processAcceptedEvent(eventName, parameters);
 		case "EXPOSED":
-			return eventManagerLauncher.assertExposedEvent(eventName, parameters);
+			return this.eventManagerLauncher.assertExposedEvent(eventName, parameters);
 		case "STOP":
-			return eventManagerLauncher.sendStopEvent();
+			return this.eventManagerLauncher.sendStopEvent();
 		default:
 			break;
 		}
@@ -113,7 +113,7 @@ public class EngineFactory{
 			return sequentialEngineLauncher.getExecutionTrace();
 		}
 		else if (this.getActiveEngine() instanceof IEventBasedExecutionEngine) {
-			return eventManagerLauncher.getExecutionTrace();
+			return this.eventManagerLauncher.getExecutionTrace();
 		}
 		return null;
 	}
@@ -157,7 +157,7 @@ public class EngineFactory{
 			return sequentialEngineLauncher.getModelResource();
 		}
 		else if (this.getActiveEngine() instanceof IEventBasedExecutionEngine) {
-			return eventManagerLauncher.getModelResource();
+			return this.eventManagerLauncher.getModelResource();
 		}
 		return (new ResourceSetImpl()).getResource(URI.createURI(MUTPath), true);
 	}
@@ -166,8 +166,8 @@ public class EngineFactory{
 		if (!dslHasInterface() && sequentialEngineLauncher != null) {
 			return sequentialEngineLauncher;
 		}
-		else if (dslHasInterface() && eventManagerLauncher != null) {
-			return eventManagerLauncher;
+		else if (dslHasInterface() && this.eventManagerLauncher != null) {
+			return this.eventManagerLauncher;
 		}
 		return null;
 	}
