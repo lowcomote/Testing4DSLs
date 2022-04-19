@@ -146,15 +146,20 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 					e.printStackTrace();
 				}
 			}
-		}else if (this.eventManager == null){
+		}else if (this.executionEngine == null || this.eventManager == null){
 			startEngine();
-			this.eventManager.processEventOccurrence(eventOccurrence);	
+			try {
+				this.eventManager.processEventOccurrence(eventOccurrence);
+			}
+			catch (NullPointerException e) {
+				return "FAIL: There is an issue with the execution engine";
+			}	
 		}else {
 			this.eventManager.processEventOccurrence(eventOccurrence);
 		}
 		return "PASS";
 	}
-
+	
 	private void getModelDebugger() {
 		IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
 		try {
