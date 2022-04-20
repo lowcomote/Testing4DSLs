@@ -221,8 +221,16 @@ public class JavaEngineLauncher extends AbstractEngine{
 		}
 		return null;
 	}
-	
-	public void attach (ModelExecutionObserver observer) {
+
+	@Override
+	public void disposeResources() {
+		this.MUTResource.unload();
+		this.javaEngine.dispose();
+	}
+
+	@Override
+	public void attach(ModelExecutionObserver observer) {
+		// TODO Auto-generated method stub
 		
 	}
 }

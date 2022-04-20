@@ -179,4 +179,13 @@ public class EngineFactory{
 	public ArrayList<String> getOCLResultAsString(){
 		return oclLauncher.getResultAsString();
 	}
+
+	public void disposeResources() {
+		if (this.getActiveEngine() instanceof ISequentialExecutionEngine) {
+			sequentialEngineLauncher.disposeResources();
+		}
+		else if (this.getActiveEngine() instanceof IEventBasedExecutionEngine) {
+			this.eventManagerLauncher.disposeResources();
+		}
+	}
 }

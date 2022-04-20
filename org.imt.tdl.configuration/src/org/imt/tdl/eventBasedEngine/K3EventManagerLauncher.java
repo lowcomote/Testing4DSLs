@@ -574,5 +574,11 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
       for (ModelExecutionObserver observer : observers) {
          observer.update(e);
       }
-   } 
+   }
+
+	@Override
+	public void disposeResources() {
+		this.MUTResource.unload();
+		this.executionEngine.dispose();
+	} 
 }

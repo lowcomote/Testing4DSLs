@@ -118,6 +118,7 @@ class TestDescriptionAspect{
 			_self.testCaseCoverage.trace = _self.launcher.executionTrace
 	    	_self.testCaseCoverage.MUTResource = _self.launcher.MUTResource
 		}
+		_self.launcher.disposeResources()
 		return _self.testCaseResult
 	}
 }

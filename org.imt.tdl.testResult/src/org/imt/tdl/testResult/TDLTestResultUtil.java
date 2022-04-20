@@ -1,5 +1,6 @@
 package org.imt.tdl.testResult;
 
+import java.lang.invoke.VolatileCallSite;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,18 +45,15 @@ public class TDLTestResultUtil {
 		factories.add(new EcoreItemProviderAdapterFactory());
 		factories.add(new ReflectiveItemProviderAdapterFactory());
 		
-		ComposedAdapterFactory composedAdapterFactory = new ComposedAdapterFactory(factories);
-	    IItemLabelProvider itemLabelProvider  ;  
-	    ITreeItemContentProvider treeItemContentProvider ;
-		AdapterFactory adapterFactory = composedAdapterFactory;
+		AdapterFactory adapterFactory = new ComposedAdapterFactory(factories); 
 		
-		itemLabelProvider = (IItemLabelProvider)adapterFactory.adapt(object, IItemLabelProviderClass);
-	    String objectLabel = itemLabelProvider.getText(object) ;
+	    IItemLabelProvider objectLabelProvider = (IItemLabelProvider)adapterFactory.adapt(object, IItemLabelProviderClass);
+	    String objectLabel = objectLabelProvider.getText(object) ;
 	    
-	    treeItemContentProvider = (ITreeItemContentProvider)adapterFactory.adapt(object, ITreeItemContentProviderClass);
+	    ITreeItemContentProvider treeItemContentProvider = (ITreeItemContentProvider)adapterFactory.adapt(object, ITreeItemContentProviderClass);
 	    Object container = treeItemContentProvider.getParent(object) ; 
-	    itemLabelProvider = (IItemLabelProvider)adapterFactory.adapt(container, IItemLabelProviderClass);
-	    String containerLabel = itemLabelProvider.getText(container);
+	    IItemLabelProvider containerLabelProvider = (IItemLabelProvider)adapterFactory.adapt(container, IItemLabelProviderClass);
+	    String containerLabel = containerLabelProvider.getText(container);
 	    
 		return (containerLabel + "::" + objectLabel);
 	}

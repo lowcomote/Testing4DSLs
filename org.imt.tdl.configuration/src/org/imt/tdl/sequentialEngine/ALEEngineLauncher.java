@@ -266,4 +266,10 @@ public class ALEEngineLauncher extends AbstractEngine{
 	public void attach (ModelExecutionObserver observer) {
 		
 	}
+
+	@Override
+	public void disposeResources() {
+		this.MUTResource.unload();
+		this.aleEngine.dispose();
+	}
 }

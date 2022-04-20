@@ -11,4 +11,5 @@ public interface IEventBasedExecutionEngine extends IExecutionEngine {
 	public String assertExposedEvent(String eventName, Map<String, Object> parameters);
 	public String sendStopEvent();
 	public Boolean isEngineStarted();
+	public void disposeResources();
 }

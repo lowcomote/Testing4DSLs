@@ -1,6 +1,7 @@
 package org.imt.tdl.amplification;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrence;
@@ -22,7 +23,7 @@ import org.imt.tdl.testResult.TDLTestResultUtil;
 public class AssertionGenerator extends ModelExecutionObserver{
 
 	Package testSuite;
-	List<EventOccurrence> exposedEventOccurrences = new ArrayList<>();
+	List<EventOccurrence> exposedEventOccurrences = Collections.synchronizedList(new ArrayList<>());
 	
 	@SuppressWarnings("static-access")
 	public boolean generateAssertionsForTestCase(TestDescription tdlTestCase) {
