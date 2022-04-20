@@ -80,6 +80,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	private ILaunchConfiguration launchConf;
 	private EventBasedRunConfiguration runConf;
 	private EventBasedExecutionEngine executionEngine = null;
+	Job executionEngineJob;
 	
 	private CustomEventBasedLauncher launcher;
 	private boolean isDebugMode = false;
@@ -226,7 +227,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			e.printStackTrace();
 		}
 		String PLUGIN_ID = "org.eclipse.gemoc.execution.sequential.javaengine.ui"; 		
-		Job job = new Job(getDebugJobName()) {
+		executionEngineJob = new Job(getDebugJobName()) {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				executionEngine.startSynchronous();
@@ -240,7 +241,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 				queue.add(new Object());
 			}
 		});
-		job.schedule();
+		executionEngineJob.schedule();
 		addEventManagerListener(queue);
 	}
 	
@@ -580,5 +581,6 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	public void disposeResources() {
 		this.MUTResource.unload();
 		this.executionEngine.dispose();
+		this.executionEngineJob.cancel();
 	} 
 }
