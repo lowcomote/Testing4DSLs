@@ -3,6 +3,12 @@ package org.imt.tdl.amplification;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrence;
 import org.etsi.mts.tdl.Block;
@@ -35,7 +41,36 @@ public class AssertionGenerator extends ModelExecutionObserver{
 		modelExecutionEngine = testCaseRunner.launcher(tdlTestCase).getActiveEngine();
 		modelExecutionEngine.attach(this);
 		//run the test case
-		TDLTestCaseResult result = testCaseRunner.executeTestCase(tdlTestCase);
+		final Runnable testRunner = new Thread() {
+			  @Override 
+			  public void run() { 
+				  testCaseRunner.executeTestCase(tdlTestCase);
+			  }
+			};
+
+		final ExecutorService executor = Executors.newSingleThreadExecutor();
+		@SuppressWarnings("rawtypes")
+		final Future future = executor.submit(testRunner);
+		executor.shutdown(); // This does not cancel the already-scheduled task.
+
+		try { 
+		  future.get(10, TimeUnit.SECONDS); 
+		}
+		catch (InterruptedException ie) { 
+			ie.printStackTrace();
+		}
+		catch (ExecutionException ee) { 
+			ee.printStackTrace();
+		}
+		catch (TimeoutException te) { 
+			//te.printStackTrace();
+			System.out.println("TimeoutException -> There is an infinite loop in the test case or model under test");
+			future.cancel(true);
+		}
+		if (!executor.isTerminated()) {
+		    executor.shutdownNow(); // If you want to stop the code that hasn't finished
+		}
+		TDLTestCaseResult result = testCaseRunner.testCaseResult(tdlTestCase);
 		//if the new test case cannot be executed completely, or the model did not expose any event occurrence (i.e., no assertion can be generated)
 		//the test case must be ignored from the list of new test cases
 		if (result.getValue() == TDLTestResultUtil.INCONCLUSIVE || exposedEventOccurrences.size() == 0) {
