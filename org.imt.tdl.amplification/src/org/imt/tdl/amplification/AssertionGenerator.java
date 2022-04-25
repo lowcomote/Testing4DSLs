@@ -54,7 +54,7 @@ public class AssertionGenerator extends ModelExecutionObserver{
 		executor.shutdown(); // This does not cancel the already-scheduled task.
 
 		try { 
-		  future.get(10, TimeUnit.SECONDS); 
+		  future.get(5, TimeUnit.SECONDS); 
 		}
 		catch (InterruptedException ie) { 
 			ie.printStackTrace();
