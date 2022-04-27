@@ -28,6 +28,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.dsl.debug.ide.adapter.DSLThreadAdapter;
 import org.eclipse.gemoc.dsl.debug.ide.launch.AbstractDSLLaunchConfigurationDelegate;
@@ -382,7 +383,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			case ValuePackage.SINGLE_REFERENCE_VALUE:
 				value1 = ((SingleReferenceValue) e1Arg.getValue()).getReferenceValue();
 				value2 = ((SingleReferenceValue) e2Arg.getValue()).getReferenceValue();
-				if (value1 == value2) {
+				if (EcoreUtil.equals(value1, value2)) {
 					return true;
 				}
 				String svalue1 = value1.toString();
@@ -546,7 +547,8 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	public Resource getModelResource() {
 		if (this.executionEngine == null) {
 			MUTResource = (new ResourceSetImpl()).getResource(URI.createURI(MUTPath), true);
-		}else{
+		}
+		else {
 			MUTResource = this.executionEngine.getExecutionContext().getResourceModel();
 		}
 		return MUTResource;
