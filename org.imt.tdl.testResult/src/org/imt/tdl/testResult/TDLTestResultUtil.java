@@ -1,6 +1,5 @@
 package org.imt.tdl.testResult;
 
-import java.lang.invoke.VolatileCallSite;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,8 +52,10 @@ public class TDLTestResultUtil {
 	    ITreeItemContentProvider treeItemContentProvider = (ITreeItemContentProvider)adapterFactory.adapt(object, ITreeItemContentProviderClass);
 	    Object container = treeItemContentProvider.getParent(object) ; 
 	    IItemLabelProvider containerLabelProvider = (IItemLabelProvider)adapterFactory.adapt(container, IItemLabelProviderClass);
-	    String containerLabel = containerLabelProvider.getText(container);
-	    
+	    String containerLabel = "";
+	    if (containerLabelProvider != null) {
+	    	containerLabel = containerLabelProvider.getText(container);
+	    }
 		return (containerLabel + "::" + objectLabel);
 	}
    
