@@ -12,6 +12,10 @@ import org.eclipse.gemoc.executionframework.event.model.event.EventFactory;
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrence;
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrenceArgument;
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrenceType;
+import org.eclipse.gemoc.executionframework.value.model.value.SingleReferenceValue;
+import org.eclipse.gemoc.executionframework.value.model.value.Value;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.BehavioralInterface;
 import org.eclipse.gemoc.executionframework.behavioralinterface.behavioralInterface.Event;
 
@@ -59,7 +63,12 @@ public class SimpleImplementationRelationship implements IImplementationRelation
 				event.getParams().stream().forEach(p -> notification.getArguments().entrySet().stream()
 						.filter(a -> (p.getName().equals(a.getKey())||a.getKey().equals("_self"))).findFirst().ifPresent(a -> {
 							final EventOccurrenceArgument arg = EventFactory.eINSTANCE.createEventOccurrenceArgument();
-							arg.setValue(EventManagerUtils.convertObjectToValue(a.getValue()));
+							Value argValue = EventManagerUtils.convertObjectToValue(a.getValue());
+							if (a.getValue() instanceof EObject) {
+								EObject copiedObject = EcoreUtil.copy((EObject) a.getValue());
+								((SingleReferenceValue) argValue).setReferenceValue(copiedObject);
+							}
+							arg.setValue(argValue);
 							arg.setParameter(p);
 							eventOccurrence.getArgs().add(arg);
 						}));
