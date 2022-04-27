@@ -91,7 +91,7 @@ class ModelEObjectCreator {
 		}
 		//all the values must be from the same type:
 		//(1) if they are dataInstanceUse, it means they are references to EObjects of the model under test
-		if (featureTdlValues.get(0) instanceof DataInstanceUse){
+		else if (featureTdlValues.get(0) instanceof DataInstanceUse){
 			var List<EObject> featureValues = new ArrayList
 			for (DataUse tdlValue : featureTdlValues){
 				val EObject featureValue = (tdlValue as DataInstanceUse).getMatchedMUTElement(MUTResource, isAssertion, DSLPath)
