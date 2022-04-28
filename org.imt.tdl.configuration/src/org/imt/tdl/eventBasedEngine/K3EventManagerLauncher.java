@@ -305,9 +305,9 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	@Override
 	public String sendStopEvent() {
 		String result = "PASS";
-		if (this.executionEngine.getRunningStatus() == RunStatus.Running) {
+		while (this.executionEngine.getRunningStatus() != RunStatus.WaitingForEvent) {
 			try {//wait 1 second because the engine is running
-				Thread.sleep(1000);
+				Thread.sleep(10000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
