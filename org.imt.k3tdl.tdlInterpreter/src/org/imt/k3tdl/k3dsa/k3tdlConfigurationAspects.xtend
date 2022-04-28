@@ -1,7 +1,6 @@
 package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
-
 import java.util.ArrayList
 import java.util.HashMap
 import java.util.Map
@@ -15,12 +14,12 @@ import org.etsi.mts.tdl.GateInstance
 import org.etsi.mts.tdl.GateType
 import org.etsi.mts.tdl.LiteralValueUse
 import org.imt.tdl.configuration.EngineFactory
+import org.imt.tdl.testResult.TDLTestResultUtil
 
 import static extension org.imt.k3tdl.k3dsa.DataInstanceAspect.*
 import static extension org.imt.k3tdl.k3dsa.DataInstanceUseAspect.*
-import static extension org.imt.k3tdl.k3dsa.LiteralValueUseAspect.*
 import static extension org.imt.k3tdl.k3dsa.DataTypeAspect.*
-import org.imt.tdl.testResult.TDLTestResultUtil
+import static extension org.imt.k3tdl.k3dsa.LiteralValueUseAspect.*
 
 @Aspect(className=GateType)
 class GateTypeAspect {
@@ -204,22 +203,23 @@ class GateInstanceAspect {
 			if (event.argument.get(i).dataUse instanceof DataInstanceUse){//the parameter is an eobject
 				val DataInstanceUse argTdlValue = event.argument.get(i).dataUse as DataInstanceUse
 				/*
-				 * if the object is conforming to a the xDSL's runtime state definition 
-				 * (its type is annotated as 'dynamic' or 'aspect'),
-				 * the object will not exist in the model under test and must be created
+				 * if the object is conforming to a the xDSL's runtime state definition or has runtime data
+				 * (its type or one of its features is annotated as 'dynamic' or 'aspect'),
+				 * the object will not be found in the model under test and must be created
 				 */
-				if (argTdlValue.dataInstance.dataType.isDynamicType){
-					argValue = argTdlValue.createEObject(_self.gateLauncher.MUTResource, true, _self.DSLPath)
-				}
-				else if (event.dataInstance.dataType.isAcceptedEvent(_self.DSLPath)){					
+				if (event.dataInstance.dataType.isAcceptedEvent(_self.DSLPath)){
 					argValue = argTdlValue.getMatchedMUTElement(_self.gateLauncher.MUTResource, true, _self.DSLPath)
 					if (argValue === null){
-						argValue = argTdlValue.setMatchedMUTElement(_self.gateLauncher.MUTResource, _self.DSLPath)
+						argValue = argTdlValue.createEObject(_self.gateLauncher.MUTResource, true, _self.DSLPath)
 					}
 				}
-				else {//it is an exposed event			
-					argValue = argTdlValue.getMatchedMUTElement(_self.gateLauncher.MUTResource, false, _self.DSLPath)
+				else{//is an exposed event
+					//when EObjects have dynamic features, the value of their features may change several times
+					//so we cannot retrieve the object from the engine.resource, but we should create it using a new resource
+					val resource = (new ResourceSetImpl()).getResource(URI.createURI(_self.MUTPath), true);
+					argValue = argTdlValue.createEObject(resource, true, _self.DSLPath)
 				}
+				
 				if (argValue === null){
 					return null
 				}
