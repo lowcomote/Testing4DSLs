@@ -558,7 +558,7 @@ public class TDLTestInputDataAmplification {
 	
 	private TestDescription copyTdlTestCase(TestDescription testCase, String modificationOperator) {
 		TestDescription copyTdlTestCase = tdlFactory.eINSTANCE.createTestDescription();
-		copyTdlTestCase.setName(testCase.getName() + (numOfNewTests++) + "_" + modificationOperator);
+		copyTdlTestCase.setName(testCase.getName()  + "_" + (numOfNewTests++) + "_" + modificationOperator);
 		copyTdlTestCase.setTestConfiguration(testCase.getTestConfiguration());
 		copyTdlTestCase.setBehaviourDescription(EcoreUtil.copy(testCase.getBehaviourDescription()));
 		return copyTdlTestCase;
