@@ -127,7 +127,7 @@ public class GenericEventManager implements IEventManager {
 			while (callRequest != null) {
 				final boolean runToCompletion = callRequest.isRunToCompletion();
 				if (runToCompletion) {
-					//canManageEvents = false;
+					canManageEvents = false;
 					handleCallRequest(callRequest);
 					canManageEvents = true;
 				} else {
