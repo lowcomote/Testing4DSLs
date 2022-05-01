@@ -19,12 +19,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
 import org.etsi.mts.tdl.tdlFactory;
-import org.imt.k3tdl.k3dsa.PackageAspect;
 import org.imt.tdl.amplification.evaluation.MutationRuntimeException;
 import org.imt.tdl.amplification.evaluation.MutationScoreCalculator;
 import org.imt.tdl.amplification.utilities.PathHelper;
 import org.imt.tdl.testResult.TDLTestResultUtil;
-import org.imt.tdl.testResult.TDLTestSuiteResult;
 
 public class TDLTestAmplifier {
 	
@@ -119,19 +117,27 @@ public class TDLTestAmplifier {
 			System.out.println("\nPhase (3): Running new tests and generating assertions");
 			for (TestDescription newTestCase : TMP) {
 				tdlTestSuite.getPackagedElement().add(newTestCase);
-				AssertionGenerator generator = new AssertionGenerator();
-				boolean result = generator.generateAssertionsForTestCase(newTestCase);
+				AssertionGenerator assertionGenerator = new AssertionGenerator();
+				boolean result = assertionGenerator.generateAssertionsForTestCase(newTestCase);
 				//check whether the assertion can be generated for the new test case
 				if (!result) {
 					tdlTestSuite.getPackagedElement().remove(newTestCase);
 					amplifiedTests.remove(newTestCase);
 				}
-				//check whether the new test case improves the mutation score, if there is any mutants
-				else if (!scoreCalculator.noMutantsExists){
-					boolean improvement = scoreCalculator.testCaseImprovesMutationScore(newTestCase);
-					if (!improvement) {
+				else {
+					//check whether the new test case is passed on the original model
+					String testRunResult = scoreCalculator.runTestCaseOnOriginalModel(newTestCase);
+					if (testRunResult != TDLTestResultUtil.PASS) {
 						tdlTestSuite.getPackagedElement().remove(newTestCase);
 						amplifiedTests.remove(newTestCase);
+					}
+					//check whether the new test case improves the mutation score, if there is any mutants
+					else if (!scoreCalculator.noMutantsExists){
+						boolean improvement = scoreCalculator.testCaseImprovesMutationScore(newTestCase);
+						if (!improvement) {
+							tdlTestSuite.getPackagedElement().remove(newTestCase);
+							amplifiedTests.remove(newTestCase);
+						}
 					}
 				}
 			}				
