@@ -19,8 +19,12 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
 import org.etsi.mts.tdl.tdlFactory;
+import org.imt.k3tdl.k3dsa.PackageAspect;
+import org.imt.tdl.amplification.evaluation.MutationRuntimeException;
 import org.imt.tdl.amplification.evaluation.MutationScoreCalculator;
 import org.imt.tdl.amplification.utilities.PathHelper;
+import org.imt.tdl.testResult.TDLTestResultUtil;
+import org.imt.tdl.testResult.TDLTestSuiteResult;
 
 public class TDLTestAmplifier {
 	
@@ -35,7 +39,7 @@ public class TDLTestAmplifier {
 	int numNewTests;
 	Map<Integer, List<TestDescription>> iteration_ampTests = new HashMap<>();
 	
-	public void amplifyTestSuite(IFile testSuiteFile) {
+	public void amplifyTestSuite(IFile testSuiteFile) throws MutationRuntimeException {
 		PathHelper.getInstance().setTestSuiteFile(testSuiteFile);
 		testSuiteRes = PathHelper.getInstance().getTestSuiteResource();
 		tdlTestSuite = PathHelper.getInstance().getTestSuite();
@@ -45,6 +49,12 @@ public class TDLTestAmplifier {
 		initialNumOfKilledMutants = 0;
 		initialMutationScore = 0;
 		if (!scoreCalculator.noMutantsExists) {
+			String result = scoreCalculator.runTestSuiteOnOriginalModel();
+			if (result == TDLTestResultUtil.FAIL) {
+				String message = "Amplification Stopped: The manually-written test suite is failed on the original model under test.";
+				System.out.println(message);
+				throw (new MutationRuntimeException(message));
+			}
 			initialMutationScore = scoreCalculator.calculateInitialMutationScore();
 			initialNumOfKilledMutants = scoreCalculator.getNumOfKilledMutants();
 		}
