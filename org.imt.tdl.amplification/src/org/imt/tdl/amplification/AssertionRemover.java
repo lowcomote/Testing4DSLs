@@ -13,6 +13,8 @@ import org.etsi.mts.tdl.TestDescription;
 
 public class AssertionRemover {
 
+	int numOfAssertions;
+	
 	public void removeAssertionsFromTestCase(TestDescription tdlTestCase) {
 		//removing all the tdl messages which are sent from gates of the SUT component
 		TreeIterator<EObject> iterator = tdlTestCase.getBehaviourDescription().getBehaviour().eAllContents();
@@ -26,6 +28,11 @@ public class AssertionRemover {
 				}
 			}
 		}
+		numOfAssertions = assertions.size();
 		EcoreUtil.deleteAll(assertions, false);
+	}
+	
+	public int getNumOfAssertions() {
+		return numOfAssertions;
 	}
 }
