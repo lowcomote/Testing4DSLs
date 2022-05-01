@@ -6,6 +6,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IProject;
@@ -20,12 +26,14 @@ import org.imt.tdl.testResult.TDLTestResultUtil;
 public class MutationScoreCalculator {
 	
 	Package testSuite;
+	List<TestDescription> testCases = new ArrayList<>();
 	public boolean noMutantsExists;
 	
 	private static String KILLED = "killed";
 	private static String ALIVE = "alive";
 	
 	private HashMap<String, String> mutant_status = new HashMap<>();
+	private HashMap<TestDescription, Long> testCase_executionTime = new HashMap<>();
 	public HashMap<String, List<String>> testCase_killedMutant = new HashMap<>();
 	
 	int numOfMutants;
@@ -40,15 +48,36 @@ public class MutationScoreCalculator {
 	
 	public MutationScoreCalculator(Package testSuite) {
 		this.testSuite = testSuite;
+		testCases = testSuite.getPackagedElement().stream().filter(p -> p instanceof TestDescription).
+				map(p -> (TestDescription) p).collect(Collectors.toList());
 		seedModelPath = PathHelper.getInstance().getSeedModelPath();
 		workspacePath = PathHelper.getInstance().getWorkspacePath();
 		findMutants();
 	}
 	
+	public String runTestSuiteOnOriginalModel() {
+		for (TestDescription testCase:testCases) {
+			String result = runTestCaseOnOriginalModel(testCase);
+			if (result == TDLTestResultUtil.FAIL) {
+				return TDLTestResultUtil.FAIL;
+			}
+		}
+		return TDLTestResultUtil.PASS;
+	}
+	
+	private String runTestCaseOnOriginalModel (TestDescription testCase) {
+		long start = System.currentTimeMillis();
+		TDLTestCaseResult result = TestDescriptionAspect.executeTestCase(testCase);
+		long stop = System.currentTimeMillis();
+		if (result.getValue() != TDLTestResultUtil.PASS) {
+			return TDLTestResultUtil.FAIL;
+		}
+		testCase_executionTime.put(testCase, (stop-start));
+		return TDLTestResultUtil.PASS;
+	}
+	
 	public double calculateInitialMutationScore() {
 		System.out.println("Calculating the mutation score of the input test suite");
-		List<TestDescription> testCases = testSuite.getPackagedElement().stream().filter(p -> p instanceof TestDescription).
-			map(p -> (TestDescription) p).collect(Collectors.toList());
 		testCases.forEach(t -> runTestCaseOnMutants(t));
 		calculateMutationScore();
 		System.out.println("The mutation score of the input test suite is: " + mutationScore);
@@ -63,11 +92,47 @@ public class MutationScoreCalculator {
 		else {
 			aliveMutants = mutant_status.keySet().stream().filter(mutant -> mutant_status.get(mutant) == ALIVE).collect(Collectors.toSet());
 		}
+		//using default values for timeout from pitest tool
+		double timeoutFactor = 1.25;
+		int timeoutConstant = 4000;
+		long timeout = this.testCase_executionTime.get(testCase);
+		timeout = (long) (timeout * timeoutFactor + timeoutConstant);
+		
 		//run the test case only on alive mutants
 		for (String mutant:aliveMutants) {
 			String mutantPath = mutant.replace("\\", "/");
-			TDLTestCaseResult result = TestDescriptionAspect.executeTestCase(testCase, mutantPath);
-			if (result.getValue() == TDLTestResultUtil.FAIL) {
+			TDLTestCaseResult result = null;
+			final Runnable testRunner = new Thread() {
+				  @Override 
+				  public void run() { 
+					  TestDescriptionAspect.executeTestCase(testCase, mutantPath);
+				  }
+				};
+
+			final ExecutorService executor = Executors.newSingleThreadExecutor();
+			@SuppressWarnings("rawtypes")
+			final Future future = executor.submit(testRunner);
+			executor.shutdown(); // This does not cancel the already-scheduled task.
+			try { 
+			  future.get(timeout, TimeUnit.MILLISECONDS);
+			  //if there is no exception, get the result
+			  result = TestDescriptionAspect.testCaseResult(testCase);
+			}
+			catch (InterruptedException ie) { 
+				ie.printStackTrace();
+			}
+			catch (ExecutionException ee) { 
+				ee.printStackTrace();
+			}
+			catch (TimeoutException te) { 
+				//te.printStackTrace();
+				System.out.println("TimeoutException -> There is an infinite loop in the mutant");
+				future.cancel(true);
+			}
+			if (!executor.isTerminated()) {
+			    executor.shutdownNow(); // If you want to stop the code that hasn't finished
+			}
+			if (result == null || result.getValue() == TDLTestResultUtil.FAIL) {
 				mutant_status.replace(mutant, KILLED);
 				keepTestCaseKilledMutantMapping(testCase.getName(), mutant);
 				numOfKilledMutants++;
