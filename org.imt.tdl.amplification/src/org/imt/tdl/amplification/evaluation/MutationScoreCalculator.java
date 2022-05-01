@@ -16,6 +16,11 @@ import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+import org.etsi.mts.tdl.ComponentInstanceRole;
+import org.etsi.mts.tdl.GateReference;
+import org.etsi.mts.tdl.Interaction;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
 import org.imt.k3tdl.k3dsa.TestDescriptionAspect;
@@ -34,13 +39,17 @@ public class MutationScoreCalculator {
 	
 	private HashMap<String, String> mutant_status = new HashMap<>();
 	private HashMap<TestDescription, Long> testCase_executionTime = new HashMap<>();
+	private HashMap<TestDescription, Integer> testCase_numOfAssertions = new HashMap<>();
+
 	public HashMap<String, List<String>> testCase_killedMutant = new HashMap<>();
 	
 	int numOfMutants;
 	int numOfKilledMutants;
-
 	double mutationScore;
 	
+	double timeoutFactor;
+	int timeoutConstant;
+
 	String workspacePath;
 	String seedModelPath;
 	IProject mutantsProject;
@@ -53,9 +62,13 @@ public class MutationScoreCalculator {
 		seedModelPath = PathHelper.getInstance().getSeedModelPath();
 		workspacePath = PathHelper.getInstance().getWorkspacePath();
 		findMutants();
+		//default values of pitest tool
+		timeoutFactor = 1.25;
+		timeoutConstant = 4000;
 	}
 	
 	public String runTestSuiteOnOriginalModel() {
+		System.out.println("Run test suite on the original model");
 		for (TestDescription testCase:testCases) {
 			String result = runTestCaseOnOriginalModel(testCase);
 			if (result == TDLTestResultUtil.FAIL) {
@@ -65,7 +78,7 @@ public class MutationScoreCalculator {
 		return TDLTestResultUtil.PASS;
 	}
 	
-	private String runTestCaseOnOriginalModel (TestDescription testCase) {
+	public String runTestCaseOnOriginalModel (TestDescription testCase) {
 		long start = System.currentTimeMillis();
 		TDLTestCaseResult result = TestDescriptionAspect.executeTestCase(testCase);
 		long stop = System.currentTimeMillis();
@@ -73,11 +86,12 @@ public class MutationScoreCalculator {
 			return TDLTestResultUtil.FAIL;
 		}
 		testCase_executionTime.put(testCase, (stop-start));
+		testCase_numOfAssertions.put(testCase, getNumOfAssertions(testCase));
 		return TDLTestResultUtil.PASS;
 	}
 	
 	public double calculateInitialMutationScore() {
-		System.out.println("Calculating the mutation score of the input test suite");
+		System.out.println("\nCalculating the mutation score of the input test suite");
 		testCases.forEach(t -> runTestCaseOnMutants(t));
 		calculateMutationScore();
 		System.out.println("The mutation score of the input test suite is: " + mutationScore);
@@ -93,10 +107,10 @@ public class MutationScoreCalculator {
 			aliveMutants = mutant_status.keySet().stream().filter(mutant -> mutant_status.get(mutant) == ALIVE).collect(Collectors.toSet());
 		}
 		//using default values for timeout from pitest tool
-		double timeoutFactor = 1.25;
-		int timeoutConstant = 4000;
-		long timeout = this.testCase_executionTime.get(testCase);
-		timeout = (long) (timeout * timeoutFactor + timeoutConstant);
+		//for timeoutConstant, it is calculated based on the waiting times used in the event manager:
+		//at the first of configuration and for each assertion 5000 waiting time
+		int timeoutConstant = testCase_numOfAssertions.get(testCase) * 5000 + 5000;
+		long timeout = (long) (testCase_executionTime.get(testCase) * timeoutFactor + timeoutConstant);
 		
 		//run the test case only on alive mutants
 		for (String mutant:aliveMutants) {
@@ -128,6 +142,7 @@ public class MutationScoreCalculator {
 				//te.printStackTrace();
 				System.out.println("TimeoutException -> There is an infinite loop in the mutant");
 				future.cancel(true);
+				TestDescriptionAspect.launcher(testCase).disposeResources();
 			}
 			if (!executor.isTerminated()) {
 			    executor.shutdownNow(); // If you want to stop the code that hasn't finished
@@ -161,7 +176,7 @@ public class MutationScoreCalculator {
 			calculateMutationScore();
 			System.out.println("The test case " + testCase.getName() + " has improved the mutation score by: " + (mutationScore - previousScore));
 			System.out.println("- previous mutation score: " + previousScore);
-			System.out.println("- new mutation score: " + mutationScore);
+			System.out.println("- new mutation score: " + mutationScore + "\n");
 			return true;
 		}
 		return false;
@@ -222,5 +237,24 @@ public class MutationScoreCalculator {
 	
 	public Set<String> getAliveMutants(){
 		return mutant_status.keySet().stream().filter(mutant -> mutant_status.get(mutant) == ALIVE).collect(Collectors.toSet());
+	}
+	
+	public void setTestCase_numOfAssertions(TestDescription testCase, int numOfAssertions) {
+		testCase_numOfAssertions.put(testCase, numOfAssertions);
+	}
+	
+	public int getNumOfAssertions(TestDescription tdlTestCase){
+		TreeIterator<EObject> iterator = tdlTestCase.getBehaviourDescription().getBehaviour().eAllContents();
+		int numOfAssertions = 0;
+		while (iterator.hasNext()) {
+			EObject eobject = iterator.next();
+			if (eobject instanceof Interaction) {
+				GateReference sourceGate = ((Interaction) eobject).getSourceGate();
+				if (sourceGate.getComponent().getRole() == ComponentInstanceRole.SUT) {
+					numOfAssertions++;
+				}
+			}
+		}
+		return numOfAssertions;
 	}
 }
