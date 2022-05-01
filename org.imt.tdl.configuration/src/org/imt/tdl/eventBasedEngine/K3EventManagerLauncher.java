@@ -24,8 +24,14 @@ import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.Launch;
 import org.eclipse.debug.core.model.IDebugTarget;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -48,6 +54,7 @@ import org.eclipse.gemoc.executionframework.event.model.event.EventFactory;
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrence;
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrenceArgument;
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrenceType;
+import org.eclipse.gemoc.executionframework.event.model.event.StopEventOccurrence;
 import org.eclipse.gemoc.executionframework.value.model.value.BooleanAttributeValue;
 import org.eclipse.gemoc.executionframework.value.model.value.BooleanObjectAttributeValue;
 import org.eclipse.gemoc.executionframework.value.model.value.FloatAttributeValue;
@@ -305,14 +312,18 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	@Override
 	public String sendStopEvent() {
 		String result = "PASS";
-		while (this.executionEngine.getRunningStatus() != RunStatus.WaitingForEvent) {
-			try {//wait 1 second because the engine is running
-				Thread.sleep(10000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		int i=0;
+		while (this.executionEngine.getRunningStatus() != RunStatus.WaitingForEvent && i < 10) {
+			try{
+				Thread.sleep(500);
+				i++;
+			}
+			catch(InterruptedException ex){
+			    Thread.currentThread().interrupt();
 			}
 		}
 		this.executionEngine.stop();
+		this.executionEngineJob.cancel();
 		if (eventOccurrences.size()>0) {
 			result = "FAIL:There are extra received events";
 		}
@@ -583,6 +594,5 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	public void disposeResources() {
 		this.MUTResource.unload();
 		this.executionEngine.dispose();
-		this.executionEngineJob.cancel();
 	} 
 }
