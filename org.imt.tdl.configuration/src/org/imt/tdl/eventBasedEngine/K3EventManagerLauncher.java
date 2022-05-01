@@ -24,14 +24,8 @@ import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.Launch;
 import org.eclipse.debug.core.model.IDebugTarget;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -54,7 +48,6 @@ import org.eclipse.gemoc.executionframework.event.model.event.EventFactory;
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrence;
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrenceArgument;
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrenceType;
-import org.eclipse.gemoc.executionframework.event.model.event.StopEventOccurrence;
 import org.eclipse.gemoc.executionframework.value.model.value.BooleanAttributeValue;
 import org.eclipse.gemoc.executionframework.value.model.value.BooleanObjectAttributeValue;
 import org.eclipse.gemoc.executionframework.value.model.value.FloatAttributeValue;
@@ -96,14 +89,14 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	private LinkedTransferQueue<EventOccurrence> eventOccurrences = new LinkedTransferQueue<EventOccurrence>();
 	
 	private List<ModelExecutionObserver> observers = new ArrayList<>();
-
+	
 	// progress monitor used during launch; useful for operations that wish to
 	// contribute to the progress bar
 	protected IProgressMonitor launchProgressMonitor = null;
 
 	private final ILaunchConfigurationType launchType = DebugPlugin.getDefault().getLaunchManager()
 			.getLaunchConfigurationType("org.eclipse.gemoc.execution.sequential.javaengine.ui.launcher");
-
+	
 	@Override
 	public void setUp(String MUTPath, String DSLPath){
 		this.MUTPath = MUTPath;
@@ -187,7 +180,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	@Override
 	public String assertExposedEvent(String eventName, Map<String, Object> parameters) {
 		try {
-			EventOccurrence receivedEventOccurrence = eventOccurrences.poll(10000, TimeUnit.MILLISECONDS);
+			EventOccurrence receivedEventOccurrence = eventOccurrences.poll(5000, TimeUnit.MILLISECONDS);
 			EventOccurrence expectedEventOccurrence = createEventOccurance(EventOccurrenceType.EXPOSED, eventName, parameters);
 			if (expectedEventOccurrence == null) {
 				return "FAIL: The expected event occurrence does not match to the interface or its parameters does not exist in the MUT";
