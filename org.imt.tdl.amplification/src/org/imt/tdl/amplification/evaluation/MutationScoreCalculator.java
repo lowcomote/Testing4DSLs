@@ -80,7 +80,7 @@ public class MutationScoreCalculator {
 	
 	public String runTestCaseOnOriginalModel (TestDescription testCase) {
 		long start = System.currentTimeMillis();
-		TDLTestCaseResult result = TestDescriptionAspect.executeTestCase(testCase);
+		TDLTestCaseResult result = TestDescriptionAspect.executeTestCase(testCase, seedModelPath);
 		long stop = System.currentTimeMillis();
 		if (result.getValue() != TDLTestResultUtil.PASS) {
 			return TDLTestResultUtil.FAIL;
