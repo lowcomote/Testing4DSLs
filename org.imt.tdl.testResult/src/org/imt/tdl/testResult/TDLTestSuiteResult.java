@@ -58,4 +58,11 @@ public class TDLTestSuiteResult {
 		}
 		return num;
 	}
+	
+	public String getTestSuiteResultValue() {
+		if (getNumOfPassedTestCases() == this.testCaseResults.size()) {
+			return TDLTestResultUtil.PASS;
+		}
+		return TDLTestResultUtil.FAIL;
+	}
 }
