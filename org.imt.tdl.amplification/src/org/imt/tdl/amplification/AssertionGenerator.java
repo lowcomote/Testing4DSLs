@@ -1,15 +1,8 @@
 package org.imt.tdl.amplification;
 
 import java.util.ArrayList;
-
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 import org.eclipse.gemoc.executionframework.event.model.event.EventOccurrence;
 import org.etsi.mts.tdl.Block;
@@ -110,5 +103,9 @@ public class AssertionGenerator extends ModelExecutionObserver{
 		}catch (ClassCastException e) {
 			return null;
 		}
+	}
+	
+	public int getNumberOfAssertions() {
+		return exposedEventOccurrences.size();
 	}
 }
