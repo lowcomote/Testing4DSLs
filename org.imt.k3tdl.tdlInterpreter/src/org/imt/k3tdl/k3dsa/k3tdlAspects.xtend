@@ -19,12 +19,12 @@ import org.imt.tdl.coverage.TDLCoverageUtil
 import org.imt.tdl.coverage.TDLTestCaseCoverage
 import org.imt.tdl.coverage.TDLTestSuiteCoverage
 import org.imt.tdl.testResult.TDLTestCaseResult
+import org.imt.tdl.testResult.TDLTestResultUtil
+import org.imt.tdl.testResult.TDLTestSuiteResult
 
 import static extension org.imt.k3tdl.k3dsa.BehaviourDescriptionAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
 import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
-import org.imt.tdl.testResult.TDLTestSuiteResult
-import org.imt.tdl.testResult.TDLTestResultUtil
 
 @Aspect(className = Package)
 class PackageAspect {
@@ -47,30 +47,34 @@ class PackageAspect {
 	@Main
 	def void main(){
 		try {
-			_self.testSuiteResult.testSuite = _self
-			_self.testSuiteCoverage.testSuite = _self
-    		for (TestDescription testCase:_self.testcases) {
-    			val TDLTestCaseResult testCaseResult = testCase.executeTestCase()
-    			_self.testSuiteResult.addResult(testCaseResult)
-    			//for coverage, only considering passed and failed test cases
-    			if (testCaseResult.value != TDLTestResultUtil.INCONCLUSIVE){
-    				_self.testSuiteCoverage.addTCCoverage(testCase.testCaseCoverage)
-    			}
-    			println()
-    		}
-    		
-    		TDLTestResultUtil.instance.setTestSuiteResult = _self.testSuiteResult		
-    		TDLCoverageUtil.instance.testSuiteCoverage = _self.testSuiteCoverage
-    		TDLCoverageUtil.instance.DSLPath = _self.testcases.get(0).testConfiguration.DSLPath
-    		TDLCoverageUtil.instance.runCoverageComputation
-    		  		
+			_self.executeTestSuite()		
 		} catch (TDLRuntimeException nt){
 			println("Stopped due "+nt.message)	
 		}
+	}
+	
+	def TDLTestSuiteResult executeTestSuite(){
+		_self.testSuiteResult.testSuite = _self
+		_self.testSuiteCoverage.testSuite = _self
+		for (TestDescription testCase:_self.testcases) {
+			val TDLTestCaseResult testCaseResult = testCase.executeTestCase()
+			_self.testSuiteResult.addResult(testCaseResult)
+			//for coverage, only considering passed and failed test cases
+			if (testCaseResult.value != TDLTestResultUtil.INCONCLUSIVE){
+				_self.testSuiteCoverage.addTCCoverage(testCase.testCaseCoverage)
+			}
+			println()
+		}
 		
+		TDLTestResultUtil.instance.setTestSuiteResult = _self.testSuiteResult		
+		TDLCoverageUtil.instance.testSuiteCoverage = _self.testSuiteCoverage
+		TDLCoverageUtil.instance.DSLPath = _self.testcases.get(0).testConfiguration.DSLPath
+		TDLCoverageUtil.instance.runCoverageComputation
 		println("Test suite execution has been finished successfully.")
+		return _self.testSuiteResult
 	}
 }
+
 @Aspect (className = TestDescription)
 class TestDescriptionAspect{
 	public EngineFactory launcher = new EngineFactory
