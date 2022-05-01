@@ -203,9 +203,18 @@ public class TDLTestAmplifier {
 						for (String mutant:scoreCalculator.testCase_killedMutant.get(amplifiedTest.getName())) {
 							fileOut.println("Killed mutant " + (j++) + ": " + mutant);
 						}
+						scoreCalculator.testCase_killedMutant.remove(amplifiedTest.getName());
 						fileOut.println();
 					}
 				}	
+			}
+			fileOut.println("--------------------------------------------------");
+			for (String testCase:scoreCalculator.testCase_killedMutant.keySet()) {
+				fileOut.println("Original test case: " + testCase);
+				int j = 1;
+				for (String mutant:scoreCalculator.testCase_killedMutant.get(testCase)) {
+					fileOut.println("Killed mutant " + (j++) + ": " + mutant);
+				}
 			}
 			fileOut.println("--------------------------------------------------");
 			Set<String> aliveMutants = scoreCalculator.getAliveMutants();
