@@ -1,6 +1,7 @@
 package org.imt.tdl.amplification;
 
 import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -40,36 +41,8 @@ public class AssertionGenerator extends ModelExecutionObserver{
 		testCaseRunner.activateConfiguration(tdlTestCase);
 		modelExecutionEngine = testCaseRunner.launcher(tdlTestCase).getActiveEngine();
 		modelExecutionEngine.attach(this);
-		//run the test case
-		final Runnable testRunner = new Thread() {
-			  @Override 
-			  public void run() { 
-				  testCaseRunner.executeTestCase(tdlTestCase);
-			  }
-			};
-
-		final ExecutorService executor = Executors.newSingleThreadExecutor();
-		@SuppressWarnings("rawtypes")
-		final Future future = executor.submit(testRunner);
-		executor.shutdown(); // This does not cancel the already-scheduled task.
-
-		try { 
-		  future.get(5, TimeUnit.SECONDS); 
-		}
-		catch (InterruptedException ie) { 
-			ie.printStackTrace();
-		}
-		catch (ExecutionException ee) { 
-			ee.printStackTrace();
-		}
-		catch (TimeoutException te) { 
-			//te.printStackTrace();
-			System.out.println("TimeoutException -> There is an infinite loop in the test case or model under test");
-			future.cancel(true);
-		}
-		if (!executor.isTerminated()) {
-		    executor.shutdownNow(); // If you want to stop the code that hasn't finished
-		}
+		
+		testCaseRunner.executeTestCase(tdlTestCase);
 		TDLTestCaseResult result = testCaseRunner.testCaseResult(tdlTestCase);
 		//if the new test case cannot be executed completely, or the model did not expose any event occurrence (i.e., no assertion can be generated)
 		//the test case must be ignored from the list of new test cases
