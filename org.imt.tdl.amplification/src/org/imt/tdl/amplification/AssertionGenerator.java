@@ -25,18 +25,16 @@ public class AssertionGenerator extends ModelExecutionObserver{
 	Package testSuite;
 	List<EventOccurrence> exposedEventOccurrences = Collections.synchronizedList(new ArrayList<>());
 	
-	@SuppressWarnings("static-access")
 	public boolean generateAssertionsForTestCase(TestDescription tdlTestCase) {
 		testSuite = (Package) tdlTestCase.eContainer();
-		TestDescriptionAspect testCaseRunner = new TestDescriptionAspect();
 		
 		//activating test case configuration and attaching a model execution observer to the configured model execution engine
-		testCaseRunner.activateConfiguration(tdlTestCase);
-		modelExecutionEngine = testCaseRunner.launcher(tdlTestCase).getActiveEngine();
+		TestDescriptionAspect.activateConfiguration(tdlTestCase);
+		modelExecutionEngine = TestDescriptionAspect.launcher(tdlTestCase).getActiveEngine();
 		modelExecutionEngine.attach(this);
 		
-		testCaseRunner.executeTestCase(tdlTestCase);
-		TDLTestCaseResult result = testCaseRunner.testCaseResult(tdlTestCase);
+		TestDescriptionAspect.executeTestCase(tdlTestCase);
+		TDLTestCaseResult result = TestDescriptionAspect.testCaseResult(tdlTestCase);
 		//if the new test case cannot be executed completely, or the model did not expose any event occurrence (i.e., no assertion can be generated)
 		//the test case must be ignored from the list of new test cases
 		if (result.getValue() == TDLTestResultUtil.INCONCLUSIVE || exposedEventOccurrences.size() == 0) {
@@ -68,6 +66,7 @@ public class AssertionGenerator extends ModelExecutionObserver{
 				return false;
 			}
 		}
+		TestDescriptionAspect.launcher(tdlTestCase).disposeResources();
 		return true;
 	}
 
