@@ -198,20 +198,39 @@ public class TDLTestInputDataAmplification {
 		Set<StructuredDataInstance> eventsUsedInTests = findEventsUsedInTestCase();
 		List<StructuredDataInstance> eventsNotUsedInTests = tdlEventInstances.stream().
 				filter(e -> !eventsUsedInTests.contains(e)).toList();
+		List<Message> newMessagesForNotUsedEvents = new ArrayList<>();
+		int n = 0;
 		for (StructuredDataInstance tdlEventInstance: eventsNotUsedInTests) {
 			//check whether for each event parameter, at least one eobject exists in the model under test
 			//this is required for setting the value of parameters
 			List<Member> tdlEventParameters = ((StructuredDataType) tdlEventInstance.getDataType()).allMembers();
 			if (tdlEventParameters.stream().allMatch(p -> !etype_tdlEObjects.get(p.getDataType().getName()).isEmpty())) {
 				List<Message> newMessages = generateNewMessages4NotUsedEvent(tdlEventInstance);
+				//for each new message, create a new test case
 				for (Message newMessage: newMessages) {
 					TestDescription copyTdlTestCase = copyTdlTestCase(tdlTestCase, EVENTCREATION);
 					Block copyContainer = ((CompoundBehaviour) copyTdlTestCase.getBehaviourDescription().getBehaviour()).getBlock();
 					copyContainer.getBehaviour().add(newMessage);
 					generatedTestsByEventCreation.add(copyTdlTestCase);
 				}
+				if (newMessages.size()>1) {
+					//create a new test case containing all new messages
+					TestDescription copyTdlTestCase = copyTdlTestCase(tdlTestCase, EVENTCREATION);
+					Block copyContainer = ((CompoundBehaviour) copyTdlTestCase.getBehaviourDescription().getBehaviour()).getBlock();
+					copyContainer.getBehaviour().addAll(newMessages);
+					generatedTestsByEventCreation.add(copyTdlTestCase);
+				}
+				newMessagesForNotUsedEvents.addAll(newMessages);
+				n++;
 			}
 		}
+		if (n>1) {
+			//create a new test case containing all new messages for all not used event instances
+			TestDescription copyTdlTestCase = copyTdlTestCase(tdlTestCase, EVENTCREATION);
+			Block copyContainer = ((CompoundBehaviour) copyTdlTestCase.getBehaviourDescription().getBehaviour()).getBlock();
+			copyContainer.getBehaviour().addAll(newMessagesForNotUsedEvents);
+			generatedTestsByEventCreation.add(copyTdlTestCase);
+		}		
 		return generatedTestsByEventCreation;
 	}
 	
