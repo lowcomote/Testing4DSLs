@@ -9,6 +9,8 @@ BehavioralInterface ArduinoInterface
 		parameters = [sensor: InfraRedSensor]
 	accepted event IRSensor_notDetected:
 		parameters = [sensor: InfraRedSensor]
+	accepted event soundSensor_detected:
+		parameters = [sensor: SoundSensor]
 	exposed event Pin_level_changed:
 		parameters = [pin: Pin]
 		
