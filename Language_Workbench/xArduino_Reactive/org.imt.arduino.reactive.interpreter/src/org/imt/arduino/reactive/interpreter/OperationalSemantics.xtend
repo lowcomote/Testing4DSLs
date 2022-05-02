@@ -60,6 +60,7 @@ import static extension org.imt.arduino.reactive.interpreter.Instruction_Utilite
 import static extension org.imt.arduino.reactive.interpreter.IntegerVariable_EvaluableAspect.*
 import static extension org.imt.arduino.reactive.interpreter.Pin_EvaluableAspect.*
 import static extension org.imt.arduino.reactive.interpreter.Project_ExecutableAspect.*
+import org.imt.arduino.reactive.arduino.SoundSensor
 
 @Aspect(className=Instruction)
 class Instruction_UtilitesAspect {
@@ -207,14 +208,14 @@ class PushButtonAspect extends ModuleAspect{
 	
 	@Step
 	def void press() {
-		//println("Button " + _self.name + " pressed")
+		println("Button " + _self.name + " pressed")
 		_self.pin.level = 1
 		_self.project.execute
 	}
 	
 	@Step
 	def void release() {
-		//println("Button " + _self.name + " released")
+		println("Button " + _self.name + " released")
 		_self.pin.level = 0
 		_self.project.execute
 	}
@@ -225,18 +226,26 @@ class InfraRedSensorAspect extends ModuleAspect{
 	
 	@Step
 	def void detect(){
-		//println("Sensor " + _self.name + " detected")
+		println("Sensor " + _self.name + " detected")
 		_self.pin.level = 1
 		_self.project.execute
 	}
 	@Step
 	def void notDetect(){
-		//println("Sensor " + _self.name + " not detected")
+		println("Sensor " + _self.name + " not detected")
 		_self.pin.level = 0
 		_self.project.execute
 	}
 }
-
+@Aspect(className=SoundSensor)
+class SoundSensorAspect extends ModuleAspect{
+	
+	@Step
+	def void detect(){
+		println("Sensor " + _self.name + " detected")
+		_self.project.execute
+	}
+}
 @Aspect(className=VariableAssignment)
 class VariableAssignment_ExecutableAspect extends Instruction_ExecutableAspect {
 	@Step
@@ -702,7 +711,7 @@ class Pin_EvaluableAspect {
 	
 	@Step
 	def void changeLevel(){
-		//println("The level of " + _self.name + " pin changed to " + _self.level)
+		println("The level of " + _self.name + " pin changed to " + _self.level)
 	}
 }
 
