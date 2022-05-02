@@ -82,7 +82,7 @@ public class TDLTestAmplifier {
 							+ PathHelper.getInstance().getTestSuiteProjectName() + "\\" 
 							+ PathHelper.getInstance().getTestSuiteFileName() + 
 							"_amplificationResult.txt";
-				printMutationAnalysisResult(outputFilePath);
+				printAmplificationResult(outputFilePath);
 			}
 			
 			if (numNewTests > 0) {
@@ -92,6 +92,11 @@ public class TDLTestAmplifier {
 		}else {
 			System.out.println("As the initial mutation score is 100% there is no need for test amplification");
 			System.out.println("Total number of mutants: " + scoreCalculator.getNumOfMutants());
+			String outputFilePath = PathHelper.getInstance().getWorkspacePath() + "\\"
+					+ PathHelper.getInstance().getTestSuiteProjectName() + "\\" 
+					+ PathHelper.getInstance().getTestSuiteFileName() + 
+					"_mutationResult.txt";
+			printMutationAnalysisResult(outputFilePath);
 		}
 	}
 
@@ -168,7 +173,7 @@ public class TDLTestAmplifier {
 		newTestSuiteRes.unload();
 	}
 
-	private void printMutationAnalysisResult(String outputFilePath) {
+	private void printAmplificationResult(String outputFilePath) {
 		System.out.println("Total number of mutants: " + scoreCalculator.getNumOfMutants());
 		System.out.println("- initial number of killed mutants: " + initialNumOfKilledMutants);
 		System.out.println("- total number of killed mutants: " + scoreCalculator.getNumOfKilledMutants());
@@ -223,6 +228,28 @@ public class TDLTestAmplifier {
 				int j = 1;
 				for (String mutant:aliveMutants) {
 					fileOut.println("Alive mutant " + (j++) + ": " + mutant);
+				}
+			}
+			fos.close();
+			fileOut.close();
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void printMutationAnalysisResult(String outputFilePath) {
+		//saving results into a .txt file
+		try {
+			FileOutputStream fos = new FileOutputStream(outputFilePath);
+			PrintStream fileOut = new PrintStream(fos);
+			for (String testCase:scoreCalculator.testCase_killedMutant.keySet()) {
+				fileOut.println("Original test case: " + testCase);
+				int j = 1;
+				for (String mutant:scoreCalculator.testCase_killedMutant.get(testCase)) {
+					fileOut.println("Killed mutant " + (j++) + ": " + mutant);
 				}
 			}
 			fos.close();
