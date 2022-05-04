@@ -16,9 +16,7 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -192,12 +190,14 @@ public class TDLTestInputDataAmplification {
 				}
 				if (newMessages.size()>1) {
 					//create a new test case containing all new messages
+					List<Message> allNewMessages = new ArrayList<>();
+					Collections.copy(allNewMessages, newMessages);
 					TestDescription copyTdlTestCase = copyTdlTestCase(tdlTestCase, EVENTCREATION);
 					Block copyContainer = ((CompoundBehaviour) copyTdlTestCase.getBehaviourDescription().getBehaviour()).getBlock();
-					copyContainer.getBehaviour().addAll(newMessages);
+					copyContainer.getBehaviour().addAll(allNewMessages);
 					generatedTestsByEventCreation.add(copyTdlTestCase);
 				}
-				newMessagesForNotUsedEvents.addAll(newMessages);
+				newMessages.forEach(m -> newMessagesForNotUsedEvents.add(copyTdlMessage(m)));;
 				n++;
 			}
 		}
@@ -309,8 +309,8 @@ public class TDLTestInputDataAmplification {
 		List<TestDescription> generatedTestsByPermutation = new ArrayList<>();
 		TestDescription copyTdlTestCase = copyTdlTestCase(tdlTestCase, EVENTPERMUTATION);
 		Block copyContainer = ((CompoundBehaviour) copyTdlTestCase.getBehaviourDescription().getBehaviour()).getBlock();
-		List<Message> copyMessages = copyContainer.getBehaviour().stream().map(b -> (Message) b).filter(m -> isMessageSendingAnEvent(m)).toList();
-		Collections.shuffle(copyMessages);
+		List<Message> copyMessages = copyContainer.getBehaviour().stream().map(b -> (Message) b).
+				filter(m -> isMessageSendingAnEvent(m)).collect(Collectors.toList());
 		copyContainer.getBehaviour().clear();
 		copyContainer.getBehaviour().addAll(copyMessages);
 		generatedTestsByPermutation.add(copyTdlTestCase);		
