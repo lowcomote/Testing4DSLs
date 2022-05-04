@@ -1,0 +1,85 @@
+Total number of mutants: 222
+- initial number of killed mutants: 148
+- initial mutation score: 66.66666666666666%
+Total number of test cases improving mutation score: 0
+- number of mutants killed by improved test cases: 0
+- total number of killed mutants : 148
+- final mutation score : 66.66666666666666%
+=> improvement in the mutation score : 0.0%
+--------------------------------------------------
+--------------------------------------------------
+List of Alive mutants:
+Alive mutant 1: \PSSM.Event019C\mutants\ctt\Output40.model
+Alive mutant 2: \PSSM.Event019C\mutants\ctr\Output13.model
+Alive mutant 3: \PSSM.Event019C\mutants\dtr\Output5.model
+Alive mutant 4: \PSSM.Event019C\mutants\ctt\Output27.model
+Alive mutant 5: \PSSM.Event019C\mutants\ctr\Output26.model
+Alive mutant 6: \PSSM.Event019C\mutants\cev\Output0.model
+Alive mutant 7: \PSSM.Event019C\mutants\rco\Output1.model
+Alive mutant 8: \PSSM.Event019C\mutants\ctr\Output46.model
+Alive mutant 9: \PSSM.Event019C\mutants\cet\Output8.model
+Alive mutant 10: \PSSM.Event019C\mutants\ctr\Output36.model
+Alive mutant 11: \PSSM.Event019C\mutants\ctr\Output43.model
+Alive mutant 12: \PSSM.Event019C\mutants\rev\Output1.model
+Alive mutant 13: \PSSM.Event019C\mutants\ctr\Output23.model
+Alive mutant 14: \PSSM.Event019C\mutants\ctr2\Output0.model
+Alive mutant 15: \PSSM.Event019C\mutants\cet\Output1.model
+Alive mutant 16: \PSSM.Event019C\mutants\ctr\Output10.model
+Alive mutant 17: \PSSM.Event019C\mutants\cst\Output0.model
+Alive mutant 18: \PSSM.Event019C\mutants\ctt\Output36.model
+Alive mutant 19: \PSSM.Event019C\mutants\ctr\Output12.model
+Alive mutant 20: \PSSM.Event019C\mutants\ccs\Output2.model
+Alive mutant 21: \PSSM.Event019C\mutants\ctr\Output40.model
+Alive mutant 22: \PSSM.Event019C\mutants\cev\Output4.model
+Alive mutant 23: \PSSM.Event019C\mutants\ctr\Output27.model
+Alive mutant 24: \PSSM.Event019C\mutants\ccfs\Output0.model
+Alive mutant 25: \PSSM.Event019C\mutants\ctr\Output47.model
+Alive mutant 26: \PSSM.Event019C\mutants\dtr\Output1.model
+Alive mutant 27: \PSSM.Event019C\mutants\ctt\Output41.model
+Alive mutant 28: \PSSM.Event019C\mutants\ctr2\Output1.model
+Alive mutant 29: \PSSM.Event019C\mutants\rev\Output0.model
+Alive mutant 30: \PSSM.Event019C\mutants\cfs\Output0.model
+Alive mutant 31: \PSSM.Event019C\mutants\ccs\Output5.model
+Alive mutant 32: \PSSM.Event019C\mutants\ctt\Output28.model
+Alive mutant 33: \PSSM.Event019C\mutants\ctr\Output9.model
+Alive mutant 34: \PSSM.Event019C\mutants\cet\Output10.model
+Alive mutant 35: \PSSM.Event019C\mutants\ctr\Output39.model
+Alive mutant 36: \PSSM.Event019C\mutants\cfs\Output3.model
+Alive mutant 37: \PSSM.Event019C\mutants\ctr\Output24.model
+Alive mutant 38: \PSSM.Event019C\mutants\ctr\Output44.model
+Alive mutant 39: \PSSM.Event019C\mutants\ctr\Output41.model
+Alive mutant 40: \PSSM.Event019C\mutants\ctr\Output21.model
+Alive mutant 41: \PSSM.Event019C\mutants\ccs\Output3.model
+Alive mutant 42: \PSSM.Event019C\mutants\ctr\Output11.model
+Alive mutant 43: \PSSM.Event019C\mutants\cet\Output3.model
+Alive mutant 44: \PSSM.Event019C\mutants\cst\Output8.model
+Alive mutant 45: \PSSM.Event019C\mutants\ctt\Output35.model
+Alive mutant 46: \PSSM.Event019C\mutants\ccfs\Output4.model
+Alive mutant 47: \PSSM.Event019C\mutants\ctt\Output32.model
+Alive mutant 48: \PSSM.Event019C\mutants\ctr\Output8.model
+Alive mutant 49: \PSSM.Event019C\mutants\cev\Output5.model
+Alive mutant 50: \PSSM.Event019C\mutants\cev\Output1.model
+Alive mutant 51: \PSSM.Event019C\mutants\cfs\Output2.model
+Alive mutant 52: \PSSM.Event019C\mutants\ctt\Output29.model
+Alive mutant 53: \PSSM.Event019C\mutants\ctr\Output35.model
+Alive mutant 54: \PSSM.Event019C\mutants\ctr\Output25.model
+Alive mutant 55: \PSSM.Event019C\mutants\ctr\Output45.model
+Alive mutant 56: \PSSM.Event019C\mutants\ccfs\Output1.model
+Alive mutant 57: \PSSM.Event019C\mutants\ctr\Output48.model
+Alive mutant 58: \PSSM.Event019C\mutants\ctr\Output38.model
+Alive mutant 59: \PSSM.Event019C\mutants\cet\Output6.model
+Alive mutant 60: \PSSM.Event019C\mutants\ctr\Output37.model
+Alive mutant 61: \PSSM.Event019C\mutants\ctr\Output7.model
+Alive mutant 62: \PSSM.Event019C\mutants\ctr\Output42.model
+Alive mutant 63: \PSSM.Event019C\mutants\cet\Output4.model
+Alive mutant 64: \PSSM.Event019C\mutants\ctt\Output9.model
+Alive mutant 65: \PSSM.Event019C\mutants\ctr\Output22.model
+Alive mutant 66: \PSSM.Event019C\mutants\dtr\Output6.model
+Alive mutant 67: \PSSM.Event019C\mutants\ctr2\Output6.model
+Alive mutant 68: \PSSM.Event019C\mutants\ctr2\Output2.model
+Alive mutant 69: \PSSM.Event019C\mutants\cev\Output2.model
+Alive mutant 70: \PSSM.Event019C\mutants\cet\Output0.model
+Alive mutant 71: \PSSM.Event019C\mutants\ccs\Output0.model
+Alive mutant 72: \PSSM.Event019C\mutants\dtr\Output3.model
+Alive mutant 73: \PSSM.Event019C\mutants\ctt\Output15.model
+Alive mutant 74: \PSSM.Event019C\mutants\cet\Output7.model

@@ -1,0 +1,34 @@
+Total number of mutants: 45
+- initial number of killed mutants: 25
+- initial mutation score: 55.55555555555556%
+Total number of test cases improving mutation score: 1
+- number of mutants killed by improved test cases: 2
+- total number of killed mutants : 27
+- final mutation score : 60.0%
+=> improvement in the mutation score : 4.444444444444439%
+--------------------------------------------------
+iteration 1: 1 generated test cases
+Amplified Test Case: Terminate003_Test0_EventDuplication
+Killed mutant 1: \PSSM.Terminate003\mutants\cet\Output49.model
+Killed mutant 2: \PSSM.Terminate003\mutants\rev\Output9.model
+
+--------------------------------------------------
+List of Alive mutants:
+Alive mutant 1: \PSSM.Terminate003\mutants\ctt\Output111.model
+Alive mutant 2: \PSSM.Terminate003\mutants\ccfs\Output20.model
+Alive mutant 3: \PSSM.Terminate003\mutants\ctr\Output133.model
+Alive mutant 4: \PSSM.Terminate003\mutants\cev\Output22.model
+Alive mutant 5: \PSSM.Terminate003\mutants\ctr\Output139.model
+Alive mutant 6: \PSSM.Terminate003\mutants\ccs\Output23.model
+Alive mutant 7: \PSSM.Terminate003\mutants\ccfs\Output22.model
+Alive mutant 8: \PSSM.Terminate003\mutants\ctr2\Output23.model
+Alive mutant 9: \PSSM.Terminate003\mutants\cev\Output21.model
+Alive mutant 10: \PSSM.Terminate003\mutants\ctr\Output138.model
+Alive mutant 11: \PSSM.Terminate003\mutants\ctr\Output137.model
+Alive mutant 12: \PSSM.Terminate003\mutants\ccfs\Output23.model
+Alive mutant 13: \PSSM.Terminate003\mutants\ccs\Output21.model
+Alive mutant 14: \PSSM.Terminate003\mutants\dtr\Output22.model
+Alive mutant 15: \PSSM.Terminate003\mutants\ctr\Output132.model
+Alive mutant 16: \PSSM.Terminate003\mutants\ctr2\Output24.model
+Alive mutant 17: \PSSM.Terminate003\mutants\ctr\Output136.model
+Alive mutant 18: \PSSM.Terminate003\mutants\ctr2\Output25.model

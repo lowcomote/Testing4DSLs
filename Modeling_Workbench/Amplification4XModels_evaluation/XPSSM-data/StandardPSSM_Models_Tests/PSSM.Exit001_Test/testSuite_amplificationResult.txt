@@ -1,0 +1,102 @@
+Total number of mutants: 236
+- initial number of killed mutants: 156
+- initial mutation score: 66.10169491525424%
+Total number of test cases improving mutation score: 5
+- number of mutants killed by improved test cases: 80
+- total number of killed mutants : 236
+- final mutation score : 100.0%
+=> improvement in the mutation score : 33.89830508474576%
+--------------------------------------------------
+iteration = 1
+Amplified Test Case: Exit001_Test0_EventDuplication
+Killed mutant 1: \PSSM.Exit001\mutants\ctt\Output82.model
+Killed mutant 2: \PSSM.Exit001\mutants\cet\Output16.model
+Killed mutant 3: \PSSM.Exit001\mutants\cst\Output58.model
+
+Amplified Test Case: Exit001_Test1_EventDuplication
+Killed mutant 1: \PSSM.Exit001\mutants\cet\Output15.model
+
+Amplified Test Case: Exit001_Test2_EventDeletion
+Killed mutant 1: \PSSM.Exit001\mutants\cst\Output61.model
+
+iteration = 2
+Amplified Test Case: Exit001_Test0_EventDuplication0_EventDuplication
+Killed mutant 1: \PSSM.Exit001\mutants\cet\Output13.model
+Killed mutant 2: \PSSM.Exit001\mutants\cet\Output17.model
+Killed mutant 3: \PSSM.Exit001\mutants\rev\Output2.model
+Killed mutant 4: \PSSM.Exit001\mutants\cet\Output14.model
+Killed mutant 5: \PSSM.Exit001\mutants\cet\Output18.model
+
+Amplified Test Case: Exit001_Test2_EventDeletion0_EventDuplication
+Killed mutant 1: \PSSM.Exit001\mutants\ctt\Output69.model
+Killed mutant 2: \PSSM.Exit001\mutants\ctr\Output128.model
+Killed mutant 3: \PSSM.Exit001\mutants\dtr\Output19.model
+Killed mutant 4: \PSSM.Exit001\mutants\ctr\Output111.model
+Killed mutant 5: \PSSM.Exit001\mutants\ctr\Output78.model
+Killed mutant 6: \PSSM.Exit001\mutants\ctr\Output101.model
+Killed mutant 7: \PSSM.Exit001\mutants\ctr\Output75.model
+Killed mutant 8: \PSSM.Exit001\mutants\ccs\Output15.model
+Killed mutant 9: \PSSM.Exit001\mutants\ctr\Output98.model
+Killed mutant 10: \PSSM.Exit001\mutants\ccs\Output19.model
+Killed mutant 11: \PSSM.Exit001\mutants\ctr\Output81.model
+Killed mutant 12: \PSSM.Exit001\mutants\ccfs\Output18.model
+Killed mutant 13: \PSSM.Exit001\mutants\cev\Output16.model
+Killed mutant 14: \PSSM.Exit001\mutants\ctr2\Output21.model
+Killed mutant 15: \PSSM.Exit001\mutants\ctr\Output112.model
+Killed mutant 16: \PSSM.Exit001\mutants\ctr2\Output23.model
+Killed mutant 17: \PSSM.Exit001\mutants\ctr\Output79.model
+Killed mutant 18: \PSSM.Exit001\mutants\ctr\Output99.model
+Killed mutant 19: \PSSM.Exit001\mutants\ctr2\Output15.model
+Killed mutant 20: \PSSM.Exit001\mutants\ctr\Output104.model
+Killed mutant 21: \PSSM.Exit001\mutants\ctr\Output124.model
+Killed mutant 22: \PSSM.Exit001\mutants\ctr\Output100.model
+Killed mutant 23: \PSSM.Exit001\mutants\ctr\Output84.model
+Killed mutant 24: \PSSM.Exit001\mutants\ctr\Output80.model
+Killed mutant 25: \PSSM.Exit001\mutants\ccfs\Output21.model
+Killed mutant 26: \PSSM.Exit001\mutants\ctr\Output115.model
+Killed mutant 27: \PSSM.Exit001\mutants\ctr\Output95.model
+Killed mutant 28: \PSSM.Exit001\mutants\ccfs\Output16.model
+Killed mutant 29: \PSSM.Exit001\mutants\ccfs\Output19.model
+Killed mutant 30: \PSSM.Exit001\mutants\ccs\Output18.model
+Killed mutant 31: \PSSM.Exit001\mutants\ctt\Output81.model
+Killed mutant 32: \PSSM.Exit001\mutants\ctr\Output127.model
+Killed mutant 33: \PSSM.Exit001\mutants\ctt\Output96.model
+Killed mutant 34: \PSSM.Exit001\mutants\ctr\Output83.model
+Killed mutant 35: \PSSM.Exit001\mutants\ctr\Output103.model
+Killed mutant 36: \PSSM.Exit001\mutants\ccs\Output17.model
+Killed mutant 37: \PSSM.Exit001\mutants\ctr\Output113.model
+Killed mutant 38: \PSSM.Exit001\mutants\ctr2\Output19.model
+Killed mutant 39: \PSSM.Exit001\mutants\ctr\Output93.model
+Killed mutant 40: \PSSM.Exit001\mutants\ctr\Output86.model
+Killed mutant 41: \PSSM.Exit001\mutants\ctr\Output96.model
+Killed mutant 42: \PSSM.Exit001\mutants\cev\Output21.model
+Killed mutant 43: \PSSM.Exit001\mutants\ccfs\Output20.model
+Killed mutant 44: \PSSM.Exit001\mutants\cev\Output18.model
+Killed mutant 45: \PSSM.Exit001\mutants\ctr\Output116.model
+Killed mutant 46: \PSSM.Exit001\mutants\ccs\Output14.model
+Killed mutant 47: \PSSM.Exit001\mutants\ctr\Output123.model
+Killed mutant 48: \PSSM.Exit001\mutants\dtr\Output20.model
+Killed mutant 49: \PSSM.Exit001\mutants\ctr\Output126.model
+Killed mutant 50: \PSSM.Exit001\mutants\ctr\Output76.model
+Killed mutant 51: \PSSM.Exit001\mutants\ccfs\Output14.model
+Killed mutant 52: \PSSM.Exit001\mutants\cev\Output15.model
+Killed mutant 53: \PSSM.Exit001\mutants\ccs\Output16.model
+Killed mutant 54: \PSSM.Exit001\mutants\dtr\Output21.model
+Killed mutant 55: \PSSM.Exit001\mutants\ctt\Output83.model
+Killed mutant 56: \PSSM.Exit001\mutants\ccfs\Output22.model
+Killed mutant 57: \PSSM.Exit001\mutants\cev\Output20.model
+Killed mutant 58: \PSSM.Exit001\mutants\ctr\Output114.model
+Killed mutant 59: \PSSM.Exit001\mutants\ctt\Output98.model
+Killed mutant 60: \PSSM.Exit001\mutants\ctr\Output94.model
+Killed mutant 61: \PSSM.Exit001\mutants\ctr\Output77.model
+Killed mutant 62: \PSSM.Exit001\mutants\ctr\Output125.model
+Killed mutant 63: \PSSM.Exit001\mutants\ctr\Output85.model
+Killed mutant 64: \PSSM.Exit001\mutants\ctr2\Output17.model
+Killed mutant 65: \PSSM.Exit001\mutants\ctr\Output97.model
+Killed mutant 66: \PSSM.Exit001\mutants\ctr2\Output22.model
+Killed mutant 67: \PSSM.Exit001\mutants\ctr\Output102.model
+Killed mutant 68: \PSSM.Exit001\mutants\ctr\Output82.model
+Killed mutant 69: \PSSM.Exit001\mutants\ctt\Output86.model
+Killed mutant 70: \PSSM.Exit001\mutants\ccs\Output13.model
+
+--------------------------------------------------

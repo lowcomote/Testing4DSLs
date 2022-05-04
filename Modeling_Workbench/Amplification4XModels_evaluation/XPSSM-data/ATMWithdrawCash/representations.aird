@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" uid="_aE5y4LAbEeyH0IKRvu3kVA" version="14.5.1.202106111100">
+  <semanticResources>ATM.withdraw.model</semanticResources>
+  <semanticResources>mutants/cat/Output18.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220405_152211/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220405_152213/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220405_152214/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220405_152216/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220405_152217/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220405_152219/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220405_152220/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220405_152221/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220405_152222/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220405_152224/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220405_152225/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220405_152226/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220405_152228/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220405_152229/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220405_152230/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220405_152231/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220405_152233/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220405_152234/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220413_212839/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220413_215126/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220414_122024/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220427_224641/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220427_224642/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220427_224643/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220427_224659/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220427_224700/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220427_224701/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220427_224756/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220427_224757/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220427_224758/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220427_224817/ATM.withdraw.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220427_224818/ATM.withdraw.model</semanticResources>
+</viewpoint:DAnalysis>

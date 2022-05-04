@@ -1,0 +1,21 @@
+Total number of mutants: 635
+- initial number of killed mutants: 629
+- initial mutation score: 99.05511811023622%
+Total number of test cases improving mutation score: 2
+- number of mutants killed by improved test cases: 6
+- total number of killed mutants : 635
+- final mutation score : 100.0%
+=> improvement in the mutation score : 0.9448818897637823%
+--------------------------------------------------
+iteration 1: 2 generated test cases
+Amplified Test Case: test20_EventDuplication
+Killed mutant 1: \PSSM.BankATM_Mutants\mutants\cst\Output209.model
+
+Amplified Test Case: test111_EventDuplication
+Killed mutant 1: \PSSM.BankATM_Mutants\mutants\cst\Output622.model
+Killed mutant 2: \PSSM.BankATM_Mutants\mutants\cst\Output595.model
+Killed mutant 3: \PSSM.BankATM_Mutants\mutants\cst\Output633.model
+Killed mutant 4: \PSSM.BankATM_Mutants\mutants\cst\Output591.model
+Killed mutant 5: \PSSM.BankATM_Mutants\mutants\cst\Output105.model
+
+--------------------------------------------------

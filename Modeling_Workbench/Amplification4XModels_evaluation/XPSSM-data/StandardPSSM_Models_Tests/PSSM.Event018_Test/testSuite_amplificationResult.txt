@@ -1,0 +1,110 @@
+Total number of mutants: 265
+- initial number of killed mutants: 177
+- initial mutation score: 66.79245283018868%
+Total number of test cases improving mutation score: 5
+- number of mutants killed by improved test cases: 88
+- total number of killed mutants : 265
+- final mutation score : 100.0%
+=> improvement in the mutation score : 33.20754716981133%
+--------------------------------------------------
+iteration 1: 3 generated test cases
+Amplified Test Case: Event018_Test0_EventDuplication
+Killed mutant 1: \PSSM.Event018\mutants\ctt\Output29.model
+Killed mutant 2: \PSSM.Event018\mutants\cst\Output10.model
+
+Amplified Test Case: Event018_Test1_EventDuplication
+Killed mutant 1: \PSSM.Event018\mutants\cet\Output5.model
+
+Amplified Test Case: Event018_Test2_EventDeletion
+Killed mutant 1: \PSSM.Event018\mutants\cst\Output11.model
+
+iteration 2: 2 generated test cases
+Amplified Test Case: Event018_Test0_EventDuplication0_EventDuplication
+Killed mutant 1: \PSSM.Event018\mutants\cet\Output2.model
+Killed mutant 2: \PSSM.Event018\mutants\cet\Output3.model
+Killed mutant 3: \PSSM.Event018\mutants\rev\Output0.model
+Killed mutant 4: \PSSM.Event018\mutants\cet\Output1.model
+
+Amplified Test Case: Event018_Test1_EventDuplication5_EventDeletion
+Killed mutant 1: \PSSM.Event018\mutants\cev\Output1.model
+Killed mutant 2: \PSSM.Event018\mutants\ctr\Output33.model
+Killed mutant 3: \PSSM.Event018\mutants\ctr\Output23.model
+Killed mutant 4: \PSSM.Event018\mutants\ctr\Output43.model
+Killed mutant 5: \PSSM.Event018\mutants\ctr2\Output0.model
+Killed mutant 6: \PSSM.Event018\mutants\ccs\Output6.model
+Killed mutant 7: \PSSM.Event018\mutants\ccfs\Output6.model
+Killed mutant 8: \PSSM.Event018\mutants\ctr\Output53.model
+Killed mutant 9: \PSSM.Event018\mutants\ctt\Output14.model
+Killed mutant 10: \PSSM.Event018\mutants\dtr\Output3.model
+Killed mutant 11: \PSSM.Event018\mutants\ctr\Output30.model
+Killed mutant 12: \PSSM.Event018\mutants\ctr\Output20.model
+Killed mutant 13: \PSSM.Event018\mutants\ctt\Output44.model
+Killed mutant 14: \PSSM.Event018\mutants\ctr\Output40.model
+Killed mutant 15: \PSSM.Event018\mutants\dtr\Output0.model
+Killed mutant 16: \PSSM.Event018\mutants\ctr\Output50.model
+Killed mutant 17: \PSSM.Event018\mutants\ctr\Output27.model
+Killed mutant 18: \PSSM.Event018\mutants\ctr\Output47.model
+Killed mutant 19: \PSSM.Event018\mutants\ctr\Output17.model
+Killed mutant 20: \PSSM.Event018\mutants\ctr\Output37.model
+Killed mutant 21: \PSSM.Event018\mutants\ctt\Output41.model
+Killed mutant 22: \PSSM.Event018\mutants\cev\Output4.model
+Killed mutant 23: \PSSM.Event018\mutants\ctr\Output39.model
+Killed mutant 24: \PSSM.Event018\mutants\ctr\Output52.model
+Killed mutant 25: \PSSM.Event018\mutants\ctr\Output67.model
+Killed mutant 26: \PSSM.Event018\mutants\ctr\Output19.model
+Killed mutant 27: \PSSM.Event018\mutants\ctr\Output44.model
+Killed mutant 28: \PSSM.Event018\mutants\ctr\Output70.model
+Killed mutant 29: \PSSM.Event018\mutants\ctt\Output33.model
+Killed mutant 30: \PSSM.Event018\mutants\ctr\Output64.model
+Killed mutant 31: \PSSM.Event018\mutants\cev\Output2.model
+Killed mutant 32: \PSSM.Event018\mutants\ctr\Output24.model
+Killed mutant 33: \PSSM.Event018\mutants\ctr2\Output8.model
+Killed mutant 34: \PSSM.Event018\mutants\ctt\Output28.model
+Killed mutant 35: \PSSM.Event018\mutants\ctt\Output48.model
+Killed mutant 36: \PSSM.Event018\mutants\ctr\Output36.model
+Killed mutant 37: \PSSM.Event018\mutants\dtr\Output6.model
+Killed mutant 38: \PSSM.Event018\mutants\cev\Output5.model
+Killed mutant 39: \PSSM.Event018\mutants\ctr\Output41.model
+Killed mutant 40: \PSSM.Event018\mutants\ctr\Output16.model
+Killed mutant 41: \PSSM.Event018\mutants\ctr\Output21.model
+Killed mutant 42: \PSSM.Event018\mutants\ccfs\Output7.model
+Killed mutant 43: \PSSM.Event018\mutants\ctr2\Output1.model
+Killed mutant 44: \PSSM.Event018\mutants\ccfs\Output8.model
+Killed mutant 45: \PSSM.Event018\mutants\ctr\Output71.model
+Killed mutant 46: \PSSM.Event018\mutants\ccs\Output4.model
+Killed mutant 47: \PSSM.Event018\mutants\ctr\Output28.model
+Killed mutant 48: \PSSM.Event018\mutants\ccs\Output1.model
+Killed mutant 49: \PSSM.Event018\mutants\ctr\Output48.model
+Killed mutant 50: \PSSM.Event018\mutants\ccfs\Output1.model
+Killed mutant 51: \PSSM.Event018\mutants\ctr\Output18.model
+Killed mutant 52: \PSSM.Event018\mutants\ctr\Output38.model
+Killed mutant 53: \PSSM.Event018\mutants\ctr\Output68.model
+Killed mutant 54: \PSSM.Event018\mutants\ctr\Output55.model
+Killed mutant 55: \PSSM.Event018\mutants\dtr\Output5.model
+Killed mutant 56: \PSSM.Event018\mutants\ctr\Output65.model
+Killed mutant 57: \PSSM.Event018\mutants\ctr\Output45.model
+Killed mutant 58: \PSSM.Event018\mutants\ctr\Output35.model
+Killed mutant 59: \PSSM.Event018\mutants\ctr\Output25.model
+Killed mutant 60: \PSSM.Event018\mutants\ctr2\Output2.model
+Killed mutant 61: \PSSM.Event018\mutants\ctr\Output32.model
+Killed mutant 62: \PSSM.Event018\mutants\ctr\Output22.model
+Killed mutant 63: \PSSM.Event018\mutants\ctr2\Output5.model
+Killed mutant 64: \PSSM.Event018\mutants\cfs\Output0.model
+Killed mutant 65: \PSSM.Event018\mutants\ctt\Output38.model
+Killed mutant 66: \PSSM.Event018\mutants\ccs\Output5.model
+Killed mutant 67: \PSSM.Event018\mutants\ctr\Output42.model
+Killed mutant 68: \PSSM.Event018\mutants\ctr\Output29.model
+Killed mutant 69: \PSSM.Event018\mutants\ctr\Output49.model
+Killed mutant 70: \PSSM.Event018\mutants\ctr\Output69.model
+Killed mutant 71: \PSSM.Event018\mutants\ctr\Output54.model
+Killed mutant 72: \PSSM.Event018\mutants\ctr2\Output3.model
+Killed mutant 73: \PSSM.Event018\mutants\ctr\Output34.model
+Killed mutant 74: \PSSM.Event018\mutants\ccfs\Output5.model
+Killed mutant 75: \PSSM.Event018\mutants\ccs\Output8.model
+Killed mutant 76: \PSSM.Event018\mutants\ctr\Output31.model
+Killed mutant 77: \PSSM.Event018\mutants\ctr\Output51.model
+Killed mutant 78: \PSSM.Event018\mutants\ctr\Output46.model
+Killed mutant 79: \PSSM.Event018\mutants\ctr\Output26.model
+Killed mutant 80: \PSSM.Event018\mutants\ctr\Output66.model
+
+--------------------------------------------------

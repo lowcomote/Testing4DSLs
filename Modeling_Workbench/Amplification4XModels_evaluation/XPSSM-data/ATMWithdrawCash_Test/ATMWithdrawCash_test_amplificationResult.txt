@@ -1,0 +1,110 @@
+Total number of mutants: 301
+- initial number of killed mutants: 210
+- initial mutation score: 69.76744186046511%
+Total number of test cases improving mutation score: 4
+- number of mutants killed by improved test cases: 91
+- total number of killed mutants : 301
+- final mutation score : 100.0%
+=> improvement in the mutation score : 30.23255813953488%
+--------------------------------------------------
+iteration = 1
+Amplified Test Case: test_wrongPin0_IntegerModification
+Killed mutant 1: \ATMWithdrawCash\mutants\cet\Output3.model
+Killed mutant 2: \ATMWithdrawCash\mutants\rev\Output0.model
+Killed mutant 3: \ATMWithdrawCash\mutants\cet\Output4.model
+
+Amplified Test Case: test_wrongPin2_IntegerModification
+Killed mutant 1: \ATMWithdrawCash\mutants\ciose\Output1.model
+Killed mutant 2: \ATMWithdrawCash\mutants\ciog\Output1.model
+Killed mutant 3: \ATMWithdrawCash\mutants\cioge\Output2.model
+
+Amplified Test Case: test_wrongPin5_IntegerModification
+Killed mutant 1: \ATMWithdrawCash\mutants\cet\Output23.model
+Killed mutant 2: \ATMWithdrawCash\mutants\cet\Output17.model
+Killed mutant 3: \ATMWithdrawCash\mutants\cet\Output18.model
+Killed mutant 4: \ATMWithdrawCash\mutants\cet\Output9.model
+Killed mutant 5: \ATMWithdrawCash\mutants\cet\Output19.model
+Killed mutant 6: \ATMWithdrawCash\mutants\cet\Output16.model
+Killed mutant 7: \ATMWithdrawCash\mutants\rev\Output2.model
+
+Amplified Test Case: test_wrongPin20_IntegerModification
+Killed mutant 1: \ATMWithdrawCash\mutants\ctr\Output23.model
+Killed mutant 2: \ATMWithdrawCash\mutants\cios\Output1.model
+Killed mutant 3: \ATMWithdrawCash\mutants\ctr\Output13.model
+Killed mutant 4: \ATMWithdrawCash\mutants\ctr\Output33.model
+Killed mutant 5: \ATMWithdrawCash\mutants\ctr\Output43.model
+Killed mutant 6: \ATMWithdrawCash\mutants\cioge\Output3.model
+Killed mutant 7: \ATMWithdrawCash\mutants\ctr2\Output0.model
+Killed mutant 8: \ATMWithdrawCash\mutants\cione\Output0.model
+Killed mutant 9: \ATMWithdrawCash\mutants\ccs\Output3.model
+Killed mutant 10: \ATMWithdrawCash\mutants\ctr\Output46.model
+Killed mutant 11: \ATMWithdrawCash\mutants\ccfs\Output3.model
+Killed mutant 12: \ATMWithdrawCash\mutants\ctr2\Output4.model
+Killed mutant 13: \ATMWithdrawCash\mutants\cet\Output10.model
+Killed mutant 14: \ATMWithdrawCash\mutants\ctr\Output8.model
+Killed mutant 15: \ATMWithdrawCash\mutants\ctr\Output17.model
+Killed mutant 16: \ATMWithdrawCash\mutants\ctr\Output27.model
+Killed mutant 17: \ATMWithdrawCash\mutants\dtr\Output4.model
+Killed mutant 18: \ATMWithdrawCash\mutants\dtr\Output7.model
+Killed mutant 19: \ATMWithdrawCash\mutants\ccs\Output4.model
+Killed mutant 20: \ATMWithdrawCash\mutants\ccfs\Output0.model
+Killed mutant 21: \ATMWithdrawCash\mutants\ctr\Output5.model
+Killed mutant 22: \ATMWithdrawCash\mutants\dtr\Output8.model
+Killed mutant 23: \ATMWithdrawCash\mutants\ctr\Output42.model
+Killed mutant 24: \ATMWithdrawCash\mutants\cev\Output1.model
+Killed mutant 25: \ATMWithdrawCash\mutants\rco\Output1.model
+Killed mutant 26: \ATMWithdrawCash\mutants\ctr\Output19.model
+Killed mutant 27: \ATMWithdrawCash\mutants\dtr\Output1.model
+Killed mutant 28: \ATMWithdrawCash\mutants\ctr\Output6.model
+Killed mutant 29: \ATMWithdrawCash\mutants\ctr\Output22.model
+Killed mutant 30: \ATMWithdrawCash\mutants\cet\Output22.model
+Killed mutant 31: \ATMWithdrawCash\mutants\ctr\Output2.model
+Killed mutant 32: \ATMWithdrawCash\mutants\dtr\Output5.model
+Killed mutant 33: \ATMWithdrawCash\mutants\ctr\Output16.model
+Killed mutant 34: \ATMWithdrawCash\mutants\ctr\Output45.model
+Killed mutant 35: \ATMWithdrawCash\mutants\ctr\Output10.model
+Killed mutant 36: \ATMWithdrawCash\mutants\ctr\Output30.model
+Killed mutant 37: \ATMWithdrawCash\mutants\cet\Output8.model
+Killed mutant 38: \ATMWithdrawCash\mutants\ctr\Output25.model
+Killed mutant 39: \ATMWithdrawCash\mutants\ctr\Output28.model
+Killed mutant 40: \ATMWithdrawCash\mutants\ctr\Output48.model
+Killed mutant 41: \ATMWithdrawCash\mutants\ctr\Output9.model
+Killed mutant 42: \ATMWithdrawCash\mutants\ccs\Output5.model
+Killed mutant 43: \ATMWithdrawCash\mutants\dtr\Output2.model
+Killed mutant 44: \ATMWithdrawCash\mutants\ctr\Output15.model
+Killed mutant 45: \ATMWithdrawCash\mutants\ctr2\Output5.model
+Killed mutant 46: \ATMWithdrawCash\mutants\ctr2\Output2.model
+Killed mutant 47: \ATMWithdrawCash\mutants\ctr\Output3.model
+Killed mutant 48: \ATMWithdrawCash\mutants\ctr\Output31.model
+Killed mutant 49: \ATMWithdrawCash\mutants\cev\Output0.model
+Killed mutant 50: \ATMWithdrawCash\mutants\ctr\Output21.model
+Killed mutant 51: \ATMWithdrawCash\mutants\ctr\Output11.model
+Killed mutant 52: \ATMWithdrawCash\mutants\ctr\Output44.model
+Killed mutant 53: \ATMWithdrawCash\mutants\ctr\Output34.model
+Killed mutant 54: \ATMWithdrawCash\mutants\ccs\Output1.model
+Killed mutant 55: \ATMWithdrawCash\mutants\rev\Output1.model
+Killed mutant 56: \ATMWithdrawCash\mutants\ctr\Output14.model
+Killed mutant 57: \ATMWithdrawCash\mutants\ctr\Output24.model
+Killed mutant 58: \ATMWithdrawCash\mutants\ctr\Output0.model
+Killed mutant 59: \ATMWithdrawCash\mutants\ctr\Output4.model
+Killed mutant 60: \ATMWithdrawCash\mutants\ctr\Output29.model
+Killed mutant 61: \ATMWithdrawCash\mutants\ctr\Output32.model
+Killed mutant 62: \ATMWithdrawCash\mutants\ccs\Output6.model
+Killed mutant 63: \ATMWithdrawCash\mutants\ccfs\Output2.model
+Killed mutant 64: \ATMWithdrawCash\mutants\ctr\Output47.model
+Killed mutant 65: \ATMWithdrawCash\mutants\ctr\Output12.model
+Killed mutant 66: \ATMWithdrawCash\mutants\cet\Output12.model
+Killed mutant 67: \ATMWithdrawCash\mutants\ctr2\Output6.model
+Killed mutant 68: \ATMWithdrawCash\mutants\ctr\Output26.model
+Killed mutant 69: \ATMWithdrawCash\mutants\ctr\Output1.model
+Killed mutant 70: \ATMWithdrawCash\mutants\ctr\Output20.model
+Killed mutant 71: \ATMWithdrawCash\mutants\rco\Output3.model
+Killed mutant 72: \ATMWithdrawCash\mutants\ctr\Output7.model
+Killed mutant 73: \ATMWithdrawCash\mutants\ctr2\Output3.model
+Killed mutant 74: \ATMWithdrawCash\mutants\cev\Output5.model
+Killed mutant 75: \ATMWithdrawCash\mutants\dtr\Output6.model
+Killed mutant 76: \ATMWithdrawCash\mutants\ctr\Output18.model
+Killed mutant 77: \ATMWithdrawCash\mutants\cev\Output2.model
+Killed mutant 78: \ATMWithdrawCash\mutants\dtr\Output3.model
+
+--------------------------------------------------

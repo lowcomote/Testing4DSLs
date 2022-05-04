@@ -1,0 +1,218 @@
+Total number of mutants: 1383
+- initial number of killed mutants: 1219
+- initial mutation score: 88.14%
+Total number of test cases improving mutation score: 30
+- number of mutants killed by improved test cases: 164
+- total number of killed mutants : 199
+- final mutation score : 100.0%
+=> improvement in the mutation score : 11.86%
+--------------------------------------------------
+iteration 1: 30 generated test cases
+
+Amplified Test Case: test20_EventDuplication
+Killed 11 ccfs_ccs mutants 
+
+Amplified Test Case: test915_EventDuplication
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\cev\Output18.model
+
+Amplified Test Case: test115_EventDeletion
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\cev\Output9.model
+
+Amplified Test Case: test160_EventDuplication
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\cfs\Output0.model
+Killed mutant 2: \PSSM.JavaThread_Mutants\mutants\cev\Output5.model
+
+Amplified Test Case: test165_EventDuplication
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\cev\Output12.model
+
+Amplified Test Case: test166_EventDeletion
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\cev\Output13.model
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\cev\Output16.model
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\cev\Output8.model
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\cev\Output14.model
+Killed mutant 2: \PSSM.JavaThread_Mutants\mutants\cev\Output20.model
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\cev\Output4.model
+Killed mutant 2: \PSSM.JavaThread_Mutants\mutants\cev\Output17.model
+Killed mutant 3: \PSSM.JavaThread_Mutants\mutants\cev\Output21.model
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\cev\Output24.model
+Killed mutant 2: \PSSM.JavaThread_Mutants\mutants\cev\Output0.model
+Killed mutant 3: \PSSM.JavaThread_Mutants\mutants\cev\Output22.model
+Killed mutant 4: \PSSM.JavaThread_Mutants\mutants\cev\Output27.model
+Killed mutant 5: \PSSM.JavaThread_Mutants\mutants\cev\Output26.model
+Killed mutant 6: \PSSM.JavaThread_Mutants\mutants\cev\Output3.model
+Killed mutant 7: \PSSM.JavaThread_Mutants\mutants\cev\Output19.model
+Killed mutant 8: \PSSM.JavaThread_Mutants\mutants\cev\Output2.model
+
+Amplified Test Case: test170_IntegerModification
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\cev\Output23.model
+Killed mutant 2: \PSSM.JavaThread_Mutants\mutants\cev\Output6.model
+
+Amplified Test Case: test172_IntegerModification
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\cev\Output15.model
+
+Amplified Test Case: test173_IntegerModification
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\cev\Output1.model
+
+Amplified Test Case: test174_IntegerModification
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\cev\Output25.model
+
+Amplified Test Case: test44_EventDeletion
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\cst\Output32.model
+Killed mutant 2: \PSSM.JavaThread_Mutants\mutants\cst\Output35.model
+Killed mutant 3: \PSSM.JavaThread_Mutants\mutants\cst\Output33.model
+Killed mutant 4: \PSSM.JavaThread_Mutants\mutants\cst\Output30.model
+Killed mutant 5: \PSSM.JavaThread_Mutants\mutants\cst\Output31.model
+Killed mutant 6: \PSSM.JavaThread_Mutants\mutants\cst\Output34.model
+
+Amplified Test Case: test51_EventDuplication
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\ctr\Output84.model
+Killed mutant 2: \PSSM.JavaThread_Mutants\mutants\ctr2\Output2.model
+Killed mutant 3: \PSSM.JavaThread_Mutants\mutants\ctr\Output11.model
+Killed mutant 4: \PSSM.JavaThread_Mutants\mutants\ctr\Output49.model
+
+Amplified Test Case: test52_EventDuplication
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\ctr\Output34.model
+Killed mutant 2: \PSSM.JavaThread_Mutants\mutants\ctr\Output64.model
+Killed mutant 3: \PSSM.JavaThread_Mutants\mutants\ctr\Output87.model
+Killed mutant 4: \PSSM.JavaThread_Mutants\mutants\ctr\Output67.model
+Killed mutant 5: \PSSM.JavaThread_Mutants\mutants\ctr\Output2.model
+Killed mutant 6: \PSSM.JavaThread_Mutants\mutants\ctr\Output18.model
+Killed mutant 7: \PSSM.JavaThread_Mutants\mutants\ctr2\Output7.model
+Killed mutant 8: \PSSM.JavaThread_Mutants\mutants\ctr\Output76.model
+Killed mutant 9: \PSSM.JavaThread_Mutants\mutants\ctr\Output21.model
+Killed mutant 10: \PSSM.JavaThread_Mutants\mutants\ctr\Output9.model
+Killed mutant 11: \PSSM.JavaThread_Mutants\mutants\ctr2\Output4.model
+Killed mutant 12: \PSSM.JavaThread_Mutants\mutants\ctr\Output36.model
+Killed mutant 13: \PSSM.JavaThread_Mutants\mutants\ctr\Output42.model
+Killed mutant 14: \PSSM.JavaThread_Mutants\mutants\ctr\Output12.model
+Killed mutant 15: \PSSM.JavaThread_Mutants\mutants\ctr\Output0.model
+Killed mutant 16: \PSSM.JavaThread_Mutants\mutants\ctr\Output75.model
+Killed mutant 17: \PSSM.JavaThread_Mutants\mutants\ctr\Output35.model
+Killed mutant 18: \PSSM.JavaThread_Mutants\mutants\ctr\Output63.model
+Killed mutant 19: \PSSM.JavaThread_Mutants\mutants\ctr\Output78.model
+Killed mutant 20: \PSSM.JavaThread_Mutants\mutants\ctr\Output43.model
+Killed mutant 21: \PSSM.JavaThread_Mutants\mutants\ctr\Output37.model
+Killed mutant 22: \PSSM.JavaThread_Mutants\mutants\ctr\Output17.model
+Killed mutant 23: \PSSM.JavaThread_Mutants\mutants\ctr\Output66.model
+Killed mutant 24: \PSSM.JavaThread_Mutants\mutants\ctr\Output86.model
+Killed mutant 25: \PSSM.JavaThread_Mutants\mutants\ctr\Output46.model
+Killed mutant 26: \PSSM.JavaThread_Mutants\mutants\ctr\Output74.model
+
+Amplified Test Case: test53_EventDuplication
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\ctr\Output77.model
+Killed mutant 2: \PSSM.JavaThread_Mutants\mutants\ctr\Output60.model
+Killed mutant 3: \PSSM.JavaThread_Mutants\mutants\ctr\Output28.model
+Killed mutant 4: \PSSM.JavaThread_Mutants\mutants\ctr\Output20.model
+Killed mutant 5: \PSSM.JavaThread_Mutants\mutants\ctr\Output30.model
+Killed mutant 6: \PSSM.JavaThread_Mutants\mutants\ctr\Output40.model
+Killed mutant 7: \PSSM.JavaThread_Mutants\mutants\ctr\Output70.model
+Killed mutant 8: \PSSM.JavaThread_Mutants\mutants\ctr\Output15.model
+Killed mutant 9: \PSSM.JavaThread_Mutants\mutants\ctr\Output73.model
+Killed mutant 10: \PSSM.JavaThread_Mutants\mutants\ctr\Output88.model
+Killed mutant 11: \PSSM.JavaThread_Mutants\mutants\ctr\Output68.model
+Killed mutant 12: \PSSM.JavaThread_Mutants\mutants\ctr\Output33.model
+Killed mutant 13: \PSSM.JavaThread_Mutants\mutants\ctr\Output13.model
+Killed mutant 14: \PSSM.JavaThread_Mutants\mutants\ctr\Output41.model
+Killed mutant 15: \PSSM.JavaThread_Mutants\mutants\ctr\Output47.model
+Killed mutant 16: \PSSM.JavaThread_Mutants\mutants\ctr\Output61.model
+Killed mutant 17: \PSSM.JavaThread_Mutants\mutants\ctr\Output6.model
+Killed mutant 18: \PSSM.JavaThread_Mutants\mutants\ctr\Output81.model
+Killed mutant 19: \PSSM.JavaThread_Mutants\mutants\ctr\Output79.model
+Killed mutant 20: \PSSM.JavaThread_Mutants\mutants\ctr\Output82.model
+Killed mutant 21: \PSSM.JavaThread_Mutants\mutants\ctr2\Output3.model
+Killed mutant 22: \PSSM.JavaThread_Mutants\mutants\ctr\Output16.model
+Killed mutant 23: \PSSM.JavaThread_Mutants\mutants\ctr\Output26.model
+Killed mutant 24: \PSSM.JavaThread_Mutants\mutants\ctr\Output3.model
+Killed mutant 25: \PSSM.JavaThread_Mutants\mutants\ctr\Output62.model
+Killed mutant 26: \PSSM.JavaThread_Mutants\mutants\ctr\Output72.model
+Killed mutant 27: \PSSM.JavaThread_Mutants\mutants\ctr\Output7.model
+Killed mutant 28: \PSSM.JavaThread_Mutants\mutants\ctr\Output32.model
+Killed mutant 29: \PSSM.JavaThread_Mutants\mutants\ctr\Output22.model
+Killed mutant 30: \PSSM.JavaThread_Mutants\mutants\ctr\Output65.model
+Killed mutant 31: \PSSM.JavaThread_Mutants\mutants\ctr\Output45.model
+Killed mutant 32: \PSSM.JavaThread_Mutants\mutants\ctr\Output25.model
+Killed mutant 33: \PSSM.JavaThread_Mutants\mutants\ctr\Output4.model
+Killed mutant 34: \PSSM.JavaThread_Mutants\mutants\ctr\Output23.model
+Killed mutant 35: \PSSM.JavaThread_Mutants\mutants\ctr\Output31.model
+Killed mutant 36: \PSSM.JavaThread_Mutants\mutants\ctr\Output14.model
+Killed mutant 37: \PSSM.JavaThread_Mutants\mutants\ctr\Output71.model
+Killed mutant 38: \PSSM.JavaThread_Mutants\mutants\ctr2\Output9.model
+Killed mutant 39: \PSSM.JavaThread_Mutants\mutants\ctr\Output29.model
+Killed mutant 40: \PSSM.JavaThread_Mutants\mutants\ctr\Output89.model
+Killed mutant 41: \PSSM.JavaThread_Mutants\mutants\ctr\Output69.model
+
+Amplified Test Case: test56_EventDeletion
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\ctr\Output24.model
+
+Amplified Test Case: test60_EventDuplication
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\ctr\Output85.model
+Killed mutant 2: \PSSM.JavaThread_Mutants\mutants\ctr2\Output6.model
+Killed mutant 3: \PSSM.JavaThread_Mutants\mutants\ctr\Output39.model
+
+Amplified Test Case: test61_EventDuplication
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\ctr\Output48.model
+
+Amplified Test Case: test62_EventDuplication
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\ctr\Output44.model
+Killed mutant 2: \PSSM.JavaThread_Mutants\mutants\ctr2\Output5.model
+Killed mutant 3: \PSSM.JavaThread_Mutants\mutants\ctr\Output83.model
+Killed mutant 4: \PSSM.JavaThread_Mutants\mutants\ctr\Output1.model
+Killed mutant 5: \PSSM.JavaThread_Mutants\mutants\ctr\Output8.model
+Killed mutant 6: \PSSM.JavaThread_Mutants\mutants\ctr2\Output1.model
+Killed mutant 7: \PSSM.JavaThread_Mutants\mutants\ctr\Output38.model
+Killed mutant 8: \PSSM.JavaThread_Mutants\mutants\ctr\Output5.model
+Killed mutant 9: \PSSM.JavaThread_Mutants\mutants\ctr\Output19.model
+Killed mutant 10: \PSSM.JavaThread_Mutants\mutants\ctr\Output80.model
+Killed mutant 11: \PSSM.JavaThread_Mutants\mutants\ctr\Output10.model
+Killed mutant 12: \PSSM.JavaThread_Mutants\mutants\ctr\Output27.model
+
+Amplified Test Case: test2920_EventDeletion
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\ctt\Output43.model
+Killed mutant 2: \PSSM.JavaThread_Mutants\mutants\ctt\Output229.model
+Killed mutant 3: \PSSM.JavaThread_Mutants\mutants\ctt\Output61.model
+Killed mutant 4: \PSSM.JavaThread_Mutants\mutants\ctt\Output169.model
+Killed mutant 5: \PSSM.JavaThread_Mutants\mutants\ctt\Output246.model
+
+Amplified Test Case: test94_IntegerModification
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\dtr\Output8.model
+
+Amplified Test Case: test95_IntegerModification
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\dtr\Output1.model
+Killed mutant 2: \PSSM.JavaThread_Mutants\mutants\dtr\Output10.model
+Killed mutant 3: \PSSM.JavaThread_Mutants\mutants\dtr\Output6.model
+
+Amplified Test Case: test96_IntegerModification
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\dtr\Output21.model
+Killed mutant 2: \PSSM.JavaThread_Mutants\mutants\rtr\Output4.model
+Killed mutant 3: \PSSM.JavaThread_Mutants\mutants\rtr\Output27.model
+Killed mutant 4: \PSSM.JavaThread_Mutants\mutants\dtr\Output24.model
+Killed mutant 5: \PSSM.JavaThread_Mutants\mutants\dtr\Output4.model
+Killed mutant 6: \PSSM.JavaThread_Mutants\mutants\dtr\Output23.model
+Killed mutant 7: \PSSM.JavaThread_Mutants\mutants\dtr\Output27.model
+
+Amplified Test Case: test97_IntegerModification
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\dtr\Output12.model
+Killed mutant 2: \PSSM.JavaThread_Mutants\mutants\dtr\Output3.model
+Killed mutant 3: \PSSM.JavaThread_Mutants\mutants\dtr\Output2.model
+Killed mutant 4: \PSSM.JavaThread_Mutants\mutants\dtr\Output9.model
+Killed mutant 5: \PSSM.JavaThread_Mutants\mutants\dtr\Output18.model
+Killed mutant 6: \PSSM.JavaThread_Mutants\mutants\dtr\Output14.model
+Killed mutant 7: \PSSM.JavaThread_Mutants\mutants\dtr\Output16.model
+Killed mutant 8: \PSSM.JavaThread_Mutants\mutants\dtr\Output7.model
+Killed mutant 9: \PSSM.JavaThread_Mutants\mutants\dtr\Output13.model
+
+Amplified Test Case: test98_IntegerModification
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\dtr\Output11.model
+Killed mutant 2: \PSSM.JavaThread_Mutants\mutants\dtr\Output22.model
+Killed mutant 3: \PSSM.JavaThread_Mutants\mutants\dtr\Output25.model
+Killed mutant 4: \PSSM.JavaThread_Mutants\mutants\dtr\Output20.model
+Killed mutant 5: \PSSM.JavaThread_Mutants\mutants\dtr\Output19.model
+
+Amplified Test Case: test911_IntegerModification
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\dtr\Output17.model
+
+Amplified Test Case: test912_EventDuplication
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\dtr\Output15.model
+Killed mutant 2: \PSSM.JavaThread_Mutants\mutants\dtr\Output26.model
+
+--------------------------------------------------

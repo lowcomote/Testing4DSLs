@@ -1,0 +1,24 @@
+Total number of mutants: 173
+- initial number of killed mutants: 167
+- initial mutation score: 96.53179190751445%
+Total number of test cases improving mutation score: 3
+- number of mutants killed by improved test cases: 6
+- total number of killed mutants : 173
+- final mutation score : 100.0%
+=> improvement in the mutation score : 3.4682080924855474%
+--------------------------------------------------
+iteration 1: 1 generated test cases
+Amplified Test Case: Final001_Test0_EventDuplication
+Killed mutant 1: \PSSM.Final001\mutants\cev\Output8.model
+Killed mutant 2: \PSSM.Final001\mutants\ctr\Output64.model
+Killed mutant 3: \PSSM.Final001\mutants\ctt\Output78.model
+Killed mutant 4: \PSSM.Final001\mutants\ccs\Output10.model
+
+iteration 2: 2 generated test cases
+Amplified Test Case: Final001_Test0_EventDuplication1_EventDuplication
+Killed mutant 1: \PSSM.Final001\mutants\ctr\Output74.model
+
+Amplified Test Case: Final001_Test0_EventDuplication2_EventDuplication
+Killed mutant 1: \PSSM.Final001\mutants\ctr2\Output12.model
+
+--------------------------------------------------

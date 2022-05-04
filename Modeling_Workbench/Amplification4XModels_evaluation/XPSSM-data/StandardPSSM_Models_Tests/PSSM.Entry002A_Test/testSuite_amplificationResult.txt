@@ -1,0 +1,90 @@
+Total number of mutants: 217
+- initial number of killed mutants: 146
+- initial mutation score: 67.2811059907834%
+Total number of test cases improving mutation score: 3
+- number of mutants killed by improved test cases: 7
+- total number of killed mutants : 153
+- final mutation score : 70.50691244239631%
+=> improvement in the mutation score : 3.2258064516129004%
+--------------------------------------------------
+iteration = 1
+Amplified Test Case: Entry002_Test_A0_EventDuplication
+Killed mutant 1: \PSSM.Entry002A\mutants\cet\Output19.model
+Killed mutant 2: \PSSM.Entry002A\mutants\cet\Output18.model
+Killed mutant 3: \PSSM.Entry002A\mutants\cst\Output75.model
+Killed mutant 4: \PSSM.Entry002A\mutants\ctt\Output134.model
+
+Amplified Test Case: Entry002_Test_A3_EventDeletion
+Killed mutant 1: \PSSM.Entry002A\mutants\cet\Output22.model
+
+iteration = 2
+Amplified Test Case: Entry002_Test_A0_EventDuplication1_EventDuplication
+Killed mutant 1: \PSSM.Entry002A\mutants\cis\Output30.model
+Killed mutant 2: \PSSM.Entry002A\mutants\ctt\Output142.model
+
+--------------------------------------------------
+List of Alive mutants:
+Alive mutant 1: \PSSM.Entry002A\mutants\ctr\Output162.model
+Alive mutant 2: \PSSM.Entry002A\mutants\ccs\Output22.model
+Alive mutant 3: \PSSM.Entry002A\mutants\cfs\Output12.model
+Alive mutant 4: \PSSM.Entry002A\mutants\ccfs\Output26.model
+Alive mutant 5: \PSSM.Entry002A\mutants\ctt\Output147.model
+Alive mutant 6: \PSSM.Entry002A\mutants\ctr\Output172.model
+Alive mutant 7: \PSSM.Entry002A\mutants\ctr\Output182.model
+Alive mutant 8: \PSSM.Entry002A\mutants\ctt\Output143.model
+Alive mutant 9: \PSSM.Entry002A\mutants\ctr\Output132.model
+Alive mutant 10: \PSSM.Entry002A\mutants\ctr\Output165.model
+Alive mutant 11: \PSSM.Entry002A\mutants\dtr\Output26.model
+Alive mutant 12: \PSSM.Entry002A\mutants\ctr2\Output28.model
+Alive mutant 13: \PSSM.Entry002A\mutants\ccfs\Output22.model
+Alive mutant 14: \PSSM.Entry002A\mutants\ctr\Output175.model
+Alive mutant 15: \PSSM.Entry002A\mutants\ctr\Output185.model
+Alive mutant 16: \PSSM.Entry002A\mutants\cev\Output22.model
+Alive mutant 17: \PSSM.Entry002A\mutants\ctr\Output171.model
+Alive mutant 18: \PSSM.Entry002A\mutants\cev\Output25.model
+Alive mutant 19: \PSSM.Entry002A\mutants\ctr\Output178.model
+Alive mutant 20: \PSSM.Entry002A\mutants\cet\Output21.model
+Alive mutant 21: \PSSM.Entry002A\mutants\ctr\Output163.model
+Alive mutant 22: \PSSM.Entry002A\mutants\rev\Output3.model
+Alive mutant 23: \PSSM.Entry002A\mutants\ctr2\Output26.model
+Alive mutant 24: \PSSM.Entry002A\mutants\ctr\Output166.model
+Alive mutant 25: \PSSM.Entry002A\mutants\ctr\Output186.model
+Alive mutant 26: \PSSM.Entry002A\mutants\cfs\Output11.model
+Alive mutant 27: \PSSM.Entry002A\mutants\ccfs\Output23.model
+Alive mutant 28: \PSSM.Entry002A\mutants\dtr\Output25.model
+Alive mutant 29: \PSSM.Entry002A\mutants\ctr\Output169.model
+Alive mutant 30: \PSSM.Entry002A\mutants\ctt\Output135.model
+Alive mutant 31: \PSSM.Entry002A\mutants\ctr\Output174.model
+Alive mutant 32: \PSSM.Entry002A\mutants\ctr\Output187.model
+Alive mutant 33: \PSSM.Entry002A\mutants\cet\Output17.model
+Alive mutant 34: \PSSM.Entry002A\mutants\ccs\Output27.model
+Alive mutant 35: \PSSM.Entry002A\mutants\ctr\Output167.model
+Alive mutant 36: \PSSM.Entry002A\mutants\ctr\Output177.model
+Alive mutant 37: \PSSM.Entry002A\mutants\ccs\Output20.model
+Alive mutant 38: \PSSM.Entry002A\mutants\ccfs\Output21.model
+Alive mutant 39: \PSSM.Entry002A\mutants\cev\Output24.model
+Alive mutant 40: \PSSM.Entry002A\mutants\cet\Output20.model
+Alive mutant 41: \PSSM.Entry002A\mutants\dtr\Output21.model
+Alive mutant 42: \PSSM.Entry002A\mutants\ctr\Output183.model
+Alive mutant 43: \PSSM.Entry002A\mutants\ctr\Output173.model
+Alive mutant 44: \PSSM.Entry002A\mutants\ctr\Output170.model
+Alive mutant 45: \PSSM.Entry002A\mutants\ctr\Output180.model
+Alive mutant 46: \PSSM.Entry002A\mutants\ctr\Output160.model
+Alive mutant 47: \PSSM.Entry002A\mutants\ctt\Output151.model
+Alive mutant 48: \PSSM.Entry002A\mutants\ctr\Output181.model
+Alive mutant 49: \PSSM.Entry002A\mutants\ctr\Output168.model
+Alive mutant 50: \PSSM.Entry002A\mutants\dtr\Output23.model
+Alive mutant 51: \PSSM.Entry002A\mutants\ctr\Output161.model
+Alive mutant 52: \PSSM.Entry002A\mutants\ctr\Output133.model
+Alive mutant 53: \PSSM.Entry002A\mutants\ctr\Output176.model
+Alive mutant 54: \PSSM.Entry002A\mutants\cev\Output20.model
+Alive mutant 55: \PSSM.Entry002A\mutants\ctt\Output148.model
+Alive mutant 56: \PSSM.Entry002A\mutants\ctr2\Output21.model
+Alive mutant 57: \PSSM.Entry002A\mutants\ccs\Output21.model
+Alive mutant 58: \PSSM.Entry002A\mutants\ctr\Output136.model
+Alive mutant 59: \PSSM.Entry002A\mutants\ccs\Output24.model
+Alive mutant 60: \PSSM.Entry002A\mutants\ctr2\Output24.model
+Alive mutant 61: \PSSM.Entry002A\mutants\ctr2\Output27.model
+Alive mutant 62: \PSSM.Entry002A\mutants\ctr\Output179.model
+Alive mutant 63: \PSSM.Entry002A\mutants\ctr\Output164.model
+Alive mutant 64: \PSSM.Entry002A\mutants\ctr\Output184.model

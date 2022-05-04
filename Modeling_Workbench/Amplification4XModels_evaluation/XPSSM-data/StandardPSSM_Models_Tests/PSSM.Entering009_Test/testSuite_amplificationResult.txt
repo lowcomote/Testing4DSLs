@@ -1,0 +1,54 @@
+Total number of mutants: 107
+- initial number of killed mutants: 70
+- initial mutation score: 65.42056074766354%
+Total number of test cases improving mutation score: 2
+- number of mutants killed by improved test cases: 7
+- total number of killed mutants : 77
+- final mutation score : 71.96261682242991%
+=> improvement in the mutation score : 6.542056074766355%
+--------------------------------------------------
+iteration 1: 1 generated test cases
+Amplified Test Case: Entering009_Test0_EventDuplication
+Killed mutant 1: \PSSM.Entering009\mutants\rev\Output0.model
+Killed mutant 2: \PSSM.Entering009\mutants\cet\Output2.model
+Killed mutant 3: \PSSM.Entering009\mutants\cet\Output0.model
+Killed mutant 4: \PSSM.Entering009\mutants\cet\Output1.model
+
+iteration 2: 1 generated test cases
+Amplified Test Case: Entering009_Test0_EventDuplication1_EventDuplication
+Killed mutant 1: \PSSM.Entering009\mutants\ctr\Output4.model
+Killed mutant 2: \PSSM.Entering009\mutants\ctr2\Output1.model
+Killed mutant 3: \PSSM.Entering009\mutants\ctt\Output5.model
+
+--------------------------------------------------
+List of Alive mutants:
+Alive mutant 1: \PSSM.Entering009\mutants\ctr\Output11.model
+Alive mutant 2: \PSSM.Entering009\mutants\ccfs\Output4.model
+Alive mutant 3: \PSSM.Entering009\mutants\dtr\Output1.model
+Alive mutant 4: \PSSM.Entering009\mutants\ctr2\Output3.model
+Alive mutant 5: \PSSM.Entering009\mutants\ccfs\Output1.model
+Alive mutant 6: \PSSM.Entering009\mutants\dtr\Output0.model
+Alive mutant 7: \PSSM.Entering009\mutants\ctr2\Output0.model
+Alive mutant 8: \PSSM.Entering009\mutants\ctt\Output3.model
+Alive mutant 9: \PSSM.Entering009\mutants\ctr\Output15.model
+Alive mutant 10: \PSSM.Entering009\mutants\ctr\Output6.model
+Alive mutant 11: \PSSM.Entering009\mutants\ctr\Output12.model
+Alive mutant 12: \PSSM.Entering009\mutants\ctr2\Output2.model
+Alive mutant 13: \PSSM.Entering009\mutants\ctr\Output9.model
+Alive mutant 14: \PSSM.Entering009\mutants\ctr\Output1.model
+Alive mutant 15: \PSSM.Entering009\mutants\ccfs\Output3.model
+Alive mutant 16: \PSSM.Entering009\mutants\cev\Output2.model
+Alive mutant 17: \PSSM.Entering009\mutants\ctr\Output10.model
+Alive mutant 18: \PSSM.Entering009\mutants\ccs\Output0.model
+Alive mutant 19: \PSSM.Entering009\mutants\ctr\Output3.model
+Alive mutant 20: \PSSM.Entering009\mutants\dtr\Output2.model
+Alive mutant 21: \PSSM.Entering009\mutants\ctr\Output7.model
+Alive mutant 22: \PSSM.Entering009\mutants\cev\Output0.model
+Alive mutant 23: \PSSM.Entering009\mutants\ctr\Output14.model
+Alive mutant 24: \PSSM.Entering009\mutants\ctr\Output8.model
+Alive mutant 25: \PSSM.Entering009\mutants\ctr\Output13.model
+Alive mutant 26: \PSSM.Entering009\mutants\ctr\Output2.model
+Alive mutant 27: \PSSM.Entering009\mutants\ccfs\Output2.model
+Alive mutant 28: \PSSM.Entering009\mutants\ctr\Output0.model
+Alive mutant 29: \PSSM.Entering009\mutants\cev\Output3.model
+Alive mutant 30: \PSSM.Entering009\mutants\ctr\Output5.model

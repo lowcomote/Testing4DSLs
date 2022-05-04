@@ -1,0 +1,19 @@
+Total number of mutants: 158
+- initial number of killed mutants: 152
+- initial mutation score: 96.20253164556962%
+Total number of test cases improving mutation score: 1
+- number of mutants killed by improved test cases: 6
+- total number of killed mutants : 158
+- final mutation score : 100.0%
+=> improvement in the mutation score : 3.797468354430378%
+--------------------------------------------------
+iteration 1: 1 generated test cases
+Amplified Test Case: Transition011_Test_B0_EventDuplication
+Killed mutant 1: \PSSM.Transition011B\mutants\cet\Output61.model
+Killed mutant 2: \PSSM.Transition011B\mutants\cet\Output63.model
+Killed mutant 3: \PSSM.Transition011B\mutants\cet\Output60.model
+Killed mutant 4: \PSSM.Transition011B\mutants\rev\Output13.model
+Killed mutant 5: \PSSM.Transition011B\mutants\cet\Output62.model
+Killed mutant 6: \PSSM.Transition011B\mutants\cst\Output112.model
+
+--------------------------------------------------

@@ -1,0 +1,42 @@
+Total number of mutants: 733
+- initial number of killed mutants: 720
+- initial mutation score: 98.22646657571623%
+Total number of test cases improving mutation score: 9
+- number of mutants killed by improved test cases: 13
+- total number of killed mutants : 733
+- final mutation score : 100.0%
+=> improvement in the mutation score : 1.7735334242837686%
+--------------------------------------------------
+iteration 1: 9 generated test cases
+Amplified Test Case: test55_EventDeletion
+Killed mutant 1: \PSSM.BankATM_Mutants\mutants\ctt\Output694.model
+
+Amplified Test Case: test70_EventDuplication
+Killed mutant 1: \PSSM.BankATM_Mutants\mutants\ctt\Output159.model
+
+Amplified Test Case: test77_EventDeletion
+Killed mutant 1: \PSSM.BankATM_Mutants\mutants\ctt\Output195.model
+
+Amplified Test Case: test88_EventDeletion
+Killed mutant 1: \PSSM.BankATM_Mutants\mutants\ctt\Output683.model
+
+Amplified Test Case: test89_EventDeletion
+Killed mutant 1: \PSSM.BankATM_Mutants\mutants\ctt\Output291.model
+Killed mutant 2: \PSSM.BankATM_Mutants\mutants\ctt\Output411.model
+
+Amplified Test Case: test91_EventDuplication
+Killed mutant 1: \PSSM.BankATM_Mutants\mutants\ctt\Output432.model
+
+Amplified Test Case: test92_EventDuplication
+Killed mutant 1: \PSSM.BankATM_Mutants\mutants\ctt\Output309.model
+
+Amplified Test Case: test94_EventDuplication
+Killed mutant 1: \PSSM.BankATM_Mutants\mutants\ctt\Output349.model
+Killed mutant 2: \PSSM.BankATM_Mutants\mutants\ctt\Output79.model
+Killed mutant 3: \PSSM.BankATM_Mutants\mutants\ctt\Output388.model
+Killed mutant 4: \PSSM.BankATM_Mutants\mutants\ctt\Output373.model
+
+Amplified Test Case: test104_EventDeletion
+Killed mutant 1: \PSSM.BankATM_Mutants\mutants\ctt\Output456.model
+
+--------------------------------------------------

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ASCII"?>
+<statemachines:CustomSystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:statemachines="http://org.imt.pssm.reactive/statemachines/" xsi:schemaLocation="http://org.imt.pssm.reactive/statemachines/ ../../../model/statemachines.ecore">
+  <statemachine name="Event017_Test_B$behavior$1"/>
+  <signals name="Data">
+    <attributes xsi:type="statemachines:BooleanAttribute" name="value"/>
+  </signals>
+  <signals name="Continue"/>
+</statemachines:CustomSystem>

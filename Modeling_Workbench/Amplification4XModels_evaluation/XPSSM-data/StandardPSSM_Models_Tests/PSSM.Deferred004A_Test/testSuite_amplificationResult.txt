@@ -1,0 +1,56 @@
+Total number of mutants: 340
+- initial number of killed mutants: 307
+- initial mutation score: 90.29411764705883%
+Total number of test cases improving mutation score: 6
+- number of mutants killed by improved test cases: 33
+- total number of killed mutants : 340
+- final mutation score : 100.0%
+=> improvement in the mutation score : 9.705882352941176%
+--------------------------------------------------
+iteration 1: 6 generated test cases
+Amplified Test Case: Deferred004_Test_A0_EventDuplication
+Killed mutant 1: \PSSM.Deferred004A\mutants\cet\Output28.model
+Killed mutant 2: \PSSM.Deferred004A\mutants\ctr\Output18.model
+Killed mutant 3: \PSSM.Deferred004A\mutants\ctr\Output46.model
+Killed mutant 4: \PSSM.Deferred004A\mutants\cet\Output23.model
+Killed mutant 5: \PSSM.Deferred004A\mutants\cet\Output13.model
+Killed mutant 6: \PSSM.Deferred004A\mutants\ctt\Output43.model
+Killed mutant 7: \PSSM.Deferred004A\mutants\ccfs\Output2.model
+Killed mutant 8: \PSSM.Deferred004A\mutants\ctt\Output35.model
+Killed mutant 9: \PSSM.Deferred004A\mutants\cet\Output30.model
+Killed mutant 10: \PSSM.Deferred004A\mutants\ctr\Output11.model
+Killed mutant 11: \PSSM.Deferred004A\mutants\cet\Output25.model
+Killed mutant 12: \PSSM.Deferred004A\mutants\ctr2\Output6.model
+Killed mutant 13: \PSSM.Deferred004A\mutants\cet\Output32.model
+Killed mutant 14: \PSSM.Deferred004A\mutants\ctr\Output12.model
+Killed mutant 15: \PSSM.Deferred004A\mutants\cet\Output27.model
+Killed mutant 16: \PSSM.Deferred004A\mutants\ctr\Output37.model
+Killed mutant 17: \PSSM.Deferred004A\mutants\rev\Output5.model
+Killed mutant 18: \PSSM.Deferred004A\mutants\ccfs\Output3.model
+Killed mutant 19: \PSSM.Deferred004A\mutants\dtr\Output3.model
+Killed mutant 20: \PSSM.Deferred004A\mutants\cet\Output29.model
+Killed mutant 21: \PSSM.Deferred004A\mutants\cet\Output31.model
+Killed mutant 22: \PSSM.Deferred004A\mutants\ctr\Output45.model
+
+Amplified Test Case: Deferred004_Test_A1_EventDuplication
+Killed mutant 1: \PSSM.Deferred004A\mutants\cfs\Output2.model
+Killed mutant 2: \PSSM.Deferred004A\mutants\ccs\Output3.model
+Killed mutant 3: \PSSM.Deferred004A\mutants\ctt\Output48.model
+Killed mutant 4: \PSSM.Deferred004A\mutants\ctr\Output40.model
+Killed mutant 5: \PSSM.Deferred004A\mutants\ctr\Output52.model
+Killed mutant 6: \PSSM.Deferred004A\mutants\ctr\Output8.model
+Killed mutant 7: \PSSM.Deferred004A\mutants\ctr\Output17.model
+
+Amplified Test Case: Deferred004_Test_A2_EventDuplication
+Killed mutant 1: \PSSM.Deferred004A\mutants\ctr\Output51.model
+
+Amplified Test Case: Deferred004_Test_A3_EventDuplication
+Killed mutant 1: \PSSM.Deferred004A\mutants\cst\Output27.model
+
+Amplified Test Case: Deferred004_Test_A5_EventDeletion
+Killed mutant 1: \PSSM.Deferred004A\mutants\ctt\Output29.model
+
+Amplified Test Case: Deferred004_Test_A9_EventDeletion
+Killed mutant 1: \PSSM.Deferred004A\mutants\ctr\Output23.model
+
+--------------------------------------------------

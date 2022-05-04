@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" uid="_NpjtsGloEeymCpqPpiNlzQ" version="14.5.1.202106111100">
+  <semanticResources>model/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115140/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115151/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115202/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115203/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115204/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115214/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115215/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115226/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115237/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115248/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115259/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115310/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115321/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115332/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115343/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115354/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115405/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115416/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115427/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115438/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115449/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115500/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115511/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115521/OnlineShopping.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220428_115532/OnlineShopping.model</semanticResources>
+</viewpoint:DAnalysis>

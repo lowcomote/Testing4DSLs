@@ -1,0 +1,114 @@
+Total number of mutants: 285
+- initial number of killed mutants: 185
+- initial mutation score: 64.91228070175438%
+Total number of test cases improving mutation score: 1
+- number of mutants killed by improved test cases: 4
+- total number of killed mutants : 189
+- final mutation score : 66.3157894736842%
+=> improvement in the mutation score : 1.4035087719298178%
+--------------------------------------------------
+iteration 1: 1 generated test cases
+Amplified Test Case: Fork002_Test0_EventDuplication
+Killed mutant 1: \PSSM.Fork002\mutants\cet\Output0.model
+Killed mutant 2: \PSSM.Fork002\mutants\cet\Output5.model
+Killed mutant 3: \PSSM.Fork002\mutants\cet\Output1.model
+Killed mutant 4: \PSSM.Fork002\mutants\rev\Output0.model
+
+--------------------------------------------------
+List of Alive mutants:
+Alive mutant 1: \PSSM.Fork002\mutants\ctr\Output36.model
+Alive mutant 2: \PSSM.Fork002\mutants\ccs\Output2.model
+Alive mutant 3: \PSSM.Fork002\mutants\ctt\Output63.model
+Alive mutant 4: \PSSM.Fork002\mutants\dtr\Output6.model
+Alive mutant 5: \PSSM.Fork002\mutants\ccfs\Output6.model
+Alive mutant 6: \PSSM.Fork002\mutants\ctt\Output30.model
+Alive mutant 7: \PSSM.Fork002\mutants\ctr\Output62.model
+Alive mutant 8: \PSSM.Fork002\mutants\ctr\Output52.model
+Alive mutant 9: \PSSM.Fork002\mutants\ctr2\Output0.model
+Alive mutant 10: \PSSM.Fork002\mutants\ccfs\Output3.model
+Alive mutant 11: \PSSM.Fork002\mutants\ctr\Output22.model
+Alive mutant 12: \PSSM.Fork002\mutants\ctr\Output12.model
+Alive mutant 13: \PSSM.Fork002\mutants\ccs\Output6.model
+Alive mutant 14: \PSSM.Fork002\mutants\cfs\Output4.model
+Alive mutant 15: \PSSM.Fork002\mutants\ctr\Output42.model
+Alive mutant 16: \PSSM.Fork002\mutants\ctr\Output32.model
+Alive mutant 17: \PSSM.Fork002\mutants\ctt\Output26.model
+Alive mutant 18: \PSSM.Fork002\mutants\ctr\Output30.model
+Alive mutant 19: \PSSM.Fork002\mutants\ctr2\Output4.model
+Alive mutant 20: \PSSM.Fork002\mutants\ctr\Output27.model
+Alive mutant 21: \PSSM.Fork002\mutants\ctr\Output45.model
+Alive mutant 22: \PSSM.Fork002\mutants\ctr\Output25.model
+Alive mutant 23: \PSSM.Fork002\mutants\cev\Output5.model
+Alive mutant 24: \PSSM.Fork002\mutants\ctr\Output50.model
+Alive mutant 25: \PSSM.Fork002\mutants\ctr\Output19.model
+Alive mutant 26: \PSSM.Fork002\mutants\ctr\Output10.model
+Alive mutant 27: \PSSM.Fork002\mutants\ctt\Output28.model
+Alive mutant 28: \PSSM.Fork002\mutants\dtr\Output7.model
+Alive mutant 29: \PSSM.Fork002\mutants\ctr\Output39.model
+Alive mutant 30: \PSSM.Fork002\mutants\ctr\Output33.model
+Alive mutant 31: \PSSM.Fork002\mutants\ctr2\Output1.model
+Alive mutant 32: \PSSM.Fork002\mutants\ctt\Output22.model
+Alive mutant 33: \PSSM.Fork002\mutants\ctr\Output13.model
+Alive mutant 34: \PSSM.Fork002\mutants\ctr\Output59.model
+Alive mutant 35: \PSSM.Fork002\mutants\ctr\Output53.model
+Alive mutant 36: \PSSM.Fork002\mutants\ctr\Output61.model
+Alive mutant 37: \PSSM.Fork002\mutants\ctr\Output41.model
+Alive mutant 38: \PSSM.Fork002\mutants\dtr\Output0.model
+Alive mutant 39: \PSSM.Fork002\mutants\cfs\Output8.model
+Alive mutant 40: \PSSM.Fork002\mutants\ctt\Output62.model
+Alive mutant 41: \PSSM.Fork002\mutants\ctr\Output56.model
+Alive mutant 42: \PSSM.Fork002\mutants\ctr\Output16.model
+Alive mutant 43: \PSSM.Fork002\mutants\ctr\Output11.model
+Alive mutant 44: \PSSM.Fork002\mutants\dtr\Output4.model
+Alive mutant 45: \PSSM.Fork002\mutants\ctr\Output21.model
+Alive mutant 46: \PSSM.Fork002\mutants\ccfs\Output4.model
+Alive mutant 47: \PSSM.Fork002\mutants\ctt\Output25.model
+Alive mutant 48: \PSSM.Fork002\mutants\ctr2\Output5.model
+Alive mutant 49: \PSSM.Fork002\mutants\ctt\Output4.model
+Alive mutant 50: \PSSM.Fork002\mutants\ctr\Output28.model
+Alive mutant 51: \PSSM.Fork002\mutants\ctr\Output44.model
+Alive mutant 52: \PSSM.Fork002\mutants\ctr\Output38.model
+Alive mutant 53: \PSSM.Fork002\mutants\ctr\Output18.model
+Alive mutant 54: \PSSM.Fork002\mutants\cev\Output2.model
+Alive mutant 55: \PSSM.Fork002\mutants\ccs\Output4.model
+Alive mutant 56: \PSSM.Fork002\mutants\ctr\Output9.model
+Alive mutant 57: \PSSM.Fork002\mutants\ctr\Output48.model
+Alive mutant 58: \PSSM.Fork002\mutants\cev\Output6.model
+Alive mutant 59: \PSSM.Fork002\mutants\ctr\Output54.model
+Alive mutant 60: \PSSM.Fork002\mutants\ctr\Output34.model
+Alive mutant 61: \PSSM.Fork002\mutants\ctr\Output14.model
+Alive mutant 62: \PSSM.Fork002\mutants\ccfs\Output1.model
+Alive mutant 63: \PSSM.Fork002\mutants\ctr\Output24.model
+Alive mutant 64: \PSSM.Fork002\mutants\cfs\Output6.model
+Alive mutant 65: \PSSM.Fork002\mutants\cfs\Output7.model
+Alive mutant 66: \PSSM.Fork002\mutants\ctr\Output15.model
+Alive mutant 67: \PSSM.Fork002\mutants\ctr\Output47.model
+Alive mutant 68: \PSSM.Fork002\mutants\ctr\Output57.model
+Alive mutant 69: \PSSM.Fork002\mutants\ctr2\Output2.model
+Alive mutant 70: \PSSM.Fork002\mutants\cev\Output3.model
+Alive mutant 71: \PSSM.Fork002\mutants\ctt\Output11.model
+Alive mutant 72: \PSSM.Fork002\mutants\dtr\Output1.model
+Alive mutant 73: \PSSM.Fork002\mutants\ctr\Output17.model
+Alive mutant 74: \PSSM.Fork002\mutants\ctr\Output20.model
+Alive mutant 75: \PSSM.Fork002\mutants\ctt\Output64.model
+Alive mutant 76: \PSSM.Fork002\mutants\ctr\Output40.model
+Alive mutant 77: \PSSM.Fork002\mutants\ctr\Output37.model
+Alive mutant 78: \PSSM.Fork002\mutants\ctt\Output59.model
+Alive mutant 79: \PSSM.Fork002\mutants\ctr\Output35.model
+Alive mutant 80: \PSSM.Fork002\mutants\ctr\Output55.model
+Alive mutant 81: \PSSM.Fork002\mutants\ctt\Output24.model
+Alive mutant 82: \PSSM.Fork002\mutants\ctr\Output60.model
+Alive mutant 83: \PSSM.Fork002\mutants\ctt\Output18.model
+Alive mutant 84: \PSSM.Fork002\mutants\cfs\Output0.model
+Alive mutant 85: \PSSM.Fork002\mutants\ctr\Output58.model
+Alive mutant 86: \PSSM.Fork002\mutants\ctr\Output49.model
+Alive mutant 87: \PSSM.Fork002\mutants\ctr\Output29.model
+Alive mutant 88: \PSSM.Fork002\mutants\ctr\Output23.model
+Alive mutant 89: \PSSM.Fork002\mutants\ctr\Output43.model
+Alive mutant 90: \PSSM.Fork002\mutants\ctt\Output27.model
+Alive mutant 91: \PSSM.Fork002\mutants\ccfs\Output2.model
+Alive mutant 92: \PSSM.Fork002\mutants\ctr\Output51.model
+Alive mutant 93: \PSSM.Fork002\mutants\ctr\Output31.model
+Alive mutant 94: \PSSM.Fork002\mutants\ctr2\Output6.model
+Alive mutant 95: \PSSM.Fork002\mutants\ctr\Output46.model
+Alive mutant 96: \PSSM.Fork002\mutants\ctr\Output26.model

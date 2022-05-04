@@ -1,0 +1,38 @@
+Total number of mutants: 55
+- initial number of killed mutants: 33
+- initial mutation score: 60.0%
+Total number of test cases improving mutation score: 2
+- number of mutants killed by improved test cases: 2
+- total number of killed mutants : 35
+- final mutation score : 63.63636363636363%
+=> improvement in the mutation score : 3.6363636363636376%
+--------------------------------------------------
+iteration = 1
+Amplified Test Case: Behavior003_Test0_EventDuplication
+Killed mutant 1: \PSSM.Behavior003\mutants\ctt\Output0.model
+
+Amplified Test Case: Behavior003_Test3_EventDeletion
+Killed mutant 1: \PSSM.Behavior003\mutants\cet\Output1.model
+
+--------------------------------------------------
+List of Alive mutants:
+Alive mutant 1: \PSSM.Behavior003\mutants\cev\Output1.model
+Alive mutant 2: \PSSM.Behavior003\mutants\dtr\Output2.model
+Alive mutant 3: \PSSM.Behavior003\mutants\rev\Output0.model
+Alive mutant 4: \PSSM.Behavior003\mutants\dtr\Output1.model
+Alive mutant 5: \PSSM.Behavior003\mutants\cev\Output0.model
+Alive mutant 6: \PSSM.Behavior003\mutants\ctr\Output6.model
+Alive mutant 7: \PSSM.Behavior003\mutants\ctr\Output2.model
+Alive mutant 8: \PSSM.Behavior003\mutants\ctr\Output1.model
+Alive mutant 9: \PSSM.Behavior003\mutants\ccs\Output2.model
+Alive mutant 10: \PSSM.Behavior003\mutants\ctr\Output7.model
+Alive mutant 11: \PSSM.Behavior003\mutants\ctr\Output8.model
+Alive mutant 12: \PSSM.Behavior003\mutants\ccfs\Output0.model
+Alive mutant 13: \PSSM.Behavior003\mutants\ctt\Output4.model
+Alive mutant 14: \PSSM.Behavior003\mutants\ccfs\Output2.model
+Alive mutant 15: \PSSM.Behavior003\mutants\ccs\Output1.model
+Alive mutant 16: \PSSM.Behavior003\mutants\ctt\Output5.model
+Alive mutant 17: \PSSM.Behavior003\mutants\ctr2\Output2.model
+Alive mutant 18: \PSSM.Behavior003\mutants\cet\Output0.model
+Alive mutant 19: \PSSM.Behavior003\mutants\ctr2\Output1.model
+Alive mutant 20: \PSSM.Behavior003\mutants\ctr\Output0.model

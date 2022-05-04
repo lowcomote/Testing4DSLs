@@ -1,0 +1,39 @@
+Total number of mutants: 407
+- initial number of killed mutants: 384
+- initial mutation score: 94.34889434889435%
+Total number of test cases improving mutation score: 2
+- number of mutants killed by improved test cases: 12
+- total number of killed mutants : 396
+- final mutation score : 97.2972972972973%
+=> improvement in the mutation score : 2.9484029484029506%
+--------------------------------------------------
+iteration 1: 2 generated test cases
+Amplified Test Case: Deferred004_Test_B0_EventDuplication
+Killed mutant 1: \PSSM.Deferred004B\mutants\cet\Output24.model
+Killed mutant 2: \PSSM.Deferred004B\mutants\cet\Output26.model
+Killed mutant 3: \PSSM.Deferred004B\mutants\cst\Output27.model
+Killed mutant 4: \PSSM.Deferred004B\mutants\cet\Output20.model
+Killed mutant 5: \PSSM.Deferred004B\mutants\cst\Output3.model
+Killed mutant 6: \PSSM.Deferred004B\mutants\cet\Output19.model
+Killed mutant 7: \PSSM.Deferred004B\mutants\cet\Output25.model
+Killed mutant 8: \PSSM.Deferred004B\mutants\rev\Output2.model
+Killed mutant 9: \PSSM.Deferred004B\mutants\cet\Output27.model
+Killed mutant 10: \PSSM.Deferred004B\mutants\cet\Output23.model
+
+Amplified Test Case: Deferred004_Test_B3_EventDuplication
+Killed mutant 1: \PSSM.Deferred004B\mutants\cet\Output10.model
+Killed mutant 2: \PSSM.Deferred004B\mutants\rev\Output1.model
+
+--------------------------------------------------
+List of Alive mutants:
+Alive mutant 1: \PSSM.Deferred004B\mutants\ctr\Output76.model
+Alive mutant 2: \PSSM.Deferred004B\mutants\ctr\Output28.model
+Alive mutant 3: \PSSM.Deferred004B\mutants\cev\Output6.model
+Alive mutant 4: \PSSM.Deferred004B\mutants\ctr\Output44.model
+Alive mutant 5: \PSSM.Deferred004B\mutants\ctr\Output36.model
+Alive mutant 6: \PSSM.Deferred004B\mutants\ctr\Output23.model
+Alive mutant 7: \PSSM.Deferred004B\mutants\ctt\Output74.model
+Alive mutant 8: \PSSM.Deferred004B\mutants\cfs\Output3.model
+Alive mutant 9: \PSSM.Deferred004B\mutants\ctr\Output42.model
+Alive mutant 10: \PSSM.Deferred004B\mutants\rtr\Output6.model
+Alive mutant 11: \PSSM.Deferred004B\mutants\ctr\Output50.model

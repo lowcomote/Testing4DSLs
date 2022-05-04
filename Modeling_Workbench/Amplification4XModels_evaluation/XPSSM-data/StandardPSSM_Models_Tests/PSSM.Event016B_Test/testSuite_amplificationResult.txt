@@ -1,0 +1,57 @@
+Total number of mutants: 663
+- initial number of killed mutants: 622
+- initial mutation score: 93.81598793363499%
+Total number of test cases improving mutation score: 2
+- number of mutants killed by improved test cases: 41
+- total number of killed mutants : 663
+- final mutation score : 100.0%
+=> improvement in the mutation score : 6.184012066365008%
+--------------------------------------------------
+iteration 1: 1 generated test cases
+Amplified Test Case: Event016_Test_B0_EventDuplication
+Killed mutant 1: \PSSM.Event016B\mutants\cet\Output9.model
+Killed mutant 2: \PSSM.Event016B\mutants\cet\Output4.model
+
+iteration 2: 1 generated test cases
+Amplified Test Case: Event016_Test_B0_EventDuplication10_EventDeletion
+Killed mutant 1: \PSSM.Event016B\mutants\ccfs\Output5.model
+Killed mutant 2: \PSSM.Event016B\mutants\ctt\Output99.model
+Killed mutant 3: \PSSM.Event016B\mutants\ctr\Output4.model
+Killed mutant 4: \PSSM.Event016B\mutants\ctt\Output41.model
+Killed mutant 5: \PSSM.Event016B\mutants\cst\Output77.model
+Killed mutant 6: \PSSM.Event016B\mutants\ctr\Output77.model
+Killed mutant 7: \PSSM.Event016B\mutants\ctt\Output46.model
+Killed mutant 8: \PSSM.Event016B\mutants\cet\Output22.model
+Killed mutant 9: \PSSM.Event016B\mutants\ctr\Output62.model
+Killed mutant 10: \PSSM.Event016B\mutants\cst\Output69.model
+Killed mutant 11: \PSSM.Event016B\mutants\ctt\Output100.model
+Killed mutant 12: \PSSM.Event016B\mutants\ctr\Output122.model
+Killed mutant 13: \PSSM.Event016B\mutants\cev\Output9.model
+Killed mutant 14: \PSSM.Event016B\mutants\cev\Output2.model
+Killed mutant 15: \PSSM.Event016B\mutants\ctr\Output81.model
+Killed mutant 16: \PSSM.Event016B\mutants\ctr\Output129.model
+Killed mutant 17: \PSSM.Event016B\mutants\cev\Output7.model
+Killed mutant 18: \PSSM.Event016B\mutants\ctr\Output124.model
+Killed mutant 19: \PSSM.Event016B\mutants\ctr\Output19.model
+Killed mutant 20: \PSSM.Event016B\mutants\cat\Output11.model
+Killed mutant 21: \PSSM.Event016B\mutants\rev\Output7.model
+Killed mutant 22: \PSSM.Event016B\mutants\cst\Output16.model
+Killed mutant 23: \PSSM.Event016B\mutants\cat\Output56.model
+Killed mutant 24: \PSSM.Event016B\mutants\ctr\Output56.model
+Killed mutant 25: \PSSM.Event016B\mutants\cst\Output18.model
+Killed mutant 26: \PSSM.Event016B\mutants\ccs\Output3.model
+Killed mutant 27: \PSSM.Event016B\mutants\ccs\Output8.model
+Killed mutant 28: \PSSM.Event016B\mutants\ctt\Output107.model
+Killed mutant 29: \PSSM.Event016B\mutants\ctr\Output111.model
+Killed mutant 30: \PSSM.Event016B\mutants\cev\Output12.model
+Killed mutant 31: \PSSM.Event016B\mutants\ccs\Output1.model
+Killed mutant 32: \PSSM.Event016B\mutants\ctr2\Output8.model
+Killed mutant 33: \PSSM.Event016B\mutants\ctt\Output134.model
+Killed mutant 34: \PSSM.Event016B\mutants\cet\Output19.model
+Killed mutant 35: \PSSM.Event016B\mutants\ctr\Output130.model
+Killed mutant 36: \PSSM.Event016B\mutants\ctr\Output35.model
+Killed mutant 37: \PSSM.Event016B\mutants\ctt\Output94.model
+Killed mutant 38: \PSSM.Event016B\mutants\ctr\Output70.model
+Killed mutant 39: \PSSM.Event016B\mutants\ctt\Output121.model
+
+--------------------------------------------------

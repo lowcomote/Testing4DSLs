@@ -1,0 +1,49 @@
+Total number of mutants: 113
+- initial number of killed mutants: 86
+- initial mutation score: 76.10619469026548%
+Total number of test cases improving mutation score: 5
+- number of mutants killed by improved test cases: 27
+- total number of killed mutants : 113
+- final mutation score : 100.0%
+=> improvement in the mutation score : 23.893805309734518%
+--------------------------------------------------
+iteration = 1
+Amplified Test Case: Transition007_Test4_EventDeletion
+Killed mutant 1: \PSSM.Transition007\mutants\ctr2\Output50.model
+Killed mutant 2: \PSSM.Transition007\mutants\ctr\Output246.model
+Killed mutant 3: \PSSM.Transition007\mutants\dtr\Output47.model
+
+Amplified Test Case: Transition007_Test5_EventDeletion
+Killed mutant 1: \PSSM.Transition007\mutants\dtr\Output48.model
+Killed mutant 2: \PSSM.Transition007\mutants\ctr\Output244.model
+Killed mutant 3: \PSSM.Transition007\mutants\ctr\Output253.model
+Killed mutant 4: \PSSM.Transition007\mutants\ccfs\Output46.model
+Killed mutant 5: \PSSM.Transition007\mutants\ctt\Output200.model
+Killed mutant 6: \PSSM.Transition007\mutants\ctr\Output240.model
+Killed mutant 7: \PSSM.Transition007\mutants\ctr\Output245.model
+
+Amplified Test Case: Transition007_Test6_EventDeletion
+Killed mutant 1: \PSSM.Transition007\mutants\ctr2\Output51.model
+Killed mutant 2: \PSSM.Transition007\mutants\cev\Output50.model
+Killed mutant 3: \PSSM.Transition007\mutants\ctr\Output241.model
+Killed mutant 4: \PSSM.Transition007\mutants\ctr\Output251.model
+Killed mutant 5: \PSSM.Transition007\mutants\cev\Output48.model
+Killed mutant 6: \PSSM.Transition007\mutants\ctr\Output252.model
+Killed mutant 7: \PSSM.Transition007\mutants\dtr\Output50.model
+Killed mutant 8: \PSSM.Transition007\mutants\cev\Output46.model
+Killed mutant 9: \PSSM.Transition007\mutants\ctr\Output239.model
+
+Amplified Test Case: Transition007_Test7_EventDeletion
+Killed mutant 1: \PSSM.Transition007\mutants\rev\Output20.model
+Killed mutant 2: \PSSM.Transition007\mutants\ccfs\Output47.model
+Killed mutant 3: \PSSM.Transition007\mutants\ctr\Output254.model
+Killed mutant 4: \PSSM.Transition007\mutants\ctr\Output242.model
+Killed mutant 5: \PSSM.Transition007\mutants\ctr2\Output49.model
+
+iteration = 2
+Amplified Test Case: Transition007_Test4_EventDeletion1_EventDuplication
+Killed mutant 1: \PSSM.Transition007\mutants\ctt\Output199.model
+Killed mutant 2: \PSSM.Transition007\mutants\ctr\Output243.model
+Killed mutant 3: \PSSM.Transition007\mutants\dtr\Output49.model
+
+--------------------------------------------------

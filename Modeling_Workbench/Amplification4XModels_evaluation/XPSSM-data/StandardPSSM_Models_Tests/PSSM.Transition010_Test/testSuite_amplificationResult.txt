@@ -1,0 +1,50 @@
+Total number of mutants: 81
+- initial number of killed mutants: 57
+- initial mutation score: 70.37037037037037%
+Total number of test cases improving mutation score: 7
+- number of mutants killed by improved test cases: 24
+- total number of killed mutants : 81
+- final mutation score : 100.0%
+=> improvement in the mutation score : 29.629629629629626%
+--------------------------------------------------
+iteration 1: 5 generated test cases
+Amplified Test Case: Transition0100_EventDuplication
+Killed mutant 1: \PSSM.Transition010\mutants\cet\Output122.model
+Killed mutant 2: \PSSM.Transition010\mutants\rev\Output27.model
+
+Amplified Test Case: Transition0101_EventDuplication
+Killed mutant 1: \PSSM.Transition010\mutants\ctt\Output306.model
+Killed mutant 2: \PSSM.Transition010\mutants\ctr\Output399.model
+
+Amplified Test Case: Transition0102_EventDuplication
+Killed mutant 1: \PSSM.Transition010\mutants\ctr\Output395.model
+
+Amplified Test Case: Transition0108_EventDeletion
+Killed mutant 1: \PSSM.Transition010\mutants\ctr\Output397.model
+Killed mutant 2: \PSSM.Transition010\mutants\cev\Output70.model
+Killed mutant 3: \PSSM.Transition010\mutants\cev\Output71.model
+Killed mutant 4: \PSSM.Transition010\mutants\ccs\Output72.model
+Killed mutant 5: \PSSM.Transition010\mutants\dtr\Output72.model
+Killed mutant 6: \PSSM.Transition010\mutants\ctr\Output398.model
+Killed mutant 7: \PSSM.Transition010\mutants\ctr\Output394.model
+Killed mutant 8: \PSSM.Transition010\mutants\cev\Output69.model
+Killed mutant 9: \PSSM.Transition010\mutants\ctr2\Output78.model
+Killed mutant 10: \PSSM.Transition010\mutants\dtr\Output71.model
+Killed mutant 11: \PSSM.Transition010\mutants\ctt\Output304.model
+Killed mutant 12: \PSSM.Transition010\mutants\ctt\Output303.model
+Killed mutant 13: \PSSM.Transition010\mutants\ccfs\Output70.model
+Killed mutant 14: \PSSM.Transition010\mutants\ctr\Output396.model
+Killed mutant 15: \PSSM.Transition010\mutants\ccfs\Output71.model
+
+Amplified Test Case: Transition0109_EventDeletion
+Killed mutant 1: \PSSM.Transition010\mutants\ccs\Output74.model
+Killed mutant 2: \PSSM.Transition010\mutants\cev\Output72.model
+
+iteration 2: 2 generated test cases
+Amplified Test Case: Transition0100_EventDuplication0_EventDuplication
+Killed mutant 1: \PSSM.Transition010\mutants\dtr\Output70.model
+
+Amplified Test Case: Transition0100_EventDuplication2_EventDuplication
+Killed mutant 1: \PSSM.Transition010\mutants\ctr2\Output76.model
+
+--------------------------------------------------

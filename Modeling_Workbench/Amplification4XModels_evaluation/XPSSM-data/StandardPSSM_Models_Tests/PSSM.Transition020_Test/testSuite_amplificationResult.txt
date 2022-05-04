@@ -1,0 +1,65 @@
+Total number of mutants: 108
+- initial number of killed mutants: 66
+- initial mutation score: 61.111111111111114%
+Total number of test cases improving mutation score: 6
+- number of mutants killed by improved test cases: 42
+- total number of killed mutants : 108
+- final mutation score : 100.0%
+=> improvement in the mutation score : 38.888888888888886%
+--------------------------------------------------
+iteration 1: 6 generated test cases
+Amplified Test Case: Transition020_Test0_EventDuplication
+Killed mutant 1: \PSSM.Transition020\mutants\dtr\Output43.model
+Killed mutant 2: \PSSM.Transition020\mutants\ctt\Output175.model
+Killed mutant 3: \PSSM.Transition020\mutants\cet\Output72.model
+Killed mutant 4: \PSSM.Transition020\mutants\cac\Output43.model
+Killed mutant 5: \PSSM.Transition020\mutants\rev\Output15.model
+Killed mutant 6: \PSSM.Transition020\mutants\cet\Output70.model
+Killed mutant 7: \PSSM.Transition020\mutants\ctr\Output238.model
+Killed mutant 8: \PSSM.Transition020\mutants\ctr\Output236.model
+Killed mutant 9: \PSSM.Transition020\mutants\cst\Output120.model
+Killed mutant 10: \PSSM.Transition020\mutants\ctr\Output224.model
+Killed mutant 11: \PSSM.Transition020\mutants\cet\Output71.model
+Killed mutant 12: \PSSM.Transition020\mutants\cet\Output69.model
+
+Amplified Test Case: Transition020_Test1_EventDuplication
+Killed mutant 1: \PSSM.Transition020\mutants\cev\Output45.model
+Killed mutant 2: \PSSM.Transition020\mutants\ctt\Output181.model
+Killed mutant 3: \PSSM.Transition020\mutants\ccs\Output42.model
+Killed mutant 4: \PSSM.Transition020\mutants\ctr\Output223.model
+Killed mutant 5: \PSSM.Transition020\mutants\cev\Output42.model
+Killed mutant 6: \PSSM.Transition020\mutants\ctt\Output182.model
+Killed mutant 7: \PSSM.Transition020\mutants\ctt\Output187.model
+
+Amplified Test Case: Transition020_Test2_EventDuplication
+Killed mutant 1: \PSSM.Transition020\mutants\ccfs\Output43.model
+Killed mutant 2: \PSSM.Transition020\mutants\ctr\Output225.model
+Killed mutant 3: \PSSM.Transition020\mutants\dtr\Output45.model
+Killed mutant 4: \PSSM.Transition020\mutants\ctr\Output234.model
+Killed mutant 5: \PSSM.Transition020\mutants\ctr2\Output45.model
+Killed mutant 6: \PSSM.Transition020\mutants\ctr\Output235.model
+
+Amplified Test Case: Transition020_Test3_EventDeletion
+Killed mutant 1: \PSSM.Transition020\mutants\dtr\Output42.model
+Killed mutant 2: \PSSM.Transition020\mutants\cst\Output119.model
+Killed mutant 3: \PSSM.Transition020\mutants\ctt\Output183.model
+Killed mutant 4: \PSSM.Transition020\mutants\ctr\Output232.model
+Killed mutant 5: \PSSM.Transition020\mutants\cev\Output43.model
+Killed mutant 6: \PSSM.Transition020\mutants\ctr\Output233.model
+Killed mutant 7: \PSSM.Transition020\mutants\rac\Output40.model
+Killed mutant 8: \PSSM.Transition020\mutants\ctr2\Output47.model
+Killed mutant 9: \PSSM.Transition020\mutants\dtr\Output44.model
+Killed mutant 10: \PSSM.Transition020\mutants\ctr\Output237.model
+Killed mutant 11: \PSSM.Transition020\mutants\cev\Output41.model
+Killed mutant 12: \PSSM.Transition020\mutants\rtr\Output43.model
+Killed mutant 13: \PSSM.Transition020\mutants\ccfs\Output41.model
+Killed mutant 14: \PSSM.Transition020\mutants\ctr\Output226.model
+Killed mutant 15: \PSSM.Transition020\mutants\ccs\Output45.model
+
+Amplified Test Case: Transition020_Test4_EventDeletion
+Killed mutant 1: \PSSM.Transition020\mutants\ctr2\Output48.model
+
+Amplified Test Case: Transition020_Test5_EventDeletion
+Killed mutant 1: \PSSM.Transition020\mutants\ctr\Output231.model
+
+--------------------------------------------------

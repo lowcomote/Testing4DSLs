@@ -1,0 +1,84 @@
+Total number of mutants: 199
+- initial number of killed mutants: 133
+- initial mutation score: 66.83417085427136%
+Total number of test cases improving mutation score: 3
+- number of mutants killed by improved test cases: 66
+- total number of killed mutants : 199
+- final mutation score : 100.0%
+=> improvement in the mutation score : 33.165829145728644%
+--------------------------------------------------
+iteration 1: 2 generated test cases
+Amplified Test Case: Transition011_Test_A0_EventDuplication
+Killed mutant 1: \PSSM.Transition011A\mutants\ctt\Output18.model
+
+Amplified Test Case: Transition011_Test_A1_EventDuplication
+Killed mutant 1: \PSSM.Transition011A\mutants\cst\Output3.model
+
+iteration 2: 1 generated test cases
+Amplified Test Case: Transition011_Test_A1_EventDuplication2_EventDuplication
+Killed mutant 1: \PSSM.Transition011A\mutants\ctr\Output26.model
+Killed mutant 2: \PSSM.Transition011A\mutants\ctr2\Output3.model
+Killed mutant 3: \PSSM.Transition011A\mutants\ctt\Output20.model
+Killed mutant 4: \PSSM.Transition011A\mutants\dtr\Output4.model
+Killed mutant 5: \PSSM.Transition011A\mutants\ccs\Output4.model
+Killed mutant 6: \PSSM.Transition011A\mutants\ctr\Output5.model
+Killed mutant 7: \PSSM.Transition011A\mutants\ccs\Output0.model
+Killed mutant 8: \PSSM.Transition011A\mutants\ctr\Output9.model
+Killed mutant 9: \PSSM.Transition011A\mutants\cev\Output6.model
+Killed mutant 10: \PSSM.Transition011A\mutants\sdt\Output1.model
+Killed mutant 11: \PSSM.Transition011A\mutants\cac\Output1.model
+Killed mutant 12: \PSSM.Transition011A\mutants\ctt\Output7.model
+Killed mutant 13: \PSSM.Transition011A\mutants\dtr\Output1.model
+Killed mutant 14: \PSSM.Transition011A\mutants\cev\Output3.model
+Killed mutant 15: \PSSM.Transition011A\mutants\ctt\Output26.model
+Killed mutant 16: \PSSM.Transition011A\mutants\cst\Output5.model
+Killed mutant 17: \PSSM.Transition011A\mutants\ctr\Output22.model
+Killed mutant 18: \PSSM.Transition011A\mutants\ctr\Output2.model
+Killed mutant 19: \PSSM.Transition011A\mutants\ccfs\Output3.model
+Killed mutant 20: \PSSM.Transition011A\mutants\ctr\Output1.model
+Killed mutant 21: \PSSM.Transition011A\mutants\ctr\Output20.model
+Killed mutant 22: \PSSM.Transition011A\mutants\ctr\Output8.model
+Killed mutant 23: \PSSM.Transition011A\mutants\ccs\Output1.model
+Killed mutant 24: \PSSM.Transition011A\mutants\ctr\Output23.model
+Killed mutant 25: \PSSM.Transition011A\mutants\ctr\Output29.model
+Killed mutant 26: \PSSM.Transition011A\mutants\ctt\Output6.model
+Killed mutant 27: \PSSM.Transition011A\mutants\ctt\Output27.model
+Killed mutant 28: \PSSM.Transition011A\mutants\ctr\Output11.model
+Killed mutant 29: \PSSM.Transition011A\mutants\cst\Output6.model
+Killed mutant 30: \PSSM.Transition011A\mutants\ccfs\Output4.model
+Killed mutant 31: \PSSM.Transition011A\mutants\ctr\Output7.model
+Killed mutant 32: \PSSM.Transition011A\mutants\ctt\Output9.model
+Killed mutant 33: \PSSM.Transition011A\mutants\dtr\Output6.model
+Killed mutant 34: \PSSM.Transition011A\mutants\rtr\Output1.model
+Killed mutant 35: \PSSM.Transition011A\mutants\ctr\Output18.model
+Killed mutant 36: \PSSM.Transition011A\mutants\ctr\Output24.model
+Killed mutant 37: \PSSM.Transition011A\mutants\rev\Output1.model
+Killed mutant 38: \PSSM.Transition011A\mutants\cet\Output9.model
+Killed mutant 39: \PSSM.Transition011A\mutants\ctr\Output28.model
+Killed mutant 40: \PSSM.Transition011A\mutants\ctr\Output0.model
+Killed mutant 41: \PSSM.Transition011A\mutants\ctr\Output4.model
+Killed mutant 42: \PSSM.Transition011A\mutants\ccfs\Output1.model
+Killed mutant 43: \PSSM.Transition011A\mutants\ctt\Output19.model
+Killed mutant 44: \PSSM.Transition011A\mutants\ctr2\Output2.model
+Killed mutant 45: \PSSM.Transition011A\mutants\cev\Output0.model
+Killed mutant 46: \PSSM.Transition011A\mutants\cet\Output11.model
+Killed mutant 47: \PSSM.Transition011A\mutants\ctr2\Output5.model
+Killed mutant 48: \PSSM.Transition011A\mutants\ctr\Output10.model
+Killed mutant 49: \PSSM.Transition011A\mutants\ctr\Output25.model
+Killed mutant 50: \PSSM.Transition011A\mutants\ctr\Output27.model
+Killed mutant 51: \PSSM.Transition011A\mutants\ctt\Output5.model
+Killed mutant 52: \PSSM.Transition011A\mutants\ccfs\Output0.model
+Killed mutant 53: \PSSM.Transition011A\mutants\cet\Output5.model
+Killed mutant 54: \PSSM.Transition011A\mutants\cst\Output4.model
+Killed mutant 55: \PSSM.Transition011A\mutants\ctr\Output3.model
+Killed mutant 56: \PSSM.Transition011A\mutants\ctr\Output19.model
+Killed mutant 57: \PSSM.Transition011A\mutants\dtr\Output2.model
+Killed mutant 58: \PSSM.Transition011A\mutants\ctt\Output8.model
+Killed mutant 59: \PSSM.Transition011A\mutants\ctr\Output6.model
+Killed mutant 60: \PSSM.Transition011A\mutants\ctr\Output21.model
+Killed mutant 61: \PSSM.Transition011A\mutants\ctr2\Output1.model
+Killed mutant 62: \PSSM.Transition011A\mutants\dtr\Output5.model
+Killed mutant 63: \PSSM.Transition011A\mutants\cev\Output4.model
+Killed mutant 64: \PSSM.Transition011A\mutants\cfs\Output0.model
+
+--------------------------------------------------

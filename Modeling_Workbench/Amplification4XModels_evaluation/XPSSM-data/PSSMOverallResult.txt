@@ -1,0 +1,9 @@
+Mutants killed by tests amplified by event duplication:
+
+Mutants killed by tests amplified by event creation:
+
+Mutants killed by tests amplified by event deletion:
+
+Mutants killed by tests amplified by event permutation:
+
+Mutants killed by tests amplified by event modification:

@@ -1,0 +1,53 @@
+Total number of mutants: 199
+- initial number of killed mutants: 171
+- initial mutation score: 85.92964824120602%
+Total number of test cases improving mutation score: 7
+- number of mutants killed by improved test cases: 28
+- total number of killed mutants : 199
+- final mutation score : 100.0%
+=> improvement in the mutation score : 14.070351758793976%
+--------------------------------------------------
+iteration 1: 7 generated test cases
+Amplified Test Case: test94_IntegerModification
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\dtr\Output8.model
+
+Amplified Test Case: test95_IntegerModification
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\dtr\Output1.model
+Killed mutant 2: \PSSM.JavaThread_Mutants\mutants\dtr\Output10.model
+Killed mutant 3: \PSSM.JavaThread_Mutants\mutants\dtr\Output6.model
+
+Amplified Test Case: test96_IntegerModification
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\dtr\Output21.model
+Killed mutant 2: \PSSM.JavaThread_Mutants\mutants\rtr\Output4.model
+Killed mutant 3: \PSSM.JavaThread_Mutants\mutants\rtr\Output27.model
+Killed mutant 4: \PSSM.JavaThread_Mutants\mutants\dtr\Output24.model
+Killed mutant 5: \PSSM.JavaThread_Mutants\mutants\dtr\Output4.model
+Killed mutant 6: \PSSM.JavaThread_Mutants\mutants\dtr\Output23.model
+Killed mutant 7: \PSSM.JavaThread_Mutants\mutants\dtr\Output27.model
+
+Amplified Test Case: test97_IntegerModification
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\dtr\Output12.model
+Killed mutant 2: \PSSM.JavaThread_Mutants\mutants\dtr\Output3.model
+Killed mutant 3: \PSSM.JavaThread_Mutants\mutants\dtr\Output2.model
+Killed mutant 4: \PSSM.JavaThread_Mutants\mutants\dtr\Output9.model
+Killed mutant 5: \PSSM.JavaThread_Mutants\mutants\dtr\Output18.model
+Killed mutant 6: \PSSM.JavaThread_Mutants\mutants\dtr\Output14.model
+Killed mutant 7: \PSSM.JavaThread_Mutants\mutants\dtr\Output16.model
+Killed mutant 8: \PSSM.JavaThread_Mutants\mutants\dtr\Output7.model
+Killed mutant 9: \PSSM.JavaThread_Mutants\mutants\dtr\Output13.model
+
+Amplified Test Case: test98_IntegerModification
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\dtr\Output11.model
+Killed mutant 2: \PSSM.JavaThread_Mutants\mutants\dtr\Output22.model
+Killed mutant 3: \PSSM.JavaThread_Mutants\mutants\dtr\Output25.model
+Killed mutant 4: \PSSM.JavaThread_Mutants\mutants\dtr\Output20.model
+Killed mutant 5: \PSSM.JavaThread_Mutants\mutants\dtr\Output19.model
+
+Amplified Test Case: test911_IntegerModification
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\dtr\Output17.model
+
+Amplified Test Case: test912_EventDuplication
+Killed mutant 1: \PSSM.JavaThread_Mutants\mutants\dtr\Output15.model
+Killed mutant 2: \PSSM.JavaThread_Mutants\mutants\dtr\Output26.model
+
+--------------------------------------------------

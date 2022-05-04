@@ -1,0 +1,38 @@
+Total number of mutants: 54
+- initial number of killed mutants: 35
+- initial mutation score: 64.81481481481481%
+Total number of test cases improving mutation score: 3
+- number of mutants killed by improved test cases: 6
+- total number of killed mutants : 41
+- final mutation score : 75.92592592592592%
+=> improvement in the mutation score : 11.111111111111116%
+--------------------------------------------------
+iteration 1: 2 generated test cases
+Amplified Test Case: Transition015_Test0_EventDuplication
+Killed mutant 1: \PSSM.Transition015\mutants\ctt\Output206.model
+Killed mutant 2: \PSSM.Transition015\mutants\cet\Output86.model
+Killed mutant 3: \PSSM.Transition015\mutants\rev\Output21.model
+Killed mutant 4: \PSSM.Transition015\mutants\cet\Output85.model
+
+Amplified Test Case: Transition015_Test1_EventDuplication
+Killed mutant 1: \PSSM.Transition015\mutants\ctt\Output210.model
+
+iteration 2: 1 generated test cases
+Amplified Test Case: Transition015_Test0_EventDuplication1_EventDuplication
+Killed mutant 1: \PSSM.Transition015\mutants\ctr\Output263.model
+
+--------------------------------------------------
+List of Alive mutants:
+Alive mutant 1: \PSSM.Transition015\mutants\ctr\Output261.model
+Alive mutant 2: \PSSM.Transition015\mutants\ctr2\Output54.model
+Alive mutant 3: \PSSM.Transition015\mutants\cev\Output51.model
+Alive mutant 4: \PSSM.Transition015\mutants\ctr\Output257.model
+Alive mutant 5: \PSSM.Transition015\mutants\ctr2\Output55.model
+Alive mutant 6: \PSSM.Transition015\mutants\ctr\Output256.model
+Alive mutant 7: \PSSM.Transition015\mutants\ctr\Output262.model
+Alive mutant 8: \PSSM.Transition015\mutants\ccfs\Output49.model
+Alive mutant 9: \PSSM.Transition015\mutants\cev\Output52.model
+Alive mutant 10: \PSSM.Transition015\mutants\ctr\Output255.model
+Alive mutant 11: \PSSM.Transition015\mutants\dtr\Output53.model
+Alive mutant 12: \PSSM.Transition015\mutants\ccs\Output52.model
+Alive mutant 13: \PSSM.Transition015\mutants\dtr\Output52.model

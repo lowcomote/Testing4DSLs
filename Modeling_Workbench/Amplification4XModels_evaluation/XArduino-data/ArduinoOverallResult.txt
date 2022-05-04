@@ -1,0 +1,20 @@
+Mutants killed by tests amplified by event duplication:
+Killed mutant 1: \Arduino.ActiveWaitIRBlueLed\mutants\cbbo_supe\Output0.model
+Killed mutant 2: \Arduino.ActiveWaitIRBlueLed\mutants\cic\Output3.model
+Killed mutant 3: \Arduino.ActiveWaitIRBlueLed\mutants\cic\Output4.model
+Killed mutant 1: \Arduino.SensorAlarm\mutants\cic\Output4.model
+Killed mutant 1: \Arduino.Servo9g\mutants\cmgr\Output0.model
+Killed mutant 1: \Arduino.ServoIrbutton\mutants\cic\Output3.model
+
+Mutants killed by tests amplified by event creation:
+Killed mutant 1: \Arduino.SensorAlarm\mutants\cbbo_infe\Output1.model
+Killed mutant 2: \Arduino.SensorAlarm\mutants\cic\Output1.model
+Killed mutant 1: \Arduino.SensorAlarm\mutants\cbbo_infe\Output0.model
+Killed mutant 1: \Arduino.Servo9g\mutants\cic\Output0.model
+
+Mutants killed by tests amplified by event deletion:
+
+Mutants killed by tests amplified by event permutation:
+Killed mutant 1: \Arduino.ActiveWaitIRBlueLed\mutants\cic\Output1.model
+
+Mutants killed by tests amplified by event modification:

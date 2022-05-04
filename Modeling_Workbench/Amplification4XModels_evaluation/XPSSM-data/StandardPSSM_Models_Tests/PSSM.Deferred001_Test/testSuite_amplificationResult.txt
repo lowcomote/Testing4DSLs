@@ -1,0 +1,74 @@
+Total number of mutants: 168
+- initial number of killed mutants: 116
+- initial mutation score: 69.04761904761905%
+Total number of test cases improving mutation score: 5
+- number of mutants killed by improved test cases: 46
+- total number of killed mutants : 162
+- final mutation score : 96.42857142857143%
+=> improvement in the mutation score : 27.380952380952383%
+--------------------------------------------------
+iteration = 1
+Amplified Test Case: Deferred001_Test0_EventDuplication
+Killed mutant 1: \PSSM.Deferred001\mutants\cet\Output17.model
+Killed mutant 2: \PSSM.Deferred001\mutants\rac\Output4.model
+Killed mutant 3: \PSSM.Deferred001\mutants\ctr\Output10.model
+Killed mutant 4: \PSSM.Deferred001\mutants\cst\Output15.model
+Killed mutant 5: \PSSM.Deferred001\mutants\rev\Output2.model
+Killed mutant 6: \PSSM.Deferred001\mutants\cet\Output14.model
+Killed mutant 7: \PSSM.Deferred001\mutants\rev\Output3.model
+Killed mutant 8: \PSSM.Deferred001\mutants\cet\Output11.model
+Killed mutant 9: \PSSM.Deferred001\mutants\cst\Output13.model
+Killed mutant 10: \PSSM.Deferred001\mutants\cet\Output15.model
+Killed mutant 11: \PSSM.Deferred001\mutants\ctt\Output18.model
+Killed mutant 12: \PSSM.Deferred001\mutants\cst\Output14.model
+Killed mutant 13: \PSSM.Deferred001\mutants\cet\Output12.model
+Killed mutant 14: \PSSM.Deferred001\mutants\ctt\Output16.model
+Killed mutant 15: \PSSM.Deferred001\mutants\cac\Output4.model
+Killed mutant 16: \PSSM.Deferred001\mutants\ctt\Output17.model
+Killed mutant 17: \PSSM.Deferred001\mutants\cet\Output13.model
+Killed mutant 18: \PSSM.Deferred001\mutants\ctt\Output19.model
+Killed mutant 19: \PSSM.Deferred001\mutants\rtr\Output4.model
+Killed mutant 20: \PSSM.Deferred001\mutants\cet\Output10.model
+
+Amplified Test Case: Deferred001_Test1_EventDuplication
+Killed mutant 1: \PSSM.Deferred001\mutants\dtr\Output3.model
+Killed mutant 2: \PSSM.Deferred001\mutants\ctr\Output18.model
+Killed mutant 3: \PSSM.Deferred001\mutants\cet\Output18.model
+
+Amplified Test Case: Deferred001_Test2_EventDuplication
+Killed mutant 1: \PSSM.Deferred001\mutants\ctr\Output19.model
+Killed mutant 2: \PSSM.Deferred001\mutants\ctr\Output13.model
+Killed mutant 3: \PSSM.Deferred001\mutants\cev\Output4.model
+Killed mutant 4: \PSSM.Deferred001\mutants\cev\Output0.model
+Killed mutant 5: \PSSM.Deferred001\mutants\ctt\Output23.model
+Killed mutant 6: \PSSM.Deferred001\mutants\cev\Output3.model
+
+Amplified Test Case: Deferred001_Test3_EventDuplication
+Killed mutant 1: \PSSM.Deferred001\mutants\ctt\Output21.model
+Killed mutant 2: \PSSM.Deferred001\mutants\cet\Output19.model
+Killed mutant 3: \PSSM.Deferred001\mutants\dtr\Output5.model
+Killed mutant 4: \PSSM.Deferred001\mutants\ctr\Output12.model
+Killed mutant 5: \PSSM.Deferred001\mutants\ctt\Output0.model
+Killed mutant 6: \PSSM.Deferred001\mutants\ctr2\Output2.model
+Killed mutant 7: \PSSM.Deferred001\mutants\ctr\Output20.model
+Killed mutant 8: \PSSM.Deferred001\mutants\dtr\Output1.model
+Killed mutant 9: \PSSM.Deferred001\mutants\ctr\Output17.model
+Killed mutant 10: \PSSM.Deferred001\mutants\ctr\Output24.model
+Killed mutant 11: \PSSM.Deferred001\mutants\ctt\Output20.model
+Killed mutant 12: \PSSM.Deferred001\mutants\ctr\Output5.model
+Killed mutant 13: \PSSM.Deferred001\mutants\cet\Output20.model
+Killed mutant 14: \PSSM.Deferred001\mutants\ctr\Output14.model
+
+Amplified Test Case: Deferred001_Test4_EventDuplication
+Killed mutant 1: \PSSM.Deferred001\mutants\cet\Output7.model
+Killed mutant 2: \PSSM.Deferred001\mutants\ctr\Output9.model
+Killed mutant 3: \PSSM.Deferred001\mutants\cet\Output6.model
+
+--------------------------------------------------
+List of Alive mutants:
+Alive mutant 1: \PSSM.Deferred001\mutants\cet\Output16.model
+Alive mutant 2: \PSSM.Deferred001\mutants\ctr2\Output0.model
+Alive mutant 3: \PSSM.Deferred001\mutants\ctr\Output8.model
+Alive mutant 4: \PSSM.Deferred001\mutants\ctr2\Output1.model
+Alive mutant 5: \PSSM.Deferred001\mutants\ctr\Output11.model
+Alive mutant 6: \PSSM.Deferred001\mutants\dtr\Output2.model

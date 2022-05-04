@@ -1,0 +1,63 @@
+Total number of mutants: 135
+- initial number of killed mutants: 85
+- initial mutation score: 62.96296296296296%
+Total number of test cases improving mutation score: 1
+- number of mutants killed by improved test cases: 50
+- total number of killed mutants : 135
+- final mutation score : 100.0%
+=> improvement in the mutation score : 37.03703703703704%
+--------------------------------------------------
+iteration 1: 1 generated test cases
+Amplified Test Case: Event017_Test_B1_BooleanModification
+Killed mutant 1: \PSSM.Event017B\mutants\ccfs\Output3.model
+Killed mutant 2: \PSSM.Event017B\mutants\cet\Output1.model
+Killed mutant 3: \PSSM.Event017B\mutants\ctt\Output8.model
+Killed mutant 4: \PSSM.Event017B\mutants\cfs\Output0.model
+Killed mutant 5: \PSSM.Event017B\mutants\ctr\Output10.model
+Killed mutant 6: \PSSM.Event017B\mutants\cev\Output3.model
+Killed mutant 7: \PSSM.Event017B\mutants\ctr\Output6.model
+Killed mutant 8: \PSSM.Event017B\mutants\ctt\Output11.model
+Killed mutant 9: \PSSM.Event017B\mutants\ccfs\Output0.model
+Killed mutant 10: \PSSM.Event017B\mutants\ctr\Output3.model
+Killed mutant 11: \PSSM.Event017B\mutants\ccs\Output4.model
+Killed mutant 12: \PSSM.Event017B\mutants\cet\Output4.model
+Killed mutant 13: \PSSM.Event017B\mutants\ctr\Output5.model
+Killed mutant 14: \PSSM.Event017B\mutants\ctt\Output15.model
+Killed mutant 15: \PSSM.Event017B\mutants\ctr2\Output3.model
+Killed mutant 16: \PSSM.Event017B\mutants\ccs\Output2.model
+Killed mutant 17: \PSSM.Event017B\mutants\ctt\Output18.model
+Killed mutant 18: \PSSM.Event017B\mutants\ctr\Output14.model
+Killed mutant 19: \PSSM.Event017B\mutants\dtr\Output4.model
+Killed mutant 20: \PSSM.Event017B\mutants\cet\Output2.model
+Killed mutant 21: \PSSM.Event017B\mutants\ctr\Output2.model
+Killed mutant 22: \PSSM.Event017B\mutants\cev\Output0.model
+Killed mutant 23: \PSSM.Event017B\mutants\ctr\Output11.model
+Killed mutant 24: \PSSM.Event017B\mutants\ctr\Output9.model
+Killed mutant 25: \PSSM.Event017B\mutants\dtr\Output1.model
+Killed mutant 26: \PSSM.Event017B\mutants\cet\Output5.model
+Killed mutant 27: \PSSM.Event017B\mutants\rev\Output0.model
+Killed mutant 28: \PSSM.Event017B\mutants\cet\Output6.model
+Killed mutant 29: \PSSM.Event017B\mutants\ctr2\Output2.model
+Killed mutant 30: \PSSM.Event017B\mutants\ctt\Output19.model
+Killed mutant 31: \PSSM.Event017B\mutants\dtr\Output3.model
+Killed mutant 32: \PSSM.Event017B\mutants\ccfs\Output1.model
+Killed mutant 33: \PSSM.Event017B\mutants\ctt\Output6.model
+Killed mutant 34: \PSSM.Event017B\mutants\rev\Output2.model
+Killed mutant 35: \PSSM.Event017B\mutants\ctr\Output1.model
+Killed mutant 36: \PSSM.Event017B\mutants\cev\Output4.model
+Killed mutant 37: \PSSM.Event017B\mutants\cev\Output1.model
+Killed mutant 38: \PSSM.Event017B\mutants\ctr\Output12.model
+Killed mutant 39: \PSSM.Event017B\mutants\ctr\Output8.model
+Killed mutant 40: \PSSM.Event017B\mutants\cet\Output0.model
+Killed mutant 41: \PSSM.Event017B\mutants\cev\Output2.model
+Killed mutant 42: \PSSM.Event017B\mutants\cet\Output7.model
+Killed mutant 43: \PSSM.Event017B\mutants\ctr2\Output1.model
+Killed mutant 44: \PSSM.Event017B\mutants\ctr\Output0.model
+Killed mutant 45: \PSSM.Event017B\mutants\rco\Output0.model
+Killed mutant 46: \PSSM.Event017B\mutants\ccs\Output3.model
+Killed mutant 47: \PSSM.Event017B\mutants\cst\Output2.model
+Killed mutant 48: \PSSM.Event017B\mutants\ctr\Output13.model
+Killed mutant 49: \PSSM.Event017B\mutants\ctr\Output7.model
+Killed mutant 50: \PSSM.Event017B\mutants\ctr\Output4.model
+
+--------------------------------------------------

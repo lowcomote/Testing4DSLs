@@ -1,0 +1,99 @@
+Total number of mutants: 344
+- initial number of killed mutants: 261
+- initial mutation score: 75.87209302325581%
+Total number of test cases improving mutation score: 2
+- number of mutants killed by improved test cases: 83
+- total number of killed mutants : 344
+- final mutation score : 100.0%
+=> improvement in the mutation score : 24.127906976744185%
+--------------------------------------------------
+iteration 1: 1 generated test cases
+Amplified Test Case: Transition017_Test0_EventDuplication
+Killed mutant 1: \PSSM.Transition017\mutants\cet\Output136.model
+Killed mutant 2: \PSSM.Transition017\mutants\rev\Output30.model
+Killed mutant 3: \PSSM.Transition017\mutants\cet\Output137.model
+Killed mutant 4: \PSSM.Transition017\mutants\cet\Output133.model
+Killed mutant 5: \PSSM.Transition017\mutants\cet\Output132.model
+
+iteration 2: 1 generated test cases
+Amplified Test Case: Transition017_Test0_EventDuplication1_EventDuplication
+Killed mutant 1: \PSSM.Transition017\mutants\ccfs\Output73.model
+Killed mutant 2: \PSSM.Transition017\mutants\ctr2\Output79.model
+Killed mutant 3: \PSSM.Transition017\mutants\ctr\Output428.model
+Killed mutant 4: \PSSM.Transition017\mutants\ctr\Output418.model
+Killed mutant 5: \PSSM.Transition017\mutants\ctr\Output451.model
+Killed mutant 6: \PSSM.Transition017\mutants\ctr\Output421.model
+Killed mutant 7: \PSSM.Transition017\mutants\ctr2\Output82.model
+Killed mutant 8: \PSSM.Transition017\mutants\ctr\Output458.model
+Killed mutant 9: \PSSM.Transition017\mutants\ctr\Output448.model
+Killed mutant 10: \PSSM.Transition017\mutants\ccs\Output77.model
+Killed mutant 11: \PSSM.Transition017\mutants\cfs\Output18.model
+Killed mutant 12: \PSSM.Transition017\mutants\ctr\Output478.model
+Killed mutant 13: \PSSM.Transition017\mutants\ctr\Output454.model
+Killed mutant 14: \PSSM.Transition017\mutants\dtr\Output74.model
+Killed mutant 15: \PSSM.Transition017\mutants\ctr\Output464.model
+Killed mutant 16: \PSSM.Transition017\mutants\ctr\Output415.model
+Killed mutant 17: \PSSM.Transition017\mutants\dtr\Output81.model
+Killed mutant 18: \PSSM.Transition017\mutants\ctr\Output425.model
+Killed mutant 19: \PSSM.Transition017\mutants\ccs\Output80.model
+Killed mutant 20: \PSSM.Transition017\mutants\ctt\Output368.model
+Killed mutant 21: \PSSM.Transition017\mutants\ctr\Output477.model
+Killed mutant 22: \PSSM.Transition017\mutants\ctt\Output340.model
+Killed mutant 23: \PSSM.Transition017\mutants\ctr\Output460.model
+Killed mutant 24: \PSSM.Transition017\mutants\ccs\Output78.model
+Killed mutant 25: \PSSM.Transition017\mutants\cev\Output77.model
+Killed mutant 26: \PSSM.Transition017\mutants\ctr\Output457.model
+Killed mutant 27: \PSSM.Transition017\mutants\ctr\Output475.model
+Killed mutant 28: \PSSM.Transition017\mutants\ctr\Output455.model
+Killed mutant 29: \PSSM.Transition017\mutants\ctr\Output420.model
+Killed mutant 30: \PSSM.Transition017\mutants\ctt\Output371.model
+Killed mutant 31: \PSSM.Transition017\mutants\ctr\Output480.model
+Killed mutant 32: \PSSM.Transition017\mutants\cfs\Output17.model
+Killed mutant 33: \PSSM.Transition017\mutants\ctr\Output429.model
+Killed mutant 34: \PSSM.Transition017\mutants\ctr\Output449.model
+Killed mutant 35: \PSSM.Transition017\mutants\ctr\Output414.model
+Killed mutant 36: \PSSM.Transition017\mutants\ccs\Output83.model
+Killed mutant 37: \PSSM.Transition017\mutants\ctr\Output463.model
+Killed mutant 38: \PSSM.Transition017\mutants\ctr\Output483.model
+Killed mutant 39: \PSSM.Transition017\mutants\cev\Output73.model
+Killed mutant 40: \PSSM.Transition017\mutants\ctr\Output426.model
+Killed mutant 41: \PSSM.Transition017\mutants\ccfs\Output77.model
+Killed mutant 42: \PSSM.Transition017\mutants\ctr\Output423.model
+Killed mutant 43: \PSSM.Transition017\mutants\ctr\Output413.model
+Killed mutant 44: \PSSM.Transition017\mutants\ccfs\Output75.model
+Killed mutant 45: \PSSM.Transition017\mutants\ctt\Output372.model
+Killed mutant 46: \PSSM.Transition017\mutants\ctr\Output482.model
+Killed mutant 47: \PSSM.Transition017\mutants\cev\Output79.model
+Killed mutant 48: \PSSM.Transition017\mutants\ctt\Output375.model
+Killed mutant 49: \PSSM.Transition017\mutants\ctr2\Output84.model
+Killed mutant 50: \PSSM.Transition017\mutants\ctr\Output452.model
+Killed mutant 51: \PSSM.Transition017\mutants\ctr\Output417.model
+Killed mutant 52: \PSSM.Transition017\mutants\ctr\Output462.model
+Killed mutant 53: \PSSM.Transition017\mutants\dtr\Output76.model
+Killed mutant 54: \PSSM.Transition017\mutants\ctr\Output422.model
+Killed mutant 55: \PSSM.Transition017\mutants\ctr\Output412.model
+Killed mutant 56: \PSSM.Transition017\mutants\ctt\Output373.model
+Killed mutant 57: \PSSM.Transition017\mutants\cev\Output80.model
+Killed mutant 58: \PSSM.Transition017\mutants\ctr\Output450.model
+Killed mutant 59: \PSSM.Transition017\mutants\ctr\Output427.model
+Killed mutant 60: \PSSM.Transition017\mutants\ctr\Output465.model
+Killed mutant 61: \PSSM.Transition017\mutants\dtr\Output78.model
+Killed mutant 62: \PSSM.Transition017\mutants\ctr\Output419.model
+Killed mutant 63: \PSSM.Transition017\mutants\cfs\Output13.model
+Killed mutant 64: \PSSM.Transition017\mutants\ccfs\Output80.model
+Killed mutant 65: \PSSM.Transition017\mutants\ctr\Output424.model
+Killed mutant 66: \PSSM.Transition017\mutants\ctr\Output479.model
+Killed mutant 67: \PSSM.Transition017\mutants\dtr\Output80.model
+Killed mutant 68: \PSSM.Transition017\mutants\ctr2\Output86.model
+Killed mutant 69: \PSSM.Transition017\mutants\ctr\Output459.model
+Killed mutant 70: \PSSM.Transition017\mutants\ctt\Output367.model
+Killed mutant 71: \PSSM.Transition017\mutants\ctr\Output453.model
+Killed mutant 72: \PSSM.Transition017\mutants\ctr2\Output80.model
+Killed mutant 73: \PSSM.Transition017\mutants\cev\Output75.model
+Killed mutant 74: \PSSM.Transition017\mutants\ctr\Output461.model
+Killed mutant 75: \PSSM.Transition017\mutants\ctr\Output481.model
+Killed mutant 76: \PSSM.Transition017\mutants\ctr\Output416.model
+Killed mutant 77: \PSSM.Transition017\mutants\ctr\Output476.model
+Killed mutant 78: \PSSM.Transition017\mutants\ctr\Output456.model
+
+--------------------------------------------------

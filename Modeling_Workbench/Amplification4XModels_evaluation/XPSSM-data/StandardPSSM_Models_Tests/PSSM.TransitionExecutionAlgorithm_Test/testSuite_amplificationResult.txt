@@ -1,0 +1,115 @@
+Total number of mutants: 249
+- initial number of killed mutants: 152
+- initial mutation score: 61.044176706827315%
+Total number of test cases improving mutation score: 3
+- number of mutants killed by improved test cases: 97
+- total number of killed mutants : 249
+- final mutation score : 100.0%
+=> improvement in the mutation score : 38.955823293172685%
+--------------------------------------------------
+iteration 1: 2 generated test cases
+Amplified Test Case: TransitionExecutionAlgorithm_Test1_EventDuplication
+Killed mutant 1: \PSSM.TransitionExecutionAlgorithm\mutants\cet\Output119.model
+Killed mutant 2: \PSSM.TransitionExecutionAlgorithm\mutants\cst\Output199.model
+
+Amplified Test Case: TransitionExecutionAlgorithm_Test2_EventDuplication
+Killed mutant 1: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output372.model
+Killed mutant 2: \PSSM.TransitionExecutionAlgorithm\mutants\cet\Output112.model
+Killed mutant 3: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output375.model
+Killed mutant 4: \PSSM.TransitionExecutionAlgorithm\mutants\rev\Output25.model
+Killed mutant 5: \PSSM.TransitionExecutionAlgorithm\mutants\cet\Output111.model
+Killed mutant 6: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output371.model
+Killed mutant 7: \PSSM.TransitionExecutionAlgorithm\mutants\cst\Output204.model
+Killed mutant 8: \PSSM.TransitionExecutionAlgorithm\mutants\ccfs\Output60.model
+Killed mutant 9: \PSSM.TransitionExecutionAlgorithm\mutants\cet\Output115.model
+Killed mutant 10: \PSSM.TransitionExecutionAlgorithm\mutants\ctr2\Output70.model
+Killed mutant 11: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output374.model
+Killed mutant 12: \PSSM.TransitionExecutionAlgorithm\mutants\dtr\Output65.model
+Killed mutant 13: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output370.model
+Killed mutant 14: \PSSM.TransitionExecutionAlgorithm\mutants\ccs\Output65.model
+Killed mutant 15: \PSSM.TransitionExecutionAlgorithm\mutants\cet\Output114.model
+Killed mutant 16: \PSSM.TransitionExecutionAlgorithm\mutants\ccs\Output62.model
+Killed mutant 17: \PSSM.TransitionExecutionAlgorithm\mutants\cet\Output113.model
+Killed mutant 18: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output373.model
+
+iteration 2: 1 generated test cases
+Amplified Test Case: TransitionExecutionAlgorithm_Test2_EventDuplication2_EventDuplication
+Killed mutant 1: \PSSM.TransitionExecutionAlgorithm\mutants\cev\Output67.model
+Killed mutant 2: \PSSM.TransitionExecutionAlgorithm\mutants\ctt\Output285.model
+Killed mutant 3: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output389.model
+Killed mutant 4: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output349.model
+Killed mutant 5: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output369.model
+Killed mutant 6: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output379.model
+Killed mutant 7: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output365.model
+Killed mutant 8: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output385.model
+Killed mutant 9: \PSSM.TransitionExecutionAlgorithm\mutants\cev\Output64.model
+Killed mutant 10: \PSSM.TransitionExecutionAlgorithm\mutants\ctr2\Output69.model
+Killed mutant 11: \PSSM.TransitionExecutionAlgorithm\mutants\ccfs\Output63.model
+Killed mutant 12: \PSSM.TransitionExecutionAlgorithm\mutants\ctr2\Output72.model
+Killed mutant 13: \PSSM.TransitionExecutionAlgorithm\mutants\cet\Output116.model
+Killed mutant 14: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output342.model
+Killed mutant 15: \PSSM.TransitionExecutionAlgorithm\mutants\ccs\Output67.model
+Killed mutant 16: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output352.model
+Killed mutant 17: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output382.model
+Killed mutant 18: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output392.model
+Killed mutant 19: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output391.model
+Killed mutant 20: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output378.model
+Killed mutant 21: \PSSM.TransitionExecutionAlgorithm\mutants\cev\Output66.model
+Killed mutant 22: \PSSM.TransitionExecutionAlgorithm\mutants\ctt\Output294.model
+Killed mutant 23: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output343.model
+Killed mutant 24: \PSSM.TransitionExecutionAlgorithm\mutants\ctr2\Output66.model
+Killed mutant 25: \PSSM.TransitionExecutionAlgorithm\mutants\ctr2\Output74.model
+Killed mutant 26: \PSSM.TransitionExecutionAlgorithm\mutants\cet\Output118.model
+Killed mutant 27: \PSSM.TransitionExecutionAlgorithm\mutants\ccs\Output70.model
+Killed mutant 28: \PSSM.TransitionExecutionAlgorithm\mutants\ccs\Output64.model
+Killed mutant 29: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output351.model
+Killed mutant 30: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output355.model
+Killed mutant 31: \PSSM.TransitionExecutionAlgorithm\mutants\cev\Output63.model
+Killed mutant 32: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output340.model
+Killed mutant 33: \PSSM.TransitionExecutionAlgorithm\mutants\dtr\Output67.model
+Killed mutant 34: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output346.model
+Killed mutant 35: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output366.model
+Killed mutant 36: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output386.model
+Killed mutant 37: \PSSM.TransitionExecutionAlgorithm\mutants\ccfs\Output67.model
+Killed mutant 38: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output383.model
+Killed mutant 39: \PSSM.TransitionExecutionAlgorithm\mutants\cet\Output120.model
+Killed mutant 40: \PSSM.TransitionExecutionAlgorithm\mutants\ccs\Output68.model
+Killed mutant 41: \PSSM.TransitionExecutionAlgorithm\mutants\ccs\Output71.model
+Killed mutant 42: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output380.model
+Killed mutant 43: \PSSM.TransitionExecutionAlgorithm\mutants\ccfs\Output64.model
+Killed mutant 44: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output364.model
+Killed mutant 45: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output344.model
+Killed mutant 46: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output354.model
+Killed mutant 47: \PSSM.TransitionExecutionAlgorithm\mutants\ctt\Output287.model
+Killed mutant 48: \PSSM.TransitionExecutionAlgorithm\mutants\cet\Output117.model
+Killed mutant 49: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output350.model
+Killed mutant 50: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output390.model
+Killed mutant 51: \PSSM.TransitionExecutionAlgorithm\mutants\ccfs\Output68.model
+Killed mutant 52: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output384.model
+Killed mutant 53: \PSSM.TransitionExecutionAlgorithm\mutants\ccfs\Output61.model
+Killed mutant 54: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output367.model
+Killed mutant 55: \PSSM.TransitionExecutionAlgorithm\mutants\ctr2\Output67.model
+Killed mutant 56: \PSSM.TransitionExecutionAlgorithm\mutants\dtr\Output68.model
+Killed mutant 57: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output347.model
+Killed mutant 58: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output387.model
+Killed mutant 59: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output377.model
+Killed mutant 60: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output357.model
+Killed mutant 61: \PSSM.TransitionExecutionAlgorithm\mutants\ccfs\Output65.model
+Killed mutant 62: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output353.model
+Killed mutant 63: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output368.model
+Killed mutant 64: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output388.model
+Killed mutant 65: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output348.model
+Killed mutant 66: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output381.model
+Killed mutant 67: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output345.model
+Killed mutant 68: \PSSM.TransitionExecutionAlgorithm\mutants\cev\Output68.model
+Killed mutant 69: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output356.model
+Killed mutant 70: \PSSM.TransitionExecutionAlgorithm\mutants\rev\Output26.model
+Killed mutant 71: \PSSM.TransitionExecutionAlgorithm\mutants\ctr2\Output68.model
+Killed mutant 72: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output341.model
+Killed mutant 73: \PSSM.TransitionExecutionAlgorithm\mutants\cev\Output65.model
+Killed mutant 74: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output393.model
+Killed mutant 75: \PSSM.TransitionExecutionAlgorithm\mutants\ctr\Output376.model
+Killed mutant 76: \PSSM.TransitionExecutionAlgorithm\mutants\ccfs\Output62.model
+Killed mutant 77: \PSSM.TransitionExecutionAlgorithm\mutants\ctr2\Output73.model
+
+--------------------------------------------------

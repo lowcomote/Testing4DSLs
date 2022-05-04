@@ -1,0 +1,77 @@
+Total number of mutants: 191
+- initial number of killed mutants: 128
+- initial mutation score: 67.01570680628272%
+Total number of test cases improving mutation score: 1
+- number of mutants killed by improved test cases: 6
+- total number of killed mutants : 134
+- final mutation score : 70.15706806282722%
+=> improvement in the mutation score : 3.141361256544495%
+--------------------------------------------------
+iteration = 1
+Amplified Test Case: Join001_Test0_EventDuplication
+Killed mutant 1: \PSSM.Join001\mutants\cet\Output15.model
+Killed mutant 2: \PSSM.Join001\mutants\ctt\Output102.model
+Killed mutant 3: \PSSM.Join001\mutants\cet\Output14.model
+Killed mutant 4: \PSSM.Join001\mutants\rev\Output2.model
+Killed mutant 5: \PSSM.Join001\mutants\cet\Output17.model
+Killed mutant 6: \PSSM.Join001\mutants\dtr\Output18.model
+
+--------------------------------------------------
+List of Alive mutants:
+Alive mutant 1: \PSSM.Join001\mutants\ctr\Output101.model
+Alive mutant 2: \PSSM.Join001\mutants\cev\Output19.model
+Alive mutant 3: \PSSM.Join001\mutants\ctr\Output121.model
+Alive mutant 4: \PSSM.Join001\mutants\ctr\Output108.model
+Alive mutant 5: \PSSM.Join001\mutants\ccfs\Output18.model
+Alive mutant 6: \PSSM.Join001\mutants\ctr\Output111.model
+Alive mutant 7: \PSSM.Join001\mutants\ctr\Output131.model
+Alive mutant 8: \PSSM.Join001\mutants\ctr2\Output17.model
+Alive mutant 9: \PSSM.Join001\mutants\ccfs\Output15.model
+Alive mutant 10: \PSSM.Join001\mutants\ccs\Output18.model
+Alive mutant 11: \PSSM.Join001\mutants\ctr\Output118.model
+Alive mutant 12: \PSSM.Join001\mutants\ctr\Output105.model
+Alive mutant 13: \PSSM.Join001\mutants\ctr\Output115.model
+Alive mutant 14: \PSSM.Join001\mutants\dtr\Output19.model
+Alive mutant 15: \PSSM.Join001\mutants\ctr\Output130.model
+Alive mutant 16: \PSSM.Join001\mutants\ctr\Output107.model
+Alive mutant 17: \PSSM.Join001\mutants\ctr2\Output13.model
+Alive mutant 18: \PSSM.Join001\mutants\ccs\Output14.model
+Alive mutant 19: \PSSM.Join001\mutants\ctr\Output112.model
+Alive mutant 20: \PSSM.Join001\mutants\ctr\Output132.model
+Alive mutant 21: \PSSM.Join001\mutants\ctr2\Output16.model
+Alive mutant 22: \PSSM.Join001\mutants\ctr\Output104.model
+Alive mutant 23: \PSSM.Join001\mutants\cev\Output16.model
+Alive mutant 24: \PSSM.Join001\mutants\ccfs\Output16.model
+Alive mutant 25: \PSSM.Join001\mutants\ccs\Output17.model
+Alive mutant 26: \PSSM.Join001\mutants\ctt\Output122.model
+Alive mutant 27: \PSSM.Join001\mutants\ctr\Output119.model
+Alive mutant 28: \PSSM.Join001\mutants\ccfs\Output13.model
+Alive mutant 29: \PSSM.Join001\mutants\dtr\Output17.model
+Alive mutant 30: \PSSM.Join001\mutants\dtr\Output20.model
+Alive mutant 31: \PSSM.Join001\mutants\ctr\Output116.model
+Alive mutant 32: \PSSM.Join001\mutants\ctr2\Output19.model
+Alive mutant 33: \PSSM.Join001\mutants\ctr\Output106.model
+Alive mutant 34: \PSSM.Join001\mutants\ctr\Output103.model
+Alive mutant 35: \PSSM.Join001\mutants\ctt\Output124.model
+Alive mutant 36: \PSSM.Join001\mutants\ctr\Output123.model
+Alive mutant 37: \PSSM.Join001\mutants\ctr\Output133.model
+Alive mutant 38: \PSSM.Join001\mutants\ctr2\Output15.model
+Alive mutant 39: \PSSM.Join001\mutants\cev\Output20.model
+Alive mutant 40: \PSSM.Join001\mutants\cev\Output17.model
+Alive mutant 41: \PSSM.Join001\mutants\ctr\Output113.model
+Alive mutant 42: \PSSM.Join001\mutants\ccs\Output13.model
+Alive mutant 43: \PSSM.Join001\mutants\ctr\Output100.model
+Alive mutant 44: \PSSM.Join001\mutants\ctr\Output110.model
+Alive mutant 45: \PSSM.Join001\mutants\ctr\Output120.model
+Alive mutant 46: \PSSM.Join001\mutants\ctr\Output117.model
+Alive mutant 47: \PSSM.Join001\mutants\ccfs\Output12.model
+Alive mutant 48: \PSSM.Join001\mutants\ccfs\Output14.model
+Alive mutant 49: \PSSM.Join001\mutants\ctr\Output122.model
+Alive mutant 50: \PSSM.Join001\mutants\ctr\Output99.model
+Alive mutant 51: \PSSM.Join001\mutants\cev\Output18.model
+Alive mutant 52: \PSSM.Join001\mutants\ctr\Output102.model
+Alive mutant 53: \PSSM.Join001\mutants\ctr\Output114.model
+Alive mutant 54: \PSSM.Join001\mutants\ctt\Output100.model
+Alive mutant 55: \PSSM.Join001\mutants\ctr2\Output14.model
+Alive mutant 56: \PSSM.Join001\mutants\ctr\Output129.model
+Alive mutant 57: \PSSM.Join001\mutants\ctr\Output109.model

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<arduino:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:arduino="http://www.obeo.fr/arduino" xmi:id="_Uck-QLvpEey6kqvve9HPhQ">
+  <boards xsi:type="arduino:ArduinoBoard" xmi:id="_Uck-QbvpEey6kqvve9HPhQ" name="board">
+    <digitalPins xmi:id="_Uck-QrvpEey6kqvve9HPhQ" name="pushButton">
+      <module xsi:type="arduino:PushButton" xmi:id="_Uck-Q7vpEey6kqvve9HPhQ" name="button"/>
+    </digitalPins>
+    <digitalPins xmi:id="_Uck-RLvpEey6kqvve9HPhQ" name="led">
+      <module xsi:type="arduino:LED" xmi:id="_Uck-RbvpEey6kqvve9HPhQ" name="led"/>
+    </digitalPins>
+  </boards>
+  <sketches xmi:id="_Uck-RrvpEey6kqvve9HPhQ" name="sketch" board="_Uck-QbvpEey6kqvve9HPhQ">
+    <block xmi:id="_Uck-R7vpEey6kqvve9HPhQ">
+      <instructions xsi:type="arduino:If" xmi:id="_Uck-SLvpEey6kqvve9HPhQ">
+        <block xmi:id="_Uck-SbvpEey6kqvve9HPhQ">
+          <instructions xsi:type="arduino:ModuleAssignment" xmi:id="_Uck-SrvpEey6kqvve9HPhQ" module="_Uck-RbvpEey6kqvve9HPhQ">
+            <operand xsi:type="arduino:IntegerConstant" xmi:id="_Uck-S7vpEey6kqvve9HPhQ" value="1"/>
+          </instructions>
+          <instructions xsi:type="arduino:ModuleAssignment" xmi:id="_Uck-TbvpEey6kqvve9HPhQ" module="_Uck-RbvpEey6kqvve9HPhQ">
+            <operand xsi:type="arduino:IntegerConstant" xmi:id="_Uck-TrvpEey6kqvve9HPhQ"/>
+          </instructions>
+          <instructions xsi:type="arduino:ModuleAssignment" xmi:id="_XMC1MLvpEey6kqvve9HPhQ" module="_Uck-RbvpEey6kqvve9HPhQ">
+            <operand xsi:type="arduino:IntegerConstant" xmi:id="_XMC1MbvpEey6kqvve9HPhQ" value="1"/>
+          </instructions>
+          <instructions xsi:type="arduino:ModuleAssignment" xmi:id="_XMC1MrvpEey6kqvve9HPhQ" module="_Uck-RbvpEey6kqvve9HPhQ">
+            <operand xsi:type="arduino:IntegerConstant" xmi:id="_XMC1M7vpEey6kqvve9HPhQ"/>
+          </instructions>
+        </block>
+        <condition xsi:type="arduino:BooleanModuleGet" xmi:id="_Uck-ULvpEey6kqvve9HPhQ" module="_Uck-Q7vpEey6kqvve9HPhQ"/>
+        <elseBlock xmi:id="_Uck-UbvpEey6kqvve9HPhQ">
+          <instructions xsi:type="arduino:If" xmi:id="_Uck-UrvpEey6kqvve9HPhQ">
+            <block xmi:id="_Uck-U7vpEey6kqvve9HPhQ">
+              <instructions xsi:type="arduino:ModuleAssignment" xmi:id="_Uck-VLvpEey6kqvve9HPhQ" module="_Uck-RbvpEey6kqvve9HPhQ">
+                <operand xsi:type="arduino:IntegerConstant" xmi:id="_Uck-VbvpEey6kqvve9HPhQ"/>
+              </instructions>
+            </block>
+            <condition xsi:type="arduino:BooleanModuleGet" xmi:id="_Uck-VrvpEey6kqvve9HPhQ" module="_Uck-RbvpEey6kqvve9HPhQ"/>
+          </instructions>
+        </elseBlock>
+      </instructions>
+    </block>
+  </sketches>
+</arduino:Project>

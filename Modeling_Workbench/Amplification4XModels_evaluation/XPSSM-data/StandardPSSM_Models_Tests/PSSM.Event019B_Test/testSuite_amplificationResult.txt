@@ -1,0 +1,30 @@
+Total number of mutants: 60
+- initial number of killed mutants: 41
+- initial mutation score: 68.33333333333333%
+Total number of test cases improving mutation score: 0
+- number of mutants killed by improved test cases: 0
+- total number of killed mutants : 41
+- final mutation score : 68.33333333333333%
+=> improvement in the mutation score : 0.0%
+--------------------------------------------------
+--------------------------------------------------
+List of Alive mutants:
+Alive mutant 1: \PSSM.Event019B\mutants\rco\Output0.model
+Alive mutant 2: \PSSM.Event019B\mutants\ctr2\Output2.model
+Alive mutant 3: \PSSM.Event019B\mutants\ctr\Output6.model
+Alive mutant 4: \PSSM.Event019B\mutants\cet\Output1.model
+Alive mutant 5: \PSSM.Event019B\mutants\ccfs\Output1.model
+Alive mutant 6: \PSSM.Event019B\mutants\ctr\Output1.model
+Alive mutant 7: \PSSM.Event019B\mutants\ccfs\Output0.model
+Alive mutant 8: \PSSM.Event019B\mutants\ctt\Output4.model
+Alive mutant 9: \PSSM.Event019B\mutants\ctr\Output2.model
+Alive mutant 10: \PSSM.Event019B\mutants\ctr\Output7.model
+Alive mutant 11: \PSSM.Event019B\mutants\cev\Output0.model
+Alive mutant 12: \PSSM.Event019B\mutants\dtr\Output1.model
+Alive mutant 13: \PSSM.Event019B\mutants\ctr\Output0.model
+Alive mutant 14: \PSSM.Event019B\mutants\ctr2\Output1.model
+Alive mutant 15: \PSSM.Event019B\mutants\cev\Output1.model
+Alive mutant 16: \PSSM.Event019B\mutants\cet\Output0.model
+Alive mutant 17: \PSSM.Event019B\mutants\rev\Output0.model
+Alive mutant 18: \PSSM.Event019B\mutants\dtr\Output2.model
+Alive mutant 19: \PSSM.Event019B\mutants\ctr\Output8.model

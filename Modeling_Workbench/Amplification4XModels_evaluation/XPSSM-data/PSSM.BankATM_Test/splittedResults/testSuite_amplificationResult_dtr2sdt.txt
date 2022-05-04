@@ -1,0 +1,62 @@
+Total number of mutants: 193
+- initial number of killed mutants: 160
+- initial mutation score: 82.90155440414507%
+Total number of test cases improving mutation score: 9
+- number of mutants killed by improved test cases: 33
+- total number of killed mutants : 193
+- final mutation score : 100.0%
+=> improvement in the mutation score : 17.098445595854926%
+--------------------------------------------------
+iteration 1: 9 generated test cases
+Amplified Test Case: test132_EventDuplication
+Killed mutant 1: \PSSM.BankATM_Mutants\mutants\dtr\Output19.model
+
+Amplified Test Case: test1311_EventDeletion
+Killed mutant 1: \PSSM.BankATM_Mutants\mutants\dtr\Output14.model
+
+Amplified Test Case: test1510_EventDuplication
+Killed mutant 1: \PSSM.BankATM_Mutants\mutants\dtr\Output6.model
+Killed mutant 2: \PSSM.BankATM_Mutants\mutants\dtr\Output32.model
+Killed mutant 3: \PSSM.BankATM_Mutants\mutants\dtr\Output22.model
+Killed mutant 4: \PSSM.BankATM_Mutants\mutants\dtr\Output33.model
+Killed mutant 5: \PSSM.BankATM_Mutants\mutants\dtr\Output7.model
+Killed mutant 6: \PSSM.BankATM_Mutants\mutants\dtr\Output25.model
+Killed mutant 7: \PSSM.BankATM_Mutants\mutants\dtr\Output10.model
+Killed mutant 8: \PSSM.BankATM_Mutants\mutants\dtr\Output18.model
+Killed mutant 9: \PSSM.BankATM_Mutants\mutants\dtr\Output11.model
+Killed mutant 10: \PSSM.BankATM_Mutants\mutants\dtr\Output31.model
+Killed mutant 11: \PSSM.BankATM_Mutants\mutants\dtr\Output16.model
+Killed mutant 12: \PSSM.BankATM_Mutants\mutants\rco\Output5.model
+Killed mutant 13: \PSSM.BankATM_Mutants\mutants\dtr\Output24.model
+Killed mutant 14: \PSSM.BankATM_Mutants\mutants\dtr\Output34.model
+
+Amplified Test Case: test160_IntegerModification
+Killed mutant 1: \PSSM.BankATM_Mutants\mutants\dtr\Output12.model
+Killed mutant 2: \PSSM.BankATM_Mutants\mutants\dtr\Output3.model
+
+Amplified Test Case: test162_IntegerModification
+Killed mutant 1: \PSSM.BankATM_Mutants\mutants\rco\Output1.model
+Killed mutant 2: \PSSM.BankATM_Mutants\mutants\dtr\Output20.model
+
+Amplified Test Case: test163_IntegerModification
+Killed mutant 1: \PSSM.BankATM_Mutants\mutants\dtr\Output29.model
+
+Amplified Test Case: test164_IntegerModification
+Killed mutant 1: \PSSM.BankATM_Mutants\mutants\dtr\Output8.model
+Killed mutant 2: \PSSM.BankATM_Mutants\mutants\rco\Output3.model
+Killed mutant 3: \PSSM.BankATM_Mutants\mutants\dtr\Output28.model
+Killed mutant 4: \PSSM.BankATM_Mutants\mutants\dtr\Output2.model
+Killed mutant 5: \PSSM.BankATM_Mutants\mutants\dtr\Output13.model
+Killed mutant 6: \PSSM.BankATM_Mutants\mutants\dtr\Output26.model
+Killed mutant 7: \PSSM.BankATM_Mutants\mutants\dtr\Output17.model
+Killed mutant 8: \PSSM.BankATM_Mutants\mutants\dtr\Output30.model
+
+Amplified Test Case: test165_IntegerModification
+Killed mutant 1: \PSSM.BankATM_Mutants\mutants\dtr\Output27.model
+Killed mutant 2: \PSSM.BankATM_Mutants\mutants\dtr\Output1.model
+
+Amplified Test Case: test166_IntegerModification
+Killed mutant 1: \PSSM.BankATM_Mutants\mutants\dtr\Output5.model
+Killed mutant 2: \PSSM.BankATM_Mutants\mutants\dtr\Output23.model
+
+--------------------------------------------------

@@ -1,0 +1,11 @@
+Total number of mutants: 16
+- initial number of killed mutants: 5
+- total number of killed mutants: 16
+Total number of test cases improving mutation score: 6
+- number of mutants killed by improved test cases: 11
+- initial mutation score : 31.25%
+- final mutation score : 100.0%
+=> improvement in the mutation score : 68.75%
+--------------------------------------------------
+iteration 1: 1 generated test cases
+Amplified Test Case: test20_EventDuplication
