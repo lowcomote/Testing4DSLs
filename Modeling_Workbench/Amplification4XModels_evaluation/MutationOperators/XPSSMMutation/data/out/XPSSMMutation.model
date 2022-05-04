@@ -1,0 +1,795 @@
+<?xml version="1.0" encoding="ASCII"?>
+<mutatorenvironment:MutatorEnvironment xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mutatorenvironment="http://mutatorenvironment/1.0">
+  <definition xsi:type="mutatorenvironment:Program" metamodel="/XPSSMMutation/data/model/statemachines.ecore" output="data/out/" exhaustive="true">
+    <source path="data/model/"/>
+  </definition>
+  <blocks name="ccs" description="Creates a connected state">
+    <commands xsi:type="mutatorenvironment:SelectObjectMutator" name="randomState">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Vertex"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:ReferenceEvaluation" operator="not">
+            <value xsi:type="mutatorenvironment:TypedSelection">
+              <type href="/XPSSMMutation/data/model/statemachines.ecore#//FinalState"/>
+            </value>
+          </first>
+        </expression>
+      </object>
+    </commands>
+    <commands xsi:type="mutatorenvironment:CreateObjectMutator" name="newState">
+      <type href="/XPSSMMutation/data/model/statemachines.ecore#//State"/>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XPSSMMutation/data/model/statemachines.ecore#//NamedElement/name"/>
+        <value xsi:type="mutatorenvironment:RandomStringType" min="1" max="4"/>
+      </attributes>
+    </commands>
+    <commands xsi:type="mutatorenvironment:CreateObjectMutator">
+      <type href="/XPSSMMutation/data/model/statemachines.ecore#//Transition"/>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/kind"/>
+        <value xsi:type="mutatorenvironment:ListType">
+          <value href="/XPSSMMutation/data/model/statemachines.ecore#//TransitionKind/external"/>
+        </value>
+      </attributes>
+      <references xsi:type="mutatorenvironment:ReferenceInit">
+        <reference href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/source"/>
+        <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.0/@commands.0"/>
+      </references>
+      <references xsi:type="mutatorenvironment:ReferenceInit">
+        <reference href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/target"/>
+        <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.0/@commands.1"/>
+      </references>
+    </commands>
+  </blocks>
+  <blocks name="ccfs" description="Creates a connected final state ">
+    <commands xsi:type="mutatorenvironment:SelectObjectMutator" name="randomState">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Vertex"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:ReferenceEvaluation" operator="not">
+            <value xsi:type="mutatorenvironment:TypedSelection">
+              <type href="/XPSSMMutation/data/model/statemachines.ecore#//FinalState"/>
+            </value>
+          </first>
+        </expression>
+      </object>
+    </commands>
+    <commands xsi:type="mutatorenvironment:CreateObjectMutator" name="fs">
+      <type href="/XPSSMMutation/data/model/statemachines.ecore#//FinalState"/>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XPSSMMutation/data/model/statemachines.ecore#//NamedElement/name"/>
+        <value xsi:type="mutatorenvironment:RandomStringType" min="1" max="4"/>
+      </attributes>
+    </commands>
+    <commands xsi:type="mutatorenvironment:CreateObjectMutator">
+      <type href="/XPSSMMutation/data/model/statemachines.ecore#//Transition"/>
+      <references xsi:type="mutatorenvironment:ReferenceInit">
+        <reference href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/source"/>
+        <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.1/@commands.0"/>
+      </references>
+      <references xsi:type="mutatorenvironment:ReferenceInit">
+        <reference href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/target"/>
+        <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.1/@commands.1"/>
+      </references>
+    </commands>
+  </blocks>
+  <blocks name="ctr" description="Creates a transition with random source and target states">
+    <commands xsi:type="mutatorenvironment:SelectObjectMutator" name="randomState1">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Vertex"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:ReferenceEvaluation" operator="not">
+            <value xsi:type="mutatorenvironment:TypedSelection">
+              <type href="/XPSSMMutation/data/model/statemachines.ecore#//FinalState"/>
+            </value>
+          </first>
+        </expression>
+      </object>
+    </commands>
+    <commands xsi:type="mutatorenvironment:SelectObjectMutator" name="randomState2">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Vertex"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:ReferenceEvaluation" operator="not">
+            <value xsi:type="mutatorenvironment:TypedSelection">
+              <type href="/XPSSMMutation/data/model/statemachines.ecore#//Pseudostate"/>
+            </value>
+          </first>
+        </expression>
+      </object>
+    </commands>
+    <commands xsi:type="mutatorenvironment:CreateObjectMutator">
+      <type href="/XPSSMMutation/data/model/statemachines.ecore#//Transition"/>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XPSSMMutation/data/model/statemachines.ecore#//NamedElement/name"/>
+        <value xsi:type="mutatorenvironment:RandomStringType" min="1" max="4"/>
+      </attributes>
+      <references xsi:type="mutatorenvironment:ReferenceInit">
+        <reference href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/source"/>
+        <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.2/@commands.0"/>
+      </references>
+      <references xsi:type="mutatorenvironment:ReferenceInit">
+        <reference href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/target"/>
+        <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.2/@commands.1"/>
+      </references>
+    </commands>
+  </blocks>
+  <blocks name="ctr2" description="Creates a transition with source but without target state">
+    <commands xsi:type="mutatorenvironment:SelectObjectMutator" name="randomState">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Vertex"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:ReferenceEvaluation" operator="not">
+            <value xsi:type="mutatorenvironment:TypedSelection">
+              <type href="/XPSSMMutation/data/model/statemachines.ecore#//FinalState"/>
+            </value>
+          </first>
+        </expression>
+      </object>
+    </commands>
+    <commands xsi:type="mutatorenvironment:CreateObjectMutator">
+      <type href="/XPSSMMutation/data/model/statemachines.ecore#//Transition"/>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XPSSMMutation/data/model/statemachines.ecore#//NamedElement/name"/>
+        <value xsi:type="mutatorenvironment:RandomStringType" min="1" max="4"/>
+      </attributes>
+      <references xsi:type="mutatorenvironment:ReferenceInit">
+        <reference href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/source"/>
+        <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.3/@commands.0"/>
+      </references>
+    </commands>
+  </blocks>
+  <blocks name="dtr" description="Duplicates a transition">
+    <commands xsi:type="mutatorenvironment:CloneObjectMutator" contents="true">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Transition"/>
+      </object>
+    </commands>
+  </blocks>
+  <blocks name="cac" description="Creates an action and set it to a transition">
+    <commands xsi:type="mutatorenvironment:CreateObjectMutator" name="action">
+      <type href="/XPSSMMutation/data/model/statemachines.ecore#//Behavior"/>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XPSSMMutation/data/model/statemachines.ecore#//NamedElement/name"/>
+        <value xsi:type="mutatorenvironment:RandomStringType" min="1" max="4"/>
+      </attributes>
+    </commands>
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Transition"/>
+      </object>
+      <references xsi:type="mutatorenvironment:ReferenceInit">
+        <reference href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/effect"/>
+        <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.5/@commands.0"/>
+      </references>
+    </commands>
+  </blocks>
+  <blocks name="cas" description="Creates an action and set it to a state">
+    <commands xsi:type="mutatorenvironment:CreateObjectMutator" name="action">
+      <type href="/XPSSMMutation/data/model/statemachines.ecore#//Behavior"/>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XPSSMMutation/data/model/statemachines.ecore#//NamedElement/name"/>
+        <value xsi:type="mutatorenvironment:RandomStringType" min="1" max="4"/>
+      </attributes>
+    </commands>
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//State"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:ReferenceEvaluation" operator="not">
+            <value xsi:type="mutatorenvironment:TypedSelection">
+              <type href="/XPSSMMutation/data/model/statemachines.ecore#//FinalState"/>
+            </value>
+          </first>
+        </expression>
+      </object>
+      <references xsi:type="mutatorenvironment:ReferenceInit">
+        <reference href="/XPSSMMutation/data/model/statemachines.ecore#//State/entry"/>
+        <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.6/@commands.0"/>
+      </references>
+    </commands>
+  </blocks>
+  <blocks name="csev" description="Creates a signalEventType and set it to a transition">
+    <commands xsi:type="mutatorenvironment:CreateObjectMutator" name="signalEventType">
+      <type href="/XPSSMMutation/data/model/statemachines.ecore#//SignalEventType"/>
+      <references xsi:type="mutatorenvironment:ReferenceInit">
+        <reference href="/XPSSMMutation/data/model/statemachines.ecore#//SignalEventType/signal"/>
+        <object xsi:type="mutatorenvironment:RandomTypeSelection">
+          <type href="/XPSSMMutation/data/model/statemachines.ecore#//Signal"/>
+        </object>
+      </references>
+    </commands>
+    <commands xsi:type="mutatorenvironment:CreateObjectMutator" name="event">
+      <type href="/XPSSMMutation/data/model/statemachines.ecore#//Trigger"/>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XPSSMMutation/data/model/statemachines.ecore#//NamedElement/name"/>
+        <value xsi:type="mutatorenvironment:RandomStringType" min="1" max="4"/>
+      </attributes>
+      <references xsi:type="mutatorenvironment:ReferenceInit">
+        <reference href="/XPSSMMutation/data/model/statemachines.ecore#//Trigger/eventType"/>
+        <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.7/@commands.0"/>
+      </references>
+    </commands>
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Transition"/>
+      </object>
+      <references xsi:type="mutatorenvironment:ReferenceInit">
+        <reference href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/triggers"/>
+        <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.7/@commands.1"/>
+      </references>
+    </commands>
+  </blocks>
+  <blocks name="rtr" description="Removes a transition">
+    <commands xsi:type="mutatorenvironment:RemoveObjectMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Transition"/>
+      </object>
+    </commands>
+  </blocks>
+  <blocks name="rst" description="Removes a state and adjacent transitions">
+    <commands xsi:type="mutatorenvironment:RemoveObjectMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Vertex"/>
+      </object>
+    </commands>
+    <commands xsi:type="mutatorenvironment:RemoveObjectMutator">
+      <object xsi:type="mutatorenvironment:CompleteTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Transition"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:ReferenceEvaluation">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/source"/>
+          </first>
+        </expression>
+      </object>
+    </commands>
+    <commands xsi:type="mutatorenvironment:RemoveObjectMutator">
+      <object xsi:type="mutatorenvironment:CompleteTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Transition"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:ReferenceEvaluation">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/target"/>
+          </first>
+        </expression>
+      </object>
+    </commands>
+  </blocks>
+  <blocks name="rev" description="Removes an event">
+    <commands xsi:type="mutatorenvironment:RemoveObjectMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Trigger"/>
+      </object>
+    </commands>
+  </blocks>
+  <blocks name="rac" description="Removes an action">
+    <commands xsi:type="mutatorenvironment:RemoveObjectMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Behavior"/>
+      </object>
+    </commands>
+  </blocks>
+  <blocks name="rco" description="Removes a constraint">
+    <commands xsi:type="mutatorenvironment:RemoveObjectMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Constraint"/>
+      </object>
+    </commands>
+  </blocks>
+  <blocks name="sdt" description="Swaps the direction of a transition">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Transition"/>
+      </object>
+      <references xsi:type="mutatorenvironment:ReferenceSwap">
+        <reference href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/source"/>
+        <reference href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/target"/>
+      </references>
+    </commands>
+  </blocks>
+  <blocks name="cis" description="Changes the initial state to a different one">
+    <commands xsi:type="mutatorenvironment:SelectObjectMutator" name="initial">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Pseudostate"/>
+      </object>
+    </commands>
+    <commands xsi:type="mutatorenvironment:SelectObjectMutator" name="transition">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Transition"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:ReferenceEvaluation" operator="is">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/source"/>
+            <value xsi:type="mutatorenvironment:TypedSelection">
+              <type href="/XPSSMMutation/data/model/statemachines.ecore#//Pseudostate"/>
+            </value>
+          </first>
+          <operator/>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/source"/>
+            <value xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.14/@commands.0"/>
+          </second>
+        </expression>
+      </object>
+    </commands>
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.14/@commands.1"/>
+      <references xsi:type="mutatorenvironment:ReferenceInit">
+        <reference href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/source"/>
+        <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.14/@commands.0"/>
+      </references>
+    </commands>
+  </blocks>
+  <blocks name="cfs" description="Changes the final state to a different one">
+    <commands xsi:type="mutatorenvironment:SelectObjectMutator" name="final">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//FinalState"/>
+      </object>
+    </commands>
+    <commands xsi:type="mutatorenvironment:SelectObjectMutator" name="transition">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Transition"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:ReferenceEvaluation" operator="is">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/target"/>
+            <value xsi:type="mutatorenvironment:TypedSelection">
+              <type href="/XPSSMMutation/data/model/statemachines.ecore#//FinalState"/>
+            </value>
+          </first>
+          <operator/>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/target"/>
+            <value xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.15/@commands.0"/>
+          </second>
+        </expression>
+      </object>
+    </commands>
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.15/@commands.1"/>
+      <references xsi:type="mutatorenvironment:ReferenceInit">
+        <reference href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/target"/>
+        <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.15/@commands.0"/>
+      </references>
+    </commands>
+  </blocks>
+  <blocks name="cst" description="Changes the source state of a transition">
+    <commands xsi:type="mutatorenvironment:SelectObjectMutator" name="transition">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Transition"/>
+      </object>
+    </commands>
+    <commands xsi:type="mutatorenvironment:SelectObjectMutator" name="state">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//State"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:ReferenceEvaluation" operator="not">
+            <value xsi:type="mutatorenvironment:TypedSelection">
+              <type href="/XPSSMMutation/data/model/statemachines.ecore#//FinalState"/>
+            </value>
+          </first>
+          <operator/>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <value xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.16/@commands.0">
+              <refType href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/source"/>
+            </value>
+          </second>
+        </expression>
+      </object>
+    </commands>
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.16/@commands.0"/>
+      <references xsi:type="mutatorenvironment:ReferenceInit">
+        <reference href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/source"/>
+        <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.16/@commands.1"/>
+      </references>
+    </commands>
+  </blocks>
+  <blocks name="ctt" description="Changes the target state of a transition">
+    <commands xsi:type="mutatorenvironment:SelectObjectMutator" name="transition">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Transition"/>
+      </object>
+    </commands>
+    <commands xsi:type="mutatorenvironment:SelectObjectMutator" name="state">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//State"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <value xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.17/@commands.0">
+              <refType href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/target"/>
+            </value>
+          </first>
+        </expression>
+      </object>
+    </commands>
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.17/@commands.0"/>
+      <references xsi:type="mutatorenvironment:ReferenceInit">
+        <reference href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/target"/>
+        <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.17/@commands.1"/>
+      </references>
+    </commands>
+  </blocks>
+  <blocks name="cet" description="Changes the event of a transition">
+    <commands xsi:type="mutatorenvironment:SelectObjectMutator" name="event">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Trigger"/>
+      </object>
+    </commands>
+    <commands xsi:type="mutatorenvironment:SelectObjectMutator" name="transition">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Transition"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/triggers"/>
+            <value xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.18/@commands.0"/>
+          </first>
+        </expression>
+      </object>
+    </commands>
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.18/@commands.1"/>
+      <references xsi:type="mutatorenvironment:ReferenceInit">
+        <reference href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/triggers"/>
+        <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.18/@commands.0"/>
+      </references>
+    </commands>
+  </blocks>
+  <blocks name="cat" description="Changes the action of a transition">
+    <commands xsi:type="mutatorenvironment:SelectObjectMutator" name="transition">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Transition"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/effect"/>
+          </first>
+        </expression>
+      </object>
+    </commands>
+    <commands xsi:type="mutatorenvironment:SelectObjectMutator" name="action">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//Behavior"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <value xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.19/@commands.0">
+              <refType href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/effect"/>
+            </value>
+          </first>
+        </expression>
+      </object>
+    </commands>
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.19/@commands.0"/>
+      <references xsi:type="mutatorenvironment:ReferenceInit">
+        <reference href="/XPSSMMutation/data/model/statemachines.ecore#//Transition/effect"/>
+        <object xsi:type="mutatorenvironment:SpecificObjectSelection" objSel="//@blocks.19/@commands.1"/>
+      </references>
+    </commands>
+  </blocks>
+  <blocks name="cios" description="Changes the operator of Integer comparison: smaller">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operator"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>&lt;=</value>
+              <value>==</value>
+              <value>!=</value>
+              <value>>=</value>
+              <value>></value>
+            </value>
+          </first>
+          <operator/>
+          <operator/>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operand1"/>
+          </second>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operand2"/>
+          </second>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="&lt;"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="ciose" description="Changes the operator of Integer comparison: smaller-equal">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operator"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>&lt;</value>
+              <value>==</value>
+              <value>!=</value>
+              <value>>=</value>
+              <value>></value>
+            </value>
+          </first>
+          <operator/>
+          <operator/>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operand1"/>
+          </second>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operand2"/>
+          </second>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="&lt;="/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cioe" description="Changes the operator of Integer comparison: equal">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operator"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>&lt;</value>
+              <value>&lt;=</value>
+              <value>!=</value>
+              <value>>=</value>
+              <value>></value>
+            </value>
+          </first>
+          <operator/>
+          <operator/>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operand1"/>
+          </second>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operand2"/>
+          </second>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="=="/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cione" description="Changes the operator of Integer comparison: not-equal">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operator"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>&lt;</value>
+              <value>&lt;=</value>
+              <value>==</value>
+              <value>>=</value>
+              <value>></value>
+            </value>
+          </first>
+          <operator/>
+          <operator/>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operand1"/>
+          </second>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operand2"/>
+          </second>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="!="/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cioge" description="Changes the operator of Integer comparison: greater-equal">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operator"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>&lt;</value>
+              <value>&lt;=</value>
+              <value>==</value>
+              <value>!=</value>
+              <value>></value>
+            </value>
+          </first>
+          <operator/>
+          <operator/>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operand1"/>
+          </second>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operand2"/>
+          </second>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value=">="/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="ciog" description="Changes the operator of Integer comparison: greater">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operator"/>
+            <value xsi:type="mutatorenvironment:ListStringType" operator="in">
+              <value>&lt;</value>
+              <value>&lt;=</value>
+              <value>==</value>
+              <value>!=</value>
+              <value>>=</value>
+            </value>
+          </first>
+          <operator/>
+          <operator/>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operand1"/>
+          </second>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operand2"/>
+          </second>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XPSSMMutation/data/model/statemachines.ecore#//IntegerComparisonExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value=">"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cboa" description="Changes the operator of Boolean Binary comparison: and">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//BooleanBinaryExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//BooleanBinaryExpression/operator"/>
+            <value xsi:type="mutatorenvironment:SpecificStringType" value="||"/>
+          </first>
+          <operator/>
+          <operator/>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//BooleanBinaryExpression/operand1"/>
+          </second>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//BooleanBinaryExpression/operand2"/>
+          </second>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XPSSMMutation/data/model/statemachines.ecore#//BooleanBinaryExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="&amp;&amp;"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cboo" description="Changes the operator of Boolean Binary comparison: or">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//BooleanBinaryExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//BooleanBinaryExpression/operator"/>
+            <value xsi:type="mutatorenvironment:SpecificStringType" value="&amp;&amp;"/>
+          </first>
+          <operator/>
+          <operator/>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//BooleanBinaryExpression/operand1"/>
+          </second>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//BooleanBinaryExpression/operand2"/>
+          </second>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XPSSMMutation/data/model/statemachines.ecore#//BooleanBinaryExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="||"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cbot" description="Changes the operator of Boolean Unary comparison: true">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//BooleanUnaryExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//BooleanUnaryExpression/operator"/>
+            <value xsi:type="mutatorenvironment:SpecificStringType" value="True"/>
+          </first>
+          <operator/>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//BooleanUnaryExpression/operand"/>
+          </second>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XPSSMMutation/data/model/statemachines.ecore#//BooleanUnaryExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="False"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="cbof" description="Changes the operator of Boolean Unary comparison: false">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//BooleanUnaryExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//BooleanUnaryExpression/operator"/>
+            <value xsi:type="mutatorenvironment:SpecificStringType" value="False"/>
+          </first>
+          <operator/>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//BooleanUnaryExpression/operand"/>
+          </second>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XPSSMMutation/data/model/statemachines.ecore#//BooleanUnaryExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="True"/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="csoe" description="Changes the operator of String comparison: equals">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//StringComparisonExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//StringComparisonExpression/operator"/>
+            <value xsi:type="mutatorenvironment:SpecificStringType" value="!="/>
+          </first>
+          <operator/>
+          <operator/>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//StringComparisonExpression/operand1"/>
+          </second>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//StringComparisonExpression/operand2"/>
+          </second>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XPSSMMutation/data/model/statemachines.ecore#//StringComparisonExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="=="/>
+      </attributes>
+    </commands>
+  </blocks>
+  <blocks name="csone" description="Changes the operator of String comparison: not-equals">
+    <commands xsi:type="mutatorenvironment:ModifyInformationMutator">
+      <object xsi:type="mutatorenvironment:RandomTypeSelection">
+        <type href="/XPSSMMutation/data/model/statemachines.ecore#//StringComparisonExpression"/>
+        <expression>
+          <first xsi:type="mutatorenvironment:AttributeEvaluation">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//StringComparisonExpression/operator"/>
+            <value xsi:type="mutatorenvironment:SpecificStringType" value="=="/>
+          </first>
+          <operator/>
+          <operator/>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//StringComparisonExpression/operand1"/>
+          </second>
+          <second xsi:type="mutatorenvironment:ReferenceEvaluation" operator="different">
+            <name href="/XPSSMMutation/data/model/statemachines.ecore#//StringComparisonExpression/operand2"/>
+          </second>
+        </expression>
+      </object>
+      <attributes xsi:type="mutatorenvironment:AttributeScalar">
+        <attribute href="/XPSSMMutation/data/model/statemachines.ecore#//StringComparisonExpression/operator"/>
+        <value xsi:type="mutatorenvironment:SpecificStringType" value="!="/>
+      </attributes>
+    </commands>
+  </blocks>
+</mutatorenvironment:MutatorEnvironment>
