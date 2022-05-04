@@ -621,9 +621,23 @@ class LiteralValueUseAspect extends StaticDataUseAspect{
 				}     										
 	        }
    			});
-		}catch(IllegalArgumentException e){
+		}
+		catch(IllegalArgumentException e){
 			println("FAIL: The new value cannot be set for the " + matchedFeature.name + " property of the MUT")
 			return TDLTestResultUtil.FAIL + ": The new value cannot be set for the " + matchedFeature.name + " property of the MUT"
+		}
+		catch(NullPointerException e){//there is no editing domain, so set the value directly
+			var parameterValue = _self.value
+        	if (parameterValue.startsWith("\"") || parameterValue.startsWith("'")){
+        		parameterValue = parameterValue.substring(1, parameterValue.length-1)//remove quotation marks
+        	}
+			if (matchedFeature.EType.name.equals("EInt") || matchedFeature.EType.name.equals("EIntegerObject")){
+				object.eSet(matchedFeature, Integer.parseInt(parameterValue));
+			} else if (matchedFeature.EType.name.equals("EBoolean")|| matchedFeature.EType.name.equals("EBooleanObject")){
+				object.eSet(matchedFeature, Boolean.parseBoolean(parameterValue));
+			} else {
+				object.eSet(matchedFeature, parameterValue);
+			} 
 		}
 		
 		return TDLTestResultUtil.PASS + ": New value is set for the " + matchedFeature.name + " property of the MUT"
