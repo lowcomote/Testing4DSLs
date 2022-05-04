@@ -1,9 +1,10 @@
 package org.imt.tdl.amplification;
 
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -78,8 +79,8 @@ public class TDLTestAmplifier {
 			
 			System.out.println("\nTest Amplification has been performed successfully.");
 			if (!scoreCalculator.noMutantsExists) {
-				String outputFilePath = PathHelper.getInstance().getWorkspacePath() + "\\"
-							+ PathHelper.getInstance().getTestSuiteProjectName() + "\\" 
+				String outputFilePath = PathHelper.getInstance().getWorkspacePath() + "/"
+							+ PathHelper.getInstance().getTestSuiteProjectName() + "/" 
 							+ PathHelper.getInstance().getTestSuiteFileName() + 
 							"_amplificationResult.txt";
 				printAmplificationResult(outputFilePath);
@@ -92,8 +93,8 @@ public class TDLTestAmplifier {
 		}else {
 			System.out.println("As the initial mutation score is 100% there is no need for test amplification");
 			System.out.println("Total number of mutants: " + scoreCalculator.getNumOfMutants());
-			String outputFilePath = PathHelper.getInstance().getWorkspacePath() + "\\"
-					+ PathHelper.getInstance().getTestSuiteProjectName() + "\\" 
+			String outputFilePath = PathHelper.getInstance().getWorkspacePath() + "/"
+					+ PathHelper.getInstance().getTestSuiteProjectName() + "/" 
 					+ PathHelper.getInstance().getTestSuiteFileName() + 
 					"_mutationResult.txt";
 			printMutationAnalysisResult(outputFilePath);
@@ -181,65 +182,55 @@ public class TDLTestAmplifier {
 	}
 
 	private void printAmplificationResult(String outputFilePath) {
-		System.out.println("Total number of mutants: " + scoreCalculator.getNumOfMutants());
-		System.out.println("- initial number of killed mutants: " + initialNumOfKilledMutants);
-		System.out.println("- total number of killed mutants: " + scoreCalculator.getNumOfKilledMutants());
-		System.out.println("Total number of test cases improving mutation score: " + numNewTests);
-		System.out.println("- number of mutants killed by improved test cases: " + (scoreCalculator.getNumOfKilledMutants()-initialNumOfKilledMutants));
-		System.out.println("- initial mutation score : " + (initialMutationScore * 100) + "%");
-		System.out.println("- final mutation score : " + (scoreCalculator.getMutationScore() * 100) + "%");
-		System.out.println("=> improvement in the mutation score : " + (scoreCalculator.getMutationScore() - initialMutationScore)*100 + "%");
-		System.out.println("--------------------------------------------------");
+		StringBuilder sb = new StringBuilder();
+		sb.append("Total number of mutants: " + scoreCalculator.getNumOfMutants() + "\n");
+		sb.append("- initial number of killed mutants: " + initialNumOfKilledMutants + "\n");
+		sb.append("- initial mutation score : " + (initialMutationScore * 100) + "%" + "\n");
+		sb.append("Total number of test cases improving mutation score: " + numNewTests + "\n");
+		sb.append("- number of mutants killed by improved test cases: " + (scoreCalculator.getNumOfKilledMutants()-initialNumOfKilledMutants)+ "\n");
+		sb.append("- total number of killed mutants: " + scoreCalculator.getNumOfKilledMutants() + "\n");
+		sb.append("- final mutation score : " + (scoreCalculator.getMutationScore() * 100) + "%" + "\n");
+		sb.append("=> improvement in the mutation score : " + (scoreCalculator.getMutationScore() - initialMutationScore)*100 + "%" + "\n");
+		sb.append("--------------------------------------------------\n");
+		System.out.println(sb);
 		
 		//saving results into a .txt file
-		try {
-			FileOutputStream fos = new FileOutputStream(outputFilePath);
-			PrintStream fileOut = new PrintStream(fos);
-			fileOut.println("Total number of mutants: " + scoreCalculator.getNumOfMutants());
-			fileOut.println("- initial number of killed mutants: " + initialNumOfKilledMutants);
-			fileOut.println("- initial mutation score: " + (initialMutationScore * 100) + "%");
-			fileOut.println("Total number of test cases improving mutation score: " + numNewTests);
-			fileOut.println("- number of mutants killed by improved test cases: " + (scoreCalculator.getNumOfKilledMutants()-initialNumOfKilledMutants));
-			fileOut.println("- total number of killed mutants : " + scoreCalculator.getNumOfKilledMutants());
-			fileOut.println("- final mutation score : " + (scoreCalculator.getMutationScore() * 100) + "%");
-			fileOut.println("=> improvement in the mutation score : " + (scoreCalculator.getMutationScore() - initialMutationScore)*100 +"%");
-			fileOut.println("--------------------------------------------------");
-			for (int iteration = 1; iteration <= iteration_ampTests.keySet().size(); iteration++) {				
-				List<TestDescription> amplifiedTests = iteration_ampTests.get(iteration-1);
-				if (amplifiedTests.size()>0) {
-					fileOut.println("iteration " + iteration + ": " + amplifiedTests.size() + " generated test cases");
-					for (int i=0; i<amplifiedTests.size(); i++) {
-						TestDescription amplifiedTest = amplifiedTests.get(i);
-						fileOut.println("Amplified Test Case: " + amplifiedTest.getName());
-						int j = 1;
-						for (String mutant:scoreCalculator.testCase_killedMutant.get(amplifiedTest.getName())) {
-							fileOut.println("Killed mutant " + (j++) + ": " + mutant);
-						}
-						scoreCalculator.testCase_killedMutant.remove(amplifiedTest.getName());
-						fileOut.println();
+		for (int iteration = 1; iteration <= iteration_ampTests.keySet().size(); iteration++) {				
+			List<TestDescription> amplifiedTests = iteration_ampTests.get(iteration-1);
+			if (amplifiedTests.size()>0) {
+				sb.append("iteration " + iteration + ": " + amplifiedTests.size() + " generated test cases\n");
+				for (int i=0; i<amplifiedTests.size(); i++) {
+					TestDescription amplifiedTest = amplifiedTests.get(i);
+					sb.append("Amplified Test Case: " + amplifiedTest.getName()+"\n");
+					int j = 1;
+					for (String mutant:scoreCalculator.testCase_killedMutant.get(amplifiedTest.getName())) {
+						sb.append("Killed mutant " + (j++) + ": " + mutant+ "\n");
 					}
-				}	
-			}
-			fileOut.println("--------------------------------------------------");
-			for (String testCase:scoreCalculator.testCase_killedMutant.keySet()) {
-				fileOut.println("Original test case: " + testCase);
-				int j = 1;
-				for (String mutant:scoreCalculator.testCase_killedMutant.get(testCase)) {
-					fileOut.println("Killed mutant " + (j++) + ": " + mutant);
+					scoreCalculator.testCase_killedMutant.remove(amplifiedTest.getName());
+					sb.append("\n");
 				}
+			}	
+		}
+		sb.append("--------------------------------------------------\n");
+		for (String testCase:scoreCalculator.testCase_killedMutant.keySet()) {
+			sb.append("Original test case: " + testCase+ "\n");
+			int j = 1;
+			for (String mutant:scoreCalculator.testCase_killedMutant.get(testCase)) {
+				sb.append("Killed mutant " + (j++) + ": " + mutant+ "\n");
 			}
-			fileOut.println("--------------------------------------------------");
-			Set<String> aliveMutants = scoreCalculator.getAliveMutants();
-			if (aliveMutants.size()>0) {
-				fileOut.println("List of Alive mutants:");
-				int j = 1;
-				for (String mutant:aliveMutants) {
-					fileOut.println("Alive mutant " + (j++) + ": " + mutant);
-				}
+		}
+		sb.append("--------------------------------------------------\n");
+		Set<String> aliveMutants = scoreCalculator.getAliveMutants();
+		if (aliveMutants.size()>0) {
+			sb.append("List of Alive mutants:\n");
+			int j = 1;
+			for (String mutant:aliveMutants) {
+				sb.append("Alive mutant " + (j++) + ": " + mutant+ "\n");
 			}
-			fos.close();
-			fileOut.close();
-			
+		}
+		try {
+			Path filePath = Paths.get(outputFilePath);
+			Files.writeString(filePath,sb);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -249,18 +240,17 @@ public class TDLTestAmplifier {
 	
 	private void printMutationAnalysisResult(String outputFilePath) {
 		//saving results into a .txt file
-		try {
-			FileOutputStream fos = new FileOutputStream(outputFilePath);
-			PrintStream fileOut = new PrintStream(fos);
-			for (String testCase:scoreCalculator.testCase_killedMutant.keySet()) {
-				fileOut.println("Original test case: " + testCase);
-				int j = 1;
-				for (String mutant:scoreCalculator.testCase_killedMutant.get(testCase)) {
-					fileOut.println("Killed mutant " + (j++) + ": " + mutant);
-				}
+		StringBuilder sb = new StringBuilder();
+		for (String testCase:scoreCalculator.testCase_killedMutant.keySet()) {
+			sb.append("Original test case: " + testCase + "\n");
+			int j = 1;
+			for (String mutant:scoreCalculator.testCase_killedMutant.get(testCase)) {
+				sb.append("Killed mutant " + (j++) + ": " + mutant + "\n");
 			}
-			fos.close();
-			fileOut.close();
+		}
+		try {
+			Path filePath = Paths.get(outputFilePath);
+			Files.writeString(filePath,sb);
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

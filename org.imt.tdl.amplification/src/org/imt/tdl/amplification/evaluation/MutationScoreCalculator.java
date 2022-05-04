@@ -1,6 +1,8 @@
 package org.imt.tdl.amplification.evaluation;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -50,10 +52,9 @@ public class MutationScoreCalculator {
 	double timeoutFactor;
 	int timeoutConstant;
 
-	String workspacePath;
-	String seedModelPath;
+	Path workspacePath;
+	Path seedModelPath;
 	IProject mutantsProject;
-	String mutantsFolderPath;
 	
 	public MutationScoreCalculator(Package testSuite) {
 		this.testSuite = testSuite;
@@ -79,8 +80,9 @@ public class MutationScoreCalculator {
 	}
 	
 	public String runTestCaseOnOriginalModel (TestDescription testCase) {
+		String modelPath = seedModelPath.toString().replace("\\", "/");
 		long start = System.currentTimeMillis();
-		TDLTestCaseResult result = TestDescriptionAspect.executeTestCase(testCase, seedModelPath);
+		TDLTestCaseResult result = TestDescriptionAspect.executeTestCase(testCase, modelPath);
 		long stop = System.currentTimeMillis();
 		if (result.getValue() != TDLTestResultUtil.PASS) {
 			return TDLTestResultUtil.FAIL;
@@ -183,9 +185,9 @@ public class MutationScoreCalculator {
 	}
 
 	private void findMutants() {
-		String projectName = seedModelPath.substring(1, seedModelPath.lastIndexOf("/"));
+		String projectName = seedModelPath.getParent().toString().substring(1);
 		mutantsProject =  ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
-		File modelFolder = new File(mutantsProject.getLocation() + "\\mutants");
+		File modelFolder = new File(mutantsProject.getLocation() + "/mutants");
 		if (modelFolder.listFiles() == null) {
 			noMutantsExists = true;
 		}else {
@@ -199,11 +201,12 @@ public class MutationScoreCalculator {
 		if (file.isFile() && file.getName().endsWith(".model")) {
 			String filePath = file.getPath();
 			if (workspacePath == null) {
-				workspacePath = filePath.substring(0, filePath.lastIndexOf(projectName)-1);
+				String path = filePath.substring(0, filePath.lastIndexOf(projectName)-1);
+				workspacePath = Paths.get(path);
 			}		
 			//get the relative path of the file
-			filePath = filePath.replace(workspacePath, "");
-			if (!filePath.equals(seedModelPath)){
+			if (!filePath.equals(seedModelPath.toString())){
+				filePath = filePath.replace(workspacePath.toString(), "");
 				mutant_status.put(filePath, ALIVE);
 				numOfMutants++;
 			}
@@ -219,7 +222,7 @@ public class MutationScoreCalculator {
 		mutationScore = (double) numOfKilledMutants/numOfMutants;
 	}
 	
-	public String getWorkspacePath() {
+	public Path getWorkspacePath() {
 		return workspacePath;
 	}
 	

@@ -1,5 +1,7 @@
 package org.imt.tdl.amplification.utilities;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -32,13 +34,13 @@ public class PathHelper {
 	IFile testSuiteFile;
 	Resource testSuiteResource;
 	Package testSuite;
-	String testSuiteFilePath;
+	Path testSuiteFilePath;
 	String testSuiteProjectName;
 	String testSuiteFileName;
 	
-	String workspacePath;
-	String modelsProjectPath;
-	String seedModelPath;
+	Path workspacePath;
+	Path modelsProjectPath;
+	Path seedModelPath;
 	Resource MUTResource;
 	
 	String DSLName;
@@ -98,7 +100,7 @@ public class PathHelper {
 				stream().filter(ci -> ci.getRole().toString().equals("SUT")).findFirst();
 		for (Annotation a:sutComponent.get().getAnnotation()){
 			if (a.getKey().getName().equals("MUTPath")){
-				seedModelPath = a.getValue().substring(1, a.getValue().length()-1);
+				seedModelPath = Paths.get(a.getValue().substring(1, a.getValue().length()-1));
 			}
 			else if (a.getKey().getName().equals("DSLName")) {
 				DSLName = a.getValue().substring(1, a.getValue().length()-1);
@@ -123,16 +125,17 @@ public class PathHelper {
 	}
 	
 	private void findWorkspace() {
-		String projectName = seedModelPath.substring(1, seedModelPath.lastIndexOf("/"));
+		String projectName = seedModelPath.getParent().toString().substring(1);
 		IProject mutProject = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
-		workspacePath = mutProject.getLocation().toString();
-		workspacePath = workspacePath.substring(0, workspacePath.lastIndexOf("/")).replace("/", "\\");
+		String path = mutProject.getLocation().toString();
+		path = path.substring(0, path.lastIndexOf("/"));
+		workspacePath = Paths.get(path);
 	}
 	
 	private void findTestSuiteProjectInfo() {
-		testSuiteFilePath = testSuiteFile.getFullPath().toString();
-		testSuiteProjectName = testSuiteFilePath.substring(1, testSuiteFilePath.lastIndexOf("/"));
-		testSuiteFileName = testSuiteFile.getName().substring(0, testSuiteFile.getName().lastIndexOf("."));
+		testSuiteFilePath = Paths.get(testSuiteFile.getFullPath().toString());
+		testSuiteProjectName = testSuiteFilePath.getParent().toString().substring(1);
+		testSuiteFileName = testSuiteFile.getName().replace("." + testSuiteFile.getFileExtension(), "");
 	}
 
 	public IFile getTestSuiteFile() {
@@ -143,7 +146,7 @@ public class PathHelper {
 		return testSuiteResource;
 	}
 	
-	public String getTestSuiteProjectPath() {
+	public Path getTestSuiteProjectPath() {
 		return testSuiteFilePath;
 	}
 
@@ -159,17 +162,17 @@ public class PathHelper {
 		return testSuite;
 	}
 
-	public String getWorkspacePath() {
+	public Path getWorkspacePath() {
 		return workspacePath;
 	}
 
-	public String getSeedModelPath() {
+	public Path getSeedModelPath() {
 		return seedModelPath;
 	}
 
 	public Resource getMUTResource() {
 		if (MUTResource == null) {
-			MUTResource = (new ResourceSetImpl()).getResource(URI.createURI(seedModelPath), true);
+			MUTResource = (new ResourceSetImpl()).getResource(URI.createFileURI(seedModelPath.toString()), true);
 		}
 		return MUTResource;
 	}
