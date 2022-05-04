@@ -1,0 +1,66 @@
+Total number of mutants: 53
+- initial number of killed mutants: 51
+- initial mutation score: 96.22641509433963%
+Total number of test cases improving mutation score: 0
+- number of mutants killed by improved test cases: 0
+- total number of killed mutants : 51
+- final mutation score : 96.22641509433963%
+=> improvement in the mutation score : 0.0%
+--------------------------------------------------
+--------------------------------------------------
+Original test case: test1
+Killed mutant 1: \Arduino.triggerBubble\mutants\cbbo_or\Output0.model
+Killed mutant 2: \Arduino.triggerBubble\mutants\cmar\Output4.model
+Killed mutant 3: \Arduino.triggerBubble\mutants\cbbo_inf\Output0.model
+Killed mutant 4: \Arduino.triggerBubble\mutants\cbbo_and\Output0.model
+Killed mutant 5: \Arduino.triggerBubble\mutants\cimgr\Output1.model
+Killed mutant 6: \Arduino.triggerBubble\mutants\cmir\Output12.model
+Killed mutant 7: \Arduino.triggerBubble\mutants\cmir\Output7.model
+Killed mutant 8: \Arduino.triggerBubble\mutants\cic\Output1.model
+Killed mutant 9: \Arduino.triggerBubble\mutants\cmar\Output1.model
+Killed mutant 10: \Arduino.triggerBubble\mutants\cmir\Output16.model
+Killed mutant 11: \Arduino.triggerBubble\mutants\cmir\Output4.model
+Killed mutant 12: \Arduino.triggerBubble\mutants\cmar\Output10.model
+Killed mutant 13: \Arduino.triggerBubble\mutants\cimgr\Output0.model
+Killed mutant 14: \Arduino.triggerBubble\mutants\cmar\Output15.model
+Killed mutant 15: \Arduino.triggerBubble\mutants\cic\Output4.model
+Killed mutant 16: \Arduino.triggerBubble\mutants\cmir\Output1.model
+Killed mutant 17: \Arduino.triggerBubble\mutants\cmar\Output8.model
+Killed mutant 18: \Arduino.triggerBubble\mutants\cbbo_equal\Output0.model
+Killed mutant 19: \Arduino.triggerBubble\mutants\cmir\Output13.model
+Killed mutant 20: \Arduino.triggerBubble\mutants\cmar\Output12.model
+Killed mutant 21: \Arduino.triggerBubble\mutants\cmir\Output10.model
+Killed mutant 22: \Arduino.triggerBubble\mutants\cmir\Output8.model
+Killed mutant 23: \Arduino.triggerBubble\mutants\cmar\Output2.model
+Killed mutant 24: \Arduino.triggerBubble\mutants\cmar\Output5.model
+Killed mutant 25: \Arduino.triggerBubble\mutants\cmir\Output5.model
+Killed mutant 26: \Arduino.triggerBubble\mutants\cmir\Output14.model
+Killed mutant 27: \Arduino.triggerBubble\mutants\cri\Output0.model
+Killed mutant 28: \Arduino.triggerBubble\mutants\cmir\Output2.model
+Killed mutant 29: \Arduino.triggerBubble\mutants\cmir\Output17.model
+Killed mutant 30: \Arduino.triggerBubble\mutants\cmar\Output16.model
+Killed mutant 31: \Arduino.triggerBubble\mutants\cic\Output0.model
+Killed mutant 32: \Arduino.triggerBubble\mutants\cmir\Output9.model
+Killed mutant 33: \Arduino.triggerBubble\mutants\cbbo_infe\Output0.model
+Killed mutant 34: \Arduino.triggerBubble\mutants\cmar\Output13.model
+Killed mutant 35: \Arduino.triggerBubble\mutants\cmar\Output6.model
+Killed mutant 36: \Arduino.triggerBubble\mutants\cmar\Output9.model
+Killed mutant 37: \Arduino.triggerBubble\mutants\cmir\Output11.model
+Killed mutant 38: \Arduino.triggerBubble\mutants\cic\Output3.model
+Killed mutant 39: \Arduino.triggerBubble\mutants\cmir\Output6.model
+Killed mutant 40: \Arduino.triggerBubble\mutants\cic\Output2.model
+Killed mutant 41: \Arduino.triggerBubble\mutants\cbbo_different\Output0.model
+Killed mutant 42: \Arduino.triggerBubble\mutants\cmar\Output3.model
+Killed mutant 43: \Arduino.triggerBubble\mutants\cmir\Output3.model
+Killed mutant 44: \Arduino.triggerBubble\mutants\cmar\Output11.model
+Killed mutant 45: \Arduino.triggerBubble\mutants\cmar\Output7.model
+Killed mutant 46: \Arduino.triggerBubble\mutants\cimgr\Output2.model
+Killed mutant 47: \Arduino.triggerBubble\mutants\cmar\Output17.model
+Killed mutant 48: \Arduino.triggerBubble\mutants\cmar\Output0.model
+Killed mutant 49: \Arduino.triggerBubble\mutants\cmir\Output15.model
+Killed mutant 50: \Arduino.triggerBubble\mutants\cmar\Output14.model
+Killed mutant 51: \Arduino.triggerBubble\mutants\cmir\Output0.model
+--------------------------------------------------
+List of Alive mutants:
+Alive mutant 1: \Arduino.triggerBubble\mutants\cbbo_supe\Output0.model
+Alive mutant 2: \Arduino.triggerBubble\mutants\cic\Output5.model
