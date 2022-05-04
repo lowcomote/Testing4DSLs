@@ -145,7 +145,15 @@ public class TDLTestAmplifier {
 						}
 					}
 				}
-			}				
+				//if all the mutants are killed by now, break the loop
+				if (scoreCalculator.getNumOfMutants() == scoreCalculator.getNumOfKilledMutants()) {
+					break;
+				}
+			}	
+			//if all the mutants are killed by now, break the loop
+			if (scoreCalculator.getNumOfMutants() == scoreCalculator.getNumOfKilledMutants()) {
+				break;
+			}
 		}
 		numNewTests += amplifiedTests.size();
 		iteration_ampTests.put(numOfIteration, new ArrayList<>());
