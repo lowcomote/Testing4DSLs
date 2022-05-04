@@ -241,6 +241,8 @@ public class TDLTestAmplifier {
 	private void printMutationAnalysisResult(String outputFilePath) {
 		//saving results into a .txt file
 		StringBuilder sb = new StringBuilder();
+		sb.append("Total number of mutants: " + scoreCalculator.getNumOfMutants() + "\n");
+		sb.append("--------------------------------------------------\n");
 		for (String testCase:scoreCalculator.testCase_killedMutant.keySet()) {
 			sb.append("Original test case: " + testCase + "\n");
 			int j = 1;
