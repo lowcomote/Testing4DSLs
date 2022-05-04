@@ -51,6 +51,15 @@ public class EngineFactory{
 		}else if(commandType.equals(DSL_SPECIFIC)) {
 			this.eventManagerLauncher = new K3EventManagerLauncher();
 			this.eventManagerLauncher.setUp(MUTPath, DSLPath);
+			if (!this.eventManagerLauncher.isEngineStarted()) {
+				IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
+				if (debugTargets.length > 0) {
+					//we are in the Debug mode, so debug the model under test
+					this.eventManagerLauncher.launchModelDebugger();
+				}else {
+					this.eventManagerLauncher.startEngine();
+				}
+			}
 		}else if (commandType.equals(OCL)) {
 			if (oclLauncher == null) {
 				oclLauncher = new OCLInterpreter();
@@ -84,17 +93,7 @@ public class EngineFactory{
 		return oclLauncher.runQuery(getMUTResource(), query.substring(1, query.length()-1));
 	}
 	
-	public String executeDSLSpecificCommand(String eventType, String eventName, Map<String, Object> parameters) {
-		if (!this.eventManagerLauncher.isEngineStarted()) {
-			IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
-			if (debugTargets.length > 0) {
-				//we are in the Debug mode, so debug the model under test
-				this.eventManagerLauncher.launchModelDebugger();
-			}else {
-				this.eventManagerLauncher.startEngine();
-			}
-		}
-		
+	public String executeDSLSpecificCommand(String eventType, String eventName, Map<String, Object> parameters) {		
 		switch (eventType) {
 		case "ACCEPTED":
 			return this.eventManagerLauncher.processAcceptedEvent(eventName, parameters);
