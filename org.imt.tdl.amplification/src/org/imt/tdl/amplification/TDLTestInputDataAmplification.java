@@ -421,13 +421,15 @@ public class TDLTestInputDataAmplification {
 	private Collection<? extends TestDescription> modifyBooleanData() {
 		List<TestDescription> generatedTestsByModification = new ArrayList<>();
 		for (LiteralValueUse boolLiteral:boolLiterals) {
-			if (getLiteralValue(boolLiteral).equals("true")) {
+			String initialValue = getLiteralValue(boolLiteral);
+			if (initialValue.equals("true")) {
 				boolLiteral.setValue("false");
 			}
-			else if (getLiteralValue(boolLiteral).equals("false")) {
+			else if (initialValue.equals("false")) {
 				boolLiteral.setValue("true");
 			}
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, BOOLMODIFICATION));
+			boolLiteral.setValue(initialValue);
 		}
 		return generatedTestsByModification;
 	}
@@ -441,8 +443,8 @@ public class TDLTestInputDataAmplification {
 	private Collection<? extends TestDescription> modifyStringData() {
 		List<TestDescription> generatedTestsByModification = new ArrayList<>();
 		for (LiteralValueUse stringLiteral:stringLiterals) {
-			String value = getLiteralValue(stringLiteral);
-			StringBuilder sb = new StringBuilder(value);
+			String initialValue = getLiteralValue(stringLiteral);
+			StringBuilder sb = new StringBuilder(initialValue);
 			Random rand = new Random();
 			int randomIndex = rand.nextInt(sb.length());
 			// 1. add a random char
@@ -450,18 +452,20 @@ public class TDLTestInputDataAmplification {
 			stringLiteral.setValue(sb.toString());
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, STRINGMODIFICATION));
 			//2. remove a random char
-			sb = new StringBuilder(value);
+			sb = new StringBuilder(initialValue);
 			sb.deleteCharAt(randomIndex);
 			stringLiteral.setValue(sb.toString());
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, STRINGMODIFICATION));
 			//3. replace a random char
-			sb = new StringBuilder(value);
+			sb = new StringBuilder(initialValue);
 			sb.replace(randomIndex, randomIndex + 1, RandomStringUtils.randomAlphanumeric(1));
 			stringLiteral.setValue(sb.toString());
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, STRINGMODIFICATION));
 			//4. replace the string by a fully random string of the same size
-			stringLiteral.setValue(RandomStringUtils.randomAlphanumeric(value.length()));
+			stringLiteral.setValue(RandomStringUtils.randomAlphanumeric(initialValue.length()));
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, STRINGMODIFICATION));
+			
+			stringLiteral.setValue(initialValue);
 		}
 		return generatedTestsByModification;
 	}
@@ -472,7 +476,8 @@ public class TDLTestInputDataAmplification {
 	private Collection<? extends TestDescription> modifyIntegerData() {
 		List<TestDescription> generatedTestsByModification = new ArrayList<>();
 		for (LiteralValueUse intLiteral:intLiterals) {
-			int value = Integer.parseInt(getLiteralValue(intLiteral));
+			String initialValue = getLiteralValue(intLiteral);
+			int value = Integer.parseInt(initialValue);
 			//1. value plus 1
 			intLiteral.setValue("'" + (value + 1) + "'");
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, INTMODIFICATION));
@@ -491,6 +496,7 @@ public class TDLTestInputDataAmplification {
 				intLiteral.setValue(otherValue.getValue());
 				generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, INTMODIFICATION));
 			}
+			intLiteral.setValue(initialValue);
 		}
 		return generatedTestsByModification;
 	}
@@ -498,7 +504,9 @@ public class TDLTestInputDataAmplification {
 	private Collection<? extends TestDescription> modifyFloatData() {
 		List<TestDescription> generatedTestsByModification = new ArrayList<>();
 		for (LiteralValueUse floatLiteral:floatLiterals) {
-			float value = Float.parseFloat(getLiteralValue(floatLiteral));
+			String initialValue = getLiteralValue(floatLiteral);
+			
+			float value = Float.parseFloat(initialValue);
 			//1. value plus 1
 			floatLiteral.setValue("'" + (value + 1) + "'");
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, FLOATMODIFICATION));
@@ -520,9 +528,12 @@ public class TDLTestInputDataAmplification {
 			String exValue = floatLiterals.get(randomIndex).getValue();
 			floatLiteral.setValue(exValue);
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, FLOATMODIFICATION));
+			
+			floatLiteral.setValue(initialValue);
 		}
 		return generatedTestsByModification;
 	}
+
 
 	private void findLiteralFeaturesOfData (DataInstanceUse dataInstanceUse){
 		//finding literals that their value is directly used in the test case
