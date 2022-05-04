@@ -116,7 +116,6 @@ public class TDLTestAmplifier {
 			System.out.println("Phase (2): Modifying test input Data to generate new test cases");
 			TDLTestInputDataAmplification IAmplifier = new TDLTestInputDataAmplification(tdlTestSuite);
 			TMP.addAll(IAmplifier.generateNewTestsByInputModification(copyTdlTestCase));
-			amplifiedTests.addAll(TMP);
 			System.out.println("Done: #of generated test cases by input modification = " + TMP.size());
 			
 			System.out.println("\nPhase (3): Running new tests and generating assertions");
@@ -127,10 +126,10 @@ public class TDLTestAmplifier {
 				//check whether the assertion can be generated for the new test case
 				if (!result) {
 					tdlTestSuite.getPackagedElement().remove(newTestCase);
-					amplifiedTests.remove(newTestCase);
 				}
 				else {
 					//check whether the new test case is passed on the original model
+					amplifiedTests.add(newTestCase);
 					String testRunResult = scoreCalculator.runTestCaseOnOriginalModel(newTestCase);
 					if (testRunResult != TDLTestResultUtil.PASS) {
 						tdlTestSuite.getPackagedElement().remove(newTestCase);
