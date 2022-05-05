@@ -585,7 +585,11 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 
 	@Override
 	public void disposeResources() {
-		this.MUTResource.unload();
-		this.executionEngine.dispose();
+		try {
+			this.MUTResource.unload();
+			this.executionEngine.dispose();
+		}catch (NullPointerException e) {
+			// TODO: handle exception
+		}	
 	} 
 }
