@@ -243,6 +243,15 @@ public class MutationScoreCalculator {
 				sb.append("Killed mutant " + (j++) + ": " + mutant + "\n");
 			}
 		}
+		if (numOfKilledMutants < numOfMutants) {
+			sb.append("--------------------------------------------------\n");
+			sb.append("Number of alive mutants: " + (numOfMutants - numOfKilledMutants) + "\n");
+			int j = 1;
+			for (String mutant:getAliveMutants()) {
+				sb.append("Alive mutant " + (j++) + ": " + mutant + "\n");
+			}
+		}
+		
 		try {
 			Path filePath = Paths.get(outputFilePath);
 			Files.writeString(filePath,sb);
