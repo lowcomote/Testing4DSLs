@@ -117,7 +117,7 @@ public class GenericEventManager implements IEventManager {
 					engine.setEngineStatus(RunStatus.WaitingForEvent);
 					callRequest = callRequestQueue.take();
 				} catch (InterruptedException e) {
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 				engine.setEngineStatus(RunStatus.Running);
 				waitForCallRequests = false;
