@@ -92,12 +92,6 @@ public class TDLTestAmplifier {
 			}
 		}else {
 			System.out.println("As the initial mutation score is 100% there is no need for test amplification");
-			System.out.println("Total number of mutants: " + scoreCalculator.getNumOfMutants());
-			String outputFilePath = PathHelper.getInstance().getWorkspacePath() + "/"
-					+ PathHelper.getInstance().getTestSuiteProjectName() + "/" 
-					+ PathHelper.getInstance().getTestSuiteFileName() + 
-					"_mutationResult.txt";
-			printMutationAnalysisResult(outputFilePath);
 		}
 	}
 
@@ -231,29 +225,6 @@ public class TDLTestAmplifier {
 		try {
 			Path filePath = Paths.get(outputFilePath);
 			Files.writeString(filePath,sb);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	private void printMutationAnalysisResult(String outputFilePath) {
-		//saving results into a .txt file
-		StringBuilder sb = new StringBuilder();
-		sb.append("Total number of mutants: " + scoreCalculator.getNumOfMutants() + "\n");
-		sb.append("--------------------------------------------------\n");
-		for (String testCase:scoreCalculator.testCase_killedMutant.keySet()) {
-			sb.append("Original test case: " + testCase + "\n");
-			int j = 1;
-			for (String mutant:scoreCalculator.testCase_killedMutant.get(testCase)) {
-				sb.append("Killed mutant " + (j++) + ": " + mutant + "\n");
-			}
-		}
-		try {
-			Path filePath = Paths.get(outputFilePath);
-			Files.writeString(filePath,sb);
-			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

@@ -1,6 +1,9 @@
 package org.imt.tdl.amplification.evaluation;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -97,6 +100,7 @@ public class MutationScoreCalculator {
 		testCases.forEach(t -> runTestCaseOnMutants(t));
 		calculateMutationScore();
 		System.out.println("The mutation score of the input test suite is: " + mutationScore);
+		printMutationAnalysisResult();
 		return mutationScore;
 	}
 
@@ -220,6 +224,34 @@ public class MutationScoreCalculator {
 	
 	private void calculateMutationScore() {
 		mutationScore = (double) numOfKilledMutants/numOfMutants;
+	}
+	
+	private void printMutationAnalysisResult() {
+		//saving results into a .txt file
+		String outputFilePath = PathHelper.getInstance().getWorkspacePath() + "/"
+				+ PathHelper.getInstance().getTestSuiteProjectName() + "/" 
+				+ PathHelper.getInstance().getTestSuiteFileName() + 
+				"_mutationResult.txt";
+		StringBuilder sb = new StringBuilder();
+		sb.append("Number of generated mutants: " + numOfMutants + "\n");
+		sb.append("Number of killed mutants: " + numOfKilledMutants + "\n");
+		sb.append("--------------------------------------------------\n");
+		for (String testCase:testCase_killedMutant.keySet()) {
+			sb.append("Original test case: " + testCase + "\n");
+			int j = 1;
+			for (String mutant:testCase_killedMutant.get(testCase)) {
+				sb.append("Killed mutant " + (j++) + ": " + mutant + "\n");
+			}
+		}
+		try {
+			Path filePath = Paths.get(outputFilePath);
+			Files.writeString(filePath,sb);
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public Path getWorkspacePath() {
