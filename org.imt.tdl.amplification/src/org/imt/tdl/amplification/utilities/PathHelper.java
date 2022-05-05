@@ -172,7 +172,8 @@ public class PathHelper {
 
 	public Resource getMUTResource() {
 		if (MUTResource == null) {
-			MUTResource = (new ResourceSetImpl()).getResource(URI.createFileURI(seedModelPath.toString()), true);
+			String path = seedModelPath.toString().replace("\\", "/");
+			MUTResource = (new ResourceSetImpl()).getResource(URI.createURI(path), true);
 		}
 		return MUTResource;
 	}
