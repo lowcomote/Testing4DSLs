@@ -429,7 +429,7 @@ public class TDLTestInputDataAmplification {
 				boolLiteral.setValue("true");
 			}
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, BOOLMODIFICATION));
-			boolLiteral.setValue(initialValue);
+			boolLiteral.setValue("\""+ initialValue + "\"");
 		}
 		return generatedTestsByModification;
 	}
@@ -465,7 +465,7 @@ public class TDLTestInputDataAmplification {
 			stringLiteral.setValue(RandomStringUtils.randomAlphanumeric(initialValue.length()));
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, STRINGMODIFICATION));
 			
-			stringLiteral.setValue(initialValue);
+			stringLiteral.setValue("\""+ initialValue + "\"");
 		}
 		return generatedTestsByModification;
 	}
@@ -479,16 +479,16 @@ public class TDLTestInputDataAmplification {
 			String initialValue = getLiteralValue(intLiteral);
 			int value = Integer.parseInt(initialValue);
 			//1. value plus 1
-			intLiteral.setValue("'" + (value + 1) + "'");
+			intLiteral.setValue("\"" + (value + 1) + "\"");
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, INTMODIFICATION));
 			//2. value minus 1
-			intLiteral.setValue("'" + (value - 1) + "'");
+			intLiteral.setValue("\"" + (value - 1) + "\"");
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, INTMODIFICATION));
 			//3. value multiply by 2
-			intLiteral.setValue("'" + (value * 2) + "'");
+			intLiteral.setValue("\"" + (value * 2) + "\"");
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, INTMODIFICATION));
 			//4. value divide by 2
-			intLiteral.setValue("'" + (value / 2) + "'");
+			intLiteral.setValue("\"" + (value / 2) + "\"");
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, INTMODIFICATION));
 			//5. replacement by an existing literal of the same type
 			List<LiteralValueUse> otherValues = intLiterals.stream().filter(i -> i != intLiteral).toList();
@@ -496,7 +496,7 @@ public class TDLTestInputDataAmplification {
 				intLiteral.setValue(otherValue.getValue());
 				generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, INTMODIFICATION));
 			}
-			intLiteral.setValue(initialValue);
+			intLiteral.setValue("\""+ initialValue + "\"");
 		}
 		return generatedTestsByModification;
 	}
@@ -508,16 +508,16 @@ public class TDLTestInputDataAmplification {
 			
 			float value = Float.parseFloat(initialValue);
 			//1. value plus 1
-			floatLiteral.setValue("'" + (value + 1) + "'");
+			floatLiteral.setValue("\"" + (value + 1) + "\"");
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, FLOATMODIFICATION));
 			//2. value minus 1
-			floatLiteral.setValue("'" + (value - 1) + "'");
+			floatLiteral.setValue("\"" + (value - 1) + "\"");
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, FLOATMODIFICATION));
 			//3. value multiply by 2
-			floatLiteral.setValue("'" + (value * 2) + "'");
+			floatLiteral.setValue("\"" + (value * 2) + "\"");
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, FLOATMODIFICATION));
 			//4. value divide by 2
-			floatLiteral.setValue("'" + (float)(value / 2) + "'");
+			floatLiteral.setValue("\"" + (float)(value / 2) + "\"");
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, FLOATMODIFICATION));
 			//5. replacement by an existing literal of the same type
 			Random rand = new Random();
@@ -529,7 +529,7 @@ public class TDLTestInputDataAmplification {
 			floatLiteral.setValue(exValue);
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, FLOATMODIFICATION));
 			
-			floatLiteral.setValue(initialValue);
+			floatLiteral.setValue("\"" + initialValue + "\"");
 		}
 		return generatedTestsByModification;
 	}

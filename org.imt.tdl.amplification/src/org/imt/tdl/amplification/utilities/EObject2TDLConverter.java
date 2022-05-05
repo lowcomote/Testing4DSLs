@@ -109,14 +109,14 @@ public class EObject2TDLConverter {
 				DataInstanceUse tdlValues = tdlFactory.createDataInstanceUse();
 				for (Boolean eValue:eValues) {
 					LiteralValueUse tdlValue = tdlFactory.createLiteralValueUse();
-					tdlValue.setValue("\'" + eValue.toString() + "\'");
+					tdlValue.setValue("\"" + eValue.toString() + "\"");
 					tdlValues.getItem().add(tdlValue);
 				}
 				return tdlValues;
 			}else {
 				boolean eValue = (boolean) eobject.eGet(efeature);
 				LiteralValueUse tdlValue = tdlFactory.createLiteralValueUse();
-				tdlValue.setValue("\'" + eValue + "\'");
+				tdlValue.setValue("\"" + eValue + "\"");
 				return tdlValue;
 			}
 		}
@@ -127,14 +127,14 @@ public class EObject2TDLConverter {
 				DataInstanceUse tdlValues = tdlFactory.createDataInstanceUse();
 				for (Integer eValue:eValues) {
 					LiteralValueUse tdlValue = tdlFactory.createLiteralValueUse();
-					tdlValue.setValue("\'" + eValue.toString() + "\'");
+					tdlValue.setValue("\"" + eValue.toString() + "\"");
 					tdlValues.getItem().add(tdlValue);
 				}
 				return tdlValues;
 			}else {
 				int eValue = (int) eobject.eGet(efeature);
 				LiteralValueUse tdlValue = tdlFactory.createLiteralValueUse();
-				tdlValue.setValue("\'" + eValue + "\'");
+				tdlValue.setValue("\"" + eValue + "\"");
 				return tdlValue;
 			}
 		}
@@ -145,14 +145,14 @@ public class EObject2TDLConverter {
 				DataInstanceUse tdlValues = tdlFactory.createDataInstanceUse();
 				for (Float eValue:eValues) {
 					LiteralValueUse tdlValue = tdlFactory.createLiteralValueUse();
-					tdlValue.setValue("\'" + eValue.toString() + "\'");
+					tdlValue.setValue("\"" + eValue.toString() + "\"");
 					tdlValues.getItem().add(tdlValue);
 				}
 				return tdlValues;
 			}else {
 				float eValue = (float) eobject.eGet(efeature);
 				LiteralValueUse tdlValue = tdlFactory.createLiteralValueUse();
-				tdlValue.setValue("\'" + eValue + "\'");
+				tdlValue.setValue("\"" + eValue + "\"");
 				return tdlValue;
 			}
 		}
@@ -163,14 +163,14 @@ public class EObject2TDLConverter {
 				DataInstanceUse tdlValues = tdlFactory.createDataInstanceUse();
 				for (String eValue:eValues) {
 					LiteralValueUse tdlValue = tdlFactory.createLiteralValueUse();
-					tdlValue.setValue("\'" + eValue.toString() + "\'");
+					tdlValue.setValue("\"" + eValue.toString() + "\"");
 					tdlValues.getItem().add(tdlValue);
 				}
 				return tdlValues;
 			}else {
 				String eValue = (String) eobject.eGet(efeature);
 				LiteralValueUse tdlValue = tdlFactory.createLiteralValueUse();
-				tdlValue.setValue("\'" + eValue + "\'");
+				tdlValue.setValue("\"" + eValue + "\"");
 				return tdlValue;
 			}
 		}
