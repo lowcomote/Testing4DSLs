@@ -588,6 +588,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		try {
 			this.MUTResource.unload();
 			this.executionEngine.dispose();
+			this.executionEngineJob.cancel();
 		}catch (NullPointerException e) {
 			// TODO: handle exception
 		}	

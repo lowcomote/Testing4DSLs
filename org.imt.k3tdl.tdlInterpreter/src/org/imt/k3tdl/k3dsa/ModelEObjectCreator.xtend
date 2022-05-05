@@ -166,6 +166,7 @@ class ModelEObjectCreator {
 	   		}catch(IllegalArgumentException e){
 				println("New value cannot be set for the " + feature.name + " property of the MUT")
 			}catch(NullPointerException e){
+				
 				object.eSet(feature, value)
 			}
 	}
