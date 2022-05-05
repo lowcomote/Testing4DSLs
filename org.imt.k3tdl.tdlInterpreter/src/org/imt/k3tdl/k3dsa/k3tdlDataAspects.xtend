@@ -411,14 +411,32 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 				println("FAIL: The new value cannot be set for the " + matchedFeature.name + " property of the MUT")
 				return TDLTestResultUtil.FAIL + ": The new value cannot be set for the " + matchedFeature.name + " property of the MUT"
 			}
+			catch(NullPointerException e){
+				var ArrayList<EObject> rootElements = new ArrayList
+				rootElements.add(object)
+	        	val ArrayList<EObject> matchedObjects = new ArrayList
+				for (i : 0 ..<_self.item.size){
+					val item = _self.item.get(i) as DataInstanceUse
+					val matchedObject = item.getMatchedMUTElement(rootElements, MUTResource, false, DSLPath)			
+					if (matchedObject === null){
+						println("There is no " + item.dataInstance.name + " property in the MUT")
+					}else{
+						_self.setMatchedMUTElement(matchedObject, MUTResource, DSLPath)
+						matchedObjects.add(matchedObject)
+					}							
+				}
+				if (matchedObjects.size == _self.item.size){
+					object.eSet(matchedFeature, matchedObjects)
+				}
+			}
 		}else{//there is just one data instance
 			val matchedObject = _self.getMatchedMUTElement(MUTResource, false, DSLPath)
 			if (matchedObject === null){
 				println("There is no " + _self.dataInstance.name + " property in the MUT")
 				return TDLTestResultUtil.FAIL + ": There is no MUT element matched with " + _self.dataInstance.name
 			}
-			val TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(object);
 			try{
+				val TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(object);
 				domain.getCommandStack().execute(new RecordingCommand(domain) {
 			        override protected doExecute() {
 			        	var ArrayList<EObject> rootElements = new ArrayList
@@ -437,6 +455,17 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 	   		}catch(IllegalArgumentException e){
 				println("New value cannot be set for the " + matchedFeature.name + " property of the MUT")
 				return TDLTestResultUtil.FAIL + ": New value cannot be set for the " + matchedFeature.name + " property of the MUT"
+			}catch(NullPointerException e){
+				var ArrayList<EObject> rootElements = new ArrayList
+				rootElements.add(object)
+	        	_self.setMatchedMUTElement(matchedObject, MUTResource, DSLPath)
+	        	if (matchedFeature.many){
+	        		val ArrayList<EObject> matchedObjects = new ArrayList
+	        		matchedObjects.add(matchedObject)
+	        		object.eSet(matchedFeature, matchedObjects)
+	        	}else{
+	        		object.eSet(matchedFeature, matchedObject)
+	        	}
 			}
 		}
 		return TDLTestResultUtil.PASS + ": New value is set for the " + matchedFeature.name + " property of the MUT"

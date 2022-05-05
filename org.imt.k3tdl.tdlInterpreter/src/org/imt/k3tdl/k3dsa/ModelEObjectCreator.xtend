@@ -16,6 +16,9 @@ import org.etsi.mts.tdl.StructuredDataInstance
 import static org.imt.k3tdl.k3dsa.DataTypeAspect.*
 
 import static extension org.imt.k3tdl.k3dsa.DataInstanceUseAspect.*
+import org.eclipse.emf.transaction.TransactionalEditingDomain
+import org.eclipse.emf.transaction.util.TransactionUtil
+import org.eclipse.emf.transaction.RecordingCommand
 
 class ModelEObjectCreator {
 	
@@ -87,7 +90,7 @@ class ModelEObjectCreator {
 	
 	def void setFeatureValue (EObject newEObject, EStructuralFeature feature, List<DataUse> featureTdlValues){
 		if (featureTdlValues.size == 0){
-			newEObject.eSet(feature, feature.defaultValue)
+			setEObjectFeatureValue (newEObject, feature, feature.defaultValue)
 		}
 		//all the values must be from the same type:
 		//(1) if they are dataInstanceUse, it means they are references to EObjects of the model under test
@@ -103,9 +106,9 @@ class ModelEObjectCreator {
 			}
 			if (!featureValues.empty){
 				if (feature.isMany){//the feature value is a list of eobjects
-					newEObject.eSet(feature, featureValues)
+					setEObjectFeatureValue (newEObject, feature, featureValues)
 				}else{//the feature value is only one eobject
-					newEObject.eSet(feature, featureValues.get(0))
+					setEObjectFeatureValue (newEObject, feature, featureValues.get(0))
 				}
 			}
 		}
@@ -115,41 +118,56 @@ class ModelEObjectCreator {
 				if (!feature.isMany){//a single integer must be set as the value
 					var featureValue = getLiteralValue(featureTdlValues.get(0) as LiteralValueUse)
 					Integer.parseInt(featureValue)
-					newEObject.eSet(feature, Integer.parseInt(featureValue))
+					setEObjectFeatureValue (newEObject, feature, Integer.parseInt(featureValue))
 				}else{//a list of integers must be set as the value
 					var List<Integer> featureValues = new ArrayList
 					for (DataUse tdlValue : featureTdlValues){
 						var featureValue = getLiteralValue(tdlValue as LiteralValueUse)
 			        	featureValues.add(Integer.parseInt(featureValue))
 					}
-					newEObject.eSet(feature, featureValues)
+					setEObjectFeatureValue (newEObject, feature, featureValues)
 				}
 			} else if (feature.EType.name.equals("EBooleanObject") || feature.EType.name.equals("EBoolean")){//TODO: must be tested
 				if (!feature.isMany){//a single boolean must be set as the value
 					var featureValue = getLiteralValue(featureTdlValues.get(0) as LiteralValueUse)
-					newEObject.eSet(feature, Boolean.parseBoolean(featureValue))
+					setEObjectFeatureValue (newEObject, feature, Boolean.parseBoolean(featureValue))
 				}else{//a list of booleans must be set as the value
 					var List<Boolean> featureValues = new ArrayList
 					for (DataUse tdlValue : featureTdlValues){
 						var featureValue = getLiteralValue(tdlValue as LiteralValueUse)
 			        	featureValues.add(Boolean.parseBoolean(featureValue))
 					}
-					newEObject.eSet(feature, featureValues)
+					setEObjectFeatureValue (newEObject, feature, featureValues)
 				}
 			} else {
 				if (!feature.isMany){//a single string must be set as the value
 					var featureValue = getLiteralValue(featureTdlValues.get(0) as LiteralValueUse)
-					newEObject.eSet(feature, featureValue)
+					setEObjectFeatureValue (newEObject, feature, featureValue)
 				}else{//a list of strings must be set as the value
 					var List<String> featureValues = new ArrayList
 					for (DataUse tdlValue : featureTdlValues){
 						var featureValue = getLiteralValue(tdlValue as LiteralValueUse)
 			        	featureValues.add(featureValue)
 					}
-					newEObject.eSet(feature, featureValues)
+					setEObjectFeatureValue (newEObject, feature, featureValues)
 				}
 			} 
 		}
+	}
+	
+	def setEObjectFeatureValue(EObject object, EStructuralFeature feature, Object value) {
+		try{
+			val TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(object);
+			domain.getCommandStack().execute(new RecordingCommand(domain) {
+		        override protected doExecute() {
+		        	object.eSet(feature, value)										
+		        }
+	   		});
+	   		}catch(IllegalArgumentException e){
+				println("New value cannot be set for the " + feature.name + " property of the MUT")
+			}catch(NullPointerException e){
+				object.eSet(feature, value)
+			}
 	}
 	
 	def String getLiteralValue(LiteralValueUse literalValue){
