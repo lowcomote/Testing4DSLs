@@ -242,6 +242,10 @@ class MessageAspect extends InteractoinAspect{
 			result = TDLTestResultUtil.FAIL
 			_self.parentTestDescription.testCaseResult.value = TDLTestResultUtil.FAIL
 		}
+		else if (info.contains(TDLTestResultUtil.INCONCLUSIVE)){
+			result = TDLTestResultUtil.INCONCLUSIVE
+			_self.parentTestDescription.testCaseResult.value = TDLTestResultUtil.INCONCLUSIVE
+		}
 		else if (info.contains(TDLTestResultUtil.PASS)){
 			result = TDLTestResultUtil.PASS
 		}

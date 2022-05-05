@@ -94,7 +94,7 @@ class GateInstanceAspect {
 				//the message is an event conforming to the behavioral interface of the DSL
 				val eventParameters = _self.getEventParameters(arg, EXPOSED_EVENT)
 				if (eventParameters === null){
-					return TDLTestResultUtil.FAIL + ": The event parameters cannot be neither found in the model under test nor created. \n"+
+					return TDLTestResultUtil.INCONCLUSIVE + ": The event parameters cannot be neither found in the model under test nor created. \n"+
 					"There must be a syntactical problem in the test data"
 				}
 				return _self.gateLauncher.executeDSLSpecificCommand(EXPOSED_EVENT,arg.dataInstance.validName, eventParameters)
