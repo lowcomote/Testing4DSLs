@@ -35,12 +35,15 @@ public class AssertionGenerator extends ModelExecutionObserver{
 		
 		TestDescriptionAspect.executeTestCase(tdlTestCase);
 		TDLTestCaseResult result = TestDescriptionAspect.testCaseResult(tdlTestCase);
-		//if the new test case cannot be executed completely, or the model did not expose any event occurrence (i.e., no assertion can be generated)
-		//the test case must be ignored from the list of new test cases
-		if (result.getValue() == TDLTestResultUtil.INCONCLUSIVE || exposedEventOccurrences.size() == 0) {
+		//if the new test case cannot be executed completely, the test case must be ignored from the list of new test cases
+		if (result.getValue() == TDLTestResultUtil.INCONCLUSIVE) {
 			return false;
 		}
-		
+		//if the model did not expose any event occurrence (no explicit assertion), 
+		//means with this input, the model should not react anything
+		if (exposedEventOccurrences.size() == 0) {
+			return true;
+		}
 		GateReference sourceGate = getSourceGate(tdlTestCase);
 		Target targetGate = getTargetGate(tdlTestCase);
 		if (sourceGate == null || targetGate == null) {
