@@ -1,6 +1,5 @@
 package org.imt.tdl.amplification.evaluation;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,20 +60,15 @@ public class Evaluation4MODELSPaper {
 		testCases.forEach(t -> scoreCalculator.runTestCaseOnAllMutants(t));
 		scoreCalculator.calculateOverallMutationScore();
 		mutationScore = scoreCalculator.getOverallMutationScore();
-		IFile weakTestsFile = null;
 		//if the mutation score is less than 40%, it is not a good input for the experiment
 		if (mutationScore < 0.4) {
 			String message = "Amplification Stopped: The mutation score of the input test suite must be higher than 40%";
 			System.out.println(message);
 			throw (new MutationRuntimeException(message));
 		}
-		//if the mutation score is between 40% and 80%, there is no need to remove test cases
-		else if (mutationScore >= 0.4 && mutationScore <= 0.8) {
-			weakTestsFile = testSuiteFile;
-		}
-		else if (mutationScore > 0.8) {
+		if (mutationScore > 0.8) {
 			makeTestSuiteWeaker();
-			weakTestsFile = saveSelectedTestCases();
+			saveSelectedTestCases();
 		}
 	}
 	
@@ -82,7 +76,7 @@ public class Evaluation4MODELSPaper {
 		int index = 0;
 		while (index <testCases.size() && !(mutationScore >= 0.4 && mutationScore <= 0.8)) {
 			TestDescription testCase = testCases.get(index);
-			List<String> mutantsKilledByTestCase = scoreCalculator.testCase_killedMutant.get(testCase);
+			List<String> mutantsKilledByTestCase = scoreCalculator.testCase_killedMutant.get(testCase.getName());
 			int numOfMutantsNotKilledByOtherTests = mutantsKilledByTestCase.stream().filter(m -> mutantNotKilledByOtherTests(testCase, m)).toList().size();
 			if (numOfMutantsNotKilledByOtherTests == 0) {
 				//no change in the mutation score
@@ -112,14 +106,14 @@ public class Evaluation4MODELSPaper {
 		List<TestDescription> otherTests = testCases.stream().
 				filter(t -> !EcoreUtil.equals(t, testCase)).toList();
 		for (TestDescription otherTest : otherTests) {
-			if (scoreCalculator.testCase_killedMutant.get(otherTest).contains(mutant)) {
+			if (scoreCalculator.testCase_killedMutant.get(otherTest.getName()).contains(mutant)) {
 				return false;
 			}
 		}
 		return true;
 	}
 
-	private IFile saveSelectedTestCases() {
+	private void saveSelectedTestCases() {
 		String sourcePath = testSuiteRes.getURI().toString();
 		String extension = ".tdlan2";
 		if (sourcePath.endsWith(".xmi")) {
@@ -137,8 +131,5 @@ public class Evaluation4MODELSPaper {
 		}
 		testSuiteRes.unload();
 		weakTestSuiteRes.unload();
-		
-		File weakTestsFile = new File (outputPath);
-		return (IFile) weakTestsFile;
 	}
 }
