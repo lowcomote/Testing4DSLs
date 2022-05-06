@@ -423,10 +423,10 @@ public class TDLTestInputDataAmplification {
 		for (LiteralValueUse boolLiteral:boolLiterals) {
 			String initialValue = getLiteralValue(boolLiteral);
 			if (initialValue.equals("true")) {
-				boolLiteral.setValue("false");
+				boolLiteral.setValue("\"false\"");
 			}
 			else if (initialValue.equals("false")) {
-				boolLiteral.setValue("true");
+				boolLiteral.setValue("\"true\"");
 			}
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, BOOLMODIFICATION));
 			boolLiteral.setValue("\""+ initialValue + "\"");
