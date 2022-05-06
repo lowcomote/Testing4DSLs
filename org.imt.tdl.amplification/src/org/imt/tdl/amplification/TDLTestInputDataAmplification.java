@@ -464,6 +464,9 @@ public class TDLTestInputDataAmplification {
 			//4. replace the string by a fully random string of the same size
 			stringLiteral.setValue(RandomStringUtils.randomAlphanumeric(initialValue.length()));
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, STRINGMODIFICATION));
+			//5. replace the string by an empty string (based on pitest tool)
+			stringLiteral.setValue("\"\"");
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, STRINGMODIFICATION));
 			
 			stringLiteral.setValue("\""+ initialValue + "\"");
 		}
@@ -478,19 +481,31 @@ public class TDLTestInputDataAmplification {
 		for (LiteralValueUse intLiteral:intLiterals) {
 			String initialValue = getLiteralValue(intLiteral);
 			int value = Integer.parseInt(initialValue);
-			//1. value plus 1
+			//1. value = 1
+			intLiteral.setValue("\"" + (1) + "\"");
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, INTMODIFICATION));
+			//2. value = 0
+			intLiteral.setValue("\"" + (0) + "\"");
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, INTMODIFICATION));
+			//3. value = -1
+			intLiteral.setValue("\"" + (-1) + "\"");
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, INTMODIFICATION));
+			//4. negating value
+			intLiteral.setValue("\"" + (-value) + "\"");
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, INTMODIFICATION));
+			//5. value plus 1
 			intLiteral.setValue("\"" + (value + 1) + "\"");
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, INTMODIFICATION));
-			//2. value minus 1
+			//6. value minus 1
 			intLiteral.setValue("\"" + (value - 1) + "\"");
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, INTMODIFICATION));
-			//3. value multiply by 2
+			//7. value multiply by 2
 			intLiteral.setValue("\"" + (value * 2) + "\"");
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, INTMODIFICATION));
-			//4. value divide by 2
+			//8. value divide by 2
 			intLiteral.setValue("\"" + (value / 2) + "\"");
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, INTMODIFICATION));
-			//5. replacement by an existing literal of the same type
+			//9. replacement by an existing literal of the same type
 			List<LiteralValueUse> otherValues = intLiterals.stream().filter(i -> i != intLiteral).toList();
 			for (LiteralValueUse otherValue: otherValues) {
 				intLiteral.setValue(otherValue.getValue());
@@ -505,29 +520,37 @@ public class TDLTestInputDataAmplification {
 		List<TestDescription> generatedTestsByModification = new ArrayList<>();
 		for (LiteralValueUse floatLiteral:floatLiterals) {
 			String initialValue = getLiteralValue(floatLiteral);
-			
 			float value = Float.parseFloat(initialValue);
-			//1. value plus 1
+			//1. value = 1
+			floatLiteral.setValue("\"" + (1) + "\"");
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, FLOATMODIFICATION));
+			//2. value = 0
+			floatLiteral.setValue("\"" + (0) + "\"");
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, FLOATMODIFICATION));
+			//3. value = -1
+			floatLiteral.setValue("\"" + (-1) + "\"");
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, FLOATMODIFICATION));
+			//4. negating value
+			floatLiteral.setValue("\"" + (-value) + "\"");
+			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, FLOATMODIFICATION));
+			//5. value plus 1
 			floatLiteral.setValue("\"" + (value + 1) + "\"");
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, FLOATMODIFICATION));
-			//2. value minus 1
+			//6. value minus 1
 			floatLiteral.setValue("\"" + (value - 1) + "\"");
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, FLOATMODIFICATION));
-			//3. value multiply by 2
+			//7. value multiply by 2
 			floatLiteral.setValue("\"" + (value * 2) + "\"");
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, FLOATMODIFICATION));
-			//4. value divide by 2
+			//8. value divide by 2
 			floatLiteral.setValue("\"" + (float)(value / 2) + "\"");
 			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, FLOATMODIFICATION));
-			//5. replacement by an existing literal of the same type
-			Random rand = new Random();
-			int randomIndex = rand.nextInt(floatLiterals.size());
-			while (randomIndex == floatLiterals.indexOf(floatLiteral)) {
-				randomIndex = rand.nextInt(floatLiterals.size());
+			//9. replacement by an existing literal of the same type
+			List<LiteralValueUse> otherValues = floatLiterals.stream().filter(i -> i != floatLiteral).toList();
+			for (LiteralValueUse otherValue: otherValues) {
+				floatLiteral.setValue(otherValue.getValue());
+				generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, FLOATMODIFICATION));
 			}
-			String exValue = floatLiterals.get(randomIndex).getValue();
-			floatLiteral.setValue(exValue);
-			generatedTestsByModification.add(copyTdlTestCase(tdlTestCase, FLOATMODIFICATION));
 			
 			floatLiteral.setValue("\"" + initialValue + "\"");
 		}
