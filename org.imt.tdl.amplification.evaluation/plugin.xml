@@ -7,7 +7,7 @@
             locationURI="popup:org.eclipse.ui.popup.any?after=additions">
          <command
                commandId="org.imt.tdl.amplification.evaluation.command"
-               label="Evaluate TDL Test Amplification Tool"
+               label="Weaken the test suite"
                style="push">
          </command>
       </menuContribution>
