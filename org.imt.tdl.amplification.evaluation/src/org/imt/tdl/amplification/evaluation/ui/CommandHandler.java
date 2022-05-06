@@ -44,7 +44,7 @@ public class CommandHandler implements IHandler {
 
 						}
 					};
-					Job job = Job.create("Test Amplifier", run);
+					Job job = Job.create("Test Amplification Evaluator", run);
 					job.schedule();
 				}
 			}

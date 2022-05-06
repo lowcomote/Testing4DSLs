@@ -104,8 +104,7 @@ public class MutationScoreCalculator {
 		return mutationScore;
 	}
 	
-	@SuppressWarnings("unused")
-	private void runTestCaseOnAllMutants(TestDescription testCase) {
+	public void runTestCaseOnAllMutants(TestDescription testCase) {
 		//using default values for timeout from pitest tool
 		//for timeoutConstant, it is calculated based on the waiting times used in the event manager:
 		//at the first of configuration and for each assertion 5000 waiting time
@@ -322,6 +321,10 @@ public class MutationScoreCalculator {
 	
 	public int getNumOfMutants() {
 		return numOfMutants;
+	}
+	
+	public void setNumOfKilledMutants(int numOfKilledMutants) {
+		this.numOfKilledMutants = numOfKilledMutants;
 	}
 	
 	public int getNumOfKilledMutants() {

@@ -32,14 +32,10 @@ public class Evaluation4MODELSPaper {
 
 	Resource testSuiteRes;
 	Package tdlTestSuite;
+	List<TestDescription> testCases = new ArrayList<>();
 	
 	MutationScoreCalculator scoreCalculator;
-	int initialNumOfKilledMutants;
-	double initialMutationScore;
-	
-	int numOfIteration;
-	int numNewTests;
-	Map<Integer, List<TestDescription>> iteration_ampTests = new HashMap<>();
+	double mutationScore ;
 	
 	public void selectTestsForEvaluation(IFile testSuiteFile) throws MutationRuntimeException {
 		PathHelper.getInstance().setTestSuiteFile(testSuiteFile);
@@ -60,22 +56,14 @@ public class Evaluation4MODELSPaper {
 			throw (new MutationRuntimeException(message));
 		}
 		
-		List<TestDescription> testCases = new ArrayList<>();
+		System.out.println("\nCalculating the mutation score of the input test suite");
 		testCases = tdlTestSuite.getPackagedElement().stream().filter(p -> p instanceof TestDescription).
 				map(p -> (TestDescription) p).collect(Collectors.toList());
 		
-		int index = -1;
-		double mutationScore = 0;
-		
-		for (int i=0; i<testCases.size(); i++) {
-			scoreCalculator.runTestCaseOnAliveMutants(testCases.get(i));
-			scoreCalculator.calculateOverallMutationScore();
-			mutationScore = scoreCalculator.getOverallMutationScore();
-			if (mutationScore > 0.8) {
-				index = i;
-				break;
-			}
-		}
+		//running all tests on all mutants
+		testCases.forEach(t -> scoreCalculator.runTestCaseOnAllMutants(t));
+		scoreCalculator.calculateOverallMutationScore();
+		mutationScore = scoreCalculator.getOverallMutationScore();
 		IFile weakTestsFile = null;
 		//if the mutation score is less than 40%, it is not a good input for the experiment
 		if (mutationScore < 0.4) {
@@ -88,18 +76,56 @@ public class Evaluation4MODELSPaper {
 			weakTestsFile = testSuiteFile;
 		}
 		else if (mutationScore > 0.8) {
-			//remove the test cases from the index to the end
-			for (int i=index; i<testCases.size(); i++) {
-				tdlTestSuite.getPackagedElement().remove(testCases.get(index));
-			}
+			makeTestSuiteWeaker();
 			weakTestsFile = saveSelectedTestCases();
 		}
-
+		
 		//send it to the amplifier
 		TDLTestAmplifier testAmplifier = new TDLTestAmplifier();
 		testAmplifier.amplifyTestSuite(weakTestsFile);
 	}
 	
+	private void makeTestSuiteWeaker() throws MutationRuntimeException {
+		int index = 0;
+		while (index <testCases.size() && !(mutationScore >= 0.4 && mutationScore <= 0.8)) {
+			TestDescription testCase = testCases.get(index);
+			List<String> mutantsKilledByTestCase = scoreCalculator.testCase_killedMutant.get(testCase);
+			int numOfMutantsNotKilledByOtherTests = mutantsKilledByTestCase.stream().filter(m -> mutantNotKilledByOtherTests(testCase, m)).toList().size();
+			if (numOfMutantsNotKilledByOtherTests == 0) {
+				//no change in the mutation score
+				tdlTestSuite.getPackagedElement().remove(testCase);
+			}
+			else if (numOfMutantsNotKilledByOtherTests > 0) {
+				int numOfKilledMutants = scoreCalculator.getNumOfKilledMutants() - numOfMutantsNotKilledByOtherTests;
+				double newScore = (double) (numOfKilledMutants) / scoreCalculator.getNumOfMutants();
+				//remove the test case if the new score is not lower than 40%
+				if (newScore >= 0.4) {
+					tdlTestSuite.getPackagedElement().remove(testCase);
+					scoreCalculator.setNumOfKilledMutants(numOfKilledMutants);
+					scoreCalculator.calculateOverallMutationScore();
+					mutationScore = scoreCalculator.getOverallMutationScore();
+				}
+			}
+			index++;
+		}
+		if (mutationScore < 0.4 || mutationScore > 0.8) {
+			String message = "Amplification Stopped: It is not possible to make test suite weaker with the current threshold (between 40% and 80%)";
+			System.out.println(message);
+			throw (new MutationRuntimeException(message));
+		}
+	}
+
+	private boolean mutantNotKilledByOtherTests(TestDescription testCase, String mutant) {
+		List<TestDescription> otherTests = testCases.stream().
+				filter(t -> !EcoreUtil.equals(t, testCase)).toList();
+		for (TestDescription otherTest : otherTests) {
+			if (scoreCalculator.testCase_killedMutant.get(otherTest).contains(mutant)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	private IFile saveSelectedTestCases() {
 		String sourcePath = testSuiteRes.getURI().toString();
 		String extension = ".tdlan2";
