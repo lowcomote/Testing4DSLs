@@ -97,14 +97,67 @@ public class MutationScoreCalculator {
 	
 	public double calculateInitialMutationScore() {
 		System.out.println("\nCalculating the mutation score of the input test suite");
-		testCases.forEach(t -> runTestCaseOnMutants(t));
-		calculateMutationScore();
+		testCases.forEach(t -> runTestCaseOnAliveMutants(t));
+		calculateOverallMutationScore();
 		System.out.println("The mutation score of the input test suite is: " + mutationScore);
 		printMutationAnalysisResult();
 		return mutationScore;
 	}
+	
+	@SuppressWarnings("unused")
+	private void runTestCaseOnAllMutants(TestDescription testCase) {
+		//using default values for timeout from pitest tool
+		//for timeoutConstant, it is calculated based on the waiting times used in the event manager:
+		//at the first of configuration and for each assertion 5000 waiting time
+		int timeoutConstant = testCase_numOfAssertions.get(testCase) * 5000 + 5000;
+		long timeout = (long) (testCase_executionTime.get(testCase) * timeoutFactor + timeoutConstant);
+		
+		//run the test case only on alive mutants
+		for (String mutant:mutant_status.keySet()) {
+			String mutantPath = mutant.replace("\\", "/");
+			TDLTestCaseResult result = null;
+			final Runnable testRunner = new Thread() {
+				  @Override 
+				  public void run() { 
+					  TestDescriptionAspect.executeTestCase(testCase, mutantPath);
+				  }
+				};
 
-	private void runTestCaseOnMutants(TestDescription testCase) {
+			final ExecutorService executor = Executors.newSingleThreadExecutor();
+			@SuppressWarnings("rawtypes")
+			final Future future = executor.submit(testRunner);
+			executor.shutdown(); // This does not cancel the already-scheduled task.
+			try { 
+			  future.get(timeout, TimeUnit.MILLISECONDS);
+			  //if there is no exception, get the result
+			  result = TestDescriptionAspect.testCaseResult(testCase);
+			}
+			catch (InterruptedException ie) { 
+				ie.printStackTrace();
+			}
+			catch (ExecutionException ee) { 
+				ee.printStackTrace();
+			}
+			catch (TimeoutException te) { 
+				//te.printStackTrace();
+				System.out.println("TimeoutException -> There is an infinite loop in the mutant");
+				future.cancel(true);
+				TestDescriptionAspect.launcher(testCase).disposeResources();
+			}
+			if (!executor.isTerminated()) {
+			    executor.shutdownNow(); // If you want to stop the code that hasn't finished
+			}
+			if (result == null || result.getValue() == TDLTestResultUtil.FAIL) {				
+				keepTestCaseKilledMutantMapping(testCase.getName(), mutant);
+				if (mutant_status.get(mutant) != KILLED) {
+					mutant_status.replace(mutant, KILLED);
+					numOfKilledMutants++;
+				}	
+			}
+		}
+	}
+	
+	public void runTestCaseOnAliveMutants(TestDescription testCase) {
 		Set<String> aliveMutants = new HashSet<>();
 		if (numOfKilledMutants == 0) {
 			aliveMutants = mutant_status.keySet();
@@ -176,10 +229,10 @@ public class MutationScoreCalculator {
 
 	public boolean testCaseImprovesMutationScore (TestDescription testCase) {
 		int pastNumOfKilledMutants = numOfKilledMutants;
-		runTestCaseOnMutants(testCase);
+		runTestCaseOnAliveMutants(testCase);
 		if (numOfKilledMutants > pastNumOfKilledMutants) {
 			double previousScore = mutationScore;
-			calculateMutationScore();
+			calculateOverallMutationScore();
 			System.out.println("The test case " + testCase.getName() + " has improved the mutation score by: " + (mutationScore - previousScore));
 			System.out.println("- previous mutation score: " + previousScore);
 			System.out.println("- new mutation score: " + mutationScore + "\n");
@@ -222,7 +275,7 @@ public class MutationScoreCalculator {
 		}
 	}
 	
-	private void calculateMutationScore() {
+	public void calculateOverallMutationScore() {
 		mutationScore = (double) numOfKilledMutants/numOfMutants;
 	}
 	
@@ -275,7 +328,13 @@ public class MutationScoreCalculator {
 		return numOfKilledMutants;
 	}
 	
-	public double getMutationScore() {
+	public double getOverallMutationScore() {
+		return mutationScore;
+	}
+	
+	public double getTestCaseMutationScore(TestDescription testCase) {
+		int numOfKilledMutants = testCase_killedMutant.get(testCase).size();
+		double mutationScore = (double) numOfKilledMutants/numOfMutants;
 		return mutationScore;
 	}
 	

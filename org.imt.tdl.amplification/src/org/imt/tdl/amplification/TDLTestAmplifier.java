@@ -47,6 +47,7 @@ public class TDLTestAmplifier {
 		scoreCalculator = new MutationScoreCalculator(tdlTestSuite);
 		initialNumOfKilledMutants = 0;
 		initialMutationScore = 0;
+		
 		if (!scoreCalculator.noMutantsExists) {
 			String result = scoreCalculator.runTestSuiteOnOriginalModel();
 			if (result == TDLTestResultUtil.FAIL) {
@@ -73,7 +74,7 @@ public class TDLTestAmplifier {
 			 * Our stop-criterion is a combination of number of iteration and reaching to 100% mutation score
 			 * at each iteration, the previously amplified tests are amplified
 			 */
-			while (numOfIteration<3 && scoreCalculator.getMutationScore()<1) {
+			while (numOfIteration<3 && scoreCalculator.getOverallMutationScore()<1) {
 				amplifyTestCases(iteration_ampTests.get(numOfIteration-1));
 			}
 			
@@ -183,8 +184,8 @@ public class TDLTestAmplifier {
 		sb.append("Total number of test cases improving mutation score: " + numNewTests + "\n");
 		sb.append("- number of mutants killed by improved test cases: " + (scoreCalculator.getNumOfKilledMutants()-initialNumOfKilledMutants)+ "\n");
 		sb.append("- total number of killed mutants: " + scoreCalculator.getNumOfKilledMutants() + "\n");
-		sb.append("- final mutation score : " + (scoreCalculator.getMutationScore() * 100) + "%" + "\n");
-		sb.append("=> improvement in the mutation score : " + (scoreCalculator.getMutationScore() - initialMutationScore)*100 + "%" + "\n");
+		sb.append("- final mutation score : " + (scoreCalculator.getOverallMutationScore() * 100) + "%" + "\n");
+		sb.append("=> improvement in the mutation score : " + (scoreCalculator.getOverallMutationScore() - initialMutationScore)*100 + "%" + "\n");
 		sb.append("--------------------------------------------------\n");
 		System.out.println(sb);
 		

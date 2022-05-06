@@ -23,3 +23,6 @@ Require-Bundle: org.eclipse.xtend.lib;bundle-version="2.25.0",
  org.apache.commons.lang3;bundle-version="3.1.0",
  org.eclipse.gemoc.dsl.model,
  org.eclipse.emf.ecore
+Export-Package: org.imt.tdl.amplification,
+ org.imt.tdl.amplification.mutation,
+ org.imt.tdl.amplification.utilities
