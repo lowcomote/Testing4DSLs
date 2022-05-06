@@ -1,4 +1,4 @@
-package org.imt.tdl.amplification.evaluation;
+package org.imt.tdl.amplification.mutation;
 
 import java.io.File;
 import java.io.FileNotFoundException;
