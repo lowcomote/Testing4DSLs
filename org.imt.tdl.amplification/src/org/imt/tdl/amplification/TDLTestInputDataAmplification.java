@@ -1,6 +1,7 @@
 package org.imt.tdl.amplification;
 
 import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -41,7 +42,7 @@ import org.etsi.mts.tdl.StructuredDataType;
 import org.etsi.mts.tdl.TestDescription;
 import org.etsi.mts.tdl.tdlFactory;
 import org.imt.tdl.amplification.utilities.EObject2TDLConverter;
-import org.imt.tdl.amplification.utilities.PathHelper;
+import org.imt.tdl.mutation.utilities.PathHelper;
 
 public class TDLTestInputDataAmplification {
 	

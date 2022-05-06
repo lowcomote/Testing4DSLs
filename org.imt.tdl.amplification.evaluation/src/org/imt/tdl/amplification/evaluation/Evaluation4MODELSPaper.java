@@ -13,10 +13,9 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
-import org.imt.tdl.amplification.TDLTestAmplifier;
-import org.imt.tdl.amplification.mutation.MutationRuntimeException;
-import org.imt.tdl.amplification.mutation.MutationScoreCalculator;
-import org.imt.tdl.amplification.utilities.PathHelper;
+import org.imt.tdl.mutation.MutationRuntimeException;
+import org.imt.tdl.mutation.MutationScoreCalculator;
+import org.imt.tdl.mutation.utilities.PathHelper;
 import org.imt.tdl.testResult.TDLTestResultUtil;
 
 /*

@@ -5,7 +5,8 @@ Bundle-SymbolicName: org.imt.tdl.mutation
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-16
 Automatic-Module-Name: org.imt.tdl.mutation
-Export-Package: org.imt.tdl.mutation
+Export-Package: org.imt.tdl.mutation,
+ org.imt.tdl.mutation.utilities
 Require-Bundle: org.etsi.mts.tdl.model;bundle-version="1.4.0",
  org.imt.tdl.testResult;bundle-version="1.0.0",
  org.eclipse.core.resources,

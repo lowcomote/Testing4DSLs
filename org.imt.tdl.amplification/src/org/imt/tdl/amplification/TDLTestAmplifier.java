@@ -1,6 +1,7 @@
 package org.imt.tdl.amplification;
 
 import java.io.FileNotFoundException;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,9 +21,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
 import org.etsi.mts.tdl.tdlFactory;
-import org.imt.tdl.amplification.mutation.MutationRuntimeException;
-import org.imt.tdl.amplification.mutation.MutationScoreCalculator;
-import org.imt.tdl.amplification.utilities.PathHelper;
+import org.imt.tdl.mutation.MutationRuntimeException;
+import org.imt.tdl.mutation.MutationScoreCalculator;
+import org.imt.tdl.mutation.utilities.PathHelper;
 import org.imt.tdl.testResult.TDLTestResultUtil;
 
 public class TDLTestAmplifier {
