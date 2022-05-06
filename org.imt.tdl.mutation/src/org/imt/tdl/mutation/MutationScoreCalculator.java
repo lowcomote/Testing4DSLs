@@ -278,7 +278,7 @@ public class MutationScoreCalculator {
 		mutationScore = (double) numOfKilledMutants/numOfMutants;
 	}
 	
-	private void printMutationAnalysisResult() {
+	public void printMutationAnalysisResult() {
 		//saving results into a .txt file
 		String outputFilePath = PathHelper.getInstance().getWorkspacePath() + "/"
 				+ PathHelper.getInstance().getTestSuiteProjectName() + "/" 

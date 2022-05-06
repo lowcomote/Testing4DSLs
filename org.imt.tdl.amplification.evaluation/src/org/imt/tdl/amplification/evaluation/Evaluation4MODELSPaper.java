@@ -60,6 +60,7 @@ public class Evaluation4MODELSPaper {
 		testCases.forEach(t -> scoreCalculator.runTestCaseOnAllMutants(t));
 		scoreCalculator.calculateOverallMutationScore();
 		mutationScore = scoreCalculator.getOverallMutationScore();
+		scoreCalculator.printMutationAnalysisResult();
 		//if the mutation score is less than 40%, it is not a good input for the experiment
 		if (mutationScore < 0.4) {
 			String message = "Amplification Stopped: The mutation score of the input test suite must be higher than 40%";
