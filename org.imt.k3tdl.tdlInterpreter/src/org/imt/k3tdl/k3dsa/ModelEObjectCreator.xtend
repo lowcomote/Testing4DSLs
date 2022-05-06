@@ -52,6 +52,7 @@ class ModelEObjectCreator {
 	}
 	
 	def boolean setEObjectFeatures(DataInstanceUse TDLObject, EObject newEObject, EClass eobjectType){
+		var result = true
 		if (TDLObject.dataInstance instanceof StructuredDataInstance && 
 			(TDLObject.dataInstance as StructuredDataInstance).memberAssignment.size>0){//check the member assignments
 			val StructuredDataInstance dataInstance = TDLObject.dataInstance as StructuredDataInstance
@@ -59,7 +60,10 @@ class ModelEObjectCreator {
 				val eStructuralFeature = eobjectType.getEStructuralFeature(getValidName(memberAssignment.member.name))
 				if (eStructuralFeature !== null){
 					val memberValue = memberAssignment.memberSpec
-					return setFeatureValue(newEObject, eStructuralFeature, getTdlValues(memberValue))
+					result = setFeatureValue(newEObject, eStructuralFeature, getTdlValues(memberValue))
+					if (!result){
+						return result
+					}
 				}
 			}
 		}
@@ -68,9 +72,13 @@ class ModelEObjectCreator {
 			val eStructuralFeature = eobjectType.getEStructuralFeature(getValidName(parameterBinding.parameter.name))
 			if (eStructuralFeature !== null){
 				val parameterValue = parameterBinding.dataUse
-				return setFeatureValue(newEObject, eStructuralFeature, getTdlValues(parameterValue))
+				result = setFeatureValue(newEObject, eStructuralFeature, getTdlValues(parameterValue))
+				if (!result){
+					return result
+				}
 			}
 		}
+		return result
 	}
 	
 	def List<DataUse> getTdlValues (DataUse dataUse){
