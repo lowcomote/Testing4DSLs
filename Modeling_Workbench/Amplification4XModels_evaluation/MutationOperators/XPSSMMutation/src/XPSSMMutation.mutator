@@ -6,26 +6,28 @@ metamodel "/XPSSMMutation/data/model/statemachines.ecore"
 with blocks {
 	//addition mutation operators
 	ccs "Creates a connected state" {
-		randomState = select one Vertex where {self not typed FinalState}
-		newState = create State with {name = random-string(1, 4)}
-		create Transition with {^source = randomState, ^target = newState, kind = {external}}
+		randomState = select one State where {self not typed FinalState}
+		newState = create State with {name = random-string(1, 4), ^container = randomState->^container}
+		create Transition with {name = random-string(1, 4), ^source = randomState, ^target = newState, kind = {external}}
 	}
 	ccfs "Creates a connected final state "{
-		randomState = select one Vertex where {self not typed FinalState}
-		fs = create FinalState with {name = random-string(1, 4)}
-		create Transition with {^source = randomState, ^target = fs}
+		randomState = select one State where {self not typed FinalState}
+		fs = create FinalState with {name = random-string(1, 4), ^container = randomState->^container}
+		create Transition with {name = random-string(1, 4), ^source = randomState, ^target = fs, kind = {external}}
 	}
-	ctr "Creates a transition with random source and target states"{
-		randomState1 = select one Vertex where {self not typed FinalState}
-		randomState2 = select one Vertex where {self not typed Pseudostate}
-		create Transition with {name = random-string(1, 4), ^source = randomState1, ^target = randomState2}
-	}
-	ctr2 "Creates a transition with source but without target state"{
-		randomState = select one Vertex where {self not typed FinalState}
-		create Transition with {name = random-string(1, 4), ^source = randomState}
-	}
-	dtr "Duplicates a transition"{
-		deep clone one Transition
+	
+	//ctr mutants can be killed if there is no other transition between the selected source and target state
+	//as there is no way to check the constraint, it is removed
+	
+//	ctr "Creates a transition with random source and target states"{
+//		randomState1 = select one Vertex where {self not typed FinalState}
+//		randomState2 = select one Vertex where {self not typed Pseudostate}
+//		create Transition with {name = random-string(1, 4), ^source = randomState1, ^target = randomState2, kind = {external}}
+//	}
+
+	// dtr mutants can be killed if the duplicated transition is from an initial Pseudostate
+	dtr "Duplicates a transition if its source is initial Pseudostate"{
+		deep clone one Transition where {^source is typed Pseudostate and ^source.kind is "initial"}
 	}
 	cac "Creates an action and set it to a transition"{
 		action = create Behavior with {name = random-string(1, 4)}
@@ -69,9 +71,10 @@ with blocks {
 		modify one Transition with {swapref(^source, ^target)}
 	}
 	cis "Changes the initial state to a different one" {
-		initial = select one Pseudostate
-		transition = select one Transition where {^source is typed Pseudostate and ^source <> initial}
-		modify transition with {^source = initial}
+		initial1 = select one Pseudostate where {kind = {initial}}
+		initial2 = select one Pseudostate where {kind = {initial} and self <> initial1}
+		transition = select one Transition where {^source = initial1}
+		modify transition with {^source = initial2}
 	}
 	cfs "Changes the final state to a different one"{
 		final = select one FinalState
