@@ -197,6 +197,15 @@ public class TDLTestInputDataAmplification {
 					Block copyContainer = ((CompoundBehaviour) copyTdlTestCase.getBehaviourDescription().getBehaviour()).getBlock();
 					copyContainer.getBehaviour().addAll(allNewMessages);
 					generatedTestsByEventCreation.add(copyTdlTestCase);
+					//for this new test case having several new messages, amplify it by other operators: duplication, permutation, deletion
+					TestDescription inputTestCase = this.tdlTestCase;
+					tdlTestCase = copyTdlTestCase;
+					generatedTestsByEventCreation.addAll(generateTestsByEventDuplication());
+					generatedTestsByEventCreation.addAll(generateTestsByEventPermutation());
+					if (newMessages.size() > 2) {
+						generatedTestsByEventCreation.addAll(generateTestsByEventDeletion());
+					}
+					tdlTestCase = inputTestCase;
 				}
 				newMessages.forEach(m -> newMessagesForNotUsedEvents.add(copyTdlMessage(m)));;
 				n++;
@@ -208,7 +217,17 @@ public class TDLTestInputDataAmplification {
 			Block copyContainer = ((CompoundBehaviour) copyTdlTestCase.getBehaviourDescription().getBehaviour()).getBlock();
 			copyContainer.getBehaviour().addAll(newMessagesForNotUsedEvents);
 			generatedTestsByEventCreation.add(copyTdlTestCase);
-		}		
+			//for this new test case having several new messages, amplify it by other operators: duplication, permutation, deletion
+			TestDescription inputTestCase = this.tdlTestCase;
+			tdlTestCase = copyTdlTestCase;
+			generatedTestsByEventCreation.addAll(generateTestsByEventDuplication());
+			generatedTestsByEventCreation.addAll(generateTestsByEventPermutation());
+			if (n > 2) {
+				generatedTestsByEventCreation.addAll(generateTestsByEventDeletion());
+			}
+			tdlTestCase = inputTestCase;
+		}	
+		
 		return generatedTestsByEventCreation;
 	}
 	
