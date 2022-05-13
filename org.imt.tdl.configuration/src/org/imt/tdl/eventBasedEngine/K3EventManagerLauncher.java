@@ -320,7 +320,12 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			result = "FAIL:There are extra received events";
 		}
 		this.executionEngineJob.cancel();
-		this.executionEngineJob.getThread().interrupt();
+		try {
+			this.executionEngineJob.getThread().interrupt();
+		}
+		catch (NullPointerException e) {
+			//e.printStackTrace();
+		}
 		return result;
 	}
 	
