@@ -26,6 +26,9 @@
             <triggers name="thread.yieldTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
             </triggers>
+            <triggers name="monitorLockTrigger">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.16"/>
+            </triggers>
           </transitions>
           <transitions name="running2ready" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" kind="external">
             <triggers name="threadSuspendedTrigger">
@@ -57,9 +60,6 @@
       <transitions name="new2runnable" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="t.startTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
-        </triggers>
-        <triggers name="monitorLockTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.16"/>
         </triggers>
       </transitions>
       <transitions name="runnable2timedWaiting" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">

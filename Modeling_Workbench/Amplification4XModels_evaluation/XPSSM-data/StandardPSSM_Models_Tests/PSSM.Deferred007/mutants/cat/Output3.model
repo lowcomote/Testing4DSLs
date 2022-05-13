@@ -25,7 +25,7 @@
         <triggers name="ContinueSignalEventTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
-        <effect name="T6(effect)"/>
+        <effect name="T7(testEnd)"/>
       </transitions>
       <transitions name="T5" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="ContinueSignalEventTrigger">
@@ -36,10 +36,9 @@
         <triggers name="op">
           <eventType xsi:type="statemachines:CallEventType" operation="//@operations.0"/>
         </triggers>
+        <effect name="T6(effect)"/>
       </transitions>
-      <transitions name="T7" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">
-        <effect name="T7(testEnd)"/>
-      </transitions>
+      <transitions name="T7" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external"/>
     </regions>
   </statemachine>
   <signals name="Start"/>

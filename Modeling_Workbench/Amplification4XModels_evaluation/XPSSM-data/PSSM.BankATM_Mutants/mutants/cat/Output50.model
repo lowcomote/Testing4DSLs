@@ -41,7 +41,7 @@
                 </constraint>
               </transitions>
               <transitions name="validatePin2final3" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.3" kind="external">
-                <effect name="ejectCard"/>
+                <effect name="wrongPinMsg"/>
                 <constraint xsi:type="statemachines:IntegerConstraint">
                   <expression operator="!=" operand1="//@signals.7/@attributes.0" operand2="//@signals.6/@attributes.0"/>
                 </constraint>
@@ -49,9 +49,7 @@
             </regions>
             <entry name="customerAuthentication"/>
           </vertice>
-          <vertice xsi:type="statemachines:State" name="SelectingTransaction" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.1 //@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.2">
-            <entry name="selectTransaction"/>
-          </vertice>
+          <vertice xsi:type="statemachines:State" name="SelectingTransaction" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.1 //@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.2"/>
           <vertice xsi:type="statemachines:State" name="WithdrawMoney" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.1">
             <regions name="withdrawRegion">
               <vertice xsi:type="statemachines:Pseudostate" name="initial4" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.0"/>
@@ -139,13 +137,14 @@
           <transitions name="authentication2final2" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.5" kind="external"/>
         </regions>
         <entry name="readCard"/>
+        <exit name="ejectCard"/>
       </vertice>
       <transitions name="initial2off" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>
       <transitions name="off2selfTest" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="turnOnTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <effect name="startup"/>
+        <effect name="selectTransaction"/>
       </transitions>
       <transitions name="selfTest2idle" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <triggers name="sucessTrigger">

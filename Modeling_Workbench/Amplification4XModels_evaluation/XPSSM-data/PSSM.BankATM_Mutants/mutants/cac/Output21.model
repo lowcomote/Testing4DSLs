@@ -142,7 +142,7 @@
         <exit name="ejectCard"/>
       </vertice>
       <transitions name="initial2off" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external">
-        <effect name="ES"/>
+        <effect name="r"/>
       </transitions>
       <transitions name="off2selfTest" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="turnOnTrigger">

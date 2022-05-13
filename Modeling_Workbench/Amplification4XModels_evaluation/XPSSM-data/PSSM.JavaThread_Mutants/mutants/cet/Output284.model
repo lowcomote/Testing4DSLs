@@ -104,6 +104,9 @@
         <triggers name="wait4lock2reenterTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.11"/>
         </triggers>
+        <triggers name="o.waitTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.7"/>
+        </triggers>
       </transitions>
       <transitions name="runnable2terminated" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6" kind="external">
         <triggers name="threadTerminatedTrigger">
@@ -113,9 +116,6 @@
       <transitions name="timedWaiting2runnable" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="sleepTimeElapsedTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.12"/>
-        </triggers>
-        <triggers name="o.waitTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.7"/>
         </triggers>
       </transitions>
       <transitions name="timedWaiting2terminated" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6" kind="external">

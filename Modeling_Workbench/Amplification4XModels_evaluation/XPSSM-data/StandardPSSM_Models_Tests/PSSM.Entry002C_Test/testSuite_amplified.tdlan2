@@ -175,9 +175,9 @@ Package testSuite {
 	}
 	Annotation MUTPath ;
 	Annotation DSLName ;
-	Region Region1 ( _name = 'Region1' ) ;
-	StateMachine Entry002_Test_B ( _name = 'Entry002_Test_B$behavior$1' , regions = { Region1 } ) ;
-	Test Description Entry002_Test_C0_EventDuplication uses configuration configuration4Entry002_Test_C {
+	Region Region1 ( _name = "Region1" ) ;
+	StateMachine Entry002_Test_A ( _name = "Entry002_Test_A$behavior$1" , regions = { Region1 } ) ;
+	Test Description Entry002_Test_C_0_EventDuplication uses configuration configuration4Entry002_Test_C {
 		tester.reactiveGate sends _run (
 			state_machine = Entry002_Test_C
 		) to PSSM.reactiveGate ;
@@ -187,6 +187,31 @@ Package testSuite {
 		) to PSSM.reactiveGate ;
 		tester.reactiveGate sends _run (
 			state_machine = Entry002_Test_C
+		) to PSSM.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T2_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_entry
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T1_1_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T3_testEnd
+		) to tester.reactiveGate ;
+	}
+	Test Description Entry002_Test_C_1_EventDuplication uses configuration configuration4Entry002_Test_C {
+		tester.reactiveGate sends _run (
+			state_machine = Entry002_Test_C
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Entry002_Test_C ,
+			signal_occurrence = start_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Entry002_Test_C ,
+			signal_occurrence = start_occurrence
 		) to PSSM.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = T2_effect

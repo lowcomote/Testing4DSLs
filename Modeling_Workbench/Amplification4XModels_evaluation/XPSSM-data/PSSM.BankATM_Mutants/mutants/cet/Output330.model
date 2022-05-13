@@ -75,9 +75,6 @@
                 </constraint>
               </transitions>
               <transitions name="checkBalance2final4" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.4" kind="external">
-                <triggers name="cardInsertedTrigger">
-                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
-                </triggers>
                 <effect name="notEnoughMoneyMsg"/>
                 <constraint xsi:type="statemachines:IntegerConstraint">
                   <expression operator=">" operand1="//@signals.10/@attributes.0" operand2="//@signals.6/@attributes.1"/>
@@ -170,6 +167,9 @@
       <transitions name="outOfService2maintenance" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <triggers name="serviceTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.4"/>
+        </triggers>
+        <triggers name="cardInsertedTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
         </triggers>
       </transitions>
       <transitions name="maintenance2outOfService" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.4" kind="external">

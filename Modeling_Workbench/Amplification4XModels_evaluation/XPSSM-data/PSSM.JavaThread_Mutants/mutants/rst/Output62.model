@@ -82,8 +82,8 @@
         </triggers>
       </transitions>
       <transitions name="runnable2waiting" source="//@statemachine/@regions.0/@vertice.2" kind="external">
-        <triggers name="o.waitTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.7"/>
+        <triggers name="t.joinTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
         </triggers>
       </transitions>
       <transitions name="runnable2waiting" source="//@statemachine/@regions.0/@vertice.2" kind="external">

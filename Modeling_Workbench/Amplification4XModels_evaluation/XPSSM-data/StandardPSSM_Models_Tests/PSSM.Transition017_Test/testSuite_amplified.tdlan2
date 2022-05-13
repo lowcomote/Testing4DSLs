@@ -184,9 +184,9 @@ Package testSuite {
 	}
 	Annotation MUTPath ;
 	Annotation DSLName ;
-	Region Region1 ( _name = 'Region1' ) ;
-	StateMachine Transition015_Test ( _name = 'Transition015_Test$behavior$1' , regions = { Region1 } ) ;
-	Test Description Transition017_Test0_EventDuplication uses configuration configuration4Transition017_Test {
+	Region Region1 ( _name = "Region1" ) ;
+	StateMachine Transition015_Test ( _name = "Transition015_Test$behavior$1" , regions = { Region1 } ) ;
+	Test Description Transition017_Test_0_EventDuplication uses configuration configuration4Transition017_Test {
 		tester.reactiveGate sends _run (
 			state_machine = Transition017_Test
 		) to PSSM.reactiveGate ;
@@ -219,7 +219,7 @@ Package testSuite {
 			behavior = T3_testEnd
 		) to tester.reactiveGate ;
 	}
-	Test Description Transition017_Test0_EventDuplication1_EventDuplication uses configuration configuration4Transition017_Test {
+	Test Description Transition017_Test_1_EventDuplication uses configuration configuration4Transition017_Test {
 		tester.reactiveGate sends _run (
 			state_machine = Transition017_Test
 		) to PSSM.reactiveGate ;
@@ -227,16 +227,10 @@ Package testSuite {
 			state_machine = Transition017_Test ,
 			signal_occurrence = start_occurrence
 		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = Transition017_Test
-		) to PSSM.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = Transition017_Test ,
 			signal_occurrence = start_occurrence
 		) to PSSM.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T2_doTraversal
-		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = T2_doTraversal
 		) to tester.reactiveGate ;
@@ -257,12 +251,6 @@ Package testSuite {
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = T3_testEnd
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_entry
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S3_1_doActivity
 		) to tester.reactiveGate ;
 	}
 }

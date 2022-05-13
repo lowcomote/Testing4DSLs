@@ -37,13 +37,13 @@
               </transitions>
               <transitions name="validatePin2SelectingTransaction" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.2" kind="external">
                 <constraint xsi:type="statemachines:IntegerConstraint">
-                  <expression operator="==" operand1="//@signals.7/@attributes.0" operand2="//@signals.6/@attributes.0"/>
+                  <expression operand1="//@signals.7/@attributes.0" operand2="//@signals.6/@attributes.0"/>
                 </constraint>
               </transitions>
               <transitions name="validatePin2final3" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.3" kind="external">
                 <effect name="wrongPinMsg"/>
                 <constraint xsi:type="statemachines:IntegerConstraint">
-                  <expression operand1="//@signals.7/@attributes.0" operand2="//@signals.6/@attributes.0"/>
+                  <expression operator="!=" operand1="//@signals.7/@attributes.0" operand2="//@signals.6/@attributes.0"/>
                 </constraint>
               </transitions>
             </regions>

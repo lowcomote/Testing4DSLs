@@ -18,7 +18,7 @@
             <triggers name="ContinueTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
             </triggers>
-            <effect name="T1.2(effect)"/>
+            <effect name="T2.2(effect)"/>
           </transitions>
           <transitions name="T1.3" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" kind="external">
             <triggers name="ContinueTrigger">
@@ -54,6 +54,7 @@
                 <effect name="T2.2.2(effect)"/>
               </transitions>
             </regions>
+            <exit name="S2.1(exit)"/>
           </vertice>
           <vertice xsi:type="statemachines:State" name="S2.2" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.1/@transitions.1 //@statemachine/@regions.0/@vertice.2/@regions.1/@transitions.2 //@statemachine/@regions.0/@vertice.2/@regions.1/@transitions.3"/>
           <transitions name="T2.1" source="//@statemachine/@regions.0/@vertice.2/@regions.1/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.1/@vertice.1" kind="external"/>
@@ -61,7 +62,6 @@
             <triggers name="ContinueTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
             </triggers>
-            <effect name="T2.2(effect)"/>
           </transitions>
           <transitions name="T2.3" source="//@statemachine/@regions.0/@vertice.2/@regions.1/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@regions.1/@vertice.2" kind="external">
             <triggers name="ContinueTrigger">
@@ -73,7 +73,7 @@
             <triggers name="ContinueTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
             </triggers>
-            <effect name="S2.1(exit)"/>
+            <effect name="T2.4(effect)"/>
           </transitions>
         </regions>
         <exit name="S1(exit)"/>

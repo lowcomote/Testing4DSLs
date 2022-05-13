@@ -68,6 +68,9 @@
                 <triggers name="amountEnteredTrigger">
                   <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.10"/>
                 </triggers>
+                <triggers name="turnOnTrigger">
+                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+                </triggers>
               </transitions>
               <transitions name="checkBalance2makeWithdrawal" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.3" kind="external">
                 <constraint xsi:type="statemachines:IntegerConstraint">
@@ -127,9 +130,6 @@
           <transitions name="selectingTransaction2withdraw" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3" kind="external">
             <triggers name="withdrawTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
-            </triggers>
-            <triggers name="turnOnTrigger">
-              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
             </triggers>
           </transitions>
           <transitions name="selectingTransaction2transfer" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4" kind="external">

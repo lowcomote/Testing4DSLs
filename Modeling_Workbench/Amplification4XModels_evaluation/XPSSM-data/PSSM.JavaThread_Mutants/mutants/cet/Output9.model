@@ -32,9 +32,6 @@
             <triggers name="finishTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
             </triggers>
-            <triggers name="threadSelectedTrigger">
-              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
-            </triggers>
           </transitions>
         </regions>
         <entry name="ThreadIsRunnable"/>
@@ -116,6 +113,9 @@
       <transitions name="timedWaiting2runnable" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="sleepTimeElapsedTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.12"/>
+        </triggers>
+        <triggers name="threadSelectedTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
       </transitions>
       <transitions name="timedWaiting2terminated" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6" kind="external">

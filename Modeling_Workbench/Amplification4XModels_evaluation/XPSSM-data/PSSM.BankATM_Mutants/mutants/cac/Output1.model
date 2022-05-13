@@ -34,7 +34,7 @@
                 <triggers name="pinEnteredTrigger">
                   <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.7"/>
                 </triggers>
-                <effect name="ES"/>
+                <effect name="r"/>
               </transitions>
               <transitions name="validatePin2SelectingTransaction" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.2" kind="external">
                 <constraint xsi:type="statemachines:IntegerConstraint">

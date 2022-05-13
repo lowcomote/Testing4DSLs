@@ -168,9 +168,6 @@
         <triggers name="serviceTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.4"/>
         </triggers>
-        <triggers name="cancelTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.5"/>
-        </triggers>
       </transitions>
       <transitions name="maintenance2outOfService" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="failureTrigger">
@@ -185,6 +182,9 @@
       <transitions name="Idle2off" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.1" kind="external">
         <triggers name="turnOffTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
+        </triggers>
+        <triggers name="cancelTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.5"/>
         </triggers>
         <effect name="shutDown"/>
       </transitions>

@@ -164,7 +164,9 @@ Package testSuite {
 	}
 	Annotation MUTPath ;
 	Annotation DSLName ;
-	Test Description Terminate003_Test0_EventDuplication uses configuration configuration4Terminate003_Test {
+	Region Region1 ( _name = "Region1" ) ;
+	StateMachine Join003_Test ( _name = "Join003_Test$behavior$1" , regions = { Region1 } ) ;
+	Test Description Terminate003_Test_0_EventDuplication uses configuration configuration4Terminate003_Test {
 		tester.reactiveGate sends _run (
 			state_machine = Terminate003_Test
 		) to PSSM.reactiveGate ;

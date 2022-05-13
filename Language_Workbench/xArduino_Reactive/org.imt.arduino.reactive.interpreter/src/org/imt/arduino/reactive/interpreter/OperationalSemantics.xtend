@@ -62,6 +62,15 @@ import static extension org.imt.arduino.reactive.interpreter.Pin_EvaluableAspect
 import static extension org.imt.arduino.reactive.interpreter.Project_ExecutableAspect.*
 import org.imt.arduino.reactive.arduino.SoundSensor
 
+/*
+ * TODO: adding two new elements to the definition of runtime state as:
+ * currentInstruction: keeping the last executed instruction
+ * -> hence when receiving an occurrence for any accepted event, we simply run the sketch from the currentInstruction
+ * passedTime: the amount of time that must be passed. This value must be set when receiving an occurrence for a new accepted event
+ * such as "passedTime(time)" 
+ * -> hence when executing Delay elements, we used the passedTime to pass the delay time
+ */
+
 @Aspect(className=Instruction)
 class Instruction_UtilitesAspect {
 	private def Project getProject(Module module) {

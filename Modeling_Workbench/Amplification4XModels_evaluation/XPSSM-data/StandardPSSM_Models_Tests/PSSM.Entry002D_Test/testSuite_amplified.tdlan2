@@ -176,9 +176,9 @@ Package testSuite {
 	}
 	Annotation MUTPath ;
 	Annotation DSLName ;
-	Region Region1 ( _name = 'Region1' ) ;
-	StateMachine Entry002_Test_B ( _name = 'Entry002_Test_B$behavior$1' , regions = { Region1 } ) ;
-	Test Description Entry002_Test_D0_EventDuplication uses configuration configuration4Entry002_Test_D {
+	Region Region1 ( _name = "Region1" ) ;
+	StateMachine Entry002_Test_A ( _name = "Entry002_Test_A$behavior$1" , regions = { Region1 } ) ;
+	Test Description Entry002_Test_D_0_EventDuplication uses configuration configuration4Entry002_Test_D {
 		tester.reactiveGate sends _run (
 			state_machine = Entry002_Test_D
 		) to PSSM.reactiveGate ;
@@ -205,7 +205,7 @@ Package testSuite {
 			behavior = T3_testEnd
 		) to tester.reactiveGate ;
 	}
-	Test Description Entry002_Test_D0_EventDuplication1_EventDuplication uses configuration configuration4Entry002_Test_D {
+	Test Description Entry002_Test_D_1_EventDuplication uses configuration configuration4Entry002_Test_D {
 		tester.reactiveGate sends _run (
 			state_machine = Entry002_Test_D
 		) to PSSM.reactiveGate ;
@@ -213,16 +213,10 @@ Package testSuite {
 			state_machine = Entry002_Test_D ,
 			signal_occurrence = start_occurrence
 		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = Entry002_Test_D
-		) to PSSM.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = Entry002_Test_D ,
 			signal_occurrence = start_occurrence
 		) to PSSM.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T2_effect
-		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = T2_effect
 		) to tester.reactiveGate ;
@@ -237,9 +231,6 @@ Package testSuite {
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = T3_testEnd
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_entry
 		) to tester.reactiveGate ;
 	}
 }

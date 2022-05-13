@@ -118,9 +118,6 @@
                 </constraint>
               </transitions>
               <transitions name="transferMoney2final5" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.5" kind="external">
-                <triggers name="failureTrigger">
-                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
-                </triggers>
                 <effect name="successfullyTransferred"/>
               </transitions>
             </regions>
@@ -154,6 +151,9 @@
       <transitions name="selfTest2idle" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <triggers name="sucessTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
+        </triggers>
+        <triggers name="failureTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
       </transitions>
       <transitions name="selfTest2outOfService" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.4" kind="external"/>

@@ -17,11 +17,7 @@
         <entry name="S3(entry)"/>
       </vertice>
       <vertice xsi:type="statemachines:FinalState" name="FinalState1" incomingTransitions="//@statemachine/@regions.0/@transitions.5"/>
-      <transitions name="T1" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external">
-        <triggers name="AnotherSignalTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
-        </triggers>
-      </transitions>
+      <transitions name="T1" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>
       <transitions name="T2" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="StartTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
@@ -41,6 +37,9 @@
         <effect name="T5(effect)"/>
       </transitions>
       <transitions name="T6" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">
+        <triggers name="AnotherSignalTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
+        </triggers>
         <effect name="T6(testEnd)"/>
       </transitions>
     </regions>

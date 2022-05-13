@@ -29,7 +29,11 @@
               </vertice>
               <vertice xsi:type="statemachines:State" name="validatePin" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.2 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.1"/>
               <vertice xsi:type="statemachines:FinalState" name="final3" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.3"/>
-              <transitions name="initial3_2_getPin" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.1" kind="external"/>
+              <transitions name="initial3_2_getPin" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.1" kind="external">
+                <triggers name="transferTrigger">
+                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.9"/>
+                </triggers>
+              </transitions>
               <transitions name="getPin2validatePin" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.2" kind="external">
                 <triggers name="pinEnteredTrigger">
                   <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.7"/>
@@ -70,9 +74,6 @@
                 </triggers>
               </transitions>
               <transitions name="checkBalance2makeWithdrawal" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.3" kind="external">
-                <triggers name="transferTrigger">
-                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.9"/>
-                </triggers>
                 <constraint xsi:type="statemachines:IntegerConstraint">
                   <expression operator="&lt;=" operand1="//@signals.10/@attributes.0" operand2="//@signals.6/@attributes.1"/>
                 </constraint>

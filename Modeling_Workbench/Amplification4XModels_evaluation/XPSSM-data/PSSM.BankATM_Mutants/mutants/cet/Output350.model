@@ -128,9 +128,6 @@
             <triggers name="withdrawTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
             </triggers>
-            <triggers name="cancelTrigger">
-              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.5"/>
-            </triggers>
           </transitions>
           <transitions name="selectingTransaction2transfer" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4" kind="external">
             <triggers name="transferTrigger">
@@ -180,6 +177,9 @@
       <transitions name="maintenance2selfTest" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="sucessTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
+        </triggers>
+        <triggers name="cancelTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.5"/>
         </triggers>
       </transitions>
       <transitions name="Idle2off" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.1" kind="external">

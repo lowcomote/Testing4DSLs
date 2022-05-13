@@ -21,6 +21,9 @@
             <triggers name="threadSelectedTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
             </triggers>
+            <triggers name="o.waitTrigger">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.7"/>
+            </triggers>
           </transitions>
           <transitions name="running2ready" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" kind="external">
             <triggers name="thread.yieldTrigger">
@@ -143,9 +146,6 @@
       <transitions name="waiting2blocked" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <triggers name="o.notifyTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.15"/>
-        </triggers>
-        <triggers name="o.waitTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.7"/>
         </triggers>
       </transitions>
       <transitions name="blocked2runnable" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.2" kind="external">

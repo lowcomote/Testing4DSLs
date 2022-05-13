@@ -181,9 +181,9 @@ Package testSuite {
 	}
 	Annotation MUTPath ;
 	Annotation DSLName ;
-	Region Region1 ( _name = 'Region1' ) ;
-	StateMachine Transition001_Test ( _name = 'Transition001_Test$behavior$1' , regions = { Region1 } ) ;
-	Test Description Terminate001_Test0_EventDuplication uses configuration configuration4Terminate001_Test {
+	Region Region1 ( _name = "Region1" ) ;
+	StateMachine Join003_Test ( _name = "Join003_Test$behavior$1" , regions = { Region1 } ) ;
+	Test Description Terminate001_Test_0_EventDuplication uses configuration configuration4Terminate001_Test {
 		tester.reactiveGate sends _run (
 			state_machine = Terminate001_Test
 		) to PSSM.reactiveGate ;
@@ -210,7 +210,7 @@ Package testSuite {
 			behavior = T2_2_testEnd
 		) to tester.reactiveGate ;
 	}
-	Test Description Terminate001_Test0_EventDuplication1_EventDuplication uses configuration configuration4Terminate001_Test {
+	Test Description Terminate001_Test_0_EventDuplication_1_EventDuplication uses configuration configuration4Terminate001_Test {
 		tester.reactiveGate sends _run (
 			state_machine = Terminate001_Test
 		) to PSSM.reactiveGate ;

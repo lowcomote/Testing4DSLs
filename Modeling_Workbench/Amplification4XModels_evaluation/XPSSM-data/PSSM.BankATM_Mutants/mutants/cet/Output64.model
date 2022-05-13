@@ -137,11 +137,7 @@
         <entry name="readCard"/>
         <exit name="ejectCard"/>
       </vertice>
-      <transitions name="initial2off" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external">
-        <triggers name="amountEnteredTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.10"/>
-        </triggers>
-      </transitions>
+      <transitions name="initial2off" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>
       <transitions name="off2selfTest" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="turnOnTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
@@ -188,6 +184,9 @@
       <transitions name="Idle2maintenance" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <triggers name="serviceTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.4"/>
+        </triggers>
+        <triggers name="amountEnteredTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.10"/>
         </triggers>
       </transitions>
       <transitions name="Idle2serviceCustomer" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6" kind="external">

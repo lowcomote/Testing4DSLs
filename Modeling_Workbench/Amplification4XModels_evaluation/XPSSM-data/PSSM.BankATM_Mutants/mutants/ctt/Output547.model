@@ -3,7 +3,7 @@
   <statemachine name="BankATM">
     <regions name="mainRegion">
       <vertice xsi:type="statemachines:Pseudostate" name="initial1" outgoingTransitions="//@statemachine/@regions.0/@transitions.0"/>
-      <vertice xsi:type="statemachines:State" name="Off" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0 //@statemachine/@regions.0/@transitions.4 //@statemachine/@regions.0/@transitions.8 //@statemachine/@regions.0/@transitions.3">
+      <vertice xsi:type="statemachines:State" name="Off" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0 //@statemachine/@regions.0/@transitions.4 //@statemachine/@regions.0/@transitions.8">
         <entry name="ATMIsOff"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="SelfTest" outgoingTransitions="//@statemachine/@regions.0/@transitions.2 //@statemachine/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@transitions.1 //@statemachine/@regions.0/@transitions.7">
@@ -55,7 +55,7 @@
           <vertice xsi:type="statemachines:State" name="WithdrawMoney" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.1">
             <regions name="withdrawRegion">
               <vertice xsi:type="statemachines:Pseudostate" name="initial4" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.0"/>
-              <vertice xsi:type="statemachines:State" name="GetAmount" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.0">
+              <vertice xsi:type="statemachines:State" name="GetAmount" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.0 //@statemachine/@regions.0/@transitions.3">
                 <entry name="enterAmountMsg"/>
               </vertice>
               <vertice xsi:type="statemachines:State" name="CheckBalance" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.2 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.1"/>
@@ -153,7 +153,7 @@
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
         </triggers>
       </transitions>
-      <transitions name="selfTest2outOfService" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.1" kind="external">
+      <transitions name="selfTest2outOfService" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.1" kind="external">
         <triggers name="failureTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>

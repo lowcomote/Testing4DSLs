@@ -55,11 +55,11 @@
           <vertice xsi:type="statemachines:State" name="WithdrawMoney" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.1">
             <regions name="withdrawRegion">
               <vertice xsi:type="statemachines:Pseudostate" name="initial4" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.0"/>
-              <vertice xsi:type="statemachines:State" name="GetAmount" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.0">
-                <entry name="enterAmountMsg"/>
-              </vertice>
+              <vertice xsi:type="statemachines:State" name="GetAmount" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.0"/>
               <vertice xsi:type="statemachines:State" name="CheckBalance" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.2 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.1"/>
-              <vertice xsi:type="statemachines:State" name="MakeWithdrawal" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.2"/>
+              <vertice xsi:type="statemachines:State" name="MakeWithdrawal" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.2">
+                <doActivity name="updateCardBalance"/>
+              </vertice>
               <vertice xsi:type="statemachines:FinalState" name="final4" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.3 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.4"/>
               <transitions name="initial4_2_getAmount" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.1" kind="external"/>
               <transitions name="getAmount2checkBalance" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.2" kind="external">
@@ -97,7 +97,7 @@
               <vertice xsi:type="statemachines:FinalState" name="final5" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.4 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.5"/>
               <transitions name="initial5_2_validateCard" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.1" kind="external"/>
               <transitions name="validateCard2getAmount" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.2" kind="external">
-                <effect name="updateCardBalance"/>
+                <effect name="cardNumberIsValid"/>
               </transitions>
               <transitions name="getAmount2checkBalance" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.3" kind="external">
                 <triggers name="amountEnteredTrigger">
@@ -110,7 +110,7 @@
                 </constraint>
               </transitions>
               <transitions name="checkBalance2final5" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.5" kind="external">
-                <effect name="notEnoughMoneyMsg"/>
+                <effect name="enterAmountMsg"/>
                 <constraint xsi:type="statemachines:IntegerConstraint">
                   <expression operator=">" operand1="//@signals.10/@attributes.0" operand2="//@signals.6/@attributes.1"/>
                 </constraint>

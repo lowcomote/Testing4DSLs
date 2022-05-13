@@ -85,11 +85,11 @@
               </transitions>
             </regions>
           </vertice>
-          <vertice xsi:type="statemachines:State" name="TransferMoney" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.2">
+          <vertice xsi:type="statemachines:State" name="TransferMoney" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.4 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.2">
             <regions name="transferRegion">
               <vertice xsi:type="statemachines:Pseudostate" name="initial5" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.0"/>
               <vertice xsi:type="statemachines:State" name="ValidateCard" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.0"/>
-              <vertice xsi:type="statemachines:State" name="GetAmount" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.2 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.1">
+              <vertice xsi:type="statemachines:State" name="GetAmount" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.1">
                 <entry name="enterAmountMsg"/>
               </vertice>
               <vertice xsi:type="statemachines:State" name="CheckBalance" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.2"/>
@@ -106,7 +106,7 @@
                   <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.10"/>
                 </triggers>
               </transitions>
-              <transitions name="checkBalance2transferMoney" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.4" kind="external">
+              <transitions name="checkBalance2transferMoney" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.4" kind="external">
                 <constraint xsi:type="statemachines:IntegerConstraint">
                   <expression operator="&lt;=" operand1="//@signals.10/@attributes.0" operand2="//@signals.6/@attributes.1"/>
                 </constraint>

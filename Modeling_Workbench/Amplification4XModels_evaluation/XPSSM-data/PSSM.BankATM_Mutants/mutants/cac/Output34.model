@@ -205,7 +205,7 @@
         <triggers name="failureTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
-        <effect name="ES"/>
+        <effect name="r"/>
       </transitions>
     </regions>
   </statemachine>

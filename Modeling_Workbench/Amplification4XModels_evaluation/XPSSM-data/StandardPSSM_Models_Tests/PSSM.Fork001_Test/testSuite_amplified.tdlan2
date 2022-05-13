@@ -190,9 +190,10 @@ Package testSuite {
 	}
 	Annotation MUTPath ;
 	Annotation DSLName ;
-	Region Region1 ( _name = 'Region1' ) ;
-	StateMachine Event001_Test ( _name = 'Event001_Test$behavior$1' , regions = { Region1 } ) ;
-	Test Description Fork001_Test0_EventDuplication uses configuration configuration4Fork001_Test {
+	Region Region1 ( _name = "Region1" ) ;
+	Region Region2 ( _name = "Region2" ) ;
+	StateMachine Final001_Test ( _name = "Final001_Test$behavior$1" , regions = { Region1 , Region2 } ) ;
+	Test Description Fork001_Test_0_EventDuplication uses configuration configuration4Fork001_Test {
 		tester.reactiveGate sends _run (
 			state_machine = Fork001_Test
 		) to PSSM.reactiveGate ;
@@ -228,7 +229,7 @@ Package testSuite {
 			behavior = T5_testEnd
 		) to tester.reactiveGate ;
 	}
-	Test Description Fork001_Test1_EventDuplication uses configuration configuration4Fork001_Test {
+	Test Description Fork001_Test_1_EventDuplication uses configuration configuration4Fork001_Test {
 		tester.reactiveGate sends _run (
 			state_machine = Fork001_Test
 		) to PSSM.reactiveGate ;
@@ -263,46 +264,6 @@ Package testSuite {
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = T5_testEnd
-		) to tester.reactiveGate ;
-	}
-	Test Description Fork001_Test0_EventDuplication1_EventDuplication uses configuration configuration4Fork001_Test {
-		tester.reactiveGate sends _run (
-			state_machine = Fork001_Test
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Fork001_Test ,
-			signal_occurrence = start_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = Fork001_Test
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Fork001_Test ,
-			signal_occurrence = start_occurrence
-		) to PSSM.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T3_effect
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T3_effect
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_entry
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T3_1_effect
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_3_entry
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_entry
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T4_effect
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_2_entry
 		) to tester.reactiveGate ;
 	}
 }

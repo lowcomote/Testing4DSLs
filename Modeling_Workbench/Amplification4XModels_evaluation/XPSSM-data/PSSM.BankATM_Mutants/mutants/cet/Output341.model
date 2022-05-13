@@ -168,6 +168,9 @@
         <triggers name="serviceTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.4"/>
         </triggers>
+        <triggers name="cancelTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.5"/>
+        </triggers>
       </transitions>
       <transitions name="maintenance2outOfService" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="failureTrigger">
@@ -200,9 +203,6 @@
       <transitions name="serviceCustomer2outOfService" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="failureTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
-        </triggers>
-        <triggers name="cancelTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.5"/>
         </triggers>
       </transitions>
     </regions>

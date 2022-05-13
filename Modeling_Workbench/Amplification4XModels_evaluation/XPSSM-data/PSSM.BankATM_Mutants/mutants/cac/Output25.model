@@ -162,7 +162,7 @@
         <triggers name="turnOffTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
         </triggers>
-        <effect name="ES"/>
+        <effect name="r"/>
       </transitions>
       <transitions name="outOfService2maintenance" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <triggers name="serviceTrigger">

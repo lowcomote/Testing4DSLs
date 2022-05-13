@@ -12,7 +12,7 @@
         <triggers name="StartTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <effect name="MW"/>
+        <effect name="tIl"/>
       </transitions>
     </regions>
   </statemachine>

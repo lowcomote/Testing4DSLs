@@ -27,7 +27,7 @@
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
             </triggers>
           </transitions>
-          <transitions name="running2ready" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6" kind="external">
+          <transitions name="running2ready" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.5" kind="external">
             <triggers name="threadSuspendedTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.4"/>
             </triggers>
@@ -46,10 +46,10 @@
       <vertice xsi:type="statemachines:State" name="Waiting" outgoingTransitions="//@statemachine/@regions.0/@transitions.17 //@statemachine/@regions.0/@transitions.18 //@statemachine/@regions.0/@transitions.19" incomingTransitions="//@statemachine/@regions.0/@transitions.7 //@statemachine/@regions.0/@transitions.8 //@statemachine/@regions.0/@transitions.9">
         <entry name="ThreadIsWaiting"/>
       </vertice>
-      <vertice xsi:type="statemachines:State" name="Blocked" outgoingTransitions="//@statemachine/@regions.0/@transitions.21 //@statemachine/@regions.0/@transitions.20" incomingTransitions="//@statemachine/@regions.0/@transitions.10 //@statemachine/@regions.0/@transitions.11 //@statemachine/@regions.0/@transitions.15 //@statemachine/@regions.0/@transitions.16 //@statemachine/@regions.0/@transitions.18 //@statemachine/@regions.0/@transitions.19">
+      <vertice xsi:type="statemachines:State" name="Blocked" outgoingTransitions="//@statemachine/@regions.0/@transitions.21 //@statemachine/@regions.0/@transitions.20" incomingTransitions="//@statemachine/@regions.0/@transitions.10 //@statemachine/@regions.0/@transitions.11 //@statemachine/@regions.0/@transitions.15 //@statemachine/@regions.0/@transitions.16 //@statemachine/@regions.0/@transitions.18 //@statemachine/@regions.0/@transitions.19 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.3">
         <entry name="ThreadIsBlocked"/>
       </vertice>
-      <vertice xsi:type="statemachines:State" name="Terminated" outgoingTransitions="//@statemachine/@regions.0/@transitions.22" incomingTransitions="//@statemachine/@regions.0/@transitions.12 //@statemachine/@regions.0/@transitions.14 //@statemachine/@regions.0/@transitions.17 //@statemachine/@regions.0/@transitions.21 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.3">
+      <vertice xsi:type="statemachines:State" name="Terminated" outgoingTransitions="//@statemachine/@regions.0/@transitions.22" incomingTransitions="//@statemachine/@regions.0/@transitions.12 //@statemachine/@regions.0/@transitions.14 //@statemachine/@regions.0/@transitions.17 //@statemachine/@regions.0/@transitions.21">
         <entry name="ThreadIsTerminated"/>
       </vertice>
       <vertice xsi:type="statemachines:FinalState" name="final1" incomingTransitions="//@statemachine/@regions.0/@transitions.22"/>

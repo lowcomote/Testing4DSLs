@@ -36,7 +36,7 @@
             <triggers name="finishTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
             </triggers>
-            <effect name="WKd"/>
+            <effect name="ZK"/>
           </transitions>
         </regions>
         <entry name="ThreadIsRunnable"/>

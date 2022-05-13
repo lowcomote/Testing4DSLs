@@ -41,6 +41,9 @@
                 </constraint>
               </transitions>
               <transitions name="validatePin2final3" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.3" kind="external">
+                <triggers name="cardInsertedTrigger">
+                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
+                </triggers>
                 <effect name="wrongPinMsg"/>
                 <constraint xsi:type="statemachines:IntegerConstraint">
                   <expression operator="!=" operand1="//@signals.7/@attributes.0" operand2="//@signals.6/@attributes.0"/>
@@ -81,9 +84,6 @@
                 </constraint>
               </transitions>
               <transitions name="makeWithdrawal2final4" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.4" kind="external">
-                <triggers name="cardInsertedTrigger">
-                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
-                </triggers>
                 <effect name="deliverCash"/>
               </transitions>
             </regions>

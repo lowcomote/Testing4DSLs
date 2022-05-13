@@ -16,7 +16,7 @@
         <entry name="ObjectExists&amp;NotReferenced"/>
       </vertice>
       <transitions name="initial2NENR" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external">
-        <effect name="u"/>
+        <effect name="zF"/>
       </transitions>
       <transitions name="NENR2ER" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="home.createTrigger">

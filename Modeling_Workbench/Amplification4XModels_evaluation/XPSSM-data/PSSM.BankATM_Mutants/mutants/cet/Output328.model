@@ -68,9 +68,6 @@
                 <triggers name="amountEnteredTrigger">
                   <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.10"/>
                 </triggers>
-                <triggers name="cardInsertedTrigger">
-                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
-                </triggers>
               </transitions>
               <transitions name="checkBalance2makeWithdrawal" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.3" kind="external">
                 <constraint xsi:type="statemachines:IntegerConstraint">
@@ -203,6 +200,9 @@
       <transitions name="serviceCustomer2outOfService" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="failureTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
+        </triggers>
+        <triggers name="cardInsertedTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
         </triggers>
       </transitions>
     </regions>

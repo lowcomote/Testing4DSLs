@@ -19,6 +19,9 @@
                 <triggers name="ContinueTrigger">
                   <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
                 </triggers>
+                <triggers name="AnotherSignalDeferrableTrigger">
+                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+                </triggers>
                 <effect name="T1.1.2(effect)"/>
               </transitions>
             </regions>
@@ -58,9 +61,6 @@
         </triggers>
       </transitions>
       <transitions name="T3" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
-        <triggers name="AnotherSignalDeferrableTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
-        </triggers>
         <effect name="T3(testEnd)"/>
       </transitions>
     </regions>

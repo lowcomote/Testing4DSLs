@@ -60,6 +60,7 @@
               </vertice>
               <vertice xsi:type="statemachines:State" name="CheckBalance" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.2 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.1"/>
               <vertice xsi:type="statemachines:State" name="MakeWithdrawal" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.2">
+                <entry name="vq"/>
                 <doActivity name="updateCardBalance"/>
               </vertice>
               <vertice xsi:type="statemachines:FinalState" name="final4" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.3 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.4"/>
@@ -94,7 +95,6 @@
               </vertice>
               <vertice xsi:type="statemachines:State" name="CheckBalance" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.3 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.2"/>
               <vertice xsi:type="statemachines:State" name="TransferMoney" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.3">
-                <entry name="wF"/>
                 <doActivity name="updateCardBalance"/>
               </vertice>
               <vertice xsi:type="statemachines:FinalState" name="final5" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.4 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.5"/>

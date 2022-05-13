@@ -14,10 +14,9 @@
               <vertice xsi:type="statemachines:FinalState" name="FS1.1.1" incomingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@transitions.1"/>
               <transitions name="T1.1.1" source="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@vertice.0" kind="external"/>
               <transitions name="T1.1.2" source="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@vertice.2" kind="external">
-                <effect name="T2(effect)"/>
+                <effect name="T1.1.2(testEnd)"/>
               </transitions>
             </regions>
-            <entry name="S1.1(entry)"/>
           </vertice>
           <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@transitions.0"/>
           <transitions name="T1.1" source="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0" kind="external"/>
@@ -30,6 +29,7 @@
         <triggers name="StartTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
+        <effect name="S1.1(entry)"/>
       </transitions>
     </regions>
   </statemachine>

@@ -70,7 +70,7 @@
                 </triggers>
               </transitions>
               <transitions name="checkBalance2makeWithdrawal" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.3" kind="external">
-                <effect name="ES"/>
+                <effect name="r"/>
                 <constraint xsi:type="statemachines:IntegerConstraint">
                   <expression operator="&lt;=" operand1="//@signals.10/@attributes.0" operand2="//@signals.6/@attributes.1"/>
                 </constraint>

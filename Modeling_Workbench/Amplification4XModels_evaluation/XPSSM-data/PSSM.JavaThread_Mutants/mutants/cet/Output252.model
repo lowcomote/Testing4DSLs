@@ -53,7 +53,11 @@
         <entry name="ThreadIsTerminated"/>
       </vertice>
       <vertice xsi:type="statemachines:FinalState" name="final1" incomingTransitions="//@statemachine/@regions.0/@transitions.22"/>
-      <transitions name="initial1_2_new" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>
+      <transitions name="initial1_2_new" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external">
+        <triggers name="lockSupport.parkUntilTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
+        </triggers>
+      </transitions>
       <transitions name="new2runnable" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="t.startTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
@@ -133,9 +137,6 @@
       <transitions name="waiting2terminated" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.6" kind="external">
         <triggers name="threadTerminatedTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.13"/>
-        </triggers>
-        <triggers name="lockSupport.parkUntilTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
         </triggers>
       </transitions>
       <transitions name="waiting2blocked" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">

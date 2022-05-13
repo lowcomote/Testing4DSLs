@@ -123,7 +123,11 @@
             </regions>
           </vertice>
           <vertice xsi:type="statemachines:FinalState" name="final2" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.3 //@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.4 //@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.5"/>
-          <transitions name="initial2authentication" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1" kind="external"/>
+          <transitions name="initial2authentication" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1" kind="external">
+            <triggers name="transferTrigger">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.9"/>
+            </triggers>
+          </transitions>
           <transitions name="selectingTransaction2withdraw" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3" kind="external">
             <triggers name="withdrawTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
@@ -163,9 +167,6 @@
       <transitions name="outOfService2maintenance" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <triggers name="serviceTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.4"/>
-        </triggers>
-        <triggers name="transferTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.9"/>
         </triggers>
       </transitions>
       <transitions name="maintenance2outOfService" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.4" kind="external">

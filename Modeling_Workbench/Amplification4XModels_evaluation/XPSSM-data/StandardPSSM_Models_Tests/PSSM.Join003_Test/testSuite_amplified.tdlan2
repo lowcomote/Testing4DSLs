@@ -180,7 +180,7 @@ Package testSuite {
 	}
 	Annotation MUTPath ;
 	Annotation DSLName ;
-	Test Description Join003_Test0_EventDuplication uses configuration configuration4Join003_Test {
+	Test Description Join003_Test_2_EventDuplication uses configuration configuration4Join003_Test {
 		tester.reactiveGate sends _run (
 			state_machine = Join003_Test
 		) to PSSM.reactiveGate ;
@@ -192,11 +192,21 @@ Package testSuite {
 			state_machine = Join003_Test ,
 			signal_occurrence = data_occurrence
 		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = Join003_Test
+		tester.reactiveGate sends signal_received (
+			state_machine = Join003_Test ,
+			signal_occurrence = data_occurrence
 		) to PSSM.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = T1_2_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T1_4_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T3_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T5_testEnd
 		) to tester.reactiveGate ;
 	}
 }

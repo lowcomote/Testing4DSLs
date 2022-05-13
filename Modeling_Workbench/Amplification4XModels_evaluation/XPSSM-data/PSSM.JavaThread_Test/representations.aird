@@ -9,4 +9,5 @@
   <semanticResources>splittedResults/testSuite_amplified_dtr2sdt.tdlan2</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20220428_115823/testSuite.tdlan2</semanticResources>
   <semanticResources>gemoc-gen/execution/execution-20220428_125248/testSuite_amplified.tdlan2</semanticResources>
+  <semanticResources>testSuite_selected.tdlan2</semanticResources>
 </viewpoint:DAnalysis>

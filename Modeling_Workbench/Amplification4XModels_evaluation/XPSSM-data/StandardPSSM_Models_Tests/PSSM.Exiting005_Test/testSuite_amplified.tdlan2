@@ -185,7 +185,9 @@ Package testSuite {
 	}
 	Annotation MUTPath ;
 	Annotation DSLName ;
-	Test Description Exiting005_Test0_EventDuplication uses configuration configuration4Exiting005_Test {
+	Region Region1 ( _name = "Region1" ) ;
+	StateMachine Exiting004 ( _name = "Exiting004$behavior$1" , regions = { Region1 } ) ;
+	Test Description Exiting005_Test_0_EventDuplication uses configuration configuration4Exiting005_Test {
 		tester.reactiveGate sends _run (
 			state_machine = Exiting005_Test
 		) to PSSM.reactiveGate ;
@@ -206,6 +208,199 @@ Package testSuite {
 		) to PSSM.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S2_1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T3_testEnd
+		) to tester.reactiveGate ;
+	}
+	Test Description Exiting005_Test_1_EventDuplication uses configuration configuration4Exiting005_Test {
+		tester.reactiveGate sends _run (
+			state_machine = Exiting005_Test
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting005_Test ,
+			signal_occurrence = start_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting005_Test ,
+			signal_occurrence = continue_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting005_Test ,
+			signal_occurrence = pending_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting005_Test ,
+			signal_occurrence = start_occurrence
+		) to PSSM.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S2_1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T3_testEnd
+		) to tester.reactiveGate ;
+	}
+	Test Description Exiting005_Test_0_EventDuplication_1_EventDuplication uses configuration configuration4Exiting005_Test {
+		tester.reactiveGate sends _run (
+			state_machine = Exiting005_Test
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting005_Test ,
+			signal_occurrence = start_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting005_Test ,
+			signal_occurrence = continue_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting005_Test ,
+			signal_occurrence = pending_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends _run (
+			state_machine = Exiting005_Test
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting005_Test ,
+			signal_occurrence = start_occurrence
+		) to PSSM.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S2_1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T3_testEnd
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_1_exit
+		) to tester.reactiveGate ;
+	}
+	Test Description Exiting005_Test_0_EventDuplication_2_EventDuplication uses configuration configuration4Exiting005_Test {
+		tester.reactiveGate sends _run (
+			state_machine = Exiting005_Test
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting005_Test ,
+			signal_occurrence = start_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting005_Test ,
+			signal_occurrence = continue_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting005_Test ,
+			signal_occurrence = pending_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends _run (
+			state_machine = Exiting005_Test
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting005_Test ,
+			signal_occurrence = continue_occurrence
+		) to PSSM.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S2_1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T3_testEnd
+		) to tester.reactiveGate ;
+	}
+	Test Description Exiting005_Test_0_EventDuplication_3_EventDuplication uses configuration configuration4Exiting005_Test {
+		tester.reactiveGate sends _run (
+			state_machine = Exiting005_Test
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting005_Test ,
+			signal_occurrence = start_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting005_Test ,
+			signal_occurrence = continue_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting005_Test ,
+			signal_occurrence = pending_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends _run (
+			state_machine = Exiting005_Test
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting005_Test ,
+			signal_occurrence = pending_occurrence
+		) to PSSM.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S2_1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T3_testEnd
+		) to tester.reactiveGate ;
+	}
+	Test Description Exiting005_Test_0_EventDuplication_1_EventDuplication_3_EventDuplication uses configuration configuration4Exiting005_Test {
+		tester.reactiveGate sends _run (
+			state_machine = Exiting005_Test
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting005_Test ,
+			signal_occurrence = start_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting005_Test ,
+			signal_occurrence = continue_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting005_Test ,
+			signal_occurrence = pending_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends _run (
+			state_machine = Exiting005_Test
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting005_Test ,
+			signal_occurrence = start_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting005_Test ,
+			signal_occurrence = pending_occurrence
+		) to PSSM.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S2_1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T3_testEnd
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_1_exit
@@ -215,87 +410,6 @@ Package testSuite {
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = T2_2_effect
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T3_testEnd
-		) to tester.reactiveGate ;
-	}
-	Test Description Exiting005_Test1_EventDuplication uses configuration configuration4Exiting005_Test {
-		tester.reactiveGate sends _run (
-			state_machine = Exiting005_Test
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Exiting005_Test ,
-			signal_occurrence = start_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Exiting005_Test ,
-			signal_occurrence = continue_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Exiting005_Test ,
-			signal_occurrence = pending_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Exiting005_Test ,
-			signal_occurrence = start_occurrence
-		) to PSSM.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T3_testEnd
-		) to tester.reactiveGate ;
-	}
-	Test Description Exiting005_Test2_EventDuplication uses configuration configuration4Exiting005_Test {
-		tester.reactiveGate sends _run (
-			state_machine = Exiting005_Test
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Exiting005_Test ,
-			signal_occurrence = start_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Exiting005_Test ,
-			signal_occurrence = continue_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Exiting005_Test ,
-			signal_occurrence = pending_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Exiting005_Test ,
-			signal_occurrence = continue_occurrence
-		) to PSSM.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S2_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S2_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T3_testEnd
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T2_2_effect
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T3_testEnd
 		) to tester.reactiveGate ;
 	}
 }

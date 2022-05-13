@@ -3,7 +3,7 @@
   <statemachine name="BankATM">
     <regions name="mainRegion">
       <vertice xsi:type="statemachines:Pseudostate" name="initial1" outgoingTransitions="//@statemachine/@regions.0/@transitions.0"/>
-      <vertice xsi:type="statemachines:State" name="Off" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0 //@statemachine/@regions.0/@transitions.3 //@statemachine/@regions.0/@transitions.7">
+      <vertice xsi:type="statemachines:State" name="Off" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0 //@statemachine/@regions.0/@transitions.3">
         <entry name="ATMIsOff"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="SelfTest" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.1 //@statemachine/@regions.0/@transitions.6">
@@ -12,7 +12,7 @@
       <vertice xsi:type="statemachines:State" name="OutOfService" outgoingTransitions="//@statemachine/@regions.0/@transitions.3 //@statemachine/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@transitions.2 //@statemachine/@regions.0/@transitions.11 //@statemachine/@regions.0/@transitions.5">
         <entry name="outOfService"/>
       </vertice>
-      <vertice xsi:type="statemachines:State" name="Maintenance" outgoingTransitions="//@statemachine/@regions.0/@transitions.6 //@statemachine/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@transitions.4">
+      <vertice xsi:type="statemachines:State" name="Maintenance" outgoingTransitions="//@statemachine/@regions.0/@transitions.6 //@statemachine/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@transitions.4 //@statemachine/@regions.0/@transitions.7">
         <entry name="underMaintenance"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="ServiceCustomer" outgoingTransitions="//@statemachine/@regions.0/@transitions.9 //@statemachine/@regions.0/@transitions.11 //@statemachine/@regions.0/@transitions.10" incomingTransitions="//@statemachine/@regions.0/@transitions.8">
@@ -171,11 +171,10 @@
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
         </triggers>
       </transitions>
-      <transitions name="Idle2off" target="//@statemachine/@regions.0/@vertice.1" kind="external">
-        <triggers name="turnOffTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
+      <transitions name="Idle2maintenance" target="//@statemachine/@regions.0/@vertice.4" kind="external">
+        <triggers name="serviceTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.4"/>
         </triggers>
-        <effect name="shutDown"/>
       </transitions>
       <transitions name="Idle2serviceCustomer" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <triggers name="cardInsertedTrigger">

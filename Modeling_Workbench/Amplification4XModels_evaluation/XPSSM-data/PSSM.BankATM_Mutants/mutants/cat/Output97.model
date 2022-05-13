@@ -59,9 +59,7 @@
                 <entry name="enterAmountMsg"/>
               </vertice>
               <vertice xsi:type="statemachines:State" name="CheckBalance" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.2 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.1"/>
-              <vertice xsi:type="statemachines:State" name="MakeWithdrawal" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.2">
-                <doActivity name="updateCardBalance"/>
-              </vertice>
+              <vertice xsi:type="statemachines:State" name="MakeWithdrawal" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.2"/>
               <vertice xsi:type="statemachines:FinalState" name="final4" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.3 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.4"/>
               <transitions name="initial4_2_getAmount" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.1" kind="external"/>
               <transitions name="getAmount2checkBalance" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.2" kind="external">
@@ -75,7 +73,7 @@
                 </constraint>
               </transitions>
               <transitions name="checkBalance2final4" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.4" kind="external">
-                <effect name="shutDown"/>
+                <effect name="notEnoughMoneyMsg"/>
                 <constraint xsi:type="statemachines:IntegerConstraint">
                   <expression operator=">" operand1="//@signals.10/@attributes.0" operand2="//@signals.6/@attributes.1"/>
                 </constraint>
@@ -118,7 +116,7 @@
                 </constraint>
               </transitions>
               <transitions name="transferMoney2final5" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.5" kind="external">
-                <effect name="successfullyTransferred"/>
+                <effect name="updateCardBalance"/>
               </transitions>
             </regions>
           </vertice>
@@ -162,6 +160,7 @@
         <triggers name="turnOffTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
         </triggers>
+        <effect name="shutDown"/>
       </transitions>
       <transitions name="outOfService2maintenance" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <triggers name="serviceTrigger">

@@ -66,6 +66,9 @@
               <transitions name="initial4_2_getAmount" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.1" kind="external"/>
               <transitions name="getAmount2checkBalance" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.2" kind="external"/>
               <transitions name="checkBalance2makeWithdrawal" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.3" kind="external">
+                <triggers name="amountEnteredTrigger">
+                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.10"/>
+                </triggers>
                 <constraint xsi:type="statemachines:IntegerConstraint">
                   <expression operator="&lt;=" operand1="//@signals.10/@attributes.0" operand2="//@signals.6/@attributes.1"/>
                 </constraint>
@@ -194,9 +197,6 @@
       <transitions name="serviceCustomer2idle" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <triggers name="cancelTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.5"/>
-        </triggers>
-        <triggers name="amountEnteredTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.10"/>
         </triggers>
       </transitions>
       <transitions name="serviceCustomer2idle" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.3" kind="external"/>

@@ -26,9 +26,6 @@
             <triggers name="thread.yieldTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
             </triggers>
-            <triggers name="wait4lock2reenterTrigger">
-              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.11"/>
-            </triggers>
           </transitions>
           <transitions name="running2ready" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" kind="external">
             <triggers name="threadSuspendedTrigger">
@@ -100,6 +97,9 @@
       <transitions name="runnable2waiting" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="lockSupport.parkTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.9"/>
+        </triggers>
+        <triggers name="wait4lock2reenterTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.11"/>
         </triggers>
       </transitions>
       <transitions name="runnable2blocked" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.5" kind="external">

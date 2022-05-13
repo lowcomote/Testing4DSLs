@@ -18,7 +18,7 @@
       <vertice xsi:type="statemachines:State" name="Maintenance" outgoingTransitions="//@statemachine/@regions.0/@transitions.7 //@statemachine/@regions.0/@transitions.6" incomingTransitions="//@statemachine/@regions.0/@transitions.5 //@statemachine/@regions.0/@transitions.9">
         <entry name="underMaintenance"/>
       </vertice>
-      <vertice xsi:type="statemachines:State" name="ServiceCustomer" outgoingTransitions="//@statemachine/@regions.0/@transitions.11 //@statemachine/@regions.0/@transitions.13 //@statemachine/@regions.0/@transitions.12" incomingTransitions="//@statemachine/@regions.0/@transitions.10">
+      <vertice xsi:type="statemachines:State" name="ServiceCustomer" outgoingTransitions="//@statemachine/@regions.0/@transitions.11 //@statemachine/@regions.0/@transitions.13 //@statemachine/@regions.0/@transitions.12" incomingTransitions="//@statemachine/@regions.0/@transitions.10 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.1">
         <regions name="serviceCustomerRegion">
           <vertice xsi:type="statemachines:Pseudostate" name="initial2" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.0"/>
           <vertice xsi:type="statemachines:State" name="CustomerAuthentication" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.0">
@@ -64,7 +64,7 @@
               </vertice>
               <vertice xsi:type="statemachines:FinalState" name="final4" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.3 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.4"/>
               <transitions name="initial4_2_getAmount" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.1" kind="external"/>
-              <transitions name="getAmount2checkBalance" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.5" kind="external">
+              <transitions name="getAmount2checkBalance" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.6" kind="external">
                 <triggers name="amountEnteredTrigger">
                   <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.10"/>
                 </triggers>
@@ -122,7 +122,7 @@
               </transitions>
             </regions>
           </vertice>
-          <vertice xsi:type="statemachines:FinalState" name="final2" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.3 //@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.4 //@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.5 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.1"/>
+          <vertice xsi:type="statemachines:FinalState" name="final2" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.3 //@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.4 //@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.5"/>
           <transitions name="initial2authentication" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1" kind="external"/>
           <transitions name="selectingTransaction2withdraw" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3" kind="external">
             <triggers name="withdrawTrigger">

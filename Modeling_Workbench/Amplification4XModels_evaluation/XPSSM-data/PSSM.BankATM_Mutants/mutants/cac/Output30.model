@@ -189,7 +189,7 @@
         <triggers name="serviceTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.4"/>
         </triggers>
-        <effect name="ES"/>
+        <effect name="r"/>
       </transitions>
       <transitions name="Idle2serviceCustomer" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6" kind="external">
         <triggers name="cardInsertedTrigger">

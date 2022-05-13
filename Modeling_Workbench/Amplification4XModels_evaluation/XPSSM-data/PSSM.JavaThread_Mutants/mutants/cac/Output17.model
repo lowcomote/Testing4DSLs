@@ -113,7 +113,7 @@
         <triggers name="threadTerminatedTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.13"/>
         </triggers>
-        <effect name="WKd"/>
+        <effect name="ZK"/>
       </transitions>
       <transitions name="timedWaiting2runnable" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="sleepTimeElapsedTrigger">

@@ -10,7 +10,9 @@
           <vertice xsi:type="statemachines:State" name="S1.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0">
             <entry name="S1.1(entry)"/>
           </vertice>
-          <vertice xsi:type="statemachines:State" name="S1.2" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1"/>
+          <vertice xsi:type="statemachines:State" name="S1.2" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1">
+            <entry name="S1.2(entry)"/>
+          </vertice>
           <vertice xsi:type="statemachines:State" name="S1.3" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.2">
             <entry name="S1.3(entry)"/>
           </vertice>
@@ -26,12 +28,11 @@
             <triggers name="Continue">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
             </triggers>
-            <effect name="S1.2(entry)"/>
+            <effect name="T1.3(effect)"/>
           </transitions>
           <transitions name="T1.4" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.4" kind="external"/>
           <transitions name="T1.5" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.4" kind="external"/>
         </regions>
-        <entry name="S1(entry)"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="S2" outgoingTransitions="//@statemachine/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@transitions.2">
         <entry name="S2(entry)"/>
@@ -48,7 +49,7 @@
         <triggers name="StartTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <effect name="T3(effect)"/>
+        <effect name="S1(entry)"/>
       </transitions>
       <transitions name="T5" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <effect name="T5(testEnd)"/>

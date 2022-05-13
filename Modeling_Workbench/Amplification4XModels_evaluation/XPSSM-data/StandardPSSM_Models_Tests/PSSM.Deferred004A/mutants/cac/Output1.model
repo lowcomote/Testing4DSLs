@@ -19,7 +19,7 @@
             <triggers name="PendingTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
             </triggers>
-            <effect name="Mu"/>
+            <effect name="wV"/>
           </transitions>
         </regions>
         <regions name="Region2">

@@ -39,7 +39,7 @@
                 <triggers name="ContinueTrigger">
                   <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
                 </triggers>
-                <effect name="Xz"/>
+                <effect name="g"/>
               </transitions>
             </regions>
             <regions name="Region2">

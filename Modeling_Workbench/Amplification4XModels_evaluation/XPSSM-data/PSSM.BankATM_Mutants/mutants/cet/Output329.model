@@ -133,6 +133,9 @@
             <triggers name="transferTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.9"/>
             </triggers>
+            <triggers name="cardInsertedTrigger">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
+            </triggers>
           </transitions>
           <transitions name="withdraw2final2" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.5" kind="external"/>
           <transitions name="transfer2final2" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.5" kind="external"/>
@@ -196,11 +199,7 @@
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.5"/>
         </triggers>
       </transitions>
-      <transitions name="serviceCustomer2idle" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.3" kind="external">
-        <triggers name="cardInsertedTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
-        </triggers>
-      </transitions>
+      <transitions name="serviceCustomer2idle" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.3" kind="external"/>
       <transitions name="serviceCustomer2outOfService" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="failureTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>

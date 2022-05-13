@@ -85,7 +85,7 @@
               </transitions>
             </regions>
           </vertice>
-          <vertice xsi:type="statemachines:State" name="TransferMoney" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.2 //@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.5">
+          <vertice xsi:type="statemachines:State" name="TransferMoney" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.2">
             <regions name="transferRegion">
               <vertice xsi:type="statemachines:Pseudostate" name="initial5" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.0"/>
               <vertice xsi:type="statemachines:State" name="ValidateCard" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.0"/>
@@ -93,7 +93,7 @@
                 <entry name="enterAmountMsg"/>
               </vertice>
               <vertice xsi:type="statemachines:State" name="CheckBalance" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.3 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.2"/>
-              <vertice xsi:type="statemachines:State" name="TransferMoney" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.3">
+              <vertice xsi:type="statemachines:State" name="TransferMoney" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.3 //@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.5">
                 <doActivity name="updateCardBalance"/>
               </vertice>
               <vertice xsi:type="statemachines:FinalState" name="final5" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.4 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.5"/>
@@ -136,7 +136,7 @@
           </transitions>
           <transitions name="withdraw2final2" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.5" kind="external"/>
           <transitions name="transfer2final2" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.5" kind="external"/>
-          <transitions name="authentication2final2" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4" kind="external"/>
+          <transitions name="authentication2final2" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.4" kind="external"/>
         </regions>
         <entry name="readCard"/>
         <exit name="ejectCard"/>

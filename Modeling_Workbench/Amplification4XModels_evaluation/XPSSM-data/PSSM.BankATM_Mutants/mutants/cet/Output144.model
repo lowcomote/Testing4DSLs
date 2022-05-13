@@ -196,14 +196,14 @@
         <triggers name="cancelTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.5"/>
         </triggers>
-        <triggers name="turnOnTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
-        </triggers>
       </transitions>
       <transitions name="serviceCustomer2idle" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.3" kind="external"/>
       <transitions name="serviceCustomer2outOfService" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="failureTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
+        </triggers>
+        <triggers name="turnOnTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
       </transitions>
     </regions>

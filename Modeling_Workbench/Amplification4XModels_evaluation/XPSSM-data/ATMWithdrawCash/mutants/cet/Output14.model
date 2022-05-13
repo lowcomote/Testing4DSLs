@@ -31,9 +31,6 @@
         </constraint>
       </transitions>
       <transitions name="validatePin_final" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.7" kind="external">
-        <triggers name="pinEntered">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
-        </triggers>
         <effect name="wrongPinMsg"/>
         <constraint xsi:type="statemachines:IntegerConstraint">
           <expression operator="!=" operand1="//@signals.1/@attributes.0" operand2="//@signals.0/@attributes.0"/>
@@ -56,6 +53,9 @@
         </constraint>
       </transitions>
       <transitions name="withdraw_final" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.7" kind="external">
+        <triggers name="pinEntered">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
+        </triggers>
         <effect name="deliverCash"/>
       </transitions>
     </regions>

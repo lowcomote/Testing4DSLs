@@ -148,9 +148,6 @@
         <triggers name="sucessTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
         </triggers>
-        <triggers name="transferTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.9"/>
-        </triggers>
       </transitions>
       <transitions name="selfTest2outOfService" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="failureTrigger">
@@ -199,7 +196,11 @@
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.5"/>
         </triggers>
       </transitions>
-      <transitions name="serviceCustomer2idle" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.3" kind="external"/>
+      <transitions name="serviceCustomer2idle" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.3" kind="external">
+        <triggers name="transferTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.9"/>
+        </triggers>
+      </transitions>
       <transitions name="serviceCustomer2outOfService" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="failureTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>

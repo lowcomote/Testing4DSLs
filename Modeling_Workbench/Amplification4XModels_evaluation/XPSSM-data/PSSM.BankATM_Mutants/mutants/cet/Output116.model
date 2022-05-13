@@ -97,7 +97,11 @@
                 <doActivity name="updateCardBalance"/>
               </vertice>
               <vertice xsi:type="statemachines:FinalState" name="final5" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.4 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.5"/>
-              <transitions name="initial5_2_validateCard" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.1" kind="external"/>
+              <transitions name="initial5_2_validateCard" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.1" kind="external">
+                <triggers name="transferTrigger">
+                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.9"/>
+                </triggers>
+              </transitions>
               <transitions name="validateCard2getAmount" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.2" kind="external">
                 <effect name="cardNumberIsValid"/>
               </transitions>
@@ -127,9 +131,6 @@
           <transitions name="selectingTransaction2withdraw" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3" kind="external">
             <triggers name="withdrawTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
-            </triggers>
-            <triggers name="transferTrigger">
-              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.9"/>
             </triggers>
           </transitions>
           <transitions name="selectingTransaction2transfer" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4" kind="external"/>

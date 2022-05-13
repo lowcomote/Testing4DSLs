@@ -94,9 +94,6 @@
         <triggers name="lockSupport.parkTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.9"/>
         </triggers>
-        <triggers name="t.startTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
-        </triggers>
       </transitions>
       <transitions name="runnable2blocked" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <triggers name="wait4lock2enterTrigger">
@@ -156,6 +153,9 @@
       <transitions name="blocked2terminated" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.6" kind="external">
         <triggers name="threadTerminatedTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.13"/>
+        </triggers>
+        <triggers name="t.startTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
       </transitions>
       <transitions name="terminated2final" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.7" kind="external"/>

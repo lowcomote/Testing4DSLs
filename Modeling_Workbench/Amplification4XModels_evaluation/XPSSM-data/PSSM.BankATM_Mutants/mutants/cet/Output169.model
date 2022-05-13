@@ -41,9 +41,6 @@
                 </constraint>
               </transitions>
               <transitions name="validatePin2final3" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.3" kind="external">
-                <triggers name="turnOnTrigger">
-                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
-                </triggers>
                 <effect name="wrongPinMsg"/>
                 <constraint xsi:type="statemachines:IntegerConstraint">
                   <expression operator="!=" operand1="//@signals.7/@attributes.0" operand2="//@signals.6/@attributes.0"/>
@@ -130,6 +127,9 @@
           <transitions name="selectingTransaction2withdraw" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3" kind="external">
             <triggers name="withdrawTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
+            </triggers>
+            <triggers name="turnOnTrigger">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
             </triggers>
           </transitions>
           <transitions name="selectingTransaction2transfer" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4" kind="external">

@@ -25,7 +25,7 @@
         <triggers name="businessMethodTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
-        <effect name="u"/>
+        <effect name="zF"/>
       </transitions>
       <transitions name="ER2NER" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <triggers name="object.removeTrigger">

@@ -168,7 +168,7 @@ Package testSuite {
 	}
 	Annotation MUTPath ;
 	Annotation DSLName ;
-	Test Description Entry002_Test_A0_EventDuplication uses configuration configuration4Entry002_Test_A {
+	Test Description Entry002_Test_A_0_EventDuplication uses configuration configuration4Entry002_Test_A {
 		tester.reactiveGate sends _run (
 			state_machine = Entry002_Test_A
 		) to PSSM.reactiveGate ;
@@ -189,9 +189,13 @@ Package testSuite {
 			behavior = T3_testEnd
 		) to tester.reactiveGate ;
 	}
-	Test Description Entry002_Test_A3_EventDeletion uses configuration configuration4Entry002_Test_A {
+	Test Description Entry002_Test_A_1_EventDuplication uses configuration configuration4Entry002_Test_A {
 		tester.reactiveGate sends _run (
 			state_machine = Entry002_Test_A
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Entry002_Test_A ,
+			signal_occurrence = start_occurrence
 		) to PSSM.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = Entry002_Test_A ,
@@ -207,7 +211,7 @@ Package testSuite {
 			behavior = T3_testEnd
 		) to tester.reactiveGate ;
 	}
-	Test Description Entry002_Test_A0_EventDuplication1_EventDuplication uses configuration configuration4Entry002_Test_A {
+	Test Description Entry002_Test_A_0_EventDuplication_1_EventDuplication uses configuration configuration4Entry002_Test_A {
 		tester.reactiveGate sends _run (
 			state_machine = Entry002_Test_A
 		) to PSSM.reactiveGate ;
@@ -227,6 +231,9 @@ Package testSuite {
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = S2_1_entry
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T3_testEnd
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = T3_testEnd

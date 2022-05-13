@@ -153,7 +153,7 @@
         <triggers name="monitorLockTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.16"/>
         </triggers>
-        <effect name="WKd"/>
+        <effect name="ZK"/>
       </transitions>
       <transitions name="blocked2terminated" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.6" kind="external">
         <triggers name="threadTerminatedTrigger">

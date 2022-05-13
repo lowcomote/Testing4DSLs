@@ -172,7 +172,9 @@ Package testSuite {
 	}
 	Annotation MUTPath ;
 	Annotation DSLName ;
-	Test Description Event019_Test_A1_EventDuplication uses configuration configuration4Event019_Test_A {
+	Region Region1 ( _name = "Region1" ) ;
+	StateMachine Event018_Test ( _name = "Event018_Test$behavior$1" , regions = { Region1 } ) ;
+	Test Description Event019_Test_A_1_EventDuplication uses configuration configuration4Event019_Test_A {
 		tester.reactiveGate sends _run (
 			state_machine = Event019_Test_A
 		) to PSSM.reactiveGate ;
@@ -201,7 +203,30 @@ Package testSuite {
 			behavior = T3_testEnd
 		) to tester.reactiveGate ;
 	}
-	Test Description Event019_Test_A1_EventDuplication2_EventDuplication uses configuration configuration4Event019_Test_A {
+	Test Description Event019_Test_A_2_EventDuplication uses configuration configuration4Event019_Test_A {
+		tester.reactiveGate sends _run (
+			state_machine = Event019_Test_A
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Event019_Test_A ,
+			signal_occurrence = continue_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends callOperation_received (
+			state_machine = Event019_Test_A ,
+			call_occurrence = op_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends callOperation_received (
+			state_machine = Event019_Test_A ,
+			call_occurrence = op_occurrence
+		) to PSSM.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T2_effect
+		) to tester.reactiveGate ;
+	}
+	Test Description Event019_Test_A_1_EventDuplication_1_EventDuplication uses configuration configuration4Event019_Test_A {
 		tester.reactiveGate sends _run (
 			state_machine = Event019_Test_A
 		) to PSSM.reactiveGate ;
@@ -217,9 +242,9 @@ Package testSuite {
 			state_machine = Event019_Test_A ,
 			signal_occurrence = continue_occurrence
 		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends callOperation_received (
+		tester.reactiveGate sends signal_received (
 			state_machine = Event019_Test_A ,
-			call_occurrence = op_occurrence
+			signal_occurrence = continue_occurrence
 		) to PSSM.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_exit
@@ -234,7 +259,7 @@ Package testSuite {
 			behavior = T3_testEnd
 		) to tester.reactiveGate ;
 	}
-	Test Description Event019_Test_A1_EventDuplication4_EventDeletion uses configuration configuration4Event019_Test_A {
+	Test Description Event019_Test_A_1_EventDuplication_2_EventDuplication uses configuration configuration4Event019_Test_A {
 		tester.reactiveGate sends _run (
 			state_machine = Event019_Test_A
 		) to PSSM.reactiveGate ;
@@ -250,74 +275,9 @@ Package testSuite {
 			state_machine = Event019_Test_A ,
 			signal_occurrence = continue_occurrence
 		) to PSSM.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T2_effect
-		) to tester.reactiveGate ;
-	}
-	Test Description Event019_Test_A1_EventDuplication5_EventDeletion uses configuration configuration4Event019_Test_A {
-		tester.reactiveGate sends _run (
-			state_machine = Event019_Test_A
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Event019_Test_A ,
-			signal_occurrence = continue_occurrence
-		) to PSSM.reactiveGate ;
 		tester.reactiveGate sends callOperation_received (
 			state_machine = Event019_Test_A ,
 			call_occurrence = op_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Event019_Test_A ,
-			signal_occurrence = continue_occurrence
-		) to PSSM.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T2_effect
-		) to tester.reactiveGate ;
-	}
-	Test Description Event019_Test_A1_EventDuplication6_EventDeletion uses configuration configuration4Event019_Test_A {
-		tester.reactiveGate sends _run (
-			state_machine = Event019_Test_A
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Event019_Test_A ,
-			signal_occurrence = continue_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends callOperation_received (
-			state_machine = Event019_Test_A ,
-			call_occurrence = op_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Event019_Test_A ,
-			signal_occurrence = continue_occurrence
-		) to PSSM.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T2_effect
-		) to tester.reactiveGate ;
-	}
-	Test Description Event019_Test_A1_EventDuplication7_EventDeletion uses configuration configuration4Event019_Test_A {
-		tester.reactiveGate sends _run (
-			state_machine = Event019_Test_A
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Event019_Test_A ,
-			signal_occurrence = continue_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends callOperation_received (
-			state_machine = Event019_Test_A ,
-			call_occurrence = op_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Event019_Test_A ,
-			signal_occurrence = continue_occurrence
 		) to PSSM.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_exit

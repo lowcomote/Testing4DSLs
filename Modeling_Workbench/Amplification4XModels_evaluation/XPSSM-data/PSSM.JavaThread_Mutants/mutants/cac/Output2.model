@@ -26,7 +26,7 @@
             <triggers name="thread.yieldTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
             </triggers>
-            <effect name="WKd"/>
+            <effect name="ZK"/>
           </transitions>
           <transitions name="running2ready" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" kind="external">
             <triggers name="threadSuspendedTrigger">

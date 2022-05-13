@@ -14,7 +14,7 @@
             <exit name="S1.2(exit)"/>
           </vertice>
           <transitions name="T1.1" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" kind="external">
-            <effect name="Xz"/>
+            <effect name="g"/>
           </transitions>
           <transitions name="T1.2" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" kind="external">
             <triggers name="ContinueTrigger">

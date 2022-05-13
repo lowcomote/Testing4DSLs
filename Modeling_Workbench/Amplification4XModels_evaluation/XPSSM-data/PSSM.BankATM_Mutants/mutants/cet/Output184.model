@@ -107,6 +107,9 @@
                 </triggers>
               </transitions>
               <transitions name="checkBalance2transferMoney" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.4" kind="external">
+                <triggers name="sucessTrigger">
+                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
+                </triggers>
                 <constraint xsi:type="statemachines:IntegerConstraint">
                   <expression operator="&lt;=" operand1="//@signals.10/@attributes.0" operand2="//@signals.6/@attributes.1"/>
                 </constraint>
@@ -127,9 +130,6 @@
           <transitions name="selectingTransaction2withdraw" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3" kind="external">
             <triggers name="withdrawTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
-            </triggers>
-            <triggers name="sucessTrigger">
-              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
             </triggers>
           </transitions>
           <transitions name="selectingTransaction2transfer" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4" kind="external">

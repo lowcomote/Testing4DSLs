@@ -118,6 +118,9 @@
                 </constraint>
               </transitions>
               <transitions name="transferMoney2final5" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.5" kind="external">
+                <triggers name="cardInsertedTrigger">
+                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
+                </triggers>
                 <effect name="successfullyTransferred"/>
               </transitions>
             </regions>
@@ -194,9 +197,6 @@
       <transitions name="serviceCustomer2idle" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <triggers name="cancelTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.5"/>
-        </triggers>
-        <triggers name="cardInsertedTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
         </triggers>
       </transitions>
       <transitions name="serviceCustomer2idle" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.3" kind="external"/>

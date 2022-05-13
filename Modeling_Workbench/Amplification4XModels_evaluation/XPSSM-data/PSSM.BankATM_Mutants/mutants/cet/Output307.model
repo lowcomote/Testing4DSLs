@@ -128,6 +128,9 @@
             <triggers name="withdrawTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
             </triggers>
+            <triggers name="cardInsertedTrigger">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
+            </triggers>
           </transitions>
           <transitions name="selectingTransaction2transfer" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4" kind="external">
             <triggers name="transferTrigger">
@@ -167,9 +170,6 @@
       <transitions name="outOfService2maintenance" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <triggers name="serviceTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.4"/>
-        </triggers>
-        <triggers name="cardInsertedTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
         </triggers>
       </transitions>
       <transitions name="maintenance2outOfService" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.4" kind="external">

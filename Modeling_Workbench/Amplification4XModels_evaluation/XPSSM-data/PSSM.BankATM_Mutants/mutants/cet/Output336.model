@@ -97,11 +97,7 @@
                 <doActivity name="updateCardBalance"/>
               </vertice>
               <vertice xsi:type="statemachines:FinalState" name="final5" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.4 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.5"/>
-              <transitions name="initial5_2_validateCard" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.1" kind="external">
-                <triggers name="cardInsertedTrigger">
-                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
-                </triggers>
-              </transitions>
+              <transitions name="initial5_2_validateCard" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.1" kind="external"/>
               <transitions name="validateCard2getAmount" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.2" kind="external">
                 <effect name="cardNumberIsValid"/>
               </transitions>
@@ -138,7 +134,11 @@
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.9"/>
             </triggers>
           </transitions>
-          <transitions name="withdraw2final2" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.5" kind="external"/>
+          <transitions name="withdraw2final2" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.5" kind="external">
+            <triggers name="cardInsertedTrigger">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
+            </triggers>
+          </transitions>
           <transitions name="transfer2final2" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.5" kind="external"/>
           <transitions name="authentication2final2" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.5" kind="external"/>
         </regions>

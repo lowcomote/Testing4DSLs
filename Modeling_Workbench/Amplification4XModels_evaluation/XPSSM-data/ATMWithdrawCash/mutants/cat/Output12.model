@@ -6,7 +6,9 @@
       <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0">
         <entry name="insertCardMsg"/>
       </vertice>
-      <vertice xsi:type="statemachines:State" name="getPin" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.1"/>
+      <vertice xsi:type="statemachines:State" name="getPin" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.1">
+        <entry name="enterPinMsg"/>
+      </vertice>
       <vertice xsi:type="statemachines:State" name="validatePin" outgoingTransitions="//@statemachine/@regions.0/@transitions.3 //@statemachine/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@transitions.2"/>
       <vertice xsi:type="statemachines:State" name="getAmount" outgoingTransitions="//@statemachine/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@transitions.3">
         <entry name="enterAmountMsg"/>
@@ -33,7 +35,7 @@
         </constraint>
       </transitions>
       <transitions name="validatePin_final" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.7" kind="external">
-        <effect name="enterPinMsg"/>
+        <effect name="deliverCash"/>
         <constraint xsi:type="statemachines:IntegerConstraint">
           <expression operator="!=" operand1="//@signals.1/@attributes.0" operand2="//@signals.0/@attributes.0"/>
         </constraint>
@@ -54,9 +56,7 @@
           <expression operator=">" operand1="//@signals.2/@attributes.0" operand2="//@signals.0/@attributes.1"/>
         </constraint>
       </transitions>
-      <transitions name="withdraw_final" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.7" kind="external">
-        <effect name="deliverCash"/>
-      </transitions>
+      <transitions name="withdraw_final" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.7" kind="external"/>
     </regions>
   </statemachine>
   <signals name="Card">

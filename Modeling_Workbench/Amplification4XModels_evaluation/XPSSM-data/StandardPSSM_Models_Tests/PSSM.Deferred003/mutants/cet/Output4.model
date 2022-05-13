@@ -36,12 +36,12 @@
             <triggers name="PendingTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
             </triggers>
-            <triggers name="ContinueTrigger">
-              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
-            </triggers>
             <effect name="T1.2(effect)"/>
           </transitions>
           <transitions name="T1.3" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.3" kind="external">
+            <triggers name="ContinueTrigger">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+            </triggers>
             <triggers name="ContinueTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
             </triggers>

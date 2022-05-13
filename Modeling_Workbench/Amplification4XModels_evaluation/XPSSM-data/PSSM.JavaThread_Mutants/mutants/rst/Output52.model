@@ -62,8 +62,8 @@
         </triggers>
       </transitions>
       <transitions name="runnable2timedWaiting" source="//@statemachine/@regions.0/@vertice.2" kind="external">
-        <triggers name="t.join()Trigger">
-          <eventType xsi:type="statemachines:CallEventType" operation="//@operations.2"/>
+        <triggers name="o.wait()Trigger">
+          <eventType xsi:type="statemachines:CallEventType" operation="//@operations.1"/>
         </triggers>
       </transitions>
       <transitions name="runnable2timedWaiting" source="//@statemachine/@regions.0/@vertice.2" kind="external">

@@ -142,6 +142,9 @@
         <triggers name="turnOnTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
+        <triggers name="withdrawTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
+        </triggers>
         <effect name="startup"/>
       </transitions>
       <transitions name="selfTest2idle" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
@@ -178,9 +181,6 @@
       <transitions name="Idle2off" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.1" kind="external">
         <triggers name="turnOffTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
-        </triggers>
-        <triggers name="withdrawTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
         </triggers>
         <effect name="shutDown"/>
       </transitions>

@@ -58,9 +58,6 @@
         <triggers name="t.startTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <triggers name="lockSupport.parkNanosTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.5"/>
-        </triggers>
       </transitions>
       <transitions name="runnable2timedWaiting" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <triggers name="threadSleep()Trigger">
@@ -116,6 +113,9 @@
       <transitions name="timedWaiting2runnable" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="sleepTimeElapsedTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.12"/>
+        </triggers>
+        <triggers name="lockSupport.parkNanosTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.5"/>
         </triggers>
       </transitions>
       <transitions name="timedWaiting2terminated" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6" kind="external">

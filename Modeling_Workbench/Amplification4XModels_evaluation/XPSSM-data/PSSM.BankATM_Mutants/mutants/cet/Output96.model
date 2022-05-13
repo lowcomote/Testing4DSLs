@@ -148,6 +148,9 @@
         <triggers name="sucessTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
         </triggers>
+        <triggers name="withdrawTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
+        </triggers>
       </transitions>
       <transitions name="selfTest2outOfService" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="failureTrigger">
@@ -189,9 +192,6 @@
       <transitions name="Idle2serviceCustomer" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6" kind="external">
         <triggers name="cardInsertedTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
-        </triggers>
-        <triggers name="withdrawTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
         </triggers>
       </transitions>
       <transitions name="serviceCustomer2idle" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.3" kind="external">

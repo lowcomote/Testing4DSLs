@@ -75,9 +75,6 @@
                 </constraint>
               </transitions>
               <transitions name="checkBalance2final4" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.4" kind="external">
-                <triggers name="withdrawTrigger">
-                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
-                </triggers>
                 <effect name="notEnoughMoneyMsg"/>
                 <constraint xsi:type="statemachines:IntegerConstraint">
                   <expression operator=">" operand1="//@signals.10/@attributes.0" operand2="//@signals.6/@attributes.1"/>
@@ -134,7 +131,11 @@
             </triggers>
           </transitions>
           <transitions name="withdraw2final2" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.5" kind="external"/>
-          <transitions name="transfer2final2" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.5" kind="external"/>
+          <transitions name="transfer2final2" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.5" kind="external">
+            <triggers name="withdrawTrigger">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
+            </triggers>
+          </transitions>
           <transitions name="authentication2final2" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.5" kind="external"/>
         </regions>
         <entry name="readCard"/>

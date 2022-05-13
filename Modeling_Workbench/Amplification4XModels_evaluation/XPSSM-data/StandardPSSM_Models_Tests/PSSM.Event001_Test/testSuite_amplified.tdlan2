@@ -164,7 +164,7 @@ Package testSuite {
 	}
 	Annotation MUTPath ;
 	Annotation DSLName ;
-	Test Description Event001_Test0_EventDuplication uses configuration configuration4Event001_Test {
+	Test Description Event001_Test_0_EventDuplication uses configuration configuration4Event001_Test {
 		tester.reactiveGate sends _run (
 			state_machine = Event001_Test
 		) to PSSM.reactiveGate ;
@@ -182,7 +182,7 @@ Package testSuite {
 			behavior = T2_testEnd
 		) to tester.reactiveGate ;
 	}
-	Test Description Event001_Test1_EventDuplication uses configuration configuration4Event001_Test {
+	Test Description Event001_Test_1_EventDuplication uses configuration configuration4Event001_Test {
 		tester.reactiveGate sends _run (
 			state_machine = Event001_Test
 		) to PSSM.reactiveGate ;

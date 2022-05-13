@@ -16,7 +16,11 @@
             <entry name="ThreadIsRunning"/>
           </vertice>
           <vertice xsi:type="statemachines:FinalState" name="final2" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.4"/>
-          <transitions name="initial2_2_ready" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" kind="external"/>
+          <transitions name="initial2_2_ready" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" kind="external">
+            <triggers name="sleepTimeElapsedTrigger">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.12"/>
+            </triggers>
+          </transitions>
           <transitions name="ready2running" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" kind="external">
             <triggers name="threadSelectedTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
@@ -153,9 +157,6 @@
       <transitions name="blocked2terminated" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.6" kind="external">
         <triggers name="threadTerminatedTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.13"/>
-        </triggers>
-        <triggers name="sleepTimeElapsedTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.12"/>
         </triggers>
       </transitions>
       <transitions name="terminated2final" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.7" kind="external"/>

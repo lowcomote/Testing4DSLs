@@ -4,7 +4,7 @@
     <regions name="mainRegion">
       <vertice xsi:type="statemachines:Pseudostate" name="initial1" outgoingTransitions="//@statemachine/@regions.0/@transitions.0"/>
       <vertice xsi:type="statemachines:State" name="New" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0">
-        <entry name="newThreadCreated"/>
+        <entry name="hMa"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="Runnable" outgoingTransitions="//@statemachine/@regions.0/@transitions.2 //@statemachine/@regions.0/@transitions.5 //@statemachine/@regions.0/@transitions.6 //@statemachine/@regions.0/@transitions.7 //@statemachine/@regions.0/@transitions.8 //@statemachine/@regions.0/@transitions.9 //@statemachine/@regions.0/@transitions.10 //@statemachine/@regions.0/@transitions.11 //@statemachine/@regions.0/@transitions.12 //@statemachine/@regions.0/@transitions.3 //@statemachine/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@transitions.1 //@statemachine/@regions.0/@transitions.13 //@statemachine/@regions.0/@transitions.20">
         <regions name="runnableRegion">
@@ -50,7 +50,7 @@
         <entry name="ThreadIsBlocked"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="Terminated" outgoingTransitions="//@statemachine/@regions.0/@transitions.22" incomingTransitions="//@statemachine/@regions.0/@transitions.12 //@statemachine/@regions.0/@transitions.14 //@statemachine/@regions.0/@transitions.17 //@statemachine/@regions.0/@transitions.21">
-        <entry name="uNd"/>
+        <entry name="ThreadIsTerminated"/>
       </vertice>
       <vertice xsi:type="statemachines:FinalState" name="final1" incomingTransitions="//@statemachine/@regions.0/@transitions.22"/>
       <transitions name="initial1_2_new" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>

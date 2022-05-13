@@ -55,7 +55,7 @@
         <triggers name="releaseTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.7"/>
         </triggers>
-        <effect name="u"/>
+        <effect name="zF"/>
       </transitions>
       <transitions name="ENR2ER" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="handleTrigger">

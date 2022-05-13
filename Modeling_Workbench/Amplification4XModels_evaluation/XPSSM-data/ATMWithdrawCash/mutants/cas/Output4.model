@@ -14,7 +14,7 @@
         <entry name="enterAmountMsg"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="checkBalance" outgoingTransitions="//@statemachine/@regions.0/@transitions.6 //@statemachine/@regions.0/@transitions.7" incomingTransitions="//@statemachine/@regions.0/@transitions.5">
-        <entry name="Dg"/>
+        <entry name="c"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="makeWithdrawal" outgoingTransitions="//@statemachine/@regions.0/@transitions.8" incomingTransitions="//@statemachine/@regions.0/@transitions.6">
         <doActivity name="updateCardBalance"/>

@@ -30,12 +30,12 @@
             </triggers>
             <effect name="T1.3(effect)"/>
           </transitions>
-          <transitions name="T1.4" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.4" kind="external"/>
-          <transitions name="T1.5" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.4" kind="external">
+          <transitions name="T1.4" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.4" kind="external">
             <triggers name="StartTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
             </triggers>
           </transitions>
+          <transitions name="T1.5" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.4" kind="external"/>
         </regions>
         <entry name="S1(entry)"/>
       </vertice>

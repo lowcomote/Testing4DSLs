@@ -3,7 +3,7 @@
   <statemachine name="withdrawCash">
     <regions name="region">
       <vertice xsi:type="statemachines:Pseudostate" name="Initial" outgoingTransitions="//@statemachine/@regions.0/@transitions.0"/>
-      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0 //@statemachine/@regions.0/@transitions.5">
+      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0">
         <entry name="insertCardMsg"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="getPin" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.1">
@@ -17,7 +17,7 @@
       <vertice xsi:type="statemachines:State" name="makeWithdrawal" outgoingTransitions="//@statemachine/@regions.0/@transitions.8" incomingTransitions="//@statemachine/@regions.0/@transitions.6">
         <doActivity name="updateCardBalance"/>
       </vertice>
-      <vertice xsi:type="statemachines:FinalState" name="FinalState" incomingTransitions="//@statemachine/@regions.0/@transitions.4 //@statemachine/@regions.0/@transitions.7 //@statemachine/@regions.0/@transitions.8"/>
+      <vertice xsi:type="statemachines:FinalState" name="FinalState" incomingTransitions="//@statemachine/@regions.0/@transitions.4 //@statemachine/@regions.0/@transitions.7 //@statemachine/@regions.0/@transitions.8 //@statemachine/@regions.0/@transitions.5"/>
       <transitions name="initial_wait" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>
       <transitions name="wait_getPin" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="cardInserted">
@@ -40,7 +40,7 @@
           <expression operator="!=" operand1="//@signals.1/@attributes.0" operand2="//@signals.0/@attributes.0"/>
         </constraint>
       </transitions>
-      <transitions name="getAmount_checkBalance" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.1" kind="external">
+      <transitions name="getAmount_checkBalance" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.7" kind="external">
         <triggers name="amountEntered">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
         </triggers>

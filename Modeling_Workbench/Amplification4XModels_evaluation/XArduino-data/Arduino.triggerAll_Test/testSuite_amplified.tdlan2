@@ -312,167 +312,45 @@ Package triggerAll_TestSuite {
 		connect tester.oclGate to arduino.oclGate ;
 	}
 	Project project_0 ( ) ;
-	Sketch sketch ( _name = 'sketch' , project = project_0 ) ;
-	Test Description test3_6_EventCreation uses configuration triggerAllConfiguration {
+	Sketch sketch ( _name = "sketch" , project = project_0 ) ;
+	Test Description test3_5_IntegerModification uses configuration triggerAllConfiguration {
 		tester.reactiveGate sends soundSensorPin (
-			level = '64'
+			level = "128"
 		) to arduino.reactiveGate ;
 		tester.reactiveGate sends soundSensor_detected (
 			sensor = soundSensor
 		) to arduino.reactiveGate ;
-		tester.reactiveGate sends button_pressed (
-			button = pushButton
-		) to arduino.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = blueLedPin ( level = '1' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = blueLedPin ( level = '0' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = whiteLedPin ( level = '1' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = whiteLedPin ( level = '0' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = redLedPin ( level = '1' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = redLedPin ( level = '0' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = blueLedPin ( level = '1' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = blueLedPin ( level = '0' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = whiteLedPin ( level = '1' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = whiteLedPin ( level = '0' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = redLedPin ( level = '1' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = redLedPin ( level = '0' )
-		) to tester.reactiveGate ;
 	}
-	Test Description test3_6_EventCreation_2_IntegerModification uses configuration triggerAllConfiguration {
+	Test Description test3_8_EventDuplication uses configuration triggerAllConfiguration {
 		tester.reactiveGate sends soundSensorPin (
-			level = '128'
+			level = "129"
 		) to arduino.reactiveGate ;
 		tester.reactiveGate sends soundSensor_detected (
 			sensor = soundSensor
 		) to arduino.reactiveGate ;
-		tester.reactiveGate sends button_pressed (
-			button = pushButton
-		) to arduino.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = blueLedPin ( level = '1' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = blueLedPin ( level = '0' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = whiteLedPin ( level = '1' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = whiteLedPin ( level = '0' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = redLedPin ( level = '1' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = redLedPin ( level = '0' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = blueLedPin ( level = '1' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = blueLedPin ( level = '0' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = whiteLedPin ( level = '1' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = whiteLedPin ( level = '0' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = redLedPin ( level = '1' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = redLedPin ( level = '0' )
-		) to tester.reactiveGate ;
-	}
-	Test Description test3_6_EventCreation_2_IntegerModification_0_IntegerModification uses configuration triggerAllConfiguration {
-		tester.reactiveGate sends soundSensorPin (
-			level = '129'
-		) to arduino.reactiveGate ;
 		tester.reactiveGate sends soundSensor_detected (
 			sensor = soundSensor
 		) to arduino.reactiveGate ;
-		tester.reactiveGate sends button_pressed (
-			button = pushButton
-		) to arduino.reactiveGate ;
 		arduino.reactiveGate sends Pin_level_changed (
-			pin = fanPin ( level = '1' )
+			pin = fanPin ( level = "1" )
 		) to tester.reactiveGate ;
 		arduino.reactiveGate sends Pin_level_changed (
-			pin = fanPin ( level = '0' )
+			pin = fanPin ( level = "0" )
 		) to tester.reactiveGate ;
 		arduino.reactiveGate sends Pin_level_changed (
-			pin = servo2Pin ( level = '60' )
+			pin = servo2Pin ( level = "60" )
 		) to tester.reactiveGate ;
 		arduino.reactiveGate sends Pin_level_changed (
-			pin = blueLedPin ( level = '1' )
+			pin = servo2Pin ( level = "0" )
 		) to tester.reactiveGate ;
 		arduino.reactiveGate sends Pin_level_changed (
-			pin = blueLedPin ( level = '0' )
+			pin = fanPin ( level = "1" )
 		) to tester.reactiveGate ;
 		arduino.reactiveGate sends Pin_level_changed (
-			pin = whiteLedPin ( level = '1' )
+			pin = fanPin ( level = "0" )
 		) to tester.reactiveGate ;
 		arduino.reactiveGate sends Pin_level_changed (
-			pin = whiteLedPin ( level = '0' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = redLedPin ( level = '1' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = redLedPin ( level = '0' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = blueLedPin ( level = '1' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = blueLedPin ( level = '0' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = whiteLedPin ( level = '1' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = whiteLedPin ( level = '0' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = redLedPin ( level = '1' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = redLedPin ( level = '0' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = servo2Pin ( level = '0' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = fanPin ( level = '1' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = fanPin ( level = '0' )
-		) to tester.reactiveGate ;
-		arduino.reactiveGate sends Pin_level_changed (
-			pin = servo2Pin ( level = '60' )
+			pin = servo2Pin ( level = "60" )
 		) to tester.reactiveGate ;
 	}
 }

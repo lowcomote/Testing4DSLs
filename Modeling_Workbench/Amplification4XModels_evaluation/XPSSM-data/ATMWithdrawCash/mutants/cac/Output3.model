@@ -30,7 +30,7 @@
         </triggers>
       </transitions>
       <transitions name="validatePin_getAmount" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.4" kind="external">
-        <effect name="vk"/>
+        <effect name="xNG"/>
         <constraint xsi:type="statemachines:IntegerConstraint">
           <expression operator="==" operand1="//@signals.1/@attributes.0" operand2="//@signals.0/@attributes.0"/>
         </constraint>

@@ -157,9 +157,6 @@
         <triggers name="failureTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
-        <triggers name="cardInsertedTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
-        </triggers>
       </transitions>
       <transitions name="outOfService2Off" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.1" kind="external">
         <triggers name="turnOffTrigger">
@@ -199,7 +196,11 @@
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.5"/>
         </triggers>
       </transitions>
-      <transitions name="serviceCustomer2idle" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.3" kind="external"/>
+      <transitions name="serviceCustomer2idle" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.3" kind="external">
+        <triggers name="cardInsertedTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
+        </triggers>
+      </transitions>
       <transitions name="serviceCustomer2outOfService" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="failureTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>

@@ -36,9 +36,6 @@
             <triggers name="finishTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
             </triggers>
-            <triggers name="o.waitTrigger">
-              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.7"/>
-            </triggers>
           </transitions>
         </regions>
         <entry name="ThreadIsRunnable"/>
@@ -136,6 +133,9 @@
       <transitions name="waiting2terminated" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.6" kind="external">
         <triggers name="threadTerminatedTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.13"/>
+        </triggers>
+        <triggers name="o.waitTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.7"/>
         </triggers>
       </transitions>
       <transitions name="waiting2blocked" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">

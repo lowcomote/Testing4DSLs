@@ -119,6 +119,9 @@
         <triggers name="threadTerminatedTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.13"/>
         </triggers>
+        <triggers name="o.wait()Trigger">
+          <eventType xsi:type="statemachines:CallEventType" operation="//@operations.1"/>
+        </triggers>
       </transitions>
       <transitions name="timedWaiting2blocked" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <triggers name="o.notifyAllTrigger">
@@ -133,9 +136,6 @@
       <transitions name="waiting2terminated" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.6" kind="external">
         <triggers name="threadTerminatedTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.13"/>
-        </triggers>
-        <triggers name="o.wait()Trigger">
-          <eventType xsi:type="statemachines:CallEventType" operation="//@operations.1"/>
         </triggers>
       </transitions>
       <transitions name="waiting2blocked" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">

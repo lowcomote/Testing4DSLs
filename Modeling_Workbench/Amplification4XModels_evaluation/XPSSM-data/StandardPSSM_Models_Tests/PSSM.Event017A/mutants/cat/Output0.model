@@ -17,12 +17,18 @@
         <triggers name="DataSignalEventTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
-        <effect name="T4(effect)"/>
+        <constraint xsi:type="statemachines:BooleanConstraint">
+          <expression xsi:type="statemachines:BooleanUnaryExpression" operand="//@signals.1/@attributes.0"/>
+        </constraint>
       </transitions>
       <transitions name="T4" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="DataSignalEventTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
+        <effect name="T3(effect)"/>
+        <constraint xsi:type="statemachines:BooleanConstraint">
+          <expression xsi:type="statemachines:BooleanUnaryExpression" operator="False" operand="//@signals.1/@attributes.0"/>
+        </constraint>
       </transitions>
       <transitions name="T5" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <effect name="T5(testEnd)"/>

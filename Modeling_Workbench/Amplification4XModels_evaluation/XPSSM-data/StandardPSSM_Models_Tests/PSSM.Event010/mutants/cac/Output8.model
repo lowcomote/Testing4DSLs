@@ -53,7 +53,7 @@
         <effect name="T3(effect)"/>
       </transitions>
       <transitions name="T5" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.4" kind="external">
-        <effect name="aA"/>
+        <effect name="e"/>
       </transitions>
       <transitions name="T4" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <effect name="T4(testEnd)"/>

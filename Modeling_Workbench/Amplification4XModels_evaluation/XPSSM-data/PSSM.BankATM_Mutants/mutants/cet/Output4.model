@@ -148,6 +148,9 @@
         <triggers name="sucessTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
         </triggers>
+        <triggers name="pinEnteredTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.7"/>
+        </triggers>
       </transitions>
       <transitions name="selfTest2outOfService" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="failureTrigger">
@@ -168,9 +171,6 @@
       <transitions name="maintenance2outOfService" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="failureTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
-        </triggers>
-        <triggers name="pinEnteredTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.7"/>
         </triggers>
       </transitions>
       <transitions name="maintenance2selfTest" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.2" kind="external">

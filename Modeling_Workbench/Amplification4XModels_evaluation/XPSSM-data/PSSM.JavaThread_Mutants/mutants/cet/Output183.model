@@ -69,9 +69,6 @@
         <triggers name="t.join()Trigger">
           <eventType xsi:type="statemachines:CallEventType" operation="//@operations.2"/>
         </triggers>
-        <triggers name="o.wait()Trigger">
-          <eventType xsi:type="statemachines:CallEventType" operation="//@operations.1"/>
-        </triggers>
       </transitions>
       <transitions name="runnable2timedWaiting" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <triggers name="lockSupport.parkNanosTrigger">
@@ -91,6 +88,9 @@
       <transitions name="runnable2waiting" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="t.joinTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
+        </triggers>
+        <triggers name="o.wait()Trigger">
+          <eventType xsi:type="statemachines:CallEventType" operation="//@operations.1"/>
         </triggers>
       </transitions>
       <transitions name="runnable2waiting" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.4" kind="external">

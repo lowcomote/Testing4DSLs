@@ -21,7 +21,7 @@
           </vertice>
           <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@transitions.0"/>
           <transitions name="T1.1" source="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0" kind="external">
-            <effect name="DLc"/>
+            <effect name="Lsm"/>
           </transitions>
         </regions>
         <entry name="S1(entry)"/>

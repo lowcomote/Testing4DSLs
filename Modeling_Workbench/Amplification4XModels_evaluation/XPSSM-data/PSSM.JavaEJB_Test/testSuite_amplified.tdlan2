@@ -733,7 +733,7 @@ Package testSuite {
 	SignalEventOccurrence releaseReference_occurrence ( signal = releaseReference ) ;
 	Signal handle_getEJBObject__ ( _name = "handle.getEJBObject()" ) ;
 	SignalEventOccurrence handle_getEJBObject___occurrence ( signal = handle_getEJBObject__ ) ;
-	Test Description test100_EventDuplication uses configuration JavaEJBConfiguration {
+	Test Description test7_2_EventDuplication uses configuration JavaEJBConfiguration {
 		tester.reactiveGate sends _run (
 			state_machine = JavaEJB
 		) to statemachine.reactiveGate ;
@@ -743,14 +743,11 @@ Package testSuite {
 		) to statemachine.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = JavaEJB ,
-			signal_occurrence = object_remove___occurrence
+			signal_occurrence = systemException_occurrence
 		) to statemachine.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = JavaEJB ,
-			signal_occurrence = businessMethod___occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = JavaEJB
+			signal_occurrence = systemException_occurrence
 		) to statemachine.reactiveGate ;
 		statemachine.reactiveGate sends behavior_executed (
 			behavior = ObjectNotExisted_NotReferenced
@@ -761,7 +758,33 @@ Package testSuite {
 		statemachine.reactiveGate sends behavior_executed (
 			behavior = ObjectNotExisted_Referenced
 		) to tester.reactiveGate ;
-		//added after debugging the code
+	}
+	Test Description test17_2_EventDuplication uses configuration JavaEJBConfiguration {
+		tester.reactiveGate sends _run (
+			state_machine = JavaEJB
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = JavaEJB ,
+			signal_occurrence = home_create_method____occurrence
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = JavaEJB ,
+			signal_occurrence = systemException_occurrence
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = JavaEJB ,
+			signal_occurrence = releaseReference_occurrence
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = JavaEJB ,
+			signal_occurrence = systemException_occurrence
+		) to statemachine.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = ObjectNotExisted_NotReferenced
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = ObjectExists_Referenced
+		) to tester.reactiveGate ;
 		statemachine.reactiveGate sends behavior_executed (
 			behavior = ObjectNotExisted_Referenced
 		) to tester.reactiveGate ;

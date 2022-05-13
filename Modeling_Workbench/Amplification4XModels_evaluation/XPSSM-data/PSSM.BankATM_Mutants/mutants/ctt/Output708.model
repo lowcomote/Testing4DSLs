@@ -18,7 +18,7 @@
       <vertice xsi:type="statemachines:State" name="Maintenance" outgoingTransitions="//@statemachine/@regions.0/@transitions.7 //@statemachine/@regions.0/@transitions.6" incomingTransitions="//@statemachine/@regions.0/@transitions.5 //@statemachine/@regions.0/@transitions.9">
         <entry name="underMaintenance"/>
       </vertice>
-      <vertice xsi:type="statemachines:State" name="ServiceCustomer" outgoingTransitions="//@statemachine/@regions.0/@transitions.11 //@statemachine/@regions.0/@transitions.13 //@statemachine/@regions.0/@transitions.12" incomingTransitions="//@statemachine/@regions.0/@transitions.10">
+      <vertice xsi:type="statemachines:State" name="ServiceCustomer" outgoingTransitions="//@statemachine/@regions.0/@transitions.11 //@statemachine/@regions.0/@transitions.13 //@statemachine/@regions.0/@transitions.12" incomingTransitions="//@statemachine/@regions.0/@transitions.10 //@statemachine/@regions.0/@transitions.11">
         <regions name="serviceCustomerRegion">
           <vertice xsi:type="statemachines:Pseudostate" name="initial2" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.0"/>
           <vertice xsi:type="statemachines:State" name="CustomerAuthentication" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.0">
@@ -85,7 +85,7 @@
               </transitions>
             </regions>
           </vertice>
-          <vertice xsi:type="statemachines:State" name="TransferMoney" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.2 //@statemachine/@regions.0/@transitions.11">
+          <vertice xsi:type="statemachines:State" name="TransferMoney" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.2">
             <regions name="transferRegion">
               <vertice xsi:type="statemachines:Pseudostate" name="initial5" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.0"/>
               <vertice xsi:type="statemachines:State" name="ValidateCard" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.0"/>
@@ -195,7 +195,7 @@
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
         </triggers>
       </transitions>
-      <transitions name="serviceCustomer2idle" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4" kind="external">
+      <transitions name="serviceCustomer2idle" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.6" kind="external">
         <triggers name="cancelTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.5"/>
         </triggers>

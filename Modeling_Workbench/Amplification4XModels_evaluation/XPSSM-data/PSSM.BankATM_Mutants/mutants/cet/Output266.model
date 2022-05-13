@@ -75,6 +75,9 @@
                 </constraint>
               </transitions>
               <transitions name="checkBalance2final4" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.4" kind="external">
+                <triggers name="turnOffTrigger">
+                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
+                </triggers>
                 <effect name="notEnoughMoneyMsg"/>
                 <constraint xsi:type="statemachines:IntegerConstraint">
                   <expression operator=">" operand1="//@signals.10/@attributes.0" operand2="//@signals.6/@attributes.1"/>
@@ -97,11 +100,7 @@
                 <doActivity name="updateCardBalance"/>
               </vertice>
               <vertice xsi:type="statemachines:FinalState" name="final5" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.4 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.5"/>
-              <transitions name="initial5_2_validateCard" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.1" kind="external">
-                <triggers name="turnOffTrigger">
-                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
-                </triggers>
-              </transitions>
+              <transitions name="initial5_2_validateCard" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.1" kind="external"/>
               <transitions name="validateCard2getAmount" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.2" kind="external">
                 <effect name="cardNumberIsValid"/>
               </transitions>

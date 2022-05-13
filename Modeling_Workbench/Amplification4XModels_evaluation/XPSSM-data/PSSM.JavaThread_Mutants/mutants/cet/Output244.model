@@ -99,6 +99,9 @@
         <triggers name="wait4lock2enterTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.10"/>
         </triggers>
+        <triggers name="lockSupport.parkUntilTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
+        </triggers>
       </transitions>
       <transitions name="runnable2blocked" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <triggers name="wait4lock2reenterTrigger">
@@ -148,9 +151,6 @@
       <transitions name="blocked2runnable" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="monitorLockTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.16"/>
-        </triggers>
-        <triggers name="lockSupport.parkUntilTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
         </triggers>
       </transitions>
       <transitions name="blocked2terminated" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.6" kind="external">

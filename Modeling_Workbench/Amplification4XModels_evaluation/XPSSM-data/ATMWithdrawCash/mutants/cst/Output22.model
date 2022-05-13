@@ -13,8 +13,8 @@
       <vertice xsi:type="statemachines:State" name="getAmount" outgoingTransitions="//@statemachine/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@transitions.3">
         <entry name="enterAmountMsg"/>
       </vertice>
-      <vertice xsi:type="statemachines:State" name="checkBalance" outgoingTransitions="//@statemachine/@regions.0/@transitions.6 //@statemachine/@regions.0/@transitions.7" incomingTransitions="//@statemachine/@regions.0/@transitions.5"/>
-      <vertice xsi:type="statemachines:State" name="makeWithdrawal" outgoingTransitions="//@statemachine/@regions.0/@transitions.8 //@statemachine/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@transitions.6">
+      <vertice xsi:type="statemachines:State" name="checkBalance" outgoingTransitions="//@statemachine/@regions.0/@transitions.6 //@statemachine/@regions.0/@transitions.7 //@statemachine/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@transitions.5"/>
+      <vertice xsi:type="statemachines:State" name="makeWithdrawal" outgoingTransitions="//@statemachine/@regions.0/@transitions.8" incomingTransitions="//@statemachine/@regions.0/@transitions.6">
         <doActivity name="updateCardBalance"/>
       </vertice>
       <vertice xsi:type="statemachines:FinalState" name="FinalState" incomingTransitions="//@statemachine/@regions.0/@transitions.4 //@statemachine/@regions.0/@transitions.7 //@statemachine/@regions.0/@transitions.8"/>
@@ -34,7 +34,7 @@
           <expression operator="==" operand1="//@signals.1/@attributes.0" operand2="//@signals.0/@attributes.0"/>
         </constraint>
       </transitions>
-      <transitions name="validatePin_final" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.7" kind="external">
+      <transitions name="validatePin_final" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.7" kind="external">
         <effect name="wrongPinMsg"/>
         <constraint xsi:type="statemachines:IntegerConstraint">
           <expression operator="!=" operand1="//@signals.1/@attributes.0" operand2="//@signals.0/@attributes.0"/>

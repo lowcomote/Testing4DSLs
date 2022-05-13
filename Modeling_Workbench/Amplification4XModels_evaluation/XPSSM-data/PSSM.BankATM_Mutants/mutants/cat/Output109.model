@@ -12,9 +12,7 @@
       <vertice xsi:type="statemachines:State" name="Idle" outgoingTransitions="//@statemachine/@regions.0/@transitions.10 //@statemachine/@regions.0/@transitions.9 //@statemachine/@regions.0/@transitions.8" incomingTransitions="//@statemachine/@regions.0/@transitions.2 //@statemachine/@regions.0/@transitions.11 //@statemachine/@regions.0/@transitions.12">
         <entry name="waitingForCard"/>
       </vertice>
-      <vertice xsi:type="statemachines:State" name="OutOfService" outgoingTransitions="//@statemachine/@regions.0/@transitions.4 //@statemachine/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@transitions.3 //@statemachine/@regions.0/@transitions.13 //@statemachine/@regions.0/@transitions.6">
-        <entry name="outOfService"/>
-      </vertice>
+      <vertice xsi:type="statemachines:State" name="OutOfService" outgoingTransitions="//@statemachine/@regions.0/@transitions.4 //@statemachine/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@transitions.3 //@statemachine/@regions.0/@transitions.13 //@statemachine/@regions.0/@transitions.6"/>
       <vertice xsi:type="statemachines:State" name="Maintenance" outgoingTransitions="//@statemachine/@regions.0/@transitions.7 //@statemachine/@regions.0/@transitions.6" incomingTransitions="//@statemachine/@regions.0/@transitions.5 //@statemachine/@regions.0/@transitions.9">
         <entry name="underMaintenance"/>
       </vertice>
@@ -41,6 +39,7 @@
                 </constraint>
               </transitions>
               <transitions name="validatePin2final3" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.3" kind="external">
+                <effect name="wrongPinMsg"/>
                 <constraint xsi:type="statemachines:IntegerConstraint">
                   <expression operator="!=" operand1="//@signals.7/@attributes.0" operand2="//@signals.6/@attributes.0"/>
                 </constraint>
@@ -80,7 +79,7 @@
                 </constraint>
               </transitions>
               <transitions name="makeWithdrawal2final4" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.4" kind="external">
-                <effect name="wrongPinMsg"/>
+                <effect name="deliverCash"/>
               </transitions>
             </regions>
           </vertice>
@@ -182,7 +181,7 @@
         <triggers name="turnOffTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
         </triggers>
-        <effect name="shutDown"/>
+        <effect name="outOfService"/>
       </transitions>
       <transitions name="Idle2maintenance" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <triggers name="serviceTrigger">

@@ -36,9 +36,6 @@
                 </triggers>
               </transitions>
               <transitions name="validatePin2SelectingTransaction" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.2" kind="external">
-                <triggers name="transferTrigger">
-                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.9"/>
-                </triggers>
                 <constraint xsi:type="statemachines:IntegerConstraint">
                   <expression operator="==" operand1="//@signals.7/@attributes.0" operand2="//@signals.6/@attributes.0"/>
                 </constraint>
@@ -187,6 +184,9 @@
       <transitions name="Idle2maintenance" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <triggers name="serviceTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.4"/>
+        </triggers>
+        <triggers name="transferTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.9"/>
         </triggers>
       </transitions>
       <transitions name="Idle2serviceCustomer" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6" kind="external">

@@ -135,7 +135,11 @@
             </triggers>
           </transitions>
           <transitions name="withdraw2final2" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.5" kind="external"/>
-          <transitions name="transfer2final2" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.5" kind="external"/>
+          <transitions name="transfer2final2" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.5" kind="external">
+            <triggers name="turnOffTrigger">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
+            </triggers>
+          </transitions>
           <transitions name="authentication2final2" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.5" kind="external"/>
         </regions>
         <entry name="readCard"/>
@@ -185,9 +189,6 @@
       <transitions name="Idle2maintenance" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <triggers name="serviceTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.4"/>
-        </triggers>
-        <triggers name="turnOffTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
         </triggers>
       </transitions>
       <transitions name="Idle2serviceCustomer" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6" kind="external">

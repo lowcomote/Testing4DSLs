@@ -12,10 +12,10 @@
       <vertice xsi:type="statemachines:State" name="Idle" outgoingTransitions="//@statemachine/@regions.0/@transitions.10 //@statemachine/@regions.0/@transitions.9 //@statemachine/@regions.0/@transitions.8" incomingTransitions="//@statemachine/@regions.0/@transitions.2 //@statemachine/@regions.0/@transitions.11 //@statemachine/@regions.0/@transitions.12">
         <entry name="waitingForCard"/>
       </vertice>
-      <vertice xsi:type="statemachines:State" name="OutOfService" outgoingTransitions="//@statemachine/@regions.0/@transitions.4 //@statemachine/@regions.0/@transitions.5 //@statemachine/@regions.0/@transitions.0" incomingTransitions="//@statemachine/@regions.0/@transitions.3 //@statemachine/@regions.0/@transitions.13 //@statemachine/@regions.0/@transitions.6">
+      <vertice xsi:type="statemachines:State" name="OutOfService" outgoingTransitions="//@statemachine/@regions.0/@transitions.4 //@statemachine/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@transitions.3 //@statemachine/@regions.0/@transitions.13 //@statemachine/@regions.0/@transitions.6">
         <entry name="outOfService"/>
       </vertice>
-      <vertice xsi:type="statemachines:State" name="Maintenance" outgoingTransitions="//@statemachine/@regions.0/@transitions.7 //@statemachine/@regions.0/@transitions.6" incomingTransitions="//@statemachine/@regions.0/@transitions.5 //@statemachine/@regions.0/@transitions.9">
+      <vertice xsi:type="statemachines:State" name="Maintenance" outgoingTransitions="//@statemachine/@regions.0/@transitions.7 //@statemachine/@regions.0/@transitions.6 //@statemachine/@regions.0/@transitions.0" incomingTransitions="//@statemachine/@regions.0/@transitions.5 //@statemachine/@regions.0/@transitions.9">
         <entry name="underMaintenance"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="ServiceCustomer" outgoingTransitions="//@statemachine/@regions.0/@transitions.11 //@statemachine/@regions.0/@transitions.13 //@statemachine/@regions.0/@transitions.12" incomingTransitions="//@statemachine/@regions.0/@transitions.10">
@@ -141,7 +141,7 @@
         <entry name="readCard"/>
         <exit name="ejectCard"/>
       </vertice>
-      <transitions name="initial2off" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>
+      <transitions name="initial2off" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>
       <transitions name="off2selfTest" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="turnOnTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>

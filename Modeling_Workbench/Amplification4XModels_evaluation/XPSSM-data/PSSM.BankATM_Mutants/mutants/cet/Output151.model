@@ -159,6 +159,9 @@
         <triggers name="turnOffTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
         </triggers>
+        <triggers name="turnOnTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+        </triggers>
         <effect name="shutDown"/>
       </transitions>
       <transitions name="outOfService2maintenance" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">
@@ -201,9 +204,6 @@
       <transitions name="serviceCustomer2outOfService" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="failureTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
-        </triggers>
-        <triggers name="turnOnTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
       </transitions>
     </regions>

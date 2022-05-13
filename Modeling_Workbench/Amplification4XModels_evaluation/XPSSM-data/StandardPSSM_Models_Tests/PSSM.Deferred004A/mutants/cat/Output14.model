@@ -33,7 +33,7 @@
             <triggers name="ContinueTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
             </triggers>
-            <effect name="T2.2(effect)"/>
+            <effect name="T5(testEnd)"/>
           </transitions>
         </regions>
         <exit name="S1(exit)"/>
@@ -50,7 +50,7 @@
         <triggers name="ContinueTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <effect name="T5(testEnd)"/>
+        <effect name="T3(effect)"/>
       </transitions>
       <transitions name="T4" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="AnotherSignalTrigger">

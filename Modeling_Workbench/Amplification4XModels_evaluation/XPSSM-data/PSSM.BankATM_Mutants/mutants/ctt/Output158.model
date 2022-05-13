@@ -21,7 +21,7 @@
       <vertice xsi:type="statemachines:State" name="ServiceCustomer" outgoingTransitions="//@statemachine/@regions.0/@transitions.11 //@statemachine/@regions.0/@transitions.13 //@statemachine/@regions.0/@transitions.12" incomingTransitions="//@statemachine/@regions.0/@transitions.10">
         <regions name="serviceCustomerRegion">
           <vertice xsi:type="statemachines:Pseudostate" name="initial2" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.0"/>
-          <vertice xsi:type="statemachines:State" name="CustomerAuthentication" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.0 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.3">
+          <vertice xsi:type="statemachines:State" name="CustomerAuthentication" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.0">
             <regions name="authenticationRegion">
               <vertice xsi:type="statemachines:Pseudostate" name="initial3" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.0"/>
               <vertice xsi:type="statemachines:State" name="getPin" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.0">
@@ -58,7 +58,7 @@
               <vertice xsi:type="statemachines:State" name="GetAmount" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.0">
                 <entry name="enterAmountMsg"/>
               </vertice>
-              <vertice xsi:type="statemachines:State" name="CheckBalance" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.2 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.1"/>
+              <vertice xsi:type="statemachines:State" name="CheckBalance" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.2 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.1 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.3"/>
               <vertice xsi:type="statemachines:State" name="MakeWithdrawal" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@transitions.2">
                 <doActivity name="updateCardBalance"/>
               </vertice>
@@ -74,7 +74,7 @@
                   <expression operator="&lt;=" operand1="//@signals.10/@attributes.0" operand2="//@signals.6/@attributes.1"/>
                 </constraint>
               </transitions>
-              <transitions name="checkBalance2final4" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1" kind="external">
+              <transitions name="checkBalance2final4" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.2" kind="external">
                 <effect name="notEnoughMoneyMsg"/>
                 <constraint xsi:type="statemachines:IntegerConstraint">
                   <expression operator=">" operand1="//@signals.10/@attributes.0" operand2="//@signals.6/@attributes.1"/>

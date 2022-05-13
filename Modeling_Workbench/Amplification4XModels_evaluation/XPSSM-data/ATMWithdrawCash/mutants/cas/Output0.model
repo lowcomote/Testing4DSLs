@@ -7,7 +7,7 @@
         <entry name="insertCardMsg"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="getPin" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.1">
-        <entry name="Dg"/>
+        <entry name="enterPinMsg"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="validatePin" outgoingTransitions="//@statemachine/@regions.0/@transitions.3 //@statemachine/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@transitions.2"/>
       <vertice xsi:type="statemachines:State" name="getAmount" outgoingTransitions="//@statemachine/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@transitions.3">
@@ -15,6 +15,7 @@
       </vertice>
       <vertice xsi:type="statemachines:State" name="checkBalance" outgoingTransitions="//@statemachine/@regions.0/@transitions.6 //@statemachine/@regions.0/@transitions.7" incomingTransitions="//@statemachine/@regions.0/@transitions.5"/>
       <vertice xsi:type="statemachines:State" name="makeWithdrawal" outgoingTransitions="//@statemachine/@regions.0/@transitions.8" incomingTransitions="//@statemachine/@regions.0/@transitions.6">
+        <entry name="c"/>
         <doActivity name="updateCardBalance"/>
       </vertice>
       <vertice xsi:type="statemachines:FinalState" name="FinalState" incomingTransitions="//@statemachine/@regions.0/@transitions.4 //@statemachine/@regions.0/@transitions.7 //@statemachine/@regions.0/@transitions.8"/>

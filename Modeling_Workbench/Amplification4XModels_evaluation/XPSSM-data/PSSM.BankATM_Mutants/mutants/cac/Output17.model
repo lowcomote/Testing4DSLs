@@ -133,7 +133,7 @@
             <triggers name="transferTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.9"/>
             </triggers>
-            <effect name="ES"/>
+            <effect name="r"/>
           </transitions>
           <transitions name="withdraw2final2" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.5" kind="external"/>
           <transitions name="transfer2final2" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.5" kind="external"/>

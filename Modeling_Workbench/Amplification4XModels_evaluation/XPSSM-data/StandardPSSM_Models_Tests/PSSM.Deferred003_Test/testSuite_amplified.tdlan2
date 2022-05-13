@@ -206,7 +206,9 @@ Package testSuite {
 	}
 	Annotation MUTPath ;
 	Annotation DSLName ;
-	Test Description Deferred003_Test0_EventDuplication uses configuration configuration4Deferred003_Test {
+	Region Region1 ( _name = "Region1" ) ;
+	StateMachine Deferred001_Test ( _name = "Deferred001_Test$behavior$1" , regions = { Region1 } ) ;
+	Test Description Deferred003_Test_2_EventDuplication uses configuration configuration4Deferred003_Test {
 		tester.reactiveGate sends _run (
 			state_machine = Deferred003_Test
 		) to PSSM.reactiveGate ;
@@ -230,17 +232,15 @@ Package testSuite {
 			state_machine = Deferred003_Test ,
 			signal_occurrence = pending_occurrence
 		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = Deferred003_Test
+		tester.reactiveGate sends signal_received (
+			state_machine = Deferred003_Test ,
+			signal_occurrence = continue_occurrence
 		) to PSSM.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_1_1_exit
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_1_exit
+			behavior = T1_1_2_effect
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_1_exit
@@ -252,16 +252,13 @@ Package testSuite {
 			behavior = S1_2_exit
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
+			behavior = T1_3_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = T3_testEnd
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_1_2_effect
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_1_2_effect
 		) to tester.reactiveGate ;
 	}
-	Test Description Deferred003_Test1_EventDuplication uses configuration configuration4Deferred003_Test {
+	Test Description Deferred003_Test_4_EventDuplication uses configuration configuration4Deferred003_Test {
 		tester.reactiveGate sends _run (
 			state_machine = Deferred003_Test
 		) to PSSM.reactiveGate ;
@@ -287,16 +284,13 @@ Package testSuite {
 		) to PSSM.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = Deferred003_Test ,
-			signal_occurrence = start_occurrence
+			signal_occurrence = another_occurrence
 		) to PSSM.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_1_1_exit
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_1_exit
+			behavior = T1_1_2_effect
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_1_exit
@@ -308,72 +302,13 @@ Package testSuite {
 			behavior = S1_2_exit
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
+			behavior = T1_3_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = T3_testEnd
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_1_2_effect
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_1_2_effect
 		) to tester.reactiveGate ;
 	}
-	Test Description Deferred003_Test4_EventDuplication uses configuration configuration4Deferred003_Test {
-		tester.reactiveGate sends _run (
-			state_machine = Deferred003_Test
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Deferred003_Test ,
-			signal_occurrence = start_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Deferred003_Test ,
-			signal_occurrence = continue_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Deferred003_Test ,
-			signal_occurrence = continue_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Deferred003_Test ,
-			signal_occurrence = another_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Deferred003_Test ,
-			signal_occurrence = pending_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Deferred003_Test ,
-			signal_occurrence = another_occurrence
-		) to PSSM.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_2_effect
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_2_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T3_testEnd
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_1_2_effect
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_1_2_effect
-		) to tester.reactiveGate ;
-	}
-	Test Description Deferred003_Test5_EventDuplication uses configuration configuration4Deferred003_Test {
+	Test Description Deferred003_Test_5_EventDuplication uses configuration configuration4Deferred003_Test {
 		tester.reactiveGate sends _run (
 			state_machine = Deferred003_Test
 		) to PSSM.reactiveGate ;
@@ -405,13 +340,7 @@ Package testSuite {
 			behavior = S1_1_1_exit
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_1_exit
+			behavior = T1_1_2_effect
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_1_exit
@@ -423,71 +352,10 @@ Package testSuite {
 			behavior = S1_2_exit
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
-			behavior = T3_testEnd
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_2_effect
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_1_2_effect
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_1_2_effect
-		) to tester.reactiveGate ;
-	}
-	Test Description Deferred003_Test0_EventDuplication0_EventDuplication uses configuration configuration4Deferred003_Test {
-		tester.reactiveGate sends _run (
-			state_machine = Deferred003_Test
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Deferred003_Test ,
-			signal_occurrence = start_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Deferred003_Test ,
-			signal_occurrence = continue_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Deferred003_Test ,
-			signal_occurrence = continue_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Deferred003_Test ,
-			signal_occurrence = another_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Deferred003_Test ,
-			signal_occurrence = pending_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = Deferred003_Test
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = Deferred003_Test
-		) to PSSM.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_2_effect
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_2_exit
+			behavior = T1_3_effect
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = T3_testEnd
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_1_2_effect
 		) to tester.reactiveGate ;
 	}
 }

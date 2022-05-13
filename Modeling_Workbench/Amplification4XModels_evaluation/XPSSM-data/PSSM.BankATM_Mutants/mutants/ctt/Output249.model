@@ -49,7 +49,7 @@
             </regions>
             <entry name="customerAuthentication"/>
           </vertice>
-          <vertice xsi:type="statemachines:State" name="SelectingTransaction" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.1 //@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.2 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.2">
+          <vertice xsi:type="statemachines:State" name="SelectingTransaction" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.1 //@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.2">
             <entry name="selectTransaction"/>
           </vertice>
           <vertice xsi:type="statemachines:State" name="WithdrawMoney" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.1">
@@ -96,12 +96,12 @@
               <vertice xsi:type="statemachines:State" name="TransferMoney" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.3">
                 <doActivity name="updateCardBalance"/>
               </vertice>
-              <vertice xsi:type="statemachines:FinalState" name="final5" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.4 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.5"/>
+              <vertice xsi:type="statemachines:FinalState" name="final5" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.4 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.5 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@transitions.2"/>
               <transitions name="initial5_2_validateCard" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.1" kind="external"/>
               <transitions name="validateCard2getAmount" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.2" kind="external">
                 <effect name="cardNumberIsValid"/>
               </transitions>
-              <transitions name="getAmount2checkBalance" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.2" kind="external">
+              <transitions name="getAmount2checkBalance" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.5" kind="external">
                 <triggers name="amountEnteredTrigger">
                   <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.10"/>
                 </triggers>

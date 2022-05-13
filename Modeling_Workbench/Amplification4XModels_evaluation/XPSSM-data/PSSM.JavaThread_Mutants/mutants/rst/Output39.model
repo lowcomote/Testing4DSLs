@@ -15,8 +15,8 @@
           <vertice xsi:type="statemachines:FinalState" name="final2" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.2"/>
           <transitions name="initial2_2_ready" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" kind="external"/>
           <transitions name="running2ready" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" kind="external">
-            <triggers name="threadSuspendedTrigger">
-              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.4"/>
+            <triggers name="thread.yieldTrigger">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
             </triggers>
           </transitions>
           <transitions name="running2final2" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" kind="external">

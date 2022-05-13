@@ -180,7 +180,7 @@ Package testSuite {
 	}
 	Annotation MUTPath ;
 	Annotation DSLName ;
-	Test Description Exit001_Test0_EventDuplication uses configuration configuration4Exit001_Test {
+	Test Description Exit001_Test_0_EventDuplication uses configuration configuration4Exit001_Test {
 		tester.reactiveGate sends _run (
 			state_machine = Exit001_Test
 		) to PSSM.reactiveGate ;
@@ -210,7 +210,7 @@ Package testSuite {
 			behavior = T4_testEnd
 		) to tester.reactiveGate ;
 	}
-	Test Description Exit001_Test1_EventDuplication uses configuration configuration4Exit001_Test {
+	Test Description Exit001_Test_1_EventDuplication uses configuration configuration4Exit001_Test {
 		tester.reactiveGate sends _run (
 			state_machine = Exit001_Test
 		) to PSSM.reactiveGate ;
@@ -239,93 +239,6 @@ Package testSuite {
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = T4_testEnd
-		) to tester.reactiveGate ;
-	}
-	Test Description Exit001_Test2_EventDeletion uses configuration configuration4Exit001_Test {
-		tester.reactiveGate sends _run (
-			state_machine = Exit001_Test
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Exit001_Test ,
-			signal_occurrence = start_occurrence
-		) to PSSM.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_2_effect
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T3_effect
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T4_testEnd
-		) to tester.reactiveGate ;
-	}
-	Test Description Exit001_Test0_EventDuplication0_EventDuplication uses configuration configuration4Exit001_Test {
-		tester.reactiveGate sends _run (
-			state_machine = Exit001_Test
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Exit001_Test ,
-			signal_occurrence = start_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = Exit001_Test
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = Exit001_Test
-		) to PSSM.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_2_effect
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T3_effect
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T4_testEnd
-		) to tester.reactiveGate ;
-	}
-	Test Description Exit001_Test2_EventDeletion0_EventDuplication uses configuration configuration4Exit001_Test {
-		tester.reactiveGate sends _run (
-			state_machine = Exit001_Test
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Exit001_Test ,
-			signal_occurrence = start_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = Exit001_Test
-		) to PSSM.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_2_effect
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T3_effect
 		) to tester.reactiveGate ;
 	}
 }

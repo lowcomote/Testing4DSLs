@@ -3,7 +3,9 @@
   <statemachine name="withdrawCash">
     <regions name="region">
       <vertice xsi:type="statemachines:Pseudostate" name="Initial" outgoingTransitions="//@statemachine/@regions.0/@transitions.0"/>
-      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0"/>
+      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0">
+        <entry name="insertCardMsg"/>
+      </vertice>
       <vertice xsi:type="statemachines:State" name="getPin" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.1">
         <entry name="enterPinMsg"/>
       </vertice>
@@ -49,13 +51,12 @@
         </constraint>
       </transitions>
       <transitions name="checkBalance_final" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.7" kind="external">
-        <effect name="insertCardMsg"/>
         <constraint xsi:type="statemachines:IntegerConstraint">
           <expression operator=">" operand1="//@signals.2/@attributes.0" operand2="//@signals.0/@attributes.1"/>
         </constraint>
       </transitions>
       <transitions name="withdraw_final" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.7" kind="external">
-        <effect name="deliverCash"/>
+        <effect name="notEnoughMoneyMsg"/>
       </transitions>
     </regions>
   </statemachine>

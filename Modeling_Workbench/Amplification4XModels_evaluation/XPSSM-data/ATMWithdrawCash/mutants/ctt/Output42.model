@@ -6,11 +6,11 @@
       <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0">
         <entry name="insertCardMsg"/>
       </vertice>
-      <vertice xsi:type="statemachines:State" name="getPin" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.1">
+      <vertice xsi:type="statemachines:State" name="getPin" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.1 //@statemachine/@regions.0/@transitions.7">
         <entry name="enterPinMsg"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="validatePin" outgoingTransitions="//@statemachine/@regions.0/@transitions.3 //@statemachine/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@transitions.2"/>
-      <vertice xsi:type="statemachines:State" name="getAmount" outgoingTransitions="//@statemachine/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@transitions.3 //@statemachine/@regions.0/@transitions.7">
+      <vertice xsi:type="statemachines:State" name="getAmount" outgoingTransitions="//@statemachine/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@transitions.3">
         <entry name="enterAmountMsg"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="checkBalance" outgoingTransitions="//@statemachine/@regions.0/@transitions.6 //@statemachine/@regions.0/@transitions.7" incomingTransitions="//@statemachine/@regions.0/@transitions.5"/>
@@ -50,7 +50,7 @@
           <expression operator="&lt;=" operand1="//@signals.2/@attributes.0" operand2="//@signals.0/@attributes.1"/>
         </constraint>
       </transitions>
-      <transitions name="checkBalance_final" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.4" kind="external">
+      <transitions name="checkBalance_final" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <effect name="notEnoughMoneyMsg"/>
         <constraint xsi:type="statemachines:IntegerConstraint">
           <expression operator=">" operand1="//@signals.2/@attributes.0" operand2="//@signals.0/@attributes.1"/>

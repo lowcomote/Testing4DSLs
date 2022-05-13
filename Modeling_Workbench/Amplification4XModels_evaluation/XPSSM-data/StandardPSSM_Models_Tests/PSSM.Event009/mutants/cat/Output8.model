@@ -14,7 +14,7 @@
             <triggers name="Continue">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
             </triggers>
-            <effect name="T5(testEnd)"/>
+            <effect name="T1.2(effect)"/>
           </transitions>
         </regions>
         <regions name="Region2">
@@ -26,7 +26,7 @@
             <triggers name="Continue">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
             </triggers>
-            <effect name="T2.2(effect)"/>
+            <effect name="T5(testEnd)"/>
           </transitions>
         </regions>
       </vertice>

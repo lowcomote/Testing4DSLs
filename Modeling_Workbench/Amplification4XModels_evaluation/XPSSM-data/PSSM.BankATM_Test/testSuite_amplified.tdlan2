@@ -1279,9 +1279,7 @@ Package testSuite {
 	IntegerAttributeValue enteredAmountValue ( attribute = enteredAmount ) ;
 	Signal Amount ( _name = "Amount" , attributes = enteredAmount ) ;
 	SignalEventOccurrence Amount_occurrence ( signal = Amount ) ;
-	
-	//ccfs_ccs
-	Test Description test17_13_EventDuplication uses configuration BankATMConfiguration {
+	Test Description test18_0_IntegerModification uses configuration BankATMConfiguration {
 		tester.reactiveGate sends _run (
 			state_machine = BankATM
 		) to statemachine.reactiveGate ;
@@ -1295,222 +1293,7 @@ Package testSuite {
 		) to statemachine.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = BankATM ,
-			signal_occurrence = Card_occurrence ( attributeValues = { cardPinValue ( value = "1100" ) , cardBalanceValue ( value = "1100" ) } )
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = failure_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = Card_occurrence ( attributeValues = { cardPinValue ( value = "1100" ) , cardBalanceValue ( value = "1100" ) } )
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = startup
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underTesting
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = waitingForCard
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = readCard
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = customerAuthentication
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = enterPinMsg
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ejectCard
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = outOfService
-		) to tester.reactiveGate ;
-	}
-	Test Description test19_30_IntegerModification uses configuration BankATMConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = BankATM
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = turnOn_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = success_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = Card_occurrence ( attributeValues = { cardPinValue ( value = "1344" ) , cardBalanceValue ( value = "1344" ) } )
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = Pin_occurrence ( attributeValues = pinValue ( value = '2688' ) )
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = startup
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underTesting
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = waitingForCard
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = readCard
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = customerAuthentication
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = enterPinMsg
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = wrongPinMsg
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ejectCard
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = waitingForCard
-		) to tester.reactiveGate ;
-	}
-	//cev2cis
-	Test Description test60_EventDuplication uses configuration BankATMConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = BankATM
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = turnOn_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = failure_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = turnOff_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = BankATM
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = startup
-		) to tester.reactiveGate ;
-		//the following are added after debugging the code
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underTesting
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = outOfService
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = shutDown
-		) to tester.reactiveGate ;
-		//--
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-	}
-	//cst
-	Test Description test20_EventDuplication uses configuration BankATMConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = BankATM
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = turnOn_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = BankATM
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = startup
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underTesting
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-	}
-	Test Description test111_EventDuplication uses configuration BankATMConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = BankATM
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = turnOn_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = success_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = service_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = failure_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = turnOn_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = startup
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underTesting
-		) to tester.reactiveGate ;
-		//the following are added after debugging the code
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = waitingForCard
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underMaintenance
-		) to tester.reactiveGate ;
-		//---
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = outOfService
-		) to tester.reactiveGate ;
-	}
-	//ctr_ctr2
-	Test Description test182_IntegerModification uses configuration BankATMConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = BankATM
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = turnOn_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = success_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = Card_occurrence ( attributeValues = { cardPinValue ( value = '2688' ) , cardBalanceValue ( value = "1100" ) } )
+			signal_occurrence = Card_occurrence ( attributeValues = { cardPinValue ( value = "1" ) , cardBalanceValue ( value = "1100" ) } )
 		) to statemachine.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = BankATM ,
@@ -1522,7 +1305,6 @@ Package testSuite {
 		statemachine.reactiveGate sends behavior_executed (
 			behavior = startup
 		) to tester.reactiveGate ;
-		//the following are added after debugging the code
 		statemachine.reactiveGate sends behavior_executed (
 			behavior = underTesting
 		) to tester.reactiveGate ;
@@ -1548,8 +1330,7 @@ Package testSuite {
 			behavior = waitingForCard
 		) to tester.reactiveGate ;
 	}
-	//ctt
-	Test Description test55_EventDeletion uses configuration BankATMConfiguration {
+	Test Description test18_58_EventDuplication uses configuration BankATMConfiguration {
 		tester.reactiveGate sends _run (
 			state_machine = BankATM
 		) to statemachine.reactiveGate ;
@@ -1563,425 +1344,15 @@ Package testSuite {
 		) to statemachine.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = BankATM ,
-			signal_occurrence = turnOff_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = startup
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underTesting
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = waitingForCard
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = shutDown
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-	}
-	Test Description test70_EventDuplication uses configuration BankATMConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = BankATM
+			signal_occurrence = Card_occurrence ( attributeValues = { cardPinValue ( value = "1344" ) , cardBalanceValue ( value = "1100" ) } )
 		) to statemachine.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = BankATM ,
-			signal_occurrence = turnOn_occurrence
+			signal_occurrence = Pin_occurrence ( attributeValues = pinValue ( value = "1212" ) )
 		) to statemachine.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = BankATM ,
-			signal_occurrence = failure_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = service_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = BankATM
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = startup
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underTesting
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = outOfService
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underMaintenance
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-	}
-	Test Description test77_EventDeletion uses configuration BankATMConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = BankATM
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = turnOn_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = failure_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = service_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = startup
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underTesting
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = outOfService
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underMaintenance
-		) to tester.reactiveGate ;
-	}
-	Test Description test88_EventDeletion uses configuration BankATMConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = BankATM
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = turnOn_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = failure_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = service_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = failure_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = startup
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underTesting
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = outOfService
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underMaintenance
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = outOfService
-		) to tester.reactiveGate ;
-	}
-	Test Description test91_EventDuplication uses configuration BankATMConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = BankATM
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = turnOn_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = failure_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = service_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = success_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = turnOn_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = startup
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underTesting
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = outOfService
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underMaintenance
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underTesting
-		) to tester.reactiveGate ;
-	}
-	Test Description test92_EventDuplication uses configuration BankATMConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = BankATM
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = turnOn_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = failure_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = service_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = success_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = failure_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = startup
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underTesting
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = outOfService
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underMaintenance
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underTesting
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = outOfService
-		) to tester.reactiveGate ;
-	}
-	Test Description test94_EventDuplication uses configuration BankATMConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = BankATM
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = turnOn_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = failure_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = service_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = success_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = success_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = startup
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underTesting
-		) to tester.reactiveGate ;
-		//the following are added after debugging the code
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = outOfService
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underMaintenance
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underTesting
-		) to tester.reactiveGate ;
-		//---
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = waitingForCard
-		) to tester.reactiveGate ;
-	}
-	Test Description test104_EventDeletion uses configuration BankATMConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = BankATM
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = turnOn_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = success_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = service_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = startup
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underTesting
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = waitingForCard
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underMaintenance
-		) to tester.reactiveGate ;
-	}
-		Test Description test132_EventDuplication uses configuration BankATMConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = BankATM
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = turnOn_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = success_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = service_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = failure_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = turnOff_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = success_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = startup
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underTesting
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = waitingForCard
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underMaintenance
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = outOfService
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = shutDown
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-	}
-	Test Description test1311_EventDeletion uses configuration BankATMConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = BankATM
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = turnOn_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = success_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = service_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = failure_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = turnOff_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = startup
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underTesting
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = waitingForCard
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underMaintenance
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = outOfService
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = shutDown
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-	}
-	Test Description test1510_EventDuplication uses configuration BankATMConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = BankATM
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = turnOn_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = success_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = Card_occurrence ( attributeValues = { cardPinValue ( value = "1100" ) , cardBalanceValue ( value = "1100" ) } )
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = BankATM
+			signal_occurrence = Pin_occurrence ( attributeValues = pinValue ( value = "1212" ) )
 		) to statemachine.reactiveGate ;
 		statemachine.reactiveGate sends behavior_executed (
 			behavior = ATMIsOff
@@ -2005,10 +1376,16 @@ Package testSuite {
 			behavior = enterPinMsg
 		) to tester.reactiveGate ;
 		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
+			behavior = wrongPinMsg
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = ejectCard
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = waitingForCard
 		) to tester.reactiveGate ;
 	}
-	Test Description test160_IntegerModification uses configuration BankATMConfiguration {
+	Test Description test19_58_EventDuplication uses configuration BankATMConfiguration {
 		tester.reactiveGate sends _run (
 			state_machine = BankATM
 		) to statemachine.reactiveGate ;
@@ -2022,11 +1399,15 @@ Package testSuite {
 		) to statemachine.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = BankATM ,
-			signal_occurrence = Card_occurrence ( attributeValues = { cardPinValue ( value = '1345' ) , cardBalanceValue ( value = "1100" ) } )
+			signal_occurrence = Card_occurrence ( attributeValues = { cardPinValue ( value = "1344" ) , cardBalanceValue ( value = "1100" ) } )
 		) to statemachine.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = BankATM ,
-			signal_occurrence = cancel_occurrence
+			signal_occurrence = Pin_occurrence ( attributeValues = pinValue ( value = "1344" ) )
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = Pin_occurrence ( attributeValues = pinValue ( value = "1344" ) )
 		) to statemachine.reactiveGate ;
 		statemachine.reactiveGate sends behavior_executed (
 			behavior = ATMIsOff
@@ -2036,6 +1417,273 @@ Package testSuite {
 		) to tester.reactiveGate ;
 		statemachine.reactiveGate sends behavior_executed (
 			behavior = underTesting
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = waitingForCard
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = readCard
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = customerAuthentication
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = enterPinMsg
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = selectTransaction
+		) to tester.reactiveGate ;
+	}
+	Test Description test20_58_EventDuplication uses configuration BankATMConfiguration {
+		tester.reactiveGate sends _run (
+			state_machine = BankATM
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = turnOn_occurrence
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = success_occurrence
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = Card_occurrence ( attributeValues = { cardPinValue ( value = "1344" ) , cardBalanceValue ( value = "1100" ) } )
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = Pin_occurrence ( attributeValues = pinValue ( value = "1344" ) )
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = WithdrawTransaction_occurrence
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = Pin_occurrence ( attributeValues = pinValue ( value = "1344" ) )
+		) to statemachine.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = ATMIsOff
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = startup
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = underTesting
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = waitingForCard
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = readCard
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = customerAuthentication
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = enterPinMsg
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = selectTransaction
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = enterAmountMsg
+		) to tester.reactiveGate ;
+	}
+	Test Description test21_58_EventDuplication uses configuration BankATMConfiguration {
+		tester.reactiveGate sends _run (
+			state_machine = BankATM
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = turnOn_occurrence
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = success_occurrence
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = Card_occurrence ( attributeValues = { cardPinValue ( value = "1344" ) , cardBalanceValue ( value = "1100" ) } )
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = Pin_occurrence ( attributeValues = pinValue ( value = "1344" ) )
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = TransferTransaction_occurrence
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = Pin_occurrence ( attributeValues = pinValue ( value = "1344" ) )
+		) to statemachine.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = ATMIsOff
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = startup
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = underTesting
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = waitingForCard
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = readCard
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = customerAuthentication
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = enterPinMsg
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = selectTransaction
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = cardNumberIsValid
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = enterAmountMsg
+		) to tester.reactiveGate ;
+	}
+	Test Description test22_27_IntegerModification uses configuration BankATMConfiguration {
+		tester.reactiveGate sends _run (
+			state_machine = BankATM
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = turnOn_occurrence
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = success_occurrence
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = Card_occurrence ( attributeValues = { cardPinValue ( value = "1344" ) , cardBalanceValue ( value = "500" ) } )
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = Pin_occurrence ( attributeValues = pinValue ( value = "1344" ) )
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = WithdrawTransaction_occurrence
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = Amount_occurrence ( attributeValues = enteredAmountValue ( value = "500" ) )
+		) to statemachine.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = ATMIsOff
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = startup
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = underTesting
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = waitingForCard
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = readCard
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = customerAuthentication
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = enterPinMsg
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = selectTransaction
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = enterAmountMsg
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = updateCardBalance
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = deliverCash
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = ejectCard
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = waitingForCard
+		) to tester.reactiveGate ;
+	}
+	Test Description test22_111_EventDuplication uses configuration BankATMConfiguration {
+		tester.reactiveGate sends _run (
+			state_machine = BankATM
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = turnOn_occurrence
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = success_occurrence
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = Card_occurrence ( attributeValues = { cardPinValue ( value = "1344" ) , cardBalanceValue ( value = "1100" ) } )
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = Pin_occurrence ( attributeValues = pinValue ( value = "1344" ) )
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = WithdrawTransaction_occurrence
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = Amount_occurrence ( attributeValues = enteredAmountValue ( value = "500" ) )
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = Card_occurrence ( attributeValues = { cardPinValue ( value = "1344" ) , cardBalanceValue ( value = "1100" ) } )
+		) to statemachine.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = ATMIsOff
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = startup
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = underTesting
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = waitingForCard
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = readCard
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = customerAuthentication
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = enterPinMsg
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = selectTransaction
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = enterAmountMsg
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = updateCardBalance
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = deliverCash
+		) to tester.reactiveGate ;
+		statemachine.reactiveGate sends behavior_executed (
+			behavior = ejectCard
 		) to tester.reactiveGate ;
 		statemachine.reactiveGate sends behavior_executed (
 			behavior = waitingForCard
@@ -2056,7 +1704,7 @@ Package testSuite {
 			behavior = waitingForCard
 		) to tester.reactiveGate ;
 	}
-	Test Description test162_IntegerModification uses configuration BankATMConfiguration {
+	Test Description test24_111_EventDuplication uses configuration BankATMConfiguration {
 		tester.reactiveGate sends _run (
 			state_machine = BankATM
 		) to statemachine.reactiveGate ;
@@ -2070,11 +1718,23 @@ Package testSuite {
 		) to statemachine.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = BankATM ,
-			signal_occurrence = Card_occurrence ( attributeValues = { cardPinValue ( value = '2688' ) , cardBalanceValue ( value = "1100" ) } )
+			signal_occurrence = Card_occurrence ( attributeValues = { cardPinValue ( value = "1344" ) , cardBalanceValue ( value = "1100" ) } )
 		) to statemachine.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = BankATM ,
-			signal_occurrence = cancel_occurrence
+			signal_occurrence = Pin_occurrence ( attributeValues = pinValue ( value = "1344" ) )
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = TransferTransaction_occurrence
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = Amount_occurrence ( attributeValues = enteredAmountValue ( value = "500" ) )
+		) to statemachine.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = BankATM ,
+			signal_occurrence = Card_occurrence ( attributeValues = { cardPinValue ( value = "1344" ) , cardBalanceValue ( value = "1100" ) } )
 		) to statemachine.reactiveGate ;
 		statemachine.reactiveGate sends behavior_executed (
 			behavior = ATMIsOff
@@ -2098,184 +1758,22 @@ Package testSuite {
 			behavior = enterPinMsg
 		) to tester.reactiveGate ;
 		statemachine.reactiveGate sends behavior_executed (
-			behavior = ejectCard
+			behavior = selectTransaction
 		) to tester.reactiveGate ;
 		statemachine.reactiveGate sends behavior_executed (
-			behavior = waitingForCard
-		) to tester.reactiveGate ;
-	}
-	Test Description test163_IntegerModification uses configuration BankATMConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = BankATM
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = turnOn_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = success_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = Card_occurrence ( attributeValues = { cardPinValue ( value = '672' ) , cardBalanceValue ( value = "1100" ) } )
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = cancel_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
+			behavior = cardNumberIsValid
 		) to tester.reactiveGate ;
 		statemachine.reactiveGate sends behavior_executed (
-			behavior = startup
+			behavior = enterAmountMsg
 		) to tester.reactiveGate ;
 		statemachine.reactiveGate sends behavior_executed (
-			behavior = underTesting
+			behavior = updateCardBalance
 		) to tester.reactiveGate ;
 		statemachine.reactiveGate sends behavior_executed (
-			behavior = waitingForCard
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = readCard
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = customerAuthentication
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = enterPinMsg
+			behavior = successfullyTransferred
 		) to tester.reactiveGate ;
 		statemachine.reactiveGate sends behavior_executed (
 			behavior = ejectCard
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = waitingForCard
-		) to tester.reactiveGate ;
-	}
-	Test Description test164_IntegerModification uses configuration BankATMConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = BankATM
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = turnOn_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = success_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = Card_occurrence ( attributeValues = { cardPinValue ( value = "1100" ) , cardBalanceValue ( value = "1100" ) } )
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = cancel_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = startup
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underTesting
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = waitingForCard
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = readCard
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = customerAuthentication
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = enterPinMsg
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ejectCard
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = waitingForCard
-		) to tester.reactiveGate ;
-	}
-	Test Description test165_IntegerModification uses configuration BankATMConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = BankATM
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = turnOn_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = success_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = Card_occurrence ( attributeValues = { cardPinValue ( value = "1100" ) , cardBalanceValue ( value = '1101' ) } )
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = cancel_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = startup
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underTesting
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = waitingForCard
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = readCard
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = customerAuthentication
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = enterPinMsg
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ejectCard
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = waitingForCard
-		) to tester.reactiveGate ;
-	}
-	Test Description test166_IntegerModification uses configuration BankATMConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = BankATM
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = turnOn_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = success_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = Card_occurrence ( attributeValues = { cardPinValue ( value = "1100" ) , cardBalanceValue ( value = '1099' ) } )
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = BankATM ,
-			signal_occurrence = cancel_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ATMIsOff
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = startup
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = underTesting
 		) to tester.reactiveGate ;
 		statemachine.reactiveGate sends behavior_executed (
 			behavior = waitingForCard

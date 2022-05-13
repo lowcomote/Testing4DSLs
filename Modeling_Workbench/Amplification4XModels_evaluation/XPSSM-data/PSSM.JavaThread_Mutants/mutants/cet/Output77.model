@@ -59,6 +59,9 @@
         <triggers name="threadSleep()Trigger">
           <eventType xsi:type="statemachines:CallEventType" operation="//@operations.0"/>
         </triggers>
+        <triggers name="threadSuspendedTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.4"/>
+        </triggers>
       </transitions>
       <transitions name="runnable2timedWaiting" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <triggers name="o.wait()Trigger">
@@ -138,9 +141,6 @@
       <transitions name="waiting2blocked" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <triggers name="o.notifyAllTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.14"/>
-        </triggers>
-        <triggers name="threadSuspendedTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.4"/>
         </triggers>
       </transitions>
       <transitions name="waiting2blocked" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">

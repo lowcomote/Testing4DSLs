@@ -13,7 +13,7 @@
             <effect name="T1.1(doTraversal)"/>
           </transitions>
           <transitions name="T1.2" source="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.1" kind="external">
-            <effect name="YD"/>
+            <effect name="Ywm"/>
           </transitions>
         </regions>
         <entry name="S1(entry)"/>

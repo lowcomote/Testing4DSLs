@@ -75,7 +75,7 @@
         <triggers name="businessMethodTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
-        <effect name="u"/>
+        <effect name="zF"/>
       </transitions>
       <transitions name="NER2NENR" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.1" kind="external">
         <triggers name="releaseTrigger">

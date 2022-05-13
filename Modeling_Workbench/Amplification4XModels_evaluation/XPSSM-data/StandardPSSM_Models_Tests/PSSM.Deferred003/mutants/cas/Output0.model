@@ -21,7 +21,7 @@
                 <effect name="T1.1.2(effect)"/>
               </transitions>
             </regions>
-            <entry name="oFR"/>
+            <entry name="Lvn"/>
             <exit name="S1.1(exit)"/>
             <deferrableTriggers name="ContinueTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>

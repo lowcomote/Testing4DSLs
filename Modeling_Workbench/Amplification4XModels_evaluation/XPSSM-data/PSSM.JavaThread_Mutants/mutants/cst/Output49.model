@@ -9,10 +9,10 @@
       <vertice xsi:type="statemachines:State" name="Runnable" outgoingTransitions="//@statemachine/@regions.0/@transitions.2 //@statemachine/@regions.0/@transitions.5 //@statemachine/@regions.0/@transitions.6 //@statemachine/@regions.0/@transitions.7 //@statemachine/@regions.0/@transitions.8 //@statemachine/@regions.0/@transitions.9 //@statemachine/@regions.0/@transitions.10 //@statemachine/@regions.0/@transitions.11 //@statemachine/@regions.0/@transitions.12 //@statemachine/@regions.0/@transitions.3 //@statemachine/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@transitions.1 //@statemachine/@regions.0/@transitions.13 //@statemachine/@regions.0/@transitions.20">
         <regions name="runnableRegion">
           <vertice xsi:type="statemachines:Pseudostate" name="initial2" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0"/>
-          <vertice xsi:type="statemachines:State" name="Ready" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1 //@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.2 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.3">
+          <vertice xsi:type="statemachines:State" name="Ready" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.2 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.3">
             <entry name="ThreadIsReady"/>
           </vertice>
-          <vertice xsi:type="statemachines:State" name="Running" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.2 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.3 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1">
+          <vertice xsi:type="statemachines:State" name="Running" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.2 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.3 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.4 //@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1">
             <entry name="ThreadIsRunning"/>
           </vertice>
           <vertice xsi:type="statemachines:FinalState" name="final2" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.4"/>
@@ -54,7 +54,7 @@
       </vertice>
       <vertice xsi:type="statemachines:FinalState" name="final1" incomingTransitions="//@statemachine/@regions.0/@transitions.22"/>
       <transitions name="initial1_2_new" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>
-      <transitions name="new2runnable" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">
+      <transitions name="new2runnable" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="t.startTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>

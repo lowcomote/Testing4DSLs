@@ -19,6 +19,7 @@
             <triggers name="PendingTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
             </triggers>
+            <effect name="T1.2(effect)"/>
           </transitions>
         </regions>
         <regions name="Region2">
@@ -49,13 +50,12 @@
         <triggers name="ContinueTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <effect name="T3(effect)"/>
       </transitions>
       <transitions name="T4" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="AnotherSignalTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
         </triggers>
-        <effect name="T1.2(effect)"/>
+        <effect name="T3(effect)"/>
       </transitions>
       <transitions name="T5" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <effect name="T5(testEnd)"/>

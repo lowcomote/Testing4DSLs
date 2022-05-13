@@ -118,6 +118,9 @@
                 </constraint>
               </transitions>
               <transitions name="transferMoney2final5" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.5" kind="external">
+                <triggers name="sucessTrigger">
+                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
+                </triggers>
                 <effect name="successfullyTransferred"/>
               </transitions>
             </regions>
@@ -132,9 +135,6 @@
           <transitions name="selectingTransaction2transfer" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4" kind="external">
             <triggers name="transferTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.9"/>
-            </triggers>
-            <triggers name="sucessTrigger">
-              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
             </triggers>
           </transitions>
           <transitions name="withdraw2final2" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.5" kind="external"/>

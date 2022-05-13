@@ -81,9 +81,6 @@
                 </constraint>
               </transitions>
               <transitions name="makeWithdrawal2final4" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.4" kind="external">
-                <triggers name="sucessTrigger">
-                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
-                </triggers>
                 <effect name="deliverCash"/>
               </transitions>
             </regions>
@@ -197,6 +194,9 @@
       <transitions name="serviceCustomer2idle" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <triggers name="cancelTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.5"/>
+        </triggers>
+        <triggers name="sucessTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
         </triggers>
       </transitions>
       <transitions name="serviceCustomer2idle" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.3" kind="external"/>

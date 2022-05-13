@@ -29,11 +29,7 @@
               </vertice>
               <vertice xsi:type="statemachines:State" name="validatePin" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.2 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.1"/>
               <vertice xsi:type="statemachines:FinalState" name="final3" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.3"/>
-              <transitions name="initial3_2_getPin" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.1" kind="external">
-                <triggers name="amountEnteredTrigger">
-                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.10"/>
-                </triggers>
-              </transitions>
+              <transitions name="initial3_2_getPin" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.1" kind="external"/>
               <transitions name="getPin2validatePin" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.2" kind="external">
                 <triggers name="pinEnteredTrigger">
                   <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.7"/>
@@ -75,6 +71,9 @@
                 </constraint>
               </transitions>
               <transitions name="checkBalance2final4" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.4" kind="external">
+                <triggers name="amountEnteredTrigger">
+                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.10"/>
+                </triggers>
                 <effect name="notEnoughMoneyMsg"/>
                 <constraint xsi:type="statemachines:IntegerConstraint">
                   <expression operator=">" operand1="//@signals.10/@attributes.0" operand2="//@signals.6/@attributes.1"/>

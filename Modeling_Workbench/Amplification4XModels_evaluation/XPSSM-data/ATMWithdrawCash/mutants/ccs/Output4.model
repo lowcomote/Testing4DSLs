@@ -18,6 +18,7 @@
         <doActivity name="updateCardBalance"/>
       </vertice>
       <vertice xsi:type="statemachines:FinalState" name="FinalState" incomingTransitions="//@statemachine/@regions.0/@transitions.4 //@statemachine/@regions.0/@transitions.7 //@statemachine/@regions.0/@transitions.8"/>
+      <vertice xsi:type="statemachines:State" name="gvM" incomingTransitions="//@statemachine/@regions.0/@transitions.9"/>
       <transitions name="initial_wait" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>
       <transitions name="wait_getPin" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="cardInserted">
@@ -59,7 +60,7 @@
       <transitions name="withdraw_final" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.7" kind="external">
         <effect name="deliverCash"/>
       </transitions>
-      <transitions source="//@statemachine/@regions.0/@vertice.6" kind="external"/>
+      <transitions name="Jw" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.8" kind="external"/>
     </regions>
   </statemachine>
   <signals name="Card">

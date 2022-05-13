@@ -23,7 +23,7 @@
         <triggers name="cardInserted">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <effect name="vk"/>
+        <effect name="xNG"/>
       </transitions>
       <transitions name="getPin_validatePin" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <triggers name="pinEntered">

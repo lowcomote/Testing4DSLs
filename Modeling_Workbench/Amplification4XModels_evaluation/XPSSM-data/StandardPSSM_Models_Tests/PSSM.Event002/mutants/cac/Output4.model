@@ -32,7 +32,7 @@
         <triggers>
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
-        <effect name="w"/>
+        <effect name="lT"/>
       </transitions>
     </regions>
   </statemachine>

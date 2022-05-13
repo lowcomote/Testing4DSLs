@@ -64,9 +64,6 @@
         <triggers name="o.wait()Trigger">
           <eventType xsi:type="statemachines:CallEventType" operation="//@operations.1"/>
         </triggers>
-        <triggers name="t.startTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
-        </triggers>
       </transitions>
       <transitions name="runnable2timedWaiting" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <triggers name="t.join()Trigger">
@@ -111,6 +108,9 @@
       <transitions name="runnable2terminated" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6" kind="external">
         <triggers name="threadTerminatedTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.13"/>
+        </triggers>
+        <triggers name="t.startTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
       </transitions>
       <transitions name="timedWaiting2runnable" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.2" kind="external">

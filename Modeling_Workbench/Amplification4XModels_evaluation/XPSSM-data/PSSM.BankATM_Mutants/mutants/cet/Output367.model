@@ -112,9 +112,6 @@
                 </constraint>
               </transitions>
               <transitions name="checkBalance2final5" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.5" kind="external">
-                <triggers name="cancelTrigger">
-                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.5"/>
-                </triggers>
                 <effect name="notEnoughMoneyMsg"/>
                 <constraint xsi:type="statemachines:IntegerConstraint">
                   <expression operator=">" operand1="//@signals.10/@attributes.0" operand2="//@signals.6/@attributes.1"/>
@@ -148,6 +145,9 @@
       <transitions name="off2selfTest" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="turnOnTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+        </triggers>
+        <triggers name="cancelTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.5"/>
         </triggers>
         <effect name="startup"/>
       </transitions>

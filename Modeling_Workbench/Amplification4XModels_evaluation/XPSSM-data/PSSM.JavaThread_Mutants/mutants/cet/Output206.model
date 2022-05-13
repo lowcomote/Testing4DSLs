@@ -154,12 +154,11 @@
         <triggers name="threadTerminatedTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.13"/>
         </triggers>
-      </transitions>
-      <transitions name="terminated2final" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.7" kind="external">
         <triggers name="t.join()Trigger">
           <eventType xsi:type="statemachines:CallEventType" operation="//@operations.2"/>
         </triggers>
       </transitions>
+      <transitions name="terminated2final" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.7" kind="external"/>
     </regions>
   </statemachine>
   <signals name="t.start"/>

@@ -1,22 +1,18 @@
 Total number of mutants: 231
 - initial number of killed mutants: 213
-- initial mutation score: 92.20779220779221%
-Total number of test cases improving mutation score: 3
+- initial mutation score : 92.20779220779221%
+Total number of test cases improving mutation score: 2
 - number of mutants killed by improved test cases: 18
-- total number of killed mutants : 231
+- total number of killed mutants: 231
 - final mutation score : 100.0%
 => improvement in the mutation score : 7.792207792207795%
 --------------------------------------------------
-iteration 1: 1 generated test cases
-Amplified Test Case: test3_6_EventCreation
+iteration 1: 2 generated test cases
+Amplified Test Case: test3_5_IntegerModification
 Killed mutant 1: \Arduino.triggerAll\mutants\cic\Output6.model
+Killed mutant 2: \Arduino.triggerAll\mutants\cbbo_supe\Output0.model
 
-iteration 2: 1 generated test cases
-Amplified Test Case: test3_6_EventCreation_2_IntegerModification
-Killed mutant 1: \Arduino.triggerAll\mutants\cbbo_supe\Output0.model
-
-iteration 3: 1 generated test cases
-Amplified Test Case: test3_6_EventCreation_2_IntegerModification_0_IntegerModification
+Amplified Test Case: test3_8_EventDuplication
 Killed mutant 1: \Arduino.triggerAll\mutants\cmar\Output70.model
 Killed mutant 2: \Arduino.triggerAll\mutants\cmir\Output3.model
 Killed mutant 3: \Arduino.triggerAll\mutants\cmar\Output17.model

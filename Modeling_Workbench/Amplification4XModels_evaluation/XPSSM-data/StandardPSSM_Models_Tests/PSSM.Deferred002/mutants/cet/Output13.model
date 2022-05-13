@@ -36,13 +36,13 @@
         <triggers name="ContinueTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
+        <triggers name="AnotherSignalTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
+        </triggers>
         <effect name="T5(effect)"/>
       </transitions>
       <transitions name="T6" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="AnoterSignalTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
-        </triggers>
-        <triggers name="AnotherSignalTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
         </triggers>
         <effect name="T6(effect)"/>

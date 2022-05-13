@@ -165,7 +165,7 @@ Package testSuite {
 	}
 	Annotation MUTPath ;
 	Annotation DSLName ;
-	Test Description Event015_Test0_EventDuplication uses configuration configuration4Event015_Test {
+	Test Description Event015_Test_0_EventDuplication uses configuration configuration4Event015_Test {
 		tester.reactiveGate sends _run (
 			state_machine = Event015_Test
 		) to PSSM.reactiveGate ;
@@ -183,16 +183,13 @@ Package testSuite {
 			behavior = T3_testEnd
 		) to tester.reactiveGate ;
 	}
-	Test Description Event015_Test0_EventDuplication1_EventDuplication uses configuration configuration4Event015_Test {
+	Test Description Event015_Test_1_EventDuplication uses configuration configuration4Event015_Test {
 		tester.reactiveGate sends _run (
 			state_machine = Event015_Test
 		) to PSSM.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = Event015_Test ,
 			signal_occurrence = start_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = Event015_Test
 		) to PSSM.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = Event015_Test ,

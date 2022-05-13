@@ -22,12 +22,13 @@
             <triggers name="ContinueTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
             </triggers>
+            <effect name="T1.2(effect)"/>
           </transitions>
           <transitions name="T1.3" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.3" kind="external">
             <triggers name="Continue">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
             </triggers>
-            <effect name="T1.2(effect)"/>
+            <effect name="T1.3(effect)"/>
           </transitions>
           <transitions name="T1.4" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.4" kind="external"/>
           <transitions name="T1.5" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.4" kind="external"/>
@@ -49,11 +50,9 @@
         <triggers name="StartTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <effect name="T3(effect)"/>
-      </transitions>
-      <transitions name="T5" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <effect name="T5(testEnd)"/>
       </transitions>
+      <transitions name="T5" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.4" kind="external"/>
       <transitions name="T4" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <effect name="T4(testEnd)"/>
       </transitions>

@@ -33,7 +33,7 @@
             <triggers name="ContinueTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
             </triggers>
-            <effect name="Mu"/>
+            <effect name="wV"/>
           </transitions>
         </regions>
         <exit name="S1(exit)"/>

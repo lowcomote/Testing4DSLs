@@ -54,7 +54,6 @@
                 <effect name="T2.2.2(effect)"/>
               </transitions>
             </regions>
-            <entry name="MPk"/>
             <exit name="S2.1(exit)"/>
           </vertice>
           <vertice xsi:type="statemachines:State" name="S2.2" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.1/@transitions.1 //@statemachine/@regions.0/@vertice.2/@regions.1/@transitions.2 //@statemachine/@regions.0/@vertice.2/@regions.1/@transitions.3"/>
@@ -78,6 +77,7 @@
             <effect name="T2.4(effect)"/>
           </transitions>
         </regions>
+        <entry name="Ds"/>
         <exit name="S1(exit)"/>
       </vertice>
       <vertice xsi:type="statemachines:FinalState" name="FinalState1" incomingTransitions="//@statemachine/@regions.0/@transitions.2"/>

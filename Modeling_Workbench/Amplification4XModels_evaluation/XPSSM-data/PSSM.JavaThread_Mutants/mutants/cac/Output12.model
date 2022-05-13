@@ -88,7 +88,7 @@
         <triggers name="o.waitTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.7"/>
         </triggers>
-        <effect name="WKd"/>
+        <effect name="ZK"/>
       </transitions>
       <transitions name="runnable2waiting" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="t.joinTrigger">

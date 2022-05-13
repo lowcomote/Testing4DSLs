@@ -1,3 +1,6 @@
+Number of generated mutants: 49
+Number of killed mutants: 49
+--------------------------------------------------
 Original test case: test4
 Killed mutant 1: \Arduino.ServoIrbutton\mutants\cbbo_equal\Output0.model
 Original test case: test2

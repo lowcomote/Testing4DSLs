@@ -18,7 +18,7 @@
                 <triggers name="ContinueTrigger">
                   <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
                 </triggers>
-                <effect name="gPF"/>
+                <effect name="ev"/>
               </transitions>
             </regions>
             <exit name="S1.1(exit)"/>

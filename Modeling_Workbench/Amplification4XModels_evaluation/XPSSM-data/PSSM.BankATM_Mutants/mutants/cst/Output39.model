@@ -24,7 +24,7 @@
           <vertice xsi:type="statemachines:State" name="CustomerAuthentication" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.0">
             <regions name="authenticationRegion">
               <vertice xsi:type="statemachines:Pseudostate" name="initial3" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.0"/>
-              <vertice xsi:type="statemachines:State" name="getPin" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.0">
+              <vertice xsi:type="statemachines:State" name="getPin" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.1 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.0">
                 <entry name="enterPinMsg"/>
               </vertice>
               <vertice xsi:type="statemachines:State" name="validatePin" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.1"/>
@@ -35,7 +35,7 @@
                   <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.7"/>
                 </triggers>
               </transitions>
-              <transitions name="validatePin2SelectingTransaction" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.2" kind="external">
+              <transitions name="validatePin2SelectingTransaction" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.2" kind="external">
                 <constraint xsi:type="statemachines:IntegerConstraint">
                   <expression operator="==" operand1="//@signals.7/@attributes.0" operand2="//@signals.6/@attributes.0"/>
                 </constraint>
@@ -49,7 +49,7 @@
             </regions>
             <entry name="customerAuthentication"/>
           </vertice>
-          <vertice xsi:type="statemachines:State" name="SelectingTransaction" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.1 //@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.2 //@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.2">
+          <vertice xsi:type="statemachines:State" name="SelectingTransaction" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.1 //@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@transitions.2">
             <entry name="selectTransaction"/>
           </vertice>
           <vertice xsi:type="statemachines:State" name="WithdrawMoney" outgoingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@vertice.6/@regions.0/@transitions.1">

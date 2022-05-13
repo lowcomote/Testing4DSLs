@@ -3752,7 +3752,6 @@ Package testSuite {
 	Test Configuration JavaThreadLifeCycleConfiguration {
 		create Tester tester of type TestSystem ;
 		create SUT statemachine of type MUT with { MUTPath : '/PSSM.JavaThread_Mutants/JavaThreadLifeCycle.model' ; DSLName : 'org.imt.pssm.reactive.ReactivePSSM' ; } ;
-		connect tester.oclGate to statemachine.oclGate ;
 		connect tester.reactiveGate to statemachine.reactiveGate ;
 	}
 	StateMachine JaveThreadStates ( _name = "JaveThreadStates" ) ;
@@ -3810,33 +3809,7 @@ Package testSuite {
 	IntegerAttributeValue joinTimeoutValue ( attribute = joinTimeout ) ;
 	Operation t_join__ ( _name = "t.join()" , inParameters = joinTimeout ) ;
 	CallEventOccurrence t_join___occurrence ( operation = t_join__ ) ;
-	//ccfs_ccs
-	Test Description test20_EventDuplication uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		//modified because of wrong order
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-	}
-	Test Description test30_EventDuplication uses configuration JavaThreadLifeCycleConfiguration {
+	Test Description test2_1_EventDuplication uses configuration JavaThreadLifeCycleConfiguration {
 		tester.reactiveGate sends _run (
 			state_machine = JaveThreadStates
 		) to statemachine.reactiveGate ;
@@ -3846,10 +3819,7 @@ Package testSuite {
 		) to statemachine.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
+			signal_occurrence = t_start_occurrence
 		) to statemachine.reactiveGate ;
 		statemachine.reactiveGate sends behavior_executed (
 			behavior = newThreadCreated
@@ -3860,14 +3830,8 @@ Package testSuite {
 		statemachine.reactiveGate sends behavior_executed (
 			behavior = ThreadIsReady
 		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
 	}
-	Test Description test31_EventDuplication uses configuration JavaThreadLifeCycleConfiguration {
+	Test Description test3_1_EventDuplication uses configuration JavaThreadLifeCycleConfiguration {
 		tester.reactiveGate sends _run (
 			state_machine = JaveThreadStates
 		) to statemachine.reactiveGate ;
@@ -3896,71 +3860,7 @@ Package testSuite {
 			behavior = ThreadIsRunning
 		) to tester.reactiveGate ;
 	}
-	Test Description test33_EventDeletion uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-	}
-	Test Description test40_EventDuplication uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = Thread_yield_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-	}
-	//cev2cis
-		Test Description test915_EventDuplication uses configuration JavaThreadLifeCycleConfiguration {
+	Test Description test7_25_EventDuplication uses configuration JavaThreadLifeCycleConfiguration {
 		tester.reactiveGate sends _run (
 			state_machine = JaveThreadStates
 		) to statemachine.reactiveGate ;
@@ -3978,48 +3878,12 @@ Package testSuite {
 		) to statemachine.reactiveGate ;
 		tester.reactiveGate sends callOperation_received (
 			state_machine = JaveThreadStates ,
-			call_occurrence = t_join___occurrence ( inParameterValues = joinTimeoutValue ( value = '1' ) )
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = finishRunnable_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsWaitingByTime
-		) to tester.reactiveGate ;
-	}
-	Test Description test115_EventDeletion uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
+			call_occurrence = Thread_sleep___occurrence ( inParameterValues = sleepTimeValue ( value = "10" ) )
 		) to statemachine.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = JaveThreadStates ,
 			signal_occurrence = t_start_occurrence
 		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = finishRunnable_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = LockSupport_parkUntil___occurrence
-		) to statemachine.reactiveGate ;
 		statemachine.reactiveGate sends behavior_executed (
 			behavior = newThreadCreated
 		) to tester.reactiveGate ;
@@ -4036,155 +3900,7 @@ Package testSuite {
 			behavior = ThreadIsWaitingByTime
 		) to tester.reactiveGate ;
 	}
-	Test Description test160_EventDuplication uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = finishRunnable_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = LockSupport_parkUntil___occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = sleepTimeElapsed_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsWaitingByTime
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-	}
-	Test Description test165_EventDuplication uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = finishRunnable_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = LockSupport_parkUntil___occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = sleepTimeElapsed_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = sleepTimeElapsed_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsWaitingByTime
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-	}
-	Test Description test166_EventDeletion uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = finishRunnable_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = LockSupport_parkUntil___occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = sleepTimeElapsed_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsWaitingByTime
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-	}
-	Test Description test170_IntegerModification uses configuration JavaThreadLifeCycleConfiguration {
+	Test Description test22_25_EventDuplication uses configuration JavaThreadLifeCycleConfiguration {
 		tester.reactiveGate sends _run (
 			state_machine = JaveThreadStates
 		) to statemachine.reactiveGate ;
@@ -4202,212 +3918,11 @@ Package testSuite {
 		) to statemachine.reactiveGate ;
 		tester.reactiveGate sends callOperation_received (
 			state_machine = JaveThreadStates ,
-			call_occurrence = Thread_sleep___occurrence ( inParameterValues = sleepTimeValue ( value = '11' ) )
+			call_occurrence = Thread_sleep___occurrence ( inParameterValues = sleepTimeValue ( value = "10" ) )
 		) to statemachine.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = JaveThreadStates ,
-			signal_occurrence = ThreadTerminated_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsWaitingByTime
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsTerminated
-		) to tester.reactiveGate ;
-	}
-	Test Description test172_IntegerModification uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = finishRunnable_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends callOperation_received (
-			state_machine = JaveThreadStates ,
-			call_occurrence = Thread_sleep___occurrence ( inParameterValues = sleepTimeValue ( value = '20' ) )
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = ThreadTerminated_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsWaitingByTime
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsTerminated
-		) to tester.reactiveGate ;
-	}
-	Test Description test173_IntegerModification uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = finishRunnable_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends callOperation_received (
-			state_machine = JaveThreadStates ,
-			call_occurrence = Thread_sleep___occurrence ( inParameterValues = sleepTimeValue ( value = '5' ) )
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = ThreadTerminated_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsWaitingByTime
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsTerminated
-		) to tester.reactiveGate ;
-	}
-	Test Description test174_IntegerModification uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = finishRunnable_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends callOperation_received (
-			state_machine = JaveThreadStates ,
-			call_occurrence = Thread_sleep___occurrence ( inParameterValues = sleepTimeValue ( value = '6' ) )
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = ThreadTerminated_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		//added after debuging the code 
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		//--
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsWaitingByTime
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsTerminated
-		) to tester.reactiveGate ;
-	}
-	//cst
-		Test Description test44_EventDeletion uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = Thread_yield_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		//added after debuging the code
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-	}
-	//ctr_ctr2
-	Test Description test51_EventDuplication uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSuspended_occurrence
+			signal_occurrence = o_notifyAll_occurrence
 		) to statemachine.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = JaveThreadStates ,
@@ -4425,285 +3940,6 @@ Package testSuite {
 		statemachine.reactiveGate sends behavior_executed (
 			behavior = ThreadIsRunning
 		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-	}
-	Test Description test52_EventDuplication uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSuspended_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-	}
-	Test Description test53_EventDuplication uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSuspended_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSuspended_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-	}
-	Test Description test56_EventDeletion uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSuspended_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		//added after debugging the code
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-	}
-	Test Description test60_EventDuplication uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = finishRunnable_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = ThreadTerminated_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		//added after debugging the code
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		//--
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsTerminated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-	}
-	Test Description test61_EventDuplication uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = finishRunnable_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = ThreadTerminated_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		//added after debugging the code
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		//--
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsTerminated
-		) to tester.reactiveGate ;
-	}
-	Test Description test62_EventDuplication uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = finishRunnable_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = ThreadTerminated_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		//added after debugging the code
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		//--
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsTerminated
-		) to tester.reactiveGate ;
-	}
-	//ctt
-		Test Description test2920_EventDeletion uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = finishRunnable_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends callOperation_received (
-			state_machine = JaveThreadStates ,
-			call_occurrence = t_join___occurrence ( inParameterValues = joinTimeoutValue ( value = '1' ) )
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = o_notify_occurrence
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		//added
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		//--
 		statemachine.reactiveGate sends behavior_executed (
 			behavior = ThreadIsWaitingByTime
 		) to tester.reactiveGate ;
@@ -4711,8 +3947,7 @@ Package testSuite {
 			behavior = ThreadIsBlocked
 		) to tester.reactiveGate ;
 	}
-	//dtr2sdt
-	Test Description test94_IntegerModification uses configuration JavaThreadLifeCycleConfiguration {
+	Test Description test32_1_EventDuplication uses configuration JavaThreadLifeCycleConfiguration {
 		tester.reactiveGate sends _run (
 			state_machine = JaveThreadStates
 		) to statemachine.reactiveGate ;
@@ -4728,46 +3963,14 @@ Package testSuite {
 			state_machine = JaveThreadStates ,
 			signal_occurrence = finishRunnable_occurrence
 		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends callOperation_received (
+		tester.reactiveGate sends signal_received (
 			state_machine = JaveThreadStates ,
-			call_occurrence = t_join___occurrence ( inParameterValues = joinTimeoutValue ( value = '6' ) )
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsWaitingByTime
-		) to tester.reactiveGate ;
-	}
-	Test Description test95_IntegerModification uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
+			signal_occurrence = o_wait_occurrence
 		) to statemachine.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = JaveThreadStates ,
 			signal_occurrence = t_start_occurrence
 		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = finishRunnable_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends callOperation_received (
-			state_machine = JaveThreadStates ,
-			call_occurrence = t_join___occurrence ( inParameterValues = joinTimeoutValue ( value = '4' ) )
-		) to statemachine.reactiveGate ;
 		statemachine.reactiveGate sends behavior_executed (
 			behavior = newThreadCreated
 		) to tester.reactiveGate ;
@@ -4781,197 +3984,7 @@ Package testSuite {
 			behavior = ThreadIsRunning
 		) to tester.reactiveGate ;
 		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsWaitingByTime
-		) to tester.reactiveGate ;
-	}
-	Test Description test96_IntegerModification uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = finishRunnable_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends callOperation_received (
-			state_machine = JaveThreadStates ,
-			call_occurrence = t_join___occurrence ( inParameterValues = joinTimeoutValue ( value = '10' ) )
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsWaitingByTime
-		) to tester.reactiveGate ;
-	}
-	Test Description test97_IntegerModification uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = finishRunnable_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends callOperation_received (
-			state_machine = JaveThreadStates ,
-			call_occurrence = t_join___occurrence ( inParameterValues = joinTimeoutValue ( value = '2' ) )
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		//added
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		//--
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsWaitingByTime
-		) to tester.reactiveGate ;
-	}
-	Test Description test98_IntegerModification uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = finishRunnable_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends callOperation_received (
-			state_machine = JaveThreadStates ,
-			call_occurrence = t_join___occurrence ( inParameterValues = joinTimeoutValue ( value = '3' ) )
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsWaitingByTime
-		) to tester.reactiveGate ;
-	}
-	Test Description test911_IntegerModification uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = finishRunnable_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends callOperation_received (
-			state_machine = JaveThreadStates ,
-			call_occurrence = t_join___occurrence ( inParameterValues = joinTimeoutValue ( value = '1' ) )
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		//added
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		//--
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsWaitingByTime
-		) to tester.reactiveGate ;
-	}
-	Test Description test912_EventDuplication uses configuration JavaThreadLifeCycleConfiguration {
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = t_start_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = threadSelected2Run_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = JaveThreadStates ,
-			signal_occurrence = finishRunnable_occurrence
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends callOperation_received (
-			state_machine = JaveThreadStates ,
-			call_occurrence = t_join___occurrence ( inParameterValues = joinTimeoutValue ( value = '1' ) )
-		) to statemachine.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = JaveThreadStates
-		) to statemachine.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunnable
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsReady
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsRunning
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = ThreadIsWaitingByTime
-		) to tester.reactiveGate ;
-		statemachine.reactiveGate sends behavior_executed (
-			behavior = newThreadCreated
+			behavior = ThreadIsWaiting
 		) to tester.reactiveGate ;
 	}
 }

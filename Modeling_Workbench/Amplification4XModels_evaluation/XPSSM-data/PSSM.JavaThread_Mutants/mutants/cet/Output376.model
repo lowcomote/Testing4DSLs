@@ -16,7 +16,11 @@
             <entry name="ThreadIsRunning"/>
           </vertice>
           <vertice xsi:type="statemachines:FinalState" name="final2" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.4"/>
-          <transitions name="initial2_2_ready" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" kind="external"/>
+          <transitions name="initial2_2_ready" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" kind="external">
+            <triggers name="wait4lock2enterTrigger">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.10"/>
+            </triggers>
+          </transitions>
           <transitions name="ready2running" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" kind="external">
             <triggers name="threadSelectedTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
@@ -72,9 +76,6 @@
       <transitions name="runnable2timedWaiting" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <triggers name="t.join()Trigger">
           <eventType xsi:type="statemachines:CallEventType" operation="//@operations.2"/>
-        </triggers>
-        <triggers name="wait4lock2enterTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.10"/>
         </triggers>
       </transitions>
       <transitions name="runnable2timedWaiting" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">

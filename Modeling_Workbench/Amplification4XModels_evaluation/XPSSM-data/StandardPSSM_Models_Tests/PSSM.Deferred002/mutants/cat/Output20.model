@@ -5,6 +5,7 @@
       <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@transitions.0"/>
       <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0"/>
       <vertice xsi:type="statemachines:State" name="S1" outgoingTransitions="//@statemachine/@regions.0/@transitions.2 //@statemachine/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@transitions.1">
+        <exit name="S1(exit)"/>
         <deferrableTriggers name="DeferredContinueTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </deferrableTriggers>
@@ -12,9 +13,7 @@
       <vertice xsi:type="statemachines:State" name="S2" outgoingTransitions="//@statemachine/@regions.0/@transitions.4 //@statemachine/@regions.0/@transitions.5" incomingTransitions="//@statemachine/@regions.0/@transitions.2 //@statemachine/@regions.0/@transitions.3">
         <entry name="S2(entry)"/>
       </vertice>
-      <vertice xsi:type="statemachines:State" name="S3" outgoingTransitions="//@statemachine/@regions.0/@transitions.6" incomingTransitions="//@statemachine/@regions.0/@transitions.4 //@statemachine/@regions.0/@transitions.5">
-        <entry name="S3(entry)"/>
-      </vertice>
+      <vertice xsi:type="statemachines:State" name="S3" outgoingTransitions="//@statemachine/@regions.0/@transitions.6" incomingTransitions="//@statemachine/@regions.0/@transitions.4 //@statemachine/@regions.0/@transitions.5"/>
       <vertice xsi:type="statemachines:FinalState" name="FinalState1" incomingTransitions="//@statemachine/@regions.0/@transitions.6"/>
       <transitions name="T1" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>
       <transitions name="T2" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">
@@ -38,13 +37,13 @@
         <triggers name="ContinueTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <effect name="S1(exit)"/>
+        <effect name="T5(effect)"/>
       </transitions>
       <transitions name="T6" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="AnoterSignalTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
         </triggers>
-        <effect name="T6(effect)"/>
+        <effect name="S3(entry)"/>
       </transitions>
       <transitions name="T7" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <effect name="T7(testEnd)"/>

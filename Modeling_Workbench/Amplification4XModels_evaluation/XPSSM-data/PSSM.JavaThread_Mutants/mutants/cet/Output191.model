@@ -144,13 +144,13 @@
         <triggers name="o.notifyTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.15"/>
         </triggers>
-        <triggers name="t.join()Trigger">
-          <eventType xsi:type="statemachines:CallEventType" operation="//@operations.2"/>
-        </triggers>
       </transitions>
       <transitions name="blocked2runnable" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="monitorLockTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.16"/>
+        </triggers>
+        <triggers name="t.join()Trigger">
+          <eventType xsi:type="statemachines:CallEventType" operation="//@operations.2"/>
         </triggers>
       </transitions>
       <transitions name="blocked2terminated" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.6" kind="external">

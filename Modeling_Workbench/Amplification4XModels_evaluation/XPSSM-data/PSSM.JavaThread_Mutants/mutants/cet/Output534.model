@@ -63,6 +63,9 @@
         <triggers name="threadSleep()Trigger">
           <eventType xsi:type="statemachines:CallEventType" operation="//@operations.0"/>
         </triggers>
+        <triggers name="monitorLockTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.16"/>
+        </triggers>
       </transitions>
       <transitions name="runnable2timedWaiting" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <triggers name="o.wait()Trigger">
@@ -97,9 +100,6 @@
       <transitions name="runnable2waiting" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="lockSupport.parkTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.9"/>
-        </triggers>
-        <triggers name="monitorLockTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.16"/>
         </triggers>
       </transitions>
       <transitions name="runnable2blocked" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.5" kind="external">

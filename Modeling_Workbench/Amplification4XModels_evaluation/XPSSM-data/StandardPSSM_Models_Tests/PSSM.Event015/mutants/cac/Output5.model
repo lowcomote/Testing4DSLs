@@ -26,7 +26,7 @@
         </triggers>
       </transitions>
       <transitions name="T3" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
-        <effect name="yd"/>
+        <effect name="P"/>
       </transitions>
     </regions>
   </statemachine>

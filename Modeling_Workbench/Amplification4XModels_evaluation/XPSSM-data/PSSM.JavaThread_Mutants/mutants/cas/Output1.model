@@ -47,10 +47,10 @@
         <entry name="ThreadIsWaiting"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="Blocked" outgoingTransitions="//@statemachine/@regions.0/@transitions.21 //@statemachine/@regions.0/@transitions.20" incomingTransitions="//@statemachine/@regions.0/@transitions.10 //@statemachine/@regions.0/@transitions.11 //@statemachine/@regions.0/@transitions.15 //@statemachine/@regions.0/@transitions.16 //@statemachine/@regions.0/@transitions.18 //@statemachine/@regions.0/@transitions.19">
-        <entry name="uNd"/>
+        <entry name="ThreadIsBlocked"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="Terminated" outgoingTransitions="//@statemachine/@regions.0/@transitions.22" incomingTransitions="//@statemachine/@regions.0/@transitions.12 //@statemachine/@regions.0/@transitions.14 //@statemachine/@regions.0/@transitions.17 //@statemachine/@regions.0/@transitions.21">
-        <entry name="ThreadIsTerminated"/>
+        <entry name="hMa"/>
       </vertice>
       <vertice xsi:type="statemachines:FinalState" name="final1" incomingTransitions="//@statemachine/@regions.0/@transitions.22"/>
       <transitions name="initial1_2_new" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>

@@ -190,32 +190,7 @@ Package testSuite {
 	}
 	Annotation MUTPath ;
 	Annotation DSLName ;
-	Test Description Transition019_Test0_EventDuplication uses configuration configuration4Transition019_Test {
-		tester.reactiveGate sends _run (
-			state_machine = Transition019_Test
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Transition019_Test ,
-			signal_occurrence = start_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Transition019_Test ,
-			signal_occurrence = continue_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = Transition019_Test
-		) to PSSM.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_2_effect
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_3_effect
-		) to tester.reactiveGate ;
-	}
-	Test Description Transition019_Test1_EventDuplication uses configuration configuration4Transition019_Test {
+	Test Description Transition019_Test_2_EventDuplication uses configuration configuration4Transition019_Test {
 		tester.reactiveGate sends _run (
 			state_machine = Transition019_Test
 		) to PSSM.reactiveGate ;
@@ -229,92 +204,28 @@ Package testSuite {
 		) to PSSM.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = Transition019_Test ,
-			signal_occurrence = start_occurrence
-		) to PSSM.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_2_effect
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_3_effect
-		) to tester.reactiveGate ;
-	}
-	Test Description Transition019_Test0_EventDuplication2_EventDuplication uses configuration configuration4Transition019_Test {
-		tester.reactiveGate sends _run (
-			state_machine = Transition019_Test
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Transition019_Test ,
-			signal_occurrence = start_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Transition019_Test ,
-			signal_occurrence = continue_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = Transition019_Test
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Transition019_Test ,
 			signal_occurrence = continue_occurrence
 		) to PSSM.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_1_exit
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_exit
+			behavior = T1_2_effect
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_2_effect
+			behavior = S2_1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T2_2_effect
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = T1_3_effect
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_2_effect
+			behavior = T2_3_effect
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_3_effect
-		) to tester.reactiveGate ;
-	}
-	Test Description Transition019_Test0_EventDuplication2_EventDuplication0_EventDuplication uses configuration configuration4Transition019_Test {
-		tester.reactiveGate sends _run (
-			state_machine = Transition019_Test
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Transition019_Test ,
-			signal_occurrence = start_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Transition019_Test ,
-			signal_occurrence = continue_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = Transition019_Test
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends signal_received (
-			state_machine = Transition019_Test ,
-			signal_occurrence = continue_occurrence
-		) to PSSM.reactiveGate ;
-		tester.reactiveGate sends _run (
-			state_machine = Transition019_Test
-		) to PSSM.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = S1_1_exit
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_2_effect
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_3_effect
-		) to tester.reactiveGate ;
-		PSSM.reactiveGate sends behavior_executed (
-			behavior = T1_2_effect
+			behavior = T3_testEnd
 		) to tester.reactiveGate ;
 	}
 }

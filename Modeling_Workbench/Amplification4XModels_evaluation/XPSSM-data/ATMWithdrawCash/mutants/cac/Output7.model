@@ -51,7 +51,7 @@
         </constraint>
       </transitions>
       <transitions name="checkBalance_final" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.7" kind="external">
-        <effect name="vk"/>
+        <effect name="xNG"/>
         <constraint xsi:type="statemachines:IntegerConstraint">
           <expression operator=">" operand1="//@signals.2/@attributes.0" operand2="//@signals.0/@attributes.1"/>
         </constraint>

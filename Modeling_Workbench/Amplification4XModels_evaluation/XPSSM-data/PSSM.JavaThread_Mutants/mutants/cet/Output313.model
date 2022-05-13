@@ -21,9 +21,6 @@
             <triggers name="threadSelectedTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
             </triggers>
-            <triggers name="t.joinTrigger">
-              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
-            </triggers>
           </transitions>
           <transitions name="running2ready" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" kind="external">
             <triggers name="thread.yieldTrigger">
@@ -85,6 +82,9 @@
       <transitions name="runnable2timedWaiting" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <triggers name="lockSupport.parkUntilTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
+        </triggers>
+        <triggers name="t.joinTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
         </triggers>
       </transitions>
       <transitions name="runnable2waiting" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.4" kind="external">

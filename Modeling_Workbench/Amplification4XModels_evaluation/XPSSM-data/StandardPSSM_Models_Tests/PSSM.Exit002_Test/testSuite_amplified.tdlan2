@@ -168,9 +168,9 @@ Package testSuite {
 	}
 	Annotation MUTPath ;
 	Annotation DSLName ;
-	Region Region1 ( _name = 'Region1' ) ;
-	StateMachine Exit003_Test ( _name = 'Exit003_Test$behavior$1' , regions = { Region1 } ) ;
-	Test Description Exit002_Test0_EventDuplication uses configuration configuration4Exit002_Test {
+	Region Region1 ( _name = "Region1" ) ;
+	StateMachine Exit001_Test ( _name = "Exit001_Test$behavior$1" , regions = { Region1 } ) ;
+	Test Description Exit002_Test_0_EventDuplication uses configuration configuration4Exit002_Test {
 		tester.reactiveGate sends _run (
 			state_machine = Exit002_Test
 		) to PSSM.reactiveGate ;
@@ -191,7 +191,36 @@ Package testSuite {
 			behavior = T3_testEnd
 		) to tester.reactiveGate ;
 	}
-	Test Description Exit002_Test2_EventDeletion uses configuration configuration4Exit002_Test {
+	Test Description Exit002_Test_1_EventDuplication uses configuration configuration4Exit002_Test {
+		tester.reactiveGate sends _run (
+			state_machine = Exit002_Test
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exit002_Test ,
+			signal_occurrence = start_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exit002_Test ,
+			signal_occurrence = start_occurrence
+		) to PSSM.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T1_2_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T2_2_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T3_testEnd
+		) to tester.reactiveGate ;
+	}
+	Test Description Exit002_Test_0_EventDuplication_1_EventDuplication uses configuration configuration4Exit002_Test {
+		tester.reactiveGate sends _run (
+			state_machine = Exit002_Test
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exit002_Test ,
+			signal_occurrence = start_occurrence
+		) to PSSM.reactiveGate ;
 		tester.reactiveGate sends _run (
 			state_machine = Exit002_Test
 		) to PSSM.reactiveGate ;
@@ -201,6 +230,18 @@ Package testSuite {
 		) to PSSM.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = T1_2_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T2_2_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T3_testEnd
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T1_2_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T3_testEnd
 		) to tester.reactiveGate ;
 	}
 }

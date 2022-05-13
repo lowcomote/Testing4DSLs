@@ -31,6 +31,9 @@
             <triggers name="threadSuspendedTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.4"/>
             </triggers>
+            <triggers name="o.waitTrigger">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.7"/>
+            </triggers>
           </transitions>
           <transitions name="running2final2" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.3" kind="external">
             <triggers name="finishTrigger">
@@ -155,11 +158,7 @@
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.13"/>
         </triggers>
       </transitions>
-      <transitions name="terminated2final" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.7" kind="external">
-        <triggers name="o.waitTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.7"/>
-        </triggers>
-      </transitions>
+      <transitions name="terminated2final" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.7" kind="external"/>
     </regions>
   </statemachine>
   <signals name="t.start"/>

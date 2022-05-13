@@ -70,9 +70,6 @@
                 </triggers>
               </transitions>
               <transitions name="checkBalance2makeWithdrawal" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.3" kind="external">
-                <triggers name="turnOffTrigger">
-                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
-                </triggers>
                 <constraint xsi:type="statemachines:IntegerConstraint">
                   <expression operator="&lt;=" operand1="//@signals.10/@attributes.0" operand2="//@signals.6/@attributes.1"/>
                 </constraint>
@@ -148,6 +145,9 @@
       <transitions name="off2selfTest" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="turnOnTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+        </triggers>
+        <triggers name="turnOffTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
         </triggers>
         <effect name="startup"/>
       </transitions>

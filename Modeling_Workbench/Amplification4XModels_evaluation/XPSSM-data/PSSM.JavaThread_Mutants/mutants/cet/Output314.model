@@ -104,6 +104,9 @@
         <triggers name="wait4lock2reenterTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.11"/>
         </triggers>
+        <triggers name="t.joinTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
+        </triggers>
       </transitions>
       <transitions name="runnable2terminated" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6" kind="external">
         <triggers name="threadTerminatedTrigger">
@@ -153,9 +156,6 @@
       <transitions name="blocked2terminated" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.6" kind="external">
         <triggers name="threadTerminatedTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.13"/>
-        </triggers>
-        <triggers name="t.joinTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
         </triggers>
       </transitions>
       <transitions name="terminated2final" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.7" kind="external"/>

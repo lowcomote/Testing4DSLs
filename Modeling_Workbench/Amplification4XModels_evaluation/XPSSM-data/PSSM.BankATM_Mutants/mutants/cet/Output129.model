@@ -81,6 +81,9 @@
                 </constraint>
               </transitions>
               <transitions name="makeWithdrawal2final4" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.4" kind="external">
+                <triggers name="transferTrigger">
+                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.9"/>
+                </triggers>
                 <effect name="deliverCash"/>
               </transitions>
             </regions>
@@ -157,9 +160,6 @@
       <transitions name="outOfService2Off" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.1" kind="external">
         <triggers name="turnOffTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
-        </triggers>
-        <triggers name="transferTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.9"/>
         </triggers>
         <effect name="shutDown"/>
       </transitions>

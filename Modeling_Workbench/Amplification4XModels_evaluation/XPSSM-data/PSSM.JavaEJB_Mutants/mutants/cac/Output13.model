@@ -80,7 +80,7 @@
         <triggers name="releaseTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.7"/>
         </triggers>
-        <effect name="u"/>
+        <effect name="zF"/>
       </transitions>
     </regions>
   </statemachine>

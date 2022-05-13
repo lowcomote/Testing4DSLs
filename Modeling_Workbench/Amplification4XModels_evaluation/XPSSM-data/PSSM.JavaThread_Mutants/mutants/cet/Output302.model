@@ -99,9 +99,6 @@
         <triggers name="wait4lock2enterTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.10"/>
         </triggers>
-        <triggers name="t.joinTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
-        </triggers>
       </transitions>
       <transitions name="runnable2blocked" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <triggers name="wait4lock2reenterTrigger">
@@ -158,7 +155,11 @@
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.13"/>
         </triggers>
       </transitions>
-      <transitions name="terminated2final" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.7" kind="external"/>
+      <transitions name="terminated2final" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.7" kind="external">
+        <triggers name="t.joinTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
+        </triggers>
+      </transitions>
     </regions>
   </statemachine>
   <signals name="t.start"/>

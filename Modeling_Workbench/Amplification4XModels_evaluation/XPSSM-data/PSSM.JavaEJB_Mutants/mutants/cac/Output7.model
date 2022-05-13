@@ -50,7 +50,7 @@
         <triggers name="crashTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
         </triggers>
-        <effect name="u"/>
+        <effect name="zF"/>
       </transitions>
       <transitions name="ER2ENR" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="releaseTrigger">

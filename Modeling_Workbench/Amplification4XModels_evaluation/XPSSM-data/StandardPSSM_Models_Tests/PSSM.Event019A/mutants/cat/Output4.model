@@ -15,12 +15,12 @@
         <triggers name="CallEventOpTrigger">
           <eventType xsi:type="statemachines:CallEventType" operation="//@operations.0"/>
         </triggers>
+        <effect name="T3(testEnd)"/>
       </transitions>
       <transitions name="T3" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <triggers name="ContinueSignalEventTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <effect name="T2(effect)"/>
       </transitions>
     </regions>
   </statemachine>

@@ -27,6 +27,9 @@
             <triggers name="threadSuspendedTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.4"/>
             </triggers>
+            <triggers name="threadSelectedTrigger">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
+            </triggers>
           </transitions>
           <transitions name="running2final2" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.3" kind="external">
             <triggers name="finishTrigger">
@@ -63,9 +66,6 @@
       <transitions name="runnable2timedWaiting" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <triggers name="o.wait()Trigger">
           <eventType xsi:type="statemachines:CallEventType" operation="//@operations.1"/>
-        </triggers>
-        <triggers name="threadSelectedTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
       </transitions>
       <transitions name="runnable2timedWaiting" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">

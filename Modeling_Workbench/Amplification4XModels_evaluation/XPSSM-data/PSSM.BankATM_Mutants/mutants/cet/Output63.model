@@ -77,6 +77,9 @@
                 </constraint>
               </transitions>
               <transitions name="makeWithdrawal2final4" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.4" kind="external">
+                <triggers name="amountEnteredTrigger">
+                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.10"/>
+                </triggers>
                 <effect name="deliverCash"/>
               </transitions>
             </regions>
@@ -98,9 +101,6 @@
                 <effect name="cardNumberIsValid"/>
               </transitions>
               <transitions name="getAmount2checkBalance" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4/@regions.0/@vertice.3" kind="external">
-                <triggers name="amountEnteredTrigger">
-                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.10"/>
-                </triggers>
                 <triggers name="amountEnteredTrigger">
                   <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.10"/>
                 </triggers>

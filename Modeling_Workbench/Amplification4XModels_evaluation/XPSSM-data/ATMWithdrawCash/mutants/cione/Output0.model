@@ -31,7 +31,7 @@
       </transitions>
       <transitions name="validatePin_getAmount" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <constraint xsi:type="statemachines:IntegerConstraint">
-          <expression operator="==" operand1="//@signals.1/@attributes.0" operand2="//@signals.0/@attributes.0"/>
+          <expression operator="!=" operand1="//@signals.1/@attributes.0" operand2="//@signals.0/@attributes.0"/>
         </constraint>
       </transitions>
       <transitions name="validatePin_final" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.7" kind="external">
@@ -53,7 +53,7 @@
       <transitions name="checkBalance_final" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.7" kind="external">
         <effect name="notEnoughMoneyMsg"/>
         <constraint xsi:type="statemachines:IntegerConstraint">
-          <expression operator="!=" operand1="//@signals.2/@attributes.0" operand2="//@signals.0/@attributes.1"/>
+          <expression operator=">" operand1="//@signals.2/@attributes.0" operand2="//@signals.0/@attributes.1"/>
         </constraint>
       </transitions>
       <transitions name="withdraw_final" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.7" kind="external">

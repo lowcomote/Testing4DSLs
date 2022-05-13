@@ -41,9 +41,6 @@
                 </constraint>
               </transitions>
               <transitions name="validatePin2final3" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.3" kind="external">
-                <triggers name="cardInsertedTrigger">
-                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
-                </triggers>
                 <effect name="wrongPinMsg"/>
                 <constraint xsi:type="statemachines:IntegerConstraint">
                   <expression operator="!=" operand1="//@signals.7/@attributes.0" operand2="//@signals.6/@attributes.0"/>
@@ -148,6 +145,9 @@
       <transitions name="off2selfTest" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="turnOnTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
+        </triggers>
+        <triggers name="cardInsertedTrigger">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
         </triggers>
         <effect name="startup"/>
       </transitions>

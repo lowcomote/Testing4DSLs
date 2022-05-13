@@ -194,7 +194,7 @@
         <triggers name="cardInsertedTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
         </triggers>
-        <effect name="ES"/>
+        <effect name="r"/>
       </transitions>
       <transitions name="serviceCustomer2idle" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <triggers name="cancelTrigger">

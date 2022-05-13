@@ -186,9 +186,9 @@ Package testSuite {
 	}
 	Annotation MUTPath ;
 	Annotation DSLName ;
-	Region Region1 ( _name = 'Region1' ) ;
-	StateMachine Entry002_Test_B ( _name = 'Entry002_Test_B$behavior$1' , regions = { Region1 } ) ;
-	Test Description Entering011_Test0_EventDuplication uses configuration configuration4Entering011_Test {
+	Region Region1 ( _name = "Region1" ) ;
+	StateMachine Entering004_Test ( _name = "Entering004_Test$behavior$1" , regions = { Region1 } ) ;
+	Test Description Entering011_Test_0_EventDuplication uses configuration configuration4Entering011_Test {
 		tester.reactiveGate sends _run (
 			state_machine = Entering011_Test
 		) to PSSM.reactiveGate ;
@@ -207,7 +207,39 @@ Package testSuite {
 			behavior = S1_entry
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
+			behavior = T2_1_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_2_entry
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T1_1_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_1_entry
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
 			behavior = T3_testEnd
+		) to tester.reactiveGate ;
+	}
+	Test Description Entering011_Test_1_EventDuplication uses configuration configuration4Entering011_Test {
+		tester.reactiveGate sends _run (
+			state_machine = Entering011_Test
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Entering011_Test ,
+			signal_occurrence = start_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Entering011_Test ,
+			signal_occurrence = continue_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Entering011_Test ,
+			signal_occurrence = start_occurrence
+		) to PSSM.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_entry
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = T2_1_effect
@@ -220,6 +252,100 @@ Package testSuite {
 		) to tester.reactiveGate ;
 		PSSM.reactiveGate sends behavior_executed (
 			behavior = S1_1_entry
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T3_testEnd
+		) to tester.reactiveGate ;
+	}
+	Test Description Entering011_Test_0_EventDuplication_1_EventDuplication uses configuration configuration4Entering011_Test {
+		tester.reactiveGate sends _run (
+			state_machine = Entering011_Test
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Entering011_Test ,
+			signal_occurrence = start_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Entering011_Test ,
+			signal_occurrence = continue_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends _run (
+			state_machine = Entering011_Test
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Entering011_Test ,
+			signal_occurrence = start_occurrence
+		) to PSSM.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_entry
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T2_1_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_2_entry
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T1_1_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_1_entry
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T3_testEnd
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_entry
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T2_1_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_2_entry
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T1_1_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_1_entry
+		) to tester.reactiveGate ;
+	}
+	Test Description Entering011_Test_0_EventDuplication_2_EventDuplication uses configuration configuration4Entering011_Test {
+		tester.reactiveGate sends _run (
+			state_machine = Entering011_Test
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Entering011_Test ,
+			signal_occurrence = start_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Entering011_Test ,
+			signal_occurrence = continue_occurrence
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends _run (
+			state_machine = Entering011_Test
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Entering011_Test ,
+			signal_occurrence = continue_occurrence
+		) to PSSM.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_entry
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T2_1_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_2_entry
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T1_1_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_1_entry
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T3_testEnd
 		) to tester.reactiveGate ;
 	}
 }

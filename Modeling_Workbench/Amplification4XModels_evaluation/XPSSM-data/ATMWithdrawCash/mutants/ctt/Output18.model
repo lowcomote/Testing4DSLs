@@ -3,7 +3,7 @@
   <statemachine name="withdrawCash">
     <regions name="region">
       <vertice xsi:type="statemachines:Pseudostate" name="Initial" outgoingTransitions="//@statemachine/@regions.0/@transitions.0"/>
-      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0 //@statemachine/@regions.0/@transitions.3">
+      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0">
         <entry name="insertCardMsg"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="getPin" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.1">
@@ -13,7 +13,7 @@
       <vertice xsi:type="statemachines:State" name="getAmount" outgoingTransitions="//@statemachine/@regions.0/@transitions.5">
         <entry name="enterAmountMsg"/>
       </vertice>
-      <vertice xsi:type="statemachines:State" name="checkBalance" outgoingTransitions="//@statemachine/@regions.0/@transitions.6 //@statemachine/@regions.0/@transitions.7" incomingTransitions="//@statemachine/@regions.0/@transitions.5"/>
+      <vertice xsi:type="statemachines:State" name="checkBalance" outgoingTransitions="//@statemachine/@regions.0/@transitions.6 //@statemachine/@regions.0/@transitions.7" incomingTransitions="//@statemachine/@regions.0/@transitions.5 //@statemachine/@regions.0/@transitions.3"/>
       <vertice xsi:type="statemachines:State" name="makeWithdrawal" outgoingTransitions="//@statemachine/@regions.0/@transitions.8" incomingTransitions="//@statemachine/@regions.0/@transitions.6">
         <doActivity name="updateCardBalance"/>
       </vertice>
@@ -29,7 +29,7 @@
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
       </transitions>
-      <transitions name="validatePin_getAmount" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.1" kind="external">
+      <transitions name="validatePin_getAmount" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.5" kind="external">
         <constraint xsi:type="statemachines:IntegerConstraint">
           <expression operator="==" operand1="//@signals.1/@attributes.0" operand2="//@signals.0/@attributes.0"/>
         </constraint>

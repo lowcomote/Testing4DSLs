@@ -128,6 +128,9 @@
             <triggers name="withdrawTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
             </triggers>
+            <triggers name="sucessTrigger">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
+            </triggers>
           </transitions>
           <transitions name="selectingTransaction2transfer" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4" kind="external">
             <triggers name="transferTrigger">
@@ -189,9 +192,6 @@
       <transitions name="Idle2serviceCustomer" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6" kind="external">
         <triggers name="cardInsertedTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.6"/>
-        </triggers>
-        <triggers name="sucessTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
         </triggers>
       </transitions>
       <transitions name="serviceCustomer2idle" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.3" kind="external">

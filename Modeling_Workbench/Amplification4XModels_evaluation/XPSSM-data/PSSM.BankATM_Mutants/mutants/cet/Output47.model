@@ -124,6 +124,9 @@
             <triggers name="withdrawTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
             </triggers>
+            <triggers name="amountEnteredTrigger">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.10"/>
+            </triggers>
           </transitions>
           <transitions name="selectingTransaction2transfer" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.4" kind="external">
             <triggers name="transferTrigger">
@@ -178,9 +181,6 @@
       <transitions name="Idle2off" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.1" kind="external">
         <triggers name="turnOffTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.3"/>
-        </triggers>
-        <triggers name="amountEnteredTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.10"/>
         </triggers>
         <effect name="shutDown"/>
       </transitions>

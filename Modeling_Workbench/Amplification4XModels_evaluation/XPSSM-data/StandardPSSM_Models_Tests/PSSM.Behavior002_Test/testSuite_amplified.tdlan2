@@ -164,7 +164,9 @@ Package testSuite {
 	}
 	Annotation MUTPath ;
 	Annotation DSLName ;
-	Test Description Behavior002_Test0_EventDuplication uses configuration configuration4Behavior002_Test {
+	Region Region1 ( _name = "Region1" ) ;
+	StateMachine Entering004_Test ( _name = "Entering004_Test$behavior$1" , regions = { Region1 } ) ;
+	Test Description Behavior002_Test_0_EventDuplication uses configuration configuration4Behavior002_Test {
 		tester.reactiveGate sends _run (
 			state_machine = Behavior002_Test
 		) to PSSM.reactiveGate ;
@@ -182,7 +184,7 @@ Package testSuite {
 			behavior = T2_testEnd
 		) to tester.reactiveGate ;
 	}
-	Test Description Behavior002_Test1_EventDuplication uses configuration configuration4Behavior002_Test {
+	Test Description Behavior002_Test_1_EventDuplication uses configuration configuration4Behavior002_Test {
 		tester.reactiveGate sends _run (
 			state_machine = Behavior002_Test
 		) to PSSM.reactiveGate ;

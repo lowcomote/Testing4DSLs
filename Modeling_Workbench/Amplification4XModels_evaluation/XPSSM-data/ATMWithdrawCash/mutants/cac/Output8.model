@@ -57,7 +57,7 @@
         </constraint>
       </transitions>
       <transitions name="withdraw_final" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.7" kind="external">
-        <effect name="vk"/>
+        <effect name="xNG"/>
       </transitions>
     </regions>
   </statemachine>

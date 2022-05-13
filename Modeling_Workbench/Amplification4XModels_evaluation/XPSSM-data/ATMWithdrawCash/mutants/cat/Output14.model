@@ -14,7 +14,9 @@
         <entry name="enterAmountMsg"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="checkBalance" outgoingTransitions="//@statemachine/@regions.0/@transitions.6 //@statemachine/@regions.0/@transitions.7" incomingTransitions="//@statemachine/@regions.0/@transitions.5"/>
-      <vertice xsi:type="statemachines:State" name="makeWithdrawal" outgoingTransitions="//@statemachine/@regions.0/@transitions.8" incomingTransitions="//@statemachine/@regions.0/@transitions.6"/>
+      <vertice xsi:type="statemachines:State" name="makeWithdrawal" outgoingTransitions="//@statemachine/@regions.0/@transitions.8" incomingTransitions="//@statemachine/@regions.0/@transitions.6">
+        <doActivity name="updateCardBalance"/>
+      </vertice>
       <vertice xsi:type="statemachines:FinalState" name="FinalState" incomingTransitions="//@statemachine/@regions.0/@transitions.4 //@statemachine/@regions.0/@transitions.7 //@statemachine/@regions.0/@transitions.8"/>
       <transitions name="initial_wait" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>
       <transitions name="wait_getPin" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">
@@ -33,7 +35,7 @@
         </constraint>
       </transitions>
       <transitions name="validatePin_final" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.7" kind="external">
-        <effect name="updateCardBalance"/>
+        <effect name="notEnoughMoneyMsg"/>
         <constraint xsi:type="statemachines:IntegerConstraint">
           <expression operator="!=" operand1="//@signals.1/@attributes.0" operand2="//@signals.0/@attributes.0"/>
         </constraint>
@@ -49,7 +51,6 @@
         </constraint>
       </transitions>
       <transitions name="checkBalance_final" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.7" kind="external">
-        <effect name="notEnoughMoneyMsg"/>
         <constraint xsi:type="statemachines:IntegerConstraint">
           <expression operator=">" operand1="//@signals.2/@attributes.0" operand2="//@signals.0/@attributes.1"/>
         </constraint>

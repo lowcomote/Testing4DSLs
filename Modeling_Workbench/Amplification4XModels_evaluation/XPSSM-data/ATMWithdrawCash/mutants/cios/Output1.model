@@ -47,13 +47,13 @@
       </transitions>
       <transitions name="checkBalance_withdraw" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.6" kind="external">
         <constraint xsi:type="statemachines:IntegerConstraint">
-          <expression operand1="//@signals.2/@attributes.0" operand2="//@signals.0/@attributes.1"/>
+          <expression operator="&lt;=" operand1="//@signals.2/@attributes.0" operand2="//@signals.0/@attributes.1"/>
         </constraint>
       </transitions>
       <transitions name="checkBalance_final" source="//@statemachine/@regions.0/@vertice.5" target="//@statemachine/@regions.0/@vertice.7" kind="external">
         <effect name="notEnoughMoneyMsg"/>
         <constraint xsi:type="statemachines:IntegerConstraint">
-          <expression operator=">" operand1="//@signals.2/@attributes.0" operand2="//@signals.0/@attributes.1"/>
+          <expression operand1="//@signals.2/@attributes.0" operand2="//@signals.0/@attributes.1"/>
         </constraint>
       </transitions>
       <transitions name="withdraw_final" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.7" kind="external">

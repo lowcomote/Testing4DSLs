@@ -169,7 +169,9 @@ Package testSuite {
 	}
 	Annotation MUTPath ;
 	Annotation DSLName ;
-	Test Description Entry002_Test_B0_EventDuplication uses configuration configuration4Entry002_Test_B {
+	Region Region1 ( _name = "Region1" ) ;
+	StateMachine Entry002_Test_A ( _name = "Entry002_Test_A$behavior$1" , regions = { Region1 } ) ;
+	Test Description Entry002_Test_B_0_EventDuplication uses configuration configuration4Entry002_Test_B {
 		tester.reactiveGate sends _run (
 			state_machine = Entry002_Test_B
 		) to PSSM.reactiveGate ;
@@ -190,7 +192,7 @@ Package testSuite {
 			behavior = T3_testEnd
 		) to tester.reactiveGate ;
 	}
-	Test Description Entry002_Test_B1_EventDuplication uses configuration configuration4Entry002_Test_B {
+	Test Description Entry002_Test_B_1_EventDuplication uses configuration configuration4Entry002_Test_B {
 		tester.reactiveGate sends _run (
 			state_machine = Entry002_Test_B
 		) to PSSM.reactiveGate ;

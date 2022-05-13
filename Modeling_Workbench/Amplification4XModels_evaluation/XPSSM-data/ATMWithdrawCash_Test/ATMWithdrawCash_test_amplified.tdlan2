@@ -302,13 +302,13 @@ Package ATMWithdrawCash_TestSuite {
 	Behavior updateCardBalance ( _name = "updateCardBalance" ) ;
 	Behavior notEnoughMoneyMsg ( _name = "notEnoughMoneyMsg" ) ;
 	Behavior deliverCash ( _name = "deliverCash" ) ;
-	Test Description test_wrongPin0_IntegerModification uses configuration xPSSMConfiguration {
+	Test Description test_wrongPin_6_IntegerModification uses configuration xPSSMConfiguration {
 		tester.reactiveGate sends _run (
 			state_machine = ATM
 		) to reactivepssm.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = ATM ,
-			signal_occurrence = card_occurrence ( signal = Card , attributeValues = { cardPinValue ( value = '1235' ) , cardBalanceValue ( value = "1000" ) } )
+			signal_occurrence = card_occurrence ( signal = Card , attributeValues = { cardPinValue ( value = "2468" ) , cardBalanceValue ( value = "1000" ) } )
 		) to reactivepssm.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = ATM ,
@@ -324,17 +324,20 @@ Package ATMWithdrawCash_TestSuite {
 			behavior = wrongPinMsg
 		) to tester.reactiveGate ;
 	}
-	Test Description test_wrongPin2_IntegerModification uses configuration xPSSMConfiguration {
+	Test Description test_wrongPin_54_EventDuplication uses configuration xPSSMConfiguration {
 		tester.reactiveGate sends _run (
 			state_machine = ATM
 		) to reactivepssm.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = ATM ,
-			signal_occurrence = card_occurrence ( signal = Card , attributeValues = { cardPinValue ( value = '2468' ) , cardBalanceValue ( value = "1000" ) } )
+			signal_occurrence = card_occurrence ( signal = Card , attributeValues = { cardPinValue ( value = "1234" ) , cardBalanceValue ( value = "1000" ) } )
 		) to reactivepssm.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = ATM ,
 			signal_occurrence = pin_occurrence ( signal = Pin , attributeValues = enteredPinValue ( value = "2222" ) )
+		) to reactivepssm.reactiveGate ;
+		tester.reactiveGate sends _run (
+			state_machine = ATM
 		) to reactivepssm.reactiveGate ;
 		reactivepssm.reactiveGate sends behavior_executed (
 			behavior = insertCardMsg
@@ -345,18 +348,25 @@ Package ATMWithdrawCash_TestSuite {
 		reactivepssm.reactiveGate sends behavior_executed (
 			behavior = wrongPinMsg
 		) to tester.reactiveGate ;
+		reactivepssm.reactiveGate sends behavior_executed (
+			behavior = insertCardMsg
+		) to tester.reactiveGate ;
 	}
-	Test Description test_wrongPin5_IntegerModification uses configuration xPSSMConfiguration {
+	Test Description test_successfulWithdraw_18_IntegerModification uses configuration xPSSMConfiguration {
 		tester.reactiveGate sends _run (
 			state_machine = ATM
 		) to reactivepssm.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = ATM ,
-			signal_occurrence = card_occurrence ( signal = Card , attributeValues = { cardPinValue ( value = "2222" ) , cardBalanceValue ( value = "1000" ) } )
+			signal_occurrence = signal_occurrence ( signal = Card , attributeValues = { cardPinValue ( value = "1234" ) , cardBalanceValue ( value = "500" ) } )
 		) to reactivepssm.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = ATM ,
-			signal_occurrence = pin_occurrence ( signal = Pin , attributeValues = enteredPinValue ( value = "2222" ) )
+			signal_occurrence = signal_occurrence ( signal = Pin , attributeValues = { enteredPinValue ( value = "1234" ) } )
+		) to reactivepssm.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = ATM ,
+			signal_occurrence = signal_occurrence ( signal = Amount , attributeValues = { enteredAmountValue ( value = "500" ) } )
 		) to reactivepssm.reactiveGate ;
 		reactivepssm.reactiveGate sends behavior_executed (
 			behavior = insertCardMsg
@@ -367,18 +377,32 @@ Package ATMWithdrawCash_TestSuite {
 		reactivepssm.reactiveGate sends behavior_executed (
 			behavior = enterAmountMsg
 		) to tester.reactiveGate ;
+		reactivepssm.reactiveGate sends behavior_executed (
+			behavior = updateCardBalance
+		) to tester.reactiveGate ;
+		reactivepssm.reactiveGate sends behavior_executed (
+			behavior = deliverCash
+		) to tester.reactiveGate ;
 	}
-	Test Description test_wrongPin20_IntegerModification uses configuration xPSSMConfiguration {
+	Test Description test_wrongAmount_46_EventDuplication uses configuration xPSSMConfiguration {
 		tester.reactiveGate sends _run (
 			state_machine = ATM
 		) to reactivepssm.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = ATM ,
-			signal_occurrence = card_occurrence ( signal = Card , attributeValues = { cardPinValue ( value = "2222" ) , cardBalanceValue ( value = "2222" ) } )
+			signal_occurrence = signal_occurrence ( signal = Card , attributeValues = { cardPinValue ( value = "1234" ) , cardBalanceValue ( value = "1000" ) } )
 		) to reactivepssm.reactiveGate ;
 		tester.reactiveGate sends signal_received (
 			state_machine = ATM ,
-			signal_occurrence = pin_occurrence ( signal = Pin , attributeValues = enteredPinValue ( value = "2222" ) )
+			signal_occurrence = signal_occurrence ( signal = Pin , attributeValues = { enteredPinValue ( value = "1234" ) } )
+		) to reactivepssm.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = ATM ,
+			signal_occurrence = signal_occurrence ( signal = Amount , attributeValues = { enteredAmountValue ( value = "1500" ) } )
+		) to reactivepssm.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = ATM ,
+			signal_occurrence = signal_occurrence ( signal = Pin , attributeValues = { enteredPinValue ( value = "1234" ) } )
 		) to reactivepssm.reactiveGate ;
 		reactivepssm.reactiveGate sends behavior_executed (
 			behavior = insertCardMsg
@@ -388,6 +412,9 @@ Package ATMWithdrawCash_TestSuite {
 		) to tester.reactiveGate ;
 		reactivepssm.reactiveGate sends behavior_executed (
 			behavior = enterAmountMsg
+		) to tester.reactiveGate ;
+		reactivepssm.reactiveGate sends behavior_executed (
+			behavior = notEnoughMoneyMsg
 		) to tester.reactiveGate ;
 	}
 }

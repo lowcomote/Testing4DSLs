@@ -3,7 +3,7 @@
   <statemachine name="withdrawCash">
     <regions name="region">
       <vertice xsi:type="statemachines:Pseudostate" name="Initial" outgoingTransitions="//@statemachine/@regions.0/@transitions.0"/>
-      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0">
+      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1 //@statemachine/@regions.0/@transitions.6" incomingTransitions="//@statemachine/@regions.0/@transitions.0">
         <entry name="insertCardMsg"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="getPin" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.1">
@@ -14,7 +14,7 @@
         <entry name="enterAmountMsg"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="checkBalance" outgoingTransitions="//@statemachine/@regions.0/@transitions.7" incomingTransitions="//@statemachine/@regions.0/@transitions.5"/>
-      <vertice xsi:type="statemachines:State" name="makeWithdrawal" outgoingTransitions="//@statemachine/@regions.0/@transitions.8 //@statemachine/@regions.0/@transitions.6" incomingTransitions="//@statemachine/@regions.0/@transitions.6">
+      <vertice xsi:type="statemachines:State" name="makeWithdrawal" outgoingTransitions="//@statemachine/@regions.0/@transitions.8" incomingTransitions="//@statemachine/@regions.0/@transitions.6">
         <doActivity name="updateCardBalance"/>
       </vertice>
       <vertice xsi:type="statemachines:FinalState" name="FinalState" incomingTransitions="//@statemachine/@regions.0/@transitions.4 //@statemachine/@regions.0/@transitions.7 //@statemachine/@regions.0/@transitions.8"/>
@@ -45,7 +45,7 @@
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
         </triggers>
       </transitions>
-      <transitions name="checkBalance_withdraw" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.6" kind="external">
+      <transitions name="checkBalance_withdraw" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.6" kind="external">
         <constraint xsi:type="statemachines:IntegerConstraint">
           <expression operator="&lt;=" operand1="//@signals.2/@attributes.0" operand2="//@signals.0/@attributes.1"/>
         </constraint>

@@ -22,7 +22,7 @@
                 <triggers name="ContinueTrigger">
                   <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.2"/>
                 </triggers>
-                <effect name="uYu"/>
+                <effect name="lC"/>
               </transitions>
             </regions>
             <exit name="S1.1(exit)"/>

@@ -31,6 +31,9 @@
             <triggers name="threadSuspendedTrigger">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.4"/>
             </triggers>
+            <triggers name="monitorLockTrigger">
+              <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.16"/>
+            </triggers>
           </transitions>
           <transitions name="running2final2" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.3" kind="external">
             <triggers name="finishTrigger">
@@ -77,9 +80,6 @@
       <transitions name="runnable2timedWaiting" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">
         <triggers name="lockSupport.parkNanosTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.5"/>
-        </triggers>
-        <triggers name="monitorLockTrigger">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.16"/>
         </triggers>
       </transitions>
       <transitions name="runnable2timedWaiting" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external">

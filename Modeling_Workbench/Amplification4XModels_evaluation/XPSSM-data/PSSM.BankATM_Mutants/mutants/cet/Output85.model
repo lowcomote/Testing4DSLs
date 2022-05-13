@@ -36,9 +36,6 @@
                 </triggers>
               </transitions>
               <transitions name="validatePin2SelectingTransaction" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.1/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.2" kind="external">
-                <triggers name="withdrawTrigger">
-                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
-                </triggers>
                 <constraint xsi:type="statemachines:IntegerConstraint">
                   <expression operator="==" operand1="//@signals.7/@attributes.0" operand2="//@signals.6/@attributes.0"/>
                 </constraint>
@@ -84,6 +81,9 @@
                 </constraint>
               </transitions>
               <transitions name="makeWithdrawal2final4" source="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.6/@regions.0/@vertice.3/@regions.0/@vertice.4" kind="external">
+                <triggers name="withdrawTrigger">
+                  <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.8"/>
+                </triggers>
                 <effect name="deliverCash"/>
               </transitions>
             </regions>

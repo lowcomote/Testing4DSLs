@@ -13,7 +13,9 @@
           <vertice xsi:type="statemachines:State" name="S1.2" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.3" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1">
             <entry name="S1.2(entry)"/>
           </vertice>
-          <vertice xsi:type="statemachines:State" name="S1.3" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.2"/>
+          <vertice xsi:type="statemachines:State" name="S1.3" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.2">
+            <entry name="S1.3(entry)"/>
+          </vertice>
           <vertice xsi:type="statemachines:FinalState" name="FinalState1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.3 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.4"/>
           <transitions name="T1.1" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" kind="external"/>
           <transitions name="T1.2" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" kind="external">
@@ -26,7 +28,7 @@
             <triggers name="Continue">
               <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
             </triggers>
-            <effect name="T1.3(effect)"/>
+            <effect name="T4(testEnd)"/>
           </transitions>
           <transitions name="T1.4" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.4" kind="external"/>
           <transitions name="T1.5" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.4" kind="external"/>
@@ -51,11 +53,9 @@
         <effect name="T3(effect)"/>
       </transitions>
       <transitions name="T5" source="//@statemachine/@regions.0/@vertice.3" target="//@statemachine/@regions.0/@vertice.4" kind="external">
-        <effect name="S1.3(entry)"/>
+        <effect name="T5(testEnd)"/>
       </transitions>
-      <transitions name="T4" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.4" kind="external">
-        <effect name="T4(testEnd)"/>
-      </transitions>
+      <transitions name="T4" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.4" kind="external"/>
     </regions>
   </statemachine>
   <signals name="Start"/>

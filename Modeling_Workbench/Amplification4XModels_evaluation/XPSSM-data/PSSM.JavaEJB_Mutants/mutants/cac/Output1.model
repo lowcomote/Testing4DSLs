@@ -20,7 +20,7 @@
         <triggers name="home.createTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
         </triggers>
-        <effect name="u"/>
+        <effect name="zF"/>
       </transitions>
       <transitions name="ER2ER" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="businessMethodTrigger">

@@ -160,7 +160,7 @@
         </triggers>
       </transitions>
       <transitions name="terminated2final" source="//@statemachine/@regions.0/@vertice.6" target="//@statemachine/@regions.0/@vertice.7" kind="external">
-        <effect name="WKd"/>
+        <effect name="ZK"/>
       </transitions>
     </regions>
   </statemachine>

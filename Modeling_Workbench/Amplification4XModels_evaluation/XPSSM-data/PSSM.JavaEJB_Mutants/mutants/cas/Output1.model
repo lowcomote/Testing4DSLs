@@ -7,13 +7,13 @@
         <entry name="ObjectNotExisted&amp;NotReferenced"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="Exists&amp;Referenced" outgoingTransitions="//@statemachine/@regions.0/@transitions.2 //@statemachine/@regions.0/@transitions.3 //@statemachine/@regions.0/@transitions.8 //@statemachine/@regions.0/@transitions.7 //@statemachine/@regions.0/@transitions.6 //@statemachine/@regions.0/@transitions.5 //@statemachine/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@transitions.1 //@statemachine/@regions.0/@transitions.2 //@statemachine/@regions.0/@transitions.9">
-        <entry name="Yi"/>
+        <entry name="ObjectExists&amp;Referenced"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="NotExisted&amp;Referenced" outgoingTransitions="//@statemachine/@regions.0/@transitions.13 //@statemachine/@regions.0/@transitions.12" incomingTransitions="//@statemachine/@regions.0/@transitions.3 //@statemachine/@regions.0/@transitions.7 //@statemachine/@regions.0/@transitions.6 //@statemachine/@regions.0/@transitions.5 //@statemachine/@regions.0/@transitions.4 //@statemachine/@regions.0/@transitions.12">
         <entry name="ObjectNotExisted&amp;Referenced"/>
       </vertice>
       <vertice xsi:type="statemachines:State" name="Exists&amp;NotReferenced" outgoingTransitions="//@statemachine/@regions.0/@transitions.9 //@statemachine/@regions.0/@transitions.10 //@statemachine/@regions.0/@transitions.11" incomingTransitions="//@statemachine/@regions.0/@transitions.8">
-        <entry name="ObjectExists&amp;NotReferenced"/>
+        <entry name="pbJ"/>
       </vertice>
       <transitions name="initial2NENR" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>
       <transitions name="NENR2ER" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">

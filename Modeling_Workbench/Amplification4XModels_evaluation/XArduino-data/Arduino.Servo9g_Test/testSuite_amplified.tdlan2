@@ -289,6 +289,10 @@ Package TestSuite {
 		connect tester.reactiveGate to arduino.reactiveGate ;
 		connect tester.oclGate to arduino.oclGate ;
 	}
+	InfraRedSensor IRSensor1 ( _name = "IRSensor1" ) ;
+	PushButton Button1 ( _name = "Button1" ) ;
+	Project project_0 ( ) ;
+	Sketch sketch ( _name = "sketch" , project = project_0 ) ;
 	Test Description test1_0_EventDuplication uses configuration servo9gConfiguration {
 		tester.reactiveGate sends _run (
 			sketch = sketch
@@ -297,16 +301,16 @@ Package TestSuite {
 			sketch = sketch
 		) to arduino.reactiveGate ;
 		arduino.reactiveGate sends Pin_level_changed (
-			pin = servoPin ( level = '90' )
+			pin = servoPin ( level = "90" )
 		) to tester.reactiveGate ;
 		arduino.reactiveGate sends Pin_level_changed (
-			pin = servoPin ( level = '180' )
+			pin = servoPin ( level = "180" )
 		) to tester.reactiveGate ;
 		arduino.reactiveGate sends Pin_level_changed (
-			pin = servoPin ( level = '90' )
+			pin = servoPin ( level = "90" )
 		) to tester.reactiveGate ;
 		arduino.reactiveGate sends Pin_level_changed (
-			pin = servoPin ( level = '180' )
+			pin = servoPin ( level = "180" )
 		) to tester.reactiveGate ;
 	}
 }

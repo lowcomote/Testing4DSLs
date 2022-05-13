@@ -8,7 +8,6 @@
           <vertice xsi:type="statemachines:State" name="S1.1" incomingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@transitions.0">
             <regions name="Region1">
               <vertice xsi:type="statemachines:State" name="S1.1.1" outgoingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@transitions.0" incomingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@transitions.1">
-                <entry name="S"/>
                 <exit name="S1.1.1(exit)"/>
               </vertice>
               <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@transitions.1"/>
@@ -24,7 +23,9 @@
         </regions>
         <exit name="S1(exit)"/>
       </vertice>
-      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0"/>
+      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0">
+        <entry name="Uj"/>
+      </vertice>
       <vertice xsi:type="statemachines:State" name="S2" outgoingTransitions="//@statemachine/@regions.0/@transitions.2">
         <regions name="Region1">
           <vertice xsi:type="statemachines:State" name="S1.2" outgoingTransitions="//@statemachine/@regions.0/@vertice.3/@regions.0/@transitions.0" incomingTransitions="//@statemachine/@regions.0/@vertice.1/@regions.0/@vertice.0/@regions.0/@transitions.0">

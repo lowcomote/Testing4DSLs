@@ -17,7 +17,7 @@
             <effect name="T1.3(effect)"/>
           </transitions>
         </regions>
-        <entry name="kj"/>
+        <entry name="J"/>
       </vertice>
       <vertice xsi:type="statemachines:FinalState" name="FSR1" incomingTransitions="//@statemachine/@regions.0/@transitions.2"/>
       <transitions name="T1" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>

@@ -18,13 +18,14 @@
         <doActivity name="updateCardBalance"/>
       </vertice>
       <vertice xsi:type="statemachines:FinalState" name="FinalState" incomingTransitions="//@statemachine/@regions.0/@transitions.4 //@statemachine/@regions.0/@transitions.7 //@statemachine/@regions.0/@transitions.8"/>
-      <transitions name="initial_wait" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external"/>
+      <transitions name="initial_wait" source="//@statemachine/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.1" kind="external">
+        <triggers name="pinEntered">
+          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
+        </triggers>
+      </transitions>
       <transitions name="wait_getPin" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2" kind="external">
         <triggers name="cardInserted">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.0"/>
-        </triggers>
-        <triggers name="pinEntered">
-          <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
       </transitions>
       <transitions name="getPin_validatePin" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.3" kind="external"/>

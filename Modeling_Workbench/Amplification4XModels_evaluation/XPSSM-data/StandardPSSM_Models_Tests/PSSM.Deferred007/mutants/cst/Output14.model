@@ -3,8 +3,8 @@
   <statemachine name="Deferred007_Test$behavior$1">
     <regions name="Region1">
       <vertice xsi:type="statemachines:Pseudostate" name="Initial1" outgoingTransitions="//@statemachine/@regions.0/@transitions.0"/>
-      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1 //@statemachine/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@transitions.0"/>
-      <vertice xsi:type="statemachines:State" name="S1" outgoingTransitions="//@statemachine/@regions.0/@transitions.2" incomingTransitions="//@statemachine/@regions.0/@transitions.1">
+      <vertice xsi:type="statemachines:State" name="wait" outgoingTransitions="//@statemachine/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@transitions.0"/>
+      <vertice xsi:type="statemachines:State" name="S1" outgoingTransitions="//@statemachine/@regions.0/@transitions.2 //@statemachine/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@transitions.1">
         <exit name="S1(exit)"/>
         <deferrableTriggers name="OpCallEventTrigger">
           <eventType xsi:type="statemachines:CallEventType" operation="//@operations.0"/>
@@ -32,7 +32,7 @@
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.1"/>
         </triggers>
       </transitions>
-      <transitions name="T6" source="//@statemachine/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.4" kind="external">
+      <transitions name="T6" source="//@statemachine/@regions.0/@vertice.2" target="//@statemachine/@regions.0/@vertice.4" kind="external">
         <triggers name="op">
           <eventType xsi:type="statemachines:CallEventType" operation="//@operations.0"/>
         </triggers>

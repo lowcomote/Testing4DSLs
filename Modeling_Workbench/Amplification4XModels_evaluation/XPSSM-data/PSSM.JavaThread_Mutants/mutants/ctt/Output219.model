@@ -12,10 +12,10 @@
           <vertice xsi:type="statemachines:State" name="Ready" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.0 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.2 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.3">
             <entry name="ThreadIsReady"/>
           </vertice>
-          <vertice xsi:type="statemachines:State" name="Running" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.2 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.3 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1 //@statemachine/@regions.0/@transitions.19">
+          <vertice xsi:type="statemachines:State" name="Running" outgoingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.2 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.3 //@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.4" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.1">
             <entry name="ThreadIsRunning"/>
           </vertice>
-          <vertice xsi:type="statemachines:FinalState" name="final2" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.4"/>
+          <vertice xsi:type="statemachines:FinalState" name="final2" incomingTransitions="//@statemachine/@regions.0/@vertice.2/@regions.0/@transitions.4 //@statemachine/@regions.0/@transitions.19"/>
           <transitions name="initial2_2_ready" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.0" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" kind="external"/>
           <transitions name="ready2running" source="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.1" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" kind="external">
             <triggers name="threadSelectedTrigger">
@@ -144,7 +144,7 @@
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.14"/>
         </triggers>
       </transitions>
-      <transitions name="waiting2blocked" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.2" kind="external">
+      <transitions name="waiting2blocked" source="//@statemachine/@regions.0/@vertice.4" target="//@statemachine/@regions.0/@vertice.2/@regions.0/@vertice.3" kind="external">
         <triggers name="o.notifyTrigger">
           <eventType xsi:type="statemachines:SignalEventType" signal="//@signals.15"/>
         </triggers>
