@@ -1,2 +1,0 @@
-/Arduino.SensorAlarm/mutants/cbbo_supe/Output2.model
-/Arduino.SensorAlarm/mutants/cbbo_supe/Output3.model
