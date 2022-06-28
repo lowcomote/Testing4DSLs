@@ -321,6 +321,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		}
 		this.executionEngineJob.cancel();
 		try {
+			this.executionEngine.stop();
 			this.executionEngineJob.getThread().interrupt();
 		}
 		catch (NullPointerException e) {
