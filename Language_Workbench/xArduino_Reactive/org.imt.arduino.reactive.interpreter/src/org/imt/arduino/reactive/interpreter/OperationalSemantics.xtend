@@ -131,29 +131,29 @@ class Project_ExecutableAspect {
 		//}
 	}
 	
-	@Main
-	def void main() {
-		val start = System.nanoTime
-		_self.execute
-		val stop = System.nanoTime
-		//println("time to execute " + (stop - start))
-	}
-	
-	@Step
-	def void setup() {
-		_self.eAllContents().forEach[o|{
-			if (o instanceof IntegerVariable) {
-				o.value = o.initialValue
-			} else if (o instanceof BooleanVariable) {
-				o.value = o.initialValue
-			} 
-		}]
-	}
-	
-	@InitializeModel
-	def void initializeModel(EList<String> args){
-		_self.setup
-	}
+//	@Main
+//	def void main() {
+//		val start = System.nanoTime
+//		_self.execute
+//		val stop = System.nanoTime
+//		//println("time to execute " + (stop - start))
+//	}
+//	
+//	@Step
+//	def void setup() {
+//		_self.eAllContents().forEach[o|{
+//			if (o instanceof IntegerVariable) {
+//				o.value = o.initialValue
+//			} else if (o instanceof BooleanVariable) {
+//				o.value = o.initialValue
+//			} 
+//		}]
+//	}
+//	
+//	@InitializeModel
+//	def void initializeModel(EList<String> args){
+//		_self.setup
+//	}
 }
 
 @Aspect(className=Sketch)
