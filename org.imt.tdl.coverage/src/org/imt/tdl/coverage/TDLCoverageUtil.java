@@ -34,7 +34,9 @@ public class TDLCoverageUtil {
 	private static TDLCoverageUtil instance = new TDLCoverageUtil();
 	
 	private String DSLPath;
-	public List<String> coverableClasses = new ArrayList<>();
+	private EPackage metamodelRootElement;
+	private List<String> coverableClasses = new ArrayList<>();
+	private List<String> notcoverableClasses = new ArrayList<>();
 	private List<String> extendedClassesWithStep = new ArrayList<>();
 	private List<String> extendedClassesWithoutStep = new ArrayList<>();
 	
@@ -83,7 +85,6 @@ public class TDLCoverageUtil {
 	}
 	
 	public void findCoverableClasses(){
-		EPackage metamodelRootElement;
 		final ResourceSet resSet = new ResourceSetImpl();
 		IConfigurationElement language = Arrays
 				.asList(Platform.getExtensionRegistry()
@@ -103,35 +104,8 @@ public class TDLCoverageUtil {
 		}else if (dsl.getEntry("ale") != null) {
 			findAleClasses(dsl, bundle);
 		} 
-		
-		int abstractSyntaxSize = 0;
-		for (EClassifier clazz: metamodelRootElement.getEClassifiers()) {
-			String className = clazz.getName();
-			if (clazz instanceof EClass) {
-				abstractSyntaxSize++;
-				if (!instance.coverableClasses.contains(className) && !instance.extendedClassesWithoutStep.contains(className)) {
-					checkInheritance((EClass) clazz);
-				}
-				checkDynamicAspectsOfClass(clazz);
-			}
-		}
-		
-		//System.out.println("Abstract Syntax Size (n. of EClasses): " + abstractSyntaxSize);
-		double percentage = Math.ceil((double)(instance.extendedClassesWithStep.size()*100)/abstractSyntaxSize);
-		//System.out.println("% of Extended classes with @Step rules: " + percentage);
-		percentage = Math.ceil((double)(instance.coverableClasses.size()*100)/abstractSyntaxSize);
-		//System.out.println("% of Coverable classes (considering inheritance): " + percentage);
 	}
 
-	public void updateCoverableClasses (List<String> newClasses) {
-		if (newClasses != null) {
-			for (String newClassName: newClasses) {
-				if (!instance.coverableClasses.contains(newClassName)) {
-					instance.coverableClasses.add(newClassName);
-				}
-			}
-		}
-	}
 	private void findK3Classes(Dsl dsl, Bundle bundle) {
 		final List<Class<?>> classes = dsl.getEntries().stream().filter(e -> e.getKey().equals("k3"))
 				.findFirst()
@@ -195,8 +169,32 @@ public class TDLCoverageUtil {
 		return result;
 	}
 	
+	public void checkInheritanceOfNotCoverableClasses() {
+		int abstractSyntaxSize = 0;
+		for (EClassifier clazz: metamodelRootElement.getEClassifiers()) {
+			String className = clazz.getName();
+			if (clazz instanceof EClass) {
+				abstractSyntaxSize++;
+				if (!instance.coverableClasses.contains(className)) {
+					checkInheritance((EClass) clazz);
+				}
+				checkDynamicAspectsOfClass(clazz);
+				//TODO: to be removed
+				if (!instance.coverableClasses.contains(className)) {
+					notcoverableClasses.add(className);
+				}	
+			}
+		}
+		
+		//System.out.println("Abstract Syntax Size (n. of EClasses): " + abstractSyntaxSize);
+		double percentage = Math.ceil((double)(instance.extendedClassesWithStep.size()*100)/abstractSyntaxSize);
+		//System.out.println("% of Extended classes with @Step rules: " + percentage);
+		percentage = Math.ceil((double)(instance.coverableClasses.size()*100)/abstractSyntaxSize);
+		//System.out.println("% of Coverable classes (considering inheritance): " + percentage);	
+	}
+	
 	private void checkInheritance(EClass eClazz) {
-		//foreach class that is not coverable (it is not extended in the interpreter)
+		//for each class that is not coverable (it is not extended in the interpreter)
 		//if one of its super classes is coverable, the class must be set as coverable 
 		for (EClass superClass:eClazz.getEAllSuperTypes()) {
 			if (instance.coverableClasses.contains(superClass.getName())) {
@@ -228,6 +226,14 @@ public class TDLCoverageUtil {
 		return (featureDynamicAnnotations != null && featureDynamicAnnotations.size() > 0);
 	}
 
+	public boolean isClassCoverable(EClass clazz) {
+		return coverableClasses.contains(clazz.getName());
+	}
+	
+	public void addNewCoverableClass(EClass clazz) {
+		coverableClasses.add(clazz.getName());
+	}
+	
 	public List<EClass> getClassesWithDynamicFeatures() {
 		return classesWithDynamicFeatures;
 	}
