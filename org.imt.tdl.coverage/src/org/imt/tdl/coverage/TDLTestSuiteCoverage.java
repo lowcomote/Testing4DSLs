@@ -5,9 +5,12 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.etsi.mts.tdl.Package;
 import org.imt.tdl.coverage.dslSpecific.DSLSpecificCoverageHandler;
+import org.imt.tdl.coverage.dslSpecific.DSLSpecificCoverageRule;
 import org.imt.tdl.coverage.dslSpecific.IDSLSpecificCoverage;
 
 public class TDLTestSuiteCoverage {
@@ -18,6 +21,9 @@ public class TDLTestSuiteCoverage {
 	private List<EObject> modelObjects;
 	private List<String> tsObjectCoverageStatus;
 
+	private IDSLSpecificCoverage dslSpecificCoverageExtension;
+	private EList<DSLSpecificCoverageRule> dslSpecificCoverageRules;
+	
 	double tsCoveragePercentage;
 	int numOfCoveredObjs;
 	int numOfNotCoverableElements;
@@ -45,44 +51,50 @@ public class TDLTestSuiteCoverage {
 	
 	//Calculating coverage of the test suite based on its test cases coverage
 	public void calculateTSCoverage() {
-		DSLSpecificCoverageHandler dslSpecificCoverageHandler = new DSLSpecificCoverageHandler();
-		IDSLSpecificCoverage dslSpecificCoverage = dslSpecificCoverageHandler.getDSLSpecificCoverage();
-		if (dslSpecificCoverage != null) {
-			TDLCoverageUtil.getInstance().updateCoverableClasses(dslSpecificCoverage.getNewCoverableClasses());
-		}
-		//System.out.println("Number of Coverable Classes: " + TDLCoverageUtil.getInstance().coverableClasses.size());
-		//for each test case, first calculate coverage using the generic tool
-		//then, if the DSL provides a dsl-specific coverage tool, specialize the coverage based on it
+		findDSLSpecificCoverageExtension();
+		//check inheritance relationships between coverable and not-coverable classes
+		TDLCoverageUtil.getInstance().checkInheritanceOfNotCoverableClasses();
+		
+		//for each test case, calculate coverage using the generic tool
+		//if the DSL provides a dsl-specific coverage tool, call its methods: ignoring model objects, retrieving coverage rules
 		for (TDLTestCaseCoverage tcCoverageObj : this.tcCoverages) {
-			if (dslSpecificCoverage != null) {
-				dslSpecificCoverage.ignoreModelObjects(tcCoverageObj.getMUTResource());
-				tcCoverageObj.calculateTCCoverage();
-				dslSpecificCoverage.specializeCoverage(tcCoverageObj);
+			if (dslSpecificCoverageExtension != null) {
+				dslSpecificCoverageExtension.ignoreModelObjects(tcCoverageObj.getMUTResource());
+				tcCoverageObj.setDslSpecificCoverageRules(dslSpecificCoverageRules);
 			}
-			else {
-				tcCoverageObj.calculateTCCoverage();
-			}
+			tcCoverageObj.calculateTCCoverage();
 			tcCoverageObj.countNumOfElements();
 			tcCoverageObj.calculateCoveragePercentage();
-			this.overallResult.getCoverage().add(tcCoverageObj.getTcCoveragePercentage() + "");
+			overallResult.getCoverage().add(tcCoverageObj.getTcCoveragePercentage() + "");
 			
 			//if it is the first test case, copy the whole test case object coverage status for the test suite
-			if (this.tsObjectCoverageStatus.size() == 0) {
-				this.modelObjects.addAll(tcCoverageObj.getModelObjects());
-				this.tsObjectCoverageStatus.addAll(tcCoverageObj.getTcObjectCoverageStatus());
+			if (tsObjectCoverageStatus.size() == 0) {
+				modelObjects.addAll(tcCoverageObj.getModelObjects());
+				tsObjectCoverageStatus.addAll(tcCoverageObj.getTcObjectCoverageStatus());
 			}else {
 				for (int i=0; i<tcCoverageObj.getTcObjectCoverageStatus().size(); i++) {
 					String tcCoverage = tcCoverageObj.getTcObjectCoverageStatus().get(i);
-					if (tcCoverage == TDLCoverageUtil.COVERED & this.tsObjectCoverageStatus.get(i) != TDLCoverageUtil.COVERED) {
-						this.tsObjectCoverageStatus.set(i, TDLCoverageUtil.COVERED);
+					if (tcCoverage == TDLCoverageUtil.COVERED & tsObjectCoverageStatus.get(i) != TDLCoverageUtil.COVERED) {
+						tsObjectCoverageStatus.set(i, TDLCoverageUtil.COVERED);
 					}
 				}
 			}
 		}
-		if (this.tsObjectCoverageStatus.size() != 0) {
+		if (tsObjectCoverageStatus.size() != 0) {
 			countNumOfElements();
 			//System.out.println("\n" + "Model size (n. of EObjects): " + this.modelObjects.size() + "\n");
 			calculateCoveragePercentage();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void findDSLSpecificCoverageExtension() {
+		//check if there is a DSL-Specific coverage extension
+		DSLSpecificCoverageHandler dslSpecificCoverageHandler = new DSLSpecificCoverageHandler();
+		dslSpecificCoverageExtension = dslSpecificCoverageHandler.getDSLSpecificCoverage();
+		dslSpecificCoverageRules = ECollections.newBasicEList();
+		if (dslSpecificCoverageExtension != null) {
+			dslSpecificCoverageRules.addAll(dslSpecificCoverageExtension.getDSLSpecificCoverageRules());
 		}
 	}
 	
