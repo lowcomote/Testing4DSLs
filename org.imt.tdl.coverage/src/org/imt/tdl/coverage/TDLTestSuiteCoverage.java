@@ -53,7 +53,7 @@ public class TDLTestSuiteCoverage {
 	public void calculateTSCoverage() {
 		findDSLSpecificCoverageExtension();
 		//check inheritance relationships between coverable and not-coverable classes
-		TDLCoverageUtil.getInstance().checkInheritanceOfNotCoverableClasses();
+		TDLCoverageUtil.getInstance().checkInheritanceForNotCoverableClasses();
 		
 		//for each test case, calculate coverage using the generic tool
 		//if the DSL provides a dsl-specific coverage tool, call its methods: ignoring model objects, retrieving coverage rules

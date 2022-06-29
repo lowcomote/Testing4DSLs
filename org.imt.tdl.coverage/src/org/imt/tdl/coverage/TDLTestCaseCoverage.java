@@ -91,7 +91,7 @@ public class TDLTestCaseCoverage {
 		List<DSLSpecificCoverageRule> relatedRules = dslSpecificCoverageRules.stream().
 				filter(r -> r.getContext().equals(object.eClass())).collect(Collectors.toList());
 		for (DSLSpecificCoverageRule rule:relatedRules) {
-			for (EReference eRefrence : rule.getImpliesReferenceCoverage()) {
+			for (EReference eRefrence : rule.getReferenceCoverage()) {
 				Object referencedObject = object.eGet(eRefrence);
 				if (referencedObject != null) {
 					if (referencedObject instanceof EObject) {
