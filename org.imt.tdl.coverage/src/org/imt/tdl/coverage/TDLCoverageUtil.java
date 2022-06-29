@@ -169,7 +169,9 @@ public class TDLCoverageUtil {
 		return result;
 	}
 	
-	public void checkInheritanceOfNotCoverableClasses() {
+	//for each class that is not coverable (it is not extended in the interpreter)
+	//if one of its super classes is coverable, the class must be set as coverable 
+	public void checkInheritanceForNotCoverableClasses() {
 		int abstractSyntaxSize = 0;
 		for (EClassifier clazz: metamodelRootElement.getEClassifiers()) {
 			String className = clazz.getName();
@@ -194,8 +196,6 @@ public class TDLCoverageUtil {
 	}
 	
 	private void checkInheritance(EClass eClazz) {
-		//for each class that is not coverable (it is not extended in the interpreter)
-		//if one of its super classes is coverable, the class must be set as coverable 
 		for (EClass superClass:eClazz.getEAllSuperTypes()) {
 			if (instance.coverableClasses.contains(superClass.getName())) {
 				instance.coverableClasses.add(eClazz.getName());
@@ -209,13 +209,13 @@ public class TDLCoverageUtil {
 				filter(a -> a.getSource().equals("dynamic") || a.getSource().equals("aspect")).collect(Collectors.toList());
 		//if the type of the object is dynamic, all of its features must be set to the default values
 		if (classDynamicAnnotations != null && classDynamicAnnotations.size()>0) {
-			this.dynamicClasses.add((EClass) clazz);
+			dynamicClasses.add((EClass) clazz);
 		}
 		else {
 			List<EStructuralFeature> dynamicFeatures = ((EClass) clazz).getEAllStructuralFeatures().stream().
 					filter(f -> isDynamicFeature(f)).collect(Collectors.toList());
 			if (dynamicFeatures != null && dynamicFeatures.size()>0) {
-				this.classesWithDynamicFeatures.add((EClass) clazz);
+				classesWithDynamicFeatures.add((EClass) clazz);
 			}
 		}
 	}
@@ -234,6 +234,23 @@ public class TDLCoverageUtil {
 		coverableClasses.add(clazz.getName());
 	}
 	
+	public void removeCoverableClass(EClass clazz) {
+		coverableClasses.remove(clazz.getName());
+	}
+	//for every class that is going to be removed from the coverable classes,
+	//find all the subclasses from the metamodel and remove them as well
+	public void removeCoverableClass_subClass(EClass clazz) {
+		coverableClasses.remove(clazz.getName());
+		for (EClassifier c: metamodelRootElement.getEClassifiers().stream().filter(superClass -> superClass instanceof EClass).collect(Collectors.toList())) {
+			for (EClass sc: ((EClass) c).getEAllSuperTypes().stream().filter(superClass -> superClass instanceof EClass).collect(Collectors.toList())) {
+				if (sc.getName().equals(clazz.getName()) && coverableClasses.contains(c.getName())) {
+					coverableClasses.remove(c.getName());
+					break;
+				}
+			}
+		}
+	}
+	
 	public List<EClass> getClassesWithDynamicFeatures() {
 		return classesWithDynamicFeatures;
 	}
@@ -241,6 +258,5 @@ public class TDLCoverageUtil {
 	public List<EClass> getDynamicClasses() {
 		return dynamicClasses;
 	}
-	
 	
 }
