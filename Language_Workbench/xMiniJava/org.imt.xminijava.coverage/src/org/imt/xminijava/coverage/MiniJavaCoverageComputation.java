@@ -3,6 +3,7 @@ package org.imt.xminijava.coverage;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.RecordingCommand;
@@ -22,51 +23,45 @@ import org.imt.minijava.xminiJava.TypeDeclaration;
 import org.imt.minijava.xminiJava.WhileStatement;
 import org.imt.tdl.coverage.TDLCoverageUtil;
 import org.imt.tdl.coverage.TDLTestCaseCoverage;
+import org.imt.tdl.coverage.dslSpecific.DSLSpecificCoverageRule;
 import org.imt.tdl.coverage.dslSpecific.IDSLSpecificCoverage;
 
 public class MiniJavaCoverageComputation implements IDSLSpecificCoverage{
 
 	private List<EObject> modelObjects ;
 	private TDLTestCaseCoverage testCaseCoverage;
-	
-	@Override
-	public List<String> getNewCoverableClasses() {
-		List<String> coverableClasses = new ArrayList<>();
-		coverableClasses.add(Class.class.getName());
-		return coverableClasses;
-	}
 
-	@Override
-	public void specializeCoverage(TDLTestCaseCoverage testCaseCoverage) {
-		this.testCaseCoverage = testCaseCoverage;
-		this.modelObjects = testCaseCoverage.getModelObjects();
-		for (int i=0; i<this.modelObjects.size(); i++) {
-			EObject modelObject = this.modelObjects.get(i);
-			//String coverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(i);
-			if (modelObject instanceof Program) {
-				programCoverage ((Program) modelObject);
-			}
-			else if (modelObject instanceof Method) {
-				methodCoverage ((Method) modelObject);
-			}
-			else if (modelObject instanceof MethodCall) {
-				methodCallCoverage ((MethodCall) modelObject);
-			}
-//			else if (modelObject instanceof Class && coverage != TDLCoverageUtil.COVERED) {
-//				classCoverage ((Class) modelObject);
+//	@Override
+//	public void specializeCoverage(TDLTestCaseCoverage testCaseCoverage) {
+//		this.testCaseCoverage = testCaseCoverage;
+//		this.modelObjects = testCaseCoverage.getModelObjects();
+//		for (int i=0; i<this.modelObjects.size(); i++) {
+//			EObject modelObject = this.modelObjects.get(i);
+//			//String coverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(i);
+//			if (modelObject instanceof Program) {
+//				programCoverage ((Program) modelObject);
 //			}
-			//the following are required to be compatible with CodeCover tool
-//			else if (modelObject instanceof IfStatement) {
-//				ifCoverage ((IfStatement) modelObject);
+//			else if (modelObject instanceof Method) {
+//				methodCoverage ((Method) modelObject);
 //			}
-//			else if (modelObject instanceof WhileStatement) {
-//				whileCoverage ((WhileStatement) modelObject);
+//			else if (modelObject instanceof MethodCall) {
+//				methodCallCoverage ((MethodCall) modelObject);
 //			}
-//			else if (modelObject instanceof ForStatement) {
-//				forCoverage ((ForStatement) modelObject);
-//			}
-		}
-	}
+////			else if (modelObject instanceof Class && coverage != TDLCoverageUtil.COVERED) {
+////				classCoverage ((Class) modelObject);
+////			}
+//			//the following are required to be compatible with CodeCover tool
+////			else if (modelObject instanceof IfStatement) {
+////				ifCoverage ((IfStatement) modelObject);
+////			}
+////			else if (modelObject instanceof WhileStatement) {
+////				whileCoverage ((WhileStatement) modelObject);
+////			}
+////			else if (modelObject instanceof ForStatement) {
+////				forCoverage ((ForStatement) modelObject);
+////			}
+//		}
+//	}
 
 	private void methodCallCoverage(MethodCall modelObject) {
 		//if the container of a methodCall is a block, it is indeed a statement and its coverage status must be considered
@@ -201,5 +196,11 @@ public class MiniJavaCoverageComputation implements IDSLSpecificCoverage{
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public EList<DSLSpecificCoverageRule> getDSLSpecificCoverageRules() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

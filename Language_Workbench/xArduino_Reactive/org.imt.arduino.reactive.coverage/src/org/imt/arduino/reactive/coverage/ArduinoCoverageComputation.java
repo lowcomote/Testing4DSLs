@@ -1,165 +1,47 @@
 package org.imt.arduino.reactive.coverage;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.imt.arduino.reactive.arduino.AnalogPin;
-import org.imt.arduino.reactive.arduino.Block;
-import org.imt.arduino.reactive.arduino.Board;
-import org.imt.arduino.reactive.arduino.DigitalPin;
-import org.imt.arduino.reactive.arduino.Instruction;
-import org.imt.arduino.reactive.arduino.Module;
-import org.imt.arduino.reactive.arduino.Pin;
-import org.imt.arduino.reactive.arduino.Project;
-import org.imt.arduino.reactive.arduino.Sketch;
-import org.imt.tdl.coverage.TDLCoverageUtil;
-import org.imt.tdl.coverage.TDLTestCaseCoverage;
+import org.imt.arduino.reactive.arduino.ArduinoPackage;
+import org.imt.tdl.coverage.dslSpecific.DSLSpecificCoverageRule;
 import org.imt.tdl.coverage.dslSpecific.IDSLSpecificCoverage;
 
 public class ArduinoCoverageComputation implements IDSLSpecificCoverage{
 
-	private List<EObject> modelObjects;
-	private TDLTestCaseCoverage testCaseCoverage;
-	
 	@Override
-	public List<String> getNewCoverableClasses() {
-		// TODO Auto-generated method stub
-		return null;
+	public EList<DSLSpecificCoverageRule> getDSLSpecificCoverageRules() {
+		//a Project is covered if at least one of its Sketches are covered
+		DSLSpecificCoverageRule rule4sketch = new DSLSpecificCoverageRule();
+		rule4sketch.setContext(ArduinoPackage.eINSTANCE.getSketch());
+		rule4sketch.setContainerCoverageByOne(ECollections.asEList(ArduinoPackage.eINSTANCE.getProject_Sketches()));
+		
+		//a Sketch is covered if at least one of its Blocks is covered
+		DSLSpecificCoverageRule rule4block = new DSLSpecificCoverageRule();
+		rule4block.setContext(ArduinoPackage.eINSTANCE.getBlock());
+		rule4block.setContainerCoverageByOne(ECollections.asEList(ArduinoPackage.eINSTANCE.getSketch_Block()));
+		
+		//a Block is covered if at least one of its instructions is covered
+		DSLSpecificCoverageRule rule4instruction = new DSLSpecificCoverageRule();
+		rule4instruction.setContext(ArduinoPackage.eINSTANCE.getInstruction());
+		rule4instruction.setContainerCoverageByOne(ECollections.asEList(ArduinoPackage.eINSTANCE.getBlock_Instructions()));
+		
+		//ignore physical-related elements from coverage computation
+		DSLSpecificCoverageRule rule4board = new DSLSpecificCoverageRule();
+		rule4board.setContext(ArduinoPackage.eINSTANCE.getBoard());
+		rule4board.ignoreClass_subClassesFromCoverage();
+		
+		DSLSpecificCoverageRule rule4pin = new DSLSpecificCoverageRule();
+		rule4pin.setContext(ArduinoPackage.eINSTANCE.getPin());
+		rule4pin.ignoreClass_subClassesFromCoverage();
+		
+		DSLSpecificCoverageRule rule4module = new DSLSpecificCoverageRule();
+		rule4module.setContext(ArduinoPackage.eINSTANCE.getModule());
+		rule4module.ignoreClass_subClassesFromCoverage();
+		
+		return ECollections.asEList(rule4sketch, rule4block, rule4board, rule4instruction, rule4module, rule4pin);
 	}
 
-	@Override
-	public void specializeCoverage(TDLTestCaseCoverage testCaseCoverage) {
-		this.testCaseCoverage = testCaseCoverage;
-		this.modelObjects = testCaseCoverage.getModelObjects();
-		for (int i=0; i<this.modelObjects.size(); i++) {
-			EObject modelObject = this.modelObjects.get(i);
-			String coverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(i);
-			if (modelObject instanceof Project && coverage != TDLCoverageUtil.COVERED) {
-				projectCoverage ((Project) modelObject);
-			}
-			else if (modelObject instanceof Sketch && coverage != TDLCoverageUtil.COVERED) {
-				sketchCoverage ((Sketch) modelObject);
-			}
-			else if (modelObject instanceof Block && coverage != TDLCoverageUtil.COVERED) {
-				blockCoverage ((Block) modelObject);
-			}
-			//The board and its contained elements must be ignored from coverage computation because only the sketch is important
-			else if (modelObject instanceof Board) {
-				boardCoverage ((Board) modelObject);
-			}
-			else if (modelObject instanceof Pin) {
-				pinCoverage ((Pin) modelObject);
-			}
-			else if (modelObject instanceof Module) {
-				moduleCoverage ((Module) modelObject);
-			}
-		}
-	}
-
-	private void boardCoverage(Board modelObject) {
-		// TODO Auto-generated method stub
-		Board board = (Board) modelObject;
-		int index = this.modelObjects.indexOf(board);
-		this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.NOT_COVERABLE);
-	}
-
-	private void projectCoverage(Project project) {
-		//Project is the root element of the model, so if there is at least one covered element, it is also covered
-		if (this.testCaseCoverage.getTcObjectCoverageStatus().contains(TDLCoverageUtil.COVERED)) {
-			int index = this.modelObjects.indexOf(project);
-			this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.COVERED);
-		}	
-	}
-
-	private void sketchCoverage(Sketch modelObject) {
-		//if at least one of the contained objects of the sketch is covered, the sketch is also covered
-		Sketch sketch = (Sketch) modelObject;
-		Block block = sketch.getBlock();
-		if (block != null) {
-			int blockIndex = this.modelObjects.indexOf(block);
-			String blockCoverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(blockIndex);
-			if (blockCoverage != TDLCoverageUtil.COVERED) {
-				blockCoverage(block);
-				blockCoverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(blockIndex);
-			}
-			if (blockCoverage == TDLCoverageUtil.COVERED) {
-				int sketchIndex = this.modelObjects.indexOf(sketch);
-				this.testCaseCoverage.getTcObjectCoverageStatus().set(sketchIndex, TDLCoverageUtil.COVERED);
-			}
-		}
-	}
-	
-	private void blockCoverage(Block modelObject) {
-		//if at least one of its instructions is covered, the block is also covered
-		Block block = (Block) modelObject;
-		for (Instruction instruction: block.getInstructions()) {
-			int instructionIndex = this.modelObjects.indexOf(instruction);
-			String instrcutionCoverge = this.testCaseCoverage.getTcObjectCoverageStatus().get(instructionIndex);
-			if (instrcutionCoverge == TDLCoverageUtil.COVERED) {
-				int blockIndex = this.modelObjects.indexOf(block);
-				this.testCaseCoverage.getTcObjectCoverageStatus().set(blockIndex, TDLCoverageUtil.COVERED); 
-				break;
-			}
-		}
-		int blockIndex = this.modelObjects.indexOf(block);
-		String blockCoverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(blockIndex);
-		if (blockCoverage != TDLCoverageUtil.COVERED) {
-			this.testCaseCoverage.getTcObjectCoverageStatus().set(blockIndex, TDLCoverageUtil.NOT_COVERED);
-		}
-	}
-	
-	private void pinCoverage(Pin pin) {
-		int pinIndex = this.modelObjects.indexOf(pin);
-		this.testCaseCoverage.getTcObjectCoverageStatus().set(pinIndex, TDLCoverageUtil.NOT_COVERABLE);
-//		if (pin instanceof DigitalPin) {
-//			digitalPinCoverage ((DigitalPin) pin);
-//		}
-//		else if (pin instanceof AnalogPin) {
-//			analogPinCoverage ((AnalogPin) pin);
-//		}
-	}
-
-	private void digitalPinCoverage(DigitalPin pin) {
-		//if the pin has a module, the coverage of the module is equals to the coverage of its container pin
-		int pinIndex = this.modelObjects.indexOf(pin);
-		String pinCoverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(pinIndex);
-		if (pin.getModule() != null) {
-			int moduleIndex =  this.modelObjects.indexOf(pin.getModule());
-			String moduleCoverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(moduleIndex);
-			if (pinCoverage == TDLCoverageUtil.COVERED && moduleCoverage != TDLCoverageUtil.COVERED) {
-				this.testCaseCoverage.getTcObjectCoverageStatus().set(moduleIndex, TDLCoverageUtil.COVERED);
-			}
-			else if (pinCoverage != TDLCoverageUtil.COVERED && moduleCoverage == TDLCoverageUtil.COVERED) {
-				this.testCaseCoverage.getTcObjectCoverageStatus().set(pinIndex, TDLCoverageUtil.COVERED);
-			}
-		}
-	}
-
-	private void analogPinCoverage(AnalogPin pin) {
-		//if the pin has a module, the coverage of the module is equals to the coverage of its container pin
-		int pinIndex = this.modelObjects.indexOf(pin);
-		String pinCoverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(pinIndex);
-		if (pin.getModule() != null) {
-			int moduleIndex =  this.modelObjects.indexOf(pin.getModule());
-			String moduleCoverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(moduleIndex);
-			if (moduleCoverage == TDLCoverageUtil.COVERED) {
-				this.testCaseCoverage.getTcObjectCoverageStatus().set(pinIndex, TDLCoverageUtil.COVERED);
-			}
-		}
-	}
-
-	private void moduleCoverage(Module modelObject) {
-		//if the container of the module i.e., a pin is covered, the module is also covered
-		Module module = (Module) modelObject;
-		int moduleIndex = this.modelObjects.indexOf(module);
-		this.testCaseCoverage.getTcObjectCoverageStatus().set(moduleIndex, TDLCoverageUtil.NOT_COVERABLE);
-//		int pinIndex  =  this.modelObjects.indexOf(module.eContainer());
-//		String pinCoverage  = this.testCaseCoverage.getTcObjectCoverageStatus().get(pinIndex);
-//		if (pinCoverage == TDLCoverageUtil.COVERED) {
-//			this.testCaseCoverage.getTcObjectCoverageStatus().set(moduleIndex, TDLCoverageUtil.COVERED);
-//		}
-	}
 	
 	@Override
 	public void ignoreModelObjects(Resource MUTResource) {
