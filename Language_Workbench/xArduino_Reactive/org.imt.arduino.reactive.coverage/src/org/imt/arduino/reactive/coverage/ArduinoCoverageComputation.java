@@ -13,17 +13,17 @@ public class ArduinoCoverageComputation implements IDSLSpecificCoverage{
 	public EList<DSLSpecificCoverageRule> getDSLSpecificCoverageRules() {
 		//a Project is covered if at least one of its Sketches are covered
 		DSLSpecificCoverageRule rule4project = new DSLSpecificCoverageRule();
-		rule4project.setContext(ArduinoPackage.eINSTANCE.getSketch());
+		rule4project.setContext(ArduinoPackage.eINSTANCE.getProject());
 		rule4project.setContainerCoverageByOne(ECollections.asEList(ArduinoPackage.eINSTANCE.getProject_Sketches()));
 		
 		//a Sketch is covered if at least one of its Blocks is covered
 		DSLSpecificCoverageRule rule4sketch = new DSLSpecificCoverageRule();
-		rule4sketch.setContext(ArduinoPackage.eINSTANCE.getBlock());
+		rule4sketch.setContext(ArduinoPackage.eINSTANCE.getSketch());
 		rule4sketch.setContainerCoverageByOne(ECollections.asEList(ArduinoPackage.eINSTANCE.getSketch_Block()));
 		
 		//a Block is covered if at least one of its instructions is covered
 		DSLSpecificCoverageRule rule4block = new DSLSpecificCoverageRule();
-		rule4block.setContext(ArduinoPackage.eINSTANCE.getInstruction());
+		rule4block.setContext(ArduinoPackage.eINSTANCE.getBlock());
 		rule4block.setContainerCoverageByOne(ECollections.asEList(ArduinoPackage.eINSTANCE.getBlock_Instructions()));
 		
 		//set dependencies between rules
