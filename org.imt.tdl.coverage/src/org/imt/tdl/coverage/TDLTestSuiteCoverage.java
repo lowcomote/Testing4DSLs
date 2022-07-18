@@ -60,7 +60,7 @@ public class TDLTestSuiteCoverage {
 		for (TDLTestCaseCoverage tcCoverageObj : this.tcCoverages) {
 			if (dslSpecificCoverageExtension != null) {
 				dslSpecificCoverageExtension.ignoreModelObjects(tcCoverageObj.getMUTResource());
-				tcCoverageObj.setDslSpecificCoverageRules(dslSpecificCoverageRules);
+				tcCoverageObj.setCoverageRules(dslSpecificCoverageRules);
 			}
 			tcCoverageObj.calculateTCCoverage();
 			tcCoverageObj.countNumOfElements();
