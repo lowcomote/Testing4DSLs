@@ -17,7 +17,8 @@ public class DSLSpecificCoverageRule {
 	private EList<EReference> containerCoverageByAll;
 	private EList<EReference> containerCoverageByOne;
 	
-	private List<DSLSpecificCoverageRule> dependsOn = new ArrayList();
+	private List<DSLSpecificCoverageRule> dependencies = new ArrayList();
+
 	private boolean ignoreClassFromCoverage;
 	
 	public EClass getContext() {
@@ -92,12 +93,15 @@ public class DSLSpecificCoverageRule {
 	}
 	
 	public void addDependency (DSLSpecificCoverageRule rule) {
-		this.dependsOn.add(rule);
+		dependencies.add(rule);
 	}
 	
 	public void removeDependency (DSLSpecificCoverageRule rule) {
-		if (this.dependsOn.contains(rule)) {
-			this.dependsOn.remove(rule);
+		if (dependencies.contains(rule)) {
+			dependencies.remove(rule);
 		}
+	}
+	public List<DSLSpecificCoverageRule> getDependencies() {
+		return dependencies;
 	}
 }
