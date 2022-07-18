@@ -15,12 +15,12 @@ public class PSSMCoverageComputation implements IDSLSpecificCoverage{
 		//a customSystem is covered when its inner stateMachine is covered
 		DSLSpecificCoverageRule rule4customSystem = new DSLSpecificCoverageRule();
 		rule4customSystem.setContext(StatemachinesPackage.eINSTANCE.getCustomSystem());
-		rule4customSystem.setReferenceCoverage(StatemachinesPackage.eINSTANCE.getCustomSystem_Statemachine());
+		rule4customSystem.setContainerCoverageByOne(StatemachinesPackage.eINSTANCE.getCustomSystem_Statemachine());
 		
-		//a stateMachine is covered when all of its inner regions are covered
+		//a stateMachine is covered when one of its inner regions are covered
 		DSLSpecificCoverageRule rule4stateMachine = new DSLSpecificCoverageRule();
 		rule4stateMachine.setContext(StatemachinesPackage.eINSTANCE.getStateMachine());
-		rule4stateMachine.setContainerCoverageByAll(StatemachinesPackage.eINSTANCE.getStateMachine_Regions());
+		rule4stateMachine.setContainerCoverageByOne(StatemachinesPackage.eINSTANCE.getStateMachine_Regions());
 		
 		//a region is covered if at least one of its transitions is covered
 		DSLSpecificCoverageRule rule4region = new DSLSpecificCoverageRule();
@@ -67,6 +67,12 @@ public class PSSMCoverageComputation implements IDSLSpecificCoverage{
 		rule4customSystem.addDependency(rule4stateMachine);
 		rule4stateMachine.addDependency(rule4region);
 		rule4region.addDependency(rule4transition);
+		rule4booleanConstraint.addDependency(rule4transition);
+		rule4stringConstraint.addDependency(rule4transition);
+		rule4integerConstraint.addDependency(rule4transition);
+		rule4trigger.addDependency(rule4transition);  
+		rule4signalEvent.addDependency(rule4trigger);
+		rule4callEvent.addDependency(rule4trigger);
 		
 		return ECollections.asEList(rule4customSystem, rule4stateMachine, rule4region, rule4transition, rule4trigger, rule4stringConstraint,
 				rule4booleanConstraint, rule4integerConstraint, rule4callEvent, rule4signalEvent);
