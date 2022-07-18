@@ -63,6 +63,11 @@ public class PSSMCoverageComputation implements IDSLSpecificCoverage{
 		rule4callEvent.setContext(StatemachinesPackage.eINSTANCE.getCallEventType());
 		rule4callEvent.setReferenceCoverage(StatemachinesPackage.eINSTANCE.getCallEventType_Operation());
 		
+		//set dependencies between rules
+		rule4customSystem.addDependency(rule4stateMachine);
+		rule4stateMachine.addDependency(rule4region);
+		rule4region.addDependency(rule4transition);
+		
 		return ECollections.asEList(rule4customSystem, rule4stateMachine, rule4region, rule4transition, rule4trigger, rule4stringConstraint,
 				rule4booleanConstraint, rule4integerConstraint, rule4callEvent, rule4signalEvent);
 	}
