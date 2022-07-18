@@ -1,5 +1,8 @@
 package org.imt.tdl.coverage.dslSpecific;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -14,6 +17,7 @@ public class DSLSpecificCoverageRule {
 	private EList<EReference> containerCoverageByAll;
 	private EList<EReference> containerCoverageByOne;
 	
+	private List<DSLSpecificCoverageRule> dependsOn = new ArrayList();
 	private boolean ignoreClassFromCoverage;
 	
 	public EClass getContext() {
@@ -84,6 +88,16 @@ public class DSLSpecificCoverageRule {
 		ignoreClassFromCoverage = true;
 		if (TDLCoverageUtil.getInstance().isClassCoverable(context)) {
 			TDLCoverageUtil.getInstance().removeCoverableClass_subClass(context);
+		}
+	}
+	
+	public void addDependency (DSLSpecificCoverageRule rule) {
+		this.dependsOn.add(rule);
+	}
+	
+	public void removeDependency (DSLSpecificCoverageRule rule) {
+		if (this.dependsOn.contains(rule)) {
+			this.dependsOn.remove(rule);
 		}
 	}
 }
