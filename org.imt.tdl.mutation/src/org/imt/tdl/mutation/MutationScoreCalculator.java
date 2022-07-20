@@ -283,7 +283,7 @@ public class MutationScoreCalculator {
 		String outputFilePath = PathHelper.getInstance().getWorkspacePath() + "/"
 				+ PathHelper.getInstance().getTestSuiteProjectName() + "/" 
 				+ PathHelper.getInstance().getTestSuiteFileName() + 
-				"_mutationResult.txt";
+				"_mutationReport.txt";
 		StringBuilder sb = new StringBuilder();
 		sb.append("Number of generated mutants: " + numOfMutants + "\n");
 		sb.append("Number of killed mutants: " + numOfKilledMutants + "\n");

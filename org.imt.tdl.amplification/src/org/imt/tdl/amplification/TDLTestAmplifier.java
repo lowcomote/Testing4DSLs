@@ -84,7 +84,7 @@ public class TDLTestAmplifier {
 				String outputFilePath = PathHelper.getInstance().getWorkspacePath() + "/"
 							+ PathHelper.getInstance().getTestSuiteProjectName() + "/" 
 							+ PathHelper.getInstance().getTestSuiteFileName() + 
-							"_amplificationResult.txt";
+							"_amplificationReport.txt";
 				printAmplificationResult(outputFilePath);
 			}
 			
