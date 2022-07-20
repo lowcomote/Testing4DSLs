@@ -19,7 +19,10 @@ Export-Package: org.imt.tdl.coverage,
  org.imt.tdl.coverage.dslSpecific,
  TDLTestCoverage,
  TDLTestCoverage.impl,
- TDLTestCoverage.util
+ TDLTestCoverage.util,
+ DSLSpecificCoverage,
+ DSLSpecificCoverage.impl,
+ DSLSpecificCoverage.util
 Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.common,
  org.eclipse.gemoc.dsl.model,

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="DSLSpecificCoverage" nsURI="https://org.imt.tdl.coverage/DSLSpecificCoverage"
+    nsPrefix="DSLSpecificCoverage">
+  <eClassifiers xsi:type="ecore:EClass" name="DomainSpecificCoverage">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metaclasses" lowerBound="1"
+        upperBound="-1" eType="#//Context" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Context">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metaclass" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
+        eType="#//Rule" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Rule" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CoverageIgnorance" eSuperTypes="#//Rule">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ignoreSubclasses" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReferenceCoverageInference" eSuperTypes="#//Rule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associationReference" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContainerCoverageInference" eSuperTypes="#//Rule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containerMetaclass" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containementReference"
+        lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiplicity" lowerBound="1"
+        eType="#//CoveredContainee"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CoveredContainee">
+    <eLiterals name="ALL"/>
+    <eLiterals name="ONE" value="1"/>
+  </eClassifiers>
+</ecore:EPackage>

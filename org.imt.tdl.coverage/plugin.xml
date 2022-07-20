@@ -37,4 +37,12 @@
             genModel="model/TDLTestCoverage.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated DSLSpecificCoverage -->
+      <package
+            uri="https://org.imt.tdl.coverage/DSLSpecificCoverage"
+            class="DSLSpecificCoverage.DSLSpecificCoveragePackage"
+            genModel="model/DSLSpecificCoverage.genmodel"/>
+   </extension>
+
 </plugin>
