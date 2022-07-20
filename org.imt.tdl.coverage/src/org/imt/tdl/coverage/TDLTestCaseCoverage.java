@@ -6,19 +6,31 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gemoc.trace.commons.model.trace.SequentialStep;
 import org.eclipse.gemoc.trace.commons.model.trace.Step;
 import org.eclipse.gemoc.trace.commons.model.trace.Trace;
 import org.etsi.mts.tdl.TestDescription;
-import org.imt.tdl.coverage.dslSpecific.DSLSpecificCoverageRule;
+import org.imt.tdl.coverage.dslSpecific.DSLSpecificCoverageExecutor;
+
+import DSLSpecificCoverage.ContainerCoverageInference;
+import DSLSpecificCoverage.Context;
+import DSLSpecificCoverage.CoverageIgnorance;
+import DSLSpecificCoverage.CoveredContainee;
+import DSLSpecificCoverage.ReferenceCoverageInference;
+import DSLSpecificCoverage.Rule;
 
 public class TDLTestCaseCoverage {
 
@@ -26,10 +38,11 @@ public class TDLTestCaseCoverage {
 	private Resource MUTResource;
 	private Trace<?, ?, ?> trace;
 	
-	private Map<DSLSpecificCoverageRule, Boolean> coverageRule_status= new HashMap<>();
+	private Map<Context, List<EObject>> coverageContext_eobjects= new HashMap<>();
 
 	private List<EObject> modelObjects;
 	private List<String> tcObjectCoverageStatus;
+	private List<String> tcObjectCoverageStatusCopy;
 	
 	double tcCoveragePercentage;
 	int numOfCoveredObjs;
@@ -37,23 +50,30 @@ public class TDLTestCaseCoverage {
 	
 	public TDLTestCaseCoverage() {
 		modelObjects = new ArrayList<>();
-		tcObjectCoverageStatus = new ArrayList<>();	
+		tcObjectCoverageStatus = new ArrayList<>();
+		tcObjectCoverageStatusCopy = new ArrayList<>();
 		numOfCoveredObjs= 0 ;
 		numOfNotCoverableElements = 0;
 	}
+	
 	//calculating the coverage of the test case based on the model execution trace and dsl-specific coverage rules
 	public void calculateTCCoverage () {
-		//find coverable objects using the MUTResource of the test case
-		findNotCoverableObjects();
+		//if there is a dsl-specific coverage, initialize the map
+		if (TDLCoverageUtil.getInstance().getDslSpecificCoverage() != null) {
+			TDLCoverageUtil.getInstance().getDslSpecificCoverage().getMetaclasses().
+				forEach(c -> coverageContext_eobjects.put(c, new ArrayList<>()));
+		}
+		analyzeEObjects();
 		Step<?> rootStep = trace.getRootStep();
 		calculateObjectCoverage(rootStep);
-		if (!coverageRule_status.isEmpty()) {
-			applyDSLSpecificCoverageRules();
+		if (!coverageContext_eobjects.isEmpty()) {
+			runDSLSpecificCoverage();
 		}
 		changeCoverable2notCovered();
 	}
 
-	private void findNotCoverableObjects() {
+	private void analyzeEObjects() {
+		//find coverable objects using the MUTResource of the test case
 		TreeIterator<EObject> modelContents = MUTResource.getAllContents();
 		while (modelContents.hasNext()) {
 			EObject modelObject = modelContents.next();
@@ -88,68 +108,72 @@ public class TDLTestCaseCoverage {
 		}
 	}
 	
-	private void applyDSLSpecificCoverageRules() {
-		//for each rule, find the model objects that are of type of the rule's context
-		//apply the rule on all objects
-		for (DSLSpecificCoverageRule rule:coverageRule_status.keySet()) {
-			//a rule might be already executed while checking rule dependencies, so first check its status
-			if (!coverageRule_status.get(rule)) {
-				modelObjects.stream().filter(o -> rule.getContext().isSuperTypeOf(o.eClass())).collect(Collectors.toList()).
-					forEach(object -> applyCoverageRule(rule, object));
-				coverageRule_status.replace(rule, true);
+	private void runDSLSpecificCoverage() {
+		//find the model objects that are of type of the contexts
+		
+		for (Entry<Context,List<EObject>> entry:coverageContext_eobjects.entrySet()) {
+			String contextName = entry.getKey().getMetaclass().getName();
+			for (EObject object: modelObjects) {
+				String objectTypeName = object.eClass().getName();
+				if (contextName.equals(objectTypeName) ||
+						object.eClass().getEAllSuperTypes().stream().
+							filter(st -> st.getName().equals(contextName)).findAny().isPresent()) {
+					entry.getValue().add(object);
+				}
+			}
+		}
+//		coverageContext_eobjects.entrySet().forEach(entry -> 
+//			entry.getValue().addAll(modelObjects.stream().
+//				filter(object -> entry.getKey().getMetaclass().isSuperTypeOf(object.eClass())).
+//				collect(Collectors.toList())));
+		//apply domain specific coverage while the coverage matrix changes
+		while (isCoverageMatrixChanged()) {
+			coverageContext_eobjects.entrySet().stream().filter(entry -> !entry.getValue().isEmpty()).
+				forEach(entry -> entry.getValue().
+					forEach(o -> applyCoverageRules(entry.getKey().getRules(), o)));
+		}
+	}
+
+	//apply all the rules on the object (NOTE: rule's context = object type)
+	private void applyCoverageRules(EList<Rule> rules, EObject object) {
+		for (Rule rule:rules) {
+			if (rule instanceof ReferenceCoverageInference) {
+				inferReferenceCoverage((ReferenceCoverageInference) rule, object);
+			}
+			else if (rule instanceof ContainerCoverageInference) {
+				inferContainerCoverage((ContainerCoverageInference) rule, object);
 			}
 		}
 	}
 	
-	private void applyCoverageRule(DSLSpecificCoverageRule rule, EObject object) {
-		//first apply dependent rules that are not already applied
-		if (!rule.getDependencies().isEmpty()) {
-			rule.getDependencies().stream().filter(dr -> coverageRule_status.get(dr) == false).
-				forEach(dr -> applyDependentRule(dr));
-		}
-		
-		//infer coverage of association references
-		if (rule.getReferenceCoverage() != null) {
-			for (EReference eRefrence : rule.getReferenceCoverage()) {
-				Object referencedObject = object.eGet(eRefrence);
-				if (referencedObject != null) {
-					if (referencedObject instanceof EObject) {
-						setReferencedObjectCoverage((EObject) referencedObject, getObjectCoverage(object));
-					}
-					else if (referencedObject instanceof EObjectContainmentEList<?>) {
-						((EObjectContainmentEList<?>) referencedObject).
-							forEach(o -> setReferencedObjectCoverage((EObject) o, getObjectCoverage(object)));
-					}
-				}
+	private void inferReferenceCoverage(ReferenceCoverageInference r, EObject object) {
+		Object referencedObject = object.eGet(r.getAssociationReference());
+		if (referencedObject != null) {
+			if (referencedObject instanceof EObject) {
+				setReferencedObjectCoverage((EObject) referencedObject, getObjectCoverage(object));
+			}
+			else if (referencedObject instanceof EObjectContainmentEList<?>) {
+				((EObjectContainmentEList<?>) referencedObject).
+					forEach(o -> setReferencedObjectCoverage((EObject) o, getObjectCoverage(object)));
 			}
 		}
-		
-		//infer coverage of containers when at least one contained element must be covered
-		if (rule.getContainerCoverageByOne() != null) {
-			for (EReference eRefrence : rule.getContainerCoverageByOne()) {
-				Object containedObject = object.eGet(eRefrence);
-				if (containedObject != null) {
-					if (containedObject instanceof EObject) {
-						EObject containee = (EObject) containedObject;
-						setReferencedObjectCoverage(containee.eContainer(), getObjectCoverage(containee));
-					}
-					else if (containedObject instanceof EObjectContainmentEList<?>) {
+	}
+
+	private void inferContainerCoverage(ContainerCoverageInference r, EObject object) {
+		//check if the object container is the one expected by the rule
+		if (object.eContainer().eClass().getName() == r.getContainerMetaclass().getName()) {
+			Object containedObject = object.eContainer().eGet(r.getContainementReference());
+			if (containedObject != null) {
+				if (containedObject instanceof EObject) {
+					EObject containee = (EObject) containedObject;
+					setReferencedObjectCoverage(containee.eContainer(), getObjectCoverage(containee));
+				}
+				else if (containedObject instanceof EObjectContainmentEList<?>) {
+					//if several objects are contained, set coverage based on the rule's multiplicity
+					if (r.getMultiplicity() == CoveredContainee.ONE) {
 						coverContainerIfOneContaineeCovered((EObjectContainmentEList<?>) containedObject);
 					}
-				}
-			}
-		}
-		
-		//infer coverage of containers when all contained elements must be covered
-		if (rule.getContainerCoverageByAll() != null) {
-			for (EReference eRefrence : rule.getContainerCoverageByAll()) {
-				Object containedObject = object.eGet(eRefrence);
-				if (containedObject != null) {
-					if (containedObject instanceof EObject) {
-						EObject containee = (EObject) containedObject;
-						setReferencedObjectCoverage(containee.eContainer(), getObjectCoverage(containee));
-					}
-					else if (containedObject instanceof EObjectContainmentEList<?>) {
+					else {
 						coverContainerIfAllContaineeCovered((EObjectContainmentEList<?>) containedObject);
 					}
 				}
@@ -163,14 +187,6 @@ public class TDLTestCaseCoverage {
 			return tcObjectCoverageStatus.get(objectIndex);
 		}
 		return null;
-	}
-	
-	private void applyDependentRule(DSLSpecificCoverageRule dependentRule) {
-		//find the model objects that are of type of the rule's context
-		//apply the rule on all objects and set the rule status true
-		modelObjects.stream().filter(o -> dependentRule.getContext().isSuperTypeOf(o.eClass())).collect(Collectors.toList()).
-			forEach(object -> applyCoverageRule(dependentRule, object));
-		coverageRule_status.replace(dependentRule, true);
 	}
 	
 	private void setReferencedObjectCoverage(EObject refrencedObject, String coverageStatus) {
@@ -209,6 +225,13 @@ public class TDLTestCaseCoverage {
 			setReferencedObjectCoverage(((EObject) containedObjects.get(0)).eContainer(), TDLCoverageUtil.NOT_COVERED);
 		}
 	}
+	
+	private boolean isCoverageMatrixChanged() {
+        List<String> newCopy = new ArrayList<>(tcObjectCoverageStatus);
+        boolean result = !Objects.equals(tcObjectCoverageStatusCopy, newCopy);
+        tcObjectCoverageStatusCopy = newCopy;
+        return result;
+    }
 	
 	private void changeCoverable2notCovered() {
 		for (int i=0; i<this.tcObjectCoverageStatus.size(); i++) {
@@ -257,10 +280,6 @@ public class TDLTestCaseCoverage {
 
 	public TestDescription getTestCase() {
 		return testCase;
-	}
-
-	public void setCoverageRules(EList<DSLSpecificCoverageRule> dslSpecificCoverageRules) {
-		dslSpecificCoverageRules.forEach(r -> coverageRule_status.put(r, false));
 	}
 	public void setTestCase(TestDescription testCase) {
 		this.testCase = testCase;
