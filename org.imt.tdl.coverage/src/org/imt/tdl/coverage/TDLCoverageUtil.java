@@ -297,8 +297,9 @@ public class TDLCoverageUtil {
 		final Resource res = (new ResourceSetImpl()).getResource(URI.createURI(DSLPath), true);
 		final Dsl dsl = (Dsl) res.getContents().get(0);
 		if (dsl.getEntry("coverageFilePath") != null) {
+			ResourceSet resSet = testSuiteCoverage.getTcCoverages().get(0).getMUTResource().getResourceSet();
 			String coverageFilePath = dsl.getEntry("coverageFilePath").getValue().replaceFirst("resource", "plugin");
-			Resource coverageFileResource = (new ResourceSetImpl()).getResource(URI.createURI(coverageFilePath), true);
+			Resource coverageFileResource = (resSet).getResource(URI.createURI(coverageFilePath), true);
 			return coverageFileResource;
 		}
 		return null;

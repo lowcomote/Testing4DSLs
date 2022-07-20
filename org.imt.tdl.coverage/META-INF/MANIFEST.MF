@@ -8,7 +8,8 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: org.imt.tdl.coverage
-Import-Package: fr.inria.diverse.k3.al.annotationprocessor,
+Import-Package: DSLSpecificCoverage,
+ fr.inria.diverse.k3.al.annotationprocessor,
  fr.inria.diverse.k3.al.annotationprocessor.stepmanager,
  org.eclipse.core.runtime;version="3.7.0",
  org.eclipse.emf.ecore.provider,
