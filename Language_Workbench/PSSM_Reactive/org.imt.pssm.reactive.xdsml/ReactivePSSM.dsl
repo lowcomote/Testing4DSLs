@@ -5,3 +5,4 @@ behavioralInterface = platform:/resource/org.imt.pssm.reactive.relationships/Rea
 implemRelId = org.imt.pssm.reactive.relationships.implementation_relationship
 subtypeRelId = org.imt.pssm.reactive.relationships.subtyping_relationship
 coverageId = org.imt.pssm.reactive.coverage.PSSMCoverageComputation
+coverageFilePath = platform:/resource/org.imt.pssm.reactive.coverage/model/PSSMCoverageRules.xmi

@@ -4,3 +4,4 @@ k3 =  org.imt.arduino.reactive.interpreter.Control_EvaluableAspect, org.imt.ardu
 behavioralInterface = platform:/resource/org.imt.arduino.reactive.relationships/Arduino.bi
 implemRelId = org.imt.arduino.relationships.implementation_relationship
 coverageId = org.imt.arduino.reactive.coverage.ArduinoCoverageComputation
+coverageFilePath = platform:/resource/org.imt.arduino.reactive.coverage/model/ArduinoCoverageRules.xmi
