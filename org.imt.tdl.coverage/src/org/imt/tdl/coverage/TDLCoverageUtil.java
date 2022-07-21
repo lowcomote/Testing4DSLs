@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecoretools.ale.BehavioredClass;
 import org.eclipse.emf.ecoretools.ale.Operation;
 import org.eclipse.emf.ecoretools.ale.Tag;
@@ -89,21 +90,34 @@ public class TDLCoverageUtil {
 		instance.classesWithDynamicFeatures.clear();
 		instance.dslSpecificCoverage = null;
 		instance.dslSpecificCoverageExtension = null;
-		//analyze the DSL interpreter to find coverable classes
+		
 		findCoverableClasses();
-		//check if there is any DSL specific coverage and update coverable classes based on it
-		loadDSLSpecificCoverage();
-		//check inheritance relationships between coverable and not coverable classes
+		instance.testSuiteCoverage.calculateTSCoverage();
+	}
+
+	public void findCoverableClasses() {
+		//1. find coverable classes from the DSL's interpreter implementation
+		findCoverableClassesFromDSLSemantics();
+		
+		//2. check if there is any DSL specific coverage and update coverable classes based on it
+		dslSpecificCoverage = findDSLSpecificCoverage();
+		//if a DomainSpecificCoverage found, update coverable classes using the executor
+		if (dslSpecificCoverage != null) {
+			DSLSpecificCoverageExecutor executor = new DSLSpecificCoverageExecutor();
+			executor.updateCoverableClasses(dslSpecificCoverage);
+		}
+		
+		//3. check inheritance relationships between coverable and not coverable classes
 		checkInheritanceForNotCoverableClasses();
-		//if there is a dsl specific coverage, run all the coverage ignorance rules as it updates the coverable classes
+		
+		//4. if there is a dsl specific coverage, run all the coverage ignorance rules as it updates the coverable classes
 		if (dslSpecificCoverage != null) {
 			DSLSpecificCoverageExecutor executor = new DSLSpecificCoverageExecutor();
 			executor.runCoverageIgnoranceRules(dslSpecificCoverage);
 		}
-		instance.testSuiteCoverage.calculateTSCoverage();
 	}
-
-	public void findCoverableClasses(){
+	
+	private void findCoverableClassesFromDSLSemantics(){
 		final ResourceSet resSet = new ResourceSetImpl();
 		IConfigurationElement language = Arrays
 				.asList(Platform.getExtensionRegistry()
@@ -256,9 +270,10 @@ public class TDLCoverageUtil {
 		}
 		List<String> coverableSubClasses = metamodelRootElement.getEClassifiers().stream().
 			filter(c -> c instanceof EClass).map(c -> (EClass) c).
-			filter(c -> c.getEAllSuperTypes().contains(clazz) && coverableClasses.contains(c.getName())).
-			map (c -> c.getName()).
-			collect(Collectors.toList());
+			filter(c -> c.getEAllSuperTypes().stream().
+					filter(sc -> sc.getName().equals(clazz.getName())).findAny().isPresent() 
+					&& coverableClasses.contains(c.getName())).
+			map (c -> c.getName()).collect(Collectors.toList());
 		coverableClasses.removeAll(coverableSubClasses);
 	}
 	
@@ -270,37 +285,39 @@ public class TDLCoverageUtil {
 		return dynamicClasses;
 	}
 	
-	private void loadDSLSpecificCoverage() {
+	private DomainSpecificCoverage findDSLSpecificCoverage() {
 		//check if there is a DSL-Specific coverage extension
 		DSLSpecificCoverageHandler dslSpecificCoverageHandler = new DSLSpecificCoverageHandler();
 		dslSpecificCoverageExtension = dslSpecificCoverageHandler.getDSLSpecificCoverage();
 		//1. if the rules are implemented in a java class, retrieve them using extension point
 		if (dslSpecificCoverageExtension != null &&
 				dslSpecificCoverageExtension.getDomainSpecificCoverage() != null) {
-			dslSpecificCoverage = dslSpecificCoverageExtension.getDomainSpecificCoverage();
+			return dslSpecificCoverageExtension.getDomainSpecificCoverage();
 		}
 		//2. else, check .dsl file for the path to the coverageRules.xmi file
 		else {
-			Resource coverageFileResource = findDSLSpecificCoverageFile();
+			Resource coverageFileResource = loadDSLSpecificCoverageFile();
 			if (coverageFileResource != null) {
-				dslSpecificCoverage = (DomainSpecificCoverage) coverageFileResource.getContents().get(0);
+				return (DomainSpecificCoverage) coverageFileResource.getContents().get(0);
 			}
 		}
-		//if a DomainSpecificCoverage found, update coverable classes using the executor
-		if (dslSpecificCoverage != null) {
-			DSLSpecificCoverageExecutor executor = new DSLSpecificCoverageExecutor();
-			executor.updateCoverableClasses(dslSpecificCoverage);
-		}
+		return null;
 	}
-
-	private Resource findDSLSpecificCoverageFile() {
+	
+	private Resource loadDSLSpecificCoverageFile() {
+		String coverageFilePath = getCoverageFilePath();
+		if (coverageFilePath != null) {
+			Resource coverageFileResource = (new ResourceSetImpl()).getResource(URI.createURI(coverageFilePath), true);
+			return coverageFileResource;
+		}
+		return null;
+	}
+	
+	private String getCoverageFilePath() {
 		final Resource res = (new ResourceSetImpl()).getResource(URI.createURI(DSLPath), true);
 		final Dsl dsl = (Dsl) res.getContents().get(0);
 		if (dsl.getEntry("coverageFilePath") != null) {
-			ResourceSet resSet = testSuiteCoverage.getTcCoverages().get(0).getMUTResource().getResourceSet();
-			String coverageFilePath = dsl.getEntry("coverageFilePath").getValue().replaceFirst("resource", "plugin");
-			Resource coverageFileResource = (resSet).getResource(URI.createURI(coverageFilePath), true);
-			return coverageFileResource;
+			return dsl.getEntry("coverageFilePath").getValue().replaceFirst("resource", "plugin");
 		}
 		return null;
 	}
@@ -310,6 +327,17 @@ public class TDLCoverageUtil {
 	}
 
 	public DomainSpecificCoverage getDslSpecificCoverage() {
+		return dslSpecificCoverage;
+	}
+	
+	//Load rules using the resourceSet of the model objects to have the same IDs for EClasses
+	public DomainSpecificCoverage getDslSpecificCoverage(Resource MUTResource) {
+		String coverageFilePath = getCoverageFilePath();
+		if (coverageFilePath != null) {
+			Resource coverageFileResource = (MUTResource.getResourceSet()).getResource(URI.createURI(coverageFilePath), true);
+			dslSpecificCoverage = (DomainSpecificCoverage) coverageFileResource.getContents().get(0);
+			EcoreUtil.resolveAll(dslSpecificCoverage);
+		}
 		return dslSpecificCoverage;
 	}
 }
