@@ -32,10 +32,6 @@ Event-Driven XTDL is a generic approach that provides testing facilities for rea
 - TDL tools Version 1.0.0 ([udpate site](https://tdl.etsi.org/eclipse/latest/))
 - ATL transformation language Version 4.4.0 ([update site](http://download.eclipse.org/mmt/atl/updates/releases/4.4.0))
 
-**Setup**: 
-Find the `GenerateData.mwe` from org.etsi.mts.tdl.graphical.labels.data -> src -> org.etsi.mts.tdl.graphical.labels
-Right click and select Run As -> MWE2 Workflow
-
 **Using the XTDL**: 
 To use XTDL for a given xDSL, the following steps have to be followed.
 1. Import the intended input reactive xDSL into the workspace. For example, any of the xDSLs in the *Language_Workbench* folder can be used.
@@ -47,7 +43,7 @@ To write test cases from scratch, do the following steps:
 - Run the library generator using the GUI icons provided for it (it is in the toolbar and also in the menubar): It pop-ups a new window asking a project and an xDSL to be chosen from a list. Choose the project you just created and the xDSL imported in the first workspace as the input xDSL. By clicking the `Finish` button, a set of TDL files (i.e., the TDL library specific to the input xDSL) will be defined under the selected project.
 - Define the TDL test cases using the generated TDL files. To do so, you can define a new TDL file with the filename ending with `.tdlan2`, or you can use the generated `testSuite.tdlan2` file containing the required packages for writing test cases.
 5. Run the test cases using the `Executable model with GEMOC Java engine` run configuration (For the sample test suites existing in the *Modeling_Workbench* folder, the required launch configurations are provided).
-6. To see the test result follow: Window -> Show View -> Other -> TDL -> TDL Test Results. This is ![a sample screenshot of our tool](https://gitlab.univ-nantes.fr/naomod/faezeh-public/xtdl/-/blob/xTDL_EventManager/testResult.PNG).
+6. To see the test result follow: Window -> Show View -> Other -> TDL -> TDL Test Results. This is ![a sample screenshot of our tool](/testResult.PNG).
 
 ## Mutation Analysis
 Using our approach, you can perform mutation analysis on TDL test suites written for executable models.
@@ -57,6 +53,6 @@ This is the result of integrating our approach with [WODEL-Test](https://link.sp
 - WODEL framework ([udpate site](http://gomezabajo.github.io/Wodel/update-site)): You may face an error during installation related to emfjason. In this case, you need to first install emfjason [from this update site](http://ghillairet.github.io/p2/).
 
 For example, we performed mutation analysis on PSSM test suites in the `Mutation Testing/PSSMMutation` project.
-The result is accessbile in the `Modeling_Workbench` folder under [MutationTesting4PSSM.TDL](https://gitlab.univ-nantes.fr/naomod/faezeh-public/xtdl/-/tree/xTDL_EventManager/Modeling_Workbench/MutationTesting4PSSM.TDL).
-This is ![a sample screenshot of our tool](https://gitlab.univ-nantes.fr/naomod/faezeh-public/xtdl/-/blob/xTDL_EventManager/mutation.PNG).
+The result is accessbile in the `Modeling_Workbench` folder under [MutationTesting4PSSM.TDL](/Modeling_Workbench/MutationTesting4PSSM.TDL).
+This is ![a sample screenshot of our tool](/mutation.PNG).
 
