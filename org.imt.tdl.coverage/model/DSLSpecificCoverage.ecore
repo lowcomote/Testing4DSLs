@@ -16,6 +16,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Rule" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="CoverageIgnorance" eSuperTypes="#//Rule">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ignoreSubclasses" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="whenContainedBy" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReferenceCoverageInference" eSuperTypes="#//Rule">
     <eStructuralFeatures xsi:type="ecore:EReference" name="associationReference" lowerBound="1"
