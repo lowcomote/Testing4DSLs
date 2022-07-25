@@ -22,41 +22,11 @@ public class MiniJavaCoverageComputation implements IDSLSpecificCoverage{
 		//ignoring conditional elements from coverage computation because only their conditions must be considered
 		//ignoring method signature from coverage computation
 		//ignoring Program from coverage computation
+		//ignoring MethodCall when it is not contained by a Block: if the container of a methodCall is a block, it is indeed a statement and its coverage status must be considered
+			//but if it is contained by other elements such as if, while, ..., it is not coverable
 		//a TypeDeclaration is covered when at least one of its members is covered
 		return null;
 	}
-	
-	//NOTCHECKED
-//	private void methodCallCoverage(MethodCall modelObject) {
-//		//if the container of a methodCall is a block, it is indeed a statement and its coverage status must be considered
-//		//but if it is contained by other elements such as if, while, ..., it is not coverable
-//		MethodCall methodCall = (MethodCall) modelObject;
-//		if (!(methodCall.eContainer() instanceof Block)) {
-//			int index = this.modelObjects.indexOf(methodCall);
-//			this.testCaseCoverage.getTcObjectCoverageStatus().set(index, TDLCoverageUtil.NOT_COVERABLE);
-//		}
-//	}
-
-//	@SuppressWarnings("unused")
-//	private void classCoverage(Class clazz) {
-//		//a class is covered when at least one of its methods is covered
-//		//this method is useful when we need to have class coverage
-//		int clazzIndex = this.modelObjects.indexOf(clazz);
-//		for (Member member: clazz.getMembers()) {
-//			if (member instanceof Method) {
-//				int methodIndex = this.modelObjects.indexOf(member);
-//				String methodCoverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(methodIndex);
-//				if (methodCoverage == TDLCoverageUtil.COVERED) {
-//					this.testCaseCoverage.getTcObjectCoverageStatus().set(clazzIndex, TDLCoverageUtil.COVERED);
-//					break;
-//				}
-//			}
-//		}
-//		String classCoverage = this.testCaseCoverage.getTcObjectCoverageStatus().get(clazzIndex);
-//		if (classCoverage != TDLCoverageUtil.COVERED) {
-//			this.testCaseCoverage.getTcObjectCoverageStatus().set(clazzIndex, TDLCoverageUtil.NOT_COVERED);
-//		}
-//	}
 	
 	@Override
 	public void ignoreModelObjects(Resource MUTResource) {

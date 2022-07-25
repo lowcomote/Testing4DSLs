@@ -5,45 +5,60 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:DSLSpecificCoverage="https://org.imt.tdl.coverage/DSLSpecificCoverage"
     name="MiniJavaCoverage">
-  <metaclasses>
+  <contexts>
     <metaclass
         href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//ForStatement"/>
     <rules xsi:type="DSLSpecificCoverage:CoverageIgnorance"
         ignoreSubclasses="true"/>
-  </metaclasses>
-  <metaclasses>
+  </contexts>
+  <contexts>
     <metaclass
         href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//WhileStatement"/>
     <rules xsi:type="DSLSpecificCoverage:CoverageIgnorance"
         ignoreSubclasses="true"/>
-  </metaclasses>
-  <metaclasses>
+  </contexts>
+  <contexts>
     <metaclass
         href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//IfStatement"/>
     <rules xsi:type="DSLSpecificCoverage:CoverageIgnorance"
         ignoreSubclasses="true"/>
-  </metaclasses>
-  <metaclasses>
+  </contexts>
+  <contexts>
     <metaclass
         href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//Method"/>
     <rules xsi:type="DSLSpecificCoverage:CoverageIgnorance"
         ignoreSubclasses="true"/>
-  </metaclasses>
-  <metaclasses>
+  </contexts>
+  <contexts>
     <metaclass
         href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//Program"/>
     <rules xsi:type="DSLSpecificCoverage:CoverageIgnorance"
         ignoreSubclasses="true"/>
-  </metaclasses>
-  <metaclasses>
+  </contexts>
+  <contexts>
+    <metaclass
+        href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//MethodCall"/>
+    <rules xsi:type="DSLSpecificCoverage:CoverageIgnorance"
+        ignoreSubclasses="true">
+      <condition
+          xsi:type="DSLSpecificCoverage:ContainerExclusion">
+        <whenNotContainedBy
+            href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//Block"/>
+      </condition>
+    </rules>
+  </contexts>
+  <contexts>
     <metaclass
         href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//Member"/>
     <rules xsi:type="DSLSpecificCoverage:ContainerCoverageInference"
         multiplicity="ONE">
-      <containerMetaclass
-          href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//TypeDeclaration"/>
+      <condition
+          xsi:type="DSLSpecificCoverage:ContainerInclusion">
+        <whenContainedBy
+            href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//TypeDeclaration"/>
+      </condition>
       <containementReference
           href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//TypeDeclaration/members"/>
     </rules>
-  </metaclasses>
+  </contexts>
 </DSLSpecificCoverage:DomainSpecificCoverage>

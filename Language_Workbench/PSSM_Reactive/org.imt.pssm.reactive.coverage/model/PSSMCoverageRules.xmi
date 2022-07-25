@@ -5,101 +5,110 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:DSLSpecificCoverage="https://org.imt.tdl.coverage/DSLSpecificCoverage"
     name="PSSMCoverage">
-  <metaclasses>
+  <contexts>
     <metaclass
         href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//StateMachine"/>
     <rules xsi:type="DSLSpecificCoverage:ContainerCoverageInference"
         multiplicity="ONE">
-      <containerMetaclass
-          href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//CustomSystem"/>
+      <condition
+          xsi:type="DSLSpecificCoverage:ContainerInclusion">
+        <whenContainedBy
+            href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//CustomSystem"/>
+      </condition>
       <containementReference
           href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//CustomSystem/statemachine"/>
     </rules>
-  </metaclasses>
-  <metaclasses>
+  </contexts>
+  <contexts>
     <metaclass
         href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//Region"/>
     <rules xsi:type="DSLSpecificCoverage:ContainerCoverageInference"
         multiplicity="ONE">
-      <containerMetaclass
-          href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//StateMachine"/>
+      <condition
+          xsi:type="DSLSpecificCoverage:ContainerInclusion">
+        <whenContainedBy
+            href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//StateMachine"/>
+      </condition>
       <containementReference
           href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//StateMachine/regions"/>
     </rules>
-  </metaclasses>
-  <metaclasses>
+  </contexts>
+  <contexts>
     <metaclass
         href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//Transition"/>
     <rules xsi:type="DSLSpecificCoverage:ReferenceCoverageInference">
-      <associationReference
+      <eReference
           href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//Transition/source"/>
     </rules>
     <rules xsi:type="DSLSpecificCoverage:ReferenceCoverageInference">
-      <associationReference
+      <eReference
           href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//Transition/target"/>
     </rules>
     <rules xsi:type="DSLSpecificCoverage:ReferenceCoverageInference">
-      <associationReference
+      <eReference
           href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//Transition/constraint"/>
     </rules>
     <rules xsi:type="DSLSpecificCoverage:ReferenceCoverageInference">
-      <associationReference
+      <eReference
           href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//Transition/triggers"/>
     </rules>
     <rules xsi:type="DSLSpecificCoverage:ContainerCoverageInference"
         multiplicity="ONE">
-      <containerMetaclass
-          href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//Region"/>
+      <condition
+          xsi:type="DSLSpecificCoverage:ContainerInclusion">
+        <whenContainedBy
+            href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//Region"/>
+      </condition>
       <containementReference
           href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//Region/transitions"/>
     </rules>
-  </metaclasses>
-  <metaclasses>
+  </contexts>
+  <contexts>
     <metaclass
         href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//BooleanConstraint"/>
     <rules xsi:type="DSLSpecificCoverage:ReferenceCoverageInference">
-      <associationReference
+      <eReference
           href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//BooleanConstraint/expression"/>
     </rules>
-  </metaclasses>
-  <metaclasses>
+  </contexts>
+  <contexts>
     <metaclass
         href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//IntegerConstraint"/>
     <rules xsi:type="DSLSpecificCoverage:ReferenceCoverageInference">
-      <associationReference
+      <eReference
           href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//IntegerConstraint/expression"/>
     </rules>
-  </metaclasses>
-  <metaclasses>
+  </contexts>
+  <contexts>
     <metaclass
         href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//StringConstraint"/>
     <rules xsi:type="DSLSpecificCoverage:ReferenceCoverageInference">
-      <associationReference
+      <eReference
           href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//StringConstraint/expression"/>
     </rules>
-  </metaclasses>
-  <metaclasses>
+  </contexts>
+  <contexts>
     <metaclass
         href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//Trigger"/>
     <rules xsi:type="DSLSpecificCoverage:ReferenceCoverageInference">
-      <associationReference
+      <eReference
           href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//Trigger/eventType"/>
     </rules>
-  </metaclasses>
-  <metaclasses>
+  </contexts>
+  <contexts>
     <metaclass
         href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//SignalEventType"/>
     <rules xsi:type="DSLSpecificCoverage:ReferenceCoverageInference">
-      <associationReference
+      <eReference
           href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//SignalEventType/signal"/>
     </rules>
-  </metaclasses>
-  <metaclasses>
+  </contexts>
+  <contexts>
     <metaclass
         href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//CallEventType"/>
     <rules xsi:type="DSLSpecificCoverage:ReferenceCoverageInference">
-      <associationReference
+      <eReference
           href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//CallEventType/operation"/>
     </rules>
-  </metaclasses>
+  </contexts>
 </DSLSpecificCoverage:DomainSpecificCoverage>
