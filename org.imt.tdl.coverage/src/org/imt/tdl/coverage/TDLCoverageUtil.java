@@ -51,7 +51,6 @@ public class TDLCoverageUtil {
 	
 	public static final String COVERED = "Covered";
 	public static final String NOT_COVERED = "Not_Covered";
-	public static final String COVERABLE = "Coverable";
 	public static final String NOT_COVERABLE = "Not_Coverable";
 	
 	private IDSLSpecificCoverage dslSpecificCoverageExtension;
@@ -91,30 +90,8 @@ public class TDLCoverageUtil {
 		instance.dslSpecificCoverage = null;
 		instance.dslSpecificCoverageExtension = null;
 		
-		findCoverableClasses();
-		instance.testSuiteCoverage.calculateTSCoverage();
-	}
-
-	public void findCoverableClasses() {
-		//1. find coverable classes from the DSL's interpreter implementation
 		findCoverableClassesFromDSLSemantics();
-		
-		//2. check if there is any DSL specific coverage and update coverable classes based on it
-		dslSpecificCoverage = findDSLSpecificCoverage();
-		//if a DomainSpecificCoverage found, update coverable classes using the executor
-		if (dslSpecificCoverage != null) {
-			DSLSpecificCoverageExecutor executor = new DSLSpecificCoverageExecutor();
-			executor.updateCoverableClasses(dslSpecificCoverage);
-		}
-		
-		//3. check inheritance relationships between coverable and not coverable classes
-		checkInheritanceForNotCoverableClasses();
-		
-		//4. if there is a dsl specific coverage, run all the coverage ignorance rules as it updates the coverable classes
-		if (dslSpecificCoverage != null) {
-			DSLSpecificCoverageExecutor executor = new DSLSpecificCoverageExecutor();
-			executor.runCoverageIgnoranceRules(dslSpecificCoverage);
-		}
+		instance.testSuiteCoverage.calculateTSCoverage();
 	}
 	
 	private void findCoverableClassesFromDSLSemantics(){
@@ -137,6 +114,7 @@ public class TDLCoverageUtil {
 		}else if (dsl.getEntry("ale") != null) {
 			findAleClasses(dsl, bundle);
 		}
+		checkInheritanceForNotCoverableClasses();
 	}
 
 	private void findK3Classes(Dsl dsl, Bundle bundle) {
@@ -251,9 +229,17 @@ public class TDLCoverageUtil {
 		return coverableClasses.contains(clazz.getName());
 	}
 	
+	//add a class and all of its sub classes
 	public void addCoverableClass(EClass clazz) {
 		if (!coverableClasses.contains(clazz.getName())) {
 			coverableClasses.add(clazz.getName());
+			List<String> notCoverableSubClasses = metamodelRootElement.getEClassifiers().stream().
+					filter(c -> c instanceof EClass).map(c -> (EClass) c).
+					filter(c -> c.getEAllSuperTypes().stream().
+							filter(sc -> sc.getName().equals(clazz.getName())).findAny().isPresent() 
+							&& !coverableClasses.contains(c.getName())).
+					map (c -> c.getName()).collect(Collectors.toList());
+				coverableClasses.addAll(notCoverableSubClasses);
 		}
 	}
 	
@@ -262,19 +248,18 @@ public class TDLCoverageUtil {
 			coverableClasses.remove(clazz.getName());
 		}
 	}
-	//for every class that is going to be removed from the coverable classes,
-	//find all the subclasses from the metamodel and remove them as well
+	//remove a class and all of its sub classes
 	public void removeCoverableClass_subClass(EClass clazz) {
 		if (coverableClasses.contains(clazz.getName())) {
 			coverableClasses.remove(clazz.getName());
+			List<String> coverableSubClasses = metamodelRootElement.getEClassifiers().stream().
+					filter(c -> c instanceof EClass).map(c -> (EClass) c).
+					filter(c -> c.getEAllSuperTypes().stream().
+							filter(sc -> sc.getName().equals(clazz.getName())).findAny().isPresent() 
+							&& coverableClasses.contains(c.getName())).
+					map (c -> c.getName()).collect(Collectors.toList());
+				coverableClasses.removeAll(coverableSubClasses);
 		}
-		List<String> coverableSubClasses = metamodelRootElement.getEClassifiers().stream().
-			filter(c -> c instanceof EClass).map(c -> (EClass) c).
-			filter(c -> c.getEAllSuperTypes().stream().
-					filter(sc -> sc.getName().equals(clazz.getName())).findAny().isPresent() 
-					&& coverableClasses.contains(c.getName())).
-			map (c -> c.getName()).collect(Collectors.toList());
-		coverableClasses.removeAll(coverableSubClasses);
 	}
 	
 	public List<EClass> getClassesWithDynamicFeatures() {
@@ -283,6 +268,13 @@ public class TDLCoverageUtil {
 
 	public List<EClass> getDynamicClasses() {
 		return dynamicClasses;
+	}
+	
+	public DomainSpecificCoverage getDslSpecificCoverage() {
+		if (dslSpecificCoverage == null) {
+			dslSpecificCoverage = findDSLSpecificCoverage();
+		}
+		return dslSpecificCoverage;
 	}
 	
 	private DomainSpecificCoverage findDSLSpecificCoverage() {
@@ -324,20 +316,5 @@ public class TDLCoverageUtil {
 	
 	public IDSLSpecificCoverage getDslSpecificCoverageExtension() {
 		return dslSpecificCoverageExtension;
-	}
-
-	public DomainSpecificCoverage getDslSpecificCoverage() {
-		return dslSpecificCoverage;
-	}
-	
-	//Load rules using the resourceSet of the model objects to have the same IDs for EClasses
-	public DomainSpecificCoverage getDslSpecificCoverage(Resource MUTResource) {
-		String coverageFilePath = getCoverageFilePath();
-		if (coverageFilePath != null) {
-			Resource coverageFileResource = (MUTResource.getResourceSet()).getResource(URI.createURI(coverageFilePath), true);
-			dslSpecificCoverage = (DomainSpecificCoverage) coverageFileResource.getContents().get(0);
-			EcoreUtil.resolveAll(dslSpecificCoverage);
-		}
-		return dslSpecificCoverage;
 	}
 }

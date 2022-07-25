@@ -5,13 +5,8 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.common.util.ECollections;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.etsi.mts.tdl.Package;
-import org.imt.tdl.coverage.dslSpecific.DSLSpecificCoverageHandler;
-import org.imt.tdl.coverage.dslSpecific.DSLSpecificCoverageExecutor;
-import org.imt.tdl.coverage.dslSpecific.IDSLSpecificCoverage;
 
 public class TDLTestSuiteCoverage {
 
@@ -100,8 +95,8 @@ public class TDLTestSuiteCoverage {
 		BigDecimal bd = new BigDecimal(tsCoveragePercentage).setScale(2, RoundingMode.HALF_UP);
 		tsCoveragePercentage = bd.doubleValue();
 		//System.out.println("Test suite coverage: " + tsCoveragePercentage);
-		this.overallResult.getCoverage().add(tsCoveragePercentage + "");
-		this.setCoverageInfos();
+		overallResult.getCoverage().add(tsCoveragePercentage + "");
+		setCoverageInfos();
 	}
 
 	public void setCoverageInfos() {
@@ -113,15 +108,9 @@ public class TDLTestSuiteCoverage {
 			objectCoverage.setMetaclass(modelObjects.get(i).eClass());
 			for (TDLTestCaseCoverage tcCoverageObj : this.tcCoverages) {
 				String tcCoverage = tcCoverageObj.getTcObjectCoverageStatus().get(i);
-				if (tcCoverage == TDLCoverageUtil.COVERABLE) {
-					tcCoverage = TDLCoverageUtil.NOT_COVERED;
-				}
 				objectCoverage.getCoverage().add(tcCoverage);
 			}
 			String tsCoverage = this.tsObjectCoverageStatus.get(i);
-			if (tsCoverage == TDLCoverageUtil.COVERABLE) {
-				tsCoverage = TDLCoverageUtil.NOT_COVERED;
-			}
 			objectCoverage.getCoverage().add(tsCoverage);
 			this.coverageOfModelObjects.add(objectCoverage);
 		}

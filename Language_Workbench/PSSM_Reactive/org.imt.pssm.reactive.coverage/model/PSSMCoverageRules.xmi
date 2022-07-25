@@ -10,13 +10,10 @@
         href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//StateMachine"/>
     <rules xsi:type="DSLSpecificCoverage:ContainerCoverageInference"
         multiplicity="ONE">
-      <condition
-          xsi:type="DSLSpecificCoverage:ContainerInclusion">
-        <whenContainedBy
-            href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//CustomSystem"/>
-      </condition>
       <containementReference
           href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//CustomSystem/statemachine"/>
+      <containerContext
+          href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//CustomSystem"/>
     </rules>
   </contexts>
   <contexts>
@@ -24,13 +21,10 @@
         href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//Region"/>
     <rules xsi:type="DSLSpecificCoverage:ContainerCoverageInference"
         multiplicity="ONE">
-      <condition
-          xsi:type="DSLSpecificCoverage:ContainerInclusion">
-        <whenContainedBy
-            href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//StateMachine"/>
-      </condition>
       <containementReference
           href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//StateMachine/regions"/>
+      <containerContext
+          href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//StateMachine"/>
     </rules>
   </contexts>
   <contexts>
@@ -54,13 +48,10 @@
     </rules>
     <rules xsi:type="DSLSpecificCoverage:ContainerCoverageInference"
         multiplicity="ONE">
-      <condition
-          xsi:type="DSLSpecificCoverage:ContainerInclusion">
-        <whenContainedBy
-            href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//Region"/>
-      </condition>
       <containementReference
           href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//Region/transitions"/>
+      <containerContext
+          href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//Region"/>
     </rules>
   </contexts>
   <contexts>
