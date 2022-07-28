@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" uid="_a7raIGlfEeymCpqPpiNlzQ" version="14.5.1.202106111100">
+  <semanticResources>model/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191715/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191717/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191718/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191719/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191721/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191722/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191723/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191724/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191726/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191727/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191728/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191729/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191730/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191731/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191732/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191733/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191734/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191735/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191736/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191738/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191739/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191740/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191741/BankATM.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220727_191742/BankATM.model</semanticResources>
+</viewpoint:DAnalysis>

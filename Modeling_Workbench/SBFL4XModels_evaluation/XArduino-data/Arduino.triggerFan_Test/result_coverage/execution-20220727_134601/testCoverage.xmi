@@ -1,0 +1,1168 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TDLTestCoverage:TestSuiteCoverage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:TDLTestCoverage="http://org.imt.tdl.coverage/TDLTestCoverage" coveragePercentage="100.0">
+  <testSuite href="/Arduino.triggerFan_Test/gemoc-gen/execution/execution-20220727_134601/testSuite.tdlan2#/"/>
+  <testCaseCoverages coveragePercentage="47.83">
+    <testCase href="/Arduino.triggerFan_Test/gemoc-gen/execution/execution-20220727_134601/testSuite.tdlan2#//@packagedElement.9"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-QLvpEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-QbvpEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_DErf8MovEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_DErf8covEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_KowVYMovEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_KowVYcovEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_R9yCMMovEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_TJEJkMovEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_oKk-sMxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_pbE9QMxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_FekdMMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_O4upcM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Z_DdoM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_bNFXAM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_MhMBMMowEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_NGu-QMowEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-RrvpEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-R7vpEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_r3xpMMxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_siUbAMxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_2NhVAMxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_2NhVAcxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEcxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEsxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKE8xYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_da8VsM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_da8Vsc-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbiroM-XEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXloMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXlocxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMcxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNcxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNsxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfN8xYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfOMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfOcxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMsxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfM8xYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXlpMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_pWkaMM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_mKijEM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_-TEUMM-WEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Rvs2kM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SYps8M-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_UQNrgM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="56.52">
+    <testCase href="/Arduino.triggerFan_Test/gemoc-gen/execution/execution-20220727_134601/testSuite.tdlan2#//@packagedElement.10"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-QLvpEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-QbvpEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_DErf8MovEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_DErf8covEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_KowVYMovEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_KowVYcovEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_R9yCMMovEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_TJEJkMovEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_oKk-sMxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_pbE9QMxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_FekdMMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_O4upcM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Z_DdoM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_bNFXAM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_MhMBMMowEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_NGu-QMowEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-RrvpEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-R7vpEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_r3xpMMxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_siUbAMxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_2NhVAMxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_2NhVAcxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEcxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEsxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKE8xYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_da8VsM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_da8Vsc-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbiroM-XEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXloMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXlocxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMcxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNcxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNsxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfN8xYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfOMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfOcxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMsxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfM8xYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXlpMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_pWkaMM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_mKijEM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_-TEUMM-WEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Rvs2kM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SYps8M-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_UQNrgM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="60.87">
+    <testCase href="/Arduino.triggerFan_Test/gemoc-gen/execution/execution-20220727_134601/testSuite.tdlan2#//@packagedElement.11"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-QLvpEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-QbvpEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_DErf8MovEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_DErf8covEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_KowVYMovEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_KowVYcovEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_R9yCMMovEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_TJEJkMovEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_oKk-sMxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_pbE9QMxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_FekdMMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_O4upcM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Z_DdoM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_bNFXAM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_MhMBMMowEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_NGu-QMowEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-RrvpEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-R7vpEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_r3xpMMxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_siUbAMxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_2NhVAMxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_2NhVAcxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEcxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEsxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKE8xYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_da8VsM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_da8Vsc-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbiroM-XEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXloMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXlocxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMcxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNcxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNsxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfN8xYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfOMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfOcxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMsxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfM8xYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXlpMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_pWkaMM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_mKijEM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_-TEUMM-WEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Rvs2kM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SYps8M-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_UQNrgM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="78.26">
+    <testCase href="/Arduino.triggerFan_Test/gemoc-gen/execution/execution-20220727_134601/testSuite.tdlan2#//@packagedElement.12"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-QLvpEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-QbvpEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_DErf8MovEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_DErf8covEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_KowVYMovEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_KowVYcovEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_R9yCMMovEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_TJEJkMovEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_oKk-sMxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_pbE9QMxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_FekdMMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_O4upcM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Z_DdoM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_bNFXAM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_MhMBMMowEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_NGu-QMowEeyrEsguAqucdw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-RrvpEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-R7vpEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_r3xpMMxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_siUbAMxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_2NhVAMxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_2NhVAcxXEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEcxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEsxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKE8xYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_da8VsM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_da8Vsc-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbiroM-XEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXloMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXlocxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMcxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNcxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNsxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfN8xYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfOMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfOcxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMsxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfM8xYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXlpMxYEeyMmOihs3jxMw"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_pWkaMM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_mKijEM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_-TEUMM-WEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Rvs2kM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SYps8M-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_UQNrgM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-QLvpEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-QbvpEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_DErf8MovEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_DErf8covEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_KowVYMovEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_KowVYcovEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_R9yCMMovEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_TJEJkMovEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_oKk-sMxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_pbE9QMxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_FekdMMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_O4upcM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Z_DdoM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_bNFXAM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_MhMBMMowEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_NGu-QMowEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-RrvpEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-R7vpEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_r3xpMMxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_siUbAMxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_2NhVAMxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_2NhVAcxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEcxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEsxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKE8xYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_da8VsM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_da8Vsc-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbiroM-XEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXloMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXlocxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMcxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNcxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNsxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfN8xYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfOMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfOcxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMsxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfM8xYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXlpMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_pWkaMM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_mKijEM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_-TEUMM-WEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Rvs2kM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SYps8M-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_UQNrgM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-QLvpEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-QbvpEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_DErf8MovEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_DErf8covEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_KowVYMovEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_KowVYcovEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_R9yCMMovEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_TJEJkMovEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_oKk-sMxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_pbE9QMxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_FekdMMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_O4upcM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Z_DdoM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_bNFXAM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_MhMBMMowEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_NGu-QMowEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-RrvpEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-R7vpEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_r3xpMMxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_siUbAMxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_2NhVAMxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_2NhVAcxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEcxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEsxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKE8xYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_da8VsM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_da8Vsc-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbiroM-XEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXloMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXlocxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMcxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNcxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNsxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfN8xYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfOMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfOcxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMsxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfM8xYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXlpMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_pWkaMM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_mKijEM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_-TEUMM-WEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Rvs2kM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SYps8M-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_UQNrgM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-QLvpEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-QbvpEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_DErf8MovEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_DErf8covEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_KowVYMovEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_KowVYcovEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_R9yCMMovEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_TJEJkMovEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_oKk-sMxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_pbE9QMxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_FekdMMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_O4upcM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Z_DdoM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_bNFXAM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_MhMBMMowEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_NGu-QMowEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-RrvpEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-R7vpEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_r3xpMMxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_siUbAMxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_2NhVAMxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_2NhVAcxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEcxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEsxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKE8xYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_da8VsM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_da8Vsc-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbiroM-XEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXloMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXlocxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMcxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNcxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNsxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfN8xYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfOMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfOcxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMsxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfM8xYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXlpMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_pWkaMM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_mKijEM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_-TEUMM-WEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Rvs2kM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SYps8M-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_UQNrgM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-QLvpEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-QbvpEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_DErf8MovEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_DErf8covEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_KowVYMovEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_KowVYcovEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_R9yCMMovEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_TJEJkMovEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_oKk-sMxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_pbE9QMxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_FekdMMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_O4upcM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Z_DdoM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_bNFXAM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_MhMBMMowEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_NGu-QMowEeyrEsguAqucdw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-RrvpEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Uck-R7vpEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_r3xpMMxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_siUbAMxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_2NhVAMxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_2NhVAcxXEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEcxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKEsxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_APUKE8xYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_da8VsM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_da8Vsc-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbiroM-XEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXloMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXlocxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMcxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNcxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfNsxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfN8xYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfOMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfOcxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfMsxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_VbYfM8xYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SFXlpMxYEeyMmOihs3jxMw"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_pWkaMM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_mKijEM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_-TEUMM-WEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_Rvs2kM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_SYps8M-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.triggerFan/triggerFan.model#_UQNrgM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+</TDLTestCoverage:TestSuiteCoverage>

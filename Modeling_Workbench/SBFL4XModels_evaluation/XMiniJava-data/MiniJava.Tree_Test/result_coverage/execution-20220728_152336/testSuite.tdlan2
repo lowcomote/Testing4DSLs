@@ -1,0 +1,592 @@
+Package TestSuite {
+	//test cases
+	VariableDeclaration hasLeft (_name = "hasLeft");
+	VariableDeclaration hasRight (_name = "hasRight");
+	BooleanValue boolValue (value = ?);
+	SymbolBinding symbolBinding (symbol = ?);
+	
+	Test Description test1 uses configuration TreeConfiguration1 {
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = hasLeft, value = boolValue (value = "true")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = hasRight, value = boolValue (value = "true")) to tester.genericGate;
+	}
+	
+	VariableDeclaration hasLeft1 (_name = "hasLeft1");
+	VariableDeclaration hasRight1 (_name = "hasRight1");
+	VariableDeclaration hasLeft2 (_name = "hasLeft2");
+	VariableDeclaration hasRight2 (_name = "hasRight2");
+	
+	Test Description test2 uses configuration TreeConfiguration2 {
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = hasLeft1, value = boolValue (value = "true")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = hasRight1, value = boolValue (value = "false")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = hasLeft2, value = boolValue (value = "true")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = hasRight2, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test3 uses configuration TreeConfiguration3{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = hasLeft1, value = boolValue (value = "false")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = hasRight1, value = boolValue (value = "true")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = hasLeft2, value = boolValue (value = "false")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = hasRight2, value = boolValue (value = "true")) to tester.genericGate;
+	}
+	
+	VariableDeclaration result (_name = "result");
+	
+	Test Description test4 uses configuration TreeConfiguration4 {
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	
+	VariableDeclaration result1 (_name = "result1");
+	VariableDeclaration result2 (_name = "result2");
+	VariableDeclaration result3 (_name = "result3");
+	VariableDeclaration result4 (_name = "result4");
+	VariableDeclaration result5 (_name = "result5");
+	VariableDeclaration result6 (_name = "result6");
+	VariableDeclaration result7 (_name = "result7");
+	Test Description test5 uses configuration TreeConfiguration5{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result1, value = boolValue (value = "true")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result2, value = boolValue (value = "true")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result3, value = boolValue (value = "true")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result4, value = boolValue (value = "true")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result5, value = boolValue (value = "true")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result6, value = boolValue (value = "true")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result7, value = boolValue (value = "true")) to tester.genericGate;
+	}
+	
+	Test Description test6 uses configuration TreeConfiguration6{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = hasLeft1, value = boolValue (value = "true")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = hasLeft2, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	
+	VariableDeclaration key1 (_name = "key1");
+	VariableDeclaration key2 (_name = "key2");
+	IntegerValue intValue (value = ?);
+	Test Description test7 uses configuration TreeConfiguration7{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = key1, value = intValue (value = "11")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = key2, value = intValue (value = "12")) to tester.genericGate;
+	}
+	Test Description test8 uses configuration TreeConfiguration8{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = hasRight1, value = boolValue (value = "true")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = hasRight2, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test9 uses configuration TreeConfiguration9{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = key1, value = intValue (value = "9")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = key2, value = intValue (value = "8")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = hasRight, value = boolValue (value = "true")) to tester.genericGate;
+	}
+	Test Description test10 uses configuration TreeConfiguration10{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = key1, value = intValue (value = "9")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = key2, value = intValue (value = "10")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = hasRight, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test11 uses configuration TreeConfiguration11{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = key1, value = intValue (value = "13")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = key2, value = intValue (value = "12")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = hasRight, value = boolValue (value = "true")) to tester.genericGate;
+	}
+	Test Description test12 uses configuration TreeConfiguration12{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = key1, value = intValue (value = "13")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = key2, value = intValue (value = "14")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = hasRight, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test13 uses configuration TreeConfiguration13{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result1, value = boolValue (value = "true")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result2, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test14 uses configuration TreeConfiguration14{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result1, value = boolValue (value = "true")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result2, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test15 uses configuration TreeConfiguration15{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result1, value = boolValue (value = "true")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result2, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test16 uses configuration TreeConfiguration16{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result1, value = boolValue (value = "true")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result2, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test17 uses configuration TreeConfiguration17{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result1, value = boolValue (value = "true")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result2, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test18 uses configuration TreeConfiguration18{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result1, value = boolValue (value = "true")) to tester.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result2, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test19 uses configuration TreeConfiguration19{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test20 uses configuration TreeConfiguration20{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "true")) to tester.genericGate;
+	}
+	Test Description test21 uses configuration TreeConfiguration21{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test22 uses configuration TreeConfiguration22{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test23 uses configuration TreeConfiguration23{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "true")) to tester.genericGate;
+	}
+	Test Description test24 uses configuration TreeConfiguration24{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "false")) to tester.genericGate;
+	}
+	Test Description test25 uses configuration TreeConfiguration25{
+		tester.genericGate sends runModel to xminijava.genericGate;
+		tester.genericGate sends getModelState to xminijava.genericGate;
+		xminijava.genericGate sends symbolBinding (symbol = result, value = boolValue (value = "true")) to tester.genericGate;
+	}
+	//data types
+	Type Program ( _name of type EString , imports of type _Import , classes of type TypeDeclaration , state of type State with { dynamic ;
+	} ) ;
+	Type _Import ( importedNamespace of type EString ) ;
+	Type TypeDeclaration extends NamedElement ( accessLevel of type AccessLevel , implements of type Interface , members of type Member ) ;
+	Type Class extends TypeDeclaration ( abstract of type EBoolean , superClass of type Class ) ;
+	Type Interface extends TypeDeclaration ( ) ;
+	Type Member extends TypedDeclaration ( access of type AccessLevel ) ;
+	Type Method extends Member ( abstract of type EBoolean , static of type EBoolean , params of type Parameter , body of type Block ) ;
+	Type Parameter extends Symbol ( ) ;
+	Type Field extends Member ( defaultValue of type Expression ) ;
+	Type AccessLevel ;
+	Type Block extends Statement ( statements of type Statement ) ;
+	Type Statement ( ) ;
+	Type PrintStatement extends Statement ( expression of type Expression ) ;
+	Type Return extends Statement ( expression of type Expression ) ;
+	Type IfStatement extends Statement ( expression of type Expression , thenBlock of type Block , elseBlock of type Block ) ;
+	Type WhileStatement extends Statement ( condition of type Expression , block of type Block ) ;
+	Type ForStatement extends Statement ( declaration of type Assignment , condition of type Expression , progression of type Assignment , block of type Block ) ;
+	Type TypeRef ( ) ;
+	Type SingleTypeRef ( ) ;
+	Type ClassRef extends SingleTypeRef ( referencedClass of type TypeDeclaration ) ;
+	Type NamedElement ( _name of type EString ) ;
+	Type TypedDeclaration extends NamedElement ( typeRef of type TypeRef ) ;
+	Type Symbol extends TypedDeclaration ( ) ;
+	Type VariableDeclaration extends Symbol();
+	//Type VariableDeclaration extends Assignee () ;
+	Type Assignment extends Statement ( assignee of type Assignee , value of type Expression ) ;
+	Type Assignee ( ) ;
+	Type Expression ( ) ;
+	Type ArrayTypeRef extends TypeRef ( typeRef of type SingleTypeRef ) ;
+	Type IntegerTypeRef ( ) ;
+	Type BooleanTypeRef ( ) ;
+	Type StringTypeRef ( ) ;
+	Type VoidTypeRef ( ) ;
+	Type Or extends Expression ( left of type Expression , right of type Expression ) ;
+	Type And extends Expression ( left of type Expression , right of type Expression ) ;
+	Type Equality extends Expression ( left of type Expression , right of type Expression ) ;
+	Type Inequality extends Expression ( left of type Expression , right of type Expression ) ;
+	Type SuperiorOrEqual extends Expression ( left of type Expression , right of type Expression ) ;
+	Type InferiorOrEqual extends Expression ( left of type Expression , right of type Expression ) ;
+	Type Superior extends Expression ( left of type Expression , right of type Expression ) ;
+	Type Inferior extends Expression ( left of type Expression , right of type Expression ) ;
+	Type Plus extends Expression ( left of type Expression , right of type Expression ) ;
+	Type Minus extends Expression ( left of type Expression , right of type Expression ) ;
+	Type Multiplication extends Expression ( left of type Expression , right of type Expression ) ;
+	Type Division extends Expression ( left of type Expression , right of type Expression ) ;
+	Type ArrayAccess extends Expression ( object of type Expression , index of type Expression ) ;
+	Type ArrayLength extends Expression ( array of type Expression ) ;
+	Type Not extends Expression ( expression of type Expression ) ;
+	Type Neg extends Expression ( expression of type Expression ) ;
+	Type FieldAccess extends Expression ( receiver of type Expression , field of type Field ) ;
+	Type MethodCall extends Expression ( receiver of type Expression , method of type Method , args of type Expression ) ;
+	Type StringConstant extends Expression ( value of type EString ) ;
+	Type IntConstant extends Expression ( value of type EInt ) ;
+	Type BoolConstant extends Expression ( value of type EString ) ;
+	Type This ( ) ;
+	Type Super ( ) ;
+	Type Null ( ) ;
+	Type NewObject extends Expression ( _type of type Class , args of type Expression ) ;
+	Type NewArray extends Expression ( _type of type TypeRef , _size of type Expression ) ;
+	Type SymbolRef extends Expression ( symbol of type Symbol ) ;
+	Type Context ( _bindings of type SymbolBinding , parentContext of type Context , childContext of type Context ) with {
+		dynamic ;
+	} ;
+	Type Value ( ) with {
+		dynamic ;
+	} ;
+	Type IntegerValue extends Value ( value of type EInt ) with {
+		dynamic ;
+	} ;
+	Type SymbolBinding ( value of type Value , symbol of type Symbol ) with {
+		dynamic ;
+	} ;
+	Type FieldBinding ( field of type Field , value of type Value ) with {
+		dynamic ;
+	} ;
+	Type StringValue extends Value ( value of type EString ) with {
+		dynamic ;
+	} ;
+	Type BooleanValue extends Value ( value of type EBoolean ) with {
+		dynamic ;
+	} ;
+	Type OutputStream ( stream of type EString ) with {
+		dynamic ;
+	} ;
+	Type State ( rootFrame of type Frame , objectsHeap of type ObjectInstance , outputStream of type OutputStream , arraysHeap of type ArrayInstance ) with {
+		dynamic ;
+	} ;
+	Type Frame ( call of type Call , _instance of type ObjectInstance , childFrame of type Frame , parentFrame of type Frame , rootContext of type Context , returnValue of type Value ) with {
+		dynamic ;
+	} ;
+	Type NullValue ( ) with {
+		dynamic ;
+	} ;
+	Type Call ( ) with {
+		dynamic ;
+	} ;
+	Type NewCall extends Call ( _new of type NewObject ) with {
+		dynamic ;
+	} ;
+	Type MethodCall2 extends Call ( methodcall of type MethodCall ) with {
+		dynamic ;
+	} ;
+	Type ObjectInstance ( fieldbindings of type FieldBinding , _type of type Class ) with {
+		dynamic ;
+	} ;
+	Type ArrayInstance ( value of type Value , _size of type EInt ) with {
+		dynamic ;
+	} ;
+	Type ObjectRefValue extends Value ( _instance of type ObjectInstance ) with {
+		dynamic ;
+	} ;
+	Type ArrayRefValue extends Value ( _instance of type ArrayInstance ) with {
+		dynamic ;
+	} ;
+	AccessLevel PRIVATE ;
+	AccessLevel PROTECTED ;
+	AccessLevel PUBLIC ;
+	Annotation dynamic ;
+	Type EBoolean ;
+	Type EDoubleObject ;
+	Type EShort ;
+	Type ETreeIterator ;
+	Type EInvocationTargetException ;
+	Type EResource ;
+	Type EInt ;
+	Type EJavaClass ;
+	Type EDiagnosticChain ;
+	Type EFeatureMap ;
+	Type EFeatureMapEntry ;
+	Type EBooleanObject ;
+	Type EEList ;
+	Type ELongObject ;
+	Type EEnumerator ;
+	Type EResourceSet ;
+	Type EDate ;
+	Type EDouble ;
+	Type EIntegerObject ;
+	Type EBigInteger ;
+	Type EFloatObject ;
+	Type EJavaObject ;
+	Type EString ;
+	Type EFloat ;
+	Type EShortObject ;
+	Type EBigDecimal ;
+	Type EChar ;
+	Type ECharacterObject ;
+	Type ELong ;
+	Type EByteArray ;
+	Type EMap ;
+	Type EByte ;
+	Type EByteObject ;
+	
+	//common
+	Type OCL ( query of type EString ) ;
+	OCL oclQuery ( query = ? ) ;
+	Type Verdict ;
+	Verdict PASS ;
+	Verdict FAIL ;
+	Verdict INCONCLUSINVE ;
+	Type modelExecutionCommand ;
+	modelExecutionCommand runModel ;
+	modelExecutionCommand runModelAsynchronous ;
+	modelExecutionCommand stopModelExecution ;
+	modelExecutionCommand resetModel ;
+	modelExecutionCommand getModelState ;
+	
+	//test configuration
+	Gate Type genericGateType accepts modelExecutionCommand ;
+	Gate Type oclGateType accepts OCL ;
+	Component Type TestSystem having {
+		gate genericGate of type genericGateType ;
+		gate oclGate of type oclGateType ;
+	}
+	Component Type MUT having {
+		gate genericGate of type genericGateType ;
+		gate oclGate of type oclGateType ;
+	}
+	Annotation MUTPath ;
+	Annotation DSLName ;
+	//test configurations for tree models
+	Test Configuration TreeConfiguration1 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test1.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration2 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test2.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration3 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test3.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration4 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test4.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration5 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test5.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration6 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test6.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration7 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test7.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration8 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test8.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration9 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test9.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration10 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test10.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration11 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test11.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration12 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test12.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration13 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test13.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration14 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test14.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration15 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test15.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration16 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test16.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration17 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test17.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration18 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test18.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration19 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test19.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration20 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test20.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration21 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test21.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration22 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test22.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration23 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test23.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration24 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test24.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+	Test Configuration TreeConfiguration25 {
+		create Tester tester of type TestSystem ;
+		create SUT xminijava of type MUT with { 
+			MUTPath : '/xMiniJava_models/tree_junitTests_xminijava/Tree_test25.xminijava' ; 
+			DSLName : 'org.imt.xminijava.Xminijava' ; 
+		} ;
+		connect tester.genericGate to xminijava.genericGate ;
+		connect tester.oclGate to xminijava.oclGate ;
+	}
+}
