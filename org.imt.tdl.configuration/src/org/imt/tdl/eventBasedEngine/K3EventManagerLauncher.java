@@ -128,36 +128,36 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			ThreadImpl testDebugger = (ThreadImpl) testCaseDebugThread.getTarget();
 			if (testDebugger.getState().toString() == "STEPPING_OVER") {
 				//Skip the breakpoint
-				if (this.modelDebugThread == null) {
+				if (modelDebugThread == null) {
 					getModelDebugger();
 				}
-				this.eventManager.processEventOccurrence(eventOccurrence);
+				eventManager.processEventOccurrence(eventOccurrence);
 				try {
-					this.modelDebugThread.resume();
+					modelDebugThread.resume();
 				} catch (DebugException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}else {
-				this.eventManager.processEventOccurrence(eventOccurrence);
+				eventManager.processEventOccurrence(eventOccurrence);
 			}
-			while (this.executionEngine.getRunningStatus() == RunStatus.Running) {
+			while (executionEngine.getRunningStatus() == RunStatus.Running) {
 				try {
-					this.testCaseDebugThread.suspend();
+					testCaseDebugThread.suspend();
 				} catch (DebugException e) {
 					e.printStackTrace();
 				}
 			}
-		}else if (this.executionEngine == null || this.eventManager == null){
+		}else if (executionEngine == null || eventManager == null){
 			startEngine();
 			try {
-				this.eventManager.processEventOccurrence(eventOccurrence);
+				eventManager.processEventOccurrence(eventOccurrence);
 			}
 			catch (NullPointerException e) {
 				return "FAIL: There is an issue with the execution engine";
 			}	
 		}else {
-			this.eventManager.processEventOccurrence(eventOccurrence);
+			eventManager.processEventOccurrence(eventOccurrence);
 		}
 		return "PASS";
 	}
@@ -169,7 +169,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 				if ((DSLThreadAdapter)debugTargets[i].getThreads()[0] == this.testCaseDebugThread) {
 					i--;
 				}else {
-					this.modelDebugThread = (DSLThreadAdapter)debugTargets[i].getThreads()[0];
+					modelDebugThread = (DSLThreadAdapter)debugTargets[i].getThreads()[0];
 				}
 			}
 		} catch (DebugException e) {
@@ -222,7 +222,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	@Override
 	public void startEngine() {
 		try {
-			this.executionEngine = (EventBasedExecutionEngine) launcher.createExecutionEngine(this.runConf, ExecutionMode.Run);
+			executionEngine = (EventBasedExecutionEngine) launcher.createExecutionEngine(this.runConf, ExecutionMode.Run);
 		}catch (CoreException | EngineContextException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -254,7 +254,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
 		try {
 			//get the thread running the test case debugger to suspend it during model debugging
-			this.testCaseDebugThread = (DSLThreadAdapter)debugTargets[0].getThreads()[0];
+			testCaseDebugThread = (DSLThreadAdapter)debugTargets[0].getThreads()[0];
 		} catch (DebugException e) {
 			e.printStackTrace();
 		}
@@ -263,15 +263,15 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		Launch debugLaunch = new Launch(launchConf, ILaunchManager.DEBUG_MODE, new GemocSourceLocator());
 		DebugPlugin.getDefault().getLaunchManager().addLaunch(debugLaunch);	
 		try{
-			this.launcher.launch(launchConf, ILaunchManager.DEBUG_MODE, debugLaunch, new NullProgressMonitor());
-			this.executionEngine = (EventBasedExecutionEngine) this.launcher.getExecutionEngine();
+			launcher.launch(launchConf, ILaunchManager.DEBUG_MODE, debugLaunch, new NullProgressMonitor());
+			executionEngine = (EventBasedExecutionEngine) launcher.getExecutionEngine();
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		final TransferQueue<Object> queue = new LinkedTransferQueue<>();
-		this.executionEngine.getExecutionContext().getExecutionPlatform().addEngineAddon(new IEngineAddon() {
+		executionEngine.getExecutionContext().getExecutionPlatform().addEngineAddon(new IEngineAddon() {
 			@Override
 			public void engineInitialized(IExecutionEngine<?> executionEngine) {
 				queue.add(new Object());
@@ -283,8 +283,8 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	private void addEventManagerListener(TransferQueue<Object> queue) {
 		try {
 			if (queue.poll(5000, TimeUnit.MILLISECONDS) != null) {
-				this.eventManager = (GenericEventManager) this.executionEngine.getAddonsTypedBy(GenericEventManager.class).stream().findFirst().orElse(null);
-				this.eventManager.addListener(new IEventManagerListener() {
+				eventManager = (GenericEventManager) executionEngine.getAddonsTypedBy(GenericEventManager.class).stream().findFirst().orElse(null);
+				eventManager.addListener(new IEventManagerListener() {
 					@Override
 					public void eventReceived(EventOccurrence e) {
 						eventOccurrences.add(e);
@@ -306,7 +306,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	public String sendStopEvent() {
 		String result = "PASS";
 		int i=0;
-		while (this.executionEngine.getRunningStatus() != RunStatus.WaitingForEvent && i < 10) {
+		while (executionEngine.getRunningStatus() != RunStatus.WaitingForEvent && i < 10) {
 			try{
 				Thread.sleep(500);
 				i++;
@@ -315,14 +315,14 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			    Thread.currentThread().interrupt();
 			}
 		}
-		this.executionEngine.stop();
-		if (eventOccurrences.size()>0) {
-			result = "FAIL:There are extra received events";
-		}
-		this.executionEngineJob.cancel();
+		
 		try {
-			this.executionEngine.stop();
-			this.executionEngineJob.getThread().interrupt();
+			executionEngine.stop();
+			if (eventOccurrences.size()>0) {
+				result = "FAIL:There are extra received events";
+			}
+			executionEngineJob.cancel();
+			executionEngineJob.getThread().interrupt();
 		}
 		catch (NullPointerException e) {
 			//e.printStackTrace();
