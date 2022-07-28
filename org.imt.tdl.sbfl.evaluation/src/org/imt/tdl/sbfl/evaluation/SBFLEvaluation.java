@@ -90,7 +90,7 @@ public class SBFLEvaluation {
 	}
 	
 	private void findMutantRegistryMapping(IProject mutantsProject) {
-		File projectFolder = new File(mutantsProject.getLocation() + "\\model");
+		File projectFolder = new File(mutantsProject.getLocation() + "\\mutants");
 		for (File file : projectFolder.listFiles()) {
 			pathsHelper(mutantsProject.getName(), file);
 		}
@@ -121,7 +121,7 @@ public class SBFLEvaluation {
 			//get the name of the seed model
 			if (this.seedModelPath == null) {
 				String seedModelName = filePath.substring(1);
-				seedModelName = filePath.substring(filePath.indexOf("\\model\\") + "\\model\\".length(), filePath.length());
+				seedModelName = filePath.substring(filePath.indexOf("\\mutants\\") + "\\mutants\\".length(), filePath.length());
 				if (file.getName().equals(seedModelName)) {//file is the seed model
 					this.seedModelPath = filePath;
 				}
