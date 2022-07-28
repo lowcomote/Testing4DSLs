@@ -96,11 +96,11 @@ public class EngineFactory{
 	public String executeDSLSpecificCommand(String eventType, String eventName, Map<String, Object> parameters) {		
 		switch (eventType) {
 		case "ACCEPTED":
-			return this.eventManagerLauncher.processAcceptedEvent(eventName, parameters);
+			return eventManagerLauncher.processAcceptedEvent(eventName, parameters);
 		case "EXPOSED":
-			return this.eventManagerLauncher.assertExposedEvent(eventName, parameters);
+			return eventManagerLauncher.assertExposedEvent(eventName, parameters);
 		case "STOP":
-			return this.eventManagerLauncher.sendStopEvent();
+			return eventManagerLauncher.sendStopEvent();
 		default:
 			break;
 		}
@@ -112,7 +112,7 @@ public class EngineFactory{
 			return sequentialEngineLauncher.getExecutionTrace();
 		}
 		else if (this.getActiveEngine() instanceof IEventBasedExecutionEngine) {
-			return this.eventManagerLauncher.getExecutionTrace();
+			return eventManagerLauncher.getExecutionTrace();
 		}
 		return null;
 	}
@@ -152,11 +152,11 @@ public class EngineFactory{
 	}
 	
 	public Resource getMUTResource() {
-		if (this.getActiveEngine() instanceof ISequentialExecutionEngine) {
+		if (getActiveEngine() instanceof ISequentialExecutionEngine) {
 			return sequentialEngineLauncher.getModelResource();
 		}
-		else if (this.getActiveEngine() instanceof IEventBasedExecutionEngine) {
-			return this.eventManagerLauncher.getModelResource();
+		else if (getActiveEngine() instanceof IEventBasedExecutionEngine) {
+			return eventManagerLauncher.getModelResource();
 		}
 		return (new ResourceSetImpl()).getResource(URI.createURI(MUTPath), true);
 	}
@@ -165,8 +165,8 @@ public class EngineFactory{
 		if (!dslHasInterface() && sequentialEngineLauncher != null) {
 			return sequentialEngineLauncher;
 		}
-		else if (dslHasInterface() && this.eventManagerLauncher != null) {
-			return this.eventManagerLauncher;
+		else if (dslHasInterface() && eventManagerLauncher != null) {
+			return eventManagerLauncher;
 		}
 		return null;
 	}
@@ -184,7 +184,7 @@ public class EngineFactory{
 			sequentialEngineLauncher.disposeResources();
 		}
 		else if (this.getActiveEngine() instanceof IEventBasedExecutionEngine) {
-			this.eventManagerLauncher.disposeResources();
+			eventManagerLauncher.disposeResources();
 		}
 	}
 }
