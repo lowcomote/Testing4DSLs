@@ -159,14 +159,14 @@ public class DSLSpecificCoverageExecutor {
 			//ignore EObjects contained by one of the containerContext classes
 			if (rule.getContainerContext().stream().
 				anyMatch(c -> c.getName().equals(object.eContainer().eClass().getName()))) {
-				testCaseCoverage.setObjectCoverage(object, TDLCoverageUtil.NOT_COVERABLE);
+				testCaseCoverage.setObjectNotCoverable(object);
 			}
 		}
 		else if (rule.getCondition() == ConditionType.EXCLUSION) {
 			//ignore EObjects that are not contained by any of the containerContext classes
 			if (!rule.getContainerContext().stream().
 				anyMatch(c -> c.getName().equals(object.eContainer().eClass().getName()))) {
-				testCaseCoverage.setObjectCoverage(object, TDLCoverageUtil.NOT_COVERABLE);
+				testCaseCoverage.setObjectNotCoverable(object);
 			}
 		}
 	}
