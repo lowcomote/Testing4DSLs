@@ -94,6 +94,7 @@ public class TDLCoverageView extends ViewPart{
         coverageFilterCombo.add("All");
         coverageFilterCombo.add("Covered");
         coverageFilterCombo.add("Not-Covered");
+        coverageFilterCombo.add("Covered & Not-Covered");
         coverageFilterCombo.add("Not Coverable");
         coverageFilterCombo.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -152,7 +153,7 @@ public class TDLCoverageView extends ViewPart{
 		addressTree.setHeaderVisible(true);
 		addressTree.setLinesVisible(true);
 		m_treeViewer = new TreeViewer(addressTree);
-
+		
 		TreeColumn metaclassColumn = new TreeColumn(addressTree, SWT.LEFT);
 		metaclassColumn.setAlignment(SWT.LEFT);
 		metaclassColumn.setText("Meta-Class");
@@ -357,20 +358,27 @@ private class CoverageFilter extends ViewerFilter {
 			if (coverageFilterIndex == -1 || coverageFilterIndex == 0) {
 				return true;
 			}
-			if (coverageFilterIndex == 1) {//covered elements
+			else if (coverageFilterIndex == 1) {//covered elements
 				if (element instanceof ObjectCoverageStatus) {
 					ObjectCoverageStatus cInfo = (ObjectCoverageStatus) element;
 					//the last element of the coverage is related to the test suite
 					return cInfo.getCoverage().get(cInfo.getCoverage().size()-1) == TDLCoverageUtil.COVERED;
 				}
 			}
-			if (coverageFilterIndex == 2) {//not covered elements
+			else if (coverageFilterIndex == 2) {//not covered elements
 				if (element instanceof ObjectCoverageStatus) {
 					ObjectCoverageStatus cInfo = (ObjectCoverageStatus) element;
 					return cInfo.getCoverage().get(cInfo.getCoverage().size()-1) == TDLCoverageUtil.NOT_COVERED;
+				}
 			}
+			else if (coverageFilterIndex == 3) {//covered and not covered elements
+				if (element instanceof ObjectCoverageStatus) {
+					ObjectCoverageStatus cInfo = (ObjectCoverageStatus) element;
+					String coverage = cInfo.getCoverage().get(cInfo.getCoverage().size()-1);
+					return  (coverage == TDLCoverageUtil.COVERED || coverage == TDLCoverageUtil.NOT_COVERED);
+				}
 			}
-			if (coverageFilterIndex == 3) {//elements that are not coverable
+			else if (coverageFilterIndex == 4) {//elements that are not coverable
 				if (element instanceof ObjectCoverageStatus) {
 					ObjectCoverageStatus cInfo = (ObjectCoverageStatus) element;
 					return cInfo.getCoverage().get(cInfo.getCoverage().size()-1) == TDLCoverageUtil.NOT_COVERABLE;
