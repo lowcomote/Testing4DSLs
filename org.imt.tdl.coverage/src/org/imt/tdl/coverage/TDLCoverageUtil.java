@@ -65,14 +65,14 @@ public class TDLCoverageUtil {
 		return instance;
 	}
 	public TDLTestSuiteCoverage getTestSuiteCoverage() {
-		return instance.testSuiteCoverage;
+		return testSuiteCoverage;
 	}
 	public void setTestSuiteCoverage(TDLTestSuiteCoverage coverage) {
-		instance.testSuiteCoverage = coverage;
+		testSuiteCoverage = coverage;
 	}
 
 	public String getDSLPath() {
-		return instance.DSLPath;
+		return DSLPath;
 	}
 
 	public void setDSLPath(String DSLPath) {
@@ -80,16 +80,16 @@ public class TDLCoverageUtil {
 	}
 	
 	public void runCoverageComputation() {
-		instance.coverableClasses.clear();
-		instance.extendedClassesWithStep.clear();
-		instance.extendedClassesWithoutStep.clear();
-		instance.dynamicClasses.clear();
-		instance.classesWithDynamicFeatures.clear();
-		instance.dslSpecificCoverage = null;
-		instance.dslSpecificCoverageExtension = null;
+		coverableClasses.clear();
+		extendedClassesWithStep.clear();
+		extendedClassesWithoutStep.clear();
+		dynamicClasses.clear();
+		classesWithDynamicFeatures.clear();
+		dslSpecificCoverage = null;
+		dslSpecificCoverageExtension = null;
 		
 		findCoverableClassesFromDSLSemantics();
-		instance.testSuiteCoverage.calculateTSCoverage();
+		testSuiteCoverage.calculateTSCoverage();
 	}
 	
 	private void findCoverableClassesFromDSLSemantics(){
@@ -130,14 +130,14 @@ public class TDLCoverageUtil {
 			Method[] methods = clazz.getDeclaredMethods();
 			for (Method method: methods) {
 				if (method.getAnnotationsByType(Step.class).length > 0) {
-					instance.extendedClassesWithStep.add(className);
-					instance.coverableClasses.add(className);
+					extendedClassesWithStep.add(className);
+					coverableClasses.add(className);
 					break;
 				}
 			}
 			//if the extended class had no @step rule
-			if (!instance.extendedClassesWithStep.contains(className)) {
-				instance.extendedClassesWithoutStep.add(className);
+			if (!extendedClassesWithStep.contains(className)) {
+				extendedClassesWithoutStep.add(className);
 			}
 		}
 	}
@@ -155,16 +155,16 @@ public class TDLCoverageUtil {
 			for (int i=0; i<operations.size(); i++) {
 				for (Tag tag:operations.get(i).getTag()) {
 					if (tag.getName().equals("step")) {
-						instance.extendedClassesWithStep.add(className);
-						instance.coverableClasses.add(className);
+						extendedClassesWithStep.add(className);
+						coverableClasses.add(className);
 						i = operations.size();
 						break;
 					}
 				}
 			}
 			//if the extended class had no @step rule
-			if (!instance.extendedClassesWithStep.contains(className)) {
-				instance.extendedClassesWithoutStep.add(className);
+			if (!extendedClassesWithStep.contains(className)) {
+				extendedClassesWithoutStep.add(className);
 			}
 		}
 	}
@@ -184,7 +184,8 @@ public class TDLCoverageUtil {
 		for (EClassifier clazz: metamodelRootElement.getEClassifiers()) {
 			String className = clazz.getName();
 			if (clazz instanceof EClass) {
-				if (!instance.coverableClasses.contains(className)) {
+				if (!coverableClasses.contains(className) && 
+						!extendedClassesWithoutStep.contains(className)) {
 					checkInheritance((EClass) clazz);
 				}
 				checkDynamicAspectsOfClass(clazz);	
@@ -194,8 +195,8 @@ public class TDLCoverageUtil {
 	
 	private void checkInheritance(EClass eClazz) {
 		for (EClass superClass:eClazz.getEAllSuperTypes()) {
-			if (instance.coverableClasses.contains(superClass.getName())) {
-				instance.coverableClasses.add(eClazz.getName());
+			if (coverableClasses.contains(superClass.getName())) {
+				coverableClasses.add(eClazz.getName());
 				break;
 			}
 		}
@@ -235,7 +236,8 @@ public class TDLCoverageUtil {
 					filter(c -> c instanceof EClass).map(c -> (EClass) c).
 					filter(c -> c.getEAllSuperTypes().stream().
 							filter(sc -> sc.getName().equals(clazz.getName())).findAny().isPresent() 
-							&& !coverableClasses.contains(c.getName())).
+							&& !coverableClasses.contains(c.getName())
+							&& !extendedClassesWithoutStep.contains(c.getName())).
 					map (c -> c.getName()).collect(Collectors.toList());
 				coverableClasses.addAll(notCoverableSubClasses);
 		}
@@ -270,28 +272,27 @@ public class TDLCoverageUtil {
 	
 	public DomainSpecificCoverage getDslSpecificCoverage() {
 		if (dslSpecificCoverage == null) {
-			dslSpecificCoverage = findDSLSpecificCoverage();
+			findDSLSpecificCoverage();
 		}
 		return dslSpecificCoverage;
 	}
 	
-	private DomainSpecificCoverage findDSLSpecificCoverage() {
+	private void findDSLSpecificCoverage() {
 		//check if there is a DSL-Specific coverage extension
 		DSLSpecificCoverageHandler dslSpecificCoverageHandler = new DSLSpecificCoverageHandler();
 		dslSpecificCoverageExtension = dslSpecificCoverageHandler.getDSLSpecificCoverage();
 		//1. if the rules are implemented in a java class, retrieve them using extension point
 		if (dslSpecificCoverageExtension != null &&
 				dslSpecificCoverageExtension.getDomainSpecificCoverage() != null) {
-			return dslSpecificCoverageExtension.getDomainSpecificCoverage();
+			dslSpecificCoverage = dslSpecificCoverageExtension.getDomainSpecificCoverage();
 		}
 		//2. else, check .dsl file for the path to the coverageRules.xmi file
 		else {
 			Resource coverageFileResource = loadDSLSpecificCoverageFile();
 			if (coverageFileResource != null) {
-				return (DomainSpecificCoverage) coverageFileResource.getContents().get(0);
+				dslSpecificCoverage = (DomainSpecificCoverage) coverageFileResource.getContents().get(0);
 			}
 		}
-		return null;
 	}
 	
 	private Resource loadDSLSpecificCoverageFile() {
@@ -313,6 +314,9 @@ public class TDLCoverageUtil {
 	}
 	
 	public IDSLSpecificCoverage getDslSpecificCoverageExtension() {
+		if (dslSpecificCoverageExtension == null) {
+			findDSLSpecificCoverage();
+		}
 		return dslSpecificCoverageExtension;
 	}
 }
