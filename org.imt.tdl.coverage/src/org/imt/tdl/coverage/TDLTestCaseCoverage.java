@@ -67,8 +67,7 @@ public class TDLTestCaseCoverage {
 		//list objects of the MUTResource of the test case and set their initial status as NOT-COVERED
 		TreeIterator<EObject> modelContents = MUTResource.getAllContents();
 		while (modelContents.hasNext()) {
-			EObject modelObject = modelContents.next();
-			modelObjects.add(modelObject);
+			modelObjects.add(modelContents.next());
 			tcObjectCoverageStatus.add(TDLCoverageUtil.NOT_COVERED);
 		}
 	}
@@ -163,7 +162,8 @@ public class TDLTestCaseCoverage {
 		tcCoveragePercentage = (double)(numOfCoveredObjs*100)/numOfCoverableElements;
 		BigDecimal bd = new BigDecimal(tcCoveragePercentage).setScale(2, RoundingMode.HALF_UP);
 		tcCoveragePercentage = bd.doubleValue();
-		//System.out.println(this.testCase.getName() + " coverage: " + tcCoveragePercentage);
+		System.out.println(this.testCase.getName() + " coverage: " + 
+				numOfCoveredObjs + "/" + numOfCoverableElements + " = " + tcCoveragePercentage +"%");
 	}
 	
 	public Trace<?, ?, ?> getTrace() {

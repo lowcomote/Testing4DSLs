@@ -75,28 +75,28 @@ public class TDLTestSuiteCoverage {
 	}
 	
 	private void countNumOfElements() {
-		this.numOfCoveredObjs = 0;
-		this.numOfNotCoverableElements = 0;
-		for (String coverage:this.tsObjectCoverageStatus) {
+		numOfCoveredObjs = 0;
+		numOfNotCoverableElements = 0;
+		for (String coverage:tsObjectCoverageStatus) {
 			if (coverage == TDLCoverageUtil.NOT_COVERABLE) {
-				this.numOfNotCoverableElements++;
+				numOfNotCoverableElements++;
 			}
 			else if (coverage == TDLCoverageUtil.COVERED) {
-				this.numOfCoveredObjs++;
+				numOfCoveredObjs++;
 			}
 		}
 	}
 	
 	public void calculateCoveragePercentage() {
-		int numOfCoverableElements = this.tsObjectCoverageStatus.size() - this.numOfNotCoverableElements;
-		//System.out.println("number of coveredObjects: " + this.numOfCoveredObjs);
-		//System.out.println("number of coverableElements: " + numOfCoverableElements);
-		tsCoveragePercentage = (double)(this.numOfCoveredObjs*100)/numOfCoverableElements;
+		int numOfCoverableElements = tsObjectCoverageStatus.size() - numOfNotCoverableElements;
+		tsCoveragePercentage = (double)(numOfCoveredObjs*100)/numOfCoverableElements;
 		BigDecimal bd = new BigDecimal(tsCoveragePercentage).setScale(2, RoundingMode.HALF_UP);
 		tsCoveragePercentage = bd.doubleValue();
-		//System.out.println("Test suite coverage: " + tsCoveragePercentage);
 		overallResult.getCoverage().add(tsCoveragePercentage + "");
 		setCoverageInfos();
+		System.out.println("Test suite coverage: " + 
+				numOfCoveredObjs + "/" + numOfCoverableElements + " = " + tsCoveragePercentage +"%");
+	
 	}
 
 	public void setCoverageInfos() {
@@ -106,18 +106,18 @@ public class TDLTestSuiteCoverage {
 			ObjectCoverageStatus objectCoverage = new ObjectCoverageStatus();
 			objectCoverage.setModelObject(modelObjects.get(i));
 			objectCoverage.setMetaclass(modelObjects.get(i).eClass());
-			for (TDLTestCaseCoverage tcCoverageObj : this.tcCoverages) {
+			for (TDLTestCaseCoverage tcCoverageObj : tcCoverages) {
 				String tcCoverage = tcCoverageObj.getTcObjectCoverageStatus().get(i);
 				objectCoverage.getCoverage().add(tcCoverage);
 			}
-			String tsCoverage = this.tsObjectCoverageStatus.get(i);
+			String tsCoverage = tsObjectCoverageStatus.get(i);
 			objectCoverage.getCoverage().add(tsCoverage);
-			this.coverageOfModelObjects.add(objectCoverage);
+			coverageOfModelObjects.add(objectCoverage);
 		}
 		//add the overall result as the last row of the info array
-		this.overallResult.setMetaclass(null);
-		this.overallResult.setModelObject(null);
-		this.coverageOfModelObjects.add(this.overallResult);
+		overallResult.setMetaclass(null);
+		overallResult.setModelObject(null);
+		coverageOfModelObjects.add(this.overallResult);
 	}
 	
 	public List<ObjectCoverageStatus> getCoverageOfModelObjects(){
