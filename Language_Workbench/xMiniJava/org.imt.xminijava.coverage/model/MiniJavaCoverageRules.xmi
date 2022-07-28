@@ -7,31 +7,13 @@
     name="MiniJavaCoverage">
   <contexts>
     <metaclass
-        href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//ForStatement"/>
-    <rules xsi:type="DSLSpecificCoverage:EClassIgnorance"
-        ignoreSubclasses="true"/>
-  </contexts>
-  <contexts>
-    <metaclass
-        href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//WhileStatement"/>
-    <rules xsi:type="DSLSpecificCoverage:EClassIgnorance"
-        ignoreSubclasses="true"/>
-  </contexts>
-  <contexts>
-    <metaclass
-        href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//IfStatement"/>
+        href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//Program"/>
     <rules xsi:type="DSLSpecificCoverage:EClassIgnorance"
         ignoreSubclasses="true"/>
   </contexts>
   <contexts>
     <metaclass
         href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//Method"/>
-    <rules xsi:type="DSLSpecificCoverage:EClassIgnorance"
-        ignoreSubclasses="true"/>
-  </contexts>
-  <contexts>
-    <metaclass
-        href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//Program"/>
     <rules xsi:type="DSLSpecificCoverage:EClassIgnorance"
         ignoreSubclasses="true"/>
   </contexts>
@@ -52,7 +34,7 @@
       <containementReference
           href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//TypeDeclaration/members"/>
       <containerContext
-          href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//TypeDeclaration"/>
+          href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//Class"/>
     </rules>
   </contexts>
 </DSLSpecificCoverage:DomainSpecificCoverage>
