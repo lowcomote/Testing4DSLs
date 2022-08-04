@@ -10,9 +10,9 @@
         href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//StateMachine"/>
     <rules xsi:type="DSLSpecificCoverage:ContainerCoverageInference"
         multiplicity="ONE">
-      <containementReference
+      <containmentReference
           href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//CustomSystem/statemachine"/>
-      <containerContext
+      <containerType
           href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//CustomSystem"/>
     </rules>
   </contexts>
@@ -21,9 +21,9 @@
         href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//Region"/>
     <rules xsi:type="DSLSpecificCoverage:ContainerCoverageInference"
         multiplicity="ONE">
-      <containementReference
+      <containmentReference
           href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//StateMachine/regions"/>
-      <containerContext
+      <containerType
           href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//StateMachine"/>
     </rules>
   </contexts>
@@ -48,9 +48,9 @@
     </rules>
     <rules xsi:type="DSLSpecificCoverage:ContainerCoverageInference"
         multiplicity="ONE">
-      <containementReference
+      <containmentReference
           href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//Region/transitions"/>
-      <containerContext
+      <containerType
           href="../../org.imt.pssm.reactive.model/model/statemachines.ecore#//Region"/>
     </rules>
   </contexts>

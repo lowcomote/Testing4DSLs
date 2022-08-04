@@ -50,7 +50,7 @@ public class TDLTestCaseCoverage {
 	public void calculateTCCoverage () {
 		listEObjects();
 		Step<?> rootStep = trace.getRootStep();
-		calculateObjectCoverage(rootStep);
+		calculateCoverageBasedOnTrace(rootStep);
 		
 		//if there is a dsl-specific coverage, initialize the map
 		dslSpecificCoverage = TDLCoverageUtil.getInstance().getDslSpecificCoverage();
@@ -72,16 +72,19 @@ public class TDLTestCaseCoverage {
 		}
 	}
 	
-	private void calculateObjectCoverage(Object rootStep) {
+	private void calculateCoverageBasedOnTrace(Object rootStep) {
+		//System.out.println("Execution Trace:");
 		if (rootStep instanceof SequentialStep) {
 			SequentialStep<?, ?> step = (SequentialStep<?, ?>) rootStep;
 			if (step.getMseoccurrence() != null) {
 				EObject object = step.getMseoccurrence().getMse().getCaller();
+				//System.out.println("execution rule: " + step.getMseoccurrence().getMse().getAction()+
+				//		" (executedObject = " + object + ")");
 				setObjectCoverage(object, TDLCoverageUtil.COVERED);
 			}
 			if (step.getSubSteps() != null) {
 				for (int i=0; i < step.getSubSteps().size(); i++) {
-					calculateObjectCoverage(step.getSubSteps().get(i));
+					calculateCoverageBasedOnTrace(step.getSubSteps().get(i));
 				}
 			}
 		}

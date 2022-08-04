@@ -24,20 +24,20 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSLSpecificCoverage.ecore#//Context/rules"/>
     </genClasses>
     <genClasses image="false" ecoreClass="DSLSpecificCoverage.ecore#//Rule"/>
-    <genClasses ecoreClass="DSLSpecificCoverage.ecore#//EClassIgnorance">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSLSpecificCoverage.ecore#//EClassIgnorance/ignoreSubclasses"/>
+    <genClasses ecoreClass="DSLSpecificCoverage.ecore#//TypeIgnorance">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSLSpecificCoverage.ecore#//TypeIgnorance/ignoreSubclasses"/>
     </genClasses>
     <genClasses ecoreClass="DSLSpecificCoverage.ecore#//ReferenceCoverageInference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DSLSpecificCoverage.ecore#//ReferenceCoverageInference/eReference"/>
     </genClasses>
     <genClasses ecoreClass="DSLSpecificCoverage.ecore#//ContainerCoverageInference">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DSLSpecificCoverage.ecore#//ContainerCoverageInference/containementReference"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DSLSpecificCoverage.ecore#//ContainerCoverageInference/containerContext"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DSLSpecificCoverage.ecore#//ContainerCoverageInference/containmentReference"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DSLSpecificCoverage.ecore#//ContainerCoverageInference/containerType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSLSpecificCoverage.ecore#//ContainerCoverageInference/multiplicity"/>
     </genClasses>
     <genClasses ecoreClass="DSLSpecificCoverage.ecore#//EObjectIgnorance">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSLSpecificCoverage.ecore#//EObjectIgnorance/condition"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DSLSpecificCoverage.ecore#//EObjectIgnorance/containerContext"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DSLSpecificCoverage.ecore#//EObjectIgnorance/containerType"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -14,7 +14,7 @@
         eType="#//Rule" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Rule" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EClassIgnorance" eSuperTypes="#//Rule">
+  <eClassifiers xsi:type="ecore:EClass" name="TypeIgnorance" eSuperTypes="#//Rule">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ignoreSubclasses" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReferenceCoverageInference" eSuperTypes="#//Rule">
@@ -22,9 +22,9 @@
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ContainerCoverageInference" eSuperTypes="#//Rule">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="containementReference"
-        lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="containerContext" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containmentReference" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containerType" lowerBound="1"
         upperBound="-1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiplicity" lowerBound="1"
         eType="#//CoveredContainee"/>
@@ -32,7 +32,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="EObjectIgnorance" eSuperTypes="#//Rule">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="condition" lowerBound="1"
         eType="#//ConditionType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="containerContext" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containerType" lowerBound="1"
         upperBound="-1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="CoveredContainee">

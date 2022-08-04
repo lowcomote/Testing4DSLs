@@ -15,7 +15,7 @@ import DSLSpecificCoverage.ConditionType;
 import DSLSpecificCoverage.ContainerCoverageInference;
 import DSLSpecificCoverage.Context;
 import DSLSpecificCoverage.CoveredContainee;
-import DSLSpecificCoverage.EClassIgnorance;
+import DSLSpecificCoverage.TypeIgnorance;
 import DSLSpecificCoverage.EObjectIgnorance;
 import DSLSpecificCoverage.ReferenceCoverageInference;
 import DSLSpecificCoverage.Rule;
@@ -44,21 +44,21 @@ public class DSLSpecificCoverageExecutor {
 				eObjects.forEach(object -> 
 					runEObjectIgnoranceRule((EObjectIgnorance) rule, object));
 			}
-			else if (rule instanceof EClassIgnorance) {
-				updateCoverableClasses((EClassIgnorance) rule);
+			else if (rule instanceof TypeIgnorance) {
+				updateCoverableClasses((TypeIgnorance) rule);
 				eObjects.forEach(object -> 
-					runEClassIgnoranceRule((EClassIgnorance) rule, object));
+					runTypeIgnoranceRule((TypeIgnorance) rule, object));
 			}
 		}
 	}
 	
 	//check if the context of the container is specified in the rule
 	private void updateCoverableClasses(ContainerCoverageInference rule) {
-		if (!rule.getContainerContext().isEmpty()) {
-			rule.getContainerContext().forEach(c -> addCoverableClass(c));
+		if (!rule.getContainerType().isEmpty()) {
+			rule.getContainerType().forEach(c -> addCoverableClass(c));
 		}
 		else {
-			addCoverableClass((EClass) rule.getContainementReference().eContainer());
+			addCoverableClass((EClass) rule.getContainmentReference().eContainer());
 		}
 	}
 
@@ -67,7 +67,7 @@ public class DSLSpecificCoverageExecutor {
 				(EClass) rule.getEReference().getEType());
 	}
 	
-	private void updateCoverableClasses(EClassIgnorance rule) {
+	private void updateCoverableClasses(TypeIgnorance rule) {
 		if (rule.isIgnoreSubclasses()) {
 			TDLCoverageUtil.getInstance().removeCoverableClass_subClass(
 					((Context) rule.eContainer()).getMetaclass());
@@ -102,12 +102,12 @@ public class DSLSpecificCoverageExecutor {
 
 	private void inferContainerCoverage(ContainerCoverageInference r, EObject object) {
 		//check if the object container is the one expected by the rule
-		if (!r.getContainerContext().stream().anyMatch
+		if (!r.getContainerType().stream().anyMatch
 				(c -> c.getName().equals(object.eContainer().eClass().getName()))) {
 			return;
 		}
 		
-		EReference ref = (EReference) getMatchedFeature(object.eContainer(), r.getContainementReference().getName());
+		EReference ref = (EReference) getMatchedFeature(object.eContainer(), r.getContainmentReference().getName());
 		if (ref == null) { return;}
 		
 		Object containedObject = object.eContainer().eGet(ref);
@@ -156,22 +156,26 @@ public class DSLSpecificCoverageExecutor {
 	
 	private void runEObjectIgnoranceRule(EObjectIgnorance rule, EObject object) {
 		if (rule.getCondition() == ConditionType.INCLUSION) {
-			//ignore EObjects contained by one of the containerContext classes
-			if (rule.getContainerContext().stream().
+			//ignore EObjects contained by one of the ContainerType classes
+			if (rule.getContainerType().stream().
 				anyMatch(c -> c.getName().equals(object.eContainer().eClass().getName()))) {
 				testCaseCoverage.setObjectNotCoverable(object);
 			}
 		}
 		else if (rule.getCondition() == ConditionType.EXCLUSION) {
-			//ignore EObjects that are not contained by any of the containerContext classes
-			if (!rule.getContainerContext().stream().
+			//ignore EObjects that are not contained by any of the ContainerType classes
+			if (!rule.getContainerType().stream().
 				anyMatch(c -> c.getName().equals(object.eContainer().eClass().getName()))) {
 				testCaseCoverage.setObjectNotCoverable(object);
 			}
 		}
 	}
 	
-	private void runEClassIgnoranceRule(EClassIgnorance rule, EObject object) {
+	private void runTypeIgnoranceRule(TypeIgnorance rule, EObject object) {
+		if (!rule.isIgnoreSubclasses() && !object.eClass().getName().equals(
+				((Context) rule.eContainer()).getMetaclass().getName())) {
+			return;
+		}
 		testCaseCoverage.setObjectNotCoverable(object);
 	}
 	

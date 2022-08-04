@@ -8,13 +8,13 @@
   <contexts>
     <metaclass
         href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//Program"/>
-    <rules xsi:type="DSLSpecificCoverage:EClassIgnorance"
+    <rules xsi:type="DSLSpecificCoverage:TypeIgnorance"
         ignoreSubclasses="true"/>
   </contexts>
   <contexts>
     <metaclass
         href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//Method"/>
-    <rules xsi:type="DSLSpecificCoverage:EClassIgnorance"
+    <rules xsi:type="DSLSpecificCoverage:TypeIgnorance"
         ignoreSubclasses="true"/>
   </contexts>
   <contexts>
@@ -22,7 +22,7 @@
         href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//MethodCall"/>
     <rules xsi:type="DSLSpecificCoverage:EObjectIgnorance"
         condition="EXCLUSION">
-      <containerContext
+      <containerType
           href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//Block"/>
     </rules>
   </contexts>
@@ -31,9 +31,9 @@
         href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//Member"/>
     <rules xsi:type="DSLSpecificCoverage:ContainerCoverageInference"
         multiplicity="ONE">
-      <containementReference
+      <containmentReference
           href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//TypeDeclaration/members"/>
-      <containerContext
+      <containerType
           href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//Class"/>
     </rules>
   </contexts>
