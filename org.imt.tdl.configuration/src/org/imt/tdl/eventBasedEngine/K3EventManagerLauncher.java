@@ -228,7 +228,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			e.printStackTrace();
 		}
 		String PLUGIN_ID = "org.eclipse.gemoc.execution.sequential.javaengine.ui"; 		
-		executionEngineJob = new Job(getDebugJobName()) {
+		executionEngineJob = new Job("GEMOC Event-based Engine") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				executionEngine.startSynchronous();
@@ -328,6 +328,17 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			//e.printStackTrace();
 		}
 		return result;
+//		if (this.executionEngine.getRunningStatus() == RunStatus.WaitingForEvent) {
+//			if (this.eventOccurrences.size()>0) {
+//				result = "FAIL:There are extra received events";
+//			}else {
+//				result = "PASS";
+//			}
+//		}else if (this.executionEngine.getRunningStatus() == RunStatus.Running) {
+//			result = "FAIL:Infinite loop in the Model";
+//		}
+//		this.executionEngine.stop();
+//		return result;
 	}
 	
 	private EventOccurrence createEventOccurance(EventOccurrenceType eventType, String eventName, Map<String, Object> parameters) {
@@ -563,10 +574,6 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			MUTResource = this.executionEngine.getExecutionContext().getResourceModel();
 		}
 		return MUTResource;
-	}
-	
-	private String getDebugJobName() {
-		return "Gemoc debug job";
 	}
 
 	@Override
