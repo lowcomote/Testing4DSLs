@@ -58,6 +58,7 @@ public class TDLCoverageView extends ViewPart{
 	
 	@Override
 	public void createPartControl(Composite parent) {
+		TDLCoverageUtil.getInstance().runCoverageComputation();
 		Composite contents = new Group(parent, SWT.FILL);
 	    GridLayout layout = new GridLayout();
 		contents.setLayout(layout);
