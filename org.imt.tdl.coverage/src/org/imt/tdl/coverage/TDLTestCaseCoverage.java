@@ -61,6 +61,8 @@ public class TDLTestCaseCoverage {
 		}
 		
 		findNotCoverableObjects();
+		countNumOfElements();
+		calculateCoveragePercentage();
 	}
 
 	private void listEObjects() {
@@ -150,7 +152,7 @@ public class TDLTestCaseCoverage {
 	public void countNumOfElements() {
 		numOfCoveredObjs = 0;
 		numOfNotCoverableElements = 0;
-		for (String coverage:this.tcObjectCoverageStatus) {
+		for (String coverage:tcObjectCoverageStatus) {
 			if (coverage == TDLCoverageUtil.NOT_COVERABLE) {
 				numOfNotCoverableElements++;
 			}
@@ -163,8 +165,12 @@ public class TDLTestCaseCoverage {
 	public void calculateCoveragePercentage() {
 		int numOfCoverableElements = tcObjectCoverageStatus.size() - numOfNotCoverableElements;
 		tcCoveragePercentage = (double)(numOfCoveredObjs*100)/numOfCoverableElements;
+		try {
 		BigDecimal bd = new BigDecimal(tcCoveragePercentage).setScale(2, RoundingMode.HALF_UP);
 		tcCoveragePercentage = bd.doubleValue();
+		}catch (NumberFormatException e) {
+			System.out.println("NumberFormatException:" + tcCoveragePercentage);
+		}
 		System.out.println(this.testCase.getName() + " coverage: " + 
 				numOfCoveredObjs + "/" + numOfCoverableElements + " = " + tcCoveragePercentage +"%");
 	}
