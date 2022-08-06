@@ -42,6 +42,10 @@ public class TestCoveragePersistence implements IEngineAddon{
 		pathToReportsFiles = _executionContext.getWorkspace().getExecutionPath().toString();
 		Resource testSutieResource = getCopyOfTestSuite(_executionContext);
 
+		if (TDLCoverageUtil.getInstance().getTestSuiteCoverage().getTsCoveragePercentage() == 0) {
+			TDLCoverageUtil.getInstance().runCoverageComputation();
+		}
+		
 	   //create test coverage according to the TDLTestCoverage.ecore structure
 	   org.etsi.mts.tdl.Package copiedTestSuite = (org.etsi.mts.tdl.Package) testSutieResource.getContents().get(0);
 	   TDLTestSuiteCoverage tsCoveragObject = TDLCoverageUtil.getInstance().getTestSuiteCoverage();

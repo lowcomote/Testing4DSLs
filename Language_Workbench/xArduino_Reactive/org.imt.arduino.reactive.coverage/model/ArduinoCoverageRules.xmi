@@ -7,68 +7,62 @@
     name="ArduinoCoverage">
   <contexts>
     <metaclass
-        href="../../org.imt.arduino.reactive.model/model/arduino.ecore#//Sketch"/>
-    <rules xsi:type="DSLSpecificCoverage:ContainerCoverageInference"
+        href="../../org.imt.arduino.reactive.model/model/arduino.ecore#//Project"/>
+    <rules xsi:type="DSLSpecificCoverage:CoverageByContainment"
         multiplicity="ONE">
       <containmentReference
           href="../../org.imt.arduino.reactive.model/model/arduino.ecore#//Project/sketches"/>
-      <containerType
-          href="../../org.imt.arduino.reactive.model/model/arduino.ecore#//Project"/>
+    </rules>
+  </contexts>
+  <contexts>
+    <metaclass
+        href="../../org.imt.arduino.reactive.model/model/arduino.ecore#//Sketch"/>
+    <rules xsi:type="DSLSpecificCoverage:CoverageByContainment"
+        multiplicity="ONE">
+      <containmentReference
+          href="../../org.imt.arduino.reactive.model/model/arduino.ecore#//Sketch/block"/>
     </rules>
   </contexts>
   <contexts>
     <metaclass
         href="../../org.imt.arduino.reactive.model/model/arduino.ecore#//Block"/>
-    <rules xsi:type="DSLSpecificCoverage:ContainerCoverageInference"
-        multiplicity="ONE">
-      <containmentReference
-          href="../../org.imt.arduino.reactive.model/model/arduino.ecore#//Sketch/block"/>
-      <containerType
-          href="../../org.imt.arduino.reactive.model/model/arduino.ecore#//Sketch"/>
-    </rules>
-  </contexts>
-  <contexts>
-    <metaclass
-        href="../../org.imt.arduino.reactive.model/model/arduino.ecore#//Instruction"/>
-    <rules xsi:type="DSLSpecificCoverage:ContainerCoverageInference"
+    <rules xsi:type="DSLSpecificCoverage:CoverageByContainment"
         multiplicity="ONE">
       <containmentReference
           href="../../org.imt.arduino.reactive.model/model/arduino.ecore#//Block/instructions"/>
-      <containerType
-          href="../../org.imt.arduino.reactive.model/model/arduino.ecore#//Block"/>
     </rules>
   </contexts>
   <contexts>
     <metaclass
         href="../../org.imt.arduino.reactive.model/model/arduino.ecore#//Board"/>
-    <rules xsi:type="DSLSpecificCoverage:TypeIgnorance"
-        ignoreSubclasses="true"/>
+    <rules xsi:type="DSLSpecificCoverage:Ignore"
+        ignoreIfSubtyped="true"/>
   </contexts>
   <contexts>
     <metaclass
         href="../../org.imt.arduino.reactive.model/model/arduino.ecore#//Pin"/>
-    <rules xsi:type="DSLSpecificCoverage:TypeIgnorance"
-        ignoreSubclasses="true"/>
+    <rules xsi:type="DSLSpecificCoverage:Ignore"
+        ignoreIfSubtyped="true"/>
   </contexts>
   <contexts>
     <metaclass
         href="../../org.imt.arduino.reactive.model/model/arduino.ecore#//Module"/>
-    <rules xsi:type="DSLSpecificCoverage:TypeIgnorance"
-        ignoreSubclasses="true"/>
+    <rules xsi:type="DSLSpecificCoverage:Ignore"
+        ignoreIfSubtyped="true"/>
   </contexts>
   <contexts>
     <metaclass
         href="../../org.imt.arduino.reactive.model/model/arduino.ecore#//If"/>
-    <rules xsi:type="DSLSpecificCoverage:ReferenceCoverageInference">
-      <eReference
+    <rules xsi:type="DSLSpecificCoverage:CoverageByReference">
+      <reference
           href="../../org.imt.arduino.reactive.model/model/arduino.ecore#//If/condition"/>
     </rules>
   </contexts>
   <contexts>
     <metaclass
         href="../../org.imt.arduino.reactive.model/model/arduino.ecore#//While"/>
-    <rules xsi:type="DSLSpecificCoverage:ReferenceCoverageInference">
-      <eReference
+    <rules xsi:type="DSLSpecificCoverage:CoverageByReference">
+      <reference
           href="../../org.imt.arduino.reactive.model/model/arduino.ecore#//While/condition"/>
     </rules>
   </contexts>

@@ -8,19 +8,19 @@
   <contexts>
     <metaclass
         href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//Program"/>
-    <rules xsi:type="DSLSpecificCoverage:TypeIgnorance"
-        ignoreSubclasses="true"/>
+    <rules xsi:type="DSLSpecificCoverage:Ignore"
+        ignoreIfSubtyped="true"/>
   </contexts>
   <contexts>
     <metaclass
         href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//Method"/>
-    <rules xsi:type="DSLSpecificCoverage:TypeIgnorance"
-        ignoreSubclasses="true"/>
+    <rules xsi:type="DSLSpecificCoverage:Ignore"
+        ignoreIfSubtyped="true"/>
   </contexts>
   <contexts>
     <metaclass
         href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//MethodCall"/>
-    <rules xsi:type="DSLSpecificCoverage:EObjectIgnorance"
+    <rules xsi:type="DSLSpecificCoverage:IgnoreIfContained"
         condition="EXCLUSION">
       <containerType
           href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//Block"/>
@@ -28,13 +28,11 @@
   </contexts>
   <contexts>
     <metaclass
-        href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//Member"/>
-    <rules xsi:type="DSLSpecificCoverage:ContainerCoverageInference"
+        href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//Class"/>
+    <rules xsi:type="DSLSpecificCoverage:CoverageByContainment"
         multiplicity="ONE">
       <containmentReference
           href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//TypeDeclaration/members"/>
-      <containerType
-          href="../../org.imt.xminijava.model/model/XMiniJava.ecore#//Class"/>
     </rules>
   </contexts>
 </DSLSpecificCoverage:DomainSpecificCoverage>
