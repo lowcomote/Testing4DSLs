@@ -25,6 +25,7 @@ import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TDLan2StandaloneSetup;
 import org.etsi.mts.tdl.TestDescription;
 import org.etsi.mts.tdl.tdlPackage;
+import org.etsi.mts.tdl.util.tdlResourceFactoryImpl;
 
 import com.google.inject.Injector;
 
@@ -77,10 +78,8 @@ public class PathHelper {
 			resSet.getPackageRegistry().put(tdlPackage.eNS_URI, tdlPackage.eINSTANCE);
 		}
 		else if (testSuiteURI.toString().endsWith(".tdlan2")) {
-			Injector injector = new TDLan2StandaloneSetup().createInjectorAndDoEMFRegistration();
-			//resSet = injector.getInstance(XtextResourceSet.class);
-			XtextResourceSet xtextResSet = injector.getInstance(XtextResourceSet.class);
-			xtextResSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
+			resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(".tdlan2", new tdlResourceFactoryImpl());
+			resSet.getPackageRegistry().put(tdlPackage.eNS_URI, tdlPackage.eINSTANCE);
 		}
 		Resource testSuiteRes = (resSet).getResource(testSuiteURI, true);
 		return testSuiteRes;
