@@ -50,8 +50,6 @@ public class TDLTestSuiteCoverage {
 				TDLCoverageUtil.getInstance().getDslSpecificCoverageExtension().ignoreModelObjects(tcCoverageObj.getMUTResource());
 			}
 			tcCoverageObj.calculateTCCoverage();
-			tcCoverageObj.countNumOfElements();
-			tcCoverageObj.calculateCoveragePercentage();
 			overallResult.getCoverage().add(tcCoverageObj.getTcCoveragePercentage() + "");
 			
 			//if it is the first test case, copy the whole test case object coverage status for the test suite
