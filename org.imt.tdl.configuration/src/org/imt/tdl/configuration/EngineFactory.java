@@ -28,9 +28,12 @@ import org.imt.tdl.sequentialEngine.JavaEngineLauncher;
 public class EngineFactory{
 	
 	private String DSLPath;
-	private String MUTPath;
-	public boolean launcherIsTuned = false;
+	private Resource dslRes = null;
+	private boolean DSLHasInterface = false;
 	
+	private String MUTPath;
+	
+	public boolean launcherIsTuned = false;
 	private ISequentialExecutionEngine sequentialEngineLauncher;
 	private OCLInterpreter oclLauncher;
 	private IEventBasedExecutionEngine eventManagerLauncher;
@@ -49,15 +52,15 @@ public class EngineFactory{
 			}
 			sequentialEngineLauncher.setUp(MUTPath, DSLPath);
 		}else if(commandType.equals(DSL_SPECIFIC)) {
-			this.eventManagerLauncher = new K3EventManagerLauncher();
-			this.eventManagerLauncher.setUp(MUTPath, DSLPath);
-			if (!this.eventManagerLauncher.isEngineStarted()) {
+			eventManagerLauncher = new K3EventManagerLauncher();
+			eventManagerLauncher.setUp(MUTPath, DSLPath);
+			if (!eventManagerLauncher.isEngineStarted()) {
 				IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
 				if (debugTargets.length > 0) {
 					//we are in the Debug mode, so debug the model under test
-					this.eventManagerLauncher.launchModelDebugger();
+					eventManagerLauncher.launchModelDebugger();
 				}else {
-					this.eventManagerLauncher.startEngine();
+					eventManagerLauncher.startEngine();
 				}
 			}
 		}else if (commandType.equals(OCL)) {
@@ -108,16 +111,14 @@ public class EngineFactory{
 	}
 	
 	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {
-		if (this.getActiveEngine() instanceof ISequentialExecutionEngine) {
+		if (getActiveEngine() instanceof ISequentialExecutionEngine) {
 			return sequentialEngineLauncher.getExecutionTrace();
 		}
-		else if (this.getActiveEngine() instanceof IEventBasedExecutionEngine) {
+		else if (getActiveEngine() instanceof IEventBasedExecutionEngine) {
 			return eventManagerLauncher.getExecutionTrace();
 		}
 		return null;
 	}
-	
-	private Resource dslRes = null;
 	
 	private String getEngineType() {
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
@@ -129,18 +130,13 @@ public class EngineFactory{
 		return null;
 	}
 	
-	private boolean dslHasInterface() {
-		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(DSLPath), true);
-		Dsl dsl = (Dsl)dslRes.getContents().get(0);
-		if (dsl.getEntry("behavioralInterface") != null) {
-			return true;
-		}
-		return false;
-	}
-	
 	public void setDSLPath (String DSLPath) {
 		this.DSLPath = DSLPath;
 		dslRes = (new ResourceSetImpl()).getResource(URI.createURI(this.DSLPath), true);
+		Dsl dsl = (Dsl)dslRes.getContents().get(0);
+		if (dsl.getEntry("behavioralInterface") != null) {
+			DSLHasInterface = true;
+		}
 	}
 	
 	public void setMUTPath (String MUTPath) {
@@ -152,20 +148,21 @@ public class EngineFactory{
 	}
 	
 	public Resource getMUTResource() {
-		if (getActiveEngine() instanceof ISequentialExecutionEngine) {
+		IExecutionEngine activeEngine = getActiveEngine();
+		if (activeEngine instanceof ISequentialExecutionEngine) {
 			return sequentialEngineLauncher.getModelResource();
 		}
-		else if (getActiveEngine() instanceof IEventBasedExecutionEngine) {
+		else if (activeEngine instanceof IEventBasedExecutionEngine) {
 			return eventManagerLauncher.getModelResource();
 		}
 		return (new ResourceSetImpl()).getResource(URI.createURI(MUTPath), true);
 	}
 	
 	public IExecutionEngine getActiveEngine() {
-		if (!dslHasInterface() && sequentialEngineLauncher != null) {
+		if (!DSLHasInterface && sequentialEngineLauncher != null) {
 			return sequentialEngineLauncher;
 		}
-		else if (dslHasInterface() && eventManagerLauncher != null) {
+		else if (DSLHasInterface && eventManagerLauncher != null) {
 			return eventManagerLauncher;
 		}
 		return null;
@@ -180,10 +177,10 @@ public class EngineFactory{
 	}
 
 	public void disposeResources() {
-		if (this.getActiveEngine() instanceof ISequentialExecutionEngine) {
+		if (getActiveEngine() instanceof ISequentialExecutionEngine) {
 			sequentialEngineLauncher.disposeResources();
 		}
-		else if (this.getActiveEngine() instanceof IEventBasedExecutionEngine) {
+		else if (getActiveEngine() instanceof IEventBasedExecutionEngine) {
 			eventManagerLauncher.disposeResources();
 		}
 	}
