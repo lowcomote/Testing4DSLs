@@ -48,7 +48,7 @@ public class ExcelExporter {
 		for (Map.Entry<String, SBFLMeasures> entry:mutant_SBFLMeasures4FaultyObject.entrySet()) {
 			//create one sheet per mutant
 			String mutantPath = entry.getKey();
-			String mutantName = mutantPath.substring(mutantPath.indexOf("model\\") + 6, mutantPath.indexOf(".model")).replaceAll("\\\\", "\\."); 
+			String mutantName = mutantPath.substring(mutantPath.indexOf("mutants\\") + 6, mutantPath.indexOf(".model")).replaceAll("\\\\", "\\."); 
 			if (seedModelName == null) {
 				seedModelName = mutantName.substring(0, mutantName.indexOf("."));
 			}

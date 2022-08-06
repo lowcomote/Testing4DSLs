@@ -57,14 +57,14 @@ public class SBFLEvaluation {
 	}
 	public void evaluateSBFLTechniques() {
 		//finding mutants and mapping them to their registry
-		findMutantRegistryMapping(this.mutantsProject);
-		System.out.println("# of generated mutants: " + this.mutant_registry.size());
+		findMutantRegistryMapping(mutantsProject);
+		System.out.println("# of generated mutants: " + mutant_registry.size());
 		
 		//finding test suite and run it on mutants to find live ones and keep verdict and coverage of killed ones
 		String testResourcePath = "platform:/resource/"+ testSuiteProject.getName() + "/";
 		File testsFolder = new File(testSuiteProject.getLocation().toString());	
 		for (File testFile : testsFolder.listFiles()) {
-			this.testSuite = getTestSuite(testResourcePath, testFile);
+			testSuite = getTestSuite(testResourcePath, testFile);
 		}
 		testMutants();
 		
@@ -95,17 +95,17 @@ public class SBFLEvaluation {
 			pathsHelper(mutantsProject.getName(), file);
 		}
 		//if the mutants have registries, find their mappings.
-		for (String mutantPath:this.mutants){
-			if (this.registeries.size()>0){
+		for (String mutantPath:mutants){
+			if (registeries.size()>0){
 				String mutator = getMutator(mutantPath);
 				String mutantName = mutantPath.substring(mutantPath.lastIndexOf("\\") + 1, mutantPath.indexOf(".model"));
-				Optional<String> registery = this.registeries.stream().filter(r -> r.contains(mutator) && r.contains(mutantName + "Registry")).findFirst();
+				Optional<String> registery = registeries.stream().filter(r -> r.contains(mutator) && r.contains(mutantName + "Registry")).findFirst();
 				if (registery.isPresent()) {
-					this.mutant_registry.put(mutantPath, registery.get());
+					mutant_registry.put(mutantPath, registery.get());
 				}
 			}
 			else {
-				this.mutant_registry.put(mutantPath, null);
+				mutant_registry.put(mutantPath, null);
 			}
 		}
 	}
@@ -113,23 +113,23 @@ public class SBFLEvaluation {
 	private void pathsHelper(String projectName, File file) {
 		if (file.isFile() && file.getName().endsWith(".model")) {
 			String filePath = file.getPath();
-			if (this.workspacePath == null) {
-				this.workspacePath = filePath.substring(0, filePath.lastIndexOf(projectName)-1);
+			if (workspacePath == null) {
+				workspacePath = filePath.substring(0, filePath.lastIndexOf(projectName)-1);
 			}		
 			//get the relative path of the file
-			filePath = filePath.replace(this.workspacePath, "");
+			filePath = filePath.replace(workspacePath, "");
 			//get the name of the seed model
-			if (this.seedModelPath == null) {
+			if (seedModelPath == null) {
 				String seedModelName = filePath.substring(1);
 				seedModelName = filePath.substring(filePath.indexOf("\\mutants\\") + "\\mutants\\".length(), filePath.length());
 				if (file.getName().equals(seedModelName)) {//file is the seed model
-					this.seedModelPath = filePath;
+					seedModelPath = filePath;
 				}
 			}
 			if (file.getName().endsWith("Registry.model")) {
-				this.registeries.add(filePath);
+				registeries.add(filePath);
 			}else if (!filePath.equals(seedModelPath)){
-				this.mutants.add(filePath);
+				mutants.add(filePath);
 			}
 		}
 		else if (file.isDirectory()){
@@ -140,7 +140,7 @@ public class SBFLEvaluation {
 	}
 	
 	public String getMutator (String filePath) {
-		filePath = filePath.replace(this.workspacePath, "");
+		filePath = filePath.replace(workspacePath, "");
 		String[] filePathSections = filePath.split("\\\\");
 		if (filePath.contains("Registry.model")) {
 			return filePathSections[filePathSections.length-3];
@@ -178,27 +178,27 @@ public class SBFLEvaluation {
 	}
 	
 	private void testMutants() {
-		for (String mutant:this.mutants) {
+		for (String mutant:mutants) {
 			MutationTestRunner testRunner = new MutationTestRunner();
 			System.out.println("run tests on: " + mutant);
-			testRunner.runTestAndCalculateCoverage(this.testSuite, mutant);
+			testRunner.runTestAndCalculateCoverage(testSuite, mutant);
 			if (testRunner.getTestSuiteResult().getNumOfFailedTestCases() == 0) {
 				//the mutant is alive, so it must be removed from the evaluation data
-				if (this.mutant_registry.size()>0) {
-					this.mutant_registry.remove(mutant);
+				if (mutant_registry.size()>0) {
+					mutant_registry.remove(mutant);
 				}
 			}
 			else {
 				//the mutant is killed, so its test result and its coverage must be kept
-				this.mutant_Verdict.put(mutant, testRunner.getTestSuiteResult());
-				this.mutant_Coverage.put(mutant, testRunner.getTestSuiteCoverage());
+				mutant_Verdict.put(mutant, testRunner.getTestSuiteResult());
+				mutant_Coverage.put(mutant, testRunner.getTestSuiteCoverage());
 			}
 		}
 	}
 	
 	public void localizeFaultOfMutant(String mutant) {
-		TDLTestSuiteResult testSuiteResult = this.mutant_Verdict.get(mutant);
-		TDLTestSuiteCoverage testSuiteCoverage = this.mutant_Coverage.get(mutant);
+		TDLTestSuiteResult testSuiteResult = mutant_Verdict.get(mutant);
+		TDLTestSuiteCoverage testSuiteCoverage = mutant_Coverage.get(mutant);
 		SuspiciousnessRanking suspComputing = new SuspiciousnessRanking(testSuiteResult, testSuiteCoverage);
 		suspComputing.calculateMeasures();
 		List<SBFLMeasures> mutantSBFLMeasures = suspComputing.getElementsSBFLMeasures();
@@ -230,8 +230,8 @@ public class SBFLEvaluation {
 	
 	private EObject getFaultyObjectOfMutant(String mutant) {
 		//if there is a registry for the mutant, find the faulty object using the registry
-		if (this.mutant_registry.get(mutant) != null) {
-			String mutantRegistryPath = "platform:/resource" + this.mutant_registry.get(mutant).replace("\\", "/");
+		if (mutant_registry.get(mutant) != null) {
+			String mutantRegistryPath = "platform:/resource" + mutant_registry.get(mutant).replace("\\", "/");
 			Resource registryResource = (new ResourceSetImpl()).getResource(URI.createURI(mutantRegistryPath), true);
 			Mutations mutations = (Mutations) registryResource.getContents().get(0);
 			Optional<AppMutation> informationChangedMutation = mutations.getMuts().stream().filter(m -> m instanceof InformationChanged).findFirst();
@@ -250,7 +250,7 @@ public class SBFLEvaluation {
 			FaultyObjectFinder finder = new FaultyObjectFinder();
 			String mutantPath = "platform:/resource" + mutant.replace("\\", "/");
 			Resource mutantResource = (new ResourceSetImpl()).getResource(URI.createURI(mutantPath), true);
-			String seedPath = "platform:/resource" + this.seedModelPath.replace("\\", "/");
+			String seedPath = "platform:/resource" + seedModelPath.replace("\\", "/");
 			Resource originalModelResource = (new ResourceSetImpl()).getResource(URI.createURI(seedPath), true);
 			return finder.findFaultyObjectOfMutant(mutantResource, originalModelResource);
 		}
