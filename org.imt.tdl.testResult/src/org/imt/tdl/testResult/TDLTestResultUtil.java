@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -56,7 +57,15 @@ public class TDLTestResultUtil {
 	    if (containerLabelProvider != null) {
 	    	containerLabel = containerLabelProvider.getText(container);
 	    }
-		return (containerLabel + "::" + objectLabel);
+	    String label = containerLabel + "::" + objectLabel + "(";
+	    for (EAttribute attribute : object.eClass().getEAllAttributes()) {
+	    	Object featureValue = object.eGet(attribute);
+	    	label += featureValue != null ? featureValue.toString()+", " : "";
+	    }
+	    if (label.endsWith(", ")) {
+	    	label = label.substring(0, label.length()-2);
+	    }
+	    return label + ")";
 	}
    
    public String getDataAsString(List<?> list){
