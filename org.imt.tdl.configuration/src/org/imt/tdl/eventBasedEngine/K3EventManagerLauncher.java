@@ -188,11 +188,11 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			if (receivedEventOccurrence == null) {
 				return "FAIL: There is no received event occurrence from the MUT";
 			}
-			if (this.equalEventOccurrences(receivedEventOccurrence, expectedEventOccurrence)) {
+			if (equalEventOccurrences(receivedEventOccurrence, expectedEventOccurrence)) {
 				return "PASS";
 			}
 			return "FAIL: The expected event is not received from MUT \nThe received event is:\n" + 
-				this.eventOccurenceToString(receivedEventOccurrence);
+				eventOccurenceToString(receivedEventOccurrence);
 
 		} catch (InterruptedException e) {
 			return e.getMessage();
@@ -315,7 +315,6 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			    Thread.currentThread().interrupt();
 			}
 		}
-		
 		try {
 			executionEngine.stop();
 			if (eventOccurrences.size()>0) {
@@ -328,16 +327,16 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			//e.printStackTrace();
 		}
 		return result;
-//		if (this.executionEngine.getRunningStatus() == RunStatus.WaitingForEvent) {
-//			if (this.eventOccurrences.size()>0) {
+//		if (executionEngine.getRunningStatus() == RunStatus.WaitingForEvent) {
+//			if (eventOccurrences.size()>0) {
 //				result = "FAIL:There are extra received events";
 //			}else {
 //				result = "PASS";
 //			}
-//		}else if (this.executionEngine.getRunningStatus() == RunStatus.Running) {
+//		}else if (executionEngine.getRunningStatus() == RunStatus.Running) {
 //			result = "FAIL:Infinite loop in the Model";
 //		}
-//		this.executionEngine.stop();
+//		executionEngine.stop();
 //		return result;
 	}
 	
