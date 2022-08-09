@@ -29,12 +29,12 @@ public class ArduinoImplementationRelationship extends SimpleImplementationRelat
 	}
 	private static Set<String> computeRunToCompletionMap(List<Event> events) {
 		final Set<String> result = new HashSet<>();
-		result.add("org.imt.arduino.reactive.interpreter.SketchAspect.execute");
-		result.add("org.imt.arduino.reactive.interpreter.PushButtonAspect.press");
-		result.add("org.imt.arduino.reactive.interpreter.PushButtonAspect.release");
-		result.add("org.imt.arduino.reactive.interpreter.InfraRedSensorAspect.detect");
-		result.add("org.imt.arduino.reactive.interpreter.InfraRedSensorAspect.notDetect");
-		result.add("org.imt.arduino.reactive.interpreter.SoundSensorAspect.detect");
+//		result.add("org.imt.arduino.reactive.interpreter.SketchAspect.execute");
+//		result.add("org.imt.arduino.reactive.interpreter.PushButtonAspect.press");
+//		result.add("org.imt.arduino.reactive.interpreter.PushButtonAspect.release");
+//		result.add("org.imt.arduino.reactive.interpreter.InfraRedSensorAspect.detect");
+//		result.add("org.imt.arduino.reactive.interpreter.InfraRedSensorAspect.notDetect");
+//		result.add("org.imt.arduino.reactive.interpreter.SoundSensorAspect.detect");
 		return result;
 	}
 	public ArduinoImplementationRelationship() {
