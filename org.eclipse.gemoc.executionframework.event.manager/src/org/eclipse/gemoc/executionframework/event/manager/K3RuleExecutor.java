@@ -52,6 +52,7 @@ public class K3RuleExecutor implements IMetalanguageRuleExecutor{
 						+ "or if, after possible unwrapping, a parameter value cannot be converted to the corresponding formal parameter type by a method invocation conversion.");
 			}
 			else if (e instanceof InvocationTargetException) {
+				//e.printStackTrace();
 				System.out.println("InvocationTargetException -> thrown because of calling '" + toCall.getName() + "' method");
 			}
 			else if (e instanceof NullPointerException) {
