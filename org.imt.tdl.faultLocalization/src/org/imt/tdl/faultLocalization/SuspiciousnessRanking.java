@@ -50,64 +50,64 @@ public class SuspiciousnessRanking {
 	
 	public SuspiciousnessRanking() {
 		setSbflTechniques();
-		this.testSuiteResult = TDLTestResultUtil.getInstance().getTestSuiteResult();
-		this.errorVector = this.testSuiteResult.getTestCaseResults();
-		this.testSuiteCoverage = TDLCoverageUtil.getInstance().getTestSuiteCoverage();
-		this.coverageMatix.addAll(this.testSuiteCoverage.coverageOfModelObjects);
+		testSuiteResult = TDLTestResultUtil.getInstance().getTestSuiteResult();
+		errorVector = testSuiteResult.getTestCaseResults();
+		testSuiteCoverage = TDLCoverageUtil.getInstance().getTestSuiteCoverage();
+		coverageMatix.addAll(testSuiteCoverage.coverageOfModelObjects);
 		//the row of the matrix containing coverage percentages should be removed 
-		this.coverageMatix.removeIf(element -> element.getMetaclass() == null);
+		coverageMatix.removeIf(element -> element.getMetaclass() == null);
 		//if the element is not coverable, remove it from the matrix
-		this.coverageMatix.removeIf(element -> 
+		coverageMatix.removeIf(element -> 
 			element.getCoverage().get(element.getCoverage().size()-1) == TDLCoverageUtil.NOT_COVERABLE);
-		this.elementsSBFLMeasures.clear();
+		elementsSBFLMeasures.clear();
 	}
 	
 	private void setSbflTechniques() {
-		this.sbflTechniques.add(ARITHMETICMEAN);
-		this.sbflTechniques.add(BARINEL);
-		this.sbflTechniques.add(BARONIETAL);
-		this.sbflTechniques.add(BRAUNBANQUET);
-		this.sbflTechniques.add(COHEN);
-		this.sbflTechniques.add(CONFIDENCE);
-		this.sbflTechniques.add(PIERCE);
-		this.sbflTechniques.add(ROGERSTANIMOTO);
-		this.sbflTechniques.add(RUSSELRAO);
-		this.sbflTechniques.add(SIMPLEMATCHING);
-		this.sbflTechniques.add(DSTAR);
-		this.sbflTechniques.add(KULCYNSKI2);
-		this.sbflTechniques.add(MOUNTFORD);
-		this.sbflTechniques.add(OCHIAI);
-		this.sbflTechniques.add(OCHIAI2);
-		this.sbflTechniques.add(OP2);
-		this.sbflTechniques.add(PHI);
-		this.sbflTechniques.add(TARANTULA);
-		this.sbflTechniques.add(ZOLTAR);
+		sbflTechniques.add(ARITHMETICMEAN);
+		sbflTechniques.add(BARINEL);
+		sbflTechniques.add(BARONIETAL);
+		sbflTechniques.add(BRAUNBANQUET);
+		sbflTechniques.add(COHEN);
+		sbflTechniques.add(CONFIDENCE);
+		sbflTechniques.add(PIERCE);
+		sbflTechniques.add(ROGERSTANIMOTO);
+		sbflTechniques.add(RUSSELRAO);
+		sbflTechniques.add(SIMPLEMATCHING);
+		sbflTechniques.add(DSTAR);
+		sbflTechniques.add(KULCYNSKI2);
+		sbflTechniques.add(MOUNTFORD);
+		sbflTechniques.add(OCHIAI);
+		sbflTechniques.add(OCHIAI2);
+		sbflTechniques.add(OP2);
+		sbflTechniques.add(PHI);
+		sbflTechniques.add(TARANTULA);
+		sbflTechniques.add(ZOLTAR);
 		
 	}
 
 	public SuspiciousnessRanking(TDLTestSuiteResult tsResult, TDLTestSuiteCoverage tsCoverage) {
 		setSbflTechniques();
-		this.testSuiteResult = tsResult;
-		this.errorVector = this.testSuiteResult.getTestCaseResults();
-		this.testSuiteCoverage = tsCoverage;
-		this.coverageMatix.addAll(this.testSuiteCoverage.coverageOfModelObjects);
+		testSuiteResult = tsResult;
+		errorVector = testSuiteResult.getTestCaseResults();
+		testSuiteCoverage = tsCoverage;
+		coverageMatix.addAll(testSuiteCoverage.coverageOfModelObjects);
 		//the row of the matrix containing coverage percentages should be removed 
-		this.coverageMatix.removeIf(element -> element.getMetaclass() == null);
+		coverageMatix.removeIf(element -> element.getMetaclass() == null);
 		//if the element is not coverable, remove it from the matrix
-		this.coverageMatix.removeIf(element -> 
+		coverageMatix.removeIf(element -> 
 			element.getCoverage().get(element.getCoverage().size()-1) == TDLCoverageUtil.NOT_COVERABLE);
-		this.elementsSBFLMeasures.clear();
+		elementsSBFLMeasures.clear();
 	}
 	
 	public void calculateMeasures() {
-		for (int i=0; i<this.coverageMatix.size(); i++) {
-			EObject modelElement = this.coverageMatix.get(i).getModelObject();
-			ArrayList<String> elementCoverageStatus = this.coverageMatix.get(i).getCoverage();
+		for (int i=0; i<coverageMatix.size(); i++) {
+			EObject modelElement = coverageMatix.get(i).getModelObject();
+			ArrayList<String> elementCoverageStatus = coverageMatix.get(i).getCoverage();
 			SBFLMeasures elementSBFLMeasures = new SBFLMeasures();
 			elementSBFLMeasures.setModelObject(modelElement);
 			elementSBFLMeasures.setMetaclass(modelElement.eClass());
-			elementSBFLMeasures.setNF(this.testSuiteResult.getNumOfFailedTestCases());
-			elementSBFLMeasures.setNS(this.testSuiteResult.getNumOfPassedTestCases());
+			elementSBFLMeasures.setNF(testSuiteResult.getNumOfFailedTestCases());
+			elementSBFLMeasures.setNS(testSuiteResult.getNumOfPassedTestCases());
 
 			int NCF = 0;//number of failed test cases that cover a coverable model element
 			int NUF = 0;//number of failed test cases that do not cover a coverable model element
@@ -117,10 +117,10 @@ public class SuspiciousnessRanking {
 			int NU = 0;//total number of test cases that do not cover a coverable model element 
 			for (int j=0; j<elementCoverageStatus.size()-1; j++) {
 				elementSBFLMeasures.getCoverage().add(elementCoverageStatus.get(j));
-				String testCaseName = this.testSuiteCoverage.getTCCoverages().get(j).getTestCaseName();
+				String testCaseName = testSuiteCoverage.getTCCoverages().get(j).getTestCaseName();
 				//find the result of the test case
 				String testCaseVerdict = "";
-				for (TDLTestCaseResult testResult:this.errorVector) {
+				for (TDLTestCaseResult testResult:errorVector) {
 					if (testResult.getTestCaseName().equals(testCaseName)) {
 						testCaseVerdict = testResult.getValue();
 						break;
@@ -153,10 +153,10 @@ public class SuspiciousnessRanking {
 		//to show the verdicts in the view, we add a new SBFLMeasure object at the end of the list elementsSBFLMeasures
 		//this object only contains verdicts for the test cases
 		SBFLMeasures testsVerdicts = new SBFLMeasures();
-		for (TDLTestCaseResult tcResult:this.errorVector) {
+		for (TDLTestCaseResult tcResult:errorVector) {
 			testsVerdicts.getCoverage().add(tcResult.getValue());
 		}
-		this.elementsSBFLMeasures.add(testsVerdicts);
+		elementsSBFLMeasures.add(testsVerdicts);
 	}
 	
 	//reference: https://github.com/javitroya/SBFL_MT/blob/6f623acab0d4b673314feca58d72cac705dc0967/Spectrum-based_FaultLoc_MT/SpecBased_FaultLoc_MT/src/es/us/eii/fault/localization/mt/main/FaultLocalizationMT_Main.java#L1031
@@ -361,7 +361,7 @@ public class SuspiciousnessRanking {
 	
 	public void calculateRanks() {
 		List<SBFLMeasures> measures = new ArrayList<SBFLMeasures>();
-		measures.addAll(this.elementsSBFLMeasures);
+		measures.addAll(elementsSBFLMeasures);
 		measures.remove(measures.size()-1);
 		Collections.sort(measures, Collections.reverseOrder());
 		int rank = 1;
@@ -380,7 +380,7 @@ public class SuspiciousnessRanking {
 			}else {
 				measures.get(i).getRank().put(technique, rank);
 			}
-			for (SBFLMeasures objectMeasures: this.elementsSBFLMeasures) {
+			for (SBFLMeasures objectMeasures: elementsSBFLMeasures) {
 				if (objectMeasures.getMetaclass() == measures.get(i).getMetaclass()
 						&& objectMeasures.getModelObject() == measures.get(i).getModelObject()) {
 					objectMeasures.getRank().put(technique, rank);
@@ -391,14 +391,14 @@ public class SuspiciousnessRanking {
 	}
 	
 	public void measureEXAMScores(SBFLMeasures measures4faultyObject, String technique) { 
-		int faultyObjIndex = this.elementsSBFLMeasures.indexOf(measures4faultyObject);
-		int numOfObjects = this.elementsSBFLMeasures.size();
+		int faultyObjIndex = elementsSBFLMeasures.indexOf(measures4faultyObject);
+		int numOfObjects = elementsSBFLMeasures.size();
 		int rank4faultyObject = measures4faultyObject.getRank().get(technique);
 		int numOfTies = 0;
 		//calculate number of ties based on the ranks of other objects for the same technique
-		for (int i=0; i<this.elementsSBFLMeasures.size(); i++) {
-		    if (i != faultyObjIndex && this.elementsSBFLMeasures.get(i).getModelObject()!=null) {
-		    	if (this.elementsSBFLMeasures.get(i).getRank().get(technique) == rank4faultyObject) {
+		for (int i=0; i<elementsSBFLMeasures.size(); i++) {
+		    if (i != faultyObjIndex && elementsSBFLMeasures.get(i).getModelObject()!=null) {
+		    	if (elementsSBFLMeasures.get(i).getRank().get(technique) == rank4faultyObject) {
 		    		numOfTies++;
 		    	}
 		    }
@@ -431,7 +431,7 @@ public class SuspiciousnessRanking {
 	}
 	
 	public List<SBFLMeasures> getElementsSBFLMeasures() {
-		return this.elementsSBFLMeasures;
+		return elementsSBFLMeasures;
 	}
 
 	public void setElementsSBFLMeasures(List<SBFLMeasures> elementsSBFLMeasures) {
