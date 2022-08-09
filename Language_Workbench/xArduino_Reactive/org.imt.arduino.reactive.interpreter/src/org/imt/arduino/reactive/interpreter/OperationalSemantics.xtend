@@ -707,7 +707,6 @@ class Delay_ExecutableAspect extends Utilities_ExecutableAspect {
 			}
 		} catch (InterruptedException e) {
 			System.out.println("InterruptedException thrown because of Delay")
-			e.printStackTrace()
 		}
 	}
 }
