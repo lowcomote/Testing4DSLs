@@ -318,7 +318,10 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		try {
 			executionEngine.stop();
 			if (eventOccurrences.size()>0) {
-				result = "FAIL:There are extra received events";
+				StringBuilder sb = new StringBuilder();
+				sb.append("FAIL:There are " + eventOccurrences.size() +" extra received events:\n");
+				eventOccurrences.stream().forEach(e -> sb.append(eventOccurenceToString(e) + ", "));
+				result = sb.toString().endsWith(", ") ? sb.substring(0, sb.length()-2) : sb.toString();
 			}
 			executionEngineJob.cancel();
 			executionEngineJob.getThread().interrupt();
