@@ -60,7 +60,8 @@ public class TDLTestResultUtil {
 	    String label = containerLabel + "::" + objectLabel + "(";
 	    for (EAttribute attribute : object.eClass().getEAllAttributes()) {
 	    	Object featureValue = object.eGet(attribute);
-	    	label += featureValue != null ? featureValue.toString()+", " : "";
+	    	label += featureValue != null ? 
+	    			attribute.getName() + "=" + featureValue.toString() + ", " : "";
 	    }
 	    if (label.endsWith(", ")) {
 	    	label = label.substring(0, label.length()-2);
