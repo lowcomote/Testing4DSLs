@@ -91,6 +91,14 @@ public class EngineFactory{
 		return sequentialEngineLauncher.stopAsynchronousExecution();
 	}
 	
+	public void terminateExecution() {
+		if (getActiveEngine() instanceof ISequentialExecutionEngine) {
+			sequentialEngineLauncher.stopAsynchronousExecution();
+		}
+		else if (getActiveEngine() instanceof IEventBasedExecutionEngine) {
+			eventManagerLauncher.sendStopEvent(0);//stop engine immediately
+		}
+	}
 	public String executeOCLCommand (String query){
 		//send the query without quotation marks
 		return oclLauncher.runQuery(getMUTResource(), query.substring(1, query.length()-1));
@@ -103,7 +111,7 @@ public class EngineFactory{
 		case "EXPOSED":
 			return eventManagerLauncher.assertExposedEvent(eventName, parameters);
 		case "STOP":
-			return eventManagerLauncher.sendStopEvent();
+			return eventManagerLauncher.sendStopEvent(10);//stop engine after a while
 		default:
 			break;
 		}

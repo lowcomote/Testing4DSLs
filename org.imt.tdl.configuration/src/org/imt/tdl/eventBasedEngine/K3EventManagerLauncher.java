@@ -88,6 +88,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	private GenericEventManager eventManager = null;
 	private LinkedTransferQueue<EventOccurrence> eventOccurrences = new LinkedTransferQueue<EventOccurrence>();
 	
+	//observer is used for assertion generation component of test amplifier
 	private List<ModelExecutionObserver> observers = new ArrayList<>();
 	
 	// progress monitor used during launch; useful for operations that wish to
@@ -101,9 +102,9 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	public void setUp(String MUTPath, String DSLPath){
 		this.MUTPath = MUTPath;
 		this.DSLPath = DSLPath;
-		final String languageName = this.getDslName(DSLPath);
-		final String implemRelId = this.getImplRel(DSLPath);
-		final String subtypeRelId = this.getSubRel(DSLPath);
+		final String languageName = getDslName(DSLPath);
+		final String implemRelId = getImplRel(DSLPath);
+		final String subtypeRelId = getSubRel(DSLPath);
 		final Set<String> implRelIds = new HashSet<>();
 		implRelIds.add(implemRelId);
 		final Set<String> subtypeRelIds =  new HashSet<>();
@@ -303,10 +304,10 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	}
 	
 	@Override
-	public String sendStopEvent() {
+	public String sendStopEvent(int waitingTime) {
 		String result = "PASS";
 		int i=0;
-		while (executionEngine.getRunningStatus() != RunStatus.WaitingForEvent && i < 10) {
+		while (executionEngine.getRunningStatus() != RunStatus.WaitingForEvent && i < waitingTime) {
 			try{
 				Thread.sleep(500);
 				i++;
@@ -330,17 +331,6 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 			//e.printStackTrace();
 		}
 		return result;
-//		if (executionEngine.getRunningStatus() == RunStatus.WaitingForEvent) {
-//			if (eventOccurrences.size()>0) {
-//				result = "FAIL:There are extra received events";
-//			}else {
-//				result = "PASS";
-//			}
-//		}else if (executionEngine.getRunningStatus() == RunStatus.Running) {
-//			result = "FAIL:Infinite loop in the Model";
-//		}
-//		executionEngine.stop();
-//		return result;
 	}
 	
 	private EventOccurrence createEventOccurance(EventOccurrenceType eventType, String eventName, Map<String, Object> parameters) {
@@ -569,11 +559,11 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	}
 	
 	public Resource getModelResource() {
-		if (this.executionEngine == null) {
+		if (executionEngine == null) {
 			MUTResource = (new ResourceSetImpl()).getResource(URI.createURI(MUTPath), true);
 		}
 		else {
-			MUTResource = this.executionEngine.getExecutionContext().getResourceModel();
+			MUTResource = executionEngine.getExecutionContext().getResourceModel();
 		}
 		return MUTResource;
 	}
@@ -602,10 +592,10 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	@Override
 	public void disposeResources() {
 		try {
-			this.MUTResource.unload();
-			this.executionEngine.dispose();
-			this.executionEngineJob.cancel();
-			this.executionEngineJob.getThread().interrupt();
+			MUTResource.unload();
+			executionEngine.dispose();
+			executionEngineJob.cancel();
+			executionEngineJob.getThread().interrupt();
 		}catch (NullPointerException e) {
 			// TODO: handle exception
 		}

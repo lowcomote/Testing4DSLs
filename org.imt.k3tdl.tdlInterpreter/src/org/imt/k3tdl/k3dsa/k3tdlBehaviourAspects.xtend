@@ -89,7 +89,6 @@ class CombinedBehaviourAspect extends BehaviourAspect{
 }
 @Aspect (className = PeriodicBehaviour)
 class PeriodicBehaviourAspect extends BehaviourAspect{
-
 	@OverrideAspectMethod
 	def boolean performBehavior(){
 		return _self.block.traverseBlock()
@@ -124,7 +123,8 @@ class StopAspect extends AtomicBehaviourAspect{
 	@Step
 	@OverrideAspectMethod
 	def boolean performBehavior(){
-		return false
+		_self.parentTestDescription.launcher.terminateExecution
+		return true
 	}
 }
 @Aspect (className = Break)
@@ -441,6 +441,9 @@ class BlockAspect{
 			result = b.performBehavior()
 			if (!result){
 				return false
+			}
+			if (b instanceof Stop){//don't execute the behaviors after executing Stop behavior as the test suite execution must be finished
+				return true
 			}
 		}
 		return true
