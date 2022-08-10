@@ -3,6 +3,7 @@ package org.imt.tdl.sbfl.evaluation;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -90,8 +91,14 @@ public class SBFLEvaluation {
 	}
 	
 	private void findMutantRegistryMapping(IProject mutantsProject) {
-		File projectFolder = new File(mutantsProject.getLocation() + "\\mutants");
-		for (File file : projectFolder.listFiles()) {
+		File projectFolder = new File(mutantsProject.getLocation().toString());
+		seedModelPath = Arrays.asList(projectFolder.listFiles()).stream()
+							.filter(f -> f.isFile() && f.getName().endsWith(".model"))
+							.findFirst().get().getPath();
+		workspacePath = seedModelPath.substring(0, seedModelPath.lastIndexOf(mutantsProject.getName())-1);
+		seedModelPath = seedModelPath.replace(workspacePath, "");
+		File mutantsFolder = new File(mutantsProject.getLocation() + "\\mutants");
+		for (File file : mutantsFolder.listFiles()) {
 			pathsHelper(mutantsProject.getName(), file);
 		}
 		//if the mutants have registries, find their mappings.
@@ -112,20 +119,9 @@ public class SBFLEvaluation {
 	
 	private void pathsHelper(String projectName, File file) {
 		if (file.isFile() && file.getName().endsWith(".model")) {
-			String filePath = file.getPath();
-			if (workspacePath == null) {
-				workspacePath = filePath.substring(0, filePath.lastIndexOf(projectName)-1);
-			}		
+			String filePath = file.getPath();		
 			//get the relative path of the file
 			filePath = filePath.replace(workspacePath, "");
-			//get the name of the seed model
-			if (seedModelPath == null) {
-				String seedModelName = filePath.substring(1);
-				seedModelName = filePath.substring(filePath.indexOf("\\mutants\\") + "\\mutants\\".length(), filePath.length());
-				if (file.getName().equals(seedModelName)) {//file is the seed model
-					seedModelPath = filePath;
-				}
-			}
 			if (file.getName().endsWith("Registry.model")) {
 				registeries.add(filePath);
 			}else if (!filePath.equals(seedModelPath)){
