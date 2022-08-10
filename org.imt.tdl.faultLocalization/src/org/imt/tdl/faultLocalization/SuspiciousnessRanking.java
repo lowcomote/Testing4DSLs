@@ -1,3 +1,14 @@
+/********************************************************************************
+* Copyright (c) 2022 IMT Atlantique.
+* All rights reserved. This program and the accompanying materials
+* are made available under the terms of the Eclipse Public License v1.0
+* which accompanies this distribution, and is available at
+* http://www.eclipse.org/legal/epl-v10.html
+*
+* Contributors:
+* Javier Troya (Universidad de Sevilla, Spain) - implementation: Initial Contributor (2017)
+* Faezeh Khorram (IMT Atlantique, France) - further contribution (2022)
+*******************************************************************************/
 package org.imt.tdl.faultLocalization;
 
 import java.math.BigDecimal;
@@ -148,7 +159,7 @@ public class SuspiciousnessRanking {
 			elementSBFLMeasures.setNU(NU);
 			elementSBFLMeasures.setNUF(NUF);
 			elementSBFLMeasures.setNUS(NUS);
-			this.elementsSBFLMeasures.add(elementSBFLMeasures);		
+			elementsSBFLMeasures.add(elementSBFLMeasures);		
 		}
 		//to show the verdicts in the view, we add a new SBFLMeasure object at the end of the list elementsSBFLMeasures
 		//this object only contains verdicts for the test cases
