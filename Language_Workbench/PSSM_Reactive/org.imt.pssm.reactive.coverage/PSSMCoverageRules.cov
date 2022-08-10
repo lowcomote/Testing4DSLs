@@ -1,0 +1,95 @@
+DomainSpecificCoverage PSSMCoverage{
+	Import metamodel statemachines
+	Context CustomSystem{
+		rules{
+			//a customSystem is covered when its inner stateMachine is covered
+			CoverageByContainment{
+				containmentReference statemachine
+				multiplicity ONE
+			}
+		}
+	},
+	Context StateMachine{
+		rules{
+			//a stateMachine is covered when one of its inner regions are covered
+			CoverageByContainment{
+				containmentReference regions
+				multiplicity ONE
+			}
+		}
+	},
+	Context Region{
+		rules{
+			//a region is covered if at least one of its transitions is covered
+			CoverageByContainment{
+				containmentReference transitions
+				multiplicity ONE
+			}
+		}
+	},
+	Context Transition{
+		rules{
+			//if a transition is covered, its source state, target state, constraint, and triggers are also covered
+			CoverageByReference{
+				reference source
+			},
+			CoverageByReference{
+				reference target
+			},
+			CoverageByReference{
+				reference constraint
+			},
+			CoverageByReference{
+				reference triggers
+			}
+		}
+	},
+	Context BooleanConstraint{
+		rules{
+			//if a constraint is covered, its expression is also covered
+			CoverageByReference {
+				reference expression
+			}
+		}
+	},
+	Context IntegerConstraint{
+		rules{
+			//if a constraint is covered, its expression is also covered
+			CoverageByReference {
+				reference expression
+			}
+		}
+	},
+	Context StringConstraint{
+		rules{
+			//if a constraint is covered, its expression is also covered
+			CoverageByReference {
+				reference expression
+			}
+		}
+	},
+	Context Trigger{
+		rules{
+			//if a trigger is covered, its EventType is also covered
+			CoverageByReference {
+				reference eventType
+			}
+		}
+	},
+	Context SignalEventType{
+		rules{
+			//if a SignalEventType is covered, its Signal is also covered
+			CoverageByReference {
+				reference signal
+			}
+		}
+	},
+	Context CallEventType{
+		rules{
+			//if a CallEventType is covered, its Operation is also covered
+			CoverageByReference {
+				reference operation
+			}
+		}
+	}
+}
