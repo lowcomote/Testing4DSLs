@@ -91,8 +91,7 @@ class TestDescriptionAspect{
 	//this method is called from other codes (not GEMOC engine)
 	def TDLTestCaseResult executeTestCase(String MUTPath){
 		_self.activateConfiguration(MUTPath)
-		val result = _self.runTestAndReturnResult
-		return result
+		return _self.runTestAndReturnResult
 	}
 	
 	def void disposeResources{
