@@ -20,12 +20,12 @@ public class MutationTestRunner {
 	private String DSLPath = "";
 
 	public MutationTestRunner() {
-		this.testSuiteResult = new TDLTestSuiteResult();
-		this.testSuiteCoverage= new TDLTestSuiteCoverage();
+		testSuiteResult = new TDLTestSuiteResult();
+		testSuiteCoverage= new TDLTestSuiteCoverage();
 	}
 	public void runTestAndCalculateCoverage(Package testPackage, String mutantPath) {
 		mutantPath = mutantPath.replace("\\", "/");
-		this.testSuiteResult.setTestSuite(testPackage);
+		testSuiteResult.setTestSuite(testPackage);
 		for (int i=0; i<testPackage.getPackagedElement().size(); i++) {
 			Object o = testPackage.getPackagedElement().get(i);
 			if (o instanceof TestDescription) {
@@ -47,26 +47,26 @@ public class MutationTestRunner {
 						testCaseCoverage.setTestCase(testCase);
 						testCaseCoverage.setTrace(TestDescriptionAspect.launcher(testCase).getExecutionTrace());
 						testCaseCoverage.setMUTResource(TestDescriptionAspect.launcher(testCase).getMUTResource());
-						this.testSuiteResult.addResult(testCaseResult);
+						testSuiteResult.addResult(testCaseResult);
 					}
 				}else {
-					this.testSuiteCoverage.addTCCoverage(testCaseCoverage);
+					testSuiteCoverage.addTCCoverage(testCaseCoverage);
 				}
-				this.testSuiteResult.addResult(testCaseResult);
-				if (this.DSLPath == "") {
-					this.DSLPath = TestConfigurationAspect.DSLPath(testCase.getTestConfiguration());
+				testSuiteResult.addResult(testCaseResult);
+				if (DSLPath == "") {
+					DSLPath = TestConfigurationAspect.DSLPath(testCase.getTestConfiguration());
 				}
 			}
 		}
 		//keep test result and test coverage for killed mutants
-		if (this.testSuiteResult.getNumOfFailedTestCases() != 0) {
-			TDLCoverageUtil.getInstance().setTestSuiteCoverage(this.testSuiteCoverage);
-			if (TDLCoverageUtil.getInstance().getDSLPath() == null || !TDLCoverageUtil.getInstance().getDSLPath().equals(this.DSLPath)) {
-			    TDLCoverageUtil.getInstance().setDSLPath(this.DSLPath);
+		if (testSuiteResult.getNumOfFailedTestCases() != 0) {
+			TDLCoverageUtil.getInstance().setTestSuiteCoverage(testSuiteCoverage);
+			if (TDLCoverageUtil.getInstance().getDSLPath() == null || !TDLCoverageUtil.getInstance().getDSLPath().equals(DSLPath)) {
+			    TDLCoverageUtil.getInstance().setDSLPath(DSLPath);
 			    TDLCoverageUtil.getInstance().runCoverageComputation();
 			}
 			else {
-				this.testSuiteCoverage.calculateTSCoverage();
+				testSuiteCoverage.calculateTSCoverage();
 			}
 		}
 	}
