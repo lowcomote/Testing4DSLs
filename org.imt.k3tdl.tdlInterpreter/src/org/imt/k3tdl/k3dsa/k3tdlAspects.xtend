@@ -92,8 +92,11 @@ class TestDescriptionAspect{
 	def TDLTestCaseResult executeTestCase(String MUTPath){
 		_self.activateConfiguration(MUTPath)
 		val result = _self.runTestAndReturnResult
-		_self.launcher.disposeResources()
 		return result
+	}
+	
+	def void disposeResources{
+		_self.launcher.disposeResources()
 	}
 	
 	def void activateConfiguration(){
