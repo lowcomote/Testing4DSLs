@@ -141,11 +141,11 @@ public class MutationScoreCalculator {
 				//te.printStackTrace();
 				System.out.println("TimeoutException -> There is an infinite loop in the mutant");
 				future.cancel(true);
-				TestDescriptionAspect.launcher(testCase).disposeResources();
 			}
 			if (!executor.isTerminated()) {
 			    executor.shutdownNow(); // If you want to stop the code that hasn't finished
 			}
+			TestDescriptionAspect.launcher(testCase).disposeResources();
 			if (result == null || result.getValue() == TDLTestResultUtil.FAIL) {				
 				keepTestCaseKilledMutantMapping(testCase.getName(), mutant);
 				if (mutant_status.get(mutant) != KILLED) {
