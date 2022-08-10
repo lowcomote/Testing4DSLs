@@ -20,6 +20,7 @@ import DSLSpecificCoverage.CoverageByContainment;
 import DSLSpecificCoverage.CoverageByReference;
 import DSLSpecificCoverage.DSLSpecificCoveragePackage;
 import DSLSpecificCoverage.DomainSpecificCoverage;
+import DSLSpecificCoverage.IgnoreIfContained;
 
 /**
  * This class contains custom scoping description.
@@ -39,8 +40,7 @@ public class COVScopeProvider extends AbstractCOVScopeProvider {
 			
 			return Scopes.scopeFor(allPackages);			
 		}
-		else if (reference.equals(DSLSpecificCoveragePackage.eINSTANCE.getContext_Metaclass())||
-					reference.equals(DSLSpecificCoveragePackage.eINSTANCE.getIgnoreIfContained_ContainerType())) {
+		else if (reference.equals(DSLSpecificCoveragePackage.eINSTANCE.getContext_Metaclass())) {
 			Collection<EClass> allClasses = ((DomainSpecificCoverage)((Context) context).eContainer())
 												.getMetamodel().getEClassifiers().stream()
 												.filter(EClass.class::isInstance)
@@ -48,6 +48,14 @@ public class COVScopeProvider extends AbstractCOVScopeProvider {
 												.collect(Collectors.toCollection(BasicEList::new));
 			return Scopes.scopeFor(allClasses);
 		}
+		else if (reference.equals(DSLSpecificCoveragePackage.eINSTANCE.getIgnoreIfContained_ContainerType())) {
+		Collection<EClass> allClasses = ((DomainSpecificCoverage)((Context)((IgnoreIfContained) context).eContainer()).eContainer())
+											.getMetamodel().getEClassifiers().stream()
+											.filter(EClass.class::isInstance)
+											.map(EClass.class::cast)
+											.collect(Collectors.toCollection(BasicEList::new));
+		return Scopes.scopeFor(allClasses);
+	}
 		else if (reference.equals(DSLSpecificCoveragePackage.eINSTANCE.getCoverageByReference_Reference())) {
 			EList<EReference> references = ((Context)((CoverageByReference) context).eContainer())
 												.getMetaclass().getEAllReferences();
