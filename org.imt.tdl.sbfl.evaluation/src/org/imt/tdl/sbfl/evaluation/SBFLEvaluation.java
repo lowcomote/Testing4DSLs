@@ -59,7 +59,6 @@ public class SBFLEvaluation {
 	public void evaluateSBFLTechniques() {
 		//finding mutants and mapping them to their registry
 		findMutantRegistryMapping(mutantsProject);
-		System.out.println("# of generated mutants: " + mutant_registry.size());
 		
 		//finding test suite and run it on mutants to find live ones and keep verdict and coverage of killed ones
 		String testResourcePath = "platform:/resource/"+ testSuiteProject.getName() + "/";
@@ -87,6 +86,7 @@ public class SBFLEvaluation {
 			}
 		}
 		System.out.println("Evaluation finished: ");
+		System.out.println("# of generated mutants: " + mutant_registry.size());
 		System.out.println("# of killed mutants: " + mutant_Verdict.size());
 		System.out.println("# of mutants that their fault is localized: " + mutant_SBFLMeasures4FaultyObject.size());
 	}

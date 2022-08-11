@@ -70,11 +70,15 @@ public class FaultyObjectFinder {
         List<EObject> mutantObjects = StreamSupport
                            .stream(iterable.spliterator(), false)
                            .collect(Collectors.toList());
-        int lowestIndex = 0;
+        int lowestIndex = -1;
         EObject firstDifferentObject = null;
 		for (Diff diff:mutantDiffsFiltered) {
 			EObject diffObject = getDiffObject(diff);
-			if (mutantObjects.indexOf(diffObject) <= lowestIndex) {
+			if (lowestIndex == -1) {
+				lowestIndex = mutantObjects.indexOf(diffObject);
+				firstDifferentObject = diffObject;
+			}
+			else if (mutantObjects.indexOf(diffObject) <= lowestIndex) {
 				lowestIndex = mutantObjects.indexOf(diffObject);
 				firstDifferentObject = diffObject;
 			}
