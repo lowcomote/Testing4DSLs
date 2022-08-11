@@ -51,7 +51,7 @@ public class SBFLEvaluation {
 	IProject testSuiteProject;
 	String workspacePath;
 	String seedModelPath;
-	
+
 	public SBFLEvaluation (IProject mutantsProject, IProject testSuiteProject) {
 		this.mutantsProject = mutantsProject;
 		this.testSuiteProject = testSuiteProject;
@@ -78,9 +78,10 @@ public class SBFLEvaluation {
 		if (mutant_SBFLMeasures4FaultyObject.size()>0) {
 			//export results to Excel
 			ExcelExporter excelExporter = new ExcelExporter(mutant_SBFLMeasures4FaultyObject);
+			String seedModelName = seedModelPath.substring(seedModelPath.lastIndexOf("\\")+1, seedModelPath.lastIndexOf("."));
+			excelExporter.setSeedModelName(seedModelName);
 			try {
 				excelExporter.saveResults2Excelfile();
-				System.out.println("Results saved in an Excel file");
 			}catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}

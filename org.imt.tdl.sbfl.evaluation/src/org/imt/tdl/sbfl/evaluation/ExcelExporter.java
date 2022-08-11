@@ -22,17 +22,17 @@ public class ExcelExporter {
 	private String seedModelName;
 	
 	public ExcelExporter(HashMap<String, SBFLMeasures> mutant_SBFLMeasures4FaultyObject) {
-		this.workbook = new XSSFWorkbook();
+		workbook = new XSSFWorkbook();
 		this.mutant_SBFLMeasures4FaultyObject = mutant_SBFLMeasures4FaultyObject;
 		SBFLMeasures firstMeasure = mutant_SBFLMeasures4FaultyObject.values().stream().findFirst().get();
-       	firstMeasure.getRank().keySet().stream().forEach(t -> this.SBFLTechniques.add(t));
+       	firstMeasure.getRank().keySet().stream().forEach(t -> SBFLTechniques.add(t));
 	}
 	
 	public void saveResults2Excelfile() throws FileNotFoundException{
-		this.exportMutantResult2Excel();
-		this.exportOverallResult2Excel();
+		exportMutantResult2Excel();
+		exportOverallResult2Excel();
+		String filePath = "C:\\labtop\\GitHub\\xtdl\\org.imt.tdl.sbfl.evaluation\\evaluationData\\" + seedModelName + ".xlsx";
 		try {
-			String filePath = "C:\\labtop\\GitHub\\xtdl\\org.imt.tdl.sbfl.evaluation\\evaluationData\\" + seedModelName + ".xlsx";
 			FileOutputStream fos = new FileOutputStream(filePath);
 			workbook.write(fos);
 			fos.close();
@@ -40,6 +40,7 @@ public class ExcelExporter {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("Results saved in an Excel file: " + filePath);
 	}
 	
 	@SuppressWarnings("resource")
@@ -48,11 +49,7 @@ public class ExcelExporter {
 		for (Map.Entry<String, SBFLMeasures> entry:mutant_SBFLMeasures4FaultyObject.entrySet()) {
 			//create one sheet per mutant
 			String mutantPath = entry.getKey();
-			String mutantName = mutantPath.substring(mutantPath.indexOf("mutants\\") + 6, mutantPath.indexOf(".model")).replaceAll("\\\\", "\\."); 
-			if (seedModelName == null) {
-				seedModelName = mutantName.substring(0, mutantName.indexOf("."));
-			}
-			mutantName = mutantName.substring(seedModelName.length()+1);
+			String mutantName = mutantPath.substring(mutantPath.indexOf("mutants\\") + 8, mutantPath.indexOf(".model")).replaceAll("\\\\", "\\."); 
 			XSSFSheet sheet = workbook.createSheet(mutantName);
 			//create header row
 			XSSFRow headerRow = sheet.createRow(0);
@@ -136,4 +133,13 @@ public class ExcelExporter {
 			row4technique.createCell(9).setCellValue((double) sdCalculator.getStandardDeviation());//WC-SD
 		}
 	}
+
+	public String getSeedModelName() {
+		return seedModelName;
+	}
+
+	public void setSeedModelName(String seedModelName) {
+		this.seedModelName = seedModelName;
+	}
+	
 }
