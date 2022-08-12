@@ -57,7 +57,7 @@ public class DSLSpecificTypesGenerator {
 			runner.doEcore2tdl(new NullProgressMonitor());
 			EMFModel outModel = (EMFModel) runner.getOutModel();
 			Resource dslTypesRes = outModel.getResource();
-			dslSpecificTypesPackage = (Package) dslTypesRes.getContents().get(0);
+			dslSpecificTypesPackage = getDSLSpecificTypesPackage(dslTypesRes);
 			for (int i=0; i<dslSpecificTypesPackage.getPackagedElement().size();i++) {
 				PackageableElement p = dslSpecificTypesPackage.getPackagedElement().get(i);
 				if (p instanceof DataType) {
@@ -87,6 +87,18 @@ public class DSLSpecificTypesGenerator {
 			e.printStackTrace();
 		}
 	}
+	private Package getDSLSpecificTypesPackage(Resource dslTypesRes) {
+		if (dslTypesRes.getContents().size()==1) {
+			return (Package) dslTypesRes.getContents().get(0);
+		}
+		Package firstPackage = (Package) dslTypesRes.getContents().get(0);
+		for (int i=1; i<dslTypesRes.getContents().size(); i++) {
+			Package iPackage = (Package) dslTypesRes.getContents().get(i);
+			firstPackage.getPackagedElement().addAll(iPackage.getPackagedElement());
+		}
+		return firstPackage;
+	}
+
 	private boolean isDynamic(DataType dataType) {
 		if (dataType instanceof StructuredDataType) {
 			StructuredDataType type = (StructuredDataType) dataType;
