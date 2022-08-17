@@ -10,13 +10,13 @@
   </contexts>
   <contexts>
     <metaclass href="http://org.imt.minijava.xminijava/xminiJava/#//MethodCall"/>
-    <rules xsi:type="DSLSpecificCoverage:IgnoreIfContained" condition="EXCLUSION">
+    <rules xsi:type="DSLSpecificCoverage:ConditionalIgnore" condition="EXCLUSION">
       <containerType href="http://org.imt.minijava.xminijava/xminiJava/#//Block"/>
     </rules>
   </contexts>
   <contexts>
     <metaclass href="http://org.imt.minijava.xminijava/xminiJava/#//Class"/>
-    <rules xsi:type="DSLSpecificCoverage:CoverageByContainment" multiplicity="ONE">
+    <rules xsi:type="DSLSpecificCoverage:CoverageByContent" multiplicity="ONE">
       <containmentReference href="http://org.imt.minijava.xminijava/xminiJava/#//TypeDeclaration/members"/>
     </rules>
   </contexts>

@@ -22,7 +22,7 @@ Context returns Context:
 	'}';
 
 Rule returns Rule:
-	Ignore | CoverageByReference | CoverageByContainment | IgnoreIfContained;
+	Ignore | CoverageOfReferenced | CoverageByContent | ConditionalIgnore;
 
 EBoolean returns ecore::EBoolean:
 	'true' | 'false';
@@ -31,30 +31,30 @@ Ignore returns Ignore:
 	{Ignore}
 	'Ignore'
 	'{'
-		('ignoreIfSubtyped' ignoreIfSubtyped=EBoolean)?
+		('ignoreSubtypes' ignoreSubtypes=EBoolean)?
 	'}';
 
-CoverageByReference returns CoverageByReference:
-	'CoverageByReference'
+CoverageOfReferenced returns CoverageOfReferenced:
+	'CoverageOfReferenced'
 	'{'
 		'reference' reference=[ecore::EReference|EString]
 	'}';
 
-CoverageByContainment returns CoverageByContainment:
-	'CoverageByContainment'
+CoverageByContent returns CoverageByContent:
+	'CoverageByContent'
 	'{'
 		'containmentReference' containmentReference=[ecore::EReference|EString]
-		'multiplicity' multiplicity=CoveredContainee
+		'multiplicity' multiplicity=CoveredContents
 	'}';
 
-IgnoreIfContained returns IgnoreIfContained:
-	'IgnoreIfContained'
+ConditionalIgnore returns ConditionalIgnore:
+	'ConditionalIgnore'
 	'{'
 		'condition' condition=ConditionType
 		'containerType' '(' containerType+=[ecore::EClass|EString] ( "," containerType+=[ecore::EClass|EString])* ')' 
 	'}';
 
-enum CoveredContainee returns CoveredContainee:
+enum CoveredContents returns CoveredContents:
 				ALL = 'ALL' | ONE = 'ONE';
 
 enum ConditionType returns ConditionType:

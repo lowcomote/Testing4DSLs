@@ -3,20 +3,20 @@ DomainSpecificCoverage MiniJavaCoverage{
 	Context Program{
 		rules{
 			//ignoring Program from coverage computation
-			Ignore {ignoreIfSubtyped true}
+			Ignore {ignoreSubtypes true}
 		}
 	},
 	Context Method{
 		rules{
 			//ignoring method signature from coverage computation
-			Ignore {ignoreIfSubtyped true}
+			Ignore {ignoreSubtypes true}
 		}
 	},
 	Context MethodCall{
 		rules{
 			//ignoring MethodCall when it is not contained by a Block: if the container of a methodCall is a block, it is indeed a statement and its coverage status must be considered
 			//but if it is contained by other elements such as if, while, ..., it is not coverable
-			IgnoreIfContained {
+			ConditionalIgnore {
 				condition EXCLUSION
 				containerType (Block)
 			}
@@ -25,7 +25,7 @@ DomainSpecificCoverage MiniJavaCoverage{
 	Context Class{
 		rules{
 			//a TypeDeclaration is covered when at least one of its members is covered
-			CoverageByContainment{
+			CoverageByContent{
 				containmentReference members
 				multiplicity ONE
 			}

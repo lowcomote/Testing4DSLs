@@ -3,7 +3,7 @@ DomainSpecificCoverage PSSMCoverage{
 	Context CustomSystem{
 		rules{
 			//a customSystem is covered when its inner stateMachine is covered
-			CoverageByContainment{
+			CoverageByContent{
 				containmentReference statemachine
 				multiplicity ONE
 			}
@@ -12,7 +12,7 @@ DomainSpecificCoverage PSSMCoverage{
 	Context StateMachine{
 		rules{
 			//a stateMachine is covered when one of its inner regions are covered
-			CoverageByContainment{
+			CoverageByContent{
 				containmentReference regions
 				multiplicity ONE
 			}
@@ -21,7 +21,7 @@ DomainSpecificCoverage PSSMCoverage{
 	Context Region{
 		rules{
 			//a region is covered if at least one of its transitions is covered
-			CoverageByContainment{
+			CoverageByContent{
 				containmentReference transitions
 				multiplicity ONE
 			}
@@ -30,16 +30,16 @@ DomainSpecificCoverage PSSMCoverage{
 	Context Transition{
 		rules{
 			//if a transition is covered, its source state, target state, constraint, and triggers are also covered
-			CoverageByReference{
+			CoverageOfReferenced{
 				reference source
 			},
-			CoverageByReference{
+			CoverageOfReferenced{
 				reference target
 			},
-			CoverageByReference{
+			CoverageOfReferenced{
 				reference constraint
 			},
-			CoverageByReference{
+			CoverageOfReferenced{
 				reference triggers
 			}
 		}
@@ -47,7 +47,7 @@ DomainSpecificCoverage PSSMCoverage{
 	Context BooleanConstraint{
 		rules{
 			//if a constraint is covered, its expression is also covered
-			CoverageByReference {
+			CoverageOfReferenced {
 				reference expression
 			}
 		}
@@ -55,7 +55,7 @@ DomainSpecificCoverage PSSMCoverage{
 	Context IntegerConstraint{
 		rules{
 			//if a constraint is covered, its expression is also covered
-			CoverageByReference {
+			CoverageOfReferenced {
 				reference expression
 			}
 		}
@@ -63,7 +63,7 @@ DomainSpecificCoverage PSSMCoverage{
 	Context StringConstraint{
 		rules{
 			//if a constraint is covered, its expression is also covered
-			CoverageByReference {
+			CoverageOfReferenced {
 				reference expression
 			}
 		}
@@ -71,7 +71,7 @@ DomainSpecificCoverage PSSMCoverage{
 	Context Trigger{
 		rules{
 			//if a trigger is covered, its EventType is also covered
-			CoverageByReference {
+			CoverageOfReferenced {
 				reference eventType
 			}
 		}
@@ -79,7 +79,7 @@ DomainSpecificCoverage PSSMCoverage{
 	Context SignalEventType{
 		rules{
 			//if a SignalEventType is covered, its Signal is also covered
-			CoverageByReference {
+			CoverageOfReferenced {
 				reference signal
 			}
 		}
@@ -87,7 +87,7 @@ DomainSpecificCoverage PSSMCoverage{
 	Context CallEventType{
 		rules{
 			//if a CallEventType is covered, its Operation is also covered
-			CoverageByReference {
+			CoverageOfReferenced {
 				reference operation
 			}
 		}

@@ -15,12 +15,12 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 
+import DSLSpecificCoverage.ConditionalIgnore;
 import DSLSpecificCoverage.Context;
-import DSLSpecificCoverage.CoverageByContainment;
-import DSLSpecificCoverage.CoverageByReference;
+import DSLSpecificCoverage.CoverageByContent;
+import DSLSpecificCoverage.CoverageOfReferenced;
 import DSLSpecificCoverage.DSLSpecificCoveragePackage;
 import DSLSpecificCoverage.DomainSpecificCoverage;
-import DSLSpecificCoverage.IgnoreIfContained;
 
 /**
  * This class contains custom scoping description.
@@ -48,21 +48,21 @@ public class COVScopeProvider extends AbstractCOVScopeProvider {
 												.collect(Collectors.toCollection(BasicEList::new));
 			return Scopes.scopeFor(allClasses);
 		}
-		else if (reference.equals(DSLSpecificCoveragePackage.eINSTANCE.getIgnoreIfContained_ContainerType())) {
-		Collection<EClass> allClasses = ((DomainSpecificCoverage)((Context)((IgnoreIfContained) context).eContainer()).eContainer())
+		else if (reference.equals(DSLSpecificCoveragePackage.eINSTANCE.getConditionalIgnore_ContainerType())) {
+		Collection<EClass> allClasses = ((DomainSpecificCoverage)((Context)((ConditionalIgnore) context).eContainer()).eContainer())
 											.getMetamodel().getEClassifiers().stream()
 											.filter(EClass.class::isInstance)
 											.map(EClass.class::cast)
 											.collect(Collectors.toCollection(BasicEList::new));
 		return Scopes.scopeFor(allClasses);
 	}
-		else if (reference.equals(DSLSpecificCoveragePackage.eINSTANCE.getCoverageByReference_Reference())) {
-			EList<EReference> references = ((Context)((CoverageByReference) context).eContainer())
+		else if (reference.equals(DSLSpecificCoveragePackage.eINSTANCE.getCoverageOfReferenced_Reference())) {
+			EList<EReference> references = ((Context)((CoverageOfReferenced) context).eContainer())
 												.getMetaclass().getEAllReferences();
 			return Scopes.scopeFor(references);
 		}
-		else if (reference.equals(DSLSpecificCoveragePackage.eINSTANCE.getCoverageByContainment_ContainmentReference())){
-			EList<EReference> containments = ((Context)((CoverageByContainment) context).eContainer())
+		else if (reference.equals(DSLSpecificCoveragePackage.eINSTANCE.getCoverageByContent_ContainmentReference())){
+			EList<EReference> containments = ((Context)((CoverageByContent) context).eContainer())
 												.getMetaclass().getEAllContainments();
 			return Scopes.scopeFor(containments);
 		}

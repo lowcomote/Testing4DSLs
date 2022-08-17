@@ -12,12 +12,12 @@ import org.imt.tdl.coverage.TDLCoverageUtil;
 import org.imt.tdl.coverage.TDLTestCaseCoverage;
 
 import DSLSpecificCoverage.ConditionType;
-import DSLSpecificCoverage.CoverageByContainment;
+import DSLSpecificCoverage.CoverageByContent;
 import DSLSpecificCoverage.Context;
-import DSLSpecificCoverage.CoveredContainee;
+import DSLSpecificCoverage.CoveredContents;
 import DSLSpecificCoverage.Ignore;
-import DSLSpecificCoverage.IgnoreIfContained;
-import DSLSpecificCoverage.CoverageByReference;
+import DSLSpecificCoverage.ConditionalIgnore;
+import DSLSpecificCoverage.CoverageOfReferenced;
 import DSLSpecificCoverage.Rule;
 
 public class DSLSpecificCoverageExecutor {
@@ -30,19 +30,19 @@ public class DSLSpecificCoverageExecutor {
 	//apply all the rules on the object (NOTE: rule's context = object type)
 	public void applyCoverageRules(EList<Rule> rules, List<EObject> eObjects) {
 		for (Rule rule:rules) {
-			if (rule instanceof CoverageByReference) {
-				updateCoverableClasses((CoverageByReference) rule);
+			if (rule instanceof CoverageOfReferenced) {
+				updateCoverableClasses((CoverageOfReferenced) rule);
 				eObjects.forEach(object -> 
-					inferReferenceCoverage((CoverageByReference) rule, object));
+					inferReferenceCoverage((CoverageOfReferenced) rule, object));
 			}
-			else if (rule instanceof CoverageByContainment) {
-				updateCoverableClasses((CoverageByContainment) rule);
+			else if (rule instanceof CoverageByContent) {
+				updateCoverableClasses((CoverageByContent) rule);
 				eObjects.forEach(object -> 
-					inferContainerCoverage((CoverageByContainment) rule, object));
+					inferContainerCoverage((CoverageByContent) rule, object));
 			}
-			else if (rule instanceof IgnoreIfContained) {
+			else if (rule instanceof ConditionalIgnore) {
 				eObjects.forEach(object -> 
-					runIgnoreIfContainedRule((IgnoreIfContained) rule, object));
+					runConditionalIgnoreRule((ConditionalIgnore) rule, object));
 			}
 			else if (rule instanceof Ignore) {
 				updateCoverableClasses((Ignore) rule);
@@ -52,17 +52,17 @@ public class DSLSpecificCoverageExecutor {
 		}
 	}
 	
-	private void updateCoverableClasses(CoverageByContainment rule) {
+	private void updateCoverableClasses(CoverageByContent rule) {
 		addCoverableClass(((Context) rule.eContainer()).getMetaclass());
 	}
 
-	private void updateCoverableClasses(CoverageByReference rule) {
+	private void updateCoverableClasses(CoverageOfReferenced rule) {
 		TDLCoverageUtil.getInstance().addCoverableClass(
 				(EClass) rule.getReference().getEType());
 	}
 	
 	private void updateCoverableClasses(Ignore rule) {
-		if (rule.isIgnoreIfSubtyped()) {
+		if (rule.isIgnoreSubtypes()) {
 			TDLCoverageUtil.getInstance().removeCoverableClass_subClass(
 					((Context) rule.eContainer()).getMetaclass());
 		}
@@ -76,7 +76,7 @@ public class DSLSpecificCoverageExecutor {
 		TDLCoverageUtil.getInstance().addCoverableClass(c);
 	}
 
-	private void inferReferenceCoverage(CoverageByReference r, EObject object) {
+	private void inferReferenceCoverage(CoverageOfReferenced r, EObject object) {
 		EReference ref = (EReference) getMatchedFeature(object, r.getReference().getName());
 		if (ref == null) {return; }
 		
@@ -94,7 +94,7 @@ public class DSLSpecificCoverageExecutor {
 		}
 	}
 
-	private void inferContainerCoverage(CoverageByContainment r, EObject object) {
+	private void inferContainerCoverage(CoverageByContent r, EObject object) {
 		EReference ref = (EReference) getMatchedFeature(object, r.getContainmentReference().getName());
 		if (ref == null) { return;}
 		
@@ -108,7 +108,7 @@ public class DSLSpecificCoverageExecutor {
 		}
 		else if (containedObject instanceof EObjectContainmentEList<?>) {
 			//if several objects are contained, set coverage based on the rule's multiplicity
-			if (r.getMultiplicity() == CoveredContainee.ONE) {
+			if (r.getMultiplicity() == CoveredContents.ONE) {
 				coverContainerIfOneContaineeCovered((EObjectContainmentEList<?>) containedObject);
 			}
 			else {
@@ -130,19 +130,19 @@ public class DSLSpecificCoverageExecutor {
 	}
 	
 	private void coverContainerIfAllContaineeCovered(EObjectContainmentEList<?> containedObjects) {
-		int coveredContaineeCounter = 0;
+		int CoveredContentsCounter = 0;
 		for (Object containee:containedObjects) {
 			String containeeCoverage = testCaseCoverage.getObjectCoverage((EObject) containee);
 			if (containeeCoverage == TDLCoverageUtil.COVERED) {
-				coveredContaineeCounter++;
+				CoveredContentsCounter++;
 			}
 		}
-		if (coveredContaineeCounter == containedObjects.size()) {
+		if (CoveredContentsCounter == containedObjects.size()) {
 			testCaseCoverage.setObjectCoverage(((EObject) containedObjects.get(0)).eContainer(), TDLCoverageUtil.COVERED);
 		}
 	}
 	
-	private void runIgnoreIfContainedRule(IgnoreIfContained rule, EObject object) {
+	private void runConditionalIgnoreRule(ConditionalIgnore rule, EObject object) {
 		if (rule.getCondition() == ConditionType.INCLUSION) {
 			//ignore EObjects contained by one of the ContainerType classes
 			if (rule.getContainerType().stream().
@@ -160,7 +160,7 @@ public class DSLSpecificCoverageExecutor {
 	}
 	
 	private void runIgnoreRule(Ignore rule, EObject object) {
-		if (!rule.isIgnoreIfSubtyped() && !object.eClass().getName().equals(
+		if (!rule.isIgnoreSubtypes() && !object.eClass().getName().equals(
 				((Context) rule.eContainer()).getMetaclass().getName())) {
 			return;
 		}
