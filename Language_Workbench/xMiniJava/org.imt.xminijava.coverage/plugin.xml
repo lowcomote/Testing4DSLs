@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.imt.tdl.coverage.extensionpoint.DSLSpecificCoverage">
+      <client
+            DSLSpecificCoverage="org.imt.xminijava.coverage.MiniJavaCoverageComputation"
+            class="org.imt.xminijava.coverage.MiniJavaCoverageComputation"
+            id="org.imt.xminijava.coverage.MiniJavaCoverageComputation">
+      </client>
+   </extension>
+
+</plugin>
