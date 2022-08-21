@@ -38,9 +38,9 @@ public class CustomK3Launcher extends AbstractSequentialGemocLauncher<GenericMod
 			ExecutionMode executionMode) throws CoreException, EngineContextException {
 		// create and initialize engine
 		PlainK3ExecutionEngine executionEngine = new PlainK3ExecutionEngine();
-		this.executioncontext.getExecutionPlatform().getModelLoader().setProgressMonitor(this.launchProgressMonitor);
+		executioncontext.getExecutionPlatform().getModelLoader().setProgressMonitor(launchProgressMonitor);
 
-		executionEngine.initialize(this.executioncontext);
+		executionEngine.initialize(executioncontext);
 		return executionEngine;
 	}
 

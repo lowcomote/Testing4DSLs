@@ -13,9 +13,7 @@ public class TDLCore {
 		artifactPath = artifactPath.replace("\\", "/");
 		System.out.println("\\Model under test: " + artifactPath);
 		for (int i=0; i<testPackage.getPackagedElement().size(); i++) {
-			Object o = testPackage.getPackagedElement().get(i);
-			if (o instanceof TestDescription) {
-				TestDescription testCase = (TestDescription) o;
+			if (testPackage.getPackagedElement().get(i) instanceof TestDescription testCase) {
 				System.out.println("Test case: " + testCase.getName());
 				TestDescriptionAspect.executeTestCase(testCase, artifactPath);
 				result.addNumExecutedTests();

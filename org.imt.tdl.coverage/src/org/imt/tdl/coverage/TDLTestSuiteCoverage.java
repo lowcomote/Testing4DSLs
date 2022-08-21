@@ -24,28 +24,28 @@ public class TDLTestSuiteCoverage {
 	private ObjectCoverageStatus overallResult;
 	
 	public TDLTestSuiteCoverage() {
-		this.tcCoverages = new ArrayList<>();
-		this.modelObjects = new ArrayList<>();
-		this.tsObjectCoverageStatus = new ArrayList<>();
-		this.tsCoveragePercentage = 0;
-		this.numOfCoveredObjs= 0 ;
-		this.numOfNotCoverableElements = 0;
-		this.coverageOfModelObjects = new ArrayList<>();
-		this.overallResult = new ObjectCoverageStatus();
+		tcCoverages = new ArrayList<>();
+		modelObjects = new ArrayList<>();
+		tsObjectCoverageStatus = new ArrayList<>();
+		tsCoveragePercentage = 0;
+		numOfCoveredObjs= 0 ;
+		numOfNotCoverableElements = 0;
+		coverageOfModelObjects = new ArrayList<>();
+		overallResult = new ObjectCoverageStatus();
 	}
 	//for every test case of the test suite, add its coverage to the list
 	public void addTCCoverage(TDLTestCaseCoverage tcCoverage) {
-		this.tcCoverages.add(tcCoverage);
+		tcCoverages.add(tcCoverage);
 	}
 	public List<TDLTestCaseCoverage> getTCCoverages() {
-		return this.tcCoverages;
+		return tcCoverages;
 	}
 	
 	//Calculating coverage of the test suite based on its test cases coverage
 	public void calculateTSCoverage() {
 		//for each test case, calculate coverage using the generic tool
 		//if the DSL provides a dsl-specific coverage tool, call its methods: ignoring model objects, retrieving coverage rules
-		for (TDLTestCaseCoverage tcCoverageObj : this.tcCoverages) {
+		for (TDLTestCaseCoverage tcCoverageObj : tcCoverages) {
 			if (TDLCoverageUtil.getInstance().getDslSpecificCoverageExtension() != null) {
 				TDLCoverageUtil.getInstance().getDslSpecificCoverageExtension().ignoreModelObjects(tcCoverageObj.getMUTResource());
 			}
@@ -119,23 +119,29 @@ public class TDLTestSuiteCoverage {
 	}
 	
 	public List<ObjectCoverageStatus> getCoverageOfModelObjects(){
-		return this.coverageOfModelObjects;
+		return coverageOfModelObjects;
 	}
+	
 	public Package getTestSuite() {
 		return testSuite;
 	}
+	
 	public void setTestSuite(Package testSuite) {
 		this.testSuite = testSuite;
 	}
+	
 	public String getTestSuiteName() {
 		return testSuite.getName();
 	}
+	
 	public List<EObject> getModelObjects() {
 		return modelObjects;
 	}
+	
 	public List<TDLTestCaseCoverage> getTcCoverages() {
 		return tcCoverages;
 	}
+	
 	public double getTsCoveragePercentage() {
 		return tsCoveragePercentage;
 	}

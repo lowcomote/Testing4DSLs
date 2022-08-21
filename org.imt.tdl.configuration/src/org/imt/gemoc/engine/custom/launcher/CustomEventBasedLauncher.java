@@ -39,7 +39,7 @@ public class CustomEventBasedLauncher
 		EventBasedExecutionEngine executionEngine = new EventBasedExecutionEngine();
 		EventBasedModelExecutionContext executioncontext = new EventBasedModelExecutionContext(runConfiguration,
 				executionMode);
-		executioncontext.getExecutionPlatform().getModelLoader().setProgressMonitor(this.launchProgressMonitor);
+		executioncontext.getExecutionPlatform().getModelLoader().setProgressMonitor(launchProgressMonitor);
 		executioncontext.initializeResourceModel();
 		executionEngine.initialize(executioncontext);
 		return executionEngine;

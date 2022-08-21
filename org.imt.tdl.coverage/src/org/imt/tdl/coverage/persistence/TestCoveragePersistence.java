@@ -144,14 +144,14 @@ public class TestCoveragePersistence implements IEngineAddon{
 		//the model under test is already copied, so do nothing
 		else {return;}
 		
-		this.MUTResource = (new ResourceSetImpl()).createResource(modelURI);
-		this.MUTResource.getContents().addAll(EcoreUtil.copyAll(resource.getContents()));
+		MUTResource = (new ResourceSetImpl()).createResource(modelURI);
+		MUTResource.getContents().addAll(EcoreUtil.copyAll(resource.getContents()));
 	    try {
-	    	this.MUTResource.save(null);
+	    	MUTResource.save(null);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	    TreeIterator<EObject> modelContents = this.MUTResource.getAllContents();
+	    TreeIterator<EObject> modelContents = MUTResource.getAllContents();
 		while (modelContents.hasNext()) {
 			modelObjects.add(modelContents.next());
 		}

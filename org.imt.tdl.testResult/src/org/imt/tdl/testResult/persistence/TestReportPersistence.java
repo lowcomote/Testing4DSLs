@@ -1,8 +1,6 @@
 package org.imt.tdl.testResult.persistence;
 
 import java.io.File;
-
-
 import java.io.IOException;
 import java.util.Optional;
 
@@ -20,7 +18,6 @@ import org.etsi.mts.tdl.Behaviour;
 import org.etsi.mts.tdl.CompoundBehaviour;
 import org.etsi.mts.tdl.Message;
 import org.etsi.mts.tdl.Package;
-import org.etsi.mts.tdl.PackageableElement;
 import org.etsi.mts.tdl.TestDescription;
 import org.imt.tdl.TDLTestReport.TDLTestReportFactory;
 import org.imt.tdl.TDLTestReport.TestCaseResult;
@@ -47,10 +44,12 @@ public class TestReportPersistence implements IEngineAddon{
 	   testSuiteResult.setTestSuite(copiedTestSuite);
 	   for (TDLTestCaseResult tcResultObject : TDLTestResultUtil.getInstance().getTestSuiteResult().getTestCaseResults()) {
 		   String testCaseName = tcResultObject.getTestCaseName();
-		   Optional<PackageableElement> optionalTC = copiedTestSuite.getPackagedElement().stream().filter(p -> p instanceof TestDescription).
-			filter(t -> t.getName().equals(testCaseName)).findFirst();
+		   Optional<TestDescription> optionalTC = copiedTestSuite.getPackagedElement().stream()
+				   .filter(p -> p instanceof TestDescription)
+				   .map(t -> (TestDescription) t)
+				   .filter(t -> t.getName().equals(testCaseName)).findFirst();
 		   if (optionalTC.isPresent()) {
-			   TestDescription copiedTestCase = (TestDescription) optionalTC.get();
+			   TestDescription copiedTestCase = optionalTC.get();
 			   TestCaseResult testCaseResult = TDLTestReportFactory.eINSTANCE.createTestCaseResult();
 			   testCaseResult.setTestCase(copiedTestCase);
 			   String testCaseVerdict = tcResultObject.getValue();

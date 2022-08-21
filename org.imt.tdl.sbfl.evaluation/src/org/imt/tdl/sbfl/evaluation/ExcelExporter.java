@@ -60,7 +60,7 @@ public class ExcelExporter {
 	        //create one row per technique with the following columns: susp, rank, BC, AC, WC
 	        SBFLMeasures SBFLMeasures4FaultyObject = (SBFLMeasures) entry.getValue();
 			int rowNum = 1;
-			for (String SBFLTechnique:this.SBFLTechniques) {
+			for (String SBFLTechnique:SBFLTechniques) {
 				XSSFRow row4technique = sheet.createRow(rowNum++);
 				row4technique.createCell(0).setCellValue(SBFLTechnique);
 				row4technique.createCell(1).setCellValue((double) SBFLMeasures4FaultyObject.getSusp().get(SBFLTechnique));
@@ -92,7 +92,7 @@ public class ExcelExporter {
 			allWC.put(SBFLTechnique, new ArrayList<>());
 		});
 		for (SBFLMeasures measure4mutant:mutant_SBFLMeasures4FaultyObject.values()) {
-			this.SBFLTechniques.stream().forEach(SBFLTechnique -> {
+			SBFLTechniques.stream().forEach(SBFLTechnique -> {
 				allBC.get(SBFLTechnique).add(measure4mutant.getBestEXAMScore().get(SBFLTechnique));
 				allAC.get(SBFLTechnique).add(measure4mutant.getAverageEXAMScore().get(SBFLTechnique));
 				allWC.get(SBFLTechnique).add(measure4mutant.getWorseEXAMScore().get(SBFLTechnique));
@@ -101,7 +101,7 @@ public class ExcelExporter {
 		//calculate mean, median, standard deviation for BC, AC, WC
 		CalculateStandardDeviation sdCalculator = new CalculateStandardDeviation();
 		int rowNum = 1;
-		for (String SBFLTechnique:this.SBFLTechniques) {
+		for (String SBFLTechnique:SBFLTechniques) {
 			XSSFRow row4technique = sheet.createRow(rowNum++);
 			row4technique.createCell(0).setCellValue((String) SBFLTechnique);
 			
@@ -110,27 +110,27 @@ public class ExcelExporter {
 			sdCalculator.calculateMedian();
 			sdCalculator.calculateMean();
 			sdCalculator.calculateSD();
-			row4technique.createCell(1).setCellValue((double) sdCalculator.getMedian());//BC-Median
-			row4technique.createCell(2).setCellValue((double) sdCalculator.getMean());//BC-Mean
-			row4technique.createCell(3).setCellValue((double) sdCalculator.getStandardDeviation());//BC-SD
+			row4technique.createCell(1).setCellValue(sdCalculator.getMedian());//BC-Median
+			row4technique.createCell(2).setCellValue(sdCalculator.getMean());//BC-Mean
+			row4technique.createCell(3).setCellValue(sdCalculator.getStandardDeviation());//BC-SD
 			
 			//calculate mean, median, standard deviation for AC
 			sdCalculator.setEXAMScores(allAC.get(SBFLTechnique));
 			sdCalculator.calculateMedian();
 			sdCalculator.calculateMean();
 			sdCalculator.calculateSD();
-			row4technique.createCell(4).setCellValue((double) sdCalculator.getMedian());//AC-Median
-			row4technique.createCell(5).setCellValue((double) sdCalculator.getMean());//AC-Mean
-			row4technique.createCell(6).setCellValue((double) sdCalculator.getStandardDeviation());//AC-SD
+			row4technique.createCell(4).setCellValue(sdCalculator.getMedian());//AC-Median
+			row4technique.createCell(5).setCellValue(sdCalculator.getMean());//AC-Mean
+			row4technique.createCell(6).setCellValue(sdCalculator.getStandardDeviation());//AC-SD
 			
 			//calculate mean, median, standard deviation for WC
 			sdCalculator.setEXAMScores(allWC.get(SBFLTechnique));
 			sdCalculator.calculateMedian();
 			sdCalculator.calculateMean();
 			sdCalculator.calculateSD();
-			row4technique.createCell(7).setCellValue((double) sdCalculator.getMedian());//WC-Median
-			row4technique.createCell(8).setCellValue((double) sdCalculator.getMean());//WC-Mean
-			row4technique.createCell(9).setCellValue((double) sdCalculator.getStandardDeviation());//WC-SD
+			row4technique.createCell(7).setCellValue(sdCalculator.getMedian());//WC-Median
+			row4technique.createCell(8).setCellValue(sdCalculator.getMean());//WC-Mean
+			row4technique.createCell(9).setCellValue(sdCalculator.getStandardDeviation());//WC-SD
 		}
 	}
 

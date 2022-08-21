@@ -11,7 +11,7 @@ public class TDLTestSuiteResult {
 	private List<TDLTestCaseResult> testCaseResults;
 	
 	public TDLTestSuiteResult() {
-		this.testCaseResults = new ArrayList<>();
+		testCaseResults = new ArrayList<>();
 	}
 	public Package getTestSuite() {
 		return testSuite;
@@ -23,46 +23,29 @@ public class TDLTestSuiteResult {
 		return testSuite.getName();
 	}
 	public void addResult(TDLTestCaseResult result) {
-		this.testCaseResults.add(result);
+		testCaseResults.add(result);
 	}
 	public List<TDLTestCaseResult> getTestCaseResults() {
 		return testCaseResults;
 	}
 	
 	public int getNumOfPassedTestCases() {
-		int numPassedTests = 0;
-		for (TDLTestCaseResult result : testCaseResults) {
-			if (result.getValue() == TDLTestResultUtil.PASS) {
-				numPassedTests++;
-			}
-		}
-		return numPassedTests;
+		return (int) testCaseResults.stream()
+				.filter(r -> r.getValue() == TDLTestResultUtil.PASS).count();
 	}
 	
 	public int getNumOfFailedTestCases() {
-		int numFailedTests = 0;
-		for (TDLTestCaseResult result : testCaseResults) {
-			if (result.getValue() == TDLTestResultUtil.FAIL) {
-				numFailedTests++;
-			}
-		}
-		return numFailedTests;
+		return (int) testCaseResults.stream()
+				.filter(r -> r.getValue() == TDLTestResultUtil.FAIL).count();
 	}
 	
 	public int getNumOfInconclusiveTestCases() {
-		int num = 0;
-		for (TDLTestCaseResult result : testCaseResults) {
-			if (result.getValue() == TDLTestResultUtil.INCONCLUSIVE) {
-				num++;
-			}
-		}
-		return num;
+		return (int) testCaseResults.stream()
+				.filter(r -> r.getValue() == TDLTestResultUtil.INCONCLUSIVE).count();
 	}
 	
 	public String getTestSuiteResultValue() {
-		if (getNumOfPassedTestCases() == this.testCaseResults.size()) {
-			return TDLTestResultUtil.PASS;
-		}
-		return TDLTestResultUtil.FAIL;
+		return getNumOfPassedTestCases() == testCaseResults.size() ?
+			TDLTestResultUtil.PASS : TDLTestResultUtil.FAIL;
 	}
 }

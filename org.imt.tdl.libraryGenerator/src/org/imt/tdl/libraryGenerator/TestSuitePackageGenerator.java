@@ -54,6 +54,8 @@ public class TestSuitePackageGenerator {
 		testSuitePackage.getImport().add(dslSpecificEventsPackageImport);
 		testSuitePackage.getImport().add(testConfigurationImport);
 	}
+	
+	@SuppressWarnings("unused")
 	private void generateGenericDataInstances() {
 		List<DataType> dynamicTypes = dslSpecificTyepsGenerator.getDynamicTypes();
 		for (int i=0; i< dynamicTypes.size(); i++) {
@@ -91,6 +93,8 @@ public class TestSuitePackageGenerator {
 		}
 		return false;
 	}
+	
+	@SuppressWarnings("unused")
 	private void generateAnnotations() {
 		AnnotationType ExactEquivalent = factory.createAnnotationType();
 		ExactEquivalent.setName("ExactEquivalent");
@@ -100,9 +104,11 @@ public class TestSuitePackageGenerator {
 		PartialEquivalent.setName("PartialEquivalent");
 		testSuitePackage.getPackagedElement().add(PartialEquivalent);
 	}
+	
 	public Package getTestSuitePackage() {
 		return testSuitePackage;
 	}
+	
 	public TestConfigurationGenerator getTestConfigurationGenerator() {
 		return testConfigurationPackageGenerator;
 	}

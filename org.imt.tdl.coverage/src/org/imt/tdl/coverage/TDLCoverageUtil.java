@@ -106,7 +106,7 @@ public class TDLCoverageUtil {
 		String ecoreFilePath = dsl.getEntry("ecore").getValue().replaceFirst("resource", "plugin");
 		Resource ecoreResource = (new ResourceSetImpl()).getResource(URI.createURI(ecoreFilePath), true);
 		metamodelRootElement = (EPackage) ecoreResource.getContents().get(0);
-		
+	
 		if (dsl.getEntry("k3") != null) {
 			findK3Classes(dsl, bundle);
 		}else if (dsl.getEntry("ale") != null) {
@@ -183,12 +183,12 @@ public class TDLCoverageUtil {
 	public void checkInheritanceForNotCoverableClasses() {
 		for (EClassifier clazz: metamodelRootElement.getEClassifiers()) {
 			String className = clazz.getName();
-			if (clazz instanceof EClass) {
+			if (clazz instanceof EClass eclazz) {
 				if (!coverableClasses.contains(className) && 
 						!extendedClassesWithoutStep.contains(className)) {
-					checkInheritance((EClass) clazz);
+					checkInheritance(eclazz);
 				}
-				checkDynamicAspectsOfClass(clazz);	
+				checkDynamicAspectsOfClass(eclazz);	
 			}
 		}	
 	}
@@ -220,7 +220,8 @@ public class TDLCoverageUtil {
 	
 	private boolean isDynamicFeature(EStructuralFeature feature) {
 		List<EAnnotation> featureDynamicAnnotations = feature.getEAnnotations().stream().
-				filter(a -> a.getSource().equals("dynamic") || a.getSource().equals("aspect")).collect(Collectors.toList());
+				filter(a -> a.getSource().equals("dynamic") || 
+						a.getSource().equals("aspect")).collect(Collectors.toList());
 		return (featureDynamicAnnotations != null && featureDynamicAnnotations.size() > 0);
 	}
 
@@ -307,10 +308,8 @@ public class TDLCoverageUtil {
 	private String getCoverageFilePath() {
 		final Resource res = (new ResourceSetImpl()).getResource(URI.createURI(DSLPath), true);
 		final Dsl dsl = (Dsl) res.getContents().get(0);
-		if (dsl.getEntry("coverageFilePath") != null) {
-			return dsl.getEntry("coverageFilePath").getValue().replaceFirst("resource", "plugin");
-		}
-		return null;
+		return dsl.getEntry("coverageFilePath") != null ? 
+				dsl.getEntry("coverageFilePath").getValue().replaceFirst("resource", "plugin") : null;
 	}
 	
 	public IDSLSpecificCoverage getDslSpecificCoverageExtension() {

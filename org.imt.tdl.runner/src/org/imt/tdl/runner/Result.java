@@ -8,45 +8,54 @@ import java.util.Map;
 import org.etsi.mts.tdl.TestDescription;
 
 public class Result {
+	
 	private int numExecutedTests = 0;
 	private int numFailedTests = 0;
 	private Map<String, Boolean> tests = new HashMap<>();
 	private List<Failure> failures = new ArrayList<>();
 	
 	public void addTest(String testCase, boolean verdict) {
-		this.tests.put(testCase, verdict);
+		tests.put(testCase, verdict);
 	}
+	
 	public Map<String, Boolean> getTests(){
-		return this.tests;
+		return tests;
 	}
+	
 	public void addFailure(TestDescription testCase) {
 		Failure failure = new Failure();
 		failure.setTestHeader(testCase);
-		this.failures.add(failure);
+		failures.add(failure);
 	}
+	
 	public List<Failure> getFailures(){
 		//the Failures describing tests that failed and the problems they encountered
-		return this.failures;
+		return failures;
 	}
+	
 	protected void addNumExecutedTests() {
-		this.numExecutedTests++;
+		numExecutedTests++;
 	}
+	
 	protected void addNumFailedTests() {
-		this.numFailedTests++;
+		numFailedTests++;
 	}
+	
 	public int getRunCount() {
 		return this.numExecutedTests;
 	}
 	public int getFailureCount() {
 		//the number of tests that failed during the run
-		return this.numFailedTests;
+		return numFailedTests;
 	}
+	
 	public boolean wasSuccessful() {
-		if (this.numFailedTests==0) {
+		if (numFailedTests==0) {
 			return true;
 		}
 		return false;
 	}
+	
 	@Override
     public boolean equals(Object o) {
 		if (o == this) {
@@ -56,8 +65,8 @@ public class Result {
 			return false;
 		}
 		Result r = (Result) o;
-		if (this.numExecutedTests == r.numExecutedTests && this.numFailedTests == r.numFailedTests &&
-				this.tests.equals(r.tests) && this.failures.equals(r.failures)) {
+		if (numExecutedTests == r.numExecutedTests && numFailedTests == r.numFailedTests &&
+				tests.equals(r.tests) && failures.equals(r.failures)) {
 			return true;
 		}
 		return false;

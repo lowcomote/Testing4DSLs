@@ -65,8 +65,9 @@ public class TDLTestAmplifier {
 			numOfIteration = 0;
 			numNewTests = 0;
 			
-			List<TestDescription> initialTdlTestCases = tdlTestSuite.getPackagedElement().stream().
-					filter(p -> p instanceof TestDescription).map(t -> (TestDescription) t).collect(Collectors.toList());
+			List<TestDescription> initialTdlTestCases = tdlTestSuite.getPackagedElement().stream()
+					.filter(p -> p instanceof TestDescription)
+					.map(t -> (TestDescription) t).collect(Collectors.toList());
 			
 			//run test amplification on the given test cases
 			amplifyTestCases(initialTdlTestCases);
@@ -134,8 +135,7 @@ public class TDLTestAmplifier {
 					}
 					//check whether the new test case improves the mutation score, if there is any mutants
 					else if (!scoreCalculator.noMutantsExists){
-						boolean improvement = scoreCalculator.testCaseImprovesMutationScore(newTestCase);
-						if (!improvement) {
+						if (!scoreCalculator.testCaseImprovesMutationScore(newTestCase)) {
 							tdlTestSuite.getPackagedElement().remove(newTestCase);
 							amplifiedTests.remove(newTestCase);
 						}

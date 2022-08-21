@@ -44,12 +44,8 @@ public class EngineFactory{
 
 	public void setUp(String commandType) throws CoreException, EngineContextException {
 		if (commandType.equals(GENERIC)) {
-			String engineType = this.getEngineType();
-			if (engineType=="ale") {
-				sequentialEngineLauncher = new ALEEngineLauncher();	
-			}else if(engineType=="k3") {
-				sequentialEngineLauncher = new JavaEngineLauncher();
-			}
+			String engineType = getEngineType();
+			sequentialEngineLauncher = engineType=="k3" ? new JavaEngineLauncher() : new ALEEngineLauncher();
 			sequentialEngineLauncher.setUp(MUTPath, DSLPath);
 		}else if(commandType.equals(DSL_SPECIFIC)) {
 			eventManagerLauncher = new K3EventManagerLauncher();

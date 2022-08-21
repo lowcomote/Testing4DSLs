@@ -167,7 +167,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
 		try {
 			for (int i=debugTargets.length -1 ; i>=0; i--) {
-				if ((DSLThreadAdapter)debugTargets[i].getThreads()[0] == this.testCaseDebugThread) {
+				if ((DSLThreadAdapter)debugTargets[i].getThreads()[0] == testCaseDebugThread) {
 					i--;
 				}else {
 					modelDebugThread = (DSLThreadAdapter)debugTargets[i].getThreads()[0];
@@ -334,7 +334,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	}
 	
 	private EventOccurrence createEventOccurance(EventOccurrenceType eventType, String eventName, Map<String, Object> parameters) {
-		BehavioralInterface bInterface = this.getBehavioralInterfaceRootElement(this.DSLPath);
+		BehavioralInterface bInterface = getBehavioralInterfaceRootElement(DSLPath);
 		Event event = null;
 		for (int i=0; i<bInterface.getEvents().size();i++) {
 			if (bInterface.getEvents().get(i).getName().equals(eventName)) {
@@ -570,13 +570,13 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 
 	@Override
 	public Boolean isEngineStarted() {
-		return (this.executionEngine != null && this.eventManager != null);
+		return (executionEngine != null && eventManager != null);
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {
-		return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) this.executionEngine.getAddon(GenericTraceEngineAddon.class).getTrace();
+		return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) executionEngine.getAddon(GenericTraceEngineAddon.class).getTrace();
 	}
 	
 	public void attach (ModelExecutionObserver observer) {

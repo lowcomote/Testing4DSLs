@@ -48,14 +48,19 @@ public class FaultyObjectFinder {
 		}
 		//Filter diffs that do not have any equivalence and requirement, or they require the diffs related to the seed model
 		List<Diff> mutantDiffsFiltered = mutantDiffs.stream().
-				filter(md -> (md.getRequires() == null || md.getRequires().size() == 0 || !mutantDiffs.containsAll(md.getRequires())) && 
-				(md.getEquivalence() == null || md.getEquivalence().getDifferences().size() == 0)).collect(Collectors.toList());
+				filter(md -> (md.getRequires() == null 
+								|| md.getRequires().size() == 0 
+								|| !mutantDiffs.containsAll(md.getRequires())) 
+							&& (md.getEquivalence() == null 
+								|| md.getEquivalence().getDifferences().size() == 0))
+				.collect(Collectors.toList());
 		if (mutantDiffsFiltered.size() == 1) {
 			return getDiffObject(mutantDiffsFiltered.get(0));
 		}
 		else if (mutantDiffsFiltered.size() == 0) {
 			//Filter diff objects that is because of CHANGE
-			mutantDiffsFiltered = mutantDiffs.stream().filter(md -> md.getKind() == DifferenceKind.CHANGE).collect(Collectors.toList());
+			mutantDiffsFiltered = mutantDiffs.stream()
+					.filter(md -> md.getKind() == DifferenceKind.CHANGE).collect(Collectors.toList());
 			if (mutantDiffsFiltered.size() == 1) {
 				return getDiffObject(mutantDiffsFiltered.get(0));
 			}
@@ -90,8 +95,7 @@ public class FaultyObjectFinder {
 		if (diff instanceof AttributeChange) {
 			return ((MatchSpec)diff.eContainer()).getLeft();
 		}
-		else if (diff instanceof ReferenceChange) {
-			ReferenceChange refDiff = (ReferenceChange) diff;
+		else if (diff instanceof ReferenceChange refDiff) {
 			if (refDiff.getReference().isContainment()) {
 				return refDiff.getValue();
 			}

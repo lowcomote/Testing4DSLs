@@ -64,7 +64,7 @@ public class ALEEngineLauncher extends AbstractEngine{
 			this.breakAtStart();
 		}
 		
-		this.executioncontext.setResourceModel(this.MUTResource);
+		executioncontext.setResourceModel(MUTResource);
 		CustomALELauncher launcher = new CustomALELauncher();
 		launcher.executioncontext = executioncontext;
 		Launch debugLaunch = new Launch(launchConfiguration, ILaunchManager.DEBUG_MODE, new GemocSourceLocator());
@@ -136,7 +136,7 @@ public class ALEEngineLauncher extends AbstractEngine{
 	@Override
 	public String executeModelAsynchronous() {
 		try{
-			this.aleEngine = createExecutionEngine();
+			aleEngine = createExecutionEngine();
 		}catch (EngineContextException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -145,14 +145,14 @@ public class ALEEngineLauncher extends AbstractEngine{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.aleEngine.start();
+		aleEngine.start();
 		return "The engine is running";
 	}
 	
 	@Override
 	public String stopAsynchronousExecution() {
-		this.aleEngine.stop();
-		this.setModelResource(this.aleEngine.getExecutionContext().getResourceModel());
+		aleEngine.stop();
+		setModelResource(aleEngine.getExecutionContext().getResourceModel());
 		return "PASS: The model under test executed successfully";
 	}
 	
@@ -160,17 +160,17 @@ public class ALEEngineLauncher extends AbstractEngine{
 	private AleEngine createExecutionEngine() throws EngineContextException, CoreException{
 		//if the resource is updated (e.g., the value of its dynamic features are set by the test case)
 		//then the execution context should be updated
-		this.executioncontext.setResourceModel(this.MUTResource);
+		executioncontext.setResourceModel(MUTResource);
 		CustomALELauncher launcher = new CustomALELauncher();
-		launcher.executioncontext = this.executioncontext;
+		launcher.executioncontext = executioncontext;
 		
-		return (AleEngine) launcher.createExecutionEngine(this.runConfiguration, this.executionMode);
+		return (AleEngine) launcher.createExecutionEngine(runConfiguration, executionMode);
 	}
 	@Override
 	protected String getModelEntryPointMethodName(){
 		EClass target = null;
 		final EClass finalTarget = target;
-		org.eclipse.gemoc.dsl.Dsl language = DslHelper.load(this._language);
+		org.eclipse.gemoc.dsl.Dsl language = DslHelper.load(_language);
 		IAleEnvironment environment = Helper.gemocDslToAleDsl(language);
 		
 		List<ParsedFile<ModelUnit>> parsedSemantics = environment.getBehaviors().getParsedFiles();
@@ -190,12 +190,12 @@ public class ALEEngineLauncher extends AbstractEngine{
 	}
 	@Override
 	protected String getModelInitializationMethodName() {
-		if (this._language != null && this._entryPointMethod != null) {
+		if (_language != null && _entryPointMethod != null) {
 
-			List<String> segments = Arrays.asList(this._entryPointMethod.split("::"));
+			List<String> segments = Arrays.asList(_entryPointMethod.split("::"));
 			if (segments.size() >= 2) {
 				String tagetClassName = segments.get(segments.size() - 2);
-				org.eclipse.gemoc.dsl.Dsl language = DslHelper.load(this._language);
+				org.eclipse.gemoc.dsl.Dsl language = DslHelper.load(_language);
 
 				try(IAleEnvironment environment = Helper.gemocDslToAleDsl(language)) {
 					Optional<Method> initOperation = Optional.empty();
@@ -217,12 +217,10 @@ public class ALEEngineLauncher extends AbstractEngine{
 		}
 		return "";
 	}
+	
 	public String provideMethodLabel(Object element) {
-		
-		if(element instanceof Method) {
-			Method mtd = (Method) element;
+		if(element instanceof Method mtd) {
 			ExtendedClass base = (ExtendedClass) mtd.eContainer();
-			
 			if(base.getBaseClass() != mtd.getOperationRef().getEContainingClass()) {
 				return provideClassLabel(base.getBaseClass()) + "::" + mtd.getOperationRef().getName();
 			}
@@ -230,17 +228,17 @@ public class ALEEngineLauncher extends AbstractEngine{
 				return provideClassLabel(mtd.getOperationRef());
 			}
 		}
-		
 		return provideClassLabel(element);
 	}
+	
 	public String provideClassLabel(Object element) {
-		if(element instanceof ENamedElement){
+		if(element instanceof ENamedElement namedElement){
 			StringBuilder sb = new StringBuilder();
-			if(((ENamedElement)element).eContainer() != null){
-				sb.append(provideClassLabel(((ENamedElement)element).eContainer()));
+			if(namedElement.eContainer() != null){
+				sb.append(provideClassLabel(namedElement.eContainer()));
 				sb.append("::");
 			}
-			sb.append(((ENamedElement)element).getName());
+			sb.append(namedElement.getName());
 			return sb.toString();
 		}
 		else return element == null ? "" : element.toString();
@@ -248,28 +246,24 @@ public class ALEEngineLauncher extends AbstractEngine{
 
 	@Override
 	public Resource getModelResource() {
-		if (aleEngine != null) {
-			return aleEngine.getExecutionContext().getResourceModel();
-		}
-		return MUTResource;
+		return aleEngine != null ? aleEngine.getExecutionContext().getResourceModel() : MUTResource;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {
-		if (aleEngine != null) {
-			return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) aleEngine.getAddon(GenericTraceEngineAddon.class).getTrace();
-		}
-		return null;
+		return aleEngine != null ? (Trace<Step<?>, TracedObject<?>, State<?, ?>>) aleEngine
+										.getAddon(GenericTraceEngineAddon.class).getTrace() : null;
 	}
 	
+	@Override
 	public void attach (ModelExecutionObserver observer) {
-		
+	
 	}
 
 	@Override
 	public void disposeResources() {
-		this.MUTResource.unload();
-		this.aleEngine.dispose();
+		MUTResource.unload();
+		aleEngine.dispose();
 	}
 }

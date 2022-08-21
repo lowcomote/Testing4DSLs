@@ -52,10 +52,10 @@ public class JavaEngineLauncher extends AbstractEngine{
 		DSLThreadAdapter testCaseDebugThread = (DSLThreadAdapter) testCaseDebuggerThreads[0];
 		ThreadImpl testDebugger = (ThreadImpl) testCaseDebugThread.getTarget();
 		if (testDebugger.getState().toString() == "STEPPING_INTO") {
-			this.breakAtStart();
+			breakAtStart();
 		}
 
-		this.executioncontext.setResourceModel(this.MUTResource);
+		executioncontext.setResourceModel(MUTResource);
 		CustomK3Launcher launcher = new CustomK3Launcher();
 		launcher.executioncontext = executioncontext;
 		Launch debugLaunch = new Launch(launchConfiguration, ILaunchManager.DEBUG_MODE, new GemocSourceLocator());
@@ -207,25 +207,20 @@ public class JavaEngineLauncher extends AbstractEngine{
 
 	@Override
 	public Resource getModelResource() {
-		if (javaEngine != null) {
-			return javaEngine.getExecutionContext().getResourceModel();
-		}
-		return MUTResource;
+		return javaEngine != null ? javaEngine.getExecutionContext().getResourceModel() : MUTResource;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public Trace<Step<?>, TracedObject<?>, State<?, ?>> getExecutionTrace() {
-		if (javaEngine != null) {
-			return (Trace<Step<?>, TracedObject<?>, State<?, ?>>) javaEngine.getAddon(GenericTraceEngineAddon.class).getTrace();
-		}
-		return null;
+		return javaEngine != null ? (Trace<Step<?>, TracedObject<?>, State<?, ?>>) javaEngine
+										.getAddon(GenericTraceEngineAddon.class).getTrace() : null;
 	}
 
 	@Override
 	public void disposeResources() {
-		this.MUTResource.unload();
-		this.javaEngine.dispose();
+		MUTResource.unload();
+		javaEngine.dispose();
 	}
 
 	@Override

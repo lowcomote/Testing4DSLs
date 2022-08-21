@@ -21,8 +21,8 @@ public class AssertionRemover {
 		List<EObject> assertions = new ArrayList<>();
 		while (iterator.hasNext()) {
 			EObject eobject = iterator.next();
-			if (eobject instanceof Interaction) {
-				GateReference sourceGate = ((Interaction) eobject).getSourceGate();
+			if (eobject instanceof Interaction interaction) {
+				GateReference sourceGate =  interaction.getSourceGate();
 				if (sourceGate.getComponent().getRole() == ComponentInstanceRole.SUT) {
 					assertions.add(eobject);
 				}

@@ -39,7 +39,7 @@ public class CustomALELauncher extends AbstractSequentialGemocLauncher<GenericMo
 	public IExecutionEngine<GenericModelExecutionContext<SequentialRunConfiguration>> createExecutionEngine(SequentialRunConfiguration runConfiguration, ExecutionMode executionMode)
 			throws CoreException, EngineContextException {
 		AleEngine engine = new AleEngine();
-		engine.initialize(this.executioncontext);
+		engine.initialize(executioncontext);
 		
 		// declare this engine as available for ale: queries in the odesign
 		ALESiriusInterpreter.getDefault().addAleEngine(engine);

@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 
 public class DSLSelectionWizardPage extends WizardPage{
+	
 	private Composite parent;
 	private Group tdlProjectArea;
 	private Group languageArea;
@@ -46,11 +47,12 @@ public class DSLSelectionWizardPage extends WizardPage{
 		area.setLayout(gl);
 		area.layout();
 		setControl(area);
-		this.tdlProjectArea = createGroup(area, "Select a TDL Project");
-		this.languageArea = createGroup(area, "Select a language");
+		tdlProjectArea = createGroup(area, "Select a TDL Project");
+		languageArea = createGroup(area, "Select a language");
 		createProjectLayout (tdlProjectArea, null);
 		createLanguageLayout (languageArea, null);
 	}
+	
 	protected Group createGroup(Composite parent, String text) {
 		Group group = new Group(parent, SWT.NULL);
 		group.setText(text);
@@ -61,6 +63,7 @@ public class DSLSelectionWizardPage extends WizardPage{
 		group.setLayout(locationLayout);
 		return group;
 	}
+	
 	public Composite createProjectLayout(Composite parent, Font font) {
 		createTextLabelLayout(parent, "TDL Projects");
 		_projectCombo = new Combo(parent, SWT.NONE);
@@ -78,6 +81,7 @@ public class DSLSelectionWizardPage extends WizardPage{
 		createTextLabelLayout(parent, "");
 		return parent;
 	}
+	
 	public Composite createLanguageLayout(Composite parent, Font font) {
 		// Language
 		createTextLabelLayout(parent, "Languages");
@@ -101,15 +105,18 @@ public class DSLSelectionWizardPage extends WizardPage{
 
 		return parent;
 	}
+	
 	protected void createTextLabelLayout(Composite parent, String labelString) {
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		parent.setLayoutData(gd);
 		Label inputLabel = new Label(parent, SWT.NONE);
 		inputLabel.setText(labelString); // $NON-NLS-1$
 	}
+	
 	private GridData createStandardLayout() {
 		return new GridData(SWT.FILL, SWT.CENTER, true, false);
 	}
+	
 	public HashMap<String, String> getAllLanguages() {
 		HashMap<String, String> languagesPaths = new HashMap<String, String>();
 
@@ -125,6 +132,7 @@ public class DSLSelectionWizardPage extends WizardPage{
 		}
 		return languagesPaths;
 	}
+	
 	public HashMap<String, IPath> getAllTDLProjects() {
 		HashMap<String, IPath> projects = new HashMap<>();
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
@@ -136,9 +144,11 @@ public class DSLSelectionWizardPage extends WizardPage{
 		}
 		return projects;
 	}
+	
 	public IPath getSelectedProjectPath() {
 		return this.selectedProjectPath;
 	}
+	
 	public String getSelectedDSLFilePath() {
 		return this.selectedDSLPath;
 	}

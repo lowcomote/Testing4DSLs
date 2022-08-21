@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -231,15 +232,19 @@ public class SBFLEvaluation {
 			String mutantRegistryPath = "platform:/resource" + mutant_registry.get(mutant).replace("\\", "/");
 			Resource registryResource = (new ResourceSetImpl()).getResource(URI.createURI(mutantRegistryPath), true);
 			Mutations mutations = (Mutations) registryResource.getContents().get(0);
-			Optional<AppMutation> informationChangedMutation = mutations.getMuts().stream().filter(m -> m instanceof InformationChanged).findFirst();
-			if (informationChangedMutation.isPresent()) {
-				InformationChanged informationChanged = (InformationChanged)informationChangedMutation.get();
-				if (informationChanged.getAttChanges().size()>0) {
-					return ((InformationChanged)informationChangedMutation.get()).getObject();
+			try {
+				InformationChanged informationChangedMutation = mutations.getMuts().stream()
+						.filter(m -> m instanceof InformationChanged)
+						.map(m -> (InformationChanged) m)
+						.findFirst().get();
+				if (informationChangedMutation.getAttChanges().size()>0) {
+					return informationChangedMutation.getObject();
 				}
-				if (informationChanged.getRefChanges().size()>0) {
-					return informationChanged.getRefChanges().get(0).getMutantObject().get(0);
+				if (informationChangedMutation.getRefChanges().size()>0) {
+					return informationChangedMutation.getRefChanges().get(0).getMutantObject().get(0);
 				}
+			}catch (NoSuchElementException e) {
+				// TODO: handle exception
 			}
 		}
 		//otherwise, use EMF Compare to find the faulty object
@@ -289,12 +294,13 @@ public class SBFLEvaluation {
 		while (mutantContents.hasNext()) {
 			EObject eobject = mutantContents.next();
 			EClass eobjectType = eobject.eClass();
-			if (this.isDynamicClass(eobjectType)) {
-				eobjectType.getEAllStructuralFeatures().forEach(f -> clearRuntimeDataOfFeature(eobject, f));
+			if (isDynamicClass(eobjectType)) {
+				eobjectType.getEAllStructuralFeatures()
+					.forEach(f -> clearRuntimeDataOfFeature(eobject, f));
 			}
-			else if (this.isClassWithDynamiFeature(eobjectType)) {
-				List<EStructuralFeature> dynamicFeatures = eobjectType.getEAllStructuralFeatures().stream().
-						filter(f -> isDynamicFeature(f)).collect(Collectors.toList());
+			else if (isClassWithDynamiFeature(eobjectType)) {
+				List<EStructuralFeature> dynamicFeatures = eobjectType.getEAllStructuralFeatures().stream()
+						.filter(f -> isDynamicFeature(f)).collect(Collectors.toList());
 				dynamicFeatures.forEach(f -> clearRuntimeDataOfFeature(eobject, f));
 			}
 		}	
@@ -321,19 +327,13 @@ public class SBFLEvaluation {
 	private boolean isDynamicClass(EClass eobjectType) {
 		Optional<EClass> eclass = TDLCoverageUtil.getInstance().getDynamicClasses().stream().
 				filter(c -> c.getName().equals(eobjectType.getName())).findFirst();
-		if (eclass.isPresent()) {
-			return true;
-		}
-		return false;
+		return eclass.isPresent() ? true : false;
 	}
 	
 	private boolean isClassWithDynamiFeature(EClass eobjectType) {
 		Optional<EClass> eclass = TDLCoverageUtil.getInstance().getClassesWithDynamicFeatures().stream().
 				filter(c -> c.getName().equals(eobjectType.getName())).findFirst();
-		if (eclass.isPresent()) {
-			return true;
-		}
-		return false;
+		return eclass.isPresent() ? true : false;
 	}
 	
 	private boolean isDynamicFeature(EStructuralFeature feature) {

@@ -1,10 +1,8 @@
 package org.imt.tdl.mutation.utilities;
 
 import java.nio.file.Path;
-
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.Optional;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -17,17 +15,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.etsi.mts.tdl.Annotation;
 import org.etsi.mts.tdl.ComponentInstance;
 import org.etsi.mts.tdl.Package;
-import org.etsi.mts.tdl.TDLan2StandaloneSetup;
 import org.etsi.mts.tdl.TestDescription;
 import org.etsi.mts.tdl.tdlPackage;
 import org.etsi.mts.tdl.util.tdlResourceFactoryImpl;
-
-import com.google.inject.Injector;
 
 public class PathHelper {
 	
@@ -94,11 +87,14 @@ public class PathHelper {
 	}
 	
 	private void findModelPathAndDSLName () {
-		Optional<TestDescription> testCase = testSuite.getPackagedElement().stream().filter(p -> p instanceof TestDescription).
-		map(p -> (TestDescription) p).findFirst();
-		Optional<ComponentInstance> sutComponent = testCase.get().getTestConfiguration().getComponentInstance().
-				stream().filter(ci -> ci.getRole().toString().equals("SUT")).findFirst();
-		for (Annotation a:sutComponent.get().getAnnotation()){
+		TestDescription testCase = testSuite.getPackagedElement().stream().
+				filter(p -> p instanceof TestDescription).
+				map(p -> (TestDescription) p).
+				findFirst().get();
+		ComponentInstance sutComponent = testCase.getTestConfiguration().getComponentInstance().stream().
+				filter(ci -> ci.getRole().toString().equals("SUT")).
+				findFirst().get();
+		for (Annotation a:sutComponent.getAnnotation()){
 			if (a.getKey().getName().equals("MUTPath")){
 				seedModelPath = Paths.get(a.getValue().substring(1, a.getValue().length()-1));
 			}

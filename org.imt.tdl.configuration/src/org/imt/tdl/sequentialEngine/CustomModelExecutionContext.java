@@ -18,13 +18,10 @@ public class CustomModelExecutionContext extends GenericModelExecutionContext {
 
 	@SuppressWarnings("unchecked")
 	public void setResourceModel(Resource modifiedResource) {
-		this._resourceModel = modifiedResource;
+		_resourceModel = modifiedResource;
 	}
 
 	public boolean modelInitialized() {
-		if (this._resourceModel == null) {
-			return false;
-		}
-		return true;
+		return _resourceModel == null ? false : true;
 	}
 }

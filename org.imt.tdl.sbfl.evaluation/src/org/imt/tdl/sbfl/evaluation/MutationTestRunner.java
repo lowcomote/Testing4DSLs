@@ -27,9 +27,7 @@ public class MutationTestRunner {
 		mutantPath = mutantPath.replace("\\", "/");
 		testSuiteResult.setTestSuite(testPackage);
 		for (int i=0; i<testPackage.getPackagedElement().size(); i++) {
-			Object o = testPackage.getPackagedElement().get(i);
-			if (o instanceof TestDescription) {
-				TestDescription testCase = (TestDescription) o;
+			if (testPackage.getPackagedElement().get(i) instanceof TestDescription testCase) {
 				String dslName = getDSLName(testCase);
 				//for minijava mutants, the mutant must be changed to enable the test case execution ('main' method required)
 				String mutantTestPath = mutantPath;

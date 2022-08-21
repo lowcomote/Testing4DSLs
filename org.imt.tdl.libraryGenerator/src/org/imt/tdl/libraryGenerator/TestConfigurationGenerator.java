@@ -117,7 +117,7 @@ public class TestConfigurationGenerator {
 		genericGate.setType(gateTypes.get(GENERIC_GATE_TYPE));
 		component.getGateInstance().add(genericGate);
 
-		if (this.gateTypes.get(DSL_GATE_TYPE) != null) {
+		if (gateTypes.get(DSL_GATE_TYPE) != null) {
 			GateInstance dslSpecificGate = factory.createGateInstance();
 			dslSpecificGate.setName(DSL_GATE);
 			dslSpecificGate.setType(gateTypes.get(DSL_GATE_TYPE));

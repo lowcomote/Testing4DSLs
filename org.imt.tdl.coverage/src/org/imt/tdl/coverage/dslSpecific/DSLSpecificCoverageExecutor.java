@@ -30,24 +30,20 @@ public class DSLSpecificCoverageExecutor {
 	//apply all the rules on the object (NOTE: rule's context = object type)
 	public void applyCoverageRules(EList<Rule> rules, List<EObject> eObjects) {
 		for (Rule rule:rules) {
-			if (rule instanceof CoverageOfReferenced) {
-				updateCoverableClasses((CoverageOfReferenced) rule);
-				eObjects.forEach(object -> 
-					inferReferenceCoverage((CoverageOfReferenced) rule, object));
+			if (rule instanceof CoverageOfReferenced corRule) {
+				updateCoverableClasses(corRule);
+				eObjects.forEach(object -> inferReferenceCoverage(corRule, object));
 			}
-			else if (rule instanceof CoverageByContent) {
-				updateCoverableClasses((CoverageByContent) rule);
-				eObjects.forEach(object -> 
-					inferContainerCoverage((CoverageByContent) rule, object));
+			else if (rule instanceof CoverageByContent cbcRule) {
+				updateCoverableClasses(cbcRule);
+				eObjects.forEach(object -> inferContainerCoverage(cbcRule, object));
 			}
-			else if (rule instanceof ConditionalIgnore) {
-				eObjects.forEach(object -> 
-					runConditionalIgnoreRule((ConditionalIgnore) rule, object));
+			else if (rule instanceof ConditionalIgnore ciRule) {
+				eObjects.forEach(object -> runConditionalIgnoreRule(ciRule, object));
 			}
-			else if (rule instanceof Ignore) {
-				updateCoverableClasses((Ignore) rule);
-				eObjects.forEach(object -> 
-					runIgnoreRule((Ignore) rule, object));
+			else if (rule instanceof Ignore iRule) {
+				updateCoverableClasses(iRule);
+				eObjects.forEach(object -> runIgnoreRule(iRule , object));
 			}
 		}
 	}
@@ -83,13 +79,11 @@ public class DSLSpecificCoverageExecutor {
 		Object referencedObject = object.eGet(ref);
 		if (referencedObject == null) { return; }
 		
-		if (referencedObject instanceof EObject) {
-			testCaseCoverage.setObjectCoverage(
-					(EObject) referencedObject, testCaseCoverage.getObjectCoverage(object));
+		if (referencedObject instanceof EObject refEobject) {
+			testCaseCoverage.setObjectCoverage(refEobject, testCaseCoverage.getObjectCoverage(object));
 		}
-		else if (referencedObject instanceof EObjectContainmentEList<?>) {
-			((EObjectContainmentEList<?>) referencedObject).
-				forEach(o -> testCaseCoverage.setObjectCoverage(
+		else if (referencedObject instanceof EObjectContainmentEList<?> refEobjects) {
+			refEobjects.forEach(o -> testCaseCoverage.setObjectCoverage(
 						(EObject) o, testCaseCoverage.getObjectCoverage(object)));
 		}
 	}
@@ -101,18 +95,17 @@ public class DSLSpecificCoverageExecutor {
 		Object containedObject = object.eGet(ref);
 		if (containedObject == null) { return; }
 		
-		if (containedObject instanceof EObject) {
-			EObject containee = (EObject) containedObject;
+		if (containedObject instanceof EObject containee) {
 			testCaseCoverage.setObjectCoverage(
 					object, testCaseCoverage.getObjectCoverage(containee));
 		}
-		else if (containedObject instanceof EObjectContainmentEList<?>) {
+		else if (containedObject instanceof EObjectContainmentEList<?> conEobjects) {
 			//if several objects are contained, set coverage based on the rule's multiplicity
 			if (r.getMultiplicity() == CoveredContents.ONE) {
-				coverContainerIfOneContaineeCovered((EObjectContainmentEList<?>) containedObject);
+				coverContainerIfOneContaineeCovered(conEobjects);
 			}
 			else {
-				coverContainerIfAllContaineeCovered((EObjectContainmentEList<?>) containedObject);
+				coverContainerIfAllContaineeCovered(conEobjects);
 			}
 		}
 	}

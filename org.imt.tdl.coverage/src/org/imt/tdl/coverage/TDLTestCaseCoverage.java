@@ -76,8 +76,7 @@ public class TDLTestCaseCoverage {
 	
 	private void calculateCoverageBasedOnTrace(Object rootStep) {
 		//System.out.println("Execution Trace:");
-		if (rootStep instanceof SequentialStep) {
-			SequentialStep<?, ?> step = (SequentialStep<?, ?>) rootStep;
+		if (rootStep instanceof SequentialStep step) {
 			if (step.getMseoccurrence() != null) {
 				EObject object = step.getMseoccurrence().getMse().getCaller();
 				//System.out.println("execution rule: " + step.getMseoccurrence().getMse().getAction()+
@@ -118,10 +117,7 @@ public class TDLTestCaseCoverage {
 	
 	public String getObjectCoverage(EObject object) {
 		int objectIndex = modelObjects.indexOf(object);
-		if (objectIndex != -1){
-			return tcObjectCoverageStatus.get(objectIndex);
-		}
-		return null;
+		return objectIndex != -1 ? tcObjectCoverageStatus.get(objectIndex) : null;
 	}
 	
 	public void setObjectCoverage(EObject object, String coverageStatus) {
@@ -166,12 +162,12 @@ public class TDLTestCaseCoverage {
 		int numOfCoverableElements = tcObjectCoverageStatus.size() - numOfNotCoverableElements;
 		tcCoveragePercentage = (double)(numOfCoveredObjs*100)/numOfCoverableElements;
 		try {
-		BigDecimal bd = new BigDecimal(tcCoveragePercentage).setScale(2, RoundingMode.HALF_UP);
-		tcCoveragePercentage = bd.doubleValue();
+			BigDecimal bd = new BigDecimal(tcCoveragePercentage).setScale(2, RoundingMode.HALF_UP);
+			tcCoveragePercentage = bd.doubleValue();
 		}catch (NumberFormatException e) {
 			System.out.println("NumberFormatException:" + tcCoveragePercentage);
 		}
-		System.out.println(this.testCase.getName() + " coverage: " + 
+		System.out.println(testCase.getName() + " coverage: " + 
 				numOfCoveredObjs + "/" + numOfCoverableElements + " = " + tcCoveragePercentage +"%");
 	}
 	

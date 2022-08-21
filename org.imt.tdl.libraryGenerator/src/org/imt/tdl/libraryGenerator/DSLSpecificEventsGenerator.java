@@ -123,10 +123,8 @@ public class DSLSpecificEventsGenerator {
 	}
 	//if a name is a keyword in tdl language, put '_' before it
 	private String validName (String name) {
-		if (Arrays.stream(TDLCodeGenerator.tokenNames).anyMatch(name::equals)) {
-			return "_"+name;
-		}
-		return name;
+		return Arrays.stream(TDLCodeGenerator.tokenNames).anyMatch(name::equals)
+				 ? "_" + name : name;
 	}
 	
 	protected String getDslName(String dslFilePath) {

@@ -7,15 +7,15 @@ public class Failure {
 	private String failedTestName;
 	
 	public void setTestHeader(TestDescription testCase) {
-		this.failedTestName= testCase.getName();
-		this.testHeader = "Failed test case: " + testCase.getName();
+		failedTestName= testCase.getName();
+		testHeader = "Failed test case: " + testCase.getName();
 	}
 	public String getTestHeader() {
 		//a user-understandable label for the test
-		return this.testHeader;
+		return testHeader;
 	}
 	public String getFailedTestName() {
-		return this.failedTestName;
+		return failedTestName;
 	}
 	@Override
     public boolean equals(Object o) {
@@ -26,7 +26,7 @@ public class Failure {
 			return false;
 		}
 		Failure f = (Failure) o;
-		if (this.testHeader.equals(f.testHeader) && this.failedTestName.equals(f.failedTestName)) {
+		if (testHeader.equals(f.testHeader) && failedTestName.equals(f.failedTestName)) {
 			return true;
 		}
 		return false;

@@ -342,7 +342,8 @@ public class MutationScoreCalculator {
 	}
 	
 	public Set<String> getAliveMutants(){
-		return mutant_status.keySet().stream().filter(mutant -> mutant_status.get(mutant) == ALIVE).collect(Collectors.toSet());
+		return mutant_status.keySet().stream().
+				filter(mutant -> mutant_status.get(mutant) == ALIVE).collect(Collectors.toSet());
 	}
 	
 	public void setTestCase_numOfAssertions(TestDescription testCase, int numOfAssertions) {
@@ -354,8 +355,8 @@ public class MutationScoreCalculator {
 		int numOfAssertions = 0;
 		while (iterator.hasNext()) {
 			EObject eobject = iterator.next();
-			if (eobject instanceof Interaction) {
-				GateReference sourceGate = ((Interaction) eobject).getSourceGate();
+			if (eobject instanceof Interaction interaction) {
+				GateReference sourceGate = interaction.getSourceGate();
 				if (sourceGate.getComponent().getRole() == ComponentInstanceRole.SUT) {
 					numOfAssertions++;
 				}

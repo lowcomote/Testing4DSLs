@@ -257,8 +257,8 @@ public class TDLSBFLView extends ViewPart{
 			if (parentElement instanceof List<?>) {
 				return ((List<?>) parentElement).toArray();
 			}
-			if (parentElement instanceof SuspiciousnessRanking) {
-				return ((SuspiciousnessRanking) parentElement).getElementsSBFLMeasures().toArray();
+			if (parentElement instanceof SuspiciousnessRanking suspRanking) {
+				return suspRanking.getElementsSBFLMeasures().toArray();
 			}
 			return new Object[0]; 
 		}
@@ -279,8 +279,8 @@ public class TDLSBFLView extends ViewPart{
 			if (element instanceof List<?>) {
 				return ((List<?>) element).size() > 0;
 			}
-			if (element instanceof SuspiciousnessRanking) {
-				return ((SuspiciousnessRanking) element).getElementsSBFLMeasures().size() > 0;
+			if (element instanceof SuspiciousnessRanking suspRanking) {
+				return suspRanking.getElementsSBFLMeasures().size() > 0;
 			}
 			return false;
 		}
@@ -320,8 +320,7 @@ public class TDLSBFLView extends ViewPart{
 
 		@Override
 		public Color getBackground(Object element, int columnIndex) {
-			if (element instanceof SBFLMeasures) {
-				SBFLMeasures sbflMeasures = (SBFLMeasures) element;
+			if (element instanceof SBFLMeasures sbflMeasures) {
 				if (columnIndex > 1 && columnIndex < sbflMeasures.getCoverage().size() + 2) {
 					//the test case coverages
 					String tcEntry = sbflMeasures.getCoverage().get(columnIndex-2);
@@ -344,16 +343,14 @@ public class TDLSBFLView extends ViewPart{
 		@Override
 		public String getColumnText(Object element, int columnIndex) {
 			String columnText = "";
-			if (element instanceof String) {
-				String result = (String) element;
+			if (element instanceof String result) {
 				switch (columnIndex) {
 				case 0:
 					columnText = result;
 					break;
 				}
 			}
-			if (element instanceof SBFLMeasures) {
-				SBFLMeasures sbflMeasures = (SBFLMeasures) element;
+			if (element instanceof SBFLMeasures sbflMeasures) {
 				int sbflOperandsStartIndex = (sbflMeasures.getCoverage().size() + 2);
 				if (columnIndex == 0 && sbflMeasures.getMetaclass() != null) {
 					columnText = sbflMeasures.getMetaclass().getName();
@@ -451,13 +448,10 @@ private class ElementFilter extends ViewerFilter {
 		if (elementFilterIndex == -1 || elementFilterIndex == 0) {
 			return true;
 		}else {
-			if (element instanceof SBFLMeasures) {
-				SBFLMeasures parameters = (SBFLMeasures) element;
+			if (element instanceof SBFLMeasures parameters) {
 				if (parameters.getMetaclass() == null) {
 					return false;
 				}else {
-					int index = elementFilterIndex;
-					List<String> filters = classFilters;
 					String filter = classFilters.get(elementFilterIndex-1);
 					String objectType = parameters.getMetaclass().getName();
 					if (objectType.equals(filter)) {

@@ -57,14 +57,13 @@ public class MiniJavaMutationTestHelper {
 	
 	public Class getMainClass(Program miniJavaPackage) {
 		for (TypeDeclaration cclass: miniJavaPackage.getClasses()) {
-			if (cclass instanceof Class) {
-				Class javaClass = (Class) cclass;
+			if (cclass instanceof Class javaClass) {
 				for (Member member:javaClass.getMembers()) {
-					if (member instanceof Method) {
-						Method method = (Method) member;
-						if (method.getName().equals("main") && method.isStatic() && 
-								(method.getParams().get(0).getTypeRef() instanceof ArrayTypeRef) &&
-								(((ArrayTypeRef) method.getParams().get(0).getTypeRef()).getTypeRef() instanceof StringTypeRef)) {
+					if (member instanceof Method method) {
+						if (method.getName().equals("main") 
+								&& method.isStatic() 
+								&& (method.getParams().get(0).getTypeRef() instanceof ArrayTypeRef) 
+								&& (((ArrayTypeRef) method.getParams().get(0).getTypeRef()).getTypeRef() instanceof StringTypeRef)) {
 							return javaClass;
 						}
 					}

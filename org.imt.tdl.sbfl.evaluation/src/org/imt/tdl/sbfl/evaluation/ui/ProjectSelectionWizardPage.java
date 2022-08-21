@@ -19,6 +19,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 
 public class ProjectSelectionWizardPage extends WizardPage{
+	
 	private Composite parent;
 	private Group mutantProjectArea;
 	private Group testProjectArea;
@@ -42,11 +43,12 @@ public class ProjectSelectionWizardPage extends WizardPage{
 		area.setLayout(gl);
 		area.layout();
 		setControl(area);
-		this.mutantProjectArea = createGroup(area, "Select a project containing mutants and their registries");
-		this.testProjectArea = createGroup(area, "Select the project that contains test suites for the mutants");
+		mutantProjectArea = createGroup(area, "Select a project containing mutants and their registries");
+		testProjectArea = createGroup(area, "Select the project that contains test suites for the mutants");
 		createMutantProjectLayout (mutantProjectArea, null);
 		createTestProjectLayout (testProjectArea, null);
 	}
+	
 	protected Group createGroup(Composite parent, String text) {
 		Group group = new Group(parent, SWT.NULL);
 		group.setText(text);
@@ -57,6 +59,7 @@ public class ProjectSelectionWizardPage extends WizardPage{
 		group.setLayout(locationLayout);
 		return group;
 	}
+	
 	public Composite createMutantProjectLayout(Composite parent, Font font) {
 		mutantProjectCombo = new Combo(parent, SWT.NONE);
 		mutantProjectCombo.setLayoutData(createStandardLayout());
@@ -73,6 +76,7 @@ public class ProjectSelectionWizardPage extends WizardPage{
 		createTextLabelLayout(parent, "");
 		return parent;
 	}
+	
 	public Composite createTestProjectLayout(Composite parent, Font font) {
 		testProjectCombo = new Combo(parent, SWT.NONE);
 		testProjectCombo.setLayoutData(createStandardLayout());
@@ -90,15 +94,18 @@ public class ProjectSelectionWizardPage extends WizardPage{
 
 		return parent;
 	}
+	
 	protected void createTextLabelLayout(Composite parent, String labelString) {
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		parent.setLayoutData(gd);
 		Label inputLabel = new Label(parent, SWT.NONE);
 		inputLabel.setText(labelString); // $NON-NLS-1$
 	}
+	
 	private GridData createStandardLayout() {
 		return new GridData(SWT.FILL, SWT.CENTER, true, false);
 	}
+	
 	public HashMap<String, IProject> getAllOpenProjects() {
 		HashMap<String, IProject> projects = new HashMap<>();
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
@@ -110,9 +117,11 @@ public class ProjectSelectionWizardPage extends WizardPage{
 		}
 		return projects;
 	}
+	
 	public IProject getMutantProject() {
 		return this.mutantProject;
 	}
+	
 	public IProject getTestProject() {
 		return this.testProject;
 	}

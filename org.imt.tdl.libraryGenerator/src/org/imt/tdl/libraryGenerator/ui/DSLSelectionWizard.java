@@ -6,6 +6,7 @@ import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 
 public class DSLSelectionWizard extends Wizard implements INewWizard{
+	
 	private DSLSelectionWizardPage selectDSL;
 
 	@Override

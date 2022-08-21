@@ -39,18 +39,18 @@ public abstract class AbstractEngine implements ISequentialExecutionEngine{
 	
 	@Override
 	public void setUp(String MUTPath, String DSLPath) {
-		this._modelLocation = MUTPath;
-		this._siriusRepresentationLocation = MUTPath.split("/")[1] + "/representations.aird";
-		this._delay = "0";
-		this._language = this.getDslName(DSLPath);
-		this._entryPointModelElement = "/";
-		this._entryPointMethod = getModelEntryPointMethodName();
-		this._animationFirstBreak = false;
-		this._modelInitializationMethod = getModelInitializationMethodName();
-		this._modelInitializationArguments = "";
-		this.executionMode = ExecutionMode.Animation;
-		this.createLaunchConfiguration();
-		this.configureEngine();
+		_modelLocation = MUTPath;
+		_siriusRepresentationLocation = MUTPath.split("/")[1] + "/representations.aird";
+		_delay = "0";
+		_language = this.getDslName(DSLPath);
+		_entryPointModelElement = "/";
+		_entryPointMethod = getModelEntryPointMethodName();
+		_animationFirstBreak = false;
+		_modelInitializationMethod = getModelInitializationMethodName();
+		_modelInitializationArguments = "";
+		executionMode = ExecutionMode.Animation;
+		createLaunchConfiguration();
+		configureEngine();
 	}
 	
 	protected abstract String getModelInitializationMethodName();
@@ -67,15 +67,15 @@ public abstract class AbstractEngine implements ISequentialExecutionEngine{
 			e.printStackTrace();
 		}
 		// Set its attributes
-		configurationWorkingCopy.setAttribute(AbstractDSLLaunchConfigurationDelegate.RESOURCE_URI, this._modelLocation);
-		configurationWorkingCopy.setAttribute(AbstractDSLLaunchConfigurationDelegateSiriusUI.SIRIUS_RESOURCE_URI, this._siriusRepresentationLocation);
-		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_DELAY, Integer.parseInt(this._delay));
-		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_SELECTED_LANGUAGE, this._language);
-		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_MODEL_ENTRY_POINT, this._entryPointModelElement);
-		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_METHOD_ENTRY_POINT, this._entryPointMethod);
-		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_METHOD, this._modelInitializationMethod);
-		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_ARGUMENTS, this._modelInitializationArguments);
-		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_BREAK_START, this._animationFirstBreak);
+		configurationWorkingCopy.setAttribute(AbstractDSLLaunchConfigurationDelegate.RESOURCE_URI, _modelLocation);
+		configurationWorkingCopy.setAttribute(AbstractDSLLaunchConfigurationDelegateSiriusUI.SIRIUS_RESOURCE_URI, _siriusRepresentationLocation);
+		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_DELAY, Integer.parseInt(_delay));
+		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_SELECTED_LANGUAGE, _language);
+		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_MODEL_ENTRY_POINT, _entryPointModelElement);
+		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_METHOD_ENTRY_POINT, _entryPointMethod);
+		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_METHOD, _modelInitializationMethod);
+		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_INITIALIZATION_ARGUMENTS, _modelInitializationArguments);
+		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_BREAK_START, _animationFirstBreak);
 		// DebugModelID for sequential engine
 		//configuration.setAttribute(SequentialRunConfiguration.DEBUG_MODEL_ID, Activator.DEBUG_MODEL_ID);
 		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.DEBUG_MODEL_ID, "org.eclipse.gemoc.execution.sequential.javaengine.ui.debugModel");
@@ -88,7 +88,7 @@ public abstract class AbstractEngine implements ISequentialExecutionEngine{
 		configurationWorkingCopy.setAttribute("org.eclipse.gemoc.trace.gemoc.addon_saveTraceOnStep_booleanOption", false);
 		
 		try {
-			this.launchConfiguration = configurationWorkingCopy.doSave();
+			launchConfiguration = configurationWorkingCopy.doSave();
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -97,19 +97,19 @@ public abstract class AbstractEngine implements ISequentialExecutionEngine{
 
 	private void configureEngine() {
 		try {
-			this.runConfiguration = new SequentialRunConfiguration(this.launchConfiguration);
-			this.executioncontext = new CustomModelExecutionContext(this.runConfiguration, this.executionMode);
+			runConfiguration = new SequentialRunConfiguration(launchConfiguration);
+			executioncontext = new CustomModelExecutionContext(runConfiguration, executionMode);
 		} catch (CoreException e) {
 			e.printStackTrace();
 		} catch (EngineContextException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.executioncontext.getExecutionPlatform().getModelLoader().setProgressMonitor(new NullProgressMonitor());
-		if (!this.executioncontext.modelInitialized()) {
-			this.executioncontext.initializeResourceModel();
+		executioncontext.getExecutionPlatform().getModelLoader().setProgressMonitor(new NullProgressMonitor());
+		if (!executioncontext.modelInitialized()) {
+			executioncontext.initializeResourceModel();
 		}
-		this.MUTResource = this.executioncontext.getResourceModel();
+		MUTResource = executioncontext.getResourceModel();
 	}
 	
 	@Override
@@ -126,7 +126,7 @@ public abstract class AbstractEngine implements ISequentialExecutionEngine{
 	public void breakAtStart() {
 		configurationWorkingCopy.setAttribute(SequentialRunConfiguration.LAUNCH_BREAK_START, true);
 		try {
-			this.launchConfiguration = configurationWorkingCopy.doSave();
+			launchConfiguration = configurationWorkingCopy.doSave();
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

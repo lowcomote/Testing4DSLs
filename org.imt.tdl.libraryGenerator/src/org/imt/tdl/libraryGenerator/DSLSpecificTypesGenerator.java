@@ -60,17 +60,16 @@ public class DSLSpecificTypesGenerator {
 			dslSpecificTypesPackage = getDSLSpecificTypesPackage(dslTypesRes);
 			for (int i=0; i<dslSpecificTypesPackage.getPackagedElement().size();i++) {
 				PackageableElement p = dslSpecificTypesPackage.getPackagedElement().get(i);
-				if (p instanceof DataType) {
-					dslSpecificTypes.put(p.getName().toLowerCase(), (DataType) p);
+				if (p instanceof DataType dataType) {
+					dslSpecificTypes.put(p.getName().toLowerCase(), dataType);
 					//recognizing dynamic data types for being used as model state
-					if (p instanceof StructuredDataType) {
-						StructuredDataType type = (StructuredDataType) p;
-						if (isDynamic(type)) {
-							dynamicTypes.add(type);
-						}else if (type.getExtension() != null) {
-							DataType superClass = (DataType) type.getExtension().getExtending();
+					if (p instanceof StructuredDataType sDataType) {
+						if (isDynamic(sDataType)) {
+							dynamicTypes.add(sDataType);
+						}else if (sDataType.getExtension() != null) {
+							DataType superClass = (DataType) sDataType.getExtension().getExtending();
 							if (isDynamic(superClass) || dynamicTypes.contains(superClass)) {
-								dynamicTypes.add(type);
+								dynamicTypes.add(sDataType);
 							}
 							//TODO: For the updated version of TDL, the following if condition must be used
 //							if (type.getExtension().stream().map(e -> (DataType) e.getExtending()).
@@ -88,10 +87,10 @@ public class DSLSpecificTypesGenerator {
 		}
 	}
 	private Package getDSLSpecificTypesPackage(Resource dslTypesRes) {
-		if (dslTypesRes.getContents().size()==1) {
-			return (Package) dslTypesRes.getContents().get(0);
-		}
 		Package firstPackage = (Package) dslTypesRes.getContents().get(0);
+		if (dslTypesRes.getContents().size()==1) {
+			return firstPackage;
+		}
 		for (int i=1; i<dslTypesRes.getContents().size(); i++) {
 			Package iPackage = (Package) dslTypesRes.getContents().get(i);
 			firstPackage.getPackagedElement().addAll(iPackage.getPackagedElement());
@@ -100,8 +99,7 @@ public class DSLSpecificTypesGenerator {
 	}
 
 	private boolean isDynamic(DataType dataType) {
-		if (dataType instanceof StructuredDataType) {
-			StructuredDataType type = (StructuredDataType) dataType;
+		if (dataType instanceof StructuredDataType type) {
 			for (int j=0; j < type.getAnnotation().size(); j++){
 				String annotation = type.getAnnotation().get(j).getKey().getName().toString();
 				if (annotation.contains("dynamic")||annotation.contains("aspect")) {

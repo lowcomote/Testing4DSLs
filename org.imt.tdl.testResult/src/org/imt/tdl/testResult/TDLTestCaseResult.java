@@ -2,6 +2,7 @@ package org.imt.tdl.testResult;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.etsi.mts.tdl.TestDescription;
 
@@ -18,8 +19,8 @@ public class TDLTestCaseResult {
 	private int messageNumber = 0;
 	
 	public TDLTestCaseResult() {
-		this.value = TDLTestResultUtil.PASS;
-		this.tdlMessageResults = new ArrayList<TDLMessageResult>();
+		value = TDLTestResultUtil.PASS;
+		tdlMessageResults = new ArrayList<TDLMessageResult>();
 	}
 	
 	public TestDescription getTestCase() {
@@ -31,11 +32,11 @@ public class TDLTestCaseResult {
 	}
 	
 	public String getTestCaseName() {
-		return this.testCase.getName();
+		return testCase.getName();
 	}
 	
 	public String getValue() {
-		return this.value;
+		return value;
 	}
 	
 	public void setValue(String value) {
@@ -45,46 +46,30 @@ public class TDLTestCaseResult {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
 	public String getDescription() {
-		return this.description;
+		return description;
 	}
 	
 	public List<TDLMessageResult> getTdlMessages() {
-		return this.tdlMessageResults;
+		return tdlMessageResults;
 	}
+	
 	public List<TDLMessageResult> getFailedTdlMessages() {
-		List<TDLMessageResult> failedTdlMessages = new ArrayList<>();
-		for (TDLMessageResult tdlMessage : this.tdlMessageResults) {
-			if (tdlMessage.getFailure() == true) {
-				failedTdlMessages.add(tdlMessage);
-			}
-		}
-		return failedTdlMessages;
+		return tdlMessageResults.stream().filter(r -> r.getFailure()).collect(Collectors.toList());
 	}
+	
 	public int getNumOfPassedtdlMessages() {
-		int passed = 0;
-		for (TDLMessageResult tdlMessage : tdlMessageResults) {
-			if (tdlMessage.getValue() == TDLTestResultUtil.PASS) {
-				passed++;
-			}
-		}
-		return passed;
+		return (int) tdlMessageResults.stream()
+				.filter(r -> r.getValue() == TDLTestResultUtil.PASS).count();
 	}
 	
 	public int getNumOfFailures() {
-		int failures = 0;
-		for (TDLMessageResult tdlMessage : tdlMessageResults) {
-			if (tdlMessage.getFailure() == true) {
-				failures++;
-			}
-		}
-		return failures;
+		return (int) tdlMessageResults.stream().filter(r -> r.getFailure()).count();
 	}
 
 	public void addTdlMessage(TDLMessageResult messageResult) {
-		this.messageNumber++;
-		messageResult.setTdlMessageId("Message#" + this.messageNumber);
-		this.tdlMessageResults.add(messageResult);
+		messageResult.setTdlMessageId("Message#" + (++messageNumber));
+		tdlMessageResults.add(messageResult);
 	}
-	
 }
