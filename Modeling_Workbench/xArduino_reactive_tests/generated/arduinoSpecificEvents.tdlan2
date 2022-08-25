@@ -22,6 +22,10 @@ Package arduinoSpecificEvents {
 		AcceptedEvent ;
 	} ;
 	IRSensor_notDetected IRSensor_notDetected ( sensor = ? ) ;
+	Type soundSensor_detected ( sensor of type SoundSensor ) with {
+		AcceptedEvent ;
+	} ;
+	soundSensor_detected soundSensor_detected ( sensor = ? ) ;
 	Type Pin_level_changed ( pin of type Pin ) with {
 		ExposedEvent ;
 	} ;
