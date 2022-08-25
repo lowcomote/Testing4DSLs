@@ -20,6 +20,7 @@ import org.etsi.mts.tdl.UnassignedMemberTreatment;
 import org.etsi.mts.tdl.tdlFactory;
 
 public class CommonPackageGenerator {
+	
 	private tdlFactory factory;
 	private Package commonPackage;
 	private Package dslSpecificTypesPackage;
@@ -29,22 +30,29 @@ public class CommonPackageGenerator {
 	private List<DataInstance> verdictInstances = new ArrayList<DataInstance>();
 	private DataType modelExecutionCommand;
 
-	public CommonPackageGenerator() {
+	public CommonPackageGenerator(DSLSpecificTypesGenerator dslSpecificTypesGenerator) {
 		factory = tdlFactory.eINSTANCE;
+		dslSpecificTypesPackage = dslSpecificTypesGenerator.getDslSpecificTypesPackage();
+		dslSpecificTypes = dslSpecificTypesGenerator.getDslSpecificTypes();
 	}
-	public void generateCommonPackage(){
+	
+	public Package generateCommonPackage(){
 		commonPackage = factory.createPackage();
 		commonPackage.setName("common");
 		generateImports();
 		generateTypeForOCL();
 		generateVerdicts();
 		generateTypeForGeneralEvents();
+		System.out.println("common package generated successfully");
+		return commonPackage;
 	}
+	
 	private void generateImports() {
 		ElementImport dslSpecificTypesPackageImport = factory.createElementImport();
 		dslSpecificTypesPackageImport.setImportedPackage(dslSpecificTypesPackage);
 		commonPackage.getImport().add(dslSpecificTypesPackageImport);
 	}
+	
 	private void generateTypeForOCL() {
 		StructuredDataType OCL = factory.createStructuredDataType();
 		OCL.setName("OCL");
@@ -68,6 +76,7 @@ public class CommonPackageGenerator {
 		oclQuery.getMemberAssignment().add(queryAssign);
 		commonPackage.getPackagedElement().add(oclQuery);
 	}
+	
 	private void generateVerdicts() {
 		SimpleDataType Verdict = factory.createSimpleDataType();
 		Verdict.setName("Verdict");
@@ -89,6 +98,7 @@ public class CommonPackageGenerator {
 		verdictInstances.add(FAIL);
 		verdictInstances.add(INCONCLUSINVE);
 	}
+	
 	private void generateTypeForGeneralEvents() {
 		SimpleDataType modelExecutionCommand = factory.createSimpleDataType();
 		modelExecutionCommand.setName("modelExecutionCommand");
@@ -117,19 +127,16 @@ public class CommonPackageGenerator {
 		
 		this.modelExecutionCommand = modelExecutionCommand;
 	}
+	
 	public Package getCommonPackage() {
 		return commonPackage;
 	}
+	
 	public DataType getOCLType() {
 		return oclType;
 	}
+	
 	public DataType getModelExecutionCommand() {
 		return modelExecutionCommand;
-	}
-	public void setDslSpecificTypes(Map<String, DataType> dslSpecificTypes) {
-		this.dslSpecificTypes = dslSpecificTypes;
-	}
-	public void setDslSpecificTypesPackage (Package typesPackage) {
-		dslSpecificTypesPackage = typesPackage;
 	}
 }

@@ -28,30 +28,35 @@ import org.etsi.mts.tdl.UnassignedMemberTreatment;
 import org.etsi.mts.tdl.tdlFactory;
 
 public class DSLSpecificEventsGenerator {
+	
 	private String dslName;
 	private BehavioralInterface interfaceRootElement;
 	
 	private tdlFactory factory;
 	private Package dslSpecificEventsPackage;
-	private Package dslSpecificTypesPackage;
 	
+	private Package dslSpecificTypesPackage;
 	private Map<String, DataType> dslSpecificTypes = new HashMap<String, DataType>();
+	
 	private List<DataType> dslInterfaceTypes = new ArrayList<DataType>();
 	
-	public DSLSpecificEventsGenerator(String dslFilePath) throws IOException {
+	public DSLSpecificEventsGenerator(String dslFilePath, DSLSpecificTypesGenerator dslSpecificTypesGenerator) throws IOException {
 		factory = tdlFactory.eINSTANCE; 
 		dslName = validName(getDslName(dslFilePath));
 		interfaceRootElement = getBehavioralInterfaceRootElement(dslFilePath);
+		dslSpecificTypesPackage = dslSpecificTypesGenerator.getDslSpecificTypesPackage();
+		dslSpecificTypes = dslSpecificTypesGenerator.getDslSpecificTypes();
 	}
 	
-	public void generateDSLSpecificEventsPackage(String dslFilePath) throws IOException{
+	public Package generateDSLSpecificEventsPackage(String dslFilePath) throws IOException{
 		dslSpecificEventsPackage = factory.createPackage();
 		dslSpecificEventsPackage.setName(dslName.toLowerCase() + "SpecificEvents");
 		generateImports();
-		if (interfaceRootElement != null) {
-			generateTypeForDSLInterfaces();
-		}
+		generateTypeForDSLInterfaces();
+		System.out.println("dsl-specific events package generated successfully");
+		return dslSpecificEventsPackage;
 	}
+	
 	private void generateImports() {		
 		ElementImport PackageImport = factory.createElementImport();
 		PackageImport.setImportedPackage(dslSpecificTypesPackage);
@@ -109,18 +114,15 @@ public class DSLSpecificEventsGenerator {
 			dslInterfaceTypes.add(typeForEvent);	
 		}
 	}
+	
 	public Package getDslSpecificEventsPackage() {
 		return dslSpecificEventsPackage;
 	}
+	
 	public List<DataType> getTypesOfDslInterfaces(){
 		return dslInterfaceTypes;
 	}
-	public void setDslSpecificTypesPackage (Package typesPackage) {
-		dslSpecificTypesPackage = typesPackage;
-	}
-	public void setDslSpecificTypes(Map<String, DataType> dslSpecificTypes) {
-		this.dslSpecificTypes = dslSpecificTypes;
-	}
+
 	//if a name is a keyword in tdl language, put '_' before it
 	private String validName (String name) {
 		return Arrays.stream(TDLCodeGenerator.tokenNames).anyMatch(name::equals)

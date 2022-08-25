@@ -23,30 +23,16 @@ import org.imt.atl.ecore2tdl.files.Ecore2tdl;
 
 public class DSLSpecificTypesGenerator {
 
+	private String dslFilePath;
 	private Package dslSpecificTypesPackage;
 	private Map<String, DataType> dslSpecificTypes = new HashMap<String, DataType>();
 	private List<DataType> dynamicTypes = new ArrayList<>();
 	
-	private DSLSpecificEventsGenerator dslSpecificEventsGenerator;
-	private CommonPackageGenerator commonPackageGenerator;
-	
 	public DSLSpecificTypesGenerator (String dslFilePath) throws IOException{
-		generateDslSpecificTypes(dslFilePath);
-		
-		commonPackageGenerator = new CommonPackageGenerator();
-		commonPackageGenerator.setDslSpecificTypesPackage(dslSpecificTypesPackage);
-		commonPackageGenerator.setDslSpecificTypes(dslSpecificTypes);
-		commonPackageGenerator.generateCommonPackage();
-		System.out.println("common package generated successfully");
-		
-		dslSpecificEventsGenerator = new DSLSpecificEventsGenerator(dslFilePath);
-		dslSpecificEventsGenerator.setDslSpecificTypesPackage(dslSpecificTypesPackage);
-		dslSpecificEventsGenerator.setDslSpecificTypes(dslSpecificTypes);
-		dslSpecificEventsGenerator.generateDSLSpecificEventsPackage(dslFilePath);
-		System.out.println("dsl-specific events package generated successfully");
+		this.dslFilePath = dslFilePath;
 	}
 
-	private void generateDslSpecificTypes(String dslFilePath) throws IOException {
+	public Package generateDslSpecificTypes() throws IOException {
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
 		String metamodelPath = dsl.getEntry("ecore").getValue().replaceFirst("resource", "plugin");
@@ -85,7 +71,10 @@ public class DSLSpecificTypesGenerator {
 		} catch (ATLExecutionException e) {
 			e.printStackTrace();
 		}
+		System.out.println("dsl-specific types package generated successfully");
+		return dslSpecificTypesPackage;
 	}
+	
 	private Package getDSLSpecificTypesPackage(Resource dslTypesRes) {
 		Package firstPackage = (Package) dslTypesRes.getContents().get(0);
 		if (dslTypesRes.getContents().size()==1) {
@@ -118,15 +107,15 @@ public class DSLSpecificTypesGenerator {
 		}
 		return false;
 	}
-	public CommonPackageGenerator getCommonPackageGenerator() {
-		return commonPackageGenerator;
+	
+	public Map<String, DataType> getDslSpecificTypes() {
+		return dslSpecificTypes;
 	}
-	public DSLSpecificEventsGenerator getDslSpecificEventsGenerator() {
-		return dslSpecificEventsGenerator;
-	}
-	public Package getDslSpecificTypesPackage() {
+	
+	public Package getDslSpecificTypesPackage () {
 		return dslSpecificTypesPackage;
 	}
+	
 	public List<DataType> getDynamicTypes(){
 		return dynamicTypes;
 	}
