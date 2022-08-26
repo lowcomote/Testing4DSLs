@@ -1,95 +1,75 @@
 DomainSpecificCoverage PSSMCoverage{
 	Import metamodel statemachines
 	Context CustomSystem{
-		rules{
-			//a customSystem is covered when its inner stateMachine is covered
-			CoverageByContent{
-				containmentReference statemachine
-				multiplicity ONE
-			}
+		//a customSystem is covered when its inner stateMachine is covered
+		CoverageByContent{
+			containmentReference statemachine
+			multiplicity ONE
 		}
 	},
 	Context StateMachine{
-		rules{
-			//a stateMachine is covered when one of its inner regions are covered
-			CoverageByContent{
-				containmentReference regions
-				multiplicity ONE
-			}
+		//a stateMachine is covered when one of its inner regions are covered
+		CoverageByContent{
+			containmentReference regions
+			multiplicity ONE
 		}
 	},
 	Context Region{
-		rules{
-			//a region is covered if at least one of its transitions is covered
-			CoverageByContent{
-				containmentReference transitions
-				multiplicity ONE
-			}
+		//a region is covered if at least one of its transitions is covered
+		CoverageByContent{
+			containmentReference transitions
+			multiplicity ONE
 		}
 	},
 	Context Transition{
-		rules{
-			//if a transition is covered, its source state, target state, constraint, and triggers are also covered
-			CoverageOfReferenced{
-				reference source
-			},
-			CoverageOfReferenced{
-				reference target
-			},
-			CoverageOfReferenced{
-				reference constraint
-			},
-			CoverageOfReferenced{
-				reference triggers
-			}
+		//if a transition is covered, its source state, target state, constraint, and triggers are also covered
+		CoverageOfReferenced{
+			reference source
+		},
+		CoverageOfReferenced{
+			reference target
+		},
+		CoverageOfReferenced{
+			reference constraint
+		},
+		CoverageOfReferenced{
+			reference triggers
 		}
 	},
 	Context BooleanConstraint{
-		rules{
-			//if a constraint is covered, its expression is also covered
-			CoverageOfReferenced {
-				reference expression
-			}
+		//if a constraint is covered, its expression is also covered
+		CoverageOfReferenced {
+			reference expression
 		}
 	},
 	Context IntegerConstraint{
-		rules{
-			//if a constraint is covered, its expression is also covered
-			CoverageOfReferenced {
-				reference expression
-			}
+		//if a constraint is covered, its expression is also covered
+		CoverageOfReferenced {
+			reference expression
 		}
 	},
 	Context StringConstraint{
-		rules{
-			//if a constraint is covered, its expression is also covered
-			CoverageOfReferenced {
-				reference expression
-			}
+		//if a constraint is covered, its expression is also covered
+		CoverageOfReferenced {
+			reference expression
 		}
 	},
 	Context Trigger{
-		rules{
-			//if a trigger is covered, its EventType is also covered
-			CoverageOfReferenced {
-				reference eventType
-			}
+		//if a trigger is covered, its EventType is also covered
+		CoverageOfReferenced {
+			reference eventType
 		}
 	},
 	Context SignalEventType{
-		rules{
-			//if a SignalEventType is covered, its Signal is also covered
-			CoverageOfReferenced {
-				reference signal
-			}
+		//if a SignalEventType is covered, its Signal is also covered
+		CoverageOfReferenced {
+			reference signal
 		}
 	},
 	Context CallEventType{
-		rules{
-			//if a CallEventType is covered, its Operation is also covered
-			CoverageOfReferenced {
-				reference operation
-			}
+		//if a CallEventType is covered, its Operation is also covered
+		CoverageOfReferenced {
+			reference operation
 		}
 	}
 }

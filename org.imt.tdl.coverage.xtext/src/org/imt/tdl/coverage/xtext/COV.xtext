@@ -18,7 +18,7 @@ EString returns ecore::EString:
 Context returns Context:
 	'Context' metaclass=[ecore::EClass|EString]
 	'{'
-		('rules' '{' rules+=Rule ( "," rules+=Rule)* '}' )?
+		(rules+=Rule ( "," rules+=Rule)*)?
 	'}';
 
 Rule returns Rule:

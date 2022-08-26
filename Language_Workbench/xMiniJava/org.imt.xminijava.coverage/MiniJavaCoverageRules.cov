@@ -1,34 +1,26 @@
 DomainSpecificCoverage MiniJavaCoverage{
 	Import metamodel xminiJava
 	Context Program{
-		rules{
-			//ignoring Program from coverage computation
-			Ignore {ignoreSubtypes true}
-		}
+		//ignoring Program from coverage computation
+		Ignore {ignoreSubtypes true}
 	},
 	Context Method{
-		rules{
-			//ignoring method signature from coverage computation
-			Ignore {ignoreSubtypes true}
-		}
+		//ignoring method signature from coverage computation
+		Ignore {ignoreSubtypes true}
 	},
 	Context MethodCall{
-		rules{
-			//ignoring MethodCall when it is not contained by a Block: if the container of a methodCall is a block, it is indeed a statement and its coverage status must be considered
-			//but if it is contained by other elements such as if, while, ..., it is not coverable
-			ConditionalIgnore {
-				condition EXCLUSION
-				containerType (Block)
-			}
+		//ignoring MethodCall when it is not contained by a Block: if the container of a methodCall is a block, it is indeed a statement and its coverage status must be considered
+		//but if it is contained by other elements such as if, while, ..., it is not coverable
+		ConditionalIgnore {
+			condition EXCLUSION
+			containerType (Block)
 		}
 	},
 	Context Class{
-		rules{
-			//a TypeDeclaration is covered when at least one of its members is covered
-			CoverageByContent{
-				containmentReference members
-				multiplicity ONE
-			}
+		//a TypeDeclaration is covered when at least one of its members is covered
+		CoverageByContent{
+			containmentReference members
+			multiplicity ONE
 		}
 	}
 }
