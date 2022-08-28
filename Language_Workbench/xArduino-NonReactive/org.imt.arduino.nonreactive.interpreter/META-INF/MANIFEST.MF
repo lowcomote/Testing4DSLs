@@ -1,18 +1,16 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Operationalsemantics
-Bundle-SymbolicName: org.imt.arduino.nonreactive.interpreter
-Bundle-Version: 1.0.0.qualifier
-Require-Bundle: org.eclipse.core.runtime,
+Bundle-Name: org.imt.arduino.nonreactive.interpreter
+Bundle-SymbolicName: org.imt.arduino.nonreactive.interpreter; singleton:=true
+Bundle-Version: 1.0.0
+Require-Bundle: fr.inria.diverse.k3.al.annotationprocessor.plugin;bundle-version="3.0.0";visibility:=reexport,
  org.eclipse.xtend.lib;bundle-version="2.6.0";visibility:=private,
- fr.inria.diverse.k3.al.annotationprocessor.plugin;bundle-version="1.0.0",
- org.eclipse.xtend.core;bundle-version="2.7.3",
- org.eclipse.emf.ecore,
- org.eclipse.core.resources;bundle-version="3.9.1",
- org.eclipse.jdt.core;bundle-version="3.10.0",
- fr.inria.diverse.k3.ui;bundle-version="3.2.0",
- org.imt.arduino.nonreactive.model;bundle-version="1.0.0",
- org.eclipse.gemoc.dsl.ide;bundle-version="3.0.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Bundle-ActivationPolicy: lazy
+ org.eclipse.xtext.xbase.lib;bundle-version="2.6.0";visibility:=private,
+ com.google.guava;bundle-version="0.0.0";visibility:=private,
+ org.eclipse.emf.ecore.xmi;bundle-version="2.8.0";visibility:=reexport,
+ org.eclipse.emf.ecore;bundle-version="2.8.0";visibility:=reexport,
+ org.eclipse.emf.common;bundle-version="2.8.0";visibility:=reexport,
+ org.imt.arduino.nonreactive.model;bundle-version="1.0.0"
+Bundle-ClassPath: .
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.imt.arduino.nonreactive.interpreter

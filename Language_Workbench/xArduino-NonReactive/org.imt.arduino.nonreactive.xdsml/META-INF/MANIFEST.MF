@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.gemoc.arduino.sequential.k3.xdsml
-Bundle-SymbolicName: org.imt.arduino.nonreactive.xdsml;singleton:=true
-Automatic-Module-Name: org.gemoc.arduino.sequential.k3.xdsml
+Bundle-Name: org.imt.arduino.nonreactive.xdsml
+Bundle-SymbolicName: org.imt.arduino.nonreactive.xdsml; singleton:=true
+Automatic-Module-Name: org.imt.arduino.nonreactive.xdsml
 Bundle-Version: 1.0.0
 Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
