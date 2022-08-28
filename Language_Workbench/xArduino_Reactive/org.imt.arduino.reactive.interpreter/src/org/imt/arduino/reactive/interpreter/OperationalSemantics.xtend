@@ -1,8 +1,6 @@
 package org.imt.arduino.reactive.interpreter
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
-import fr.inria.diverse.k3.al.annotationprocessor.InitializeModel
-import fr.inria.diverse.k3.al.annotationprocessor.Main
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 import fr.inria.diverse.k3.al.annotationprocessor.Step
 import org.eclipse.emf.common.util.EList
@@ -38,6 +36,7 @@ import org.imt.arduino.reactive.arduino.Project
 import org.imt.arduino.reactive.arduino.PushButton
 import org.imt.arduino.reactive.arduino.Repeat
 import org.imt.arduino.reactive.arduino.Sketch
+import org.imt.arduino.reactive.arduino.SoundSensor
 import org.imt.arduino.reactive.arduino.Time
 import org.imt.arduino.reactive.arduino.UnaryBooleanExpression
 import org.imt.arduino.reactive.arduino.UnaryBooleanOperatorKind
@@ -60,7 +59,6 @@ import static extension org.imt.arduino.reactive.interpreter.Instruction_Utilite
 import static extension org.imt.arduino.reactive.interpreter.IntegerVariable_EvaluableAspect.*
 import static extension org.imt.arduino.reactive.interpreter.Pin_EvaluableAspect.*
 import static extension org.imt.arduino.reactive.interpreter.Project_ExecutableAspect.*
-import org.imt.arduino.reactive.arduino.SoundSensor
 
 /*
  * TODO: adding two new elements to the definition of runtime state as:
@@ -130,30 +128,6 @@ class Project_ExecutableAspect {
 			sketches.forEach[s|s.block.execute]
 		//}
 	}
-	
-//	@Main
-//	def void main() {
-//		val start = System.nanoTime
-//		_self.execute
-//		val stop = System.nanoTime
-//		//println("time to execute " + (stop - start))
-//	}
-//	
-//	@Step
-//	def void setup() {
-//		_self.eAllContents().forEach[o|{
-//			if (o instanceof IntegerVariable) {
-//				o.value = o.initialValue
-//			} else if (o instanceof BooleanVariable) {
-//				o.value = o.initialValue
-//			} 
-//		}]
-//	}
-//	
-//	@InitializeModel
-//	def void initializeModel(EList<String> args){
-//		_self.setup
-//	}
 }
 
 @Aspect(className=Sketch)
