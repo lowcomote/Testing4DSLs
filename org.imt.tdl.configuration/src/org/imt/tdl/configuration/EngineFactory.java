@@ -163,11 +163,11 @@ public class EngineFactory{
 	}
 	
 	public IExecutionEngine getActiveEngine() {
-		if (!DSLHasInterface && sequentialEngineLauncher != null) {
-			return sequentialEngineLauncher;
-		}
-		else if (DSLHasInterface && eventManagerLauncher != null) {
+		if (DSLHasInterface && eventManagerLauncher != null) {
 			return eventManagerLauncher;
+		}
+		else if (sequentialEngineLauncher != null) {
+			return sequentialEngineLauncher;
 		}
 		return null;
 	}
