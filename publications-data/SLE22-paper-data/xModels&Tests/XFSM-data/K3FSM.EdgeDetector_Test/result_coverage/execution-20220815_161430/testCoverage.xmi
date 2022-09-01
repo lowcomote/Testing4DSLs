@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TestCoverage:TestSuiteCoverage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:TestCoverage="http://coverage.metamodel/TestCoverage" coveragePercentage="100.0">
+  <testSuite href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#/"/>
+  <testCaseCoverages coveragePercentage="90.0">
+    <testCase href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.3"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.0/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.0/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.1/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.1/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.2/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.2/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="90.0">
+    <testCase href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.4"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.0/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.0/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.1/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.1/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.2/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.2/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="50.0">
+    <testCase href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.5"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test3.xmi#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test3.xmi#//@ownedStates.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test3.xmi#//@ownedStates.0/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test3.xmi#//@ownedStates.0/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test3.xmi#//@ownedStates.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test3.xmi#//@ownedStates.1/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test3.xmi#//@ownedStates.1/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test3.xmi#//@ownedStates.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test3.xmi#//@ownedStates.2/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test3.xmi#//@ownedStates.2/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="50.0">
+    <testCase href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.6"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test4.xmi#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test4.xmi#//@ownedStates.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test4.xmi#//@ownedStates.0/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test4.xmi#//@ownedStates.0/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test4.xmi#//@ownedStates.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test4.xmi#//@ownedStates.1/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test4.xmi#//@ownedStates.1/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test4.xmi#//@ownedStates.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test4.xmi#//@ownedStates.2/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test4.xmi#//@ownedStates.2/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="70.0">
+    <testCase href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.7"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test5.xmi#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test5.xmi#//@ownedStates.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test5.xmi#//@ownedStates.0/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test5.xmi#//@ownedStates.0/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test5.xmi#//@ownedStates.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test5.xmi#//@ownedStates.1/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test5.xmi#//@ownedStates.1/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test5.xmi#//@ownedStates.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test5.xmi#//@ownedStates.2/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test5.xmi#//@ownedStates.2/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="80.0">
+    <testCase href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.8"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test6.xmi#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test6.xmi#//@ownedStates.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test6.xmi#//@ownedStates.0/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test6.xmi#//@ownedStates.0/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test6.xmi#//@ownedStates.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test6.xmi#//@ownedStates.1/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test6.xmi#//@ownedStates.1/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test6.xmi#//@ownedStates.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test6.xmi#//@ownedStates.2/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test6.xmi#//@ownedStates.2/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="60.0">
+    <testCase href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.9"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test7.xmi#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test7.xmi#//@ownedStates.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test7.xmi#//@ownedStates.0/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test7.xmi#//@ownedStates.0/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test7.xmi#//@ownedStates.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test7.xmi#//@ownedStates.1/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test7.xmi#//@ownedStates.1/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test7.xmi#//@ownedStates.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test7.xmi#//@ownedStates.2/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test7.xmi#//@ownedStates.2/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="80.0">
+    <testCase href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.10"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test8.xmi#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test8.xmi#//@ownedStates.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test8.xmi#//@ownedStates.0/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test8.xmi#//@ownedStates.0/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test8.xmi#//@ownedStates.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test8.xmi#//@ownedStates.1/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test8.xmi#//@ownedStates.1/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test8.xmi#//@ownedStates.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test8.xmi#//@ownedStates.2/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test8.xmi#//@ownedStates.2/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <tsObjectCoverageStatus>
+    <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#/"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.0/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.0/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.1/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.1/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.2"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.2/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/modelUnderTest_test1.xmi#//@ownedStates.2/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+</TestCoverage:TestSuiteCoverage>

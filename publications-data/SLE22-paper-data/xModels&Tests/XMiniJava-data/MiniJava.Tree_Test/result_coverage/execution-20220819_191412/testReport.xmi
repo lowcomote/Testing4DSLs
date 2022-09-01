@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TDLTestReport:TestSuiteResult xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:TDLTestReport="https://org.imt.tdl.testResult/TDLTestReport">
+  <testSuite href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#/"/>
+  <testCaseResults>
+    <testCase href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.4"/>
+    <testMessageResults tdlMessageId="Message#1" description="The model under test executed successfully">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="The current state of the MUT is retrieved">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#3" description="PASS">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#4" description="PASS">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
+    </testMessageResults>
+  </testCaseResults>
+  <testCaseResults>
+    <testCase href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.9"/>
+    <testMessageResults tdlMessageId="Message#1" description="The model under test executed successfully">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.9/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="The current state of the MUT is retrieved">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.9/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#3" description="PASS">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.9/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#4" description="PASS">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.9/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#5" description="PASS">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.9/@behaviourDescription/@behaviour/@block/@behaviour.4"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#6" description="PASS">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.9/@behaviourDescription/@behaviour/@block/@behaviour.5"/>
+    </testMessageResults>
+  </testCaseResults>
+  <testCaseResults>
+    <testCase href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.10"/>
+    <testMessageResults tdlMessageId="Message#1" description="The model under test executed successfully">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.10/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="The current state of the MUT is retrieved">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.10/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#3" description="PASS">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.10/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#4" description="PASS">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.10/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#5" description="PASS">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.10/@behaviourDescription/@behaviour/@block/@behaviour.4"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#6" description="PASS">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.10/@behaviourDescription/@behaviour/@block/@behaviour.5"/>
+    </testMessageResults>
+  </testCaseResults>
+  <testCaseResults>
+    <testCase href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.12"/>
+    <testMessageResults tdlMessageId="Message#1" description="The model under test executed successfully">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.12/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="The current state of the MUT is retrieved">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.12/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#3" description="PASS">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.12/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+    </testMessageResults>
+  </testCaseResults>
+  <testCaseResults>
+    <testCase href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.20"/>
+    <testMessageResults tdlMessageId="Message#1" description="The model under test executed successfully">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.20/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="The current state of the MUT is retrieved">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.20/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#3" description="PASS">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.20/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#4" description="PASS">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.20/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#5" description="PASS">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.20/@behaviourDescription/@behaviour/@block/@behaviour.4"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#6" description="PASS">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.20/@behaviourDescription/@behaviour/@block/@behaviour.5"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#7" description="PASS">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.20/@behaviourDescription/@behaviour/@block/@behaviour.6"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#8" description="PASS">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.20/@behaviourDescription/@behaviour/@block/@behaviour.7"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#9" description="PASS">
+      <message href="/MiniJava.Tree_Test/result_coverage/execution-20220819_191412/testSuite.tdlan2#//@packagedElement.20/@behaviourDescription/@behaviour/@block/@behaviour.8"/>
+    </testMessageResults>
+  </testCaseResults>
+</TDLTestReport:TestSuiteResult>

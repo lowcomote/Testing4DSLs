@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" uid="_6ej-sMouEeyrEsguAqucdw" version="14.5.1.202106111100">
+  <semanticResources>triggerAll.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220801_190214/triggerAll.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220804_221222/triggerAll.model</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220804_221223/triggerAll.model</semanticResources>
+</viewpoint:DAnalysis>

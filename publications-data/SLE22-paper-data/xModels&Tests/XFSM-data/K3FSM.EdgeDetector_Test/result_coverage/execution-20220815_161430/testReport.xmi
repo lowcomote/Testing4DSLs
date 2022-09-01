@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TDLTestReport:TestSuiteResult xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:TDLTestReport="https://org.imt.tdl.testResult/TDLTestReport">
+  <testSuite href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#/"/>
+  <testCaseResults>
+    <testCase href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.3"/>
+    <testMessageResults tdlMessageId="Message#1" description="New value is set for the unprocessedString property of the MUT">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.3/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="The model under test executed successfully">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.3/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#3" description="The current state of the MUT is retrieved">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.3/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#4" description="PASS">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.3/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
+    </testMessageResults>
+  </testCaseResults>
+  <testCaseResults>
+    <testCase href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.4"/>
+    <testMessageResults tdlMessageId="Message#1" description="New value is set for the unprocessedString property of the MUT">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="The model under test executed successfully">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#3" description="The ocl query evaluated successfully">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#4" description="The expected data is equal to the current data">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.4/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
+    </testMessageResults>
+  </testCaseResults>
+  <testCaseResults>
+    <testCase href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.5"/>
+    <testMessageResults tdlMessageId="Message#1" description="New value is set for the unprocessedString property of the MUT">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.5/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="The model under test executed successfully">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.5/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#3" description="The current state of the MUT is retrieved">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.5/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#4" description="PASS">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.5/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
+    </testMessageResults>
+  </testCaseResults>
+  <testCaseResults>
+    <testCase href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.6"/>
+    <testMessageResults tdlMessageId="Message#1" description="New value is set for the unprocessedString property of the MUT">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.6/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="The model under test executed successfully">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.6/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#3" description="The current state of the MUT is retrieved">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.6/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#4" description="PASS">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.6/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
+    </testMessageResults>
+  </testCaseResults>
+  <testCaseResults>
+    <testCase href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.7"/>
+    <testMessageResults tdlMessageId="Message#1" description="New value is set for the unprocessedString property of the MUT">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.7/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="The model under test executed successfully">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.7/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#3" description="The current state of the MUT is retrieved">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.7/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#4" description="PASS">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.7/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
+    </testMessageResults>
+  </testCaseResults>
+  <testCaseResults>
+    <testCase href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.8"/>
+    <testMessageResults tdlMessageId="Message#1" description="New value is set for the unprocessedString property of the MUT">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.8/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="The model under test executed successfully">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.8/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#3" description="The current state of the MUT is retrieved">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.8/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#4" description="PASS">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.8/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
+    </testMessageResults>
+  </testCaseResults>
+  <testCaseResults>
+    <testCase href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.9"/>
+    <testMessageResults tdlMessageId="Message#1" description="New value is set for the unprocessedString property of the MUT">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.9/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="The model under test executed successfully">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.9/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#3" description="The current state of the MUT is retrieved">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.9/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#4" description="PASS">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.9/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
+    </testMessageResults>
+  </testCaseResults>
+  <testCaseResults>
+    <testCase href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.10"/>
+    <testMessageResults tdlMessageId="Message#1" description="New value is set for the unprocessedString property of the MUT">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.10/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="The model under test executed successfully">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.10/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#3" description="The current state of the MUT is retrieved">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.10/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#4" description="PASS">
+      <message href="/K3FSM.EdgeDetector_Test/result_coverage/execution-20220815_161430/testSuite.tdlan2#//@packagedElement.10/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
+    </testMessageResults>
+  </testCaseResults>
+</TDLTestReport:TestSuiteResult>

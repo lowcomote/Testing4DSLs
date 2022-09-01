@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ASCII"?>
+<arduino:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:arduino="http://www.obeo.fr/arduino" xmi:id="_J6cSEBGlEe2yDMLfdVUc6A">
+  <boards xsi:type="arduino:ArduinoBoard" xmi:id="_J6cSERGlEe2yDMLfdVUc6A" name="board">
+    <digitalPins xmi:id="_J6cSEhGlEe2yDMLfdVUc6A" name="led_pin">
+      <module xsi:type="arduino:LED" xmi:id="_J6cSExGlEe2yDMLfdVUc6A" name="LED1"/>
+    </digitalPins>
+    <digitalPins xmi:id="_J6cSFBGlEe2yDMLfdVUc6A" name="sensor_pin">
+      <module xsi:type="arduino:InfraRedSensor" xmi:id="_J6cSFRGlEe2yDMLfdVUc6A" name="irSensor1"/>
+    </digitalPins>
+    <digitalPins xmi:id="_J6cSFhGlEe2yDMLfdVUc6A" name="alarm_pin">
+      <module xsi:type="arduino:Buzzer" xmi:id="_J6cSFxGlEe2yDMLfdVUc6A" name="alarm1"/>
+    </digitalPins>
+    <digitalPins xmi:id="_J6cSGBGlEe2yDMLfdVUc6A" name="button_pin">
+      <module xsi:type="arduino:PushButton" xmi:id="_J6cSGRGlEe2yDMLfdVUc6A" name="button1"/>
+    </digitalPins>
+  </boards>
+  <sketches xmi:id="_J6cSGhGlEe2yDMLfdVUc6A" name="sketch" board="_J6cSERGlEe2yDMLfdVUc6A">
+    <block xmi:id="_J6cSGxGlEe2yDMLfdVUc6A">
+      <instructions xsi:type="arduino:While" xmi:id="_J6cSHBGlEe2yDMLfdVUc6A">
+        <block xmi:id="_J6cSHRGlEe2yDMLfdVUc6A">
+          <instructions xsi:type="arduino:ModuleAssignment" xmi:id="_J6cSHhGlEe2yDMLfdVUc6A" module="_J6cSExGlEe2yDMLfdVUc6A">
+            <operand xsi:type="arduino:IntegerConstant" xmi:id="_J6cSHxGlEe2yDMLfdVUc6A" value="1"/>
+          </instructions>
+          <instructions xsi:type="arduino:While" xmi:id="_J6cSIBGlEe2yDMLfdVUc6A">
+            <block xmi:id="_J6cSIRGlEe2yDMLfdVUc6A">
+              <instructions xsi:type="arduino:ModuleAssignment" xmi:id="_J6cSIhGlEe2yDMLfdVUc6A" module="_J6cSFxGlEe2yDMLfdVUc6A">
+                <operand xsi:type="arduino:IntegerConstant" xmi:id="_J6cSIxGlEe2yDMLfdVUc6A" value="1"/>
+              </instructions>
+              <instructions xsi:type="arduino:Delay" xmi:id="_0Mro0Be9Ee2gksm8nnAp8Q" value="1000"/>
+              <instructions xsi:type="arduino:ModuleAssignment" xmi:id="_J6cSJRGlEe2yDMLfdVUc6A" module="_J6cSFxGlEe2yDMLfdVUc6A">
+                <operand xsi:type="arduino:IntegerConstant" xmi:id="_J6cSJhGlEe2yDMLfdVUc6A" value="1"/>
+              </instructions>
+              <instructions xsi:type="arduino:Delay" xmi:id="_1zU2gBe9Ee2gksm8nnAp8Q" value="1000"/>
+            </block>
+            <condition xsi:type="arduino:BinaryBooleanExpression" xmi:id="_J6cSKBGlEe2yDMLfdVUc6A" operator="equal">
+              <left xsi:type="arduino:IntegerConstant" xmi:id="_J6cSKRGlEe2yDMLfdVUc6A" value="1"/>
+              <right xsi:type="arduino:IntegerModuleGet" xmi:id="_J6c5IBGlEe2yDMLfdVUc6A" module="_J6cSFRGlEe2yDMLfdVUc6A"/>
+            </condition>
+          </instructions>
+          <instructions xsi:type="arduino:If" xmi:id="_kMHVIBfyEe27-aa39-aUKw">
+            <block xmi:id="_nHKxABfyEe27-aa39-aUKw">
+              <instructions xsi:type="arduino:ModuleAssignment" xmi:id="_nhiY0BfyEe27-aa39-aUKw" module="_J6cSFxGlEe2yDMLfdVUc6A">
+                <operand xsi:type="arduino:IntegerConstant" xmi:id="_nhiY0RfyEe27-aa39-aUKw"/>
+              </instructions>
+            </block>
+            <condition xsi:type="arduino:BooleanModuleGet" xmi:id="_ldqckBfyEe27-aa39-aUKw" module="_J6cSFxGlEe2yDMLfdVUc6A"/>
+          </instructions>
+        </block>
+        <condition xsi:type="arduino:BinaryBooleanExpression" xmi:id="_J6c5IxGlEe2yDMLfdVUc6A" operator="equal">
+          <left xsi:type="arduino:IntegerConstant" xmi:id="_J6c5JBGlEe2yDMLfdVUc6A" value="1"/>
+          <right xsi:type="arduino:IntegerModuleGet" xmi:id="_J6c5JRGlEe2yDMLfdVUc6A" module="_J6cSGRGlEe2yDMLfdVUc6A"/>
+        </condition>
+      </instructions>
+      <instructions xsi:type="arduino:If" xmi:id="_qgJfABfyEe27-aa39-aUKw">
+        <block xmi:id="_sQO8kBfyEe27-aa39-aUKw">
+          <instructions xsi:type="arduino:ModuleAssignment" xmi:id="_J6c5JhGlEe2yDMLfdVUc6A" module="_J6cSExGlEe2yDMLfdVUc6A">
+            <operand xsi:type="arduino:IntegerConstant" xmi:id="_J6c5JxGlEe2yDMLfdVUc6A"/>
+          </instructions>
+        </block>
+        <condition xsi:type="arduino:BooleanModuleGet" xmi:id="_rMAfcBfyEe27-aa39-aUKw" module="_J6cSExGlEe2yDMLfdVUc6A"/>
+      </instructions>
+    </block>
+  </sketches>
+</arduino:Project>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" uid="_Xoy4sHJVEeypTOAQkIeOzA" version="14.5.1.202106111100">
+  <semanticResources>testSuite.tdlan2</semanticResources>
+  <semanticResources>platform:/resource/RunningExample_Model/sensorLed_withDefect.model</semanticResources>
+  <semanticResources>platform:/RunningExample_Test/gemoc-gen/execution/execution-20220125_125323/testSuite.tdlan2</semanticResources>
+  <semanticResources>result_coverage/execution-20220809_195336/modelUnderTest.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220809_195336/testCoverage.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220809_195336/testReport.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220809_195336/testSuite.tdlan2</semanticResources>
+  <semanticResources>result_coverage/execution-20220809_195336/modelUnderTest_test2.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220809_195336/modelUnderTest_test4.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220809_195336/modelUnderTest_test5.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220809_195336/modelUnderTest_test6.xmi</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220813_193848/testSuite.tdlan2</semanticResources>
+</viewpoint:DAnalysis>
