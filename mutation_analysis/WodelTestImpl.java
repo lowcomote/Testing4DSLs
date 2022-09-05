@@ -1,9 +1,10 @@
-package org.imt.pssm.mutation;
+package tdl.mutation.testing;
+
+package mutator.wodeltest.XArduinoMutation;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,13 +13,17 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.JavaCore;
 import org.etsi.mts.tdl.Package;
+import org.etsi.mts.tdl.TDLan2StandaloneSetup;
 import org.etsi.mts.tdl.TestDescription;
 import org.imt.tdl.runner.Failure;
 import org.imt.tdl.runner.Result;
 import org.imt.tdl.runner.TDLCore;
+
+import com.google.inject.Injector;
 
 import manager.IOUtils;
 import manager.IWodelTest;
@@ -32,8 +37,10 @@ import manager.WodelTestResultClass;
 public class WodelTestImpl implements IWodelTest {
 
 	String workspacePath;
-	List<String> seedModels = new ArrayList<>();
-	Map<String, Result> seedModelsTestResult = new HashMap<>();
+	String seedModelPath;
+	
+	List<Package> testPackages = new ArrayList<>();
+	Result seedModelTestResult;
 	
 	//keep the mutation testing result
 	int numOfGeneratedMutants;
@@ -41,7 +48,7 @@ public class WodelTestImpl implements IWodelTest {
 	
 	@Override
 	public String getProjectName() {
-		return "PSSMMutation";
+		return "XArduinoMutation";
 	}
 
 	@Override
@@ -52,23 +59,31 @@ public class WodelTestImpl implements IWodelTest {
 	@Override
 	public void compile(IProject project) {
 	}
+
+	@Override
+	public List<String> artifactPaths(IProject project, String projectPath, File outputFolder, List<String> blockNames) {
+		List<String> artifactPaths = new ArrayList<String>();
+		File projectFolder = new File(projectPath);
+		for (File file : projectFolder.listFiles()) {
+			artifactPathsHelper(project.getName(), file, artifactPaths);
+		}
+		numOfGeneratedMutants = artifactPaths.size();
+		return artifactPaths;
+	}
 	
 	private void artifactPathsHelper(String projectName, File file, List<String> artifactPaths) {
 		if (file.isFile() && file.getName().endsWith(".model")) {
 			String filePath = file.getPath();
-			if (this.workspacePath == null) {
-				this.workspacePath = filePath.substring(0, filePath.indexOf(projectName)-1);
+			if (workspacePath == null) {
+				workspacePath = filePath.substring(0, filePath.indexOf(projectName)-1);
 			}		
 			//get the relative path of the file
-			filePath = filePath.replace(this.workspacePath, "");
-			//get the name of the seed model
-			String seedName = filePath.substring(1);
-			seedName = filePath.substring(filePath.indexOf("\\model\\") + "\\model\\".length(), filePath.length());
-			if (file.getName().equals(seedName)) {//file is the seed model
-				this.seedModels.add(filePath);
+			filePath = filePath.replace(workspacePath, "");
+			if (!file.getName().contains("Output")) {//file is the seed model
+				seedModelPath = filePath;
 			}else {
 				artifactPaths.add(filePath);
-			}			
+			}
 		}
 		else if (file.isDirectory()){
 			for (File innerFile : file.listFiles()) {
@@ -78,36 +93,39 @@ public class WodelTestImpl implements IWodelTest {
 	}
 
 	@Override
-	public List<String> artifactPaths(IProject project, String projectPath, File outputFolder, List<String> blockNames) {
-		List<String> artifactPaths = new ArrayList<String>();
-		File projectFolder = new File(projectPath + "\\model");
-		for (File file : projectFolder.listFiles()) {
-			artifactPathsHelper(project.getName(), file, artifactPaths);
+	public WodelTestGlobalResult run(IProject project, IProject testSuiteProject, String artifactPath) {
+		WodelTestGlobalResult globalResult = new WodelTestGlobalResult();
+		if (testPackages.isEmpty()) {
+			loadTestSuite(testSuiteProject);
+		}	
+		for (Package testPackage : testPackages) {
+			runTest(globalResult, project, testPackage, artifactPath);
+			if (globalResult.getStatus() != Status.OK) {
+				break;
+			}	
 		}
-		this.numOfGeneratedMutants = artifactPaths.size();
-		return artifactPaths;
+		System.out.println("# of generated mutants: " + numOfGeneratedMutants);
+		System.out.println("# of killed mutants: " + numOfKilledMutants);
+		double mutationScore = (double) numOfKilledMutants/numOfGeneratedMutants;
+		System.out.println("mutation score: " + mutationScore);
+		return globalResult;
 	}
-	
+
 	private void runTest(WodelTestGlobalResult globalResult, IProject project, Package testPackage, String artifactPath) {
 		List<WodelTestResultClass> results = globalResult.getResults();
 		List<WodelTestInfo> testsInfo = new ArrayList<WodelTestInfo>();
 		
 		TDLCore tdlCore = new TDLCore();
-		String seedModelPath = getSeedModel(artifactPath);
-		String seedModel_testcase = seedModelPath + "_" + testPackage.getName();
-		Result seedTestVerdict;
-		if (!this.seedModelsTestResult.containsKey(seedModel_testcase)) {//if the tests are not executed on the seed model
-			seedTestVerdict =  tdlCore.run(testPackage, seedModelPath);
-			this.seedModelsTestResult.put(seedModel_testcase, seedTestVerdict);
+		if (seedModelTestResult == null) {//if the tests are not executed on the seed model
+			seedModelTestResult =  tdlCore.run(testPackage, seedModelPath);
 		}
-		seedTestVerdict = this.seedModelsTestResult.get(seedModel_testcase);
 		Result mutantTestVerdict = tdlCore.run(testPackage, artifactPath);
 		
 		//when the tests has passed on the mutated model, the mutant is live otherwise is killed
 		boolean value = false;
-		if (!seedTestVerdict.equals(mutantTestVerdict)) {
+		if (!seedModelTestResult.equals(mutantTestVerdict)) {
 			value = true;
-			this.numOfKilledMutants++;
+			numOfKilledMutants++;
 		}
 		String message = value ? DIFFERENT : EQUALS;//EQUALS if the value is false and so the mutant is live
 		String MUTName = artifactPath.substring(artifactPath.lastIndexOf('\\'), artifactPath.length());
@@ -122,7 +140,7 @@ public class WodelTestImpl implements IWodelTest {
 				testsInfo.add(info);
 			}
 		}
-		String artifactAbsolutePath = (this.workspacePath + artifactPath).replaceAll("\\\\", "/");
+		String artifactAbsolutePath = (workspacePath + artifactPath).replaceAll("\\\\", "/");
 		WodelTestResult wtr = new WodelTestResult(testPackage.getName(), artifactAbsolutePath, mutantTestVerdict.getTests(), testsInfo);
 		globalResult.incNumTestsExecuted(mutantTestVerdict.getRunCount());
 		globalResult.incNumTestsFailed(mutantTestVerdict.getFailureCount());
@@ -135,64 +153,34 @@ public class WodelTestImpl implements IWodelTest {
 		resultClass.addResult(wtr);
 		globalResult.setStatus(Status.OK);
 	}
-
-	@Override
-	public WodelTestGlobalResult run(IProject project, IProject testSuiteProject, String artifactPath) {
-		WodelTestGlobalResult globalResult = new WodelTestGlobalResult();
-		//List<WodelTestResultClass> results = globalResult.getResults();
-
+	
+	private void loadTestSuite(IProject testSuiteProject) {
+		Injector injector = new TDLan2StandaloneSetup().createInjectorAndDoEMFRegistration();
+		ResourceSet resSet = injector.getInstance(ResourceSet.class);
 		String testSuitePath = ModelManager.getWorkspaceAbsolutePath() + "/" + testSuiteProject.getName();
 		String testResourcePath = "platform:/resource/"+ testSuiteProject.getName() + "/";
 		File testsFolder = new File(testSuitePath);
-		List<Package> testPackages = new ArrayList<Package>();
 		for (File testFile : testsFolder.listFiles()) {
-			testPackageHelper(testResourcePath, testFile, testPackages);
-		}		
-		for (Package testPackage : testPackages) {
-			runTest(globalResult, project, testPackage, artifactPath);
-			if (globalResult.getStatus() != Status.OK) {
-				break;
-			}	
+			testPackageHelper(resSet, testResourcePath, testFile);
 		}
-		System.out.println("# of generated mutants: " + this.numOfGeneratedMutants);
-		System.out.println("# of killed mutants: " + this.numOfKilledMutants);
-		double mutationScore = (double) this.numOfKilledMutants/this.numOfGeneratedMutants;
-		System.out.println("mutation score: " + mutationScore);
-		return globalResult;
-	}
-	private String getSeedModel (String artifactPath) {
-		String seedName = artifactPath.substring(artifactPath.indexOf("\\model\\") + "\\model\\".length(), artifactPath.length());
-		seedName = seedName.substring(0, seedName.indexOf("\\"));
-		for (String seedModel: this.seedModels) {
-			if (seedModel.contains(seedName)) {
-				return seedModel;
-			}
-		}
-		return null;
-	}
-	private Package getTestPackage(String testFilePath) {
-		Resource testSuiteRes = (new ResourceSetImpl()).getResource(URI.createURI(testFilePath), true);
-		org.etsi.mts.tdl.Package testPackage = (Package) testSuiteRes.getContents().get(0);
-		for (Object element: testPackage.getPackagedElement()) {
-			if (element instanceof TestDescription) {
-				return testPackage;
-			}
-		}
-		return null;
+		EcoreUtil.resolveAll(resSet);
 	}
 	
-	private void testPackageHelper(String testResourcePath, File testFile, List<Package> testPackages) {
+	private void testPackageHelper(ResourceSet resSet, String testResourcePath, File testFile) {
 		if (testFile.isFile() && testFile.getName().endsWith(".tdlan2")) {
 			String testFilePath = testResourcePath + testFile.getName();
-			Package testPackage = getTestPackage(testFilePath);
-			if (testPackage != null) {
-				testPackages.add(testPackage);
+			Resource testRes = resSet.getResource(URI.createURI(testFilePath), true);
+			org.etsi.mts.tdl.Package testPackage = (Package) testRes.getContents().get(0);
+			for (Object element: testPackage.getPackagedElement()) {
+				if (element instanceof TestDescription) {
+					testPackages.add(testPackage);
+				}
 			}			
 		}
 		else if (testFile.isDirectory()){
 			testResourcePath += (testFile.getName() + "/");
 			for (File innerFile : testFile.listFiles()) {
-				testPackageHelper(testResourcePath, innerFile, testPackages);
+				testPackageHelper(resSet, testResourcePath, innerFile);
 			}
 		}
 	}
@@ -201,7 +189,7 @@ public class WodelTestImpl implements IWodelTest {
 	public void projectToModel(String projectName, Class<?> cls) {
 		String projectPath = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName).getLocation().toOSString();
 		String targetPath = ModelManager.getMetaModelPath(cls);
-		File sourceFolder = new File(projectPath + "/model");
+		File sourceFolder = new File(projectPath);
 		for (File source : sourceFolder.listFiles()) {
 			if (source.getName().endsWith(".model")) {
 				try {
@@ -216,7 +204,7 @@ public class WodelTestImpl implements IWodelTest {
 
 	@Override
 	public boolean modelToProject(String className, Resource model, String folderName, String modelName, String projectName, Class<?> cls) {
-		String targetPath = ModelManager.getWorkspaceAbsolutePath() + "/" + projectName + "/model/" + className + "/" + folderName + "/" + modelName;
+		String targetPath = ModelManager.getWorkspaceAbsolutePath() + "/" + projectName + "/mutants/" + className + "/" + folderName + "/" + modelName;
 		ModelManager.saveOutModel(model, targetPath);
 		return false;
 	}

@@ -1,5 +1,5 @@
 # TAMO: Automatic Test Amplification for Executable Models
-This repository contains the evaluation data of the following paper:
+This repository contains the tool of the following paper:
 
 Faezeh Khorram, Erwan Bousse, Jean-Marie Mottu, Gerson Sunyé, Pablo Gómez-Abajo, Pablo C.Cañizares, Esther Guerra, and Juan de Lara. 2022. Automatic Test Amplification for Executable Models. In *ACM/IEEE 25th International Conference on Model Driven Engineering Languages and Systems*, October 23–28, 2022, Montreal, Canada.
 
@@ -24,11 +24,22 @@ In this work, we propose an automated and generic approach for amplifying the te
 This repository contains our test amplification tool built atop the Eclipse GEMOC Studio.
 We also performed an empirical study of the tool and all the materials are provided in this repository. In the experiment, we applied the approach to 71 test suites written for models conforming to two different DSLs, and for 67 of the 71 cases, it successfully improved the mutation score between 3.17% and 54.11% depending on the initial setup.
 
+## Assumptions
+In the current version of TDL test amplification, we consider the following assumptions:
+1. a TDL test case (i.e., TestDescription element) is a sequence of TDL Message elements exchanged between the reactiveGates
+2. the test data exchanged by TDL Messages are event instances conforming to the behavioral interface of the xDSL
+
+- Message.argument (dataInstanceUse.dataInstance) = event instance
+- Message.argument.parameterBinding.parameter = event parameter
+- Message.argument.parameterBinding.dataUse.dataInstance = EObject (value of the event parameter)
+
+3. assertion generation is performed by analyzing the execution trace of the mutated tests ->
+	it considers the xModel under test is correct and the newly generated tests are indeed useful for regression testing
+	
 ## Overview
-
-1.	*xmodels&tests*: the executable models conforming to each xDSL, a set of mutants generated for each of them (by applying the provided mutation operators using WODEL mutant generator), and a test project containing a manually-written test suite and the test amplification result including the mutation analysis report, the amplified test suite, and the test amplification report.
-
-2.	Two Excel files containing detailed data of the paper’s evaluation
+*AmplificationTool*: 
+- the eclipse plugins of our test amplification tool: `org.imt.tdl.amplificaiton`, `org.imt.tdl.mutation`
+- the plugins of our testing framework that are required for the amplification tool (To access the latest version of them, use the [main repository](https://gitlab.univ-nantes.fr/naomod/faezeh-public/xtdl)).
 
 ## Setup
 **Requirements**: 
