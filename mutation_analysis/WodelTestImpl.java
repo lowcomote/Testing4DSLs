@@ -1,7 +1,5 @@
 package tdl.mutation.testing;
 
-package mutator.wodeltest.XArduinoMutation;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,7 +17,6 @@ import org.eclipse.jdt.core.JavaCore;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TDLan2StandaloneSetup;
 import org.etsi.mts.tdl.TestDescription;
-import org.imt.tdl.runner.Failure;
 import org.imt.tdl.runner.Result;
 import org.imt.tdl.runner.TDLCore;
 
@@ -104,10 +101,6 @@ public class WodelTestImpl implements IWodelTest {
 				break;
 			}	
 		}
-		System.out.println("# of generated mutants: " + numOfGeneratedMutants);
-		System.out.println("# of killed mutants: " + numOfKilledMutants);
-		double mutationScore = (double) numOfKilledMutants/numOfGeneratedMutants;
-		System.out.println("mutation score: " + mutationScore);
 		return globalResult;
 	}
 
@@ -129,19 +122,13 @@ public class WodelTestImpl implements IWodelTest {
 		}
 		String message = value ? DIFFERENT : EQUALS;//EQUALS if the value is false and so the mutant is live
 		String MUTName = artifactPath.substring(artifactPath.lastIndexOf('\\'), artifactPath.length());
-		List<Failure> mutantFailures = mutantTestVerdict.getFailures();
-		for (Failure failure : mutantFailures) {
-			WodelTestInfo info = new WodelTestInfo(failure.getFailedTestName(), value, MUTName, message);
+		for (Map.Entry<String, Boolean> testCase_verdict : mutantTestVerdict.getTests_verdicts().entrySet()) {
+			boolean verdict = testCase_verdict.getValue();
+			WodelTestInfo info = new WodelTestInfo(testCase_verdict.getKey(), !verdict, MUTName, message);
 			testsInfo.add(info);
 		}
-		if (mutantFailures.size() == 0) {
-			for (Map.Entry<String, Boolean> testCase : mutantTestVerdict.getTests().entrySet()) {
-				WodelTestInfo info = new WodelTestInfo(testCase.getKey(), value, MUTName, message);
-				testsInfo.add(info);
-			}
-		}
 		String artifactAbsolutePath = (workspacePath + artifactPath).replaceAll("\\\\", "/");
-		WodelTestResult wtr = new WodelTestResult(testPackage.getName(), artifactAbsolutePath, mutantTestVerdict.getTests(), testsInfo);
+		WodelTestResult wtr = new WodelTestResult(testPackage.getName(), artifactAbsolutePath, mutantTestVerdict.getTests_verdicts(), testsInfo);
 		globalResult.incNumTestsExecuted(mutantTestVerdict.getRunCount());
 		globalResult.incNumTestsFailed(mutantTestVerdict.getFailureCount());
 		globalResult.incNumTestsError(wtr.getErrorCount());

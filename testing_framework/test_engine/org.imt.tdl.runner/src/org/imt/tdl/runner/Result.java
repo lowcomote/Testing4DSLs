@@ -11,21 +11,23 @@ public class Result {
 	
 	private int numExecutedTests = 0;
 	private int numFailedTests = 0;
-	private Map<String, Boolean> tests = new HashMap<>();
+	private Map<String, Boolean> tests_verdicts = new HashMap<>();
 	private List<Failure> failures = new ArrayList<>();
 	
 	public void addTest(String testCase, boolean verdict) {
-		tests.put(testCase, verdict);
+		tests_verdicts.put(testCase, verdict);
+		numExecutedTests++;
 	}
 	
-	public Map<String, Boolean> getTests(){
-		return tests;
+	public Map<String, Boolean> getTests_verdicts(){
+		return tests_verdicts;
 	}
 	
 	public void addFailure(TestDescription testCase) {
 		Failure failure = new Failure();
 		failure.setTestHeader(testCase);
 		failures.add(failure);
+		numFailedTests++;
 	}
 	
 	public List<Failure> getFailures(){
@@ -33,16 +35,8 @@ public class Result {
 		return failures;
 	}
 	
-	protected void addNumExecutedTests() {
-		numExecutedTests++;
-	}
-	
-	protected void addNumFailedTests() {
-		numFailedTests++;
-	}
-	
 	public int getRunCount() {
-		return this.numExecutedTests;
+		return numExecutedTests;
 	}
 	public int getFailureCount() {
 		//the number of tests that failed during the run
@@ -66,7 +60,7 @@ public class Result {
 		}
 		Result r = (Result) o;
 		if (numExecutedTests == r.numExecutedTests && numFailedTests == r.numFailedTests &&
-				tests.equals(r.tests) && failures.equals(r.failures)) {
+				tests_verdicts.equals(r.tests_verdicts) && failures.equals(r.failures)) {
 			return true;
 		}
 		return false;
