@@ -37,7 +37,7 @@ public class WodelTestImpl implements IWodelTest {
 	String seedModelPath;
 	
 	List<Package> testPackages = new ArrayList<>();
-	Result seedModelTestResult;
+	Result seedModelTestVerdict;
 	
 	//keep the mutation testing result
 	int numOfGeneratedMutants;
@@ -96,6 +96,7 @@ public class WodelTestImpl implements IWodelTest {
 			loadTestSuite(testSuiteProject);
 		}	
 		for (Package testPackage : testPackages) {
+			seedModelTestVerdict =  (new TDLCore()).run(testPackage, seedModelPath);
 			runTest(globalResult, project, testPackage, artifactPath);
 			if (globalResult.getStatus() != Status.OK) {
 				break;
@@ -107,34 +108,30 @@ public class WodelTestImpl implements IWodelTest {
 	private void runTest(WodelTestGlobalResult globalResult, IProject project, Package testPackage, String artifactPath) {
 		List<WodelTestResultClass> results = globalResult.getResults();
 		List<WodelTestInfo> testsInfo = new ArrayList<WodelTestInfo>();
-		
+
 		TDLCore tdlCore = new TDLCore();
-		if (seedModelTestResult == null) {//if the tests are not executed on the seed model
-			seedModelTestResult =  tdlCore.run(testPackage, seedModelPath);
-		}
 		Result mutantTestVerdict = tdlCore.run(testPackage, artifactPath);
-		
-		//when the tests has passed on the mutated model, the mutant is live otherwise is killed
-		boolean value = false;
-		if (!seedModelTestResult.equals(mutantTestVerdict)) {
-			value = true;
-			numOfKilledMutants++;
+		List<Failure> failures = mutantTestVerdict.getFailures();
+		for (Failure failure : failures) {
+			if (failure.getTestHeader() != null && failure.getMessage() != null) {
+				WodelTestInfo info = new WodelTestInfo(failure.getFailedTestName(), true, failure.getTestHeader(), failure.getMessage().replace("\n", "-"));
+				testsInfo.add(info);
+			}
 		}
-		String message = value ? DIFFERENT : EQUALS;//EQUALS if the value is false and so the mutant is live
-		String MUTName = artifactPath.substring(artifactPath.lastIndexOf('\\'), artifactPath.length());
-		for (Map.Entry<String, Boolean> testCase_verdict : mutantTestVerdict.getTests_verdicts().entrySet()) {
-			boolean verdict = testCase_verdict.getValue();
-			WodelTestInfo info = new WodelTestInfo(testCase_verdict.getKey(), !verdict, MUTName, message);
+		if (failures.size() == 0) {
+			WodelTestInfo info = new WodelTestInfo(testPackage.getName(), false, testPackage.getName(), EQUALS);
 			testsInfo.add(info);
 		}
-		String artifactAbsolutePath = (workspacePath + artifactPath).replaceAll("\\\\", "/");
-		WodelTestResult wtr = new WodelTestResult(testPackage.getName(), artifactAbsolutePath, mutantTestVerdict.getTests_verdicts(), testsInfo);
+		String mutantAbsolutePath = (workspacePath + artifactPath).replaceAll("\\\\", "/");
+		String testSuitePath = testPackage.eResource().getURI().toString();
+		testSuitePath = testSuitePath.replace("platform:/resource", workspacePath).replaceAll("\\\\", "/");
+		WodelTestResult wtr = new WodelTestResult(testPackage.getName(), testSuitePath, mutantTestVerdict.getTests_verdicts(), testsInfo);
 		globalResult.incNumTestsExecuted(mutantTestVerdict.getRunCount());
 		globalResult.incNumTestsFailed(mutantTestVerdict.getFailureCount());
 		globalResult.incNumTestsError(wtr.getErrorCount());
-		WodelTestResultClass resultClass = WodelTestResultClass.getWodelTestResultClassByName(results, artifactAbsolutePath);
+		WodelTestResultClass resultClass = WodelTestResultClass.getWodelTestResultClassByName(results, mutantAbsolutePath);
 		if (resultClass == null) {
-			resultClass = new WodelTestResultClass(artifactAbsolutePath);
+			resultClass = new WodelTestResultClass(mutantAbsolutePath);
 			results.add(resultClass);
 		}
 		resultClass.addResult(wtr);
