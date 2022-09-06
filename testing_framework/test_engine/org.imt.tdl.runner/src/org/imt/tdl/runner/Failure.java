@@ -4,6 +4,7 @@ import org.etsi.mts.tdl.TestDescription;
 
 public class Failure {
 	private String testHeader;
+	private String message;
 	private String failedTestName;
 	
 	public void setTestHeader(TestDescription testCase) {
@@ -16,6 +17,13 @@ public class Failure {
 	}
 	public String getFailedTestName() {
 		return failedTestName;
+	}
+	
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
 	}
 	@Override
     public boolean equals(Object o) {
