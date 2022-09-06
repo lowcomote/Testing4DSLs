@@ -19,7 +19,7 @@ public class TDLCore {
 				TDLTestCaseResult verdict = TestDescriptionAspect.testCaseResult(testCase);
 				if (verdict.getValue().contains("FAIL")) {
 					result.addTest(testCase.getName(), false);
-					result.addFailure(testCase);
+					result.addFailure(verdict);
 				}else {
 					result.addTest(testCase.getName(), true);
 				}
