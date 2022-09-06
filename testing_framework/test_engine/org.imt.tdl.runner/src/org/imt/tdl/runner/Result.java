@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.etsi.mts.tdl.TestDescription;
+import org.imt.tdl.testResult.TDLTestCaseResult;
 
 public class Result {
 	
@@ -23,9 +24,10 @@ public class Result {
 		return tests_verdicts;
 	}
 	
-	public void addFailure(TestDescription testCase) {
+	public void addFailure(TDLTestCaseResult testCaseVerdict) {
 		Failure failure = new Failure();
-		failure.setTestHeader(testCase);
+		failure.setTestHeader(testCaseVerdict.getTestCase());
+		failure.setMessage(testCaseVerdict.getDescription());
 		failures.add(failure);
 		numFailedTests++;
 	}
