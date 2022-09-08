@@ -162,8 +162,10 @@ class GateInstanceAspect {
 				return TDLTestResultUtil.PASS + ": The current state of the MUT is retrieved"
 			}else if (arg.dataInstance.dataType.name == OCL_TYPE) {
 				// extracting the query from the argument and sending for validation
-				var query = argument.argument.get(0).dataUse as LiteralValueUse
-				return _self.gateLauncher.executeOCLCommand(query.value)				
+				var context = (argument.argument.get(0).dataUse as DataInstanceUse).
+					getMatchedMUTElement(_self.gateLauncher.MUTResource, true, _self.DSLPath)
+				var query = argument.argument.get(1).dataUse as LiteralValueUse
+				return _self.gateLauncher.executeOCLCommand(context, query.value)				
 			}else if (arg.dataInstance.dataType.isAcceptedEvent(_self.DSLPath)){
 				//the message is an event conforming to the behavioral interface of the DSL
 				val eventParameters = _self.getEventParameters(arg, ACCEPTED_EVENT)

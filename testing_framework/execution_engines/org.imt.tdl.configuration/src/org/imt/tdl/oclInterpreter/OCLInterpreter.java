@@ -8,7 +8,6 @@ import java.util.LinkedHashSet;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.OCL;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
@@ -36,9 +35,9 @@ public class OCLInterpreter {
 	}
 
 	@SuppressWarnings("unchecked")
-	public String runQuery(Resource MUTResource, String query) {
+	public String runQuery(EObject context, String query) {
 		// The root element of the dsl is the context for ocl
-		oclHelper.setContext(MUTResource.getContents().get(0).eClass());
+		oclHelper.setContext(context.eClass());
 		try {
 			expression = oclHelper.createQuery(query);
 		} catch (ParserException e) {
@@ -47,8 +46,8 @@ public class OCLInterpreter {
 			return "FAIL: Cannot create the ocl query";
 		}
 		queryEval = ocl.createQuery(expression);
-		// the ocl query will be evaluated on the root element of MUT
-		Object res = queryEval.evaluate(MUTResource.getContents().get(0));
+		// the ocl query will be evaluated on the context element
+		Object res = queryEval.evaluate(context);
 		resultAsObject = new ArrayList<>();
 		resultAsString = new ArrayList<>();
 		if (res instanceof Collection<?>) {
@@ -77,9 +76,12 @@ public class OCLInterpreter {
 				EObject object = (EObject) res;
 				resultAsObject.add(object);
 				resultAsString.add(TDLTestResultUtil.getInstance().eObjectLabelProvider(object));
-			}else {
+			}else if (res == null){
 				resultAsObject.add(null);
 				resultAsString.add("'" + "null" + "'");
+			}else {//result is a primitive value
+				resultAsObject.add(null);
+				resultAsString.add("'" + res.toString() + "'");
 			}
 		}
 		return "PASS: The ocl query evaluated successfully";

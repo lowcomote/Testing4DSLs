@@ -18,7 +18,9 @@ import org.etsi.mts.tdl.DataType;
 import org.etsi.mts.tdl.Member;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.PackageableElement;
+import org.etsi.mts.tdl.SimpleDataType;
 import org.etsi.mts.tdl.StructuredDataType;
+import org.etsi.mts.tdl.tdlFactory;
 import org.imt.atl.ecore2tdl.files.Ecore2tdl;
 
 public class DSLSpecificTypesGenerator {
@@ -66,6 +68,11 @@ public class DSLSpecificTypesGenerator {
 					}
 				}
 			}
+			//generating a simple type for EObject
+			SimpleDataType eobjectType = tdlFactory.eINSTANCE.createSimpleDataType();
+			eobjectType.setName("EObject");
+			dslSpecificTypesPackage.getPackagedElement().add(eobjectType);
+			dslSpecificTypes.put(eobjectType.getName().toLowerCase(), eobjectType);
 		} catch (ATLCoreException e) {
 			e.printStackTrace();
 		} catch (ATLExecutionException e) {

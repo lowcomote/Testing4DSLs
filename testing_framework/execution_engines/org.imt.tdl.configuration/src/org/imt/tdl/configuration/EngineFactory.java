@@ -95,9 +95,9 @@ public class EngineFactory{
 			eventManagerLauncher.sendStopEvent(0);//stop engine immediately
 		}
 	}
-	public String executeOCLCommand (String query){
+	public String executeOCLCommand (EObject context, String query){
 		//send the query without quotation marks
-		return oclLauncher.runQuery(getMUTResource(), query.substring(1, query.length()-1));
+		return oclLauncher.runQuery(context, query.substring(1, query.length()-1));
 	}
 	
 	public String executeDSLSpecificCommand(String eventType, String eventName, Map<String, Object> parameters) {		

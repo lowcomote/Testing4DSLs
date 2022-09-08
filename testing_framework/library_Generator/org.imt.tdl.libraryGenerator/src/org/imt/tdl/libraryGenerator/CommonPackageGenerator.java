@@ -56,6 +56,11 @@ public class CommonPackageGenerator {
 	private void generateTypeForOCL() {
 		StructuredDataType OCL = factory.createStructuredDataType();
 		OCL.setName("OCL");
+		Member context = factory.createMember();
+		context.setName("context");
+		DataType contextType = dslSpecificTypes.get("EObject".toLowerCase());
+		context.setDataType(contextType);
+		OCL.getMember().add(context);
 		Member query = factory.createMember();
 		query.setName("query");
 		DataType queryType = dslSpecificTypes.get("EString".toLowerCase());
@@ -68,9 +73,15 @@ public class CommonPackageGenerator {
 		oclQuery.setName("oclQuery");
 		oclQuery.setDataType(OCL);
 		oclQuery.setUnassignedMember(UnassignedMemberTreatment.ANY_VALUE);
+		MemberAssignment contextAssign = factory.createMemberAssignment();
+		contextAssign.setMember(context);
+		AnyValue anyValue = factory.createAnyValue();
+		anyValue.setName("?");
+		contextAssign.setMemberSpec(anyValue);
+		oclQuery.getMemberAssignment().add(contextAssign);
 		MemberAssignment queryAssign = factory.createMemberAssignment();
 		queryAssign.setMember(query);
-		AnyValue anyValue = factory.createAnyValue();
+		anyValue = factory.createAnyValue();
 		anyValue.setName("?");
 		queryAssign.setMemberSpec(anyValue);
 		oclQuery.getMemberAssignment().add(queryAssign);
