@@ -756,6 +756,15 @@ public class ArduinoPackageImpl extends EPackageImpl implements ArduinoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getProject_PinChanges() {
+		return (EReference)projectEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getInstruction() {
 		return instructionEClass;
 	}
@@ -1607,6 +1616,11 @@ public class ArduinoPackageImpl extends EPackageImpl implements ArduinoPackage {
 		isCreated = true;
 
 		// Create classes and their features
+		projectEClass = createEClass(PROJECT);
+		createEReference(projectEClass, PROJECT__BOARDS);
+		createEReference(projectEClass, PROJECT__SKETCHES);
+		createEReference(projectEClass, PROJECT__PIN_CHANGES);
+
 		boardEClass = createEClass(BOARD);
 		createEReference(boardEClass, BOARD__PROJECT);
 
@@ -1625,10 +1639,6 @@ public class ArduinoPackageImpl extends EPackageImpl implements ArduinoPackage {
 		createEReference(sketchEClass, SKETCH__PROJECT);
 		createEReference(sketchEClass, SKETCH__BLOCK);
 		createEReference(sketchEClass, SKETCH__BOARD);
-
-		projectEClass = createEClass(PROJECT);
-		createEReference(projectEClass, PROJECT__BOARDS);
-		createEReference(projectEClass, PROJECT__SKETCHES);
 
 		instructionEClass = createEClass(INSTRUCTION);
 
@@ -1873,6 +1883,11 @@ public class ArduinoPackageImpl extends EPackageImpl implements ArduinoPackage {
 		arduinoCommunicationModuleEClass.getESuperTypes().add(this.getArduinoDigitalModule());
 
 		// Initialize classes, features, and operations; add parameters
+		initEClass(projectEClass, Project.class, "Project", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getProject_Boards(), this.getBoard(), this.getBoard_Project(), "boards", null, 0, -1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProject_Sketches(), this.getSketch(), this.getSketch_Project(), "sketches", null, 0, -1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProject_PinChanges(), this.getPin(), null, "pinChanges", null, 0, -1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(boardEClass, Board.class, "Board", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBoard_Project(), this.getProject(), this.getProject_Boards(), "project", null, 1, 1, Board.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1891,10 +1906,6 @@ public class ArduinoPackageImpl extends EPackageImpl implements ArduinoPackage {
 		initEReference(getSketch_Project(), this.getProject(), this.getProject_Sketches(), "project", null, 1, 1, Sketch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSketch_Block(), this.getBlock(), null, "block", null, 0, 1, Sketch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSketch_Board(), this.getBoard(), null, "board", null, 0, 1, Sketch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(projectEClass, Project.class, "Project", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getProject_Boards(), this.getBoard(), this.getBoard_Project(), "boards", null, 0, -1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getProject_Sketches(), this.getSketch(), this.getSketch_Project(), "sketches", null, 0, -1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(instructionEClass, Instruction.class, "Instruction", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2090,6 +2101,11 @@ public class ArduinoPackageImpl extends EPackageImpl implements ArduinoPackage {
 	 */
 	protected void createAspectAnnotations() {
 		String source = "aspect";
+		addAnnotation
+		  (getProject_PinChanges(),
+		   source,
+		   new String[] {
+		   });
 		addAnnotation
 		  (getPin_Level(),
 		   source,

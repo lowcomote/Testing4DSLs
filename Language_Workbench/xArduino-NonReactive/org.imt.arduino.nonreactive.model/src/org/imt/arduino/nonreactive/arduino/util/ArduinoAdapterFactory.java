@@ -126,6 +126,10 @@ public class ArduinoAdapterFactory extends AdapterFactoryImpl {
 	protected ArduinoSwitch<Adapter> modelSwitch =
 		new ArduinoSwitch<Adapter>() {
 			@Override
+			public Adapter caseProject(Project object) {
+				return createProjectAdapter();
+			}
+			@Override
 			public Adapter caseBoard(Board object) {
 				return createBoardAdapter();
 			}
@@ -148,10 +152,6 @@ public class ArduinoAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseSketch(Sketch object) {
 				return createSketchAdapter();
-			}
-			@Override
-			public Adapter caseProject(Project object) {
-				return createProjectAdapter();
 			}
 			@Override
 			public Adapter caseInstruction(Instruction object) {

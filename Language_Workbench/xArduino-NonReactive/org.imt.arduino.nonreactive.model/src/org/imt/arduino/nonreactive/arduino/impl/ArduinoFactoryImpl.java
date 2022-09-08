@@ -102,10 +102,10 @@ public class ArduinoFactoryImpl extends EFactoryImpl implements ArduinoFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case ArduinoPackage.PROJECT: return createProject();
 			case ArduinoPackage.DIGITAL_PIN: return createDigitalPin();
 			case ArduinoPackage.ANALOG_PIN: return createAnalogPin();
 			case ArduinoPackage.SKETCH: return createSketch();
-			case ArduinoPackage.PROJECT: return createProject();
 			case ArduinoPackage.DELAY: return createDelay();
 			case ArduinoPackage.MODULE_ASSIGNMENT: return createModuleAssignment();
 			case ArduinoPackage.REPEAT: return createRepeat();

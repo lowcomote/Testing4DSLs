@@ -124,6 +124,12 @@ public class ArduinoSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case ArduinoPackage.PROJECT: {
+				Project project = (Project)theEObject;
+				T result = caseProject(project);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ArduinoPackage.BOARD: {
 				Board board = (Board)theEObject;
 				T result = caseBoard(board);
@@ -165,12 +171,6 @@ public class ArduinoSwitch<T> extends Switch<T> {
 				Sketch sketch = (Sketch)theEObject;
 				T result = caseSketch(sketch);
 				if (result == null) result = caseNamedElement(sketch);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ArduinoPackage.PROJECT: {
-				Project project = (Project)theEObject;
-				T result = caseProject(project);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

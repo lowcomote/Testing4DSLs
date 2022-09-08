@@ -57,6 +57,8 @@ import org.imt.arduino.nonreactive.arduino.UnaryBooleanExpression
 import org.imt.arduino.nonreactive.arduino.UnaryBooleanOperatorKind
 import org.imt.arduino.nonreactive.arduino.Sketch
 import org.imt.arduino.nonreactive.arduino.Time
+import org.imt.arduino.nonreactive.arduino.Board
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 @Aspect(className=Instruction)
 class Instruction_UtilitesAspect {
@@ -75,6 +77,9 @@ class Instruction_UtilitesAspect {
 	}
 	
 	def protected Pin getPin(Module module) {
+		if (module.eContainer instanceof Pin){
+			return module.eContainer as Pin
+		}
 		var Pin pin = null
 		
 		val project = _self.getProject(module)
@@ -663,7 +668,25 @@ class Pin_EvaluableAspect {
 	
 	@Step
 	def void changeLevel(){
+		val pinContainer = _self.project
+		if (pinContainer !== null){
+			pinContainer.pinChanges.add(EcoreUtil.copy(_self))
+		}
 		println("The level of " + _self.name + " pin changed to " + _self.level)
+	}
+	
+	private def Project getProject() {
+		var Project project = null
+
+		var current = _self.eContainer()
+		while (current !== null) {
+			if (current instanceof Project) {
+				project = current as Project
+				return project
+			}
+			current = current.eContainer()
+		}
+		return project
 	}
 }
 

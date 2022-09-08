@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.imt.arduino.nonreactive.arduino.Project#getBoards <em>Boards</em>}</li>
  *   <li>{@link org.imt.arduino.nonreactive.arduino.Project#getSketches <em>Sketches</em>}</li>
+ *   <li>{@link org.imt.arduino.nonreactive.arduino.Project#getPinChanges <em>Pin Changes</em>}</li>
  * </ul>
  *
  * @see org.imt.arduino.nonreactive.arduino.ArduinoPackage#getProject()
@@ -51,5 +52,18 @@ public interface Project extends EObject {
 	 * @generated
 	 */
 	EList<Sketch> getSketches();
+
+	/**
+	 * Returns the value of the '<em><b>Pin Changes</b></em>' containment reference list.
+	 * The list contents are of type {@link org.imt.arduino.nonreactive.arduino.Pin}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Pin Changes</em>' containment reference list.
+	 * @see org.imt.arduino.nonreactive.arduino.ArduinoPackage#getProject_PinChanges()
+	 * @model containment="true"
+	 *        annotation="aspect"
+	 * @generated
+	 */
+	EList<Pin> getPinChanges();
 
 } // Project

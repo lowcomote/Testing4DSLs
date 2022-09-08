@@ -68,6 +68,121 @@ public interface ArduinoPackage extends EPackage {
 	int NAMED_ELEMENT = 13;
 
 	/**
+	 * The meta object id for the '{@link org.imt.arduino.nonreactive.arduino.impl.BoardImpl <em>Board</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.imt.arduino.nonreactive.arduino.impl.BoardImpl
+	 * @see org.imt.arduino.nonreactive.arduino.impl.ArduinoPackageImpl#getBoard()
+	 * @generated
+	 */
+	int BOARD = 1;
+
+	/**
+	 * The meta object id for the '{@link org.imt.arduino.nonreactive.arduino.Module <em>Module</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.imt.arduino.nonreactive.arduino.Module
+	 * @see org.imt.arduino.nonreactive.arduino.impl.ArduinoPackageImpl#getModule()
+	 * @generated
+	 */
+	int MODULE = 2;
+
+	/**
+	 * The meta object id for the '{@link org.imt.arduino.nonreactive.arduino.impl.PinImpl <em>Pin</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.imt.arduino.nonreactive.arduino.impl.PinImpl
+	 * @see org.imt.arduino.nonreactive.arduino.impl.ArduinoPackageImpl#getPin()
+	 * @generated
+	 */
+	int PIN = 4;
+
+	/**
+	 * The meta object id for the '{@link org.imt.arduino.nonreactive.arduino.impl.DigitalPinImpl <em>Digital Pin</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.imt.arduino.nonreactive.arduino.impl.DigitalPinImpl
+	 * @see org.imt.arduino.nonreactive.arduino.impl.ArduinoPackageImpl#getDigitalPin()
+	 * @generated
+	 */
+	int DIGITAL_PIN = 3;
+
+	/**
+	 * The meta object id for the '{@link org.imt.arduino.nonreactive.arduino.impl.AnalogPinImpl <em>Analog Pin</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.imt.arduino.nonreactive.arduino.impl.AnalogPinImpl
+	 * @see org.imt.arduino.nonreactive.arduino.impl.ArduinoPackageImpl#getAnalogPin()
+	 * @generated
+	 */
+	int ANALOG_PIN = 5;
+
+	/**
+	 * The meta object id for the '{@link org.imt.arduino.nonreactive.arduino.impl.SketchImpl <em>Sketch</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.imt.arduino.nonreactive.arduino.impl.SketchImpl
+	 * @see org.imt.arduino.nonreactive.arduino.impl.ArduinoPackageImpl#getSketch()
+	 * @generated
+	 */
+	int SKETCH = 6;
+
+	/**
+	 * The meta object id for the '{@link org.imt.arduino.nonreactive.arduino.impl.ProjectImpl <em>Project</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.imt.arduino.nonreactive.arduino.impl.ProjectImpl
+	 * @see org.imt.arduino.nonreactive.arduino.impl.ArduinoPackageImpl#getProject()
+	 * @generated
+	 */
+	int PROJECT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Boards</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__BOARDS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Sketches</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__SKETCHES = 1;
+
+	/**
+	 * The feature id for the '<em><b>Pin Changes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__PIN_CHANGES = 2;
+
+	/**
+	 * The number of structural features of the '<em>Project</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Project</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT_OPERATION_COUNT = 0;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -93,16 +208,6 @@ public interface ArduinoPackage extends EPackage {
 	 * @ordered
 	 */
 	int NAMED_ELEMENT_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link org.imt.arduino.nonreactive.arduino.impl.BoardImpl <em>Board</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.imt.arduino.nonreactive.arduino.impl.BoardImpl
-	 * @see org.imt.arduino.nonreactive.arduino.impl.ArduinoPackageImpl#getBoard()
-	 * @generated
-	 */
-	int BOARD = 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -141,16 +246,6 @@ public interface ArduinoPackage extends EPackage {
 	int BOARD_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.imt.arduino.nonreactive.arduino.Module <em>Module</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.imt.arduino.nonreactive.arduino.Module
-	 * @see org.imt.arduino.nonreactive.arduino.impl.ArduinoPackageImpl#getModule()
-	 * @generated
-	 */
-	int MODULE = 1;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -176,16 +271,6 @@ public interface ArduinoPackage extends EPackage {
 	 * @ordered
 	 */
 	int MODULE_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.imt.arduino.nonreactive.arduino.impl.PinImpl <em>Pin</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.imt.arduino.nonreactive.arduino.impl.PinImpl
-	 * @see org.imt.arduino.nonreactive.arduino.impl.ArduinoPackageImpl#getPin()
-	 * @generated
-	 */
-	int PIN = 3;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -222,16 +307,6 @@ public interface ArduinoPackage extends EPackage {
 	 * @ordered
 	 */
 	int PIN_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.imt.arduino.nonreactive.arduino.impl.DigitalPinImpl <em>Digital Pin</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.imt.arduino.nonreactive.arduino.impl.DigitalPinImpl
-	 * @see org.imt.arduino.nonreactive.arduino.impl.ArduinoPackageImpl#getDigitalPin()
-	 * @generated
-	 */
-	int DIGITAL_PIN = 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -279,16 +354,6 @@ public interface ArduinoPackage extends EPackage {
 	int DIGITAL_PIN_OPERATION_COUNT = PIN_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.imt.arduino.nonreactive.arduino.impl.AnalogPinImpl <em>Analog Pin</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.imt.arduino.nonreactive.arduino.impl.AnalogPinImpl
-	 * @see org.imt.arduino.nonreactive.arduino.impl.ArduinoPackageImpl#getAnalogPin()
-	 * @generated
-	 */
-	int ANALOG_PIN = 4;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -332,16 +397,6 @@ public interface ArduinoPackage extends EPackage {
 	 * @ordered
 	 */
 	int ANALOG_PIN_OPERATION_COUNT = PIN_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.imt.arduino.nonreactive.arduino.impl.SketchImpl <em>Sketch</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.imt.arduino.nonreactive.arduino.impl.SketchImpl
-	 * @see org.imt.arduino.nonreactive.arduino.impl.ArduinoPackageImpl#getSketch()
-	 * @generated
-	 */
-	int SKETCH = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -396,52 +451,6 @@ public interface ArduinoPackage extends EPackage {
 	 * @ordered
 	 */
 	int SKETCH_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.imt.arduino.nonreactive.arduino.impl.ProjectImpl <em>Project</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.imt.arduino.nonreactive.arduino.impl.ProjectImpl
-	 * @see org.imt.arduino.nonreactive.arduino.impl.ArduinoPackageImpl#getProject()
-	 * @generated
-	 */
-	int PROJECT = 6;
-
-	/**
-	 * The feature id for the '<em><b>Boards</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROJECT__BOARDS = 0;
-
-	/**
-	 * The feature id for the '<em><b>Sketches</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROJECT__SKETCHES = 1;
-
-	/**
-	 * The number of structural features of the '<em>Project</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROJECT_FEATURE_COUNT = 2;
-
-	/**
-	 * The number of operations of the '<em>Project</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROJECT_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.imt.arduino.nonreactive.arduino.impl.InstructionImpl <em>Instruction</em>}' class.
@@ -2706,6 +2715,17 @@ public interface ArduinoPackage extends EPackage {
 	EReference getProject_Sketches();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.imt.arduino.nonreactive.arduino.Project#getPinChanges <em>Pin Changes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Pin Changes</em>'.
+	 * @see org.imt.arduino.nonreactive.arduino.Project#getPinChanges()
+	 * @see #getProject()
+	 * @generated
+	 */
+	EReference getProject_PinChanges();
+
+	/**
 	 * Returns the meta object for class '{@link org.imt.arduino.nonreactive.arduino.Instruction <em>Instruction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3822,6 +3842,14 @@ public interface ArduinoPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROJECT__SKETCHES = eINSTANCE.getProject_Sketches();
+
+		/**
+		 * The meta object literal for the '<em><b>Pin Changes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROJECT__PIN_CHANGES = eINSTANCE.getProject_PinChanges();
 
 		/**
 		 * The meta object literal for the '{@link org.imt.arduino.nonreactive.arduino.impl.InstructionImpl <em>Instruction</em>}' class.

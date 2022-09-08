@@ -13,11 +13,13 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.imt.arduino.nonreactive.arduino.ArduinoPackage;
 import org.imt.arduino.nonreactive.arduino.Board;
+import org.imt.arduino.nonreactive.arduino.Pin;
 import org.imt.arduino.nonreactive.arduino.Project;
 import org.imt.arduino.nonreactive.arduino.Sketch;
 
@@ -31,6 +33,7 @@ import org.imt.arduino.nonreactive.arduino.Sketch;
  * <ul>
  *   <li>{@link org.imt.arduino.nonreactive.arduino.impl.ProjectImpl#getBoards <em>Boards</em>}</li>
  *   <li>{@link org.imt.arduino.nonreactive.arduino.impl.ProjectImpl#getSketches <em>Sketches</em>}</li>
+ *   <li>{@link org.imt.arduino.nonreactive.arduino.impl.ProjectImpl#getPinChanges <em>Pin Changes</em>}</li>
  * </ul>
  *
  * @generated
@@ -55,6 +58,16 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 	 * @ordered
 	 */
 	protected EList<Sketch> sketches;
+
+	/**
+	 * The cached value of the '{@link #getPinChanges() <em>Pin Changes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPinChanges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Pin> pinChanges;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -104,6 +117,18 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Pin> getPinChanges() {
+		if (pinChanges == null) {
+			pinChanges = new EObjectContainmentEList<Pin>(Pin.class, this, ArduinoPackage.PROJECT__PIN_CHANGES);
+		}
+		return pinChanges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -128,6 +153,8 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 				return ((InternalEList<?>)getBoards()).basicRemove(otherEnd, msgs);
 			case ArduinoPackage.PROJECT__SKETCHES:
 				return ((InternalEList<?>)getSketches()).basicRemove(otherEnd, msgs);
+			case ArduinoPackage.PROJECT__PIN_CHANGES:
+				return ((InternalEList<?>)getPinChanges()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -144,6 +171,8 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 				return getBoards();
 			case ArduinoPackage.PROJECT__SKETCHES:
 				return getSketches();
+			case ArduinoPackage.PROJECT__PIN_CHANGES:
+				return getPinChanges();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -165,6 +194,10 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 				getSketches().clear();
 				getSketches().addAll((Collection<? extends Sketch>)newValue);
 				return;
+			case ArduinoPackage.PROJECT__PIN_CHANGES:
+				getPinChanges().clear();
+				getPinChanges().addAll((Collection<? extends Pin>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -183,6 +216,9 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 			case ArduinoPackage.PROJECT__SKETCHES:
 				getSketches().clear();
 				return;
+			case ArduinoPackage.PROJECT__PIN_CHANGES:
+				getPinChanges().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -199,6 +235,8 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 				return boards != null && !boards.isEmpty();
 			case ArduinoPackage.PROJECT__SKETCHES:
 				return sketches != null && !sketches.isEmpty();
+			case ArduinoPackage.PROJECT__PIN_CHANGES:
+				return pinChanges != null && !pinChanges.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
