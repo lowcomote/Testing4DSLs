@@ -164,6 +164,9 @@ class GateInstanceAspect {
 				// extracting the query from the argument and sending for validation
 				var context = (argument.argument.get(0).dataUse as DataInstanceUse).
 					getMatchedMUTElement(_self.gateLauncher.MUTResource, true, _self.DSLPath)
+				if (context === null){
+					return TDLTestResultUtil.INCONCLUSIVE + "The context object cannot be found in the MUT";
+				}
 				var query = argument.argument.get(1).dataUse as LiteralValueUse
 				return _self.gateLauncher.executeOCLCommand(context, query.value)				
 			}else if (arg.dataInstance.dataType.isAcceptedEvent(_self.DSLPath)){
