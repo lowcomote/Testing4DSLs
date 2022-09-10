@@ -3,8 +3,10 @@ package tdl.mutation.testing;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -17,6 +19,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TDLan2StandaloneSetup;
 import org.etsi.mts.tdl.TestDescription;
+import org.imt.tdl.runner.Failure;
 import org.imt.tdl.runner.Result;
 import org.imt.tdl.runner.TDLCore;
 
@@ -31,7 +34,7 @@ import manager.WodelTestInfo;
 import manager.WodelTestResult;
 import manager.WodelTestResultClass;
 
-public class WodelTestImpl implements IWodelTest {
+public class WodelTest implements IWodelTest {
 
 	String workspacePath;
 	String seedModelPath;
@@ -111,21 +114,27 @@ public class WodelTestImpl implements IWodelTest {
 
 		TDLCore tdlCore = new TDLCore();
 		Result mutantTestVerdict = tdlCore.run(testPackage, artifactPath);
-		List<Failure> failures = mutantTestVerdict.getFailures();
-		for (Failure failure : failures) {
-			if (failure.getTestHeader() != null && failure.getMessage() != null) {
-				WodelTestInfo info = new WodelTestInfo(failure.getFailedTestName(), true, failure.getTestHeader(), failure.getMessage().replace("\n", "-"));
+		
+		List<Failure> mutantFailures  = mutantTestVerdict.getFailures();
+		if (mutantFailures.size() == 0) {
+			WodelTestInfo info = new WodelTestInfo(testPackage.getName(), false, testPackage.getName(), EQUALS);
+			testsInfo.add(info);
+		}else {
+			for (Failure failure : mutantFailures) {
+				String message = failure.getMessage() != null ? failure.getMessage().replaceAll("\n", "-") : DIFFERENT;
+				WodelTestInfo info = new WodelTestInfo(failure.getFailedTestName(), true, failure.getTestHeader(), message);
 				testsInfo.add(info);
 			}
 		}
-		if (failures.size() == 0) {
-			WodelTestInfo info = new WodelTestInfo(testPackage.getName(), false, testPackage.getName(), EQUALS);
-			testsInfo.add(info);
+		Map<String, Boolean> test_mutationValue = new HashMap<>();
+		for (Entry<String, Boolean> entry:mutantTestVerdict.getTests_verdicts().entrySet()) {
+			test_mutationValue.put(entry.getKey(), !entry.getValue());
 		}
+		
 		String mutantAbsolutePath = (workspacePath + artifactPath).replaceAll("\\\\", "/");
 		String testSuitePath = testPackage.eResource().getURI().toString();
 		testSuitePath = testSuitePath.replace("platform:/resource", workspacePath).replaceAll("\\\\", "/");
-		WodelTestResult wtr = new WodelTestResult(testPackage.getName(), testSuitePath, mutantTestVerdict.getTests_verdicts(), testsInfo);
+		WodelTestResult wtr = new WodelTestResult(testPackage.getName(), testSuitePath, test_mutationValue, testsInfo);
 		globalResult.incNumTestsExecuted(mutantTestVerdict.getRunCount());
 		globalResult.incNumTestsFailed(mutantTestVerdict.getFailureCount());
 		globalResult.incNumTestsError(wtr.getErrorCount());
@@ -203,3 +212,4 @@ public class WodelTestImpl implements IWodelTest {
 		return false;
 	}
 }
+
