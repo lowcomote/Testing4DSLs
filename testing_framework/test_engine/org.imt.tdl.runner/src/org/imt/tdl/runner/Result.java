@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.etsi.mts.tdl.TestDescription;
 import org.imt.tdl.testResult.TDLTestCaseResult;
 
 public class Result {
