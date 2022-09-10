@@ -15,8 +15,7 @@ public class TDLCore {
 		for (int i=0; i<testPackage.getPackagedElement().size(); i++) {
 			if (testPackage.getPackagedElement().get(i) instanceof TestDescription testCase) {
 				System.out.println("Test case: " + testCase.getName());
-				TestDescriptionAspect.executeTestCase(testCase, artifactPath);
-				TDLTestCaseResult verdict = TestDescriptionAspect.testCaseResult(testCase);
+				TDLTestCaseResult verdict = TestDescriptionAspect.executeTestCase(testCase, artifactPath);
 				if (verdict.getValue().contains("FAIL")) {
 					result.addTest(testCase.getName(), false);
 					result.addFailure(verdict);
