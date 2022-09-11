@@ -12,11 +12,8 @@ package org.etsi.mts.tdl.graphical.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gemoc.executionframework.extensions.sirius.services.AbstractGemocDebuggerServices;
 
 public class TdlDebugServices extends AbstractGemocDebuggerServices {

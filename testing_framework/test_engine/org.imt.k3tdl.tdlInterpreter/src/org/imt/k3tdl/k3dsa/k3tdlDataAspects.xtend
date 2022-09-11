@@ -1,6 +1,7 @@
 package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
+
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 import java.util.ArrayList
 import org.eclipse.emf.common.util.EList
@@ -18,6 +19,7 @@ import org.etsi.mts.tdl.DataInstance
 import org.etsi.mts.tdl.DataInstanceUse
 import org.etsi.mts.tdl.DataType
 import org.etsi.mts.tdl.DataUse
+import org.etsi.mts.tdl.StaticDataUse
 import org.etsi.mts.tdl.LiteralValueUse
 import org.etsi.mts.tdl.Member
 import org.etsi.mts.tdl.MemberAssignment

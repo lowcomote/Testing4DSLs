@@ -41,15 +41,13 @@ public class DataUseLabelProvider {
 		String s = "";
 		Serializer serializer = injector.getInstance(Serializer.class); 
 
-		try {  
-			if (u instanceof ActionReference) {
-				for (ParameterBinding b : ((ActionReference)u).getActualParameter()) {
-					s += separator + serialise(u, b);
-				}
-				if (s.length()>0) {
-					s=s.substring(separator.length());
-					s="("+s+")";
-				}
+		try {
+			for (ParameterBinding b : u.getArgument()) {
+				s += separator + serialise(u, b);
+			}
+			if (s.length()>0) {
+				s=s.substring(separator.length());
+				s="("+s+")";
 			}
 		} catch (Exception ex) { // fall back:  
 			System.out.println("Object could not be serialized"); 
@@ -71,13 +69,15 @@ public class DataUseLabelProvider {
 			if (u instanceof TestDescriptionReference) {
 				if (type.equals("bindings")) {
 					for (ComponentInstanceBinding b : ((TestDescriptionReference)u).getComponentInstanceBinding()) {
+						// DONE: grammar doesn't actually support this meta-class -> part of the removed rules -> rules re-added, context resolution added
 						s+=separator+serializer.serialize(b);
 					}
+					s = s.replaceAll("\\s+", " ").replaceAll("\t+", " ");
 					if (s.length()>0) {
 						s=s.substring(separator.length());
 					}
 				} else if (type.equals("parameters")) {
-					for (ParameterBinding b : ((TestDescriptionReference)u).getActualParameter()) {
+					for (ParameterBinding b : ((TestDescriptionReference)u).getArgument()) {
 						s+=separator+serialise(u, b);
 					}
 					if (s.length()>0) {
@@ -105,18 +105,18 @@ public class DataUseLabelProvider {
 		ISerializer serializer = injector.getInstance(ISerializer.class);
 		
 		XtextResource xr = null;
-		try {  
-			if (p instanceof ParameterBinding) {
-				
-				if (!(p.eResource() instanceof XtextResource)) {
-					URI uri = p.eResource().getURI();
-					p  = EcoreUtil.copy(p);
-					xr = createVirtualXtextResource(uri, p);
-				}
-				
-				SaveOptions options = SaveOptions.newBuilder().noValidation().getOptions();
-				s += serializer.serialize((ParameterBinding)p, options);
+		try {
+			
+			if (!(p.eResource() instanceof XtextResource)) {
+				URI uri = p.eResource().getURI();
+				p  = EcoreUtil.copy(p);
+				xr = createVirtualXtextResource(uri, p);
 			}
+			
+			SaveOptions options = SaveOptions.newBuilder().noValidation().getOptions();
+			s += p.getParameter().getName();
+			s += " = ";
+			s += serializer.serialize(p.getDataUse(), options);
 		} catch (Exception ex) { // fall back:  
 			System.out.println("Object could not be serialized"); 
 			System.err.println(ex);
@@ -138,18 +138,15 @@ public class DataUseLabelProvider {
 		ISerializer serializer = injector.getInstance(ISerializer.class);
 		
 		XtextResource xr = null;
-		try {  
-			if (u instanceof DataUse) {
-				
-				if (!(u.eResource() instanceof XtextResource)) {
-					URI uri = u.eResource().getURI();
-					u  = EcoreUtil.copy(u);
-					xr = createVirtualXtextResource(uri, u);
-				}
-				
-				SaveOptions options = SaveOptions.newBuilder().noValidation().getOptions();
-				s += serializer.serialize((DataUse)u, options);
+		try {
+			if (!(u.eResource() instanceof XtextResource)) {
+				URI uri = u.eResource().getURI();
+				u  = EcoreUtil.copy(u);
+				xr = createVirtualXtextResource(uri, u);
 			}
+			
+			SaveOptions options = SaveOptions.newBuilder().noValidation().getOptions();
+			s += serializer.serialize((DataUse)u, options);
 		} catch (Exception ex) { // fall back:  
 			System.out.println("Object could not be serialized"); 
 			System.err.println(ex);

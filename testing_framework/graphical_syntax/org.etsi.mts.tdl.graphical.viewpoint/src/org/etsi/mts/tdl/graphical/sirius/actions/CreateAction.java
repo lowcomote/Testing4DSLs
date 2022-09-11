@@ -97,7 +97,6 @@ public class CreateAction implements IExternalJavaAction {
 					assignmentVarUse.setVariable((Variable) element);
 					assignmentVarUse.setComponentInstance(c);
 					((Assignment)behaviour).setVariable(assignmentVarUse);
-					((Assignment)behaviour).setComponentInstance(c);
 					break;
 				}
 			}

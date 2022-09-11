@@ -306,7 +306,7 @@ rule abstractInheritedDynamicClass2Type{
 unique lazy rule superClass2extension{
 	from class: Ecore!EClass (class.eSuperTypes.notEmpty())
 	to parent : TDL!Extension(
-		extending <- class.eSuperTypes->last()
+		extending <- class.eSuperTypes
 	)
 }
 lazy rule staticFeature2member{

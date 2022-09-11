@@ -1,6 +1,7 @@
 package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
+
 import java.util.ArrayList
 import java.util.HashMap
 import java.util.Map
@@ -10,6 +11,7 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.etsi.mts.tdl.DataInstanceUse
 import org.etsi.mts.tdl.DataUse
+import org.etsi.mts.tdl.StaticDataUse
 import org.etsi.mts.tdl.GateInstance
 import org.etsi.mts.tdl.GateType
 import org.etsi.mts.tdl.LiteralValueUse

@@ -1,6 +1,7 @@
 package org.imt.k3tdl.k3dsa
 
 import java.util.ArrayList
+
 import java.util.List
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
@@ -9,6 +10,7 @@ import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.emf.ecore.resource.Resource
 import org.etsi.mts.tdl.DataInstanceUse
 import org.etsi.mts.tdl.DataUse
+import org.etsi.mts.tdl.StaticDataUse
 import org.etsi.mts.tdl.LiteralValueUse
 import org.etsi.mts.tdl.MemberAssignment
 import org.etsi.mts.tdl.StructuredDataInstance

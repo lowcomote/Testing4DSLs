@@ -55,15 +55,10 @@ public class DSLSpecificTypesGenerator {
 						if (isDynamic(sDataType)) {
 							dynamicTypes.add(sDataType);
 						}else if (sDataType.getExtension() != null) {
-							DataType superClass = (DataType) sDataType.getExtension().getExtending();
-							if (isDynamic(superClass) || dynamicTypes.contains(superClass)) {
+							if (sDataType.getExtension().stream().map(e -> (DataType) e.getExtending()).
+								anyMatch(e -> isDynamic(e) || dynamicTypes.contains(e))) {
 								dynamicTypes.add(sDataType);
 							}
-							//TODO: For the updated version of TDL, the following if condition must be used
-//							if (type.getExtension().stream().map(e -> (DataType) e.getExtending()).
-//								anyMatch(e -> isDynamic(e) || dynamicTypes.contains(e))) {
-//								dynamicTypes.add(type);
-//							}
 						}
 					}
 				}
