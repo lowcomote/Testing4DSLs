@@ -6,6 +6,7 @@ import fr.inria.diverse.k3.al.annotationprocessor.Main
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 import fr.inria.diverse.k3.al.annotationprocessor.Step
 import org.eclipse.emf.common.util.EList
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.imt.arduino.nonreactive.arduino.ArduinoBoard
 import org.imt.arduino.nonreactive.arduino.ArduinoCommunicationModule
 import org.imt.arduino.nonreactive.arduino.BinaryBooleanExpression
@@ -17,6 +18,7 @@ import org.imt.arduino.nonreactive.arduino.BooleanExpression
 import org.imt.arduino.nonreactive.arduino.BooleanModuleGet
 import org.imt.arduino.nonreactive.arduino.BooleanVariable
 import org.imt.arduino.nonreactive.arduino.BooleanVariableRef
+import org.imt.arduino.nonreactive.arduino.ChangeType
 import org.imt.arduino.nonreactive.arduino.Constant
 import org.imt.arduino.nonreactive.arduino.Control
 import org.imt.arduino.nonreactive.arduino.Delay
@@ -34,11 +36,16 @@ import org.imt.arduino.nonreactive.arduino.ModuleInstruction
 import org.imt.arduino.nonreactive.arduino.Pin
 import org.imt.arduino.nonreactive.arduino.Project
 import org.imt.arduino.nonreactive.arduino.Repeat
+import org.imt.arduino.nonreactive.arduino.Sketch
+import org.imt.arduino.nonreactive.arduino.Time
+import org.imt.arduino.nonreactive.arduino.UnaryBooleanExpression
+import org.imt.arduino.nonreactive.arduino.UnaryBooleanOperatorKind
 import org.imt.arduino.nonreactive.arduino.Utilities
 import org.imt.arduino.nonreactive.arduino.Variable
 import org.imt.arduino.nonreactive.arduino.VariableAssignment
 import org.imt.arduino.nonreactive.arduino.VariableDeclaration
 import org.imt.arduino.nonreactive.arduino.VariableRef
+import org.imt.arduino.nonreactive.arduino.WaitFor
 import org.imt.arduino.nonreactive.arduino.While
 
 import static extension org.imt.arduino.nonreactive.interpreter.Block_ExecutableAspect.*
@@ -51,14 +58,6 @@ import static extension org.imt.arduino.nonreactive.interpreter.Instruction_Exec
 import static extension org.imt.arduino.nonreactive.interpreter.Instruction_UtilitesAspect.*
 import static extension org.imt.arduino.nonreactive.interpreter.IntegerVariable_EvaluableAspect.*
 import static extension org.imt.arduino.nonreactive.interpreter.Pin_EvaluableAspect.*
-import org.imt.arduino.nonreactive.arduino.WaitFor
-import org.imt.arduino.nonreactive.arduino.ChangeType
-import org.imt.arduino.nonreactive.arduino.UnaryBooleanExpression
-import org.imt.arduino.nonreactive.arduino.UnaryBooleanOperatorKind
-import org.imt.arduino.nonreactive.arduino.Sketch
-import org.imt.arduino.nonreactive.arduino.Time
-import org.imt.arduino.nonreactive.arduino.Board
-import org.eclipse.emf.ecore.util.EcoreUtil
 
 @Aspect(className=Instruction)
 class Instruction_UtilitesAspect {
