@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TDLTestCoverage:TestSuiteCoverage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:TDLTestCoverage="http://org.imt.tdl.coverage/TDLTestCoverage" coveragePercentage="100.0">
+  <testSuite href="/Arduino.ActiveWait_Test/gemoc-gen/execution/execution-20220727_132434/testSuite.tdlan2#/"/>
+  <testCaseCoverages coveragePercentage="83.33">
+    <testCase href="/Arduino.ActiveWait_Test/gemoc-gen/execution/execution-20220727_132434/testSuite.tdlan2#//@packagedElement.2"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsbvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsrvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOs7vnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtbvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtrvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOt7vnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOuLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOubvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOurvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOu7vnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOvbvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOvrvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkbvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkrvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdk7vnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOwLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_ubWisM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_wA6LQM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOw7vnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOxLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOxbvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="58.33">
+    <testCase href="/Arduino.ActiveWait_Test/gemoc-gen/execution/execution-20220727_132434/testSuite.tdlan2#//@packagedElement.3"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsbvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsrvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOs7vnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtbvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtrvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOt7vnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOuLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOubvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOurvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOu7vnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOvbvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOvrvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkbvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkrvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdk7vnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOwLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_ubWisM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_wA6LQM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOw7vnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOxLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOxbvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="100.0">
+    <testCase href="/Arduino.ActiveWait_Test/gemoc-gen/execution/execution-20220727_132434/testSuite.tdlan2#//@packagedElement.4"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsbvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsrvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOs7vnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtbvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtrvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOt7vnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOuLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOubvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOurvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOu7vnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOvbvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOvrvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkbvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkrvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdk7vnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOwLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_ubWisM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_wA6LQM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOw7vnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOxLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOxbvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="100.0">
+    <testCase href="/Arduino.ActiveWait_Test/gemoc-gen/execution/execution-20220727_132434/testSuite.tdlan2#//@packagedElement.5"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsbvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsrvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOs7vnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtbvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtrvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOt7vnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOuLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOubvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOurvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOu7vnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOvbvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOvrvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkbvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkrvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdk7vnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOwLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_ubWisM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_wA6LQM-YEeyj4OK2t3h2Ug"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOw7vnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOxLvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOxbvnEey7OoLBzoKkPA"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsbvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsrvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOs7vnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtbvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtrvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOt7vnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOuLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOubvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOurvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOu7vnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOvbvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOvrvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkbvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkrvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdk7vnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOwLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_ubWisM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_wA6LQM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOw7vnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOxLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOxbvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsbvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsrvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOs7vnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtbvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtrvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOt7vnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOuLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOubvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOurvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOu7vnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOvbvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOvrvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkbvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkrvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdk7vnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOwLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_ubWisM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_wA6LQM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOw7vnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOxLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOxbvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsbvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsrvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOs7vnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtbvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtrvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOt7vnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOuLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOubvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOurvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOu7vnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOvbvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOvrvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkbvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkrvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdk7vnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOwLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_ubWisM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_wA6LQM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOw7vnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOxLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOxbvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsbvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOsrvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOs7vnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtbvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOtrvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOt7vnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOuLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOubvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOurvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOu7vnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOvbvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOvrvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkbvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdkrvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_vWSdk7vnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOwLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_ubWisM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_wA6LQM-YEeyj4OK2t3h2Ug"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOw7vnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOxLvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ActiveWait/activeWait.model#_TeGOxbvnEey7OoLBzoKkPA"/>
+  </tsObjectCoverageStatus>
+</TDLTestCoverage:TestSuiteCoverage>

@@ -1,0 +1,91 @@
+behavior fsm;
+
+open class StateMachine {
+	String input;
+	
+	@main
+	def void main() {
+		self.setInitialValues();
+		while ( self.unprocessedString.size() > 0) {
+			self.currentState.step(self.unprocessedString);
+		} 
+		('current state: '+self.currentState.name).log();
+		('unprocessed string: '+self.unprocessedString).log();
+		('processed string: '+self.consumedString).log();
+		('produced string: '+self.producedString).log();
+		
+	}
+	
+	@init
+	def void initializeModel(String input) {
+		self.input := input;
+	}
+	@step
+	def void setInitialValues(){
+		if (self.currentState = null){
+			self.currentState := self.initialState;
+		}
+		if (self.unprocessedString = null or self.unprocessedString = ''){			
+	 		self.unprocessedString := self.input;
+		}
+		if (self.consumedString = null){
+			self.consumedString := '';
+		}
+		if (self.producedString = null){
+			self.producedString := '';
+		}
+	}
+}
+
+open class fsm.State {
+	
+	@step
+	def void step(String inputString) {
+		//('input string: '+ inputString).log();
+		// Get the valid transitions
+		Sequence(fsm::Transition) validTransitions := null;
+		for (t in self.outgoingTransitions){
+			if (t.input != null and inputString.startsWith(t.input)){
+				validTransitions += t;
+			}
+		}
+		if(validTransitions->isEmpty()) {
+			//throw new FSMRuntimeException("No Transition")
+			validTransitions += (self.outgoingTransitions->select(t | t.input = null)->asSequence());
+		}
+		if(validTransitions->isEmpty()) {
+			('No Transition').log();
+		}
+		if(validTransitions -> size() > 1) {
+			('Non Determinism').log();
+			
+		}
+		// Fire transition
+		validTransitions->at(1).fire();
+	}
+}
+
+open class Transition {
+	
+	@step
+	def void fire() {
+		//('Firing ' + self.name + ' and entering ' + self.target.name).log();
+		StateMachine fsm := self.source.owningFSM;
+		fsm.currentState := self.target;
+		if (self.output != null){
+			if (fsm.producedString != null){
+				fsm.producedString += self.output;
+			}else{
+				fsm.producedString := self.output;
+			}
+		}
+		if (self.input != null){
+			if (fsm.consumedString != null){
+				fsm.consumedString += self.input;
+			}else{
+				fsm.consumedString := self.input;
+			}
+			fsm.unprocessedString := fsm.unprocessedString.substring(self.input.length);
+		}	
+	}
+}

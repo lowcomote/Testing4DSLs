@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:Microflow xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="www.MendixBPMN.com" name="promote employee level" valuedVariables="//@parameters.0/@attributes.1">
+  <ownedElements xsi:type="bpmn:StartEvent">
+    <outgoingFlows target="is employee level empty?"/>
+  </ownedElements>
+  <ownedElements xsi:type="bpmn:ForkDecision" incomingFlows="//@ownedElements.0/@outgoingFlows.0" label="is employee level empty?">
+    <outgoingFlows constraint="true" target="promote to Junior"/>
+    <outgoingFlows constraint="false" target="is employee level junior?"/>
+    <expression xsi:type="bpmn:StringComparisonExpression" operand1="//@parameters.0/@attributes.1" operand2="//@parameters.4"/>
+  </ownedElements>
+  <ownedElements xsi:type="bpmn:ChangeVariable" incomingFlows="//@ownedElements.1/@outgoingFlows.0" label="promote to Junior" targetVariable="//@parameters.0/@attributes.1">
+    <outgoingFlows target="//@ownedElements.9"/>
+    <newValue xsi:type="bpmn:StringValue" value="Junior"/>
+  </ownedElements>
+  <ownedElements xsi:type="bpmn:ForkDecision" incomingFlows="//@ownedElements.1/@outgoingFlows.1" label="is employee level junior?">
+    <outgoingFlows constraint="true" target="promote to Medior"/>
+    <outgoingFlows constraint="false" target="is employee level medior?"/>
+    <expression xsi:type="bpmn:StringComparisonExpression" operand1="//@parameters.0/@attributes.1" operand2="//@parameters.1"/>
+  </ownedElements>
+  <ownedElements xsi:type="bpmn:ChangeVariable" incomingFlows="//@ownedElements.3/@outgoingFlows.0" label="promote to Medior" targetVariable="//@parameters.0/@attributes.1">
+    <outgoingFlows target="//@ownedElements.9"/>
+    <newValue xsi:type="bpmn:StringValue" value="Medior"/>
+  </ownedElements>
+  <ownedElements xsi:type="bpmn:ForkDecision" incomingFlows="//@ownedElements.3/@outgoingFlows.1" label="is employee level medior?">
+    <outgoingFlows constraint="true" target="promote to Senior"/>
+    <outgoingFlows constraint="false" target="is employee level senior?"/>
+    <expression xsi:type="bpmn:StringComparisonExpression" operand1="//@parameters.0/@attributes.1" operand2="//@parameters.2"/>
+  </ownedElements>
+  <ownedElements xsi:type="bpmn:ChangeVariable" incomingFlows="//@ownedElements.5/@outgoingFlows.0" label="promote to Senior" targetVariable="//@parameters.0/@attributes.1">
+    <outgoingFlows target="//@ownedElements.9"/>
+    <newValue xsi:type="bpmn:StringValue" value="Senior"/>
+  </ownedElements>
+  <ownedElements xsi:type="bpmn:ForkDecision" incomingFlows="//@ownedElements.5/@outgoingFlows.1" label="is employee level senior?">
+    <outgoingFlows constraint="true" target="show message"/>
+    <outgoingFlows constraint="false" target="//@ownedElements.9"/>
+    <expression xsi:type="bpmn:StringComparisonExpression" operand1="//@parameters.0/@attributes.1" operand2="//@parameters.3"/>
+  </ownedElements>
+  <ownedElements xsi:type="bpmn:ShowMessage" incomingFlows="//@ownedElements.7/@outgoingFlows.0" label="show message" message="The employee level is already Senior">
+    <outgoingFlows target="//@ownedElements.9"/>
+  </ownedElements>
+  <ownedElements xsi:type="bpmn:MergeDecision" incomingFlows="//@ownedElements.8/@outgoingFlows.0 //@ownedElements.2/@outgoingFlows.0 //@ownedElements.4/@outgoingFlows.0 //@ownedElements.6/@outgoingFlows.0 //@ownedElements.7/@outgoingFlows.1">
+    <outgoingFlows target="//@ownedElements.10"/>
+  </ownedElements>
+  <ownedElements xsi:type="bpmn:EndEvent" incomingFlows="//@ownedElements.9/@outgoingFlows.0"/>
+  <parameters xsi:type="bpmn:Entity" name="Employee">
+    <attributes xsi:type="bpmn:StringVariable" name="name">
+      <valueObject value="John"/>
+    </attributes>
+    <attributes xsi:type="bpmn:StringVariable" name="level">
+      <valueObject value="Senior"/>
+    </attributes>
+  </parameters>
+  <parameters xsi:type="bpmn:StringVariable" name="JUNIOR">
+    <valueObject value="Junior"/>
+  </parameters>
+  <parameters xsi:type="bpmn:StringVariable" name="MEDIOR">
+    <valueObject value="Medior"/>
+  </parameters>
+  <parameters xsi:type="bpmn:StringVariable" name="SENIOR">
+    <valueObject value="Senior"/>
+  </parameters>
+  <parameters xsi:type="bpmn:StringVariable" name="EMPTY">
+    <valueObject value=""/>
+  </parameters>
+</bpmn:Microflow>

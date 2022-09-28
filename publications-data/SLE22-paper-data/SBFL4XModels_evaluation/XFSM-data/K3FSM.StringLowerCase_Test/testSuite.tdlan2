@@ -1,0 +1,161 @@
+Package testSuite {
+
+	Test Configuration lowerCaseConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT k3fsm of type MUT with { 
+			MUTPath : '/K3FSM.StringLowerCase/StringToLowercase.model' ; 
+			DSLName : 'K3fsm.DSL' ;
+		} ;
+		connect tester.genericGate to k3fsm.genericGate ;
+		connect tester.oclGate to k3fsm.oclGate ;
+	}
+	
+	FSM FSMNewState(_name = "toLowerCase");
+	
+	Test Description test1 uses configuration lowerCaseConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "TEST EXECUTION") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.genericGate sends getModelState to k3fsm.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = "test execution") to tester.genericGate;
+	}
+	Test Description test2 uses configuration lowerCaseConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "test execution") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.genericGate sends getModelState to k3fsm.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = "test execution") to tester.genericGate;
+	}
+	Test Description test3 uses configuration lowerCaseConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = " ") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.genericGate sends getModelState to k3fsm.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = " ") to tester.genericGate;
+	}
+	Test Description test4 uses configuration lowerCaseConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "teSt exEcuTiON") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.genericGate sends getModelState to k3fsm.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = "test execution") to tester.genericGate;
+	}
+	Test Description test5 uses configuration lowerCaseConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.genericGate sends getModelState to k3fsm.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = "abcdefghijklmnopqrstuvwxyz") to tester.genericGate;
+	}
+	Test Description test6 uses configuration lowerCaseConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "abcdefghijklmnopqrstuvwxyz") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.genericGate sends getModelState to k3fsm.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = "abcdefghijklmnopqrstuvwxyz") to tester.genericGate;
+	}
+	Test Description test7 uses configuration lowerCaseConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.genericGate sends getModelState to k3fsm.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz") to tester.genericGate;
+	}
+	
+	//common package
+	Type OCL ( query of type EString ) ;
+	OCL oclQuery ( query = ? ) ;
+	Type Verdict ;
+	Verdict PASS ;
+	Verdict FAIL ;
+	Verdict INCONCLUSINVE ;
+	Type modelExecutionCommand ;
+	modelExecutionCommand runModel ;
+	modelExecutionCommand runModelAsynchronous ;
+	modelExecutionCommand stopModelExecution ;
+	modelExecutionCommand resetModel ;
+	modelExecutionCommand getModelState ;
+	
+	//k3fsmSpecificTypes
+	Type FSM ( 
+		_name of type EString , 
+		ownedStates of type State , 
+		initialState of type State , 
+		finalState of type State , 
+		currentState of type State with { dynamic ;} , 
+		unprocessedString of type EString with { dynamic ; } , 
+		consumedString of type EString with { dynamic ; } , 
+		producedString of type EString with { dynamic ; } ) ;
+	Type State ( 
+		_name of type EString , 
+		outgoingTransitions of type Transition , 
+		incomingTransitions of type Transition , 
+		owningFSM of type FSM
+	) ;
+	Type Transition ( 
+		input of type EString , 
+		target of type State , 
+		_name of type EString , 
+		output of type EString , 
+		source of type State
+	) ;
+	Annotation dynamic ;
+	Type EInvocationTargetException ;
+	Type EFeatureMapEntry ;
+	Type EDate ;
+	Type EShortObject ;
+	Type EBigInteger ;
+	Type EIntegerObject ;
+	Type EJavaClass ;
+	Type EDouble ;
+	Type EJavaObject ;
+	Type EEnumerator ;
+	Type ETreeIterator ;
+	Type EDiagnosticChain ;
+	Type EBigDecimal ;
+	Type EResourceSet ;
+	Type EFloat ;
+	Type EDoubleObject ;
+	Type EInt ;
+	Type EResource ;
+	Type EByteObject ;
+	Type EShort ;
+	Type ELongObject ;
+	Type EFloatObject ;
+	Type EBoolean ;
+	Type EFeatureMap ;
+	Type ELong ;
+	Type EByteArray ;
+	Type EString ;
+	Type EBooleanObject ;
+	Type EChar ;
+	Type EByte ;
+	Type EEList ;
+	Type EMap ;
+	Type ECharacterObject ;
+	
+	Gate Type genericGateType accepts modelExecutionCommand;
+	Gate Type oclGateType accepts OCL;
+	
+	Component Type TestSystem having {
+		gate genericGate of type genericGateType;
+		gate oclGate of type oclGateType;
+	}
+	Component Type MUT having {
+		gate genericGate of type genericGateType;
+		gate oclGate of type oclGateType;
+	}
+	Annotation MUTPath ;
+	Annotation DSLName ;
+	Test Configuration genericConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT k3fsm of type MUT with { 
+			MUTPath : 'TODO: Put the address of the Model-Under Test here' ; 
+			DSLName : 'TODO: Put the name of the DSL' ;
+		} ;
+		connect tester.genericGate to k3fsm.genericGate ;
+	}
+	Test Configuration oclConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT k3fsm of type MUT with { 
+			MUTPath : 'TODO: Put the address of the Model-Under Test here' ; 
+			DSLName : 'TODO: Put the name of the DSL' ;
+		} ;
+		connect tester.genericGate to k3fsm.genericGate ;
+		connect tester.oclGate to k3fsm.oclGate ;
+	}
+	
+}

@@ -1,0 +1,26 @@
+Package Event015_Test_TestSuite {
+	Import all from common ;
+	Import all from pssmSpecificTypes ;
+	Import all from pssmSpecificEvents ;
+	Import all from testConfiguration ;
+	StateMachine Event015_Test ( _name = 'Event015_Test$behavior$1' ) ;
+	Signal Start ( _name = 'Start' ) ;
+	Behavior T1_2_effect ( _name = 'T1.2(effect)' ) ;
+	Behavior T1_3_effect ( _name = 'T1.3(effect)' ) ;
+	Behavior T3_testEnd ( _name = 'T3(testEnd)' ) ;
+	Test Description Event015_Test uses configuration configuration4Event015_Test {
+		tester.dslSpecificTestGate sends _run (
+			state_machine = Event015_Test
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Event015_Test ,
+			signal = Start
+		) to PSSM.dslSpecificMUTGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = T1_2_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = T3_testEnd
+		) to tester.dslSpecificTestGate ;
+	}
+}

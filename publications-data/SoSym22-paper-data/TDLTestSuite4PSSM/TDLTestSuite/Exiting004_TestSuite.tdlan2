@@ -1,0 +1,33 @@
+Package Exiting004_TestSuite {
+	Import all from common ;
+	Import all from pssmSpecificTypes ;
+	Import all from pssmSpecificEvents ;
+	Import all from testConfiguration ;
+	StateMachine Exiting004 ( _name = 'Exiting004$behavior$1' ) ;
+	Signal Start ( _name = 'Start' ) ;
+	Behavior S1_1_exit ( _name = 'S1.1(exit)' ) ;
+	Behavior T1_2_effect ( _name = 'T1.2(effect)' ) ;
+	Behavior S1_exit ( _name = 'S1(exit)' ) ;
+	Behavior T3_testEnd ( _name = 'T3(testEnd)' ) ;
+	Test Description Exiting004 uses configuration configuration4Exiting004 {
+		tester.reactiveGate sends _run (
+			state_machine = Exiting004
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting004 ,
+			signal = Start
+		) to PSSM.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T1_2_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T3_testEnd
+		) to tester.reactiveGate ;
+	}
+}

@@ -1,0 +1,132 @@
+Package TestSuite {
+	Import all from common ;
+	Import all from arduinoSpecificTypes ;
+	Import all from arduinoSpecificEvents;
+	Import all from testConfiguration ;
+	//test data
+	InfraRedSensor IRSensor(_name = "IRSensor1");
+	DigitalPin led_pin (_name = "led_pin", level =?);
+	PushButton button (_name = "Button1");
+	DigitalPin buzzer_pin (_name = "buzzer_pin", level =?);
+	//test cases
+	Test Description test1 uses configuration sensorLedConfiguration{
+		tester.reactiveGate sends button_pressed (button = button) to arduino.reactiveGate;
+		component tester waits for '500';
+		arduino.reactiveGate sends Pin_level_changed (pin = buzzer_pin (level = '1')) to tester.reactiveGate;
+	}
+	Test Description test2 uses configuration sensorLedConfiguration{
+		tester.reactiveGate sends button_pressed (button = button) to arduino.reactiveGate;
+		component tester waits for '500';
+		arduino.reactiveGate sends Pin_level_changed (pin = buzzer_pin (level = '1')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = buzzer_pin (level = '0')) to tester.reactiveGate;
+	}
+	Test Description test3 uses configuration sensorLedConfiguration{
+		tester.reactiveGate sends button_pressed (button = button) to arduino.reactiveGate;
+		component tester waits for '500';
+		arduino.reactiveGate sends Pin_level_changed (pin = buzzer_pin(level = '1')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = buzzer_pin (level = '0')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = buzzer_pin(level = '1')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = buzzer_pin (level = '0')) to tester.reactiveGate;
+	}
+	Test Description test4 uses configuration sensorLedConfiguration{
+		tester.reactiveGate sends IRSensor_detected (sensor = IRSensor) to arduino.reactiveGate;
+		component tester waits for '500';
+		arduino.reactiveGate sends Pin_level_changed (pin = led_pin (level = '1')) to tester.reactiveGate;
+	}
+	Test Description test5 uses configuration sensorLedConfiguration{
+		tester.reactiveGate sends IRSensor_detected (sensor = IRSensor) to arduino.reactiveGate;
+		component tester waits for '500';
+		arduino.reactiveGate sends Pin_level_changed (pin = led_pin (level = '1')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = led_pin (level = '0')) to tester.reactiveGate;
+	}
+	Test Description test6 uses configuration sensorLedConfiguration{
+		tester.reactiveGate sends IRSensor_detected (sensor = IRSensor) to arduino.reactiveGate;
+		component tester waits for '500';
+		arduino.reactiveGate sends Pin_level_changed (pin = led_pin(level = '1')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = led_pin (level = '0')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = led_pin(level = '1')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = led_pin (level = '0')) to tester.reactiveGate;
+	}
+	Test Description test7 uses configuration sensorLedConfiguration{
+		tester.reactiveGate sends button_pressed (button = button) to arduino.reactiveGate;
+		component tester waits for '500';
+		arduino.reactiveGate sends Pin_level_changed (pin = buzzer_pin (level = '1')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = buzzer_pin (level = '0')) to tester.reactiveGate;
+		tester.reactiveGate sends button_released (button = button) to arduino.reactiveGate;
+		
+		tester.reactiveGate sends IRSensor_detected (sensor = IRSensor) to arduino.reactiveGate;
+		component tester waits for '500';
+		arduino.reactiveGate sends Pin_level_changed (pin = led_pin (level = '1')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = led_pin (level = '0')) to tester.reactiveGate;
+	}
+	
+	Test Description test8 uses configuration sensorLedConfiguration{
+		tester.reactiveGate sends button_pressed (button = button) to arduino.reactiveGate;
+		component tester waits for '500';
+		arduino.reactiveGate sends Pin_level_changed (pin = buzzer_pin(level = '1')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = buzzer_pin (level = '0')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = buzzer_pin(level = '1')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = buzzer_pin (level = '0')) to tester.reactiveGate;
+		tester.reactiveGate sends button_released (button = button) to arduino.reactiveGate;
+		
+		tester.reactiveGate sends IRSensor_detected (sensor = IRSensor) to arduino.reactiveGate;
+		component tester waits for '500';
+		arduino.reactiveGate sends Pin_level_changed (pin = led_pin(level = '1')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = led_pin (level = '0')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = led_pin(level = '1')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = led_pin (level = '0')) to tester.reactiveGate;
+	}
+	Test Description test9 uses configuration sensorLedConfiguration{
+		tester.reactiveGate sends IRSensor_detected (sensor = IRSensor) to arduino.reactiveGate;
+		component tester waits for '500';
+		arduino.reactiveGate sends Pin_level_changed (pin = led_pin (level = '1')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = led_pin (level = '0')) to tester.reactiveGate;
+		tester.reactiveGate sends IRSensor_notDetected (sensor = IRSensor) to arduino.reactiveGate;
+		
+		tester.reactiveGate sends button_pressed (button = button) to arduino.reactiveGate;
+		component tester waits for '500';
+		arduino.reactiveGate sends Pin_level_changed (pin = buzzer_pin (level = '1')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = buzzer_pin (level = '0')) to tester.reactiveGate;
+	}
+	
+	Test Description test10 uses configuration sensorLedConfiguration{
+		tester.reactiveGate sends IRSensor_detected (sensor = IRSensor) to arduino.reactiveGate;
+		component tester waits for '500';
+		arduino.reactiveGate sends Pin_level_changed (pin = led_pin(level = '1')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = led_pin (level = '0')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = led_pin(level = '1')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = led_pin (level = '0')) to tester.reactiveGate;
+		tester.reactiveGate sends IRSensor_notDetected (sensor = IRSensor) to arduino.reactiveGate;
+		
+		tester.reactiveGate sends button_pressed (button = button) to arduino.reactiveGate;
+		component tester waits for '500';
+		arduino.reactiveGate sends Pin_level_changed (pin = buzzer_pin(level = '1')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = buzzer_pin (level = '0')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = buzzer_pin(level = '1')) to tester.reactiveGate;
+		component tester waits for '1000';
+		arduino.reactiveGate sends Pin_level_changed (pin = buzzer_pin (level = '0')) to tester.reactiveGate;
+	}
+}

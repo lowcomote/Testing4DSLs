@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" uid="_TbTjULcCEeuVgZgj_yKwuw" version="14.3.1.202003261200">
+  <semanticResources>generated/common.tdlan2</semanticResources>
+  <semanticResources>generated/bpmnSpecificTypes.tdlan2</semanticResources>
+  <semanticResources>generated/testConfiguration.tdlan2</semanticResources>
+  <semanticResources>PromoteEmployee_Test.tdlan2</semanticResources>
+  <semanticResources>VerifyUserAccess_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210706_215346/PromoteEmployee_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210706_215418/VerifyUserAccess_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210706_215454/VerifyUserAccess_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210706_215609/PromoteEmployee_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210706_215944/PromoteEmployee_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210706_220029/VerifyUserAccess_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210706_220241/VerifyUserAccess_Test.tdlan2</semanticResources>
+</viewpoint:DAnalysis>

@@ -1,0 +1,862 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TDLTestCoverage:TestSuiteCoverage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:TDLTestCoverage="http://coverage.metamodel/TestCoverage" coveragePercentage="100.0">
+  <testSuite href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/testSuite.tdlan2#/"/>
+  <testCaseCoverages coveragePercentage="54.17">
+    <testCase href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/testSuite.tdlan2#//@packagedElement.4"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.0/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.1/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.2/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.3"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.3/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@condition/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@condition/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1/@condition"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="66.67">
+    <testCase href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/testSuite.tdlan2#//@packagedElement.5"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest_test2.xmi#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest_test2.xmi#//@boards.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.0/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest_test2.xmi#//@boards.0/@digitalPins.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.1/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest_test2.xmi#//@boards.0/@digitalPins.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.2/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.3"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.3/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest_test2.xmi#//@sketches.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@condition/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@condition/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1/@condition"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="75.0">
+    <testCase href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/testSuite.tdlan2#//@packagedElement.6"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest_test3.xmi#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest_test3.xmi#//@boards.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.0/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest_test2.xmi#//@boards.0/@digitalPins.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.1/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.2/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.3"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.3/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest_test3.xmi#//@sketches.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@condition/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@condition/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1/@condition"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="91.67">
+    <testCase href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/testSuite.tdlan2#//@packagedElement.7"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest_test4.xmi#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest_test4.xmi#//@boards.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.0/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.1/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.2/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest_test4.xmi#//@boards.0/@digitalPins.3"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.3/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest_test4.xmi#//@sketches.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@condition/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@condition/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1/@condition"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="75.0">
+    <testCase href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/testSuite.tdlan2#//@packagedElement.8"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest_test3.xmi#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest_test3.xmi#//@boards.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.0/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest_test2.xmi#//@boards.0/@digitalPins.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.1/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.2/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.3"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.3/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest_test3.xmi#//@sketches.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@condition/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@condition/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1/@condition"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="100.0">
+    <testCase href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/testSuite.tdlan2#//@packagedElement.9"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest_test6.xmi#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest_test6.xmi#//@boards.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest_test6.xmi#//@boards.0/@digitalPins.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.0/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.1/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.2/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest_test4.xmi#//@boards.0/@digitalPins.3"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.3/@module"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest_test6.xmi#//@sketches.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@condition/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@condition"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@condition/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1/@block"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1/@block/@instructions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2/@operand"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1/@condition"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#/"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.0/@module"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.1/@module"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.2"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.2/@module"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.3"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@boards.0/@digitalPins.3/@module"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@condition"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@condition/@right"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.2"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@block"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.2/@condition"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@condition"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.0/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@condition/@right"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1/@block"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1/@block/@instructions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.0/@block/@instructions.1/@block/@instructions.2/@operand"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/Arduino.SensorAlarm_Test/result_coverage/execution-20220810_110013/modelUnderTest.xmi#//@sketches.0/@block/@instructions.1/@condition"/>
+  </tsObjectCoverageStatus>
+</TDLTestCoverage:TestSuiteCoverage>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ASCII"?>
+<arduino:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:arduino="http://www.obeo.fr/arduino">
+  <boards xsi:type="arduino:ArduinoBoard" name="board">
+    <digitalPins name="led_pin" level="1">
+      <module xsi:type="arduino:LED" name="LED1"/>
+    </digitalPins>
+    <digitalPins name="sensor_pin">
+      <module xsi:type="arduino:InfraRedSensor" name="irSensor1"/>
+    </digitalPins>
+    <digitalPins name="alarm_pin">
+      <module xsi:type="arduino:Buzzer" name="alarm1"/>
+    </digitalPins>
+    <digitalPins name="button_pin" level="1">
+      <module xsi:type="arduino:PushButton" name="button1"/>
+    </digitalPins>
+  </boards>
+  <sketches name="sketch" board="//@boards.0">
+    <block>
+      <instructions xsi:type="arduino:While">
+        <block>
+          <instructions xsi:type="arduino:ModuleAssignment" module="//@boards.0/@digitalPins.0/@module">
+            <operand xsi:type="arduino:IntegerConstant" value="1"/>
+          </instructions>
+          <instructions xsi:type="arduino:While">
+            <block>
+              <instructions xsi:type="arduino:ModuleAssignment" module="//@boards.0/@digitalPins.2/@module">
+                <operand xsi:type="arduino:IntegerConstant" value="1"/>
+              </instructions>
+              <instructions xsi:type="arduino:Delay" value="1000"/>
+              <instructions xsi:type="arduino:ModuleAssignment" module="//@boards.0/@digitalPins.2/@module">
+                <operand xsi:type="arduino:IntegerConstant" value="1"/>
+              </instructions>
+              <instructions xsi:type="arduino:Delay" value="1000"/>
+            </block>
+            <condition xsi:type="arduino:BinaryBooleanExpression" operator="equal">
+              <left xsi:type="arduino:IntegerConstant" value="1"/>
+              <right xsi:type="arduino:IntegerModuleGet" module="//@boards.0/@digitalPins.1/@module"/>
+            </condition>
+          </instructions>
+          <instructions xsi:type="arduino:If">
+            <block>
+              <instructions xsi:type="arduino:ModuleAssignment" module="//@boards.0/@digitalPins.2/@module">
+                <operand xsi:type="arduino:IntegerConstant"/>
+              </instructions>
+            </block>
+            <condition xsi:type="arduino:BooleanModuleGet" module="//@boards.0/@digitalPins.2/@module"/>
+          </instructions>
+        </block>
+        <condition xsi:type="arduino:BinaryBooleanExpression" operator="equal">
+          <left xsi:type="arduino:IntegerConstant" value="1"/>
+          <right xsi:type="arduino:IntegerModuleGet" module="//@boards.0/@digitalPins.3/@module"/>
+        </condition>
+      </instructions>
+      <instructions xsi:type="arduino:If">
+        <block>
+          <instructions xsi:type="arduino:ModuleAssignment" module="//@boards.0/@digitalPins.0/@module">
+            <operand xsi:type="arduino:IntegerConstant"/>
+          </instructions>
+        </block>
+        <condition xsi:type="arduino:BooleanModuleGet" module="//@boards.0/@digitalPins.0/@module"/>
+      </instructions>
+    </block>
+  </sketches>
+</arduino:Project>

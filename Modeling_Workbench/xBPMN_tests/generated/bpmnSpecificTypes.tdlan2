@@ -1,0 +1,160 @@
+Package bpmnSpecificTypes {
+	Type Microflow ( 
+		_name of type EString , 
+		ownedElements of type MicroflowElement , 
+		currentNode of type MicroflowElement with { dynamic ;} , 
+		valuedVariables of type Variable with { dynamic ; } , 
+		parameters of type Variable ) ;
+	Type MicroflowElement ( 
+		incomingFlows of type SequenceFlow , 
+		outgoingFlows of type SequenceFlow , 
+		_label of type EString , 
+		ownerMicroflow of type Microflow
+	) ;
+	Type SequenceFlow ( 
+		constraint of type EString , 
+		source of type MicroflowElement , 
+		target of type MicroflowElement
+	) ;
+	Type Activity extends MicroflowElement ( ) with {abstract ;} ;
+	Type ObjectActivity extends Activity ( 
+		entity of type Entity
+	) with {abstract ;} ;
+	Type CreateObject extends ObjectActivity ( 
+		newEntity of type Entity
+	) ;
+	Type DeleteObject extends ObjectActivity ( ) ;
+	Type ChangeObject extends ObjectActivity ( 
+		newValue of type Value , 
+		variableToBeChanged of type BasicVariable
+	) ;
+	Type RetrieveObject extends ObjectActivity ( 
+		constraint of type EString
+	) ;
+	Type ActionCallActivity extends Activity ( ) with { abstract ;} ;
+	Type MicroflowCall extends ActionCallActivity ( 
+		target of type Microflow
+	) ;
+	Type VariableActivity extends Activity ( ) with {abstract ;} ;
+	Type CreateVariable extends VariableActivity ( 
+		newVariable of type BasicVariable
+	) ;
+	Type ChangeVariable extends VariableActivity ( 
+		targetVariable of type BasicVariable , 
+		newValue of type Value
+	) ;
+	Type ClientActivity extends Activity ( ) with {	abstract ;} ;
+	Type ShowMessage extends ClientActivity ( 
+		message of type EString
+	) ;
+	Type Event extends MicroflowElement ( ) with {abstract ;} ;
+	Type StartEvent extends Event ( ) ;
+	Type EndEvent extends Event ( 
+		returnVariable of type Variable
+	) ;
+	Type Variable ( 
+		_name of type EString
+	) ;
+	Type Entity extends Variable ( 
+		attributes of type BasicVariable with { dynamic ;} , 
+		references of type Reference with { dynamic ; } 
+	) ;
+	Type Reference ( 
+		_name of type EString , 
+		referencedEntity of type Entity
+	) ;
+	Type BasicVariable extends Variable ( ) ;
+	Type IntegerVariable extends BasicVariable ( 
+		valueObject of type IntegerValue with { dynamic ;} 
+	) ;
+	Type BooleanVariable extends BasicVariable ( 
+		valueObject of type BooleanValue with { dynamic ;} 
+	) ;
+	Type StringVariable extends BasicVariable ( 
+		valueObject of type StringValue with { dynamic ;} 
+	) ;
+	Type Value ( ) with {abstract ;} ;
+	Type IntegerValue extends Value ( 
+		value of type EInt with { dynamic ;}
+	) ;
+	Type BooleanValue extends Value ( 
+		value of type EBoolean with { dynamic ;} 
+	) ;
+	Type StringValue extends Value ( 
+		value of type EString with { dynamic ;} 
+	) ;
+	Type Decision extends MicroflowElement ( ) with {abstract ;} ;
+	Type ForkDecision extends Decision ( 
+		expression of type Expression
+	) ;
+	Type MergeDecision extends Decision ( ) ;
+	Type Expression ( ) with {abstract ;} ;
+	Type IntegerComparisonExpression extends Expression ( 
+		operator of type IntegerComparisonOperator , 
+		operand1 of type IntegerVariable , 
+		operand2 of type IntegerVariable
+	) ;
+	Type StringComparisonExpression extends Expression ( 
+		operator of type StringComparisonOperator , 
+		operand1 of type StringVariable , 
+		operand2 of type StringVariable
+	) ;
+	Type BooleanExpression ( ) with {abstract ;} ;
+	Type BooleanBinaryExpression extends BooleanExpression ( 
+		operator of type BooleanBinaryOperator , 
+		operand1 of type BooleanVariable , 
+		operand2 of type BooleanVariable
+	) ;
+	Type BooleanUnaryExpression extends BooleanExpression ( 
+		operator of type BooleanUnaryOperator , 
+		operand of type BooleanVariable
+	) ;
+	Type BooleanBinaryOperator ;
+	Type BooleanUnaryOperator ;
+	Type IntegerComparisonOperator ;
+	Type StringComparisonOperator ;
+	StringComparisonOperator _EQUALS ;
+	BooleanBinaryOperator AND ;
+	BooleanBinaryOperator OR ;
+	BooleanUnaryOperator NOT ;
+	IntegerComparisonOperator SMALLER ;
+	IntegerComparisonOperator SMALLER_EQUALS ;
+	IntegerComparisonOperator EQUALS ;
+	IntegerComparisonOperator GREATER_EQUALS ;
+	IntegerComparisonOperator GREATER ;
+	Annotation dynamic ;
+	Annotation abstract ;
+	Type EDiagnosticChain ;
+	Type EChar ;
+	Type EEList ;
+	Type EJavaObject ;
+	Type EByteObject ;
+	Type EInt ;
+	Type EInvocationTargetException ;
+	Type EByte ;
+	Type EFloat ;
+	Type ELong ;
+	Type EShortObject ;
+	Type EEnumerator ;
+	Type EJavaClass ;
+	Type EShort ;
+	Type EFeatureMap ;
+	Type EDoubleObject ;
+	Type EFeatureMapEntry ;
+	Type ETreeIterator ;
+	Type EIntegerObject ;
+	Type EResourceSet ;
+	Type EBoolean ;
+	Type ECharacterObject ;
+	Type EBigInteger ;
+	Type ELongObject ;
+	Type EByteArray ;
+	Type EBigDecimal ;
+	Type EDouble ;
+	Type EMap ;
+	Type EDate ;
+	Type EString ;
+	Type EFloatObject ;
+	Type EBooleanObject ;
+	Type EResource ;
+}

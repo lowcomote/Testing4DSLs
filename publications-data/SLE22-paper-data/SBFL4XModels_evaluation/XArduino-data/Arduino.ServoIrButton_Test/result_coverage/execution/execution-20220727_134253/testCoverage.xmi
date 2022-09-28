@@ -1,0 +1,928 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TDLTestCoverage:TestSuiteCoverage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:TDLTestCoverage="http://org.imt.tdl.coverage/TDLTestCoverage" coveragePercentage="100.0">
+  <testSuite href="/Arduino.ServoIrButton_Test/gemoc-gen/execution/execution-20220727_134253/testSuite.tdlan2#/"/>
+  <testCaseCoverages coveragePercentage="82.35">
+    <testCase href="/Arduino.ServoIrButton_Test/gemoc-gen/execution/execution-20220727_134253/testSuite.tdlan2#//@packagedElement.4"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3Y7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3Z7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3aLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3abvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3arvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3a7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3bLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFg7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFiLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFibvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFirvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFi7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFj7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFk7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwskLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwskrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwsk7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwslbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwslrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwsl7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="82.35">
+    <testCase href="/Arduino.ServoIrButton_Test/gemoc-gen/execution/execution-20220727_134253/testSuite.tdlan2#//@packagedElement.5"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3Y7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3Z7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3aLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3abvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3arvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3a7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3bLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFg7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFiLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFibvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFirvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFi7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFj7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFk7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwskLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwskrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwsk7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwslbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwslrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwsl7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="100.0">
+    <testCase href="/Arduino.ServoIrButton_Test/gemoc-gen/execution/execution-20220727_134253/testSuite.tdlan2#//@packagedElement.6"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3Y7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3Z7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3aLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3abvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3arvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3a7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3bLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFg7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFiLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFibvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFirvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFi7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFj7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFk7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwskLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwskrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwsk7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwslbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwslrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwsl7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="100.0">
+    <testCase href="/Arduino.ServoIrButton_Test/gemoc-gen/execution/execution-20220727_134253/testSuite.tdlan2#//@packagedElement.7"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3Y7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3Z7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3aLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3abvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3arvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3a7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3bLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFg7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFiLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFibvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFirvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFi7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFj7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFk7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwskLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwskrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwsk7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwslbvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwslrvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwsl7vrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3Y7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3Z7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3aLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3abvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3arvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3a7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3bLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFg7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFiLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFibvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFirvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFi7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFj7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFk7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwskLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwskrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwsk7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwslbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwslrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwsl7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3Y7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3Z7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3aLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3abvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3arvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3a7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3bLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFg7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFiLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFibvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFirvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFi7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFj7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFk7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwskLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwskrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwsk7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwslbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwslrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwsl7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3Y7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3Z7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3aLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3abvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3arvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3a7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3bLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFg7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFiLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFibvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFirvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFi7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFj7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFk7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwskLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwskrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwsk7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwslbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwslrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwsl7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3YrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3Y7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3ZrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3Z7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3aLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3abvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3arvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3a7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDu3bLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFgrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFg7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFhrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFiLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFibvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFirvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFi7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFjrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFj7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFkrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwFk7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwskLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwskrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwsk7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwslbvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwslrvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.ServoIrbutton/servoIrbutton.model#_WDwsl7vrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+</TDLTestCoverage:TestSuiteCoverage>

@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TDLTestCoverage:TestSuiteCoverage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:TDLTestCoverage="http://org.imt.tdl.coverage/TDLTestCoverage" coveragePercentage="100.0">
+  <testSuite href="/xFSM_tests/result_coverage/execution/execution-20220127_212951-EdgeDetector/EdgeDetector_Test.tdlan2#/"/>
+  <testCaseCoverages coveragePercentage="90.0">
+    <testCase href="/xFSM_tests/result_coverage/execution/execution-20220127_212951-EdgeDetector/EdgeDetector_Test.tdlan2#//@packagedElement.2"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="90.0">
+    <testCase href="/xFSM_tests/result_coverage/execution/execution-20220127_212951-EdgeDetector/EdgeDetector_Test.tdlan2#//@packagedElement.3"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="50.0">
+    <testCase href="/xFSM_tests/result_coverage/execution/execution-20220127_212951-EdgeDetector/EdgeDetector_Test.tdlan2#//@packagedElement.4"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="50.0">
+    <testCase href="/xFSM_tests/result_coverage/execution/execution-20220127_212951-EdgeDetector/EdgeDetector_Test.tdlan2#//@packagedElement.5"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="70.0">
+    <testCase href="/xFSM_tests/result_coverage/execution/execution-20220127_212951-EdgeDetector/EdgeDetector_Test.tdlan2#//@packagedElement.6"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="80.0">
+    <testCase href="/xFSM_tests/result_coverage/execution/execution-20220127_212951-EdgeDetector/EdgeDetector_Test.tdlan2#//@packagedElement.7"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="60.0">
+    <testCase href="/xFSM_tests/result_coverage/execution/execution-20220127_212951-EdgeDetector/EdgeDetector_Test.tdlan2#//@packagedElement.8"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="80.0">
+    <testCase href="/xFSM_tests/result_coverage/execution/execution-20220127_212951-EdgeDetector/EdgeDetector_Test.tdlan2#//@packagedElement.9"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.1"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#/"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#/"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#/"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#/"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#/"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#/"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#/"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#/"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.0/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.1/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/xFSM_models/EdgeDetector.k3fsm#//@ownedStates.2/@outgoingTransitions.1"/>
+  </tsObjectCoverageStatus>
+</TDLTestCoverage:TestSuiteCoverage>

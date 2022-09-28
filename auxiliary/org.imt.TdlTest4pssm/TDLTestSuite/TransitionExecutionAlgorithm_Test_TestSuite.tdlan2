@@ -1,0 +1,54 @@
+Package TransitionExecutionAlgorithm_Test_TestSuite {
+	Import all from common ;
+	Import all from pssmSpecificTypes ;
+	Import all from pssmSpecificEvents ;
+	Import all from testConfiguration ;
+	StateMachine TransitionExecutionAlgorithm_Test ( _name = 'TransitionExecutionAlgorithm_Test$behavior$1' ) ;
+	Signal Start ( _name = 'Start' ) ;
+	Signal Continue ( _name = 'Continue' ) ;
+	Behavior S1_1_exit ( _name = 'S1.1(exit)' ) ;
+	Behavior T1_2_effect ( _name = 'T1.2(effect)' ) ;
+	Behavior S1_exit ( _name = 'S1(exit)' ) ;
+	Behavior S2_1_1_entry ( _name = 'S2.1.1(entry)' ) ;
+	Behavior T2_1_effect ( _name = 'T2.1(effect)' ) ;
+	Behavior S2_1_entry ( _name = 'S2.1(entry)' ) ;
+	Behavior S2_entry ( _name = 'S2(entry)' ) ;
+	Behavior T2_effect ( _name = 'T2(effect)' ) ;
+	Test Description TransitionExecutionAlgorithm_Test uses configuration configuration4TransitionExecutionAlgorithm_Test {
+		tester.dslSpecificTestGate sends _run (
+			state_machine = TransitionExecutionAlgorithm_Test
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = TransitionExecutionAlgorithm_Test ,
+			signal = Start
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = TransitionExecutionAlgorithm_Test ,
+			signal = Continue
+		) to PSSM.dslSpecificMUTGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = S1_1_exit
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = T1_2_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = S1_exit
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = T2_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = S2_entry
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = S2_1_entry
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = T2_1_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = S2_1_1_entry
+		) to tester.dslSpecificTestGate ;
+	}
+}

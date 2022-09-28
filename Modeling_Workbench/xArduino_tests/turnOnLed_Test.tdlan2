@@ -1,0 +1,25 @@
+Package testSuite {
+	Import all from common ;
+	Import all from arduinoSpecificTypes ;
+	Import all from testConfiguration ;
+	
+	DigitalPin buttonNewState (_name = "pushButton", level = ?);
+	DigitalPin ledNewState (_name = "led", level =?);
+
+	Test Description test1 uses configuration turnOnLedConfiguration{
+		tester.genericGate sends buttonNewState (level = '0') to arduino.genericGate;
+		tester.genericGate sends runModelAsynchronous to arduino.genericGate;
+		component tester waits for '1000';
+		tester.genericGate sends stopModelExecution to arduino.genericGate;
+		tester.genericGate sends getModelState to arduino.genericGate;
+		arduino.genericGate sends ledNewState (level='0') to tester.genericGate;
+	}
+	Test Description test2 uses configuration turnOnLedConfiguration{
+		tester.genericGate sends buttonNewState (level = '1') to arduino.genericGate;
+		tester.genericGate sends runModelAsynchronous to arduino.genericGate;
+		component tester waits for '1000';
+		tester.genericGate sends stopModelExecution to arduino.genericGate;
+		tester.genericGate sends getModelState to arduino.genericGate;
+		arduino.genericGate sends ledNewState (level='1') to tester.genericGate;
+	}
+}

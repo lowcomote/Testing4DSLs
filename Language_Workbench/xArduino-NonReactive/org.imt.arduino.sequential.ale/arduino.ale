@@ -1,0 +1,421 @@
+behavior arduino;
+open class Instruction{
+	def Project getProject(Module module) {
+		Project project := null;
+		current := self.eContainer();
+		while (current != null) {
+			if (current.oclIsTypeOf(arduino::Project)) {
+				project := current.oclAsType(arduino::Project);
+				result := project;
+			}
+			current := current.eContainer();
+		}
+		result := project;
+	}
+	def Pin getPin (Module module){
+		Pin pin := null;
+		Project project := self.getProject(module);
+		for (board in project.boards){
+			if (board != null and board.oclIsTypeOf(arduino::ArduinoBoard)){
+				ArduinoBoard arduinoBoard := board.oclAsType(arduino::ArduinoBoard);
+				for (analogPin in arduinoBoard.analogPins){
+					if (analogPin.module = module){
+						result := analogPin;
+					}
+				}
+				for (digitalPin in arduinoBoard.digitalPins){
+					if (digitalPin.module = module){
+						result := digitalPin;
+					}
+				}
+			}
+		}
+		result := pin;
+	}
+	def void execute(){
+		
+	}
+	def void finalize(){
+		
+	}
+}
+open class Project{
+	def void execute(){
+		while(true){
+			self.sketches -> forAll(s|s.block.execute());
+		}
+	}
+	@main
+	def void main() {
+		'main'.log();
+		self.execute();
+	}
+	@step
+	def void setup(){
+		for (o in self.eAllContents){
+			if (o.oclIsTypeOf(arduino::IntegerVariable)) {
+				o.value := o.initialValue;
+			} else if (o.oclIsTypeOf(arduino::BooleanVariable)) {
+				o.value := o.initialValue;
+			} 
+		}
+	}
+	@init
+	def void initializeModel(String input) {
+		self.setup();
+	}
+}
+open class VariableAssignment extends Instruction{
+	@step
+	override void execute() {
+		variable := self.variable;	
+		value := self.operand.evaluate();
+
+		if (variable.oclIsTypeOf(arduino::IntegerVariable)){
+			variable.initialValue := value;
+			variable.value := value;
+		}
+		if (variable.oclIsTypeOf(arduino::BooleanVariable)){
+			variable.value := value;
+		}
+	}
+}
+open class Block{
+	def void execute(){
+		for (i in self.instructions){
+			i.execute();
+		}
+	}
+}
+open class ModuleInstruction extends Instruction{
+	override void execute(){
+		
+	}
+}
+open class ModuleAssignment extends ModuleInstruction{
+	@step
+	override void execute(){
+		pin = self.getPint(self.module);
+		('Changing the level of the pin ' + pin.name + ':').log();
+		('The current level is: ' + pin.level).log();
+		if (self.operand.oclIsTypeOf(arduino::IntegerExpression)){
+			pin.level := self.operand.evaluate();
+		}
+		if (self.operand.oclIsTypeOf(arduino::BooleanExpression)){
+			res := self.operand.evaluate();
+			if (res){
+				//TODO: CHECK
+				pin.level := HIGH;
+			}else{
+				pin.level := LOW;
+			}
+		}
+		('The new level is: ' + pin.level).log();
+		if (self.module.oclIsTypeOf(arduino::BluetoothTransceiver)){
+			transceiver := self.module.oclAsType(arduino::BluetoothTransceiver);
+			transceiver.dataToSend += pin.level;
+			transceiver.push();
+			
+		}
+	}
+}
+open class BluetoothTransceiver{
+	Sequence(Integer) dataToSend;
+	Sequence(Integer) dataReceived;
+	@step
+	def void push(){
+		for (t in self.connectedTransceiver){
+			for (s in self.dataToSend){
+				t.dataReceived += s;
+			}
+		}
+		dataToSend := null;
+	}
+}
+open class VariableDeclaration extends Instruction{
+	@step
+	override void execute(){
+		if (self.variable.oclIsTypeOf(arduino::IntegerVariable)){
+			self.variable.oclAsType(arduino::IntegerVariable).value := 
+				self.variable.oclAsType(arduino::IntegerVariable).initialValue;
+		}else if (self.variable.oclIsTypeOf(arduino::BooleanVariable)){
+			self.variable.oclAsType(arduino::BooleanVariable).value := 
+				self.variable.oclAsType(arduino::BooleanVariable).initialValue;
+		}
+	}
+}
+open class Control extends Instruction{
+	override void execute(){
+		
+	}
+	def Boolean evaluate() {
+	}
+}
+open class If extends Control{
+	override Boolean evaluate(){
+		if (self.condition.oclIsTypeOf(arduino::BooleanExpression)){
+			result := self.condition.evaluate;
+		}
+		result := false;
+	} 
+	@step
+	override void execute(){
+		if (self.evaluate()) {
+			self.block.execute();
+		} else {
+			if (self.elseBlock != null) {
+				self.elseBlock.execute();
+			}
+		}
+	}
+}
+open class Repeat extends Control{
+	Integer i := 0;
+	override Boolean evaluate(){
+		Boolean resCond := false;
+		if (self.i < self.iteration){
+			resCond := true;
+		}
+		self.i += 1;
+		result := resCond;
+	}
+	def void finalize(){
+		self.i := 0;
+	}
+	override void execute(){
+		while (self.evaluate()){
+			self.block.execute();
+		}
+		self.finlize();
+	}
+}
+open class While extends Control{
+	override Boolean evaluate(){
+		result := self.condition.evaluate();
+	}
+	override void execute(){
+		while(self.evaluate()){
+			self.block.execute();
+		}
+	}
+}
+open class Utilities extends Instruction{
+	override void execute(){
+		
+	}
+}
+open class WaitFor extends Utilities{
+	Boolean waiting := false;
+	Boolean moduleActivated := false;
+	int value := 0;
+	@step
+	override void execute(){
+		self.value := _self.pin.level;		
+		self.waiting := true;
+		while (not self.isValidated()) {
+			self.moduleActivated := false;			
+			self.loop();			
+		}
+		if (self.isValidated()) {
+			self.moduleActivated := false;
+			self.waiting := false;
+		}
+		self.moduleActivated := false;
+		self.waiting := false;
+	}
+	def Boolean isValidate(){
+		if (self.mode = arduino::ChangeType::CHANGE) {
+			result := (self.value != _self.pin.level);
+		} else if (self.mode = arduino::ChangeType::RISING) {
+			result := (self.value < self.pin.level);
+		} else if (self.mode = arduino::ChangeType::FALLING) {
+			result := (self.value > self.pin.level);
+		} else {			
+			result := false;
+		}
+	}
+	def void loop(){
+		//Thread.sleep(100);
+		'waiting'.log();
+	}
+	def void setActivated() {
+		if (self.waiting) {
+			self.moduleActivated := true;
+		}
+	}
+}
+open class BinaryIntegerExpression{
+	@step
+	def int evaluate() {
+		int res := 0;
+		int iLeft := 0;
+		int iRight := 0;
+		if(self.left.oclIsTypeOf(arduino::IntegerExpression)){
+			iLeft := self.left.oclAsType(arduino::IntegerExpression).evaluate();
+		}
+		if(self.right.oclIsTypeOf(arduino::IntegerExpression)){
+			iRight := self.right.oclAsType(arduino::IntegerExpression).evaluate();
+		}
+		if (self.operator = arduino::BinaryIntegerOperatorKind::div) {
+			result := iLeft / iRight;
+		} else if (self.operator = arduino::BinaryIntegerOperatorKind::max) {
+			result := Math.max(iLeft, iRight);
+		} else if (self.operator = arduino::BinaryIntegerOperatorKind::min) {
+			result := Math.min(iLeft, iRight);
+		} else if (self.operator = arduino::BinaryIntegerOperatorKind::minus) {
+			result := iLeft - iRight;
+		} else if (self.operator = arduino::BinaryIntegerOperatorKind::mul) {
+			result := iLeft * iRight;
+		} else if (self.operator = arduino::BinaryIntegerOperatorKind::plus) {
+			result := iLeft + iRight;
+		} else if (self.operator = arduino::BinaryIntegerOperatorKind::pourcent) {
+			result := iLeft - (iLeft / iRight);
+		} 
+	}
+}
+open class BooleanModuleGet{
+	def Boolean evaluate() {	
+		pin := self.instruction.getPin(self.module);
+		if (pin.level = 0){
+			result :=false;
+		}
+		result := true;
+	}
+}
+open class BooleanConstant{
+	def Booelean evaluate() {	
+		result := self.value;
+	}
+}
+open class IntegerConstant{
+	def int evaluate() {	
+		result := self.value;
+	}
+}
+open class IntegerModuleGet{
+	def int evaluate() {	
+		//FIXME Here it is dirty but I think we should 'transmit' the value in the module itself as the wire should do in true life
+		if (self.module.oclIsTypeOf(arduino::BluetoothTransceiver)){
+			l := self.module.oclAsType(arduino::BluetoothTransceiver).dataReceived;
+			res := l->at(1);
+			if (res != null) {
+				l->remove(0);
+				result := res;
+			} else {
+				result := 0;
+			}
+		}
+		
+		pin := self.instruction.getPin(self.module);
+		result := pin.level;
+	}
+}
+open class BinaryBooleanExpression{
+	def Boolean evaluate(){
+		leftIsBoolean := false;
+		rightIsBoolean := false;
+		bLeft := false;
+		bRight := false;
+		if(self.left.oclIsTypeOf(arduino::BooleanExpression)){
+			bLeft := self.left.oclAsType(arduino::BooleanExpression).evaluate();
+			leftIsBoolean := true;
+		}
+		if(self.right.oclIsTypeOf(arduino::BooleanExpression)){
+			bRight := self.right.oclAsType(arduino::BooleanExpression).evaluate();
+			rightIsBoolean := true;
+		}
+		if (leftIsBoolean != rightIsBoolean){
+			('left operand type does not match right operand type.').log();
+			result := false;
+		}
+		if (self.operator = (arduino::BinaryBooleanOperatorKind::AND)) {
+			if (bLeft){
+				result := bRight;
+			}
+			result := false;
+		}else if (self.operator = (arduino::BinaryBooleanOperatorKind::OR)) {
+			if (bLeft){
+				result := true;
+			}
+			result := bRight;
+		}else if (self.operator = arduino::BinaryBooleanOperatorKind::inf) {
+			result := bLeft < bRight;
+		} else if (self.operator = arduino::BinaryBooleanOperatorKind::infOrEqual) {
+			result := bLeft <= bRight;
+		} else if (self.operator = arduino::BinaryBooleanOperatorKind::equal) {
+			result := bLeft = bRight;
+		} else if (self.operator = arduino::BinaryBooleanOperatorKind::supOrEqual) {
+			result := bLeft >= bRight;
+		} else if (self.operator = arduino::BinaryBooleanOperatorKind::sup) {
+			result := bLeft > bRight;
+		} else if (self.operator = arduino::BinaryBooleanOperatorKind::Different) {
+			result := bLeft != bRight;
+		}else{
+			('Operator '+ self.operator + ' not simulated yet.').log();
+		}
+	}
+}
+open class BooleanConstant{
+	def Boolean evaluate(){
+		result := self.value;
+	}
+}
+open class IntegerConstant{
+	def int evaluate(){
+		result := self.value;
+	}
+}
+open class Delay{
+	def void execute(){
+		Thread.sleep(self.value);
+	}
+}
+open class Pin{
+	int LOW := 0;
+	int HIGH := 1023;
+}
+open class IntegerVariable{
+	int value := 0;
+	def int evaluate(){
+		result := self.value;
+	}
+}
+open class BooleanVariable{
+	Boolean value := false;
+	def int evaluate(){
+		result := self.value;
+	}
+}
+open class BooleanVariableRef{
+	def Boolean evaluate(){
+		self.variable.evaluate();
+	}
+}
+open class IntegerVariableRef{
+	def int evaluate(){
+		self.variable.evaluate();
+	}
+}
+open class Expression{
+	def Instruction getInstruction() {
+		Instruction instruction := null;
+		current := self.eContainer();
+		while (current != null) {
+			if (current.oclIsTypeOf(arduino::Instruction)) {
+				instruction := current.oclAsType(arduino::Instruction);
+				result := instruction;
+			}
+			current := current.eContainer();
+		}
+		result := instruction;
+	}
+}
+open class UnaryBooleanExpression{
+	@step
+	def Boolean evaluate() {
+		if (self.operator = arduino::UnaryBooleanOperatorKind::NOT) {
+			result := not self.operand.evaluate();
+		}
+		result := self.operand.evaluate();
+	}
+}

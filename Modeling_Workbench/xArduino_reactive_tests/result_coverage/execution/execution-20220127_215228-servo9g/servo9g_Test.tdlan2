@@ -1,0 +1,30 @@
+Package testSuite {
+	Import all from common ;
+	Import all from arduinoSpecificTypes ;
+	Import all from arduinoSpecificEvents;
+	Import all from testConfiguration ;
+	
+	Sketch sketch (_name = "mainSketch");
+	DigitalPin servoPin (_name = "servo", level =?);
+	
+	Test Description test1 uses configuration servo9gConfiguration{
+		tester.reactiveGate sends _run (sketch = sketch) to arduino.reactiveGate;
+		component tester waits for '100';
+		arduino.reactiveGate sends Pin_level_changed (pin = servoPin (level = '90')) to tester.reactiveGate;
+	}
+	Test Description test2 uses configuration servo9gConfiguration{
+		tester.reactiveGate sends _run (sketch = sketch) to arduino.reactiveGate;
+		component tester waits for '600';
+		arduino.reactiveGate sends Pin_level_changed (pin = servoPin (level = '180')) to tester.reactiveGate;
+	}
+	Test Description test3 uses configuration servo9gConfiguration{
+		tester.reactiveGate sends _run (sketch = sketch) to arduino.reactiveGate;
+		component tester waits for '1100';
+		arduino.reactiveGate sends Pin_level_changed (pin = servoPin (level = '0')) to tester.reactiveGate;
+	}
+	Test Description test4 uses configuration servo9gConfiguration{
+		tester.reactiveGate sends _run (sketch = sketch) to arduino.reactiveGate;
+		component tester waits for '1600';
+		arduino.reactiveGate sends Pin_level_changed (pin = servoPin (level = '90')) to tester.reactiveGate;
+	}
+}

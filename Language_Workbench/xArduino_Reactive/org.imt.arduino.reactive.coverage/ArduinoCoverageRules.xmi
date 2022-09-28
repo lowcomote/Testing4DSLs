@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ASCII"?>
+<DSLSpecificCoverage:DomainSpecificCoverage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DSLSpecificCoverage="https://org.imt.tdl.coverage/DSLSpecificCoverage" name="ArduinoCoverage">
+  <contexts>
+    <metaclass href="http://www.obeo.fr/arduino#//Project"/>
+    <rules xsi:type="DSLSpecificCoverage:CoverageByContent" multiplicity="ONE">
+      <containmentReference href="http://www.obeo.fr/arduino#//Project/sketches"/>
+    </rules>
+  </contexts>
+  <contexts>
+    <metaclass href="http://www.obeo.fr/arduino#//Sketch"/>
+    <rules xsi:type="DSLSpecificCoverage:CoverageByContent" multiplicity="ONE">
+      <containmentReference href="http://www.obeo.fr/arduino#//Sketch/block"/>
+    </rules>
+  </contexts>
+  <contexts>
+    <metaclass href="http://www.obeo.fr/arduino#//Block"/>
+    <rules xsi:type="DSLSpecificCoverage:CoverageByContent" multiplicity="ONE">
+      <containmentReference href="http://www.obeo.fr/arduino#//Block/instructions"/>
+    </rules>
+  </contexts>
+  <contexts>
+    <metaclass href="http://www.obeo.fr/arduino#//If"/>
+    <rules xsi:type="DSLSpecificCoverage:CoverageOfReferenced">
+      <reference href="http://www.obeo.fr/arduino#//If/condition"/>
+    </rules>
+  </contexts>
+  <contexts>
+    <metaclass href="http://www.obeo.fr/arduino#//While"/>
+    <rules xsi:type="DSLSpecificCoverage:CoverageOfReferenced">
+      <reference href="http://www.obeo.fr/arduino#//While/condition"/>
+    </rules>
+  </contexts>
+  <contexts>
+    <metaclass href="http://www.obeo.fr/arduino#//Board"/>
+    <rules xsi:type="DSLSpecificCoverage:Ignore"/>
+  </contexts>
+  <contexts>
+    <metaclass href="http://www.obeo.fr/arduino#//Pin"/>
+    <rules xsi:type="DSLSpecificCoverage:Ignore"/>
+  </contexts>
+  <contexts>
+    <metaclass href="http://www.obeo.fr/arduino#//Module"/>
+    <rules xsi:type="DSLSpecificCoverage:Ignore"/>
+  </contexts>
+  <metamodel href="http://www.obeo.fr/arduino#/"/>
+</DSLSpecificCoverage:DomainSpecificCoverage>

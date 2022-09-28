@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xminiJava:Program xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xminiJava="http://org.imt.minijava.xminijava/xminiJava/" name="org.cambridge.minijava.models">
+  <classes xsi:type="xminiJava:Class" name="Main">
+    <members xsi:type="xminiJava:Method" name="main" access="public" static="true">
+      <typeRef xsi:type="xminiJava:VoidTypeRef"/>
+      <params name="a">
+        <typeRef xsi:type="xminiJava:ArrayTypeRef">
+          <typeRef xsi:type="xminiJava:StringTypeRef"/>
+        </typeRef>
+      </params>
+      <body>
+        <statements xsi:type="xminiJava:Assignment">
+          <assignee xsi:type="xminiJava:VariableDeclaration" name="factorial">
+            <typeRef xsi:type="xminiJava:ClassRef" referencedClass="//@classes.1"/>
+          </assignee>
+          <value xsi:type="xminiJava:NewObject" type="//@classes.1"/>
+        </statements>
+        <statements xsi:type="xminiJava:Assignment">
+          <assignee xsi:type="xminiJava:VariableDeclaration" name="result">
+            <typeRef xsi:type="xminiJava:IntegerTypeRef"/>
+          </assignee>
+          <value xsi:type="xminiJava:MethodCall" method="//@classes.1/@members.0">
+            <receiver xsi:type="xminiJava:SymbolRef" symbol="//@classes.0/@members.0/@body/@statements.0/@assignee"/>
+            <args xsi:type="xminiJava:IntConstant" value="1"/>
+          </value>
+        </statements>
+      </body>
+    </members>
+  </classes>
+  <classes xsi:type="xminiJava:Class" name="Factorial">
+    <members xsi:type="xminiJava:Method" name="ComputeFac" access="public">
+      <typeRef xsi:type="xminiJava:IntegerTypeRef"/>
+      <params name="num">
+        <typeRef xsi:type="xminiJava:IntegerTypeRef"/>
+      </params>
+      <body>
+        <statements xsi:type="xminiJava:Assignment">
+          <assignee xsi:type="xminiJava:VariableDeclaration" name="num_aux">
+            <typeRef xsi:type="xminiJava:IntegerTypeRef"/>
+          </assignee>
+          <value xsi:type="xminiJava:IntConstant"/>
+        </statements>
+        <statements xsi:type="xminiJava:IfStatement">
+          <expression xsi:type="xminiJava:Inferior">
+            <left xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.0/@params.0"/>
+            <right xsi:type="xminiJava:IntConstant" value="1"/>
+          </expression>
+          <thenBlock>
+            <statements xsi:type="xminiJava:Assignment">
+              <assignee xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.0/@body/@statements.0/@assignee"/>
+              <value xsi:type="xminiJava:IntConstant" value="1"/>
+            </statements>
+          </thenBlock>
+          <elseBlock>
+            <statements xsi:type="xminiJava:Assignment">
+              <assignee xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.0/@body/@statements.0/@assignee"/>
+              <value xsi:type="xminiJava:Plus">
+                <left xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.0/@params.0"/>
+                <right xsi:type="xminiJava:MethodCall" method="//@classes.1/@members.0">
+                  <receiver xsi:type="xminiJava:This"/>
+                  <args xsi:type="xminiJava:Minus">
+                    <left xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.0/@params.0"/>
+                    <right xsi:type="xminiJava:IntConstant" value="1"/>
+                  </args>
+                </right>
+              </value>
+            </statements>
+          </elseBlock>
+        </statements>
+        <statements xsi:type="xminiJava:Return">
+          <expression xsi:type="xminiJava:SymbolRef" symbol="//@classes.1/@members.0/@body/@statements.0/@assignee"/>
+        </statements>
+      </body>
+    </members>
+  </classes>
+</xminiJava:Program>

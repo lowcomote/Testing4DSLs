@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TDLTestCoverage:TestSuiteCoverage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:TDLTestCoverage="http://org.imt.tdl.coverage/TDLTestCoverage" coveragePercentage="100.0">
+  <testSuite href="/Arduino.Servo9g_Test/gemoc-gen/execution/execution-20220727_134048/testSuite.tdlan2#/"/>
+  <testCaseCoverages coveragePercentage="80.0">
+    <testCase href="/Arduino.Servo9g_Test/gemoc-gen/execution/execution-20220727_134048/testSuite.tdlan2#//@packagedElement.3"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80B4LvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80B4bvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80B4rvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o8LvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_OYCMcLvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_PsA80LvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o8bvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o8rvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_aa13ALvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_cixM0LvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o-bvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o-rvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_bzfE8LvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_D223QLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o87vqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o9LvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o9rvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o97vqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="100.0">
+    <testCase href="/Arduino.Servo9g_Test/gemoc-gen/execution/execution-20220727_134048/testSuite.tdlan2#//@packagedElement.4"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80B4LvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80B4bvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80B4rvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o8LvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_OYCMcLvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_PsA80LvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o8bvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o8rvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_aa13ALvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_cixM0LvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o-bvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o-rvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_bzfE8LvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_D223QLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o87vqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o9LvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o9rvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o97vqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="100.0">
+    <testCase href="/Arduino.Servo9g_Test/gemoc-gen/execution/execution-20220727_134048/testSuite.tdlan2#//@packagedElement.5"/>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80B4LvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80B4bvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80B4rvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o8LvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_OYCMcLvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_PsA80LvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o8bvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o8rvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_aa13ALvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_cixM0LvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o-bvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o-rvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_bzfE8LvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_D223QLvrEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o87vqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o9LvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o9rvqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+      <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o97vqEey6kqvve9HPhQ"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80B4LvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80B4bvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80B4rvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o8LvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_OYCMcLvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_PsA80LvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o8bvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o8rvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_aa13ALvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_cixM0LvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o-bvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o-rvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_bzfE8LvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_D223QLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o87vqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o9LvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o9rvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o97vqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80B4LvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80B4bvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80B4rvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o8LvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_OYCMcLvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_PsA80LvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o8bvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o8rvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_aa13ALvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_cixM0LvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o-bvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o-rvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_bzfE8LvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_D223QLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o87vqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o9LvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o9rvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o97vqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80B4LvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80B4bvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80B4rvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o8LvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_OYCMcLvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_PsA80LvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o8bvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o8rvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_aa13ALvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_cixM0LvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o-bvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o-rvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_bzfE8LvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_D223QLvrEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o87vqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o9LvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o9rvqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTCOVERABLE">
+    <modelObject href="platform:/resource/Arduino.Servo9g/servo9g.model#_B80o97vqEey6kqvve9HPhQ"/>
+  </tsObjectCoverageStatus>
+</TDLTestCoverage:TestSuiteCoverage>

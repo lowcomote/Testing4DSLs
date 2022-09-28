@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" uid="_Mqq60LbzEeunvKerAOxefQ" version="14.5.1.202106111100">
+  <semanticResources>generated/common.tdlan2</semanticResources>
+  <semanticResources>generated/k3fsmSpecificTypes.tdlan2</semanticResources>
+  <semanticResources>generated/testConfiguration.tdlan2</semanticResources>
+  <semanticResources>BitShifting_Test.tdlan2</semanticResources>
+  <semanticResources>EdgeDetector_Test.tdlan2</semanticResources>
+  <semanticResources>StringLowerCase_Test.tdlan2</semanticResources>
+  <semanticResources>StringUpperCase_Test.tdlan2</semanticResources>
+  <semanticResources>TrafficLight_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210517_155038/BitShifting_Test.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20210517_155313/BitShifting_Test.tdlan2</semanticResources>
+  <semanticResources>platform:/resource/xFSM_models/BitShifting.k3fsm</semanticResources>
+  <semanticResources>platform:/resource/xFSM_models/String.toUpperCase.k3fsm</semanticResources>
+  <semanticResources>platform:/resource/xFSM_models/TrafficLight.k3fsm</semanticResources>
+  <semanticResources>platform:/resource/xFSM_models/String.toLowercase.k3fsm</semanticResources>
+  <semanticResources>platform:/resource/xFSM_models/EdgeDetector.k3fsm</semanticResources>
+  <semanticResources>result_coverage/execution/execution-20220127_212837-TrafficLight/TrafficLight_Test.tdlan2</semanticResources>
+  <semanticResources>result_coverage/execution/execution-20220127_212837-TrafficLight/testCoverage.xmi</semanticResources>
+  <semanticResources>result_coverage/execution/execution-20220127_212837-TrafficLight/testReport.xmi</semanticResources>
+  <semanticResources>result_coverage/execution/execution-20220127_212951-EdgeDetector/EdgeDetector_Test.tdlan2</semanticResources>
+  <semanticResources>result_coverage/execution/execution-20220127_212951-EdgeDetector/testCoverage.xmi</semanticResources>
+  <semanticResources>result_coverage/execution/execution-20220127_212951-EdgeDetector/testReport.xmi</semanticResources>
+  <semanticResources>result_coverage/execution/execution-20220127_213032-BitShifting/BitShifting_Test.tdlan2</semanticResources>
+  <semanticResources>result_coverage/execution/execution-20220127_213032-BitShifting/testCoverage.xmi</semanticResources>
+  <semanticResources>result_coverage/execution/execution-20220127_213032-BitShifting/testReport.xmi</semanticResources>
+  <semanticResources>result_coverage/execution/execution-20220127_212732-StringUpperCase/StringUpperCase_Test.tdlan2</semanticResources>
+  <semanticResources>result_coverage/execution/execution-20220127_212732-StringUpperCase/testCoverage.xmi</semanticResources>
+  <semanticResources>result_coverage/execution/execution-20220127_212732-StringUpperCase/testReport.xmi</semanticResources>
+  <semanticResources>result_coverage/execution/execution-20220127_212914-StringLowerCase/StringLowerCase_Test.tdlan2</semanticResources>
+  <semanticResources>result_coverage/execution/execution-20220127_212914-StringLowerCase/testCoverage.xmi</semanticResources>
+  <semanticResources>result_coverage/execution/execution-20220127_212914-StringLowerCase/testReport.xmi</semanticResources>
+</viewpoint:DAnalysis>

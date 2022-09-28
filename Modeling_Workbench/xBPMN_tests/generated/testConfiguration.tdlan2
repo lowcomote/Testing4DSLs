@@ -1,0 +1,50 @@
+Package testConfiguration {
+	Import all from common ;
+	Gate Type genericGateType accepts modelExecutionCommand ;
+	Gate Type oclGateType accepts OCL ;
+	Component Type TestSystem having {
+		gate genericGate of type genericGateType ;
+		gate oclGate of type oclGateType ;
+	}
+	Component Type MUT having {
+		gate genericGate of type genericGateType ;
+		gate oclGate of type oclGateType ;
+	}
+	Annotation MUTPath ;
+	Annotation DSLName ;
+	Test Configuration genericConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT bpmn of type MUT with { 
+			MUTPath : 'TODO: Put the address of the Model-Under Test here' ; 
+			DSLName : 'TODO: Put the name of the DSL' ;
+		} ;
+		connect tester.genericGate to bpmn.genericGate ;
+	}
+	Test Configuration oclConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT bpmn of type MUT with { 
+			MUTPath : 'TODO: Put the address of the Model-Under Test here' ; 
+			DSLName : 'TODO: Put the name of the DSL' ;
+		} ;
+		connect tester.genericGate to bpmn.genericGate ;
+		connect tester.oclGate to bpmn.oclGate ;
+	}
+	Test Configuration promoteEmployeeConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT bpmn of type MUT with { 
+			MUTPath : '/xBPMN_models/promoteEmployee.bpmn' ; 
+			DSLName : 'org.imt.bpmn.BPMN' ;
+		} ;
+		connect tester.genericGate to bpmn.genericGate ;
+		connect tester.oclGate to bpmn.oclGate ;
+	}
+	Test Configuration verifyUserAccessConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT bpmn of type MUT with { 
+			MUTPath : '/xBPMN_models/verifyUserAccess.bpmn' ; 
+			DSLName : 'org.imt.bpmn.BPMN' ;
+		} ;
+		connect tester.genericGate to bpmn.genericGate ;
+		connect tester.oclGate to bpmn.oclGate ;
+	}
+}

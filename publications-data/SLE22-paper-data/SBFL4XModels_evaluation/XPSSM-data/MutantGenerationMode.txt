@@ -1,0 +1,1 @@
+Mutant generation mode: 20 mutants per xModel

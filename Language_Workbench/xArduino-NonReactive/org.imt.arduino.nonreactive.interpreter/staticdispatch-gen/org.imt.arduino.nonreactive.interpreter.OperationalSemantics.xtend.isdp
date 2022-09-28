@@ -1,0 +1,165 @@
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.WaitFor_ExecutableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.WaitFor){
+			org.imt.arduino.nonreactive.interpreter.WaitFor_ExecutableAspect.execute((org.imt.arduino.nonreactive.arduino.WaitFor)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.WaitFor_ExecutableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Control_EvaluableAspect#Boolean evaluate() from org.imt.arduino.nonreactive.interpreter.While_EvaluableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.While){
+			result = org.imt.arduino.nonreactive.interpreter.While_EvaluableAspect.evaluate((org.imt.arduino.nonreactive.arduino.While)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Control_EvaluableAspect#Boolean evaluate() from org.imt.arduino.nonreactive.interpreter.While_EvaluableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Variable_EvaluableAspect#Object evaluate() from org.imt.arduino.nonreactive.interpreter.BooleanVariable_EvaluableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.BooleanVariable){
+			result = org.imt.arduino.nonreactive.interpreter.BooleanVariable_EvaluableAspect.evaluate((org.imt.arduino.nonreactive.arduino.BooleanVariable)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Variable_EvaluableAspect#Object evaluate() from org.imt.arduino.nonreactive.interpreter.BooleanVariable_EvaluableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Control_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.If_ExecutableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.If){
+			org.imt.arduino.nonreactive.interpreter.If_ExecutableAspect.execute((org.imt.arduino.nonreactive.arduino.If)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Control_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.If_ExecutableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Expression_EvaluableAspect#Object evaluate() from org.imt.arduino.nonreactive.interpreter.BinaryIntegerExpression_EvaluableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.BinaryIntegerExpression){
+			result = org.imt.arduino.nonreactive.interpreter.BinaryIntegerExpression_EvaluableAspect.evaluate((org.imt.arduino.nonreactive.arduino.BinaryIntegerExpression)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Expression_EvaluableAspect#Object evaluate() from org.imt.arduino.nonreactive.interpreter.BinaryIntegerExpression_EvaluableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Utilities_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.Delay_ExecutableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.Delay){
+			org.imt.arduino.nonreactive.interpreter.Delay_ExecutableAspect.execute((org.imt.arduino.nonreactive.arduino.Delay)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Utilities_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.Delay_ExecutableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.Utilities_ExecutableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.Utilities){
+			org.imt.arduino.nonreactive.interpreter.Utilities_ExecutableAspect.execute((org.imt.arduino.nonreactive.arduino.Utilities)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.Utilities_ExecutableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Utilities_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.WaitFor_ExecutableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.WaitFor){
+			org.imt.arduino.nonreactive.interpreter.WaitFor_ExecutableAspect.execute((org.imt.arduino.nonreactive.arduino.WaitFor)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Utilities_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.WaitFor_ExecutableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Expression_EvaluableAspect#Object evaluate() from org.imt.arduino.nonreactive.interpreter.UnaryBooleanExpression_EvaluableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.UnaryBooleanExpression){
+			result = org.imt.arduino.nonreactive.interpreter.UnaryBooleanExpression_EvaluableAspect.evaluate((org.imt.arduino.nonreactive.arduino.UnaryBooleanExpression)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Expression_EvaluableAspect#Object evaluate() from org.imt.arduino.nonreactive.interpreter.UnaryBooleanExpression_EvaluableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Control_EvaluableAspect#Boolean evaluate() from org.imt.arduino.nonreactive.interpreter.Repeat_EvaluableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.Repeat){
+			result = org.imt.arduino.nonreactive.interpreter.Repeat_EvaluableAspect.evaluate((org.imt.arduino.nonreactive.arduino.Repeat)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Control_EvaluableAspect#Boolean evaluate() from org.imt.arduino.nonreactive.interpreter.Repeat_EvaluableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Control_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.Repeat_ExecutableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.Repeat){
+			org.imt.arduino.nonreactive.interpreter.Repeat_ExecutableAspect.execute((org.imt.arduino.nonreactive.arduino.Repeat)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Control_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.Repeat_ExecutableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.While_ExecutableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.While){
+			org.imt.arduino.nonreactive.interpreter.While_ExecutableAspect.execute((org.imt.arduino.nonreactive.arduino.While)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.While_ExecutableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Expression_EvaluableAspect#Object evaluate() from org.imt.arduino.nonreactive.interpreter.BooleanModuleGet_ExecutableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.BooleanModuleGet){
+			result = org.imt.arduino.nonreactive.interpreter.BooleanModuleGet_ExecutableAspect.evaluate((org.imt.arduino.nonreactive.arduino.BooleanModuleGet)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Expression_EvaluableAspect#Object evaluate() from org.imt.arduino.nonreactive.interpreter.BooleanModuleGet_ExecutableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.ModuleAssignment_ExecutableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.ModuleAssignment){
+			org.imt.arduino.nonreactive.interpreter.ModuleAssignment_ExecutableAspect.execute((org.imt.arduino.nonreactive.arduino.ModuleAssignment)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.ModuleAssignment_ExecutableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.VariableDeclaration_ExecutableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.VariableDeclaration){
+			org.imt.arduino.nonreactive.interpreter.VariableDeclaration_ExecutableAspect.execute((org.imt.arduino.nonreactive.arduino.VariableDeclaration)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.VariableDeclaration_ExecutableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.ModuleInstruction_ExecutableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.ModuleInstruction){
+			org.imt.arduino.nonreactive.interpreter.ModuleInstruction_ExecutableAspect.execute((org.imt.arduino.nonreactive.arduino.ModuleInstruction)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.ModuleInstruction_ExecutableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Expression_EvaluableAspect#Object evaluate() from org.imt.arduino.nonreactive.interpreter.VariableRef_EvaluableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.VariableRef){
+			result = org.imt.arduino.nonreactive.interpreter.VariableRef_EvaluableAspect.evaluate((org.imt.arduino.nonreactive.arduino.VariableRef)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Expression_EvaluableAspect#Object evaluate() from org.imt.arduino.nonreactive.interpreter.VariableRef_EvaluableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.If_ExecutableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.If){
+			org.imt.arduino.nonreactive.interpreter.If_ExecutableAspect.execute((org.imt.arduino.nonreactive.arduino.If)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.If_ExecutableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Expression_EvaluableAspect#Object evaluate() from org.imt.arduino.nonreactive.interpreter.BinaryBooleanExpression_EvaluableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.BinaryBooleanExpression){
+			result = org.imt.arduino.nonreactive.interpreter.BinaryBooleanExpression_EvaluableAspect.evaluate((org.imt.arduino.nonreactive.arduino.BinaryBooleanExpression)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Expression_EvaluableAspect#Object evaluate() from org.imt.arduino.nonreactive.interpreter.BinaryBooleanExpression_EvaluableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.ModuleInstruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.ModuleAssignment_ExecutableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.ModuleAssignment){
+			org.imt.arduino.nonreactive.interpreter.ModuleAssignment_ExecutableAspect.execute((org.imt.arduino.nonreactive.arduino.ModuleAssignment)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.ModuleInstruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.ModuleAssignment_ExecutableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Expression_EvaluableAspect#Object evaluate() from org.imt.arduino.nonreactive.interpreter.BooleanConstant_ExecutableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.BooleanConstant){
+			result = org.imt.arduino.nonreactive.interpreter.BooleanConstant_ExecutableAspect.evaluate((org.imt.arduino.nonreactive.arduino.BooleanConstant)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Expression_EvaluableAspect#Object evaluate() from org.imt.arduino.nonreactive.interpreter.BooleanConstant_ExecutableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.Delay_ExecutableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.Delay){
+			org.imt.arduino.nonreactive.interpreter.Delay_ExecutableAspect.execute((org.imt.arduino.nonreactive.arduino.Delay)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.Delay_ExecutableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.ArduinoCommunicationModule_PushAspect#void push() from org.imt.arduino.nonreactive.interpreter.BluetoothTransceiver_PushAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.BluetoothTransceiver){
+			org.imt.arduino.nonreactive.interpreter.BluetoothTransceiver_PushAspect.push((org.imt.arduino.nonreactive.arduino.BluetoothTransceiver)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.ArduinoCommunicationModule_PushAspect#void push() from org.imt.arduino.nonreactive.interpreter.BluetoothTransceiver_PushAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Control_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.While_ExecutableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.While){
+			org.imt.arduino.nonreactive.interpreter.While_ExecutableAspect.execute((org.imt.arduino.nonreactive.arduino.While)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Control_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.While_ExecutableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.VariableAssignment_ExecutableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.VariableAssignment){
+			org.imt.arduino.nonreactive.interpreter.VariableAssignment_ExecutableAspect.execute((org.imt.arduino.nonreactive.arduino.VariableAssignment)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.VariableAssignment_ExecutableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.Control_ExecutableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.Control){
+			org.imt.arduino.nonreactive.interpreter.Control_ExecutableAspect.execute((org.imt.arduino.nonreactive.arduino.Control)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.Control_ExecutableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Control_EvaluableAspect#Boolean evaluate() from org.imt.arduino.nonreactive.interpreter.If_EvaluableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.If){
+			result = org.imt.arduino.nonreactive.interpreter.If_EvaluableAspect.evaluate((org.imt.arduino.nonreactive.arduino.If)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Control_EvaluableAspect#Boolean evaluate() from org.imt.arduino.nonreactive.interpreter.If_EvaluableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.Repeat_ExecutableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.Repeat){
+			org.imt.arduino.nonreactive.interpreter.Repeat_ExecutableAspect.execute((org.imt.arduino.nonreactive.arduino.Repeat)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void execute() from org.imt.arduino.nonreactive.interpreter.Repeat_ExecutableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Expression_EvaluableAspect#Object evaluate() from org.imt.arduino.nonreactive.interpreter.IntegerConstant_ExecutableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.IntegerConstant){
+			result = org.imt.arduino.nonreactive.interpreter.IntegerConstant_ExecutableAspect.evaluate((org.imt.arduino.nonreactive.arduino.IntegerConstant)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Expression_EvaluableAspect#Object evaluate() from org.imt.arduino.nonreactive.interpreter.IntegerConstant_ExecutableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Variable_EvaluableAspect#Object evaluate() from org.imt.arduino.nonreactive.interpreter.IntegerVariable_EvaluableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.IntegerVariable){
+			result = org.imt.arduino.nonreactive.interpreter.IntegerVariable_EvaluableAspect.evaluate((org.imt.arduino.nonreactive.arduino.IntegerVariable)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Variable_EvaluableAspect#Object evaluate() from org.imt.arduino.nonreactive.interpreter.IntegerVariable_EvaluableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Expression_EvaluableAspect#Object evaluate() from org.imt.arduino.nonreactive.interpreter.Constant_EvaluableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.Constant){
+			result = org.imt.arduino.nonreactive.interpreter.Constant_EvaluableAspect.evaluate((org.imt.arduino.nonreactive.arduino.Constant)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Expression_EvaluableAspect#Object evaluate() from org.imt.arduino.nonreactive.interpreter.Constant_EvaluableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Expression_EvaluableAspect#Object evaluate() from org.imt.arduino.nonreactive.interpreter.IntegerModuleGet_ExecutableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.IntegerModuleGet){
+			result = org.imt.arduino.nonreactive.interpreter.IntegerModuleGet_ExecutableAspect.evaluate((org.imt.arduino.nonreactive.arduino.IntegerModuleGet)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Expression_EvaluableAspect#Object evaluate() from org.imt.arduino.nonreactive.interpreter.IntegerModuleGet_ExecutableAspect
+	// BeginInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void finalize() from org.imt.arduino.nonreactive.interpreter.Repeat_EvaluableAspect
+		if (_self instanceof org.imt.arduino.nonreactive.arduino.Repeat){
+			org.imt.arduino.nonreactive.interpreter.Repeat_EvaluableAspect.finalize((org.imt.arduino.nonreactive.arduino.Repeat)_self);
+		} else
+		// EndInjectInto org.imt.arduino.nonreactive.interpreter.Instruction_ExecutableAspect#void finalize() from org.imt.arduino.nonreactive.interpreter.Repeat_EvaluableAspect

@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TestCoverage:TestSuiteCoverage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:TestCoverage="http://coverage.metamodel/TestCoverage" coveragePercentage="100.0">
+  <testSuite href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/testSuite.tdlan2#/"/>
+  <testCaseCoverages coveragePercentage="80.0">
+    <testCase href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/testSuite.tdlan2#//@packagedElement.3"/>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@typeRef"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@params.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@typeRef"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.0/@assignee"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@typeRef"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.0/@value"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@left"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock/@statements.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock/@statements.0/@assignee"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock/@statements.0/@assignee"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0/@value"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@left"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0/@value/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0/@value/@right/@receiver"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0/@value/@right/@args.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@left"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock/@statements.0/@assignee"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="100.0">
+    <testCase href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/testSuite.tdlan2#//@packagedElement.4"/>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test2.xmi#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@typeRef"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@params.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@typeRef"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.0/@assignee"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@typeRef"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.0/@value"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@left"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock/@statements.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock/@statements.0/@assignee"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock/@statements.0/@assignee"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0/@value"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@left"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0/@value/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0/@value/@right/@receiver"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0/@value/@right/@args.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@left"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock/@statements.0/@assignee"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="80.0">
+    <testCase href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/testSuite.tdlan2#//@packagedElement.5"/>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test3.xmi#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@typeRef"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@params.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@typeRef"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.0/@assignee"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@typeRef"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.0/@value"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@left"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock/@statements.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock/@statements.0/@assignee"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTCOVERED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock/@statements.0/@assignee"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0/@value"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@left"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0/@value/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0/@value/@right/@receiver"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0/@value/@right/@args.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@left"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock/@statements.0/@assignee"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <testCaseCoverages coveragePercentage="100.0">
+    <testCase href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/testSuite.tdlan2#//@packagedElement.6"/>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test4.xmi#/"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@typeRef"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@params.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@typeRef"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.0/@assignee"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@typeRef"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.0/@value"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@left"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock/@statements.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock/@statements.0/@assignee"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock/@statements.0/@assignee"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0/@value"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@left"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0/@value/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0/@value/@right/@receiver"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0/@value/@right/@args.0"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@left"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@right"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus>
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.2"/>
+    </tcObjectCoverageStatus>
+    <tcObjectCoverageStatus coverageStatus="NOTTRACED">
+      <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock/@statements.0/@assignee"/>
+    </tcObjectCoverageStatus>
+  </testCaseCoverages>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#/"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@typeRef"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@params.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@typeRef"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.0/@assignee"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@typeRef"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.0/@value"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@left"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@right"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock/@statements.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock/@statements.0/@assignee"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@right"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock/@statements.0/@assignee"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0/@value"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@left"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0/@value/@right"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0/@value/@right/@receiver"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@elseBlock/@statements.0/@value/@right/@args.0"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@left"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@expression/@right"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus>
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.2"/>
+  </tsObjectCoverageStatus>
+  <tsObjectCoverageStatus coverageStatus="NOTTRACED">
+    <modelObject href="/MiniJava.Factorial_Test/result_coverage/execution-20220819_191206/modelUnderTest_test1.xmi#//@classes.0/@members.0/@body/@statements.1/@thenBlock/@statements.0/@assignee"/>
+  </tsObjectCoverageStatus>
+</TestCoverage:TestSuiteCoverage>

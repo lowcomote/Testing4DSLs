@@ -1,0 +1,61 @@
+Package Deferred004_Test_A_TestSuite {
+	Import all from common ;
+	Import all from pssmSpecificTypes ;
+	Import all from pssmSpecificEvents ;
+	Import all from testConfiguration ;
+	StateMachine Deferred004_Test_A ( _name = 'Deferred004_Test_A$behavior$1' ) ;
+	Signal Continue ( _name = 'Continue' ) ;
+	Signal Start ( _name = 'Start' ) ;
+	Signal AnotherSignal ( _name = 'AnotherSignal' ) ;
+	Signal Pending ( _name = 'Pending' ) ;
+	Behavior S1_1_exit ( _name = 'S1.1(exit)' ) ;
+	Behavior T1_2_effect ( _name = 'T1.2(effect)' ) ;
+	Behavior S2_1_exit ( _name = 'S2.1(exit)' ) ;
+	Behavior T2_2_effect ( _name = 'T2.2(effect)' ) ;
+	Behavior S1_exit ( _name = 'S1(exit)' ) ;
+	Behavior T3_effect ( _name = 'T3(effect)' ) ;
+	Behavior T4_effect ( _name = 'T4(effect)' ) ;
+	Behavior T5_testEnd ( _name = 'T5(testEnd)' ) ;
+	Test Description Deferred004_Test_A uses configuration configuration4Deferred004_Test_A {
+		tester.reactiveGate sends _run (
+			state_machine = Deferred004_Test_A
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Deferred004_Test_A ,
+			signal = Start
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Deferred004_Test_A ,
+			signal = Continue
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Deferred004_Test_A ,
+			signal = Pending
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Deferred004_Test_A ,
+			signal = AnotherSignal
+		) to PSSM.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T1_2_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S2_1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T2_2_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T4_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T5_testEnd
+		) to tester.reactiveGate ;
+	}
+}

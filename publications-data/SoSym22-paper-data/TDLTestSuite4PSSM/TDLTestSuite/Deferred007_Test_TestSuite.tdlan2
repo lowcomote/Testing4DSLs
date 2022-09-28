@@ -1,0 +1,52 @@
+Package Deferred007_Test_TestSuite {
+	Import all from common ;
+	Import all from pssmSpecificTypes ;
+	Import all from pssmSpecificEvents ;
+	Import all from testConfiguration ;
+	StateMachine Deferred007_Test ( _name = 'Deferred007_Test$behavior$1' ) ;
+	Signal Start ( _name = 'Start' ) ;
+	Signal Continue ( _name = 'Continue' ) ;
+	Operation op ( _name = 'op', inParameters = p1 ) ;
+	BooleanAttribute p1 (_name = 'p1');
+	Behavior S1_exit ( _name = 'S1(exit)' ) ;
+	Behavior S2_exit ( _name = 'S2(exit)' ) ;
+	Behavior T3_effect ( _name = 'T3(effect)' ) ;
+	Behavior T6_effect ( _name = 'T6(effect)' ) ;
+	Behavior T7_testEnd ( _name = 'T7(testEnd)' ) ;
+	Test Description Deferred007_Test uses configuration configuration4Deferred007_Test {
+		tester.reactiveGate sends _run (
+			state_machine = Deferred007_Test
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Deferred007_Test ,
+			signal = Start
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends callOperation_received (
+			state_machine = Deferred007_Test ,
+			operation = op
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Deferred007_Test ,
+			signal = Continue
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Deferred007_Test ,
+			signal = Continue
+		) to PSSM.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T3_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S2_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T6_effect
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T7_testEnd
+		) to tester.reactiveGate ;
+	}
+}

@@ -1,0 +1,214 @@
+Package testSuite {
+	Test Configuration bitShiftingConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT k3fsm of type MUT with { 
+			MUTPath : '/K3FSM.BitShifting/BitShifting.model' ; 
+			DSLName : 'fsm.DSL' ;
+		} ;
+		connect tester.genericGate to k3fsm.genericGate ;
+		connect tester.oclGate to k3fsm.oclGate ;
+	}
+	
+	FSM FSMNewState(_name = "BitShifting");
+	State S2 (_name = "S2");
+	
+	Test Description test1 uses configuration bitShiftingConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "0000") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.genericGate sends getModelState to k3fsm.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = "0000") to tester.genericGate;
+	}
+	Test Description test2 uses configuration bitShiftingConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "1000") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.genericGate sends getModelState to k3fsm.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = "0100") to tester.genericGate;
+	}
+	Test Description test3 uses configuration bitShiftingConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "0100") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.genericGate sends getModelState to k3fsm.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = "0010") to tester.genericGate;
+	}
+	Test Description test4 uses configuration bitShiftingConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "0010") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.genericGate sends getModelState to k3fsm.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = "0001") to tester.genericGate;
+	}
+	Test Description test5 uses configuration bitShiftingConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "0001") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.genericGate sends getModelState to k3fsm.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = "0000") to tester.genericGate;
+	}
+	Test Description test6 uses configuration bitShiftingConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "1111") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.genericGate sends getModelState to k3fsm.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = "0111") to tester.genericGate;
+	}
+	Test Description test7 uses configuration bitShiftingConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "0111") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.genericGate sends getModelState to k3fsm.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = "0011") to tester.genericGate;
+	}
+	Test Description test8 uses configuration bitShiftingConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "1011") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.genericGate sends getModelState to k3fsm.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = "0101") to tester.genericGate;
+	}
+	Test Description test9 uses configuration bitShiftingConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "1101") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.genericGate sends getModelState to k3fsm.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = "0110") to tester.genericGate;
+	}
+	Test Description test10 uses configuration bitShiftingConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "1110") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.genericGate sends getModelState to k3fsm.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = "0111") to tester.genericGate;
+	}
+	Test Description test11 uses configuration bitShiftingConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "1010") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.genericGate sends getModelState to k3fsm.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = "0101") to tester.genericGate;
+	}
+	Test Description test12 uses configuration bitShiftingConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "0101") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.genericGate sends getModelState to k3fsm.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = "0010") to tester.genericGate;
+	}
+	Test Description test13 uses configuration bitShiftingConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "1100") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.genericGate sends getModelState to k3fsm.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = "0110") to tester.genericGate;
+	}
+	Test Description test14 uses configuration bitShiftingConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "0110") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.genericGate sends getModelState to k3fsm.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = "0011") to tester.genericGate;
+	}
+	Test Description test15 uses configuration bitShiftingConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "0011") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.genericGate sends getModelState to k3fsm.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = "0001") to tester.genericGate;
+	}
+	Test Description test16 uses configuration bitShiftingConfiguration{
+		tester.genericGate sends FSMNewState (unprocessedString = "1001") to k3fsm.genericGate;
+		tester.genericGate sends runModel to k3fsm.genericGate;
+		tester.genericGate sends getModelState to k3fsm.genericGate;
+		k3fsm.genericGate sends FSMNewState (producedString = "0100") to tester.genericGate;
+	}
+	
+	//common package
+	Type OCL ( query of type EString ) ;
+	OCL oclQuery ( query = ? ) ;
+	Type Verdict ;
+	Verdict PASS ;
+	Verdict FAIL ;
+	Verdict INCONCLUSINVE ;
+	Type modelExecutionCommand ;
+	modelExecutionCommand runModel ;
+	modelExecutionCommand runModelAsynchronous ;
+	modelExecutionCommand stopModelExecution ;
+	modelExecutionCommand resetModel ;
+	modelExecutionCommand getModelState ;
+	
+	//k3fsmSpecificTypes
+	Type FSM ( 
+		_name of type EString , 
+		ownedStates of type State , 
+		initialState of type State , 
+		finalState of type State , 
+		currentState of type State with { dynamic ;} , 
+		unprocessedString of type EString with { dynamic ; } , 
+		consumedString of type EString with { dynamic ; } , 
+		producedString of type EString with { dynamic ; } ) ;
+	Type State ( 
+		_name of type EString , 
+		outgoingTransitions of type Transition , 
+		incomingTransitions of type Transition , 
+		owningFSM of type FSM
+	) ;
+	Type Transition ( 
+		input of type EString , 
+		target of type State , 
+		_name of type EString , 
+		output of type EString , 
+		source of type State
+	) ;
+	Annotation dynamic ;
+	Type EInvocationTargetException ;
+	Type EFeatureMapEntry ;
+	Type EDate ;
+	Type EShortObject ;
+	Type EBigInteger ;
+	Type EIntegerObject ;
+	Type EJavaClass ;
+	Type EDouble ;
+	Type EJavaObject ;
+	Type EEnumerator ;
+	Type ETreeIterator ;
+	Type EDiagnosticChain ;
+	Type EBigDecimal ;
+	Type EResourceSet ;
+	Type EFloat ;
+	Type EDoubleObject ;
+	Type EInt ;
+	Type EResource ;
+	Type EByteObject ;
+	Type EShort ;
+	Type ELongObject ;
+	Type EFloatObject ;
+	Type EBoolean ;
+	Type EFeatureMap ;
+	Type ELong ;
+	Type EByteArray ;
+	Type EString ;
+	Type EBooleanObject ;
+	Type EChar ;
+	Type EByte ;
+	Type EEList ;
+	Type EMap ;
+	Type ECharacterObject ;
+	
+	Gate Type genericGateType accepts modelExecutionCommand;
+	Gate Type oclGateType accepts OCL;
+	
+	Component Type TestSystem having {
+		gate genericGate of type genericGateType;
+		gate oclGate of type oclGateType;
+	}
+	Component Type MUT having {
+		gate genericGate of type genericGateType;
+		gate oclGate of type oclGateType;
+	}
+	Annotation MUTPath ;
+	Annotation DSLName ;
+	Test Configuration genericConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT k3fsm of type MUT with { 
+			MUTPath : 'TODO: Put the address of the Model-Under Test here' ; 
+			DSLName : 'TODO: Put the name of the DSL' ;
+		} ;
+		connect tester.genericGate to k3fsm.genericGate ;
+	}
+	Test Configuration oclConfiguration {
+		create Tester tester of type TestSystem ;
+		create SUT k3fsm of type MUT with { 
+			MUTPath : 'TODO: Put the address of the Model-Under Test here' ; 
+			DSLName : 'TODO: Put the name of the DSL' ;
+		} ;
+		connect tester.genericGate to k3fsm.genericGate ;
+		connect tester.oclGate to k3fsm.oclGate ;
+	}
+}

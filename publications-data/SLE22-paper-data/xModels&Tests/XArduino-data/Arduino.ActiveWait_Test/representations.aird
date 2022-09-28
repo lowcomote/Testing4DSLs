@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" uid="_OQPCQGlfEeymCpqPpiNlzQ" version="14.5.1.202106111100">
+  <semanticResources>testSuite.tdlan2</semanticResources>
+  <semanticResources>2/testSuite_selected.tdlan2</semanticResources>
+  <semanticResources>2/testSuite_selected_amplified.tdlan2</semanticResources>
+  <semanticResources>generated/arduinoSpecificEvents.tdlan2</semanticResources>
+  <semanticResources>generated/common.tdlan2</semanticResources>
+  <semanticResources>generated/testConfiguration.tdlan2</semanticResources>
+  <semanticResources>platform:/resource/Arduino.ActiveWait/activeWait.model</semanticResources>
+  <semanticResources>result_coverage/execution-20220809_200408/modelUnderTest.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220809_200408/modelUnderTest_test2.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220809_200408/modelUnderTest_test4.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220809_200408/testCoverage.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220809_200408/testReport.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220809_200408/testSuite.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220813_000342/testSuite.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220813_000342/testReport.xmi</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220813_000724/testSuite.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220813_000724/testReport.xmi</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220813_001142/testSuite.tdlan2</semanticResources>
+  <semanticResources>gemoc-gen/execution/execution-20220813_001142/testReport.xmi</semanticResources>
+</viewpoint:DAnalysis>

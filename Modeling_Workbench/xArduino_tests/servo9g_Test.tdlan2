@@ -1,0 +1,36 @@
+Package testSuite {
+	Import all from common ;
+	Import all from arduinoSpecificTypes ;
+	Import all from testConfiguration ;
+	
+	DigitalPin servoNewState (_name = "servo", level =?);
+	
+	Test Description test1 uses configuration servo9gConfiguration{
+		tester.genericGate sends runModelAsynchronous to arduino.genericGate;
+		component tester waits for '100';
+		tester.genericGate sends stopModelExecution to arduino.genericGate;
+		tester.genericGate sends getModelState to arduino.genericGate;
+		arduino.genericGate sends servoNewState (level = '90') to tester.genericGate;
+	}
+	Test Description test2 uses configuration servo9gConfiguration{
+		tester.genericGate sends runModelAsynchronous to arduino.genericGate;
+		component tester waits for '600';
+		tester.genericGate sends stopModelExecution to arduino.genericGate;
+		tester.genericGate sends getModelState to arduino.genericGate;
+		arduino.genericGate sends servoNewState (level = '180') to tester.genericGate;
+	}
+	Test Description test3 uses configuration servo9gConfiguration{
+		tester.genericGate sends runModelAsynchronous to arduino.genericGate;
+		component tester waits for '1100';
+		tester.genericGate sends stopModelExecution to arduino.genericGate;
+		tester.genericGate sends getModelState to arduino.genericGate;
+		arduino.genericGate sends servoNewState (level = '0') to tester.genericGate;
+	}
+	Test Description test4 uses configuration servo9gConfiguration{
+		tester.genericGate sends runModelAsynchronous to arduino.genericGate;
+		component tester waits for '1600';
+		tester.genericGate sends stopModelExecution to arduino.genericGate;
+		tester.genericGate sends getModelState to arduino.genericGate;
+		arduino.genericGate sends servoNewState (level = '90') to tester.genericGate;
+	}
+}

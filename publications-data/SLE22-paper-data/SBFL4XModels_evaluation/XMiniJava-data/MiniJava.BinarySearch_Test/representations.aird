@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" uid="_DBDBcGlpEeymCpqPpiNlzQ" version="14.5.1.202106111100">
+  <semanticResources>testSuite.tdlan2</semanticResources>
+  <semanticResources>platform:/resource/xMiniJava_models/binarySearch_junitTests_xminijava/BinarySearch_test1.xminijava</semanticResources>
+  <semanticResources>platform:/resource/xMiniJava_models/binarySearch_junitTests_xminijava/BinarySearch_test2.xminijava</semanticResources>
+  <semanticResources>platform:/resource/xMiniJava_models/binarySearch_junitTests_xminijava/BinarySearch_test3.xminijava</semanticResources>
+  <semanticResources>platform:/resource/xMiniJava_models/binarySearch_junitTests_xminijava/BinarySearch_test4.xminijava</semanticResources>
+  <semanticResources>platform:/resource/xMiniJava_models/binarySearch_junitTests_xminijava/BinarySearch_test5.xminijava</semanticResources>
+  <semanticResources>platform:/resource/xMiniJava_models/binarySearch_junitTests_xminijava/BinarySearch_test6.xminijava</semanticResources>
+  <semanticResources>platform:/resource/xMiniJava_models/binarySearch_junitTests_xminijava/BinarySearch_test7.xminijava</semanticResources>
+  <semanticResources>platform:/resource/xMiniJava_models/binarySearch_junitTests_xminijava/BinarySearch_test8.xminijava</semanticResources>
+  <semanticResources>platform:/resource/xMiniJava_models/binarySearch_junitTests_xminijava/BinarySearch_test9.xminijava</semanticResources>
+  <semanticResources>platform:/resource/xMiniJava_models/binarySearch_junitTests_xminijava/BinarySearch_test10.xminijava</semanticResources>
+  <semanticResources>platform:/resource/xMiniJava_models/binarySearch_junitTests_xminijava/BinarySearch_test11.xminijava</semanticResources>
+  <semanticResources>platform:/resource/xMiniJava_models/binarySearch_junitTests_xminijava/BinarySearch_test12.xminijava</semanticResources>
+  <semanticResources>platform:/resource/xMiniJava_models/binarySearch_junitTests_xminijava/BinarySearch_test13.xminijava</semanticResources>
+  <semanticResources>platform:/resource/xMiniJava_models/binarySearch_junitTests_xminijava/BinarySearch_test14.xminijava</semanticResources>
+  <semanticResources>result_coverage/execution-20220728_152049/modelUnderTest.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220728_152049/modelUnderTest_test10.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220728_152049/modelUnderTest_test11.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220728_152049/modelUnderTest_test12.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220728_152049/modelUnderTest_test13.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220728_152049/modelUnderTest_test14.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220728_152049/modelUnderTest_test2.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220728_152049/modelUnderTest_test3.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220728_152049/modelUnderTest_test4.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220728_152049/modelUnderTest_test5.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220728_152049/modelUnderTest_test6.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220728_152049/modelUnderTest_test7.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220728_152049/modelUnderTest_test8.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220728_152049/modelUnderTest_test9.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220728_152049/testCoverage.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220728_152049/testReport.xmi</semanticResources>
+  <semanticResources>result_coverage/execution-20220728_152049/testSuite.tdlan2</semanticResources>
+</viewpoint:DAnalysis>

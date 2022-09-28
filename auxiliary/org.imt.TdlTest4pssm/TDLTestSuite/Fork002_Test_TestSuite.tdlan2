@@ -1,0 +1,41 @@
+Package Fork002_Test_TestSuite {
+	Import all from common ;
+	Import all from pssmSpecificTypes ;
+	Import all from pssmSpecificEvents ;
+	Import all from testConfiguration ;
+	StateMachine Fork002_Test ( _name = 'Fork002_Test$behavior$1' ) ;
+	Signal Start ( _name = 'Start' ) ;
+	Behavior S1_1_entry ( _name = 'S1.1(entry)' ) ;
+	Behavior T2_1_effect ( _name = 'T2.1(effect)' ) ;
+	Behavior T2_2_effect ( _name = 'T2.2(effect)' ) ;
+	Behavior S1_entry ( _name = 'S1(entry)' ) ;
+	Behavior T2_effect ( _name = 'T2(effect)' ) ;
+	Behavior T3_testEnd ( _name = 'T3(testEnd)' ) ;
+	Test Description Fork002_Test uses configuration configuration4Fork002_Test {
+		tester.dslSpecificTestGate sends _run (
+			state_machine = Fork002_Test
+		) to PSSM.dslSpecificMUTGate ;
+		tester.dslSpecificTestGate sends signal_received (
+			state_machine = Fork002_Test ,
+			signal = Start
+		) to PSSM.dslSpecificMUTGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = T2_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = S1_entry
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = T2_1_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = S1_1_entry
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = T2_2_effect
+		) to tester.dslSpecificTestGate ;
+		PSSM.dslSpecificMUTGate sends behavior_effected (
+			behavior = T3_testEnd
+		) to tester.dslSpecificTestGate ;
+	}
+}

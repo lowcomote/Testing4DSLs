@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TDLTestReport:TestSuiteResult xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:TDLTestReport="https://org.imt.tdl.testResult/TDLTestReport">
+  <testSuite href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#/"/>
+  <testCaseResults>
+    <testCase href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.9"/>
+    <testMessageResults tdlMessageId="Message#1" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.9/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.9/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+  </testCaseResults>
+  <testCaseResults>
+    <testCase href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.10"/>
+    <testMessageResults tdlMessageId="Message#1" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.10/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.10/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#3" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.10/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#4" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.10/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
+    </testMessageResults>
+  </testCaseResults>
+  <testCaseResults>
+    <testCase href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.11"/>
+    <testMessageResults tdlMessageId="Message#1" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.11/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.11/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#3" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.11/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#4" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.11/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#5" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.11/@behaviourDescription/@behaviour/@block/@behaviour.4"/>
+    </testMessageResults>
+  </testCaseResults>
+  <testCaseResults>
+    <testCase href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.12"/>
+    <testMessageResults tdlMessageId="Message#1" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.12/@behaviourDescription/@behaviour/@block/@behaviour.0"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#2" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.12/@behaviourDescription/@behaviour/@block/@behaviour.1"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#3" description="New value is set for the level property of the MUT">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.12/@behaviourDescription/@behaviour/@block/@behaviour.2"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#4" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.12/@behaviourDescription/@behaviour/@block/@behaviour.3"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#5" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.12/@behaviourDescription/@behaviour/@block/@behaviour.4"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#6" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.12/@behaviourDescription/@behaviour/@block/@behaviour.5"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#7" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.12/@behaviourDescription/@behaviour/@block/@behaviour.6"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#8" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.12/@behaviourDescription/@behaviour/@block/@behaviour.7"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#9" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.12/@behaviourDescription/@behaviour/@block/@behaviour.8"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#10" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.12/@behaviourDescription/@behaviour/@block/@behaviour.9"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#11" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.12/@behaviourDescription/@behaviour/@block/@behaviour.10"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#12" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.12/@behaviourDescription/@behaviour/@block/@behaviour.11"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#13" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.12/@behaviourDescription/@behaviour/@block/@behaviour.12"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#14" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.12/@behaviourDescription/@behaviour/@block/@behaviour.13"/>
+    </testMessageResults>
+    <testMessageResults tdlMessageId="Message#15" description="PASS">
+      <message href="/Arduino.triggerFan_Test/result_coverage/execution-20220809_200041/testSuite.tdlan2#//@packagedElement.12/@behaviourDescription/@behaviour/@block/@behaviour.14"/>
+    </testMessageResults>
+  </testCaseResults>
+</TDLTestReport:TestSuiteResult>
