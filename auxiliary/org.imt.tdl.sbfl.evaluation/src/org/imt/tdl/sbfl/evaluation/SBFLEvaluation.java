@@ -2,6 +2,8 @@ package org.imt.tdl.sbfl.evaluation;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -11,6 +13,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -18,6 +21,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
@@ -25,14 +29,13 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
+import org.imt.tdl.coverage.ObjectCoverageStatus;
 import org.imt.tdl.coverage.TDLCoverageUtil;
 import org.imt.tdl.coverage.TDLTestSuiteCoverage;
-import org.imt.tdl.coverage.ObjectCoverageStatus;
 import org.imt.tdl.faultLocalization.SBFLMeasures;
 import org.imt.tdl.faultLocalization.SuspiciousnessRanking;
 import org.imt.tdl.testResult.TDLTestSuiteResult;
 
-import appliedMutations.AppMutation;
 import appliedMutations.InformationChanged;
 import appliedMutations.Mutations;
 
@@ -80,8 +83,9 @@ public class SBFLEvaluation {
 			ExcelExporter excelExporter = new ExcelExporter(mutant_SBFLMeasures4FaultyObject);
 			String seedModelName = seedModelPath.substring(seedModelPath.lastIndexOf("\\")+1, seedModelPath.lastIndexOf("."));
 			excelExporter.setSeedModelName(seedModelName);
+			String excelFilePath = getModelProjectLocation(seedModelPath) + seedModelName + "_sbflResult.xlsx";
 			try {
-				excelExporter.saveResults2Excelfile();
+				excelExporter.saveResults2Excelfile(excelFilePath);
 			}catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -148,12 +152,12 @@ public class SBFLEvaluation {
 	}
 	
 	private Package getTestSuite(String testResourcePath, File testFile) {
+		ResourceSet resSet = new ResourceSetImpl();
+		org.etsi.mts.tdl.Package testSuite = null;
 		if (testFile.isFile() && testFile.getName().endsWith(".tdlan2")) {
 			String testFilePath = testResourcePath + testFile.getName();
-			org.etsi.mts.tdl.Package testPackage = getTestPackage(testFilePath);
-			if (testPackage != null) {
-				return testPackage;
-			}			
+			Resource testSuiteRes = resSet.getResource(URI.createURI(testFilePath), true);
+			testSuite = getTestPackage(testSuiteRes);			
 		}
 		else if (testFile.isDirectory()){
 			testResourcePath += (testFile.getName() + "/");
@@ -161,11 +165,10 @@ public class SBFLEvaluation {
 				return getTestSuite(testResourcePath, innerFile);
 			}
 		}
-		return null;
+		return testSuite;
 	}
 	
-	private org.etsi.mts.tdl.Package getTestPackage(String testFilePath) {
-		Resource testSuiteRes = (new ResourceSetImpl()).getResource(URI.createURI(testFilePath), true);
+	private org.etsi.mts.tdl.Package getTestPackage(Resource testSuiteRes) {
 		org.etsi.mts.tdl.Package testPackage = (org.etsi.mts.tdl.Package) testSuiteRes.getContents().get(0);
 		for (Object element: testPackage.getPackagedElement()) {
 			if (element instanceof TestDescription) {
@@ -340,6 +343,12 @@ public class SBFLEvaluation {
 		List<EAnnotation> featureDynamicAnnotations = feature.getEAnnotations().stream().
 				filter(a -> a.getSource().equals("dynamic") || a.getSource().equals("aspect")).collect(Collectors.toList());
 		return (featureDynamicAnnotations != null && featureDynamicAnnotations.size() > 0);
+	}
+	private String getModelProjectLocation(String modelPath) {
+		Path seedModelPath = Paths.get(modelPath);
+		String projectName = seedModelPath.getParent().toString().substring(1);
+		IProject mutProject = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+		return mutProject.getLocation().toString() + "/";
 	}
 }
 

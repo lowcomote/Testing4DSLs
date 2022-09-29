@@ -28,10 +28,9 @@ public class ExcelExporter {
        	firstMeasure.getRank().keySet().stream().forEach(t -> SBFLTechniques.add(t));
 	}
 	
-	public void saveResults2Excelfile() throws FileNotFoundException{
+	public void saveResults2Excelfile(String filePath) throws FileNotFoundException{
 		exportMutantResult2Excel();
 		exportOverallResult2Excel();
-		String filePath = "C:\\labtop\\GitHub\\xtdl\\org.imt.tdl.sbfl.evaluation\\evaluationData\\" + seedModelName + ".xlsx";
 		try {
 			FileOutputStream fos = new FileOutputStream(filePath);
 			workbook.write(fos);
