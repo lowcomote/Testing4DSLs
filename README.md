@@ -61,5 +61,6 @@ After downloading GEMOC Studio, unzip the folder and run it:
 
 4.	An empty workspace will be shown. Here you should import the projects you want using `Import projects` option shown in the Project Explorer or by following: File -> Import -> Existing Projects into Workspace -> Select Root Directory (browse to the your intended directory) -> Select Folder -> Finish. The rest of the usage steps are explained for each tool separately in their specific README files.
 
-
+## Acknowledgment
+This work has received funding from the [EU H2020 research project Lowcomote](https://www.lowcomote.eu/), under the Marie Sk\l{}odowska Curie grant agreement No 813884.
 
