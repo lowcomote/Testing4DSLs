@@ -208,7 +208,7 @@ rule concreteInheritedStaticClass2Type{
 					then thisModule.dynamicFeature2annotatedMember(feature)
 					else thisModule.staticFeature2member(feature)
 					endif),
-		extension <- thisModule.superClass2extension(class))
+		extension <- class.eSuperTypes -> collect (st | thisModule.superClass2extension(st)))
 	do{
 		thisModule.tokenNames <- thisModule.tokenNames.append(type.name.toString());
 	}
@@ -229,7 +229,7 @@ rule concreteInheritedDynamicClass2Type{
 					then thisModule.dynamicFeature2annotatedMember(feature)
 					else thisModule.staticFeature2member(feature)
 					endif),
-		extension <- thisModule.superClass2extension(class),
+		extension <- class.eSuperTypes -> collect (st | thisModule.superClass2extension(st)),
 		annotation <- dynamicAnnotation),
 		dynamicAnnotation: TDL!Annotation(
 			key <- if (thisModule.dynamicAnnotationType.oclIsUndefined())
@@ -257,7 +257,7 @@ rule abstractInheritedStaticClass2Type{
 					then thisModule.dynamicFeature2annotatedMember(feature)
 					else thisModule.staticFeature2member(feature)
 					endif),
-		extension <- thisModule.superClass2extension(class),
+		extension <- class.eSuperTypes -> collect (st | thisModule.superClass2extension(st)),
 		annotation <- abstractAnnotation),
 		abstractAnnotation: TDL!Annotation(
 			key <- if (thisModule.abstractAnnotationType.oclIsUndefined())
@@ -285,7 +285,7 @@ rule abstractInheritedDynamicClass2Type{
 					then thisModule.dynamicFeature2annotatedMember(feature)
 					else thisModule.staticFeature2member(feature)
 					endif),
-		extension <- thisModule.superClass2extension(class)),
+		extension <- class.eSuperTypes -> collect (st | thisModule.superClass2extension(st))),
 		abstractAnnotation: TDL!Annotation(
 			key <- if (thisModule.abstractAnnotationType.oclIsUndefined())
 				   then thisModule.abstract2annotationType()
@@ -303,12 +303,13 @@ rule abstractInheritedDynamicClass2Type{
 	}
 }
 
-unique lazy rule superClass2extension{
-	from class: Ecore!EClass (class.eSuperTypes.notEmpty())
+lazy rule superClass2extension{
+	from class: Ecore!EClass
 	to parent : TDL!Extension(
-		extending <- class.eSuperTypes
+		extending <- class
 	)
 }
+
 lazy rule staticFeature2member{
 	from feature: Ecore!EStructuralFeature (feature.eAnnotations.isEmpty() or 
 			(feature.eAnnotations.notEmpty() and (not feature.isDynamicFeature)))
