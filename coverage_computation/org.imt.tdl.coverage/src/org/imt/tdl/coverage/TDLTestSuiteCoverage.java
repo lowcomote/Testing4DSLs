@@ -76,7 +76,7 @@ public class TDLTestSuiteCoverage {
 		numOfCoveredObjs = 0;
 		numOfNotCoverableElements = 0;
 		for (String coverage:tsObjectCoverageStatus) {
-			if (coverage == TDLCoverageUtil.NOT_COVERABLE) {
+			if (coverage == TDLCoverageUtil.NOT_TRACED) {
 				numOfNotCoverableElements++;
 			}
 			else if (coverage == TDLCoverageUtil.COVERED) {

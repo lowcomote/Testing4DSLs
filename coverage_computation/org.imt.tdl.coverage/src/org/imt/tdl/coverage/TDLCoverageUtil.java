@@ -49,7 +49,7 @@ public class TDLCoverageUtil {
 	
 	public static final String COVERED = "Covered";
 	public static final String NOT_COVERED = "Not_Covered";
-	public static final String NOT_COVERABLE = "Not_Coverable";
+	public static final String NOT_TRACED = "Not_Traced";
 	
 	private IDSLSpecificCoverage dslSpecificCoverageExtension;
 	private DomainSpecificCoverage dslSpecificCoverage;

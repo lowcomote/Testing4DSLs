@@ -69,7 +69,7 @@ public class SuspiciousnessRanking {
 		coverageMatix.removeIf(element -> element.getMetaclass() == null);
 		//if the element is not coverable, remove it from the matrix
 		coverageMatix.removeIf(element -> 
-			element.getCoverage().get(element.getCoverage().size()-1) == TDLCoverageUtil.NOT_COVERABLE);
+			element.getCoverage().get(element.getCoverage().size()-1) == TDLCoverageUtil.NOT_TRACED);
 		elementsSBFLMeasures.clear();
 	}
 	
@@ -106,7 +106,7 @@ public class SuspiciousnessRanking {
 		coverageMatix.removeIf(element -> element.getMetaclass() == null);
 		//if the element is not coverable, remove it from the matrix
 		coverageMatix.removeIf(element -> 
-			element.getCoverage().get(element.getCoverage().size()-1) == TDLCoverageUtil.NOT_COVERABLE);
+			element.getCoverage().get(element.getCoverage().size()-1) == TDLCoverageUtil.NOT_TRACED);
 		elementsSBFLMeasures.clear();
 	}
 	
