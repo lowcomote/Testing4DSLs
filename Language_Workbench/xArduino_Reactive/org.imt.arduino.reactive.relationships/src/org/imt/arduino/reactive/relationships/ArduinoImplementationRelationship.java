@@ -25,6 +25,7 @@ public class ArduinoImplementationRelationship extends SimpleImplementationRelat
 		result.put("soundSensor_detected", "org.imt.arduino.reactive.interpreter.SoundSensorAspect.detect");
 		//Exposed rules
 		result.put("pin_level_changed", "org.imt.arduino.reactive.arduino.DigitalPin.changeLevel");
+//		result.put("waiting_time_passed", "org.imt.arduino.reactive.arduino.Delay.execute");
 		return result;
 	}
 	private static Set<String> computeRunToCompletionMap(List<Event> events) {

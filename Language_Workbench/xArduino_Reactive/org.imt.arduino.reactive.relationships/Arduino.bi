@@ -13,5 +13,7 @@ BehavioralInterface ArduinoInterface
 		parameters = [sensor: SoundSensor]
 	exposed event pin_level_changed:
 		parameters = [pin: Pin]
+//	exposed event waiting_time_passed:
+//		parameters = [delay: Delay]
 		
 		

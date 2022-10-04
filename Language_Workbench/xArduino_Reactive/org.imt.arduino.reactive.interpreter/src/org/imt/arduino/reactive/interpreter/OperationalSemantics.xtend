@@ -671,17 +671,17 @@ class Delay_ExecutableAspect extends Utilities_ExecutableAspect {
 	@Step
 	@OverrideAspectMethod
 	def void execute() {
-		try {
-			if (_self.unit == Time.MICRO_SECOND){
-				val value = _self.value / 1000;
-				Thread.sleep(value)
-			}
-			else{
-				Thread.sleep(_self.value)
-			}
-		} catch (InterruptedException e) {
-			System.out.println("InterruptedException thrown because of Delay")
-		}
+//		try {
+//			if (_self.unit == Time.MICRO_SECOND){
+//				val value = _self.value / 1000;
+//				Thread.sleep(value)
+//			}
+//			else{
+//				Thread.sleep(_self.value)
+//			}
+//		} catch (InterruptedException e) {
+//			System.out.println("InterruptedException thrown because of Delay")
+//		}
 	}
 }
 
