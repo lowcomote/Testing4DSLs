@@ -52,6 +52,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.ViewPart;
+import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.imt.tdl.coverage.TDLCoverageUtil;
 import org.imt.tdl.coverage.TDLTestSuiteCoverage;
 import org.imt.tdl.coverage.ObjectCoverageStatus;
@@ -173,7 +174,7 @@ public class TDLCoverageView extends ViewPart{
 	    final Tree addressTree = new Tree(testCoverage, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		addressTree.setHeaderVisible(true);
 		addressTree.setLinesVisible(true);
-		addressTree.addListener(SWT.MouseDown, new Listener() {
+		addressTree.addListener(SWT.MouseDoubleClick, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
 				Point point = new Point(event.x, event.y);
@@ -190,11 +191,15 @@ public class TDLCoverageView extends ViewPart{
 					IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 					try {
 						IEditorPart editor = page.openEditor(new FileEditorInput(fileToOpen), desc.getId());
-						TreeViewer tviewer = (TreeViewer)((EcoreEditor) editor).getViewer();
-						ResourceSet resSet =(ResourceSet) tviewer.getInput();
-						EObject eobjectToOpen2 = resSet.getResources().get(0).getEObject(
-								eobjectToOpen.eResource().getURIFragment(eobjectToOpen));
-						tviewer.setSelection(new StructuredSelection(eobjectToOpen2));
+						if (editor instanceof EcoreEditor ecoreEditor) {
+							TreeViewer tviewer = (TreeViewer) ecoreEditor.getViewer();
+							ResourceSet resSet =(ResourceSet) tviewer.getInput();
+							EObject eobjectToOpen2 = resSet.getResources().get(0).getEObject(
+									eobjectToOpen.eResource().getURIFragment(eobjectToOpen));
+							tviewer.setSelection(new StructuredSelection(eobjectToOpen2));
+						}else if (editor instanceof XtextEditor xtextEditor) {
+							//TODO: how to reveal the object in the xtext editor
+						}
 						
 					} catch (PartInitException e) {
 						// TODO Auto-generated catch block

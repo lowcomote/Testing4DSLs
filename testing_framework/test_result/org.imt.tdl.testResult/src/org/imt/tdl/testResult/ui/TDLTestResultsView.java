@@ -1,11 +1,20 @@
 package org.imt.tdl.testResult.ui;
 
-import java.util.List;
 
+import java.util.List;
+import org.eclipse.core.internal.resources.File;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.presentation.EcoreEditor;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ITableColorProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
@@ -28,8 +37,14 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.swt.widgets.TreeItem;
+import org.eclipse.ui.IEditorDescriptor;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.ViewPart;
+import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.imt.tdl.testResult.TDLMessageResult;
 import org.imt.tdl.testResult.TDLTestCaseResult;
 import org.imt.tdl.testResult.TDLTestSuiteResult;
@@ -100,6 +115,7 @@ public class TDLTestResultsView extends ViewPart{
 		addressTree.setHeaderVisible(true);
 		addressTree.setLinesVisible(true);
 		final StyledText detailTextBox = new StyledText(testVerdict, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION| SWT.WRAP);
+		//show the test result description when mouse down
 		addressTree.addListener(SWT.MouseDown, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
@@ -108,18 +124,64 @@ public class TDLTestResultsView extends ViewPart{
 				if (item == null || item.getData() == null) {
 					//do nothing
 				}
-				else if (item.getData() instanceof TDLTestCaseResult verdict) {
+				else if (item.getData() instanceof TDLTestCaseResult verdict 
+						&& verdict.getDescription() != null) {
 					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
 						public void run() {
 							detailTextBox.setText(verdict.getDescription());
 						}
 					});
-				} else if (item.getData() instanceof TDLMessageResult verdict) {
+				} else if (item.getData() instanceof TDLMessageResult verdict 
+						&& verdict.getDescription() != null) {
             		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
 						public void run() {
 							detailTextBox.setText(verdict.getDescription());
 						}
 					});
+				}
+			}
+		});
+		//show the test message/test case/test suite when double click
+		addressTree.addListener(SWT.MouseDoubleClick, new Listener() {
+			@Override
+			public void handleEvent(Event event) {
+				Point point = new Point(event.x, event.y);
+				TreeItem item = addressTree.getItem(point);
+				EObject eobjectToOpen = null;
+				if (item == null || item.getData() == null) {
+					//do nothing
+				}
+				else if (item.getData() instanceof TDLTestSuiteResult verdict) {
+					eobjectToOpen = verdict.getTestSuite();
+				}
+				else if (item.getData() instanceof TDLTestCaseResult verdict) {
+					eobjectToOpen = verdict.getTestCase();	
+					
+				}else if (item.getData() instanceof TDLMessageResult verdict) {
+					eobjectToOpen = verdict.getMessage();
+				}
+				if (eobjectToOpen != null) {
+					IFile fileToOpen = ResourcesPlugin.getWorkspace().getRoot().getFile(
+							new Path(eobjectToOpen.eResource().getURI().toPlatformString(true)));
+					IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().
+							getDefaultEditor(fileToOpen.getName());
+					IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+					try {
+						IEditorPart editor = page.openEditor(new FileEditorInput(fileToOpen), desc.getId());
+						if (editor instanceof EcoreEditor ecoreEditor) {
+							TreeViewer tviewer = (TreeViewer) ecoreEditor.getViewer();
+							ResourceSet resSet =(ResourceSet) tviewer.getInput();
+							EObject eobjectToOpen2 = resSet.getResources().get(0).getEObject(
+									eobjectToOpen.eResource().getURIFragment(eobjectToOpen));
+							tviewer.setSelection(new StructuredSelection(eobjectToOpen2));
+						}else if (editor instanceof XtextEditor xtextEditor) {
+							//TODO: how to reveal the object in the xtext editor
+						}
+						
+					} catch (PartInitException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 		});
