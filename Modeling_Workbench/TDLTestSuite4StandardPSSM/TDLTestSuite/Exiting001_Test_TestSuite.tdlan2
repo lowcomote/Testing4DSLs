@@ -1,0 +1,42 @@
+Package Exiting001_Test_TestSuite {
+	Import all from common ;
+	Import all from pssmSpecificTypes ;
+	Import all from pssmSpecificEvents ;
+	Import all from testConfiguration ;
+	StateMachine Exiting001_Test ( _name = 'Exiting001_Test$behavior$1' ) ;
+	Signal Start ( _name = 'Start' ) ;
+	Signal Continue ( _name = 'Continue' ) ;
+	Behavior S1_1_1_exit ( _name = 'S1.1.1(exit)' ) ;
+	Behavior S1_1_exit ( _name = 'S1.1(exit)' ) ;
+	Behavior S2_1_exit ( _name = 'S2.1(exit)' ) ;
+	Behavior S1_exit ( _name = 'S1(exit)' ) ;
+	Behavior T3_testEnd ( _name = 'T3(testEnd)' ) ;
+	Test Description Exiting001_Test uses configuration configuration4Exiting001_Test {
+		tester.reactiveGate sends _run (
+			state_machine = Exiting001_Test
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting001_Test ,
+			signal = Start
+		) to PSSM.reactiveGate ;
+		tester.reactiveGate sends signal_received (
+			state_machine = Exiting001_Test ,
+			signal = Continue
+		) to PSSM.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_1_1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S2_1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = S1_exit
+		) to tester.reactiveGate ;
+		PSSM.reactiveGate sends behavior_executed (
+			behavior = T3_testEnd
+		) to tester.reactiveGate ;
+	}
+}
