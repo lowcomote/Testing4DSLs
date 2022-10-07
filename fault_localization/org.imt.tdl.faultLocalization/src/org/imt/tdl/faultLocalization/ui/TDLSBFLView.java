@@ -146,7 +146,6 @@ public class TDLSBFLView extends ViewPart{
 		gd.widthHint = 100;
 		techniqueFilter.setLayoutData(gd);
         final Combo technqiueFilterCombo = new Combo(techniqueFilter, SWT.NONE);
-        technqiueFilterCombo.add("All");
         technqiueFilterCombo.add(SuspiciousnessRanking.ARITHMETICMEAN);
         technqiueFilterCombo.add(SuspiciousnessRanking.BARINEL);
         technqiueFilterCombo.add(SuspiciousnessRanking.BARONIETAL);
