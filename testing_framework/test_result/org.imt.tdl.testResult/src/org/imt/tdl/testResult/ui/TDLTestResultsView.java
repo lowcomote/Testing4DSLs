@@ -2,13 +2,12 @@ package org.imt.tdl.testResult.ui;
 
 
 import java.util.List;
-import org.eclipse.core.internal.resources.File;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.presentation.EcoreEditor;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ITableColorProvider;
@@ -47,8 +46,8 @@ import org.eclipse.ui.part.ViewPart;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.imt.tdl.testResult.TDLMessageResult;
 import org.imt.tdl.testResult.TDLTestCaseResult;
-import org.imt.tdl.testResult.TDLTestSuiteResult;
 import org.imt.tdl.testResult.TDLTestResultUtil;
+import org.imt.tdl.testResult.TDLTestSuiteResult;
 
 public class TDLTestResultsView extends ViewPart{
 	
@@ -67,26 +66,22 @@ public class TDLTestResultsView extends ViewPart{
 	
 	@Override
 	public void createPartControl(Composite parent) {
-		Composite contents = new Group(parent, SWT.FILL);
+		Composite contents = new Group(parent, SWT.NULL);
 	    GridLayout layout = new GridLayout();
-		contents.setLayout(layout);
 		layout.numColumns = 2;
-		layout.verticalSpacing = 9;
-	    GridData gd = new GridData(GridData.FILL_HORIZONTAL | GridData.FILL_VERTICAL);
-	    gd.horizontalAlignment = SWT.FILL;
+		contents.setLayout(layout);
+	    GridData gd = new GridData();
 	    contents.setLayoutData(gd);
 	    
-	    Group filter = new Group(contents, SWT.FILL);
+	    Group filter = new Group(contents, SWT.NULL);
 	    layout = new GridLayout();
 		filter.setLayout(layout);
-		layout.numColumns = 1;
-		layout.verticalSpacing = 9;
-	    filter.setText("Filter");
-	    gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.horizontalAlignment = SWT.FILL;
+	    filter.setText("Filters");
+	    gd = new GridData();
 		gd.verticalAlignment = SWT.ON_TOP;
-		gd.widthHint = 100;
+		gd.widthHint = 150;
 	    filter.setLayoutData(gd);
+	    
         final Combo filterCombo = new Combo(filter, SWT.NONE);
         filterCombo.add("All");
         filterCombo.add("Passed");
@@ -101,14 +96,13 @@ public class TDLTestResultsView extends ViewPart{
 			}
 		});
 		
-		Group testVerdict = new Group(contents, SWT.FILL);
+		Group testVerdict = new Group(contents, SWT.NULL);
 		FillLayout fill = new FillLayout(SWT.VERTICAL);
 		testVerdict.setLayout(fill);
-		layout.numColumns = 1;
-		layout.verticalSpacing = 9;
-		testVerdict.setText("Results");
+		testVerdict.setText("Test Execution Results");
 		gd = new GridData(GridData.FILL_HORIZONTAL | GridData.FILL_VERTICAL);
 		gd.horizontalAlignment = SWT.FILL;
+		gd.verticalAlignment = SWT.FILL;
 		testVerdict.setLayoutData(gd);
 		
 	    final Tree addressTree = new Tree(testVerdict, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);

@@ -80,37 +80,28 @@ public class TDLCoverageView extends ViewPart{
 		if (TDLCoverageUtil.getInstance().getTestSuiteCoverage().getTsCoveragePercentage() == 0) {
 			TDLCoverageUtil.getInstance().runCoverageComputation();
 		}
-		Composite contents = new Group(parent, SWT.FILL);
+		Composite contents = new Group(parent, SWT.NULL);
 	    GridLayout layout = new GridLayout();
+	    layout.numColumns = 2;
 		contents.setLayout(layout);
-		layout.numColumns = 2;
-		layout.verticalSpacing = 9;
-	    GridData gd = new GridData(GridData.FILL_HORIZONTAL | GridData.FILL_VERTICAL);
-	    gd.horizontalAlignment = SWT.FILL;
+	    GridData gd = new GridData();
 	    contents.setLayoutData(gd);
 	    
-	    Group filter = new Group(contents, SWT.FILL);
+	    Group filter = new Group(contents, SWT.NULL);
 	    layout = new GridLayout();
 	    filter.setLayout(layout);
-	    layout.numColumns = 1;
-	    layout.verticalSpacing = 9;
 		filter.setText("Filters");
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.horizontalAlignment = SWT.FILL;
-		gd.verticalAlignment = SWT.ON_TOP;
-		gd.widthHint = 100;
+		gd = new GridData();
+		gd.verticalAlignment = SWT.FILL;
 		filter.setLayoutData(gd);
 		
-		Group coverageFilter = new Group(filter, SWT.FILL);
+		Group coverageFilter = new Group(filter, SWT.NULL);
 	    layout = new GridLayout();
 	    coverageFilter.setLayout(layout);
-	    layout.numColumns = 1;
-	    layout.verticalSpacing = 9;
 	    coverageFilter.setText("Coverage Filters");
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.horizontalAlignment = SWT.FILL;
+		gd = new GridData();
 		gd.verticalAlignment = SWT.ON_TOP;
-		gd.widthHint = 100;
+		gd.widthHint = 250;
 		coverageFilter.setLayoutData(gd);
         final Combo coverageFilterCombo = new Combo(coverageFilter, SWT.NONE);
         coverageFilterCombo.add("All");
@@ -127,16 +118,13 @@ public class TDLCoverageView extends ViewPart{
 			}
 		});
 		
-        Group elementFilter = new Group(filter, SWT.FILL);
+        Group elementFilter = new Group(filter, SWT.NULL);
 	    layout = new GridLayout();
 	    elementFilter.setLayout(layout);
-	    layout.numColumns = 1;
-	    layout.verticalSpacing = 9;
-	    elementFilter.setText("Model Element Filters");
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.horizontalAlignment = SWT.FILL;
+	    elementFilter.setText("Type of Model Element");
+		gd = new GridData();
 		gd.verticalAlignment = SWT.ON_TOP;
-		gd.widthHint = 100;
+		gd.widthHint = 250;
 		elementFilter.setLayoutData(gd);
         final Combo elementFilterCombo = new Combo(elementFilter, SWT.NONE);
         elementFilterCombo.add("All");
@@ -161,14 +149,13 @@ public class TDLCoverageView extends ViewPart{
 			}
 		});
 		
-		Group testCoverage = new Group(contents, SWT.FILL);
+		Group testCoverage = new Group(contents, SWT.NULL);
 		FillLayout fill = new FillLayout(SWT.VERTICAL);
 		testCoverage.setLayout(fill);
-		layout.numColumns = 1;
-		layout.verticalSpacing = 9;
 		testCoverage.setText("Coverage");
 		gd = new GridData(GridData.FILL_HORIZONTAL | GridData.FILL_VERTICAL);
 		gd.horizontalAlignment = SWT.FILL;
+		gd.verticalAlignment = SWT.FILL;
 		testCoverage.setLayoutData(gd);
 		
 	    final Tree addressTree = new Tree(testCoverage, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
