@@ -4,6 +4,7 @@ import org.etsi.mts.tdl.Annotation;
 import org.etsi.mts.tdl.ComponentInstance;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
+import org.imt.k3tdl.k3dsa.DSLProcessor;
 import org.imt.k3tdl.k3dsa.TestConfigurationAspect;
 import org.imt.k3tdl.k3dsa.TestDescriptionAspect;
 import org.imt.tdl.coverage.TDLCoverageUtil;
@@ -52,7 +53,7 @@ public class MutationTestRunner {
 				}
 				testSuiteResult.addResult(testCaseResult);
 				if (DSLPath == "") {
-					DSLPath = TestConfigurationAspect.DSLPath(testCase.getTestConfiguration());
+					DSLPath = DSLProcessor.getInstance().getDSLPath();
 				}
 			}
 		}

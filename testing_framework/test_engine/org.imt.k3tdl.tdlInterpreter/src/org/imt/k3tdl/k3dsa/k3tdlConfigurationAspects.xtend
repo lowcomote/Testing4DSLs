@@ -1,7 +1,6 @@
 package org.imt.k3tdl.k3dsa
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
-
 import java.util.ArrayList
 import java.util.HashMap
 import java.util.Map
@@ -11,7 +10,6 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.etsi.mts.tdl.DataInstanceUse
 import org.etsi.mts.tdl.DataUse
-import org.etsi.mts.tdl.StaticDataUse
 import org.etsi.mts.tdl.GateInstance
 import org.etsi.mts.tdl.GateType
 import org.etsi.mts.tdl.LiteralValueUse
@@ -30,7 +28,6 @@ class GateTypeAspect {
 @Aspect(className=GateInstance)
 class GateInstanceAspect {
 	public String MUTPath = ""
-	public String DSLPath = ""
 	
 	Object receivedOutput = null
 	Object expectedOutput = null
@@ -92,7 +89,7 @@ class GateInstanceAspect {
 				MUTResource = _self.gateLauncher.MUTResource//the MUT objects are the received output
 			}
 			else if ((arg.item === null || arg.item.size <= 0) 
-				&& arg.dataInstance.dataType.isExposedEvent(_self.DSLPath)){
+				&& arg.dataInstance.dataType.isExposedEvent()){
 				//the message is an event conforming to the behavioral interface of the DSL
 				val eventParameters = _self.getEventParameters(arg, EXPOSED_EVENT)
 				if (eventParameters === null){
@@ -106,7 +103,7 @@ class GateInstanceAspect {
 			if (arg.item !== null && arg.item.size > 0){//there is a list of objects in the expected output
 				for (i : 0 ..<arg.item.size){
 					val DataInstanceUse data = (arg.item.get(i) as DataInstanceUse)
-					val EObject matchedObject = data.getMatchedMUTElement(MUTResource as Resource, true, _self.DSLPath)		
+					val EObject matchedObject = data.getMatchedMUTElement(MUTResource as Resource, true)		
 					if (matchedObject === null){
 						return data.dataInstance.info //the info must contains FAIL information			
 					}else{
@@ -116,7 +113,7 @@ class GateInstanceAspect {
 				}
 			}else{//there is only one object in the expected output
 				val DataInstanceUse data = (arg as DataInstanceUse)
-				val EObject matchedObject = data.getMatchedMUTElement(MUTResource as Resource, true, _self.DSLPath)
+				val EObject matchedObject = data.getMatchedMUTElement(MUTResource as Resource, true)
 				if (matchedObject === null){
 					return data.dataInstance.info //the info must contains FAIL information
 				}else{
@@ -144,7 +141,7 @@ class GateInstanceAspect {
 			var arg = (argument as DataInstanceUse)
 			if (arg.item !== null && arg.item.size > 0){
 				return _self.setModelState(arg);
-			}else if (arg.dataInstance.dataType.isConcreteEcoreType(_self.DSLPath)){//request for setting the model state
+			}else if (DSLProcessor.instance.isConcreteEcoreType(arg.dataInstance.dataType.name)){//request for setting the model state
 				return _self.setModelState(arg);
 			}else if (arg.dataInstance.name == RUN_MODEL) {
 				//println("--Start MUT Execution synchronous:")
@@ -165,13 +162,13 @@ class GateInstanceAspect {
 			}else if (arg.dataInstance.dataType.name == OCL_TYPE) {
 				// extracting the query from the argument and sending for validation
 				var context = (argument.argument.get(0).dataUse as DataInstanceUse).
-					getMatchedMUTElement(_self.gateLauncher.MUTResource, true, _self.DSLPath)
+					getMatchedMUTElement(_self.gateLauncher.MUTResource, true)
 				if (context === null){
 					return TDLTestResultUtil.INCONCLUSIVE + "The context object cannot be found in the MUT";
 				}
 				var query = argument.argument.get(1).dataUse as LiteralValueUse
 				return _self.gateLauncher.executeOCLCommand(context, query.value)				
-			}else if (arg.dataInstance.dataType.isAcceptedEvent(_self.DSLPath)){
+			}else if (arg.dataInstance.dataType.isAcceptedEvent){
 				//the message is an event conforming to the behavioral interface of the DSL
 				val eventParameters = _self.getEventParameters(arg, ACCEPTED_EVENT)
 				if (eventParameters === null){
@@ -191,13 +188,13 @@ class GateInstanceAspect {
 		var String status = null
 		if (arg.item !== null && arg.item.size > 0){
 			for (i : 0 ..<arg.item.size){
-				status = (arg.item.get(i) as DataInstanceUse).setMatchedMUTElement(MUTResource, _self.DSLPath)
+				status = (arg.item.get(i) as DataInstanceUse).setMatchedMUTElement(MUTResource)
 				if (status.contains(TDLTestResultUtil.FAIL)){
 					return status
 				}
 			}
 		}else{
-			status = arg.setMatchedMUTElement(MUTResource, _self.DSLPath);
+			status = arg.setMatchedMUTElement(MUTResource);
 		}
 		return status
 	}
@@ -214,17 +211,17 @@ class GateInstanceAspect {
 				 * (its type or one of its features is annotated as 'dynamic' or 'aspect'),
 				 * the object will not be found in the model under test and must be created
 				 */
-				if (event.dataInstance.dataType.isAcceptedEvent(_self.DSLPath)){
-					argValue = argTdlValue.getMatchedMUTElement(_self.gateLauncher.MUTResource, true, _self.DSLPath)
+				if (event.dataInstance.dataType.isAcceptedEvent){
+					argValue = argTdlValue.getMatchedMUTElement(_self.gateLauncher.MUTResource, true)
 					if (argValue === null){
-						argValue = argTdlValue.createEObject(_self.gateLauncher.MUTResource, true, _self.DSLPath)
+						argValue = argTdlValue.createEObject(_self.gateLauncher.MUTResource, true)
 					}
 				}
 				else{//is an exposed event
 					//when EObjects have dynamic features, the value of their features may change several times
 					//so we cannot retrieve the object from the engine.resource, but we should create it using a new resource
 					val resource = (new ResourceSetImpl()).getResource(URI.createURI(_self.MUTPath), true);
-					argValue = argTdlValue.createEObject(resource, true, _self.DSLPath)
+					argValue = argTdlValue.createEObject(resource, true)
 				}
 				
 				if (argValue === null){

@@ -29,7 +29,7 @@ class ModelEObjectCreator {
 	boolean isAssertion;
 	String DSLPath;
 	
-	def EObject createEObject(DataInstanceUse TDLObject, Resource MUTResource, boolean isAssertion, String DSLPath){
+	def EObject createEObject(DataInstanceUse TDLObject, Resource MUTResource, boolean isAssertion){
 		this.MUTResource = MUTResource
 		this.isAssertion = isAssertion
 		this.DSLPath = DSLPath
@@ -109,7 +109,7 @@ class ModelEObjectCreator {
 		else if (featureTdlValues.get(0) instanceof DataInstanceUse){
 			var List<EObject> featureValues = new ArrayList
 			for (DataUse tdlValue : featureTdlValues){
-				val EObject featureValue = (tdlValue as DataInstanceUse).getMatchedMUTElement(MUTResource, isAssertion, DSLPath)
+				val EObject featureValue = (tdlValue as DataInstanceUse).getMatchedMUTElement(MUTResource, isAssertion)
 				if (featureValue !== null){//if the EObject found in the model, add it as a value for the feature
 					featureValues.add(featureValue)
 				}else{//if the EObject is not found in the model, we must create it and then add it as a value for the feature

@@ -214,7 +214,6 @@ class MessageAspect extends InteractoinAspect{
 	@OverrideAspectMethod
 	def boolean performBehavior(){
 		for (Target t: _self.target){
-			t.targetGate.gate.DSLPath = _self.parentTestDescription.testConfiguration.DSLPath
 			t.targetGate.gate.MUTPath = _self.parentTestDescription.testConfiguration.MUTPath
 			if (_self.sourceGate.component.role.toString == "SUT"){
 				//when the SUT component sends an argument, it is actually an assertion that have to be checked

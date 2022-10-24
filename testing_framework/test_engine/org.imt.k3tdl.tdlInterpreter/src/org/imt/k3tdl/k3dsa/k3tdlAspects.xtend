@@ -5,10 +5,7 @@ import fr.inria.diverse.k3.al.annotationprocessor.InitializeModel
 import fr.inria.diverse.k3.al.annotationprocessor.Main
 import fr.inria.diverse.k3.al.annotationprocessor.Step
 import java.util.ArrayList
-import java.util.Arrays
 import java.util.List
-import org.eclipse.core.runtime.IConfigurationElement
-import org.eclipse.core.runtime.Platform
 import org.eclipse.emf.common.util.EList
 import org.etsi.mts.tdl.Annotation
 import org.etsi.mts.tdl.Package
@@ -68,7 +65,7 @@ class PackageAspect {
 		
 		TDLTestResultUtil.instance.setTestSuiteResult = _self.testSuiteResult		
 		TDLCoverageUtil.instance.testSuiteCoverage = _self.testSuiteCoverage
-		TDLCoverageUtil.instance.DSLPath = _self.testcases.get(0).testConfiguration.DSLPath
+		TDLCoverageUtil.instance.DSLPath = DSLProcessor.instance.DSLPath
 		println("Test suite execution has been finished successfully.")
 		return _self.testSuiteResult
 	}
@@ -129,52 +126,37 @@ class TestDescriptionAspect{
 @Aspect (className = TestConfiguration)
 class TestConfigurationAspect{
 	public String MUTPath;
-	public String DSLPath;
 
 	def void activateConfiguration(EngineFactory launcher){
 		//finding the address of MUT From the annotations of the SUT component (the component with role==0)
 		val sutComponent = _self.componentInstance.filter[ci | ci.role.toString.equals("SUT")].get(0)
 		for (Annotation a:sutComponent.annotation){
 			if (a.key.name.equals('MUTPath')){
-				_self.MUTPath = a.value.substring(1, a.value.length-1)
-				launcher.MUTPath = _self.MUTPath
+				val modelPath = a.value.substring(1, a.value.length-1)
+				if (!modelPath.equals(_self.MUTPath)){
+					_self.MUTPath = modelPath
+				}
 			}else if (a.key.name.equals('DSLName')){
-				val DSLName = a.value.substring(1, a.value.length-1)
-				_self.DSLPath = _self.getDSLPath(DSLName)
-				launcher.DSLPath = _self.DSLPath
+				val dslName = a.value.substring(1, a.value.length-1)
+				DSLProcessor.instance.loadDSL(dslName)
 			}
 		}
+		launcher.MUTPath = _self.MUTPath
+		launcher.DSLPath = DSLProcessor.instance.getDSLPath
 		_self.setUpLauncher(launcher)
 	}
 
 	def void activateConfiguration(EngineFactory launcher, String MUTPath){
 		_self.MUTPath = MUTPath
-		launcher.MUTPath = _self.MUTPath
 		for (Annotation a:_self.componentInstance.filter[ci | ci.role.toString == "SUT"].get(0).annotation){
 			if (a.key.name == 'DSLName'){
-				val DSLName = a.value.substring(1, a.value.length-1)
-				_self.DSLPath = _self.getDSLPath(DSLName)
-				launcher.DSLPath = _self.DSLPath
+				val dslName = a.value.substring(1, a.value.length-1)
+				DSLProcessor.instance.loadDSL(dslName)
 			}
 		}
+		launcher.MUTPath = _self.MUTPath
+		launcher.DSLPath = DSLProcessor.instance.getDSLPath
 		_self.setUpLauncher(launcher)
-	}
-	
-	def String getDSLPath (String DSLName){
-		val IConfigurationElement language = Arrays
-				.asList(Platform.getExtensionRegistry()
-						.getConfigurationElementsFor("org.eclipse.gemoc.gemoc_language_workbench.xdsml"))
-				.stream().filter(l | l.getAttribute("xdsmlFilePath").endsWith(".dsl")
-						&& l.getAttribute("name").equals(DSLName))
-				.findFirst().orElse(null);
-		
-		if (language !== null) {
-			var xdsmlFilePath = language.getAttribute("xdsmlFilePath");
-			if (!xdsmlFilePath.startsWith("platform:/plugin")) {
-				xdsmlFilePath = "platform:/plugin" + xdsmlFilePath;
-			}
-			return xdsmlFilePath
-		}
 	}
 	
 	final static String GENERIC_GATE = "genericGate";

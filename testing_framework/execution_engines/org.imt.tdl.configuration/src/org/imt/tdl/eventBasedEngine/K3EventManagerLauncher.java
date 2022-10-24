@@ -223,7 +223,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	@Override
 	public void startEngine() {
 		try {
-			executionEngine = (EventBasedExecutionEngine) launcher.createExecutionEngine(this.runConf, ExecutionMode.Run);
+			executionEngine = (EventBasedExecutionEngine) launcher.createExecutionEngine(runConf, ExecutionMode.Run);
 		}catch (CoreException | EngineContextException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
