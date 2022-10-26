@@ -83,7 +83,6 @@ public class TestCoveragePersistence implements IEngineAddon{
 		   tsModelObjectCoverageStatus.setCoverageStatus(getCoverageStatus(tsCoverage));
 		   testSuiteCoverage.getTsObjectCoverageStatus().add(tsModelObjectCoverageStatus);
 	   }
-	   
 	   //create a resource for the test coverage
 	   URI testCoverageURI = URI.createURI(pathToReportsFiles + "/testCoverage.xmi", false);
 	   Resource testCoverageResource = (new ResourceSetImpl()).createResource(testCoverageURI);
@@ -110,25 +109,10 @@ public class TestCoveragePersistence implements IEngineAddon{
 	}
 
 	private Resource getCopyOfTestSuite(IExecutionContext<?, ?, ?> _executionContext) {
-		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		String projectName = _executionContext.getWorkspace().getProjectPath().toString().substring(1);
-		IProject[] projects = root.getProjects();
-		IProject testSuiteProject = null;
-		for (int i=0; i<projects.length; i++) {
-			if (projects[i].getName().equals(projectName)) {
-				testSuiteProject = projects[i];
-			}
-		}
-		String testSuiteProjectAbsolutePath = testSuiteProject.getLocation().toString().replace("/" + projectName, "");
-		String copiedModelFolderPath = testSuiteProjectAbsolutePath + pathToReportsFiles;
-		File modelFile = new File(copiedModelFolderPath);
-		for (File file: modelFile.listFiles()) {
-			if (file.getName().endsWith(".tdlan2")) {
-				String modelPath = file.getPath().replace(testSuiteProjectAbsolutePath.replaceAll("/", "\\\\"), "").replaceAll("\\\\", "/");
-				return (new ResourceSetImpl()).getResource(URI.createURI(modelPath), true);
-			}
-		}
-		return null;
+		String copiedTestSuitePath = _executionContext.getWorkspace().getExecutionPath().toString() 
+				+ "/" + _executionContext.getResourceModel().getURI().lastSegment();
+		URI copiedTestSuiteURI = URI.createPlatformResourceURI(copiedTestSuitePath, false);
+		return (new ResourceSetImpl()).getResource(copiedTestSuiteURI, true);
 	}
 	
 	//save the model under test if it is not saved or if it is different from the current saved file
