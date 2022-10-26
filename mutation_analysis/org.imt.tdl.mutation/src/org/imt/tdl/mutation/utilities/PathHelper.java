@@ -1,5 +1,6 @@
 package org.imt.tdl.mutation.utilities;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -124,7 +125,7 @@ public class PathHelper {
 		String projectName = seedModelPath.getParent().toString().substring(1);
 		IProject mutProject = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
 		String path = mutProject.getLocation().toString();
-		path = path.substring(0, path.lastIndexOf("/"));
+		path = path.substring(0, path.lastIndexOf(File.separator));
 		workspacePath = Paths.get(path);
 	}
 	
@@ -132,7 +133,7 @@ public class PathHelper {
 		String projectName = seedModelPath.getParent().toString().substring(1);
 		IProject mutProject = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
 		String path = mutProject.getLocation().toString();
-		path = path.substring(0, path.lastIndexOf("/"));
+		path = path.substring(0, path.lastIndexOf(File.separator));
 		return Paths.get(path);
 	}
 	
@@ -176,7 +177,7 @@ public class PathHelper {
 
 	public Resource getMUTResource() {
 		if (MUTResource == null) {
-			String path = seedModelPath.toString().replace("\\", "/");
+			String path = Paths.get(seedModelPath.toString()).toString();
 			MUTResource = (new ResourceSetImpl()).getResource(URI.createURI(path), true);
 		}
 		return MUTResource;

@@ -1,5 +1,6 @@
 package org.imt.tdl.testResult.persistence;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -26,14 +27,14 @@ import org.imt.tdl.testResult.TDLTestResultUtil;
 
 public class TestReportPersistence implements IEngineAddon{
 	
+	String pathToReportsFiles;
+	
 	@Override
 	public void engineStopped(IExecutionEngine<?> engine) {
-		IExecutionContext<?, ?, ?> _executionContext = null;
-		Resource testSutieResource = null;
-		if (_executionContext == null) {
-			_executionContext = engine.getExecutionContext();
-			testSutieResource = getCopyOfTestSuite(_executionContext);
-		}
+		IExecutionContext<?, ?, ?> _executionContext = engine.getExecutionContext();
+		pathToReportsFiles = _executionContext.getWorkspace().getExecutionPath().toString();
+		Resource testSutieResource = getCopyOfTestSuite(_executionContext);
+
 	   //create test result according to the TDLTestReport.ecore structure
 	   Package copiedTestSuite = (Package) testSutieResource.getContents().get(0);
 	   TestSuiteResult testSuiteResult = TDLTestReportFactory.eINSTANCE.createTestSuiteResult();
@@ -78,8 +79,8 @@ public class TestReportPersistence implements IEngineAddon{
 	   }
 	   
 	   //create a resource for the test result
-	   URI testReportURI = URI.createURI(
-				_executionContext.getWorkspace().getExecutionPath().toString() + "/testReport.xmi", false);
+	   URI testReportURI = URI.createURI(_executionContext.getWorkspace().getExecutionPath().toString() 
+			   + File.separator + "testReport.xmi", false);
 	   Resource testResultResource = (new ResourceSetImpl()).createResource(testReportURI);
 	   testResultResource.getContents().add(testSuiteResult);
 	   //saving resources
@@ -92,8 +93,8 @@ public class TestReportPersistence implements IEngineAddon{
 	   }
 		
 	private Resource getCopyOfTestSuite(IExecutionContext<?, ?, ?> _executionContext) {
-		String copiedTestSuitePath = _executionContext.getWorkspace().getExecutionPath().toString() 
-				+ "/" + _executionContext.getResourceModel().getURI().lastSegment();
+		String copiedTestSuitePath = pathToReportsFiles + File.separator 
+				+ _executionContext.getResourceModel().getURI().lastSegment();
 		URI copiedTestSuiteURI = URI.createPlatformResourceURI(copiedTestSuitePath, false);
 		return (new ResourceSetImpl()).getResource(copiedTestSuiteURI, true);
 	}

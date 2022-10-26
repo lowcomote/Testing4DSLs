@@ -6,9 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -84,7 +81,7 @@ public class TestCoveragePersistence implements IEngineAddon{
 		   testSuiteCoverage.getTsObjectCoverageStatus().add(tsModelObjectCoverageStatus);
 	   }
 	   //create a resource for the test coverage
-	   URI testCoverageURI = URI.createURI(pathToReportsFiles + "/testCoverage.xmi", false);
+	   URI testCoverageURI = URI.createURI(pathToReportsFiles + File.separator + "testCoverage.xmi", false);
 	   Resource testCoverageResource = (new ResourceSetImpl()).createResource(testCoverageURI);
 	   testCoverageResource.getContents().add(testSuiteCoverage);
 	   //saving resources
@@ -109,8 +106,8 @@ public class TestCoveragePersistence implements IEngineAddon{
 	}
 
 	private Resource getCopyOfTestSuite(IExecutionContext<?, ?, ?> _executionContext) {
-		String copiedTestSuitePath = _executionContext.getWorkspace().getExecutionPath().toString() 
-				+ "/" + _executionContext.getResourceModel().getURI().lastSegment();
+		String copiedTestSuitePath = pathToReportsFiles + File.separator 
+				+ _executionContext.getResourceModel().getURI().lastSegment();
 		URI copiedTestSuiteURI = URI.createPlatformResourceURI(copiedTestSuitePath, false);
 		return (new ResourceSetImpl()).getResource(copiedTestSuiteURI, true);
 	}
@@ -119,11 +116,11 @@ public class TestCoveragePersistence implements IEngineAddon{
 	private void copyMUTResource (Resource resource, String testID) {
 		URI modelURI = null;
 		if (MUTResource == null) {
-			modelURI = URI.createURI(pathToReportsFiles + "/modelUnderTest.xmi", false);
+			modelURI = URI.createURI(pathToReportsFiles + File.separator + "modelUnderTest.xmi", false);
 		}
 		//the test case uses a different model under test
 		else if (!EcoreUtil.equals(MUTResource.getContents().get(0), resource.getContents().get(0))) {
-			modelURI = URI.createURI(pathToReportsFiles + "/modelUnderTest_" + testID + ".xmi", false);
+			modelURI = URI.createURI(pathToReportsFiles + File.separator + "modelUnderTest_" + testID + ".xmi", false);
 		}
 		//the model under test is already copied, so do nothing
 		else {return;}

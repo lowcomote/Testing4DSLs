@@ -1,5 +1,6 @@
 package org.imt.tdl.mutation;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -240,8 +241,8 @@ public class MutationScoreCalculator {
 	public void printMutationAnalysisResult() {
 		int numOfMutants = mutantGenerator.numOfMutants;
 		//saving results into a .txt file
-		String outputFilePath = PathHelper.getInstance().getWorkspacePath() + "/"
-				+ PathHelper.getInstance().getTestSuiteProjectName() + "/" 
+		String outputFilePath = PathHelper.getInstance().getWorkspacePath() + File.separator
+				+ PathHelper.getInstance().getTestSuiteProjectName() + File.separator 
 				+ PathHelper.getInstance().getTestSuiteFileName() + 
 				"_mutationReport.txt";
 		StringBuilder sb = new StringBuilder();

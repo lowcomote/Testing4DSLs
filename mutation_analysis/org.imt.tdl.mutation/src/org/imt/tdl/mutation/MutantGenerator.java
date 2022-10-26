@@ -51,7 +51,7 @@ public class MutantGenerator {
 		mutants = new ArrayList<>();
 		String projectName = seedModelPath.getParent().toString().substring(1);
 		mutantsProject =  ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
-		File modelFolder = new File(mutantsProject.getLocation() + "/mutants");
+		File modelFolder = new File(mutantsProject.getLocation() + File.separator + "mutants");
 		if (modelFolder.listFiles() == null) {
 			if (mutatorFilePath != null) {
 				//TODO: generate mutants if nothing exists
