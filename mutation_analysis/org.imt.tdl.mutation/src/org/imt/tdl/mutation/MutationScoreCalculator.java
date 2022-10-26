@@ -1,6 +1,5 @@
 package org.imt.tdl.mutation;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,8 +18,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.etsi.mts.tdl.ComponentInstanceRole;
@@ -35,9 +32,10 @@ import org.imt.tdl.testResult.TDLTestResultUtil;
 
 public class MutationScoreCalculator {
 	
+	MutantGenerator mutantGenerator;
+	
 	Package testSuite;
 	List<TestDescription> testCases = new ArrayList<>();
-	public boolean noMutantsExists;
 	
 	private static String KILLED = "killed";
 	private static String ALIVE = "alive";
@@ -48,29 +46,24 @@ public class MutationScoreCalculator {
 
 	public HashMap<String, List<String>> testCase_killedMutant = new HashMap<>();
 	
-	int numOfMutants;
 	int numOfKilledMutants;
 	double mutationScore;
 	
 	double timeoutFactor;
 	int timeoutConstant;
-
-	Path workspacePath;
-	Path seedModelPath;
-	IProject mutantsProject;
 	
 	public MutationScoreCalculator(Package testSuite) {
+		mutantGenerator = new MutantGenerator();
+		mutantGenerator.findMutants().forEach(m -> mutant_status.put(m, ALIVE));
+		
 		this.testSuite = testSuite;
 		testCases = testSuite.getPackagedElement().stream().filter(p -> p instanceof TestDescription).
 				map(p -> (TestDescription) p).collect(Collectors.toList());
-		seedModelPath = PathHelper.getInstance().getSeedModelPath();
-		workspacePath = PathHelper.getInstance().getWorkspacePath();
-		findMutants();
 		//default values of pitest tool
 		timeoutFactor = 1.25;
 		timeoutConstant = 4000;
 	}
-	
+
 	public String runTestSuiteOnOriginalModel() {
 		System.out.println("Run test suite on the original model");
 		for (TestDescription testCase:testCases) {
@@ -83,7 +76,7 @@ public class MutationScoreCalculator {
 	}
 	
 	public String runTestCaseOnOriginalModel (TestDescription testCase) {
-		String modelPath = seedModelPath.toString().replace("\\", "/");
+		String modelPath = PathHelper.getInstance().getSeedModelPath().toString().replace("\\", "/");
 		long start = System.currentTimeMillis();
 		TDLTestCaseResult result = TestDescriptionAspect.executeTestCase(testCase, modelPath);
 		long stop = System.currentTimeMillis();
@@ -239,46 +232,13 @@ public class MutationScoreCalculator {
 		}
 		return false;
 	}
-
-	private void findMutants() {
-		String projectName = seedModelPath.getParent().toString().substring(1);
-		mutantsProject =  ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
-		File modelFolder = new File(mutantsProject.getLocation() + "/mutants");
-		if (modelFolder.listFiles() == null) {
-			noMutantsExists = true;
-		}else {
-			for (File file : modelFolder.listFiles()) {
-				mutantsPathsHelper(projectName, file);
-			}
-		}
-	}
-	
-	private void mutantsPathsHelper(String projectName, File file) {
-		if (file.isFile() && file.getName().endsWith(".model")) {
-			String filePath = file.getPath();
-			if (workspacePath == null) {
-				String path = filePath.substring(0, filePath.lastIndexOf(projectName)-1);
-				workspacePath = Paths.get(path);
-			}		
-			//get the relative path of the file
-			if (!filePath.equals(seedModelPath.toString())){
-				filePath = filePath.replace(workspacePath.toString(), "");
-				mutant_status.put(filePath, ALIVE);
-				numOfMutants++;
-			}
-		}
-		else if (file.isDirectory()){
-			for (File innerFile : file.listFiles()) {
-				mutantsPathsHelper(projectName, innerFile);
-			}
-		}
-	}
 	
 	public void calculateOverallMutationScore() {
-		mutationScore = (double) numOfKilledMutants/numOfMutants;
+		mutationScore = (double) numOfKilledMutants/mutantGenerator.numOfMutants;
 	}
 	
 	public void printMutationAnalysisResult() {
+		int numOfMutants = mutantGenerator.numOfMutants;
 		//saving results into a .txt file
 		String outputFilePath = PathHelper.getInstance().getWorkspacePath() + "/"
 				+ PathHelper.getInstance().getTestSuiteProjectName() + "/" 
@@ -315,12 +275,12 @@ public class MutationScoreCalculator {
 		}
 	}
 	
-	public Path getWorkspacePath() {
-		return workspacePath;
+	public boolean noMutantsExists() {
+		return mutantGenerator.noMutantsExists;
 	}
 	
 	public int getNumOfMutants() {
-		return numOfMutants;
+		return mutantGenerator.numOfMutants;
 	}
 	
 	public void setNumOfKilledMutants(int numOfKilledMutants) {
@@ -337,7 +297,7 @@ public class MutationScoreCalculator {
 	
 	public double getTestCaseMutationScore(TestDescription testCase) {
 		int numOfKilledMutants = testCase_killedMutant.get(testCase).size();
-		double mutationScore = (double) numOfKilledMutants/numOfMutants;
+		double mutationScore = (double) numOfKilledMutants/mutantGenerator.numOfMutants;
 		return mutationScore;
 	}
 	

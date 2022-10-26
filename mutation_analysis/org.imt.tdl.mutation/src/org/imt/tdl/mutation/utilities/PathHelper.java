@@ -128,6 +128,14 @@ public class PathHelper {
 		workspacePath = Paths.get(path);
 	}
 	
+	public Path findWorkspace(Path seedModelPath) {
+		String projectName = seedModelPath.getParent().toString().substring(1);
+		IProject mutProject = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+		String path = mutProject.getLocation().toString();
+		path = path.substring(0, path.lastIndexOf("/"));
+		return Paths.get(path);
+	}
+	
 	private void findTestSuiteProjectInfo() {
 		testSuiteFilePath = Paths.get(testSuiteFile.getFullPath().toString());
 		testSuiteProjectName = testSuiteFilePath.getParent().toString().substring(1);

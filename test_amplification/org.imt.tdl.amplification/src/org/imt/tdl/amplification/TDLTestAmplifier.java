@@ -49,7 +49,7 @@ public class TDLTestAmplifier {
 		initialNumOfKilledMutants = 0;
 		initialMutationScore = 0;
 		
-		if (!scoreCalculator.noMutantsExists) {
+		if (!scoreCalculator.noMutantsExists()) {
 			String result = scoreCalculator.runTestSuiteOnOriginalModel();
 			if (result == TDLTestResultUtil.FAIL) {
 				String message = "Amplification Stopped: The manually-written test suite is failed on the original model under test.";
@@ -81,7 +81,7 @@ public class TDLTestAmplifier {
 			}
 			
 			System.out.println("\nTest Amplification has been performed successfully.");
-			if (!scoreCalculator.noMutantsExists) {
+			if (!scoreCalculator.noMutantsExists()) {
 				String outputFilePath = PathHelper.getInstance().getWorkspacePath() + "/"
 							+ PathHelper.getInstance().getTestSuiteProjectName() + "/" 
 							+ PathHelper.getInstance().getTestSuiteFileName() + 
@@ -134,7 +134,7 @@ public class TDLTestAmplifier {
 						amplifiedTests.remove(newTestCase);
 					}
 					//check whether the new test case improves the mutation score, if there is any mutants
-					else if (!scoreCalculator.noMutantsExists){
+					else if (!scoreCalculator.noMutantsExists()){
 						if (!scoreCalculator.testCaseImprovesMutationScore(newTestCase)) {
 							tdlTestSuite.getPackagedElement().remove(newTestCase);
 							amplifiedTests.remove(newTestCase);
