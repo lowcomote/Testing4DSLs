@@ -308,8 +308,8 @@ public class TDLCoverageUtil {
 	private String getCoverageFilePath() {
 		final Resource res = (new ResourceSetImpl()).getResource(URI.createURI(DSLPath), true);
 		final Dsl dsl = (Dsl) res.getContents().get(0);
-		return dsl.getEntry("coverageFilePath") != null ? 
-				dsl.getEntry("coverageFilePath").getValue().replaceFirst("resource", "plugin") : null;
+		return dsl.getEntry("coverageRules") != null ? 
+				dsl.getEntry("coverageRules").getValue().replaceFirst("resource", "plugin") : null;
 	}
 	
 	public IDSLSpecificCoverage getDslSpecificCoverageExtension() {
