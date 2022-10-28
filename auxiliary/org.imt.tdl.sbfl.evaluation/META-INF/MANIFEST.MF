@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Evaluation
 Bundle-SymbolicName: org.imt.tdl.sbfl.evaluation;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-16
 Automatic-Module-Name: org.imt.tdl.sbfl.evaluation
 Export-Package: org.imt.tdl.sbfl.evaluation
 Require-Bundle: org.imt.tdl.testResult;bundle-version="1.0.0",

@@ -41,8 +41,8 @@ import org.etsi.mts.tdl.StructuredDataInstance;
 import org.etsi.mts.tdl.StructuredDataType;
 import org.etsi.mts.tdl.TestDescription;
 import org.etsi.mts.tdl.tdlFactory;
+import org.imt.k3tdl.utilities.PathHelper;
 import org.imt.tdl.amplification.utilities.EObject2TDLConverter;
-import org.imt.tdl.mutation.utilities.PathHelper;
 
 public class TDLTestInputDataAmplification {
 	
@@ -107,7 +107,7 @@ public class TDLTestInputDataAmplification {
 	}
 	
 	private void findTdlDataOfDSLInterface() {
-		String dslFilePath = PathHelper.getInstance().getDSLPath();
+		String dslFilePath = TDLTestAmplifier.pathHelper.getDSLPath().toString();
 		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
 		if (dsl.getEntry("behavioralInterface") != null) {
@@ -131,7 +131,7 @@ public class TDLTestInputDataAmplification {
 	private void findTdlDataOfMUT() {
 		tdlEventParameterTypes.forEach(t -> etype_tdlEObjects.put(t.getName(), new ArrayList<>()));
 		EObject2TDLConverter object2tdlCoverter = new EObject2TDLConverter(tdlTestSuite);
-		Resource MUTResource = PathHelper.getInstance().getMUTResource();
+		Resource MUTResource = TDLTestAmplifier.pathHelper.getMUTResource();
 		TreeIterator<EObject> modelContents = MUTResource.getAllContents();
 		while (modelContents.hasNext()) {
 			EObject modelObject = modelContents.next();

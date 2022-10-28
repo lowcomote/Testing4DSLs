@@ -1,8 +1,5 @@
-package org.imt.k3tdl.k3dsa
+package org.imt.k3tdl.utilities
 
-import java.util.Arrays
-import org.eclipse.core.runtime.IConfigurationElement
-import org.eclipse.core.runtime.Platform
 import org.eclipse.emf.common.util.BasicEList
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.common.util.URI
@@ -10,12 +7,15 @@ import org.eclipse.emf.ecore.EClassifier
 import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.gemoc.dsl.Dsl
+import org.etsi.mts.tdl.Package
 
 class DSLProcessor {
 	
 	static DSLProcessor instance = new DSLProcessor
+	static PathHelper pathHelper;
 	
 	String DSLPath = null;
+	
 	
 	def static DSLProcessor getInstance(){
 		return instance
@@ -52,24 +52,19 @@ class DSLProcessor {
 		return name
 	}
 	
+	def void initPathHelper(Package testSuite){
+		pathHelper = new PathHelper(testSuite)
+	}
+	
 	def String findDSLPath (String DSLName){
-		val IConfigurationElement language = Arrays
-				.asList(Platform.getExtensionRegistry()
-						.getConfigurationElementsFor("org.eclipse.gemoc.gemoc_language_workbench.xdsml"))
-				.stream().filter(l | l.getAttribute("xdsmlFilePath").endsWith(".dsl")
-						&& l.getAttribute("name").equals(DSLName))
-				.findFirst().orElse(null);
-		
-		if (language !== null) {
-			var xdsmlFilePath = language.getAttribute("xdsmlFilePath");
-			if (!xdsmlFilePath.startsWith("platform:/plugin")) {
-				xdsmlFilePath = "platform:/plugin" + xdsmlFilePath;
-			}
-			return xdsmlFilePath
-		}
+		return pathHelper.findDSLPath(DSLName).toString
 	}
 	
 	def String getDSLPath (){
 		return DSLPath
+	}
+	
+	def PathHelper getPathHelper(){
+		return instance.pathHelper
 	}
 }

@@ -146,10 +146,10 @@ public class DSLSelectionWizardPage extends WizardPage{
 	}
 	
 	public IPath getSelectedProjectPath() {
-		return this.selectedProjectPath;
+		return selectedProjectPath;
 	}
 	
 	public String getSelectedDSLFilePath() {
-		return this.selectedDSLPath;
+		return selectedDSLPath;
 	}
 }

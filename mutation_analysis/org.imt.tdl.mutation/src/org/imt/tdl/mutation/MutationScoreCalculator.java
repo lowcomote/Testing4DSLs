@@ -1,6 +1,7 @@
 package org.imt.tdl.mutation;
 
 import java.io.File;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -26,13 +27,14 @@ import org.etsi.mts.tdl.GateReference;
 import org.etsi.mts.tdl.Interaction;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
-import org.imt.k3tdl.k3dsa.TestDescriptionAspect;
-import org.imt.tdl.mutation.utilities.PathHelper;
+import org.imt.k3tdl.interpreter.TestDescriptionAspect;
+import org.imt.k3tdl.utilities.PathHelper;
 import org.imt.tdl.testResult.TDLTestCaseResult;
 import org.imt.tdl.testResult.TDLTestResultUtil;
 
 public class MutationScoreCalculator {
 	
+	PathHelper pathHelper;
 	MutantGenerator mutantGenerator;
 	
 	Package testSuite;
@@ -54,7 +56,8 @@ public class MutationScoreCalculator {
 	int timeoutConstant;
 	
 	public MutationScoreCalculator(Package testSuite) {
-		mutantGenerator = new MutantGenerator();
+		pathHelper = new PathHelper(testSuite);
+		mutantGenerator = new MutantGenerator(pathHelper.getModelUnderTestPath(), pathHelper.getDSLPath());
 		mutantGenerator.findMutants().forEach(m -> mutant_status.put(m, ALIVE));
 		
 		this.testSuite = testSuite;
@@ -77,7 +80,7 @@ public class MutationScoreCalculator {
 	}
 	
 	public String runTestCaseOnOriginalModel (TestDescription testCase) {
-		String modelPath = PathHelper.getInstance().getSeedModelPath().toString().replace("\\", "/");
+		String modelPath = pathHelper.getModelUnderTestPath().toString();
 		long start = System.currentTimeMillis();
 		TDLTestCaseResult result = TestDescriptionAspect.executeTestCase(testCase, modelPath);
 		long stop = System.currentTimeMillis();
@@ -241,9 +244,9 @@ public class MutationScoreCalculator {
 	public void printMutationAnalysisResult() {
 		int numOfMutants = mutantGenerator.numOfMutants;
 		//saving results into a .txt file
-		String outputFilePath = PathHelper.getInstance().getWorkspacePath() + File.separator
-				+ PathHelper.getInstance().getTestSuiteProjectName() + File.separator 
-				+ PathHelper.getInstance().getTestSuiteFileName() + 
+		String outputFilePath = pathHelper.getWorkspacePath() + File.separator
+				+ pathHelper.getTestSuiteProjectName() + File.separator 
+				+ pathHelper.getTestSuiteFileName() + 
 				"_mutationReport.txt";
 		StringBuilder sb = new StringBuilder();
 		sb.append("Number of generated mutants: " + numOfMutants + "\n");
@@ -297,7 +300,7 @@ public class MutationScoreCalculator {
 	}
 	
 	public double getTestCaseMutationScore(TestDescription testCase) {
-		int numOfKilledMutants = testCase_killedMutant.get(testCase).size();
+		int numOfKilledMutants = testCase_killedMutant.get(testCase.getName()).size();
 		double mutationScore = (double) numOfKilledMutants/mutantGenerator.numOfMutants;
 		return mutationScore;
 	}

@@ -37,7 +37,6 @@ import org.imt.arduino.reactive.arduino.PushButton
 import org.imt.arduino.reactive.arduino.Repeat
 import org.imt.arduino.reactive.arduino.Sketch
 import org.imt.arduino.reactive.arduino.SoundSensor
-import org.imt.arduino.reactive.arduino.Time
 import org.imt.arduino.reactive.arduino.UnaryBooleanExpression
 import org.imt.arduino.reactive.arduino.UnaryBooleanOperatorKind
 import org.imt.arduino.reactive.arduino.Utilities

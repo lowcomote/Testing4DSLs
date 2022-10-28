@@ -2,7 +2,7 @@ package org.imt.tdl.runner;
 
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
-import org.imt.k3tdl.k3dsa.TestDescriptionAspect;
+import org.imt.k3tdl.interpreter.TestDescriptionAspect;
 import org.imt.tdl.testResult.TDLTestCaseResult;
 
 public class TDLCore {

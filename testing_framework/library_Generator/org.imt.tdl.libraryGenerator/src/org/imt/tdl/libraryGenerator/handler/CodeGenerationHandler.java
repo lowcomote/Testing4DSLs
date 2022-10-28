@@ -21,7 +21,7 @@ public class CodeGenerationHandler extends AbstractHandler {
 			String tdlProjectPath = page.getSelectedProjectPath().toString();
 			String dslFilePath = page.getSelectedDSLFilePath();
 			if (wizard.performFinish()) {
-				TDLCodeGenerator tdlCodeGenerator = new TDLCodeGenerator(dslFilePath, tdlProjectPath);
+				new TDLCodeGenerator(dslFilePath, tdlProjectPath);
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

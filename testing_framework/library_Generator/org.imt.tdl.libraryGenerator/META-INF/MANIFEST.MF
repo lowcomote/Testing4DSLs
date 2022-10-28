@@ -37,3 +37,4 @@ Import-Package: javax.inject;version="1.0.0",
  org.eclipse.xtext.resource,
  org.eclipse.xtext.serializer,
  org.eclipse.xtext.serializer.impl
+Automatic-Module-Name: org.imt.tdl.libraryGenerator

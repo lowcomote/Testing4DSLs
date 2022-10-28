@@ -13,6 +13,7 @@ Require-Bundle: org.eclipse.core.runtime,
  fr.inria.diverse.k3.ui;bundle-version="3.2.0",
  org.imt.arduino.reactive.model;bundle-version="1.0.0",
  org.eclipse.gemoc.dsl.ide;bundle-version="3.0.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-16
 Bundle-ActivationPolicy: lazy
 Export-Package: org.imt.arduino.reactive.interpreter
+Automatic-Module-Name: org.imt.arduino.reactive.interpreter

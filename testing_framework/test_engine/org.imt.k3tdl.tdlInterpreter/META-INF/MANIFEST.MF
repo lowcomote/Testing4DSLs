@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.imt.k3tdl.k3dsa
+Bundle-Name: org.imt.k3tdl.interpreter
 Bundle-SymbolicName: org.imt.k3tdl.tdlInterpreter;singleton:=true
 Bundle-Version: 1.0.0
 Require-Bundle: fr.inria.diverse.k3.al.annotationprocessor.plugin;bundle-version="3.0.0";visibility:=reexport,
@@ -23,4 +23,5 @@ Require-Bundle: fr.inria.diverse.k3.al.annotationprocessor.plugin;bundle-version
  org.imt.tdl.coverage;bundle-version="1.0.0"
 Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Export-Package: org.imt.k3tdl.k3dsa
+Export-Package: org.imt.k3tdl.interpreter,
+ org.imt.k3tdl.utilities

@@ -19,6 +19,7 @@ import org.eclipse.sirius.diagram.model.business.internal.spec.DNodeSpec;
 import org.eclipse.sirius.ext.gmf.runtime.gef.ui.figures.SiriusWrapLabel;
 import org.eclipse.sirius.viewpoint.DMappingBased;
 
+@SuppressWarnings("restriction")
 public class Util {
 
 	public static void disableOutlines(IFigure f) {

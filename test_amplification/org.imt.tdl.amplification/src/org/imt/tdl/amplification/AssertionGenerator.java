@@ -1,6 +1,7 @@
 package org.imt.tdl.amplification;
 
 import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.Target;
 import org.etsi.mts.tdl.TestDescription;
 import org.etsi.mts.tdl.tdlFactory;
-import org.imt.k3tdl.k3dsa.TestDescriptionAspect;
+import org.imt.k3tdl.interpreter.TestDescriptionAspect;
 import org.imt.tdl.amplification.utilities.Event2TDLConverter;
 import org.imt.tdl.observer.ModelExecutionObserver;
 import org.imt.tdl.testResult.TDLTestCaseResult;

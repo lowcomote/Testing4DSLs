@@ -9,7 +9,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
  org.eclipse.m2m.atl.engine.emfvm,
  org.eclipse.m2m.atl.emftvm.launcher
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true
 Export-Package: org.imt.atl.ecore2tdl.files
+Automatic-Module-Name: org.imt.atl.ecore2tdl

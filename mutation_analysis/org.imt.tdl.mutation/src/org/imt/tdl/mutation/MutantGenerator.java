@@ -1,6 +1,7 @@
 package org.imt.tdl.mutation;
 
 import java.io.File;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -12,10 +13,11 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gemoc.dsl.Dsl;
-import org.imt.tdl.mutation.utilities.PathHelper;
+import org.imt.k3tdl.utilities.PathHelper;
 
 public class MutantGenerator {
 
+	PathHelper pathHelper;
 	Path workspacePath;
 	String mutatorFilePath; 
 	Path seedModelPath;
@@ -26,20 +28,22 @@ public class MutantGenerator {
 	boolean noMutantsExists;
 	
 	//this constructor is used by the test amplification tool
-	public MutantGenerator() {
-		workspacePath = PathHelper.getInstance().getWorkspacePath();
-		seedModelPath = PathHelper.getInstance().getSeedModelPath();
-		mutatorFilePath = findMutationOperatorFilePath (PathHelper.getInstance().getDSLPath());
+	public MutantGenerator(Path seedModelPath, Path DSLPath) {
+		this.seedModelPath = seedModelPath;
+		pathHelper = new PathHelper(seedModelPath);
+		workspacePath = pathHelper.getWorkspacePath();
+		mutatorFilePath = findMutationOperatorFilePath (DSLPath);
 	}
 	
 	public MutantGenerator(Path seedModelPath, String mutatorFilePath) {
 		this.seedModelPath = seedModelPath;
-		workspacePath = PathHelper.getInstance().findWorkspace(seedModelPath);
+		pathHelper = new PathHelper(seedModelPath);
+		workspacePath = pathHelper.getWorkspacePath();
 		this.mutatorFilePath = mutatorFilePath;
 	}
 	
-	private String findMutationOperatorFilePath(String dslPath) {
-		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslPath), true);
+	private String findMutationOperatorFilePath(Path dslPath) {
+		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslPath.toString()), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
 		if (dsl.getEntry("mutationOperators") != null) {
 			return dsl.getEntry("mutationOperators").getValue().replaceFirst("resource", "plugin");

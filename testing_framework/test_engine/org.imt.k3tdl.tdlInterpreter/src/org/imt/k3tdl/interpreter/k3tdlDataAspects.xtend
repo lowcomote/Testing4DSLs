@@ -1,25 +1,20 @@
-package org.imt.k3tdl.k3dsa
+package org.imt.k3tdl.interpreter
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 import java.util.ArrayList
 import org.eclipse.emf.common.util.EList
-import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.emf.transaction.RecordingCommand
 import org.eclipse.emf.transaction.TransactionalEditingDomain
 import org.eclipse.emf.transaction.util.TransactionUtil
-import org.eclipse.gemoc.dsl.Dsl
 import org.etsi.mts.tdl.DataInstance
 import org.etsi.mts.tdl.DataInstanceUse
 import org.etsi.mts.tdl.DataType
 import org.etsi.mts.tdl.DataUse
-import org.etsi.mts.tdl.StaticDataUse
 import org.etsi.mts.tdl.LiteralValueUse
 import org.etsi.mts.tdl.Member
 import org.etsi.mts.tdl.MemberAssignment
@@ -31,15 +26,15 @@ import org.etsi.mts.tdl.StructuredDataInstance
 import org.etsi.mts.tdl.StructuredDataType
 import org.imt.tdl.testResult.TDLTestResultUtil
 
-import static extension org.imt.k3tdl.k3dsa.DataInstanceAspect.*
-import static extension org.imt.k3tdl.k3dsa.DataInstanceUseAspect.*
-import static extension org.imt.k3tdl.k3dsa.DataTypeAspect.*
-import static extension org.imt.k3tdl.k3dsa.DataUseAspect.*
-import static extension org.imt.k3tdl.k3dsa.MemberAspect.*
-import static extension org.imt.k3tdl.k3dsa.MemberAssignmentAspect.*
-import static extension org.imt.k3tdl.k3dsa.ParameterBindingAspect.*
-import static extension org.imt.k3tdl.k3dsa.StaticDataUseAspect.*
-import static extension org.imt.k3tdl.k3dsa.StructuredDataInstanceAspect.*
+import static extension org.imt.k3tdl.interpreter.DataInstanceAspect.*
+import static extension org.imt.k3tdl.interpreter.DataInstanceUseAspect.*
+import static extension org.imt.k3tdl.interpreter.DataTypeAspect.*
+import static extension org.imt.k3tdl.interpreter.DataUseAspect.*
+import static extension org.imt.k3tdl.interpreter.MemberAspect.*
+import static extension org.imt.k3tdl.interpreter.MemberAssignmentAspect.*
+import static extension org.imt.k3tdl.interpreter.ParameterBindingAspect.*
+import static extension org.imt.k3tdl.interpreter.StructuredDataInstanceAspect.*
+import org.imt.k3tdl.utilities.DSLProcessor
 
 @Aspect (className = DataType)
 class DataTypeAspect{

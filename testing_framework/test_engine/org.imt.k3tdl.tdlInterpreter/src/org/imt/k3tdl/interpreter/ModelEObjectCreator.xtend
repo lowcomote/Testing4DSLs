@@ -1,26 +1,24 @@
-package org.imt.k3tdl.k3dsa
+package org.imt.k3tdl.interpreter
 
 import java.util.ArrayList
-
 import java.util.List
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.transaction.RecordingCommand
+import org.eclipse.emf.transaction.TransactionalEditingDomain
+import org.eclipse.emf.transaction.util.TransactionUtil
 import org.etsi.mts.tdl.DataInstanceUse
 import org.etsi.mts.tdl.DataUse
-import org.etsi.mts.tdl.StaticDataUse
 import org.etsi.mts.tdl.LiteralValueUse
 import org.etsi.mts.tdl.MemberAssignment
 import org.etsi.mts.tdl.StructuredDataInstance
 
-import static org.imt.k3tdl.k3dsa.DataTypeAspect.*
+import static org.imt.k3tdl.interpreter.DataTypeAspect.*
 
-import static extension org.imt.k3tdl.k3dsa.DataInstanceUseAspect.*
-import org.eclipse.emf.transaction.TransactionalEditingDomain
-import org.eclipse.emf.transaction.util.TransactionUtil
-import org.eclipse.emf.transaction.RecordingCommand
+import static extension org.imt.k3tdl.interpreter.DataInstanceUseAspect.*
 
 class ModelEObjectCreator {
 	
@@ -122,6 +120,8 @@ class ModelEObjectCreator {
 				}else{//the feature value is only one eobject
 					return setEObjectFeatureValue (newEObject, feature, featureValues.get(0))
 				}
+			}else{
+				return false
 			}
 		}
 		//if they are LiteralValueUse, it means they are primitives
@@ -163,6 +163,8 @@ class ModelEObjectCreator {
 					return setEObjectFeatureValue (newEObject, feature, featureValues)
 				}
 			} 
+		}else{
+			return false
 		}
 	}
 	

@@ -76,7 +76,7 @@ public class TDLTestCaseCoverage {
 	
 	private void calculateCoverageBasedOnTrace(Object rootStep) {
 		//System.out.println("Execution Trace:");
-		if (rootStep instanceof SequentialStep step) {
+		if (rootStep instanceof SequentialStep<?, ?> step) {
 			if (step.getMseoccurrence() != null) {
 				EObject object = step.getMseoccurrence().getMse().getCaller();
 				//System.out.println("execution rule: " + step.getMseoccurrence().getMse().getAction()+

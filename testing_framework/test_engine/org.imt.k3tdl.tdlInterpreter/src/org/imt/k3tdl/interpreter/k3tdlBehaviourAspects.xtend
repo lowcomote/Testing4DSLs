@@ -1,4 +1,4 @@
-package org.imt.k3tdl.k3dsa
+package org.imt.k3tdl.interpreter
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 
@@ -42,12 +42,12 @@ import org.etsi.mts.tdl.DefaultBehaviour
 import org.etsi.mts.tdl.InterruptBehaviour
 import org.etsi.mts.tdl.Block
 import org.etsi.mts.tdl.BehaviourDescription
-import static extension org.imt.k3tdl.k3dsa.BehaviourAspect.*
-import static extension org.imt.k3tdl.k3dsa.BlockAspect.*
-import static extension org.imt.k3tdl.k3dsa.GateInstanceAspect.*
-import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
-import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
-import static extension org.imt.k3tdl.k3dsa.ExpressionAspect.*
+import static extension org.imt.k3tdl.interpreter.BehaviourAspect.*
+import static extension org.imt.k3tdl.interpreter.BlockAspect.*
+import static extension org.imt.k3tdl.interpreter.GateInstanceAspect.*
+import static extension org.imt.k3tdl.interpreter.TestDescriptionAspect.*
+import static extension org.imt.k3tdl.interpreter.TestConfigurationAspect.*
+import static extension org.imt.k3tdl.interpreter.ExpressionAspect.*
 import org.etsi.mts.tdl.Target
 import org.imt.tdl.testResult.TDLMessageResult
 import org.etsi.mts.tdl.LiteralValueUse

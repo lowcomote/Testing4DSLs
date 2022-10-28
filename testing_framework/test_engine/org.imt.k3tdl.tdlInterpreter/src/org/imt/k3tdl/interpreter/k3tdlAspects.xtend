@@ -1,4 +1,4 @@
-package org.imt.k3tdl.k3dsa
+package org.imt.k3tdl.interpreter
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 import fr.inria.diverse.k3.al.annotationprocessor.InitializeModel
@@ -11,6 +11,7 @@ import org.etsi.mts.tdl.Annotation
 import org.etsi.mts.tdl.Package
 import org.etsi.mts.tdl.TestConfiguration
 import org.etsi.mts.tdl.TestDescription
+import org.imt.k3tdl.utilities.DSLProcessor
 import org.imt.tdl.configuration.EngineFactory
 import org.imt.tdl.coverage.TDLCoverageUtil
 import org.imt.tdl.coverage.TDLTestCaseCoverage
@@ -19,9 +20,9 @@ import org.imt.tdl.testResult.TDLTestCaseResult
 import org.imt.tdl.testResult.TDLTestResultUtil
 import org.imt.tdl.testResult.TDLTestSuiteResult
 
-import static extension org.imt.k3tdl.k3dsa.BehaviourDescriptionAspect.*
-import static extension org.imt.k3tdl.k3dsa.TestConfigurationAspect.*
-import static extension org.imt.k3tdl.k3dsa.TestDescriptionAspect.*
+import static extension org.imt.k3tdl.interpreter.BehaviourDescriptionAspect.*
+import static extension org.imt.k3tdl.interpreter.TestConfigurationAspect.*
+import static extension org.imt.k3tdl.interpreter.TestDescriptionAspect.*
 
 @Aspect(className = Package)
 class PackageAspect {
@@ -44,6 +45,7 @@ class PackageAspect {
 	@Main
 	def void main(){
 		try {
+			DSLProcessor.instance.initPathHelper(_self)
 			_self.executeTestSuite()		
 		} catch (TDLRuntimeException nt){
 			println("Stopped due "+nt.message)	

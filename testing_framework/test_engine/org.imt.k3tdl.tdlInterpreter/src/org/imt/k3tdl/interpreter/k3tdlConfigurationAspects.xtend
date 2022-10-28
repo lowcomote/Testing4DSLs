@@ -1,6 +1,7 @@
-package org.imt.k3tdl.k3dsa
+package org.imt.k3tdl.interpreter
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
+
 import java.util.ArrayList
 import java.util.HashMap
 import java.util.Map
@@ -16,10 +17,11 @@ import org.etsi.mts.tdl.LiteralValueUse
 import org.imt.tdl.configuration.EngineFactory
 import org.imt.tdl.testResult.TDLTestResultUtil
 
-import static extension org.imt.k3tdl.k3dsa.DataInstanceAspect.*
-import static extension org.imt.k3tdl.k3dsa.DataInstanceUseAspect.*
-import static extension org.imt.k3tdl.k3dsa.DataTypeAspect.*
-import static extension org.imt.k3tdl.k3dsa.LiteralValueUseAspect.*
+import static extension org.imt.k3tdl.interpreter.DataInstanceAspect.*
+import static extension org.imt.k3tdl.interpreter.DataInstanceUseAspect.*
+import static extension org.imt.k3tdl.interpreter.DataTypeAspect.*
+import static extension org.imt.k3tdl.interpreter.LiteralValueUseAspect.*
+import org.imt.k3tdl.utilities.DSLProcessor
 
 @Aspect(className=GateType)
 class GateTypeAspect {

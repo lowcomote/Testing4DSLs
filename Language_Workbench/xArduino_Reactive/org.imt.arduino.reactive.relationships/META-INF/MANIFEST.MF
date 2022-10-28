@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Relationships
 Bundle-SymbolicName: org.imt.arduino.reactive.relationships;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-16
 Automatic-Module-Name: org.imt.arduino.relationships
 Export-Package: org.imt.arduino.reactive.relationships
 Require-Bundle: org.eclipse.gemoc.executionframework.event.manager;bundle-version="4.0.0",

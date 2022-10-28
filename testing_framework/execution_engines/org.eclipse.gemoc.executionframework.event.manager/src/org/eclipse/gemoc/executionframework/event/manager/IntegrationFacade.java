@@ -18,12 +18,7 @@ public class IntegrationFacade {
 		final IMetalanguageRuleExecutor ruleExecutor = metalanguageIntegrations
 				.computeIfAbsent(callRequest.getMetalanguage(), m -> findMetalanguageRuleExecutor(m));
 		ruleExecutor.setExecutionEngine(executionEngine);
-		if (ruleExecutor != null) {
-			ruleExecutor.handleCallRequest(callRequest);
-		} else {
-			throw new IllegalArgumentException(
-					"No metalanguage rule executor was found for metalanguage " + callRequest.getMetalanguage());
-		}
+		ruleExecutor.handleCallRequest(callRequest);
 	}
 
 	private IMetalanguageRuleExecutor findMetalanguageRuleExecutor(String metalanguage) {

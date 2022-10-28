@@ -1,4 +1,4 @@
-package org.imt.k3tdl.k3dsa
+package org.imt.k3tdl.interpreter
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 import org.etsi.mts.tdl.TimeConstraint

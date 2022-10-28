@@ -1,4 +1,4 @@
-package org.imt.tdl.mutation.utilities;
+package org.imt.k3tdl.utilities;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -9,7 +9,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -24,41 +23,69 @@ import org.etsi.mts.tdl.tdlPackage;
 import org.etsi.mts.tdl.util.tdlResourceFactoryImpl;
 
 public class PathHelper {
-	
-	static PathHelper instance = new PathHelper();
 
 	IFile testSuiteFile;
-	Resource testSuiteResource;
-	Package testSuite;
 	Path testSuiteFilePath;
-	String testSuiteProjectName;
 	String testSuiteFileName;
 	
+	Resource testSuiteResource;
+	URI testSuiteURI;
+	
+	Package testSuite;
+
 	Path workspacePath;
 	Path modelsProjectPath;
-	Path seedModelPath;
+	Path modelUnderTestPath;
 	Resource MUTResource;
 	
 	String DSLName;
-	String DSLPath;
+	Path DSLPath;
 	
-	private PathHelper() {
-	}
-	
-	public static PathHelper getInstance() {
-		return instance;
-	}
-	
-	public void setTestSuiteFile(IFile testSuiteFile) {
+	public PathHelper (IFile testSuiteFile) {
 		this.testSuiteFile = testSuiteFile;
-		ResourceSet resSet = new ResourceSetImpl();
-		testSuiteResource = readTestSuiteResource(resSet, testSuiteFile);
-		setTestSuite((Package)testSuiteResource.getContents().get(0));
+		String filePath = testSuiteFile.getFullPath().toString();
+		testSuiteURI = URI.createPlatformResourceURI(filePath, true);
+		loadTestSuite (testSuiteURI);
+		setup();
 	}
 	
-	private Resource readTestSuiteResource(ResourceSet resSet, IFile testSuiteFile){
-		IPath path = testSuiteFile.getFullPath();
-		URI testSuiteURI = URI.createPlatformResourceURI(path.toString(), true);
+	public PathHelper (Resource testSuiteResource) {
+		this.testSuiteResource = testSuiteResource;
+		testSuite = (Package) testSuiteResource.getContents().get(0);
+		setup();
+	}
+	
+	public PathHelper (Package testSuite) {
+		this.testSuite = testSuite;
+		testSuiteResource = testSuite.eResource();
+		setup();
+	}
+	
+	private void setup() {
+		findTestSuiteNameAndPath();
+		findModelAndDSLPathOfTestSuite();
+		//when the modelUnderTestPath found, find the workspace path
+		findWorkspacePath();
+	}
+	
+	public PathHelper (Path modelUnderTestPath) {
+		this.modelUnderTestPath = modelUnderTestPath;
+		//when the modelUnderTestPath found, find the workspace path
+		findWorkspacePath();
+	}
+	
+	public PathHelper() {
+		
+	}
+	
+	private void findTestSuiteNameAndPath() {
+		testSuiteURI = testSuiteResource.getURI();
+		testSuiteFilePath = Paths.get(testSuiteURI.path());
+		testSuiteFileName = testSuiteURI.lastSegment();
+	}
+
+	public void loadTestSuite (URI testSuiteURI) {
+		ResourceSet resSet = new ResourceSetImpl();
 		if (testSuiteURI.toString().endsWith(".xmi")) {
 			resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 			resSet.getPackageRegistry().put(tdlPackage.eNS_URI, tdlPackage.eINSTANCE);
@@ -75,74 +102,88 @@ public class PathHelper {
 			resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(".tdlan2", new tdlResourceFactoryImpl());
 			resSet.getPackageRegistry().put(tdlPackage.eNS_URI, tdlPackage.eINSTANCE);
 		}
-		Resource testSuiteRes = (resSet).getResource(testSuiteURI, true);
-		return testSuiteRes;
+		testSuiteResource = (resSet).getResource(testSuiteURI, true);
+		testSuite = (Package) testSuiteResource.getContents().get(0);
 	}
-	
-	public void setTestSuite(Package testSuite) {
-		this.testSuite = testSuite;
-		findModelPathAndDSLName();
-		findDSLPath();
-		findWorkspace();
-		findTestSuiteProjectInfo();
-	}
-	
-	private void findModelPathAndDSLName () {
+
+	public void findModelAndDSLPathOfTestSuite() {
 		TestDescription testCase = testSuite.getPackagedElement().stream().
 				filter(p -> p instanceof TestDescription).
 				map(p -> (TestDescription) p).
 				findFirst().get();
+		findModelAndDSLPathOfTestCase(testCase);
+	}
+	
+	public void findModelAndDSLPathOfTestCase(TestDescription testCase) {
 		ComponentInstance sutComponent = testCase.getTestConfiguration().getComponentInstance().stream().
 				filter(ci -> ci.getRole().toString().equals("SUT")).
 				findFirst().get();
 		for (Annotation a:sutComponent.getAnnotation()){
 			if (a.getKey().getName().equals("MUTPath")){
-				seedModelPath = Paths.get(a.getValue().substring(1, a.getValue().length()-1));
+				modelUnderTestPath = Paths.get(a.getValue().substring(1, a.getValue().length()-1));
 			}
 			else if (a.getKey().getName().equals("DSLName")) {
 				DSLName = a.getValue().substring(1, a.getValue().length()-1);
+				DSLPath = findDSLPath (DSLName);
 			}
 		}
 	}
 	
-	public void findDSLPath (){
+	public Path findDSLPath (String DSLName){
 		IConfigurationElement language = Arrays
 				.asList(Platform.getExtensionRegistry()
 						.getConfigurationElementsFor("org.eclipse.gemoc.gemoc_language_workbench.xdsml"))
 				.stream().filter(l -> l.getAttribute("xdsmlFilePath").endsWith(".dsl")
 						&& l.getAttribute("name").equals(DSLName))
 				.findFirst().orElse(null);
-		
 		if (language != null) {
-			DSLPath = language.getAttribute("xdsmlFilePath");
-			if (!DSLPath.startsWith("platform:/plugin")) {
-				DSLPath = "platform:/plugin" + DSLPath;
-			}
+			return Paths.get(URI.createPlatformPluginURI(language.getAttribute("xdsmlFilePath"), false).toString());
 		}
+		return null;
 	}
 	
-	private void findWorkspace() {
-		String projectName = seedModelPath.getParent().toString().substring(1);
-		IProject mutProject = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+	private void findWorkspacePath() {
+		IProject mutProject = getModelUnderTestProject();
 		String path = mutProject.getLocation().toString();
 		path = path.substring(0, path.lastIndexOf(File.separator));
 		workspacePath = Paths.get(path);
 	}
 	
-	public Path findWorkspace(Path seedModelPath) {
-		String projectName = seedModelPath.getParent().toString().substring(1);
-		IProject mutProject = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
-		String path = mutProject.getLocation().toString();
-		path = path.substring(0, path.lastIndexOf(File.separator));
-		return Paths.get(path);
+	public Path getWorkspacePath(Path path) {
+		return getWorkspacePath(getProject(path));
 	}
 	
-	private void findTestSuiteProjectInfo() {
-		testSuiteFilePath = Paths.get(testSuiteFile.getFullPath().toString());
-		testSuiteProjectName = testSuiteFilePath.getParent().toString().substring(1);
-		testSuiteFileName = testSuiteFile.getName().replace("." + testSuiteFile.getFileExtension(), "");
+	public Path getWorkspacePath(String projectName) {
+		return getWorkspacePath(getProject(projectName));
 	}
-
+	
+	public Path getWorkspacePath(IProject project) {
+		String projectPath = project.getLocation().toString();
+		projectPath = projectPath.substring(0, projectPath.lastIndexOf(File.separator));
+		return Paths.get(projectPath);
+	}
+	
+	public Path getWorkspacePath() {
+		return workspacePath;
+	}
+	
+	public IProject getProject (Path path) {
+		String projectName = path.getParent().toString().substring(1);
+		return getProject(projectName);
+	}
+	
+	public IProject getProject (String projectName) {
+		return ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+	}
+	
+	public IProject getTestSuiteProject () {
+		return getProject(testSuiteFilePath);
+	}
+	
+	public IProject getModelUnderTestProject () {
+		return getProject(modelUnderTestPath);
+	}
+	
 	public IFile getTestSuiteFile() {
 		return testSuiteFile;
 	}
@@ -151,12 +192,12 @@ public class PathHelper {
 		return testSuiteResource;
 	}
 	
-	public Path getTestSuiteProjectPath() {
+	public Path getTestSuiteFilePath() {
 		return testSuiteFilePath;
 	}
 
 	public String getTestSuiteProjectName() {
-		return testSuiteProjectName;
+		return testSuiteFilePath.getParent().toString().substring(1);
 	}
 
 	public String getTestSuiteFileName() {
@@ -167,26 +208,27 @@ public class PathHelper {
 		return testSuite;
 	}
 
-	public Path getWorkspacePath() {
-		return workspacePath;
-	}
-
-	public Path getSeedModelPath() {
-		return seedModelPath;
+	public Path getModelUnderTestPath() {
+		return modelUnderTestPath;
 	}
 
 	public Resource getMUTResource() {
-		if (MUTResource == null) {
-			String path = Paths.get(seedModelPath.toString()).toString();
-			MUTResource = (new ResourceSetImpl()).getResource(URI.createURI(path), true);
+		if (MUTResource == null && modelUnderTestPath != null) {
+			MUTResource = getMUTResource(modelUnderTestPath);
 		}
 		return MUTResource;
 	}
+	
+	public Resource getMUTResource(Path modelUnderTestPath) {
+		String path = Paths.get(modelUnderTestPath.toString()).toString();
+		return (new ResourceSetImpl()).getResource(URI.createURI(path), true);
+	}
+	
 	public String getDSLName() {
 		return DSLName;
 	}
 
-	public String getDSLPath() {
+	public Path getDSLPath() {
 		return DSLPath;
 	}
 }
