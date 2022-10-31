@@ -1,7 +1,6 @@
 package org.imt.tdl.mutation;
 
 import java.io.File;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -9,11 +8,10 @@ import java.util.List;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.gemoc.dsl.Dsl;
-import org.imt.k3tdl.utilities.PathHelper;
+import org.imt.tdl.utilities.DSLProcessor;
+import org.imt.tdl.utilities.PathHelper;
+
+import manager.MutatorAPILauncher;
 
 public class MutantGenerator {
 
@@ -43,10 +41,11 @@ public class MutantGenerator {
 	}
 	
 	private String findMutationOperatorFilePath(Path dslPath) {
-		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslPath.toString()), true);
-		Dsl dsl = (Dsl)dslRes.getContents().get(0);
-		if (dsl.getEntry("mutationOperators") != null) {
-			return dsl.getEntry("mutationOperators").getValue().replaceFirst("resource", "plugin");
+		DSLProcessor dslProcessor = new DSLProcessor(dslPath);
+		String path = dslProcessor.getPath2MutationOperators();
+		if (path != null) {
+			path.replaceFirst("resource", "plugin");
+			return path;
 		}
 		return null;
 	}
@@ -55,10 +54,11 @@ public class MutantGenerator {
 		mutants = new ArrayList<>();
 		String projectName = seedModelPath.getParent().toString().substring(1);
 		mutantsProject =  ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
-		File modelFolder = new File(mutantsProject.getLocation() + File.separator + "mutants");
+		String mutantsPath = Paths.get(mutantsProject.getLocation().toString(), "mutants").toString();
+		File modelFolder = new File(mutantsPath);
 		if (modelFolder.listFiles() == null) {
 			if (mutatorFilePath != null) {
-				//TODO: generate mutants if nothing exists
+				generateMutants(mutantsPath);
 			}
 			noMutantsExists = true;
 		}else {
@@ -69,6 +69,12 @@ public class MutantGenerator {
 		return mutants;
 	}
 	
+	private void generateMutants(String outputPath) {
+		// TODO Auto-generated method stub
+//		MutatorAPILauncher mutatorAPILauncher = new MutatorAPILauncher(
+//				event, project, arrMutatorNames, arrOperatorNames, seedModelPath, outputPath);
+	}
+
 	private void mutantsPathsHelper(String projectName, File file) {
 		if (file.isFile() && file.getName().endsWith(".model")) {
 			String filePath = file.getPath();

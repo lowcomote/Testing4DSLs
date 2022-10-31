@@ -2,6 +2,7 @@ package org.imt.k3tdl.interpreter
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 
+
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 import java.util.ArrayList
 import org.eclipse.emf.common.util.EList
@@ -34,7 +35,6 @@ import static extension org.imt.k3tdl.interpreter.MemberAspect.*
 import static extension org.imt.k3tdl.interpreter.MemberAssignmentAspect.*
 import static extension org.imt.k3tdl.interpreter.ParameterBindingAspect.*
 import static extension org.imt.k3tdl.interpreter.StructuredDataInstanceAspect.*
-import org.imt.k3tdl.utilities.DSLProcessor
 
 @Aspect (className = DataType)
 class DataTypeAspect{
@@ -63,12 +63,16 @@ class DataTypeAspect{
 	}
 	
 	def boolean isAcceptedEvent() {
-		val annotation = _self.annotation.stream.filter(a | a.key.name.equals("AcceptedEvent")).findFirst
+		val annotation = _self.annotation.stream.filter(
+			a | a.key.name.equals("AcceptedEvent")
+		).findFirst
 		return annotation.isPresent
 	}
 	
 	def boolean isExposedEvent() {
-		val annotation = _self.annotation.stream.filter(a | a.key.name.equals("ExposedEvent")).findFirst
+		val annotation = _self.annotation.stream.filter(
+			a | a.key.name.equals("ExposedEvent")
+		).findFirst
 		return annotation.isPresent
 	}
 	
@@ -180,7 +184,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 	def EObject getMatchedMUTElement(Resource MUTResource, boolean isAssertion){
 		var ArrayList<EObject> rootElement = new ArrayList
 		//if data type is abstract return null
-		if (!DSLProcessor.instance.isConcreteEcoreType(_self.dataInstance.dataType.name)){
+		if (!PackageAspect.dslProcessor.isConcreteEcoreType(_self.dataInstance.dataType.name)){
 			println("The " + _self.dataInstance.name + " element is abstract")
 			_self.dataInstance.info = TDLTestResultUtil.FAIL + ": The " + _self.dataInstance.name + " element is abstract"
 			return null;
@@ -573,18 +577,24 @@ class StaticDataUseAspect extends DataUseAspect{
 }
 @Aspect (className = LiteralValueUse)
 class LiteralValueUseAspect extends StaticDataUseAspect{
+	static String EINT = "EInt"
+	static String EINTOBJECT = "EIntegerObject"
+	static String EBOOLEAN = "EBoolean"
+	static String EBOOLOBJECT = "EBooleanObject"
+	static String ESTRING = "EString"
+	
 	def Object getPrimitiveValue(String primitiveTypeName){
 		var String parameterValue = _self.value
 		if (parameterValue.startsWith("\"") || parameterValue.startsWith("'")){
 	        parameterValue = parameterValue.substring(1, parameterValue.length-1)//remove quotation marks
 	    }
-	    if (primitiveTypeName.equals("EInt") || primitiveTypeName.equals("EIntegerObject")){
+	    if (primitiveTypeName.equals(EINT) || primitiveTypeName.equals(EINTOBJECT)){
 			return Integer.parseInt(parameterValue)
 		}
-		else if (primitiveTypeName.equals("EBoolean") || primitiveTypeName.equals("EBooleanObject")){
+		else if (primitiveTypeName.equals(EBOOLEAN) || primitiveTypeName.equals(EBOOLOBJECT)){
 			return Boolean.parseBoolean(parameterValue)
 		}
-		else if (primitiveTypeName.equals("EString")){
+		else if (primitiveTypeName.equals(ESTRING)){
 			return parameterValue
 		}
 		return null;
@@ -614,9 +624,9 @@ class LiteralValueUseAspect extends StaticDataUseAspect{
 	        	if (parameterValue.startsWith("\"") || parameterValue.startsWith("'")){
 	        		parameterValue = parameterValue.substring(1, parameterValue.length-1)//remove quotation marks
 	        	}
-				if (matchedFeature.EType.name.equals("EInt") || matchedFeature.EType.name.equals("EIntegerObject")){
+				if (matchedFeature.EType.name.equals(EINT) || matchedFeature.EType.name.equals(EINTOBJECT)){
 					object.eSet(matchedFeature, Integer.parseInt(parameterValue));
-				} else if (matchedFeature.EType.name.equals("EBoolean")|| matchedFeature.EType.name.equals("EBooleanObject")){
+				} else if (matchedFeature.EType.name.equals(EBOOLEAN)|| matchedFeature.EType.name.equals(EBOOLOBJECT)){
 					object.eSet(matchedFeature, Boolean.parseBoolean(parameterValue));
 				} else {
 					object.eSet(matchedFeature, parameterValue);
@@ -633,13 +643,13 @@ class LiteralValueUseAspect extends StaticDataUseAspect{
         	if (parameterValue.startsWith("\"") || parameterValue.startsWith("'")){
         		parameterValue = parameterValue.substring(1, parameterValue.length-1)//remove quotation marks
         	}
-			if (matchedFeature.EType.name.equals("EInt") || matchedFeature.EType.name.equals("EIntegerObject")){
+			if (matchedFeature.EType.name.equals(EINT) || matchedFeature.EType.name.equals(EINTOBJECT)){
 				object.eSet(matchedFeature, Integer.parseInt(parameterValue));
-			} else if (matchedFeature.EType.name.equals("EBoolean")|| matchedFeature.EType.name.equals("EBooleanObject")){
+			} else if (matchedFeature.EType.name.equals(EBOOLEAN)|| matchedFeature.EType.name.equals(EBOOLOBJECT)){
 				object.eSet(matchedFeature, Boolean.parseBoolean(parameterValue));
 			} else {
 				object.eSet(matchedFeature, parameterValue);
-			} 
+			}   
 		}
 		
 		return TDLTestResultUtil.PASS + ": New value is set for the " + matchedFeature.name + " property of the MUT"

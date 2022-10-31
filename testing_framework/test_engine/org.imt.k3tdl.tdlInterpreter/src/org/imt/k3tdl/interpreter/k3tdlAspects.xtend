@@ -4,14 +4,13 @@ import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 import fr.inria.diverse.k3.al.annotationprocessor.InitializeModel
 import fr.inria.diverse.k3.al.annotationprocessor.Main
 import fr.inria.diverse.k3.al.annotationprocessor.Step
+import java.nio.file.Paths
 import java.util.ArrayList
 import java.util.List
 import org.eclipse.emf.common.util.EList
-import org.etsi.mts.tdl.Annotation
 import org.etsi.mts.tdl.Package
 import org.etsi.mts.tdl.TestConfiguration
 import org.etsi.mts.tdl.TestDescription
-import org.imt.k3tdl.utilities.DSLProcessor
 import org.imt.tdl.configuration.EngineFactory
 import org.imt.tdl.coverage.TDLCoverageUtil
 import org.imt.tdl.coverage.TDLTestCaseCoverage
@@ -19,13 +18,19 @@ import org.imt.tdl.coverage.TDLTestSuiteCoverage
 import org.imt.tdl.testResult.TDLTestCaseResult
 import org.imt.tdl.testResult.TDLTestResultUtil
 import org.imt.tdl.testResult.TDLTestSuiteResult
+import org.imt.tdl.utilities.DSLProcessor
+import org.imt.tdl.utilities.PathHelper
 
+import static extension org.imt.k3tdl.interpreter.PackageAspect.*
 import static extension org.imt.k3tdl.interpreter.BehaviourDescriptionAspect.*
 import static extension org.imt.k3tdl.interpreter.TestConfigurationAspect.*
 import static extension org.imt.k3tdl.interpreter.TestDescriptionAspect.*
 
 @Aspect(className = Package)
 class PackageAspect {
+	
+	public static PathHelper pathHelper;
+	public static DSLProcessor dslProcessor;
 	
 	List<TestDescription> testcases = new ArrayList<TestDescription>
 	TDLTestSuiteResult testSuiteResult = new TDLTestSuiteResult
@@ -37,18 +42,16 @@ class PackageAspect {
 		for (Object o : _self.packagedElement.filter[p | p instanceof TestDescription]){
 			_self.testcases.add(o as TestDescription)
 		}
-		if (_self.testcases.size == 0){
-			println("There is no test case in the package " + _self.name + "to be executed")
-		}
 	}
 	@Step
 	@Main
 	def void main(){
-		try {
-			DSLProcessor.instance.initPathHelper(_self)
-			_self.executeTestSuite()		
-		} catch (TDLRuntimeException nt){
-			println("Stopped due "+nt.message)	
+		if (_self.testcases.size == 0){
+			println("There is no test case in the package " + _self.name + "to be executed")
+		}
+		else{
+			pathHelper = new PathHelper(_self)
+			_self.executeTestSuite()
 		}
 	}
 	
@@ -67,7 +70,7 @@ class PackageAspect {
 		
 		TDLTestResultUtil.instance.setTestSuiteResult = _self.testSuiteResult		
 		TDLCoverageUtil.instance.testSuiteCoverage = _self.testSuiteCoverage
-		TDLCoverageUtil.instance.DSLPath = DSLProcessor.instance.DSLPath
+		TDLCoverageUtil.instance.DSLPath = pathHelper.DSLPath.toString
 		println("Test suite execution has been finished successfully.")
 		return _self.testSuiteResult
 	}
@@ -75,6 +78,7 @@ class PackageAspect {
 
 @Aspect (className = TestDescription)
 class TestDescriptionAspect{
+	
 	public EngineFactory launcher = new EngineFactory
 	public TDLTestCaseResult testCaseResult = new TDLTestCaseResult
 	public TDLTestCaseCoverage testCaseCoverage = new TDLTestCaseCoverage
@@ -90,19 +94,24 @@ class TestDescriptionAspect{
 	//this method is called from other codes (not GEMOC engine)
 	def TDLTestCaseResult executeTestCase(String MUTPath){
 		_self.activateConfiguration(MUTPath)
-		val result = _self.runTestAndReturnResult
-		return result
+		return _self.runTestAndReturnResult
 	}
 	
+	/*
+	 * the activateConfiguration methods are useful to configure test case before executing it
+	 * e.g, in the test amplification tool, first a test configuration is created 
+	 * then an observer is attached to the model execution engine
+	 * and afterwards, the test case is executed
+	 */
 	def void activateConfiguration(){
+		pathHelper.findModelAndDSLPathOfTestCase(_self)
 		_self.testConfiguration.activateConfiguration(_self.launcher)
 	}
 	
 	def void activateConfiguration(String MUTPath){
-		_self.launcher = new EngineFactory
-		_self.testCaseResult = new TDLTestCaseResult
-		_self.testCaseCoverage = new TDLTestCaseCoverage
-		_self.testConfiguration.activateConfiguration(_self.launcher, MUTPath)
+		pathHelper.findModelAndDSLPathOfTestCase(_self)
+		pathHelper.modelUnderTestPath = Paths.get(MUTPath)
+		_self.testConfiguration.activateConfiguration(_self.launcher)
 	}
 	
 	def TDLTestCaseResult runTestAndReturnResult(){
@@ -127,37 +136,14 @@ class TestDescriptionAspect{
 
 @Aspect (className = TestConfiguration)
 class TestConfigurationAspect{
-	public String MUTPath;
 
 	def void activateConfiguration(EngineFactory launcher){
-		//finding the address of MUT From the annotations of the SUT component (the component with role==0)
-		val sutComponent = _self.componentInstance.filter[ci | ci.role.toString.equals("SUT")].get(0)
-		for (Annotation a:sutComponent.annotation){
-			if (a.key.name.equals('MUTPath')){
-				val modelPath = a.value.substring(1, a.value.length-1)
-				if (!modelPath.equals(_self.MUTPath)){
-					_self.MUTPath = modelPath
-				}
-			}else if (a.key.name.equals('DSLName')){
-				val dslName = a.value.substring(1, a.value.length-1)
-				DSLProcessor.instance.loadDSL(dslName)
-			}
-		}
-		launcher.MUTPath = _self.MUTPath
-		launcher.DSLPath = DSLProcessor.instance.getDSLPath
-		_self.setUpLauncher(launcher)
-	}
-
-	def void activateConfiguration(EngineFactory launcher, String MUTPath){
-		_self.MUTPath = MUTPath
-		for (Annotation a:_self.componentInstance.filter[ci | ci.role.toString == "SUT"].get(0).annotation){
-			if (a.key.name == 'DSLName'){
-				val dslName = a.value.substring(1, a.value.length-1)
-				DSLProcessor.instance.loadDSL(dslName)
-			}
-		}
-		launcher.MUTPath = _self.MUTPath
-		launcher.DSLPath = DSLProcessor.instance.getDSLPath
+		val dslPath = PackageAspect.pathHelper.DSLPath
+		PackageAspect.dslProcessor = new DSLProcessor(dslPath)
+		dslProcessor.loadDSLMetaclasses
+		
+		launcher.DSLPath = dslPath
+		launcher.MUTPath = PackageAspect.pathHelper.modelUnderTestPath
 		_self.setUpLauncher(launcher)
 	}
 	

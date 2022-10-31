@@ -19,7 +19,8 @@ Require-Bundle: org.imt.tdl.testResult;bundle-version="1.0.0",
  org.imt.xminijava.model,
  org.imt.tdl.configuration,
  org.eclipse.gmf.runtime.emf.core,
- org.eclipse.gemoc.trace.commons.model
+ org.eclipse.gemoc.trace.commons.model,
+ org.imt.tdl.utilities
 Bundle-ClassPath: lib/commons-codec-1.15.jar,
  lib/commons-collections4-4.4.jar,
  lib/commons-compress-1.21.jar,

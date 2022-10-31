@@ -1,40 +1,43 @@
 package org.imt.tdl.sbfl.evaluation;
 
-import org.etsi.mts.tdl.Annotation;
-
-import org.etsi.mts.tdl.ComponentInstance;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
-import org.imt.k3tdl.utilities.DSLProcessor;
 import org.imt.k3tdl.interpreter.TestDescriptionAspect;
 import org.imt.tdl.coverage.TDLCoverageUtil;
 import org.imt.tdl.coverage.TDLTestCaseCoverage;
 import org.imt.tdl.coverage.TDLTestSuiteCoverage;
 import org.imt.tdl.testResult.TDLTestCaseResult;
-import org.imt.tdl.testResult.TDLTestResultUtil;	
+import org.imt.tdl.testResult.TDLTestResultUtil;
 import org.imt.tdl.testResult.TDLTestSuiteResult;
+import org.imt.tdl.utilities.PathHelper;
 
 public class MutationTestRunner {
 	
+	private PathHelper pathHelper;
+	
 	private TDLTestSuiteResult testSuiteResult;
 	private TDLTestSuiteCoverage testSuiteCoverage;
-	private String DSLPath = "";
 
 	public MutationTestRunner() {
 		testSuiteResult = new TDLTestSuiteResult();
 		testSuiteCoverage= new TDLTestSuiteCoverage();
 	}
+	
 	public void runTestAndCalculateCoverage(Package testPackage, String mutantPath) {
-		mutantPath = mutantPath.replace("\\", "/");
+		pathHelper = new PathHelper(testPackage);
+		pathHelper.findModelAndDSLPathOfTestSuite();
+		String dslName = pathHelper.getDSLName();
+		
 		testSuiteResult.setTestSuite(testPackage);
+		
 		for (int i=0; i<testPackage.getPackagedElement().size(); i++) {
 			if (testPackage.getPackagedElement().get(i) instanceof TestDescription testCase) {
-				String dslName = getDSLName(testCase);
 				//for minijava mutants, the mutant must be changed to enable the test case execution ('main' method required)
 				String mutantTestPath = mutantPath;
 				if (dslName.equals("org.imt.xminijava.Xminijava")) {
 					mutantTestPath = mutantPath.substring(0, mutantPath.indexOf(".model")) + "_" + testCase.getName() + ".model";
-					(new MiniJavaMutationTestHelper()).addMainClassToMutant(mutantPath, testCase, mutantTestPath);
+					(new MiniJavaMutationTestHelper()).addMainClassToMutant(
+							pathHelper.getModelUnderTestPath().toString(), mutantPath, mutantTestPath);
 				}
 				TestDescriptionAspect.executeTestCase(testCase, mutantTestPath);
 				TDLTestCaseResult testCaseResult = TestDescriptionAspect.testCaseResult(testCase);
@@ -52,14 +55,13 @@ public class MutationTestRunner {
 					testSuiteCoverage.addTCCoverage(testCaseCoverage);
 				}
 				testSuiteResult.addResult(testCaseResult);
-				if (DSLPath == "") {
-					DSLPath = DSLProcessor.getInstance().getDSLPath();
-				}
 			}
 		}
 		//keep test result and test coverage for killed mutants
 		if (testSuiteResult.getNumOfFailedTestCases() != 0) {
 			TDLCoverageUtil.getInstance().setTestSuiteCoverage(testSuiteCoverage);
+			pathHelper.findModelAndDSLPathOfTestSuite();
+			String DSLPath = pathHelper.getDSLPath().toString();
 			if (TDLCoverageUtil.getInstance().getDSLPath() == null || !TDLCoverageUtil.getInstance().getDSLPath().equals(DSLPath)) {
 			    TDLCoverageUtil.getInstance().setDSLPath(DSLPath);
 			    TDLCoverageUtil.getInstance().runCoverageComputation();
@@ -68,17 +70,6 @@ public class MutationTestRunner {
 				testSuiteCoverage.calculateTSCoverage();
 			}
 		}
-	}
-	
-	private String getDSLName(TestDescription testCase) {
-		ComponentInstance sutComponent = testCase.getTestConfiguration().getComponentInstance().stream().
-				filter(ci -> ci.getRole().toString().equals("SUT")).findFirst().get();
-		for (Annotation a:sutComponent.getAnnotation()){
-			if (a.getKey().getName().equals("DSLName")){
-				return a.getValue().substring(1, a.getValue().length()-1);
-			}
-		}
-		return null;
 	}
 	
 	public TDLTestSuiteResult getTestSuiteResult() {
@@ -95,13 +86,5 @@ public class MutationTestRunner {
 
 	public void setTestSuiteCoverage(TDLTestSuiteCoverage testSuiteCoverage) {
 		this.testSuiteCoverage = testSuiteCoverage;
-	}
-
-	public String getDSLPath() {
-		return DSLPath;
-	}
-
-	public void setDSLPath(String dSLPath) {
-		DSLPath = dSLPath;
 	}
 }

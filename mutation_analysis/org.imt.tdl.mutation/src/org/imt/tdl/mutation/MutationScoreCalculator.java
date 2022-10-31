@@ -2,6 +2,7 @@ package org.imt.tdl.mutation;
 
 import java.io.File;
 
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -28,9 +29,9 @@ import org.etsi.mts.tdl.Interaction;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
 import org.imt.k3tdl.interpreter.TestDescriptionAspect;
-import org.imt.k3tdl.utilities.PathHelper;
 import org.imt.tdl.testResult.TDLTestCaseResult;
 import org.imt.tdl.testResult.TDLTestResultUtil;
+import org.imt.tdl.utilities.PathHelper;
 
 public class MutationScoreCalculator {
 	
@@ -110,7 +111,7 @@ public class MutationScoreCalculator {
 		
 		//run the test case only on alive mutants
 		for (String mutant:mutant_status.keySet()) {
-			String mutantPath = mutant.replace("\\", "/");
+			String mutantPath = Paths.get(mutant).toString();
 			TDLTestCaseResult result = null;
 			final Runnable testRunner = new Thread() {
 				  @Override 
@@ -169,7 +170,7 @@ public class MutationScoreCalculator {
 		
 		//run the test case only on alive mutants
 		for (String mutant:aliveMutants) {
-			String mutantPath = mutant.replace("\\", "/");
+			String mutantPath = Paths.get(mutant).toString();
 			TDLTestCaseResult result = null;
 			final Runnable testRunner = new Thread() {
 				  @Override 

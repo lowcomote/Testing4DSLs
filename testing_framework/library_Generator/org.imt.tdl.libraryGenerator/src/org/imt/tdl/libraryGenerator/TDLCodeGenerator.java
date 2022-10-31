@@ -1,7 +1,7 @@
 package org.imt.tdl.libraryGenerator;
 
 import java.io.IOException;
-
+import java.nio.file.Paths;
 import java.util.Collections;
 
 import org.eclipse.emf.common.util.URI;
@@ -17,7 +17,21 @@ import com.google.inject.Injector;
 public class TDLCodeGenerator {
 	
 	public static final String[] tokenNames = new String[] {
-	        "Package", "{", "}", "with", "perform", "action", "(", ",", ")", "on", "test", "objectives", ":", ";", "name", "time", "label", "constraints", "Action", "alternatively", "or", "Annotation", "*", "?", "=", "assert", "otherwise", "set", "verdict", "to", "->", "[", "]", "times", "repeat", "break", "Note", "create", "of", "type", "bind", "Component", "Type", "having", "if", "else", "connect", "as", "Map", "in", ".", "new", "containing", "Use", "Signature", "Collection", "default", "+", "-", "/", "mod", ">", "<", ">=", "<=", "==", "!=", "and", "xor", "not", "size", "Import", "all", "from", "Function", "returns", "instance", "returned", "Predefined", "gate", "Gate", "accepts", "sends", "triggers", "calls", "responds", "response", "interrupt", "optional", "mapped", "omit", "argument", "optionally", "run", "parallel", "parameter", "every", "component", "is", "quiet", "for", "terminate", "where", "it", "assigned", "Test", "Configuration", "Description", "Implementation", "uses", "configuration", "execute", "bindings", "Objective", "description", "Time", "out", "timer", "start", "stop", "variable", "waits", "extends", "SUT", "Tester", "Message", "Procedure", "In", "Out", "Exception", "last", "previous", "first"
+	        "Package", "{", "}", "with", "perform", "action", "(", ",", ")", "on", "test"
+	        , "objectives", ":", ";", "name", "time", "label", "constraints", "Constraint" ,"Action"
+	        , "alternatively", "or", "Annotation", "*", "?", "=", "assert", "otherwise", "set"
+	        , "verdict", "to", "->", "[", "]", "times", "repeat", "break", "Note", "create", "of"
+	        , "type", "bind", "Component", "Type", "having", "if", "else", "connect", "as", "Map"
+	        , "in", ".", "new", "containing", "Use", "Signature", "Collection", "default", "+", "-"
+	        , "/", "mod", ">", "<", ">=", "<=", "==", "!=", "and", "xor", "not", "size", "Import"
+	        , "all", "from", "Function", "returns", "instance", "returned", "Predefined", "gate"
+	        , "Gate", "accepts", "sends", "triggers", "calls", "responds", "response", "interrupt"
+	        , "optional", "mapped", "omit", "argument", "optionally", "run", "parallel", "parameter"
+	        , "every", "component", "is", "quiet", "for", "terminate", "where", "it", "assigned"
+	        , "Test", "Configuration", "Description", "Implementation", "uses", "configuration"
+	        , "execute", "bindings", "Objective", "description", "Time", "out", "timer", "start"
+	        , "stop", "variable", "waits", "extends", "SUT", "Tester", "Message", "Procedure", "In"
+	        , "Out", "Exception", "last", "previous", "first"
 	    };
 	
 	private CommonPackageGenerator commonPackageGenerator;
@@ -61,21 +75,26 @@ public class TDLCodeGenerator {
 		Injector injector = new TDLan2StandaloneSetup().createInjectorAndDoEMFRegistration();
 		ResourceSet rs = injector.getInstance(ResourceSet.class);
 		
-		Resource commonPackageRes = rs.createResource(URI.createURI(tdlProjectPath + "/generated/" + commonPackage.getName()+ ".tdlan2"));
+		String path = Paths.get(tdlProjectPath, "generated", (commonPackage.getName()+ ".tdlan2")).toString();
+		Resource commonPackageRes = rs.createResource(URI.createURI(path));
 		commonPackageRes.getContents().add(commonPackage);
 		
 		Resource dslSpecificEventsRes = null;
 		if (dslSpecificEventsPackage!=null) {
-			dslSpecificEventsRes = rs.createResource(URI.createURI(tdlProjectPath + "/generated/" + dslSpecificEventsPackage.getName()+ ".tdlan2"));
+			path = Paths.get(tdlProjectPath, "generated", dslSpecificEventsPackage.getName() + ".tdlan2").toString();
+			dslSpecificEventsRes = rs.createResource(URI.createURI(path));
 			dslSpecificEventsRes.getContents().add(dslSpecificEventsPackage);
 		}
-		Resource dslSpecificTypesRes = rs.createResource(URI.createURI(tdlProjectPath + "/generated/" + dslSpecificTypesPackage.getName()+ ".tdlan2"));
+		path = Paths.get(tdlProjectPath, "generated", dslSpecificTypesPackage.getName() + ".tdlan2").toString();
+		Resource dslSpecificTypesRes = rs.createResource(URI.createURI(path));
 		dslSpecificTypesRes.getContents().add(dslSpecificTypesPackage);
 		
-		Resource configurationRes = rs.createResource(URI.createURI(tdlProjectPath + "/generated/" + testConfigurationPackage.getName()+ ".tdlan2"));
+		path = Paths.get(tdlProjectPath, "generated", testConfigurationPackage.getName()+ ".tdlan2").toString();
+		Resource configurationRes = rs.createResource(URI.createURI(path));
 		configurationRes.getContents().add(testConfigurationPackage);
 		
-		Resource testSuitePackageRes = rs.createResource(URI.createURI(tdlProjectPath + "/" + testSuitePackage.getName()+ ".tdlan2"));
+		path = Paths.get(tdlProjectPath, testSuitePackage.getName()+ ".tdlan2").toString();
+		Resource testSuitePackageRes = rs.createResource(URI.createURI(path));
 		testSuitePackageRes.getContents().add(testSuitePackage);
 		
 		commonPackageRes.save(Collections.EMPTY_MAP);

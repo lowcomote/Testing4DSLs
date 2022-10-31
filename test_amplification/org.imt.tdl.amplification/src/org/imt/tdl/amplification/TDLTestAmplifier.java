@@ -1,6 +1,8 @@
 package org.imt.tdl.amplification;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+
 
 
 import java.io.IOException;
@@ -22,10 +24,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
 import org.etsi.mts.tdl.tdlFactory;
-import org.imt.k3tdl.utilities.PathHelper;
 import org.imt.tdl.mutation.MutationRuntimeException;
 import org.imt.tdl.mutation.MutationScoreCalculator;
 import org.imt.tdl.testResult.TDLTestResultUtil;
+import org.imt.tdl.utilities.PathHelper;
 
 public class TDLTestAmplifier {
 	
@@ -84,8 +86,8 @@ public class TDLTestAmplifier {
 			
 			System.out.println("\nTest Amplification has been performed successfully.");
 			if (!scoreCalculator.noMutantsExists()) {
-				String outputFilePath = pathHelper.getWorkspacePath() + "/"
-							+ pathHelper.getTestSuiteProjectName() + "/" 
+				String outputFilePath = pathHelper.getWorkspacePath() + File.separator
+							+ pathHelper.getTestSuiteProjectName() + File.separator
 							+ pathHelper.getTestSuiteFileName() + 
 							"_amplificationReport.txt";
 				printAmplificationResult(outputFilePath);
@@ -166,7 +168,8 @@ public class TDLTestAmplifier {
 			extension = ".xmi";
 		}
 		
-		String outputPath = sourcePath.substring(0, sourcePath.lastIndexOf("/")+1) + pathHelper.getTestSuiteFileName() + "_amplified" + extension;
+		String outputPath = sourcePath.replace(testSuiteRes.getURI().lastSegment(), "") 
+				+ pathHelper.getTestSuiteFileName() + "_amplified" + extension;
 		Resource newTestSuiteRes = (new ResourceSetImpl()).createResource(URI.createURI(outputPath));
 		//all the new elements are in the testSuiteRes
 		newTestSuiteRes.getContents().addAll(EcoreUtil.copyAll(testSuiteRes.getContents()));

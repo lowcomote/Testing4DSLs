@@ -27,6 +27,11 @@ class ModelEObjectCreator {
 	boolean isAssertion;
 	String DSLPath;
 	
+	static String EINT = "EInt"
+	static String EINTOBJECT = "EIntegerObject"
+	static String EBOOLEAN = "EBoolean"
+	static String EBOOLOBJECT = "EBooleanObject"
+	
 	def EObject createEObject(DataInstanceUse TDLObject, Resource MUTResource, boolean isAssertion){
 		this.MUTResource = MUTResource
 		this.isAssertion = isAssertion
@@ -126,7 +131,7 @@ class ModelEObjectCreator {
 		}
 		//if they are LiteralValueUse, it means they are primitives
 		else if (featureTdlValues.get(0) instanceof LiteralValueUse){
-			if (feature.EType.name.equals("EIntegerObject") || feature.EType.name.equals("EInt")){
+			if (feature.EType.name.equals(EINT) || feature.EType.name.equals(EINTOBJECT)){
 				if (!feature.isMany){//a single integer must be set as the value
 					var featureValue = getLiteralValue(featureTdlValues.get(0) as LiteralValueUse)
 					return setEObjectFeatureValue (newEObject, feature, Integer.parseInt(featureValue))
@@ -138,7 +143,7 @@ class ModelEObjectCreator {
 					}
 					return setEObjectFeatureValue (newEObject, feature, featureValues)
 				}
-			} else if (feature.EType.name.equals("EBooleanObject") || feature.EType.name.equals("EBoolean")){//TODO: must be tested
+			} else if (feature.EType.name.equals(EBOOLEAN) || feature.EType.name.equals(EBOOLOBJECT)){//TODO: must be tested
 				if (!feature.isMany){//a single boolean must be set as the value
 					var featureValue = getLiteralValue(featureTdlValues.get(0) as LiteralValueUse)
 					return setEObjectFeatureValue (newEObject, feature, Boolean.parseBoolean(featureValue))

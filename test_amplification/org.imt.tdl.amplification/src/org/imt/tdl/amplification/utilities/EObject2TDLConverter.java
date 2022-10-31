@@ -100,9 +100,17 @@ public class EObject2TDLConverter {
 		return eobjectTdlInstance;
 	}
 
+	static String EINT = "EInt";
+	static String EINTOBJECT = "EIntegerObject";
+	static String EBOOLEAN = "EBoolean";
+	static String EBOOLOBJECT = "EBooleanObject";
+	static String EFLOAT = "EFloat";
+	static String EFLOATOBJECT = "EFloatObject";
+	static String ESTRING = "EString";
+			
 	private StaticDataUse convertFeatureValue2TDLData(EObject eobject, EStructuralFeature efeature) {
 		//if the feature value is a literal, create LiteralValueUse
-		if (efeature.getEType().getName().equals("EBooleanObject") || efeature.getEType().getName().equals("EBoolean")) {
+		if (efeature.getEType().getName().equals(EBOOLEAN) || efeature.getEType().getName().equals(EBOOLOBJECT)) {
 			if (efeature.isMany()){//several values must be created for the feature
 				@SuppressWarnings("unchecked")
 				List<Boolean> eValues = (List<Boolean>) eobject.eGet(efeature);
@@ -120,7 +128,7 @@ public class EObject2TDLConverter {
 				return tdlValue;
 			}
 		}
-		else if (efeature.getEType().getName().equals("EIntegerObject") || efeature.getEType().getName().equals("EInt")) {
+		else if (efeature.getEType().getName().equals(EINT) || efeature.getEType().getName().equals(EINTOBJECT)) {
 			if (efeature.isMany()){//several values must be created for the feature
 				@SuppressWarnings("unchecked")
 				List<Integer> eValues = (List<Integer>) eobject.eGet(efeature);
@@ -138,7 +146,7 @@ public class EObject2TDLConverter {
 				return tdlValue;
 			}
 		}
-		else if (efeature.getEType().getName().equals("EFloatObject") || efeature.getEType().getName().equals("EFloat")) {
+		else if (efeature.getEType().getName().equals(EFLOAT) || efeature.getEType().getName().equals(EFLOATOBJECT)) {
 			if (efeature.isMany()){//several values must be created for the feature
 				@SuppressWarnings("unchecked")
 				List<Float> eValues = (List<Float>) eobject.eGet(efeature);
@@ -156,7 +164,7 @@ public class EObject2TDLConverter {
 				return tdlValue;
 			}
 		}
-		else if (efeature.getEType().getName().equals("EString")) {
+		else if (efeature.getEType().getName().equals(ESTRING)) {
 			if (efeature.isMany()){//several values must be created for the feature
 				@SuppressWarnings("unchecked")
 				List<String> eValues = (List<String>) eobject.eGet(efeature);
@@ -231,7 +239,7 @@ public class EObject2TDLConverter {
 	}
 	
 	public DataUse convertBoolean2TDLData(boolean boolValue){
-		SimpleDataType tdlBooleanType = (SimpleDataType) getTDLDataType("EBoolean");
+		SimpleDataType tdlBooleanType = (SimpleDataType) getTDLDataType(EBOOLEAN);
 		SimpleDataInstance tdlBooleanInstance = tdlFactory.createSimpleDataInstance();
 		tdlBooleanInstance.setDataType(tdlBooleanType);
 		tdlBooleanInstance.setName("" + boolValue);
@@ -242,7 +250,7 @@ public class EObject2TDLConverter {
 	}
 	
 	public DataUse convertInteger2TDLData(int intValue){
-		SimpleDataType tdlIntType = (SimpleDataType) getTDLDataType("EInt");
+		SimpleDataType tdlIntType = (SimpleDataType) getTDLDataType(EINT);
 		SimpleDataInstance tdlIntInstance = tdlFactory.createSimpleDataInstance();
 		tdlIntInstance.setDataType(tdlIntType);
 		tdlIntInstance.setName("" + intValue);
@@ -253,7 +261,7 @@ public class EObject2TDLConverter {
 	}
 	
 	public DataUse convertFloat2TDLData(float floatValue){
-		SimpleDataType tdlFloatType = (SimpleDataType) getTDLDataType("EFloat");
+		SimpleDataType tdlFloatType = (SimpleDataType) getTDLDataType(EFLOAT);
 		SimpleDataInstance tdlFloatInstance = tdlFactory.createSimpleDataInstance();
 		tdlFloatInstance.setDataType(tdlFloatType);
 		tdlFloatInstance.setName("" + floatValue);
@@ -264,7 +272,7 @@ public class EObject2TDLConverter {
 	}
 	
 	public DataUse convertString2TDLData(String stringValue){
-		SimpleDataType tdlStringType = (SimpleDataType) getTDLDataType("EString");
+		SimpleDataType tdlStringType = (SimpleDataType) getTDLDataType(ESTRING);
 		SimpleDataInstance tdlStringInstance = tdlFactory.createSimpleDataInstance();
 		tdlStringInstance.setDataType(tdlStringType);
 		tdlStringInstance.setName(getValidName(stringValue));
@@ -275,8 +283,11 @@ public class EObject2TDLConverter {
 	}
 	
 	private DataType getTDLDataType (String typeName) {
-		Optional<DataType> dtOptional = tdlTestSuite.getPackagedElement().stream().filter(p -> p instanceof DataType).
-			map(p -> (DataType) p).filter(t -> getDSLCompatibleName(t.getName()).equals(typeName)).findFirst();
+		Optional<DataType> dtOptional = tdlTestSuite.getPackagedElement().stream()
+				.filter(p -> p instanceof DataType)
+				.map(p -> (DataType) p)
+				.filter(t -> getDSLCompatibleName(t.getName()).equals(typeName))
+				.findFirst();
 		if (dtOptional.isPresent()) {
 			return dtOptional.get();
 		}
@@ -318,7 +329,24 @@ public class EObject2TDLConverter {
 	}
 	
 	private String getValidName (String name){
-		String[] tokenNames = {"Package", "{", "}", "with", "perform", "action", "(", ",", ")", "on", "test", "objectives", ":", ";", "name", "time", "label", "constraints", "Action", "alternatively", "or", "Annotation", "*", "?", "=", "assert", "otherwise", "set", "verdict", "to", "->", "[", "]", "times", "repeat", "break", "Note", "create", "of", "type", "bind", "Component", "Type", "having", "if", "else", "connect", "as", "Map", "in", ".", "new", "containing", "Use", "Signature", "Collection", "default", "+", "-", "/", "mod", ">", "<", ">=", "<=", "==", "!=", "and", "xor", "not", "size", "Import", "all", "from", "Function", "returns", "instance", "returned", "Predefined", "gate", "Gate", "accepts", "sends", "triggers", "calls", "responds", "response", "interrupt", "optional", "mapped", "omit", "argument", "optionally", "run", "parallel", "parameter", "every", "component", "is", "quiet", "for", "terminate", "where", "it", "assigned", "Test", "Configuration", "Description", "Implementation", "uses", "configuration", "execute", "bindings", "Objective", "description", "Time", "out", "timer", "start", "stop", "variable", "waits", "extends", "SUT", "Tester", "Message", "Procedure", "In", "Out", "Exception", "last", "previous", "first"};
+		String[] tokenNames = {"Package", "{", "}", "with", "perform", "action", "(", ",", ")"
+				, "on", "test", "objectives", ":", ";", "name", "time", "label", "constraints"
+				, "Action", "alternatively", "or", "Annotation", "*", "?", "=", "assert"
+				, "otherwise", "set", "verdict", "to", "->", "[", "]", "times", "repeat"
+				, "break", "Note", "create", "of", "type", "bind", "Component", "Type", "having"
+				, "if", "else", "connect", "as", "Map", "in", ".", "new", "containing", "Use"
+				, "Signature", "Collection", "default", "+", "-", "/", "mod", ">", "<", ">="
+				, "<=", "==", "!=", "and", "xor", "not", "size", "Import", "all", "from"
+				, "Function", "returns", "instance", "returned", "Predefined", "gate", "Gate"
+				, "accepts", "sends", "triggers", "calls", "responds", "response", "interrupt"
+				, "optional", "mapped", "omit", "argument", "optionally", "run", "parallel"
+				, "parameter", "every", "component", "is", "quiet", "for", "terminate", "where"
+				, "it", "assigned", "Test", "Configuration", "Description", "Implementation"
+				, "uses", "configuration", "execute", "bindings", "Objective", "description"
+				, "Time", "out", "timer", "start", "stop", "variable", "waits", "extends", "SUT"
+				, "Tester", "Message", "Procedure", "In", "Out", "Exception", "last", "previous"
+				, "first", "Constraint"};
+		
 		String result = name;
 		if (result.contains("$")){
 			result = result.substring(0, result.indexOf("$"));

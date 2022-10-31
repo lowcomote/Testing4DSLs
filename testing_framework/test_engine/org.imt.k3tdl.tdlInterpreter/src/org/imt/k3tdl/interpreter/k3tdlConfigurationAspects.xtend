@@ -1,7 +1,6 @@
 package org.imt.k3tdl.interpreter
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
-
 import java.util.ArrayList
 import java.util.HashMap
 import java.util.Map
@@ -21,7 +20,6 @@ import static extension org.imt.k3tdl.interpreter.DataInstanceAspect.*
 import static extension org.imt.k3tdl.interpreter.DataInstanceUseAspect.*
 import static extension org.imt.k3tdl.interpreter.DataTypeAspect.*
 import static extension org.imt.k3tdl.interpreter.LiteralValueUseAspect.*
-import org.imt.k3tdl.utilities.DSLProcessor
 
 @Aspect(className=GateType)
 class GateTypeAspect {
@@ -29,8 +27,7 @@ class GateTypeAspect {
 
 @Aspect(className=GateInstance)
 class GateInstanceAspect {
-	public String MUTPath = ""
-	
+
 	Object receivedOutput = null
 	Object expectedOutput = null
 	
@@ -143,7 +140,7 @@ class GateInstanceAspect {
 			var arg = (argument as DataInstanceUse)
 			if (arg.item !== null && arg.item.size > 0){
 				return _self.setModelState(arg);
-			}else if (DSLProcessor.instance.isConcreteEcoreType(arg.dataInstance.dataType.name)){//request for setting the model state
+			}else if (PackageAspect.dslProcessor.isConcreteEcoreType(arg.dataInstance.dataType.name)){//request for setting the model state
 				return _self.setModelState(arg);
 			}else if (arg.dataInstance.name == RUN_MODEL) {
 				//println("--Start MUT Execution synchronous:")
@@ -155,8 +152,9 @@ class GateInstanceAspect {
 				//println("--Stop Asynchronous MUT Execution")
 				return _self.gateLauncher.stopAsyncExecution
 			}else if (arg.dataInstance.name == RESET_MODEL) {
+				val MUTPath = PackageAspect.pathHelper.modelUnderTestPath.toString
 				_self.gateLauncher.MUTResource = 
-					(new ResourceSetImpl()).getResource(URI.createURI(_self.MUTPath), true)
+					(new ResourceSetImpl()).getResource(URI.createURI(MUTPath), true)
 				return TDLTestResultUtil.PASS + ": The MUT is reset to its initial state"
 			}else if (arg.dataInstance.name == GET_MODEL) {
 				_self.receivedOutput = _self.gateLauncher.MUTResource
@@ -222,7 +220,8 @@ class GateInstanceAspect {
 				else{//is an exposed event
 					//when EObjects have dynamic features, the value of their features may change several times
 					//so we cannot retrieve the object from the engine.resource, but we should create it using a new resource
-					val resource = (new ResourceSetImpl()).getResource(URI.createURI(_self.MUTPath), true);
+					val MUTPath = PackageAspect.pathHelper.modelUnderTestPath.toString
+					val resource = (new ResourceSetImpl()).getResource(URI.createURI(MUTPath), true);
 					argValue = argTdlValue.createEObject(resource, true)
 				}
 				

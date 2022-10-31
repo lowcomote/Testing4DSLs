@@ -191,7 +191,6 @@ public class ALEEngineLauncher extends AbstractEngine{
 	@Override
 	protected String getModelInitializationMethodName() {
 		if (_language != null && _entryPointMethod != null) {
-
 			List<String> segments = Arrays.asList(_entryPointMethod.split("::"));
 			if (segments.size() >= 2) {
 				String tagetClassName = segments.get(segments.size() - 2);

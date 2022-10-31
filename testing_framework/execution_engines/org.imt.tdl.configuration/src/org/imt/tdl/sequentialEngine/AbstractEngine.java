@@ -1,5 +1,7 @@
 package org.imt.tdl.sequentialEngine;
 
+import java.io.File;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.debug.core.DebugPlugin;
@@ -40,10 +42,10 @@ public abstract class AbstractEngine implements ISequentialExecutionEngine{
 	@Override
 	public void setUp(String MUTPath, String DSLPath) {
 		_modelLocation = MUTPath;
-		_siriusRepresentationLocation = MUTPath.split("/")[1] + "/representations.aird";
+		_siriusRepresentationLocation = MUTPath.split(File.separator)[1] + File.separator + "representations.aird";
 		_delay = "0";
 		_language = this.getDslName(DSLPath);
-		_entryPointModelElement = "/";
+		_entryPointModelElement = File.separator;
 		_entryPointMethod = getModelEntryPointMethodName();
 		_animationFirstBreak = false;
 		_modelInitializationMethod = getModelInitializationMethodName();

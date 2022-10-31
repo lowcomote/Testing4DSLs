@@ -7,9 +7,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.etsi.mts.tdl.Annotation;
-import org.etsi.mts.tdl.ComponentInstance;
-import org.etsi.mts.tdl.TestDescription;
 import org.imt.minijava.xminiJava.ArrayTypeRef;
 import org.imt.minijava.xminiJava.Class;
 import org.imt.minijava.xminiJava.Member;
@@ -22,28 +19,19 @@ public class MiniJavaMutationTestHelper {
 
 	//the minijava code of the test case is in the 'main' method of minijava model and must be added to the mutant to be able to run test case
 	//the path to the minijava model is provided in the 'MUTPath' annotation of the test case's configuration
-	public void addMainClassToMutant(String mutantPath, TestDescription testCase, String mutantTestPath) {
-		ComponentInstance sutComponent = testCase.getTestConfiguration().getComponentInstance().stream().
-				filter(ci -> ci.getRole().toString().equals("SUT")).findFirst().get();
-		String MUTPath = "";
-		for (Annotation a:sutComponent.getAnnotation()){
-			if (a.getKey().getName().equals("MUTPath")){
-				MUTPath = a.getValue().substring(1, a.getValue().length()-1);
-				break;
-			}
-		}
+	public void addMainClassToMutant(String MUTPath, String mutantPath, String mutantTestPath) {
 		ResourceSet resSet = new ResourceSetImpl();
 		//find the 'Main' class from the seed MUTResource
-		Resource seedResource = resSet.getResource(URI.createURI("platform:/resource" + MUTPath), true);
+		Resource seedResource = resSet.getResource(URI.createPlatformResourceURI(MUTPath, false), true);
 		Program seedPackage = (Program) seedResource.getContents().get(0);
 		Class mainClass = getMainClass(seedPackage);
 		if (mainClass != null) {
 			//add main class to mutant and save the result in a new resource
-			Resource mutantResource = resSet.getResource(URI.createURI("platform:/resource" + mutantPath), true);
+			Resource mutantResource = resSet.getResource(URI.createPlatformResourceURI(mutantPath, false), true);
 			Program mutantPackage = (Program) mutantResource.getContents().get(0);
 			mutantPackage.getClasses().add(0, mainClass);
 			EcoreUtil.resolveAll(mutantPackage);
-			Resource mutantTestResource = (new ResourceSetImpl()).createResource(URI.createURI("platform:/resource" + mutantTestPath));
+			Resource mutantTestResource = (new ResourceSetImpl()).createResource(URI.createPlatformResourceURI(mutantTestPath, false));
 			mutantTestResource.getContents().add(mutantPackage);
 			EcoreUtil.resolveAll(mutantTestResource);
 			try {			

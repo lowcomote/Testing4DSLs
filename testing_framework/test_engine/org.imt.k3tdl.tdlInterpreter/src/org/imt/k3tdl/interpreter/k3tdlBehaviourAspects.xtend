@@ -1,59 +1,57 @@
 package org.imt.k3tdl.interpreter
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
-
-import fr.inria.diverse.k3.al.annotationprocessor.Step
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
-
-import org.etsi.mts.tdl.Interaction
-import org.etsi.mts.tdl.Behaviour
-import org.etsi.mts.tdl.AtomicBehaviour
-import org.etsi.mts.tdl.CombinedBehaviour
-import org.etsi.mts.tdl.PeriodicBehaviour
-import org.etsi.mts.tdl.ExceptionalBehaviour
+import fr.inria.diverse.k3.al.annotationprocessor.Step
 import org.etsi.mts.tdl.ActionBehaviour
-import org.etsi.mts.tdl.VerdictAssignment
-import org.etsi.mts.tdl.Stop
-import org.etsi.mts.tdl.Break
-import org.etsi.mts.tdl.TestDescriptionReference
-import org.etsi.mts.tdl.TimerOperation
-import org.etsi.mts.tdl.TimeOperation
+import org.etsi.mts.tdl.ActionReference
+import org.etsi.mts.tdl.AlternativeBehaviour
 import org.etsi.mts.tdl.Assertion
 import org.etsi.mts.tdl.Assignment
+import org.etsi.mts.tdl.AtomicBehaviour
+import org.etsi.mts.tdl.Behaviour
+import org.etsi.mts.tdl.BehaviourDescription
+import org.etsi.mts.tdl.Block
+import org.etsi.mts.tdl.BoundedLoopBehaviour
+import org.etsi.mts.tdl.Break
+import org.etsi.mts.tdl.CombinedBehaviour
+import org.etsi.mts.tdl.CompoundBehaviour
+import org.etsi.mts.tdl.ConditionalBehaviour
+import org.etsi.mts.tdl.DataInstanceUse
+import org.etsi.mts.tdl.DefaultBehaviour
+import org.etsi.mts.tdl.ExceptionalBehaviour
 import org.etsi.mts.tdl.InlineAction
-import org.etsi.mts.tdl.ActionReference
-import org.etsi.mts.tdl.TimerStart
-import org.etsi.mts.tdl.ProcedureCall
+import org.etsi.mts.tdl.Interaction
+import org.etsi.mts.tdl.InterruptBehaviour
+import org.etsi.mts.tdl.LiteralValueUse
+import org.etsi.mts.tdl.LocalExpression
 import org.etsi.mts.tdl.Message
-import org.etsi.mts.tdl.TimerStop
-import org.etsi.mts.tdl.TimeOut
-import org.etsi.mts.tdl.Wait
+import org.etsi.mts.tdl.MultipleCombinedBehaviour
+import org.etsi.mts.tdl.OptionalBehaviour
+import org.etsi.mts.tdl.ParallelBehaviour
+import org.etsi.mts.tdl.PeriodicBehaviour
+import org.etsi.mts.tdl.ProcedureCall
 import org.etsi.mts.tdl.Quiescence
 import org.etsi.mts.tdl.SingleCombinedBehaviour
-import org.etsi.mts.tdl.MultipleCombinedBehaviour
-import org.etsi.mts.tdl.BoundedLoopBehaviour
+import org.etsi.mts.tdl.Stop
+import org.etsi.mts.tdl.Target
+import org.etsi.mts.tdl.TestDescriptionReference
+import org.etsi.mts.tdl.TimeOperation
+import org.etsi.mts.tdl.TimeOut
+import org.etsi.mts.tdl.TimerOperation
+import org.etsi.mts.tdl.TimerStart
+import org.etsi.mts.tdl.TimerStop
 import org.etsi.mts.tdl.UnboundedLoopBehaviour
-import org.etsi.mts.tdl.CompoundBehaviour
-import org.etsi.mts.tdl.OptionalBehaviour
-import org.etsi.mts.tdl.ConditionalBehaviour
-import org.etsi.mts.tdl.AlternativeBehaviour
-import org.etsi.mts.tdl.ParallelBehaviour
-import org.etsi.mts.tdl.DefaultBehaviour
-import org.etsi.mts.tdl.InterruptBehaviour
-import org.etsi.mts.tdl.Block
-import org.etsi.mts.tdl.BehaviourDescription
+import org.etsi.mts.tdl.VerdictAssignment
+import org.etsi.mts.tdl.Wait
+import org.imt.tdl.testResult.TDLMessageResult
+import org.imt.tdl.testResult.TDLTestResultUtil
+
 import static extension org.imt.k3tdl.interpreter.BehaviourAspect.*
 import static extension org.imt.k3tdl.interpreter.BlockAspect.*
+import static extension org.imt.k3tdl.interpreter.ExpressionAspect.*
 import static extension org.imt.k3tdl.interpreter.GateInstanceAspect.*
 import static extension org.imt.k3tdl.interpreter.TestDescriptionAspect.*
-import static extension org.imt.k3tdl.interpreter.TestConfigurationAspect.*
-import static extension org.imt.k3tdl.interpreter.ExpressionAspect.*
-import org.etsi.mts.tdl.Target
-import org.imt.tdl.testResult.TDLMessageResult
-import org.etsi.mts.tdl.LiteralValueUse
-import org.etsi.mts.tdl.DataInstanceUse
-import org.etsi.mts.tdl.LocalExpression
-import org.imt.tdl.testResult.TDLTestResultUtil
 
 @Aspect (className = BehaviourDescription)
 class BehaviourDescriptionAspect{
@@ -214,7 +212,6 @@ class MessageAspect extends InteractoinAspect{
 	@OverrideAspectMethod
 	def boolean performBehavior(){
 		for (Target t: _self.target){
-			t.targetGate.gate.MUTPath = _self.parentTestDescription.testConfiguration.MUTPath
 			if (_self.sourceGate.component.role.toString == "SUT"){
 				//when the SUT component sends an argument, it is actually an assertion that have to be checked
 				_self.sourceGate.gate.setLauncher(_self.parentTestDescription.launcher)

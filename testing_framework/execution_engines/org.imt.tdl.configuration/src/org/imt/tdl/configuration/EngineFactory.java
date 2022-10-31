@@ -1,7 +1,7 @@
 package org.imt.tdl.configuration;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
-
 import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
@@ -11,7 +11,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.executionframework.engine.commons.EngineContextException;
 import org.eclipse.gemoc.trace.commons.model.trace.State;
 import org.eclipse.gemoc.trace.commons.model.trace.Step;
@@ -24,14 +23,13 @@ import org.imt.tdl.sequentialEngine.ALEEngineLauncher;
 import org.imt.tdl.sequentialEngine.IExecutionEngine;
 import org.imt.tdl.sequentialEngine.ISequentialExecutionEngine;
 import org.imt.tdl.sequentialEngine.JavaEngineLauncher;
+import org.imt.tdl.utilities.DSLProcessor;
 
 public class EngineFactory{
 	
-	private String DSLPath;
-	private Resource dslRes = null;
-	private boolean DSLHasInterface = false;
-	
-	private String MUTPath;
+	private Path MUTPath;
+	private Path DSLPath;
+	private DSLProcessor dslProcessor;
 	
 	public boolean launcherIsTuned = false;
 	private ISequentialExecutionEngine sequentialEngineLauncher;
@@ -46,10 +44,10 @@ public class EngineFactory{
 		if (commandType.equals(GENERIC)) {
 			String engineType = getEngineType();
 			sequentialEngineLauncher = engineType=="k3" ? new JavaEngineLauncher() : new ALEEngineLauncher();
-			sequentialEngineLauncher.setUp(MUTPath, DSLPath);
+			sequentialEngineLauncher.setUp(MUTPath.toString(), DSLPath.toString());
 		}else if(commandType.equals(DSL_SPECIFIC)) {
 			eventManagerLauncher = new K3EventManagerLauncher();
-			eventManagerLauncher.setUp(MUTPath, DSLPath);
+			eventManagerLauncher.setUp(MUTPath.toString(), DSLPath.toString());
 			if (!eventManagerLauncher.isEngineStarted()) {
 				IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
 				if (debugTargets.length > 0) {
@@ -125,25 +123,14 @@ public class EngineFactory{
 	}
 	
 	private String getEngineType() {
-		Dsl dsl = (Dsl)dslRes.getContents().get(0);
-		if (dsl.getEntry("k3") != null) {
-			return "k3";
-		}else if (dsl.getEntry("ale") != null) {
-			return "ale";
-		}
-		return null;
+		return dslProcessor.getDSLSemanticsLanguage();
 	}
 	
-	public void setDSLPath (String DSLPath) {
-		this.DSLPath = DSLPath;
-		dslRes = (new ResourceSetImpl()).getResource(URI.createURI(this.DSLPath), true);
-		Dsl dsl = (Dsl)dslRes.getContents().get(0);
-		if (dsl.getEntry("behavioralInterface") != null) {
-			DSLHasInterface = true;
-		}
+	public void setDSLPath (Path DSLPath) {
+		dslProcessor = new DSLProcessor(DSLPath);
 	}
 	
-	public void setMUTPath (String MUTPath) {
+	public void setMUTPath (Path MUTPath) {
 		this.MUTPath = MUTPath;
 	}
 	
@@ -159,11 +146,11 @@ public class EngineFactory{
 		else if (activeEngine instanceof IEventBasedExecutionEngine) {
 			return eventManagerLauncher.getModelResource();
 		}
-		return (new ResourceSetImpl()).getResource(URI.createURI(MUTPath), true);
+		return (new ResourceSetImpl()).getResource(URI.createURI(MUTPath.toString()), true);
 	}
 	
 	public IExecutionEngine getActiveEngine() {
-		if (DSLHasInterface && eventManagerLauncher != null) {
+		if (dslProcessor.dslHasBehavioralInterface() && eventManagerLauncher != null) {
 			return eventManagerLauncher;
 		}
 		else if (sequentialEngineLauncher != null) {

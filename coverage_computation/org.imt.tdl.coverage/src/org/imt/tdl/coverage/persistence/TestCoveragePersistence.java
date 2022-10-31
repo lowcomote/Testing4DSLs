@@ -2,6 +2,7 @@ package org.imt.tdl.coverage.persistence;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -81,7 +82,8 @@ public class TestCoveragePersistence implements IEngineAddon{
 		   testSuiteCoverage.getTsObjectCoverageStatus().add(tsModelObjectCoverageStatus);
 	   }
 	   //create a resource for the test coverage
-	   URI testCoverageURI = URI.createURI(pathToReportsFiles + File.separator + "testCoverage.xmi", false);
+	   String path = Paths.get(pathToReportsFiles + File.separator + "testCoverage.xmi").toString();
+	   URI testCoverageURI = URI.createURI(path, false);
 	   Resource testCoverageResource = (new ResourceSetImpl()).createResource(testCoverageURI);
 	   testCoverageResource.getContents().add(testSuiteCoverage);
 	   //saving resources
@@ -106,8 +108,8 @@ public class TestCoveragePersistence implements IEngineAddon{
 	}
 
 	private Resource getCopyOfTestSuite(IExecutionContext<?, ?, ?> _executionContext) {
-		String copiedTestSuitePath = pathToReportsFiles + File.separator 
-				+ _executionContext.getResourceModel().getURI().lastSegment();
+		String copiedTestSuitePath = Paths.get(pathToReportsFiles + File.separator 
+				+ _executionContext.getResourceModel().getURI().lastSegment()).toString();
 		URI copiedTestSuiteURI = URI.createPlatformResourceURI(copiedTestSuitePath, false);
 		return (new ResourceSetImpl()).getResource(copiedTestSuiteURI, true);
 	}
@@ -116,11 +118,13 @@ public class TestCoveragePersistence implements IEngineAddon{
 	private void copyMUTResource (Resource resource, String testID) {
 		URI modelURI = null;
 		if (MUTResource == null) {
-			modelURI = URI.createURI(pathToReportsFiles + File.separator + "modelUnderTest.xmi", false);
+			String path = Paths.get(pathToReportsFiles + File.separator + "modelUnderTest.xmi").toString();
+			modelURI = URI.createURI(path, false);
 		}
 		//the test case uses a different model under test
 		else if (!EcoreUtil.equals(MUTResource.getContents().get(0), resource.getContents().get(0))) {
-			modelURI = URI.createURI(pathToReportsFiles + File.separator + "modelUnderTest_" + testID + ".xmi", false);
+			String path = Paths.get(pathToReportsFiles + File.separator + "modelUnderTest_" + testID + ".xmi").toString();
+			modelURI = URI.createURI(path, false);
 		}
 		//the model under test is already copied, so do nothing
 		else {return;}
