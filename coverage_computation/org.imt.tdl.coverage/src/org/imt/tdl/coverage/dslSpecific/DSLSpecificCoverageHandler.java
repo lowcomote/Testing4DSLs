@@ -1,5 +1,7 @@
 package org.imt.tdl.coverage.dslSpecific;
 
+import java.nio.file.Path;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
@@ -32,8 +34,8 @@ public class DSLSpecificCoverageHandler {
 		return null;
 	}
 
-	private String getDSLCoverageComputationId(String dslFilePath) {
-		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
+	private String getDSLCoverageComputationId(Path dslFilePath) {
+		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath.toString()), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
 		return dsl.getEntry(COVERAGE_ID) != null ? dsl.getEntry(COVERAGE_ID).getValue().toString() : null;
 	}
