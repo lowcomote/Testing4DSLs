@@ -79,8 +79,7 @@ public class TestReportPersistence implements IEngineAddon{
 	   }
 	   
 	   //create a resource for the test result
-	   URI testReportURI = URI.createURI(_executionContext.getWorkspace().getExecutionPath().toString() 
-			   + File.separator + "testReport.xmi", false);
+	   URI testReportURI = URI.createURI(pathToReportsFiles + File.separator + "testReport.xmi", false);
 	   Resource testResultResource = (new ResourceSetImpl()).createResource(testReportURI);
 	   testResultResource.getContents().add(testSuiteResult);
 	   //saving resources

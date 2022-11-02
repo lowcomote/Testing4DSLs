@@ -127,6 +127,7 @@ public class EngineFactory{
 	}
 	
 	public void setDSLPath (Path DSLPath) {
+		this.DSLPath = DSLPath;
 		dslProcessor = new DSLProcessor(DSLPath);
 	}
 	

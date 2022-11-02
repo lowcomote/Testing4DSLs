@@ -221,7 +221,7 @@ class GateInstanceAspect {
 					//when EObjects have dynamic features, the value of their features may change several times
 					//so we cannot retrieve the object from the engine.resource, but we should create it using a new resource
 					val MUTPath = PackageAspect.pathHelper.modelUnderTestPath.toString
-					val resource = (new ResourceSetImpl()).getResource(URI.createURI(MUTPath), true);
+					val resource = (new ResourceSetImpl()).getResource(URI.createPlatformResourceURI(MUTPath, false), true);
 					argValue = argTdlValue.createEObject(resource, true)
 				}
 				

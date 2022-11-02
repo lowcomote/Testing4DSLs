@@ -15,7 +15,7 @@ Require-Bundle: org.eclipse.xtend.lib;bundle-version="2.21.0";visibility:="priva
  fr.inria.diverse.k3.al.annotationprocessor.plugin;bundle-version="0.0.0";visibility:="reexport",
  org.eclipse.gemoc.xdsmlframework.api;bundle-version="4.0.0";visibility:="reexport",
  org.eclipse.gemoc.executionframework.engine;bundle-version="4.0.0";visibility:="reexport",
+ org.imt.k3tdl.tdlInterpreter;bundle-version="0.0.0";visibility:="private",
  org.eclipse.gemoc.executionframework.extensions.sirius;bundle-version="0.0.0";visibility:=reexport,
- org.etsi.mts.tdl.model;bundle-version="1.4.0",
- org.imt.k3tdl.tdlInterpreter;bundle-version="1.0.0"
+ org.etsi.mts.tdl.model;bundle-version="1.4.0"
 Bundle-ActivationPolicy: lazy

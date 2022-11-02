@@ -82,8 +82,7 @@ public class TestCoveragePersistence implements IEngineAddon{
 		   testSuiteCoverage.getTsObjectCoverageStatus().add(tsModelObjectCoverageStatus);
 	   }
 	   //create a resource for the test coverage
-	   String path = Paths.get(pathToReportsFiles + File.separator + "testCoverage.xmi").toString();
-	   URI testCoverageURI = URI.createURI(path, false);
+	   URI testCoverageURI = URI.createURI(pathToReportsFiles + File.separator + "testCoverage.xmi", false);
 	   Resource testCoverageResource = (new ResourceSetImpl()).createResource(testCoverageURI);
 	   testCoverageResource.getContents().add(testSuiteCoverage);
 	   //saving resources
@@ -118,13 +117,11 @@ public class TestCoveragePersistence implements IEngineAddon{
 	private void copyMUTResource (Resource resource, String testID) {
 		URI modelURI = null;
 		if (MUTResource == null) {
-			String path = Paths.get(pathToReportsFiles + File.separator + "modelUnderTest.xmi").toString();
-			modelURI = URI.createURI(path, false);
+			modelURI = URI.createURI(pathToReportsFiles + File.separator + "modelUnderTest.xmi", false);
 		}
 		//the test case uses a different model under test
 		else if (!EcoreUtil.equals(MUTResource.getContents().get(0), resource.getContents().get(0))) {
-			String path = Paths.get(pathToReportsFiles + File.separator + "modelUnderTest_" + testID + ".xmi").toString();
-			modelURI = URI.createURI(path, false);
+			modelURI = URI.createURI(pathToReportsFiles + File.separator + "modelUnderTest_" + testID + ".xmi", false);
 		}
 		//the model under test is already copied, so do nothing
 		else {return;}

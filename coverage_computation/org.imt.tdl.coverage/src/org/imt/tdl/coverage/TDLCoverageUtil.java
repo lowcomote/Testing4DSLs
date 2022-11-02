@@ -1,5 +1,6 @@
 package org.imt.tdl.coverage;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -25,7 +26,7 @@ public class TDLCoverageUtil {
 	private static TDLCoverageUtil instance = new TDLCoverageUtil();
 	
 	private DSLProcessor dslProcessor;
-	private String DSLPath;
+	private Path DSLPath;
 	private EPackage metamodelRootElement;
 	private Set<String> coverableClasses = new HashSet<>();
 	private Set<String> extendedClassesWithoutStep = new HashSet<>();
@@ -57,11 +58,11 @@ public class TDLCoverageUtil {
 		testSuiteCoverage = coverage;
 	}
 
-	public String getDSLPath() {
+	public Path getDSLPath() {
 		return DSLPath;
 	}
 
-	public void setDSLPath(String DSLPath) {
+	public void setDSLPath(Path DSLPath) {
 		instance.DSLPath = DSLPath;
 	}
 	
@@ -223,10 +224,9 @@ public class TDLCoverageUtil {
 	}
 	
 	private String getCoverageFilePath() {
-		DSLProcessor dslProcessor = new DSLProcessor(DSLPath);
 		String path = dslProcessor.getPath2CoverageRules();
 		if (path != null) {
-			path.replaceFirst("resource", "plugin");
+			path = path.replaceFirst("resource", "plugin");
 			return path;
 		}
 		return null;

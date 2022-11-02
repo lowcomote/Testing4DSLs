@@ -1,5 +1,6 @@
 package org.imt.tdl.eventBasedEngine;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -29,7 +30,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.gemoc.dsl.debug.ide.adapter.DSLThreadAdapter;
 import org.eclipse.gemoc.dsl.debug.ide.launch.AbstractDSLLaunchConfigurationDelegate;
 import org.eclipse.gemoc.dsl.debug.impl.ThreadImpl;
@@ -71,11 +71,15 @@ import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
 import org.imt.gemoc.engine.custom.launcher.CustomEventBasedLauncher;
 import org.imt.tdl.observer.ModelExecutionObserver;
 import org.imt.tdl.testResult.TDLTestResultUtil;
+import org.imt.tdl.utilities.DSLProcessor;
 
 public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	
-	private String MUTPath;
+	
 	private String DSLPath;
+	DSLProcessor dslProcessor;
+	
+	private String MUTPath;
 	private Resource MUTResource = null;
 	
 	private ILaunchConfiguration launchConf;
@@ -102,9 +106,10 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	public void setUp(String MUTPath, String DSLPath){
 		this.MUTPath = MUTPath;
 		this.DSLPath = DSLPath;
-		final String languageName = getDslName(DSLPath);
-		final String implemRelId = getImplRel(DSLPath);
-		final String subtypeRelId = getSubRel(DSLPath);
+		dslProcessor = new DSLProcessor(Paths.get(DSLPath));
+		final String languageName = dslProcessor.getDSLName();
+		final String implemRelId = dslProcessor.getImplemRelId();
+		final String subtypeRelId = dslProcessor.getSubtypeRelId();
 		final Set<String> implRelIds = new HashSet<>();
 		implRelIds.add(implemRelId);
 		final Set<String> subtypeRelIds =  new HashSet<>();
@@ -334,7 +339,7 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 	}
 	
 	private EventOccurrence createEventOccurance(EventOccurrenceType eventType, String eventName, Map<String, Object> parameters) {
-		BehavioralInterface bInterface = getBehavioralInterfaceRootElement(DSLPath);
+		BehavioralInterface bInterface = getBehavioralInterfaceRootElement(dslProcessor.getPath2BehavioralInterface());
 		Event event = null;
 		for (int i=0; i<bInterface.getEvents().size();i++) {
 			if (bInterface.getEvents().get(i).getName().equals(eventName)) {
@@ -518,40 +523,11 @@ public class K3EventManagerLauncher implements IEventBasedExecutionEngine{
 		return result;
 	}
 	
-	private BehavioralInterface getBehavioralInterfaceRootElement(String dslFilePath) {
-		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
-		Dsl dsl = (Dsl)dslRes.getContents().get(0);
-		if (dsl.getEntry("behavioralInterface") != null) {
-			String interfacePath = dsl.getEntry("behavioralInterface").getValue().replaceFirst("resource", "plugin");
-			Resource interfaceRes = (new ResourceSetImpl()).getResource(URI.createURI(interfacePath), true);
-			BehavioralInterface interfaceRootElement = (BehavioralInterface) interfaceRes.getContents().get(0);
-			return interfaceRootElement;
-		}
-		return null;
-	}
-
-	private String getDslName(String dslFilePath) {
-		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
-		Dsl dsl = (Dsl)dslRes.getContents().get(0);
-		return dsl.getEntry("name").getValue().toString();
-	}
-	
-	private String getImplRel(String dslFilePath) {
-		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
-		Dsl dsl = (Dsl)dslRes.getContents().get(0);
-		if (dsl.getEntry("implemRelId") == null) {
-			return null;
-		}
-		return dsl.getEntry("implemRelId").getValue().toString();
-	}
-	
-	private String getSubRel(String dslFilePath) {
-		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
-		Dsl dsl = (Dsl)dslRes.getContents().get(0);
-		if (dsl.getEntry("subtypeRelId") == null) {
-			return null;
-		}
-		return dsl.getEntry("subtypeRelId").getValue().toString();
+	private BehavioralInterface getBehavioralInterfaceRootElement(String interfacePath) {
+		interfacePath = interfacePath.replaceFirst("resource", "plugin");
+		Resource interfaceRes = (new ResourceSetImpl()).getResource(URI.createURI(interfacePath), true);
+		BehavioralInterface interfaceRootElement = (BehavioralInterface) interfaceRes.getContents().get(0);
+		return interfaceRootElement;
 	}
 	
 	public void setModelResource(Resource resource) {

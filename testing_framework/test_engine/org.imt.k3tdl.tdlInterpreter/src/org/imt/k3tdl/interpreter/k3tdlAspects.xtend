@@ -70,7 +70,7 @@ class PackageAspect {
 		
 		TDLTestResultUtil.instance.setTestSuiteResult = _self.testSuiteResult		
 		TDLCoverageUtil.instance.testSuiteCoverage = _self.testSuiteCoverage
-		TDLCoverageUtil.instance.DSLPath = pathHelper.DSLPath.toString
+		TDLCoverageUtil.instance.DSLPath = pathHelper.DSLPath
 		println("Test suite execution has been finished successfully.")
 		return _self.testSuiteResult
 	}
