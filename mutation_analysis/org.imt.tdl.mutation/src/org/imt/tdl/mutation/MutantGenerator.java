@@ -11,8 +11,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.imt.tdl.utilities.DSLProcessor;
 import org.imt.tdl.utilities.PathHelper;
 
-import manager.MutatorAPILauncher;
-
 public class MutantGenerator {
 
 	PathHelper pathHelper;
@@ -60,11 +58,13 @@ public class MutantGenerator {
 			if (mutatorFilePath != null) {
 				generateMutants(mutantsPath);
 			}
-			noMutantsExists = true;
 		}else {
 			for (File file : modelFolder.listFiles()) {
 				mutantsPathsHelper(projectName, file);
 			}
+		}
+		if (!mutants.isEmpty()) {
+			noMutantsExists = true;
 		}
 		return mutants;
 	}
