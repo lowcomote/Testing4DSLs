@@ -50,7 +50,7 @@ class PackageAspect {
 			println("There is no test case in the package " + _self.name + "to be executed")
 		}
 		else{
-			pathHelper = new PathHelper(_self)
+			PackageAspect.pathHelper = new PathHelper(_self)
 			_self.executeTestSuite()
 		}
 	}
@@ -93,6 +93,9 @@ class TestDescriptionAspect{
 	
 	//this method is called from other codes (not GEMOC engine)
 	def TDLTestCaseResult executeTestCase(String MUTPath){
+		if (pathHelper === null){
+			pathHelper = new PathHelper(_self.eContainer as Package)
+		}
 		_self.activateConfiguration(MUTPath)
 		return _self.runTestAndReturnResult
 	}
@@ -104,11 +107,17 @@ class TestDescriptionAspect{
 	 * and afterwards, the test case is executed
 	 */
 	def void activateConfiguration(){
+		if (pathHelper === null){
+			pathHelper = new PathHelper(_self.eContainer as Package)
+		}
 		pathHelper.findModelAndDSLPathOfTestCase(_self)
 		_self.testConfiguration.activateConfiguration(_self.launcher)
 	}
 	
 	def void activateConfiguration(String MUTPath){
+		if (pathHelper === null){
+			pathHelper = new PathHelper(_self.eContainer as Package)
+		}
 		pathHelper.findModelAndDSLPathOfTestCase(_self)
 		pathHelper.modelUnderTestPath = Paths.get(MUTPath)
 		_self.testConfiguration.activateConfiguration(_self.launcher)
