@@ -58,6 +58,7 @@ public class MutationScoreCalculator {
 	
 	public MutationScoreCalculator(Package testSuite) {
 		pathHelper = new PathHelper(testSuite);
+		pathHelper.findModelAndDSLPathOfTestSuite();
 		mutantGenerator = new MutantGenerator(pathHelper.getModelUnderTestPath(), pathHelper.getDSLPath());
 		mutantGenerator.findMutants().forEach(m -> mutant_status.put(m, ALIVE));
 		

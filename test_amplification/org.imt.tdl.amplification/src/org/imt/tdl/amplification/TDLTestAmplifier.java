@@ -47,6 +47,7 @@ public class TDLTestAmplifier {
 		pathHelper = new PathHelper (testSuiteFile);
 		testSuiteRes = pathHelper.getTestSuiteResource();
 		tdlTestSuite = pathHelper.getTestSuite();
+		pathHelper.findModelAndDSLPathOfTestSuite();
 		
 		//calculating the mutation score of the manually-written test suite (i.e., the input test suite)
 		scoreCalculator = new MutationScoreCalculator(tdlTestSuite);
