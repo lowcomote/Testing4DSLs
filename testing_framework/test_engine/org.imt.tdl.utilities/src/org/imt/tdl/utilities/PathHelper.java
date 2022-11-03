@@ -74,8 +74,9 @@ public class PathHelper {
 	
 	private void findTestSuiteNameAndPath() {
 		testSuiteURI = testSuiteResource.getURI();
-		testSuiteFilePath = Paths.get(testSuiteURI.path());
-		testSuiteFileName = testSuiteURI.lastSegment();
+		String path = testSuiteURI.path().replace(testSuiteURI.segment(0), "");
+		testSuiteFilePath = Paths.get(path);
+		testSuiteFileName = testSuiteURI.lastSegment().replace("."+testSuiteURI.fileExtension(), "");
 	}
 
 	public void loadTestSuite (URI testSuiteURI) {
@@ -175,7 +176,7 @@ public class PathHelper {
 	}
 	
 	public IProject getProject (Path path) {
-		String projectName = path.getParent().toString().substring(1);
+		String projectName = path.subpath(0, 1).toString();
 		return getProject(projectName);
 	}
 	
@@ -204,7 +205,7 @@ public class PathHelper {
 	}
 
 	public String getTestSuiteProjectName() {
-		return testSuiteFilePath.getParent().toString().substring(1);
+		return testSuiteURI.segment(1);
 	}
 
 	public String getTestSuiteFileName() {
@@ -233,8 +234,8 @@ public class PathHelper {
 	}
 	
 	public Resource getMUTResource(Path modelUnderTestPath) {
-		String path = Paths.get(modelUnderTestPath.toString()).toString();
-		return (new ResourceSetImpl()).getResource(URI.createURI(path), true);
+		String path = modelUnderTestPath.toString();
+		return (new ResourceSetImpl()).getResource(URI.createPlatformResourceURI(path,false), true);
 	}
 	
 	public String getDSLName() {
