@@ -120,6 +120,11 @@ class TestDescriptionAspect{
 		}
 		pathHelper.findModelAndDSLPathOfTestCase(_self)
 		pathHelper.modelUnderTestPath = Paths.get(MUTPath)
+		
+		_self.launcher = new EngineFactory
+		_self.testCaseResult = new TDLTestCaseResult
+		_self.testCaseCoverage = new TDLTestCaseCoverage
+		
 		_self.testConfiguration.activateConfiguration(_self.launcher)
 	}
 	
@@ -132,13 +137,14 @@ class TestDescriptionAspect{
 			_self.testCaseResult.value = TDLTestResultUtil.FAIL
 			_self.testCaseResult.description = modelExecutionResult.substring(modelExecutionResult.indexOf(":")+1)
 		}
-		println("Test case "+ _self.name + ": " + _self.testCaseResult.value)
+		
 		if (_self.testCaseResult.value != TDLTestResultUtil.INCONCLUSIVE){
 			//save the model execution trace and the MUTResource related to this test case if its result is not INCONCLUSIVE
 			_self.testCaseCoverage.testCase = _self
 			_self.testCaseCoverage.trace = _self.launcher.executionTrace
 	    	_self.testCaseCoverage.MUTResource = _self.launcher.MUTResource
 		}
+		println("Test case "+ _self.name + ": " + _self.testCaseResult.value)
 		return _self.testCaseResult
 	}
 }
