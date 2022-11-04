@@ -106,7 +106,7 @@ public class TDLTestInputDataAmplification {
 	
 	private void findTdlDataOfDSLInterface() {
 		String dslFilePath = TDLTestAmplifier.pathHelper.getDSLPath().toString();
-		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
+		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createPlatformPluginURI(dslFilePath, false), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
 		if (dsl.getEntry("behavioralInterface") != null) {
 			String interfacePath = dsl.getEntry("behavioralInterface").getValue().replaceFirst("resource", "plugin");
@@ -115,8 +115,11 @@ public class TDLTestInputDataAmplification {
 			List<Event> acceptedEvents = interfaceRootElement.getEvents().stream().filter(e -> e.getType() == EventType.ACCEPTED).toList();
 			for (Event event:acceptedEvents) {
 				//finding the tdl instance corresponding to the accepted event 
-				StructuredDataInstance tdlEventInstance = tdlTestSuite.getPackagedElement().stream().filter(p -> p instanceof StructuredDataInstance).
-					map(p -> (StructuredDataInstance) p).filter(d -> getDSLCompatibleName(d.getName()).equals(event.getName())).findFirst().get();
+				StructuredDataInstance tdlEventInstance = tdlTestSuite.getPackagedElement().stream()
+						.filter(p -> p instanceof StructuredDataInstance)
+						.map(p -> (StructuredDataInstance) p)
+						.filter(d -> getDSLCompatibleName(d.getName()).equals(event.getName()))
+						.findFirst().get();
 				tdlEventInstances.add(tdlEventInstance);
 				//finding the types of the event parameters
 				for (Member tdlEventParameter:((StructuredDataType)tdlEventInstance.getDataType()).allMembers()) {
