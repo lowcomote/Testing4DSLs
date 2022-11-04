@@ -238,6 +238,26 @@ public class PathHelper {
 		return (new ResourceSetImpl()).getResource(URI.createPlatformResourceURI(path,false), true);
 	}
 	
+	public Path getPath (String path) {
+		if (path.startsWith("platform:")) {
+			URI uri = URI.createURI(path);
+			return getPath(uri);
+		}
+		return Paths.get(path);
+	}
+	
+	public Path getPath (URI uri) {
+		String path = File.separator;
+		//segment[0] is "resource" or "plugin"
+		for (int i=1; i<uri.segmentCount(); i++) {
+			path += uri.segment(i);
+			if (i < uri.segmentCount()-1) {
+				path += File.separator;
+			}
+		}
+		return Paths.get(path);
+	}
+	
 	public String getDSLName() {
 		return DSLName;
 	}
