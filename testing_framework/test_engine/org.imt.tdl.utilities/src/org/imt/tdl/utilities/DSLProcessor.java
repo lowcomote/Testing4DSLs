@@ -34,6 +34,7 @@ import fr.inria.diverse.k3.al.annotationprocessor.Step;
 public class DSLProcessor {
 	
 	Path DSLPath = null;
+	URI DSLURI;
 	Dsl dsl;
 	IConfigurationElement language;
 	HashMap <String, String> dslEntries;
@@ -58,19 +59,24 @@ public class DSLProcessor {
 	
 	public DSLProcessor(String DSLName){
 		DSLPath = findDSLPath(DSLName);
+		DSLURI = URI.createPlatformPluginURI(DSLPath.toString(), false);
 		loadDSL();
 	}
 	
 	public DSLProcessor(Path DSLPath) {
 		this.DSLPath = DSLPath;
+		DSLURI = URI.createPlatformPluginURI(DSLPath.toString(), false);
 		loadDSL();
 	}
 	
-
+	public DSLProcessor(URI DSLURI) {
+		this.DSLURI = DSLURI;
+		DSLPath = (new PathHelper()).getPath(DSLURI);
+		loadDSL();
+	}
 	private void loadDSL(){
 		dslEntries = new HashMap<>();
-		Resource dslRes = (new ResourceSetImpl()).getResource(
-				URI.createPlatformPluginURI(DSLPath.toString(), false), true);
+		Resource dslRes = (new ResourceSetImpl()).getResource(DSLURI, true);
 		dsl = (Dsl) dslRes.getContents().get(0);
 		dsl.getEntries().forEach(e -> dslEntries.put(e.getKey(), e.getValue()));
 	}
@@ -194,6 +200,10 @@ public class DSLProcessor {
 		return DSLPath;
 	}
 	
+	public URI getDSLURI() {
+		return DSLURI;
+	}
+	
 	public String getDSLEntryValue (String key){
 		return dslEntries.get(key);
 	}
@@ -205,6 +215,10 @@ public class DSLProcessor {
 	//NOTE: currently, we only consider K3 and ALE metaprogramming approaches for the implementation of the DSL's semantics
 	public String getDSLSemanticsLanguage() {
 		return dslEntries.get(K3) != null ? K3 : ALE;
+	}
+	
+	public String getPath2Ecore() {
+		return dslEntries.get(ECORE);
 	}
 	
 	public boolean dslHasBehavioralInterface() {
