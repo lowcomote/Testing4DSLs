@@ -63,7 +63,7 @@ public class MutantGenerator {
 				mutantsPathsHelper(projectName, file);
 			}
 		}
-		if (!mutants.isEmpty()) {
+		if (mutants.isEmpty()) {
 			noMutantsExists = true;
 		}
 		return mutants;
