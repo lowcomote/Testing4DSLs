@@ -1,16 +1,14 @@
 package org.imt.tdl.libraryGenerator;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.gemoc.dsl.Dsl;
 import org.eclipse.m2m.atl.common.ATLExecutionException;
 import org.eclipse.m2m.atl.core.ATLCoreException;
 import org.eclipse.m2m.atl.core.emf.EMFModel;
@@ -22,6 +20,8 @@ import org.etsi.mts.tdl.SimpleDataType;
 import org.etsi.mts.tdl.StructuredDataType;
 import org.etsi.mts.tdl.tdlFactory;
 import org.imt.atl.ecore2tdl.files.Ecore2tdl;
+import org.imt.tdl.utilities.DSLProcessor;
+import org.imt.tdl.utilities.PathHelper;
 
 public class DSLSpecificTypesGenerator {
 
@@ -35,9 +35,9 @@ public class DSLSpecificTypesGenerator {
 	}
 
 	public Package generateDslSpecificTypes() throws IOException {
-		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath), true);
-		Dsl dsl = (Dsl)dslRes.getContents().get(0);
-		String metamodelPath = dsl.getEntry("ecore").getValue().replaceFirst("resource", "plugin");
+		Path dslPath = (new PathHelper()).getPath(dslFilePath);
+		DSLProcessor dslProcessor = new DSLProcessor(dslPath);
+		String metamodelPath = dslProcessor.getPath2Ecore().replaceFirst("resource", "plugin");
 		String IN_model_path = metamodelPath;
 		try {
 			Ecore2tdl runner = new Ecore2tdl();

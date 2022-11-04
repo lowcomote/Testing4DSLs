@@ -76,25 +76,25 @@ public class TDLCodeGenerator {
 		ResourceSet rs = injector.getInstance(ResourceSet.class);
 		
 		String path = Paths.get(tdlProjectPath, "generated", (commonPackage.getName()+ ".tdlan2")).toString();
-		Resource commonPackageRes = rs.createResource(URI.createURI(path));
+		Resource commonPackageRes = rs.createResource(URI.createPlatformResourceURI(path, false));
 		commonPackageRes.getContents().add(commonPackage);
 		
 		Resource dslSpecificEventsRes = null;
 		if (dslSpecificEventsPackage!=null) {
 			path = Paths.get(tdlProjectPath, "generated", dslSpecificEventsPackage.getName() + ".tdlan2").toString();
-			dslSpecificEventsRes = rs.createResource(URI.createURI(path));
+			dslSpecificEventsRes = rs.createResource(URI.createPlatformResourceURI(path, false));
 			dslSpecificEventsRes.getContents().add(dslSpecificEventsPackage);
 		}
 		path = Paths.get(tdlProjectPath, "generated", dslSpecificTypesPackage.getName() + ".tdlan2").toString();
-		Resource dslSpecificTypesRes = rs.createResource(URI.createURI(path));
+		Resource dslSpecificTypesRes = rs.createResource(URI.createPlatformResourceURI(path, false));
 		dslSpecificTypesRes.getContents().add(dslSpecificTypesPackage);
 		
 		path = Paths.get(tdlProjectPath, "generated", testConfigurationPackage.getName()+ ".tdlan2").toString();
-		Resource configurationRes = rs.createResource(URI.createURI(path));
+		Resource configurationRes = rs.createResource(URI.createPlatformResourceURI(path, false));
 		configurationRes.getContents().add(testConfigurationPackage);
 		
 		path = Paths.get(tdlProjectPath, testSuitePackage.getName()+ ".tdlan2").toString();
-		Resource testSuitePackageRes = rs.createResource(URI.createURI(path));
+		Resource testSuitePackageRes = rs.createResource(URI.createPlatformResourceURI(path, false));
 		testSuitePackageRes.getContents().add(testSuitePackage);
 		
 		commonPackageRes.save(Collections.EMPTY_MAP);
