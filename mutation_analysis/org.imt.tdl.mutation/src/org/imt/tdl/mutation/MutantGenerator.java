@@ -8,9 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Plugin;
+import org.eclipse.emf.common.EMFPlugin.EclipsePlugin;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.imt.tdl.utilities.DSLProcessor;
 import org.imt.tdl.utilities.PathHelper;
 
+import manager.ModelManager;
 import manager.MutatorAPILauncher;
 
 public class MutantGenerator {
@@ -70,27 +79,50 @@ public class MutantGenerator {
 	}
 	
 	private void generateMutants(String outputPath) {
-		IProject wodelProject = pathHelper.getProject(mutatorFilePath);
-		List<String> wodelPrograms = new ArrayList<String>();
-		List<List<String>> wodelOperators = new ArrayList<List<String>>();
+		String bundleName = mutatorFilePath.subpath(0, 1).toString();
+		Platform.getBundle(bundleName);
 		
-		
-		
-		String[] mutatorPrograms = null;
-		String[][] mutationOperators = null;
-		MutatorAPILauncher mutatorAPILauncher = new MutatorAPILauncher(
-				null, wodelProject, mutatorPrograms, mutationOperators, seedModelPath.toString(), outputPath);
-		try {
-			mutatorAPILauncher.run(null);
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//after generating mutants, finding them in the output folder
-		findMutants();
+//		List<File> wodelPrograms = new ArrayList<File>();
+//		wodelProject.getLocation();
+//		wodelProject.getFullPath();
+//		wodelProject.getProjectRelativePath();
+//		File wodelFolder = wodelProject.getLocation().toFile();
+//		for (File file : wodelFolder.listFiles()) {
+//			if (file.getName().endsWith(".mutator")) {
+//				wodelPrograms.add(file);
+//			}
+//		}
+//		
+//		List<List<String>> wodelOperators = new ArrayList<List<String>>();
+//		for (File wodelProgram : wodelPrograms) {
+//			String xmiFilePath = wodelProgram.getPath().replace(".mutator", ".model");
+//			Resource wodelLocal = (new ResourceSetImpl()).createResource(URI.createPlatformPluginURI(xmiFilePath, false));
+//			List<EObject> mutatorBlocks = ModelManager.getObjectsOfType("Block", wodelLocal);
+//			List<String> mutatorNames = new ArrayList<String>();
+//			for (EObject mutatorBlock : mutatorBlocks) {
+//				Object mutatorBlockName = ModelManager.getAttribute("name", mutatorBlock);
+//				if (mutatorBlockName != null && mutatorBlockName instanceof String) {
+//					mutatorNames.add((String) mutatorBlockName);
+//				}
+//			}
+//			wodelOperators.add(mutatorNames);
+//		}
+//		//TODO: continue with calling related classes and generating mutants
+//		String[] mutatorPrograms = null;
+//		String[][] mutationOperators = null;
+//		MutatorAPILauncher mutatorAPILauncher = new MutatorAPILauncher(
+//				null, wodelProject, mutatorPrograms, mutationOperators, seedModelPath.toString(), outputPath);
+//		try {
+//			mutatorAPILauncher.run(null);
+//		} catch (InvocationTargetException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		//after generating mutants, finding them in the output folder
+//		findMutants();
 	}
 
 	private void mutantsPathsHelper(File file) {
