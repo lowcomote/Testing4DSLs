@@ -1,4 +1,4 @@
-# XTDL: A Testing Framework for Executable DSLs
+# Test4DSL: A Testing Framework for Executable DSLs
 This repository provides a generic testing framework for Executable Domain-Specific Languages (xDSL).
 It supports several features for testing executable models (conforming to xDSLs), including test case definition, execution, quality evaluation, debugging, fault localization, and improvement.
 The framework is the output of PhD thesis of Faezeh Khorram.
