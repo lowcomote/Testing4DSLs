@@ -18,6 +18,7 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.ILabelProviderListener;
@@ -36,7 +37,6 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -54,7 +54,6 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-
 import org.imt.tdl.coverage.computation.TDLCoverageUtil;
 import org.imt.tdl.coverage.computation.TDLTestSuiteCoverage;
 import org.imt.tdl.coverage.report.ObjectCoverageStatus;
@@ -82,20 +81,24 @@ public class TDLCoverageView extends ViewPart{
 	
 	@Override
 	public void createPartControl(Composite parent) {
+		if (TDLCoverageUtil.getInstance().getTestSuiteCoverage() == null) {
+			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "No Coverage", "There is no coverage information to display. \n Please run a test suite first.");
+			return;
+		}
 		if (!TDLCoverageUtil.getInstance().getTestSuiteCoverage().isCoverageComputed()) {
 			TDLCoverageUtil.getInstance().runCoverageComputation();
 		}
-		Composite contents = new Group(parent, SWT.NULL);
+		Composite contents = new Group(parent, SWT.FILL);
 		contents.setLayout(GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).create());
 		contents.setLayoutData(GridDataFactory.fillDefaults().grab(true, true).create());
 	    
-	    Group filter = new Group(contents, SWT.NULL);
+	    Group filter = new Group(contents, SWT.FILL);
 		filter.setText("Filters");
 		filter.setLayout(GridLayoutFactory.fillDefaults().create());
 		filter.setLayoutData(GridDataFactory.fillDefaults().create());
 	    
 		
-		Group coverageTypeFilter = new Group(filter, SWT.NULL);
+		Group coverageTypeFilter = new Group(filter, SWT.FILL);
 	    coverageTypeFilter.setText("Coverage Metrics Filters");
 	    coverageTypeFilter.setLayout(GridLayoutFactory.fillDefaults().create());
 	    coverageTypeFilter.setLayoutData(GridDataFactory.fillDefaults().create());
@@ -112,7 +115,7 @@ public class TDLCoverageView extends ViewPart{
 			}
 		});
         
-		Group coverageStatusFilter = new Group(filter, SWT.NULL);
+		Group coverageStatusFilter = new Group(filter, SWT.FILL);
 	    coverageStatusFilter.setText("Coverage Status Filters");
 	    coverageStatusFilter.setLayout(GridLayoutFactory.fillDefaults().create());
 	    coverageStatusFilter.setLayoutData(GridDataFactory.fillDefaults().create());
@@ -133,7 +136,7 @@ public class TDLCoverageView extends ViewPart{
 			}
 		});
 		
-        Group elementFilter = new Group(filter, SWT.NULL);
+        Group elementFilter = new Group(filter, SWT.FILL);
 	    elementFilter.setText("Type of Model Element");
 	    elementFilter.setLayout(GridLayoutFactory.fillDefaults().create());
 	    elementFilter.setLayoutData(GridDataFactory.fillDefaults().create());
@@ -142,7 +145,7 @@ public class TDLCoverageView extends ViewPart{
         elementFilterCombo.add("All");
         //add the meta-classes included in the coverage information as filter
         List<ObjectCoverageStatus> objectCoverageInfosByTrace = TDLCoverageUtil.getInstance()
-        		.getTestSuiteCoverage().getTsCoverageInfo(TDLCoverageUtil.TRACEBASEDCOVERAGE);
+        		.getTestSuiteCoverage().getTsCoverageInfo(TDLCoverageUtil.TRACE_BASED_COVERAGE);
         Set<EClass> metaClasses = new HashSet<EClass>();
         classFilters.clear();
         for (ObjectCoverageStatus cInfo: objectCoverageInfosByTrace) {
@@ -162,7 +165,7 @@ public class TDLCoverageView extends ViewPart{
 			}
 		});
 		
-		Group testCoverage = new Group(contents, SWT.NULL);
+		Group testCoverage = new Group(contents, SWT.FILL);
 		FillLayout fill = new FillLayout(SWT.VERTICAL);
 		testCoverage.setLayout(fill);
 		testCoverage.setText("Coverage status");

@@ -34,7 +34,7 @@ public class TDLTestCaseCoverage {
 	}
 	
 	public void calculateTCCoverage () {	
-		tcCoverageByTraceReport = new TestCoverageReport(TDLCoverageUtil.TRACEBASEDCOVERAGE);
+		tcCoverageByTraceReport = new TestCoverageReport(TDLCoverageUtil.TRACE_BASED_COVERAGE);
 		tcCoverageByTraceReport.setCoverableClasses(TDLCoverageUtil.getInstance().getCoverableClasses());
 		tcCoverageByTraceReport.setObjects(listModelEObjects());
 		tcCoverageByTraceReport.setInitialCoverageStatus();

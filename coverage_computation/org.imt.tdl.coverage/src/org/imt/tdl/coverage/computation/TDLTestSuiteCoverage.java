@@ -200,7 +200,7 @@ public class TDLTestSuiteCoverage {
 		try {
 			return tsCoverageInfos.get(coverageReports.indexOf(getTsCoverageRepot(reportTitle)));
 		}catch (Exception e) {
-			return getTsCoverageInfo(TDLCoverageUtil.TRACEBASEDCOVERAGE);
+			return getTsCoverageInfo(TDLCoverageUtil.TRACE_BASED_COVERAGE);
 		}
 	}
 

@@ -18,6 +18,7 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ITableColorProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
@@ -73,20 +74,24 @@ public class TDLSBFLView extends ViewPart{
 	
 	@Override
 	public void createPartControl(Composite parent) {
+		if (TDLCoverageUtil.getInstance().getTestSuiteCoverage() == null) {
+			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "No Coverage", "There is no coverage information to use for fault localization. \n Please run a test suite first.");
+			return;
+		}
 		if (!TDLCoverageUtil.getInstance().getTestSuiteCoverage().isCoverageComputed()) {
 			TDLCoverageUtil.getInstance().runCoverageComputation();
 		}
 		SuspiciousnessRanking suspComputing = new SuspiciousnessRanking();
 		suspComputing.calculateMeasures();
 		
-		Composite contents = new Group(parent, SWT.NULL);
+		Composite contents = new Group(parent, SWT.FILL);
 	    GridLayout layout = new GridLayout();
 		layout.numColumns = 2;
 		contents.setLayout(layout);
 	    GridData gd = new GridData();
 	    contents.setLayoutData(gd);
 	    
-	    Group filter = new Group(contents, SWT.NULL);
+	    Group filter = new Group(contents, SWT.FILL);
 	    layout = new GridLayout();
 	    filter.setLayout(layout);
 		filter.setText("Filters");
@@ -94,7 +99,7 @@ public class TDLSBFLView extends ViewPart{
 		gd.verticalAlignment = SWT.FILL;
 		filter.setLayoutData(gd);
 		
-        Group elementFilter = new Group(filter, SWT.NULL);
+        Group elementFilter = new Group(filter, SWT.FILL);
 	    layout = new GridLayout();
 	    elementFilter.setLayout(layout);
 	    elementFilter.setText("Type of Model Element");
@@ -125,7 +130,7 @@ public class TDLSBFLView extends ViewPart{
 			}
 		});
 		
-        Group techniqueFilter = new Group(filter, SWT.NULL);
+        Group techniqueFilter = new Group(filter, SWT.FILL);
 	    layout = new GridLayout();
 	    techniqueFilter.setLayout(layout);
 	    techniqueFilter.setText("SBFL Technique");
@@ -169,7 +174,7 @@ public class TDLSBFLView extends ViewPart{
 			}
 		});
         
-		Group sbflInfo = new Group(contents, SWT.NULL);
+		Group sbflInfo = new Group(contents, SWT.FILL);
 		FillLayout fill = new FillLayout(SWT.VERTICAL);
 		sbflInfo.setLayout(fill);
 		sbflInfo.setText("SBFL Information");

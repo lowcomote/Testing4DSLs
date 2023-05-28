@@ -33,7 +33,7 @@ public class DSLSpecificBranchCoverage {
 	}
 	
 	public TestCoverageReport runBranchCoverageComputation() {
-		tcBranchCoverageReport = new TestCoverageReport(TDLCoverageUtil.BRANCHCOVERAGE);
+		tcBranchCoverageReport = new TestCoverageReport(TDLCoverageUtil.BRANCH_COVERAGE);
 		tcBranchCoverageReport.setCoverableClasses(dslSpecificCoverageExecutor.getCoverableClasses());
 
 		OCLInterpreter oclLauncher = new OCLInterpreter();

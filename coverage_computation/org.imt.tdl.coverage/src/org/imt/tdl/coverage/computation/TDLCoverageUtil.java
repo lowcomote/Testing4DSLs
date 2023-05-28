@@ -40,9 +40,9 @@ private static TDLCoverageUtil instance = new TDLCoverageUtil();
 	public static final String PARTLY_COVERED = "partly covered";
 	public static final String NOSTATUS = "no status";
 	
-	public static final String TRACEBASEDCOVERAGE = "basedOnTrace";
-	public static final String DSLSPECIFICCOVERAGE = "dslSpecific";
-	public static final String BRANCHCOVERAGE = "branchCoverage";
+	public static final String TRACE_BASED_COVERAGE = "basedOnTrace";
+	public static final String DSL_SPECIFIC_COVERAGE = "dslSpecific";
+	public static final String BRANCH_COVERAGE = "branchCoverage";
 	
 	private IDSLSpecificCoverage dslSpecificCoverageExtension;
 	private List<DomainSpecificCoverage> dslSpecificCoverages;

@@ -58,7 +58,7 @@ public class DSLSpecificCoverageExecutor {
 	}
 	
 	public void runDSLSpecificCoverage() {
-		String coverageTitle = TDLCoverageUtil.DSLSPECIFICCOVERAGE + "_" + coverageRuleset.getName();
+		String coverageTitle = TDLCoverageUtil.DSL_SPECIFIC_COVERAGE + "_" + coverageRuleset.getName();
 		tcDslSpecificCoverageReport = new TestCoverageReport(coverageTitle);
 		tcDslSpecificCoverageReport.setCoverableClasses(TDLCoverageUtil.getInstance().getCoverableClasses());
 		tcDslSpecificCoverageReport.setObjects(testCaseCoverage.getAllModelObjects());
