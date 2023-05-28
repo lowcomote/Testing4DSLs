@@ -4,4 +4,4 @@ k3 = org.imt.pssm.reactive.interpreter.AttributeValueAspect,org.imt.pssm.reactiv
 behavioralInterface = platform:/resource/org.imt.pssm.reactive.relationships/ReactivePSSM.bi
 implemRelId = org.imt.pssm.reactive.relationships.implementation_relationship
 subtypeRelId = org.imt.pssm.reactive.relationships.subtyping_relationship
-coverageFilePath = platform:/resource/org.imt.pssm.reactive.coverage/PSSMCoverageRules.cov
+coverageRules = /org.imt.pssm.reactive.coverage/PSSMModelElementCoverageRules.cov,/org.imt.pssm.reactive.coverage/PSSMBranchCoverageRules.cov

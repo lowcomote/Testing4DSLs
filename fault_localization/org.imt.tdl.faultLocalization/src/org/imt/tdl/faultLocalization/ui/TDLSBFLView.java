@@ -5,10 +5,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.presentation.EcoreEditor;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
@@ -17,6 +22,7 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ITableColorProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
@@ -25,24 +31,35 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
+import org.eclipse.swt.widgets.TreeItem;
+import org.eclipse.ui.IEditorDescriptor;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.ViewPart;
-import org.imt.tdl.coverage.TDLCoverageUtil;
+import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.imt.tdl.coverage.computation.TDLCoverageUtil;
 import org.imt.tdl.faultLocalization.SBFLMeasures;
 import org.imt.tdl.faultLocalization.SuspiciousnessRanking;
 import org.imt.tdl.testResult.TDLTestResultUtil;
 
 public class TDLSBFLView extends ViewPart{
-
-	public static final String ID = "org.imt.tdl.rt.ui.sbflView"; //$NON-NLS-1$
+	
+	public static final String ID = "rt.ui.sbflView"; //$NON-NLS-1$
 	
 	private TreeViewer m_treeViewer;
 	
@@ -56,40 +73,34 @@ public class TDLSBFLView extends ViewPart{
 	
 	@Override
 	public void createPartControl(Composite parent) {
+		if (!TDLCoverageUtil.getInstance().getTestSuiteCoverage().isCoverageComputed()) {
+			TDLCoverageUtil.getInstance().runCoverageComputation();
+		}
 		SuspiciousnessRanking suspComputing = new SuspiciousnessRanking();
 		suspComputing.calculateMeasures();
 		
-		Composite contents = new Group(parent, SWT.FILL);
+		Composite contents = new Group(parent, SWT.NULL);
 	    GridLayout layout = new GridLayout();
-		contents.setLayout(layout);
 		layout.numColumns = 2;
-		layout.verticalSpacing = 9;
-	    GridData gd = new GridData(GridData.FILL_HORIZONTAL | GridData.FILL_VERTICAL);
-	    gd.horizontalAlignment = SWT.FILL;
+		contents.setLayout(layout);
+	    GridData gd = new GridData();
 	    contents.setLayoutData(gd);
 	    
-	    Group filter = new Group(contents, SWT.FILL);
+	    Group filter = new Group(contents, SWT.NULL);
 	    layout = new GridLayout();
 	    filter.setLayout(layout);
-	    layout.numColumns = 1;
-	    layout.verticalSpacing = 9;
 		filter.setText("Filters");
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.horizontalAlignment = SWT.FILL;
-		gd.verticalAlignment = SWT.ON_TOP;
-		gd.widthHint = 100;
+		gd = new GridData();
+		gd.verticalAlignment = SWT.FILL;
 		filter.setLayoutData(gd);
 		
-        Group elementFilter = new Group(filter, SWT.FILL);
+        Group elementFilter = new Group(filter, SWT.NULL);
 	    layout = new GridLayout();
 	    elementFilter.setLayout(layout);
-	    layout.numColumns = 1;
-	    layout.verticalSpacing = 9;
 	    elementFilter.setText("Type of Model Element");
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.horizontalAlignment = SWT.FILL;
+		gd = new GridData();
 		gd.verticalAlignment = SWT.ON_TOP;
-		gd.widthHint = 100;
+		gd.widthHint = 250;
 		elementFilter.setLayoutData(gd);
         final Combo elementFilterCombo = new Combo(elementFilter, SWT.NONE);
         elementFilterCombo.add("All");
@@ -114,19 +125,15 @@ public class TDLSBFLView extends ViewPart{
 			}
 		});
 		
-        Group techniqueFilter = new Group(filter, SWT.FILL);
+        Group techniqueFilter = new Group(filter, SWT.NULL);
 	    layout = new GridLayout();
 	    techniqueFilter.setLayout(layout);
-	    layout.numColumns = 1;
-	    layout.verticalSpacing = 9;
 	    techniqueFilter.setText("SBFL Technique");
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.horizontalAlignment = SWT.FILL;
+		gd = new GridData();
 		gd.verticalAlignment = SWT.ON_TOP;
-		gd.widthHint = 100;
+		gd.widthHint = 250;
 		techniqueFilter.setLayoutData(gd);
         final Combo technqiueFilterCombo = new Combo(techniqueFilter, SWT.NONE);
-        technqiueFilterCombo.add("All");
         technqiueFilterCombo.add(SuspiciousnessRanking.ARITHMETICMEAN);
         technqiueFilterCombo.add(SuspiciousnessRanking.BARINEL);
         technqiueFilterCombo.add(SuspiciousnessRanking.BARONIETAL);
@@ -162,19 +169,51 @@ public class TDLSBFLView extends ViewPart{
 			}
 		});
         
-		Group sbflInfo = new Group(contents, SWT.FILL);
+		Group sbflInfo = new Group(contents, SWT.NULL);
 		FillLayout fill = new FillLayout(SWT.VERTICAL);
 		sbflInfo.setLayout(fill);
-		layout.numColumns = 1;
-		layout.verticalSpacing = 9;
 		sbflInfo.setText("SBFL Information");
 		gd = new GridData(GridData.FILL_HORIZONTAL | GridData.FILL_VERTICAL);
 		gd.horizontalAlignment = SWT.FILL;
+		gd.verticalAlignment = SWT.FILL;
 		sbflInfo.setLayoutData(gd);
 		
 	    final Tree addressTree = new Tree(sbflInfo, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		addressTree.setHeaderVisible(true);
 		addressTree.setLinesVisible(true);
+		addressTree.addListener(SWT.MouseDoubleClick, new Listener() {
+			@Override
+			public void handleEvent(Event event) {
+				Point point = new Point(event.x, event.y);
+				TreeItem item = addressTree.getItem(point);
+				if (item == null || item.getData() == null) {
+					//do nothing
+				}
+				else if (item.getData() instanceof SBFLMeasures) {
+					EObject eobjectToOpen = ((SBFLMeasures) item.getData()).getModelObject();		
+					IFile fileToOpen = ResourcesPlugin.getWorkspace().getRoot().getFile(
+							new Path(eobjectToOpen.eResource().getURI().toPlatformString(true)));
+					IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().
+							getDefaultEditor(fileToOpen.getName());
+					IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+					try {
+						IEditorPart editor = page.openEditor(new FileEditorInput(fileToOpen), desc.getId());
+						if (editor instanceof EcoreEditor) {
+							TreeViewer tviewer = (TreeViewer) ((EcoreEditor) editor).getViewer();
+							ResourceSet resSet =(ResourceSet) tviewer.getInput();
+							EObject eobjectToOpen2 = resSet.getResources().get(0).getEObject(
+									eobjectToOpen.eResource().getURIFragment(eobjectToOpen));
+							tviewer.setSelection(new StructuredSelection(eobjectToOpen2));
+						}else if (editor instanceof XtextEditor) {
+							//TODO: how to reveal the object in the xtext editor
+						}
+					} catch (PartInitException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		});
 		m_treeViewer = new TreeViewer(addressTree);
 
 		TreeColumn metaclassColumn = new TreeColumn(addressTree, SWT.LEFT);
@@ -195,38 +234,38 @@ public class TDLSBFLView extends ViewPart{
 			column.setWidth(60);
 		}
 		
-		TreeColumn NCF = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
-		NCF.setAlignment(SWT.CENTER);
-		NCF.setText("NCF");
-		NCF.setWidth(50);
-		TreeColumn NUF = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
-		NUF.setAlignment(SWT.CENTER);
-		NUF.setText("NUF");
-		NUF.setWidth(50);
-		TreeColumn NCS = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
-		NCS.setAlignment(SWT.CENTER);
-		NCS.setText("NCS");
-		NCS.setWidth(50);
-		TreeColumn NUS = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
-		NUS.setAlignment(SWT.CENTER);
-		NUS.setText("NUS");
-		NUS.setWidth(50);
-		TreeColumn NC = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
-		NC.setAlignment(SWT.CENTER);
-		NC.setText("NC");
-		NC.setWidth(50);
-		TreeColumn NU = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
-		NU.setAlignment(SWT.CENTER);
-		NU.setText("NU");
-		NU.setWidth(50);
-		TreeColumn NS = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
-		NS.setAlignment(SWT.CENTER);
-		NS.setText("NS");
-		NS.setWidth(50);
-		TreeColumn NF = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
-		NF.setAlignment(SWT.CENTER);
-		NF.setText("NF");
-		NF.setWidth(50);
+//		TreeColumn NCF = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
+//		NCF.setAlignment(SWT.CENTER);
+//		NCF.setText("NCF");
+//		NCF.setWidth(50);
+//		TreeColumn NUF = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
+//		NUF.setAlignment(SWT.CENTER);
+//		NUF.setText("NUF");
+//		NUF.setWidth(50);
+//		TreeColumn NCS = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
+//		NCS.setAlignment(SWT.CENTER);
+//		NCS.setText("NCS");
+//		NCS.setWidth(50);
+//		TreeColumn NUS = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
+//		NUS.setAlignment(SWT.CENTER);
+//		NUS.setText("NUS");
+//		NUS.setWidth(50);
+//		TreeColumn NC = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
+//		NC.setAlignment(SWT.CENTER);
+//		NC.setText("NC");
+//		NC.setWidth(50);
+//		TreeColumn NU = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
+//		NU.setAlignment(SWT.CENTER);
+//		NU.setText("NU");
+//		NU.setWidth(50);
+//		TreeColumn NS = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
+//		NS.setAlignment(SWT.CENTER);
+//		NS.setText("NS");
+//		NS.setWidth(50);
+//		TreeColumn NF = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
+//		NF.setAlignment(SWT.CENTER);
+//		NF.setText("NF");
+//		NF.setWidth(50);
 		
 		TreeColumn susp = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
 		susp.setAlignment(SWT.CENTER);
@@ -257,8 +296,8 @@ public class TDLSBFLView extends ViewPart{
 			if (parentElement instanceof List<?>) {
 				return ((List<?>) parentElement).toArray();
 			}
-			if (parentElement instanceof SuspiciousnessRanking suspRanking) {
-				return suspRanking.getElementsSBFLMeasures().toArray();
+			if (parentElement instanceof SuspiciousnessRanking) {
+				return ((SuspiciousnessRanking) parentElement).getElementsSBFLMeasures().toArray();
 			}
 			return new Object[0]; 
 		}
@@ -279,8 +318,8 @@ public class TDLSBFLView extends ViewPart{
 			if (element instanceof List<?>) {
 				return ((List<?>) element).size() > 0;
 			}
-			if (element instanceof SuspiciousnessRanking suspRanking) {
-				return suspRanking.getElementsSBFLMeasures().size() > 0;
+			if (element instanceof SuspiciousnessRanking) {
+				return ((SuspiciousnessRanking) element).getElementsSBFLMeasures().size() > 0;
 			}
 			return false;
 		}
@@ -320,7 +359,8 @@ public class TDLSBFLView extends ViewPart{
 
 		@Override
 		public Color getBackground(Object element, int columnIndex) {
-			if (element instanceof SBFLMeasures sbflMeasures) {
+			if (element instanceof SBFLMeasures) {
+				 SBFLMeasures sbflMeasures =  (SBFLMeasures) element;
 				if (columnIndex > 1 && columnIndex < sbflMeasures.getCoverage().size() + 2) {
 					//the test case coverages
 					String tcEntry = sbflMeasures.getCoverage().get(columnIndex-2);
@@ -343,14 +383,15 @@ public class TDLSBFLView extends ViewPart{
 		@Override
 		public String getColumnText(Object element, int columnIndex) {
 			String columnText = "";
-			if (element instanceof String result) {
+			if (element instanceof String) {
 				switch (columnIndex) {
 				case 0:
-					columnText = result;
+					columnText = (String) element;
 					break;
 				}
 			}
-			if (element instanceof SBFLMeasures sbflMeasures) {
+			if (element instanceof SBFLMeasures) {
+				SBFLMeasures sbflMeasures =  (SBFLMeasures) element;
 				int sbflOperandsStartIndex = (sbflMeasures.getCoverage().size() + 2);
 				if (columnIndex == 0 && sbflMeasures.getMetaclass() != null) {
 					columnText = sbflMeasures.getMetaclass().getName();
@@ -377,38 +418,38 @@ public class TDLSBFLView extends ViewPart{
 					if (sbflMeasures.getMetaclass() == null) {
 						columnText = "";
 					}else {
+//						if (columnIndex == sbflOperandsStartIndex) {
+//							columnText = sbflMeasures.getNCF() + "";
+//						}
+//						else if (columnIndex == sbflOperandsStartIndex + 1) {
+//							columnText = sbflMeasures.getNUF() + "";
+//						}
+//						else if (columnIndex == sbflOperandsStartIndex + 2) {
+//							columnText = sbflMeasures.getNCS() + "";
+//						}
+//						else if (columnIndex == sbflOperandsStartIndex + 3) {
+//							columnText = sbflMeasures.getNUS() + "";
+//						}
+//						else if (columnIndex == sbflOperandsStartIndex + 4) {
+//							columnText = sbflMeasures.getNC() + "";
+//						}
+//						else if (columnIndex == sbflOperandsStartIndex + 5) {
+//							columnText = sbflMeasures.getNU() + "";
+//						}
+//						else if (columnIndex == sbflOperandsStartIndex + 6) {
+//							columnText = sbflMeasures.getNS() + "";
+//						}
+//						else if (columnIndex == sbflOperandsStartIndex + 7) {
+//							columnText = sbflMeasures.getNF() + "";
+//						}
 						if (columnIndex == sbflOperandsStartIndex) {
-							columnText = sbflMeasures.getNCF() + "";
-						}
-						else if (columnIndex == sbflOperandsStartIndex + 1) {
-							columnText = sbflMeasures.getNUF() + "";
-						}
-						else if (columnIndex == sbflOperandsStartIndex + 2) {
-							columnText = sbflMeasures.getNCS() + "";
-						}
-						else if (columnIndex == sbflOperandsStartIndex + 3) {
-							columnText = sbflMeasures.getNUS() + "";
-						}
-						else if (columnIndex == sbflOperandsStartIndex + 4) {
-							columnText = sbflMeasures.getNC() + "";
-						}
-						else if (columnIndex == sbflOperandsStartIndex + 5) {
-							columnText = sbflMeasures.getNU() + "";
-						}
-						else if (columnIndex == sbflOperandsStartIndex + 6) {
-							columnText = sbflMeasures.getNS() + "";
-						}
-						else if (columnIndex == sbflOperandsStartIndex + 7) {
-							columnText = sbflMeasures.getNF() + "";
-						}
-						else if (columnIndex == sbflOperandsStartIndex + 8) {
 							if (sbflMeasures.getSusp().get(sbflMeasures.currentTechnique) == null) {
 								columnText = "";
 							}else {
 								columnText = sbflMeasures.getSusp().get(sbflMeasures.currentTechnique) + "";
 							}	
 						}
-						else if (columnIndex == sbflOperandsStartIndex + 9) {
+						else if (columnIndex == sbflOperandsStartIndex + 1) {
 							if (sbflMeasures.getRank().get(sbflMeasures.currentTechnique) == null) {
 								columnText = "";
 							}else {
@@ -448,7 +489,8 @@ private class ElementFilter extends ViewerFilter {
 		if (elementFilterIndex == -1 || elementFilterIndex == 0) {
 			return true;
 		}else {
-			if (element instanceof SBFLMeasures parameters) {
+			if (element instanceof SBFLMeasures) {
+				SBFLMeasures parameters =  (SBFLMeasures) element;
 				if (parameters.getMetaclass() == null) {
 					return false;
 				}else {

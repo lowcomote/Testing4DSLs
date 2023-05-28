@@ -2,6 +2,8 @@ package org.imt.tdl.testResult.ui;
 
 import java.util.List;
 
+import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ITableColorProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
@@ -53,25 +55,14 @@ public class TDLTestResultsView extends ViewPart{
 	@Override
 	public void createPartControl(Composite parent) {
 		Composite contents = new Group(parent, SWT.FILL);
-	    GridLayout layout = new GridLayout();
-		contents.setLayout(layout);
-		layout.numColumns = 2;
-		layout.verticalSpacing = 9;
-	    GridData gd = new GridData(GridData.FILL_HORIZONTAL | GridData.FILL_VERTICAL);
-	    gd.horizontalAlignment = SWT.FILL;
-	    contents.setLayoutData(gd);
-	    
+		contents.setLayout(GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).create());
+		contents.setLayoutData(GridDataFactory.fillDefaults().grab(true, true).create());
+ 
 	    Group filter = new Group(contents, SWT.FILL);
-	    layout = new GridLayout();
-		filter.setLayout(layout);
-		layout.numColumns = 1;
-		layout.verticalSpacing = 9;
 	    filter.setText("Filter");
-	    gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.horizontalAlignment = SWT.FILL;
-		gd.verticalAlignment = SWT.ON_TOP;
-		gd.widthHint = 100;
-	    filter.setLayoutData(gd);
+	    filter.setLayout(GridLayoutFactory.fillDefaults().create());
+		filter.setLayoutData(GridDataFactory.fillDefaults().create());
+	    
         final Combo filterCombo = new Combo(filter, SWT.NONE);
         filterCombo.add("All");
         filterCombo.add("Passed");
@@ -87,12 +78,11 @@ public class TDLTestResultsView extends ViewPart{
 		});
 		
 		Group testVerdict = new Group(contents, SWT.FILL);
+		testVerdict.setText("Results");
 		FillLayout fill = new FillLayout(SWT.VERTICAL);
 		testVerdict.setLayout(fill);
-		layout.numColumns = 1;
-		layout.verticalSpacing = 9;
 		testVerdict.setText("Results");
-		gd = new GridData(GridData.FILL_HORIZONTAL | GridData.FILL_VERTICAL);
+		GridData gd = new GridData(GridData.FILL_HORIZONTAL | GridData.FILL_VERTICAL);
 		gd.horizontalAlignment = SWT.FILL;
 		testVerdict.setLayoutData(gd);
 		
@@ -108,16 +98,16 @@ public class TDLTestResultsView extends ViewPart{
 				if (item == null || item.getData() == null) {
 					//do nothing
 				}
-				else if (item.getData() instanceof TDLTestCaseResult verdict) {
+				else if (item.getData() instanceof TDLTestCaseResult) {
 					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
 						public void run() {
-							detailTextBox.setText(verdict.getDescription());
+							detailTextBox.setText(((TDLTestCaseResult) item.getData()).getDescription());
 						}
 					});
-				} else if (item.getData() instanceof TDLMessageResult verdict) {
+				} else if (item.getData() instanceof TDLMessageResult) {
             		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
 						public void run() {
-							detailTextBox.setText(verdict.getDescription());
+							detailTextBox.setText(((TDLMessageResult) item.getData()).getDescription());
 						}
 					});
 				}
@@ -158,11 +148,11 @@ public class TDLTestResultsView extends ViewPart{
 			if (parentElement instanceof List<?>) {
 				return ((List<?>) parentElement).toArray();
 			}
-			if (parentElement instanceof TDLTestSuiteResult tsResult) {
-				return tsResult.getTestCaseResults().toArray();
+			if (parentElement instanceof TDLTestSuiteResult) {
+				return ((TDLTestSuiteResult) parentElement).getTestCaseResults().toArray();
 			}
-			if (parentElement instanceof TDLTestCaseResult tcResult) {
-				return tcResult.getTdlMessages().toArray();
+			if (parentElement instanceof TDLTestCaseResult) {
+				return ((TDLTestCaseResult) parentElement).getTdlMessages().toArray();
 			}
 			return new Object[0]; 
 		}
@@ -172,14 +162,14 @@ public class TDLTestResultsView extends ViewPart{
 			if (element instanceof String) {
 				return (String) element;
 			}
-			if (element instanceof TDLTestSuiteResult tsResult) {
-				return tsResult.getTestSuiteName();
+			if (element instanceof TDLTestSuiteResult) {
+				return ((TDLTestSuiteResult) element).getTestSuiteName();
 			}
-			if (element instanceof TDLTestCaseResult tcResult) {
-				return tcResult.getTestCaseName();
+			if (element instanceof TDLTestCaseResult) {
+				return ((TDLTestCaseResult) element).getTestCaseName();
 			}
-			if (element instanceof TDLMessageResult tmResult) {
-				return tmResult.getTdlMessageId();
+			if (element instanceof TDLMessageResult) {
+				return ((TDLMessageResult) element).getTdlMessageId();
 			}
 			return null;
 		}
@@ -189,11 +179,11 @@ public class TDLTestResultsView extends ViewPart{
 			if (element instanceof List<?>) {
 				return ((List<?>) element).size() > 0;
 			}
-			if (element instanceof TDLTestSuiteResult tsResult) {
-				return tsResult.getTestCaseResults().size() > 0;
+			if (element instanceof TDLTestSuiteResult) {
+				return ((TDLTestSuiteResult) element).getTestCaseResults().size() > 0;
 			}
-			if (element instanceof TDLTestCaseResult tcResult) {
-				return tcResult.getTdlMessages().size() > 0;
+			if (element instanceof TDLTestCaseResult) {
+				return ((TDLTestCaseResult) element).getTdlMessages().size() > 0;
 			}
 			return false;
 		}
@@ -231,11 +221,12 @@ public class TDLTestResultsView extends ViewPart{
 		}
 		
 		private Color getBackground(Object element) {
-			if (element instanceof TDLTestSuiteResult result) {
-				return result.getNumOfFailedTestCases() == 0 ? GREEN : RED;
+			if (element instanceof TDLTestSuiteResult) {
+				return ((TDLTestSuiteResult) element).getNumOfFailedTestCases() == 0 ? GREEN : RED;
 			}
-			if (element instanceof TDLTestCaseResult result) {
-				if (result.getValue() == TDLTestResultUtil.PASS) {
+			if (element instanceof TDLTestCaseResult) {
+				TDLTestCaseResult result = ((TDLTestCaseResult) element);
+				if (((TDLTestCaseResult) element).getValue() == TDLTestResultUtil.PASS) {
 					return GREEN;
 				}
 				else if(result.getValue() == TDLTestResultUtil.INCONCLUSIVE) {
@@ -245,7 +236,8 @@ public class TDLTestResultsView extends ViewPart{
 					return RED;
 				}
 			}
-			if (element instanceof TDLMessageResult result) {
+			if (element instanceof TDLMessageResult) {
+				TDLMessageResult result = ((TDLMessageResult) element);
 				if (result.getValue() == TDLTestResultUtil.PASS) {
 					return GREEN;
 				}
@@ -272,14 +264,15 @@ public class TDLTestResultsView extends ViewPart{
 		@Override
 		public String getColumnText(Object element, int columnIndex) {
 			String columnText = "";
-			if (element instanceof String result) {
+			if (element instanceof String) {
 				switch (columnIndex) {
 				case 0:
-					columnText = result;
+					columnText = ((String) element);
 					break;
 				}
 			}
-			if (element instanceof TDLTestSuiteResult result) {
+			if (element instanceof TDLTestSuiteResult) {
+				TDLTestSuiteResult result = (TDLTestSuiteResult) element;
 				switch(columnIndex) {
 				case 0:
 					columnText = result.getTestSuiteName();
@@ -298,7 +291,8 @@ public class TDLTestResultsView extends ViewPart{
 					break;
 				}
 			}
-			if (element instanceof TDLTestCaseResult result) {
+			if (element instanceof TDLTestCaseResult) {
+				TDLTestCaseResult result = (TDLTestCaseResult) element;
 				switch (columnIndex) {
 				case 0:
 					columnText = result.getTestCaseName();
@@ -311,7 +305,8 @@ public class TDLTestResultsView extends ViewPart{
 					break;
 				}
 			}
-			if (element instanceof TDLMessageResult result) {
+			if (element instanceof TDLMessageResult) {
+				TDLMessageResult result = (TDLMessageResult) element;
 				switch (columnIndex) {
 				case 0:
 					columnText = result.getTdlMessageId();
@@ -339,34 +334,34 @@ private class DataFilter extends ViewerFilter {
 				if (element instanceof TDLTestSuiteResult) {
 					return true;
 				}
-				if (element instanceof TDLTestCaseResult result) {
-					return result.getValue() == TDLTestResultUtil.PASS;
+				if (element instanceof TDLTestCaseResult) {
+					return ((TDLTestCaseResult) element).getValue() == TDLTestResultUtil.PASS;
 				}
-				if (element instanceof TDLMessageResult result) {
-					return result.getValue() == TDLTestResultUtil.PASS;
+				if (element instanceof TDLMessageResult) {
+					return ((TDLMessageResult) element).getValue() == TDLTestResultUtil.PASS;
 				}
 			}
 			if (filterIndex == 2) {
 				if (element instanceof TDLTestSuiteResult) {
 					return true;
 				}
-				if (element instanceof TDLTestCaseResult result) {
-					return result.getValue() == TDLTestResultUtil.FAIL;
+				if (element instanceof TDLTestCaseResult) {
+					return ((TDLTestCaseResult) element).getValue() == TDLTestResultUtil.FAIL;
 				}
-				if (element instanceof TDLMessageResult result) {
-					return result.getValue() == TDLTestResultUtil.FAIL;
+				if (element instanceof TDLMessageResult) {
+					return ((TDLMessageResult) element).getValue() == TDLTestResultUtil.FAIL;
 				}
 			}
 			if (filterIndex == 3) {
 				if (element instanceof TDLTestSuiteResult) {
 					return true;
 				}
-				if (element instanceof TDLTestCaseResult result) {
-					return result.getValue() == TDLTestResultUtil.INCONCLUSIVE;
+				if (element instanceof TDLTestCaseResult) {
+					return ((TDLTestCaseResult) element).getValue() == TDLTestResultUtil.INCONCLUSIVE;
 				}
 				if (element instanceof TDLMessageResult) {
-					if (parentElement instanceof TDLTestCaseResult result) {
-						return result.getValue() == TDLTestResultUtil.INCONCLUSIVE;
+					if (parentElement instanceof TDLTestCaseResult) {
+						return ((TDLMessageResult) element).getValue() == TDLTestResultUtil.INCONCLUSIVE;
 					}
 					return false;
 				}

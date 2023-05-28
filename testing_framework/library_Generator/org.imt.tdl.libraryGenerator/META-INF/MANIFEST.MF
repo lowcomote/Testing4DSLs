@@ -22,7 +22,6 @@ Require-Bundle: org.etsi.mts.tdl.model;bundle-version="1.4.0",
  org.junit.jupiter.api;bundle-version="5.6.0",
  org.eclipse.gemoc.executionframework.engine,
  org.eclipse.emf.ecoretools.Ale;bundle-version="1.2.0",
- org.eclipse.m2m.atl.emftvm,
  org.eclipse.m2m.atl.common,
  org.imt.atl.ecore2tdl;bundle-version="1.0.0",
  org.eclipse.emf.ecoretools.ale.xtext;bundle-version="1.2.0",
@@ -31,9 +30,12 @@ Require-Bundle: org.etsi.mts.tdl.model;bundle-version="1.4.0",
  org.eclipse.core.commands;bundle-version="3.10.0",
  org.eclipse.jface;bundle-version="3.22.200",
  org.eclipse.ui;bundle-version="3.119.0",
- org.eclipse.gemoc.xdsmlframework.api;bundle-version="4.0.0"
+ org.eclipse.gemoc.xdsmlframework.api;bundle-version="4.0.0",
+ org.eclipse.m2m.atl.core,
+ org.eclipse.m2m.atl.core.emf
 Import-Package: javax.inject;version="1.0.0",
  org.eclipse.emf.mwe.internal.core.ast.util,
  org.eclipse.xtext.resource,
  org.eclipse.xtext.serializer,
  org.eclipse.xtext.serializer.impl
+Bundle-RequiredExecutionEnvironment: JavaSE-11

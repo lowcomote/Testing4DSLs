@@ -1,0 +1,31 @@
+ruleset MiniJavaBranchCoverage{
+	import metamodel xminiJava
+	import ruleset from "/minijava.coverage/MiniJavaModelElementCoverageRules.cov"
+	
+	context Block{
+		covered when ONE statements iscovered
+	},
+	context IfStatement{
+		when "self.elseBlock <> null"{
+			branch "self.thenBlock",
+			branch "self.elseBlock"
+		},
+		when "self.elseBlock = null"{
+			branch "self.thenBlock",
+			branch else
+		}
+	}
+	//the rules for while and for must be removed for CodeCover
+//	context WhileStatement{
+//		{
+//			branch "self.block",
+//			branch else
+//		}
+//	},
+//	context ForStatement{
+//		{
+//			branch "self.block",
+//			branch else
+//		}
+//	} 
+}

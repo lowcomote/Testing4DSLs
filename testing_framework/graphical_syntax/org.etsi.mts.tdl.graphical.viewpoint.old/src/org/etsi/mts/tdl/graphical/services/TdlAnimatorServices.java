@@ -12,15 +12,11 @@ package org.etsi.mts.tdl.graphical.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gemoc.executionframework.extensions.sirius.services.AbstractGemocAnimatorServices;
 import org.etsi.mts.tdl.Message;
-import org.imt.k3tdl.k3dsa.MessageAspectMessageAspectContext;
-import org.imt.tdl.testResult.TDLMessageResult;
+import org.imt.k3tdl.interpreter.MessageAspectMessageAspectContext;
 
 public class TdlAnimatorServices extends AbstractGemocAnimatorServices {
 	@Override

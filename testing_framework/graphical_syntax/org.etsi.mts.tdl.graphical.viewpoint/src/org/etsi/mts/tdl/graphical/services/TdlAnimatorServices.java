@@ -16,7 +16,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gemoc.executionframework.extensions.sirius.services.AbstractGemocAnimatorServices;
 import org.etsi.mts.tdl.Message;
-import org.imt.k3tdl.k3dsa.MessageAspectMessageAspectContext;
+import org.imt.k3tdl.interpreter.MessageAspectMessageAspectContext;
 
 public class TdlAnimatorServices extends AbstractGemocAnimatorServices {
 	@Override

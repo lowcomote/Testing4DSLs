@@ -1,0 +1,9 @@
+ruleset FSMBranchCoverage{
+	import metamodel k3fsm
+	context State{
+		when "self.outgoingTransitions->size()>1"{
+			branch "self.outgoingTransitions"
+			description "A State with two or more outgoing transitions defines a branch"
+		}	
+	} 
+}

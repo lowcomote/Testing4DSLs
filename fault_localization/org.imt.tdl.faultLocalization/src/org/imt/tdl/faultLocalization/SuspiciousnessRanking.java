@@ -12,15 +12,16 @@
 package org.imt.tdl.faultLocalization;
 
 import java.math.BigDecimal;
+
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.imt.tdl.coverage.TDLCoverageUtil;
-import org.imt.tdl.coverage.TDLTestSuiteCoverage;
-import org.imt.tdl.coverage.ObjectCoverageStatus;
+import org.imt.tdl.coverage.computation.TDLCoverageUtil;
+import org.imt.tdl.coverage.computation.TDLTestSuiteCoverage;
+import org.imt.tdl.coverage.report.ObjectCoverageStatus;
 import org.imt.tdl.testResult.TDLTestCaseResult;
 import org.imt.tdl.testResult.TDLTestResultUtil;
 import org.imt.tdl.testResult.TDLTestSuiteResult;
@@ -64,12 +65,13 @@ public class SuspiciousnessRanking {
 		testSuiteResult = TDLTestResultUtil.getInstance().getTestSuiteResult();
 		errorVector = testSuiteResult.getTestCaseResults();
 		testSuiteCoverage = TDLCoverageUtil.getInstance().getTestSuiteCoverage();
-		coverageMatix.addAll(testSuiteCoverage.coverageOfModelObjects);
+		coverageMatix.addAll(testSuiteCoverage.getTsCoverageInfo(TDLCoverageUtil.DSLSPECIFICCOVERAGE));
+		
 		//the row of the matrix containing coverage percentages should be removed 
 		coverageMatix.removeIf(element -> element.getMetaclass() == null);
 		//if the element is not coverable, remove it from the matrix
 		coverageMatix.removeIf(element -> 
-			element.getCoverage().get(element.getCoverage().size()-1) == TDLCoverageUtil.NOT_COVERABLE);
+			element.getCoverage().get(element.getCoverage().size()-1) == TDLCoverageUtil.NOSTATUS);
 		elementsSBFLMeasures.clear();
 	}
 	
@@ -101,12 +103,12 @@ public class SuspiciousnessRanking {
 		testSuiteResult = tsResult;
 		errorVector = testSuiteResult.getTestCaseResults();
 		testSuiteCoverage = tsCoverage;
-		coverageMatix.addAll(testSuiteCoverage.coverageOfModelObjects);
+		coverageMatix.addAll(testSuiteCoverage.getTsCoverageInfo(TDLCoverageUtil.DSLSPECIFICCOVERAGE));
 		//the row of the matrix containing coverage percentages should be removed 
 		coverageMatix.removeIf(element -> element.getMetaclass() == null);
 		//if the element is not coverable, remove it from the matrix
 		coverageMatix.removeIf(element -> 
-			element.getCoverage().get(element.getCoverage().size()-1) == TDLCoverageUtil.NOT_COVERABLE);
+			element.getCoverage().get(element.getCoverage().size()-1) == TDLCoverageUtil.NOSTATUS);
 		elementsSBFLMeasures.clear();
 	}
 	
@@ -128,7 +130,7 @@ public class SuspiciousnessRanking {
 			int NU = 0;//total number of test cases that do not cover a coverable model element 
 			for (int j=0; j<elementCoverageStatus.size()-1; j++) {
 				elementSBFLMeasures.getCoverage().add(elementCoverageStatus.get(j));
-				String testCaseName = testSuiteCoverage.getTCCoverages().get(j).getTestCaseName();
+				String testCaseName = testSuiteCoverage.getTcCoverages().get(j).getTestCaseName();
 				//find the result of the test case
 				String testCaseVerdict = "";
 				for (TDLTestCaseResult testResult:errorVector) {

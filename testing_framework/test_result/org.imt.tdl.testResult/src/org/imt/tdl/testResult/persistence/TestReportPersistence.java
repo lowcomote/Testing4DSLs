@@ -28,89 +28,95 @@ import org.imt.tdl.testResult.TDLMessageResult;
 import org.imt.tdl.testResult.TDLTestCaseResult;
 import org.imt.tdl.testResult.TDLTestResultUtil;
 
-public class TestReportPersistence implements IEngineAddon{
-	
+public class TestReportPersistence implements IEngineAddon {
+
 	@Override
 	public void engineStopped(IExecutionEngine<?> engine) {
-		IExecutionContext<?, ?, ?> _executionContext = null;
-		Resource testSutieResource = null;
-		if (_executionContext == null) {
-			_executionContext = engine.getExecutionContext();
-			testSutieResource = getCopyOfTestSuite(_executionContext);
+		if (TDLTestResultUtil.getInstance().getTestSuiteResult() == null) {
+			System.out.println(
+					"There is no test execution result to be saved. The test execution is interrupted due to some errors.");
+		} else {
+			saveTestExecutionResult(engine.getExecutionContext());
 		}
-	   //create test result according to the TDLTestReport.ecore structure
-	   Package copiedTestSuite = (Package) testSutieResource.getContents().get(0);
-	   TestSuiteResult testSuiteResult = TDLTestReportFactory.eINSTANCE.createTestSuiteResult();
-	   testSuiteResult.setTestSuite(copiedTestSuite);
-	   for (TDLTestCaseResult tcResultObject : TDLTestResultUtil.getInstance().getTestSuiteResult().getTestCaseResults()) {
-		   String testCaseName = tcResultObject.getTestCaseName();
-		   Optional<TestDescription> optionalTC = copiedTestSuite.getPackagedElement().stream()
-				   .filter(p -> p instanceof TestDescription)
-				   .map(t -> (TestDescription) t)
-				   .filter(t -> t.getName().equals(testCaseName)).findFirst();
-		   if (optionalTC.isPresent()) {
-			   TestDescription copiedTestCase = optionalTC.get();
-			   TestCaseResult testCaseResult = TDLTestReportFactory.eINSTANCE.createTestCaseResult();
-			   testCaseResult.setTestCase(copiedTestCase);
-			   String testCaseVerdict = tcResultObject.getValue();
-			   if (testCaseVerdict == TDLTestResultUtil.PASS) {
-				   testCaseResult.setValue(Verdicts.PASS);
-			   }else if (testCaseVerdict == TDLTestResultUtil.FAIL) {
-				   testCaseResult.setValue(Verdicts.FAIL);
-			   }else if (testCaseVerdict == TDLTestResultUtil.INCONCLUSIVE) {
-				   testCaseResult.setValue(Verdicts.INCONCLUSIVE);
-			   }
-			   testCaseResult.setDescription(tcResultObject.getDescription());
-			   for (int i=0; i<tcResultObject.getTdlMessages().size(); i++) {
-				   TDLMessageResult messageResultObject = tcResultObject.getTdlMessages().get(i);
-				   TestMessageResult testMessageResult = TDLTestReportFactory.eINSTANCE.createTestMessageResult();
-				   testMessageResult.setMessage(findEquivalentTDLMessage(copiedTestCase, i));
-				   String testMsgVerdict = messageResultObject.getValue();
-				   if (testMsgVerdict == TDLTestResultUtil.PASS) {
-					   testMessageResult.setValue(Verdicts.PASS);
-				   }else if (testMsgVerdict == TDLTestResultUtil.FAIL) {
-					   testMessageResult.setValue(Verdicts.FAIL);
-				   }else if (testMsgVerdict == TDLTestResultUtil.INCONCLUSIVE) {
-					   testMessageResult.setValue(Verdicts.INCONCLUSIVE);
-				   }
-				   testMessageResult.setDescription(messageResultObject.getDescription());
-				   testMessageResult.setTdlMessageId(messageResultObject.getTdlMessageId());
-				   testCaseResult.getTestMessageResults().add(testMessageResult);
-			   }
-			   testSuiteResult.getTestCaseResults().add(testCaseResult);
-		   }
-	   }
-	   
-	   //create a resource for the test result
-	   URI testReportURI = URI.createURI(
-				_executionContext.getWorkspace().getExecutionPath().toString() + "/testReport.xmi", false);
-	   Resource testResultResource = (new ResourceSetImpl()).createResource(testReportURI);
-	   testResultResource.getContents().add(testSuiteResult);
-	   //saving resources
-	   try {
+	}
+
+	private void saveTestExecutionResult(IExecutionContext<?, ?, ?> executionContext) {
+		// create test result according to the TDLTestReport.ecore structure
+		Resource testSutieResource = getCopyOfTestSuite(executionContext);
+		Package copiedTestSuite = (Package) testSutieResource.getContents().get(0);
+		TestSuiteResult testSuiteResult = TDLTestReportFactory.eINSTANCE.createTestSuiteResult();
+		testSuiteResult.setTestSuite(copiedTestSuite);
+		for (TDLTestCaseResult tcResultObject : TDLTestResultUtil.getInstance().getTestSuiteResult()
+				.getTestCaseResults()) {
+			String testCaseName = tcResultObject.getTestCaseName();
+			Optional<TestDescription> optionalTC = copiedTestSuite.getPackagedElement().stream()
+					.filter(p -> p instanceof TestDescription).map(t -> (TestDescription) t)
+					.filter(t -> t.getName().equals(testCaseName)).findFirst();
+			if (optionalTC.isPresent()) {
+				TestDescription copiedTestCase = optionalTC.get();
+				TestCaseResult testCaseResult = TDLTestReportFactory.eINSTANCE.createTestCaseResult();
+				testCaseResult.setTestCase(copiedTestCase);
+				String testCaseVerdict = tcResultObject.getValue();
+				if (testCaseVerdict == TDLTestResultUtil.PASS) {
+					testCaseResult.setValue(Verdicts.PASS);
+				} else if (testCaseVerdict == TDLTestResultUtil.FAIL) {
+					testCaseResult.setValue(Verdicts.FAIL);
+				} else if (testCaseVerdict == TDLTestResultUtil.INCONCLUSIVE) {
+					testCaseResult.setValue(Verdicts.INCONCLUSIVE);
+				}
+				testCaseResult.setDescription(tcResultObject.getDescription());
+				for (int i = 0; i < tcResultObject.getTdlMessages().size(); i++) {
+					TDLMessageResult messageResultObject = tcResultObject.getTdlMessages().get(i);
+					TestMessageResult testMessageResult = TDLTestReportFactory.eINSTANCE.createTestMessageResult();
+					testMessageResult.setMessage(findEquivalentTDLMessage(copiedTestCase, i));
+					String testMsgVerdict = messageResultObject.getValue();
+					if (testMsgVerdict == TDLTestResultUtil.PASS) {
+						testMessageResult.setValue(Verdicts.PASS);
+					} else if (testMsgVerdict == TDLTestResultUtil.FAIL) {
+						testMessageResult.setValue(Verdicts.FAIL);
+					} else if (testMsgVerdict == TDLTestResultUtil.INCONCLUSIVE) {
+						testMessageResult.setValue(Verdicts.INCONCLUSIVE);
+					}
+					testMessageResult.setDescription(messageResultObject.getDescription());
+					testMessageResult.setTdlMessageId(messageResultObject.getTdlMessageId());
+					testCaseResult.getTestMessageResults().add(testMessageResult);
+				}
+				testSuiteResult.getTestCaseResults().add(testCaseResult);
+			}
+		}
+
+		// create a resource for the test result
+		URI testReportURI = URI
+				.createURI(executionContext.getWorkspace().getExecutionPath().toString() + "/testReport.xmi", false);
+		Resource testResultResource = (new ResourceSetImpl()).createResource(testReportURI);
+		testResultResource.getContents().add(testSuiteResult);
+		// saving resources
+		try {
 			testResultResource.save(null);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	   }
-		
+			e.printStackTrace();
+		}
+	}
+
 	private Resource getCopyOfTestSuite(IExecutionContext<?, ?, ?> _executionContext) {
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		String projectName = _executionContext.getWorkspace().getProjectPath().toString().substring(1);
 		IProject[] projects = root.getProjects();
 		IProject testSuiteProject = null;
-		for (int i=0; i<projects.length; i++) {
+		for (int i = 0; i < projects.length; i++) {
 			if (projects[i].getName().equals(projectName)) {
 				testSuiteProject = projects[i];
 			}
 		}
 		String testSuiteProjectAbsolutePath = testSuiteProject.getLocation().toString().replace("/" + projectName, "");
-		String copiedModelFolderPath = testSuiteProjectAbsolutePath + _executionContext.getWorkspace().getExecutionPath().toString();
+		String copiedModelFolderPath = testSuiteProjectAbsolutePath
+				+ _executionContext.getWorkspace().getExecutionPath().toString();
 		File modelFile = new File(copiedModelFolderPath);
-		for (File file: modelFile.listFiles()) {
+		for (File file : modelFile.listFiles()) {
 			if (file.getName().endsWith(".tdlan2")) {
-				String modelPath = file.getPath().replace(testSuiteProjectAbsolutePath.replaceAll("/", "\\\\"), "").replaceAll("\\\\", "/");
+				String modelPath = file.getPath().replace(testSuiteProjectAbsolutePath.replaceAll("/", "\\\\"), "")
+						.replaceAll("\\\\", "/");
 				return (new ResourceSetImpl()).getResource(URI.createURI(modelPath), true);
 			}
 		}
@@ -118,7 +124,8 @@ public class TestReportPersistence implements IEngineAddon{
 	}
 
 	private Message findEquivalentTDLMessage(TestDescription copiedTestCase, int index) {
-		EList<Behaviour> behaviors =  ((CompoundBehaviour) copiedTestCase.getBehaviourDescription().getBehaviour()).getBlock().getBehaviour();
+		EList<Behaviour> behaviors = ((CompoundBehaviour) copiedTestCase.getBehaviourDescription().getBehaviour())
+				.getBlock().getBehaviour();
 		Object[] messages = behaviors.stream().filter(b -> b instanceof Message).toArray();
 		if (messages.length > index && messages[index] instanceof Message) {
 			return (Message) messages[index];

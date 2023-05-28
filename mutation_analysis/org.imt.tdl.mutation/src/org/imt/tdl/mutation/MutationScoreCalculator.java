@@ -1,7 +1,7 @@
 package org.imt.tdl.mutation;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -21,24 +22,46 @@ import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.etsi.mts.tdl.ComponentInstanceRole;
 import org.etsi.mts.tdl.GateReference;
 import org.etsi.mts.tdl.Interaction;
 import org.etsi.mts.tdl.Package;
 import org.etsi.mts.tdl.TestDescription;
-import org.imt.k3tdl.k3dsa.TestDescriptionAspect;
-import org.imt.tdl.mutation.utilities.PathHelper;
+import org.imt.k3tdl.interpreter.TestDescriptionAspect;
+import org.imt.tdl.amplification.dsl.amplifier.ClassSelectionMode;
+import org.imt.tdl.amplification.dsl.amplifier.CloningOperator;
+import org.imt.tdl.amplification.dsl.amplifier.CloningType;
+import org.imt.tdl.amplification.dsl.amplifier.CreationOperator;
+import org.imt.tdl.amplification.dsl.amplifier.ExplicitScopeSelection;
+import org.imt.tdl.amplification.dsl.amplifier.FeatureSelectionStrategy;
+import org.imt.tdl.amplification.dsl.amplifier.GeneratedOperators;
+import org.imt.tdl.amplification.dsl.amplifier.ImplicitScopeSelection;
+import org.imt.tdl.amplification.dsl.amplifier.ModificationOperator;
+import org.imt.tdl.amplification.dsl.amplifier.MutationAnalysis;
+import org.imt.tdl.amplification.dsl.amplifier.MutationOperatorType;
+import org.imt.tdl.amplification.dsl.amplifier.RemovalOperator;
+import org.imt.tdl.amplification.dsl.amplifier.RetypingOperator;
 import org.imt.tdl.testResult.TDLTestCaseResult;
 import org.imt.tdl.testResult.TDLTestResultUtil;
+import org.imt.tdl.utilities.DSLProcessor;
+import org.imt.tdl.utilities.PathHelper;
+
+import mutatorenvironment.MutatorEnvironment;
+import mutatorenvironment.MutatorenvironmentPackage;
+import wodel.dsls.WodelUtils;
+import wodel.utils.exceptions.MetaModelNotFoundException;
 
 public class MutationScoreCalculator {
 	
 	Package testSuite;
 	List<TestDescription> testCases = new ArrayList<>();
-	public boolean noMutantsExists;
 	
+	MutationAnalysis mutationAnalysisSpec;
+
 	private static String KILLED = "killed";
 	private static String ALIVE = "alive";
 	
@@ -49,22 +72,32 @@ public class MutationScoreCalculator {
 	public HashMap<String, List<String>> testCase_killedMutant = new HashMap<>();
 	
 	int numOfMutants;
-	int numOfKilledMutants;
-	double mutationScore;
+	
+	double seedMutationScore;
+	int seedNumOfKilledMutants;
+	
+	int currentNumOfKilledMutants;
+	double currentMutationScore;
 	
 	double timeoutFactor;
 	int timeoutConstant;
 
-	Path workspacePath;
+	PathHelper pathHelper;
+	Path runtimeWorkspacePath;
 	Path seedModelPath;
 	IProject mutantsProject;
 	
-	public MutationScoreCalculator(Package testSuite) {
+	public MutationScoreCalculator(MutationAnalysis mutationAnalysisSpec, Package testSuite) {
 		this.testSuite = testSuite;
 		testCases = testSuite.getPackagedElement().stream().filter(p -> p instanceof TestDescription).
 				map(p -> (TestDescription) p).collect(Collectors.toList());
-		seedModelPath = PathHelper.getInstance().getSeedModelPath();
-		workspacePath = PathHelper.getInstance().getWorkspacePath();
+		
+		pathHelper = new PathHelper(testSuite);
+		pathHelper.findModelAndDSLPathOfTestSuite();
+		seedModelPath = pathHelper.getModelUnderTestPath();
+		runtimeWorkspacePath = pathHelper.getRuntimeWorkspacePath();
+		
+		this.mutationAnalysisSpec = mutationAnalysisSpec;
 		findMutants();
 		//default values of pitest tool
 		timeoutFactor = 1.25;
@@ -98,10 +131,12 @@ public class MutationScoreCalculator {
 	public double calculateInitialMutationScore() {
 		System.out.println("\nCalculating the mutation score of the input test suite");
 		testCases.forEach(t -> runTestCaseOnAliveMutants(t));
-		calculateOverallMutationScore();
-		System.out.println("The mutation score of the input test suite is: " + mutationScore);
-		printMutationAnalysisResult();
-		return mutationScore;
+		updateMutationScore();
+		seedNumOfKilledMutants = currentNumOfKilledMutants;
+		seedMutationScore = currentMutationScore;
+		System.out.println("The mutation score of the input test suite is: " + seedMutationScore);
+		//printMutationAnalysisResult();
+		return seedMutationScore;
 	}
 	
 	public void runTestCaseOnAllMutants(TestDescription testCase) {
@@ -141,16 +176,16 @@ public class MutationScoreCalculator {
 				//te.printStackTrace();
 				System.out.println("TimeoutException -> There is an infinite loop in the mutant");
 				future.cancel(true);
+				TestDescriptionAspect.launcher(testCase).disposeResources();
 			}
 			if (!executor.isTerminated()) {
 			    executor.shutdownNow(); // If you want to stop the code that hasn't finished
 			}
-			TestDescriptionAspect.launcher(testCase).disposeResources();
 			if (result == null || result.getValue() == TDLTestResultUtil.FAIL) {				
 				keepTestCaseKilledMutantMapping(testCase.getName(), mutant);
 				if (mutant_status.get(mutant) != KILLED) {
 					mutant_status.replace(mutant, KILLED);
-					numOfKilledMutants++;
+					currentNumOfKilledMutants++;
 				}	
 			}
 		}
@@ -158,7 +193,7 @@ public class MutationScoreCalculator {
 	
 	public void runTestCaseOnAliveMutants(TestDescription testCase) {
 		Set<String> aliveMutants = new HashSet<>();
-		if (numOfKilledMutants == 0) {
+		if (currentNumOfKilledMutants == 0) {
 			aliveMutants = mutant_status.keySet();
 		}
 		else {
@@ -173,6 +208,7 @@ public class MutationScoreCalculator {
 		//run the test case only on alive mutants
 		for (String mutant:aliveMutants) {
 			String mutantPath = mutant.replace("\\", "/");
+			System.out.println("Running test case " + testCase.getName() + " on mutant " + mutantPath);
 			TDLTestCaseResult result = null;
 			final Runnable testRunner = new Thread() {
 				  @Override 
@@ -208,7 +244,7 @@ public class MutationScoreCalculator {
 			if (result == null || result.getValue() == TDLTestResultUtil.FAIL) {
 				mutant_status.replace(mutant, KILLED);
 				keepTestCaseKilledMutantMapping(testCase.getName(), mutant);
-				numOfKilledMutants++;
+				currentNumOfKilledMutants++;
 			}
 		}
 	}
@@ -227,42 +263,133 @@ public class MutationScoreCalculator {
 	}
 
 	public boolean testCaseImprovesMutationScore (TestDescription testCase) {
-		int pastNumOfKilledMutants = numOfKilledMutants;
+		int pastNumOfKilledMutants = currentNumOfKilledMutants;
 		runTestCaseOnAliveMutants(testCase);
-		if (numOfKilledMutants > pastNumOfKilledMutants) {
-			double previousScore = mutationScore;
-			calculateOverallMutationScore();
-			System.out.println("The test case " + testCase.getName() + " has improved the mutation score by: " + (mutationScore - previousScore));
+		if (currentNumOfKilledMutants > pastNumOfKilledMutants) {
+			double previousScore = currentMutationScore;
+			updateMutationScore();
+			System.out.println("The test case " + testCase.getName() + " has improved the mutation score by: " + (currentMutationScore - previousScore));
 			System.out.println("- previous mutation score: " + previousScore);
-			System.out.println("- new mutation score: " + mutationScore + "\n");
+			System.out.println("- new mutation score: " + currentMutationScore + "\n");
 			return true;
 		}
 		return false;
 	}
 
 	private void findMutants() {
-		String projectName = seedModelPath.getParent().toString().substring(1);
-		mutantsProject =  ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+		String modelProjectName = seedModelPath.getParent().toString().substring(1);
+		mutantsProject =  ResourcesPlugin.getWorkspace().getRoot().getProject(modelProjectName);
 		File modelFolder = new File(mutantsProject.getLocation() + "/mutants");
-		if (modelFolder.listFiles() == null) {
-			noMutantsExists = true;
-		}else {
-			for (File file : modelFolder.listFiles()) {
-				mutantsPathsHelper(projectName, file);
+		//if there is no mutant, generate mutants
+		if (modelFolder.listFiles() == null || modelFolder.listFiles().length == 0) {
+			String inputPath = mutantsProject.getLocation().toString();
+			String outputPath = inputPath + "/mutants";
+			String eclipseHomePath = "c:/labtop/gemoc_studio";
+			String mutatorFilePath = mutationAnalysisSpec.getMutationOperatorSet().getPathToMutationOperators();
+			String wodelProjectName = Paths.get(mutatorFilePath).getName(0).toString();
+			String wodelProjectPath = Platform.getBundle(wodelProjectName).getLocation();
+			wodelProjectPath = wodelProjectPath.substring(wodelProjectPath.indexOf("C:/"), wodelProjectPath.length()-1);
+			
+			//if the user requested to generate mutation operators for them
+			if (mutationAnalysisSpec.getMutationOperatorSet() instanceof GeneratedOperators) {
+				generateMutationOperators(wodelProjectPath, eclipseHomePath, inputPath);
 			}
+			String currentPluginPath = Platform.getBundle("org.imt.tdl.mutation").getLocation();
+			currentPluginPath = currentPluginPath.substring(currentPluginPath.indexOf("C:/"), currentPluginPath.length()-1);
+			WodelUtils.generateMutants(inputPath, outputPath, currentPluginPath, wodelProjectPath, eclipseHomePath);
+		}
+		for (File file : modelFolder.listFiles()) {
+			mutantsPathsHelper(modelProjectName, file);
 		}
 	}
 	
+	private void generateMutationOperators(String wodelProjectPath, String eclipseHomePath, String inputPath) {
+		DSLProcessor dslProcessor = new DSLProcessor(pathHelper.getDSLPath());
+		String ecoreFilePath = dslProcessor.getPath2Ecore();
+		String ecoreFileName = ecoreFilePath.substring(ecoreFilePath.lastIndexOf("/")+1);
+		String metamodelPath = wodelProjectPath + "/data/model/" + ecoreFileName;
+		String eclipseCompilerName = "GemocStudioc";
+		
+		MutatorenvironmentPackage.eINSTANCE.getClass();
+		MutatorEnvironment wodel = WodelUtils.generateWodelProgram(metamodelPath);
+		//NOTE: We consider there is only one GeneratedOperator 
+		GeneratedOperators toBeGeneratedOperators = (GeneratedOperators) mutationAnalysisSpec.getMutationOperatorSet();
+		try {
+			for (MutationOperatorType operatorType: toBeGeneratedOperators.getTargetOperators()) {	
+				List<EClass> scopes = new ArrayList<>();
+				if (operatorType.getScopeSelection() instanceof ExplicitScopeSelection) {
+					scopes.addAll(((ExplicitScopeSelection) operatorType.getScopeSelection()).getScope());
+				}
+				else if(operatorType.getScopeSelection() instanceof ImplicitScopeSelection) {
+					ImplicitScopeSelection strategy = (ImplicitScopeSelection) operatorType.getScopeSelection();
+					List<EClass> classes =dslProcessor.getMetamodelRootElement().getEClassifiers().stream()
+							.filter(EClass.class::isInstance)
+							.map(EClass.class::cast)
+							.collect(Collectors.toList());
+					if (strategy.getMode() == ClassSelectionMode.ALL) {
+						scopes.addAll(classes);
+					} else if (strategy.getMode() == ClassSelectionMode.RANDOM) {
+						Random random = new Random();
+						int randomIndex = random.nextInt(classes.size());
+						scopes.add(classes.get(randomIndex));
+					} else if (strategy.getMode() == ClassSelectionMode.CONCRETE) {
+						scopes.addAll(classes.stream()
+								.filter(c -> !c.isAbstract())
+								.collect(Collectors.toList()));
+					} else if (strategy.getMode() == ClassSelectionMode.ABSTRACT) {
+						scopes.addAll(classes.stream()
+								.filter(c -> c.isAbstract())
+								.collect(Collectors.toList()));
+					}
+				}
+				for (EClass scope : scopes) {
+					if (operatorType instanceof CreationOperator) {
+						WodelUtils.generateCreationMutationOperators(wodel, inputPath, true, scope.getName());
+					}
+					else if (operatorType instanceof CloningOperator) {
+						CloningType mode = ((CloningOperator) operatorType).getType();
+						//TODO: Wodel API must provide a way to specify cloning mode
+						WodelUtils.generateCloningMutationOperators(wodel, inputPath, true, true, scope.getName());
+					}
+					else if (operatorType instanceof RetypingOperator) {
+						WodelUtils.generateRetypingMutationOperators(wodel, inputPath, scope.getName());
+					}
+					else if (operatorType instanceof RemovalOperator) {
+						WodelUtils.generateRemovalMutationOperators(wodel, inputPath, true, scope.getName());
+					}
+					else if (operatorType instanceof ModificationOperator) {
+						List<FeatureSelectionStrategy> strategy = ((ModificationOperator) operatorType).getStrategy();
+						if (strategy != null) {
+							//TODO: Wodel API must provide a way to specify attribute selection mode	
+						}
+						WodelUtils.generateModificationMutationOperators(wodel, inputPath, true, null, scope.getName());
+					}
+				}
+			}
+			
+			WodelUtils.serializeWodelProgram(wodel, wodelProjectPath);
+			
+		} catch (MetaModelNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//WodelUtils.generateMutationOperators(metamodelPath, inputPath, wodelProjectPath);
+		WodelUtils.compileWodelProject(wodelProjectPath, eclipseHomePath, eclipseCompilerName);
+	}
+
 	private void mutantsPathsHelper(String projectName, File file) {
 		if (file.isFile() && file.getName().endsWith(".model")) {
 			String filePath = file.getPath();
-			if (workspacePath == null) {
+			if (runtimeWorkspacePath == null) {
 				String path = filePath.substring(0, filePath.lastIndexOf(projectName)-1);
-				workspacePath = Paths.get(path);
+				runtimeWorkspacePath = Paths.get(path);
 			}		
 			//get the relative path of the file
 			if (!filePath.equals(seedModelPath.toString())){
-				filePath = filePath.replace(workspacePath.toString(), "");
+				filePath = filePath.replace(runtimeWorkspacePath.toString(), "");
 				mutant_status.put(filePath, ALIVE);
 				numOfMutants++;
 			}
@@ -274,19 +401,15 @@ public class MutationScoreCalculator {
 		}
 	}
 	
-	public void calculateOverallMutationScore() {
-		mutationScore = (double) numOfKilledMutants/numOfMutants;
+	public void updateMutationScore() {
+		currentMutationScore = (double) currentNumOfKilledMutants/numOfMutants;
 	}
 	
 	public void printMutationAnalysisResult() {
 		//saving results into a .txt file
-		String outputFilePath = PathHelper.getInstance().getWorkspacePath() + "/"
-				+ PathHelper.getInstance().getTestSuiteProjectName() + "/" 
-				+ PathHelper.getInstance().getTestSuiteFileName() + 
-				"_mutationReport.txt";
 		StringBuilder sb = new StringBuilder();
 		sb.append("Number of generated mutants: " + numOfMutants + "\n");
-		sb.append("Number of killed mutants: " + numOfKilledMutants + "\n");
+		sb.append("Number of killed mutants: " + currentNumOfKilledMutants + "\n");
 		sb.append("--------------------------------------------------\n");
 		for (String testCase:testCase_killedMutant.keySet()) {
 			sb.append("Original test case: " + testCase + "\n");
@@ -295,44 +418,55 @@ public class MutationScoreCalculator {
 				sb.append("Killed mutant " + (j++) + ": " + mutant + "\n");
 			}
 		}
-		if (numOfKilledMutants < numOfMutants) {
+		if (currentNumOfKilledMutants < numOfMutants) {
 			sb.append("--------------------------------------------------\n");
-			sb.append("Number of alive mutants: " + (numOfMutants - numOfKilledMutants) + "\n");
+			sb.append("Number of alive mutants: " + (numOfMutants - currentNumOfKilledMutants) + "\n");
 			int j = 1;
 			for (String mutant:getAliveMutants()) {
 				sb.append("Alive mutant " + (j++) + ": " + mutant + "\n");
 			}
 		}
-		
+		String outputFilePath = pathHelper.getRuntimeWorkspacePath() + "/"
+				+ pathHelper.getTestSuiteProjectName() + "/" 
+				+ "mutation-analysis-result" + "/";
+		Path filePath = Paths.get(outputFilePath);
 		try {
-			Path filePath = Paths.get(outputFilePath);
+			Files.createDirectories(filePath);
+			filePath = Paths.get(filePath + "/" + pathHelper.getTestSuiteFileName() + 
+				"_mutationReport.txt");
 			Files.writeString(filePath,sb);
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public Path getWorkspacePath() {
-		return workspacePath;
+	public Path getRuntimeWorkspacePath() {
+		return runtimeWorkspacePath;
 	}
 	
 	public int getNumOfMutants() {
 		return numOfMutants;
 	}
 	
+	public double getSeedMutationScore() {
+		return seedMutationScore;
+	}
+
+	public int getSeedNumOfKilledMutants() {
+		return seedNumOfKilledMutants;
+	}
+
 	public void setNumOfKilledMutants(int numOfKilledMutants) {
-		this.numOfKilledMutants = numOfKilledMutants;
+		this.currentNumOfKilledMutants = numOfKilledMutants;
 	}
 	
 	public int getNumOfKilledMutants() {
-		return numOfKilledMutants;
+		return currentNumOfKilledMutants;
 	}
 	
-	public double getOverallMutationScore() {
-		return mutationScore;
+	public double getCurrentMutationScore() {
+		return currentMutationScore;
 	}
 	
 	public double getTestCaseMutationScore(TestDescription testCase) {
@@ -342,12 +476,15 @@ public class MutationScoreCalculator {
 	}
 	
 	public Set<String> getAliveMutants(){
-		return mutant_status.keySet().stream().
-				filter(mutant -> mutant_status.get(mutant) == ALIVE).collect(Collectors.toSet());
+		return mutant_status.keySet().stream().filter(mutant -> mutant_status.get(mutant) == ALIVE).collect(Collectors.toSet());
 	}
 	
 	public void setTestCase_numOfAssertions(TestDescription testCase, int numOfAssertions) {
 		testCase_numOfAssertions.put(testCase, numOfAssertions);
+	}
+	
+	public boolean mutantsExists() {
+		return numOfMutants > 0 ? true : false;
 	}
 	
 	public int getNumOfAssertions(TestDescription tdlTestCase){
@@ -355,8 +492,8 @@ public class MutationScoreCalculator {
 		int numOfAssertions = 0;
 		while (iterator.hasNext()) {
 			EObject eobject = iterator.next();
-			if (eobject instanceof Interaction interaction) {
-				GateReference sourceGate = interaction.getSourceGate();
+			if (eobject instanceof Interaction) {
+				GateReference sourceGate = ((Interaction) eobject).getSourceGate();
 				if (sourceGate.getComponent().getRole() == ComponentInstanceRole.SUT) {
 					numOfAssertions++;
 				}

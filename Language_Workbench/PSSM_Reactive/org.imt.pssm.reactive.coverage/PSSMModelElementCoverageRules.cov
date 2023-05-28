@@ -1,0 +1,41 @@
+ruleset PSSMModelElementCoverage{
+	import metamodel statemachines
+	context CustomSystem{
+		covered when ONE statemachine iscovered
+		description "a customSystem is covered when its inner stateMachine is covered"
+	},
+	context StateMachine{
+		covered when ONE regions iscovered
+		description "a stateMachine is covered when one of its inner regions are covered"
+	},
+	context Region{
+		covered when ONE transitions iscovered
+		description "a region is covered if at least one of its transitions is covered"
+	},
+	context Transition{
+		covers source, target, constraint, triggers
+		description "if a transition is covered, its source state, target state, constraint, and triggers are also covered"
+	},
+	//if a constraint is covered, its expression is also covered
+	context BooleanConstraint{
+		covers expression
+	},
+	context IntegerConstraint{
+		covers expression
+	},
+	context StringConstraint{
+		covers expression
+	},
+	context Trigger{
+		covers eventType
+		description "if a trigger is covered, its EventType is also covered"
+	},
+	context SignalEventType{
+		covers signal
+		description "if a SignalEventType is covered, its Signal is also covered"
+	},
+	context CallEventType{
+		covers operation
+		description "if a CallEventType is covered, its Operation is also covered"
+	}
+}

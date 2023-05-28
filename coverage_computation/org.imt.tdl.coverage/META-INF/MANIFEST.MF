@@ -16,14 +16,15 @@ Import-Package: DSLSpecificCoverage,
  org.eclipse.emf.ecoretools.ale,
  org.eclipse.gemoc.trace.commons.model.trace,
  org.osgi.framework;version="1.10.0"
-Export-Package: org.imt.tdl.coverage,
- org.imt.tdl.coverage.dslSpecific,
+Export-Package: DSLSpecificCoverage,
+ DSLSpecificCoverage.impl,
+ DSLSpecificCoverage.util,
  TDLTestCoverage,
  TDLTestCoverage.impl,
  TDLTestCoverage.util,
- DSLSpecificCoverage,
- DSLSpecificCoverage.impl,
- DSLSpecificCoverage.util
+ org.imt.tdl.coverage.computation,
+ org.imt.tdl.coverage.dslSpecific,
+ org.imt.tdl.coverage.report
 Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.common,
  org.eclipse.gemoc.dsl.model,
@@ -35,5 +36,13 @@ Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.edit;bundle-version="2.16.0",
  org.eclipse.ui;bundle-version="3.119.0",
  org.eclipse.emf.transaction,
- org.eclipse.gemoc.xdsmlframework.api
+ org.eclipse.gemoc.xdsmlframework.api,
+ org.eclipse.emf.ecore.editor;bundle-version="2.17.0",
+ org.eclipse.xtext.ui;bundle-version="2.27.0",
+ org.eclipse.gemoc.commons.eclipse;bundle-version="3.3.0",
+ com.google.guava,
+ org.eclipse.ocl;bundle-version="3.16.0",
+ org.eclipse.ocl.ecore;bundle-version="3.16.0",
+ org.imt.tdl.utilities
 Bundle-ActivationPolicy: lazy
+Bundle-Activator: org.imt.tdl.coverage.computation.Activator

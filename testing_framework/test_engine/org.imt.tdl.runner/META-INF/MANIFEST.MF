@@ -16,3 +16,4 @@ Require-Bundle: org.eclipse.gemoc.executionframework.engine,
  org.etsi.mts.tdl.model;bundle-version="1.4.0",
  org.imt.k3tdl.tdlInterpreter;bundle-version="1.0.0",
  org.imt.tdl.testResult
+Bundle-RequiredExecutionEnvironment: JavaSE-11

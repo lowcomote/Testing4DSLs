@@ -1,9 +1,7 @@
 # TAMO: Automatic Test Amplification for Executable Models
-This repository contains the tool of the following paper:
+This repository contains the tool and the evaluation data of the following paper:
 
-Faezeh Khorram, Erwan Bousse, Jean-Marie Mottu, Gerson Sunyé, Pablo Gómez-Abajo, Pablo C.Cañizares, Esther Guerra, and Juan de Lara. 2022. Automatic Test Amplification for Executable Models. In *ACM/IEEE 25th International Conference on Model Driven Engineering Languages and Systems*, October 23–28, 2022, Montreal, Canada.
-
-The paper is recently accepted and you can find its preprint from [this link](https://hal.archives-ouvertes.fr/hal-03745034).
+Faezeh Khorram, Erwan Bousse, Jean-Marie Mottu, Gerson Sunyé, Djamel Eddine Khelladi, Pablo Gómez-Abajo, Pablo C.Cañizares, Esther Guerra, and Juan de Lara. 2023. A Language-Parametric Test Amplification Framework for Executable Domain-Specific Languages. Submitted to the International Journal on Software and Systems Modeling (SoSyM) as an extension of our MODELS'22 paper ([link to the paper](https://dl.acm.org/doi/10.1145/3550355.3552451)).
 
 ## Introduction
 Behavioral models are important assets that must be thoroughly verified early in the design process. This can be achieved with manually-written test cases that embed carefully hand-picked domain-specific input data. 
@@ -12,39 +10,51 @@ In our previous work, we proposed a testing framework providing facilities to wr
 Manually-written test cases may not always reach the desired level of quality, such as high coverage or being able to localize faults efficiently. *Test amplification* is an interesting emergent approach to improve a test suite by automatically generating new test cases out of existing manually-written ones. 
 There are ad-hoc test amplification solutions for a few programming languages, such as DSpot for Java [[2]](https://github.com/STAMP-project/dspot/).
 
-In this work, we propose an automated and generic approach for amplifying the test cases of behavioral models. Given an executable DSL, a conforming behavioral model, and an existing test suite, the proposed approach generates new regression test cases in three steps: 
+In this work, we propose an automated and generic process for amplifying the test cases of behavioral models. Given an executable DSL, a conforming behavioral model, and an existing test suite, the proposed approach generates new regression test cases in three steps: 
 (i) generating new test inputs by applying a set of generic modifiers on the existing test inputs; 
 (ii) running the model under test with new inputs and generating assertions from the execution traces; and 
-(iii) selecting the new test cases that increase the mutation score. 
+(iii) selecting the new test cases that increase the initial test quality in terms of both mutation score and coverage. 
+We also propose a textual DSL to control and configure the test amplification process.
+Moreover, to facilitate the application of mutation analysis, we propose an automatic approach for the generation of mutation operators for a given xDSL.
 
+The proposed test amplification framework for xDSLs:
 <p align="center">
-    <img src="Screenshots/Overview.jpg"  width="40%" height="40%">
+    <img src="Screenshots/Overview.jpg"  width="45%" height="45%">
+</p>
+
+The proposed test amplification process:
+<p align="center">
+    <img src="Screenshots/Process.png"  width="40%" height="40%">
 </p>
 
 This repository contains our test amplification tool built atop the Eclipse GEMOC Studio.
-We also performed an empirical study of the tool and all the materials are provided in this repository. In the experiment, we applied the approach to 71 test suites written for models conforming to two different DSLs, and for 67 of the 71 cases, it successfully improved the mutation score between 3.17% and 54.11% depending on the initial setup.
+We also performed an empirical study of the tool and all the materials are provided in this repository. In the experiment, we applied the approach to 71 test suites written for models conforming to two different DSLs.
 
-## Assumptions
-In the current version of TDL test amplification, we consider the following assumptions:
-1. a TDL test case (i.e., TestDescription element) is a sequence of TDL Message elements exchanged between the reactiveGates
-2. the test data exchanged by TDL Messages are event instances conforming to the behavioral interface of the xDSL
-
-- Message.argument (dataInstanceUse.dataInstance) = event instance
-- Message.argument.parameterBinding.parameter = event parameter
-- Message.argument.parameterBinding.dataUse.dataInstance = EObject (value of the event parameter)
-
-3. assertion generation is performed by analyzing the execution trace of the mutated tests ->
-	it considers the xModel under test is correct and the newly generated tests are indeed useful for regression testing
-	
 ## Overview
-*AmplificationTool*: 
-- the eclipse plugins of our test amplification tool: `org.imt.tdl.amplificaiton`, `org.imt.tdl.mutation`
-- the plugins of our testing framework that are required for the amplification tool (To access the latest version of them, use the [main repository](https://gitlab.univ-nantes.fr/naomod/faezeh-public/xtdl)).
+1.	*Tool*: 
+- *amplification_tool*: the plugins of our test amplification tool (`org.imt.tdl.amplificaiton`) and the implementation of the AMPC DSL which is used for the configuration of the test amplification process.
+- *testing_tool*: the plugins of our testing framework that are the basis for the amplification tool (To access the latest version of them, use the [main repository](https://github.com/lowcomote/Testing4DSLs)).
+- *coverage_tool*: the plugins for the model element coverage computation
+- *mutation_tool*: the plugins for the mutation analysis 
+2.	*xdsls*: the implementation of two Executable Domain-Specific Languages (xDSLs) of our case study, including *xPSSM* and *xArduino*. The implementation of each involves five projects:
+
+- <u>Abstract Syntax</u>: containing the `Ecore` metamodel of the xDSL and the java code generated from it using the `.genmodel` file
+- <u>Operational Semantics</u>: containing the interpreter of the xDSL implemented in `Xtend`
+- <u>Behavioral Interface</u>: containing a `.bi` file that is the interface of the xDSL and a java class that do the setups, so GEMOC engines can find and use the interface 
+- <u>Executable DSL</u>: containing a `.dsl` file which specifies the name of the xdsl, the path to the `.ecore` file, the list of execution rules of the interpreter, and the id of the behavioral interface project
+- <u>Coverage rules</u>: containing a '.cov' file which specializes the coverage computation for the xDSL
+- <u>Mutation Operators</u>: containing a `.mutator` file which includes the mutation operators defined for the xDSL using [WODEL language](https://gomezabajo.github.io/Wodel/)
+
+ **NOTE**: Currently, we do not provide any graphical syntax for the xDSLs.
+
+3.	*xmodels&tests*: the executable models conforming to each xDSL, a set of mutants generated for each of them (by applying the provided mutation operators using WODEL mutant generator), and a test project containing a manually-written test suite and the test amplification result including the mutation analysis report, the amplified test suite, and the test amplification report.
+
+4.	*evaluationResult*: Excel files containing detailed data of the paper’s evaluation and the result of our evaluation for RQ4. 
 
 ## Setup
 **Requirements**: 
 - Operating System: Windows 10
-- Java 16
+- Java 11
 - GEMOC Studio Version 3.5.0: https://gemoc.org/download.html
 - TDL: https://tdl.etsi.org/eclipse/latest/
 

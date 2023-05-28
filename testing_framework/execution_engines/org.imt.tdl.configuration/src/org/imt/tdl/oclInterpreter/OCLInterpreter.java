@@ -29,7 +29,7 @@ public class OCLInterpreter {
 	private ArrayList<EObject> resultAsObject;
 	private ArrayList<String> resultAsString;
 
-	public void setUp() {
+	public OCLInterpreter() {
 		ocl = OCL.newInstance(EcoreEnvironmentFactory.INSTANCE);
 		oclHelper = ocl.createOCLHelper();
 	}

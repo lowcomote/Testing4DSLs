@@ -25,10 +25,13 @@
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="coverageStatus" lowerBound="1"
         eType="#//CoverageStatus"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relatedObjectCoverageStatus"
+        upperBound="-1" eType="#//ModelObjectCoverageStatus" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="CoverageStatus">
     <eLiterals name="COVERED"/>
     <eLiterals name="NOTCOVERED" value="1"/>
-    <eLiterals name="NOTCOVERABLE" value="2"/>
+    <eLiterals name="PARTLYCOVERED" value="2"/>
+    <eLiterals name="NOSTATUS" value="3" literal="NOSTATUS"/>
   </eClassifiers>
 </ecore:EPackage>

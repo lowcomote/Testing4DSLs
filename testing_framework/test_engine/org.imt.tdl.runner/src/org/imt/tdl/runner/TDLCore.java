@@ -1,8 +1,9 @@
 package org.imt.tdl.runner;
 
 import org.etsi.mts.tdl.Package;
+
 import org.etsi.mts.tdl.TestDescription;
-import org.imt.k3tdl.k3dsa.TestDescriptionAspect;
+import org.imt.k3tdl.interpreter.TestDescriptionAspect;
 import org.imt.tdl.testResult.TDLTestCaseResult;
 
 public class TDLCore {
@@ -13,7 +14,8 @@ public class TDLCore {
 		artifactPath = artifactPath.replace("\\", "/");
 		System.out.println("\\Model under test: " + artifactPath);
 		for (int i=0; i<testPackage.getPackagedElement().size(); i++) {
-			if (testPackage.getPackagedElement().get(i) instanceof TestDescription testCase) {
+			if (testPackage.getPackagedElement().get(i) instanceof TestDescription) {
+				TestDescription testCase = (TestDescription) testPackage.getPackagedElement().get(i);
 				System.out.println("Test case: " + testCase.getName());
 				TDLTestCaseResult verdict = TestDescriptionAspect.executeTestCase(testCase, artifactPath);
 				if (verdict.getValue().contains("FAIL")) {
