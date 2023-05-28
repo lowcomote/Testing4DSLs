@@ -41,7 +41,7 @@ public class FilterByCoverage implements ITestSelector{
 		PackageAspect.initializeModel(testSuite, null);
 		PackageAspect.main(testSuite);
 		TDLCoverageUtil.getInstance().runCoverageComputation();
-		tsCoverageReport = TDLCoverageUtil.getInstance().getTestSuiteCoverage().getTsCoverageRepot(TDLCoverageUtil.DSLSPECIFICCOVERAGE);
+		tsCoverageReport = TDLCoverageUtil.getInstance().getTestSuiteCoverage().getTsCoverageRepot(TDLCoverageUtil.DSL_SPECIFIC_COVERAGE);
 		tsObjectCoverageStatus = tsCoverageReport.getObjectCoverageStatus();
 		numOfCoveredElements = (int) tsObjectCoverageStatus.stream()
 				.filter(c -> c == TDLCoverageUtil.COVERED).count();
@@ -55,7 +55,7 @@ public class FilterByCoverage implements ITestSelector{
 		testCase_newCoveredObjs.put(testCase.getName(), new ArrayList<>());
 		TDLTestCaseCoverage coverageRunner = TestDescriptionAspect.testCaseCoverage(testCase);
 		coverageRunner.calculateTCCoverage();
-		TestCoverageReport tcCoverageReport = coverageRunner.getTcCoverageRepot(TDLCoverageUtil.DSLSPECIFICCOVERAGE);
+		TestCoverageReport tcCoverageReport = coverageRunner.getTcCoverageRepot(TDLCoverageUtil.DSL_SPECIFIC_COVERAGE);
 		List<String> tcObjectCoverageStatus = tcCoverageReport.getObjectCoverageStatus();
 		boolean scoreImproved = false;
 		for (int i=0; i<tsObjectCoverageStatus.size();i++) {
