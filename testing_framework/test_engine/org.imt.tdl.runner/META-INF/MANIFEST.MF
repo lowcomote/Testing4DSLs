@@ -17,3 +17,4 @@ Require-Bundle: org.eclipse.gemoc.executionframework.engine,
  org.imt.k3tdl.tdlInterpreter;bundle-version="1.0.0",
  org.imt.tdl.testResult
 Automatic-Module-Name: org.imt.tdl.runner
+Bundle-RequiredExecutionEnvironment: JavaSE-11

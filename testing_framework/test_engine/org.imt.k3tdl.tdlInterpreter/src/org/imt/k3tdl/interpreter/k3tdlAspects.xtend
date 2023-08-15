@@ -1,6 +1,7 @@
 package org.imt.k3tdl.interpreter
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
+
 import fr.inria.diverse.k3.al.annotationprocessor.InitializeModel
 import fr.inria.diverse.k3.al.annotationprocessor.Main
 import fr.inria.diverse.k3.al.annotationprocessor.Step
@@ -12,9 +13,9 @@ import org.etsi.mts.tdl.Package
 import org.etsi.mts.tdl.TestConfiguration
 import org.etsi.mts.tdl.TestDescription
 import org.imt.tdl.configuration.EngineFactory
-import org.imt.tdl.coverage.TDLCoverageUtil
-import org.imt.tdl.coverage.TDLTestCaseCoverage
-import org.imt.tdl.coverage.TDLTestSuiteCoverage
+import org.imt.tdl.coverage.computation.TDLCoverageUtil
+import org.imt.tdl.coverage.computation.TDLTestCaseCoverage
+import org.imt.tdl.coverage.computation.TDLTestSuiteCoverage
 import org.imt.tdl.testResult.TDLTestCaseResult
 import org.imt.tdl.testResult.TDLTestResultUtil
 import org.imt.tdl.testResult.TDLTestSuiteResult

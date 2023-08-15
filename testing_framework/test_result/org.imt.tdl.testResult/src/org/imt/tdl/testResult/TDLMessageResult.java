@@ -24,22 +24,24 @@ public class TDLMessageResult {
 		this.message = message;
 		this.value = value;
 		if (value == TDLTestResultUtil.INCONCLUSIVE) {
-			failure = true;
+			this.failure = true;
 		}
 		this.description = description;
 		this.oracle = oracle;
 	}
-	
 	public String getTdlMessageId() {
-		return tdlMessageId != null ? tdlMessageId : "NULL";
+		if (this.tdlMessageId == null) {
+			return "NULL";
+		}
+		return this.tdlMessageId;
 	}
 	
 	public void setTdlMessageId(String name) {
-		tdlMessageId = name;
+		this.tdlMessageId = name;
 	}
 	
 	public String getValue() {
-		return value;
+		return this.value;
 	}
 	
 	public void setValue(String value) {
@@ -47,7 +49,10 @@ public class TDLMessageResult {
 	}
 	
 	public String getDescription() {
-		return description != null ? description : "NULL";
+		if (this.description == null) {
+			return "NULL";
+		}
+		return this.description;
 	}
 	
 	public void setDescription(String description) {
@@ -55,7 +60,7 @@ public class TDLMessageResult {
 	}
 	
 	public HashMap<DataUse, DataUse> getOracle() {
-		return oracle;
+		return this.oracle;
 	}
 	
 	public void setOracle(HashMap<DataUse, DataUse> oracle) {
@@ -69,11 +74,9 @@ public class TDLMessageResult {
 	public void setFailure(boolean failure) {
 		this.failure = failure;
 	}
-	
 	public Message getMessage() {
 		return message;
 	}
-	
 	public void setMessage(Message message) {
 		this.message = message;
 	}

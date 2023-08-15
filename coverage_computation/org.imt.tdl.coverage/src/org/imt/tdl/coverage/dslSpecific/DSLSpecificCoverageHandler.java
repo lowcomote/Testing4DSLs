@@ -9,11 +9,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gemoc.dsl.Dsl;
-import org.imt.tdl.coverage.TDLCoverageUtil;
+
+import org.imt.tdl.coverage.computation.TDLCoverageUtil;
 
 public class DSLSpecificCoverageHandler {
 	
-	private static final String COVERAGE_POINT_ID = "org.imt.tdl.coverage.extensionpoint.DSLSpecificCoverage";
+	private static final String COVERAGE_POINT_ID = "coverage.extensionpoint.DSLSpecificCoverage";
 	private static final String COVERAGE_ID = "coverageId";
 	
 	public IDSLSpecificCoverage getDSLSpecificCoverage() {
@@ -35,7 +36,8 @@ public class DSLSpecificCoverageHandler {
 	}
 
 	private String getDSLCoverageComputationId(Path dslFilePath) {
-		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createURI(dslFilePath.toString()), true);
+		String path = dslFilePath.toString().replace("\\\\", "/");
+		Resource dslRes = (new ResourceSetImpl()).getResource(URI.createPlatformPluginURI(path, false), true);
 		Dsl dsl = (Dsl)dslRes.getContents().get(0);
 		return dsl.getEntry(COVERAGE_ID) != null ? dsl.getEntry(COVERAGE_ID).getValue().toString() : null;
 	}

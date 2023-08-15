@@ -15,12 +15,12 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 
-import DSLSpecificCoverage.ConditionalIgnore;
 import DSLSpecificCoverage.Context;
 import DSLSpecificCoverage.CoverageByContent;
 import DSLSpecificCoverage.CoverageOfReferenced;
 import DSLSpecificCoverage.DSLSpecificCoveragePackage;
 import DSLSpecificCoverage.DomainSpecificCoverage;
+import DSLSpecificCoverage.LimitedIgnore;
 
 /**
  * This class contains custom scoping description.
@@ -29,6 +29,7 @@ import DSLSpecificCoverage.DomainSpecificCoverage;
  * on how and when to use it.
  */
 public class COVScopeProvider extends AbstractCOVScopeProvider {
+	
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		if (reference.equals(DSLSpecificCoveragePackage.eINSTANCE.getDomainSpecificCoverage_Metamodel())) {
@@ -48,14 +49,14 @@ public class COVScopeProvider extends AbstractCOVScopeProvider {
 												.collect(Collectors.toCollection(BasicEList::new));
 			return Scopes.scopeFor(allClasses);
 		}
-		else if (reference.equals(DSLSpecificCoveragePackage.eINSTANCE.getConditionalIgnore_ContainerType())) {
-		Collection<EClass> allClasses = ((DomainSpecificCoverage)((Context)((ConditionalIgnore) context).eContainer()).eContainer())
+		else if (reference.equals(DSLSpecificCoveragePackage.eINSTANCE.getLimitedIgnore_ContainerMetaclass())) {
+		Collection<EClass> allClasses = ((DomainSpecificCoverage)((Context)((LimitedIgnore) context).eContainer()).eContainer())
 											.getMetamodel().getEClassifiers().stream()
 											.filter(EClass.class::isInstance)
 											.map(EClass.class::cast)
 											.collect(Collectors.toCollection(BasicEList::new));
 		return Scopes.scopeFor(allClasses);
-	}
+		}
 		else if (reference.equals(DSLSpecificCoveragePackage.eINSTANCE.getCoverageOfReferenced_Reference())) {
 			EList<EReference> references = ((Context)((CoverageOfReferenced) context).eContainer())
 												.getMetaclass().getEAllReferences();
@@ -68,4 +69,5 @@ public class COVScopeProvider extends AbstractCOVScopeProvider {
 		}
 		return super.getScope(context, reference);
 	}
+	
 }

@@ -218,7 +218,8 @@ public class ALEEngineLauncher extends AbstractEngine{
 	}
 	
 	public String provideMethodLabel(Object element) {
-		if(element instanceof Method mtd) {
+		if(element instanceof Method) {
+			Method mtd = (Method) element;
 			ExtendedClass base = (ExtendedClass) mtd.eContainer();
 			if(base.getBaseClass() != mtd.getOperationRef().getEContainingClass()) {
 				return provideClassLabel(base.getBaseClass()) + "::" + mtd.getOperationRef().getName();
@@ -231,7 +232,8 @@ public class ALEEngineLauncher extends AbstractEngine{
 	}
 	
 	public String provideClassLabel(Object element) {
-		if(element instanceof ENamedElement namedElement){
+		if(element instanceof ENamedElement){
+			ENamedElement namedElement = (ENamedElement) element;
 			StringBuilder sb = new StringBuilder();
 			if(namedElement.eContainer() != null){
 				sb.append(provideClassLabel(namedElement.eContainer()));

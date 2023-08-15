@@ -52,14 +52,14 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.imt.tdl.coverage.TDLCoverageUtil;
+import org.imt.tdl.coverage.computation.TDLCoverageUtil;
 import org.imt.tdl.faultLocalization.SBFLMeasures;
 import org.imt.tdl.faultLocalization.SuspiciousnessRanking;
 import org.imt.tdl.testResult.TDLTestResultUtil;
 
 public class TDLSBFLView extends ViewPart{
 	
-	public static final String ID = "org.imt.tdl.rt.ui.sbflView"; //$NON-NLS-1$
+	public static final String ID = "rt.ui.sbflView"; //$NON-NLS-1$
 	
 	private TreeViewer m_treeViewer;
 	
@@ -73,7 +73,7 @@ public class TDLSBFLView extends ViewPart{
 	
 	@Override
 	public void createPartControl(Composite parent) {
-		if (TDLCoverageUtil.getInstance().getTestSuiteCoverage().getTsCoveragePercentage() == 0) {
+		if (!TDLCoverageUtil.getInstance().getTestSuiteCoverage().isCoverageComputed()) {
 			TDLCoverageUtil.getInstance().runCoverageComputation();
 		}
 		SuspiciousnessRanking suspComputing = new SuspiciousnessRanking();
@@ -189,8 +189,8 @@ public class TDLSBFLView extends ViewPart{
 				if (item == null || item.getData() == null) {
 					//do nothing
 				}
-				else if (item.getData() instanceof SBFLMeasures sbflMeasure) {
-					EObject eobjectToOpen = sbflMeasure.getModelObject();		
+				else if (item.getData() instanceof SBFLMeasures) {
+					EObject eobjectToOpen = ((SBFLMeasures) item.getData()).getModelObject();		
 					IFile fileToOpen = ResourcesPlugin.getWorkspace().getRoot().getFile(
 							new Path(eobjectToOpen.eResource().getURI().toPlatformString(true)));
 					IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().
@@ -198,13 +198,13 @@ public class TDLSBFLView extends ViewPart{
 					IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 					try {
 						IEditorPart editor = page.openEditor(new FileEditorInput(fileToOpen), desc.getId());
-						if (editor instanceof EcoreEditor ecoreEditor) {
-							TreeViewer tviewer = (TreeViewer) ecoreEditor.getViewer();
+						if (editor instanceof EcoreEditor) {
+							TreeViewer tviewer = (TreeViewer) ((EcoreEditor) editor).getViewer();
 							ResourceSet resSet =(ResourceSet) tviewer.getInput();
 							EObject eobjectToOpen2 = resSet.getResources().get(0).getEObject(
 									eobjectToOpen.eResource().getURIFragment(eobjectToOpen));
 							tviewer.setSelection(new StructuredSelection(eobjectToOpen2));
-						}else if (editor instanceof XtextEditor xtextEditor) {
+						}else if (editor instanceof XtextEditor) {
 							//TODO: how to reveal the object in the xtext editor
 						}
 					} catch (PartInitException e) {
@@ -234,38 +234,38 @@ public class TDLSBFLView extends ViewPart{
 			column.setWidth(60);
 		}
 		
-		TreeColumn NCF = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
-		NCF.setAlignment(SWT.CENTER);
-		NCF.setText("NCF");
-		NCF.setWidth(50);
-		TreeColumn NUF = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
-		NUF.setAlignment(SWT.CENTER);
-		NUF.setText("NUF");
-		NUF.setWidth(50);
-		TreeColumn NCS = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
-		NCS.setAlignment(SWT.CENTER);
-		NCS.setText("NCS");
-		NCS.setWidth(50);
-		TreeColumn NUS = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
-		NUS.setAlignment(SWT.CENTER);
-		NUS.setText("NUS");
-		NUS.setWidth(50);
-		TreeColumn NC = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
-		NC.setAlignment(SWT.CENTER);
-		NC.setText("NC");
-		NC.setWidth(50);
-		TreeColumn NU = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
-		NU.setAlignment(SWT.CENTER);
-		NU.setText("NU");
-		NU.setWidth(50);
-		TreeColumn NS = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
-		NS.setAlignment(SWT.CENTER);
-		NS.setText("NS");
-		NS.setWidth(50);
-		TreeColumn NF = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
-		NF.setAlignment(SWT.CENTER);
-		NF.setText("NF");
-		NF.setWidth(50);
+//		TreeColumn NCF = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
+//		NCF.setAlignment(SWT.CENTER);
+//		NCF.setText("NCF");
+//		NCF.setWidth(50);
+//		TreeColumn NUF = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
+//		NUF.setAlignment(SWT.CENTER);
+//		NUF.setText("NUF");
+//		NUF.setWidth(50);
+//		TreeColumn NCS = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
+//		NCS.setAlignment(SWT.CENTER);
+//		NCS.setText("NCS");
+//		NCS.setWidth(50);
+//		TreeColumn NUS = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
+//		NUS.setAlignment(SWT.CENTER);
+//		NUS.setText("NUS");
+//		NUS.setWidth(50);
+//		TreeColumn NC = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
+//		NC.setAlignment(SWT.CENTER);
+//		NC.setText("NC");
+//		NC.setWidth(50);
+//		TreeColumn NU = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
+//		NU.setAlignment(SWT.CENTER);
+//		NU.setText("NU");
+//		NU.setWidth(50);
+//		TreeColumn NS = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
+//		NS.setAlignment(SWT.CENTER);
+//		NS.setText("NS");
+//		NS.setWidth(50);
+//		TreeColumn NF = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
+//		NF.setAlignment(SWT.CENTER);
+//		NF.setText("NF");
+//		NF.setWidth(50);
 		
 		TreeColumn susp = new TreeColumn(addressTree, SWT.LEFT | SWT.BOLD);
 		susp.setAlignment(SWT.CENTER);
@@ -296,8 +296,8 @@ public class TDLSBFLView extends ViewPart{
 			if (parentElement instanceof List<?>) {
 				return ((List<?>) parentElement).toArray();
 			}
-			if (parentElement instanceof SuspiciousnessRanking suspRanking) {
-				return suspRanking.getElementsSBFLMeasures().toArray();
+			if (parentElement instanceof SuspiciousnessRanking) {
+				return ((SuspiciousnessRanking) parentElement).getElementsSBFLMeasures().toArray();
 			}
 			return new Object[0]; 
 		}
@@ -318,8 +318,8 @@ public class TDLSBFLView extends ViewPart{
 			if (element instanceof List<?>) {
 				return ((List<?>) element).size() > 0;
 			}
-			if (element instanceof SuspiciousnessRanking suspRanking) {
-				return suspRanking.getElementsSBFLMeasures().size() > 0;
+			if (element instanceof SuspiciousnessRanking) {
+				return ((SuspiciousnessRanking) element).getElementsSBFLMeasures().size() > 0;
 			}
 			return false;
 		}
@@ -359,7 +359,8 @@ public class TDLSBFLView extends ViewPart{
 
 		@Override
 		public Color getBackground(Object element, int columnIndex) {
-			if (element instanceof SBFLMeasures sbflMeasures) {
+			if (element instanceof SBFLMeasures) {
+				 SBFLMeasures sbflMeasures =  (SBFLMeasures) element;
 				if (columnIndex > 1 && columnIndex < sbflMeasures.getCoverage().size() + 2) {
 					//the test case coverages
 					String tcEntry = sbflMeasures.getCoverage().get(columnIndex-2);
@@ -382,14 +383,15 @@ public class TDLSBFLView extends ViewPart{
 		@Override
 		public String getColumnText(Object element, int columnIndex) {
 			String columnText = "";
-			if (element instanceof String result) {
+			if (element instanceof String) {
 				switch (columnIndex) {
 				case 0:
-					columnText = result;
+					columnText = (String) element;
 					break;
 				}
 			}
-			if (element instanceof SBFLMeasures sbflMeasures) {
+			if (element instanceof SBFLMeasures) {
+				SBFLMeasures sbflMeasures =  (SBFLMeasures) element;
 				int sbflOperandsStartIndex = (sbflMeasures.getCoverage().size() + 2);
 				if (columnIndex == 0 && sbflMeasures.getMetaclass() != null) {
 					columnText = sbflMeasures.getMetaclass().getName();
@@ -416,38 +418,38 @@ public class TDLSBFLView extends ViewPart{
 					if (sbflMeasures.getMetaclass() == null) {
 						columnText = "";
 					}else {
+//						if (columnIndex == sbflOperandsStartIndex) {
+//							columnText = sbflMeasures.getNCF() + "";
+//						}
+//						else if (columnIndex == sbflOperandsStartIndex + 1) {
+//							columnText = sbflMeasures.getNUF() + "";
+//						}
+//						else if (columnIndex == sbflOperandsStartIndex + 2) {
+//							columnText = sbflMeasures.getNCS() + "";
+//						}
+//						else if (columnIndex == sbflOperandsStartIndex + 3) {
+//							columnText = sbflMeasures.getNUS() + "";
+//						}
+//						else if (columnIndex == sbflOperandsStartIndex + 4) {
+//							columnText = sbflMeasures.getNC() + "";
+//						}
+//						else if (columnIndex == sbflOperandsStartIndex + 5) {
+//							columnText = sbflMeasures.getNU() + "";
+//						}
+//						else if (columnIndex == sbflOperandsStartIndex + 6) {
+//							columnText = sbflMeasures.getNS() + "";
+//						}
+//						else if (columnIndex == sbflOperandsStartIndex + 7) {
+//							columnText = sbflMeasures.getNF() + "";
+//						}
 						if (columnIndex == sbflOperandsStartIndex) {
-							columnText = sbflMeasures.getNCF() + "";
-						}
-						else if (columnIndex == sbflOperandsStartIndex + 1) {
-							columnText = sbflMeasures.getNUF() + "";
-						}
-						else if (columnIndex == sbflOperandsStartIndex + 2) {
-							columnText = sbflMeasures.getNCS() + "";
-						}
-						else if (columnIndex == sbflOperandsStartIndex + 3) {
-							columnText = sbflMeasures.getNUS() + "";
-						}
-						else if (columnIndex == sbflOperandsStartIndex + 4) {
-							columnText = sbflMeasures.getNC() + "";
-						}
-						else if (columnIndex == sbflOperandsStartIndex + 5) {
-							columnText = sbflMeasures.getNU() + "";
-						}
-						else if (columnIndex == sbflOperandsStartIndex + 6) {
-							columnText = sbflMeasures.getNS() + "";
-						}
-						else if (columnIndex == sbflOperandsStartIndex + 7) {
-							columnText = sbflMeasures.getNF() + "";
-						}
-						else if (columnIndex == sbflOperandsStartIndex + 8) {
 							if (sbflMeasures.getSusp().get(sbflMeasures.currentTechnique) == null) {
 								columnText = "";
 							}else {
 								columnText = sbflMeasures.getSusp().get(sbflMeasures.currentTechnique) + "";
 							}	
 						}
-						else if (columnIndex == sbflOperandsStartIndex + 9) {
+						else if (columnIndex == sbflOperandsStartIndex + 1) {
 							if (sbflMeasures.getRank().get(sbflMeasures.currentTechnique) == null) {
 								columnText = "";
 							}else {
@@ -487,7 +489,8 @@ private class ElementFilter extends ViewerFilter {
 		if (elementFilterIndex == -1 || elementFilterIndex == 0) {
 			return true;
 		}else {
-			if (element instanceof SBFLMeasures parameters) {
+			if (element instanceof SBFLMeasures) {
+				SBFLMeasures parameters =  (SBFLMeasures) element;
 				if (parameters.getMetaclass() == null) {
 					return false;
 				}else {

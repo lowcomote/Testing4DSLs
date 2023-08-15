@@ -48,10 +48,11 @@ public class DSLSpecificTypesGenerator {
 			dslSpecificTypesPackage = getDSLSpecificTypesPackage(dslTypesRes);
 			for (int i=0; i<dslSpecificTypesPackage.getPackagedElement().size();i++) {
 				PackageableElement p = dslSpecificTypesPackage.getPackagedElement().get(i);
-				if (p instanceof DataType dataType) {
-					dslSpecificTypes.put(p.getName().toLowerCase(), dataType);
+				if (p instanceof DataType) {
+					dslSpecificTypes.put(p.getName().toLowerCase(), (DataType)p);
 					//recognizing dynamic data types for being used as model state
-					if (p instanceof StructuredDataType sDataType) {
+					if (p instanceof StructuredDataType) {
+						StructuredDataType sDataType = (StructuredDataType) p;
 						if (isDynamic(sDataType)) {
 							dynamicTypes.add(sDataType);
 						}else if (sDataType.getExtension() != null) {
@@ -90,7 +91,8 @@ public class DSLSpecificTypesGenerator {
 	}
 
 	private boolean isDynamic(DataType dataType) {
-		if (dataType instanceof StructuredDataType type) {
+		if (dataType instanceof StructuredDataType) {
+			StructuredDataType type = (StructuredDataType) dataType;
 			for (int j=0; j < type.getAnnotation().size(); j++){
 				String annotation = type.getAnnotation().get(j).getKey().getName().toString();
 				if (annotation.contains("dynamic")||annotation.contains("aspect")) {

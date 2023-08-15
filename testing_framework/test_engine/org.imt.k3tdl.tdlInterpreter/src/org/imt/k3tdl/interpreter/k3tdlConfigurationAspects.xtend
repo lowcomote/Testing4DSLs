@@ -99,7 +99,7 @@ class GateInstanceAspect {
 			}	
 			var String status = null
 			var ArrayList<EObject> matchedMUTElements = new ArrayList<EObject>();
-			if (arg.item !== null && arg.item.size > 0){//there is a list of objects in the expected output
+			if (!arg.item.nullOrEmpty){//there is a list of objects in the expected output
 				for (i : 0 ..<arg.item.size){
 					val DataInstanceUse data = (arg.item.get(i) as DataInstanceUse)
 					val EObject matchedObject = data.getMatchedMUTElement(MUTResource as Resource, true)		
@@ -138,7 +138,7 @@ class GateInstanceAspect {
 	def String sendArgument2sut(DataUse argument) {
 		if (argument instanceof DataInstanceUse) {
 			var arg = (argument as DataInstanceUse)
-			if (arg.item !== null && arg.item.size > 0){
+			if (!arg.item.nullOrEmpty){
 				return _self.setModelState(arg);
 			}else if (PackageAspect.dslProcessor.isConcreteEcoreType(arg.dataInstance.dataType.name)){//request for setting the model state
 				return _self.setModelState(arg);
@@ -186,7 +186,7 @@ class GateInstanceAspect {
 		//get the current MUTResource
 		var MUTResource = _self.gateLauncher.MUTResource;
 		var String status = null
-		if (arg.item !== null && arg.item.size > 0){
+		if (!arg.item.nullOrEmpty){
 			for (i : 0 ..<arg.item.size){
 				status = (arg.item.get(i) as DataInstanceUse).setMatchedMUTElement(MUTResource)
 				if (status.contains(TDLTestResultUtil.FAIL)){

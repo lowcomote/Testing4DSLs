@@ -1,13 +1,21 @@
 package org.imt.tdl.testResult.persistence;
 
-import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Optional;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.gemoc.commons.eclipse.emf.URIHelper;
 import org.eclipse.gemoc.xdsmlframework.api.core.IExecutionContext;
 import org.eclipse.gemoc.xdsmlframework.api.core.IExecutionEngine;
 import org.eclipse.gemoc.xdsmlframework.api.engine_addon.IEngineAddon;
@@ -27,16 +35,41 @@ import org.imt.tdl.testResult.TDLTestResultUtil;
 
 public class TestReportPersistence implements IEngineAddon{
 	
-	String pathToReportsFiles;
+	static String reportFolderName = "test-report";
+	IPath path2reportsFolder;
 	
 	@Override
 	public void engineStopped(IExecutionEngine<?> engine) {
-		IExecutionContext<?, ?, ?> _executionContext = engine.getExecutionContext();
-		pathToReportsFiles = _executionContext.getWorkspace().getExecutionPath().toString();
-		Resource testSutieResource = getCopyOfTestSuite(_executionContext);
+		if (TDLTestResultUtil.getInstance().getTestSuiteResult() == null) {
+		   System.out.println("There is no test execution result to be saved. The test execution is interrupted due to some errors.");
+	    }
+		else {
+			saveTestReport(engine.getExecutionContext());
+		}
+	}
 
+	private void saveTestReport(IExecutionContext<?, ?, ?> _executionContext) {
+		URI modelURI = _executionContext.getResourceModel().getURI();
+		IPath testFilePath = new Path(URIHelper.removePlatformScheme(modelURI));
+		IPath _projectPath = testFilePath.removeLastSegments(testFilePath.segmentCount() - 1);
+		IPath _executionTopParentPath = _projectPath.append(reportFolderName);		
+		String folderNameWithTime = generateSpecificExecutionFolderName();
+		path2reportsFolder = _executionTopParentPath.append(folderNameWithTime);
+
+		try {
+			createExecutionFolders();
+			copyFileTo(testFilePath, path2reportsFolder);
+		} catch (CoreException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		URI copiedTestSuiteURI = URI.createPlatformResourceURI(path2reportsFolder.toString(), false)
+				.appendSegment(testFilePath.lastSegment());
+		Resource testSuiteResource= (new ResourceSetImpl()).getResource(copiedTestSuiteURI, true);
+		
 	   //create test result according to the TDLTestReport.ecore structure
-	   Package copiedTestSuite = (Package) testSutieResource.getContents().get(0);
+	   Package copiedTestSuite = (Package) testSuiteResource.getContents().get(0);
 	   TestSuiteResult testSuiteResult = TDLTestReportFactory.eINSTANCE.createTestSuiteResult();
 	   testSuiteResult.setTestSuite(copiedTestSuite);
 	   for (TDLTestCaseResult tcResultObject : TDLTestResultUtil.getInstance().getTestSuiteResult().getTestCaseResults()) {
@@ -79,7 +112,8 @@ public class TestReportPersistence implements IEngineAddon{
 	   }
 	   
 	   //create a resource for the test result
-	   URI testReportURI = URI.createURI(pathToReportsFiles + File.separator + "testReport.xmi", false);
+	   URI testReportURI = URI.createPlatformResourceURI(path2reportsFolder.toString(), false)
+				.appendSegment("testReport.xmi");
 	   Resource testResultResource = (new ResourceSetImpl()).createResource(testReportURI);
 	   testResultResource.getContents().add(testSuiteResult);
 	   //saving resources
@@ -87,15 +121,32 @@ public class TestReportPersistence implements IEngineAddon{
 			testResultResource.save(null);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	   }
+			e.printStackTrace();
+		}
+	}
+
+	private String generateSpecificExecutionFolderName() {
+		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+		return "/execution-" + timeStamp;
+	}
 		
-	private Resource getCopyOfTestSuite(IExecutionContext<?, ?, ?> _executionContext) {
-		String copiedTestSuitePath = pathToReportsFiles + File.separator 
-				+ _executionContext.getResourceModel().getURI().lastSegment();
-		URI copiedTestSuiteURI = URI.createPlatformResourceURI(copiedTestSuitePath, false);
-		return (new ResourceSetImpl()).getResource(copiedTestSuiteURI, true);
+	private void createExecutionFolders() throws CoreException {
+		createFolder(path2reportsFolder.removeLastSegments(1));
+		createFolder(path2reportsFolder);		
+	}
+
+	private void createFolder(IPath folderPath) throws CoreException {
+		IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder(folderPath);
+		if (!folder.exists()) {
+			folder.create(true, true, null);
+		}
+	}
+	
+	public void copyFileTo(IPath sourceFilePath, IPath destinationFolderPath) throws CoreException 
+	{
+		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(sourceFilePath);
+		IPath destinationFilePath = destinationFolderPath.append(sourceFilePath.lastSegment());
+		file.copy(destinationFilePath, true, null);
 	}
 
 	private Message findEquivalentTDLMessage(TestDescription copiedTestCase, int index) {

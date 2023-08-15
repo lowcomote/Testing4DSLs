@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.imt.tdl.xdsml; singleton:=true
 Automatic-Module-Name: org.imt.tdl.xdsml
 Bundle-Version: 1.0.0
 Bundle-ClassPath: .
-Bundle-RequiredExecutionEnvironment: JavaSE-16
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: org.eclipse.xtend.lib;bundle-version="2.21.0";visibility:="private",
  org.eclipse.xtext.xbase.lib;bundle-version="2.21.0";visibility:="private",
  com.google.guava;bundle-version="0.0.0";visibility:="private",
