@@ -99,7 +99,7 @@ class GateInstanceAspect {
 			}	
 			var String status = null
 			var ArrayList<EObject> matchedMUTElements = new ArrayList<EObject>();
-			if (arg.item !== null && arg.item.size > 0){//there is a list of objects in the expected output
+			if (!arg.item.nullOrEmpty){//there is a list of objects in the expected output
 				for (i : 0 ..<arg.item.size){
 					val DataInstanceUse data = (arg.item.get(i) as DataInstanceUse)
 					val EObject matchedObject = data.getMatchedMUTElement(MUTResource as Resource, true)		
@@ -138,7 +138,7 @@ class GateInstanceAspect {
 	def String sendArgument2sut(DataUse argument) {
 		if (argument instanceof DataInstanceUse) {
 			var arg = (argument as DataInstanceUse)
-			if (arg.item !== null && arg.item.size > 0){
+			if (!arg.item.nullOrEmpty){
 				return _self.setModelState(arg);
 			}else if (PackageAspect.dslProcessor.isConcreteEcoreType(arg.dataInstance.dataType.name)){//request for setting the model state
 				return _self.setModelState(arg);
@@ -160,12 +160,17 @@ class GateInstanceAspect {
 				_self.receivedOutput = _self.gateLauncher.MUTResource
 				return TDLTestResultUtil.PASS + ": The current state of the MUT is retrieved"
 			}else if (arg.dataInstance.dataType.name == OCL_TYPE) {
-				// extracting the query from the argument and sending for validation
-				var context = (argument.argument.get(0).dataUse as DataInstanceUse).
+				//the default context is the root element
+				var context = _self.gateLauncher.MUTResource.contents.get(0)
+				//check if the context object is specified in the test case
+				if (argument.argument.size > 1){
+					context = (argument.argument.get(0).dataUse as DataInstanceUse).
 					getMatchedMUTElement(_self.gateLauncher.MUTResource, true)
-				if (context === null){
-					return TDLTestResultUtil.INCONCLUSIVE + "The context object cannot be found in the MUT";
+					if (context === null){
+						return TDLTestResultUtil.INCONCLUSIVE + "The context object cannot be found in the MUT";
+					}
 				}
+				// extracting the query from the argument and sending for validation
 				var query = argument.argument.get(1).dataUse as LiteralValueUse
 				return _self.gateLauncher.executeOCLCommand(context, query.value)				
 			}else if (arg.dataInstance.dataType.isAcceptedEvent){
@@ -186,7 +191,7 @@ class GateInstanceAspect {
 		//get the current MUTResource
 		var MUTResource = _self.gateLauncher.MUTResource;
 		var String status = null
-		if (arg.item !== null && arg.item.size > 0){
+		if (!arg.item.nullOrEmpty){
 			for (i : 0 ..<arg.item.size){
 				status = (arg.item.get(i) as DataInstanceUse).setMatchedMUTElement(MUTResource)
 				if (status.contains(TDLTestResultUtil.FAIL)){

@@ -45,4 +45,12 @@
             genModel="model/DSLSpecificCoverage.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated TestCoverage -->
+      <package
+            uri="http://coverage.metamodel/TestCoverage"
+            class="TestCoverage.TestCoveragePackage"
+            genModel="model/TestCoverage.genmodel"/>
+   </extension>
+
 </plugin>

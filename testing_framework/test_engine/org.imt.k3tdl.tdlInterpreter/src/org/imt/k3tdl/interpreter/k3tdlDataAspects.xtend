@@ -2,7 +2,6 @@ package org.imt.k3tdl.interpreter
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 
-
 import fr.inria.diverse.k3.al.annotationprocessor.OverrideAspectMethod
 import java.util.ArrayList
 import org.eclipse.emf.common.util.EList
@@ -19,12 +18,14 @@ import org.etsi.mts.tdl.DataUse
 import org.etsi.mts.tdl.LiteralValueUse
 import org.etsi.mts.tdl.Member
 import org.etsi.mts.tdl.MemberAssignment
+import org.etsi.mts.tdl.Package
 import org.etsi.mts.tdl.ParameterBinding
 import org.etsi.mts.tdl.SimpleDataInstance
 import org.etsi.mts.tdl.SpecialValueUse
 import org.etsi.mts.tdl.StaticDataUse
 import org.etsi.mts.tdl.StructuredDataInstance
 import org.etsi.mts.tdl.StructuredDataType
+import org.imt.k3tdl.interpreter.utilities.EObjectFinderUtilities
 import org.imt.tdl.testResult.TDLTestResultUtil
 
 import static extension org.imt.k3tdl.interpreter.DataInstanceAspect.*
@@ -62,6 +63,14 @@ class DataTypeAspect{
 		return false;
 	}
 	
+	
+	def boolean isConcreteEcoreType() {
+		val annotation = _self.annotation.stream.filter(
+			a | a.key.name.equals("abstract")
+		).findFirst
+		return !annotation.isPresent
+	}
+	
 	def boolean isAcceptedEvent() {
 		val annotation = _self.annotation.stream.filter(
 			a | a.key.name.equals("AcceptedEvent")
@@ -86,7 +95,8 @@ class DataTypeAspect{
 @Aspect (className = DataInstance)
 class DataInstanceAspect{
 	public String info = null
-	def EObject getMatchedMUTElement(ArrayList<EObject> rootElement, Resource MUTResource, boolean isAssertion){
+	
+	def ArrayList<EObject> getMatchedMUTElement(ArrayList<EObject> rootElement, boolean isAssertion, Resource MUTResource){
 		
 	}
 	
@@ -110,7 +120,7 @@ class DataInstanceAspect{
 @Aspect (className = SimpleDataInstance)
 class SimpleDataInstanceAspect extends DataInstanceAspect{
 	@OverrideAspectMethod
-	def EObject getMatchedMUTElement(ArrayList<EObject> rootElement, Resource MUTResource, boolean isAssertion){
+	def ArrayList<EObject> getMatchedMUTElement(ArrayList<EObject> rootElement, boolean isAssertion, Resource MUTResource){
 		println("The " + _self.name + " element cannot be found since it has no identifier")
 		_self.info = TDLTestResultUtil.FAIL + ": The " + _self.name + " element cannot be found since it has no identifier"
 		return null;
@@ -118,16 +128,16 @@ class SimpleDataInstanceAspect extends DataInstanceAspect{
 }
 @Aspect (className = StructuredDataInstance)
 class StructuredDataInstanceAspect extends DataInstanceAspect{
-	public ArrayList<EObject> matchedElements = new ArrayList
+	
 	@OverrideAspectMethod
-	def EObject getMatchedMUTElement(ArrayList<EObject> rootElement, Resource MUTResource, boolean isAssertion){
+	def ArrayList<EObject> getMatchedMUTElement(ArrayList<EObject> rootElement, boolean isAssertion, Resource MUTResource){
 		//find matched elements based on the memberAssignments of dataInstance
-		_self.matchedElements.clear
+		var ArrayList<EObject> matchedElements = new ArrayList
 		for (i:0 ..<rootElement.size){	
 			var boolean memberFound = true	
 			try{
 				_self.memberAssignment.forEach[memberAssign |
-					_self.info = memberAssign.isMatchedMember(rootElement.get(i), MUTResource, isAssertion)
+					_self.info = memberAssign.isMatchedMember(rootElement.get(i), isAssertion, MUTResource)
 					if(_self.info.contains(TDLTestResultUtil.FAIL)){
 						throw new InterruptedException()
 					}
@@ -136,15 +146,89 @@ class StructuredDataInstanceAspect extends DataInstanceAspect{
 			    memberFound = false
 			}
 			if (memberFound){
-				_self.matchedElements.add(rootElement.get(i))
+				matchedElements.add(rootElement.get(i))
 			}			
 		}
-		if (_self.matchedElements.empty){
-			return null
-		}
-		return _self.matchedElements.get(0)
+		return matchedElements
 	}
 
+	def EObject getMatchedMUTElementByContainer (ArrayList<EObject> equalEObjectsByFeature){
+		val tdlDataContainer = _self.findContainerOfTdlData
+		if (tdlDataContainer === null){ 
+			return null
+		}
+		var ArrayList<EObject> equalContainers = new ArrayList
+		var EObject matchedEObject = null
+ 		for (i : 0 ..<equalEObjectsByFeature.size){
+ 			matchedEObject = equalEObjectsByFeature.get(i)
+ 			val eobjectContainer = matchedEObject.eContainer
+ 			if (tdlDataContainer.equals2eobject(eobjectContainer)){
+ 				equalContainers.add(eobjectContainer)
+ 				EObjectFinderUtilities.instance.matchedEObjectsByContainer.add(matchedEObject)
+ 			}
+ 			else{
+ 				matchedEObject = null
+ 			}
+ 		}
+ 		if (equalContainers.empty){
+ 			return null
+ 		}
+ 		else if (equalContainers.size==1){
+ 			return EObjectFinderUtilities.instance.getInitialMatchedEObject(matchedEObject)
+ 		}
+ 		else{
+ 			val tdlUpperContainer = tdlDataContainer.findContainerOfTdlData
+ 			var ArrayList<EObject> eobjects2check = new ArrayList
+ 			for (i : 0 ..<equalContainers.size){
+ 				eobjects2check.add(equalContainers.get(i).eContainer)
+ 			}
+ 			return tdlUpperContainer.getMatchedMUTElementByContainer(eobjects2check)
+ 		}
+	}
+	
+	//in the root tdl package, find a structuredDataInstance that has a memberAssignment with memberSpec = _self.dataInstance
+	def StructuredDataInstance findContainerOfTdlData (){
+		val tdlPackage = _self.eContainer as Package
+		val tdlDataContainer = tdlPackage.packagedElement.findFirst[p | 
+			p instanceof StructuredDataInstance
+			&& (p as StructuredDataInstance).memberAssignment.exists[ma | 
+				ma.member.annotation.exists[a | a.key.name.equals('containment')]
+				&& ma.memberSpec instanceof DataInstanceUse 
+				&& _self.pointing2data(ma.memberSpec as DataInstanceUse)
+			]
+		]
+		if (tdlDataContainer === null) {
+			return null
+		}
+		return tdlDataContainer as StructuredDataInstance
+	}
+	
+	def boolean pointing2data(DataInstanceUse memberSpec){
+		if (memberSpec.dataInstance !== null){
+			return (memberSpec.dataInstance == _self)? true : false;
+		}else{
+			return (memberSpec.item.exists[item | 
+						item instanceof DataInstanceUse
+						&& (item as DataInstanceUse).dataInstance == _self
+					])? true: false;
+		}
+	}
+	
+	def boolean equals2eobject (EObject eobject){
+		//each memberAssignment of the _self must equal to the value of the matched feature of the eobject
+		try{
+			_self.memberAssignment.forEach[ma |
+			_self.info = ma.isMatchedMember(eobject)
+				if(_self.info.contains(TDLTestResultUtil.FAIL)){
+					throw new InterruptedException()
+				}
+			]
+		}catch(InterruptedException e){
+			return false
+		}
+		return true
+	}
+	
 	def String setMatchedMUTElement(EObject matchedObject, Resource MUTResource){
 		var String status = ""
 		for (i : 0 ..<_self.memberAssignment.size){
@@ -181,10 +265,11 @@ class StructuredDataInstanceAspect extends DataInstanceAspect{
 }
 @Aspect (className = DataInstanceUse)
 class DataInstanceUseAspect extends StaticDataUseAspect{
+	
 	def EObject getMatchedMUTElement(Resource MUTResource, boolean isAssertion){
 		var ArrayList<EObject> rootElement = new ArrayList
 		//if data type is abstract return null
-		if (!PackageAspect.dslProcessor.isConcreteEcoreType(_self.dataInstance.dataType.name)){
+		if (!_self.dataInstance.dataType.isConcreteEcoreType){
 			println("The " + _self.dataInstance.name + " element is abstract")
 			_self.dataInstance.info = TDLTestResultUtil.FAIL + ": The " + _self.dataInstance.name + " element is abstract"
 			return null;
@@ -196,47 +281,60 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 			rootElement.remove(0)
 			rootElement.addAll(container.eAllContents.filter[object | object.eClass.name.equals(dataTypeName)].toList)
 		}
-		return _self.getMatchedMUTElement(rootElement, MUTResource, isAssertion)
+		return _self.getMatchedMUTElement(rootElement, isAssertion, MUTResource)
 	}
 	
-	def EObject getMatchedMUTElement(ArrayList<EObject> rootElement, Resource MUTResource, boolean isAssertion){
-		var ArrayList<EObject> containers = new ArrayList
-		var EObject matchedElement = null
+	def EObject getMatchedMUTElement(ArrayList<EObject> rootElement, boolean isAssertion, Resource MUTResource){
+		var ArrayList<EObject> matchedElements = new ArrayList
 		if (_self.dataInstance instanceof StructuredDataInstance){
 			//some attributes are set as member assignments for dataInstance
 			//so find the matched element based on the dataInstance
 			val dataIns = _self.dataInstance as StructuredDataInstance
 			if (dataIns.memberAssignment.size>0){//if some values are assigned to the members of data instance
-				matchedElement = dataIns.getMatchedMUTElement(rootElement, MUTResource, isAssertion)
-				if (matchedElement === null){
+				matchedElements = dataIns.getMatchedMUTElement(rootElement, isAssertion, MUTResource)
+				if (matchedElements.empty){
 					_self.dataInstance.info = TDLTestResultUtil.FAIL + ": There is no MUT element matched with " + dataIns.name
 					return null
 				}
 			}	
-			containers = dataIns.matchedElements
 		}
 		//when the program reach to this line, it means the values assigned as parameter bindings has to be checked
 		//therefore, all the elements identified as root must be checked to find the matched element
 		//find matched elements based on the parameter bindings of dataInstanceUse
-		for (i:0 ..<containers.size){
-			_self.dataInstance.info = _self.isMatchedParametrizedElement(containers.get(i), MUTResource, isAssertion)
+		var ArrayList<EObject> equalEObjectsByFeatures = new ArrayList
+		for (i:0 ..<matchedElements.size){
+			_self.dataInstance.info = _self.isMatchedParametrizedElement(matchedElements.get(i), isAssertion, MUTResource)
 			if (_self.dataInstance.info.contains(TDLTestResultUtil.PASS)){
-					return containers.get(i)
+					equalEObjectsByFeatures.add(matchedElements.get(i))
 			}
 		}
-		return null
+		if(equalEObjectsByFeatures.empty){
+			return null
+		}
+		else if(equalEObjectsByFeatures.size == 1){
+			return equalEObjectsByFeatures.get(0)
+		}
+		//at this point, all the features of the elements are the same and we should check their containers
+		//in the context of TDL, we should find a DataInstance with memberAssignment that its memberSpec is self
+		//then the DataInstance is the container of tdl element
+		EObjectFinderUtilities.instance.matchedEObjectsByContainer.clear
+		return _self.getMatchedMUTElementByContainer(equalEObjectsByFeatures)
 	}
 	
-	def String isMatchedParametrizedElement(EObject rootElement, Resource MUTResource, boolean isAssertion){
+	def String isMatchedParametrizedElement(EObject rootElement, boolean isAssertion, Resource MUTResource){
 		//find matched element based on the parameter bindings of dataInstance
 		for (i : 0 ..<_self.argument.size){
-			val parameterBinding = _self.argument.get(i);
-			val status = parameterBinding.isMatchedParameter(rootElement, MUTResource, isAssertion)
+			val parameterBinding = _self.argument.get(i)
+			val status = parameterBinding.isMatchedParameter(rootElement, isAssertion, MUTResource)
 			if (status.contains(TDLTestResultUtil.FAIL)){
-				return status;
+				return status
 			}		
 		}
-		return TDLTestResultUtil.PASS;
+		return TDLTestResultUtil.PASS
+	}
+	
+	def EObject getMatchedMUTElementByContainer (ArrayList<EObject> equalEObjectsByContainer){
+		return (_self.dataInstance as StructuredDataInstance).getMatchedMUTElementByContainer(equalEObjectsByContainer)
 	}
 
 	def String setMatchedMUTElement(Resource MUTResource){
@@ -301,7 +399,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 	}
 	
 	@OverrideAspectMethod
-	def String assertEquals(Resource MUTResource, Object featureValue, Boolean isAssertion){
+	def String assertEquals(Object featureValue, Boolean isAssertion, Resource MUTResource){
 		var ArrayList<EObject> rootObjects = new ArrayList
 		if (featureValue instanceof EList){
 			rootObjects.addAll(featureValue)
@@ -312,10 +410,10 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 		val ArrayList<EObject> matchedObjects = new ArrayList
 		var String expectedData = "";
 		var String mutData = "";
-		if (_self.item !== null && _self.item.size > 0){//there are several instances of data
+		if (!_self.item.nullOrEmpty){//there are several instances of data
 			mutData = TDLTestResultUtil.getInstance.getDataAsString(featureValue as EList<?>)
 			for (i : 0 ..<_self.item.size){
-				val matchedObject = (_self.item.get(i) as DataInstanceUse).getMatchedMUTElement(rootObjects, MUTResource, isAssertion)			
+				val matchedObject = (_self.item.get(i) as DataInstanceUse).getMatchedMUTElement(rootObjects, isAssertion, MUTResource)			
 				matchedObjects.add(matchedObject)
 				expectedData += ((_self.item.get(i) as DataInstanceUse).dataInstance.name + ", ")
 			}
@@ -323,18 +421,18 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 			if (mutData.equals("[]") && !expectedData.isNullOrEmpty){
 				return TDLTestResultUtil.FAIL + ": The expected data is: " + expectedData + ", but the current data is NULL";
 			}
-			if (isAssertion){
-				if ((featureValue as EList<?>).equals(matchedObjects)){
-					return TDLTestResultUtil.PASS + ": The expected data is equal to the current data"
-				}
-			}else{
+//			if (isAssertion){
+//				if ((featureValue as EList<?>).equals(matchedObjects)){
+//					return TDLTestResultUtil.PASS + ": The expected data is equal to the current data"
+//				}
+//			}else{
 				if ((featureValue as EList<?>).containsAll(matchedObjects)){
 					return TDLTestResultUtil.PASS + ": The expected data contains the current data"
 				}
-			}		
+//			}		
 			return TDLTestResultUtil.FAIL + ": The expected data is: " + expectedData + ", but the current data is: " + mutData;
 		}else{//there is just one data instance
-			val matchedObject = _self.getMatchedMUTElement(rootObjects, MUTResource, isAssertion)
+			val matchedObject = _self.getMatchedMUTElement(rootObjects, isAssertion, MUTResource)
 			if (matchedObject === null){
 				expectedData =  _self.dataInstance.name
 			}else{
@@ -356,8 +454,8 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 	}
 	
 	@OverrideAspectMethod
-	def String updateData(Resource MUTResource, EObject object, EStructuralFeature matchedFeature){
-		if (_self.item !== null && _self.item.size > 0){//there are several instances of data
+	def String updateData(EObject object, EStructuralFeature matchedFeature, Resource MUTResource){
+		if (!_self.item.nullOrEmpty){//there are several instances of data
 			val TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(object);
 			try{
 				domain.getCommandStack().execute(new RecordingCommand(domain) {
@@ -367,7 +465,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 			        	val ArrayList<EObject> matchedObjects = new ArrayList
 						for (i : 0 ..<_self.item.size){
 							val item = _self.item.get(i) as DataInstanceUse
-							val matchedObject = item.getMatchedMUTElement(rootElements, MUTResource, false)			
+							val matchedObject = item.getMatchedMUTElement(rootElements, false, MUTResource)			
 							if (matchedObject === null){
 								println("There is no " + item.dataInstance.name + " property in the MUT")
 							}else{
@@ -390,7 +488,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 	        	val ArrayList<EObject> matchedObjects = new ArrayList
 				for (i : 0 ..<_self.item.size){
 					val item = _self.item.get(i) as DataInstanceUse
-					val matchedObject = item.getMatchedMUTElement(rootElements, MUTResource, false)			
+					val matchedObject = item.getMatchedMUTElement(rootElements, false, MUTResource)			
 					if (matchedObject === null){
 						println("There is no " + item.dataInstance.name + " property in the MUT")
 					}else{
@@ -405,7 +503,7 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 		}else{//there is just one data instance
 			val matchedObject = _self.getMatchedMUTElement(MUTResource, false)
 			if (matchedObject === null){
-				println("There is no " + _self.dataInstance.name + " property in the MUT")
+				//println("There is no " + _self.dataInstance.name + " property in the MUT")
 				return TDLTestResultUtil.FAIL + ": There is no MUT element matched with " + _self.dataInstance.name
 			}
 			try{
@@ -444,12 +542,14 @@ class DataInstanceUseAspect extends StaticDataUseAspect{
 		return TDLTestResultUtil.PASS + ": New value is set for the " + matchedFeature.name + " property of the MUT"
 	}
 }
+
 @Aspect (className = MemberAssignment)
 class MemberAssignmentAspect{
-	def String isMatchedMember(EObject rootElement, Resource MUTResource, Boolean isAssertion){
+	
+	def String isMatchedMember(EObject rootElement, Boolean isAssertion, Resource MUTResource){
 		val EStructuralFeature matchedFeature = _self.member.getMatchedFeature(rootElement)	
 		if (matchedFeature === null){
-			println("There is no " + _self.member.name + " property in the MUT")
+			//println("There is no " + _self.member.name + " property in the MUT")
 			return TDLTestResultUtil.FAIL + ": There is no MUT element matched with " + _self.member.name
 		}
 		val featureValue = rootElement.eGet(matchedFeature)
@@ -458,7 +558,49 @@ class MemberAssignmentAspect{
 		}
 		//Assert the data instances of the member assignment
 		if (_self.memberSpec instanceof DataInstanceUse){
-			return _self.memberSpec.assertEquals(MUTResource, featureValue, isAssertion)
+			return _self.memberSpec.assertEquals(featureValue, isAssertion, MUTResource)
+		}
+		return _self.memberSpec.assertEquals(featureValue)
+	} 
+	
+	def String isMatchedMember(EObject eobject){
+		val EStructuralFeature matchedFeature = _self.member.getMatchedFeature(eobject)	
+		if (matchedFeature === null){
+			//println("There is no " + _self.member.name + " property in the MUT")
+			return TDLTestResultUtil.FAIL + ": There is no MUT element matched with " + _self.member.name
+		}
+		val featureValue = eobject.eGet(matchedFeature)
+		//Assert the value of the member assignment
+		if (_self.memberSpec instanceof DataInstanceUse){
+			val memberValue = _self.memberSpec as DataInstanceUse
+			var boolean result = true
+			if (memberValue.dataInstance !== null){
+				val tdlValue = memberValue.dataInstance as StructuredDataInstance
+				if (featureValue instanceof EObject){
+					//there is only one value
+					result = tdlValue.equals2eobject(featureValue as EObject)
+					return result ? TDLTestResultUtil.PASS: TDLTestResultUtil.FAIL
+				}
+				else if (featureValue instanceof EList){
+					//if there is only one tdlValue but a list of featureValues,
+					//there must be at least one featureValue == tdlValue
+					result = (featureValue as EList<EObject>).exists[o | tdlValue.equals2eobject(o)]
+					return result ? TDLTestResultUtil.PASS: TDLTestResultUtil.FAIL
+				} 
+			}
+			else if (!memberValue.item.isEmpty && featureValue instanceof EList){
+				//there is a list of values
+				val EList<EObject> featureValues = featureValue as EList<EObject>
+				for(i:0..<memberValue.item.size){
+					val memberItemValue = (memberValue.item.get(i) as DataInstanceUse).dataInstance as StructuredDataInstance					
+					//there must be at least one featureValue == memberItemValue
+					result = featureValues.exists[o | memberItemValue.equals2eobject(o)]
+					if (!result){
+						return TDLTestResultUtil.FAIL
+					}
+				}
+				return TDLTestResultUtil.PASS
+			}
 		}
 		return _self.memberSpec.assertEquals(featureValue)
 	} 
@@ -466,14 +608,14 @@ class MemberAssignmentAspect{
 	def String setMatchedMember(EObject rootElement, Resource MUTResource){
 		val EStructuralFeature matchedFeature = _self.member.getMatchedFeature(rootElement)	
 		if (_self.memberSpec instanceof DataInstanceUse){
-			return _self.memberSpec.updateData(MUTResource, rootElement, matchedFeature)
+			return _self.memberSpec.updateData(rootElement, matchedFeature, MUTResource)
 		}
 		return _self.memberSpec.updateData(rootElement, matchedFeature)
 	} 
 	
 	def Boolean hasItems(){
 		val data = _self.memberSpec as DataInstanceUse
-		if (data.item !== null && data.item.size >0){
+		if (!data.item.nullOrEmpty){
 			return true
 		}
 		return false
@@ -482,10 +624,10 @@ class MemberAssignmentAspect{
 @Aspect (className = ParameterBinding)
 class ParameterBindingAspect{
 	
-	def String isMatchedParameter(EObject rootElement, Resource MUTResource, Boolean isAssertion){
+	def String isMatchedParameter(EObject rootElement, Boolean isAssertion, Resource MUTResource){
 		val EStructuralFeature matchedFeature = (_self.parameter as Member).getMatchedFeature(rootElement) 
 		if (matchedFeature === null){
-			println("There is no " + _self.parameter.name + " property in the MUT")
+			//println("There is no " + _self.parameter.name + " property in the MUT")
 			return TDLTestResultUtil.FAIL + ": There is no MUT element matched with " + _self.parameter.name
 		}
 		val featureValue = rootElement.eGet(matchedFeature)
@@ -493,7 +635,7 @@ class ParameterBindingAspect{
 			return TDLTestResultUtil.PASS
 		}
 		if (_self.dataUse instanceof DataInstanceUse){
-			return _self.dataUse.assertEquals(MUTResource, featureValue, isAssertion)
+			return _self.dataUse.assertEquals(featureValue, isAssertion, MUTResource)
 		}
 		return _self.dataUse.assertEquals(featureValue)
 	} 
@@ -501,14 +643,14 @@ class ParameterBindingAspect{
 	def String setMatchedParameter(EObject rootElement, Resource MUTResource){
 		val EStructuralFeature matchedFeature = (_self.parameter as Member).getMatchedFeature(rootElement)
 		if (_self.dataUse instanceof DataInstanceUse){
-			return _self.dataUse.updateData(MUTResource, rootElement, matchedFeature)
+			return _self.dataUse.updateData(rootElement, matchedFeature, MUTResource)
 		}
 		return  _self.dataUse.updateData(rootElement, matchedFeature)
 	} 
 	
 	def Boolean hasItems(){
 		val data = _self.dataUse as DataInstanceUse
-		if (data.item !== null && data.item.size >0){
+		if (!data.item.nullOrEmpty){
 			return true
 		}
 		return false
@@ -546,13 +688,13 @@ class DataUseAspect{
 	def String assertEquals(Object featureValue){
 		return "";
 	}
-	def String assertEquals(Resource MUTResource, Object featureValue, Boolean isAssertion){
+	def String assertEquals(Object featureValue, Boolean isAssertion, Resource MUTResource){
 		return "";
 	}
 	def String updateData(EObject object, EStructuralFeature matchedFeature){
 		return "";
 	}
-	def String updateData(Resource MUTResource, EObject object, EStructuralFeature matchedFeature){
+	def String updateData(EObject object, EStructuralFeature matchedFeature, Resource MUTResource){
 		return "";
 	}
 }
@@ -563,7 +705,7 @@ class StaticDataUseAspect extends DataUseAspect{
 		return "";
 	}
 	@OverrideAspectMethod
-	def String assertEquals(Resource MUTResource, Object featureValue, Boolean isAssertion){
+	def String assertEquals(Object featureValue, Boolean isAssertion, Resource MUTResource){
 		return "";
 	}
 	@OverrideAspectMethod
@@ -571,30 +713,24 @@ class StaticDataUseAspect extends DataUseAspect{
 		return "";
 	}
 	@OverrideAspectMethod
-	def String updateData(Resource MUTResource, EObject object, EStructuralFeature matchedFeature){
+	def String updateData(EObject object, EStructuralFeature matchedFeature, Resource MUTResource){
 		return "";
 	}
 }
 @Aspect (className = LiteralValueUse)
 class LiteralValueUseAspect extends StaticDataUseAspect{
-	static String EINT = "EInt"
-	static String EINTOBJECT = "EIntegerObject"
-	static String EBOOLEAN = "EBoolean"
-	static String EBOOLOBJECT = "EBooleanObject"
-	static String ESTRING = "EString"
-	
 	def Object getPrimitiveValue(String primitiveTypeName){
 		var String parameterValue = _self.value
 		if (parameterValue.startsWith("\"") || parameterValue.startsWith("'")){
 	        parameterValue = parameterValue.substring(1, parameterValue.length-1)//remove quotation marks
 	    }
-	    if (primitiveTypeName.equals(EINT) || primitiveTypeName.equals(EINTOBJECT)){
+	    if (primitiveTypeName.equals("EInt") || primitiveTypeName.equals("EIntegerObject")){
 			return Integer.parseInt(parameterValue)
 		}
-		else if (primitiveTypeName.equals(EBOOLEAN) || primitiveTypeName.equals(EBOOLOBJECT)){
+		else if (primitiveTypeName.equals("EBoolean") || primitiveTypeName.equals("EBooleanObject")){
 			return Boolean.parseBoolean(parameterValue)
 		}
-		else if (primitiveTypeName.equals(ESTRING)){
+		else if (primitiveTypeName.equals("EString")){
 			return parameterValue
 		}
 		return null;
@@ -607,6 +743,9 @@ class LiteralValueUseAspect extends StaticDataUseAspect{
 	    }
 	    if (featureValue === null && (parameterValue == "null" || parameterValue.isNullOrEmpty)){
 			return TDLTestResultUtil.PASS + ": The expected data is equal to the current data"
+		}
+		else if (featureValue === null){
+			return TDLTestResultUtil.FAIL + ": The expected data is: " + parameterValue + ", but the current data is NULL"
 		}
 		else if (featureValue.toString.equals(parameterValue)){
 			return TDLTestResultUtil.PASS + ": The expected data is equal to the current data"
@@ -624,9 +763,9 @@ class LiteralValueUseAspect extends StaticDataUseAspect{
 	        	if (parameterValue.startsWith("\"") || parameterValue.startsWith("'")){
 	        		parameterValue = parameterValue.substring(1, parameterValue.length-1)//remove quotation marks
 	        	}
-				if (matchedFeature.EType.name.equals(EINT) || matchedFeature.EType.name.equals(EINTOBJECT)){
+				if (matchedFeature.EType.name.equals("EInt") || matchedFeature.EType.name.equals("EIntegerObject")){
 					object.eSet(matchedFeature, Integer.parseInt(parameterValue));
-				} else if (matchedFeature.EType.name.equals(EBOOLEAN)|| matchedFeature.EType.name.equals(EBOOLOBJECT)){
+				} else if (matchedFeature.EType.name.equals("EBoolean")|| matchedFeature.EType.name.equals("EBooleanObject")){
 					object.eSet(matchedFeature, Boolean.parseBoolean(parameterValue));
 				} else {
 					object.eSet(matchedFeature, parameterValue);
@@ -643,13 +782,13 @@ class LiteralValueUseAspect extends StaticDataUseAspect{
         	if (parameterValue.startsWith("\"") || parameterValue.startsWith("'")){
         		parameterValue = parameterValue.substring(1, parameterValue.length-1)//remove quotation marks
         	}
-			if (matchedFeature.EType.name.equals(EINT) || matchedFeature.EType.name.equals(EINTOBJECT)){
+			if (matchedFeature.EType.name.equals("EInt") || matchedFeature.EType.name.equals("EIntegerObject")){
 				object.eSet(matchedFeature, Integer.parseInt(parameterValue));
-			} else if (matchedFeature.EType.name.equals(EBOOLEAN)|| matchedFeature.EType.name.equals(EBOOLOBJECT)){
+			} else if (matchedFeature.EType.name.equals("EBoolean")|| matchedFeature.EType.name.equals("EBooleanObject")){
 				object.eSet(matchedFeature, Boolean.parseBoolean(parameterValue));
 			} else {
 				object.eSet(matchedFeature, parameterValue);
-			}   
+			} 
 		}
 		
 		return TDLTestResultUtil.PASS + ": New value is set for the " + matchedFeature.name + " property of the MUT"

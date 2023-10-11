@@ -1,0 +1,31 @@
+ruleset ArduinoModelElementCoverage{
+	import metamodel arduino
+	context Project{
+		covered when ONE sketches iscovered
+	},
+	context Sketch{
+		covered when ONE block iscovered 
+		description "a Sketch is covered if at least one of its Blocks is covered"
+	},
+	context Block{
+		covered when ONE instructions iscovered
+		description "a Block is covered if at least one of its instructions is covered"
+	},
+	context If{
+		covers ^condition
+	},
+	context While{
+		covers ^condition
+	},
+	//ignore physical-related elements from coverage computation
+	context Board{
+		ignore (subtypes true)
+		
+	},
+	context Pin{
+		ignore (subtypes true)
+	},
+	context Module{
+		ignore (subtypes true)
+	}
+}

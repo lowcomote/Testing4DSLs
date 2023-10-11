@@ -223,12 +223,11 @@ class MessageAspect extends InteractoinAspect{
 				var String verdict
 				verdict = t.targetGate.gate.sendArgument2sut(_self.argument)
 				_self.addMessageResult(verdict)
-				var boolean result = true
 				if (verdict.contains(TDLTestResultUtil.FAIL)){
-					result = false
 					_self.parentTestDescription.testCaseResult.value = TDLTestResultUtil.INCONCLUSIVE//the test case should be interrupted
+					return false//if the result is false, the test case execution should be interrupted
 				}
-				return result //if the result is false, the test case execution should be interrupted
+				return true 
 			}
 		}	
 	}

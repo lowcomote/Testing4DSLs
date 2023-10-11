@@ -3,6 +3,13 @@
  */
 package org.imt.tdl.coverage.xtext.validation;
 
+import org.eclipse.emf.common.util.URI;
+
+import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
+import org.eclipse.xtext.validation.EValidatorRegistrar;
+
+import DSLSpecificCoverage.DSLSpecificCoveragePackage;
+import org.imt.tdl.coverage.computation.Activator;
 
 /**
  * This class contains custom validation rules. 
@@ -10,6 +17,24 @@ package org.imt.tdl.coverage.xtext.validation;
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 public class COVValidator extends AbstractCOVValidator {
+	
+	
+	/**
+	 * Register the OCL validator for the DSL Specific Coverage Package
+	 * 
+	 * */
+	@Override
+	public void register(EValidatorRegistrar registrar) {
+		super.register(registrar);
+		final DSLSpecificCoveragePackage ePackageDSLCov = DSLSpecificCoveragePackage.eINSTANCE;
+		
+		//Activate the Plugin to get the OCL 
+		URI basicSpecValOclURI = URI.createURI(Activator.getDefault().getBundle().getResource("model/ocl/DSLSpecConvValidation.ocl").toString());
+		
+		//Register
+		registrar.register(ePackageDSLCov, new CompleteOCLEObjectValidator(ePackageDSLCov, basicSpecValOclURI));		
+	}
+	
 	
 //	public static final String INVALID_NAME = "invalidName";
 //

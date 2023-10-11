@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: DataMutation
 Bundle-SymbolicName: org.imt.tdl.amplification;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-16
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: org.imt.tdl.dataMutation
 Require-Bundle: org.eclipse.xtend.lib;bundle-version="2.25.0",
  org.etsi.mts.tdl.model;bundle-version="1.4.0",
@@ -24,6 +24,7 @@ Require-Bundle: org.eclipse.xtend.lib;bundle-version="2.25.0",
  org.eclipse.gemoc.dsl.model,
  org.eclipse.emf.ecore,
  org.imt.tdl.mutation;bundle-version="1.0.0",
- org.imt.tdl.utilities
-Export-Package: org.imt.tdl.amplification,
- org.imt.tdl.amplification.utilities
+ org.imt.tdl.utilities;bundle-version="1.0.0",
+ org.imt.tdl.amplification.dsl;bundle-version="0.1.0",
+ org.imt.tdl.coverage
+Export-Package: org.imt.tdl.amplification

@@ -54,6 +54,7 @@ public class DSLProcessor {
 	final static String SUBTYPE_REL_ID = "subtypeRelId";
 	final static String COVERAGE_RULES = "coverageRules";
 	final static String MUTATION_OPERATORS = "mutationOperators";
+	final static String AMPLIFIER_CONFIG = "amplifierConfig";
 	
 	final static String xdsml_extension_point_id = "org.eclipse.gemoc.gemoc_language_workbench.xdsml";
 	
@@ -83,14 +84,14 @@ public class DSLProcessor {
 	
 	public void loadDSLMetaclasses(){
 		if (dslEntries.get(ECORE) != null){
-			String metamodelPath = dslEntries.get(ECORE).replaceFirst("resource", "plugin");
-			Resource metamodelRes = (new ResourceSetImpl()).getResource(URI.createURI(metamodelPath), true);
+			URI metamodelUri = getPluginURI(dslEntries.get(ECORE));
+			Resource metamodelRes = (new ResourceSetImpl()).getResource(metamodelUri, true);
 			metamodelRootElement = (EPackage) metamodelRes.getContents().get(0);
 			eClassifiers = new BasicEList<EClassifier>();
 			eClassifiers.addAll(metamodelRootElement.getEClassifiers());
 		}
 	}
-	
+
 	public Path findDSLPath (String DSLName){
 		language = findDSLFile(DSLName);
 		if (language != null) {
@@ -148,8 +149,7 @@ public class DSLProcessor {
 	}
 	
 	private void findAleClasses() {
-		String aleFilePath = dsl.getEntry(ALE).getValue().replaceFirst("resource", "plugin");
-		Resource aleResource = (new ResourceSetImpl()).getResource(URI.createURI(aleFilePath), true);
+		Resource aleResource = (new ResourceSetImpl()).getResource(getPluginURI(dsl.getEntry(ALE).getValue()), true);
 		Unit interpreter = (Unit) aleResource.getContents().get(0);
 		List<BehavioredClass> classes = interpreter.getXtendedClasses();
 		//if a class is opened and has a stepping rule in the xDSL's interpreter, 
@@ -221,12 +221,28 @@ public class DSLProcessor {
 		return dslEntries.get(ECORE);
 	}
 	
+	public URI getEcoreResourceURI() {
+		return getResourceURI(getPath2Ecore());
+	}
+	
+	public URI getEcorePluginURI() {
+		return getPluginURI(getPath2Ecore());
+	}
+	
 	public boolean dslHasBehavioralInterface() {
 		return dslEntries.get(BEHAVIORAL_INTERFACE) != null;
 	}
 	
 	public String getPath2BehavioralInterface() {
 		return dslEntries.get(BEHAVIORAL_INTERFACE);
+	}
+	
+	public URI getBehavioralInterfaceResourceURI() {
+		return getResourceURI(getPath2BehavioralInterface());
+	}
+	
+	public URI getBehavioralInterfacePluginURI() {
+		return getPluginURI(getPath2BehavioralInterface());
 	}
 	
 	public boolean dslHasImplemRelId() {
@@ -253,6 +269,15 @@ public class DSLProcessor {
 		return dslEntries.get(COVERAGE_RULES);
 	}
 	
+	public URI getCoverageRulesResourceURI() {
+		return getResourceURI(getPath2CoverageRules());
+	}
+	
+	public URI getCoverageRulesPluginURI() {
+		return getPluginURI(getPath2CoverageRules());
+	}
+	
+	
 	public boolean dslHasMutationOperators() {
 		return dslEntries.get(MUTATION_OPERATORS) != null;
 	}
@@ -261,6 +286,46 @@ public class DSLProcessor {
 		return dslEntries.get(MUTATION_OPERATORS);
 	}
 
+	public URI getMutationOperatorsResourceURI() {
+		return getResourceURI(getPath2MutationOperators());
+	}
+	
+	public URI getMutationOperatorsPluginURI() {
+		return getPluginURI(getPath2MutationOperators());
+	}
+	
+	public boolean dslHasAmplifierConfig() {
+		return dslEntries.get(AMPLIFIER_CONFIG) != null;
+	}
+	
+	public String getPath2AmplifierConfig() {
+		return dslEntries.get(AMPLIFIER_CONFIG);
+	}
+	
+	public URI getAmplifierConfigResourceURI() {
+		return getResourceURI(getPath2AmplifierConfig());
+	}
+	
+	public URI getAmplifierConfigPluginURI() {
+		return getPluginURI(getPath2AmplifierConfig());
+	}
+	
+	private URI getPluginURI(String path) {
+		if (path.startsWith("platform")) {
+			path = path.replace("resource", "plugin");
+			return URI.createURI(path, false);
+		}
+		return URI.createPlatformPluginURI(path, false);
+	}
+	
+	private URI getResourceURI(String path) {
+		if (path.startsWith("platform")) {
+			path = path.replace("plugin", "resource");
+			return URI.createURI(path, false);
+		}
+		return URI.createPlatformResourceURI(path, false);
+	}
+	
 	public IConfigurationElement getLanguage() {
 		return language;
 	}

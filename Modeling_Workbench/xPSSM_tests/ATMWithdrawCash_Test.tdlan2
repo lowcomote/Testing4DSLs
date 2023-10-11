@@ -116,7 +116,8 @@ Package reactiveATM_testSuite {
 				signal = Card,
 				attributeValues = {cardPinValue (value = "1234"), cardBalanceValue (value = "1000")})
 		) to statemachine.reactiveGate;
-		tester.oclGate sends oclQuery (query = "self.statemachine.regions -> first().currentVertex") to statemachine.oclGate;
+		sm.reactiveGate sends behavior_executed (behavior = enterPinMsg) to tester.reactiveGate;
+		tester.oclGate sends oclQuery (context = ATM, query = "self.regions->first().currentVertex") to statemachine.oclGate;
 		statemachine.oclGate sends getPinState to tester.oclGate;
 	}
 	

@@ -1,0 +1,22 @@
+ruleset ArduinoBranchCoverage {
+	import metamodel arduino
+	import ruleset from "/arduino.coverage/ArduinoModelElementCoverageRules.cov"
+	
+	context If {
+		when "self.elseBlock <> null" {
+			branch "self.block",
+			branch "self.elseBlock"
+			
+		}, 
+		when "self.elseBlock = null"{
+			branch "self.block",
+			branch else
+		} 
+	},
+	context While {
+		{
+			branch "self.block",
+			branch else 
+		}
+	}
+}
