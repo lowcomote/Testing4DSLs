@@ -84,14 +84,14 @@ public class DSLProcessor {
 	
 	public void loadDSLMetaclasses(){
 		if (dslEntries.get(ECORE) != null){
-			String metamodelPath = dslEntries.get(ECORE).replaceFirst("resource", "plugin");
-			Resource metamodelRes = (new ResourceSetImpl()).getResource(URI.createPlatformPluginURI(metamodelPath, false), true);
+			URI metamodelUri = getPluginURI(dslEntries.get(ECORE));
+			Resource metamodelRes = (new ResourceSetImpl()).getResource(metamodelUri, true);
 			metamodelRootElement = (EPackage) metamodelRes.getContents().get(0);
 			eClassifiers = new BasicEList<EClassifier>();
 			eClassifiers.addAll(metamodelRootElement.getEClassifiers());
 		}
 	}
-	
+
 	public Path findDSLPath (String DSLName){
 		language = findDSLFile(DSLName);
 		if (language != null) {
@@ -149,8 +149,7 @@ public class DSLProcessor {
 	}
 	
 	private void findAleClasses() {
-		String aleFilePath = dsl.getEntry(ALE).getValue().replaceFirst("resource", "plugin");
-		Resource aleResource = (new ResourceSetImpl()).getResource(URI.createURI(aleFilePath), true);
+		Resource aleResource = (new ResourceSetImpl()).getResource(getPluginURI(dsl.getEntry(ALE).getValue()), true);
 		Unit interpreter = (Unit) aleResource.getContents().get(0);
 		List<BehavioredClass> classes = interpreter.getXtendedClasses();
 		//if a class is opened and has a stepping rule in the xDSL's interpreter, 
@@ -223,13 +222,11 @@ public class DSLProcessor {
 	}
 	
 	public URI getEcoreResourceURI() {
-		String path = getPath2Ecore().replaceFirst("plugin", "resource");
-		return URI.createPlatformResourceURI(path, false);
+		return getResourceURI(getPath2Ecore());
 	}
 	
 	public URI getEcorePluginURI() {
-		String path = getPath2Ecore().replaceFirst("resource", "plugin");
-		return URI.createPlatformPluginURI(path, false);
+		return getPluginURI(getPath2Ecore());
 	}
 	
 	public boolean dslHasBehavioralInterface() {
@@ -241,13 +238,11 @@ public class DSLProcessor {
 	}
 	
 	public URI getBehavioralInterfaceResourceURI() {
-		String path = getPath2BehavioralInterface().replaceFirst("plugin", "resource");
-		return URI.createPlatformResourceURI(path, false);
+		return getResourceURI(getPath2BehavioralInterface());
 	}
 	
 	public URI getBehavioralInterfacePluginURI() {
-		String path = getPath2BehavioralInterface().replaceFirst("resource", "plugin");
-		return URI.createPlatformPluginURI(path, false);
+		return getPluginURI(getPath2BehavioralInterface());
 	}
 	
 	public boolean dslHasImplemRelId() {
@@ -275,13 +270,11 @@ public class DSLProcessor {
 	}
 	
 	public URI getCoverageRulesResourceURI() {
-		String path = getPath2CoverageRules().replaceFirst("plugin", "resource");
-		return URI.createPlatformResourceURI(path, false);
+		return getResourceURI(getPath2CoverageRules());
 	}
 	
 	public URI getCoverageRulesPluginURI() {
-		String path = getPath2CoverageRules().replaceFirst("resource", "plugin");
-		return URI.createPlatformPluginURI(path, false);
+		return getPluginURI(getPath2CoverageRules());
 	}
 	
 	
@@ -294,13 +287,11 @@ public class DSLProcessor {
 	}
 
 	public URI getMutationOperatorsResourceURI() {
-		String path = getPath2MutationOperators().replaceFirst("plugin", "resource");
-		return URI.createPlatformResourceURI(path, false);
+		return getResourceURI(getPath2MutationOperators());
 	}
 	
 	public URI getMutationOperatorsPluginURI() {
-		String path = getPath2MutationOperators().replaceFirst("resource", "plugin");
-		return URI.createPlatformPluginURI(path, false);
+		return getPluginURI(getPath2MutationOperators());
 	}
 	
 	public boolean dslHasAmplifierConfig() {
@@ -312,13 +303,27 @@ public class DSLProcessor {
 	}
 	
 	public URI getAmplifierConfigResourceURI() {
-		String path = getPath2AmplifierConfig().replaceFirst("plugin", "resource");
-		return URI.createPlatformResourceURI(path, false);
+		return getResourceURI(getPath2AmplifierConfig());
 	}
 	
 	public URI getAmplifierConfigPluginURI() {
-		String path = getPath2AmplifierConfig().replaceFirst("resource", "plugin");
+		return getPluginURI(getPath2AmplifierConfig());
+	}
+	
+	private URI getPluginURI(String path) {
+		if (path.startsWith("platform")) {
+			path = path.replace("resource", "plugin");
+			return URI.createURI(path, false);
+		}
 		return URI.createPlatformPluginURI(path, false);
+	}
+	
+	private URI getResourceURI(String path) {
+		if (path.startsWith("platform")) {
+			path = path.replace("plugin", "resource");
+			return URI.createURI(path, false);
+		}
+		return URI.createPlatformResourceURI(path, false);
 	}
 	
 	public IConfigurationElement getLanguage() {
